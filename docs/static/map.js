@@ -64,8 +64,40 @@
       withLeaflet(function(){
         try {
           el.innerHTML = '';
-          var map = L.map(el, { scrollWheelZoom:false }).setView([39.13,-84.51], 11);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+          // Hamilton County, OH bounding box (approx). Locking the view here
+          // keeps the map focused on the dispatch jurisdiction even if a
+          // single noisy data point lands outside, and prevents users from
+          // pan-drifting to other parts of the country.
+          var HC_BOUNDS = L.latLngBounds([39.05, -84.82], [39.31, -84.27]);
+          var map = L.map(el, {
+            scrollWheelZoom: false,
+            maxBounds: HC_BOUNDS,
+            maxBoundsViscosity: 0.9,
+            minZoom: 10
+          });
+          map.fitBounds(HC_BOUNDS, { padding: [8, 8] });
+          // Esri World Imagery as default - free, no API key, refreshed
+          // every 6-12 months for major US metros, ~30-60 cm/pixel in
+          // Cincinnati. Attribution-only per Esri's terms of use. OSM
+          // available as a cartographic alternate via the layer control.
+          // Labels overlay (Esri Reference) adds street and place names
+          // on top of satellite imagery without baking them into the tiles.
+          var sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: 'Imagery &copy; <a href="https://www.esri.com">Esri</a>, Maxar, Earthstar Geographics'
+          });
+          var labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: ''
+          });
+          var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          });
+          // Default: satellite + reference labels (group via layerGroup).
+          var satWithLabels = L.layerGroup([sat, labels]);
+          satWithLabels.addTo(map);
+          L.control.layers({ 'Satellite': satWithLabels, 'Map': osm }, null, { position: 'topright', collapsed: false }).addTo(map);
           var bounds = [];
           clusterize(pts).forEach(function(c){
             var r = c.n === 1 ? 4 : Math.min(18, 5 + Math.round(Math.sqrt(c.n) * 2));
@@ -78,7 +110,15 @@
             mk.bindPopup(popupHtml(c), { maxWidth: 280 });
             bounds.push([c.la, c.lo]);
           });
-          if (bounds.length) map.fitBounds(bounds, { padding:[24,24], maxZoom:13 });
+          // Re-fit to data bounds only if they sit inside the county; otherwise
+          // keep the county-wide view we set above so a single outlier point
+          // doesn't yank the map elsewhere.
+          if (bounds.length) {
+            var dataBounds = L.latLngBounds(bounds);
+            if (HC_BOUNDS.contains(dataBounds)) {
+              map.fitBounds(dataBounds, { padding:[24,24], maxZoom:13 });
+            }
+          }
         } catch (e) { fail('Map failed to render.'); }
       });
     }).catch(function(){ fail('Dispatch data unavailable.'); });

@@ -1,27 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "2595267",
-    "name": "TOLBERT LARRY",
-    "timestamp_utc": "2026-05-11T16:24:27Z",
-    "note": "booked 10/29/25"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2597828",
-    "name": "PEGUES KEVIN",
-    "timestamp_utc": "2026-05-11T16:24:27Z",
-    "note": "booked 4/10/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2599027",
-    "name": "PATTON GREGORY",
-    "timestamp_utc": "2026-05-11T16:24:27Z",
-    "note": "booked 3/30/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "2599970",
     "name": "JACKSON ANTHONY",
     "timestamp_utc": "2026-05-11T16:24:27Z",
@@ -3498,5 +3477,26 @@
     "name": "KINNEY SHARMAINE",
     "timestamp_utc": "2026-05-14T23:51:22Z",
     "note": "booked 5/14/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2673835",
+    "name": "RODEMS RAYMOND",
+    "timestamp_utc": "2026-05-15T01:19:24Z",
+    "note": "booked 5/14/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2691553",
+    "name": "MCCRACKEN JUAREL",
+    "timestamp_utc": "2026-05-15T01:19:24Z",
+    "note": "booked 5/14/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14571708",
+    "name": "BRIGGS TRAYMAREIYAH",
+    "timestamp_utc": "2026-05-15T01:19:24Z",
+    "note": "no longer on HCSO public roster"
   }
 ]

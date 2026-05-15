@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Visiting an inmate &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#14181f">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
@@ -15,14 +15,14 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=20d5a05a41">
+  <link rel="stylesheet" href="/static/style.css?v=fce77d651b">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream — releases" href="/released.xml">
   <link rel="author" href="/humans.txt">
 </head>
-<body id="top" class="detail">
+<body id="top" class="detail page-visit">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="masthead">
     <div class="masthead-inner">
@@ -47,52 +47,77 @@
   <a href="/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Visiting</span>
 </nav>
 
-<div class="hero-eyebrow">Visiting an inmate</div>
-<h1 class="record-name page-title">How to visit someone held at the Hamilton County Justice Center</h1>
+<section class="visit-hero">
+  <span class="visit-hero-eyebrow">Visitor information</span>
+  <h1 class="visit-hero-title">Visiting someone at the Justice Center</h1>
+  <p class="visit-hero-sub">
+    JCStream does not track visitor records and does not handle visitation logistics. This page is here because family members often arrive looking for the actual policy. The links below go straight to the authoritative source.
+  </p>
+</section>
 
-<p class="alert">
-  <strong>JCStream does not track visitor records.</strong> This page exists because family members and friends often arrive here looking for visitation logistics; we link out to the Hamilton County Sheriff's Office authoritative policy and do not record who visits whom. Inmate visitation is governed by HCSO and the practical details (hours, registration, video options) change without notice.
-</p>
+<div class="visit-grid">
 
-<div class="section-h"><h2>Authoritative resources</h2></div>
-<ul class="cfs">
-  <li>
-    <a href="https://www.hcso.org/justice-center-services/" target="_blank" rel="noopener"><strong>HCSO Justice Center services &rarr;</strong></a>
-    <span class="muted">Visitation policy, hours, video-visit registration, deposit instructions, and the "do not visit" rules around active warrants. This is the authoritative source; JCStream republishes nothing from it.</span>
-  </li>
-  <li>
-    <a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener"><strong>HCSO inmate search &rarr;</strong></a>
-    <span class="muted">The same roster JCStream mirrors, served by the Sheriff's office. Use this if you need a record straight from HCSO without JCStream's framing.</span>
-  </li>
-  <li>
-    <a href="https://www.courtclerk.org" target="_blank" rel="noopener"><strong>Hamilton County Clerk of Courts &rarr;</strong></a>
-    <span class="muted">Court schedule, case dockets, and filed documents. Public hearings are open to the public; JCStream's <a href="/court/">court calendar</a> aggregates the next court date per inmate but is informational only.</span>
-  </li>
-</ul>
+  <a class="visit-card visit-card-primary" href="https://www.hcso.org/justice-center-services/" target="_blank" rel="noopener">
+    <div class="visit-card-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Authoritative</span>
+      <h2 class="visit-card-title">HCSO visitation policy</h2>
+      <p class="visit-card-desc">Hours, registration, video-visit setup, deposit instructions, and rules around active warrants. The source of record.</p>
+      <span class="visit-card-cta">Open hcso.org &rarr;</span>
+    </div>
+  </a>
 
-<div class="section-h"><h2>What JCStream does not show</h2></div>
-<p class="muted">
-  JCStream is a public-records mirror; it surfaces only what the Hamilton County Sheriff's Office already publishes about each inmate. By policy this site does <strong>not</strong> show, has never shown, and will never show:
-</p>
-<ul class="muted">
-  <li>The identities of visitors, their phone numbers, or addresses.</li>
-  <li>Phone-call records, recorded calls, or message transcripts.</li>
-  <li>Commissary purchases, deposit amounts, or money transfers.</li>
-  <li>Internal classification labels (gang affiliation, security level, behavioral notes).</li>
-  <li>Medical, psychiatric, or program-participation information.</li>
-  <li>Identifying information about minors, victims, or witnesses associated with any case.</li>
-</ul>
-<p class="muted">
-  Adding any of these would be a re-identification risk and is outside the project's stated transparency mission, even when underlying data may technically be public. See <a href="/data/#legal">the data &amp; legal page</a> for the full scope statement and the takedown protocol.
-</p>
+  <a class="visit-card" href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">
+    <div class="visit-card-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Source roster</span>
+      <h2 class="visit-card-title">HCSO inmate search</h2>
+      <p class="visit-card-desc">The same roster JCStream mirrors, served by the Sheriff&rsquo;s office without our framing or aggregation.</p>
+      <span class="visit-card-cta">Open hcso.org &rarr;</span>
+    </div>
+  </a>
 
-<div class="section-h"><h2>If a record on this site is causing you harm</h2></div>
-<p>
-  Records here come and go automatically: when HCSO removes a person from the public roster, that record is dropped from JCStream on the next sweep (about every 30 minutes). For earlier removal &mdash; for example after a court order of sealing or expungement under <a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a> &mdash; open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>. <strong>There is never a fee, and there never will be.</strong>
-</p>
-<p class="muted attribution">
-  <strong>Not a consumer reporting agency.</strong> Do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em>
-</p>
+  <a class="visit-card" href="https://www.courtclerk.org" target="_blank" rel="noopener">
+    <div class="visit-card-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg>
+    </div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Court records</span>
+      <h2 class="visit-card-title">Clerk of Courts</h2>
+      <p class="visit-card-desc">Docket schedule, case files, and filed documents. Public hearings are open. Our <a href="/court/">court calendar</a> aggregates next-court-date per inmate, but is informational only.</p>
+      <span class="visit-card-cta">Open courtclerk.org &rarr;</span>
+    </div>
+  </a>
+
+</div>
+
+<section class="visit-scope">
+  <h2 class="visit-section-h">What JCStream will never publish</h2>
+  <p class="visit-section-sub">By policy, even when the underlying data may technically be public. See <a href="/data/#legal">data &amp; legal</a> for the full scope statement.</p>
+  <ul class="visit-bullets">
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Identities, addresses, or phone numbers of visitors.</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Phone-call records, transcripts, or recordings.</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Commissary purchases, deposit amounts, or money transfers.</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Internal classification (gang affiliation, security level, behavior notes).</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Medical, psychiatric, or program-participation information.</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Identifying information about minors, victims, or witnesses.</li>
+  </ul>
+</section>
+
+<section class="visit-removal">
+  <h2 class="visit-section-h">If a record on this site is causing you harm</h2>
+  <p>
+    Records here come and go automatically: when HCSO removes a person from the public roster, that record drops from JCStream on the next sweep (about every 30 minutes). For earlier removal, for example after a court order of sealing or expungement under <a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
+  </p>
+  <p class="visit-no-fee"><strong>There is never a fee, and there never will be.</strong></p>
+  <p class="visit-fcra muted">
+    Not a consumer reporting agency. Do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em>
+  </p>
+</section>
 
     <footer class="site">
       <span>Generated —</span>
