@@ -1,20 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "2703508",
-    "name": "LONG CHRISTOPHER",
-    "timestamp_utc": "2026-05-11T16:24:27Z",
-    "note": "booked 3/24/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2651747",
-    "name": "PANKEY MERCEDES",
-    "timestamp_utc": "2026-05-11T16:24:27Z",
-    "note": "booked 9/25/25"
-  },
-  {
-    "event": "booked",
     "inmate_number": "2720560",
     "name": "BATES DEMARCO",
     "timestamp_utc": "2026-05-11T16:24:27Z",
@@ -3497,6 +3483,20 @@
     "inmate_number": "2475441",
     "name": "ROBINSON JACQOR",
     "timestamp_utc": "2026-05-15T12:38:10Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2759499",
+    "name": "DATES JABRI",
+    "timestamp_utc": "2026-05-15T13:35:31Z",
+    "note": "booked 5/15/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2314750",
+    "name": "COOPER HEWITT",
+    "timestamp_utc": "2026-05-15T13:35:31Z",
     "note": "no longer on HCSO public roster"
   }
 ]
