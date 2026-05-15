@@ -1,0 +1,6 @@
+# JCStream mirrors public records and asks search engines not to index it
+# (every page also carries <meta name="robots" content="noindex">).
+# Feeds and raw data are linked from /data/ — RSS readers don't honour
+# robots.txt, so subscriptions still work.
+User-agent: *
+Disallow: /

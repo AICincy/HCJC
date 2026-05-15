@@ -1,0 +1,56 @@
+name: refresh-caselaw
+
+# Pulls fresh Ohio appellate case law for the top ORC sections on the current
+# roster via CourtListener's public REST API and commits the updated cache to
+# data/orc_caselaw.json. Separate from sweep.yml because:
+#
+#   - The data is much slower-moving than the sweep (appellate opinions land
+#     daily, not every 30 minutes). Weekly is plenty.
+#   - CourtListener rate-limits unauthenticated traffic to 60 req/min and we
+#     don't want a sweep flake to spend that budget.
+#   - Failures should NOT block a sweep cycle. This workflow can fail
+#     silently and the statute page renders fine with the previous cache.
+#
+# Cache schema and refresh logic: scripts/refresh_caselaw.py.
+# Audit reference: audit/12 (Cloudflare migration plan) and audit/11 cross-ref.
+
+on:
+  schedule:
+    # Sundays 06:00 UTC (~02:00 ET) - off-peak; gives the run plenty of room
+    # before Monday-morning court schedules tip courts data.
+    - cron: '0 6 * * 0'
+  workflow_dispatch: {}
+
+# Run on the same branch as the sweep so the commit lands on the dev branch.
+# A merge from dev to main is owner-driven.
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Refresh ORC case-law cache
+        run: |
+          python3 scripts/refresh_caselaw.py
+
+      - name: Commit if changed
+        run: |
+          if [[ -n $(git status --porcelain data/orc_caselaw.json) ]]; then
+            git config user.name 'jcstream-caselaw-bot'
+            git config user.email 'noreply@aretheyinjail.com'
+            git add data/orc_caselaw.json
+            git commit -m "data: weekly refresh of orc_caselaw.json from CourtListener"
+            git push
+          else
+            echo "no changes to commit"
+          fi

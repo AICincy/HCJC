@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" data-base-url="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visiting an inmate &middot; JCStream</title>
+  <meta name="robots" content="noindex, noarchive">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#14181f">
+  <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
+  <meta property="og:site_name" content="JCStream">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JCStream — Hamilton County, OH Justice Center roster mirror">
+  <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
+  <meta property="og:url" content="https://www.aretheyinjail.com/">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/static/style.css?v=20d5a05a41">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream — releases" href="/released.xml">
+  <link rel="author" href="/humans.txt">
+</head>
+<body id="top" class="detail">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="/">
+        <span class="brand-text">
+          <span class="brand-name">JCStream</span>
+          <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
+        </span>
+      </a>
+      <span class="spacer"></span>
+      <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
+      <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
+      <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
+      <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+      <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
+      <a class="nav-link" href="/feed.xml">RSS</a>
+      <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+    </div>
+  </header>
+  <main id="main" class="page">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Visiting</span>
+</nav>
+
+<div class="hero-eyebrow">Visiting an inmate</div>
+<h1 class="record-name page-title">How to visit someone held at the Hamilton County Justice Center</h1>
+
+<p class="alert">
+  <strong>JCStream does not track visitor records.</strong> This page exists because family members and friends often arrive here looking for visitation logistics; we link out to the Hamilton County Sheriff's Office authoritative policy and do not record who visits whom. Inmate visitation is governed by HCSO and the practical details (hours, registration, video options) change without notice.
+</p>
+
+<div class="section-h"><h2>Authoritative resources</h2></div>
+<ul class="cfs">
+  <li>
+    <a href="https://www.hcso.org/justice-center-services/" target="_blank" rel="noopener"><strong>HCSO Justice Center services &rarr;</strong></a>
+    <span class="muted">Visitation policy, hours, video-visit registration, deposit instructions, and the "do not visit" rules around active warrants. This is the authoritative source; JCStream republishes nothing from it.</span>
+  </li>
+  <li>
+    <a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener"><strong>HCSO inmate search &rarr;</strong></a>
+    <span class="muted">The same roster JCStream mirrors, served by the Sheriff's office. Use this if you need a record straight from HCSO without JCStream's framing.</span>
+  </li>
+  <li>
+    <a href="https://www.courtclerk.org" target="_blank" rel="noopener"><strong>Hamilton County Clerk of Courts &rarr;</strong></a>
+    <span class="muted">Court schedule, case dockets, and filed documents. Public hearings are open to the public; JCStream's <a href="/court/">court calendar</a> aggregates the next court date per inmate but is informational only.</span>
+  </li>
+</ul>
+
+<div class="section-h"><h2>What JCStream does not show</h2></div>
+<p class="muted">
+  JCStream is a public-records mirror; it surfaces only what the Hamilton County Sheriff's Office already publishes about each inmate. By policy this site does <strong>not</strong> show, has never shown, and will never show:
+</p>
+<ul class="muted">
+  <li>The identities of visitors, their phone numbers, or addresses.</li>
+  <li>Phone-call records, recorded calls, or message transcripts.</li>
+  <li>Commissary purchases, deposit amounts, or money transfers.</li>
+  <li>Internal classification labels (gang affiliation, security level, behavioral notes).</li>
+  <li>Medical, psychiatric, or program-participation information.</li>
+  <li>Identifying information about minors, victims, or witnesses associated with any case.</li>
+</ul>
+<p class="muted">
+  Adding any of these would be a re-identification risk and is outside the project's stated transparency mission, even when underlying data may technically be public. See <a href="/data/#legal">the data &amp; legal page</a> for the full scope statement and the takedown protocol.
+</p>
+
+<div class="section-h"><h2>If a record on this site is causing you harm</h2></div>
+<p>
+  Records here come and go automatically: when HCSO removes a person from the public roster, that record is dropped from JCStream on the next sweep (about every 30 minutes). For earlier removal &mdash; for example after a court order of sealing or expungement under <a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a> &mdash; open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>. <strong>There is never a fee, and there never will be.</strong>
+</p>
+<p class="muted attribution">
+  <strong>Not a consumer reporting agency.</strong> Do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em>
+</p>
+
+    <footer class="site">
+      <span>Generated —</span>
+      <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+      <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
+    </footer>
+  </main>
+  <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+
+  <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
+    <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <figure class="lightbox-figure">
+      <img id="lb-img" src="" alt="" decoding="async">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+  </div>
+
+  <div id="tier-tip" role="tooltip" hidden></div>
+
+  <script src="/static/main.js?v=116dce335a" defer></script>
+</body>
+</html>

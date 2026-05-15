@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block title %}Statistics &middot; JCStream{% endblock %}
+{% block body_class %}detail{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Statistics</span>
+</nav>
+
+<div class="hero-eyebrow">Roster statistics</div>
+<h1 class="record-name page-title">A snapshot of the {{ "{:,}".format(s.n) }} people currently in custody</h1>
+<p class="alert"><strong>Arrest is not conviction.</strong> Every person reflected in these counts is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. All charges are accusations only; these are point-in-time figures for the current roster.</p>
+<p class="muted">Computed from the same data the roster is built from. Last sweep
+<code>{{ snapshot.generated_utc or 'pending' }}</code>.</p>
+
+{% macro bars(rows, total, accent='') %}
+<div class="statbars" role="list">
+  {% for label, count in rows %}
+  {% set pct = (100.0 * count / total) if total else 0 %}
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">{{ label }}</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill {{ accent }}" style="width: {{ '%.1f' % pct }}%"></span></span>
+    <span class="statbar-val">{{ "{:,}".format(count) }} <small>{{ '%.0f' % pct }}%</small></span>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+<div class="kpis">
+  <div class="kpi">
+    <div class="label">In custody</div>
+    <div class="num">{{ "{:,}".format(s.n) }}</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Face felony charge</div>
+    <div class="num">{{ s.tiers.felony }}</div>
+    {% if s.n %}<div class="kpi-foot muted">{{ '%.0f' % (100.0 * s.tiers.felony / s.n) }}% of roster</div>{% endif %}
+  </div>
+  <div class="kpi">
+    <div class="label">Misdemeanor only</div>
+    <div class="num">{{ s.tiers.misdemeanor }}</div>
+    {% if s.n %}<div class="kpi-foot muted">{{ '%.0f' % (100.0 * s.tiers.misdemeanor / s.n) }}% of roster</div>{% endif %}
+  </div>
+  <div class="kpi">
+    <div class="label">Avg. days in custody</div>
+    <div class="num">{{ s.avg_days }}</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Median bond</div>
+    <div class="num">${{ "{:,}".format(s.bond_median) }}</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Total bond set</div>
+    <div class="num">${{ "{:,}".format(s.bond_total) }}</div>
+  </div>
+</div>
+
+{% if trend is defined and trend.spark and trend.spark | length >= 1 %}
+{% set mn = trend.spark | min %}{% set mx = trend.spark | max %}{% set rng = (mx - mn) or 1 %}
+<div class="section-h"><h2>Roster size &amp; recent churn</h2><span class="grow"></span><span class="meta">tracked {{ trend.days_tracked }} day{{ '' if trend.days_tracked == 1 else 's' }}</span></div>
+<p class="roster-trend">
+  {% if trend.delta is not none %}
+    {% if trend.delta > 0 %}<span class="delta-up">&uarr; {{ trend.delta }} vs yesterday</span>
+    {% elif trend.delta < 0 %}<span class="delta-down">&darr; {{ -trend.delta }} vs yesterday</span>
+    {% else %}<span class="delta-flat">unchanged vs yesterday</span>{% endif %}
+  {% else %}<span class="muted">first day on record &mdash; a trend line appears once there are two</span>{% endif %}
+  {% if trend.spark | length >= 2 %}
+  <svg class="sparkline" width="200" height="32" viewBox="0 0 200 32" aria-hidden="true" preserveAspectRatio="none">
+    <polyline points="{% for v in trend.spark %}{{ '%.1f' % (loop.index0 * 200 / (trend.spark|length - 1)) }},{{ '%.1f' % (30 - (v - mn) * 28 / rng) }} {% endfor %}"/>
+    {% set lastv = trend.spark[-1] %}<circle cx="200" cy="{{ '%.1f' % (30 - (lastv - mn) * 28 / rng) }}" r="2.4"/>
+  </svg>
+  <span class="muted">last {{ trend.spark|length }} day{{ '' if trend.spark|length == 1 else 's' }} ({{ mn }}&ndash;{{ mx }})</span>
+  {% endif %}
+</p>
+<div class="statbars" role="list">
+  {% set chmax = [trend.booked_7d, trend.released_7d, 1] | max %}
+  <div class="statbar" role="listitem"><span class="statbar-label">Booked, last {{ trend.churn_days }} day{{ '' if trend.churn_days == 1 else 's' }}</span><span class="statbar-track" aria-hidden="true"><span class="statbar-fill cat-2925" style="width: {{ '%.1f' % (100.0 * trend.booked_7d / chmax) }}%"></span></span><span class="statbar-val">{{ "{:,}".format(trend.booked_7d) }}</span></div>
+  <div class="statbar" role="listitem"><span class="statbar-label">Released, last {{ trend.churn_days }} day{{ '' if trend.churn_days == 1 else 's' }}</span><span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: {{ '%.1f' % (100.0 * trend.released_7d / chmax) }}%"></span></span><span class="statbar-val">{{ "{:,}".format(trend.released_7d) }}</span></div>
+</div>
+<p class="muted note-paragraph">Booking counts use the HCSO booking date, so a sweep that re-discovers older records doesn&rsquo;t inflate them. Roster size is committed daily to <a href="{{ base_url }}/data/history.json">history.json</a> &mdash; counts only, no individuals are archived.</p>
+{% endif %}
+
+<div class="section-h"><h2>Bookings by month</h2><span class="grow"></span><span class="meta">of the current roster</span></div>
+{{ bars(s.months, s.months[0][1] if s.months else 1) }}
+
+{# Stacked severity composition bar — design's tier mix in one strip. #}
+{% set tb = s.tier_breakdown %}
+{% set tb_tot = (tb.F1 + tb.F2 + tb.F3 + tb.F4 + tb.F5 + tb.M1 + tb.M2 + tb.M3 + tb.M4 + tb.MM) or 1 %}
+{% set tb_segs = [
+  ('F1', tb.F1, '#9c1c1c'),
+  ('F2', tb.F2, '#c43e2c'),
+  ('F3', tb.F3, '#d96b46'),
+  ('F4', tb.F4, '#e89c5e'),
+  ('F5', tb.F5, '#f0c280'),
+  ('M1', tb.M1, '#6b7d3c'),
+  ('M2', tb.M2, '#8a9d56'),
+  ('M3', tb.M3, '#b5c590'),
+  ('M4', tb.M4, '#d4dbb7'),
+  ('MM', tb.MM, '#e7ead0'),
+] %}
+<div class="section-h"><h2>Severity composition</h2><span class="grow"></span><span class="meta">most-severe charge per person, F1 &rarr; MM</span></div>
+<div class="stacked">
+  <div class="stacked-bar">
+    {% for k, w, c in tb_segs %}{% if w %}<div class="stacked-seg" style="flex:{{ w }};background:{{ c }}" title="{{ k }}: {{ w }} ({{ '%.1f' % (100.0 * w / tb_tot) }}%)"></div>{% endif %}{% endfor %}
+  </div>
+  <ul class="stacked-leg">
+    {% for k, w, c in tb_segs %}{% if w %}
+    <li>
+      <span class="stacked-sw" style="background:{{ c }}"></span>
+      <span class="stacked-k">{{ k }} &middot; {{ tier_max(k) }}</span>
+      <span class="stacked-v">{{ "{:,}".format(w) }} <em>({{ '%.1f' % (100.0 * w / tb_tot) }}%)</em></span>
+    </li>
+    {% endif %}{% endfor %}
+  </ul>
+</div>
+
+{# Ranked top-list of most-common ORC sections with tier chip + bar. #}
+<div class="section-h"><h2>Most common offenses on the roster</h2><span class="grow"></span><span class="meta"><a href="{{ base_url }}/statute/">browse all statutes &rarr;</a></span></div>
+<div class="toplist">
+  {% set top_max = (s.top_offenses[0].count if s.top_offenses else 1) %}
+  {% for o in s.top_offenses %}
+  <a class="toplist-row" href="{{ base_url }}/statute/#orc-{{ o.code | replace('.', '-') }}">
+    <div class="toplist-rank">{{ '%02d' % loop.index }}</div>
+    <div class="toplist-name">
+      <div class="toplist-title">{{ o.title or 'Section title not in lookup' }}</div>
+      <div class="toplist-meta"><span class="orc-code">&sect; {{ o.code }}</span> &middot; <span class="tier tier-{{ o.degree }}">{{ o.degree }}</span></div>
+    </div>
+    <div class="toplist-bar"><div class="toplist-fill" style="width:{{ '%.1f' % (100.0 * o.count / top_max) }}%"></div></div>
+    <div class="toplist-n">{{ o.count }}</div>
+    <div class="toplist-pct">{{ '%.1f' % o.pct }}%</div>
+  </a>
+  {% endfor %}
+</div>
+
+{# Court calendar — next 14 days of upcoming hearings. #}
+{% if s.court_calendar %}
+{% set cal_total = s.court_calendar | sum(attribute='count') %}
+<details class="section-h-details">
+  <summary>
+    <h2>Court calendar &middot; next 14 days</h2>
+    <span class="grow"></span>
+    <span class="meta">{{ s.court_calendar | length }} day{{ '' if s.court_calendar|length == 1 else 's' }} &middot; {{ cal_total }} hearing{{ '' if cal_total == 1 else 's' }} &middot; tap to expand</span>
+  </summary>
+  <div class="cal">
+    {% for d in s.court_calendar[:8] %}
+    <div class="cal-day">
+      <div class="cal-date">
+        <div class="cal-dnum">{{ d.dnum }}</div>
+        <div class="cal-dmon">{{ d.dmon }}</div>
+      </div>
+      <div class="cal-items">
+        <div class="cal-count">{{ d.count }} hearing{{ '' if d.count == 1 else 's' }}</div>
+        <div class="cal-list">
+          {% for it in d.entries %}
+          {% set t = charge_tier(it.charge) %}
+          <a class="cal-item" href="{{ base_url }}/inmate/{{ it.inmate.inmate_number }}/">
+            {% if t %}<span class="tier tier-{{ t.label if (t.label|length >= 2 and t.label[0] in ('F','M')) else t.kind }}">{{ t.label }}</span>{% endif %}
+            <span class="cal-name">{{ it.inmate.full_name }}</span>
+            <span class="cal-charge">&middot; {{ (it.charge.description or '—') | lower }}</span>
+          </a>
+          {% endfor %}
+          {% if d.more %}<div class="cal-more">+{{ d.more }} more</div>{% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% if s.court_calendar | length > 8 %}<p class="muted">{{ s.court_calendar | length - 8 }} more day{{ '' if s.court_calendar|length - 8 == 1 else 's' }} within the 14-day window aren&rsquo;t shown.</p>{% endif %}
+</details>
+{% endif %}
+
+<div class="section-h"><h2>Offense categories (rolled up)</h2></div>
+<div class="statbars" role="list">
+  {% set top = s.offenses[0].count if s.offenses else 1 %}
+  {% for o in s.offenses[:18] %}
+  {% set pct = (100.0 * o.count / top) %}
+  <div class="statbar" role="listitem">
+    <span class="statbar-label"><span class="chap chap-{{ o.cls }}">{{ o.label }}</span></span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill cat-{{ o.cls }}" style="width: {{ '%.1f' % pct }}%"></span></span>
+    <span class="statbar-val">{{ o.count }}</span>
+  </div>
+  {% endfor %}
+  {% if s.offenses | length > 18 %}<p class="muted note-paragraph-tight">+ {{ s.offenses|length - 18 }} more offense categories</p>{% endif %}
+</div>
+
+<div class="cols2">
+  <div>
+    <div class="section-h"><h2>Charge severity</h2></div>
+    {{ bars([('Has a felony charge', s.tiers.felony), ('Misdemeanor only', s.tiers.misdemeanor), ('Unclassified', s.tiers.other)], s.n) }}
+    <div class="section-h"><h2>Sex (as recorded by HCSO)</h2></div>
+    {{ bars(s.sex, s.n) }}
+  </div>
+  <div>
+    <div class="section-h"><h2>Race (as recorded by HCSO)</h2></div>
+    {{ bars(s.race, s.n) }}
+    <div class="section-h"><h2>Number of charges</h2></div>
+    {{ bars([('1 charge', s.one_charge), ('2 or more charges', s.n - s.one_charge)], s.n) }}
+    <p class="muted note-paragraph-tight">avg {{ s.avg_charges }} per person · most: {{ s.max_charges }}</p>
+  </div>
+</div>
+
+<div class="section-h"><h2>Bond</h2></div>
+{{ bars([('No bond / $0 set', s.bond_zero), ('Bond amount set', s.bond_known - s.bond_zero), ('No bond info', s.n - s.bond_known)], s.n) }}
+
+<div class="section-h"><h2>Booking photo on file</h2></div>
+{{ bars([('Photo published by HCSO', s.with_photo), ('No photo', s.no_photo)], s.n) }}
+
+<p class="muted note-paragraph-loose">Longest current stay: {{ "{:,}".format(s.max_days) }} days. All counts reflect the current roster only - released people are removed.</p>
+<p class="muted">These counts derive from public records published by HCSO under the Ohio Public Records Act, <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>. To request correction or removal of any record reflected here, open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>. <strong>There is never a fee, and there never will be</strong>. <a href="{{ base_url }}/data/#legal">Full legal notices &rarr;</a></p>
+<p class="source"><a href="{{ base_url }}/data/">Raw data &amp; methodology</a> &middot; <a href="{{ base_url }}/">Back to the roster</a></p>
+{% endblock %}

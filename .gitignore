@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.local
+
+# Build outputs
+.cache/
+# NOTE: docs/ is intentionally NOT gitignored — Pages serves from there.
+
+# Ephemeral
+*.log
+.DS_Store
+.pytest_cache/
+# .claude/ — local agent-worktree harness state stays ignored, but durable
+# project skills + paired subagents are tracked so collaborators (and CI's
+# Claude jobs) get the same context. Use .claude/* (contents) rather than
+# .claude/ (the dir itself) so git can descend and pick up the un-ignored
+# children — git can't re-include a path whose parent dir is excluded.
+.claude/*
+!.claude/skills/
+!.claude/agents/

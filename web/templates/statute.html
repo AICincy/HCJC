@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Statute lookup &middot; JCStream{% endblock %}
+{% block body_class %}detail{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Statute lookup</span>
+</nav>
+
+<div class="hero-eyebrow">Statute lookup</div>
+<h1 class="record-name page-title">Ohio Revised Code sections currently on the roster</h1>
+<p class="alert">
+  <strong>Charges are accusations only.</strong> Tiers shown are the <em>statutory default</em> for the cited section &mdash; the degree actually charged in a case can be heavier or lighter based on subsections and aggravating factors.
+</p>
+<p class="muted">Tap a section to see who is currently held under it, its plain-English meaning, the statutory max term, and where it sits on Ohio's severity ladder. {{ sections | length }} sections appear on the current roster of {{ "{:,}".format(total_roster) }} people in custody.</p>
+
+{% if sections %}
+<div class="filter-bar" id="statute-jump-bar">
+  <label class="search-wrap" for="statute-jump">Jump to
+    <select id="statute-jump">
+      <option value="">— pick a section —</option>
+      {% for s in sections %}
+      <option value="orc-{{ s.code | replace('.', '-') }}">&sect; {{ s.code }} &middot; {{ s.title or '—' }} ({{ s.count }})</option>
+      {% endfor %}
+    </select>
+  </label>
+  <span class="filter-count">{{ sections | length }} sections</span>
+</div>
+
+<div class="statute-list">
+  {% for s in sections %}
+  <details class="statute-item" id="orc-{{ s.code | replace('.', '-') }}" {% if loop.first %}open{% endif %}>
+    <summary>
+      <span class="tier tier-{{ s.degree }}">{{ s.degree }}</span>
+      <span class="statute-item-title">
+        <span class="orc-code">&sect; {{ s.code }}</span>
+        <span class="statute-item-name">{{ s.title or 'Section title not in lookup' }}</span>
+      </span>
+      <span class="statute-item-count"><strong>{{ s.count }}</strong> held &middot; {{ '%.1f' % s.pct }}%</span>
+    </summary>
+    <div class="statute-item-body">
+      <div class="statute-hero">
+        <div>
+          <p class="statute-plain">{{ (s.explainer.plain if s.explainer else 'No plain-English explainer is on file for this section yet. The Ohio Revised Code text governs.') }}</p>
+          {% if s.explainer and s.explainer.tier_meaning %}
+          <p class="statute-tier-meaning"><strong>Severity:</strong> {{ s.explainer.tier_meaning }}</p>
+          {% endif %}
+          <p class="muted">
+            <a href="https://codes.ohio.gov/ohio-revised-code/section-{{ s.code }}" target="_blank" rel="noopener">Read the statute on codes.ohio.gov &rarr;</a>
+          </p>
+        </div>
+        <aside class="statute-side">
+          <div class="stat-card">
+            <div class="stat-row"><span class="stat-k">On roster</span><span class="stat-v">{{ s.count }} held</span></div>
+            <div class="stat-row"><span class="stat-k">Share</span><span class="stat-v">{{ '%.2f' % s.pct }}%</span></div>
+            <div class="stat-row"><span class="stat-k">Statutory max</span><span class="stat-v">{{ s.explainer.max_term if s.explainer and s.explainer.max_term else s.tier_max }}</span></div>
+            {% if s.explainer and s.explainer.typical_bond %}
+            <div class="stat-row"><span class="stat-k">Typical bond</span><span class="stat-v">{{ s.explainer.typical_bond }}</span></div>
+            {% endif %}
+          </div>
+        </aside>
+      </div>
+
+      <div class="ladder ladder-inline">
+        <div class="ladder-head"><span>More severe</span><span>Less severe</span></div>
+        <div class="ladder-grid">
+          {% for t in tier_ladder %}
+          <div class="ladder-cell ladder-{{ t }}{% if t == s.degree %} is-current{% endif %}"{% if t == s.degree %} aria-current="true"{% endif %}>
+            <div class="ladder-tier">{{ t }}</div>
+            <div class="ladder-max">{{ tier_max(t) }}</div>
+            {% if t == s.degree %}<div class="ladder-tag">This section</div>{% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <h3 class="ladder-h">People currently held under &sect; {{ s.code }}</h3>
+      <div class="rb-grid">
+        {% for inm in s.held %}
+        {% set deg = primary_degree(inm) %}
+        <a class="rb-card" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/">
+          {% if inm.photo_filename %}
+          <span class="rb-photo"><img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="" loading="lazy" decoding="async"></span>
+          {% else %}
+          <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(inm.full_name) }}"></span>
+          {% endif %}
+          <div class="rb-body">
+            {% if deg %}<span class="tier tier-{{ deg }}">{{ deg }}</span>{% endif %}
+            <h4 class="rb-name">{{ inm.full_name }}</h4>
+            <p class="rb-charge">{{ ((inm.charges | selectattr('orc_code', 'defined') | first).description | lower) if inm.charges else '—' }}</p>
+            <div class="rb-meta">
+              <span>{{ inm.booking_date or '—' }}</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% if s.count > s.held | length %}
+      <p class="muted note-paragraph-tight">Showing the first {{ s.held | length }} of {{ s.count }} people on roster under this section. The roster search on the homepage supports filtering by ORC code.</p>
+      {% endif %}
+
+      {% if s.caselaw %}
+      <details class="statute-caselaw">
+        <summary><strong>Recent Ohio appellate opinions citing &sect; {{ s.code }}</strong> <span class="muted">&middot; {{ s.caselaw | length }} published from CourtListener</span></summary>
+        <ul class="caselaw-list">
+          {% for op in s.caselaw %}
+          <li class="caselaw-row">
+            <span class="caselaw-date">{{ op.date_filed }}</span>
+            <a class="caselaw-name" href="{{ op.url }}" target="_blank" rel="noopener">{{ op.case_name }}</a>
+            <span class="caselaw-court muted">{{ op.court }}</span>
+            {% if op.citation %}<span class="caselaw-cite muted">{{ op.citation }}</span>{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        <p class="muted note-paragraph-tight">
+          Opinions are pulled from <a href="https://www.courtlistener.com" target="_blank" rel="noopener">CourtListener</a> (Free Law Project), filtered to Ohio Supreme Court and Court of Appeals, status = Published, ordered newest-first. They show how courts have <em>interpreted</em> the cited section &mdash; not the outcome of any case on JCStream's roster. JCStream caches a snapshot weekly; the link goes to the authoritative CourtListener page.
+        </p>
+      </details>
+      {% endif %}
+    </div>
+  </details>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty">
+  <h3>No statute data yet</h3>
+  <p>The current snapshot doesn't include any mapped ORC sections.</p>
+</div>
+{% endif %}
+{% endblock %}

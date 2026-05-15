@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="{{ base_url }}/static/feed.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ feed_title | default('JCStream changes', true) }}</title>
+    <link>{{ site_url }}/</link>
+    <atom:link href="{{ site_url }}{{ self_path | default('/feed.xml', true) }}" rel="self" type="application/rss+xml"/>
+    <description>{{ feed_desc | default('Changes on the Hamilton County, OH Justice Center public roster.', true) }}</description>
+    <docs>{{ site_url }}/data/</docs>
+    <language>en-us</language>
+    <generator>JCStream</generator>
+    {% if events %}<lastBuildDate>{{ rfc822(events[0].timestamp_utc) }}</lastBuildDate>{% endif %}
+    {% for e in events %}
+    <item>
+      <title>{{ e.event }} · {{ e.name }}</title>
+      <link>{{ site_url }}/inmate/{{ e.inmate_number }}/</link>
+      <guid isPermaLink="false">{{ e.event }}-{{ e.inmate_number }}-{{ e.timestamp_utc }}</guid>
+      <pubDate>{{ rfc822(e.timestamp_utc) }}</pubDate>
+      <category>{{ e.event }}</category>
+      <description>{{ feed_description(e.event, e.name, e.inmate_number, e.note) }}</description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

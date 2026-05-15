@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-base-url="{{ base_url or '' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}JCStream{% endblock %}</title>
+  {# noarchive = no Google-cache snapshot. We mirror; we don't archive. If a
+     record is purged here pursuant to ORC § 2953.32 sealing/expungement, a
+     cached copy mustn't outlive it. #}
+  <meta name="robots" content="noindex, noarchive">
+  {# Security headers asserted in HTML because GitHub Pages does not let us
+     set HTTP response headers. frame-ancestors and X-Content-Type-Options
+     cannot be asserted in <meta>; if those matter, front the site with a
+     Cloudflare Worker or migrate to Cloudflare Pages (see audit/11). #}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#14181f">
+  <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
+  {# Site-level social card only — per-page links deliberately unfurl as the
+     generic project card rather than splashing an individual's name/photo into
+     a chat preview. Unfurlers don't honor noindex; this keeps the framing right. #}
+  <meta property="og:site_name" content="JCStream">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JCStream — Hamilton County, OH Justice Center roster mirror">
+  <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
+  <meta property="og:url" content="{{ site_url }}/">
+  <meta name="twitter:card" content="summary">
+  {# Inter + JetBrains Mono self-hosted under /static/fonts/ via @font-face in
+     style.css (audit/11 spa-P2). The Google Fonts preconnects and stylesheet
+     link were removed: one fewer render-blocking request, no third-party DNS. #}
+  <link rel="stylesheet" href="{{ base_url }}/static/style.css?v={{ css_version | default('dev', true) }}">
+  <link rel="manifest" href="{{ base_url }}/manifest.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="{{ base_url }}/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="{{ base_url }}/booked.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream — releases" href="{{ base_url }}/released.xml">
+  <link rel="author" href="{{ base_url }}/humans.txt">
+</head>
+<body id="top" class="{% block body_class %}{% endblock %}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="{{ base_url }}/">
+        <span class="brand-text">
+          <span class="brand-name">JCStream</span>
+          <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
+        </span>
+      </a>
+      {% if snapshot is defined and snapshot.inmate_count %}
+      <span class="running"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody</span>
+      {% endif %}
+      <span class="spacer"></span>
+      <a class="nav-link" href="{{ base_url }}/stats/">Stats <span class="nav-hint">snapshot</span></a>
+      <a class="nav-link" href="{{ base_url }}/court/">Court <span class="nav-hint">calendar</span></a>
+      <a class="nav-link" href="{{ base_url }}/statute/">Statutes <span class="nav-hint">lookup</span></a>
+      <a class="nav-link" href="{{ base_url }}/visit/">Visit <span class="nav-hint">policy</span></a>
+      <a class="nav-link" href="{{ base_url }}/data/">Data <span class="nav-hint">feeds</span></a>
+      <a class="nav-link" href="{{ base_url }}/feed.xml">RSS</a>
+      <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+    </div>
+    {% if nav_months is defined and nav_months %}
+    <nav class="month-nav" aria-label="Jump to month">
+      <div class="month-nav-inner">
+        {% for nm in nav_months %}
+        <a class="chip" href="#m-{{ nm.slug }}">{{ nm.label }} <strong>{{ nm.count }}</strong></a>
+        {% endfor %}
+      </div>
+    </nav>
+    {% endif %}
+  </header>
+  <main id="main" class="page">
+    {# sr-only h1 only on the homepage; detail/stats/data pages declare their
+       own visible h1 so headings are linear and screen readers don't get a
+       generic title before the page-specific one. #}
+    {% block sr_h1 %}<h1 class="sr-only">JCStream — Hamilton County, Ohio Justice Center inmate roster</h1>{% endblock %}
+    {% block content %}{% endblock %}
+    <footer class="site">
+      <span>Generated {{ snapshot.generated_utc if snapshot is defined and snapshot.generated_utc else "—" }}</span>
+      <span><a href="{{ base_url }}/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+      <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
+    </footer>
+  </main>
+  <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+
+  {# Single shared lightbox — JS swaps the image in. No-JS users go to the
+     detail page instead (the photo lives there). #}
+  <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
+    <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <figure class="lightbox-figure">
+      <img id="lb-img" src="" alt="" decoding="async">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+  </div>
+
+  {# One shared tier-badge tooltip — content comes from each badge's data-tip,
+     JS positions it. Keeping it out of the cards lets the cards use
+     content-visibility:auto (paint containment would clip an in-card tooltip).
+     pointer-events:none so it never steals the mouse from the badge. #}
+  <div id="tier-tip" role="tooltip" hidden></div>
+
+  <script src="{{ base_url }}/static/main.js?v={{ main_js_version | default('dev', true) }}" defer></script>
+</body>
+</html>

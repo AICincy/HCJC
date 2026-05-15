@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Court calendar &middot; JCStream{% endblock %}
+{% block body_class %}detail page-court{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Court calendar</span>
+</nav>
+
+{% set total = (cal.today | length) + (cal.tomorrow | length) + (cal.this_week | length) + (cal.this_month | length) %}
+
+<section class="court-hero">
+  <div class="court-hero-text">
+    <span class="court-hero-eyebrow">Court calendar &middot; refreshed every 30 min</span>
+    <h1 class="court-hero-title">Who&rsquo;s due in court</h1>
+    <p class="court-hero-sub">Every scheduled hearing on the current Hamilton County Justice Center roster, grouped by day. Aggregated from HCSO booking records.</p>
+  </div>
+  <div class="court-hero-stats">
+    <div class="court-stat court-stat-primary">
+      <span class="court-stat-num">{{ cal.today | length }}</span>
+      <span class="court-stat-lab">today</span>
+    </div>
+    <div class="court-stat">
+      <span class="court-stat-num">{{ cal.tomorrow | length }}</span>
+      <span class="court-stat-lab">tomorrow</span>
+    </div>
+    <div class="court-stat">
+      <span class="court-stat-num">{{ cal.this_week | length }}</span>
+      <span class="court-stat-lab">rest of week</span>
+    </div>
+    <div class="court-stat">
+      <span class="court-stat-num">{{ cal.this_month | length }}</span>
+      <span class="court-stat-lab">next 30 days</span>
+    </div>
+  </div>
+</section>
+
+<aside class="court-banner" aria-label="Legal notice">
+  <strong>Arrest is not conviction.</strong> Everyone listed is <strong>legally presumed innocent</strong>. The shown date is the earliest upcoming hearing on file across that person&rsquo;s open charges, as printed by HCSO. Hearings can be reset, continued, or removed without notice. For the docket of record, follow case&nbsp;# links to <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+</aside>
+
+{% if total == 0 %}
+<div class="court-empty">
+  <div class="court-empty-mark" aria-hidden="true">—</div>
+  <h2>No upcoming court dates on file</h2>
+  <p>No one on the current roster has a parseable hearing in the next 30 days. This usually means HCSO is between docket publication cycles.</p>
+</div>
+{% else %}
+
+{% macro court_card(e) %}
+  {% set deg = primary_degree(e.inmate) %}
+  {% set top_charge = e.inmate.charges[0] if e.inmate.charges else None %}
+  <a class="court-card" href="{{ base_url }}/inmate/{{ e.inmate.inmate_number }}/">
+    {% if e.inmate.photo_filename %}
+    <span class="court-card-photo">
+      <img src="{{ base_url }}/photos/{{ e.inmate.photo_filename }}" alt="" loading="lazy" decoding="async">
+    </span>
+    {% else %}
+    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(e.inmate.full_name) }}"></span>
+    {% endif %}
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="{{ e.parsed_date.strftime('%Y-%m-%d') }}">{{ e.parsed_date.strftime('%a %b %-d') }}</time>
+        {% if deg %}<span class="tier tier-{{ deg }}">{{ deg }}</span>{% endif %}
+      </span>
+      <span class="court-card-name">{{ e.inmate.full_name }}</span>
+      {% if top_charge and top_charge.description %}
+      <span class="court-card-charge">{{ top_charge.description | lower }}</span>
+      {% endif %}
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;{{ e.inmate.inmate_number }}</span>
+  </a>
+{% endmacro %}
+
+<section class="court-day{% if not cal.today %} is-empty{% endif %}" id="today">
+  <header class="court-day-h">
+    <div>
+      <span class="court-day-kicker">Today</span>
+      <h2 class="court-day-title">{{ now_eastern.strftime('%A, %B %-d') }}</h2>
+    </div>
+    <span class="court-day-count">
+      <strong>{{ cal.today | length }}</strong> {{ 'hearing' if cal.today | length == 1 else 'hearings' }}
+    </span>
+  </header>
+  {% if cal.today %}
+  <div class="court-grid">
+    {% for e in cal.today %}{{ court_card(e) }}{% endfor %}
+  </div>
+  {% else %}
+  <p class="court-day-empty">No hearings on file for today.</p>
+  {% endif %}
+</section>
+
+{% if cal.tomorrow %}
+<section class="court-day" id="tomorrow">
+  <header class="court-day-h">
+    <div>
+      <span class="court-day-kicker">Tomorrow</span>
+      <h2 class="court-day-title">{{ (now_eastern + one_day).strftime('%A, %B %-d') }}</h2>
+    </div>
+    <span class="court-day-count"><strong>{{ cal.tomorrow | length }}</strong> {{ 'hearing' if cal.tomorrow | length == 1 else 'hearings' }}</span>
+  </header>
+  <div class="court-grid">
+    {% for e in cal.tomorrow %}{{ court_card(e) }}{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if cal.this_week %}
+<section class="court-day" id="this-week">
+  <header class="court-day-h">
+    <div>
+      <span class="court-day-kicker">Rest of the week</span>
+      <h2 class="court-day-title">Next 7 days</h2>
+    </div>
+    <span class="court-day-count"><strong>{{ cal.this_week | length }}</strong> {{ 'hearing' if cal.this_week | length == 1 else 'hearings' }}</span>
+  </header>
+  <div class="court-grid">
+    {% for e in cal.this_week %}{{ court_card(e) }}{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if cal.this_month %}
+<details class="court-day court-day-collapsible" id="this-month">
+  <summary class="court-day-h">
+    <div>
+      <span class="court-day-kicker">Further out</span>
+      <h2 class="court-day-title">Next 30 days</h2>
+    </div>
+    <span class="court-day-count"><strong>{{ cal.this_month | length }}</strong> {{ 'hearing' if cal.this_month | length == 1 else 'hearings' }} &middot; expand</span>
+  </summary>
+  <div class="court-grid">
+    {% for e in cal.this_month %}{{ court_card(e) }}{% endfor %}
+  </div>
+</details>
+{% endif %}
+
+{% endif %}
+
+<p class="court-foot">
+  Rebuilt on every sweep (~30 min cadence). Authoritative dockets, judge assignments, and attorney-of-record live at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">Hamilton County Clerk of Courts</a>. JCStream does not have access to courtroom schedules.
+</p>
+
+{% endblock %}

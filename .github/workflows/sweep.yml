@@ -1,0 +1,128 @@
+name: sweep
+
+# Optional secret: JCSTREAM_SENTRY_DSN
+#   Set via Repo Settings -> Secrets and variables -> Actions -> Secrets to
+#   ship sweep telemetry to Sentry. When unset (default) the SDK init falls
+#   through silently and the sweep behaves exactly as before. See
+#   audit/13_sentry_instrumentation.md for the event catalog.
+
+on:
+  schedule:
+    # Every 30 minutes. GH Actions cron is best-effort; expect actual cadence
+    # to be 30-45 minutes during peak load.
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    inputs:
+      max_surnames:
+        description: 'Cap the surname list (blank = use all)'
+        required: false
+        default: ''
+      refresh_known:
+        description: 'Re-fetch detail pages for already-known inmates'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  # Never run two sweeps simultaneously; cancel-in-progress: false means a
+  # new run waits for the prior one to finish rather than killing it mid-sweep.
+  group: jcstream-sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    name: Sweep + build + deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    # deploy-pages@v4 requires this environment to be bound to the job.
+    # GitHub auto-creates the "github-pages" environment when Settings > Pages > Source = "GitHub Actions".
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: HCSO inmate sweep
+        # JCSTREAM_USER_AGENT is intentionally not overridden here: the module
+        # default (scraper.client.DEFAULT_UA) carries the contact URL plus the
+        # parallelism-limited descriptor. Two sources of truth invite drift.
+        env:
+          # Optional. If the secret is not configured the env var resolves to
+          # an empty string and scraper.sweep._init_sentry() falls through
+          # without initializing the SDK — the sweep keeps running with zero
+          # telemetry side-effects.
+          JCSTREAM_SENTRY_DSN: ${{ secrets.JCSTREAM_SENTRY_DSN }}
+        run: |
+          python -m scraper.sweep \
+            ${{ inputs.max_surnames && format('--max-surnames {0}', inputs.max_surnames) || '' }} \
+            ${{ inputs.refresh_known && '--refresh-known' || '' }}
+
+      # All four open-data feeds: 30-day window, each module skips its API
+      # pull if the existing JSON is < 24h old. Sweep cron is every 30 min;
+      # this gates Socrata traffic to once per dataset per day.
+      - name: Pull Cincinnati Open Data calls-for-service (last 30 days, 24h cache)
+        run: python -m scraper.cfs --hours 720
+
+      - name: Pull Cincinnati Open Data shootings (last 30 days, 24h cache)
+        run: python -m scraper.shootings --days 30
+        continue-on-error: true
+
+      - name: Pull Cincinnati Open Data crime incidents (last 30 days, 24h cache)
+        run: python -m scraper.incidents --days 30
+        continue-on-error: true
+
+      - name: Pull PDI Police CFS (last 30 days, 24h cache, arrest/citation dispositions)
+        run: python -m scraper.cfs_pdi --hours 720
+        continue-on-error: true
+
+      # Seven additional Cincinnati Open Data safety feeds (officer-involved
+      # shootings, use-of-force, traffic stops, pedestrian stops, STARS
+      # crime, CCA complaints). All gated to the same 24h cache as the
+      # primary feeds; FeedSpec list lives in scraper/open_data_feeds.py.
+      - name: Pull supplemental Cincinnati Open Data safety feeds
+        run: python -m scraper.open_data_feeds
+        continue-on-error: true
+
+      - name: Build static site
+        env:
+          # Custom domain (aretheyinjail.com) serves at the ROOT, so links are
+          # root-relative — base URL is empty. Also emit the CNAME file so GitHub
+          # Pages keeps the custom domain across rebuilds.
+          # (If you ever drop the custom domain and go back to the
+          #  <owner>.github.io/<repo>/ URL, set JCSTREAM_SITE_BASE_URL to
+          #  /${{ github.event.repository.name }} and clear JCSTREAM_CNAME.)
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: www.aretheyinjail.com
+        run: python -m web.build
+
+      - name: Commit data + built site
+        run: |
+          git config user.name "jcstream-bot"
+          git config user.email "noreply@github.com"
+          git add data/ docs/
+          if ! git diff --cached --quiet; then
+            git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          else
+            echo "no changes"
+          fi
+
+      # The built site now lives in docs/ on the working branch and gets served
+      # directly by Pages when Source = "Deploy from a branch" -> <branch> -> /docs.
+      # No artifact upload, no environment binding, no gh-pages branch needed.
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deploy
+        uses: actions/deploy-pages@v4
+        continue-on-error: true

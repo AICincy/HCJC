@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" data-base-url="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data &amp; legal notices &middot; JCStream</title>
+  <meta name="robots" content="noindex, noarchive">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#14181f">
+  <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
+  <meta property="og:site_name" content="JCStream">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JCStream — Hamilton County, OH Justice Center roster mirror">
+  <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
+  <meta property="og:url" content="https://www.aretheyinjail.com/">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/static/style.css?v=20d5a05a41">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream — releases" href="/released.xml">
+  <link rel="author" href="/humans.txt">
+</head>
+<body id="top" class="detail">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="/">
+        <span class="brand-text">
+          <span class="brand-name">JCStream</span>
+          <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
+        </span>
+      </a>
+      <span class="running"><strong>1,221</strong> in custody</span>
+      <span class="spacer"></span>
+      <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
+      <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
+      <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
+      <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+      <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
+      <a class="nav-link" href="/feed.xml">RSS</a>
+      <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+    </div>
+  </header>
+  <main id="main" class="page">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Data &amp; legal</span>
+</nav>
+
+<h1 class="record-name">Data, methodology &amp; legal notices</h1>
+<p class="muted">JCStream is generated exclusively from public records maintained by the Hamilton County,
+Ohio Sheriff&rsquo;s Office (HCSO) and published through HCSO&rsquo;s public inmate-search portal at
+<a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>. Everything the
+site is built from is published here as plain JSON, rebuilt about every 30&nbsp;minutes by GitHub
+Actions. We mirror the <em>current</em> roster &mdash; when HCSO removes a person, the next sweep
+removes them here too; there is no historical archive of released individuals.</p>
+
+<div class="section-h"><h2>Files</h2></div>
+<table class="charges">
+  <caption class="sr-only">Published data files</caption>
+  <thead><tr><th scope="col">File</th><th scope="col">Contents</th></tr></thead>
+  <tbody>
+    <tr><td><a href="current.json">current.json</a></td><td>Authoritative current-roster snapshot: <code>{generated_utc, inmate_count, inmates: [&hellip;]}</code>. Each inmate has <code>inmate_number, booking_number, last_name, first_name, middle_name, date_of_birth, sex, race, booking_date, projected_release_date, holder_status, charges: [&hellip;], photo_filename, first_seen_utc, last_seen_utc</code>. Each charge has <code>common_pleas_case, municipal_case, other_case, court_date, orc_code, description, bond_type, bond_amount, disposition, comments</code>.</td></tr>
+    <tr><td><a href="changelog.json">changelog.json</a></td><td>Last ~500 change events: <code>{event: "booked"|"released"|"updated", inmate_number, name, timestamp_utc, note}</code>.</td></tr>
+    <tr><td><a href="history.json">history.json</a></td><td>Daily roster-size series (counts only, no individuals): <code>[{date, count, booked_24h, released_24h}, &hellip;]</code>, last ~400 days. Drives the homepage and <a href="../stats/">stats-page</a> trend lines.</td></tr>
+    <tr><td><a href="../search.json">search.json</a></td><td>Compact searchable index of the current roster: <code>{generated_utc, count, rows: [{n: name, c: primary offense category, t: tier, b: booking date, id}]}</code>.</td></tr>
+    <tr><td><a href="../dispatches.json">dispatches.json</a></td><td>Geocoded points behind the homepage map: <code>{generated_utc, count, points: [{la, lo, k: "cfs"|"shooting", d: disposition/type, a: address/block, n: neighborhood, t: time}]}</code>. Cincinnati Open Data only &mdash; <strong>not</strong> matched to anyone on the roster.</td></tr>
+    <tr><td><a href="orc_offenses.json">orc_offenses.json</a></td><td>Hand-curated lookup of common Ohio Revised Code criminal sections &rarr; <code>{title, degree}</code>. Degree (F1&hellip;MM) is the statute&rsquo;s default classification; the degree actually charged can vary by subsection.</td></tr>
+    <tr><td><a href="cfs_recent.json">cfs_recent.json</a></td><td>Cincinnati Open Data &mdash; CPD/CFD Calls For Service (Socrata <code>qiik-bpks</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions only. Refreshed once every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="cfs_pdi_recent.json">cfs_pdi_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Police CFS / CAD (Socrata <code>gexm-h6bt</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions. Refreshed once every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="shootings_recent.json">shootings_recent.json</a></td><td>Cincinnati Open Data &mdash; CPD Reported Shootings (Socrata <code>sfea-4ksu</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="incidents_recent.json">incidents_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Crime Incidents (Socrata <code>k59e-2pvf</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="oi_shootings_recent.json">oi_shootings_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Officer Involved Shootings (Socrata <code>r6q4-muts</code>), last ~2&nbsp;years. Refreshed once every 24&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
+    <tr><td><a href="use_of_force_pdi_recent.json">use_of_force_pdi_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Use of Force (Socrata <code>8us8-wi2w</code>), most recent ~5,000 incidents. Refreshed once every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="use_of_force_incidents_recent.json">use_of_force_incidents_recent.json</a></td><td>Cincinnati Open Data &mdash; Use of Force Incidents (Socrata <code>748b-sht4</code>), last ~365&nbsp;days. Refreshed once every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="traffic_stops_drivers_recent.json">traffic_stops_drivers_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Traffic Stops (Drivers) (Socrata <code>hibq-hbnj</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
+    <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Pedestrian Stops (Socrata <code>jx3x-rh6i</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
+    <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data &mdash; Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data &mdash; Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed once every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build &mdash; cheap tamper-evidence on top of the authenticated git history.</td></tr>
+  </tbody>
+</table>
+
+<div class="section-h"><h2>Feeds</h2></div>
+<p class="muted">RSS&nbsp;2.0, newest first, ~50 items each:
+  <a href="../feed.xml">feed.xml</a> (everything) &middot;
+  <a href="../booked.xml">booked.xml</a> (new bookings) &middot;
+  <a href="../released.xml">released.xml</a> (releases).</p>
+
+<div class="section-h"><h2>Photos</h2></div>
+<p class="muted">Booking photos live at <code>/photos/&lt;inmate_number&gt;.jpg</code> &mdash;
+the same images HCSO embeds (base64) on its own <code>inmate-detail</code> page, re-encoded
+to 250&times;312 JPEG. A photo is present only if HCSO published one. They are removed when
+the inmate leaves the public roster.</p>
+
+<div class="section-h"><h2>How it&rsquo;s built</h2></div>
+<p class="muted">A GitHub Actions cron sweeps <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>&rsquo;s
+inmate search (substring match on last name &mdash; the 26 single letters cover the whole
+roster with dedup), parses each detail page, downscales the photo, diffs against the prior
+snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commits. Source:
+<a href="https://github.com/AICincy/JCStream">github.com/AICincy/JCStream</a>.</p>
+
+<h2 id="legal" class="legal-anchor">Legal notices</h2>
+
+<div class="section-h"><h2>Presumption of innocence</h2></div>
+<p class="muted">Every individual listed on this site is legally presumed innocent unless and until proven
+guilty in a court of law. An arrest or booking record is not evidence of guilt. Charges may be
+reduced, dismissed, or result in acquittal. This site does not editorialize about guilt or innocence.</p>
+
+<div class="section-h"><h2>Legal authority</h2></div>
+<p class="muted">JCStream is generated exclusively from public records maintained by the Hamilton County
+Sheriff&rsquo;s Office and published through HCSO&rsquo;s public inmate-search portal. The right of public
+access to these records is established by the Ohio Public Records Act,
+<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>, which
+provides that public records be open and available for inspection.</p>
+
+<div class="section-h"><h2>Record removal &amp; sealing compliance</h2></div>
+<p class="muted">When HCSO removes a record from its public inmate roster, this site removes the corresponding
+record on its next automated update cycle, typically within 30&nbsp;minutes. This site does not
+maintain a historical archive of removed records. For records subject to a court order of sealing
+or expungement under <a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>
+(as amended &mdash; including changes by 135th&nbsp;G.A. HB&nbsp;234 and 136th&nbsp;G.A. HB&nbsp;96), this site
+will remove the record upon receiving notice of the order. To submit notice, or to report any error,
+open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
+Removal and correction requests are processed at no cost &mdash; <strong>there is never a fee, and there
+never will be</strong>. This site&rsquo;s voluntary compliance with sealing and expungement orders reflects
+its respect for the rehabilitative purpose of Ohio&rsquo;s sealing and expungement statutes (ORC&nbsp;&sect;&sect;&nbsp;2953.31&ndash;2953.61).</p>
+
+<div class="section-h"><h2>Fair Credit Reporting Act notice</h2></div>
+<p class="muted"><strong>This site is not a consumer reporting agency</strong> as defined by the Fair Credit Reporting
+Act, 15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em> The information here has not been collected, in whole or
+in part, for the purpose of furnishing consumer reports. You may not use this site to make decisions
+about consumer credit, employment, insurance, housing, tenant screening, or any other purpose that
+would require compliance with the FCRA.</p>
+
+<div class="section-h"><h2>Purpose</h2></div>
+<p class="muted">JCStream exists to increase public access to, and transparency of, Hamilton County&rsquo;s criminal
+justice system. By republishing HCSO&rsquo;s public inmate roster in a structured, searchable format, this
+project supports civic awareness, journalistic inquiry, court-watching, and public accountability. It
+does not editorialize about guilt or innocence, does not accept payment for record modification or
+removal, and removes records when the source agency removes them.</p>
+
+<div class="section-h"><h2>No fees &mdash; no exceptions</h2></div>
+<p class="muted">This site will never charge any person for the review, correction, or removal of their record. If
+you encounter any third party claiming to offer paid removal services for records on this site, that
+party is not affiliated with JCStream and cannot fulfill that promise. Removal requests are processed
+at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a> at no cost.</p>
+
+<div class="section-h"><h2>Non-affiliation</h2></div>
+<p class="muted">JCStream is an independent, non-governmental project. It is not affiliated with, endorsed by, or
+operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, the State of Ohio, or any
+government entity. The site&rsquo;s source code is available under the MIT License at
+<a href="https://github.com/AICincy/JCStream">github.com/AICincy/JCStream</a>; that license governs the
+code only and does not (and cannot) license the underlying public-records data, which is governed by
+Ohio law. The JCStream-arranged record data (the curation and presentation of those public records
+on this site) is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>;
+the underlying public records themselves remain governed by Ohio law and carry no JCStream license
+claim.</p>
+
+<p class="source">Generated 2026-05-14T23:51:22Z. This page is general information about the project, not legal advice.</p>
+    <footer class="site">
+      <span>Generated 2026-05-14T23:51:22Z</span>
+      <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+      <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
+    </footer>
+  </main>
+  <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+
+  <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
+    <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <figure class="lightbox-figure">
+      <img id="lb-img" src="" alt="" decoding="async">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+  </div>
+
+  <div id="tier-tip" role="tooltip" hidden></div>
+
+  <script src="/static/main.js?v=116dce335a" defer></script>
+</body>
+</html>

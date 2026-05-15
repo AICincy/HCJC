@@ -1,0 +1,392 @@
+{% extends "base.html" %}
+{% block title %}{{ inmate.full_name }} &middot; JCStream{% endblock %}
+{% block body_class %}detail{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+
+{% set tier = primary_tier(inmate) %}
+{% set counts = tier_counts(inmate) %}
+{% set bonds = bond_by_tier(inmate) %}
+{% set days = days_in_custody(inmate) %}
+{% set hero_chap = primary_chapter(inmate) %}
+{% set age = approx_age(inmate.date_of_birth) %}
+{% set seq = booking_seq(inmate.booking_number) %}
+{% set nextc = next_court_date(inmate) %}
+{% set cases = case_numbers(inmate) %}
+{% set status = charge_status_summary(inmate) %}
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person",
+ "name": {{ inmate.full_name | tojson }},
+ {% if inmate.sex %}"gender": {{ expand_sex(inmate.sex) | tojson }},{% endif %}
+ "identifier":[{"@type":"PropertyValue","name":"HCSO inmate number","value": {{ inmate.inmate_number | tojson }}},
+               {"@type":"PropertyValue","name":"HCSO booking number","value": {{ inmate.booking_number | tojson }}}],
+ "subjectOf":{"@type":"WebPage","name":"JCStream record page",
+   "url": {{ ((site_url or "") ~ "/inmate/" ~ inmate.inmate_number ~ "/") | tojson }},
+   {% if inmate.booking_date %}"dateCreated": {{ inmate.booking_date | tojson }},{% endif %}
+   "isAccessibleForFree":true,
+   "license":"https://creativecommons.org/licenses/by-nc/4.0/",
+   "isBasedOn":{"@type":"WebPage",
+     "name":"Hamilton County Justice Center booking record (HCSO source)",
+     "url": {{ ("https://www.hcso.org/justice-center-services/inmate-search/inmate-detail/?id=" ~ inmate.inmate_number) | tojson }},
+     "license":"https://codes.ohio.gov/ohio-revised-code/section-149.43"}}}
+</script>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>{{ inmate.full_name }}</span>
+</nav>
+
+<section class="inmate-hero">
+  {% if inmate.photo_filename %}
+  <figure class="record-photo">
+    <a href="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo-cap="{{ inmate.full_name }} · booked {{ inmate.booking_date }}" aria-label="Enlarge booking photo">
+      <img src="{{ base_url }}/photos/{{ inmate.photo_filename }}" alt="HCSO booking photo of {{ inmate.full_name }}" width="240" height="300" decoding="async">
+    </a>
+    <figcaption>Booking photo &middot; ORC &sect; 149.43</figcaption>
+  </figure>
+  {% else %}
+  <figure class="record-photo">
+    <span class="thumb thumb-placeholder thumb-hero" aria-hidden="true" data-initials="{{ avatar_initials(inmate.full_name) }}"></span>
+    <figcaption>No booking photo on file</figcaption>
+  </figure>
+  {% endif %}
+  <div class="record-detail">
+    <div class="tier-row">
+      {% if counts.felony %}<span class="tier tier-felony tier-lg">FELONY{% if counts.felony > 1 %} &times;{{ counts.felony }}{% endif %}</span>{% endif %}
+      {% if counts.misdemeanor %}<span class="tier tier-misdemeanor tier-lg">MISDEMEANOR{% if counts.misdemeanor > 1 %} &times;{{ counts.misdemeanor }}{% endif %}</span>{% endif %}
+      {% if counts.unknown %}<span class="tier tier-other tier-lg">OTHER &times;{{ counts.unknown }}</span>{% endif %}
+      {% if hero_chap %}<span class="chap chap-{{ hero_chap.cls }}">{{ hero_chap.label }}</span>{% endif %}
+      <span class="hero-id">#&thinsp;{{ inmate.inmate_number }}</span>
+    </div>
+    <h1 class="record-name">{{ inmate.full_name }}</h1>
+    <p class="alert"><strong>Arrest is not conviction.</strong> This individual is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges below are accusations only and are not evidence of guilt.</p>
+    <dl class="bio">
+      <dt>Inmate&nbsp;#</dt><dd><code>{{ inmate.inmate_number }}</code></dd>
+      <dt>Booking&nbsp;#</dt><dd><code>{{ inmate.booking_number or '—' }}</code>{% if seq %} <span class="muted">{{ seq }}</span>{% endif %}</dd>
+      <dt>Booked</dt><dd>{{ display_date(inmate.booking_date) }}{% if days is not none %} <span class="muted">{{ days }} day{{ '' if days == 1 else 's' }} ago</span>{% endif %}</dd>
+      <dt>Projected&nbsp;release</dt><dd>{{ inmate.projected_release_date or '—' }}</dd>
+      <dt>Next&nbsp;court&nbsp;date</dt><dd>{{ nextc or '—' }}</dd>
+      <dt>Charges</dt><dd>{{ inmate.charges | length }}{% if status %} <span class="muted">{{ status }}</span>{% endif %}</dd>
+      <dt>Total&nbsp;bond</dt><dd>{{ bonds.total }}{% if bonds.felony != '$0' and bonds.misdemeanor != '$0' %} <span class="muted">felony {{ bonds.felony }} &middot; misd. {{ bonds.misdemeanor }}</span>{% endif %}</dd>
+      <dt>Case&nbsp;#s</dt><dd>{% if cases %}{% for cn in cases %}<a href="{{ cck_case_summary(cn) }}" target="_blank" rel="noopener">{{ cn }}</a>{{ ', ' if not loop.last }}{% endfor %}{% else %}—{% endif %}</dd>
+      <dt>Date&nbsp;of&nbsp;birth</dt><dd>{{ inmate.date_of_birth or '—' }}{% if age %} <span class="muted">age ~{{ age }}</span>{% endif %}</dd>
+      <dt>Sex &middot; race</dt><dd>{{ expand_sex(inmate.sex) }} &middot; {{ expand_race(inmate.race) }}</dd>
+      <dt>Holder&nbsp;/&nbsp;detainer</dt><dd>{{ inmate.holder_status or '—' }}</dd>
+    </dl>
+    {% set bc = charges_by_chapter(inmate) %}
+    {% if bc | length > 1 %}
+    <div class="chapter-mix">
+      <span class="muted">Charges by category:</span>
+      {% for c in bc %}<span class="chap chap-{{ c.cls }}">{{ c.label }} <strong>{{ c.count }}</strong></span>{% endfor %}
+    </div>
+    {% endif %}
+    <p class="record-legal muted">This is a public record under <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> and is removed automatically when the Hamilton County Sheriff&rsquo;s Office removes it. To request earlier removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>), open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a> &mdash; <strong>there is never a fee, and there never will be</strong>. <strong>Not a consumer reporting agency</strong>; do not use this page for any purpose governed by the FCRA.</p>
+  </div>
+</section>
+
+{% if inmate.charges %}
+<div class="section-h">
+  <h2>Charges</h2>
+  <span class="pill">{{ inmate.charges | length }}</span>
+</div>
+<table class="charges">
+  <caption class="sr-only">Charges against {{ inmate.full_name }}</caption>
+  <thead><tr>
+    <th scope="col">ORC</th><th scope="col">Description</th><th scope="col">Tier</th><th scope="col">Court date</th><th scope="col">Bond</th><th scope="col">Disposition</th><th scope="col">Case #</th>
+  </tr></thead>
+  <tbody>
+  {% for c in inmate.charges %}
+    {% set case = c.common_pleas_case or c.municipal_case or c.other_case %}
+    {% set orc_t = orc_title(c.orc_code) %}
+    {% set ch_tier = charge_tier(c) %}
+    {% set ch_url = codes_ohio_url(c.orc_code) %}
+    <tr>
+      <td>
+        {% if ch_url %}<a class="orc-code" href="{{ ch_url }}" target="_blank" rel="noopener">{{ c.orc_code }} ↗</a>{% else %}<span class="orc-code">{{ c.orc_code or '—' }}</span>{% endif %}
+        {% if orc_t %}<br><small class="orc-title">{{ orc_t }}</small>{% endif %}
+      </td>
+      <td>{{ c.description or '—' }}</td>
+      <td>{% if ch_tier %}<span class="tier tier-{{ ch_tier.kind }}">{{ ch_tier.label }}</span>{% else %}<span class="muted">—</span>{% endif %}</td>
+      <td>{{ c.court_date or '—' }}</td>
+      <td>{{ (c.bond_type ~ ' ' ~ c.bond_amount) | trim or '—' }}</td>
+      <td>{{ c.disposition or '—' }}</td>
+      <td>{% if case %}<a href="{{ cck_case_summary(case) }}" target="_blank" rel="noopener">{{ case }} ↗</a>{% else %}—{% endif %}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p class="muted note-paragraph">
+  Case&nbsp;# links open Hamilton County Clerk of Courts records at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a> (you may encounter a one-time automated verification step there). The tier shown (e.g.&nbsp;F2, M1) is the <em>default degree classification</em> of the cited ORC section as published in statute &mdash; the degree actually charged in a given case can differ based on the subsection, prior offenses, or determinations made by the charging authority or the court. <strong>The tier is a statutory label, not a judicial determination of the offense level.</strong> ORC titles are static reference text.
+</p>
+<p class="muted">
+  <a href="{{ cck_name_search(inmate.last_name, inmate.first_name, inmate.date_of_birth) }}" target="_blank" rel="noopener">Run a full name + DOB search on courtclerk.org ↗</a>
+</p>
+
+{% set tl = timeline_markers(inmate) %}
+{% set bctx = bond_context(inmate) %}
+{% set top_deg = primary_degree(inmate) %}
+{% if tl or bctx or top_deg %}
+<p class="custody-summary">
+  {% if days is not none %}{% if days < 1 %}<strong>Booked today</strong>{% else %}<strong>{{ days }} day{{ '' if days == 1 else 's' }}</strong> in custody{% endif %}{% endif %}
+  {% if bonds.total and bonds.total != '$0' %} &middot; bond <strong>{{ bonds.total }}</strong>{% if bctx and bctx.my_percentile is not none %} <span class="muted">({{ pct_ordinal(bctx.my_percentile) }} &deg;ile of {{ bctx.peer_count }} peers under &sect;&nbsp;{{ bctx.code }})</span>{% endif %}{% endif %}
+  {% if top_deg %} &middot; top charge <strong>{{ top_deg }}</strong>{% if tier_max(top_deg) %} <span class="muted">({{ tier_max(top_deg) }} max)</span>{% endif %}{% endif %}
+</p>
+{% endif %}
+
+{% if tl or bctx or top_deg %}
+<details class="ladder-details">
+  <summary>Show custody timeline, bond distribution, severity ladder &mdash; <span class="muted">richer visualization of the stats above</span></summary>
+
+{% if tl and days is not none and days < 1 %}
+<div class="ladder">
+  <h3 class="ladder-h">Time in custody</h3>
+  <p class="ladder-stat">Booked today &middot; <strong>{{ tl.start.strftime('%B %-d, %Y') }}</strong> &middot; <span class="muted">no custody history to chart yet</span></p>
+</div>
+{% elif tl %}
+<div class="ladder">
+  <h3 class="ladder-h">Time in custody</h3>
+  <div class="tl">
+    <div class="tl-axis">
+      <div class="tl-track"></div>
+      <div class="tl-fill" style="width: {{ '%.1f' % tl.now_x }}%"></div>
+      {% for m in tl.markers %}
+      <div class="tl-m tl-m-{{ m.kind }} tl-side-{{ m.side }}" style="left: {{ '%.1f' % m.x }}%">
+        <div class="tl-dot"></div>
+        <div class="tl-cap">
+          <div class="tl-lab">{{ m.label }}</div>
+          <div class="tl-date">{{ m.date }}</div>
+          {% if m.sub %}<div class="tl-sub">{{ m.sub }}</div>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="tl-foot">
+      <span>{{ tl.start.strftime('%b %-d, %Y') }}</span>
+      <span class="muted">{{ tl.total_days }}-day window</span>
+      <span>{{ tl.end.strftime('%b %-d, %Y') }}</span>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if bctx %}
+{% set bondmax = bctx.p90 * 1.15 if bctx.p90 else (bctx.max or 1) %}
+{% set axis_max = bondmax if bondmax > 0 else 1 %}
+{% macro at_pct(v) %}{{ '%.1f' % (100.0 * v / axis_max) if v else 0 }}{% endmacro %}
+<div class="ladder">
+  <h3 class="ladder-h">Bond distribution &middot; <strong>{{ bctx.peer_count }}</strong> peers currently charged under &sect;&nbsp;{{ bctx.code }}{% if bctx.title %} &middot; {{ bctx.title }}{% endif %}</h3>
+  <div class="bondctx">
+    <div class="bondctx-axis">
+      <div class="bondctx-track"></div>
+      <div class="bondctx-iqr" style="left: {{ at_pct(bctx.p25) }}%; width: {{ '%.1f' % (100.0 * (bctx.p75 - bctx.p25) / axis_max) }}%"></div>
+      <div class="bondctx-med" style="left: {{ at_pct(bctx.p50) }}%"></div>
+      {% if bctx.my_bond is not none and bctx.my_bond > 0 %}
+      <div class="bondctx-mine" style="left: {{ at_pct(bctx.my_bond) }}%">
+        <span>This case &middot; ${{ "{:,}".format(bctx.my_bond) }}</span>
+      </div>
+      {% endif %}
+    </div>
+    <div class="bondctx-ticks">
+      <span><strong>Min</strong> ${{ "{:,}".format(bctx.min) }}</span>
+      <span><strong>p25</strong> ${{ "{:,}".format(bctx.p25) }}</span>
+      <span><strong>Median</strong> ${{ "{:,}".format(bctx.p50) }}</span>
+      <span><strong>p75</strong> ${{ "{:,}".format(bctx.p75) }}</span>
+      <span><strong>p90</strong> ${{ "{:,}".format(bctx.p90) }}</span>
+    </div>
+    {% if bctx.my_percentile is not none %}
+    <p class="bondctx-cap">This bond sits at the <strong>{{ pct_ordinal(bctx.my_percentile) }} percentile</strong> across the {{ bctx.peer_count }} peers on roster currently charged under &sect;&nbsp;{{ bctx.code }}.</p>
+    {% else %}
+    <p class="bondctx-cap"><strong>No bond on file for this case.</strong> The chart shows the peer distribution under &sect;&nbsp;{{ bctx.code }} only — no &ldquo;you are here&rdquo; marker is plotted because the underlying record has no bond amount.</p>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+{% if top_deg %}
+{% set tier_set = [] %}
+{% for c in inmate.charges %}{% set ct = charge_tier(c) %}{% if ct and ct.label not in tier_set %}{% set _ = tier_set.append(ct.label) %}{% endif %}{% endfor %}
+{% if (tier_set | length) == 1 %}
+<div class="ladder">
+  <h3 class="ladder-h">Statutory severity</h3>
+  <p class="ladder-stat"><strong>{{ top_deg }}</strong> &mdash; {% if top_deg.startswith('F') %}felony{% else %}misdemeanor{% endif %} &middot; <span class="muted">{{ tier_max(top_deg) }} max sentence &middot; one of 10 ORC tiers (F1&ndash;MM)</span></p>
+  <p class="tier-meaning muted">All charges on this record share the same statutory tier. The tier reflects the <em>statutory default</em> for the cited section &mdash; the degree actually charged in a case can be lighter or heavier based on subsections and aggravating factors, and a tier is a label, not a judicial determination of guilt.</p>
+</div>
+{% else %}
+<div class="ladder">
+  <h3 class="ladder-h">Severity ladder &middot; most-severe charge is <strong>{{ top_deg }}</strong></h3>
+  <div class="ladder-head"><span>More severe</span><span>Less severe</span></div>
+  <div class="ladder-grid">
+    {% for t in tier_ladder %}
+    <div class="ladder-cell ladder-{{ t }}{% if t == top_deg %} is-current{% endif %}"{% if t == top_deg %} aria-current="true"{% endif %}>
+      <div class="ladder-tier">{{ t }}</div>
+      <div class="ladder-max">{{ tier_max(t) }}</div>
+      {% if t == top_deg %}<div class="ladder-tag">This case</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <p class="tier-meaning muted">Ohio Revised Code classifies offenses on a 10-tier ladder. The tier reflects the <em>statutory default</em> for the cited section — the degree actually charged in a case can be lighter or heavier based on subsections and aggravating factors, and a tier is a label, not a judicial determination of guilt.</p>
+</div>
+{% endif %}
+{% endif %}
+
+</details>
+{% endif %}
+
+{% set statute_codes = inmate.charges | map(attribute='orc_code') | reject('none') | reject('equalto', '') | reject('equalto', 'NONE') | unique | list %}
+{% if statute_codes %}
+<details class="section-details">
+  <summary><span class="section-summary-h">Statute context</span> <span class="muted">&middot; {{ statute_codes | length }} statute{{ '' if (statute_codes | length) == 1 else 's' }} from this record &middot; frequency across {{ "{:,}".format(all_inmates_total) }} in custody</span></summary>
+  <div class="statute-context">
+    {% set seen = [] %}
+    {% for c in inmate.charges %}
+      {% if c.orc_code and c.orc_code != 'NONE' and c.orc_code not in seen %}
+        {% set _ = seen.append(c.orc_code) %}
+        {% set t = orc_title(c.orc_code) %}
+        {% set freq = orc_freq(c.orc_code) %}
+        {% set codeurl = codes_ohio_url(c.orc_code) %}
+        <div class="statute">
+          <div class="statute-head">
+            <code class="orc-code">{{ c.orc_code }}</code>
+            {% if t %}<span class="statute-title">{{ t }}</span>{% endif %}
+          </div>
+          <div class="statute-meta">
+            <span class="muted">currently in custody under this section:</span>
+            <strong>{{ freq }}</strong>
+            <span class="muted">of {{ "{:,}".format(all_inmates_total) }}</span>
+            {% if codeurl %}&middot; <a href="{{ codeurl }}" target="_blank" rel="noopener">read statute ↗</a>{% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</details>
+{% endif %}
+
+{% set similar = similar_by_statute(inmate) %}
+{% if similar %}
+<details class="section-details">
+  <summary><span class="section-summary-h">Similar inmates &middot; held under the same statute</span> <span class="pill">{{ similar | length }}</span> <span class="muted">&middot; peer match by primary ORC section, then chapter</span></summary>
+  <div class="rb-grid">
+    {% for inm in similar %}
+    {% set deg = primary_degree(inm) %}
+    {% set top_charge = inm.charges[0] if inm.charges else None %}
+    <a class="rb-card" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/">
+      {% if inm.photo_filename %}
+      <span class="rb-photo"><img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="Booking photo of {{ inm.full_name }}" loading="lazy" decoding="async"></span>
+      {% else %}
+      <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(inm.full_name) }}"></span>
+      {% endif %}
+      <div class="rb-body">
+        {% if deg %}<span class="tier tier-{{ deg }}">{{ deg }}</span>{% endif %}
+        <h4 class="rb-name">{{ inm.full_name }}</h4>
+        <p class="rb-charge">{{ (top_charge.description | lower) if top_charge and top_charge.description else '—' }}</p>
+        <div class="rb-meta">
+          <span>{{ inm.booking_date or '—' }}</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</details>
+{% endif %}
+{% endif %}
+
+{% if cfs_matches %}
+<div class="section-h">
+  <h2>Candidate dispatch calls</h2>
+  <span class="pill">{{ cfs_matches | length }}</span>
+  <span class="grow"></span>
+  <span class="meta">probabilistic match by time, not identity</span>
+</div>
+<ul class="cfs">
+  {% for r in cfs_matches %}
+  <li>
+    <time datetime="{{ r.create_time_incident }}">{{ r.create_time_incident }}</time>
+    <span class="cfs-disposition">{{ r.disposition_text }}</span>
+    &middot; {{ r.address_x }}
+    {% if r.cpd_neighborhood %}<span class="muted">({{ r.cpd_neighborhood }})</span>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<div class="section-h">
+  <h2>Status history</h2>
+  <span class="pill">{{ (inmate_events | length) or 1 }}</span>
+  <span class="grow"></span>
+  <span class="meta">from the public changelog (capped at the most recent 500 events sitewide)</span>
+</div>
+<ul class="status-history">
+  {% if inmate_events %}
+    {% for e in inmate_events %}
+    <li class="status-row">
+      <span class="tag tag-{{ e.event }}">{{ e.event }}</span>
+      <time datetime="{{ e.timestamp_utc }}">{{ e.timestamp_utc }}</time>
+      {% if e.note %}<span class="muted">&middot; {{ e.note }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  {% else %}
+    {# No changelog events on file: synthesize a single "Booked on X" row from
+       inmate.booking_date so every record carries at least one history row. #}
+    <li class="status-row">
+      <span class="tag tag-booked">booked</span>
+      <time datetime="{{ inmate.booking_date or '' }}">{{ display_date(inmate.booking_date) or 'date unknown' }}</time>
+      <span class="muted">&middot; still in custody &middot; events older than the 500-event window are not retained</span>
+    </li>
+  {% endif %}
+</ul>
+<p class="muted note-paragraph">
+  The events above are the booking, release, and material-change records JCStream observed on its own ~30-minute sweeps. They are <strong>not</strong> court-docket entries and they may lag the source record by up to one sweep cycle. The full feed for the entire roster is at <a href="{{ base_url }}/feed.xml">/feed.xml</a>; booking-only and release-only feeds are at <a href="{{ base_url }}/booked.xml">/booked.xml</a> and <a href="{{ base_url }}/released.xml">/released.xml</a>.
+</p>
+
+<p class="source">
+  Source of record:
+  <a href="https://www.hcso.org/justice-center-services/inmate-search/inmate-detail/?id={{ inmate.inmate_number }}" target="_blank" rel="noopener">hcso.org &middot; inmate-detail / id={{ inmate.inmate_number }} ↗</a>
+</p>
+<p class="muted attribution">
+  Record data licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a> &middot;
+  <a href="{{ base_url }}/data/#legal">licensing &amp; takedown protocol</a> &middot;
+  <a href="https://github.com/AICincy/JCStream/issues">report an error or request removal &mdash; there is never a fee, and there never will be</a>
+</p>
+
+<section class="comments">
+  <div class="section-h"><h2>Public commentary</h2></div>
+  <details class="comment-policy-toggle">
+    <summary><strong>This page concerns an individual who has not been convicted.</strong> All charges are accusations. <span class="muted">Read the full comment policy</span></summary>
+    <p class="muted comment-policy">
+      If public commentary is enabled on this page, comments are tied to your GitHub
+      account, are publicly visible, and are your sole responsibility. The following content is
+      removed without notice: personally identifying or contact information for the listed
+      individual, their family members, victims, or witnesses; threats, harassment, or incitement
+      to harm any person; statements of guilt presented as established fact rather than as the
+      pending charges reflected in the public record; and any content that a reasonable person
+      would recognize as defamatory, invasive of privacy, or likely to cause unjust reputational
+      harm. Discussion threads are closed and removed when this record is removed from the HCSO
+      public roster. This site does not adopt, endorse, or assume liability for any user-submitted
+      content. To report a comment or this record, open an issue at
+      <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream</a>.
+    </p>
+  </details>
+  {% if giscus.repo_id %}
+  <script src="https://giscus.app/client.js"
+          data-repo="{{ giscus.repo }}"
+          data-repo-id="{{ giscus.repo_id }}"
+          data-category="{{ giscus.category }}"
+          data-category-id="{{ giscus.category_id }}"
+          data-mapping="pathname"
+          data-strict="1"
+          data-reactions-enabled="0"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="transparent_dark"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
+  {% else %}
+  <p class="muted">Commentary isn't enabled yet. (When it is, it runs on GitHub Discussions via
+    Giscus — set the <code>JCSTREAM_GISCUS_REPO_ID</code> / <code>JCSTREAM_GISCUS_CATEGORY_ID</code>
+    repo variables, enable Discussions on the repo, and install the Giscus app.)</p>
+  {% endif %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Visiting an inmate &middot; JCStream{% endblock %}
+{% block body_class %}detail page-visit{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Visiting</span>
+</nav>
+
+<section class="visit-hero">
+  <span class="visit-hero-eyebrow">Visitor information</span>
+  <h1 class="visit-hero-title">Visiting someone at the Justice Center</h1>
+  <p class="visit-hero-sub">
+    JCStream does not track visitor records and does not handle visitation logistics. This page is here because family members often arrive looking for the actual policy. The links below go straight to the authoritative source.
+  </p>
+</section>
+
+<div class="visit-grid">
+
+  <a class="visit-card visit-card-primary" href="https://www.hcso.org/justice-center-services/" target="_blank" rel="noopener">
+    <div class="visit-card-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Authoritative</span>
+      <h2 class="visit-card-title">HCSO visitation policy</h2>
+      <p class="visit-card-desc">Hours, registration, video-visit setup, deposit instructions, and rules around active warrants. The source of record.</p>
+      <span class="visit-card-cta">Open hcso.org &rarr;</span>
+    </div>
+  </a>
+
+  <a class="visit-card" href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">
+    <div class="visit-card-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Source roster</span>
+      <h2 class="visit-card-title">HCSO inmate search</h2>
+      <p class="visit-card-desc">The same roster JCStream mirrors, served by the Sheriff&rsquo;s office without our framing or aggregation.</p>
+      <span class="visit-card-cta">Open hcso.org &rarr;</span>
+    </div>
+  </a>
+
+  <a class="visit-card" href="https://www.courtclerk.org" target="_blank" rel="noopener">
+    <div class="visit-card-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg>
+    </div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Court records</span>
+      <h2 class="visit-card-title">Clerk of Courts</h2>
+      <p class="visit-card-desc">Docket schedule, case files, and filed documents. Public hearings are open. Our <a href="{{ base_url }}/court/">court calendar</a> aggregates next-court-date per inmate, but is informational only.</p>
+      <span class="visit-card-cta">Open courtclerk.org &rarr;</span>
+    </div>
+  </a>
+
+</div>
+
+<section class="visit-scope">
+  <h2 class="visit-section-h">What JCStream will never publish</h2>
+  <p class="visit-section-sub">By policy, even when the underlying data may technically be public. See <a href="{{ base_url }}/data/#legal">data &amp; legal</a> for the full scope statement.</p>
+  <ul class="visit-bullets">
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Identities, addresses, or phone numbers of visitors.</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Phone-call records, transcripts, or recordings.</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Commissary purchases, deposit amounts, or money transfers.</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Internal classification (gang affiliation, security level, behavior notes).</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Medical, psychiatric, or program-participation information.</li>
+    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Identifying information about minors, victims, or witnesses.</li>
+  </ul>
+</section>
+
+<section class="visit-removal">
+  <h2 class="visit-section-h">If a record on this site is causing you harm</h2>
+  <p>
+    Records here come and go automatically: when HCSO removes a person from the public roster, that record drops from JCStream on the next sweep (about every 30 minutes). For earlier removal, for example after a court order of sealing or expungement under <a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
+  </p>
+  <p class="visit-no-fee"><strong>There is never a fee, and there never will be.</strong></p>
+  <p class="visit-fcra muted">
+    Not a consumer reporting agency. Do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em>
+  </p>
+</section>
+
+{% endblock %}
