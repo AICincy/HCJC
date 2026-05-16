@@ -7,12 +7,21 @@
   <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Statute lookup</span>
 </nav>
 
-<div class="hero-eyebrow">Statute lookup</div>
-<h1 class="record-name page-title">Ohio Revised Code sections currently on the roster</h1>
-<p class="alert">
-  <strong>Charges are accusations only.</strong> Tiers shown are the <em>statutory default</em> for the cited section &mdash; the degree actually charged in a case can be heavier or lighter based on subsections and aggravating factors.
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Statute Lookup</div>
+    <div class="sub">Ohio Revised Code sections on the current Hamilton County roster</div>
+  </div>
+</header>
+
+<div class="alert inline-alert">
+  <strong>Charges are accusations only.</strong> Tiers shown are the <em>statutory default</em> for the cited section. The degree actually charged in a case can be heavier or lighter based on subsections, prior offenses, and aggravating factors determined by the charging authority or the court.
+</div>
+
+<p class="page-lede">
+  Tap a section to see who is currently held under it, its plain-English meaning, the statutory max term, and where it sits on Ohio's severity ladder. {{ sections | length }} sections appear on the current roster of {{ "{:,}".format(total_roster) }} people in custody. Statutes are linked to <a href="https://codes.ohio.gov" target="_blank" rel="noopener">codes.ohio.gov</a>, the official source maintained by the Ohio Legislative Service Commission. Felony cases are heard in the <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">Court of Common Pleas, General Division</a>; misdemeanors in <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">Hamilton County Municipal Court</a>. People charged with a crime who cannot afford an attorney are entitled to one through the <a href="https://www.hamiltoncountypd.org" target="_blank" rel="noopener">Hamilton County Public Defender</a> (<a href="tel:+15139463700">513-946-3700</a>).
 </p>
-<p class="muted">Tap a section to see who is currently held under it, its plain-English meaning, the statutory max term, and where it sits on Ohio's severity ladder. {{ sections | length }} sections appear on the current roster of {{ "{:,}".format(total_roster) }} people in custody.</p>
 
 {% if sections %}
 <div class="filter-bar" id="statute-jump-bar">

@@ -7,14 +7,22 @@
   <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Court calendar</span>
 </nav>
 
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Who's Due in Court</div>
+    <div class="sub">Hamilton County Justice Center &middot; Cincinnati, Ohio &middot; ORC § 149.43</div>
+  </div>
+  <div class="stamp">Cycle {{ snapshot.generated_utc[:16] }}Z</div>
+</header>
+
 {% set total = (cal.today | length) + (cal.tomorrow | length) + (cal.this_week | length) + (cal.this_month | length) %}
 
+<p class="page-lede">
+  Every scheduled hearing on the current Hamilton County Justice Center roster, grouped by day. Aggregated from HCSO booking records; refreshed about every 30 minutes. For the official docket, follow the case-number links on each detail page to <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+</p>
+
 <section class="court-hero">
-  <div class="court-hero-text">
-    <span class="court-hero-eyebrow">Court calendar &middot; refreshed every 30 min</span>
-    <h1 class="court-hero-title">Who&rsquo;s due in court</h1>
-    <p class="court-hero-sub">Every scheduled hearing on the current Hamilton County Justice Center roster, grouped by day. Aggregated from HCSO booking records.</p>
-  </div>
   <div class="court-hero-stats">
     <div class="court-stat court-stat-primary">
       <span class="court-stat-num">{{ cal.today | length }}</span>
@@ -36,8 +44,28 @@
 </section>
 
 <aside class="court-banner" aria-label="Legal notice">
-  <strong>Arrest is not conviction.</strong> Everyone listed is <strong>legally presumed innocent</strong>. The shown date is the earliest upcoming hearing on file across that person&rsquo;s open charges, as printed by HCSO. Hearings can be reset, continued, or removed without notice. For the docket of record, follow case&nbsp;# links to <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+  <strong>Arrest is not conviction.</strong> Everyone listed is <strong>legally presumed innocent</strong>. The shown date is the earliest upcoming hearing on file across that person's open charges, as printed by HCSO. Hearings can be reset, continued, or removed without notice. For the docket of record, follow case # links to <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
 </aside>
+
+<h2 class="sect-h">Which Court is This?</h2>
+<p class="page-lede">For a full directory of every Hamilton County court (Common Pleas, Municipal, Domestic Relations, Juvenile, Probate, Appeals, and Mayor's Courts), see <a href="{{ base_url }}/courts/">The Hamilton County Court System &rarr;</a>. Quick reference below.</p>
+<div class="fields">
+  <div class="k">Common Pleas, General Div.</div>
+  <div class="v">Felony criminal cases and civil cases over $15,000. Hamilton County Courthouse, 1000 Main Street, Room 410, Cincinnati. <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">hamiltoncountycourts.org &rarr;</a></div>
+  <div class="k">Municipal Court</div>
+  <div class="v">Misdemeanor criminal cases, traffic cases, and civil cases under $15,000. Hamilton County Courthouse, 1000 Main Street, Room 205. Main: <a href="tel:+15139465200">513-946-5200</a>. Clerk Criminal/Traffic: <a href="tel:+15139466040">513-946-6040</a>.</div>
+  <div class="k">First District Court of Appeals</div>
+  <div class="v">Reviews appeals from Common Pleas, Municipal, and Juvenile Courts in Hamilton County. Decisions released Wednesdays and Fridays. 12th floor, William Howard Taft Law Center.</div>
+  <div class="k">Hearings are public</div>
+  <div class="v">Public hearings are open. The court schedule, case files, and filed documents are at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>. Pavan Parikh, Clerk of Courts.</div>
+</div>
+
+<div class="alert inline-alert" role="note">
+  <strong>Scam alert: electronic monitoring "release fees"</strong>
+  Scammers are actively impersonating Hamilton County personnel, demanding fees to release an incarcerated person to electronic GPS monitoring. Hamilton County will never require payment for electronic monitoring before release. Verify directly with the Electronic Monitoring Unit at <strong>513-946-9800</strong>.
+</div>
+
+
 
 {% if total == 0 %}
 <div class="court-empty">
@@ -137,6 +165,18 @@
 {% endif %}
 
 {% endif %}
+
+<h2 class="sect-h">After Court</h2>
+<div class="fields">
+  <div class="k">Look up a case</div>
+  <div class="v"><a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a> &mdash; search by name or case number. Civil, criminal, traffic, and Common Pleas dockets are all indexed.</div>
+  <div class="k">E-file court documents</div>
+  <div class="v"><a href="https://efiling.hamiltoncountycourts.org" target="_blank" rel="noopener">efiling.hamiltoncountycourts.org</a></div>
+  <div class="k">Need a public defender</div>
+  <div class="v">If you cannot afford an attorney, the court will appoint one. The <a href="https://www.hamiltoncountypd.org" target="_blank" rel="noopener">Hamilton County Public Defender</a> handles adult and juvenile criminal cases. Adult: <a href="tel:+15139463700">513-946-3700</a>. Juvenile: <a href="tel:+15139468282">513-946-8282</a>.</div>
+  <div class="k">Civil matters, no lawyer</div>
+  <div class="v">The <a href="https://cincyhelpcenter.org" target="_blank" rel="noopener">Clerk of Courts Help Center</a> at Room 113, Hamilton County Courthouse, provides free information, document help, and free 40-minute attorney consultations for civil matters. <a href="tel:+15139465650">513-946-5650</a>. Mon-Thu 8 AM-3:30 PM, Fri 8 AM-3 PM.</div>
+</div>
 
 <p class="court-foot">
   Rebuilt on every sweep (~30 min cadence). Authoritative dockets, judge assignments, and attorney-of-record live at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">Hamilton County Clerk of Courts</a>. JCStream does not have access to courtroom schedules.

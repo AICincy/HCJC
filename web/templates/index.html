@@ -2,6 +2,14 @@
 {% block title %}JCStream &middot; {{ snapshot.inmate_count }} currently in custody{% endblock %}
 {% block content %}
 
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Inmate Roster</div>
+    <div class="sub">Hamilton County Justice Center · Cincinnati, Ohio · ORC § 149.43</div>
+  </div>
+  <div class="stamp">Sweep {{ snapshot.generated_utc[:16] }}Z</div>
+</header>
+
 <aside class="banner" aria-label="Legal notice">
   <p><strong>Arrest is not conviction.</strong> Everyone listed here is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges shown are accusations only and may be reduced, dismissed, or result in acquittal.</p>
   <p>JCStream republishes public records of the Hamilton County Sheriff&rsquo;s Office (HCSO) as authorized by the Ohio Public Records Act, <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> &mdash; derived from HCSO&rsquo;s public inmate roster at <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>. When HCSO removes a record, it is removed here on the next update cycle; this site keeps no historical archive. JCStream is an <strong>independent, non-governmental project</strong> &mdash; not affiliated with, endorsed by, or operated by HCSO or any government agency.</p>

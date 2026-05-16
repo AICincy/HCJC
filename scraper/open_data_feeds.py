@@ -50,6 +50,12 @@ class FeedSpec:
 
     limit: int = 5000
 
+    cache_hours: int = 24
+    """How fresh the local file must be to skip a refresh. Tighter for
+    feeds that update on the source side more than once a day; relaxed for
+    rare-event feeds (officer-involved shootings, CCA complaints) where
+    sub-day polling is pure waste."""
+
 
 # All seven new feeds chosen for civic-accountability + criminal-justice
 # relevance to JCStream's mission. Excluded: dataset-locator hrefs
@@ -64,6 +70,7 @@ FEEDS: tuple[FeedSpec, ...] = (
         days=730,  # historic — these incidents are rare; 2-year window
         where_candidates=("incident_date > '{since}'",),
         order="incident_date DESC",
+        cache_hours=24,  # rare-event feed; daily is plenty
     ),
     FeedSpec(
         dataset_id="8us8-wi2w",
@@ -73,6 +80,7 @@ FEEDS: tuple[FeedSpec, ...] = (
         # No filter — pulls most-recent 5000 rows in source order. The
         # dataset is paused per OPD's "transferring to a new data
         # management system" note, so a date filter would zero it out.
+        cache_hours=24,  # OPD has paused updates; sub-daily polling is waste
     ),
     FeedSpec(
         dataset_id="748b-sht4",
@@ -81,6 +89,7 @@ FEEDS: tuple[FeedSpec, ...] = (
         days=365,
         where_candidates=("eventdate > '{since}'",),
         order="eventdate DESC",
+        cache_hours=24,
     ),
     FeedSpec(
         dataset_id="hibq-hbnj",
@@ -89,6 +98,7 @@ FEEDS: tuple[FeedSpec, ...] = (
         days=30,
         where_candidates=("interview_date > '{since}'",),
         order="interview_date DESC",
+        cache_hours=12,  # source updates daily; 12h catches AM and PM batches
     ),
     FeedSpec(
         dataset_id="jx3x-rh6i",
@@ -97,6 +107,7 @@ FEEDS: tuple[FeedSpec, ...] = (
         days=30,
         where_candidates=("interview_date > '{since}'",),
         order="interview_date DESC",
+        cache_hours=12,
     ),
     FeedSpec(
         dataset_id="7aqy-xrv9",
@@ -105,6 +116,7 @@ FEEDS: tuple[FeedSpec, ...] = (
         days=30,
         where_candidates=("datereported > '{since}'",),
         order="datereported DESC",
+        cache_hours=12,  # STARS publishes daily; 12h gets same-day after PM update
     ),
     FeedSpec(
         dataset_id="ii65-eyg6",
@@ -113,6 +125,7 @@ FEEDS: tuple[FeedSpec, ...] = (
         days=730,  # CCA complaints are infrequent; 2-year window
         where_candidates=("incident_date_time > '{since}'",),
         order="incident_date_time DESC",
+        cache_hours=24,  # complaints close on a slow cadence; daily is plenty
     ),
 )
 
@@ -161,13 +174,16 @@ def _pull_one(spec: FeedSpec) -> list[dict]:
 
 
 def pull_all(force: bool = False) -> int:
-    """Refresh every feed whose local file is >= 24h old. Returns count
-    refreshed."""
+    """Refresh every feed whose local file exceeds its configured cache window.
+    Each FeedSpec carries its own ``cache_hours`` so rare-event feeds
+    (officer-involved shootings, CCA complaints) stay on 24h while feeds
+    that update sub-daily at the source (crime_stars, traffic / pedestrian
+    stops) refresh as often as 12h. Returns count refreshed."""
     refreshed = 0
     for spec in FEEDS:
         path = DATA_DIR / spec.filename
-        if not force and recently_refreshed(path, max_age_hours=24):
-            log.info("%s: < 24h old, skipping (path=%s)", spec.label, path)
+        if not force and recently_refreshed(path, max_age_hours=spec.cache_hours):
+            log.info("%s: < %dh old, skipping (path=%s)", spec.label, spec.cache_hours, path)
             continue
         rows = _pull_one(spec)
         _save(spec, rows)
