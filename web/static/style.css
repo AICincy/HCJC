@@ -1023,8 +1023,8 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   grid-template-columns: 1.2fr 1fr;
   gap: 28px;
   align-items: end;
-  padding: 32px 36px 36px;
-  margin: 0 0 28px;
+  padding: 16px 20px;
+  margin: 0 0 16px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
@@ -1040,7 +1040,7 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   margin-bottom: 14px;
 }
 .court-hero-title {
-  font-size: clamp(32px, 4.5vw, 52px);
+  font-size: clamp(22px, 3vw, 30px);
   line-height: 1.05;
   font-weight: 700;
   letter-spacing: -0.025em;
@@ -1063,11 +1063,11 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 18px 20px;
+  padding: 10px 14px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+  border-radius: var(--radius);
+  box-shadow: none;
 }
 .court-stat-primary {
   background: linear-gradient(140deg, var(--accent) 0%, #2c41a8 100%);
@@ -1117,7 +1117,7 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 
 /* Day-bucketed section. Each section has a stickyish header + a card grid. */
 .court-day {
-  margin: 0 0 40px;
+  margin: 0 0 24px;
 }
 .court-day-h {
   display: flex;
@@ -1322,9 +1322,9 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
    Hero + 3-card resource grid + scope-statement section.
    ============================================================ */
 .visit-hero {
-  padding: 36px 0 32px;
+  padding: 16px 0 14px;
   border-bottom: 1px solid var(--border);
-  margin: 0 0 32px;
+  margin: 0 0 16px;
 }
 .visit-hero-eyebrow {
   display: block;
@@ -1336,7 +1336,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   margin-bottom: 14px;
 }
 .visit-hero-title {
-  font-size: clamp(30px, 4.5vw, 48px);
+  font-size: clamp(22px, 3vw, 30px);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.05;
@@ -1361,15 +1361,15 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   display: flex;
   flex-direction: column;
   gap: 18px;
-  padding: 24px 24px 22px;
+  padding: 14px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
+  border-radius: var(--radius);
+  box-shadow: none;
   text-decoration: none;
   color: inherit;
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
-  min-height: 220px;
+  min-height: 0;
 }
 @media (prefers-reduced-motion: no-preference) {
   .visit-card:hover {
@@ -1433,12 +1433,12 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 }
 
 .visit-scope, .visit-removal {
-  padding: 28px 32px;
+  padding: 14px 18px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  margin: 0 0 24px;
-  box-shadow: var(--shadow-card);
+  border-radius: var(--radius);
+  margin: 0 0 14px;
+  box-shadow: none;
 }
 .visit-section-h {
   font-size: clamp(22px, 2.8vw, 30px);
@@ -1615,49 +1615,46 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 20px;
+  padding: 0 0 16px;
+  margin-bottom: 16px;
   display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 28px;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
   align-items: start;
 }
 .inmate-hero > div { display: flow-root; }
 .inmate-hero .record-name {
   font-family: var(--font-sans);
-  font-size: clamp(28px, 4vw, 42px);
-  margin: 4px 0 14px;
-  letter-spacing: -0.03em;
+  font-size: clamp(20px, 3vw, 24px);
+  margin: 0 0 8px;
+  letter-spacing: -0.025em;
   font-weight: 700;
   line-height: 1;
   color: var(--fg);
 }
 .inmate-hero .alert {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  background: var(--warn-bg);
-  border: 1px solid #eccaca;
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  margin: 0 0 18px;
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: #6b3434;
+  display: block;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--fg-muted);
 }
 .inmate-hero .alert::before {
-  content: "Presumed innocent";
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  background: var(--warn);
-  color: #fff;
-  border-radius: 5px;
-  white-space: nowrap;
-  flex-shrink: 0;
+  content: "Presumed innocent \2014  ";
+  display: inline;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 0;
+  background: none;
+  color: var(--fg-muted);
+  border-radius: 0;
+  white-space: normal;
 }
 .inmate-hero .alert > strong { color: var(--warn); font-weight: 700; }
 .inmate-hero .record-photo {
@@ -1665,16 +1662,16 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   grid-row: 1;
   margin: 0;
   position: relative;
-  width: 240px;
+  width: 120px;
   align-self: start;
 }
 .inmate-hero .record-photo a { display: block; }
 .inmate-hero .record-photo img {
   display: block;
-  width: 240px;
-  height: 300px;
+  width: 120px;
+  height: 150px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 4px;
   background: var(--bg-soft);
 }
 .inmate-hero .record-photo figcaption {
@@ -1696,7 +1693,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   grid-column: 2;
   min-width: 0;
 }
-.tier-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; align-items: center; }
+.tier-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; align-items: center; }
 .hero-id {
   margin-left: auto;
   font-family: var(--font-mono);
@@ -1719,14 +1716,14 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 .bio {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  gap: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
   overflow: hidden;
   font-size: 13px;
   max-width: none;
-  margin: 18px 0 0;
+  margin: 8px 0 0;
   padding: 0;
 }
 .bio dt {
@@ -1736,14 +1733,14 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   font-size: 11px;
   letter-spacing: 0;
   font-weight: 500;
-  padding: 10px 14px 2px;
+  padding: 6px 10px;
   margin: 0;
 }
 .bio dt + dd { padding-top: 0; }
 .bio dd {
   background: var(--surface);
   margin: 0;
-  padding: 0 14px 10px;
+  padding: 6px 10px;
   color: var(--fg);
   font-size: 15px;
   font-weight: 600;
@@ -1772,7 +1769,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 .chapter-mix .muted { color: var(--fg-muted); }
 
 @media (max-width: 1024px) {
-  .inmate-hero { grid-template-columns: 180px 1fr; }
+  .inmate-hero { grid-template-columns: 100px 1fr; }
 }
 @media (max-width: 720px) {
   .inmate-hero { grid-template-columns: 1fr; }
@@ -1798,12 +1795,12 @@ table.charges thead th {
   letter-spacing: 0.06em;
   color: var(--fg-muted);
   font-weight: 600;
-  padding: 12px 16px;
+  padding: 6px 10px;
   background: var(--bg-soft);
   border-bottom: 1px solid var(--border);
 }
 table.charges tbody td {
-  padding: 12px 16px;
+  padding: 6px 10px;
   border-bottom: 1px solid var(--border);
   vertical-align: top;
 }
@@ -1832,8 +1829,8 @@ a.orc-code:hover { border-bottom-style: solid; }
 .statute-item > summary {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
+  gap: 10px;
+  padding: 8px 12px;
   cursor: pointer;
   list-style: none;
   position: relative;
@@ -1864,7 +1861,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 .statute-hero {
   display: grid;
   grid-template-columns: 1fr 320px;
-  gap: 24px;
+  gap: 16px;
   padding: 14px 0 18px;
 }
 .statute-plain { font-size: 15px; color: var(--fg-soft); line-height: 1.55; margin: 0 0 12px; }
@@ -1881,7 +1878,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 /* ===== Statute context cards ===== */
 .statute-context { display: grid; gap: 12px; margin-bottom: 24px; grid-template-columns: 1fr; }
 .statute {
-  padding: 14px 18px;
+  padding: 10px 14px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -1896,8 +1893,8 @@ a.orc-code:hover { border-bottom-style: solid; }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 18px 22px;
-  margin-bottom: 18px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
 }
 .ladder-head {
   display: flex; justify-content: space-between;
@@ -1922,8 +1919,8 @@ a.orc-code:hover { border-bottom-style: solid; }
 .ladder-stat strong { font-weight: 600; }
 
 .custody-summary {
-  margin: 18px 0 14px;
-  padding: 14px 18px;
+  margin: 10px 0 8px;
+  padding: 10px 14px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -1941,10 +1938,10 @@ a.orc-code:hover { border-bottom-style: solid; }
 .ladder-details > summary,
 .section-details > summary {
   cursor: pointer;
-  padding: 10px 14px;
+  padding: 8px 12px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 13px;
   color: var(--fg);
   list-style: none;
@@ -2065,7 +2062,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 }
 
 /* ===== Time-in-custody timeline ===== */
-.tl { padding: 56px 4px 4px; }
+.tl { padding: 32px 4px 4px; }
 .tl-axis { position: relative; height: 96px; }
 .tl-track {
   position: absolute; left: 0; right: 0; top: 44px;
@@ -2110,7 +2107,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 }
 
 /* ===== Bond context (box-and-whisker on inmate page) ===== */
-.bondctx { padding: 28px 4px 4px; }
+.bondctx { padding: 12px 4px 4px; }
 .bondctx-axis { position: relative; height: 44px; }
 .bondctx-track {
   position: absolute; left: 0; right: 0; top: 20px;
@@ -2284,11 +2281,11 @@ footer.site a { color: var(--accent); }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px 18px;
+  padding: 10px 14px;
 }
 .kpi .num {
   font-family: var(--font-sans);
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--fg);
   font-variant-numeric: tabular-nums;
@@ -2544,12 +2541,12 @@ h2.legal-anchor {
   display: flex;
   align-items: baseline;
   gap: 12px;
-  margin: 36px 0 18px;
-  padding: 0 4px 14px;
+  margin: 20px 0 10px;
+  padding: 0 4px 8px;
   border-bottom: 1px solid var(--border);
 }
 .section-h h2 {
-  font-size: clamp(20px, 2.4vw, 26px);
+  font-size: clamp(16px, 2vw, 20px);
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0;
@@ -3268,35 +3265,36 @@ footer.site .footer-legal strong { color: var(--on-ink); }
 .caselaw-court { font-size: 11.5px; color: var(--fg-muted); }
 .caselaw-cite { font-family: var(--font-mono); font-size: 11px; color: var(--fg-soft); }
 
-/* Inmate detail polish (restrained - presumption-of-innocence framing) */
+/* Inmate detail — Phase 7 density compression */
 .inmate-hero {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
-  padding: 28px;
+  background: var(--bg);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 0 16px;
   display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 28px;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
   align-items: start;
-  margin: 16px 0 28px;
+  margin: 0 0 16px;
 }
 .record-name {
-  font-size: clamp(28px, 3.5vw, 36px);
+  font-size: clamp(20px, 3vw, 24px);
   font-weight: 700;
   letter-spacing: -0.025em;
-  line-height: 1.1;
-  margin: 14px 0 16px;
+  line-height: 1.15;
+  margin: 0 0 8px;
 }
 .record-detail .alert {
-  margin: 0 0 18px;
-  padding: 14px 18px;
-  background: var(--warn-bg);
-  border-left: 3px solid var(--warn);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  color: var(--fg-soft);
-  font-size: 13.5px;
-  line-height: 1.55;
+  margin: 0 0 8px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--fg-muted);
+  font-size: 12px;
+  line-height: 1.4;
 }
 .record-detail .alert strong { color: var(--fg); }
 @media (max-width: 720px) {
