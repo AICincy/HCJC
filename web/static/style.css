@@ -1662,7 +1662,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 .inmate-hero .alert > strong { color: var(--warn); font-weight: 700; }
 .inmate-hero .record-photo {
   grid-column: 1;
-  grid-row: 1 / span 99;
+  grid-row: 1;
   margin: 0;
   position: relative;
   width: 240px;
