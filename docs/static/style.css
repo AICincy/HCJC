@@ -43,6 +43,9 @@
   --tier-felony-bg: #c43e2c;
   --tier-misd-bg:   #c8d4a4;
 
+  /* City accents kept for CFS captions. */
+  --cincy-navy:   #00205B;
+
   --radius:       6px;
   --radius-sm:    4px;
   --radius-lg:    8px;
@@ -470,7 +473,6 @@ body.detail .page { max-width: 1080px; }
 .sparkline polyline { fill: none; stroke: var(--accent); stroke-width: 1.5; }
 .sparkline circle { fill: var(--accent); }
 
-
 /* ===== Section heads ===== */
 .section-h {
   display: flex;
@@ -695,7 +697,6 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   position: relative;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid transparent;
   border-radius: var(--radius);
   padding: 10px 12px;
   display: flex;
@@ -707,6 +708,7 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   cursor: pointer;
   content-visibility: auto;
   contain-intrinsic-size: 0 90px;
+  border-left: 3px solid transparent;
 }
 .card-inmate:hover {
   border-color: var(--accent);
@@ -904,7 +906,6 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid transparent;
   border-radius: var(--radius);
   padding: 14px;
   text-decoration: none;
@@ -912,6 +913,7 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   transition: border-color 120ms;
   content-visibility: auto;
   contain-intrinsic-size: 0 280px;
+  border-left: 3px solid transparent;
 }
 .rb-card:hover {
   border-color: var(--accent);
@@ -1578,7 +1580,6 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 @media (max-width: 720px) {
   .cfs li { grid-template-columns: 1fr; gap: 4px; padding: 10px 12px; }
 }
-
 
 /* Compact legend below the filter bar. */
 .legend {
@@ -2573,6 +2574,7 @@ h2.legal-anchor {
   color: var(--fg-muted);
   letter-spacing: -0.005em;
 }
+
 /* --- Hero strip (homepage) ink theme override --- */
 .hero-strip {
   padding: 10px 14px;
@@ -2633,12 +2635,12 @@ h2.legal-anchor {
   flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid transparent;
   border-radius: var(--radius-lg);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   transition: border-color 140ms ease;
+  border-left: 3px solid transparent;
 }
 .rb-card:hover {
   border-color: var(--accent);
@@ -2669,10 +2671,10 @@ h2.legal-anchor {
 .recent-activity .card-inmate {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid transparent;
   border-radius: var(--radius-lg);
   padding: 14px;
   transition: border-color 140ms;
+  border-left: 3px solid transparent;
 }
 .recent-activity .card-inmate:hover {
   border-color: var(--accent);
