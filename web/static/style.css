@@ -648,6 +648,7 @@ body.is-table .month .card-inmate {
   align-items: center;
   padding: 10px 12px;
   border: 0;
+  border-left: 0;
   border-bottom: 1px solid var(--border);
   border-radius: 0;
   transform: none !important;
@@ -721,12 +722,13 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   position: relative;
   background: var(--surface);
   border: 1px solid var(--border);
+  border-left: 3px solid transparent;
   border-radius: var(--radius);
   padding: 10px 12px;
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  transition: all 120ms;
+  transition: border-color 120ms;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -735,8 +737,7 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 }
 .card-inmate:hover {
   border-color: var(--accent);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px -8px rgba(15,23,42,0.1);
+  border-left-color: var(--accent);
 }
 .thumb {
   display: block;
@@ -930,18 +931,18 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--border);
+  border-left: 3px solid transparent;
   border-radius: var(--radius);
   padding: 14px;
   text-decoration: none;
   color: inherit;
-  transition: all 120ms;
+  transition: border-color 120ms;
   content-visibility: auto;
   contain-intrinsic-size: 0 280px;
 }
 .rb-card:hover {
   border-color: var(--accent);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px -8px rgba(15,23,42,0.1);
+  border-left-color: var(--accent);
   text-decoration: none;
 }
 .rb-photo {
@@ -2670,19 +2671,16 @@ h2.legal-anchor {
   flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--border);
+  border-left: 3px solid transparent;
   border-radius: var(--radius-lg);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  box-shadow: var(--shadow-card);
-  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+  transition: border-color 140ms ease;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .rb-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-hover);
-    border-color: var(--accent);
-  }
+.rb-card:hover {
+  border-color: var(--accent);
+  border-left-color: var(--accent);
 }
 .rb-photo {
   display: block;
@@ -2710,17 +2708,14 @@ h2.legal-anchor {
 .recent-activity .card-inmate {
   background: var(--surface);
   border: 1px solid var(--border);
+  border-left: 3px solid transparent;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
   padding: 14px;
-  transition: box-shadow 140ms, transform 140ms, border-color 140ms;
+  transition: border-color 140ms;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .recent-activity .card-inmate:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
-    border-color: var(--accent);
-  }
+.recent-activity .card-inmate:hover {
+  border-color: var(--accent);
+  border-left-color: var(--accent);
 }
 .recent-activity .event-line { font-size: 11px; margin-bottom: 6px; }
 .recent-activity .event-line time { color: var(--fg-muted); }
