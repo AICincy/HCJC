@@ -185,6 +185,39 @@ code, .mono { font-family: var(--mono); font-size: inherit; }
   color: var(--ink-3);
   font-weight: 500;
 }
+
+/* Civic seals next to the brand. Hyperlinked to the agency's Facebook page.
+   Live in the masthead so they ride along on every page (the masthead is
+   already position: sticky, top: 0, so the seals stay visible while the
+   user scrolls and persist across all internal page navigations). */
+.masthead-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  line-height: 0;
+  border-radius: 0;
+  flex-shrink: 0;
+  transition: opacity 0.12s linear;
+}
+.masthead-seal:hover { opacity: 0.7; }
+.masthead-seal:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.masthead-seal img {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+@media (max-width: 760px) {
+  .masthead-seal img { width: 28px; height: 28px; }
+  .masthead-seal { margin-left: 6px; }
+}
+@media (max-width: 420px) {
+  .masthead-seal-coc { display: none; }
+}
 .running {
   font-family: var(--mono);
   font-size: 10.5px;

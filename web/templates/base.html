@@ -46,6 +46,24 @@
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
       </a>
+      <a class="masthead-seal masthead-seal-hcjc"
+         href="https://www.facebook.com/HCJCOH"
+         target="_blank" rel="noopener"
+         aria-label="Hamilton County Booking Photos on Facebook">
+        <img src="{{ base_url }}/static/img/hcjc-seal.png"
+             srcset="{{ base_url }}/static/img/hcjc-seal.png 1x, {{ base_url }}/static/img/hcjc-seal-2x.png 2x"
+             alt="Hamilton County Booking Photos seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <a class="masthead-seal masthead-seal-coc"
+         href="https://www.facebook.com/cityofcincinnati"
+         target="_blank" rel="noopener"
+         aria-label="City of Cincinnati on Facebook">
+        <img src="{{ base_url }}/static/img/coc-seal.png"
+             srcset="{{ base_url }}/static/img/coc-seal.png 1x, {{ base_url }}/static/img/coc-seal-2x.png 2x"
+             alt="City of Cincinnati seal"
+             width="36" height="36" decoding="async">
+      </a>
       {% if snapshot is defined and snapshot.inmate_count %}
       <span class="running desktop-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody</span>
       {% endif %}
