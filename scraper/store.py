@@ -36,9 +36,13 @@ class SnapshotCorruptError(Exception):
 
 log = logging.getLogger(__name__)
 
-# ~10h of churn at 30-min cycles. Big enough to drive the homepage feed and the
-# RSS streams; small enough that the file stays well under a megabyte.
-CHANGELOG_LIMIT = 500
+# Phase 9: raised from 500 to 10000. The old 500 cap was a 2024 instinct to
+# keep the file under a megabyte; at ~176 bytes/event that lets us run ~8
+# days of public activity (~1.7 MB), which makes the RSS streams and the
+# homepage feed actually useful for tracking institutional behavior.
+# A public-records mirror shouldn't be the bottleneck on how far back the
+# public can see.
+CHANGELOG_LIMIT = 10000
 
 
 def _atomic_write_text(path: Path, content: str) -> None:

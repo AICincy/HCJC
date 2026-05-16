@@ -516,7 +516,7 @@ def _render_inmates(
 ) -> None:
     template = env.get_template("inmate.html")
     # Pre-index events by inmate_number for O(1) per-render lookup instead of
-    # filtering the full changelog (currently capped at 500) for each inmate.
+    # filtering the full changelog (Phase 9: capped at 10000) for each inmate.
     events_by_inmate: dict[str, list[ChangeEvent]] = {}
     for e in events:
         events_by_inmate.setdefault(e.inmate_number, []).append(e)
