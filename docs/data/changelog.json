@@ -1,20 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14356015",
-    "name": "LARKINS LAJUAN",
-    "timestamp_utc": "2026-05-13T19:11:24Z",
-    "note": "booked 5/12/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1326833",
-    "name": "HUXEL MARK",
-    "timestamp_utc": "2026-05-13T19:11:24Z",
-    "note": "booked 5/12/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "14388816",
     "name": "BURTON TODD",
     "timestamp_utc": "2026-05-13T19:11:24Z",
@@ -3498,5 +3484,19 @@
     "name": "JOHNSON SAMUEL",
     "timestamp_utc": "2026-05-16T11:23:27Z",
     "note": "booked 1/1/70"
+  },
+  {
+    "event": "released",
+    "inmate_number": "1197953",
+    "name": "PLEASURE MARQUITA",
+    "timestamp_utc": "2026-05-16T11:47:32Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14677026",
+    "name": "SMITH BARRY",
+    "timestamp_utc": "2026-05-16T11:47:32Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
