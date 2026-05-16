@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <title>Visiting an inmate &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
@@ -15,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=fce77d651b">
+  <link rel="stylesheet" href="/static/style.css?v=d2d0c50465">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
@@ -33,13 +34,24 @@
         </span>
       </a>
       <span class="spacer"></span>
-      <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
-      <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
-      <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
-      <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
-      <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
-      <a class="nav-link" href="/feed.xml">RSS</a>
-      <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+      <details class="nav-menu" open>
+        <summary class="nav-toggle" aria-label="Menu">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <div class="nav-drawer">
+          <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
+          <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
+          <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
+          <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+          <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
+          <a class="nav-link" href="/feed.xml">RSS</a>
+          <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+        </div>
+      </details>
     </div>
   </header>
   <main id="main" class="page">

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <title>SANDS BRITTANY &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
@@ -15,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=fce77d651b">
+  <link rel="stylesheet" href="/static/style.css?v=d2d0c50465">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
@@ -32,15 +33,27 @@
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
       </a>
-      <span class="running"><strong>1,209</strong> in custody</span>
+      <span class="running desktop-only"><strong>1,216</strong> in custody</span>
       <span class="spacer"></span>
-      <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
-      <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
-      <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
-      <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
-      <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
-      <a class="nav-link" href="/feed.xml">RSS</a>
-      <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+      <details class="nav-menu" open>
+        <summary class="nav-toggle" aria-label="Menu">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <div class="nav-drawer">
+          <span class="running mobile-only"><strong>1,216</strong> in custody</span>
+          <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
+          <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
+          <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
+          <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+          <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
+          <a class="nav-link" href="/feed.xml">RSS</a>
+          <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+        </div>
+      </details>
     </div>
   </header>
   <main id="main" class="page">
@@ -238,7 +251,7 @@
   <div class="tl">
     <div class="tl-axis">
       <div class="tl-track"></div>
-      <div class="tl-fill" style="width: 71.8%"></div>
+      <div class="tl-fill" style="width: 71.9%"></div>
       <div class="tl-m tl-m-booked tl-side-below" style="left: 0.0%">
         <div class="tl-dot"></div>
         <div class="tl-cap">
@@ -246,7 +259,7 @@
           <div class="tl-date">2/16/26</div>
         </div>
       </div>
-      <div class="tl-m tl-m-now tl-side-below" style="left: 71.8%">
+      <div class="tl-m tl-m-now tl-side-below" style="left: 71.9%">
         <div class="tl-dot"></div>
         <div class="tl-cap">
           <div class="tl-lab">Today</div>
@@ -342,7 +355,7 @@
 </details>
 
 <details class="section-details">
-  <summary><span class="section-summary-h">Statute context</span> <span class="muted">&middot; 9 statutes from this record &middot; frequency across 1,209 in custody</span></summary>
+  <summary><span class="section-summary-h">Statute context</span> <span class="muted">&middot; 9 statutes from this record &middot; frequency across 1,216 in custody</span></summary>
   <div class="statute-context">
         <div class="statute">
           <div class="statute-head">
@@ -351,7 +364,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>67</strong>
-            <span class="muted">of 1,209</span>
+            <span class="muted">of 1,216</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2923.12" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -361,7 +374,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>127</strong>
-            <span class="muted">of 1,209</span>
+            <span class="muted">of 1,216</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2923.13" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -371,7 +384,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>10</strong>
-            <span class="muted">of 1,209</span>
+            <span class="muted">of 1,216</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-506.46" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -380,8 +393,8 @@
 <span class="statute-title">Possession of drugs</span>          </div>
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <strong>236</strong>
-            <span class="muted">of 1,209</span>
+            <strong>235</strong>
+            <span class="muted">of 1,216</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2925.11" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -391,7 +404,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>102</strong>
-            <span class="muted">of 1,209</span>
+            <span class="muted">of 1,216</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2925.03" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -401,7 +414,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>17</strong>
-            <span class="muted">of 1,209</span>
+            <span class="muted">of 1,216</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-4301.62" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -411,7 +424,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>25</strong>
-            <span class="muted">of 1,209</span>
+            <span class="muted">of 1,216</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2921.29" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -421,7 +434,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>13</strong>
-            <span class="muted">of 1,209</span>
+            <span class="muted">of 1,216</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2923.15" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -431,7 +444,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>69</strong>
-            <span class="muted">of 1,209</span>
+            <span class="muted">of 1,216</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2913.51" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
   </div>
@@ -555,7 +568,7 @@
 </section>
 
     <footer class="site">
-      <span>Generated 2026-05-16T00:35:25Z</span>
+      <span>Generated 2026-05-16T02:17:25Z</span>
       <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
       <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
     </footer>
