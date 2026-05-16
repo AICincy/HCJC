@@ -1,19 +1,5 @@
 [
   {
-    "event": "booked",
-    "inmate_number": "14809961",
-    "name": "VONBERG SAUNDRA",
-    "timestamp_utc": "2026-05-11T18:09:13Z",
-    "note": "booked 5/11/26"
-  },
-  {
-    "event": "released",
-    "inmate_number": "2313587",
-    "name": "ALLEN RONNIE",
-    "timestamp_utc": "2026-05-11T18:09:13Z",
-    "note": "no longer on HCSO public roster"
-  },
-  {
     "event": "released",
     "inmate_number": "1981075",
     "name": "BALLEW JEREMY",
@@ -3497,6 +3483,20 @@
     "inmate_number": "1924866",
     "name": "LOVINS TRACY",
     "timestamp_utc": "2026-05-15T22:47:46Z",
+    "note": "booked 5/15/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14810551",
+    "name": "PHILLIPS MADISON",
+    "timestamp_utc": "2026-05-16T00:35:25Z",
+    "note": "booked 1/1/70"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14208372",
+    "name": "CONLEY DONALD",
+    "timestamp_utc": "2026-05-16T00:35:25Z",
     "note": "booked 5/15/26"
   }
 ]
