@@ -1612,17 +1612,30 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 .breadcrumb span[aria-hidden] { color: var(--fg-muted); }
 
 .inmate-hero {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  background: var(--bg);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
   padding: 0 0 16px;
-  margin-bottom: 16px;
+  margin: 0 0 16px;
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 16px;
   align-items: start;
 }
+@media (max-width: 720px) {
+  .inmate-hero { grid-template-columns: 1fr; padding: 22px; gap: 22px; }
+  .inmate-hero .record-photo { width: 160px; margin: 0 auto; }
+}
 .inmate-hero > div { display: flow-root; }
+.record-name {
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0 0 8px;
+}
 .inmate-hero .record-name {
   font-family: var(--font-sans);
   font-size: clamp(20px, 3vw, 24px);
@@ -1656,7 +1669,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   border-radius: 0;
   white-space: normal;
 }
-.inmate-hero .alert > strong { color: var(--warn); font-weight: 700; }
+.inmate-hero .alert > strong { color: var(--fg); font-weight: 700; }
 .inmate-hero .record-photo {
   grid-column: 1;
   grid-row: 1;
@@ -1671,7 +1684,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   width: 120px;
   height: 150px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   background: var(--bg-soft);
 }
 .inmate-hero .record-photo figcaption {
@@ -1941,7 +1954,7 @@ a.orc-code:hover { border-bottom-style: solid; }
   padding: 8px 12px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-size: 13px;
   color: var(--fg);
   list-style: none;
@@ -3265,39 +3278,3 @@ footer.site .footer-legal strong { color: var(--on-ink); }
 .caselaw-court { font-size: 11.5px; color: var(--fg-muted); }
 .caselaw-cite { font-family: var(--font-mono); font-size: 11px; color: var(--fg-soft); }
 
-/* Inmate detail — Phase 7 density compression */
-.inmate-hero {
-  background: var(--bg);
-  border: none;
-  border-bottom: 1px solid var(--border);
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0 0 16px;
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 16px;
-  align-items: start;
-  margin: 0 0 16px;
-}
-.record-name {
-  font-size: clamp(20px, 3vw, 24px);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
-  margin: 0 0 8px;
-}
-.record-detail .alert {
-  margin: 0 0 8px;
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  color: var(--fg-muted);
-  font-size: 12px;
-  line-height: 1.4;
-}
-.record-detail .alert strong { color: var(--fg); }
-@media (max-width: 720px) {
-  .inmate-hero { grid-template-columns: 1fr; padding: 22px; gap: 22px; }
-  .inmate-hero .record-photo { width: 160px; margin: 0 auto; }
-}
