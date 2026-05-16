@@ -47,16 +47,30 @@
         </span>
       </a>
       {% if snapshot is defined and snapshot.inmate_count %}
-      <span class="running"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody</span>
+      <span class="running desktop-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody</span>
       {% endif %}
       <span class="spacer"></span>
-      <a class="nav-link" href="{{ base_url }}/stats/">Stats <span class="nav-hint">snapshot</span></a>
-      <a class="nav-link" href="{{ base_url }}/court/">Court <span class="nav-hint">calendar</span></a>
-      <a class="nav-link" href="{{ base_url }}/statute/">Statutes <span class="nav-hint">lookup</span></a>
-      <a class="nav-link" href="{{ base_url }}/visit/">Visit <span class="nav-hint">policy</span></a>
-      <a class="nav-link" href="{{ base_url }}/data/">Data <span class="nav-hint">feeds</span></a>
-      <a class="nav-link" href="{{ base_url }}/feed.xml">RSS</a>
-      <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+      <details class="nav-menu" open>
+        <summary class="nav-toggle" aria-label="Menu">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <div class="nav-drawer">
+          {% if snapshot is defined and snapshot.inmate_count %}
+          <span class="running mobile-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody</span>
+          {% endif %}
+          <a class="nav-link" href="{{ base_url }}/stats/">Stats <span class="nav-hint">snapshot</span></a>
+          <a class="nav-link" href="{{ base_url }}/court/">Court <span class="nav-hint">calendar</span></a>
+          <a class="nav-link" href="{{ base_url }}/statute/">Statutes <span class="nav-hint">lookup</span></a>
+          <a class="nav-link" href="{{ base_url }}/visit/">Visit <span class="nav-hint">policy</span></a>
+          <a class="nav-link" href="{{ base_url }}/data/">Data <span class="nav-hint">feeds</span></a>
+          <a class="nav-link" href="{{ base_url }}/feed.xml">RSS</a>
+          <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+        </div>
+      </details>
     </div>
     {% if nav_months is defined and nav_months %}
     <nav class="month-nav" aria-label="Jump to month">
