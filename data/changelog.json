@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14371194",
-    "name": "LONG KEITH",
-    "timestamp_utc": "2026-05-13T19:11:24Z",
-    "note": "booked 5/12/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "14196788",
     "name": "TAYLOR CEDRIC",
     "timestamp_utc": "2026-05-13T19:11:24Z",
@@ -3498,5 +3491,12 @@
     "name": "DUMAS MIKHAIL",
     "timestamp_utc": "2026-05-16T10:00:17Z",
     "note": "booked 5/16/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14317853",
+    "name": "HARDEN ZYASIA",
+    "timestamp_utc": "2026-05-16T10:35:29Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
