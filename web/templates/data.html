@@ -54,6 +54,7 @@
   <tbody>
     <tr><td><a href="current.json">current.json</a></td><td>Authoritative current-roster snapshot: <code>{generated_utc, inmate_count, inmates: [&hellip;]}</code>. Each inmate has <code>inmate_number, booking_number, last_name, first_name, middle_name, date_of_birth, sex, race, booking_date, projected_release_date, holder_status, charges: [&hellip;], photo_filename, first_seen_utc, last_seen_utc</code>. Each charge has <code>common_pleas_case, municipal_case, other_case, court_date, orc_code, description, bond_type, bond_amount, disposition, comments</code>.</td></tr>
     <tr><td><a href="changelog.json">changelog.json</a></td><td>Last ~10,000 change events (~8 days of activity at 30-min sweep cadence): <code>{event: "booked"|"released"|"updated", inmate_number, name, timestamp_utc, note}</code>. Raised from 500 in Phase 9 so the RSS streams and the homepage feed actually see institutional behavior over time.</td></tr>
+    <tr><td><a href="anon_changelog.json">anon_changelog.json</a></td><td><strong>Phase 11.</strong> PII-stripped append-only log of all change events, kept <strong>forever</strong>. Events older than 7 days lose name + inmate_number + booking_number; only event type, date (day-precision), tier (F1-MM), and primary charge category survive. The point: long-term institutional patterns (Friday vs Tuesday booking rates, felony share of roster over years) without keeping individual records visible after release. Schema: <code>{event, timestamp_utc|date, inmate_number?, name?, tier, category}</code>.</td></tr>
     <tr><td><a href="history.json">history.json</a></td><td>Daily roster-size series (counts only, no individuals): <code>[{date, count, booked_24h, released_24h}, &hellip;]</code>, last ~400 days. Drives the homepage and <a href="../stats/">stats-page</a> trend lines.</td></tr>
     <tr><td><a href="../search.json">search.json</a></td><td>Compact searchable index of the current roster: <code>{generated_utc, count, rows: [{n: name, c: primary offense category, t: tier, b: booking date, id}]}</code>.</td></tr>
     <tr><td><a href="../dispatches.json">dispatches.json</a></td><td>Geocoded points behind the homepage map: <code>{generated_utc, count, points: [{la, lo, k: "cfs"|"shooting", d: disposition/type, a: address/block, n: neighborhood, t: time}]}</code>. Cincinnati Open Data only &mdash; <strong>not</strong> matched to anyone on the roster.</td></tr>
@@ -70,6 +71,7 @@
     <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data &mdash; Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
     <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data &mdash; Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed).</td></tr>
     {% if courtclerk_cases_available %}<tr><td><a href="courtclerk_cases.json">courtclerk_cases.json</a></td><td>Crowdsourced case data submitted via the <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">case-data issue form</a> by people who looked the case up themselves at courtclerk.org. May be empty.</td></tr>{% endif %}
+    <tr><td><a href="dispatch_correlations.json">dispatch_correlations.json</a></td><td><strong>Phase 11.</strong> Researcher-mode candidate pairs joining current roster bookings to recent Cincinnati Open Data CFS rows. Schema: <code>{generated_utc, min_confidence, window_minutes, pairs: [{inmate_number, cfs_source, cfs_row_index, confidence, signals}]}</code>. <strong>Candidates only, not asserted matches.</strong> JCStream does not publish these joins on its own pages; this file is for journalists and researchers who want to cross-reference and verify before drawing conclusions. No names; both join keys are public IDs already in the other feeds.</td></tr>
     <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build &mdash; cheap tamper-evidence on top of the authenticated git history.</td></tr>
   </tbody>
 </table>
@@ -92,6 +94,39 @@ inmate search (substring match on last name &mdash; the 26 single letters cover 
 roster with dedup), parses each detail page, downscales the photo, diffs against the prior
 snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commits. Source:
 <a href="https://github.com/AICincy/JCStream">github.com/AICincy/JCStream</a>.</p>
+
+<h2 id="crowdsource" class="sect-h">Crowdsourced courtclerk.org data</h2>
+<p>
+  JCStream does <strong>not</strong> scrape <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>. The Hamilton County Clerk of Courts explicitly disallows automated access to <code>/data/</code> in their <code>robots.txt</code>, and the prior maintainer of this project made the principled call to respect that limit. A scraper here would also break every time the Clerk's site changes.
+</p>
+<p>
+  But there's a path that works: any reader who looks up a case at courtclerk.org (passing their bot check in a regular browser) can paste the docket fields into a one-minute GitHub form. The form's a structured issue template; a workflow ingests it into <code>data/courtclerk_cases.json</code>; the next site build then displays the submission on the matching inmate's detail page under "Submitted by readers." Anyone reading that inmate's page sees the court information without anyone scraping anyone.
+</p>
+<p>
+  This is a deliberate trade: coverage will always be patchy, because only what someone bothers to submit appears. The upside: every entry was looked up by a real person, so the data quality on what does come in is higher than any scraper would manage.
+</p>
+<p>
+  <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">Open the case-data form &rarr;</a>
+</p>
+
+<h2 id="correlation" class="sect-h">Dispatch correlation (researcher mode)</h2>
+<p>
+  Cincinnati Open Data publishes calls-for-service rows with disposition codes (arrest, citation, offense report) but no inmate identifier. Hamilton County publishes the booking record but no link back to the originating dispatch. The two databases are public; the join is not.
+</p>
+<p>
+  <code>dispatch_correlations.json</code> attempts the join automatically and outputs candidate pairs by inmate_number and CFS row index, with a confidence score weighted 50/50 between temporal proximity (within a 60-minute window) and textual overlap between the booking's charge description and the CFS row's disposition/incident-type fields. Pairs below 0.35 confidence are dropped.
+</p>
+<p>
+  <strong>JCStream does not publish these joins on its own pages.</strong> The file is intentionally a raw data export. A high-confidence pair still requires human verification before any public claim is made that a specific dispatch led to a specific arrest. The defamation risk of automated false-positives is real; the researcher-mode export delegates that judgment to whoever's actually doing the reporting.
+</p>
+
+<h2 id="anon" class="sect-h">Anonymized event log (permanent)</h2>
+<p>
+  The roster mirror only keeps individuals while they're on the public roster: when HCSO releases someone, the next sweep removes them here. That's the privacy default, and it stays.
+</p>
+<p>
+  But aggregate counts shouldn't disappear too. <code>anon_changelog.json</code> is a parallel feed that retains every booking and release event forever, with all identifying fields (name, inmate_number, booking_number) stripped after 7 days. What survives the strip is the event type, the date (day-precision, not minute), the offense tier (F1-MM), and the primary charge category. That's enough to answer institutional-pattern questions ("how does Friday booking volume compare to Tuesday over the last year?", "what was the F1 share of the roster during summer 2025?") without keeping anyone individually visible after they've left custody.
+</p>
 
 <h2 id="legal" class="legal-anchor">Legal notices</h2>
 

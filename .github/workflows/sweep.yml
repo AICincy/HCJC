@@ -93,6 +93,14 @@ jobs:
         run: python -m scraper.open_data_feeds
         continue-on-error: true
 
+      # Phase 11: build dispatch-to-arrest candidate pairs (researcher mode).
+      # No names, no assertions; just (inmate_number, cfs_row_index, confidence)
+      # joined keys that a researcher can investigate. Heavy disclaimer baked
+      # into the output JSON.
+      - name: Build dispatch correlation candidates
+        run: python -m scraper.correlate
+        continue-on-error: true
+
       - name: Build static site
         env:
           # Custom domain (aretheyinjail.com) serves at the ROOT, so links are

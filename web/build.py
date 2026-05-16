@@ -507,6 +507,29 @@ def _update_history(snapshot: Snapshot, booked_24h: int, released_24h: int) -> d
     }
 
 
+def _load_crowdsourced_cases() -> dict[str, list[dict]]:
+    """Read data/courtclerk_cases.json (populated via the case-data issue
+    workflow) and index entries by inmate_number. Each inmate gets a list of
+    submitted case records they're named on; the inmate.html template can
+    then render them under a 'Submitted by readers' aside."""
+    path = Path("data/courtclerk_cases.json")
+    if not path.exists():
+        return {}
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    entries = raw.get("cases", []) if isinstance(raw, dict) else (raw if isinstance(raw, list) else [])
+    by_inmate: dict[str, list[dict]] = {}
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        key = entry.get("inmate_number") or entry.get("inmate")
+        if key:
+            by_inmate.setdefault(str(key), []).append(entry)
+    return by_inmate
+
+
 def _render_inmates(
     env: Environment,
     snapshot: Snapshot,
@@ -522,12 +545,16 @@ def _render_inmates(
         events_by_inmate.setdefault(e.inmate_number, []).append(e)
     for ev_list in events_by_inmate.values():
         ev_list.sort(key=lambda e: e.timestamp_utc or "")
+    # Phase 11: load the crowdsourced courtclerk submissions once so each
+    # inmate.render() can grab their own list in O(1).
+    crowdsourced = _load_crowdsourced_cases()
     for inm in snapshot.inmates:
         page = template.render(
             inmate=inm,
             snapshot=snapshot,
             cfs_matches=matches.get(inm.inmate_number, []),
             inmate_events=events_by_inmate.get(inm.inmate_number, []),
+            crowdsourced_for_inmate=crowdsourced.get(inm.inmate_number, []),
         )
         target = out_dir / "inmate" / inm.inmate_number / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)

@@ -130,6 +130,40 @@
   <a href="{{ cck_name_search(inmate.last_name, inmate.first_name, inmate.date_of_birth) }}" target="_blank" rel="noopener">Run a full name + DOB search on courtclerk.org ↗</a>
 </p>
 
+{% if crowdsourced_for_inmate %}
+<aside class="crowdsource-block" aria-label="Crowdsourced case data">
+  <header class="crowdsource-h">
+    <span class="crowdsource-kicker">Submitted by readers</span>
+    <strong>Court records contributed for this inmate</strong>
+  </header>
+  <ul class="crowdsource-list">
+    {% for entry in crowdsourced_for_inmate %}
+    <li>
+      <span class="crowdsource-case">Case # {{ entry.case_number }}</span>
+      {% if entry.next_hearing %} &middot; next hearing <strong>{{ entry.next_hearing }}</strong>{% endif %}
+      {% if entry.judge %} &middot; before <strong>{{ entry.judge }}</strong>{% endif %}
+      {% if entry.disposition %} &middot; <em>{{ entry.disposition }}</em>{% endif %}
+      <span class="crowdsource-attrib muted">submitted by <a href="{{ entry.issue_url }}" target="_blank" rel="noopener">@{{ entry.submitter }}</a> on {{ entry.submitted[:10] }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</aside>
+{% endif %}
+
+<aside class="case-cta" aria-label="Help us mirror this case">
+  <div class="case-cta-text">
+    <strong>Have you looked up this case at courtclerk.org?</strong>
+    JCStream can't scrape courtclerk.org because their <code>robots.txt</code> disallows it. If you pass the bot check on your own browser, you can paste the docket info into a one-minute form and it will appear here for everyone. <a href="{{ base_url }}/data/#crowdsource">How crowdsourcing works &rarr;</a>
+  </div>
+  {% set primary_case = (inmate.charges | selectattr('common_pleas_case') | map(attribute='common_pleas_case') | first) or
+                       (inmate.charges | selectattr('municipal_case')   | map(attribute='municipal_case')   | first) or
+                       (inmate.charges | selectattr('other_case')       | map(attribute='other_case')       | first) or '' %}
+  <a class="case-cta-btn" target="_blank" rel="noopener"
+     href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml&title=%5Bcase%5D+{{ inmate.full_name | urlencode }}&case_number={{ primary_case | urlencode }}&defendant_name={{ inmate.full_name | urlencode }}">
+    Add case info for this inmate &rarr;
+  </a>
+</aside>
+
 {% set tl = timeline_markers(inmate) %}
 {% set bctx = bond_context(inmate) %}
 {% set top_deg = primary_degree(inmate) %}

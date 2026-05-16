@@ -750,6 +750,9 @@ code, .mono { font-family: var(--mono); font-size: inherit; }
 }
 .chapter-mix .chap strong { color: var(--ink); font-weight: 700; }
 
+/* ============================================================
+   PHASE 11: crowdsource UX on inmate pages
+   ============================================================ */
 .record-legal {
   font-family: var(--mono);
   font-size: 11px;
@@ -759,6 +762,85 @@ code, .mono { font-family: var(--mono); font-size: inherit; }
   padding-top: 12px;
   margin-top: 8px;
 }
+
+.case-cta {
+  margin: 14px 0 22px;
+  padding: 14px 16px;
+  border: 2px solid var(--ink);
+  background: var(--paper-2);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.case-cta-text {
+  flex: 1;
+  min-width: 240px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.case-cta-text strong { display: block; margin-bottom: 4px; font-weight: 700; }
+.case-cta-text a { color: var(--accent); }
+.case-cta-btn {
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 10px 14px;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  transition: background 0.12s linear, color 0.12s linear;
+}
+.case-cta-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+.crowdsource-block {
+  margin: 14px 0 18px;
+  border: 1px solid var(--rule);
+  background: var(--doc);
+  padding: 12px 14px;
+}
+.crowdsource-h {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule-2);
+}
+.crowdsource-kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.crowdsource-h strong {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+}
+.crowdsource-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.crowdsource-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule-2);
+}
+.crowdsource-list li:last-child { border-bottom: none; }
+.crowdsource-case { font-weight: 700; }
+.crowdsource-attrib { display: block; font-size: 10.5px; margin-top: 2px; }
 
 /* ============================================================
    PROSE CONTENT — lede paragraphs, rule lists, fields tables
