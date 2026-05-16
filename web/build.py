@@ -187,6 +187,8 @@ def build(out_dir: Path) -> int:
     _render_statute_page(env, snapshot, offenses, out_dir)
     _render_court_page(env, snapshot, out_dir)
     _render_visit_page(env, out_dir)
+    _render_help_page(env, out_dir)
+    _render_courts_page(env, out_dir)
     _copy_static(out_dir)
     _copy_photos(out_dir)
     _write_manifest(out_dir, env.globals["base_url"])
@@ -709,6 +711,27 @@ def _render_visit_page(env: Environment, out_dir: Path) -> None:
     policy; deliberately does NOT show visitation records (privacy creep)."""
     page = env.get_template("visit.html").render()
     target = out_dir / "visit" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
+def _render_help_page(env: Environment, out_dir: Path) -> None:
+    """Static "Get help" resources page. Mirrors current contact info for the
+    free Hamilton County legal and crisis resources most relevant to people
+    who land on JCStream looking for help. No data dependencies."""
+    page = env.get_template("help.html").render()
+    target = out_dir / "help" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
+def _render_courts_page(env: Environment, out_dir: Path) -> None:
+    """Static "Hamilton County court system" reference page. Mirrors directory
+    and jurisdictional info from hamiltoncountycourts.org (Municipal +
+    Common Pleas), probatect.org, and the Clerk of Courts. Distinct from
+    /court/ which is the operational calendar of upcoming hearings."""
+    page = env.get_template("courts.html").render()
+    target = out_dir / "courts" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
 

@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% block title %}Hamilton County court system &middot; JCStream{% endblock %}
+{% block body_class %}detail page-courts{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Court system</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">The Hamilton County Court System</div>
+    <div class="sub">Which court does what, where to find it, who presides &middot; ORC § 149.45 transparency</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  Most people who land on JCStream don't know which court will hear their case or their loved one's case. Hamilton County has six courts with overlapping geography and very different jurisdictions. This page mirrors the published information from <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">hamiltoncountycourts.org</a>, <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>, and the Clerk of Courts so the distinctions are in one place. Public records belong to the people; officials act as trustees.
+</p>
+
+<div class="alert inline-alert" role="note">
+  <strong>Scam alert (issued by the Court of Common Pleas)</strong>
+  Scammers actively impersonate Hamilton County Sheriff's Office, Electronic Monitoring Unit, and Clerk of Courts personnel, calling families of incarcerated individuals and demanding fees for "release via electronic GPS ankle monitor." They use spoofed numbers and publicly available arrest records, and request payment via Zelle, Venmo, or Cash App. Hamilton County <strong>will never require payment</strong> for electronic monitoring before release from the Justice Center. Verify directly with the Electronic Monitoring Unit at <strong>513-946-9800</strong>.
+</div>
+
+<h2 class="sect-h">Court of Common Pleas, General Division</h2>
+<p>
+  The trial court of general jurisdiction. Hears felony criminal cases and civil cases in which the amount in controversy is more than $15,000, including matters involving title to real estate (e.g. foreclosures). Approximately 16 judges; cases are assigned to a single judge by lot at filing and stay with that judge through termination.
+</p>
+<div class="fields">
+  <div class="k">Address</div>
+  <div class="v">Hamilton County Courthouse, 1000 Main Street, Room 410, Cincinnati, Ohio 45202</div>
+  <div class="k">Web</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas &rarr;</a></div>
+  <div class="k">Clerk's office</div>
+  <div class="v">Common Pleas Civil &amp; Criminal Divisions: 1000 Main Street, Room 315. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Chief Magistrates</div>
+  <div class="v">Anita P. Berding and Thomas O. Beridon (Local Rule 23). Room 424, Hamilton County Courthouse.</div>
+  <div class="k">Magistrate referrals</div>
+  <div class="v">Foreclosure, administrative appeals (except those assigned to Hon. Robert P. Ruehlman), civil forfeiture, certificates for qualification of employment, and car-title requests are heard by magistrates by General Order of Reference.</div>
+  <div class="k">Local Rules</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/local-rules/" target="_blank" rel="noopener">hamiltoncountycourts.org/local-rules &rarr;</a></div>
+</div>
+
+<h2 class="sect-h">Mission &amp; Pledge of Fairness</h2>
+<p class="page-lede">
+  Mirrored verbatim from <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas</a>. The Judges have published this commitment to the public:
+</p>
+<blockquote class="banner" style="border-left-color: var(--ink); margin: 0 0 18px;">
+  <p style="margin: 0 0 8px;"><strong>Mission.</strong> As an equal and independent branch of government, the Judges of the Hamilton County Court of Common Pleas, acting with integrity, shall provide a safe, accessible, transparent, efficient, and impartial system of justice by fairly resolving disputes, respecting the public interest, and preserving individual rights while maintaining the rule of law.</p>
+  <p style="margin: 0 0 8px;"><strong>Pledge of Fairness.</strong> The fundamental mission of the Hamilton County Court of Common Pleas is to provide a fair and impartial forum for the resolution of disputes according to the rule of law. The Judges and staff therefore make this pledge to each litigant, defendant, victim, witness, juror, and person involved in a court proceeding:</p>
+  <p style="margin: 0;"><em>Fairness includes the opportunity to be heard, the chance to have the court process explained, and the right to be treated with respect.</em></p>
+</blockquote>
+
+<h2 class="sect-h">Hamilton County Municipal Court</h2>
+<p>
+  Handles misdemeanor criminal cases, traffic offenses, and civil cases in which the amount in controversy is less than $15,000, including small claims and landlord-tenant matters. Also conducts preliminary hearings for felony cases before they transfer to Common Pleas, and oversees probation for misdemeanor offenders. The court operates several specialty divisions (housing, environmental, drug court, mental health court) and a Driver's License Intervention Program.
+</p>
+<div class="fields">
+  <div class="k">Address</div>
+  <div class="v">Hamilton County Courthouse, 1000 Main Street, Room 205, Cincinnati, Ohio 45202</div>
+  <div class="k">Main phone</div>
+  <div class="v"><a href="tel:+15139465200">513-946-5200</a></div>
+  <div class="k">Web</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/municipal/" target="_blank" rel="noopener">hamiltoncountycourts.org/municipal &rarr;</a></div>
+  <div class="k">Civil Clerk</div>
+  <div class="v">1000 Main Street, Room 115. Hours: 8 AM-4 PM, Monday-Friday. Small claims, landlord-tenant, civil under $15,000.</div>
+  <div class="k">Criminal &amp; Traffic Clerk</div>
+  <div class="v">Justice Center, 1000 Sycamore Street, Room 115. Hours: 8 AM-8 PM, Monday-Friday. Bond Window / Police Attorney Counter open 24/7. <a href="tel:+15139466040">513-946-6040</a>.</div>
+  <div class="k">Local Rules</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/" target="_blank" rel="noopener">hamiltoncountycourts.org/municipal-local-rules &rarr;</a></div>
+  <div class="k">Administrative Judge</div>
+  <div class="v">Elected by the permanent judges in November of each even-numbered year for a two-year term beginning January 1 (Municipal Local Rule 1).</div>
+</div>
+
+<h2 class="sect-h">Court of Common Pleas, Domestic Relations Division</h2>
+<p>
+  Handles divorce, dissolution of marriage, legal separation, annulment, custody between parents, spousal support, and parental rights. Distinct from Juvenile Court (custody between a parent and a non-parent goes to Juvenile). Cases are assigned by lot to a judge at filing and stay with that judge.
+</p>
+<div class="fields">
+  <div class="k">Court address</div>
+  <div class="v">800 Broadway Street, Cincinnati, Ohio 45202</div>
+  <div class="k">Clerk's office</div>
+  <div class="v">800 Broadway Street, Room 347. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Statutory basis</div>
+  <div class="v"><a href="https://codes.ohio.gov/ohio-revised-code/section-2301.03" target="_blank" rel="noopener">ORC § 2301.03</a> &mdash; assignment, jurisdiction, and administrative authority over divorce, dissolution, legal separation, and annulment cases.</div>
+  <div class="k">Docket office</div>
+  <div class="v">Room 3-46. All motions must first be set for hearing here before filing with the Clerk of Courts.</div>
+</div>
+
+<h2 class="sect-h">Hamilton County Probate Court (Common Pleas, Probate Division)</h2>
+<p>
+  Mirrored from <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>. Provides over 80 unique services. The most common: administering estates from generation to generation, providing guardianship for residents who cannot care for themselves, growing families through marriage and adoptions, and presiding over mental-health civil-commitment cases.
+</p>
+<div class="fields">
+  <div class="k">Presiding judge</div>
+  <div class="v">Hon. Ralph Winkler. Presided over more than 150,000 cases since 1999. 2015 Golden Gavel Award (Ohio Common Pleas Judges Association); 2008 Trial Judge of the Year (Hamilton County Trial Lawyers Association).</div>
+  <div class="k">Address</div>
+  <div class="v">William Howard Taft Center, 230 East Ninth Street, 9th &amp; 10th Floors, Cincinnati, Ohio 45202</div>
+  <div class="k">Main phone</div>
+  <div class="v"><a href="tel:+15139463570">513-946-3570</a></div>
+  <div class="k">Marriage licenses</div>
+  <div class="v"><a href="tel:+15139463590">513-946-3590</a> &middot; <a href="https://www.probatect.org/marriagelicenses/" target="_blank" rel="noopener">probatect.org/marriagelicenses &rarr;</a></div>
+  <div class="k">Cashier</div>
+  <div class="v">9th floor of the William Howard Taft Law Center. Hours: 8 AM-3:45 PM, Monday-Friday. <a href="tel:+15139463604">513-946-3604</a>.</div>
+  <div class="k">Free attorneys can't appear</div>
+  <div class="v">None of the Court's attorneys or personnel may give legal advice. For low-income filers, the Legal Aid Society's Volunteer Lawyers Project handles probate matters at reduced or no cost (<a href="tel:+15132419400">513-241-9400</a>).</div>
+  <div class="k">Interpreters</div>
+  <div class="v">Provided free of charge to facilitate participation in Court proceedings or services.</div>
+</div>
+
+<h2 class="sect-h">Hamilton County Juvenile Court (Common Pleas, Juvenile Division)</h2>
+<p>
+  Handles cases involving people under 18 (delinquency), plus custody disputes between parents or with a non-parent. The Clerk of Courts Help Center has a satellite office for custody issues inside Juvenile Court, on the first floor.
+</p>
+<div class="fields">
+  <div class="k">Presiding judge</div>
+  <div class="v">Hon. Melissa Powers (elected January 1, 2017; previously Hamilton County Municipal Court judge 2006-2016 and Presiding Judge 2012-2014). Established the first Hamilton County Veterans Treatment Court.</div>
+  <div class="k">Address</div>
+  <div class="v">800 Broadway, 14th Floor, Cincinnati, Ohio 45202-1332</div>
+  <div class="k">Main phone</div>
+  <div class="v"><a href="tel:+15139469209">513-946-9209</a> &middot; Fax: 513-946-9216</div>
+  <div class="k">Help Center satellite (custody)</div>
+  <div class="v">1st floor of Juvenile Court. <a href="tel:+15139469442">513-946-9442</a>.</div>
+</div>
+
+<h2 class="sect-h">First District Court of Appeals</h2>
+<p>
+  The intermediate appellate court for Hamilton County. Hamilton County is the only county within the First District; the surrounding counties (Brown, Butler, Clermont, Clinton, Fayette, Madison, Preble, Warren) are in the Twelfth District. Reviews appeals from Common Pleas (all divisions) and Municipal Court. Three-judge panels hear each case; decisions from the panel can be appealed to the Ohio Supreme Court.
+</p>
+<div class="fields">
+  <div class="k">Address</div>
+  <div class="v">William Howard Taft Law Center, 12th Floor, Cincinnati, Ohio 45202</div>
+  <div class="k">Opinion release</div>
+  <div class="v">Wednesdays and Fridays.</div>
+  <div class="k">Web</div>
+  <div class="v"><a href="https://firstdistrictcoa.org" target="_blank" rel="noopener">firstdistrictcoa.org &rarr;</a></div>
+  <div class="k">Constitutional basis</div>
+  <div class="v">Established by Article IV, Section 1 of the Ohio Constitution; jurisdiction outlined in Article IV, Section 3.</div>
+  <div class="k">Original jurisdiction</div>
+  <div class="v">In addition to hearing appeals, the court has original jurisdiction over writs of habeas corpus, mandamus, procedendo, prohibition, and quo warranto.</div>
+</div>
+
+<h2 class="sect-h">Mayor's Courts in Hamilton County</h2>
+<p>
+  Ohio is one of only two states (the other is Louisiana) that allows the mayors of municipal corporations to preside over a court. In Hamilton County municipalities populated by more than 100 people with no municipal court of their own, Mayor's Courts hear cases involving local ordinance violations and state traffic laws. A mayor is not required to be a lawyer; they may appoint an attorney with at least three years of practice to preside. A person convicted in Mayor's Court may appeal to the Hamilton County Municipal Court.
+</p>
+<div class="fields">
+  <div class="k">Hamilton County Mayor's Courts</div>
+  <div class="v">Amberley Village &middot; Blue Ash &middot; Cheviot &middot; Cleves &middot; Forest Park &middot; Golf Manor &middot; Indian Hill &middot; Lockland &middot; Madeira &middot; Montgomery &middot; North College Hill &middot; Reading &middot; Sharonville &middot; St. Bernard &middot; Terrace Park &middot; Woodlawn &middot; Wyoming</div>
+  <div class="k">Jurisdiction</div>
+  <div class="v">Local ordinance violations and state traffic offenses only. No civil cases. No felonies.</div>
+  <div class="k">Appeals</div>
+  <div class="v">Convictions in Mayor's Court can be appealed to the Hamilton County Municipal Court.</div>
+</div>
+
+<h2 class="sect-h">How a Case Moves Through the System</h2>
+<p>
+  An adult felony arrest in Hamilton County typically follows this path. The path for a misdemeanor differs at step 2 onward (it stays in Municipal Court).
+</p>
+<ul class="rule-list">
+  <li>Arrest by HCSO, Cincinnati PD, or another local jurisdiction. Booking at the Justice Center, 1000 Sycamore Street.</li>
+  <li>Arraignment in Hamilton County Municipal Court (Room 205) within a short time after booking. The judge sets bond and reads the charges. For misdemeanors and traffic, the case stays in Municipal Court; for felonies, this is a preliminary hearing.</li>
+  <li>If a felony, the case is bound over to the Court of Common Pleas, General Division (Room 410) after a preliminary hearing in Municipal Court or after a grand jury indictment.</li>
+  <li>Case is assigned by lot to one Common Pleas judge under the Individual Assignment System (Local Rule 7). That judge handles every motion, hearing, plea, and trial in the case.</li>
+  <li>Within 90 days of filing (120 days for foreclosure cases), the assigned judge holds a Case Management Conference to schedule the rest of the case (Local Rule 15).</li>
+  <li>Resolution: plea, trial verdict, dismissal, or transfer to a specialty court (drug court, mental health court, Veterans Treatment Court).</li>
+  <li>Sentence: probation, fines, restitution, county jail (typically misdemeanor), state prison (felonies). For diversion or treatment court, supervised release with treatment conditions.</li>
+  <li>Appeal: from Common Pleas or Municipal Court, to the First District Court of Appeals (12th floor, William Howard Taft Law Center). From there, by leave, to the Ohio Supreme Court.</li>
+</ul>
+
+<h2 class="sect-h">Where the Clerk of Courts Offices Are</h2>
+<p>
+  Pavan Parikh is the elected Clerk of Courts (<a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>). The Clerk's office is the record-keeper for every court in Hamilton County. Below are the public counters where you can file, look up, or pick up documents in person. E-filing is available at <a href="https://efiling.hamiltoncountycourts.org" target="_blank" rel="noopener">efiling.hamiltoncountycourts.org</a>.
+</p>
+<div class="fields">
+  <div class="k">Common Pleas Civil &amp; Criminal</div>
+  <div class="v">1000 Main Street, Room 315, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Domestic Relations</div>
+  <div class="v">800 Broadway Street, Room 347, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Municipal Civil</div>
+  <div class="v">1000 Main Street, Room 115, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Municipal Criminal &amp; Traffic</div>
+  <div class="v">Justice Center, 1000 Sycamore Street, Room 115, Cincinnati. Hours: 8 AM-8 PM Mon-Fri. Bond Window / Police Attorney Counter 24/7.</div>
+  <div class="k">Auto Title (Downtown)</div>
+  <div class="v">1001 Main Street, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Auto Title (Hamilton Ave.)</div>
+  <div class="v">10964 Hamilton Avenue, Cincinnati. Hours: 8 AM-4:30 PM Mon-Fri, 8 AM-12:30 PM Saturday.</div>
+  <div class="k">Auto Title (Red Bank Rd.)</div>
+  <div class="v">3370 Red Bank Road, Cincinnati. Hours: 8 AM-4:30 PM, Monday-Friday.</div>
+</div>
+
+<h2 class="sect-h">The Operational View</h2>
+<p>
+  For who's actually scheduled in court today and the rest of this week, see the <a href="{{ base_url }}/court/">JCStream court calendar</a>. It aggregates next-court-date per inmate from the HCSO booking records, refreshed about every 30 minutes. For the official docket of record, including judge assignments and filings, search by name or case number at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+</p>
+
+<p class="note-paragraph">
+  This page is a public-records mirror, not legal advice. Phone numbers, addresses, and jurisdictional thresholds are verified from the Hamilton County Courts, Probate Court, and Clerk of Courts websites. If you find a contact that has changed, please <a href="https://github.com/AICincy/JCStream/issues">open an issue</a>. Authoritative sources of last resort: <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">hamiltoncountycourts.org</a>, <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>, <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+</p>
+
+{% endblock %}
