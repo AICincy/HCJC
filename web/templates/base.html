@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <title>{% block title %}JCStream{% endblock %}</title>
   {# noarchive = no Google-cache snapshot. We mirror; we don't archive. If a
      record is purged here pursuant to ORC § 2953.32 sealing/expungement, a
@@ -25,7 +26,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="{{ site_url }}/">
   <meta name="twitter:card" content="summary">
-  {# Inter + JetBrains Mono self-hosted under /static/fonts/ via @font-face in
+  {# Public Sans + JetBrains Mono self-hosted under /static/fonts/ via @font-face in
      style.css (audit/11 spa-P2). The Google Fonts preconnects and stylesheet
      link were removed: one fewer render-blocking request, no third-party DNS. #}
   <link rel="stylesheet" href="{{ base_url }}/static/style.css?v={{ css_version | default('dev', true) }}">
