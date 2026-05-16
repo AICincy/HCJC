@@ -808,7 +808,7 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 }
 .tier-felony      { color: #fff; background: var(--tier-felony-bg); border: 0; }
 .tier-misdemeanor { color: var(--tier-misd-fg); background: var(--tier-misd-bg); border: 0; }
-.tier-other       { color: var(--fg-muted); background: var(--bg-soft); border: 1px dashed var(--border-hi); }
+.tier-other       { color: var(--fg-soft); background: var(--bg-soft); border: 1px dashed var(--border-hi); }
 
 /* 10-tier ladder chip (F1 → MM) used in the new design's hero + tables. */
 .tier-F1 { color: #fff; background: #9c1c1c; }
