@@ -26,7 +26,6 @@
   --fg-soft:      #334155;
   --fg-muted:     #64748b;
   --fg-dim:       #94a3b8;
-  --fg-dim-raised:#94a3b8;
 
   --accent:       #4860d8;     /* slate-blue primary */
   --accent-hi:    #6379e5;
@@ -35,7 +34,6 @@
   --danger:       #b54545;
   --warn:         #b54545;
   --warn-bg:      #fbeded;
-  --misd:         #4f7c3a;
   --ok:           #4f7c3a;
 
   /* Existing tier-pill compatibility (felony/misdemeanor binary).
@@ -44,12 +42,9 @@
   --tier-misd-fg:   #2e3a1f;
   --tier-felony-bg: #c43e2c;
   --tier-misd-bg:   #c8d4a4;
-  --tier-felony-bd: #c43e2c;
-  --tier-misd-bd:   #c8d4a4;
 
   /* City accents kept for CFS captions. */
   --cincy-navy:   #00205B;
-  --cincy-red:    #C8102E;
 
   --radius:       6px;
   --radius-sm:    4px;
@@ -60,11 +55,9 @@
   --shadow-card:  none;
   --shadow-hover: 0 2px 8px rgba(15,23,42,0.08);
 
-  --masthead-h:   56px;        /* Phase 1: compressed */
-  --monthnav-h:   34px;
+  --masthead-h:   56px;
 
   --font-sans:    "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-serif:   "Public Sans", system-ui, sans-serif;
   --font-mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Neutral "ink" surface tokens. The site uses ONE theme that mixes
@@ -95,7 +88,6 @@
     --fg-soft:      #b8bcc7;
     --fg-muted:     #8a8f9c;
     --fg-dim:       #6b7080;
-    --fg-dim-raised:#8a8f9c;
 
     --accent:       #9aabf2;
     --accent-hi:    #b0bef6;
@@ -105,7 +97,6 @@
     --warn:         #e08080;
     --warn-bg:      rgba(224,128,128,0.12);
     --ok:           #7aa86b;
-    --misd:         #7aa86b;
 
     --shadow-card:  none;
     --shadow-hover: 0 2px 8px rgba(0,0,0,0.3);
@@ -236,7 +227,6 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
   transition: all 120ms;
 }
 .masthead .nav-link:hover { color: var(--on-ink); background: var(--ink-soft); text-decoration: none; }
-.masthead .nav-link.is-active { color: var(--on-ink); background: var(--ink-soft); }
 .masthead .nav-hint {
   display: inline-block;
   margin-left: 6px;
@@ -483,20 +473,6 @@ body.detail .page { max-width: 1080px; }
 .sparkline polyline { fill: none; stroke: var(--accent); stroke-width: 1.5; }
 .sparkline circle { fill: var(--accent); }
 
-/* ===== Compact one-line hero (back-compat with old .hero block) ===== */
-.hero { margin-bottom: 14px; }
-.hero .stat {
-  font-size: 72px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  margin: 0;
-  font-family: var(--font-sans);
-  line-height: 1;
-}
-.hero .stat-label { color: var(--fg-soft); font-size: 15px; margin: 6px 0 4px; }
-.hero .stat-label a { color: var(--accent); }
-.hero .meta { color: var(--fg-muted); font-size: 12px; margin: 8px 0; font-family: var(--font-mono); }
-.hero .meta code { font-family: inherit; color: var(--fg); }
 
 /* ===== Section heads ===== */
 .section-h {
@@ -1606,14 +1582,6 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   .cfs li { grid-template-columns: 1fr; gap: 4px; padding: 10px 12px; }
 }
 
-.cfs-caption {
-  margin: 12px 0 6px;
-  padding-left: 0.55rem;
-  border-left: 2px solid var(--cincy-navy);
-  font-size: 12px;
-  color: var(--fg-muted);
-}
-.cfs-caption a { color: var(--accent); }
 
 /* Compact legend below the filter bar. */
 .legend {
@@ -1785,7 +1753,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   min-width: 0;
   overflow-wrap: anywhere;
 }
-.bio dd .muted, .bio dd .ut-muted {
+.bio dd .muted {
   font-size: 11px;
   font-weight: 400;
   color: var(--fg-dim);
@@ -2552,7 +2520,6 @@ h2.legal-anchor {
   .page { padding: 12px 12px 48px; }
   .hero-strip { gap: 10px; }
   .hero-num { font-size: 36px; }
-  .hero .stat { font-size: 36px; }
   table.charges { font-size: 12px; }
   table.charges thead th, table.charges tbody td { padding: 8px 12px; }
   .kpis { grid-template-columns: 1fr 1fr; }
@@ -2609,8 +2576,6 @@ h2.legal-anchor {
   color: var(--fg-muted);
   letter-spacing: -0.005em;
 }
-.section-h .grow { flex: 1; }
-
 /* --- Hero strip (homepage) ink theme override --- */
 .hero-strip {
   padding: 10px 14px;
@@ -2689,7 +2654,6 @@ h2.legal-anchor {
   background: var(--bg-soft);
   overflow: hidden;
 }
-.rb-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .rb-photo.is-placeholder { display: grid; place-items: center; font-family: var(--font-mono); font-weight: 700; font-size: 28px; color: var(--fg-muted); letter-spacing: 0.05em; }
 .rb-photo.is-placeholder::after { content: attr(data-initials); }
 .rb-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
@@ -2935,11 +2899,6 @@ h2.legal-anchor {
   border-radius: 0;
   scrollbar-gutter: stable;
 }
-.cfs-caption {
-  font-size: 12px;
-  color: var(--fg-muted);
-  margin: 0 0 14px;
-}
 
 /* --- Month accordion summary --- */
 .month > summary {
@@ -3176,7 +3135,6 @@ footer.site .footer-legal strong { color: var(--on-ink); }
 
 /* Sparkline tune */
 .sparkline polyline { stroke: var(--accent); stroke-width: 1.8; }
-.sparkline circle { fill: var(--accent); }
 .roster-trend {
   margin: 16px 0 24px;
   padding: 16px 20px;
@@ -3310,9 +3268,6 @@ footer.site .footer-legal strong { color: var(--on-ink); }
 .caselaw-name:hover { text-decoration: underline; }
 .caselaw-court { font-size: 11.5px; color: var(--fg-muted); }
 .caselaw-cite { font-family: var(--font-mono); font-size: 11px; color: var(--fg-soft); }
-
-/* /data/ page polish */
-.page-data .alert { border-radius: var(--radius); }
 
 /* Inmate detail polish (restrained - presumption-of-innocence framing) */
 .inmate-hero {
