@@ -16,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=375f55bcb2">
+  <link rel="stylesheet" href="/static/style.css?v=7ad67b2c6d">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
@@ -33,7 +33,25 @@
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
       </a>
-      <span class="running desktop-only"><strong>1,211</strong> in custody</span>
+      <a class="masthead-seal masthead-seal-hcjc"
+         href="https://www.facebook.com/HCJCOH"
+         target="_blank" rel="noopener"
+         aria-label="Hamilton County Booking Photos on Facebook">
+        <img src="/static/img/hcjc-seal.png"
+             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
+             alt="Hamilton County Booking Photos seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <a class="masthead-seal masthead-seal-coc"
+         href="https://www.facebook.com/cityofcincinnati"
+         target="_blank" rel="noopener"
+         aria-label="City of Cincinnati on Facebook">
+        <img src="/static/img/coc-seal.png"
+             srcset="/static/img/coc-seal.png 1x, /static/img/coc-seal-2x.png 2x"
+             alt="City of Cincinnati seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <span class="running desktop-only"><strong>1,213</strong> in custody</span>
       <span class="spacer"></span>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
@@ -44,11 +62,13 @@
           </svg>
         </summary>
         <div class="nav-drawer">
-          <span class="running mobile-only"><strong>1,211</strong> in custody</span>
+          <span class="running mobile-only"><strong>1,213</strong> in custody</span>
           <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
-          <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
+          <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who's due</span></a>
+          <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
           <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
           <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+          <a class="nav-link" href="/help/">Help <span class="nav-hint">free aid</span></a>
           <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
           <a class="nav-link" href="/feed.xml">RSS</a>
           <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
@@ -57,6 +77,7 @@
     </div>
   </header>
   <main id="main" class="page">
+    <div class="doc-wrap">
 
 
 <script type="application/ld+json">
@@ -77,6 +98,14 @@
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>DAVIS ERNEST</span>
 </nav>
+
+<div class="public-record-stamp" aria-hidden="true">Public Record · ORC § 149.43</div>
+
+<header class="doc-h doc-h-center">
+  <div class="filing-id">JCSTREAM/HCSO · INMATE-ROSTER-MIRROR · ORC § 149.43</div>
+  <div class="title">Inmate Record</div>
+  <div class="sub">Hamilton County Justice Center · Cincinnati, Ohio</div>
+</header>
 
 <section class="inmate-hero">
   <figure class="record-photo">
@@ -199,6 +228,18 @@
 <p class="muted">
   <a href="https://www.courtclerk.org/data/crim_name_results.php?lname=DAVIS&amp;fname=ERNEST&amp;dob=7%2F8%2F80" target="_blank" rel="noopener">Run a full name + DOB search on courtclerk.org ↗</a>
 </p>
+
+
+<aside class="case-cta" aria-label="Help us mirror this case">
+  <div class="case-cta-text">
+    <strong>Have you looked up this case at courtclerk.org?</strong>
+    JCStream can't scrape courtclerk.org because their <code>robots.txt</code> disallows it. If you pass the bot check on your own browser, you can paste the docket info into a one-minute form and it will appear here for everyone. <a href="/data/#crowdsource">How crowdsourcing works &rarr;</a>
+  </div>
+  <a class="case-cta-btn" target="_blank" rel="noopener"
+     href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml&title=%5Bcase%5D+DAVIS%20ERNEST&case_number=B%201506441&defendant_name=DAVIS%20ERNEST">
+    Add case info for this inmate &rarr;
+  </a>
+</aside>
 
 <p class="custody-summary">
 <strong>183 days</strong> in custody &middot; bond <strong>$250,000</strong> <span class="muted">(84th &deg;ile of 170 peers under &sect;&nbsp;2925.11)</span> &middot; top charge <strong>F5</strong> <span class="muted">(12 mo max)</span></p>
@@ -329,7 +370,7 @@
 </details>
 
 <details class="section-details">
-  <summary><span class="section-summary-h">Statute context</span> <span class="muted">&middot; 6 statutes from this record &middot; frequency across 1,211 in custody</span></summary>
+  <summary><span class="section-summary-h">Statute context</span> <span class="muted">&middot; 6 statutes from this record &middot; frequency across 1,213 in custody</span></summary>
   <div class="statute-context">
         <div class="statute">
           <div class="statute-head">
@@ -337,8 +378,8 @@
 <span class="statute-title">Disorderly conduct</span>          </div>
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <strong>49</strong>
-            <span class="muted">of 1,211</span>
+            <strong>48</strong>
+            <span class="muted">of 1,213</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2917.11" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -348,7 +389,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>234</strong>
-            <span class="muted">of 1,211</span>
+            <span class="muted">of 1,213</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2925.11" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -358,7 +399,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>10</strong>
-            <span class="muted">of 1,211</span>
+            <span class="muted">of 1,213</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2913.31" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -367,8 +408,8 @@
 <span class="statute-title">Failure to disclose personal information</span>          </div>
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <strong>26</strong>
-            <span class="muted">of 1,211</span>
+            <strong>27</strong>
+            <span class="muted">of 1,213</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2921.29" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -378,7 +419,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>102</strong>
-            <span class="muted">of 1,211</span>
+            <span class="muted">of 1,213</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2925.03" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -388,7 +429,7 @@
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
             <strong>2</strong>
-            <span class="muted">of 1,211</span>
+            <span class="muted">of 1,213</span>
 &middot; <a href="https://codes.ohio.gov/ohio-revised-code/section-2919.21" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
   </div>
@@ -511,12 +552,13 @@
     repo variables, enable Discussions on the repo, and install the Giscus app.)</p>
 </section>
 
-    <footer class="site">
-      <span>Generated 2026-05-16T19:26:14Z</span>
-      <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
-      <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
-    </footer>
+    </div>
   </main>
+  <footer class="site">
+    <span>Generated 2026-05-16T20:00:00Z</span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+    <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
+  </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
 
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>

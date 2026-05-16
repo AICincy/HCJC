@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>JCStream &middot; 1211 currently in custody</title>
+  <title>JCStream &middot; 1213 currently in custody</title>
   <meta name="robots" content="noindex, noarchive">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -16,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=375f55bcb2">
+  <link rel="stylesheet" href="/static/style.css?v=7ad67b2c6d">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
@@ -33,7 +33,25 @@
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
       </a>
-      <span class="running desktop-only"><strong>1,211</strong> in custody</span>
+      <a class="masthead-seal masthead-seal-hcjc"
+         href="https://www.facebook.com/HCJCOH"
+         target="_blank" rel="noopener"
+         aria-label="Hamilton County Booking Photos on Facebook">
+        <img src="/static/img/hcjc-seal.png"
+             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
+             alt="Hamilton County Booking Photos seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <a class="masthead-seal masthead-seal-coc"
+         href="https://www.facebook.com/cityofcincinnati"
+         target="_blank" rel="noopener"
+         aria-label="City of Cincinnati on Facebook">
+        <img src="/static/img/coc-seal.png"
+             srcset="/static/img/coc-seal.png 1x, /static/img/coc-seal-2x.png 2x"
+             alt="City of Cincinnati seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <span class="running desktop-only"><strong>1,213</strong> in custody</span>
       <span class="spacer"></span>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
@@ -44,11 +62,13 @@
           </svg>
         </summary>
         <div class="nav-drawer">
-          <span class="running mobile-only"><strong>1,211</strong> in custody</span>
+          <span class="running mobile-only"><strong>1,213</strong> in custody</span>
           <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
-          <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
+          <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who's due</span></a>
+          <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
           <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
           <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+          <a class="nav-link" href="/help/">Help <span class="nav-hint">free aid</span></a>
           <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
           <a class="nav-link" href="/feed.xml">RSS</a>
           <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
@@ -57,8 +77,8 @@
     </div>
     <nav class="month-nav" aria-label="Jump to month">
       <div class="month-nav-inner">
-        <a class="chip" href="#m-may-2026">May &#39;26 <strong>301</strong></a>
-        <a class="chip" href="#m-april-2026">Apr &#39;26 <strong>274</strong></a>
+        <a class="chip" href="#m-may-2026">May &#39;26 <strong>304</strong></a>
+        <a class="chip" href="#m-april-2026">Apr &#39;26 <strong>273</strong></a>
         <a class="chip" href="#m-march-2026">Mar &#39;26 <strong>153</strong></a>
         <a class="chip" href="#m-february-2026">Feb &#39;26 <strong>106</strong></a>
         <a class="chip" href="#m-january-2026">Jan &#39;26 <strong>66</strong></a>
@@ -85,7 +105,16 @@
     </nav>
   </header>
   <main id="main" class="page">
-<h1 class="sr-only">JCStream — Hamilton County, Ohio Justice Center inmate roster</h1>
+<h1 class="sr-only">JCStream — Hamilton County, Ohio Justice Center inmate roster</h1>    <div class="doc-wrap">
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Inmate Roster</div>
+    <div class="sub">Hamilton County Justice Center · Cincinnati, Ohio · ORC § 149.43</div>
+  </div>
+  <div class="stamp">Sweep 2026-05-16T20:00Z</div>
+</header>
+
 <aside class="banner" aria-label="Legal notice">
   <p><strong>Arrest is not conviction.</strong> Everyone listed here is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges shown are accusations only and may be reduced, dismissed, or result in acquittal.</p>
   <p>JCStream republishes public records of the Hamilton County Sheriff&rsquo;s Office (HCSO) as authorized by the Ohio Public Records Act, <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> &mdash; derived from HCSO&rsquo;s public inmate roster at <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>. When HCSO removes a record, it is removed here on the next update cycle; this site keeps no historical archive. JCStream is an <strong>independent, non-governmental project</strong> &mdash; not affiliated with, endorsed by, or operated by HCSO or any government agency.</p>
@@ -96,36 +125,36 @@
   <div class="hero-l">
     <div class="hero-eyebrow">Today in custody</div>
     <h2 class="hero-h">
-      <span class="hero-num">1,211</span>
+      <span class="hero-num">1,213</span>
       <span class="hero-unit">people</span>
     </h2>
     <p class="hero-sub">
       held at the Hamilton County Justice Center &middot; refreshed every 30 min
         &middot;
-<span class="hero-trend">&uarr; +4 vs yesterday</span>
+<span class="hero-trend">&uarr; +6 vs yesterday</span>
     </p>
-    <p class="meta">Last sweep <code>2026-05-16T19:26:14Z</code> &middot;
-      39 booked &middot; 64 released in the last 24 hours &middot;
+    <p class="meta">Last sweep <code>2026-05-16T20:00:00Z</code> &middot;
+      38 booked &middot; 56 released in the last 24 hours &middot;
       <a href="/stats/">see statistics &rarr;</a></p>
   </div>
   <div class="hero-stats">
     <div class="stat-card">
-      <div class="stat-row"><span class="stat-k">Booked, last 24h</span><span class="stat-v">39</span></div>
-      <div class="stat-row"><span class="stat-k">Released, last 24h</span><span class="stat-v">64</span></div>
-      <div class="stat-row"><span class="stat-k">Booked, last 5d</span><span class="stat-v">248</span></div>
-      <div class="stat-row"><span class="stat-k">Released, last 5d</span><span class="stat-v">328</span></div>
+      <div class="stat-row"><span class="stat-k">Booked, last 24h</span><span class="stat-v">38</span></div>
+      <div class="stat-row"><span class="stat-k">Released, last 24h</span><span class="stat-v">56</span></div>
+      <div class="stat-row"><span class="stat-k">Booked, last 5d</span><span class="stat-v">247</span></div>
+      <div class="stat-row"><span class="stat-k">Released, last 5d</span><span class="stat-v">320</span></div>
     </div>
     <div class="stat-card spark-card">
       <div class="spark-h">
         <div>
           <div class="stat-k">Roster size &middot; last 5 days</div>
-          <div class="stat-v">1,211</div>
+          <div class="stat-v">1,213</div>
         </div>
-<span class="trend-pill is-up">&uarr; +4</span>
+<span class="trend-pill is-up">&uarr; +6</span>
       </div>
       <svg class="spark-svg" viewBox="0 0 200 56" preserveAspectRatio="none" aria-hidden="true">
-        <polyline points="0.0,6.0 50.0,50.2 100.0,26.2 150.0,52.0 200.0,44.6 "/>
-        <circle cx="200" cy="44.6" r="2.4"/>
+        <polyline points="0.0,6.0 50.0,50.2 100.0,26.2 150.0,52.0 200.0,41.0 "/>
+        <circle cx="200" cy="41.0" r="2.4"/>
       </svg>
       <div class="spark-ticks"><span>1207</span><span>1232</span></div>
     </div>
@@ -141,6 +170,16 @@
     <span class="meta">last six people booked into HCSO custody</span>
   </div>
   <div class="rb-grid">
+    <a class="rb-card" href="/inmate/2367133/">
+      <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="BM"></span>
+      <div class="rb-body">
+<span class="tier tier-M4">M4</span>        <h4 class="rb-name">BATIS MARTEZ</h4>
+        <p class="rb-charge">public indecency</p>
+        <div class="rb-meta">
+          <span>5/16/26</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;2367133</span>
+        </div>
+      </div>
+    </a>
     <a class="rb-card" href="/inmate/14243879/">
       <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="CL"></span>
       <div class="rb-body">
@@ -158,6 +197,16 @@
         <p class="rb-charge">assault</p>
         <div class="rb-meta">
           <span>5/16/26</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;14060413</span>
+        </div>
+      </div>
+    </a>
+    <a class="rb-card" href="/inmate/14082223/">
+      <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="GL"></span>
+      <div class="rb-body">
+<span class="tier tier-M2">M2</span>        <h4 class="rb-name">GRIGSBY LARUS</h4>
+        <p class="rb-charge">resisting arrest</p>
+        <div class="rb-meta">
+          <span>5/16/26</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;14082223</span>
         </div>
       </div>
     </a>
@@ -181,26 +230,6 @@
         </div>
       </div>
     </a>
-    <a class="rb-card" href="/inmate/14715987/">
-      <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="LF"></span>
-      <div class="rb-body">
-<span class="tier tier-M1">M1</span>        <h4 class="rb-name">LOPEZ FRANCISCO</h4>
-        <p class="rb-charge">domestic violence</p>
-        <div class="rb-meta">
-          <span>5/16/26</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;14715987</span>
-        </div>
-      </div>
-    </a>
-    <a class="rb-card" href="/inmate/2345887/">
-      <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="MT"></span>
-      <div class="rb-body">
-<span class="tier tier-M1">M1</span>        <h4 class="rb-name">MCCARAY TRINITY</h4>
-        <p class="rb-charge">assault</p>
-        <div class="rb-meta">
-          <span>5/16/26</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;2345887</span>
-        </div>
-      </div>
-    </a>
   </div>
 </section>
 
@@ -212,6 +241,60 @@
     <span class="meta">last 8 hours</span>
   </div>
   <div class="cards">
+    <article class="card-inmate" aria-labelledby="activity-card-2186927-name">
+      <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="HM"></span>
+      <div class="meta">
+        <div class="event-line">
+          <span class="tag tag-released">released</span>
+          <time datetime="2026-05-16T20:00:00Z">2026-05-16T20:00:00Z</time>
+        </div>
+        <p class="name" id="activity-card-2186927-name">
+            <span class="released-name">HAWKINS MARCUS</span>
+        </p>
+      </div>
+    </article>
+    <article class="card-inmate" aria-labelledby="activity-card-14082223-name">
+<span class="tier tier-misdemeanor tier-corner">M ×2</span>      <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="GL"></span>
+      <div class="meta">
+        <div class="event-line">
+          <span class="tag tag-booked">booked</span>
+          <time datetime="2026-05-16T20:00:00Z">2026-05-16T20:00:00Z</time>
+        </div>
+        <p class="name" id="activity-card-14082223-name">
+            <a class="plain" href="/inmate/14082223/">GRIGSBY LARUS</a>
+        </p>
+        <p class="charge charge-traffic">obstruction / resisting</p>
+        <a class="id-chip" href="/inmate/14082223/">#&thinsp;14082223</a>
+      </div>
+    </article>
+    <article class="card-inmate" aria-labelledby="activity-card-14268875-name">
+<span class="tier tier-felony tier-corner">F</span>      <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="PT"></span>
+      <div class="meta">
+        <div class="event-line">
+          <span class="tag tag-booked">booked</span>
+          <time datetime="2026-05-16T20:00:00Z">2026-05-16T20:00:00Z</time>
+        </div>
+        <p class="name" id="activity-card-14268875-name">
+            <a class="plain" href="/inmate/14268875/">PERKINS TYLER</a>
+        </p>
+        <p class="charge charge-2903">robbery</p>
+        <a class="id-chip" href="/inmate/14268875/">#&thinsp;14268875</a>
+      </div>
+    </article>
+    <article class="card-inmate" aria-labelledby="activity-card-2367133-name">
+<span class="tier tier-misdemeanor tier-corner">M</span>      <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="BM"></span>
+      <div class="meta">
+        <div class="event-line">
+          <span class="tag tag-booked">booked</span>
+          <time datetime="2026-05-16T20:00:00Z">2026-05-16T20:00:00Z</time>
+        </div>
+        <p class="name" id="activity-card-2367133-name">
+            <a class="plain" href="/inmate/2367133/">BATIS MARTEZ</a>
+        </p>
+        <p class="charge charge-traffic">public indecency</p>
+        <a class="id-chip" href="/inmate/2367133/">#&thinsp;2367133</a>
+      </div>
+    </article>
     <article class="card-inmate" aria-labelledby="activity-card-1493246-name">
       <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="WR"></span>
       <div class="meta">
@@ -308,58 +391,6 @@
         </p>
       </div>
     </article>
-    <article class="card-inmate" aria-labelledby="activity-card-14164124-name">
-      <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="FA"></span>
-      <div class="meta">
-        <div class="event-line">
-          <span class="tag tag-released">released</span>
-          <time datetime="2026-05-16T18:48:21Z">2026-05-16T18:48:21Z</time>
-        </div>
-        <p class="name" id="activity-card-14164124-name">
-            <span class="released-name">FREUDEMANN ABIGAIL</span>
-        </p>
-      </div>
-    </article>
-    <article class="card-inmate" aria-labelledby="activity-card-1993863-name">
-      <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="CA"></span>
-      <div class="meta">
-        <div class="event-line">
-          <span class="tag tag-released">released</span>
-          <time datetime="2026-05-16T18:48:21Z">2026-05-16T18:48:21Z</time>
-        </div>
-        <p class="name" id="activity-card-1993863-name">
-            <span class="released-name">COLBERT AL</span>
-        </p>
-      </div>
-    </article>
-    <article class="card-inmate" aria-labelledby="activity-card-2363778-name">
-<span class="tier tier-misdemeanor tier-corner">M</span>      <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="SD"></span>
-      <div class="meta">
-        <div class="event-line">
-          <span class="tag tag-booked">booked</span>
-          <time datetime="2026-05-16T18:48:21Z">2026-05-16T18:48:21Z</time>
-        </div>
-        <p class="name" id="activity-card-2363778-name">
-            <a class="plain" href="/inmate/2363778/">SHEERAN DAVID</a>
-        </p>
-        <p class="charge charge-traffic">trespass</p>
-        <a class="id-chip" href="/inmate/2363778/">#&thinsp;2363778</a>
-      </div>
-    </article>
-    <article class="card-inmate" aria-labelledby="activity-card-14243879-name">
-<span class="tier tier-felony tier-corner">F ×2</span>      <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="CL"></span>
-      <div class="meta">
-        <div class="event-line">
-          <span class="tag tag-booked">booked</span>
-          <time datetime="2026-05-16T18:48:21Z">2026-05-16T18:48:21Z</time>
-        </div>
-        <p class="name" id="activity-card-14243879-name">
-            <a class="plain" href="/inmate/14243879/">COSTON LEONTE</a>
-        </p>
-        <p class="charge charge-2903">homicide</p>
-        <a class="id-chip" href="/inmate/14243879/">#&thinsp;14243879</a>
-      </div>
-    </article>
   </div>
 </section>
 
@@ -395,7 +426,7 @@
   <label for="filter-chap">Offense
     <select id="filter-chap" data-filter="chap">
       <option value="">all offenses</option>
-<option value="ovi-dui">OVI / DUI</option><option value="arson">arson</option><option value="assault">assault</option><option value="attempt">attempt</option><option value="breaking-and-entering">breaking and entering</option><option value="burglary">burglary</option><option value="burglary-robbery">burglary / robbery</option><option value="child-endangering">child endangering</option><option value="child-sexual-exploitation">child sexual exploitation</option><option value="criminal-damage">criminal damage</option><option value="discharging-firearm">discharging firearm</option><option value="disorderly">disorderly</option><option value="disorderly-conduct">disorderly conduct</option><option value="domestic-violence">domestic violence</option><option value="driving-offense">driving offense</option><option value="drug-fraud">drug fraud</option><option value="drug-paraphernalia">drug paraphernalia</option><option value="drug-possession">drug possession</option><option value="drug-trafficking">drug trafficking</option><option value="escape-contraband">escape / contraband</option><option value="failure-to-comply">failure to comply</option><option value="falsification">falsification</option><option value="family-domestic">family / domestic</option><option value="felonious-assault">felonious assault</option><option value="fraud-forgery">fraud / forgery</option><option value="hit-skip">hit-skip</option><option value="homicide">homicide</option><option value="identity-fraud">identity fraud</option><option value="kidnapping">kidnapping</option><option value="kidnapping-abduction">kidnapping / abduction</option><option value="menacing-stalking">menacing / stalking</option><option value="obstruction-resisting">obstruction / resisting</option><option value="offense-against-persons">offense against persons</option><option value="open-container">open container</option><option value="other">other</option><option value="other-criminal">other criminal</option><option value="possessing-criminal-tools">possessing criminal tools</option><option value="prostitution">prostitution</option><option value="protection-order-violation">protection-order violation</option><option value="rape">rape</option><option value="receiving-stolen-property">receiving stolen property</option><option value="riot">riot</option><option value="robbery">robbery</option><option value="sex-offense">sex offense</option><option value="sex-offender-registry">sex-offender registry</option><option value="sexual-assault">sexual assault</option><option value="strangulation">strangulation</option><option value="tampering-intimidation">tampering / intimidation</option><option value="theft">theft</option><option value="theft-fraud">theft / fraud</option><option value="traffic-civil">traffic / civil</option><option value="trespass">trespass</option><option value="unauthorized-use-of-property">unauthorized use of property</option><option value="vehicular-assault">vehicular assault</option><option value="vehicular-homicide">vehicular homicide</option><option value="weapons">weapons</option><option value="weapons-under-disability">weapons under disability</option>    </select>
+<option value="ovi-dui">OVI / DUI</option><option value="arson">arson</option><option value="assault">assault</option><option value="attempt">attempt</option><option value="breaking-and-entering">breaking and entering</option><option value="burglary">burglary</option><option value="burglary-robbery">burglary / robbery</option><option value="child-endangering">child endangering</option><option value="child-sexual-exploitation">child sexual exploitation</option><option value="criminal-damage">criminal damage</option><option value="discharging-firearm">discharging firearm</option><option value="disorderly">disorderly</option><option value="disorderly-conduct">disorderly conduct</option><option value="domestic-violence">domestic violence</option><option value="driving-offense">driving offense</option><option value="drug-fraud">drug fraud</option><option value="drug-paraphernalia">drug paraphernalia</option><option value="drug-possession">drug possession</option><option value="drug-trafficking">drug trafficking</option><option value="escape-contraband">escape / contraband</option><option value="failure-to-comply">failure to comply</option><option value="falsification">falsification</option><option value="family-domestic">family / domestic</option><option value="felonious-assault">felonious assault</option><option value="fraud-forgery">fraud / forgery</option><option value="hit-skip">hit-skip</option><option value="homicide">homicide</option><option value="identity-fraud">identity fraud</option><option value="kidnapping">kidnapping</option><option value="kidnapping-abduction">kidnapping / abduction</option><option value="menacing-stalking">menacing / stalking</option><option value="obstruction-resisting">obstruction / resisting</option><option value="offense-against-persons">offense against persons</option><option value="open-container">open container</option><option value="other">other</option><option value="other-criminal">other criminal</option><option value="possessing-criminal-tools">possessing criminal tools</option><option value="prostitution">prostitution</option><option value="protection-order-violation">protection-order violation</option><option value="public-indecency">public indecency</option><option value="rape">rape</option><option value="receiving-stolen-property">receiving stolen property</option><option value="riot">riot</option><option value="robbery">robbery</option><option value="sex-offense">sex offense</option><option value="sex-offender-registry">sex-offender registry</option><option value="sexual-assault">sexual assault</option><option value="strangulation">strangulation</option><option value="tampering-intimidation">tampering / intimidation</option><option value="theft">theft</option><option value="theft-fraud">theft / fraud</option><option value="traffic-civil">traffic / civil</option><option value="trespass">trespass</option><option value="unauthorized-use-of-property">unauthorized use of property</option><option value="vehicular-assault">vehicular assault</option><option value="vehicular-homicide">vehicular homicide</option><option value="weapons">weapons</option><option value="weapons-under-disability">weapons under disability</option>    </select>
   </label>
   <label class="search-wrap" for="search-box">Search
     <input type="search" data-filter="search" id="search-box" placeholder="name, charge, ORC code, or #" autocomplete="off" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results">
@@ -423,19 +454,48 @@
 <details class="month" id="m-may-2026" open>
   <summary>
     <h2>May 2026</h2>
-    <span class="count">301 bookings</span>
+    <span class="count">304 bookings</span>
   </summary>
 
   <details class="coms">
     <summary>
       <span class="coms-label">Crimes of May</span>
-<span class="coms-top chap chap-2925">drug possession <strong>34</strong></span><span class="coms-top chap chap-2913">theft <strong>30</strong></span><span class="coms-top chap chap-family">domestic violence <strong>25</strong></span><span class="coms-top chap chap-2903">felonious assault <strong>16</strong></span><span class="coms-more">+39 more</span>    </summary>
+<span class="coms-top chap chap-2925">drug possession <strong>34</strong></span><span class="coms-top chap chap-2913">theft <strong>30</strong></span><span class="coms-top chap chap-family">domestic violence <strong>25</strong></span><span class="coms-top chap chap-2903">felonious assault <strong>16</strong></span><span class="coms-more">+40 more</span>    </summary>
     <div class="coms-grid">
-<span class="chap chap-2925">drug possession <strong>34</strong></span><span class="chap chap-2913">theft <strong>30</strong></span><span class="chap chap-family">domestic violence <strong>25</strong></span><span class="chap chap-2903">felonious assault <strong>16</strong></span><span class="chap chap-family">protection-order violation <strong>16</strong></span><span class="chap chap-2911">criminal damage <strong>15</strong></span><span class="chap chap-traffic">assault <strong>12</strong></span><span class="chap chap-2903">strangulation <strong>11</strong></span><span class="chap chap-traffic">obstruction / resisting <strong>9</strong></span><span class="chap chap-traffic">trespass <strong>9</strong></span><span class="chap chap-traffic">OVI / DUI <strong>8</strong></span><span class="chap chap-2923">weapons under disability <strong>8</strong></span><span class="chap chap-traffic">drug paraphernalia <strong>7</strong></span><span class="chap chap-2925">drug trafficking <strong>7</strong></span><span class="chap chap-traffic">menacing / stalking <strong>7</strong></span><span class="chap chap-2903">robbery <strong>7</strong></span><span class="chap chap-traffic">driving offense <strong>5</strong></span><span class="chap chap-2903">homicide <strong>5</strong></span><span class="chap chap-2913">receiving stolen property <strong>5</strong></span><span class="chap chap-2911">burglary <strong>4</strong></span><span class="chap chap-family">child endangering <strong>3</strong></span><span class="chap chap-traffic">other <strong>3</strong></span><span class="chap chap-2911">breaking and entering <strong>2</strong></span><span class="chap chap-2903">discharging firearm <strong>2</strong></span><span class="chap chap-traffic">escape / contraband <strong>2</strong></span><span class="chap chap-traffic">failure to comply <strong>2</strong></span><span class="chap chap-traffic">falsification <strong>2</strong></span><span class="chap chap-2913">fraud / forgery <strong>2</strong></span><span class="chap chap-traffic">sex offense <strong>2</strong></span><span class="chap chap-2903">arson <strong>1</strong></span><span class="chap chap-family">family / domestic <strong>1</strong></span><span class="chap chap-traffic">hit-skip <strong>1</strong></span><span class="chap chap-2913">identity fraud <strong>1</strong></span><span class="chap chap-2903">kidnapping / abduction <strong>1</strong></span><span class="chap chap-traffic">other criminal <strong>1</strong></span><span class="chap chap-2923">possessing criminal tools <strong>1</strong></span><span class="chap chap-2903">rape <strong>1</strong></span><span class="chap chap-2903">sex offense <strong>1</strong></span><span class="chap chap-2903">sex-offender registry <strong>1</strong></span><span class="chap chap-traffic">tampering / intimidation <strong>1</strong></span><span class="chap chap-2913">theft / fraud <strong>1</strong></span><span class="chap chap-traffic">traffic / civil <strong>1</strong></span><span class="chap chap-2923">weapons <strong>1</strong></span>    </div>
+<span class="chap chap-2925">drug possession <strong>34</strong></span><span class="chap chap-2913">theft <strong>30</strong></span><span class="chap chap-family">domestic violence <strong>25</strong></span><span class="chap chap-2903">felonious assault <strong>16</strong></span><span class="chap chap-family">protection-order violation <strong>16</strong></span><span class="chap chap-2911">criminal damage <strong>15</strong></span><span class="chap chap-traffic">assault <strong>12</strong></span><span class="chap chap-2903">strangulation <strong>11</strong></span><span class="chap chap-traffic">obstruction / resisting <strong>10</strong></span><span class="chap chap-traffic">trespass <strong>9</strong></span><span class="chap chap-traffic">OVI / DUI <strong>8</strong></span><span class="chap chap-2903">robbery <strong>8</strong></span><span class="chap chap-2923">weapons under disability <strong>8</strong></span><span class="chap chap-traffic">drug paraphernalia <strong>7</strong></span><span class="chap chap-2925">drug trafficking <strong>7</strong></span><span class="chap chap-traffic">menacing / stalking <strong>7</strong></span><span class="chap chap-traffic">driving offense <strong>5</strong></span><span class="chap chap-2903">homicide <strong>5</strong></span><span class="chap chap-2913">receiving stolen property <strong>5</strong></span><span class="chap chap-2911">burglary <strong>4</strong></span><span class="chap chap-family">child endangering <strong>3</strong></span><span class="chap chap-traffic">other <strong>3</strong></span><span class="chap chap-2911">breaking and entering <strong>2</strong></span><span class="chap chap-2903">discharging firearm <strong>2</strong></span><span class="chap chap-traffic">escape / contraband <strong>2</strong></span><span class="chap chap-traffic">failure to comply <strong>2</strong></span><span class="chap chap-traffic">falsification <strong>2</strong></span><span class="chap chap-2913">fraud / forgery <strong>2</strong></span><span class="chap chap-traffic">sex offense <strong>2</strong></span><span class="chap chap-2903">arson <strong>1</strong></span><span class="chap chap-family">family / domestic <strong>1</strong></span><span class="chap chap-traffic">hit-skip <strong>1</strong></span><span class="chap chap-2913">identity fraud <strong>1</strong></span><span class="chap chap-2903">kidnapping / abduction <strong>1</strong></span><span class="chap chap-traffic">other criminal <strong>1</strong></span><span class="chap chap-2923">possessing criminal tools <strong>1</strong></span><span class="chap chap-traffic">public indecency <strong>1</strong></span><span class="chap chap-2903">rape <strong>1</strong></span><span class="chap chap-2903">sex offense <strong>1</strong></span><span class="chap chap-2903">sex-offender registry <strong>1</strong></span><span class="chap chap-traffic">tampering / intimidation <strong>1</strong></span><span class="chap chap-2913">theft / fraud <strong>1</strong></span><span class="chap chap-traffic">traffic / civil <strong>1</strong></span><span class="chap chap-2923">weapons <strong>1</strong></span>    </div>
   </details>
 
   <div class="cards">
-<article class="card-inmate" aria-labelledby="card-14243879-name" data-tier="felony" data-chap="homicide" data-name="coston leonte" data-search="coston leonte murder having weapons while under disability carrying concealed weapons receiving stolen property 2903.02b 2923.13 2923.12a 2913.51 #14243879">
+<article class="card-inmate" aria-labelledby="card-2367133-name" data-tier="misdemeanor" data-chap="public-indecency" data-name="batis martez" data-search="batis martez public indecency 2907.09 #2367133">
+  <button type="button" class="tier tier-misdemeanor tier-corner" aria-label="MISDEMEANOR, charges detail" aria-describedby="tier-tip" data-tip="MISDEMEANOR
+2907.09 · M4 · Public indecency">M</button>
+  <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="BM"></span>
+  <div class="meta">
+    <p class="name" id="card-2367133-name"><a class="plain" href="/inmate/2367133/">BATIS MARTEZ</a></p>
+    <p class="charge charge-traffic">public indecency</p>
+    <a class="id-chip" href="/inmate/2367133/">#&thinsp;2367133 &middot; booked 5/16/26</a>
+  </div>
+</article><article class="card-inmate" aria-labelledby="card-14082223-name" data-tier="misdemeanor" data-chap="obstruction-resisting" data-name="grigsby larus" data-search="grigsby larus resisting arrest failure to disclose personal information 2921.33 2921.29 #14082223">
+  <button type="button" class="tier tier-misdemeanor tier-corner" aria-label="MISDEMEANOR ×2, charges detail" aria-describedby="tier-tip" data-tip="MISDEMEANOR ×2
+2921.33 · M2 · Resisting arrest
+2921.29 · M4 · Failure to disclose personal information">M ×2</button>
+  <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="GL"></span>
+  <div class="meta">
+    <p class="name" id="card-14082223-name"><a class="plain" href="/inmate/14082223/">GRIGSBY LARUS</a></p>
+    <p class="charge charge-traffic">obstruction / resisting <span class="ct-count">+1 more</span></p>
+    <a class="id-chip" href="/inmate/14082223/">#&thinsp;14082223 &middot; booked 5/16/26</a>
+  </div>
+</article><article class="card-inmate" aria-labelledby="card-14268875-name" data-tier="felony" data-chap="robbery" data-name="perkins tyler" data-search="perkins tyler criminal trespass robbery 2911.21 2911.02 #14268875">
+  <button type="button" class="tier tier-felony tier-corner" aria-label="FELONY, charges detail" aria-describedby="tier-tip" data-tip="FELONY
+2911.21 · M4 · Criminal trespass
+2911.02 · F2 · Robbery">F</button>
+  <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="PT"></span>
+  <div class="meta">
+    <p class="name" id="card-14268875-name"><a class="plain" href="/inmate/14268875/">PERKINS TYLER</a></p>
+    <p class="charge charge-2903">robbery <span class="ct-count">+1 more</span></p>
+    <a class="id-chip" href="/inmate/14268875/">#&thinsp;14268875 &middot; booked 5/16/26</a>
+  </div>
+</article><article class="card-inmate" aria-labelledby="card-14243879-name" data-tier="felony" data-chap="homicide" data-name="coston leonte" data-search="coston leonte murder having weapons while under disability carrying concealed weapons receiving stolen property 2903.02b 2923.13 2923.12a 2913.51 #14243879">
   <button type="button" class="tier tier-felony tier-corner" aria-label="FELONY ×2, charges detail" aria-describedby="tier-tip" data-tip="FELONY ×2
 2903.02B · F1 · Murder
 2923.13 · F3 · Having weapons while under disability
@@ -3982,7 +4042,7 @@
 <details class="month" id="m-april-2026" >
   <summary>
     <h2>April 2026</h2>
-    <span class="count">274 bookings</span>
+    <span class="count">273 bookings</span>
   </summary>
 
   <details class="coms">
@@ -3990,7 +4050,7 @@
       <span class="coms-label">Crimes of April</span>
 <span class="coms-top chap chap-2925">drug possession <strong>43</strong></span><span class="coms-top chap chap-2913">theft <strong>32</strong></span><span class="coms-top chap chap-2923">weapons under disability <strong>19</strong></span><span class="coms-top chap chap-family">domestic violence <strong>13</strong></span><span class="coms-more">+43 more</span>    </summary>
     <div class="coms-grid">
-<span class="chap chap-2925">drug possession <strong>43</strong></span><span class="chap chap-2913">theft <strong>32</strong></span><span class="chap chap-2923">weapons under disability <strong>19</strong></span><span class="chap chap-family">domestic violence <strong>13</strong></span><span class="chap chap-2903">felonious assault <strong>13</strong></span><span class="chap chap-2911">criminal damage <strong>12</strong></span><span class="chap chap-traffic">assault <strong>11</strong></span><span class="chap chap-2903">strangulation <strong>10</strong></span><span class="chap chap-2923">weapons <strong>9</strong></span><span class="chap chap-traffic">OVI / DUI <strong>8</strong></span><span class="chap chap-2925">drug trafficking <strong>8</strong></span><span class="chap chap-family">protection-order violation <strong>8</strong></span><span class="chap chap-2911">burglary <strong>7</strong></span><span class="chap chap-2911">breaking and entering <strong>6</strong></span><span class="chap chap-traffic">other <strong>6</strong></span><span class="chap chap-2903">homicide <strong>5</strong></span><span class="chap chap-traffic">driving offense <strong>4</strong></span><span class="chap chap-traffic">obstruction / resisting <strong>4</strong></span><span class="chap chap-2903">robbery <strong>4</strong></span><span class="chap chap-2903">child sexual exploitation <strong>3</strong></span><span class="chap chap-2903">discharging firearm <strong>3</strong></span><span class="chap chap-traffic">disorderly conduct <strong>3</strong></span><span class="chap chap-2913">fraud / forgery <strong>3</strong></span><span class="chap chap-2903">kidnapping / abduction <strong>3</strong></span><span class="chap chap-2923">possessing criminal tools <strong>3</strong></span><span class="chap chap-2903">rape <strong>3</strong></span><span class="chap chap-traffic">drug paraphernalia <strong>2</strong></span><span class="chap chap-traffic">escape / contraband <strong>2</strong></span><span class="chap chap-traffic">failure to comply <strong>2</strong></span><span class="chap chap-traffic">hit-skip <strong>2</strong></span><span class="chap chap-traffic">menacing / stalking <strong>2</strong></span><span class="chap chap-2913">receiving stolen property <strong>2</strong></span><span class="chap chap-2903">sex-offender registry <strong>2</strong></span><span class="chap chap-2903">sexual assault <strong>2</strong></span><span class="chap chap-traffic">traffic / civil <strong>2</strong></span><span class="chap chap-2903">arson <strong>1</strong></span><span class="chap chap-traffic">attempt <strong>1</strong></span><span class="chap chap-2913">identity fraud <strong>1</strong></span><span class="chap chap-2903">offense against persons <strong>1</strong></span><span class="chap chap-traffic">open container <strong>1</strong></span><span class="chap chap-traffic">prostitution <strong>1</strong></span><span class="chap chap-traffic">sex offense <strong>1</strong></span><span class="chap chap-2903">sex offense <strong>1</strong></span><span class="chap chap-traffic">tampering / intimidation <strong>1</strong></span><span class="chap chap-traffic">trespass <strong>1</strong></span><span class="chap chap-2913">unauthorized use of property <strong>1</strong></span><span class="chap chap-2903">vehicular assault <strong>1</strong></span>    </div>
+<span class="chap chap-2925">drug possession <strong>43</strong></span><span class="chap chap-2913">theft <strong>32</strong></span><span class="chap chap-2923">weapons under disability <strong>19</strong></span><span class="chap chap-family">domestic violence <strong>13</strong></span><span class="chap chap-2903">felonious assault <strong>13</strong></span><span class="chap chap-2911">criminal damage <strong>12</strong></span><span class="chap chap-traffic">assault <strong>11</strong></span><span class="chap chap-2903">strangulation <strong>10</strong></span><span class="chap chap-2923">weapons <strong>9</strong></span><span class="chap chap-2925">drug trafficking <strong>8</strong></span><span class="chap chap-family">protection-order violation <strong>8</strong></span><span class="chap chap-traffic">OVI / DUI <strong>7</strong></span><span class="chap chap-2911">burglary <strong>7</strong></span><span class="chap chap-2911">breaking and entering <strong>6</strong></span><span class="chap chap-traffic">other <strong>6</strong></span><span class="chap chap-2903">homicide <strong>5</strong></span><span class="chap chap-traffic">driving offense <strong>4</strong></span><span class="chap chap-traffic">obstruction / resisting <strong>4</strong></span><span class="chap chap-2903">robbery <strong>4</strong></span><span class="chap chap-2903">child sexual exploitation <strong>3</strong></span><span class="chap chap-2903">discharging firearm <strong>3</strong></span><span class="chap chap-traffic">disorderly conduct <strong>3</strong></span><span class="chap chap-2913">fraud / forgery <strong>3</strong></span><span class="chap chap-2903">kidnapping / abduction <strong>3</strong></span><span class="chap chap-2923">possessing criminal tools <strong>3</strong></span><span class="chap chap-2903">rape <strong>3</strong></span><span class="chap chap-traffic">drug paraphernalia <strong>2</strong></span><span class="chap chap-traffic">escape / contraband <strong>2</strong></span><span class="chap chap-traffic">failure to comply <strong>2</strong></span><span class="chap chap-traffic">hit-skip <strong>2</strong></span><span class="chap chap-traffic">menacing / stalking <strong>2</strong></span><span class="chap chap-2913">receiving stolen property <strong>2</strong></span><span class="chap chap-2903">sex-offender registry <strong>2</strong></span><span class="chap chap-2903">sexual assault <strong>2</strong></span><span class="chap chap-traffic">traffic / civil <strong>2</strong></span><span class="chap chap-2903">arson <strong>1</strong></span><span class="chap chap-traffic">attempt <strong>1</strong></span><span class="chap chap-2913">identity fraud <strong>1</strong></span><span class="chap chap-2903">offense against persons <strong>1</strong></span><span class="chap chap-traffic">open container <strong>1</strong></span><span class="chap chap-traffic">prostitution <strong>1</strong></span><span class="chap chap-traffic">sex offense <strong>1</strong></span><span class="chap chap-2903">sex offense <strong>1</strong></span><span class="chap chap-traffic">tampering / intimidation <strong>1</strong></span><span class="chap chap-traffic">trespass <strong>1</strong></span><span class="chap chap-2913">unauthorized use of property <strong>1</strong></span><span class="chap chap-2903">vehicular assault <strong>1</strong></span>    </div>
   </details>
 
   <div class="cards">
@@ -6278,23 +6338,6 @@
     <p class="name" id="card-14205154-name"><a class="plain" href="/inmate/14205154/">WOLF LAUREN</a></p>
     <p class="charge charge-2925">drug possession <span class="ct-count">+3 more</span></p>
     <a class="id-chip" href="/inmate/14205154/">#&thinsp;14205154 &middot; booked 4/16/26</a>
-  </div>
-</article><article class="card-inmate" aria-labelledby="card-2186927-name" data-tier="misdemeanor" data-chap="ovi-dui" data-name="hawkins marcus" data-search="hawkins marcus ovi-alcohol and or drug of abuse criminal trespass domestic relations driving under suspension/violaton restriction ovi-204&#39;1000 or more alch-plasma disorderly conduct fugitive 4511.19a1a 2911.21 0002.00 4510.11 4511.19a1g 2917.11 0000.00 #2186927">
-  <button type="button" class="tier tier-misdemeanor tier-corner" aria-label="MISDEMEANOR ×5, charges detail" aria-describedby="tier-tip" data-tip="MISDEMEANOR ×5
-4511.19A1A · M1 · Operating a vehicle under the influence (OVI / DUI)
-2911.21 · M4 · Criminal trespass
-0002.00 · DOMESTIC RELATIONS
-4510.11 · M1 · Driving under suspension
-4511.19A1G · M1 · Operating a vehicle under the influence (OVI / DUI)
-2917.11 · MM · Disorderly conduct
-0000.00 · FUGITIVE">M ×5</button>
-  <a class="thumb" href="/inmate/2186927/" data-photo="/photos/2186927.jpg" data-photo-cap="HAWKINS MARCUS · booked 4/16/26" data-photo-alt="HCSO booking photo of HAWKINS MARCUS" aria-label="View booking photo of HAWKINS MARCUS">
-    <img src="/photos/2186927.jpg" alt="" width="48" height="60" loading="lazy" decoding="async">
-  </a>
-  <div class="meta">
-    <p class="name" id="card-2186927-name"><a class="plain" href="/inmate/2186927/">HAWKINS MARCUS</a></p>
-    <p class="charge charge-traffic">OVI / DUI <span class="ct-count">+6 more</span></p>
-    <a class="id-chip" href="/inmate/2186927/">#&thinsp;2186927 &middot; booked 4/16/26</a>
   </div>
 </article><article class="card-inmate" aria-labelledby="card-2079990-name" data-tier="misdemeanor" data-chap="assault" data-name="roe jerome" data-search="roe jerome assault assault 2903.13 2903.13 #2079990">
   <button type="button" class="tier tier-misdemeanor tier-corner" aria-label="MISDEMEANOR ×2, charges detail" aria-describedby="tier-tip" data-tip="MISDEMEANOR ×2
@@ -17308,7 +17351,7 @@ OTHER · Unsupported Type">F</button>
 <section class="dispatch-section">
   <div class="section-h">
     <h2>CPD calls ending in arrest, citation, or report</h2>
-    <span class="pill">126</span>
+    <span class="pill">119</span>
     <span class="grow"></span>
     <span class="meta">last 30 days &middot; <a href="https://data.cincinnati-oh.gov/d/qiik-bpks">data.cincinnati-oh.gov &middot; qiik-bpks &rarr;</a></span>
   </div>
@@ -17316,9 +17359,226 @@ OTHER · Unsupported Type">F</button>
     <summary class="district-h">
       <span class="district-kicker">CPD District</span>
       <span class="district-num">1</span>
-      <span class="district-count"><strong>41</strong> events</span>
+      <span class="district-count"><strong>33</strong> events</span>
     </summary>
     <ul class="cfs cfs-scroll">
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T23:06:19.000">2026-05-14T23:06:19.000</time>
+        </div>
+        <div class="cfs-body">CENTRAL AV / W COURT ST</div>
+<div class="cfs-foot">WEST  END</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T23:00:23.000">2026-05-14T23:00:23.000</time>
+        </div>
+        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
+<div class="cfs-foot">WEST  END</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T22:18:12.000">2026-05-14T22:18:12.000</time>
+        </div>
+        <div class="cfs-body">E 7TH ST / WALNUT ST</div>
+<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T22:16:19.000">2026-05-14T22:16:19.000</time>
+        </div>
+        <div class="cfs-body">8XX POPLAR ST</div>
+<div class="cfs-foot">WEST  END</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T20:52:29.000">2026-05-14T20:52:29.000</time>
+        </div>
+        <div class="cfs-body">W ELDER ST / CENTRAL PKWY</div>
+<div class="cfs-foot">WEST  END</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T20:28:12.000">2026-05-14T20:28:12.000</time>
+        </div>
+        <div class="cfs-body">EZZARD CHARLES DR / WESTERN AV</div>
+<div class="cfs-foot">QUEENSGATE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T19:37:57.000">2026-05-14T19:37:57.000</time>
+        </div>
+        <div class="cfs-body">JONES ST / BETTON ST</div>
+<div class="cfs-foot">WEST  END</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T18:56:04.000">2026-05-14T18:56:04.000</time>
+        </div>
+        <div class="cfs-body">1XX E FREEDOM WY</div>
+<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T18:08:38.000">2026-05-14T18:08:38.000</time>
+        </div>
+        <div class="cfs-body">12XX CLAY ST</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T17:53:32.000">2026-05-14T17:53:32.000</time>
+        </div>
+        <div class="cfs-body">11XX VINE ST</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T17:44:56.000">2026-05-14T17:44:56.000</time>
+        </div>
+        <div class="cfs-body">6XX W MCMICKEN AV</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T17:42:38.000">2026-05-14T17:42:38.000</time>
+        </div>
+        <div class="cfs-body">1XX FINDLAY ST</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T17:29:17.000">2026-05-14T17:29:17.000</time>
+        </div>
+        <div class="cfs-body">2XX MOHAWK ST</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T16:57:12.000">2026-05-14T16:57:12.000</time>
+        </div>
+        <div class="cfs-body">CENTRAL PKWY / CHARLOTTE ST</div>
+<div class="cfs-foot">WEST  END</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T16:35:37.000">2026-05-14T16:35:37.000</time>
+        </div>
+        <div class="cfs-body">E CENTRAL PKWY / WALNUT ST</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T16:16:39.000">2026-05-14T16:16:39.000</time>
+        </div>
+        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
+<div class="cfs-foot">WEST  END</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T15:28:24.000">2026-05-14T15:28:24.000</time>
+        </div>
+        <div class="cfs-body">XX W CLIFTON AV</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T15:09:56.000">2026-05-14T15:09:56.000</time>
+        </div>
+        <div class="cfs-body">8XX W 8TH ST</div>
+<div class="cfs-foot">QUEENSGATE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T15:07:26.000">2026-05-14T15:07:26.000</time>
+        </div>
+        <div class="cfs-body">VINE ST / E LIBERTY ST</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T15:01:50.000">2026-05-14T15:01:50.000</time>
+        </div>
+        <div class="cfs-body">1XX E COURT ST</div>
+<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T14:56:58.000">2026-05-14T14:56:58.000</time>
+        </div>
+        <div class="cfs-body">9XX VINE ST</div>
+<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T14:47:31.000">2026-05-14T14:47:31.000</time>
+        </div>
+        <div class="cfs-body">DALTON AV / W 9TH ST</div>
+<div class="cfs-foot">QUEENSGATE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T14:00:54.000">2026-05-14T14:00:54.000</time>
+        </div>
+        <div class="cfs-body">2XX N I75</div>
+<div class="cfs-foot">WEST  END</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T12:51:44.000">2026-05-14T12:51:44.000</time>
+        </div>
+        <div class="cfs-body">XX MERCER ST</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T12:17:29.000">2026-05-14T12:17:29.000</time>
+        </div>
+        <div class="cfs-body">E 8TH ST / VINE ST</div>
+<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T11:40:15.000">2026-05-14T11:40:15.000</time>
+        </div>
+        <div class="cfs-body">2XX W MCMICKEN AV</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T10:53:16.000">2026-05-14T10:53:16.000</time>
+        </div>
+        <div class="cfs-body">SYCAMORE ST / E 12TH ST</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T10:10:31.000">2026-05-14T10:10:31.000</time>
+        </div>
+        <div class="cfs-body">20XX MOHAWK PL</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T09:15:00.000">2026-05-14T09:15:00.000</time>
+        </div>
+        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
+<div class="cfs-foot">WEST  END</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T07:40:20.000">2026-05-14T07:40:20.000</time>
+        </div>
+        <div class="cfs-body">1XX E CLIFTON AV</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T06:53:17.000">2026-05-14T06:53:17.000</time>
+        </div>
+        <div class="cfs-body">20XX CLIFTON AV</div>
+<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
       <li>
         <div class="cfs-top">
           <span class="cfs-disposition">ARR: ARREST</span>
@@ -17333,322 +17593,98 @@ OTHER · Unsupported Type">F</button>
         </div>
         <div class="cfs-body">DALTON AV / W LIBERTY ST</div>
 <div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T23:40:07.000">2026-05-13T23:40:07.000</time>
-        </div>
-        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T23:28:48.000">2026-05-13T23:28:48.000</time>
-        </div>
-        <div class="cfs-body">CENTRAL AV / CHARLES ST</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T23:27:23.000">2026-05-13T23:27:23.000</time>
-        </div>
-        <div class="cfs-body">7XX MAIN ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T22:32:09.000">2026-05-13T22:32:09.000</time>
-        </div>
-        <div class="cfs-body">W MCMICKEN AV / RAVINE ST</div>
-<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T22:08:29.000">2026-05-13T22:08:29.000</time>
-        </div>
-        <div class="cfs-body">WINCHELL AV / YORK ST</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T22:07:28.000">2026-05-13T22:07:28.000</time>
-        </div>
-        <div class="cfs-body">1XX E 7TH ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T20:52:45.000">2026-05-13T20:52:45.000</time>
-        </div>
-        <div class="cfs-body">6XX MAIN ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T20:49:34.000">2026-05-13T20:49:34.000</time>
-        </div>
-        <div class="cfs-body">DAVID ST / WEST LAUREL PARK DR</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T20:33:33.000">2026-05-13T20:33:33.000</time>
-        </div>
-        <div class="cfs-body">VINE ST / W LIBERTY ST</div>
-<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T19:02:12.000">2026-05-13T19:02:12.000</time>
-        </div>
-        <div class="cfs-body">E 2ND ST / MAIN ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T18:57:15.000">2026-05-13T18:57:15.000</time>
-        </div>
-        <div class="cfs-body">E 2ND ST / MAIN ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T18:50:45.000">2026-05-13T18:50:45.000</time>
-        </div>
-        <div class="cfs-body">E 2ND ST / MAIN ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T17:34:10.000">2026-05-13T17:34:10.000</time>
-        </div>
-        <div class="cfs-body">BAYMILLER ST / YORK ST</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T16:33:02.000">2026-05-13T16:33:02.000</time>
-        </div>
-        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T16:16:55.000">2026-05-13T16:16:55.000</time>
-        </div>
-        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T16:07:14.000">2026-05-13T16:07:14.000</time>
-        </div>
-        <div class="cfs-body">11XX ELM ST</div>
-<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T15:46:08.000">2026-05-13T15:46:08.000</time>
-        </div>
-        <div class="cfs-body">1XX E CLIFTON AV</div>
-<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T15:17:07.000">2026-05-13T15:17:07.000</time>
-        </div>
-        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T15:11:57.000">2026-05-13T15:11:57.000</time>
-        </div>
-        <div class="cfs-body">16XX REPUBLIC ST</div>
-<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T14:51:39.000">2026-05-13T14:51:39.000</time>
-        </div>
-        <div class="cfs-body">8XX PLUM ST</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T14:41:25.000">2026-05-13T14:41:25.000</time>
-        </div>
-        <div class="cfs-body">15XX JOHN ST</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T14:07:41.000">2026-05-13T14:07:41.000</time>
-        </div>
-        <div class="cfs-body">6XX MAIN ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T14:05:11.000">2026-05-13T14:05:11.000</time>
-        </div>
-        <div class="cfs-body">X BACK ST</div>
-<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T13:56:47.000">2026-05-13T13:56:47.000</time>
-        </div>
-        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T13:31:12.000">2026-05-13T13:31:12.000</time>
-        </div>
-        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T12:19:36.000">2026-05-13T12:19:36.000</time>
-        </div>
-        <div class="cfs-body">E 5TH ST / MAIN ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T11:47:14.000">2026-05-13T11:47:14.000</time>
-        </div>
-        <div class="cfs-body">15XX VINE ST</div>
-<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T11:40:33.000">2026-05-13T11:40:33.000</time>
-        </div>
-        <div class="cfs-body">2XX N I75</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T11:19:26.000">2026-05-13T11:19:26.000</time>
-        </div>
-        <div class="cfs-body">5XX VINE ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T11:01:04.000">2026-05-13T11:01:04.000</time>
-        </div>
-        <div class="cfs-body">10XX MAIN ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T10:31:20.000">2026-05-13T10:31:20.000</time>
-        </div>
-        <div class="cfs-body">4XX MAIN ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T10:21:32.000">2026-05-13T10:21:32.000</time>
-        </div>
-        <div class="cfs-body">6XX VINE ST</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T09:36:37.000">2026-05-13T09:36:37.000</time>
-        </div>
-        <div class="cfs-body">3XX EZZARD CHARLES DR</div>
-<div class="cfs-foot">WEST  END</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T09:12:57.000">2026-05-13T09:12:57.000</time>
-        </div>
-        <div class="cfs-body">5XX DANDRIDGE ST</div>
-<div class="cfs-foot">PENDLETON</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T08:56:34.000">2026-05-13T08:56:34.000</time>
-        </div>
-        <div class="cfs-body">1XX S I75</div>
-<div class="cfs-foot">QUEENSGATE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T08:20:30.000">2026-05-13T08:20:30.000</time>
-        </div>
-        <div class="cfs-body">1XX E 13TH ST</div>
-<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T06:11:49.000">2026-05-13T06:11:49.000</time>
-        </div>
-        <div class="cfs-body">X S I75</div>
-<div class="cfs-foot">QUEENSGATE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T01:39:20.000">2026-05-13T01:39:20.000</time>
-        </div>
-        <div class="cfs-body">3XX BROADWAY</div>
-<div class="cfs-foot">C. B. D. / RIVERFRONT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T01:29:44.000">2026-05-13T01:29:44.000</time>
-        </div>
-        <div class="cfs-body">XX W 12TH ST</div>
-<div class="cfs-foot">OVER-THE-RHINE</div>      </li>
     </ul>
   </details>
   <details class="district-block" >
     <summary class="district-h">
       <span class="district-kicker">CPD District</span>
       <span class="district-num">2</span>
-      <span class="district-count"><strong>5</strong> events</span>
+      <span class="district-count"><strong>12</strong> events</span>
     </summary>
     <ul class="cfs cfs-scroll">
       <li>
         <div class="cfs-top">
           <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T15:06:03.000">2026-05-13T15:06:03.000</time>
+          <time datetime="2026-05-14T22:10:00.000">2026-05-14T22:10:00.000</time>
         </div>
-        <div class="cfs-body">BEECHMONT AV / WASIGO DR</div>
-<div class="cfs-foot">MT.  WASHINGTON</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T11:29:24.000">2026-05-13T11:29:24.000</time>
-        </div>
-        <div class="cfs-body">47XX RED BANK RD</div>
-<div class="cfs-foot">MADISONVILLE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T09:16:26.000">2026-05-13T09:16:26.000</time>
-        </div>
-        <div class="cfs-body">35XX AMBERACRES DR</div>
-<div class="cfs-foot">KENNEDY  HEIGHTS</div>      </li>
+        <div class="cfs-body">17XX RIVERSIDE DR</div>
+<div class="cfs-foot">EAST  END</div>      </li>
       <li>
         <div class="cfs-top">
           <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T01:40:52.000">2026-05-13T01:40:52.000</time>
+          <time datetime="2026-05-14T17:56:06.000">2026-05-14T17:56:06.000</time>
         </div>
-        <div class="cfs-body">16XX GRANTWOOD AV</div>
-<div class="cfs-foot">EVANSTON</div>      </li>
+        <div class="cfs-body">32XX ERIE AV</div>
+<div class="cfs-foot">HYDE PARK</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T17:20:42.000">2026-05-14T17:20:42.000</time>
+        </div>
+        <div class="cfs-body">32XX ERIE AV</div>
+<div class="cfs-foot">HYDE PARK</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T17:12:53.000">2026-05-14T17:12:53.000</time>
+        </div>
+        <div class="cfs-body">22XX VICTORY PKWY</div>
+<div class="cfs-foot">EAST WALNUT HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T17:04:40.000">2026-05-14T17:04:40.000</time>
+        </div>
+        <div class="cfs-body">31XX LINWOOD AV</div>
+<div class="cfs-foot">MT.  LOOKOUT</div>      </li>
       <li>
         <div class="cfs-top">
           <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T00:38:33.000">2026-05-13T00:38:33.000</time>
+          <time datetime="2026-05-14T15:43:29.000">2026-05-14T15:43:29.000</time>
         </div>
-        <div class="cfs-body">50XX OBSERVATORY CIR</div>
+        <div class="cfs-body">AMBERSON AV / ERIE AV</div>
+<div class="cfs-foot">HYDE PARK</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T13:29:05.000">2026-05-14T13:29:05.000</time>
+        </div>
+        <div class="cfs-body">19XX HEWITT AV</div>
+<div class="cfs-foot">EVANSTON</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T11:52:54.000">2026-05-14T11:52:54.000</time>
+        </div>
+        <div class="cfs-body">34XX GREENLAWN AV</div>
+<div class="cfs-foot">EVANSTON</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T11:46:59.000">2026-05-14T11:46:59.000</time>
+        </div>
+        <div class="cfs-body">32XX ERIE AV</div>
+<div class="cfs-foot">HYDE PARK</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T08:23:35.000">2026-05-14T08:23:35.000</time>
+        </div>
+        <div class="cfs-body">24XX INGLESIDE AV</div>
+<div class="cfs-foot">EAST WALNUT HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T07:44:30.000">2026-05-14T07:44:30.000</time>
+        </div>
+        <div class="cfs-body">33XX MANNINGTON AV</div>
+<div class="cfs-foot">MT.  LOOKOUT</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T07:30:31.000">2026-05-14T07:30:31.000</time>
+        </div>
+        <div class="cfs-body">MANNINGTON AV / TWEED AV</div>
 <div class="cfs-foot">MT.  LOOKOUT</div>      </li>
     </ul>
   </details>
@@ -17656,197 +17692,169 @@ OTHER · Unsupported Type">F</button>
     <summary class="district-h">
       <span class="district-kicker">CPD District</span>
       <span class="district-num">3</span>
-      <span class="district-count"><strong>27</strong> events</span>
+      <span class="district-count"><strong>23</strong> events</span>
     </summary>
     <ul class="cfs cfs-scroll">
       <li>
         <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T21:30:11.000">2026-05-13T21:30:11.000</time>
-        </div>
-        <div class="cfs-body">44XX W 8TH ST</div>
-<div class="cfs-foot">WEST PRICE HILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T21:12:58.000">2026-05-13T21:12:58.000</time>
-        </div>
-        <div class="cfs-body">7XX HAWTHORNE AV</div>
-<div class="cfs-foot">EAST PRICE HILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T20:43:42.000">2026-05-13T20:43:42.000</time>
-        </div>
-        <div class="cfs-body">QUEEN CITY AV / KEBLER ST</div>
-<div class="cfs-foot">SOUTH  FAIRMOUNT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T20:14:32.000">2026-05-13T20:14:32.000</time>
-        </div>
-        <div class="cfs-body">HOPPLE ST / BEEKMAN ST</div>
-<div class="cfs-foot">MILLVALE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T19:24:27.000">2026-05-13T19:24:27.000</time>
-        </div>
-        <div class="cfs-body">BEEKMAN ST / HOPPLE ST</div>
-<div class="cfs-foot">MILLVALE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T19:17:56.000">2026-05-13T19:17:56.000</time>
-        </div>
-        <div class="cfs-body">24XX HARRISON AV</div>
-<div class="cfs-foot">WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T18:31:51.000">2026-05-13T18:31:51.000</time>
-        </div>
-        <div class="cfs-body">22XX WESTWOOD NORTHERN BLVD</div>
-<div class="cfs-foot">EAST  WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
           <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T18:23:15.000">2026-05-13T18:23:15.000</time>
+          <time datetime="2026-05-15T00:53:46.000">2026-05-15T00:53:46.000</time>
         </div>
-        <div class="cfs-body">19XX WESTMONT LN</div>
-<div class="cfs-foot">WEST PRICE HILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T17:43:46.000">2026-05-13T17:43:46.000</time>
-        </div>
-        <div class="cfs-body">33XX WERK RD</div>
-<div class="cfs-foot">WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T17:29:30.000">2026-05-13T17:29:30.000</time>
-        </div>
-        <div class="cfs-body">HARRISON AV / TREMONT ST</div>
-<div class="cfs-foot">SOUTH  FAIRMOUNT</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T17:26:47.000">2026-05-13T17:26:47.000</time>
-        </div>
-        <div class="cfs-body">9XX ROSEMONT AV</div>
-<div class="cfs-foot">WEST PRICE HILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T16:08:58.000">2026-05-13T16:08:58.000</time>
-        </div>
-        <div class="cfs-body">RIVER RD / IDAHO ST</div>
-<div class="cfs-foot">RIVERSIDE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T15:59:35.000">2026-05-13T15:59:35.000</time>
-        </div>
-        <div class="cfs-body">61XX GLENWAY AV</div>
-<div class="cfs-foot">WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T15:41:54.000">2026-05-13T15:41:54.000</time>
-        </div>
-        <div class="cfs-body">4XX CRESTLINE AV</div>
-<div class="cfs-foot">EAST PRICE HILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T15:32:05.000">2026-05-13T15:32:05.000</time>
-        </div>
-        <div class="cfs-body">54XX GLENWAY AV</div>
-<div class="cfs-foot">WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T15:30:39.000">2026-05-13T15:30:39.000</time>
-        </div>
-        <div class="cfs-body">23XX FERGUSON RD</div>
-<div class="cfs-foot">WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T15:29:28.000">2026-05-13T15:29:28.000</time>
-        </div>
-        <div class="cfs-body">34XX WARSAW AV</div>
-<div class="cfs-foot">EAST PRICE HILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T14:29:51.000">2026-05-13T14:29:51.000</time>
-        </div>
-        <div class="cfs-body">61XX GLENWAY AV</div>
-<div class="cfs-foot">WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T13:52:23.000">2026-05-13T13:52:23.000</time>
-        </div>
-        <div class="cfs-body">19XX WESTWOOD NORTHERN BLVD</div>
-<div class="cfs-foot">EAST  WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T09:49:45.000">2026-05-13T09:49:45.000</time>
-        </div>
-        <div class="cfs-body">60XX GLENWAY AV</div>
-<div class="cfs-foot">WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T09:42:25.000">2026-05-13T09:42:25.000</time>
-        </div>
-        <div class="cfs-body">29XX BOUDINOT AV</div>
-<div class="cfs-foot">WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T09:26:33.000">2026-05-13T09:26:33.000</time>
-        </div>
-        <div class="cfs-body">23XX FERGUSON RD</div>
-<div class="cfs-foot">WESTWOOD</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T09:17:31.000">2026-05-13T09:17:31.000</time>
-        </div>
-        <div class="cfs-body">19XX SUTTER AV</div>
-<div class="cfs-foot">ENGLISH  WOODS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T09:07:07.000">2026-05-13T09:07:07.000</time>
-        </div>
-        <div class="cfs-body">47XX DALE AV</div>
-<div class="cfs-foot">WEST PRICE HILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T07:11:25.000">2026-05-13T07:11:25.000</time>
-        </div>
-        <div class="cfs-body">19XX E I74</div>
+        <div class="cfs-body">36XX DAWSON AV</div>
 <div class="cfs-foot">S.. CUMMINSVILLE</div>      </li>
       <li>
         <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T01:16:32.000">2026-05-13T01:16:32.000</time>
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-15T00:51:24.000">2026-05-15T00:51:24.000</time>
         </div>
-        <div class="cfs-body">41XX PRESIDENT DR</div>
-<div class="cfs-foot">FAY APARTMENTS</div>      </li>
+        <div class="cfs-body">16XX WESTWOOD AV</div>
+<div class="cfs-foot">SOUTH  FAIRMOUNT</div>      </li>
       <li>
         <div class="cfs-top">
           <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T00:11:04.000">2026-05-13T00:11:04.000</time>
+          <time datetime="2026-05-14T23:01:43.000">2026-05-14T23:01:43.000</time>
         </div>
-        <div class="cfs-body">37XX MAYFIELD AV</div>
+        <div class="cfs-body">16XX GRAND AV</div>
+<div class="cfs-foot">EAST PRICE HILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T21:22:39.000">2026-05-14T21:22:39.000</time>
+        </div>
+        <div class="cfs-body">6XX PEDRETTI AV</div>
+<div class="cfs-foot">WEST PRICE HILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T20:21:23.000">2026-05-14T20:21:23.000</time>
+        </div>
+        <div class="cfs-body">10XX WOODLAWN AV</div>
+<div class="cfs-foot">EAST PRICE HILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T19:47:56.000">2026-05-14T19:47:56.000</time>
+        </div>
+        <div class="cfs-body">24XX WILLIAMSBURG DR</div>
+<div class="cfs-foot">FAY APARTMENTS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T18:25:40.000">2026-05-14T18:25:40.000</time>
+        </div>
+        <div class="cfs-body">23XX FERGUSON RD</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T18:07:51.000">2026-05-14T18:07:51.000</time>
+        </div>
+        <div class="cfs-body">23XX FERGUSON RD</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T18:01:39.000">2026-05-14T18:01:39.000</time>
+        </div>
+        <div class="cfs-body">23XX WILLIAMSBURG DR</div>
+<div class="cfs-foot">FAY APARTMENTS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T17:40:40.000">2026-05-14T17:40:40.000</time>
+        </div>
+        <div class="cfs-body">30XX MICKEY AV</div>
+<div class="cfs-foot">EAST PRICE HILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T16:54:31.000">2026-05-14T16:54:31.000</time>
+        </div>
+        <div class="cfs-body">30XX GLENWAY AV</div>
+<div class="cfs-foot">EAST PRICE HILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T15:59:34.000">2026-05-14T15:59:34.000</time>
+        </div>
+        <div class="cfs-body">23XX FERGUSON RD</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T15:38:17.000">2026-05-14T15:38:17.000</time>
+        </div>
+        <div class="cfs-body">23XX FERGUSON RD</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T15:05:03.000">2026-05-14T15:05:03.000</time>
+        </div>
+        <div class="cfs-body">34XX FYFFE AV</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T13:42:18.000">2026-05-14T13:42:18.000</time>
+        </div>
+        <div class="cfs-body">23XX FERGUSON RD</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T13:37:11.000">2026-05-14T13:37:11.000</time>
+        </div>
+        <div class="cfs-body">61XX GLENWAY AV</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T12:15:46.000">2026-05-14T12:15:46.000</time>
+        </div>
+        <div class="cfs-body">23XX WESTWOOD NORTHERN BLVD</div>
+<div class="cfs-foot">EAST  WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T12:15:25.000">2026-05-14T12:15:25.000</time>
+        </div>
+        <div class="cfs-body">8XX PEDRETTI AV</div>
+<div class="cfs-foot">WEST PRICE HILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T12:02:29.000">2026-05-14T12:02:29.000</time>
+        </div>
+        <div class="cfs-body">23XX FERGUSON RD</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T09:23:32.000">2026-05-14T09:23:32.000</time>
+        </div>
+        <div class="cfs-body">26XX WENDEE DR</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T09:07:43.000">2026-05-14T09:07:43.000</time>
+        </div>
+        <div class="cfs-body">23XX FERGUSON RD</div>
+<div class="cfs-foot">WESTWOOD</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T08:16:18.000">2026-05-14T08:16:18.000</time>
+        </div>
+        <div class="cfs-body">E I74 TO BEEKMAN ST</div>
+<div class="cfs-foot">S.. CUMMINSVILLE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T01:22:38.000">2026-05-14T01:22:38.000</time>
+        </div>
+        <div class="cfs-body">30XX MICKEY AV</div>
 <div class="cfs-foot">EAST PRICE HILL</div>      </li>
     </ul>
   </details>
@@ -17854,9 +17862,184 @@ OTHER · Unsupported Type">F</button>
     <summary class="district-h">
       <span class="district-kicker">CPD District</span>
       <span class="district-num">4</span>
-      <span class="district-count"><strong>35</strong> events</span>
+      <span class="district-count"><strong>26</strong> events</span>
     </summary>
     <ul class="cfs cfs-scroll">
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-15T00:24:50.000">2026-05-15T00:24:50.000</time>
+        </div>
+        <div class="cfs-body">30XX MATHERS ST</div>
+<div class="cfs-foot">WALNUT HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T23:33:33.000">2026-05-14T23:33:33.000</time>
+        </div>
+        <div class="cfs-body">5XX RIDGEWAY AV</div>
+<div class="cfs-foot">AVONDALE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T23:05:14.000">2026-05-14T23:05:14.000</time>
+        </div>
+        <div class="cfs-body">GILBERT AV / LINCOLN AV</div>
+<div class="cfs-foot">WALNUT HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T19:34:18.000">2026-05-14T19:34:18.000</time>
+        </div>
+        <div class="cfs-body">7XX E MCMILLAN ST</div>
+<div class="cfs-foot">WALNUT HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T19:00:34.000">2026-05-14T19:00:34.000</time>
+        </div>
+        <div class="cfs-body">41XX READING RD</div>
+<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T18:28:06.000">2026-05-14T18:28:06.000</time>
+        </div>
+        <div class="cfs-body">3XX S I71</div>
+<div class="cfs-foot">WALNUT HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T17:57:47.000">2026-05-14T17:57:47.000</time>
+        </div>
+        <div class="cfs-body">7XX GHOLSON AV</div>
+<div class="cfs-foot">NORTH AVONDALE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T17:45:40.000">2026-05-14T17:45:40.000</time>
+        </div>
+        <div class="cfs-body">18XX NORTHCUTT AV</div>
+<div class="cfs-foot">BONDHILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T16:52:18.000">2026-05-14T16:52:18.000</time>
+        </div>
+        <div class="cfs-body">30XX WALTER AV</div>
+<div class="cfs-foot">WALNUT HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T16:37:17.000">2026-05-14T16:37:17.000</time>
+        </div>
+        <div class="cfs-body">41XX READING RD</div>
+<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T15:29:31.000">2026-05-14T15:29:31.000</time>
+        </div>
+        <div class="cfs-body">31XX HIGHLAND AV</div>
+<div class="cfs-foot">CORRYVILLE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T14:29:10.000">2026-05-14T14:29:10.000</time>
+        </div>
+        <div class="cfs-body">5XX CLINTON SPRINGS AV</div>
+<div class="cfs-foot">NORTH AVONDALE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T14:16:06.000">2026-05-14T14:16:06.000</time>
+        </div>
+        <div class="cfs-body">XX E CORRY ST</div>
+<div class="cfs-foot">CORRYVILLE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T13:53:12.000">2026-05-14T13:53:12.000</time>
+        </div>
+        <div class="cfs-body">76XX READING RD</div>
+<div class="cfs-foot">ROSELAWN</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T12:19:57.000">2026-05-14T12:19:57.000</time>
+        </div>
+        <div class="cfs-body">45XX READING RD</div>
+<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T11:15:41.000">2026-05-14T11:15:41.000</time>
+        </div>
+        <div class="cfs-body">E MARTIN LUTHER KING JR DR / N I71 TO E MLK JR DR</div>
+<div class="cfs-foot">WALNUT HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T10:13:08.000">2026-05-14T10:13:08.000</time>
+        </div>
+        <div class="cfs-body">41XX READING RD</div>
+<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T09:48:12.000">2026-05-14T09:48:12.000</time>
+        </div>
+        <div class="cfs-body">7XX RIDGEWAY AV</div>
+<div class="cfs-foot">AVONDALE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T09:16:05.000">2026-05-14T09:16:05.000</time>
+        </div>
+        <div class="cfs-body">31XX HARVEY AV</div>
+<div class="cfs-foot">AVONDALE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T08:48:01.000">2026-05-14T08:48:01.000</time>
+        </div>
+        <div class="cfs-body">16XX CREST HILL AV</div>
+<div class="cfs-foot">ROSELAWN</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T07:20:11.000">2026-05-14T07:20:11.000</time>
+        </div>
+        <div class="cfs-body">9XX E MCMILLAN ST</div>
+<div class="cfs-foot">WALNUT HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T04:09:18.000">2026-05-14T04:09:18.000</time>
+        </div>
+        <div class="cfs-body">READING RD / E SEYMOUR AV</div>
+<div class="cfs-foot">BONDHILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T03:31:10.000">2026-05-14T03:31:10.000</time>
+        </div>
+        <div class="cfs-body">40XX MEYERS DR</div>
+<div class="cfs-foot">HARTWELL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T01:36:30.000">2026-05-14T01:36:30.000</time>
+        </div>
+        <div class="cfs-body">18XX GLENDON PL</div>
+<div class="cfs-foot">ROSELAWN</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T00:52:26.000">2026-05-14T00:52:26.000</time>
+        </div>
+        <div class="cfs-body">VINE ST / E 69TH ST</div>
+<div class="cfs-foot">CARTHAGE</div>      </li>
       <li>
         <div class="cfs-top">
           <span class="cfs-disposition">CIT: CITED</span>
@@ -17864,253 +18047,176 @@ OTHER · Unsupported Type">F</button>
         </div>
         <div class="cfs-body">25XX GILBERT AV</div>
 <div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T23:10:55.000">2026-05-13T23:10:55.000</time>
-        </div>
-        <div class="cfs-body">24XX GILBERT AV</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T21:54:02.000">2026-05-13T21:54:02.000</time>
-        </div>
-        <div class="cfs-body">70XX VINE ST</div>
-<div class="cfs-foot">CARTHAGE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T21:11:35.000">2026-05-13T21:11:35.000</time>
-        </div>
-        <div class="cfs-body">GLENWOOD AV / GLENRIDGE PL</div>
-<div class="cfs-foot">NORTH AVONDALE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T20:56:11.000">2026-05-13T20:56:11.000</time>
-        </div>
-        <div class="cfs-body">X W CORRY ST</div>
-<div class="cfs-foot">CORRYVILLE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T20:46:39.000">2026-05-13T20:46:39.000</time>
-        </div>
-        <div class="cfs-body">27XX MAY ST</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T20:25:01.000">2026-05-13T20:25:01.000</time>
-        </div>
-        <div class="cfs-body">26XX SHORT VINE ST</div>
-<div class="cfs-foot">CORRYVILLE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T19:07:51.000">2026-05-13T19:07:51.000</time>
-        </div>
-        <div class="cfs-body">82XX VINE ST</div>
-<div class="cfs-foot">HARTWELL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T18:27:48.000">2026-05-13T18:27:48.000</time>
-        </div>
-        <div class="cfs-body">12XX TENNESSEE AV</div>
-<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T18:13:54.000">2026-05-13T18:13:54.000</time>
-        </div>
-        <div class="cfs-body">26XX MELROSE AV</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T17:33:31.000">2026-05-13T17:33:31.000</time>
-        </div>
-        <div class="cfs-body">41XX READING RD</div>
-<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T17:06:01.000">2026-05-13T17:06:01.000</time>
-        </div>
-        <div class="cfs-body">41XX READING RD</div>
-<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T16:38:09.000">2026-05-13T16:38:09.000</time>
-        </div>
-        <div class="cfs-body">48XX READING RD</div>
-<div class="cfs-foot">BONDHILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T16:28:34.000">2026-05-13T16:28:34.000</time>
-        </div>
-        <div class="cfs-body">34XX BURNET AV</div>
-<div class="cfs-foot">AVONDALE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T16:24:08.000">2026-05-13T16:24:08.000</time>
-        </div>
-        <div class="cfs-body">W 562 TO S I75</div>
-<div class="cfs-foot">BONDHILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T14:42:15.000">2026-05-13T14:42:15.000</time>
-        </div>
-        <div class="cfs-body">41XX READING RD</div>
-<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T14:26:54.000">2026-05-13T14:26:54.000</time>
-        </div>
-        <div class="cfs-body">7XX CHALFONTE PL</div>
-<div class="cfs-foot">NORTH AVONDALE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T14:23:12.000">2026-05-13T14:23:12.000</time>
-        </div>
-        <div class="cfs-body">MAY ST / WILLIAM H TAFT RD</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T14:02:22.000">2026-05-13T14:02:22.000</time>
-        </div>
-        <div class="cfs-body">PADDOCK RD / E SEYMOUR AV</div>
-<div class="cfs-foot">BONDHILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T13:56:02.000">2026-05-13T13:56:02.000</time>
-        </div>
-        <div class="cfs-body">11XX ELM PARK DR</div>
-<div class="cfs-foot">BONDHILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T11:56:04.000">2026-05-13T11:56:04.000</time>
-        </div>
-        <div class="cfs-body">ROCKDALE AV / READING RD</div>
-<div class="cfs-foot">AVONDALE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T11:52:03.000">2026-05-13T11:52:03.000</time>
-        </div>
-        <div class="cfs-body">24XX KENTON ST</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T11:33:10.000">2026-05-13T11:33:10.000</time>
-        </div>
-        <div class="cfs-body">7XX GREENWOOD AV</div>
-<div class="cfs-foot">NORTH AVONDALE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T10:59:52.000">2026-05-13T10:59:52.000</time>
-        </div>
-        <div class="cfs-body">23XX READING RD</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T10:57:35.000">2026-05-13T10:57:35.000</time>
-        </div>
-        <div class="cfs-body">35XX READING RD</div>
-<div class="cfs-foot">AVONDALE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T10:43:43.000">2026-05-13T10:43:43.000</time>
-        </div>
-        <div class="cfs-body">41XX READING RD</div>
-<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T10:33:30.000">2026-05-13T10:33:30.000</time>
-        </div>
-        <div class="cfs-body">9XX CURTIS ST</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T09:46:27.000">2026-05-13T09:46:27.000</time>
-        </div>
-        <div class="cfs-body">LOSANTIVILLE AV / HIRSCH DR</div>
-<div class="cfs-foot">ROSELAWN</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T08:58:37.000">2026-05-13T08:58:37.000</time>
-        </div>
-        <div class="cfs-body">READING RD / E SEYMOUR AV</div>
-<div class="cfs-foot">BONDHILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T08:45:36.000">2026-05-13T08:45:36.000</time>
-        </div>
-        <div class="cfs-body">22XX READING RD</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T07:25:19.000">2026-05-13T07:25:19.000</time>
-        </div>
-        <div class="cfs-body">10XX S I75</div>
-<div class="cfs-foot">HARTWELL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T07:00:05.000">2026-05-13T07:00:05.000</time>
-        </div>
-        <div class="cfs-body">41XX READING RD</div>
-<div class="cfs-foot">PADDOCK  HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T03:39:32.000">2026-05-13T03:39:32.000</time>
-        </div>
-        <div class="cfs-body">30XX KERPER AV</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T01:56:33.000">2026-05-13T01:56:33.000</time>
-        </div>
-        <div class="cfs-body">4XX E LIBERTY ST</div>
-<div class="cfs-foot">MOUNT  AUBURN</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T00:33:24.000">2026-05-13T00:33:24.000</time>
-        </div>
-        <div class="cfs-body">24XX GILBERT AV</div>
-<div class="cfs-foot">WALNUT HILLS</div>      </li>
     </ul>
   </details>
   <details class="district-block" >
     <summary class="district-h">
       <span class="district-kicker">CPD District</span>
       <span class="district-num">5</span>
-      <span class="district-count"><strong>16</strong> events</span>
+      <span class="district-count"><strong>24</strong> events</span>
     </summary>
     <ul class="cfs cfs-scroll">
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-15T00:38:16.000">2026-05-15T00:38:16.000</time>
+        </div>
+        <div class="cfs-body">6XX DUTCH COLONY DR</div>
+<div class="cfs-foot">WINTON HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T21:46:55.000">2026-05-14T21:46:55.000</time>
+        </div>
+        <div class="cfs-body">7XX DUTCH COLONY DR</div>
+<div class="cfs-foot">WINTON HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T21:34:47.000">2026-05-14T21:34:47.000</time>
+        </div>
+        <div class="cfs-body">3XX CALHOUN ST</div>
+<div class="cfs-foot">FAIRVIEW</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T21:13:14.000">2026-05-14T21:13:14.000</time>
+        </div>
+        <div class="cfs-body">61XX HAMILTON AV</div>
+<div class="cfs-foot">COLLEGE  HILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T20:47:00.000">2026-05-14T20:47:00.000</time>
+        </div>
+        <div class="cfs-body">7XX RIDDLE RD</div>
+<div class="cfs-foot">CLIFTON/UNIVERSITY HEIGHTS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T19:48:27.000">2026-05-14T19:48:27.000</time>
+        </div>
+        <div class="cfs-body">48XX WINNESTE AV</div>
+<div class="cfs-foot">WINTON HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T19:38:13.000">2026-05-14T19:38:13.000</time>
+        </div>
+        <div class="cfs-body">56XX FOLCHI DR</div>
+<div class="cfs-foot">COLLEGE  HILL</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T18:39:20.000">2026-05-14T18:39:20.000</time>
+        </div>
+        <div class="cfs-body">18XX CHASE AV</div>
+<div class="cfs-foot">NORTHSIDE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T18:20:27.000">2026-05-14T18:20:27.000</time>
+        </div>
+        <div class="cfs-body">12XX HOPPLE ST</div>
+<div class="cfs-foot">CAMP  WASHINGTON</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T18:00:06.000">2026-05-14T18:00:06.000</time>
+        </div>
+        <div class="cfs-body">27XX CLIFTON AV</div>
+<div class="cfs-foot">CLIFTON/UNIVERSITY HEIGHTS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T17:03:38.000">2026-05-14T17:03:38.000</time>
+        </div>
+        <div class="cfs-body">29XX W MCMICKEN AV</div>
+<div class="cfs-foot">CLIFTON/UNIVERSITY HEIGHTS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T13:47:11.000">2026-05-14T13:47:11.000</time>
+        </div>
+        <div class="cfs-body">33XX JEFFERSON AV</div>
+<div class="cfs-foot">CLIFTON</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T13:02:33.000">2026-05-14T13:02:33.000</time>
+        </div>
+        <div class="cfs-body">29XX BURLINGTON PL</div>
+<div class="cfs-foot">CAMP  WASHINGTON</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T12:51:20.000">2026-05-14T12:51:20.000</time>
+        </div>
+        <div class="cfs-body">45XX COLERAIN AV</div>
+<div class="cfs-foot">NORTHSIDE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T12:45:14.000">2026-05-14T12:45:14.000</time>
+        </div>
+        <div class="cfs-body">JEFFERSON AV / W CORRY ST</div>
+<div class="cfs-foot">CLIFTON/UNIVERSITY HEIGHTS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T11:39:17.000">2026-05-14T11:39:17.000</time>
+        </div>
+        <div class="cfs-body">55XX COLERAIN AV</div>
+<div class="cfs-foot">MOUNT AIRY</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T10:07:24.000">2026-05-14T10:07:24.000</time>
+        </div>
+        <div class="cfs-body">23XX VAN LEUNEN DR</div>
+<div class="cfs-foot">MOUNT AIRY</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T09:19:20.000">2026-05-14T09:19:20.000</time>
+        </div>
+        <div class="cfs-body">47XX KENARD AV</div>
+<div class="cfs-foot">SPRING GROVE VILLAGE</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">CIT: CITED</span>
+          <time datetime="2026-05-14T09:07:45.000">2026-05-14T09:07:45.000</time>
+        </div>
+        <div class="cfs-body">32XX VINE ST</div>
+<div class="cfs-foot">CLIFTON</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T07:40:29.000">2026-05-14T07:40:29.000</time>
+        </div>
+        <div class="cfs-body">7XX DUTCH COLONY DR</div>
+<div class="cfs-foot">WINTON HILLS</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T07:29:46.000">2026-05-14T07:29:46.000</time>
+        </div>
+        <div class="cfs-body">25XX FLANIGAN CT</div>
+<div class="cfs-foot">MOUNT AIRY</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">ARR: ARREST</span>
+          <time datetime="2026-05-14T04:43:14.000">2026-05-14T04:43:14.000</time>
+        </div>
+        <div class="cfs-body">13XX HOPPLE ST</div>
+<div class="cfs-foot">CAMP  WASHINGTON</div>      </li>
+      <li>
+        <div class="cfs-top">
+          <span class="cfs-disposition">301:OFFENSE REPORT</span>
+          <time datetime="2026-05-14T01:04:09.000">2026-05-14T01:04:09.000</time>
+        </div>
+        <div class="cfs-body">1XX W MCMILLAN ST</div>
+<div class="cfs-foot">FAIRVIEW</div>      </li>
       <li>
         <div class="cfs-top">
           <span class="cfs-disposition">CIT: CITED</span>
@@ -18118,133 +18224,21 @@ OTHER · Unsupported Type">F</button>
         </div>
         <div class="cfs-body">SPRING GROVE AV / CLIFTON AV</div>
 <div class="cfs-foot">SPRING GROVE VILLAGE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T22:25:28.000">2026-05-13T22:25:28.000</time>
-        </div>
-        <div class="cfs-body">DUTCH COLONY DR / WINNESTE AV</div>
-<div class="cfs-foot">WINTON HILLS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T21:10:58.000">2026-05-13T21:10:58.000</time>
-        </div>
-        <div class="cfs-body">58XX HAMILTON AV</div>
-<div class="cfs-foot">COLLEGE  HILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T21:06:50.000">2026-05-13T21:06:50.000</time>
-        </div>
-        <div class="cfs-body">E MITCHELL AV / VINE ST</div>
-<div class="cfs-foot">CLIFTON</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T19:41:56.000">2026-05-13T19:41:56.000</time>
-        </div>
-        <div class="cfs-body">MEEKER ST / SPRING GROVE AV</div>
-<div class="cfs-foot">CAMP  WASHINGTON</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T19:10:15.000">2026-05-13T19:10:15.000</time>
-        </div>
-        <div class="cfs-body">APPLE ST / KNOWLTON ST</div>
-<div class="cfs-foot">NORTHSIDE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T13:37:01.000">2026-05-13T13:37:01.000</time>
-        </div>
-        <div class="cfs-body">44XX W MITCHELL AV</div>
-<div class="cfs-foot">SPRING GROVE VILLAGE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T12:50:27.000">2026-05-13T12:50:27.000</time>
-        </div>
-        <div class="cfs-body">4XX RIDDLE RD</div>
-<div class="cfs-foot">CLIFTON/UNIVERSITY HEIGHTS</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T12:25:03.000">2026-05-13T12:25:03.000</time>
-        </div>
-        <div class="cfs-body">2XX W MCMILLAN ST</div>
-<div class="cfs-foot">FAIRVIEW</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T11:56:38.000">2026-05-13T11:56:38.000</time>
-        </div>
-        <div class="cfs-body">6XX W MARTIN LUTHER KING JR DR</div>
-<div class="cfs-foot">CLIFTON</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T10:54:40.000">2026-05-13T10:54:40.000</time>
-        </div>
-        <div class="cfs-body">16XX CEDAR AV</div>
-<div class="cfs-foot">COLLEGE  HILL</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T09:30:35.000">2026-05-13T09:30:35.000</time>
-        </div>
-        <div class="cfs-body">12XX CHASE AV</div>
-<div class="cfs-foot">NORTHSIDE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T07:54:17.000">2026-05-13T07:54:17.000</time>
-        </div>
-        <div class="cfs-body">21XX RAVINE ST</div>
-<div class="cfs-foot">FAIRVIEW</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T07:49:11.000">2026-05-13T07:49:11.000</time>
-        </div>
-        <div class="cfs-body">16XX BLUE ROCK ST</div>
-<div class="cfs-foot">NORTHSIDE</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">ARR: ARREST</span>
-          <time datetime="2026-05-13T02:30:06.000">2026-05-13T02:30:06.000</time>
-        </div>
-        <div class="cfs-body">CALHOUN ST / CLIFTON AV</div>
-<div class="cfs-foot">FAIRVIEW</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">301:OFFENSE REPORT</span>
-          <time datetime="2026-05-13T01:50:10.000">2026-05-13T01:50:10.000</time>
-        </div>
-        <div class="cfs-body">28XX MASSACHUSETTS AV</div>
-<div class="cfs-foot">CAMP  WASHINGTON</div>      </li>
     </ul>
   </details>
   <details class="district-block" >
     <summary class="district-h">
       <span class="district-kicker">CPD District</span>
       <span class="district-num">—</span>
-      <span class="district-count"><strong>2</strong> events</span>
+      <span class="district-count"><strong>1</strong> event</span>
     </summary>
     <ul class="cfs cfs-scroll">
       <li>
         <div class="cfs-top">
           <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T18:09:23.000">2026-05-13T18:09:23.000</time>
+          <time datetime="2026-05-14T10:22:34.000">2026-05-14T10:22:34.000</time>
         </div>
-        <div class="cfs-body">2ND ST / MAIN ST</div>
-<div class="cfs-foot">N/A</div>      </li>
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">CIT: CITED</span>
-          <time datetime="2026-05-13T17:53:40.000">2026-05-13T17:53:40.000</time>
-        </div>
-        <div class="cfs-body">2ND ST / MAIN ST</div>
+        <div class="cfs-body">7XX N I75</div>
 <div class="cfs-foot">N/A</div>      </li>
     </ul>
   </details>
@@ -18262,12 +18256,13 @@ OTHER · Unsupported Type">F</button>
 
 <script src="/static/map.js?v=6a004a8efa" defer></script>
 
-    <footer class="site">
-      <span>Generated 2026-05-16T19:26:14Z</span>
-      <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
-      <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
-    </footer>
+    </div>
   </main>
+  <footer class="site">
+    <span>Generated 2026-05-16T20:00:00Z</span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+    <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
+  </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
 
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
