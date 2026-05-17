@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-17T01:37:20Z",
+  "generated_utc": "2026-05-17T03:07:25Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3338,
+  "row_count": 3337,
   "rows": [
     {
       "address_x": "SPRING GROVE AV / STATION AV",
@@ -49078,24 +49078,6 @@
       "longitude_x": "-84.515573"
     },
     {
-      "address_x": "70XX VINE ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-22T07:20:27.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260422000207",
-      "incident_type_id": "TSTOP",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-22T07:20:27.000",
-      "closed_time_incident": "2026-04-22T08:38:19.000",
-      "dispatch_time_primary_unit": "2026-04-22T07:20:27.000",
-      "beat": "P46",
-      "district": "4",
-      "cpd_neighborhood": "CARTHAGE",
-      "community_council_neighborhood": "CARTHAGE",
-      "latitude_x": "39.1925140000896",
-      "longitude_x": "-84.481918"
-    },
-    {
       "address_x": "WARSAW AV / WELLS ST",
       "agency": "CPD",
       "create_time_incident": "2026-04-22T07:20:27.000",
@@ -49112,6 +49094,24 @@
       "community_council_neighborhood": "EAST PRICE HILL",
       "latitude_x": "39.1107860000897",
       "longitude_x": "-84.569047"
+    },
+    {
+      "address_x": "70XX VINE ST",
+      "agency": "CPD",
+      "create_time_incident": "2026-04-22T07:20:27.000",
+      "disposition_text": "ARR: ARREST",
+      "event_number": "CPD260422000207",
+      "incident_type_id": "TSTOP",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-04-22T07:20:27.000",
+      "closed_time_incident": "2026-04-22T08:38:19.000",
+      "dispatch_time_primary_unit": "2026-04-22T07:20:27.000",
+      "beat": "P46",
+      "district": "4",
+      "cpd_neighborhood": "CARTHAGE",
+      "community_council_neighborhood": "CARTHAGE",
+      "latitude_x": "39.1925140000896",
+      "longitude_x": "-84.481918"
     },
     {
       "address_x": "XX CRAFT ST",
@@ -59775,24 +59775,6 @@
       "community_council_neighborhood": "CUF",
       "latitude_x": "39.1243520000896",
       "longitude_x": "-84.518384"
-    },
-    {
-      "address_x": "28XX LAWNDALE AV",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-17T01:56:13.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260417000105",
-      "incident_type_id": "+PARKING COMPLAINT",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-17T01:56:13.000",
-      "closed_time_incident": "2026-04-17T02:04:12.000",
-      "dispatch_time_primary_unit": "2026-04-17T01:56:13.000",
-      "beat": "P23",
-      "district": "2",
-      "cpd_neighborhood": "PLEASANT RIDGE",
-      "community_council_neighborhood": "PLEASANT RIDGE",
-      "latitude_x": "39.1765300000896",
-      "longitude_x": "-84.436752"
     }
   ]
 }
