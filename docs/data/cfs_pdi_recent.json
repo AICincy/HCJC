@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-17T18:48:45Z",
+  "generated_utc": "2026-05-17T19:55:06Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3233,
+  "row_count": 3230,
   "rows": [
     {
       "address_x": "SPRING GROVE AV / STATION AV",
@@ -47900,24 +47900,6 @@
       "longitude_x": "-84.5204"
     },
     {
-      "address_x": "3XX W 5TH ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-22T15:24:33.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260422001101",
-      "incident_type_id": "+PARKING COMPLAINT",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-22T15:32:23.000",
-      "closed_time_incident": "2026-04-22T15:39:17.000",
-      "dispatch_time_primary_unit": "2026-04-22T15:31:06.000",
-      "beat": "P61",
-      "district": "1",
-      "cpd_neighborhood": "C. B. D. / RIVERFRONT",
-      "community_council_neighborhood": "DOWNTOWN",
-      "latitude_x": "39.0996460000897",
-      "longitude_x": "-84.519165"
-    },
-    {
       "address_x": "23XX FERGUSON RD",
       "agency": "CPD",
       "create_time_incident": "2026-04-22T15:24:33.000",
@@ -47934,6 +47916,24 @@
       "community_council_neighborhood": "WESTWOOD",
       "latitude_x": "39.1281620000896",
       "longitude_x": "-84.597051"
+    },
+    {
+      "address_x": "3XX W 5TH ST",
+      "agency": "CPD",
+      "create_time_incident": "2026-04-22T15:24:33.000",
+      "disposition_text": "CIT: CITED",
+      "event_number": "CPD260422001101",
+      "incident_type_id": "+PARKING COMPLAINT",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-04-22T15:32:23.000",
+      "closed_time_incident": "2026-04-22T15:39:17.000",
+      "dispatch_time_primary_unit": "2026-04-22T15:31:06.000",
+      "beat": "P61",
+      "district": "1",
+      "cpd_neighborhood": "C. B. D. / RIVERFRONT",
+      "community_council_neighborhood": "DOWNTOWN",
+      "latitude_x": "39.0996460000897",
+      "longitude_x": "-84.519165"
     },
     {
       "address_x": "E CENTRAL PKWY / MAIN ST",
@@ -57864,60 +57864,6 @@
       "community_council_neighborhood": "OTR",
       "latitude_x": "39.1126440000896",
       "longitude_x": "-84.515185"
-    },
-    {
-      "address_x": "57XX HAMILTON AV",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-17T19:47:54.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260417001693",
-      "incident_type_id": "UNWANTED PERSON (IP)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-17T19:58:33.000",
-      "closed_time_incident": "2026-04-17T22:31:18.000",
-      "dispatch_time_primary_unit": "2026-04-17T19:51:21.000",
-      "beat": "P36",
-      "district": "5",
-      "cpd_neighborhood": "COLLEGE  HILL",
-      "community_council_neighborhood": "COLLEGE HILL",
-      "latitude_x": "39.1969990000896",
-      "longitude_x": "-84.544694"
-    },
-    {
-      "address_x": "16XX CLAYTON ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-17T19:47:08.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260417001690",
-      "incident_type_id": "THREAT (IP)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-17T19:52:40.000",
-      "closed_time_incident": "2026-04-17T22:39:53.000",
-      "dispatch_time_primary_unit": "2026-04-17T19:48:17.000",
-      "beat": "P21",
-      "district": "2",
-      "cpd_neighborhood": "EAST WALNUT HILLS",
-      "community_council_neighborhood": "EAST WALNUT HILLS",
-      "latitude_x": "39.1270860000896",
-      "longitude_x": "-84.475468"
-    },
-    {
-      "address_x": "FINDLAY ST / CAMPBELL ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-17T19:28:23.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260417001646",
-      "incident_type_id": "TSTOP",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-17T19:28:23.000",
-      "closed_time_incident": "2026-04-17T19:43:15.000",
-      "dispatch_time_primary_unit": "2026-04-17T19:28:23.000",
-      "beat": "P12",
-      "district": "1",
-      "cpd_neighborhood": "OVER-THE-RHINE",
-      "community_council_neighborhood": "OTR",
-      "latitude_x": "39.1152810000897",
-      "longitude_x": "-84.519973"
     }
   ]
 }
