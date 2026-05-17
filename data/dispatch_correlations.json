@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-05-17T18:48:52Z",
+  "generated_utc": "2026-05-17T19:27:53Z",
   "min_confidence": 0.35,
   "window_minutes": 60,
-  "count": 3286,
+  "count": 3288,
   "disclaimer": "Researcher-mode output. Pairs are CANDIDATES only, not asserted matches. A high-confidence pair still requires human verification before any public claim is made that a specific dispatch led to a specific arrest. JCStream does not publish these joins on its own pages. Joining keys are inmate_number (vs current.json) and cfs_row_index (vs the cfs_recent.json or cfs_pdi_recent.json feed identified by cfs_source). Confidence weights: 50% temporal proximity within a +/- 60 minute window, 50% textual overlap between the charge description and the CFS row's disposition/incident-type fields.",
   "pairs": [
     {
@@ -3347,6 +3347,28 @@
         "dt_delta_minutes": 362.2,
         "textual_overlap": 1.0,
         "booked_date": "5/13/26"
+      }
+    },
+    {
+      "inmate_number": "14652582",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 0,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1404.1,
+        "textual_overlap": 1.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14652582",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1418.9,
+        "textual_overlap": 1.0,
+        "booked_date": "5/17/26"
       }
     },
     {
