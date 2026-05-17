@@ -31,6 +31,8 @@
     lbImg.src = src; lbImg.alt = alt || ('Booking photo: ' + (caption || ''));
     lbCap.textContent = caption || '';
     lb.hidden = false;
+    // Confine focus to the dialog: mark all other body children inert.
+    // Browsers without inert support fall back to the Tab cycler below.
     Array.prototype.forEach.call(document.body.children, function (n) {
       if (n !== lb) n.inert = true;
     });
@@ -48,6 +50,7 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !lb.hidden) closeLB();
   });
+  // Tab cycler fallback for browsers without inert. Keeps focus inside #lb.
   lb.addEventListener('keydown', function (e) {
     if (e.key !== 'Tab' || lb.hidden) return;
     var focusables = lb.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
@@ -67,7 +70,8 @@
     openLB(t.getAttribute('data-photo'), t.getAttribute('data-photo-cap'), t.getAttribute('data-photo-alt'));
   });
 
-  // (2b) Shared tier-badge tooltip - uses DOM APIs (not innerHTML).
+  // (2b) Shared tier-badge tooltip - content lives in [data-tip], JS positions it.
+  //      Uses DOM APIs (not innerHTML) to avoid CodeQL DOM-text-reinterpreted-as-HTML.
   var tip = document.getElementById('tier-tip');
   if (tip) {
     function hideTip() { tip.hidden = true; tip.style.left = '-9999px'; }
@@ -107,7 +111,8 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !tip.hidden) hideTip(); });
   }
 
-  // (2b1) Statute-jump dropdown on /statute/.
+  // (2b1) Statute-jump dropdown on /statute/ - selecting a section sets the
+  //       URL hash, which the openDetailsFor handler at (1) auto-opens.
   var statSel = document.getElementById('statute-jump');
   if (statSel) {
     statSel.addEventListener('change', function () {
@@ -116,7 +121,7 @@
     });
   }
 
-  // (2c) Roster view toggle.
+  // (2c) Roster view toggle - flip month cards between grid and table-like list.
   var vt = document.getElementById('view-toggle');
   if (vt) {
     vt.hidden = false;
@@ -183,7 +188,9 @@
   });
   apply();
 
-  // (4) Search-results dropdown - uses DOM APIs (not innerHTML).
+  // (4) Search-results dropdown - lazy-loads search.json on first keystroke,
+  //     shows a type-ahead list of matching people. Uses DOM APIs (not innerHTML)
+  //     to satisfy CodeQL DOM-text-reinterpreted-as-HTML checks.
   var sbox = document.getElementById('search-box');
   var sresults = document.getElementById('search-results');
   if (sbox && sresults) {
