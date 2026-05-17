@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-17T22:48:09Z",
+  "generated_utc": "2026-05-17T23:48:41Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3218,
+  "row_count": 3216,
   "rows": [
     {
       "address_x": "SPRING GROVE AV / STATION AV",
@@ -47900,24 +47900,6 @@
       "longitude_x": "-84.5204"
     },
     {
-      "address_x": "23XX FERGUSON RD",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-22T15:24:33.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260422001102",
-      "incident_type_id": "SPECIAL DETAIL",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-22T15:25:06.000",
-      "closed_time_incident": "2026-04-22T22:31:54.000",
-      "dispatch_time_primary_unit": "2026-04-22T15:25:06.000",
-      "beat": "P33",
-      "district": "3",
-      "cpd_neighborhood": "WESTWOOD",
-      "community_council_neighborhood": "WESTWOOD",
-      "latitude_x": "39.1281620000896",
-      "longitude_x": "-84.597051"
-    },
-    {
       "address_x": "3XX W 5TH ST",
       "agency": "CPD",
       "create_time_incident": "2026-04-22T15:24:33.000",
@@ -47934,6 +47916,24 @@
       "community_council_neighborhood": "DOWNTOWN",
       "latitude_x": "39.0996460000897",
       "longitude_x": "-84.519165"
+    },
+    {
+      "address_x": "23XX FERGUSON RD",
+      "agency": "CPD",
+      "create_time_incident": "2026-04-22T15:24:33.000",
+      "disposition_text": "301:OFFENSE REPORT",
+      "event_number": "CPD260422001102",
+      "incident_type_id": "SPECIAL DETAIL",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-04-22T15:25:06.000",
+      "closed_time_incident": "2026-04-22T22:31:54.000",
+      "dispatch_time_primary_unit": "2026-04-22T15:25:06.000",
+      "beat": "P33",
+      "district": "3",
+      "cpd_neighborhood": "WESTWOOD",
+      "community_council_neighborhood": "WESTWOOD",
+      "latitude_x": "39.1281620000896",
+      "longitude_x": "-84.597051"
     },
     {
       "address_x": "E CENTRAL PKWY / MAIN ST",
@@ -49078,24 +49078,6 @@
       "longitude_x": "-84.515573"
     },
     {
-      "address_x": "70XX VINE ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-22T07:20:27.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260422000207",
-      "incident_type_id": "TSTOP",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-22T07:20:27.000",
-      "closed_time_incident": "2026-04-22T08:38:19.000",
-      "dispatch_time_primary_unit": "2026-04-22T07:20:27.000",
-      "beat": "P46",
-      "district": "4",
-      "cpd_neighborhood": "CARTHAGE",
-      "community_council_neighborhood": "CARTHAGE",
-      "latitude_x": "39.1925140000896",
-      "longitude_x": "-84.481918"
-    },
-    {
       "address_x": "WARSAW AV / WELLS ST",
       "agency": "CPD",
       "create_time_incident": "2026-04-22T07:20:27.000",
@@ -49112,6 +49094,24 @@
       "community_council_neighborhood": "EAST PRICE HILL",
       "latitude_x": "39.1107860000897",
       "longitude_x": "-84.569047"
+    },
+    {
+      "address_x": "70XX VINE ST",
+      "agency": "CPD",
+      "create_time_incident": "2026-04-22T07:20:27.000",
+      "disposition_text": "ARR: ARREST",
+      "event_number": "CPD260422000207",
+      "incident_type_id": "TSTOP",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-04-22T07:20:27.000",
+      "closed_time_incident": "2026-04-22T08:38:19.000",
+      "dispatch_time_primary_unit": "2026-04-22T07:20:27.000",
+      "beat": "P46",
+      "district": "4",
+      "cpd_neighborhood": "CARTHAGE",
+      "community_council_neighborhood": "CARTHAGE",
+      "latitude_x": "39.1925140000896",
+      "longitude_x": "-84.481918"
     },
     {
       "address_x": "XX CRAFT ST",
@@ -57613,42 +57613,6 @@
       "community_council_neighborhood": "QUEENSGATE",
       "latitude_x": "39.1065880000897",
       "longitude_x": "-84.532262"
-    },
-    {
-      "address_x": "55XX COLERAIN AV",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-17T23:16:23.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260417002076",
-      "incident_type_id": "THEFT (JO)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-17T23:38:11.000",
-      "closed_time_incident": "2026-04-17T23:54:24.000",
-      "dispatch_time_primary_unit": "2026-04-17T23:33:43.000",
-      "beat": "P36",
-      "district": "5",
-      "cpd_neighborhood": "MOUNT AIRY",
-      "community_council_neighborhood": "MOUNT AIRY",
-      "latitude_x": "39.1938400000896",
-      "longitude_x": "-84.572154"
-    },
-    {
-      "address_x": "29XX WASSON RD",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-17T22:50:16.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260417002017",
-      "incident_type_id": "+PARKING COMPLAINT",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-17T22:50:16.000",
-      "closed_time_incident": "2026-04-17T22:54:49.000",
-      "dispatch_time_primary_unit": "2026-04-17T22:50:16.000",
-      "beat": "P22",
-      "district": "2",
-      "cpd_neighborhood": "OAKLEY",
-      "community_council_neighborhood": "OAKLEY",
-      "latitude_x": "39.1449320000896",
-      "longitude_x": "-84.435063"
     }
   ]
 }
