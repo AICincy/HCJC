@@ -15,22 +15,22 @@
 
 :root {
   /* ---- Surface / ink / accent palette ------------------------------ */
-  --bg:           #f7f3e8;     /* cream newsprint page bg – cool neutral */
-  --bg-soft:      #efe9d8;     /* deeper cream secondary bg, table head */
-  --surface:      #fbf8ef;     /* cream cards */
-  --surface-hi:   #efe9d8;     /* cream hover / muted surface */
-  --border:       #c9c2ad;     /* warm hairline */
-  --border-hi:    #9b9377;     /* warm emphasized / emphasized */
+  --bg:           #fafafa;     /* paper */
+  --bg-soft:      #f0eee5;     /* manila folder */
+  --surface:      #ffffff;     /* white inner document */
+  --surface-hi:   #f0eee5;     /* hover */
+  --border:       #000000;     /* hairline */
+  --border-hi:    #000000;     /* emphasized */
 
-  --fg:           #1a1a1a;     /* charcoal ink */
-  --fg-soft:      #353535;
-  --fg-muted:     #6b6b6b;
-  --fg-dim:       #9a9a9a;
+  --fg:           #000000;     /* pure ink */
+  --fg-soft:      #333333;
+  --fg-muted:     #666666;
+  --fg-dim:       #999999;
 
-  --accent:       #9b1c1c;     /* oxblood red */
-  --accent-hi:    #6f1313;
-  --accent-bg:    #f5e8d8;
-  --accent-bg-2:  #eddccc;
+  --accent:       #b30000;     /* federal red */
+  --accent-hi:    #800000;
+  --accent-bg:    #fff0e5;
+  --accent-bg-2:  #ffd6c2;
   --danger:       #b54545;
   --warn:         #b54545;
   --warn-bg:      #fbeded;
@@ -59,41 +59,41 @@
 
   --font-sans:    "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-serif:   Georgia, 'Times New Roman', 'Liberation Serif', Times, serif;
+  --font-serif:   var(--font-mono); /* fallback only */
 
   /* Neutral "ink" surface tokens. The site uses ONE theme that mixes
      bright light surfaces (body, content cards) with deep neutral ink
      surfaces (heroes, primary stat tiles, masthead) for visual rhythm.
      Apply these to specific blocks via .surface-ink utility or directly. */
-  --ink:          #1a2540;     /* navy masthead / masthead surface */
-  --ink-soft:     #0e1628;     /* deep navy surface */
-  --ink-border:   #2a3550;     /* hairline on dark */
-  --on-ink:       #f0f1f4;     /* primary text on dark */
-  --on-ink-soft:  #b8bcc7;     /* secondary text on dark */
-  --on-ink-muted: #8a8f9c;     /* tertiary text on dark */
-  --on-ink-accent:#d96868;     /* oxblood on dark surface (lighter blue for contrast) */
+  --ink:          #000000;     /* black ink surface */
+  --ink-soft:     #1a1a1a;     /* near-black */
+  --ink-border:   #333333;
+  --on-ink:       #fafafa;
+  --on-ink-soft:  #cccccc;
+  --on-ink-muted: #999999;
+  --on-ink-accent:#ff6666;
 
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:           #14110a;
-    --bg-soft:      #1c1810;
-    --surface:      #1c1810;
-    --surface-hi:   #282318;
-    --border:       #3a3528;
-    --border-hi:    #5a533f;
+    --bg:           #1a1a1a;
+    --bg-soft:      #242424;
+    --surface:      #1f1f1f;
+    --surface-hi:   #2a2a2a;
+    --border:       #444444;
+    --border-hi:    #666666;
 
-    --fg:           #f0eadc;
-    --fg-soft:      #d4cdb8;
-    --fg-muted:     #8a8472;
-    --fg-dim:       #5a5448;
+    --fg:           #f5f5f5;
+    --fg-soft:      #cccccc;
+    --fg-muted:     #999999;
+    --fg-dim:       #666666;
 
-    --accent:       #d96868;
-    --accent-hi:    #e88a8a;
-    --accent-bg:    rgba(217,104,104,0.12);
-    --accent-bg-2:  rgba(217,104,104,0.18);
+    --accent:       #ff5555;
+    --accent-hi:    #ff8080;
+    --accent-bg:    rgba(255,85,85,0.12);
+    --accent-bg-2:  rgba(255,85,85,0.18);
     --danger:       #e08080;
     --warn:         #e08080;
     --warn-bg:      rgba(224,128,128,0.12);
@@ -135,9 +135,9 @@ html { background: var(--bg); }
 
 body {
   margin: 0;
-  font-family: var(--font-serif);
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.55;
   letter-spacing: -0.005em;
   background: var(--bg);
   color: var(--fg);
@@ -179,8 +179,8 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
 .masthead .brand::before { display: none; }
 .masthead .brand { color: var(--fg); }
 .masthead .brand-text { display: flex; flex-direction: column; align-items: center; gap: 6px; line-height: 1; }
-.masthead .brand-name { font-family: var(--font-serif); font-style: italic; font-weight: 700; font-size: clamp(38px, 5vw, 54px); letter-spacing: 0; color: var(--fg); }
-.masthead .brand-sub  { font-size: 11px; color: var(--fg-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.22em; }
+.masthead .brand-name { font-family: var(--font-mono); font-weight: 700; font-size: clamp(32px, 4vw, 44px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--fg); line-height: 1; }
+.masthead .brand-sub  { font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; }
 .masthead .brand:hover { text-decoration: none; }
 .masthead .brand:hover .brand-name { color: var(--accent); }
 .masthead .running {
@@ -241,10 +241,10 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
     gap: 8px;
     padding: 10px 16px;
     font-size: 12px;
-    color: var(--on-ink-soft);
-    border-bottom: 1px solid var(--ink-border);
+    color: var(--fg-soft);
+    border-bottom: 1px solid var(--border);
   }
-  .running.mobile-only strong { color: var(--on-ink); }
+  .running.mobile-only strong { color: var(--fg); }
   .running.mobile-only::before {
     content: "";
     width: 7px; height: 7px; border-radius: 50%;
@@ -261,14 +261,14 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
     height: 44px;
     background: none;
     border: none;
-    color: var(--on-ink);
+    color: var(--fg);
     cursor: pointer;
     list-style: none;
     padding: 0;
     margin: 0;
     border-radius: var(--radius);
   }
-  .nav-toggle:hover { background: var(--ink-soft); }
+  .nav-toggle:hover { background: var(--bg-soft); }
   .nav-toggle::-webkit-details-marker { display: none; }
   .nav-toggle::marker { display: none; content: ""; }
   .nav-drawer {
@@ -277,8 +277,8 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
     top: 100%;
     right: 0;
     width: 240px;
-    background: var(--ink);
-    border: 1px solid var(--ink-border);
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 4px 0;
     z-index: 30;
@@ -293,7 +293,7 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
     font-size: 14px;
     border-radius: 0;
   }
-  .nav-drawer .nav-link:hover { background: var(--ink-soft); }
+  .nav-drawer .nav-link:hover { background: var(--bg-soft); }
 }
 
 /* Month chip rail */
@@ -2575,11 +2575,11 @@ h2.legal-anchor {
 /* --- Hero strip (homepage) ink theme override --- */
 .hero-strip {
   padding: 10px 14px;
-  background: linear-gradient(180deg, var(--ink) 0%, #0e1015 100%);
+  background: var(--surface);
   border-radius: var(--radius);
   box-shadow: none;
   border: 1px solid var(--border);
-  color: var(--on-ink);
+  color: var(--fg);
   margin: 0 0 12px;
   display: flex;
   flex-direction: column;
@@ -2591,30 +2591,30 @@ h2.legal-anchor {
   line-height: 1;
   font-weight: 700;
   letter-spacing: -0.04em;
-  background: linear-gradient(180deg, var(--on-ink) 0%, #a8aebd 100%);
+  background: var(--fg);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   font-variant-numeric: tabular-nums;
 }
-.hero-unit { font-size: 14px; font-weight: 500; color: var(--on-ink-soft); letter-spacing: -0.01em; }
-.hero-pill { background: none; color: var(--on-ink-soft); }
-.hero-pill.pill-up { background: none; color: var(--on-ink-soft); }
-.hero-pill.pill-down { background: none; color: var(--on-ink-soft); }
-.hero-meta .meta { color: var(--on-ink-muted); font-size: 12px; }
+.hero-unit { font-size: 14px; font-weight: 500; color: var(--fg-soft); letter-spacing: -0.01em; }
+.hero-pill { background: none; color: var(--fg-soft); }
+.hero-pill.pill-up { background: none; color: var(--fg-soft); }
+.hero-pill.pill-down { background: none; color: var(--fg-soft); }
+.hero-meta .meta { color: var(--fg-muted); font-size: 12px; }
 .hero-meta .meta a { color: var(--on-ink-accent); }
 .hero-meta .meta code { background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; font-size: 11px; }
 
 .spark-card { padding: 18px; }
-.spark-h .stat-k { color: var(--on-ink-muted); font-size: 11px; }
-.spark-h .stat-v { color: var(--on-ink); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+.spark-h .stat-k { color: var(--fg-muted); font-size: 11px; }
+.spark-h .stat-v { color: var(--fg); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
 .spark-svg polyline { stroke: var(--on-ink-accent); stroke-width: 1.6; fill: none; }
 .spark-svg circle { fill: var(--on-ink-accent); }
-.spark-ticks { color: var(--on-ink-muted); }
+.spark-ticks { color: var(--fg-muted); }
 .trend-pill { font-size: 11px; padding: 2px 10px; }
 .trend-pill.is-up   { background: rgba(122,168,107,0.18); color: #a4d18e; }
 .trend-pill.is-down { background: rgba(217,112,112,0.18); color: #e0a0a0; }
-.trend-pill.is-flat { background: rgba(255,255,255,0.08); color: var(--on-ink-soft); }
+.trend-pill.is-flat { background: rgba(255,255,255,0.08); color: var(--fg-soft); }
 
 @media (max-width: 720px) {
   .hero-strip { gap: 24px; padding: 24px 22px; }
@@ -2701,14 +2701,14 @@ h2.legal-anchor {
 }
 .cfs-map .leaflet-container { background: var(--bg-soft); font: inherit; border-radius: var(--radius-xl); }
 .cfs-map .leaflet-popup-content-wrapper {
-  background: var(--ink);
-  color: var(--on-ink);
+  background: var(--bg-soft);
+  color: var(--fg);
   border-radius: var(--radius);
   box-shadow: var(--shadow-hover);
 }
-.cfs-map .leaflet-popup-content { font-size: 13px; line-height: 1.5; margin: 12px 14px; color: var(--on-ink); }
-.cfs-map .leaflet-popup-content strong { color: var(--on-ink); }
-.cfs-map .leaflet-popup-tip { background: var(--ink); }
+.cfs-map .leaflet-popup-content { font-size: 13px; line-height: 1.5; margin: 12px 14px; color: var(--fg); }
+.cfs-map .leaflet-popup-content strong { color: var(--fg); }
+.cfs-map .leaflet-popup-tip { background: var(--bg-soft); }
 .cfs-map .leaflet-popup-close-button { color: var(--on-ink-muted) !important; }
 .cfs-map .leaflet-control-attribution {
   font-size: 10px;
@@ -3013,9 +3013,9 @@ h2.legal-anchor {
 footer.site {
   margin-top: 4rem;
   padding: 28px 36px;
-  border-top: 1px solid var(--ink-border);
-  background: var(--ink);
-  color: var(--on-ink-muted);
+  border-top: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--fg-muted);
   font-size: 12px;
   display: flex;
   flex-direction: column;
@@ -3023,9 +3023,9 @@ footer.site {
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 footer.site a { color: var(--on-ink-accent); }
-footer.site a:hover { color: var(--on-ink); }
-footer.site .footer-legal { color: var(--on-ink-muted); line-height: 1.6; max-width: 90ch; }
-footer.site .footer-legal strong { color: var(--on-ink); }
+footer.site a:hover { color: var(--fg); }
+footer.site .footer-legal { color: var(--fg-muted); line-height: 1.6; max-width: 90ch; }
+footer.site .footer-legal strong { color: var(--fg); }
 
 /* ============================================================
    /stats/, /statute/, /data/ - modernized
@@ -3084,13 +3084,13 @@ footer.site .footer-legal strong { color: var(--on-ink); }
   line-height: 1;
 }
 .kpi:first-child {
-  background: linear-gradient(140deg, var(--ink) 0%, #0e1015 100%);
+  background: var(--surface);
   border-color: transparent;
-  color: var(--on-ink);
+  color: var(--fg);
 }
 .kpi:first-child .label { color: var(--on-ink-accent); }
-.kpi:first-child .num { color: var(--on-ink); }
-.kpi:first-child .kpi-foot { color: var(--on-ink-muted); }
+.kpi:first-child .num { color: var(--fg); }
+.kpi:first-child .kpi-foot { color: var(--fg-muted); }
 
 /* Stat bars */
 .statbars { gap: 10px; margin: 14px 0 28px; }
