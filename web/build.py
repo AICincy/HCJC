@@ -77,6 +77,10 @@ def build(out_dir: Path) -> int:
         trim_blocks=True,
         lstrip_blocks=True,
     )
+    # Cross-platform strftime for templates: `{{ dt | dt_fmt('%b %-d, %Y') }}`
+    # maps %-d/%-m to %#d/%#m on Windows so the build is portable between the
+    # Linux CI runner and Windows dev boxes.
+    env.filters["dt_fmt"] = _strftime_nopad
     env.globals["cck_name_search"] = cck.name_search_url
     env.globals["cck_case_summary"] = cck.case_summary_url
     env.globals["base_url"] = _resolve_base_url()
@@ -231,6 +235,7 @@ from web.shape import (  # noqa: F401  re-exported for test_build.py access
     _primary_charge_obj, _primary_charge, _primary_chapter,
     _sort_in_group, _group_by_month, _events_in_window,
     _events_for_recent, _court_calendar, _events_for_inmate,
+    _strftime_nopad,
 )
 
 

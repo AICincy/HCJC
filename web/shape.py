@@ -9,8 +9,19 @@ adding a helper here requires registering it there with the same name.
 from __future__ import annotations
 
 import re
+import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
+
+
+def _strftime_nopad(dt, fmt: str) -> str:
+    """strftime that honors %-d / %-m on Windows by mapping to %#d / %#m.
+    POSIX systems pass the format through unchanged. Keeps date rendering
+    portable between the GitHub Actions Linux runner and Windows dev boxes.
+    """
+    if sys.platform == "win32":
+        fmt = fmt.replace("%-", "%#")
+    return dt.strftime(fmt)
 
 from scraper import orc as orc_mod
 from scraper.models import ChangeEvent, Inmate, Snapshot
@@ -250,11 +261,11 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
         raw.append({
             "x": _pct(d),
             "label": "Court",
-            "date": d.strftime("%-m/%-d/%y") if hasattr(d, "strftime") else "",
+            "date": _strftime_nopad(d, "%-m/%-d/%y") if hasattr(d, "strftime") else "",
             "kind": "court",
             "sub": (desc or "").lower()[:48],
         })
-    raw.append({"x": _pct(now), "label": "Today", "date": now.strftime("%b %-d, %Y"), "kind": "now", "sub": ""})
+    raw.append({"x": _pct(now), "label": "Today", "date": _strftime_nopad(now, "%b %-d, %Y"), "kind": "now", "sub": ""})
     if release:
         raw.append({"x": _pct(release), "label": "Projected release", "date": inmate.projected_release_date or "", "kind": "release", "sub": ""})
     raw.sort(key=lambda m: m["x"])

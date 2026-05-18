@@ -182,7 +182,7 @@
 {% if tl and days is not none and days < 1 %}
 <div class="ladder">
   <h3 class="ladder-h">Time in custody</h3>
-  <p class="ladder-stat">Booked today &middot; <strong>{{ tl.start.strftime('%B %-d, %Y') }}</strong> &middot; <span class="muted">no custody history to chart yet</span></p>
+  <p class="ladder-stat">Booked today &middot; <strong>{{ tl.start | dt_fmt('%B %-d, %Y') }}</strong> &middot; <span class="muted">no custody history to chart yet</span></p>
 </div>
 {% elif tl %}
 <div class="ladder">
@@ -203,9 +203,9 @@
       {% endfor %}
     </div>
     <div class="tl-foot">
-      <span>{{ tl.start.strftime('%b %-d, %Y') }}</span>
+      <span>{{ tl.start | dt_fmt('%b %-d, %Y') }}</span>
       <span class="muted">{{ tl.total_days }}-day window</span>
-      <span>{{ tl.end.strftime('%b %-d, %Y') }}</span>
+      <span>{{ tl.end | dt_fmt('%b %-d, %Y') }}</span>
     </div>
   </div>
 </div>

@@ -88,7 +88,7 @@
     {% endif %}
     <span class="court-card-body">
       <span class="court-card-meta">
-        <time datetime="{{ e.parsed_date.strftime('%Y-%m-%d') }}">{{ e.parsed_date.strftime('%a %b %-d') }}</time>
+        <time datetime="{{ e.parsed_date.strftime('%Y-%m-%d') }}">{{ e.parsed_date | dt_fmt('%a %b %-d') }}</time>
         {% if deg %}<span class="tier tier-{{ deg }}">{{ deg }}</span>{% endif %}
       </span>
       <span class="court-card-name">{{ e.inmate.full_name }}</span>
@@ -104,7 +104,7 @@
   <header class="court-day-h">
     <div>
       <span class="court-day-kicker">Today</span>
-      <h2 class="court-day-title">{{ now_eastern.strftime('%A, %B %-d') }}</h2>
+      <h2 class="court-day-title">{{ now_eastern | dt_fmt('%A, %B %-d') }}</h2>
     </div>
     <span class="court-day-count">
       <strong>{{ cal.today | length }}</strong> {{ 'hearing' if cal.today | length == 1 else 'hearings' }}
@@ -124,7 +124,7 @@
   <header class="court-day-h">
     <div>
       <span class="court-day-kicker">Tomorrow</span>
-      <h2 class="court-day-title">{{ (now_eastern + one_day).strftime('%A, %B %-d') }}</h2>
+      <h2 class="court-day-title">{{ (now_eastern + one_day) | dt_fmt('%A, %B %-d') }}</h2>
     </div>
     <span class="court-day-count"><strong>{{ cal.tomorrow | length }}</strong> {{ 'hearing' if cal.tomorrow | length == 1 else 'hearings' }}</span>
   </header>

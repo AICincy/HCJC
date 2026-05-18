@@ -287,7 +287,8 @@ def test_bond_by_tier_zero_for_empty_amounts():
 # ----- _days_in_custody ----------------------------------------------------
 
 def test_days_in_custody_positive_for_past_booking():
-    three_days_ago = (datetime.now() - timedelta(days=3)).strftime("%-m/%-d/%y")
+    d = datetime.now() - timedelta(days=3)
+    three_days_ago = f"{d.month}/{d.day}/{d.year % 100:02d}"
     days = build._days_in_custody(_inm(booking_date=three_days_ago))
     assert days == 3
 
