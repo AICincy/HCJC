@@ -27,10 +27,14 @@
   --fg-muted:     #666666;
   --fg-dim:       #999999;
 
-  --accent:       #b30000;     /* federal red */
+  --accent:       #b33a3a;     /* brutalist editorial red (spec §2) */
   --accent-hi:    #800000;
   --accent-bg:    #fff0e5;
   --accent-bg-2:  #ffd6c2;
+  --border-red:   #b33a3a;     /* dashed disclaimer + double-rule (spec §2) */
+  --bg-disclaimer:#fdf5e6;     /* old lace / cream (spec §2) */
+  --bg-header:    #1a1a1a;     /* dark masthead bar (spec §2, §4.1) */
+  --text-header:  #ffffff;     /* white-on-dark masthead (spec §2) */
   --danger:       #b54545;
   --warn:         #b54545;
   --warn-bg:      #fbeded;
@@ -76,35 +80,7 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:           #1a1a1a;
-    --bg-soft:      #242424;
-    --surface:      #1f1f1f;
-    --surface-hi:   #2a2a2a;
-    --border:       #444444;
-    --border-hi:    #666666;
-
-    --fg:           #f5f5f5;
-    --fg-soft:      #cccccc;
-    --fg-muted:     #999999;
-    --fg-dim:       #666666;
-
-    --accent:       #ff5555;
-    --accent-hi:    #ff8080;
-    --accent-bg:    rgba(255,85,85,0.12);
-    --accent-bg-2:  rgba(255,85,85,0.18);
-    --danger:       #e08080;
-    --warn:         #e08080;
-    --warn-bg:      rgba(224,128,128,0.12);
-    --ok:           #7aa86b;
-
-    --shadow-card:  none;
-    --shadow-hover: 0 2px 8px rgba(0,0,0,0.3);
-
-    color-scheme: dark;
-  }
-}
+/* Dark-mode media query removed per spec §1 — single light theme only. */
 
 * { box-sizing: border-box; }
 
@@ -135,10 +111,10 @@ html { background: var(--bg); }
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 14px;
-  line-height: 1.55;
-  letter-spacing: -0.005em;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
   background: var(--bg);
   color: var(--fg);
   overflow-wrap: break-word;
