@@ -71,17 +71,25 @@
   });
 
   // (2b) Shared tier-badge tooltip - content lives in [data-tip], JS positions it.
+  //      Uses DOM APIs (not innerHTML) to avoid CodeQL DOM-text-reinterpreted-as-HTML.
   var tip = document.getElementById('tier-tip');
   if (tip) {
-    function escTip(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; }); }
     function hideTip() { tip.hidden = true; tip.style.left = '-9999px'; }
     function showTip(badge) {
       var raw = badge.getAttribute('data-tip') || '';
       if (!raw) { hideTip(); return; }
       var lines = raw.split('\n');
-      var html = '<b class="tip-head">' + escTip(lines[0]) + '</b>';
-      for (var i = 1; i < lines.length; i++) html += '<span class="tip-row">' + escTip(lines[i]) + '</span>';
-      tip.innerHTML = html;
+      while (tip.firstChild) tip.removeChild(tip.firstChild);
+      var head = document.createElement('b');
+      head.className = 'tip-head';
+      head.textContent = lines[0];
+      tip.appendChild(head);
+      for (var i = 1; i < lines.length; i++) {
+        var row = document.createElement('span');
+        row.className = 'tip-row';
+        row.textContent = lines[i];
+        tip.appendChild(row);
+      }
       tip.hidden = false;
       var r = badge.getBoundingClientRect();
       var tw = tip.offsetWidth, th = tip.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight, m = 6;
@@ -181,8 +189,8 @@
   apply();
 
   // (4) Search-results dropdown - lazy-loads search.json on first keystroke,
-  //     shows a type-ahead list of matching people. The in-place card filter
-  //     above still runs in parallel.
+  //     shows a type-ahead list of matching people. Uses DOM APIs (not innerHTML)
+  //     to satisfy CodeQL DOM-text-reinterpreted-as-HTML checks.
   var sbox = document.getElementById('search-box');
   var sresults = document.getElementById('search-results');
   if (sbox && sresults) {
@@ -194,6 +202,7 @@
         .then(function (d) { idx = (d && d.rows) || []; render(); })
         .catch(function () { idx = []; });
     }
+    function clearEl(el) { while (el.firstChild) el.removeChild(el.firstChild); }
     function render() {
       var q = (sbox.value || '').trim().toLowerCase();
       if (!q || q.length < 2 || !idx) { sresults.hidden = true; sbox.setAttribute('aria-expanded', 'false'); return; }
@@ -202,20 +211,35 @@
         var r = idx[i];
         if ((r.n + ' ' + r.c + ' #' + r.id).toLowerCase().indexOf(q) !== -1) hits.push(r);
       }
+      clearEl(sresults);
       if (!hits.length) {
-        sresults.innerHTML = '<div class="sr-empty">No one matches “' + esc(q) + '”.</div>';
+        var empty = document.createElement('div');
+        empty.className = 'sr-empty';
+        empty.textContent = 'No one matches "' + q + '".';
+        sresults.appendChild(empty);
       } else {
-        sresults.innerHTML = hits.map(function (r) {
-          return '<a class="sr-item" href="' + ROOT + '/inmate/' + r.id + '/">'
-            + '<span class="sr-tier sr-' + (r.t || 'x') + '">' + (r.t === 'felony' ? 'F' : r.t === 'misdemeanor' ? 'M' : '?') + '</span>'
-            + '<span class="sr-name">' + esc(r.n) + '</span>'
-            + '<span class="sr-charge">' + esc(r.c) + '</span></a>';
-        }).join('');
+        hits.forEach(function (r) {
+          var a = document.createElement('a');
+          a.className = 'sr-item';
+          a.href = ROOT + '/inmate/' + r.id + '/';
+          var tierSpan = document.createElement('span');
+          tierSpan.className = 'sr-tier sr-' + (r.t || 'x');
+          tierSpan.textContent = r.t === 'felony' ? 'F' : r.t === 'misdemeanor' ? 'M' : '?';
+          a.appendChild(tierSpan);
+          var nameSpan = document.createElement('span');
+          nameSpan.className = 'sr-name';
+          nameSpan.textContent = r.n;
+          a.appendChild(nameSpan);
+          var chargeSpan = document.createElement('span');
+          chargeSpan.className = 'sr-charge';
+          chargeSpan.textContent = r.c;
+          a.appendChild(chargeSpan);
+          sresults.appendChild(a);
+        });
       }
       sresults.hidden = false;
       sbox.setAttribute('aria-expanded', 'true');
     }
-    function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; }); }
     sbox.addEventListener('focus', loadIdx);
     sbox.addEventListener('input', function () { loadIdx(); render(); });
     sbox.addEventListener('keydown', function (e) { if (e.key === 'Escape') { sresults.hidden = true; sbox.setAttribute('aria-expanded', 'false'); } });

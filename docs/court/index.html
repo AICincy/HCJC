@@ -16,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=375f55bcb2">
+  <link rel="stylesheet" href="/static/style.css?v=a70a58dfca">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
@@ -33,7 +33,25 @@
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
       </a>
-      <span class="running desktop-only"><strong>1,211</strong> in custody</span>
+      <a class="masthead-seal masthead-seal-hcjc"
+         href="https://www.facebook.com/HCJCOH"
+         target="_blank" rel="noopener"
+         aria-label="Hamilton County Booking Photos on Facebook">
+        <img src="/static/img/hcjc-seal.png"
+             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
+             alt="Hamilton County Booking Photos seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <a class="masthead-seal masthead-seal-coc"
+         href="https://www.facebook.com/cityofcincinnati"
+         target="_blank" rel="noopener"
+         aria-label="City of Cincinnati on Facebook">
+        <img src="/static/img/coc-seal.png"
+             srcset="/static/img/coc-seal.png 1x, /static/img/coc-seal-2x.png 2x"
+             alt="City of Cincinnati seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <span class="running desktop-only"><strong>1,246</strong> in custody</span>
       <span class="spacer"></span>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
@@ -44,11 +62,13 @@
           </svg>
         </summary>
         <div class="nav-drawer">
-          <span class="running mobile-only"><strong>1,211</strong> in custody</span>
+          <span class="running mobile-only"><strong>1,246</strong> in custody</span>
           <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
-          <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
+          <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who's due</span></a>
+          <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
           <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
           <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+          <a class="nav-link" href="/help/">Help <span class="nav-hint">free aid</span></a>
           <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
           <a class="nav-link" href="/feed.xml">RSS</a>
           <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
@@ -57,40 +77,69 @@
     </div>
   </header>
   <main id="main" class="page">
+    <div class="doc-wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Court calendar</span>
 </nav>
 
 
-<section class="court-hero">
-  <div class="court-hero-text">
-    <span class="court-hero-eyebrow">Court calendar &middot; refreshed every 30 min</span>
-    <h1 class="court-hero-title">Who&rsquo;s due in court</h1>
-    <p class="court-hero-sub">Every scheduled hearing on the current Hamilton County Justice Center roster, grouped by day. Aggregated from HCSO booking records.</p>
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Who's Due in Court</div>
+    <div class="sub">Hamilton County Justice Center &middot; Cincinnati, Ohio &middot; ORC § 149.43</div>
   </div>
+  <div class="stamp">Cycle 2026-05-18T18:37Z</div>
+</header>
+
+
+<p class="page-lede">
+  Every scheduled hearing on the current Hamilton County Justice Center roster, grouped by day. Aggregated from HCSO booking records; refreshed about every 30 minutes. For the official docket, follow the case-number links on each detail page to <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+</p>
+
+<section class="court-hero">
   <div class="court-hero-stats">
     <div class="court-stat court-stat-primary">
-      <span class="court-stat-num">9</span>
+      <span class="court-stat-num">109</span>
       <span class="court-stat-lab">today</span>
     </div>
     <div class="court-stat">
-      <span class="court-stat-num">0</span>
+      <span class="court-stat-num">81</span>
       <span class="court-stat-lab">tomorrow</span>
     </div>
     <div class="court-stat">
-      <span class="court-stat-num">352</span>
+      <span class="court-stat-num">165</span>
       <span class="court-stat-lab">rest of week</span>
     </div>
     <div class="court-stat">
-      <span class="court-stat-num">327</span>
+      <span class="court-stat-num">343</span>
       <span class="court-stat-lab">next 30 days</span>
     </div>
   </div>
 </section>
 
 <aside class="court-banner" aria-label="Legal notice">
-  <strong>Arrest is not conviction.</strong> Everyone listed is <strong>legally presumed innocent</strong>. The shown date is the earliest upcoming hearing on file across that person&rsquo;s open charges, as printed by HCSO. Hearings can be reset, continued, or removed without notice. For the docket of record, follow case&nbsp;# links to <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+  <strong>Arrest is not conviction.</strong> Everyone listed is <strong>legally presumed innocent</strong>. The shown date is the earliest upcoming hearing on file across that person's open charges, as printed by HCSO. Hearings can be reset, continued, or removed without notice. For the docket of record, follow case # links to <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
 </aside>
+
+<h2 class="sect-h">Which Court is This?</h2>
+<p class="page-lede">For a full directory of every Hamilton County court (Common Pleas, Municipal, Domestic Relations, Juvenile, Probate, Appeals, and Mayor's Courts), see <a href="/courts/">The Hamilton County Court System &rarr;</a>. Quick reference below.</p>
+<div class="fields">
+  <div class="k">Common Pleas, General Div.</div>
+  <div class="v">Felony criminal cases and civil cases over $15,000. Hamilton County Courthouse, 1000 Main Street, Room 410, Cincinnati. <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">hamiltoncountycourts.org &rarr;</a></div>
+  <div class="k">Municipal Court</div>
+  <div class="v">Misdemeanor criminal cases, traffic cases, and civil cases under $15,000. Hamilton County Courthouse, 1000 Main Street, Room 205. Main: <a href="tel:+15139465200">513-946-5200</a>. Clerk Criminal/Traffic: <a href="tel:+15139466040">513-946-6040</a>.</div>
+  <div class="k">First District Court of Appeals</div>
+  <div class="v">Reviews appeals from Common Pleas, Municipal, and Juvenile Courts in Hamilton County. Decisions released Wednesdays and Fridays. 12th floor, William Howard Taft Law Center.</div>
+  <div class="k">Hearings are public</div>
+  <div class="v">Public hearings are open. The court schedule, case files, and filed documents are at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>. Pavan Parikh, Clerk of Courts.</div>
+</div>
+
+<div class="alert inline-alert" role="note">
+  <strong>Scam alert: electronic monitoring "release fees"</strong>
+  Scammers are actively impersonating Hamilton County personnel, demanding fees to release an incarcerated person to electronic GPS monitoring. Hamilton County will never require payment for electronic monitoring before release. Verify directly with the Electronic Monitoring Unit at <strong>513-946-9800</strong>.
+</div>
+
+
 
 
 
@@ -98,131 +147,26 @@
   <header class="court-day-h">
     <div>
       <span class="court-day-kicker">Today</span>
-      <h2 class="court-day-title">Saturday, May 16</h2>
+      <h2 class="court-day-title">Monday, May 18</h2>
     </div>
     <span class="court-day-count">
-      <strong>9</strong> hearings
+      <strong>109</strong> hearings
     </span>
   </header>
   <div class="court-grid">
-  <a class="court-card" href="/inmate/14810556/">
-    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="AM"></span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-16">Sat May 16</time>
-<span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">ANDREZ-RAMIREZ MARTHA</span>
-      <span class="court-card-charge">endangering children</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;14810556</span>
-  </a>
-  <a class="court-card" href="/inmate/14782227/">
+  <a class="court-card" href="/inmate/14754420/">
     <span class="court-card-photo">
-      <img src="/photos/14782227.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/photos/14754420.jpg" alt="" loading="lazy" decoding="async">
     </span>
     <span class="court-card-body">
       <span class="court-card-meta">
-        <time datetime="2026-05-16">Sat May 16</time>
+        <time datetime="2026-05-18">Mon May 18</time>
 <span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">AVERY JEREMIAH</span>
-      <span class="court-card-charge">aggravated menacing</span>
+      <span class="court-card-name">ABDOUOURAHMANE IYSHIA</span>
+      <span class="court-card-charge">assault</span>
     </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;14782227</span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14754420</span>
   </a>
-  <a class="court-card" href="/inmate/14810434/">
-    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="CJ"></span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-16">Sat May 16</time>
-<span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">CUMMINS JEREMIAH</span>
-      <span class="court-card-charge">domestic violence</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;14810434</span>
-  </a>
-  <a class="court-card" href="/inmate/2160258/">
-    <span class="court-card-photo">
-      <img src="/photos/2160258.jpg" alt="" loading="lazy" decoding="async">
-    </span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-16">Sat May 16</time>
-<span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">GERHARDT JAMES</span>
-      <span class="court-card-charge">ovi-alcohol and or drug of abuse</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;2160258</span>
-  </a>
-  <a class="court-card" href="/inmate/14692341/">
-    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="MP"></span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-16">Sat May 16</time>
-<span class="tier tier-M2">M2</span>      </span>
-      <span class="court-card-name">MURRAY PATRICK</span>
-      <span class="court-card-charge">criminal trespass</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;14692341</span>
-  </a>
-  <a class="court-card" href="/inmate/14534696/">
-    <span class="court-card-photo">
-      <img src="/photos/14534696.jpg" alt="" loading="lazy" decoding="async">
-    </span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-16">Sat May 16</time>
-<span class="tier tier-M3">M3</span>      </span>
-      <span class="court-card-name">STYLES ROGER</span>
-      <span class="court-card-charge">sexual imposition</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;14534696</span>
-  </a>
-  <a class="court-card" href="/inmate/423747/">
-    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="UD"></span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-16">Sat May 16</time>
-<span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">UNDERWOOD DEREK</span>
-      <span class="court-card-charge">domestic violence</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;423747</span>
-  </a>
-  <a class="court-card" href="/inmate/2378768/">
-    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="WJ"></span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-16">Sat May 16</time>
-<span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">WALLACE JERRY</span>
-      <span class="court-card-charge">theft</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;2378768</span>
-  </a>
-  <a class="court-card" href="/inmate/14160181/">
-    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="WM"></span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-16">Sat May 16</time>
-<span class="tier tier-F5">F5</span>      </span>
-      <span class="court-card-name">WALLACE MONTREL</span>
-      <span class="court-card-charge">trafficking in drugs</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;14160181</span>
-  </a>
-  </div>
-</section>
-
-
-<section class="court-day" id="this-week">
-  <header class="court-day-h">
-    <div>
-      <span class="court-day-kicker">Rest of the week</span>
-      <h2 class="court-day-title">Next 7 days</h2>
-    </div>
-    <span class="court-day-count"><strong>352</strong> hearings</span>
-  </header>
-  <div class="court-grid">
   <a class="court-card" href="/inmate/14208779/">
     <span class="court-card-photo">
       <img src="/photos/14208779.jpg" alt="" loading="lazy" decoding="async">
@@ -262,6 +206,17 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;14276311</span>
   </a>
+  <a class="court-card" href="/inmate/14454235/">
+    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="AE"></span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-05-18">Mon May 18</time>
+<span class="tier tier-M1">M1</span>      </span>
+      <span class="court-card-name">ANDERSON EDWIN</span>
+      <span class="court-card-charge">receiving stolen property</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14454235</span>
+  </a>
   <a class="court-card" href="/inmate/330777/">
     <span class="court-card-photo">
       <img src="/photos/330777.jpg" alt="" loading="lazy" decoding="async">
@@ -287,6 +242,17 @@
       <span class="court-card-charge">murder</span>
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;14696404</span>
+  </a>
+  <a class="court-card" href="/inmate/14568510/">
+    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="BN"></span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-05-18">Mon May 18</time>
+<span class="tier tier-M1">M1</span>      </span>
+      <span class="court-card-name">BANKS NARAHJI</span>
+      <span class="court-card-charge">violating a protection order</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14568510</span>
   </a>
   <a class="court-card" href="/inmate/2653592/">
     <span class="court-card-photo">
@@ -928,6 +894,17 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;2658574</span>
   </a>
+  <a class="court-card" href="/inmate/937224/">
+    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="LD"></span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-05-18">Mon May 18</time>
+<span class="tier tier-M2">M2</span>      </span>
+      <span class="court-card-name">LOWE DAVID</span>
+      <span class="court-card-charge">obstructing official business</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;937224</span>
+  </a>
   <a class="court-card" href="/inmate/14253286/">
     <span class="court-card-photo">
       <img src="/photos/14253286.jpg" alt="" loading="lazy" decoding="async">
@@ -1108,6 +1085,17 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;14191416</span>
   </a>
+  <a class="court-card" href="/inmate/14810658/">
+    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="OP"></span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-05-18">Mon May 18</time>
+<span class="tier tier-M2">M2</span>      </span>
+      <span class="court-card-name">OSSAI PEACE</span>
+      <span class="court-card-charge">interfere-impede solicitation</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14810658</span>
+  </a>
   <a class="court-card" href="/inmate/1925780/">
     <span class="court-card-photo">
       <img src="/photos/1925780.jpg" alt="" loading="lazy" decoding="async">
@@ -1237,6 +1225,19 @@
       <span class="court-card-charge">possession of controlled substances</span>
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;2053527</span>
+  </a>
+  <a class="court-card" href="/inmate/1667107/">
+    <span class="court-card-photo">
+      <img src="/photos/1667107.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-05-18">Mon May 18</time>
+<span class="tier tier-F1">F1</span>      </span>
+      <span class="court-card-name">ROSS JEFFERY</span>
+      <span class="court-card-charge">aggravated arson</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;1667107</span>
   </a>
   <a class="court-card" href="/inmate/1529702/">
     <span class="court-card-photo">
@@ -1544,6 +1545,18 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;2397082</span>
   </a>
+  </div>
+</section>
+
+<section class="court-day" id="tomorrow">
+  <header class="court-day-h">
+    <div>
+      <span class="court-day-kicker">Tomorrow</span>
+      <h2 class="court-day-title">Tuesday, May 19</h2>
+    </div>
+    <span class="court-day-count"><strong>81</strong> hearings</span>
+  </header>
+  <div class="court-grid">
   <a class="court-card" href="/inmate/14366485/">
     <span class="court-card-photo">
       <img src="/photos/14366485.jpg" alt="" loading="lazy" decoding="async">
@@ -2255,17 +2268,6 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;2455679</span>
   </a>
-  <a class="court-card" href="/inmate/2681921/">
-    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="LR"></span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-19">Tue May 19</time>
-<span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">LITMON RUBIERO</span>
-      <span class="court-card-charge">assault</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;2681921</span>
-  </a>
   <a class="court-card" href="/inmate/14793896/">
     <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="LD"></span>
     <span class="court-card-body">
@@ -2470,19 +2472,6 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;1669988</span>
   </a>
-  <a class="court-card" href="/inmate/2056458/">
-    <span class="court-card-photo">
-      <img src="/photos/2056458.jpg" alt="" loading="lazy" decoding="async">
-    </span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-19">Tue May 19</time>
-<span class="tier tier-F5">F5</span>      </span>
-      <span class="court-card-name">STANTON TRACIE</span>
-      <span class="court-card-charge">possession of drugs</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;2056458</span>
-  </a>
   <a class="court-card" href="/inmate/14666300/">
     <span class="court-card-photo">
       <img src="/photos/14666300.jpg" alt="" loading="lazy" decoding="async">
@@ -2611,6 +2600,18 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;1460900</span>
   </a>
+  </div>
+</section>
+
+<section class="court-day" id="this-week">
+  <header class="court-day-h">
+    <div>
+      <span class="court-day-kicker">Rest of the week</span>
+      <h2 class="court-day-title">Next 7 days</h2>
+    </div>
+    <span class="court-day-count"><strong>165</strong> hearings</span>
+  </header>
+  <div class="court-grid">
   <a class="court-card" href="/inmate/14605791/">
     <span class="court-card-photo">
       <img src="/photos/14605791.jpg" alt="" loading="lazy" decoding="async">
@@ -3872,19 +3873,6 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;14131406</span>
   </a>
-  <a class="court-card" href="/inmate/14419476/">
-    <span class="court-card-photo">
-      <img src="/photos/14419476.jpg" alt="" loading="lazy" decoding="async">
-    </span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-21">Thu May 21</time>
-<span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">HOLT CHAD</span>
-      <span class="court-card-charge">violating a protection order</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;14419476</span>
-  </a>
   <a class="court-card" href="/inmate/2144755/">
     <span class="court-card-photo">
       <img src="/photos/2144755.jpg" alt="" loading="lazy" decoding="async">
@@ -4741,7 +4729,7 @@
       <span class="court-day-kicker">Further out</span>
       <h2 class="court-day-title">Next 30 days</h2>
     </div>
-    <span class="court-day-count"><strong>327</strong> hearings &middot; expand</span>
+    <span class="court-day-count"><strong>343</strong> hearings &middot; expand</span>
   </summary>
   <div class="court-grid">
   <a class="court-card" href="/inmate/14738744/">
@@ -4795,19 +4783,6 @@
       <span class="court-card-charge">illegal use or possession of drug paraphernalia</span>
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;14174002</span>
-  </a>
-  <a class="court-card" href="/inmate/14609273/">
-    <span class="court-card-photo">
-      <img src="/photos/14609273.jpg" alt="" loading="lazy" decoding="async">
-    </span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-05-26">Tue May 26</time>
-<span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">BURBRIDGE DEGARY</span>
-      <span class="court-card-charge">domestic violence</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;14609273</span>
   </a>
   <a class="court-card" href="/inmate/2633214/">
     <span class="court-card-photo">
@@ -7807,19 +7782,6 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;14800994</span>
   </a>
-  <a class="court-card" href="/inmate/14702029/">
-    <span class="court-card-photo">
-      <img src="/photos/14702029.jpg" alt="" loading="lazy" decoding="async">
-    </span>
-    <span class="court-card-body">
-      <span class="court-card-meta">
-        <time datetime="2026-06-05">Fri Jun 5</time>
-<span class="tier tier-M1">M1</span>      </span>
-      <span class="court-card-name">WILLIAMS CHARLES</span>
-      <span class="court-card-charge">domestic violence</span>
-    </span>
-    <span class="court-card-id" aria-hidden="true">#&thinsp;14702029</span>
-  </a>
   <a class="court-card" href="/inmate/14612512/">
     <span class="court-card-photo">
       <img src="/photos/14612512.jpg" alt="" loading="lazy" decoding="async">
@@ -8935,20 +8897,261 @@
     </span>
     <span class="court-card-id" aria-hidden="true">#&thinsp;1139460</span>
   </a>
+  <a class="court-card" href="/inmate/14312080/">
+    <span class="court-card-photo">
+      <img src="/photos/14312080.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-F2">F2</span>      </span>
+      <span class="court-card-name">COBB FRANEEK</span>
+      <span class="court-card-charge">felonious assault</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14312080</span>
+  </a>
+  <a class="court-card" href="/inmate/2744440/">
+    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="CT"></span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-F4">F4</span>      </span>
+      <span class="court-card-name">CURRY TOBIAS</span>
+      <span class="court-card-charge">theft</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;2744440</span>
+  </a>
+  <a class="court-card" href="/inmate/2173297/">
+    <span class="court-card-photo">
+      <img src="/photos/2173297.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-F2">F2</span>      </span>
+      <span class="court-card-name">EARLS BILLY</span>
+      <span class="court-card-charge">felonious assault</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;2173297</span>
+  </a>
+  <a class="court-card" href="/inmate/2128515/">
+    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="GT"></span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-F5">F5</span>      </span>
+      <span class="court-card-name">GRAGSTON TRACY</span>
+      <span class="court-card-charge">assault</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;2128515</span>
+  </a>
+  <a class="court-card" href="/inmate/14624891/">
+    <span class="court-card-photo">
+      <img src="/photos/14624891.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-M1">M1</span>      </span>
+      <span class="court-card-name">GRIMME ALEXANDER</span>
+      <span class="court-card-charge">endangering children</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14624891</span>
+  </a>
+  <a class="court-card" href="/inmate/14505961/">
+    <span class="court-card-photo">
+      <img src="/photos/14505961.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-M1">M1</span>      </span>
+      <span class="court-card-name">MAULDIN LONNIE</span>
+      <span class="court-card-charge">fail to comply with police off</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14505961</span>
+  </a>
+  <a class="court-card" href="/inmate/2266449/">
+    <span class="court-card-photo">
+      <img src="/photos/2266449.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-F1">F1</span>      </span>
+      <span class="court-card-name">MCCARY RONNICEA</span>
+      <span class="court-card-charge">unsupported type</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;2266449</span>
+  </a>
+  <a class="court-card" href="/inmate/2400590/">
+    <span class="court-card-photo">
+      <img src="/photos/2400590.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-M1">M1</span>      </span>
+      <span class="court-card-name">MORGAN RONALD</span>
+      <span class="court-card-charge">driving while intoxicated, a-d</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;2400590</span>
+  </a>
+  <a class="court-card" href="/inmate/1588179/">
+    <span class="court-card-photo">
+      <img src="/photos/1588179.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-M1">M1</span>      </span>
+      <span class="court-card-name">NICKLES QUENTIN</span>
+      <span class="court-card-charge">aggravated menacing</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;1588179</span>
+  </a>
+  <a class="court-card" href="/inmate/1887456/">
+    <span class="court-card-photo">
+      <img src="/photos/1887456.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-15">Mon Jun 15</time>
+<span class="tier tier-F4">F4</span>      </span>
+      <span class="court-card-name">YATES STEFFEN</span>
+      <span class="court-card-charge">gross sexual imposition</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;1887456</span>
+  </a>
+  <a class="court-card" href="/inmate/14790564/">
+    <span class="court-card-photo">
+      <img src="/photos/14790564.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-16">Tue Jun 16</time>
+<span class="tier tier-F2">F2</span>      </span>
+      <span class="court-card-name">BA ALASSANE</span>
+      <span class="court-card-charge">burglary</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14790564</span>
+  </a>
+  <a class="court-card" href="/inmate/14654052/">
+    <span class="court-card-photo">
+      <img src="/photos/14654052.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-16">Tue Jun 16</time>
+<span class="tier tier-F2">F2</span>      </span>
+      <span class="court-card-name">COLLINS ZACHARY</span>
+      <span class="court-card-charge">telephone harassment</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14654052</span>
+  </a>
+  <a class="court-card" href="/inmate/2784901/">
+    <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="GB"></span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-16">Tue Jun 16</time>
+<span class="tier tier-F5">F5</span>      </span>
+      <span class="court-card-name">GRIFFITH BRITTANY</span>
+      <span class="court-card-charge">harassment by inmate</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;2784901</span>
+  </a>
+  <a class="court-card" href="/inmate/2129146/">
+    <span class="court-card-photo">
+      <img src="/photos/2129146.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-16">Tue Jun 16</time>
+<span class="tier tier-F1">F1</span>      </span>
+      <span class="court-card-name">HATFIELD BRIAN</span>
+      <span class="court-card-charge">fail to comply with police off</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;2129146</span>
+  </a>
+  <a class="court-card" href="/inmate/2705475/">
+    <span class="court-card-photo">
+      <img src="/photos/2705475.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-16">Tue Jun 16</time>
+<span class="tier tier-F1">F1</span>      </span>
+      <span class="court-card-name">HINTON RODNEY</span>
+      <span class="court-card-charge">aggravated murder</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;2705475</span>
+  </a>
+  <a class="court-card" href="/inmate/1742291/">
+    <span class="court-card-photo">
+      <img src="/photos/1742291.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-16">Tue Jun 16</time>
+<span class="tier tier-F3">F3</span>      </span>
+      <span class="court-card-name">JACKSON MELVIN</span>
+      <span class="court-card-charge">drug abuse</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;1742291</span>
+  </a>
+  <a class="court-card" href="/inmate/14076276/">
+    <span class="court-card-photo">
+      <img src="/photos/14076276.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-16">Tue Jun 16</time>
+<span class="tier tier-F3">F3</span>      </span>
+      <span class="court-card-name">MARTIN DION</span>
+      <span class="court-card-charge">trafficking in drugs</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;14076276</span>
+  </a>
+  <a class="court-card" href="/inmate/2189197/">
+    <span class="court-card-photo">
+      <img src="/photos/2189197.jpg" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="court-card-body">
+      <span class="court-card-meta">
+        <time datetime="2026-06-16">Tue Jun 16</time>
+<span class="tier tier-F5">F5</span>      </span>
+      <span class="court-card-name">PARRISH ERICA</span>
+      <span class="court-card-charge">possession of drugs</span>
+    </span>
+    <span class="court-card-id" aria-hidden="true">#&thinsp;2189197</span>
+  </a>
   </div>
 </details>
 
+
+<h2 class="sect-h">After Court</h2>
+<div class="fields">
+  <div class="k">Look up a case</div>
+  <div class="v"><a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a> &mdash; search by name or case number. Civil, criminal, traffic, and Common Pleas dockets are all indexed.</div>
+  <div class="k">E-file court documents</div>
+  <div class="v"><a href="https://efiling.hamiltoncountycourts.org" target="_blank" rel="noopener">efiling.hamiltoncountycourts.org</a></div>
+  <div class="k">Need a public defender</div>
+  <div class="v">If you cannot afford an attorney, the court will appoint one. The <a href="https://www.hamiltoncountypd.org" target="_blank" rel="noopener">Hamilton County Public Defender</a> handles adult and juvenile criminal cases. Adult: <a href="tel:+15139463700">513-946-3700</a>. Juvenile: <a href="tel:+15139468282">513-946-8282</a>.</div>
+  <div class="k">Civil matters, no lawyer</div>
+  <div class="v">The <a href="https://cincyhelpcenter.org" target="_blank" rel="noopener">Clerk of Courts Help Center</a> at Room 113, Hamilton County Courthouse, provides free information, document help, and free 40-minute attorney consultations for civil matters. <a href="tel:+15139465650">513-946-5650</a>. Mon-Thu 8 AM-3:30 PM, Fri 8 AM-3 PM.</div>
+</div>
 
 <p class="court-foot">
   Rebuilt on every sweep (~30 min cadence). Authoritative dockets, judge assignments, and attorney-of-record live at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">Hamilton County Clerk of Courts</a>. JCStream does not have access to courtroom schedules.
 </p>
 
-    <footer class="site">
-      <span>Generated 2026-05-16T19:26:14Z</span>
-      <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
-      <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
-    </footer>
+    </div>
   </main>
+  <footer class="site">
+    <span>Generated 2026-05-18T18:37:21Z</span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+    <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
+  </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
 
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
@@ -8962,6 +9165,6 @@
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=116dce335a" defer></script>
+  <script src="/static/main.js?v=7215706798" defer></script>
 </body>
 </html>
