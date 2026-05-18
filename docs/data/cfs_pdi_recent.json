@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-18T04:55:41Z",
+  "generated_utc": "2026-05-18T06:28:26Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3195,
+  "row_count": 3193,
   "rows": [
     {
       "address_x": "SPRING GROVE AV / STATION AV",
@@ -47900,24 +47900,6 @@
       "longitude_x": "-84.5204"
     },
     {
-      "address_x": "23XX FERGUSON RD",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-22T15:24:33.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260422001102",
-      "incident_type_id": "SPECIAL DETAIL",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-22T15:25:06.000",
-      "closed_time_incident": "2026-04-22T22:31:54.000",
-      "dispatch_time_primary_unit": "2026-04-22T15:25:06.000",
-      "beat": "P33",
-      "district": "3",
-      "cpd_neighborhood": "WESTWOOD",
-      "community_council_neighborhood": "WESTWOOD",
-      "latitude_x": "39.1281620000896",
-      "longitude_x": "-84.597051"
-    },
-    {
       "address_x": "3XX W 5TH ST",
       "agency": "CPD",
       "create_time_incident": "2026-04-22T15:24:33.000",
@@ -47934,6 +47916,24 @@
       "community_council_neighborhood": "DOWNTOWN",
       "latitude_x": "39.0996460000897",
       "longitude_x": "-84.519165"
+    },
+    {
+      "address_x": "23XX FERGUSON RD",
+      "agency": "CPD",
+      "create_time_incident": "2026-04-22T15:24:33.000",
+      "disposition_text": "301:OFFENSE REPORT",
+      "event_number": "CPD260422001102",
+      "incident_type_id": "SPECIAL DETAIL",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-04-22T15:25:06.000",
+      "closed_time_incident": "2026-04-22T22:31:54.000",
+      "dispatch_time_primary_unit": "2026-04-22T15:25:06.000",
+      "beat": "P33",
+      "district": "3",
+      "cpd_neighborhood": "WESTWOOD",
+      "community_council_neighborhood": "WESTWOOD",
+      "latitude_x": "39.1281620000896",
+      "longitude_x": "-84.597051"
     },
     {
       "address_x": "E CENTRAL PKWY / MAIN ST",
@@ -57200,42 +57200,6 @@
       "community_council_neighborhood": "VILLAGES AT ROLL HILL",
       "latitude_x": "39.1548990000896",
       "longitude_x": "-84.560777"
-    },
-    {
-      "address_x": "29XX GILBERT AV",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-18T06:08:15.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260418000365",
-      "incident_type_id": "DISTURBANCE PHYS (IP)(W)(E)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-18T06:15:19.000",
-      "closed_time_incident": "2026-04-18T08:33:28.000",
-      "dispatch_time_primary_unit": "2026-04-18T06:09:25.000",
-      "beat": "P26",
-      "district": "4",
-      "cpd_neighborhood": "WALNUT HILLS",
-      "community_council_neighborhood": "WALNUT HILLS",
-      "latitude_x": "39.1335460000896",
-      "longitude_x": "-84.487962"
-    },
-    {
-      "address_x": "16XX SUMMIT RD",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-18T06:08:02.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260418000364",
-      "incident_type_id": "STABBING (IP)",
-      "priority": "2",
-      "arrival_time_primary_unit": "2026-04-18T06:30:57.000",
-      "closed_time_incident": "2026-04-18T09:41:24.000",
-      "dispatch_time_primary_unit": "2026-04-18T06:20:11.000",
-      "beat": "P45",
-      "district": "4",
-      "cpd_neighborhood": "ROSELAWN",
-      "community_council_neighborhood": "ROSELAWN",
-      "latitude_x": "39.2031770000896",
-      "longitude_x": "-84.457324"
     }
   ]
 }
