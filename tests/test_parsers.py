@@ -85,6 +85,35 @@ def test_parse_name_falls_back_to_og_title(caplog):
     assert any("og:title fallback" in rec.message for rec in caplog.records)
 
 
+def test_parse_name_handles_inmate_label_prefix():
+    # parser-F1 follow-up: HCSO added an "Inmate:" prefix to the name heading
+    # on 2026-05-18. The all-uppercase check used to reject the mixed-case
+    # prefix and zero out every name in the cycle. Pin both shapes here so a
+    # regression to the bare-name format or to the label-prefixed format both
+    # stay green.
+    html_prefixed = """
+    <html><body>
+      <h2>Inmate: ACOSTA, ANDREW</h2>
+      <ul>
+        <li>Inmate Number : 14544515</li>
+        <li>Booking Number : 26002866</li>
+      </ul>
+    </body></html>
+    """
+    inm, _ = parse_detail_page(html_prefixed, "14544515")
+    assert inm.last_name == "ACOSTA"
+    assert inm.first_name == "ANDREW"
+
+    html_bare = """
+    <html><body>
+      <h2>ACOSTA, ANDREW</h2>
+    </body></html>
+    """
+    inm, _ = parse_detail_page(html_bare, "14544515")
+    assert inm.last_name == "ACOSTA"
+    assert inm.first_name == "ANDREW"
+
+
 def test_extract_inline_photo_jpeg_soi_fallback():
     # parser-F3: when the 274px hook drifts (e.g. 280px), JPEG SOI bytes
     # are accepted as a fallback so photos don't disappear site-wide.

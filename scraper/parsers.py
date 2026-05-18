@@ -131,6 +131,9 @@ def _parse_name(tree: HTMLParser) -> str:
     Tiered fallback so a single drift in heading markup, casing, or location
     doesn't zero every detail-page name:
       1. h1/h2/h3 with comma + all-caps + at least one letter (current shape).
+         A leading "Inmate:" (or similar single-label-with-colon prefix that
+         HCSO added 2026-05-18) is stripped before the all-caps check, so the
+         parser tolerates both "ACOSTA, ANDREW" and "Inmate: ACOSTA, ANDREW".
       2. meta[property="og:title"] with the same shape.
       3. document <title> with at least a comma.
     Each non-tier-1 success logs a debug breadcrumb so the operator can see
@@ -139,8 +142,14 @@ def _parse_name(tree: HTMLParser) -> str:
     for tag in ("h1", "h2", "h3"):
         for node in tree.css(tag):
             text = _text(node)
-            if "," in text and text.upper() == text and any(c.isalpha() for c in text):
-                return text.strip()
+            if "," not in text:
+                continue
+            # Strip a leading "<Label>:" prefix (HCSO drift, 2026-05-18). If
+            # there is no colon, candidate == text.strip() and the historical
+            # shape still parses.
+            candidate = text.split(":", 1)[1].strip() if ":" in text else text.strip()
+            if "," in candidate and candidate.upper() == candidate and any(c.isalpha() for c in candidate):
+                return candidate
     for meta in tree.css('meta[property="og:title"]'):
         content = (meta.attributes.get("content") or "").strip()
         if "," in content and content.upper() == content and any(c.isalpha() for c in content):
