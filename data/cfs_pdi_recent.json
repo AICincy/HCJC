@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-18T06:28:26Z",
+  "generated_utc": "2026-05-18T07:52:52Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3193,
+  "row_count": 3192,
   "rows": [
     {
       "address_x": "SPRING GROVE AV / STATION AV",
@@ -20750,24 +20750,6 @@
       "longitude_x": "-84.55818"
     },
     {
-      "address_x": "8XX N I75",
-      "agency": "CPD",
-      "create_time_incident": "2026-05-05T18:28:07.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260505001641",
-      "incident_type_id": "CRASH NON-INJURY, HWY",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-05-05T18:40:15.000",
-      "closed_time_incident": "2026-05-05T19:38:30.000",
-      "dispatch_time_primary_unit": "2026-05-05T18:30:27.000",
-      "beat": "P45",
-      "district": "4",
-      "cpd_neighborhood": "BONDHILL",
-      "community_council_neighborhood": "BOND HILL",
-      "latitude_x": "39.1802680000896",
-      "longitude_x": "-84.48557"
-    },
-    {
       "address_x": "46XX RAPID RUN RD",
       "agency": "CPD",
       "create_time_incident": "2026-05-05T18:28:07.000",
@@ -20784,6 +20766,24 @@
       "community_council_neighborhood": "WEST PRICE HILL",
       "latitude_x": "39.1121280000897",
       "longitude_x": "-84.595719"
+    },
+    {
+      "address_x": "8XX N I75",
+      "agency": "CPD",
+      "create_time_incident": "2026-05-05T18:28:07.000",
+      "disposition_text": "CIT: CITED",
+      "event_number": "CPD260505001641",
+      "incident_type_id": "CRASH NON-INJURY, HWY",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-05-05T18:40:15.000",
+      "closed_time_incident": "2026-05-05T19:38:30.000",
+      "dispatch_time_primary_unit": "2026-05-05T18:30:27.000",
+      "beat": "P45",
+      "district": "4",
+      "cpd_neighborhood": "BONDHILL",
+      "community_council_neighborhood": "BOND HILL",
+      "latitude_x": "39.1802680000896",
+      "longitude_x": "-84.48557"
     },
     {
       "address_x": "55XX GLENWAY AV",
@@ -23530,24 +23530,6 @@
       "longitude_x": "-84.47384"
     },
     {
-      "address_x": "7XX DUTCH COLONY DR",
-      "agency": "CPD",
-      "create_time_incident": "2026-05-04T13:37:24.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260504001012",
-      "incident_type_id": "THEFT (NIP)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-05-04T14:00:32.000",
-      "closed_time_incident": "2026-05-04T14:42:24.000",
-      "dispatch_time_primary_unit": "2026-05-04T13:45:05.000",
-      "beat": "P42",
-      "district": "5",
-      "cpd_neighborhood": "WINTON HILLS",
-      "community_council_neighborhood": "WINTON HILLS",
-      "latitude_x": "39.1915730000896",
-      "longitude_x": "-84.51764"
-    },
-    {
       "address_x": "8XX BEECHER ST",
       "agency": "CPD",
       "create_time_incident": "2026-05-04T13:37:24.000",
@@ -23564,6 +23546,24 @@
       "community_council_neighborhood": "WALNUT HILLS",
       "latitude_x": "39.1329090000896",
       "longitude_x": "-84.489278"
+    },
+    {
+      "address_x": "7XX DUTCH COLONY DR",
+      "agency": "CPD",
+      "create_time_incident": "2026-05-04T13:37:24.000",
+      "disposition_text": "301:OFFENSE REPORT",
+      "event_number": "CPD260504001012",
+      "incident_type_id": "THEFT (NIP)",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-05-04T14:00:32.000",
+      "closed_time_incident": "2026-05-04T14:42:24.000",
+      "dispatch_time_primary_unit": "2026-05-04T13:45:05.000",
+      "beat": "P42",
+      "district": "5",
+      "cpd_neighborhood": "WINTON HILLS",
+      "community_council_neighborhood": "WINTON HILLS",
+      "latitude_x": "39.1915730000896",
+      "longitude_x": "-84.51764"
     },
     {
       "address_x": "61XX GLENWAY AV",
@@ -57182,24 +57182,6 @@
       "community_council_neighborhood": "EAST PRICE HILL",
       "latitude_x": "39.1146240000897",
       "longitude_x": "-84.576442"
-    },
-    {
-      "address_x": "23XX WILLIAMSBURG DR",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-18T06:33:34.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260418000372",
-      "incident_type_id": "UNKNOWN TROUBLE (SI)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-18T06:44:18.000",
-      "closed_time_incident": "2026-04-18T08:04:24.000",
-      "dispatch_time_primary_unit": "2026-04-18T06:34:55.000",
-      "beat": "P35",
-      "district": "3",
-      "cpd_neighborhood": "FAY APARTMENTS",
-      "community_council_neighborhood": "VILLAGES AT ROLL HILL",
-      "latitude_x": "39.1548990000896",
-      "longitude_x": "-84.560777"
     }
   ]
 }
