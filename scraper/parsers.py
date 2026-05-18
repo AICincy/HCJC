@@ -125,20 +125,25 @@ def _parse_bio(tree: HTMLParser) -> dict[str, str]:
 
 
 def _parse_name(tree: HTMLParser) -> str:
-    """The detail page shows the inmate's name in a prominent heading,
-    formatted ``LAST, FIRST [MIDDLE]``.
+    """The detail page shows the inmate's name in a prominent heading.
 
-    Tiered fallback so a single drift in heading markup, casing, or location
-    doesn't zero every detail-page name:
+    Expected format: ``LAST, FIRST [MIDDLE]`` in all-caps.
+
+    Tiered fallback strategy to handle HCSO page structure changes:
       1. h1/h2/h3 with comma + all-caps + at least one letter (current shape).
          A leading "Inmate:" (or similar single-label-with-colon prefix that
          HCSO added 2026-05-18) is stripped before the all-caps check, so the
          parser tolerates both "ACOSTA, ANDREW" and "Inmate: ACOSTA, ANDREW".
       2. meta[property="og:title"] with the same shape.
-      3. document <title> with at least a comma.
+      3. Any text node with comma + all-caps (e.g., in container divs).
+      4. Bio table extraction: look for cells labeled "Name", "Full Name", 
+         "Inmate", or similar.
+      5. document <title> with at least a comma.
+    
     Each non-tier-1 success logs a debug breadcrumb so the operator can see
     which tier saved the cycle.
     """
+    # Tier 1: h1/h2/h3 with comma + all-caps + at least one letter (original)
     for tag in ("h1", "h2", "h3"):
         for node in tree.css(tag):
             text = _text(node)
@@ -150,17 +155,41 @@ def _parse_name(tree: HTMLParser) -> str:
             candidate = text.split(":", 1)[1].strip() if ":" in text else text.strip()
             if "," in candidate and candidate.upper() == candidate and any(c.isalpha() for c in candidate):
                 return candidate
+    
+    # Tier 2: meta[property="og:title"]
     for meta in tree.css('meta[property="og:title"]'):
         content = (meta.attributes.get("content") or "").strip()
         if "," in content and content.upper() == content and any(c.isalpha() for c in content):
             log.debug("name extracted from og:title fallback")
             return content
+    
+    # Tier 3: Scan all text nodes looking for comma + all-caps pattern
+    # This catches cases where HCSO moved the name to a span, div, or other container
+    for div in tree.css("div, span, p"):
+        text = _text(div)
+        if text and "," in text and text.upper() == text and any(c.isalpha() for c in text):
+            # Avoid capturing very long strings (likely content bleed)
+            if len(text) < 200:
+                log.debug("name extracted from container text fallback (tag=%s)", div.tag)
+                return text.strip()
+    
+    # Tier 4: Look for common name table cells (td/th with label attribute)
+    for td in tree.css("td[label], th"):
+        label = td.attributes.get("label", "").strip()
+        if label.lower() in ("name", "full name", "inmate", "inmate name"):
+            text = _text(td)
+            if text:
+                log.debug("name extracted from labeled cell (label=%s)", label)
+                return text.strip()
+    
+    # Tier 5: document <title>
     title = tree.css_first("title")
     if title is not None:
         text = _text(title)
         if "," in text:
             log.debug("name extracted from <title> fallback")
             return text.strip()
+    
     # All tiers missed. Sweep's list-row fallback will still produce a
     # usable record for new bookings; --refresh-known has no fallback.
     log.warning("inmate-detail name heading (LAST, FIRST all-caps) not found")
