@@ -28,6 +28,7 @@ import json
 import re
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from collections import Counter
@@ -62,7 +63,8 @@ def top_codes(limit: int = 30) -> list[str]:
     return [c for c, _ in counts.most_common(limit)]
 
 
-def fetch_for_code(code: str, max_results: int = 3) -> list[dict]:
+def fetch_for_code(code: str, max_results: int = 3, max_retries: int = 3) -> list[dict]:
+    """Fetch case law for a code with exponential backoff retry on 429."""
     params = {
         "type": "o",
         "q": f'"{code}"',
@@ -72,21 +74,32 @@ def fetch_for_code(code: str, max_results: int = 3) -> list[dict]:
     }
     url = API + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        payload = json.load(r)
-    out = []
-    for hit in payload.get("results", [])[:max_results]:
-        cites = hit.get("citation") or []
-        rel = hit.get("absolute_url") or ""
-        out.append({
-            "case_name": hit.get("caseName") or hit.get("caseNameFull") or "",
-            "court": hit.get("court_citation_string") or hit.get("court") or "",
-            "date_filed": hit.get("dateFiled") or "",
-            "citation": cites[0] if cites else "",
-            "neutral_cite": hit.get("neutralCite") or "",
-            "url": ("https://www.courtlistener.com" + rel) if rel else "",
-        })
-    return out
+    
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                payload = json.load(r)
+            out = []
+            for hit in payload.get("results", [])[:max_results]:
+                cites = hit.get("citation") or []
+                rel = hit.get("absolute_url") or ""
+                out.append({
+                    "case_name": hit.get("caseName") or hit.get("caseNameFull") or "",
+                    "court": hit.get("court_citation_string") or hit.get("court") or "",
+                    "date_filed": hit.get("dateFiled") or "",
+                    "citation": cites[0] if cites else "",
+                    "neutral_cite": hit.get("neutralCite") or "",
+                    "url": ("https://www.courtlistener.com" + rel) if rel else "",
+                })
+            return out
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < max_retries - 1:
+                # Exponential backoff: 2s, 4s, 8s
+                backoff = 2 ** (attempt + 1)
+                print(f"    rate limited (429), retrying in {backoff}s...", file=sys.stderr)
+                time.sleep(backoff)
+            else:
+                raise
 
 
 def main() -> int:
@@ -101,7 +114,8 @@ def main() -> int:
         except Exception as e:
             print(f"  [{i:>2}/{len(codes)}] {code:10s}  ERROR: {e}", file=sys.stderr)
             by_code[code] = []
-        time.sleep(0.5)
+        # Throttle between requests to stay well under 60 req/min limit
+        time.sleep(1.5)
     out = {
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "source": "CourtListener REST API v4 (Ohio appellate courts, published opinions only)",
