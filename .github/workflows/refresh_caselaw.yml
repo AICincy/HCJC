@@ -50,7 +50,9 @@ jobs:
             git config user.email 'noreply@aretheyinjail.com'
             git add data/orc_caselaw.json
             git commit -m "data: weekly refresh of orc_caselaw.json from CourtListener"
-            git push
+            git fetch origin
+            git rebase origin/${{ github.ref_name }}
+            git push origin HEAD:${{ github.ref_name }}
           else
             echo "no changes to commit"
           fi
