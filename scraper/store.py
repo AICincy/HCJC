@@ -36,9 +36,13 @@ class SnapshotCorruptError(Exception):
 
 log = logging.getLogger(__name__)
 
-# ~10h of churn at 30-min cycles. Big enough to drive the homepage feed and the
-# RSS streams; small enough that the file stays well under a megabyte.
-CHANGELOG_LIMIT = 500
+# Phase 9: raised from 500 to 10000. The old 500 cap was a 2024 instinct to
+# keep the file under a megabyte; at ~176 bytes/event that lets us run ~8
+# days of public activity (~1.7 MB), which makes the RSS streams and the
+# homepage feed actually useful for tracking institutional behavior.
+# A public-records mirror shouldn't be the bottleneck on how far back the
+# public can see.
+CHANGELOG_LIMIT = 10000
 
 
 def _atomic_write_text(path: Path, content: str) -> None:
@@ -142,6 +146,119 @@ def save_changelog(path: Path, events: list[ChangeEvent]) -> None:
         path,
         json.dumps([e.model_dump() for e in trimmed], indent=2),
     )
+
+
+# Phase 11: PII expiry window for anon_changelog. Events older than this lose
+# their name + inmate_number + booking_number; only event_type + timestamp
+# (date-only) + tier + primary_charge_category survive. The rationale: a
+# public-records mirror should be able to surface long-term institutional
+# patterns ("bookings on Friday vs Tuesday", "F1 share of roster over 6 months")
+# without keeping individual records visible after release. Seven days gives
+# the rolling RSS streams and homepage feed enough overlap with the live
+# changelog to feel continuous, while still expiring identifying info quickly.
+ANON_EXPIRY_DAYS = 7
+
+
+def _anonymize_event(e: dict, charge_lookup: dict[str, dict] | None = None) -> dict:
+    """Return a PII-stripped copy of a changelog event row.
+
+    Keeps: event type, date (day only, not minute), tier if known, primary
+    charge category if known. Drops: name, inmate_number, booking_number,
+    bond, court_date, anything that could re-identify."""
+    ts = e.get("timestamp_utc") or ""
+    return {
+        "event": e.get("event"),
+        "date": ts[:10] if ts else None,
+        "tier": e.get("primary_tier"),
+        "category": e.get("primary_category"),
+    }
+
+
+def save_anon_changelog(
+    path: Path,
+    full_events: list[ChangeEvent],
+    enrichment: dict[str, dict] | None = None,
+) -> None:
+    """Maintain ``data/anon_changelog.json``: rolling all-time append-only
+    log where any event older than ``ANON_EXPIRY_DAYS`` has been stripped of
+    identifying information.
+
+    Strategy:
+      1. Read the existing anon file (already-anonymized older events).
+      2. For each event in the live ``full_events`` argument:
+           - If newer than the expiry cutoff, keep PII for now.
+           - If older, anonymize before merging.
+      3. Stable-dedupe by a content key (event + timestamp + inmate hash
+         within retention, or just event + date + tier + category for older
+         rows).
+      4. Write back. No CHANGELOG_LIMIT applies; this file grows forever.
+
+    The enrichment dict, if provided, maps inmate_number -> {tier, category}
+    derived from current.json at sweep time so we can anonymize without
+    losing the aggregate signal.
+    """
+    enrichment = enrichment or {}
+    # Read existing anon entries
+    existing: list[dict] = []
+    if path.exists():
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(existing, list):
+                existing = []
+        except (json.JSONDecodeError, OSError):
+            existing = []
+
+    # Determine cutoff
+    from datetime import datetime, timedelta, timezone
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=ANON_EXPIRY_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    # Build a set of (event, timestamp_utc) keys already in existing so we
+    # don't double-add when a sweep re-emits the same row.
+    seen_keys: set[tuple] = set()
+    for row in existing:
+        if isinstance(row, dict):
+            seen_keys.add((row.get("event"), row.get("date"), row.get("tier"), row.get("category"), row.get("inmate_number")))
+
+    out = list(existing)
+    for ce in full_events:
+        d = ce.model_dump() if hasattr(ce, "model_dump") else dict(ce)
+        # enrich from current.json at this moment if we have it
+        enr = enrichment.get(d.get("inmate_number") or "", {})
+        d.setdefault("primary_tier", enr.get("tier"))
+        d.setdefault("primary_category", enr.get("category"))
+
+        if (d.get("timestamp_utc") or "") < cutoff:
+            row = _anonymize_event(d)
+            key = (row.get("event"), row.get("date"), row.get("tier"), row.get("category"), None)
+        else:
+            row = {
+                "event": d.get("event"),
+                "timestamp_utc": d.get("timestamp_utc"),
+                "inmate_number": d.get("inmate_number"),
+                "name": d.get("name"),
+                "tier": d.get("primary_tier"),
+                "category": d.get("primary_category"),
+                "note": d.get("note"),
+            }
+            key = (row.get("event"), row.get("timestamp_utc"), row.get("inmate_number"))
+        if key in seen_keys:
+            continue
+        seen_keys.add(key)
+        out.append(row)
+
+    # Re-anonymize any retained rows that have crossed the expiry boundary.
+    for i, row in enumerate(out):
+        if "timestamp_utc" in row and row["timestamp_utc"] and row["timestamp_utc"] < cutoff:
+            out[i] = _anonymize_event({
+                "event": row.get("event"),
+                "timestamp_utc": row.get("timestamp_utc"),
+                "primary_tier": row.get("tier"),
+                "primary_category": row.get("category"),
+            })
+
+    # Stable sort by date/timestamp, oldest first for append-only feel
+    out.sort(key=lambda r: r.get("timestamp_utc") or r.get("date") or "")
+    _atomic_write_text(path, json.dumps(out, indent=2))
 
 
 def diff(

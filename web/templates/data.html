@@ -7,37 +7,71 @@
   <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Data &amp; legal</span>
 </nav>
 
-<h1 class="record-name">Data, methodology &amp; legal notices</h1>
-<p class="muted">JCStream is generated exclusively from public records maintained by the Hamilton County,
-Ohio Sheriff&rsquo;s Office (HCSO) and published through HCSO&rsquo;s public inmate-search portal at
-<a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>. Everything the
-site is built from is published here as plain JSON, rebuilt about every 30&nbsp;minutes by GitHub
-Actions. We mirror the <em>current</em> roster &mdash; when HCSO removes a person, the next sweep
-removes them here too; there is no historical archive of released individuals.</p>
 
-<div class="section-h"><h2>Files</h2></div>
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Data, Methodology &amp; Legal Notices</div>
+    <div class="sub">Open data feeds, licensing, and the rules of the road for this site</div>
+  </div>
+</header>
+
+<p class="page-lede">JCStream is generated exclusively from public records maintained by the Hamilton County Sheriff's Office (HCSO) and published through HCSO's public inmate-search portal at <a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">hcso.org</a>. Everything the site is built from is published here as plain JSON, rebuilt about every 30 minutes by GitHub Actions. We mirror the <em>current</em> roster: when HCSO removes a person, the next sweep removes them here too. There is no historical archive of released individuals.</p>
+
+<h2 class="sect-h">Authoritative Sources</h2>
+<div class="fields">
+  <div class="k">Inmate roster</div>
+  <div class="v"><a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">HCSO inmate search</a> &mdash; Hamilton County Sheriff's Office, published under <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC § 149.43</a>.</div>
+  <div class="k">Court dockets &amp; case files</div>
+  <div class="v"><a href="https://www.courtclerk.org" target="_blank" rel="noopener">Hamilton County Clerk of Courts</a> (Pavan Parikh). Search by name or case number. Civil, criminal, traffic.</div>
+  <div class="k">Court system</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">hamiltoncountycourts.org</a> &mdash; Common Pleas (felonies, civil over $15,000) and Municipal Court (misdemeanors, civil under $15,000).</div>
+  <div class="k">Probate matters</div>
+  <div class="v"><a href="https://www.probatect.org" target="_blank" rel="noopener">Hamilton County Probate Court</a> &mdash; estates, guardianship, marriage licenses, adoptions, name changes. Judge Ralph Winkler. <a href="tel:+15139463570">513-946-3570</a>.</div>
+  <div class="k">Statutes</div>
+  <div class="v"><a href="https://codes.ohio.gov" target="_blank" rel="noopener">codes.ohio.gov</a> &mdash; the Ohio Revised Code, maintained by the Ohio Legislative Service Commission.</div>
+  <div class="k">Cincinnati Open Data</div>
+  <div class="v"><a href="https://data.cincinnati-oh.gov" target="_blank" rel="noopener">data.cincinnati-oh.gov</a> &mdash; CPD/CFD calls for service, use-of-force, traffic and pedestrian stops, shootings.</div>
+</div>
+
+<h2 class="sect-h">Free Help</h2>
+<div class="fields">
+  <div class="k">Criminal defense</div>
+  <div class="v"><a href="https://www.hamiltoncountypd.org" target="_blank" rel="noopener">Hamilton County Public Defender</a>. Adult <a href="tel:+15139463700">513-946-3700</a>, juvenile <a href="tel:+15139468282">513-946-8282</a>. Free representation for those who cannot afford an attorney.</div>
+  <div class="k">Record sealing / expungement</div>
+  <div class="v">Public Defender Fresh Start Clinic, 1st &amp; 3rd Wednesday monthly, 1:00 PM-4:00 PM. Call <a href="tel:+15139463666">513-946-3666</a> the morning of, 8:30-11:30 AM.</div>
+  <div class="k">Civil legal aid</div>
+  <div class="v"><a href="https://www.lascinti.org" target="_blank" rel="noopener">Legal Aid Society of Greater Cincinnati</a> &mdash; <a href="tel:+15132419400">513-241-9400</a>. Family / DV, housing / eviction, consumer debt, employment, benefits.</div>
+  <div class="k">Civil court help</div>
+  <div class="v"><a href="https://cincyhelpcenter.org" target="_blank" rel="noopener">Clerk of Courts Help Center</a> at Room 113, 1000 Main St. <a href="tel:+15139465650">513-946-5650</a>. Free info, document help, free 40-min attorney consults. Civil matters only (no criminal).</div>
+  <div class="k">211 community help</div>
+  <div class="v">United Way of Greater Cincinnati. Dial <strong>211</strong> or <a href="tel:+15137217900">513-721-7900</a>. Connects to housing, food, utilities, and benefits assistance.</div>
+</div>
+
+<h2 class="sect-h">Published Files</h2>
 <table class="charges">
   <caption class="sr-only">Published data files</caption>
   <thead><tr><th scope="col">File</th><th scope="col">Contents</th></tr></thead>
   <tbody>
     <tr><td><a href="current.json">current.json</a></td><td>Authoritative current-roster snapshot: <code>{generated_utc, inmate_count, inmates: [&hellip;]}</code>. Each inmate has <code>inmate_number, booking_number, last_name, first_name, middle_name, date_of_birth, sex, race, booking_date, projected_release_date, holder_status, charges: [&hellip;], photo_filename, first_seen_utc, last_seen_utc</code>. Each charge has <code>common_pleas_case, municipal_case, other_case, court_date, orc_code, description, bond_type, bond_amount, disposition, comments</code>.</td></tr>
-    <tr><td><a href="changelog.json">changelog.json</a></td><td>Last ~500 change events: <code>{event: "booked"|"released"|"updated", inmate_number, name, timestamp_utc, note}</code>.</td></tr>
+    <tr><td><a href="changelog.json">changelog.json</a></td><td>Last ~10,000 change events (~8 days of activity at 30-min sweep cadence): <code>{event: "booked"|"released"|"updated", inmate_number, name, timestamp_utc, note}</code>. Raised from 500 in Phase 9 so the RSS streams and the homepage feed actually see institutional behavior over time.</td></tr>
+    <tr><td><a href="anon_changelog.json">anon_changelog.json</a></td><td><strong>Phase 11.</strong> PII-stripped append-only log of all change events, kept <strong>forever</strong>. Events older than 7 days lose name + inmate_number + booking_number; only event type, date (day-precision), tier (F1-MM), and primary charge category survive. The point: long-term institutional patterns (Friday vs Tuesday booking rates, felony share of roster over years) without keeping individual records visible after release. Schema: <code>{event, timestamp_utc|date, inmate_number?, name?, tier, category}</code>.</td></tr>
     <tr><td><a href="history.json">history.json</a></td><td>Daily roster-size series (counts only, no individuals): <code>[{date, count, booked_24h, released_24h}, &hellip;]</code>, last ~400 days. Drives the homepage and <a href="../stats/">stats-page</a> trend lines.</td></tr>
     <tr><td><a href="../search.json">search.json</a></td><td>Compact searchable index of the current roster: <code>{generated_utc, count, rows: [{n: name, c: primary offense category, t: tier, b: booking date, id}]}</code>.</td></tr>
     <tr><td><a href="../dispatches.json">dispatches.json</a></td><td>Geocoded points behind the homepage map: <code>{generated_utc, count, points: [{la, lo, k: "cfs"|"shooting", d: disposition/type, a: address/block, n: neighborhood, t: time}]}</code>. Cincinnati Open Data only &mdash; <strong>not</strong> matched to anyone on the roster.</td></tr>
     <tr><td><a href="orc_offenses.json">orc_offenses.json</a></td><td>Hand-curated lookup of common Ohio Revised Code criminal sections &rarr; <code>{title, degree}</code>. Degree (F1&hellip;MM) is the statute&rsquo;s default classification; the degree actually charged can vary by subsection.</td></tr>
-    <tr><td><a href="cfs_recent.json">cfs_recent.json</a></td><td>Cincinnati Open Data &mdash; CPD/CFD Calls For Service (Socrata <code>qiik-bpks</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions only. Refreshed once every 24&nbsp;hours.</td></tr>
-    <tr><td><a href="cfs_pdi_recent.json">cfs_pdi_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Police CFS / CAD (Socrata <code>gexm-h6bt</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions. Refreshed once every 24&nbsp;hours.</td></tr>
-    <tr><td><a href="shootings_recent.json">shootings_recent.json</a></td><td>Cincinnati Open Data &mdash; CPD Reported Shootings (Socrata <code>sfea-4ksu</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours.</td></tr>
-    <tr><td><a href="incidents_recent.json">incidents_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Crime Incidents (Socrata <code>k59e-2pvf</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours.</td></tr>
-    <tr><td><a href="oi_shootings_recent.json">oi_shootings_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Officer Involved Shootings (Socrata <code>r6q4-muts</code>), last ~2&nbsp;years. Refreshed once every 24&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
-    <tr><td><a href="use_of_force_pdi_recent.json">use_of_force_pdi_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Use of Force (Socrata <code>8us8-wi2w</code>), most recent ~5,000 incidents. Refreshed once every 24&nbsp;hours.</td></tr>
-    <tr><td><a href="use_of_force_incidents_recent.json">use_of_force_incidents_recent.json</a></td><td>Cincinnati Open Data &mdash; Use of Force Incidents (Socrata <code>748b-sht4</code>), last ~365&nbsp;days. Refreshed once every 24&nbsp;hours.</td></tr>
-    <tr><td><a href="traffic_stops_drivers_recent.json">traffic_stops_drivers_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Traffic Stops (Drivers) (Socrata <code>hibq-hbnj</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
-    <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Pedestrian Stops (Socrata <code>jx3x-rh6i</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
-    <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data &mdash; Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed once every 24&nbsp;hours.</td></tr>
-    <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data &mdash; Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed once every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="cfs_recent.json">cfs_recent.json</a></td><td>Cincinnati Open Data &mdash; CPD/CFD Calls For Service (Socrata <code>qiik-bpks</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions only. Refreshed at most every 1&nbsp;hour.</td></tr>
+    <tr><td><a href="cfs_pdi_recent.json">cfs_pdi_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Police CFS / CAD (Socrata <code>gexm-h6bt</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions. Refreshed at most every 1&nbsp;hour.</td></tr>
+    <tr><td><a href="shootings_recent.json">shootings_recent.json</a></td><td>Cincinnati Open Data &mdash; CPD Reported Shootings (Socrata <code>sfea-4ksu</code>), last ~30&nbsp;days. Refreshed at most every 6&nbsp;hours.</td></tr>
+    <tr><td><a href="incidents_recent.json">incidents_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Crime Incidents (Socrata <code>k59e-2pvf</code>), last ~30&nbsp;days. Refreshed at most every 6&nbsp;hours.</td></tr>
+    <tr><td><a href="oi_shootings_recent.json">oi_shootings_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Officer Involved Shootings (Socrata <code>r6q4-muts</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed). May be empty while CPD migrates to a new data-management system.</td></tr>
+    <tr><td><a href="use_of_force_pdi_recent.json">use_of_force_pdi_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Use of Force (Socrata <code>8us8-wi2w</code>), most recent ~5,000 incidents. Refreshed at most every 24&nbsp;hours (source dataset is paused).</td></tr>
+    <tr><td><a href="use_of_force_incidents_recent.json">use_of_force_incidents_recent.json</a></td><td>Cincinnati Open Data &mdash; Use of Force Incidents (Socrata <code>748b-sht4</code>), last ~365&nbsp;days. Refreshed at most every 24&nbsp;hours.</td></tr>
+    <tr><td><a href="traffic_stops_drivers_recent.json">traffic_stops_drivers_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Traffic Stops (Drivers) (Socrata <code>hibq-hbnj</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
+    <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Pedestrian Stops (Socrata <code>jx3x-rh6i</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
+    <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data &mdash; Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
+    <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data &mdash; Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed).</td></tr>
     {% if courtclerk_cases_available %}<tr><td><a href="courtclerk_cases.json">courtclerk_cases.json</a></td><td>Crowdsourced case data submitted via the <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">case-data issue form</a> by people who looked the case up themselves at courtclerk.org. May be empty.</td></tr>{% endif %}
+    <tr><td><a href="dispatch_correlations.json">dispatch_correlations.json</a></td><td><strong>Phase 11.</strong> Researcher-mode candidate pairs joining current roster bookings to recent Cincinnati Open Data CFS rows. Schema: <code>{generated_utc, min_confidence, window_minutes, pairs: [{inmate_number, cfs_source, cfs_row_index, confidence, signals}]}</code>. <strong>Candidates only, not asserted matches.</strong> JCStream does not publish these joins on its own pages; this file is for journalists and researchers who want to cross-reference and verify before drawing conclusions. No names; both join keys are public IDs already in the other feeds.</td></tr>
     <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build &mdash; cheap tamper-evidence on top of the authenticated git history.</td></tr>
   </tbody>
 </table>
@@ -60,6 +94,39 @@ inmate search (substring match on last name &mdash; the 26 single letters cover 
 roster with dedup), parses each detail page, downscales the photo, diffs against the prior
 snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commits. Source:
 <a href="https://github.com/AICincy/JCStream">github.com/AICincy/JCStream</a>.</p>
+
+<h2 id="crowdsource" class="sect-h">Crowdsourced courtclerk.org data</h2>
+<p>
+  JCStream does <strong>not</strong> scrape <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>. The Hamilton County Clerk of Courts explicitly disallows automated access to <code>/data/</code> in their <code>robots.txt</code>, and the prior maintainer of this project made the principled call to respect that limit. A scraper here would also break every time the Clerk's site changes.
+</p>
+<p>
+  But there's a path that works: any reader who looks up a case at courtclerk.org (passing their bot check in a regular browser) can paste the docket fields into a one-minute GitHub form. The form's a structured issue template; a workflow ingests it into <code>data/courtclerk_cases.json</code>; the next site build then displays the submission on the matching inmate's detail page under "Submitted by readers." Anyone reading that inmate's page sees the court information without anyone scraping anyone.
+</p>
+<p>
+  This is a deliberate trade: coverage will always be patchy, because only what someone bothers to submit appears. The upside: every entry was looked up by a real person, so the data quality on what does come in is higher than any scraper would manage.
+</p>
+<p>
+  <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">Open the case-data form &rarr;</a>
+</p>
+
+<h2 id="correlation" class="sect-h">Dispatch correlation (researcher mode)</h2>
+<p>
+  Cincinnati Open Data publishes calls-for-service rows with disposition codes (arrest, citation, offense report) but no inmate identifier. Hamilton County publishes the booking record but no link back to the originating dispatch. The two databases are public; the join is not.
+</p>
+<p>
+  <code>dispatch_correlations.json</code> attempts the join automatically and outputs candidate pairs by inmate_number and CFS row index, with a confidence score weighted 50/50 between temporal proximity (within a 60-minute window) and textual overlap between the booking's charge description and the CFS row's disposition/incident-type fields. Pairs below 0.35 confidence are dropped.
+</p>
+<p>
+  <strong>JCStream does not publish these joins on its own pages.</strong> The file is intentionally a raw data export. A high-confidence pair still requires human verification before any public claim is made that a specific dispatch led to a specific arrest. The defamation risk of automated false-positives is real; the researcher-mode export delegates that judgment to whoever's actually doing the reporting.
+</p>
+
+<h2 id="anon" class="sect-h">Anonymized event log (permanent)</h2>
+<p>
+  The roster mirror only keeps individuals while they're on the public roster: when HCSO releases someone, the next sweep removes them here. That's the privacy default, and it stays.
+</p>
+<p>
+  But aggregate counts shouldn't disappear too. <code>anon_changelog.json</code> is a parallel feed that retains every booking and release event forever, with all identifying fields (name, inmate_number, booking_number) stripped after 7 days. What survives the strip is the event type, the date (day-precision, not minute), the offense tier (F1-MM), and the primary charge category. That's enough to answer institutional-pattern questions ("how does Friday booking volume compare to Tuesday over the last year?", "what was the F1 share of the roster during summer 2025?") without keeping anyone individually visible after they've left custody.
+</p>
 
 <h2 id="legal" class="legal-anchor">Legal notices</h2>
 

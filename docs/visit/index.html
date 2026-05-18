@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>Visiting an inmate &middot; JCStream</title>
+  <title>Visiting someone at the Justice Center &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -16,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=375f55bcb2">
+  <link rel="stylesheet" href="/static/style.css?v=a70a58dfca">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
@@ -33,6 +33,24 @@
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
       </a>
+      <a class="masthead-seal masthead-seal-hcjc"
+         href="https://www.facebook.com/HCJCOH"
+         target="_blank" rel="noopener"
+         aria-label="Hamilton County Booking Photos on Facebook">
+        <img src="/static/img/hcjc-seal.png"
+             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
+             alt="Hamilton County Booking Photos seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <a class="masthead-seal masthead-seal-coc"
+         href="https://www.facebook.com/cityofcincinnati"
+         target="_blank" rel="noopener"
+         aria-label="City of Cincinnati on Facebook">
+        <img src="/static/img/coc-seal.png"
+             srcset="/static/img/coc-seal.png 1x, /static/img/coc-seal-2x.png 2x"
+             alt="City of Cincinnati seal"
+             width="36" height="36" decoding="async">
+      </a>
       <span class="spacer"></span>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
@@ -44,9 +62,11 @@
         </summary>
         <div class="nav-drawer">
           <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
-          <a class="nav-link" href="/court/">Court <span class="nav-hint">calendar</span></a>
+          <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who's due</span></a>
+          <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
           <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
           <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+          <a class="nav-link" href="/help/">Help <span class="nav-hint">free aid</span></a>
           <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
           <a class="nav-link" href="/feed.xml">RSS</a>
           <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
@@ -55,88 +75,174 @@
     </div>
   </header>
   <main id="main" class="page">
+    <div class="doc-wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Visiting</span>
 </nav>
 
-<section class="visit-hero">
-  <span class="visit-hero-eyebrow">Visitor information</span>
-  <h1 class="visit-hero-title">Visiting someone at the Justice Center</h1>
-  <p class="visit-hero-sub">
-    JCStream does not track visitor records and does not handle visitation logistics. This page is here because family members often arrive looking for the actual policy. The links below go straight to the authoritative source.
-  </p>
-</section>
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Visiting Someone at the Justice Center</div>
+    <div class="sub">Hamilton County Justice Center &middot; 1000 Sycamore Street, Cincinnati, Ohio 45202</div>
+  </div>
+</header>
 
-<div class="visit-grid">
+<p class="page-lede">
+  JCStream does not handle visitation. This page reproduces the published Hamilton County Sheriff's Office (HCSO) policy and contact information so family members who arrive here looking for the actual policy don't have to hunt for it. <a href="https://www.hcso.org/phone-visitations/" target="_blank" rel="noopener">The HCSO page is the source of record &rarr;</a>
+</p>
 
-  <a class="visit-card visit-card-primary" href="https://www.hcso.org/justice-center-services/" target="_blank" rel="noopener">
-    <div class="visit-card-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    </div>
-    <div class="visit-card-body">
-      <span class="visit-card-kicker">Authoritative</span>
-      <h2 class="visit-card-title">HCSO visitation policy</h2>
-      <p class="visit-card-desc">Hours, registration, video-visit setup, deposit instructions, and rules around active warrants. The source of record.</p>
-      <span class="visit-card-cta">Open hcso.org &rarr;</span>
-    </div>
-  </a>
-
-  <a class="visit-card" href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">
-    <div class="visit-card-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </div>
-    <div class="visit-card-body">
-      <span class="visit-card-kicker">Source roster</span>
-      <h2 class="visit-card-title">HCSO inmate search</h2>
-      <p class="visit-card-desc">The same roster JCStream mirrors, served by the Sheriff&rsquo;s office without our framing or aggregation.</p>
-      <span class="visit-card-cta">Open hcso.org &rarr;</span>
-    </div>
-  </a>
-
-  <a class="visit-card" href="https://www.courtclerk.org" target="_blank" rel="noopener">
-    <div class="visit-card-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg>
-    </div>
-    <div class="visit-card-body">
-      <span class="visit-card-kicker">Court records</span>
-      <h2 class="visit-card-title">Clerk of Courts</h2>
-      <p class="visit-card-desc">Docket schedule, case files, and filed documents. Public hearings are open. Our <a href="/court/">court calendar</a> aggregates next-court-date per inmate, but is informational only.</p>
-      <span class="visit-card-cta">Open courtclerk.org &rarr;</span>
-    </div>
-  </a>
-
+<div class="alert inline-alert" role="note">
+  <strong>Scam alert: electronic monitoring "release fees"</strong>
+  Hamilton County will never call you, or your incarcerated loved one's family, demanding a fee for an electronic GPS ankle monitor before release. The Hamilton County Court of Common Pleas has issued a public warning that scammers impersonate the Sheriff's Office, the Electronic Monitoring Unit (EMU), and the Clerk of Courts. They use publicly available arrest records and demand non-traceable payments via Zelle, Venmo, or Cash App. If you receive one of these calls, hang up and verify with the EMU directly at <strong>513-946-9800</strong>.
 </div>
 
-<section class="visit-scope">
-  <h2 class="visit-section-h">What JCStream will never publish</h2>
-  <p class="visit-section-sub">By policy, even when the underlying data may technically be public. See <a href="/data/#legal">data &amp; legal</a> for the full scope statement.</p>
-  <ul class="visit-bullets">
-    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Identities, addresses, or phone numbers of visitors.</li>
-    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Phone-call records, transcripts, or recordings.</li>
-    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Commissary purchases, deposit amounts, or money transfers.</li>
-    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Internal classification (gang affiliation, security level, behavior notes).</li>
-    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Medical, psychiatric, or program-participation information.</li>
-    <li><span class="visit-bullet-mark" aria-hidden="true">&times;</span> Identifying information about minors, victims, or witnesses.</li>
-  </ul>
-</section>
+<h2 class="sect-h">Visiting Hours</h2>
+<div class="fields">
+  <div class="k">Justice Center &middot; on-site</div>
+  <div class="v">Monday-Friday 11:00 AM to 6:30 PM. No on-site visits on holidays. On-site visits are conducted at the Justice Center North Lobby using a video terminal. No face-to-face visits.</div>
+  <div class="k">Justice Center &middot; remote</div>
+  <div class="v">Monday-Saturday 9:00 AM to 8:40 PM. Sunday 11:00 AM to 8:40 PM. Conducted by app or web browser through HomeWAV.</div>
+  <div class="k">Talbert House &middot; on-site</div>
+  <div class="v">Monday-Friday 5:30 PM to 7:00 PM. Conducted at the Justice Center North Lobby.</div>
+  <div class="k">Talbert House &middot; remote</div>
+  <div class="v">Saturday 9:00 AM to 9:00 PM. Sunday 11:00 AM to 7:00 PM. Mon, Thu, Fri 5:30 PM to 9:00 PM. Tue, Wed 5:30 PM to 7:00 PM and 8:00 PM to 9:00 PM.</div>
+</div>
+<p class="note-paragraph">Corrections officers work 12-hour shifts (7 AM to 7 PM or 7 PM to 7 AM) with occasional mandatory overtime, so published hours can shift. Confirm before traveling.</p>
 
-<section class="visit-removal">
-  <h2 class="visit-section-h">If a record on this site is causing you harm</h2>
-  <p>
-    Records here come and go automatically: when HCSO removes a person from the public roster, that record drops from JCStream on the next sweep (about every 30 minutes). For earlier removal, for example after a court order of sealing or expungement under <a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
-  </p>
-  <p class="visit-no-fee"><strong>There is never a fee, and there never will be.</strong></p>
-  <p class="visit-fcra muted">
-    Not a consumer reporting agency. Do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em>
-  </p>
-</section>
+<h2 class="sect-h">Provider: HomeWAV</h2>
+<p>
+  HCSO uses HomeWAV (not Securus) for all on-site terminal visits, remote video visits, and voice calls. Older guides on the internet still reference Securus; ignore them. Visitors register a HomeWAV account before scheduling.
+</p>
+<div class="visit-grid">
+  <div class="visit-card visit-card-primary">
+    <div class="visit-card-icon" aria-hidden="true">HW</div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Schedule a visit</span>
+      <h3 class="visit-card-title">HomeWAV portal</h3>
+      <p class="visit-card-desc">Register an account, upload a photo of your government ID, then schedule on-site or remote video visits. Free mobile apps available for iPhone and Android.</p>
+      <a class="visit-card-cta" href="https://www.homewav.com/" target="_blank" rel="noopener">Open homewav.com &rarr;</a>
+    </div>
+  </div>
+  <div class="visit-card">
+    <div class="visit-card-icon" aria-hidden="true">SUP</div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Customer support</span>
+      <h3 class="visit-card-title">HomeWAV help line</h3>
+      <p class="visit-card-desc">Available 365 days a year. Mon-Fri 8 AM to 6 PM CST, Sat-Sun 8 AM to 5 PM CST, Holidays 9 AM to 5 PM CST. Refunds: refunds@homewav.com.</p>
+      <a class="visit-card-cta" href="tel:+18443946639">Call 844-394-6639 &rarr;</a>
+    </div>
+  </div>
+  <div class="visit-card">
+    <div class="visit-card-icon" aria-hidden="true">HCSO</div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Authoritative</span>
+      <h3 class="visit-card-title">HCSO policy page</h3>
+      <p class="visit-card-desc">Hours, registration, terms of agreement, dress code, and the full account-creation procedure. The source of record.</p>
+      <a class="visit-card-cta" href="https://www.hcso.org/phone-visitations/" target="_blank" rel="noopener">Open hcso.org &rarr;</a>
+    </div>
+  </div>
+</div>
 
-    <footer class="site">
-      <span>Generated —</span>
-      <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
-      <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
-    </footer>
+<h2 class="sect-h">Rules HCSO Enforces</h2>
+<ul class="rule-list">
+  <li>The registered visitor must be present at the time of the visit.</li>
+  <li>Visitors must be appropriately dressed for the entirety of the visit. Absolutely no nudity of any kind.</li>
+  <li>No illicit or lewd behavior. No weapons or dangerous ordnance displayed during the visit.</li>
+  <li>Individuals must be more than 30 days from their release date to be visitable.</li>
+  <li>No active temporary protection orders (TPOs) against the inmate naming the visitor.</li>
+  <li>No active warrants out for the visitor.</li>
+  <li>Valid government-issued photo ID is required to register and to visit.</li>
+  <li>No minors without an adult present. Maximum four visitors at one time.</li>
+  <li>The account must include a photo of the visitor's government ID, date of birth, ID number, and expiration date.</li>
+  <li>Profile pictures cannot contain any social-media filters.</li>
+  <li>Violation of any rule results in immediate termination of the visit without credit and a potential ban from all future visits.</li>
+</ul>
+
+<h2 class="sect-h">Mail, Money, and Commissary</h2>
+<div class="fields">
+  <div class="k">Mailing address</div>
+  <div class="v">Inmate Name &amp; Booking #<br>Hamilton County Justice Center<br>1000 Sycamore Street<br>Cincinnati, OH 45202</div>
+  <div class="k">Money to commissary</div>
+  <div class="v">Deposits go through approved vendors, kiosks, or phone/online systems. Cash cannot be handed directly to jail staff. You typically need the inmate's full name and booking number.</div>
+  <div class="k">What money pays for</div>
+  <div class="v">Commissary purchases, phone/visit time, hygiene items, or court-imposed fees. Funds are held in a trust account in the inmate's name.</div>
+  <div class="k">Mail instructions</div>
+  <div class="v">See the "Inmate Information" section on hcso.org for current rules on what can be sent. <a href="https://www.hcso.org/inmate-information/" target="_blank" rel="noopener">Open hcso.org/inmate-information &rarr;</a></div>
+</div>
+
+<h2 class="sect-h">Posting Bond</h2>
+<p>Bonds are posted in person, 24 hours a day, 365 days a year, at the Clerk of Courts Municipal Criminal/Traffic Division on the 1st Floor of the Hamilton County Justice Center, 1000 Sycamore Street.</p>
+<div class="fields">
+  <div class="k">Accepted payment</div>
+  <div class="v">Cash, Mastercard, Visa, American Express, Discover. Government-issued photo ID required.</div>
+  <div class="k">Bond questions, 8 AM-4 PM</div>
+  <div class="v"><a href="tel:+15139466040">513-946-6040</a> (Clerk of Courts, Municipal Criminal/Traffic Division)</div>
+  <div class="k">After hours</div>
+  <div class="v"><a href="tel:+15139466019">513-946-6019</a></div>
+  <div class="k">Bond refund checks</div>
+  <div class="v">Monday-Friday 8:00 AM to 3:30 PM (except county holidays) at the Clerk's Office, 3rd Floor of the Hamilton County Courthouse, Room 315.</div>
+  <div class="k">Note: failure to appear</div>
+  <div class="v">Failure to appear at required appearances may result in forfeiture of bond under <a href="https://codes.ohio.gov/ohio-revised-code/section-2937.35" target="_blank" rel="noopener">ORC § 2937.35</a>.</div>
+</div>
+
+<h2 class="sect-h">If You Need a Lawyer</h2>
+<div class="visit-grid">
+  <div class="visit-card">
+    <div class="visit-card-icon" aria-hidden="true">PD</div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Criminal cases</span>
+      <h3 class="visit-card-title">Hamilton County Public Defender</h3>
+      <p class="visit-card-desc">Free representation for adults and juveniles charged with a crime who cannot afford a lawyer. <strong>Do not speak to police or detectives without your attorney present.</strong></p>
+      <a class="visit-card-cta" href="tel:+15139463700">Adult: 513-946-3700</a>
+      <a class="visit-card-cta" href="tel:+15139468282" style="margin-left:12px">Juvenile: 513-946-8282</a>
+    </div>
+  </div>
+  <div class="visit-card">
+    <div class="visit-card-icon" aria-hidden="true">FS</div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Sealing &amp; expungement</span>
+      <h3 class="visit-card-title">Fresh Start Expungement Clinic</h3>
+      <p class="visit-card-desc">Free expungement help from the Public Defender. 1st and 3rd Wednesday of each month, 1:00 PM-4:00 PM. Call the morning of your chosen date, 8:30-11:30 AM, to claim an appointment (first come, first served).</p>
+      <a class="visit-card-cta" href="tel:+15139463666">Call 513-946-3666 &rarr;</a>
+    </div>
+  </div>
+  <div class="visit-card">
+    <div class="visit-card-icon" aria-hidden="true">LA</div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Civil legal aid</span>
+      <h3 class="visit-card-title">Legal Aid Society of Greater Cincinnati</h3>
+      <p class="visit-card-desc">Free legal help for low-income clients in family / domestic violence, housing / eviction, consumer debt, employment, and benefits. Not criminal defense.</p>
+      <a class="visit-card-cta" href="tel:+15132419400">Call 513-241-9400 &rarr;</a>
+    </div>
+  </div>
+</div>
+<p class="note-paragraph">For civil court questions (small claims, eviction, custody, debt), the Clerk of Courts Help Center at Room 113 of the Hamilton County Courthouse will answer questions and book a free 40-minute appointment with a lawyer. They cannot represent you in court and cannot help with criminal cases. <a href="https://cincyhelpcenter.org" target="_blank" rel="noopener">cincyhelpcenter.org</a> or 513-946-5650.</p>
+
+<h2 class="sect-h">What JCStream Will Never Publish</h2>
+<p>By policy, even when the underlying data may technically be public. See <a href="/data/#legal">data &amp; legal</a> for the full scope statement.</p>
+<ul class="rule-list">
+  <li>Identities, addresses, or phone numbers of visitors.</li>
+  <li>Phone-call records, transcripts, or recordings.</li>
+  <li>Commissary purchases, deposit amounts, or money transfers.</li>
+  <li>Internal classification (gang affiliation, security level, behavior notes).</li>
+  <li>Medical, psychiatric, or program-participation information.</li>
+  <li>Identifying information about minors, victims, or witnesses.</li>
+</ul>
+
+<h2 class="sect-h">If a Record on This Site Is Causing You Harm</h2>
+<p>Records here come and go automatically: when HCSO removes a person from the public roster, that record drops from JCStream on the next sweep (about every 30 minutes). For earlier removal, for example after a court order of sealing or expungement under <a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32" target="_blank" rel="noopener">ORC § 2953.32</a>, open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.</p>
+<p class="visit-no-fee"><strong>There is never a fee, and there never will be.</strong></p>
+<p class="visit-fcra muted">
+  Not a consumer reporting agency. Do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15 U.S.C. § 1681 <em>et seq.</em>
+</p>
+
+    </div>
   </main>
+  <footer class="site">
+    <span>Generated —</span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+    <span class="footer-legal">Independent, non-governmental project &mdash; not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law.</span>
+  </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
 
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
@@ -150,6 +256,6 @@
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=116dce335a" defer></script>
+  <script src="/static/main.js?v=7215706798" defer></script>
 </body>
 </html>

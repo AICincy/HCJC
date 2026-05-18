@@ -64,7 +64,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--hours", type=int, default=720)  # 30 days
     parser.add_argument("--force", action="store_true",
-                        help="Refresh even if the local file is < 24h old.")
+                        help="Refresh even if the local file is < 1h old.")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args()
 
@@ -73,8 +73,8 @@ def main() -> int:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
     from .cincy_open import recently_refreshed
-    if not args.force and recently_refreshed(CFS_PATH, max_age_hours=24):
-        log.info("cfs_recent.json is < 24h old; skipping refresh (use --force to override)")
+    if not args.force and recently_refreshed(CFS_PATH, max_age_hours=1):
+        log.info("cfs_recent.json is < 1h old; skipping refresh (use --force to override)")
         return 0
     rows = pull_recent(hours=args.hours)
     save_recent(rows)

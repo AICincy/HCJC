@@ -7,11 +7,20 @@
   <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Statistics</span>
 </nav>
 
-<div class="hero-eyebrow">Roster statistics</div>
-<h1 class="record-name page-title">A snapshot of the {{ "{:,}".format(s.n) }} people currently in custody</h1>
-<p class="alert"><strong>Arrest is not conviction.</strong> Every person reflected in these counts is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. All charges are accusations only; these are point-in-time figures for the current roster.</p>
-<p class="muted">Computed from the same data the roster is built from. Last sweep
-<code>{{ snapshot.generated_utc or 'pending' }}</code>.</p>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Roster Statistics</div>
+    <div class="sub">A snapshot of the {{ "{:,}".format(s.n) }} people currently in custody &middot; Hamilton County Justice Center</div>
+  </div>
+  <div class="stamp">Sweep {{ snapshot.generated_utc[:16] }}Z</div>
+</header>
+
+<div class="alert inline-alert"><strong>Arrest is not conviction.</strong> Every person reflected in these counts is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. All charges are accusations only; these are point-in-time figures for the current roster.</div>
+
+<p class="page-lede">
+  Computed from the same data the roster is built from. The Hamilton County Justice Center holds people awaiting court proceedings or serving shorter sentences. Felony cases are prosecuted in the <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">Court of Common Pleas, General Division</a>; misdemeanors in <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">Hamilton County Municipal Court</a>. Last sweep <code>{{ snapshot.generated_utc or 'pending' }}</code>.
+</p>
 
 {% macro bars(rows, total, accent='') %}
 <div class="statbars" role="list">

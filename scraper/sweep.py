@@ -17,6 +17,7 @@ Designed to fit a ~25-minute budget at Crawl-delay: 10s, so it can run as a
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import os
 import sys
@@ -34,6 +35,7 @@ from .store import (
     load_changelog,
     load_current_or_raise,
     save_changelog,
+    save_anon_changelog,
     save_current,
 )
 from .sweep_guards import (
@@ -122,6 +124,10 @@ DETAIL_PATH = "/justice-center-services/inmate-search/inmate-detail/"
 PHOTOS_DIR = Path("data/photos")
 CURRENT_PATH = Path("data/current.json")
 CHANGELOG_PATH = Path("data/changelog.json")
+# Phase 11: PII-stripped append-only log of all events, kept forever. Events
+# older than ANON_EXPIRY_DAYS lose name/inmate_number/booking_number; only
+# event type, date (day), tier, and primary charge category survive.
+ANON_CHANGELOG_PATH = Path("data/anon_changelog.json")
 
 # sweep-F6: orchestrator-side wall-clock cap. The detail-fetch loop bails
 # when this many seconds have elapsed since make_client(); the finally
@@ -361,6 +367,33 @@ def run(
                     changelog = load_changelog(CHANGELOG_PATH)
                     changelog.extend(events)
                     save_changelog(CHANGELOG_PATH, changelog)
+                    # Phase 11: maintain the PII-expiring append-only feed.
+                    # Build enrichment so anonymized rows still carry tier +
+                    # category aggregate signal (which is what makes the
+                    # long-term feed useful at all).
+                    enrichment: dict[str, dict] = {}
+                    offenses_path = Path("data/orc_offenses.json")
+                    offenses: dict = {}
+                    if offenses_path.exists():
+                        try:
+                            offenses = json.loads(offenses_path.read_text(encoding="utf-8"))
+                        except (json.JSONDecodeError, OSError):
+                            offenses = {}
+                    for inm in current.values():
+                        first_charge = inm.charges[0] if inm.charges else None
+                        tier = None
+                        category = None
+                        if first_charge:
+                            code = (first_charge.orc_code or "").strip()
+                            ent = offenses.get(code) if isinstance(offenses, dict) else None
+                            if isinstance(ent, dict):
+                                tier = ent.get("degree")
+                                category = ent.get("title")
+                        enrichment[inm.inmate_number] = {
+                            "tier": tier,
+                            "category": category,
+                        }
+                    save_anon_changelog(ANON_CHANGELOG_PATH, changelog, enrichment)
             elif save_ok:
                 # Interrupted (or otherwise short-circuited) sweep: do not diff.
                 # `current` is a partial subset of `previous`, so every unreached
