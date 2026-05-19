@@ -32,11 +32,6 @@
   --warn-bg:      #FDF5EE;
   --ok:           #4f7c3a;
 
-  --tier-felony-fg: #F5F0EB;
-  --tier-misd-fg:   #1A1A1A;
-  --tier-felony-bg: #B33A2A;
-  --tier-misd-bg:   #DDDDDD;
-
   --radius:       0;
   --radius-sm:    0;
   --radius-lg:    0;
@@ -559,9 +554,9 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   border-radius: var(--radius);
   font-family: var(--font-mono);
 }
-.sr-tier.sr-felony      { background: var(--tier-felony-bg); color: var(--tier-felony-fg); }
-.sr-tier.sr-misdemeanor { background: var(--tier-misd-bg); color: var(--tier-misd-fg); }
-.sr-tier.sr-x           { background: var(--bg-soft); color: var(--fg-muted); }
+.sr-tier.sr-felony      { background: transparent; color: var(--fg); font-weight: 700; }
+.sr-tier.sr-misdemeanor { background: transparent; color: var(--fg-soft); font-weight: 400; text-transform: none; }
+.sr-tier.sr-x           { background: transparent; color: var(--fg-muted); font-weight: 400; }
 .sr-item .sr-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sr-item .sr-charge { font-size: 11px; color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; letter-spacing: 0.02em; }
 
@@ -686,22 +681,35 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   margin: 0;
   border: 0;
 }
-.tier-felony      { color: #fff; background: var(--tier-felony-bg); border: 0; }
-.tier-misdemeanor { color: var(--tier-misd-fg); background: var(--tier-misd-bg); border: 0; }
-.tier-other       { color: var(--fg-soft); background: var(--bg-soft); border: 1px dashed var(--border-hi); }
-
-/* 10-tier ladder chip (F1 → MM) used in the new design's hero + tables. */
-.tier-F1 { color: #fff; background: #9c1c1c; }
-.tier-F2 { color: #fff; background: #c43e2c; }
-.tier-F3 { color: #fff; background: #b85335; }
-.tier-F4 { color: #6b3a0a; background: #f3d8a8; }
-.tier-F5 { color: #6b3a0a; background: #f5e2bb; }
-.tier-M1 { color: #fff; background: #6b7d3c; }
-.tier-M2 { color: #2e3a1f; background: #c8d4a4; }
-.tier-M3 { color: #2e3a1f; background: #d5dfb6; }
-.tier-M4 { color: #4a4a2a; background: #e3e8c8; }
-.tier-MM { color: #5a6470; background: var(--bg-soft); }
-.tier-UNK{ color: var(--fg-muted); background: var(--bg-soft); border: 1px dashed var(--border-hi); }
+/* Severity encoded via typography (weight + case), not color.
+   Felony (any F-grade) → ALL-CAPS bold, accented border-top.
+   Misdemeanor (any M-grade) → sentence-case regular, no border.
+   Other / unknown → muted. All on transparent background — single-accent spec. */
+.tier-felony,
+.tier-F1, .tier-F2, .tier-F3, .tier-F4, .tier-F5 {
+  color: var(--fg);
+  background: transparent;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 0;
+  border-top: 1px solid var(--fg);
+}
+.tier-misdemeanor,
+.tier-M1, .tier-M2, .tier-M3, .tier-M4, .tier-MM {
+  color: var(--fg-soft);
+  background: transparent;
+  font-weight: 400;
+  text-transform: none;
+  border: 0;
+}
+.tier-other,
+.tier-UNK {
+  color: var(--fg-muted);
+  background: transparent;
+  font-weight: 400;
+  font-size: 10px;
+  border: 0;
+}
 .tier-lg { height: 28px; padding: 0 14px; font-size: 12px; border-radius: var(--radius-lg); }
 
 /* Tier badge pinned to the top-right corner of each card. */
@@ -1402,7 +1410,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   align-items: center;
 }
 .legend .swatch { display: inline-flex; align-items: center; gap: 0.35rem; }
-.legend .dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--cat, var(--fg-muted)); flex: 0 0 auto; }
+.legend .dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--fg-muted); flex: 0 0 auto; }
 .legend .tier { line-height: 1; height: 16px; padding: 0 6px; font-size: 9.5px; }
 
 /* ===== Inmate detail page ===== */
@@ -1877,16 +1885,19 @@ a.orc-code:hover { border-bottom-style: solid; }
   color: var(--accent);
   white-space: nowrap;
 }
-.ladder-F1 { background: #fde8e8; color: #6f1818; }
-.ladder-F2 { background: #fce0d8; color: #762a18; }
-.ladder-F3 { background: #fdebd8; color: #7a3c14; }
-.ladder-F4 { background: #fdf2e0; color: #7a4f1a; }
-.ladder-F5 { background: #fdf6e4; color: #7a5d24; }
-.ladder-M1 { background: #eef2dc; color: #3c4a14; }
-.ladder-M2 { background: #f1f4e2; color: #455218; }
-.ladder-M3 { background: #f3f6e6; color: #4f5a1f; }
-.ladder-M4 { background: #f4f6ea; color: #535d28; }
-.ladder-MM { background: #f5f6ee; color: #5a5e34; }
+/* Ladder cells: severity encoded by position (F1 leftmost = most severe)
+   and the .is-current accent ring — not by per-cell hue. */
+.ladder-F1, .ladder-F2, .ladder-F3, .ladder-F4, .ladder-F5,
+.ladder-M1, .ladder-M2, .ladder-M3, .ladder-M4, .ladder-MM {
+  background: var(--bg-soft);
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+}
+/* Felony grades get bolder label weight; misdemeanors stay regular. */
+.ladder-F1 .ladder-tier, .ladder-F2 .ladder-tier, .ladder-F3 .ladder-tier,
+.ladder-F4 .ladder-tier, .ladder-F5 .ladder-tier { font-weight: 700; color: var(--fg); }
+.ladder-M1 .ladder-tier, .ladder-M2 .ladder-tier, .ladder-M3 .ladder-tier,
+.ladder-M4 .ladder-tier, .ladder-MM .ladder-tier { font-weight: 400; color: var(--fg-soft); }
 .tier-meaning {
   font-size: 13px; color: var(--fg-soft);
   margin: 14px 0 0;
@@ -2131,15 +2142,20 @@ footer.site a { color: var(--accent); }
 /* ===== Stacked severity bar ===== */
 .stacked { padding: 4px 0 12px; }
 .stacked-bar { display: flex; height: 16px; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 14px; background: var(--bg-soft); }
-.stacked-seg { transition: filter 100ms; cursor: help; min-width: 1px; }
-.stacked-seg:hover { filter: brightness(1.08); }
+.stacked-seg { cursor: help; min-width: 1px; border-right: 1px solid var(--bg); }
+.stacked-seg:last-child { border-right: 0; }
+.stacked-seg-f { background: var(--fg); }
+.stacked-seg-m { background: var(--fg-muted); }
+.stacked-seg:hover { background: var(--accent); }
 .stacked-leg {
   list-style: none; padding: 0; margin: 0;
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 4px 18px; font-size: 12px;
 }
 .stacked-leg li { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
-.stacked-sw { width: 10px; height: 10px; border-radius: var(--radius-sm); flex-shrink: 0; }
+.stacked-sw { width: 10px; height: 10px; border-radius: var(--radius-sm); flex-shrink: 0; border: 1px solid var(--border); }
+.stacked-sw-f { background: var(--fg); }
+.stacked-sw-m { background: var(--fg-muted); }
 .stacked-k { flex: 1; color: var(--fg-soft); }
 .stacked-v { color: var(--fg-muted); font-variant-numeric: tabular-nums; }
 .stacked-v em { color: var(--fg-dim); font-style: normal; }
@@ -2221,7 +2237,7 @@ footer.site a { color: var(--accent); }
 .statbar-label { color: var(--fg-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .statbar-track { background: var(--bg-soft); border-radius: var(--radius); height: 10px; overflow: hidden; }
 .statbar-fill { display: block; height: 100%; background: var(--accent); min-width: 1px; border-radius: var(--radius); }
-.statbar-fill[class*="cat-"] { background: var(--cat, var(--accent)); }
+.statbar-fill[class*="cat-"] { background: var(--fg-soft); }
 .statbar-val { font-variant-numeric: tabular-nums; color: var(--fg); text-align: right; font-weight: 600; }
 .statbar-val small { color: var(--fg-muted); font-weight: 400; }
 .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
@@ -2451,17 +2467,17 @@ h2.legal-anchor {
   white-space: nowrap;
 }
 .cfs-disposition {
-  background: var(--accent-bg);
-  color: var(--accent);
+  background: transparent;
+  color: var(--fg-muted);
   font-weight: 600;
   font-size: 10.5px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 3px 9px;
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   display: inline-block;
   margin: 0;
-  border: 0;
 }
 
 /* --- Month accordion summary --- */
@@ -2553,7 +2569,7 @@ h2.legal-anchor {
   border: 1px solid var(--border);
   border-radius: var(--radius);
 }
-.legend .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cat, var(--fg-muted)); }
+.legend .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--fg-muted); }
 
 /* --- About JCStream block --- */
 .about-jcstream {
@@ -2680,7 +2696,7 @@ footer.site .footer-legal strong { color: var(--fg); }
   border-radius: var(--radius-lg);
   transition: width 400ms ease;
 }
-.statbar-fill[class*="cat-"] { background: var(--cat, var(--accent)); }
+.statbar-fill[class*="cat-"] { background: var(--fg-soft); }
 .statbar-val { text-align: right; }
 .statbar-val small { font-size: 11px; margin-left: 4px; }
 @media (max-width: 720px) {
