@@ -166,7 +166,7 @@
 - **SKILL.md**: .claude/skills/jcstream-orc-curator/SKILL.md
 - **Paired agent**: .claude/agents/jcstream-orc-curator.md
 - **Verdict**: Yellow
-- **One-line summary**: Schemas, conventions, and ladder are all accurate, but the cited log-line location is stale by ~1150 lines and the log level is mischaracterised as a "warning."
+- **One-line summary**: Schemas, conventions, and ladder are all accurate, but the cited log-line location is stale by ~200 lines and the log level is mischaracterised as a "warning."
 
 ## A. Drift
 - SKILL.md:46 cites `build.py:139` for the unmapped-codes log; the actual call is at `web/build.py:345` inside `_warn_about_unmapped_orcs` (defined at `web/build.py:335`, invoked at `web/build.py:186`). Post-2026-05-19 refactor — line 139 is no longer the `inmates_by_id` registration (`env.globals["inmates_by_id"]` is now at `web/build.py:179`).
