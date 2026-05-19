@@ -26,9 +26,9 @@
   var lbImg = document.getElementById('lb-img');
   var lbCap = document.getElementById('lb-cap');
   var lastFocus = null;
-  function openLB(src, caption, alt) {
+  function openLB(src, caption) {
     lastFocus = document.activeElement;
-    lbImg.src = src; lbImg.alt = alt || ('Booking photo: ' + (caption || ''));
+    lbImg.src = src; lbImg.alt = 'Booking photo: ' + (caption || '');
     lbCap.textContent = caption || '';
     lb.hidden = false;
     // Confine focus to the dialog: mark all other body children inert.
@@ -67,7 +67,7 @@
     var t = e.target.closest('[data-photo]');
     if (!t) return;
     e.preventDefault();
-    openLB(t.getAttribute('data-photo'), t.getAttribute('data-photo-cap'), t.getAttribute('data-photo-alt'));
+    openLB(t.getAttribute('data-photo'), t.getAttribute('data-photo-cap'));
   });
 
   // (2b) Shared tier-badge tooltip - content lives in [data-tip], JS positions it.
@@ -150,7 +150,6 @@
   var countEl = bar.querySelector('.filter-count');
   var noMatch = bar.parentNode.querySelector('#filter-empty');
   var cards = Array.prototype.slice.call(document.querySelectorAll('.cards .card-inmate'));
-  var weeks = Array.prototype.slice.call(document.querySelectorAll('details.week'));
   var months = Array.prototype.slice.call(document.querySelectorAll('details.month'));
   function currentFilters() {
     var f = {};
@@ -168,11 +167,6 @@
       if (ok && f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) ok = false;
       c.classList.toggle('is-filtered-out', !ok);
       if (ok) shown++;
-    });
-    weeks.forEach(function (w) {
-      var anyVisible = w.querySelector('.card-inmate:not(.is-filtered-out)');
-      w.classList.toggle('is-empty', !anyVisible && active);
-      if (active && anyVisible) w.open = true;
     });
     months.forEach(function (m) {
       var anyVisible = m.querySelector('.card-inmate:not(.is-filtered-out)');
