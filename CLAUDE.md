@@ -131,31 +131,3 @@ Violating them imposes cognitive cost the owner cannot afford.
   both default to `HCAdmin@hamilton-co.org`).
   With `JCSTREAM_PRA_SMTP_HOST` + `JCSTREAM_PRA_FROM_EMAIL` present it sends for real.
 
-- **Sentry error monitoring** for the sweep (`scraper/sweep.py`,
-  `.github/workflows/sweep.yml`): error-only, no tracing, no PII. Surfaces
-  the silent-staleness paths from `audit/05_sweep_reliability.md` as alerts
-  so the operator hears about a degraded-roster fallback the same minute it
-  happens (instead of "the site looks stale and the workflow exited 0").
-  1. Create a Sentry project (Python platform) and copy its DSN.
-  2. Repo → Settings → Secrets and variables → Actions → **Secrets**: add
-     `JCSTREAM_SENTRY_DSN` with the DSN as the value.
-  3. The next sweep picks it up. With the secret unset, `_init_sentry()`
-     short-circuits to a no-op and the sweep behaves exactly as before.
-  - Events emitted (all from `scraper/sweep.py`):
-    `sweep.degraded.roster_floor` (roster collapsed below 50% of prior),
-    `sweep.degraded.surname_errors` (>10% of letter fetches errored),
-    `sweep.detail_watchdog_tripped` (detail-page parse rates degraded;
-    `blocked="true"` for the hard floor that keeps the last-good roster,
-    `blocked="false"` for the WARN-only soft floors),
-    `sweep.photo_prune.skipped` (would-be prune over 50% of photos),
-    plus `capture_exception` for any unhandled error in the sweep loop.
-    Per-surname workers tag `sweep.surname_letter` so an exception in
-    one letter is triage-able.
-  - When to expect to hear from it: a single alert in a 30-min window is
-    usually HCSO rate-limiting and resolves on the next cycle. Two or three
-    cycles in a row of `sweep.degraded.*` means HCSO is actually down or
-    has restructured the list page. Any `detail_watchdog_tripped` with
-    `blocked="true"` means HCSO redesigned the detail page. Check
-    `scraper/parsers.py`. See `audit/13_sentry_instrumentation.md` for the
-    full catalog and threshold cross-reference.
-  - To turn it off: delete the `JCSTREAM_SENTRY_DSN` secret. No code change.

@@ -55,71 +55,6 @@ from .sweep_guards import (
 log = logging.getLogger("jcstream.sweep")
 
 
-# ===== Sentry telemetry (error monitoring only) =====
-# The sweep is the only path that should ship telemetry: the build and the
-# test suite stay offline. Initialization is gated on JCSTREAM_SENTRY_DSN so
-# local dev and any Actions run without the secret keep working unchanged
-# (sentry_sdk's capture_* APIs are no-ops when the SDK was never initialized,
-# so the instrumentation points below are safe to call unconditionally).
-def _init_sentry() -> None:
-    """Initialize sentry-sdk if JCSTREAM_SENTRY_DSN is set; otherwise no-op.
-
-    Error monitoring only: traces_sample_rate=0 means no performance/tracing
-    spans are emitted, and no profiling / session-replay integrations are
-    enabled. The SDK falls through silently when the env var is absent so the
-    GH Actions runner without the secret keeps exiting 0 on a healthy sweep.
-    """
-    dsn = os.environ.get("JCSTREAM_SENTRY_DSN", "").strip()
-    if not dsn:
-        return
-    try:
-        import sentry_sdk  # noqa: WPS433 (intentional optional dep)
-    except ImportError:
-        log.info("JCSTREAM_SENTRY_DSN is set but sentry-sdk is not installed; skipping")
-        return
-    sentry_sdk.init(
-        dsn=dsn,
-        traces_sample_rate=0.0,
-        # Don't ship local var values that could include inmate names/photos.
-        send_default_pii=False,
-    )
-    log.info("sentry-sdk initialized for sweep telemetry")
-
-
-def _sentry_capture_message(message: str, level: str = "info", **tags) -> None:
-    """Capture a Sentry message. Safe to call when the SDK isn't initialized."""
-    try:
-        import sentry_sdk
-    except ImportError:
-        return
-    with sentry_sdk.push_scope() as scope:
-        for k, v in tags.items():
-            scope.set_tag(k, v)
-        sentry_sdk.capture_message(message, level=level)
-
-
-def _sentry_capture_exception(exc: BaseException) -> None:
-    """Capture an exception. Safe to call when the SDK isn't initialized."""
-    try:
-        import sentry_sdk
-    except ImportError:
-        return
-    sentry_sdk.capture_exception(exc)
-
-
-def _sentry_set_tag(key: str, value: str) -> None:
-    """Set a tag on the current Sentry isolation scope.
-
-    Sentry 2.x maintains a per-task isolation scope by default, so calling
-    this inside a worker callback tags only that worker's events. No-op
-    when the SDK isn't installed/initialized.
-    """
-    try:
-        import sentry_sdk
-    except ImportError:
-        return
-    sentry_sdk.set_tag(key, value)
-
 SEARCH_PATH = "/justice-center-services/inmate-search/"
 DETAIL_PATH = "/justice-center-services/inmate-search/inmate-detail/"
 PHOTOS_DIR = Path("data/photos")
@@ -206,33 +141,9 @@ def run(
                     len(previous), len(seen_ids), n_failed, len(surnames),
                 )
                 # Emit a Sentry alert distinguishing the two failure modes the
-                # guard checks. Both can fire on the same cycle; emit both so
-                # the alert payload accurately reflects what tripped (see
-                # scraper/sweep_guards.sweep_looks_healthy for the thresholds).
-                # No PII: only aggregate counts are tagged.
-                failed_fraction = (n_failed / len(surnames)) if surnames else 0.0
-                if failed_fraction > SWEEP_MAX_FAILED_FRACTION and len(previous) >= SWEEP_BOOTSTRAP_FLOOR:
-                    _sentry_capture_message(
-                        "sweep.degraded.surname_errors",
-                        level="warning",
-                        prev_count=str(len(previous)),
-                        seen_count=str(len(seen_ids)),
-                        n_failed=str(n_failed),
-                        n_surnames=str(len(surnames)),
-                        failed_fraction=f"{failed_fraction:.3f}",
-                    )
-                if (
-                    len(previous) >= SWEEP_BOOTSTRAP_FLOOR
-                    and len(seen_ids) < SWEEP_MIN_ROSTER_FRACTION * len(previous)
-                ):
-                    roster_fraction = (len(seen_ids) / len(previous)) if previous else 0.0
-                    _sentry_capture_message(
-                        "sweep.degraded.roster_floor",
-                        level="warning",
-                        prev_count=str(len(previous)),
-                        seen_count=str(len(seen_ids)),
-                        roster_fraction=f"{roster_fraction:.3f}",
-                    )
+                # guard checks (scraper/sweep_guards.sweep_looks_healthy for
+                # the thresholds). Both are already logged via `log.warning`
+                # in sweep_guards; no further telemetry needed.
                 return 0
 
             # Decide which detail pages to fetch.
@@ -330,45 +241,20 @@ def run(
             watchdog_ok = check_detail_watchdog(
                 n_detail_attempts, n_detail_named, n_detail_with_photo
             )
-            # Surface the watchdog to Sentry whenever it does anything visible:
-            # the hard-BLOCK path (watchdog_ok=False) AND the WARN-only path
-            # when the soft floors trip at sample size. The WARN-only path
-            # is informational but worth knowing about; the BLOCK path is the
-            # one that flips roster_ok and keeps the last-good roster.
+            # Watchdog already logs WARN to stdout via check_detail_watchdog;
+            # the hard-BLOCK path flips roster_ok so the finally block keeps
+            # the last-good roster.
             if not watchdog_ok:
-                _sentry_capture_message(
-                    "sweep.detail_watchdog_tripped",
-                    level="warning",
-                    blocked="true",
-                    attempts=str(n_detail_attempts),
-                    named=str(n_detail_named),
-                    with_photo=str(n_detail_with_photo),
-                )
                 roster_ok = False
-            elif n_detail_attempts >= DETAIL_WATCHDOG_MIN_SAMPLE:
-                name_rate = n_detail_named / n_detail_attempts
-                photo_rate = n_detail_with_photo / n_detail_attempts
-                if name_rate < DETAIL_WATCHDOG_NAME_FLOOR or photo_rate < DETAIL_WATCHDOG_PHOTO_FLOOR:
-                    _sentry_capture_message(
-                        "sweep.detail_watchdog_tripped",
-                        level="warning",
-                        blocked="false",
-                        attempts=str(n_detail_attempts),
-                        named=str(n_detail_named),
-                        with_photo=str(n_detail_with_photo),
-                        name_rate=f"{name_rate:.3f}",
-                        photo_rate=f"{photo_rate:.3f}",
-                    )
         clean_finish = True
     except KeyboardInterrupt:
         log.warning("interrupted; persisting %d partial inmates", len(current))
-    except Exception as e:
-        # Anything else escaping the sweep body is unexpected: ship it to
-        # Sentry so we can see it, then re-raise. `roster_ok` stays True only
-        # if we already cleared the list-sweep guard; the `finally` will use
-        # that to decide whether to persist the partial roster.
+    except Exception:
+        # Anything else escaping the sweep body is unexpected: log and re-raise.
+        # `roster_ok` stays True only if we already cleared the list-sweep
+        # guard; the `finally` will use that to decide whether to persist
+        # the partial roster.
         log.exception("unhandled exception in sweep main loop")
-        _sentry_capture_exception(e)
         raise
     finally:
         # Write whatever we have so far (so an interrupted sweep doesn't blank
@@ -454,26 +340,10 @@ def _prune_and_report(photos_dir: Path, active_ids: set[str]) -> None:
     filesystem the prune is about to inspect, so it can't lie about what the
     prune would have done. We keep the prune logic untouched and just report.
     """
-    skipped = False
-    if photos_dir.exists():
-        existing = list(photos_dir.glob("*.jpg"))
-        if existing:
-            doomed = [f for f in existing if f.stem not in active_ids]
-            if doomed and len(doomed) / len(existing) > PHOTO_PRUNE_MAX_FRACTION:
-                skipped = True
-                _sentry_capture_message(
-                    "sweep.photo_prune.skipped",
-                    level="info",
-                    doomed=str(len(doomed)),
-                    existing=str(len(existing)),
-                    fraction=f"{len(doomed) / len(existing):.3f}",
-                )
-    # prune_photos itself logs and bails on its own (same threshold check); we
-    # always call it so the actual delete behavior stays owned by sweep_guards.
+    # prune_photos itself logs (log.warning) and bails on its own when the
+    # delete fraction would exceed PHOTO_PRUNE_MAX_FRACTION; we always call
+    # it so the actual delete behavior stays owned by sweep_guards.
     prune_photos(photos_dir, active_ids)
-    # `skipped` is intentionally unused beyond the capture above — left as a
-    # readable variable for future maintainers.
-    del skipped
 
 
 def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow], int]:
@@ -493,10 +363,6 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     # re-raise a typed error, switch to ThreadPoolExecutor + as_completed
     # (see scraper/sweep.py:run for the pattern) before merging.
     def fetch_one(surname: str) -> list[ListRow] | None:
-        # Tag the per-surname scope so any captured exception in this worker
-        # carries the letter context (HCSO's list page is one-letter-at-a-time,
-        # so the letter is enough to triage a regression without leaking PII).
-        _sentry_set_tag("sweep.surname_letter", surname)
         try:
             html = client.get(SEARCH_PATH, params={"last": surname})
             return parse_list_page(html)
@@ -536,6 +402,32 @@ def _fetch_one(
         log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
         return None, False, False
     inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
+    # WAF / geo-block check. Per the 2026-05-19 Claude.ai HCSO verification,
+    # valid inmate-detail pages from HCSO are 91-230 KB. HCSO's WAF returns
+    # truncated/blocked responses well under 5 KB to automated callers, and
+    # the parser silently produces an empty Inmate from them. When the page
+    # is tiny AND the parser found nothing AND we already have this inmate
+    # in `previous`, return None so the carry-forward path in `run()`
+    # preserves the previous-good record (cached photo, prior bio + charges)
+    # instead of overwriting it with empty data this cycle. For NEW inmates
+    # (not in previous) we fall through so the list_row fallback can still
+    # rescue an interstitial response into a minimal Inmate; better a name
+    # than nothing for a newly-booked record.
+    if (
+        len(html) < 5000
+        and not inm.last_name
+        and not inm.first_name
+        and not inm.charges
+        and not photo_bytes
+        and not photo_url
+        and inmate_id in previous
+    ):
+        log.warning(
+            "detail page for id=%s parsed to empty Inmate (%d bytes); "
+            "treating as WAF/geo-block, returning None to trigger carry-forward",
+            inmate_id, len(html),
+        )
+        return None, False, False
     detail_named = bool(inm.last_name or inm.first_name)
     detail_had_photo = bool(photo_bytes or photo_url)
 
@@ -610,27 +502,15 @@ def main(argv: list[str] | None = None) -> int:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
 
-    # Telemetry is initialized at the CLI entry, not at import time, so
-    # ``python -m scraper.sweep --dry-run`` from a contributor's laptop and
-    # the pytest suite (which never reaches main()) both stay offline by
-    # construction. See _init_sentry() for the env-gating contract.
-    _init_sentry()
-
     surnames = _read_surnames(args.surnames)
     log.info("loaded %d surnames from %s", len(surnames), args.surnames)
     started = time.monotonic()
-    try:
-        rc = run(
-            surnames,
-            max_surnames=args.max_surnames,
-            refresh_known=args.refresh_known,
-            dry_run=args.dry_run,
-        )
-    except Exception as e:
-        # Last-resort net for an exception that escaped run()'s own try/except
-        # (e.g. raised during `load_current_or_raise` before the main try-block).
-        _sentry_capture_exception(e)
-        raise
+    rc = run(
+        surnames,
+        max_surnames=args.max_surnames,
+        refresh_known=args.refresh_known,
+        dry_run=args.dry_run,
+    )
     log.info("sweep finished in %.1fs (rc=%d)", time.monotonic() - started, rc)
     return rc
 

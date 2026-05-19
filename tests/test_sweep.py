@@ -166,6 +166,60 @@ def test_fetch_one_carries_existing_photo_when_no_inline_image(tmp_path, monkeyp
     assert inm.photo_filename == "1234567.jpg"
 
 
+def test_fetch_one_falls_back_to_disk_when_pillow_rejects_bytes(tmp_path, monkeypatch):
+    # Regression: if Pillow can't decode the bytes (downscale_and_save returns
+    # False) but a previously-good photo is sitting on disk, we should NOT
+    # drop the cached photo from the snapshot. The prior bug used an
+    # `if photo_bytes: if downscale_and_save: set` outer-if that skipped the
+    # disk-cached fallback `elif` whenever bytes were present-but-corrupt.
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    cached = tmp_path / "5550000.jpg"
+    cached.write_bytes(b"\xff\xd8\xff\xe0cached-jpeg-bytes")
+
+    def _always_fail_downscale(raw, dest):
+        return False  # simulate Pillow UnidentifiedImageError
+
+    monkeypatch.setattr(sweep, "downscale_and_save", _always_fail_downscale)
+    html = (
+        '<html><body><h1>DOE, JOHN</h1>'
+        '<ul><li>Inmate Number : 5550000</li></ul>'
+        '<img src="data:image/png;base64,UExBQ0VIT0xERVI=" style="width:274px;">'
+        '</body></html>'
+    )
+    client = _FakeClient(html)
+    inm, _, had_photo = _fetch_one(client, "5550000", previous={}, list_row=None)
+    assert had_photo is True  # detail parser found inline bytes
+    assert inm is not None
+    # Cached file on disk rescued the snapshot even though decode failed.
+    assert inm.photo_filename == "5550000.jpg"
+
+
+def test_fetch_one_returns_none_on_waf_blocked_response_for_known_inmate(tmp_path, monkeypatch):
+    # Regression: HCSO's WAF returns a tiny truncated response (<5 KB) that
+    # parses to an empty Inmate. For inmates already in `previous`, we should
+    # return None so the carry-forward path in `run()` preserves the prior-
+    # good record. For NEW inmates (not in previous), we still fall through
+    # so the list_row fallback can rescue a name into a minimal Inmate.
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    tiny_blocked_html = "<html><body>Access Denied</body></html>"  # 41 bytes
+    client = _FakeClient(tiny_blocked_html)
+
+    # Known inmate (in previous): WAF block triggers carry-forward path.
+    prior = Inmate(inmate_number="7770000", last_name="DOE", first_name="JOHN", booking_date="5/1/26")
+    inm, named, had_photo = _fetch_one(client, "7770000", previous={"7770000": prior}, list_row=None)
+    assert inm is None  # signals run() to carry forward from previous
+    assert named is False
+    assert had_photo is False
+
+    # Unknown inmate (not in previous): list_row fallback still works.
+    list_row = ListRow(
+        inmate_number="8880000", last_name="ROE", first_name="JANE", admit_date="5/12/26"
+    )
+    inm, _, _ = _fetch_one(client, "8880000", previous={}, list_row=list_row)
+    assert inm is not None  # falls through; list_row rescues the name
+    assert inm.last_name == "ROE"
+
+
 def test_sweep_healthy_at_failure_fraction_boundary():
     # tests-F4: SWEEP_MAX_FAILED_FRACTION=0.10 uses strict `>`, so exactly
     # 10% must still be accepted. Anything strictly above is rejected.

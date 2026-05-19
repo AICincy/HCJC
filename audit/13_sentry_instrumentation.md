@@ -1,8 +1,16 @@
-# sentry - Sweep Telemetry Instrumentation
+# sentry - Sweep Telemetry Instrumentation [SUPERSEDED 2026-05-19]
+
+> **Note:** Sentry was removed from the project on 2026-05-19. The integration
+> described below (`sentry-sdk` in `requirements.txt`, `_init_sentry` and the
+> `_sentry_capture_*` helpers in `scraper/sweep.py`, `JCSTREAM_SENTRY_DSN` in
+> `.github/workflows/sweep.yml`) no longer exists. This document is preserved
+> as a historical record of what the instrumentation looked like; the sweep
+> now relies on the standard `log.warning` / `log.exception` output captured
+> by the GitHub Actions runner.
 
 ## Audit metadata
 - Scope: scraper sweep only (no build, no tests, no other CLI entry).
-- Files touched: `requirements.txt`, `scraper/sweep.py`, `.github/workflows/sweep.yml`.
+- Files touched (when active): `requirements.txt`, `scraper/sweep.py`, `.github/workflows/sweep.yml`.
 - Mode: error monitoring only. No performance tracing, no profiling, no session replay.
 
 ## Purpose
