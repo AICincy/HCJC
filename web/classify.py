@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
 # Regex to extract degree suffix (F1, F2, M1, etc.) from charge description.
 # Matches " F1", " F2", " F3", " F4", " F5", " M1", " M2", " M3", " M4", " MM"
 # at the end of the description string (or before closing paren).
-_DEGREE_RE = re.compile(r"\b([FM]\d|MM)(?:\)|$)")
+_DEGREE_RE = re.compile(r"\b([FM]\d|MM)\b")
 
 # Minimum inmates in a month-group before it's rendered as its own section.
 # Smaller groups roll into "Earlier bookings" to avoid a long tail.
