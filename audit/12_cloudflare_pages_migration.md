@@ -111,7 +111,7 @@ Current `docs/` tree count and size:
 ```
 $ find "C:\Users\krass\Documents\Claude AIO\HCJC\docs" -type f | wc -l
 2321
-$ du -sh "C:\Users\krass\Documents\Claude AIO\HCJC\docs"
+$ du -sh docs
 65M
 ```
 
