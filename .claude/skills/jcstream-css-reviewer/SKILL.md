@@ -43,11 +43,15 @@ A rule is **dead** if no selector in `web/templates/*.html` (rendered or not) ev
 
 ```sh
 # Extract every class/id selector from style.css
-grep -oE '\.[a-zA-Z0-9_-]+|#[a-zA-Z0-9_-]+' web/static/style.css | sort -u > /tmp/css-selectors.txt
-# Find selectors not referenced in templates
+# Require a letter immediately after the . or # so we skip decimal values
+# (.85rem) and hex codes (#ecedef).
+grep -oE '\.[a-zA-Z][a-zA-Z0-9_-]*|#[a-zA-Z][a-zA-Z0-9_-]*' web/static/style.css | sort -u > /tmp/css-selectors.txt
+# Find selectors not referenced in templates or main.js. Match double- or
+# single-quoted class/id attributes plus dynamic class manipulation in JS
+# (classList.add('foo'), document.querySelector('.foo'), etc.).
 while read sel; do
   cls="${sel:1}"  # strip leading . or #
-  if ! grep -rqE "class=\".*\\b${cls}\\b|id=\"${cls}\"" web/templates/ web/static/main.js; then
+  if ! grep -rqE "class=[\"'].*\\b${cls}\\b|id=[\"']${cls}[\"']|\\b${cls}\\b" web/templates/ web/static/main.js; then
     echo "Possibly dead: $sel"
   fi
 done < /tmp/css-selectors.txt | head -30
@@ -60,8 +64,10 @@ Some selectors are added by JS (`main.js` sets `body.is-table`, lightbox classes
 Two rules with the exact same selector list, or two declarations of the same property within one rule, indicate either an oversight or a cascade hack:
 
 ```sh
-# Find selectors that appear more than once at top-level (not inside @media)
-grep -nE '^\.[a-zA-Z][^,\{]+\s*\{' web/static/style.css | awk -F: '{print $3}' | sort | uniq -c | sort -rn | head -10
+# Find selectors that appear more than once at top-level (not inside @media).
+# Strip the "lineno:" prefix from grep -n with sed (awk -F: would also split
+# on colons inside pseudo-selectors like :hover).
+grep -nE '^\.[a-zA-Z][^,{]+\s*\{' web/static/style.css | sed 's/^[0-9]*://' | sort | uniq -c | sort -rn | head -10
 ```
 
 The historic `audit/10_css_a11y_performance.md` findings (`.banner` duplicated, `tag-booked` contrast, invalid `open: true` rule) may or may not still be present — verify before reporting.
@@ -160,13 +166,15 @@ If the count is much higher than the number of distinct colors in the design tok
 ```sh
 grep -oE '^\s*--[a-zA-Z0-9-]+' web/static/style.css | sort -u | while read tok; do
   name="${tok#*--}"
-  if [ "$(grep -c "var(--${name})" web/static/style.css)" -le 1 ]; then
+  if [ "$(grep -c "var(--${name})" web/static/style.css)" -eq 0 ]; then
     echo "Possibly dead token: --${name}"
   fi
 done
 ```
 
-(The `<= 1` check accounts for the `:root` definition itself counting as one match.)
+(`grep -c "var(--name)"` counts only the call-site usages, not the
+definition line `--name:` itself — so `-eq 0` correctly identifies tokens
+defined in `:root` that are never referenced via `var()`.)
 
 ## Anti-patterns specific to JCStream
 
@@ -190,8 +198,9 @@ for t in F1 F2 F3 F4 F5 M1 M2 M3 M4 MM; do
   printf "tier-%-3s: %d hits   ladder-%-3s: %d hits\n" "$t" "$(grep -cE "\.tier-$t\b" web/static/style.css)" "$t" "$(grep -cE "\.ladder-$t\b" web/static/style.css)"
 done
 
-# Dupe / cascade hunt
-grep -nE '^\.[a-zA-Z][^,{]+\s*\{' web/static/style.css | awk -F: '{print $3}' | sort | uniq -c | sort -rn | head -10
+# Dupe / cascade hunt (strip lineno: prefix with sed, not awk -F:, to
+# preserve :pseudo-selectors)
+grep -nE '^\.[a-zA-Z][^,{]+\s*\{' web/static/style.css | sed 's/^[0-9]*://' | sort | uniq -c | sort -rn | head -10
 
 # Token dead-letter check (per the snippet above)
 ```
