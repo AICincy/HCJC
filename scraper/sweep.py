@@ -10,8 +10,9 @@ Each invocation:
   4. Writes data/current.json and appends to data/changelog.json.
   5. Removes photos belonging to released inmates.
 
-Designed to fit a ~25-minute budget at Crawl-delay: 10s, so it can run as a
-30-minute cron in GitHub Actions.
+Designed to fit a ~25-minute budget at Crawl-delay: 10s, so it can run on the
+`*/15 * * * *` GitHub Actions cron (with a 20-minute skip-gate to keep effective
+cadence at ~20-45 min).
 """
 
 from __future__ import annotations
@@ -298,7 +299,7 @@ def run(
                         # otherwise the in-memory size must still clear the
                         # 50% guard. A real catastrophic mid-sweep crash with
                         # a huge to_fetch list now keeps the previous-good
-                        # snapshot until the natural 30-minute retry, rather
+                        # snapshot until the next ~20-45 minute retry, rather
                         # than persisting a degraded baseline.
                         if (
                             len(previous) < SWEEP_BOOTSTRAP_FLOOR

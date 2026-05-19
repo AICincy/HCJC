@@ -47,11 +47,12 @@ per-page link unfurls as the generic project card, not an individual's name/phot
 
 ## ORC offense categorisation
 
-`web/classify.py` (via the `_OFFENSE_CATEGORY` and `_CHAPTER_LABEL` maps, imported and
-re-exported by `web/build.py` for templates) maps each ORC section to a **fine-grained
-offense category** with a colour class (homicide / felonious assault / robbery / drug
-trafficking / domestic violence / …) keyed on the section number — so Aggravated Murder
-and simple Assault never share a tag. The
+`web/classify.py` (via the `_OFFENSE_CATEGORY` and `_CHAPTER_LABEL` maps; `web/build.py`
+re-exports the symbols for `tests/test_build.py` access, while templates reach the same
+data through env.globals helpers like `primary_chapter` and `primary_charge`) maps each
+ORC section to a **fine-grained offense category** with a colour class (homicide /
+felonious assault / robbery / drug trafficking / domestic violence / …) keyed on the
+section number — so Aggravated Murder and simple Assault never share a tag. The
 colour tracks *severity feel*, not chapter number. Charge **tier** (F1…MM) uses the most
 authoritative signal available per charge: an explicit degree suffix in the HCSO description >
 the ORC default degree from `orc_offenses.json` > the court venue (Common Pleas = felony,

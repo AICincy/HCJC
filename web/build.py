@@ -850,7 +850,7 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
         encoding="utf-8",
     )
     # security.txt (RFC 9116) — Expires is required; keep it ~1 year out (the
-    # cron rebuilds every ~30 min so it never actually goes stale).
+    # cron rebuilds every ~20-45 min so it never actually goes stale).
     expires = (datetime.now(timezone.utc) + timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%SZ")
     wk = out_dir / ".well-known"
     wk.mkdir(parents=True, exist_ok=True)
@@ -873,7 +873,7 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
         "\n/* DATA */\n"
         "  HCSO public inmate roster (ORC §149.43) + Cincinnati Open Data feeds\n"
         "  No historical archive — records drop off when HCSO removes them\n"
-        f"  Rebuilt every ~30 minutes via GitHub Actions · last build {generated_utc or '—'}\n"
+        f"  Rebuilt every ~20-45 minutes via GitHub Actions · last build {generated_utc or '—'}\n"
         "\n/* BUILT WITH */\n"
         "  Python · Jinja2 · httpx · selectolax · Pillow · GitHub Pages\n",
         encoding="utf-8",
