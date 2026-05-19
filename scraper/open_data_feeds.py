@@ -1,5 +1,5 @@
 """Generic loader for additional Cincinnati Open Data safety feeds beyond
-the four hand-rolled scrapers (cfs.py, cfs_pdi.py, shootings.py, incidents.py).
+the hand-rolled scrapers (cfs.py, cfs_pdi.py, shootings.py).
 
 Each entry in :data:`FEEDS` describes a Socrata dataset to pull on the same
 30-min sweep cron, gated to refresh at most once every 24h per feed
@@ -57,21 +57,13 @@ class FeedSpec:
     sub-day polling is pure waste."""
 
 
-# All seven new feeds chosen for civic-accountability + criminal-justice
-# relevance to JCStream's mission. Excluded: dataset-locator hrefs
-# (police-district boundaries), pre-2024 historical archives (Reported
-# Crime BEFORE 6/3/2024, NFIRS 2018/2019/2020), and filters on datasets
-# we already pull (Drug & Heroin 24h report = filtered view of qiik-bpks).
+# Supplemental feeds chosen for civic-accountability + criminal-justice
+# relevance. Excluded: dataset-locator hrefs (police-district boundaries),
+# pre-2024 historical archives (NFIRS 2018/2019/2020), filters on datasets
+# we already pull (Drug & Heroin 24h report = filtered view of qiik-bpks),
+# and frozen datasets with no 2025+ data (PDI OI Shootings r6q4-muts,
+# removed May 2026; PDI Crime Incidents k59e-2pvf replaced by Crime STARS).
 FEEDS: tuple[FeedSpec, ...] = (
-    FeedSpec(
-        dataset_id="r6q4-muts",
-        filename="oi_shootings_recent.json",
-        label="PDI Officer Involved Shootings",
-        days=730,  # historic — these incidents are rare; 2-year window
-        where_candidates=("incident_date > '{since}'",),
-        order="incident_date DESC",
-        cache_hours=24,  # rare-event feed; daily is plenty
-    ),
     FeedSpec(
         dataset_id="8us8-wi2w",
         filename="use_of_force_pdi_recent.json",

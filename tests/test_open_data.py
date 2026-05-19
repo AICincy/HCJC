@@ -1,6 +1,6 @@
 """Round-trip + error-path coverage for the Cincinnati Open Data loaders.
 
-All four feeds (cfs, cfs_pdi, incidents, shootings) share the same persistence
+All three feeds (cfs, cfs_pdi, shootings) share the same persistence
 shape: ``{generated_utc, dataset_id, row_count, rows}`` (cfs omits dataset_id).
 The ``query()`` shim in cincy_open is the only thing that touches the network;
 these tests stub it out so the suite never makes a real request.
@@ -14,7 +14,7 @@ import pytest
 
 import httpx
 
-from scraper import cfs, cfs_pdi, incidents, shootings
+from scraper import cfs, cfs_pdi, shootings
 
 
 def _socrata_400() -> httpx.HTTPStatusError:
@@ -30,7 +30,6 @@ def _socrata_400() -> httpx.HTTPStatusError:
 @pytest.mark.parametrize("mod,attr", [
     (cfs, "load_recent"),
     (cfs_pdi, "load"),
-    (incidents, "load"),
     (shootings, "load"),
 ])
 def test_loader_returns_empty_when_file_missing(mod, attr, tmp_path: Path):
@@ -42,7 +41,6 @@ def test_loader_returns_empty_when_file_missing(mod, attr, tmp_path: Path):
 @pytest.mark.parametrize("mod,save_name,load_name", [
     (cfs, "save_recent", "load_recent"),
     (cfs_pdi, "save", "load"),
-    (incidents, "save", "load"),
     (shootings, "save", "load"),
 ])
 def test_save_load_round_trip(mod, save_name, load_name, tmp_path: Path):
@@ -90,27 +88,6 @@ def test_cfs_pdi_pull_uses_dataset_id(monkeypatch):
     assert seen["dataset_id"] == "gexm-h6bt"
 
 
-def test_incidents_pull_falls_back_when_first_filter_fails(monkeypatch):
-    calls = []
-
-    def fake_query(dataset_id, **kw):
-        where = kw.get("where")
-        calls.append(where)
-        if where and where.startswith("date_reported"):
-            # Simulate Socrata's "column not found" 400 - the only failure
-            # shape the filter-candidate loop should be tolerant of.
-            raise _socrata_400()
-        return [{"row": 1}]
-
-    monkeypatch.setattr(incidents, "query", fake_query)
-    rows = incidents.pull_recent(days=1, limit=5)
-    assert rows == [{"row": 1}]
-    # First (canonical) filter tried, then the second succeeded.
-    assert len(calls) >= 2
-    assert calls[0].startswith("date_reported")
-    assert calls[1].startswith("date_from")
-
-
 def test_shootings_pull_returns_unfiltered_when_all_filters_fail(monkeypatch):
     calls = []
 
@@ -125,18 +102,6 @@ def test_shootings_pull_returns_unfiltered_when_all_filters_fail(monkeypatch):
     assert rows == [{"fallback": True}]
     # Tried both candidate filters, then the unfiltered fallback.
     assert calls[-1] is None
-
-
-def test_incidents_pull_propagates_transport_errors(monkeypatch):
-    # sec-net-F4: a real transport error (e.g. ConnectError) must NOT be
-    # silently swallowed and rolled into the unfiltered fallback. The
-    # operator wants to see an outage, not stale data.
-    def fake_query(dataset_id, **kw):
-        raise httpx.ConnectError("dns failed")
-
-    monkeypatch.setattr(incidents, "query", fake_query)
-    with pytest.raises(httpx.ConnectError):
-        incidents.pull_recent(days=1, limit=5)
 
 
 def test_shootings_pull_propagates_transport_errors(monkeypatch):

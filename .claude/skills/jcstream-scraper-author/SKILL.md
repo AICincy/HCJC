@@ -1,6 +1,6 @@
 ---
 name: jcstream-scraper-author
-description: Use when modifying or extending data pullers in scraper/ — HCSO inmate roster (sweep.py), Cincinnati Open Data feeds (cfs.py, cfs_pdi.py, shootings.py, incidents.py), the courtclerk URL helpers, PRA email loop. Covers rate-limit budget, sweep health guards (sweep_guards.py: 50% floor, 10% error ceiling, detail watchdog, photo prune), atomic write to data/current.json, and the 30-min cron in .github/workflows/sweep.yml. Trigger phrases: "add a new data feed", "add an Open Data feed", "Socrata pull", "fix the HCSO scraper", "fix the sweep cron", "tune the sweep guard", "tune detail watchdog", "raise/lower roster guard", "PRA email loop", "courtclerk link helper", "photo prune skipped", "incidents feed", "rate-limit", "sweep wall-clock".
+description: Use when modifying or extending data pullers in scraper/ — HCSO inmate roster (sweep.py), Cincinnati Open Data feeds (cfs.py, cfs_pdi.py, shootings.py, open_data_feeds.py), the courtclerk URL helpers, PRA email loop. Covers rate-limit budget, sweep health guards (sweep_guards.py: 50% floor, 10% error ceiling, detail watchdog, photo prune), atomic write to data/current.json, and the 30-min cron in .github/workflows/sweep.yml. Trigger phrases: "add a new data feed", "add an Open Data feed", "Socrata pull", "fix the HCSO scraper", "fix the sweep cron", "tune the sweep guard", "tune detail watchdog", "raise/lower roster guard", "PRA email loop", "courtclerk link helper", "photo prune skipped", "rate-limit", "sweep wall-clock".
 ---
 
 # JCStream scraper author
@@ -39,16 +39,17 @@ New OD-feed pullers should:
 Write to `data/current.json.tmp` then `os.replace()` — never directly. This keeps the GH Actions workflow from committing a partial file mid-write.
 
 ## Cincinnati Open Data feeds
-Four feeds today (`scraper/cincy_open.py` is the generic Socrata helper they all call):
+Three hand-rolled feeds (`scraper/cincy_open.py` is the generic Socrata helper they all call):
 - `qiik-bpks` — CFS calls in `scraper/cfs.py` (arrest/citation/report dispositions)
 - `gexm-h6bt` — CFS PDI dispatch in `scraper/cfs_pdi.py` (wider window)
 - `sfea-4ksu` — reported shootings in `scraper/shootings.py`
-- `k59e-2pvf` — PDI Crime Incidents in `scraper/incidents.py`
 
-When adding a feed, follow the pattern in `cfs.py` (or `shootings.py`): typed row dataclass, `load()` returns a list, build.py de-dupes on event number. The CFS↔inmate matcher lives in `scraper/match.py`.
+Six supplemental feeds in `scraper/open_data_feeds.py` (use-of-force, traffic stops, pedestrian stops, STARS crime, CCA complaints). PDI Crime Incidents (`k59e-2pvf`) was removed May 2026 (replaced by Crime STARS `7aqy-xrv9`). PDI OI Shootings (`r6q4-muts`) was removed May 2026 (dataset frozen since 2019, no replacement).
+
+When adding a feed, follow the pattern in `cfs.py` (or `shootings.py`): typed row dataclass, `load()` returns a list, build.py de-dupes on event number. The CFS-to-inmate matcher lives in `scraper/match.py`.
 
 ## Workflow contract
-`.github/workflows/sweep.yml` runs every 30 min with `timeout-minutes: 50`. It checks out the dev branch, runs the HCSO sweep, pulls the four Cincinnati Open Data feeds, runs `web.build`, commits + pushes the changes, then runs `actions/upload-pages-artifact@v3` and `actions/deploy-pages@v4` (`sweep.yml`) bound to the `github-pages` environment (`sweep.yml`). Don't add steps that re-create venvs (cold-start cost). Don't push to `main` from CI.
+`.github/workflows/sweep.yml` runs every 30 min with `timeout-minutes: 50`. It checks out the dev branch, runs the HCSO sweep, pulls the three Cincinnati Open Data feeds, runs `web.build`, commits + pushes the changes, then runs `actions/upload-pages-artifact@v3` and `actions/deploy-pages@v4` (`sweep.yml`) bound to the `github-pages` environment (`sweep.yml`). Don't add steps that re-create venvs (cold-start cost). Don't push to `main` from CI.
 
 Issue-form ingest: `scraper/ingest_issue.py` + `.github/workflows/ingest_case_data.yml` parses owner-filed GitHub issues into `data/courtclerk_cases.json`; this is a separate pipeline from the sweep cron.
 
