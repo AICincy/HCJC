@@ -435,44 +435,66 @@ def _fetch_one(
     fallback or disk-cached photo carry-forward is applied, so callers can
     measure detail-page health distinct from the list-side path.
     """
-    try:
-        html = client.get(DETAIL_PATH, params={"id": inmate_id})
-    except Exception as e:
-        log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
-        return None, False, False
-    inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
-    # WAF / geo-block check. Per the 2026-05-19 Claude.ai HCSO verification,
-    # valid inmate-detail pages from HCSO are 91-230 KB. HCSO's WAF returns
-    # truncated/blocked responses well under 5 KB to automated callers, and
-    # the parser silently produces an empty Inmate from them.
-    looks_like_waf_block = (
-        len(html) < 5000
-        and not inm.last_name
-        and not inm.first_name
-        and not inm.charges
-        and not photo_bytes
-        and not photo_url
-    )
-    if looks_like_waf_block:
+    # WAF / geo-block tolerant fetch. Per the 2026-05-19 Claude.ai HCSO
+    # verification, valid inmate-detail pages from HCSO are 91-230 KB.
+    # HCSO's WAF returns truncated/blocked responses well under 5 KB to
+    # automated callers, and the parser silently produces an empty Inmate
+    # from them. On the first attempt's WAF-block-shaped response we sleep
+    # the exponential backoff and retry once: if the WAF window has
+    # cleared, we get a real response and the photo lands this cycle
+    # rather than waiting for the next cron run.
+    inm = None
+    photo_bytes = None
+    photo_url = None
+    html = ""
+    for attempt in range(2):
+        try:
+            html = client.get(DETAIL_PATH, params={"id": inmate_id})
+        except Exception as e:
+            log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
+            return None, False, False
+        inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
+        looks_like_waf_block = (
+            len(html) < 5000
+            and not inm.last_name
+            and not inm.first_name
+            and not inm.charges
+            and not photo_bytes
+            and not photo_url
+        )
+        if not looks_like_waf_block:
+            _on_waf_block_cleared()
+            break
         streak = _on_waf_block_observed()
         backoff = _waf_backoff_seconds(streak)
+        if attempt == 0:
+            log.warning(
+                "WAF-block-shaped response for id=%s (%d bytes, streak=%d); "
+                "sleeping %.1fs and retrying once",
+                inmate_id, len(html), streak, backoff,
+            )
+            time.sleep(backoff)
+            continue
+        # Second attempt also looked like a block. Sleep the latest
+        # backoff to slow the worker before returning, then either trigger
+        # carry-forward (known inmate) or fall through to list_row
+        # fallback (new inmate).
         log.warning(
             "WAF-block-shaped response for id=%s (%d bytes, streak=%d); "
-            "sleeping %.1fs before returning",
-            inmate_id, len(html), streak, backoff,
+            "retry also blocked, returning without overwriting",
+            inmate_id, len(html), streak,
         )
         time.sleep(backoff)
-        # Known inmate: return None so the carry-forward path in `run()`
-        # preserves the previous-good record (cached photo, prior bio +
-        # charges) instead of overwriting it with empty data this cycle.
         if inmate_id in previous:
+            # Known inmate: return None so the carry-forward path in
+            # `run()` preserves the previous-good record (cached photo,
+            # prior bio + charges) instead of overwriting with empty data.
             return None, False, False
         # New inmate (not in previous): fall through so the list_row
-        # fallback below can still rescue an interstitial response into a
+        # fallback below can rescue the interstitial response into a
         # minimal Inmate. Better a name than nothing for a newly-booked
         # record.
-    else:
-        _on_waf_block_cleared()
+        break
     detail_named = bool(inm.last_name or inm.first_name)
     detail_had_photo = bool(photo_bytes or photo_url)
 

@@ -201,6 +201,10 @@ def test_fetch_one_returns_none_on_waf_blocked_response_for_known_inmate(tmp_pat
     # good record. For NEW inmates (not in previous), we still fall through
     # so the list_row fallback can rescue a name into a minimal Inmate.
     monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    # Stub out the backoff sleep so the test doesn't actually wait 2-16s
+    # for each WAF-block path. The retry loop itself is still exercised.
+    monkeypatch.setattr(sweep.time, "sleep", lambda _s: None)
+    sweep._reset_waf_block_streak_for_tests()
     tiny_blocked_html = "<html><body>Access Denied</body></html>"  # 41 bytes
     client = _FakeClient(tiny_blocked_html)
 
@@ -212,12 +216,43 @@ def test_fetch_one_returns_none_on_waf_blocked_response_for_known_inmate(tmp_pat
     assert had_photo is False
 
     # Unknown inmate (not in previous): list_row fallback still works.
+    sweep._reset_waf_block_streak_for_tests()
     list_row = ListRow(
         inmate_number="8880000", last_name="ROE", first_name="JANE", admit_date="5/12/26"
     )
     inm, _, _ = _fetch_one(client, "8880000", previous={}, list_row=list_row)
     assert inm is not None  # falls through; list_row rescues the name
     assert inm.last_name == "ROE"
+
+
+def test_fetch_one_retries_within_same_cycle_and_recovers_on_second_attempt(tmp_path, monkeypatch):
+    # Regression: the same-cycle WAF-retry loop should call the client a
+    # second time when the first response is WAF-block-shaped. If the
+    # second attempt succeeds, the inmate is returned WITHOUT a carry-
+    # forward, photo extraction runs normally, and the streak is reset.
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    monkeypatch.setattr(sweep.time, "sleep", lambda _s: None)
+    sweep._reset_waf_block_streak_for_tests()
+    tiny = "<html><body>Access Denied</body></html>"
+    full = (
+        "<html><body><h1>DOE, JOHN</h1>"
+        "<ul><li>Inmate Number : 6660000</li></ul></body></html>"
+        + (" " * 5500)  # pad to clear the <5 KB WAF-block threshold
+    )
+
+    class _FlipClient:
+        def __init__(self):
+            self.calls = 0
+        def get(self, path, params=None):
+            self.calls += 1
+            return tiny if self.calls == 1 else full
+
+    client = _FlipClient()
+    inm, named, _ = _fetch_one(client, "6660000", previous={}, list_row=None)
+    assert client.calls == 2  # retry actually ran
+    assert inm is not None
+    assert inm.last_name == "DOE"
+    assert named is True
 
 
 def test_sweep_healthy_at_failure_fraction_boundary():
