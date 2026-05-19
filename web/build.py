@@ -479,7 +479,7 @@ def _update_history(snapshot: Snapshot, booked_24h: int, released_24h: int) -> d
         except (json.JSONDecodeError, OSError) as e:
             log.warning("could not read history.json (%s); starting fresh", e)
     hist = raw
-    today = datetime.utcnow().strftime("%Y-%m-%d")
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     rec = HistoryRecord(
         date=today,
         count=snapshot.inmate_count,
