@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-19T20:41:00Z",
+  "generated_utc": "2026-05-19T21:47:15Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3180,
+  "row_count": 3178,
   "rows": [
     {
       "address_x": "3XX EZZARD CHARLES DR",
@@ -50904,24 +50904,6 @@
       "longitude_x": "-84.5204"
     },
     {
-      "address_x": "23XX FERGUSON RD",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-22T15:24:33.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260422001102",
-      "incident_type_id": "SPECIAL DETAIL",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-22T15:25:06.000",
-      "closed_time_incident": "2026-04-22T22:31:54.000",
-      "dispatch_time_primary_unit": "2026-04-22T15:25:06.000",
-      "beat": "P33",
-      "district": "3",
-      "cpd_neighborhood": "WESTWOOD",
-      "community_council_neighborhood": "WESTWOOD",
-      "latitude_x": "39.1281620000896",
-      "longitude_x": "-84.597051"
-    },
-    {
       "address_x": "3XX W 5TH ST",
       "agency": "CPD",
       "create_time_incident": "2026-04-22T15:24:33.000",
@@ -50938,6 +50920,24 @@
       "community_council_neighborhood": "DOWNTOWN",
       "latitude_x": "39.0996460000897",
       "longitude_x": "-84.519165"
+    },
+    {
+      "address_x": "23XX FERGUSON RD",
+      "agency": "CPD",
+      "create_time_incident": "2026-04-22T15:24:33.000",
+      "disposition_text": "301:OFFENSE REPORT",
+      "event_number": "CPD260422001102",
+      "incident_type_id": "SPECIAL DETAIL",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-04-22T15:25:06.000",
+      "closed_time_incident": "2026-04-22T22:31:54.000",
+      "dispatch_time_primary_unit": "2026-04-22T15:25:06.000",
+      "beat": "P33",
+      "district": "3",
+      "cpd_neighborhood": "WESTWOOD",
+      "community_council_neighborhood": "WESTWOOD",
+      "latitude_x": "39.1281620000896",
+      "longitude_x": "-84.597051"
     },
     {
       "address_x": "E CENTRAL PKWY / MAIN ST",
@@ -56938,42 +56938,6 @@
       "community_council_neighborhood": "WESTWOOD",
       "latitude_x": "39.1348740000896",
       "longitude_x": "-84.600212"
-    },
-    {
-      "address_x": "BATES AV / SIDNEY AV",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T21:42:58.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260419001387",
-      "incident_type_id": "UNKNOWN TROUBLE (SI)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-19T21:50:51.000",
-      "closed_time_incident": "2026-04-19T23:30:46.000",
-      "dispatch_time_primary_unit": "2026-04-19T21:46:12.000",
-      "beat": "P34",
-      "district": "5",
-      "cpd_neighborhood": "CAMP  WASHINGTON",
-      "community_council_neighborhood": "CAMP WASHINGTON",
-      "latitude_x": "39.1408590000896",
-      "longitude_x": "-84.535873"
-    },
-    {
-      "address_x": "13XX VINE ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T21:40:11.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260419001384",
-      "incident_type_id": "+DAMAGE",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-19T21:48:26.000",
-      "closed_time_incident": "2026-04-19T23:28:51.000",
-      "dispatch_time_primary_unit": "2026-04-19T21:41:06.000",
-      "beat": "P12",
-      "district": "1",
-      "cpd_neighborhood": "OVER-THE-RHINE",
-      "community_council_neighborhood": "OTR",
-      "latitude_x": "39.1089560000896",
-      "longitude_x": "-84.515759"
     }
   ]
 }
