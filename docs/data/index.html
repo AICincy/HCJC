@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
   <title>Data &amp; legal notices &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#14181f">
+  <meta name="theme-color" content="#F5F0EB">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
   <meta property="og:site_name" content="JCStream">
   <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=86d82b097d">
+  <link rel="stylesheet" href="/static/style.css?v=3e384a0d09">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream — new bookings" href="/booked.xml">
@@ -137,12 +137,10 @@
     <tr><td><a href="cfs_recent.json">cfs_recent.json</a></td><td>Cincinnati Open Data &mdash; CPD/CFD Calls For Service (Socrata <code>qiik-bpks</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions only. Refreshed at most every 1&nbsp;hour.</td></tr>
     <tr><td><a href="cfs_pdi_recent.json">cfs_pdi_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Police CFS / CAD (Socrata <code>gexm-h6bt</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions. Refreshed at most every 1&nbsp;hour.</td></tr>
     <tr><td><a href="shootings_recent.json">shootings_recent.json</a></td><td>Cincinnati Open Data &mdash; CPD Reported Shootings (Socrata <code>sfea-4ksu</code>), last ~30&nbsp;days. Refreshed at most every 6&nbsp;hours.</td></tr>
-    <tr><td><a href="incidents_recent.json">incidents_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Crime Incidents (Socrata <code>k59e-2pvf</code>), last ~30&nbsp;days. Refreshed at most every 6&nbsp;hours.</td></tr>
-    <tr><td><a href="oi_shootings_recent.json">oi_shootings_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Officer Involved Shootings (Socrata <code>r6q4-muts</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed). May be empty while CPD migrates to a new data-management system.</td></tr>
     <tr><td><a href="use_of_force_pdi_recent.json">use_of_force_pdi_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Use of Force (Socrata <code>8us8-wi2w</code>), most recent ~5,000 incidents. Refreshed at most every 24&nbsp;hours (source dataset is paused).</td></tr>
     <tr><td><a href="use_of_force_incidents_recent.json">use_of_force_incidents_recent.json</a></td><td>Cincinnati Open Data &mdash; Use of Force Incidents (Socrata <code>748b-sht4</code>), last ~365&nbsp;days. Refreshed at most every 24&nbsp;hours.</td></tr>
-    <tr><td><a href="traffic_stops_drivers_recent.json">traffic_stops_drivers_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Traffic Stops (Drivers) (Socrata <code>hibq-hbnj</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
-    <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data &mdash; PDI Pedestrian Stops (Socrata <code>jx3x-rh6i</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours. May be empty while CPD migrates to a new data-management system.</td></tr>
+    <tr><td><a href="traffic_stops_drivers_recent.json">traffic_stops_drivers_recent.json</a></td><td>Cincinnati Open Data &mdash; Traffic Stops Contact Cards (Socrata <code>w2kv-5pdg</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
+    <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data &mdash; Pedestrian Stops Contact Cards (Socrata <code>swrz-ak2i</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
     <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data &mdash; Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
     <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data &mdash; Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed).</td></tr>
     <tr><td><a href="dispatch_correlations.json">dispatch_correlations.json</a></td><td><strong>Phase 11.</strong> Researcher-mode candidate pairs joining current roster bookings to recent Cincinnati Open Data CFS rows. Schema: <code>{generated_utc, min_confidence, window_minutes, pairs: [{inmate_number, cfs_source, cfs_row_index, confidence, signals}]}</code>. <strong>Candidates only, not asserted matches.</strong> JCStream does not publish these joins on its own pages; this file is for journalists and researchers who want to cross-reference and verify before drawing conclusions. No names; both join keys are public IDs already in the other feeds.</td></tr>
@@ -280,6 +278,6 @@ claim.</p>
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=7215706798" defer></script>
+  <script src="/static/main.js?v=1fefbbb976" defer></script>
 </body>
 </html>

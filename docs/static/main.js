@@ -188,6 +188,21 @@
   });
   apply();
 
+  // (3b) Crime-of-month pills: click to filter roster by that chapter.
+  var chapSelect = document.getElementById('filter-chap');
+  if (chapSelect) {
+    document.addEventListener('click', function (e) {
+      var pill = e.target.closest('.coms .chap');
+      if (!pill) return;
+      var cls = '';
+      pill.classList.forEach(function (c) { if (c.indexOf('chap-') === 0) cls = c.replace('chap-', ''); });
+      if (!cls) return;
+      chapSelect.value = cls;
+      chapSelect.dispatchEvent(new Event('change'));
+      bar.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    });
+  }
+
   // (4) Search-results dropdown - lazy-loads search.json on first keystroke,
   //     shows a type-ahead list of matching people. Uses DOM APIs (not innerHTML)
   //     to satisfy CodeQL DOM-text-reinterpreted-as-HTML checks.
