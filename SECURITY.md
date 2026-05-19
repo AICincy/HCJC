@@ -1,31 +1,21 @@
 # Security Policy
 
-## Reporting Security Vulnerabilities
+## Supported Versions
 
-If you discover a security vulnerability in JCStream, please email security@aicincy.org with:
-- Description of the vulnerability
-- Steps to reproduce
-- Potential impact
-- Suggested fix (if available)
+Use this section to tell people about which versions of your project are
+currently being supported with security updates.
 
-Please do not open public issues for security vulnerabilities.
+| Version | Supported          |
+| ------- | ------------------ |
+| 5.1.x   | :white_check_mark: |
+| 5.0.x   | :x:                |
+| 4.0.x   | :white_check_mark: |
+| < 4.0   | :x:                |
 
-## Security Practices
+## Reporting a Vulnerability
 
-- All HCSO API requests use HTTPS
-- Sensitive credentials are stored in environment variables, not in version control
-- Public Records Act requests are logged but kept secure
-- Inmate photos are processed with care for PII handling
-- Data is validated at multiple points to prevent injection attacks
+Use this section to tell people how to report a vulnerability.
 
-## Version Support
-
-Security updates are provided for the current version. Previous versions may not receive updates.
-
-## Contact
-
-For security questions, contact: security@aicincy.org
-
----
-
-Last updated: May 2026
+Tell them where to go, how often they can expect to get an update on a
+reported vulnerability, what to expect if the vulnerability is accepted or
+declined, etc.
