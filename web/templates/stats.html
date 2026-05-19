@@ -96,26 +96,18 @@
 {% set tb = s.tier_breakdown %}
 {% set tb_tot = (tb.F1 + tb.F2 + tb.F3 + tb.F4 + tb.F5 + tb.M1 + tb.M2 + tb.M3 + tb.M4 + tb.MM) or 1 %}
 {% set tb_segs = [
-  ('F1', tb.F1, '#9c1c1c'),
-  ('F2', tb.F2, '#c43e2c'),
-  ('F3', tb.F3, '#d96b46'),
-  ('F4', tb.F4, '#e89c5e'),
-  ('F5', tb.F5, '#f0c280'),
-  ('M1', tb.M1, '#6b7d3c'),
-  ('M2', tb.M2, '#8a9d56'),
-  ('M3', tb.M3, '#b5c590'),
-  ('M4', tb.M4, '#d4dbb7'),
-  ('MM', tb.MM, '#e7ead0'),
+  ('F1', tb.F1), ('F2', tb.F2), ('F3', tb.F3), ('F4', tb.F4), ('F5', tb.F5),
+  ('M1', tb.M1), ('M2', tb.M2), ('M3', tb.M3), ('M4', tb.M4), ('MM', tb.MM),
 ] %}
 <div class="section-h"><h2>Severity composition</h2><span class="grow"></span><span class="meta">most-severe charge per person, F1 &rarr; MM</span></div>
 <div class="stacked">
   <div class="stacked-bar">
-    {% for k, w, c in tb_segs %}{% if w %}<div class="stacked-seg" style="flex:{{ w }};background:{{ c }}" title="{{ k }}: {{ w }} ({{ '%.1f' % (100.0 * w / tb_tot) }}%)"></div>{% endif %}{% endfor %}
+    {% for k, w in tb_segs %}{% if w %}<div class="stacked-seg stacked-seg-{{ 'f' if k.startswith('F') else 'm' }}" style="flex:{{ w }}" title="{{ k }}: {{ w }} ({{ '%.1f' % (100.0 * w / tb_tot) }}%)"></div>{% endif %}{% endfor %}
   </div>
   <ul class="stacked-leg">
-    {% for k, w, c in tb_segs %}{% if w %}
+    {% for k, w in tb_segs %}{% if w %}
     <li>
-      <span class="stacked-sw" style="background:{{ c }}"></span>
+      <span class="stacked-sw stacked-sw-{{ 'f' if k.startswith('F') else 'm' }}"></span>
       <span class="stacked-k">{{ k }} &middot; {{ tier_max(k) }}</span>
       <span class="stacked-v">{{ "{:,}".format(w) }} <em>({{ '%.1f' % (100.0 * w / tb_tot) }}%)</em></span>
     </li>
