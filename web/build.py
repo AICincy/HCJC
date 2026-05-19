@@ -27,6 +27,31 @@ from scraper import shootings as shootings_mod
 from scraper.match import attach_candidates
 from scraper.models import ChangeEvent, HistoryRecord, Inmate, Snapshot
 
+# Static classification data moved to web/classify.py (arch-F1, partial).
+# Re-exported here so tests/test_build.py can `from web.build import _foo`.
+from web.classify import (  # noqa: F401  re-exported for test_build.py access
+    _DEGREE_RE, _CHAPTER_LABEL, _OFFENSE_CATEGORY, _CLS_RANK, _TIER_MAX,
+    _RACE_LABEL, _SEX_LABEL, _MIN_MONTH_SIZE,
+    _offense_for_code, _orc_frequency, _codes_ohio_url, _chap_slug,
+    _charge_tier, _tier_counts, _primary_tier, _primary_degree, _tier_max,
+    _parse_book_date, _display_date, _parse_bond_amount, _parse_md_yy,
+    _short_month_label, _approx_age, _booking_seq, _avatar_initials,
+    _expand_race, _expand_sex, _pct_ordinal, _rfc822, _load_explainers,
+)
+from web.shape import (  # noqa: F401  re-exported for test_build.py access
+    _related_inmates, _crimes_of_month, _recent_booked_inmates,
+    _bond_context, _upcoming_courts, _tier_breakdown,
+    _top_offenses_with_orc, _all_top_offenses, _timeline_markers,
+    _similar_by_statute, _statute_held_inmates, _feed_description,
+    _bond_by_tier, _next_court_date, _case_numbers,
+    _charge_status_summary, _card_data_attrs, _card_tip,
+    _bond_total, _days_in_custody, _charges_by_chapter,
+    _primary_charge_obj, _primary_charge, _primary_chapter,
+    _sort_in_group, _group_by_month, _events_in_window,
+    _events_for_recent, _court_calendar, _events_for_inmate,
+    _strftime_nopad,
+)
+
 log = logging.getLogger("jcstream.site")
 
 ROOT = Path(__file__).parent
@@ -213,30 +238,8 @@ def build(out_dir: Path) -> int:
     return 0
 
 
-import re
-# Static classification data moved to web/classify.py (arch-F1, partial).
-from web.classify import (  # noqa: F401  re-exported for test_build.py access
-    _DEGREE_RE, _CHAPTER_LABEL, _OFFENSE_CATEGORY, _CLS_RANK, _TIER_MAX,
-    _RACE_LABEL, _SEX_LABEL, _MIN_MONTH_SIZE,
-    _offense_for_code, _orc_frequency, _codes_ohio_url, _chap_slug,
-    _charge_tier, _tier_counts, _primary_tier, _primary_degree, _tier_max,
-    _parse_book_date, _display_date, _parse_bond_amount, _parse_md_yy,
-    _short_month_label, _approx_age, _booking_seq, _avatar_initials,
-    _expand_race, _expand_sex, _pct_ordinal, _rfc822, _load_explainers,
-)
-from web.shape import (  # noqa: F401  re-exported for test_build.py access
-    _related_inmates, _crimes_of_month, _recent_booked_inmates,
-    _bond_context, _upcoming_courts, _tier_breakdown,
-    _top_offenses_with_orc, _all_top_offenses, _timeline_markers,
-    _similar_by_statute, _statute_held_inmates, _feed_description,
-    _bond_by_tier, _next_court_date, _case_numbers,
-    _charge_status_summary, _card_data_attrs, _card_tip,
-    _bond_total, _days_in_custody, _charges_by_chapter,
-    _primary_charge_obj, _primary_charge, _primary_chapter,
-    _sort_in_group, _group_by_month, _events_in_window,
-    _events_for_recent, _court_calendar, _events_for_inmate,
-    _strftime_nopad,
-)
+# Note: re-export imports for tests/test_build.py moved to the top of this
+# file (with the other module-level imports) per ruff E402.
 
 
 
@@ -668,20 +671,20 @@ def _compute_stats(snapshot: Snapshot, by_month) -> dict:
     sex = _tally("sex", _expand_sex)
     race = _tally("race", _expand_race)
     # bonds
-    import re as _re
     bond_vals = []
     zero_bond = 0
     for inm in inmates:
-        total = 0; any_amt = False
+        total = 0
+        any_amt = False
         for c in inm.charges:
-            mm = _re.search(r"\$?([\d,]+(?:\.\d{2})?)", c.bond_amount or "")
-            if mm:
+            amt = _parse_bond_amount(c.bond_amount)
+            if amt is not None:
                 any_amt = True
-                try: total += int(float(mm.group(1).replace(",", "")))
-                except ValueError: pass
+                total += amt
         if any_amt:
             bond_vals.append(total)
-            if total == 0: zero_bond += 1
+            if total == 0:
+                zero_bond += 1
     bond_vals.sort()
     median_bond = bond_vals[len(bond_vals)//2] if bond_vals else 0
     total_bond = sum(bond_vals)
