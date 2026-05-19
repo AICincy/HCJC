@@ -28,7 +28,8 @@
   var lastFocus = null;
   function openLB(src, caption) {
     lastFocus = document.activeElement;
-    lbImg.src = src; lbImg.alt = 'Booking photo: ' + (caption || '');
+    lbImg.src = src;
+    lbImg.alt = 'Booking photo';
     lbCap.textContent = caption || '';
     lb.hidden = false;
     // Confine focus to the dialog: mark all other body children inert.
