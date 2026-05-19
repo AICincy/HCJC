@@ -89,6 +89,26 @@ def parse_detail_page(html: str, inmate_number: str) -> tuple[Inmate, bytes | No
 
     if not bio and not name and not charges:
         log.info("detail page produced no structured fields for id=%s", inmate_number)
+    elif photo_url is None and photo_bytes is None:
+        # Real inmate page (has bio/name/charges) but no photo matched. Most
+        # often: HCSO published the record but hasn't attached a mug shot yet.
+        # Less often: HCSO HTML drifted away from the alt/class/274px hooks.
+        # Log a compact image inventory so the operator can spot-check.
+        img_count = sum(1 for _ in tree.css("img"))
+        nondata_count = sum(
+            1 for i in tree.css("img")
+            if (i.attributes.get("src") or "") and not (i.attributes.get("src") or "").startswith("data:")
+        )
+        data_count = sum(
+            1 for i in tree.css("img")
+            if (i.attributes.get("src") or "").startswith("data:")
+        )
+        log.info(
+            "detail page id=%s parsed (bio=%d name=%s charges=%d) but no photo extracted "
+            "(imgs=%d non-data=%d data=%d). If HCSO has a photo here, the alt/class/274px "
+            "hooks and the size+extension fallback all missed it - investigate HTML drift.",
+            inmate_number, len(bio), bool(name), len(charges), img_count, nondata_count, data_count,
+        )
 
     return (
         Inmate(
@@ -286,12 +306,56 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
     return charges
 
 
+_UI_ICON_HINTS = (
+    "logo", "icon", "menu", "header", "footer", "spinner", "loader",
+    "alert", "warn", "search", "social", "share", "facebook", "twitter",
+    "instagram", "youtube", "linkedin", "/uploads/", "/themes/",
+    "/plugins/", "/wp-content/", "/wp-includes/",
+)
+
+
+def _looks_like_ui_chrome(img) -> bool:
+    """True if an <img> looks like UI chrome (a logo, icon, alert glyph, etc.)
+    rather than a booking photo. Used by the size-fallback path in
+    _extract_photo_url so a permissive match doesn't latch onto a 51x51 alert
+    icon when HCSO drops the 274px style hook.
+    """
+    src = (img.attributes.get("src") or "").lower()
+    alt = (img.attributes.get("alt") or "").lower()
+    if any(h in src for h in _UI_ICON_HINTS):
+        return True
+    if any(h in alt for h in ("logo", "icon", "menu", "alert", "warn")):
+        return True
+    try:
+        w = int(img.attributes.get("width") or "0")
+        h = int(img.attributes.get("height") or "0")
+    except (TypeError, ValueError):
+        w = h = 0
+    # Booking mug shots are ~200-300 px wide. UI chrome is usually <80 px.
+    if 0 < w < 80 or 0 < h < 80:
+        return True
+    return False
+
+
 def _extract_photo_url(tree: HTMLParser) -> str | None:
     """Return a direct URL to the booking photo, if found on the page.
 
     Preferred over base64 extraction: a direct HTTP fetch is far more reliable
     than decoding a multi-hundred-KB base64 payload from inline HTML.
+
+    Three matching tiers:
+      1. alt / class / style hooks ("photo", "mug", "inmate", "booking",
+         "274px"). Historical HCSO pattern; preferred when present.
+      2. Size-and-extension fallback: any non-data <img> whose src ends in
+         a common image extension and that doesn't look like UI chrome
+         (rejects logos, icons, alert glyphs by URL/alt/dimensions).
+      3. None.
+
+    Tier 2 is the diagnostic for the "HCSO renamed alt/class/style but
+    still serves a real <img>" failure mode that's been costing us photo
+    coverage for recent bookings.
     """
+    fallback: str | None = None
     for img in tree.css("img"):
         src = img.attributes.get("src", "")
         if src.startswith("data:") or not src:
@@ -305,6 +369,14 @@ def _extract_photo_url(tree: HTMLParser) -> str | None:
             return src
         if "274px" in style:
             return src
+        # Tier 2 candidate: stash the first non-chrome image as a fallback.
+        if fallback is None and src.lower().rsplit("?", 1)[0].endswith(
+            (".jpg", ".jpeg", ".png", ".webp")
+        ) and not _looks_like_ui_chrome(img):
+            fallback = src
+    if fallback is not None:
+        log.info("photo url matched size+extension fallback (no alt/class/274px hook): %s", fallback)
+        return fallback
     return None
 
 
