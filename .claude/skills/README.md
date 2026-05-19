@@ -1,6 +1,6 @@
 # JCStream skills
 
-Fourteen project-specific Claude Code skills, one per recurring domain. Each skill
+Fifteen project-specific Claude Code skills, one per recurring domain. Each skill
 is auto-discovered by description (frontmatter `description:` field) and is
 paired with a same-named subagent in `../agents/`.
 
@@ -20,6 +20,7 @@ paired with a same-named subagent in `../agents/`.
 | [jcstream-template-reviewer](jcstream-template-reviewer/SKILL.md) | template-layer review reports (read-only) for `web/templates/`, `feed.xml`, `feed.xsl`, `main.js` | XSS / JSON-LD / RSS / progressive-enhancement / third-party hygiene review |
 | [jcstream-css-reviewer](jcstream-css-reviewer/SKILL.md) | CSS code-review reports (read-only) for `web/static/style.css` | dead rules, dupe selectors, tier ladder consistency, breakpoint hand-offs, focus rings, print rule, dead tokens |
 | [jcstream-security-reviewer](jcstream-security-reviewer/SKILL.md) | JCStream-specific compliance review reports (read-only) cross-cutting | FCRA boundary, ORC § 149.43 / § 2953.32, `_headers` CSP / HSTS, no-fee guarantee, presumed-innocent banner, JCSTREAM_* secret hygiene, dependency CVEs |
+| [jcstream-code-reviewer](jcstream-code-reviewer/SKILL.md) | Orchestrator (read-only); fans out to python/template/css/security reviewers in parallel and emits a consolidated PR-style review | PR review, branch review, full-repo audit |
 
 ## Handoff topology
 
@@ -66,14 +67,21 @@ paired with a same-named subagent in `../agents/`.
                        ├─► build-helper-author
                        └─► test-author
 
+   code-reviewer (orchestrator)
+       │
+       ├─► python-reviewer ────┐
+       ├─► template-reviewer ──┤  in parallel; merged report
+       ├─► css-reviewer ───────┤  routes to the authors above
+       └─► security-reviewer ──┘
+
    orc-curator     legal-copy-author     (mostly terminal)
 ```
 
 Every code-path chain ends at **test-author** (for verification);
 diagnostic / review chains (a11y-auditor, sweep-debugger, python-reviewer,
-template-reviewer, css-reviewer, security-reviewer) end with a written
-report referencing `file:line` evidence and a hand-off to the relevant
-author skill.
+template-reviewer, css-reviewer, security-reviewer, code-reviewer
+orchestrator) end with a written report referencing `file:line` evidence
+and a hand-off to the relevant author skill.
 
 ## Conventions
 

@@ -1,6 +1,6 @@
 # JCStream subagents
 
-Fourteen project-specific specialist subagents, each paired with a same-named
+Fifteen project-specific specialist subagents, each paired with a same-named
 skill in `../skills/<name>/SKILL.md`. Spawn one via the `Agent` tool with
 `subagent_type: jcstream-<name>` when working in its domain.
 
@@ -20,11 +20,14 @@ skill in `../skills/<name>/SKILL.md`. Spawn one via the `Agent` tool with
 | [jcstream-template-reviewer](jcstream-template-reviewer.md) | Read, Bash, Grep, Glob, WebFetch | `jcstream-template-reviewer` |
 | [jcstream-css-reviewer](jcstream-css-reviewer.md) | Read, Bash, Grep, Glob | `jcstream-css-reviewer` |
 | [jcstream-security-reviewer](jcstream-security-reviewer.md) | Read, Bash, Grep, Glob, WebFetch | `jcstream-security-reviewer` |
+| [jcstream-code-reviewer](jcstream-code-reviewer.md) | Agent, Read, Bash, Grep, Glob | `jcstream-code-reviewer` |
 
-Six agents (`a11y-auditor`, `sweep-debugger`, `python-reviewer`,
-`template-reviewer`, `css-reviewer`, `security-reviewer`) are intentionally
-read-only — their output is a written report, not an edit. The rest edit
-files in their owned area.
+Seven agents (`a11y-auditor`, `sweep-debugger`, `python-reviewer`,
+`template-reviewer`, `css-reviewer`, `security-reviewer`, `code-reviewer`)
+are intentionally read-only — their output is a written report, not an
+edit. The rest edit files in their owned area. The `code-reviewer` is the
+only agent with the `Agent` tool (it dispatches the four domain reviewers
+in parallel).
 
 ## Invocation patterns
 
