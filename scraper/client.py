@@ -15,6 +15,7 @@ import os
 import time
 import logging
 from dataclasses import dataclass, field
+from urllib.parse import urlparse
 
 import httpx
 
@@ -64,6 +65,19 @@ class HcsoClient:
     def __enter__(self) -> "HcsoClient":
         import threading
         self._lock = threading.Lock()
+        # verify=False below is sound only for the HCSO host. If a future
+        # operator (or JCSTREAM_BASE_URL override) points this client at any
+        # other host, the unverified TLS would let an on-path attacker
+        # substitute a forged cert. Refuse to instantiate against anything
+        # other than hcso.org so the TLS-skip decision stays tied to its
+        # justification.
+        host = urlparse(self.base_url).hostname or ""
+        if host != "hcso.org" and not host.endswith(".hcso.org"):
+            raise ValueError(
+                f"HcsoClient refuses to run with verify=False against "
+                f"non-HCSO host {host!r} (base_url={self.base_url!r}). "
+                f"Restore verify=True before retargeting."
+            )
         # verify=False: HCSO's public site uses Let's Encrypt; in practice the
         # cert chain has presented a notBefore in the future relative to GitHub
         # runner clocks, which makes verification flap. We fetch only

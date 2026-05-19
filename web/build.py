@@ -129,13 +129,12 @@ def build(out_dir: Path) -> int:
     _css = STATIC_DIR / "style.css"
     env.globals["css_version"] = (_hl.sha256(_css.read_bytes()).hexdigest()[:10]
                                   if _css.exists() else "dev")
-    # Same pattern for the externalized JS modules.
+    # Same pattern for the externalized JS module. `map.js` was removed; the
+    # previous `map_js_version` env.global had no template reference and is
+    # gone too.
     _main_js = STATIC_DIR / "main.js"
-    _map_js = STATIC_DIR / "map.js"
     env.globals["main_js_version"] = (_hl.sha256(_main_js.read_bytes()).hexdigest()[:10]
                                       if _main_js.exists() else "dev")
-    env.globals["map_js_version"] = (_hl.sha256(_map_js.read_bytes()).hexdigest()[:10]
-                                     if _map_js.exists() else "dev")
     offenses = orc_mod.load_offenses()
     env.globals["orc_title"] = lambda code: orc_mod.title_for(code, offenses)
     env.globals["primary_charge"] = _primary_charge
@@ -148,6 +147,7 @@ def build(out_dir: Path) -> int:
     env.globals["recent_booked_inmates"] = _recent_booked_inmates(snapshot, n=6)
     env.globals["timeline_markers"] = _timeline_markers
     env.globals["display_date"] = _display_date
+    env.globals["iso_booking_date"] = _iso_booking_date
     env.globals["similar_by_statute"] = lambda inm: _similar_by_statute(inm, snapshot.inmates, offenses, limit=6)
     env.globals["tier_counts"] = _tier_counts
     env.globals["charge_tier"] = _charge_tier
@@ -239,6 +239,20 @@ def build(out_dir: Path) -> int:
 
 
 
+
+
+def _iso_booking_date(inmate: Inmate) -> str | None:
+    """ISO-8601 (YYYY-MM-DD) form of an inmate's booking_date.
+
+    Returns None when booking_date is empty or unparseable; the JSON-LD
+    template suppresses the `dateCreated` key in that case so schema.org
+    consumers see "no booking date known" rather than a malformed string.
+    HCSO sentinel dates like "1/1/70" parse to a real 1970-01-01 ISO
+    string, which is acceptable for schema.org (it's a real date even
+    if it's a sentinel); downstream filtering of sentinels is unchanged.
+    """
+    dt = _parse_book_date(inmate.booking_date)
+    return dt.date().isoformat() if dt is not None else None
 
 
 def _resolve_base_url() -> str:
