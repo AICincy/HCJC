@@ -21,21 +21,60 @@ name (e.g. "have the jcstream-template-author …") or by describing the
 task ("update the FCRA disclaimer" routes to `legal-copy-author`). See
 `.claude/skills/README.md` for the index and the handoff topology.
 
-## How the owner wants me to work
+## Hard constraints (violations are accessibility failures, not style issues)
 
-- **Don't make the owner think of the options — and don't make them ask for the
-  menu.** Whenever a chunk of work wraps up (and any time work *could* continue),
-  END THE TURN with the AskUserQuestion tool (multiSelect): a *comprehensive*
-  menu of next steps with *truthful* recommendations — say which I'd actually do
-  and why, and which are marginal/skip — so the owner can accept items
-  **individually, all, or none**. Don't just summarize and stop; don't keep
-  building past the obvious-in-scope work without surfacing the menu first.
-  "Implement all suggestions" means: do everything in the last menu I offered —
-  so there must always be one.
+The owner has AuDHD. These rules are medical accessibility accommodations.
+Violating them imposes cognitive cost the owner cannot afford. Read the memory
+system (`memory/` directory) for full context including the May 2026 post-mortem.
+
+### Scope gate
+- Before writing any code, state what you think the task is in one sentence.
+  Wait for confirmation. Do not infer multi-step projects from ambiguity.
+- Do not create multi-phase plans. One task, one fix, confirm before the next.
+- Do not modify CSS, templates, or website design without explicit per-session
+  authorization. The default work is scraper/pipeline maintenance.
+- Match the scope of the fix to the scope of the problem. A one-line bug gets
+  a one-line fix. Do not refactor surroundings, add error handling for
+  impossible cases, or "improve" adjacent code.
+
+### Communication rules
+- Do not ask clarifying questions unless ambiguity risks material error
+  (wrong file, wrong jurisdiction, wrong recipient). If the task can be
+  inferred from context, execute. State the assumption inline.
+- When wrong: one sentence acknowledging, one sentence correcting, re-execute.
+  No extended apology. No multi-sentence self-criticism.
+- No filler phrases. No softening register. No "you may want to," "if that
+  doesn't work," "perhaps consider." Start with the content.
+- No em dashes or en dashes. Tables for 3+ items. One idea per sentence.
+  Active voice. Dense layouts.
+
+### Execution rules
+- Use direct tools (Read, Write, Edit) instead of writing shell scripts for
+  the owner to run. The direct tool is the default. If it fails, report the
+  error and try the indirect path.
+- You have full filesystem, git, and network access. Do not claim otherwise.
+  If an operation fails, report the failure. Do not preemptively refuse.
+- Run `python -m pytest -q` before committing. If tests fail, fix them.
+  Do not commit with failing tests.
+- Verify the live site (`curl` it) before claiming anything about how it
+  looks. Do not guess. Ask for a screenshot when the owner says "broken".
+- Do not trust compaction summaries over source files. When referencing any
+  file's content, re-read the file. Do not rely on your own prior summary.
+
+### Menu system
+- **Don't make the owner think of the options.** Whenever a chunk of work
+  wraps up (and any time work *could* continue), END THE TURN with the
+  AskUserQuestion tool (multiSelect): a *comprehensive* menu of next steps
+  with *truthful* recommendations — say which I'd actually do and why, and
+  which are marginal/skip — so the owner can accept items **individually,
+  all, or none**. Don't just summarize and stop; don't keep building past
+  the obvious-in-scope work without surfacing the menu first.
+  "Implement all suggestions" means: do everything in the last menu I
+  offered — so there must always be one.
+
+### General
 - Keep replies short. Don't re-litigate settled things. Don't nag about
   branches/PRs — this is a from-scratch solo repo; `main`/PR ceremony is moot.
-- Verify the live site (curl it) before claiming anything about how it looks;
-  don't guess. Ask for a screenshot when the owner says "broken".
 
 ## Repo facts
 
