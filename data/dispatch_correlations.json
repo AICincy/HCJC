@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-05-18T23:51:31Z",
+  "generated_utc": "2026-05-19T00:41:33Z",
   "min_confidence": 0.35,
   "window_minutes": 60,
-  "count": 2976,
+  "count": 3050,
   "disclaimer": "Researcher-mode output. Pairs are CANDIDATES only, not asserted matches. A high-confidence pair still requires human verification before any public claim is made that a specific dispatch led to a specific arrest. JCStream does not publish these joins on its own pages. Joining keys are inmate_number (vs current.json) and cfs_row_index (vs the cfs_recent.json or cfs_pdi_recent.json feed identified by cfs_source). Confidence weights: 50% temporal proximity within a +/- 60 minute window, 50% textual overlap between the charge description and the CFS row's disposition/incident-type fields.",
   "pairs": [
     {
@@ -105,6 +105,28 @@
       }
     },
     {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.97,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.97,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14544515",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1708,
@@ -149,17 +171,6 @@
       }
     },
     {
-      "inmate_number": "1339807",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.956,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 1.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "2159210",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1249,
@@ -171,6 +182,17 @@
       }
     },
     {
+      "inmate_number": "14214752",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.941,
+      "signals": {
+        "dt_delta_minutes": 28.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
       "inmate_number": "2333257",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1011,
@@ -179,17 +201,6 @@
         "dt_delta_minutes": 29.9,
         "textual_overlap": 1.0,
         "booked_date": "5/7/26"
-      }
-    },
-    {
-      "inmate_number": "1339807",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.925,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 1.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -234,6 +245,17 @@
         "dt_delta_minutes": 47.9,
         "textual_overlap": 1.0,
         "booked_date": "4/19/26"
+      }
+    },
+    {
+      "inmate_number": "14652582",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.899,
+      "signals": {
+        "dt_delta_minutes": 48.6,
+        "textual_overlap": 1.0,
+        "booked_date": "5/17/26"
       }
     },
     {
@@ -424,6 +446,39 @@
       }
     },
     {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 0,
+      "confidence": 0.817,
+      "signals": {
+        "dt_delta_minutes": 88.0,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 0,
+      "confidence": 0.817,
+      "signals": {
+        "dt_delta_minutes": 88.0,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 0,
+      "confidence": 0.817,
+      "signals": {
+        "dt_delta_minutes": 88.0,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "2815082",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1481,
@@ -432,6 +487,17 @@
         "dt_delta_minutes": 89.3,
         "textual_overlap": 1.0,
         "booked_date": "5/3/26"
+      }
+    },
+    {
+      "inmate_number": "14214752",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 89,
+      "confidence": 0.812,
+      "signals": {
+        "dt_delta_minutes": 90.4,
+        "textual_overlap": 1.0,
+        "booked_date": "5/17/26"
       }
     },
     {
@@ -465,6 +531,39 @@
         "dt_delta_minutes": 92.7,
         "textual_overlap": 1.0,
         "booked_date": "5/12/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 11,
+      "confidence": 0.805,
+      "signals": {
+        "dt_delta_minutes": 93.5,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 11,
+      "confidence": 0.805,
+      "signals": {
+        "dt_delta_minutes": 93.5,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 11,
+      "confidence": 0.805,
+      "signals": {
+        "dt_delta_minutes": 93.5,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -556,6 +655,17 @@
       }
     },
     {
+      "inmate_number": "2450915",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 94,
+      "confidence": 0.739,
+      "signals": {
+        "dt_delta_minutes": 5.5,
+        "textual_overlap": 0.5,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
       "inmate_number": "14388816",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 462,
@@ -619,6 +729,17 @@
         "dt_delta_minutes": 127.0,
         "textual_overlap": 1.0,
         "booked_date": "5/12/26"
+      }
+    },
+    {
+      "inmate_number": "14810723",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.72,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.5,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -630,6 +751,39 @@
         "dt_delta_minutes": 134.8,
         "textual_overlap": 1.0,
         "booked_date": "5/1/26"
+      }
+    },
+    {
+      "inmate_number": "14324498",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.718,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.5,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14379398",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.718,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.5,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2403077",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.718,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.5,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -1194,6 +1348,17 @@
       }
     },
     {
+      "inmate_number": "14652582",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 86,
+      "confidence": 0.592,
+      "signals": {
+        "dt_delta_minutes": 195.8,
+        "textual_overlap": 1.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
       "inmate_number": "1862140",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 792,
@@ -1246,6 +1411,28 @@
         "dt_delta_minutes": 82.4,
         "textual_overlap": 0.5,
         "booked_date": "5/8/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 20,
+      "confidence": 0.576,
+      "signals": {
+        "dt_delta_minutes": 203.6,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 20,
+      "confidence": 0.576,
+      "signals": {
+        "dt_delta_minutes": 203.6,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -1312,6 +1499,28 @@
         "dt_delta_minutes": 210.8,
         "textual_overlap": 1.0,
         "booked_date": "5/5/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 21,
+      "confidence": 0.56,
+      "signals": {
+        "dt_delta_minutes": 211.0,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 21,
+      "confidence": 0.56,
+      "signals": {
+        "dt_delta_minutes": 211.0,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -1469,53 +1678,9 @@
       }
     },
     {
-      "inmate_number": "14409961",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 6,
-      "confidence": 0.539,
-      "signals": {
-        "dt_delta_minutes": 101.4,
-        "textual_overlap": 0.5,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14715987",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 6,
-      "confidence": 0.539,
-      "signals": {
-        "dt_delta_minutes": 101.4,
-        "textual_overlap": 0.5,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14809523",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 6,
-      "confidence": 0.539,
-      "signals": {
-        "dt_delta_minutes": 101.4,
-        "textual_overlap": 0.5,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "1339807",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 6,
-      "confidence": 0.537,
-      "signals": {
-        "dt_delta_minutes": 222.0,
-        "textual_overlap": 1.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1339807",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 12,
       "confidence": 0.537,
       "signals": {
         "dt_delta_minutes": 222.0,
@@ -1788,6 +1953,17 @@
       }
     },
     {
+      "inmate_number": "14214752",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 83,
+      "confidence": 0.501,
+      "signals": {
+        "dt_delta_minutes": 239.4,
+        "textual_overlap": 1.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
       "inmate_number": "14388816",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 473,
@@ -1856,32 +2032,10 @@
     {
       "inmate_number": "1339807",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 23,
+      "cfs_row_index": 92,
       "confidence": 0.5,
       "signals": {
-        "dt_delta_minutes": 368.0,
-        "textual_overlap": 1.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1339807",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 24,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 368.5,
-        "textual_overlap": 1.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1339807",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 31,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 458.3,
+        "dt_delta_minutes": 1488.7,
         "textual_overlap": 1.0,
         "booked_date": "5/16/26"
       }
@@ -2005,6 +2159,17 @@
         "dt_delta_minutes": 1410.1,
         "textual_overlap": 1.0,
         "booked_date": "5/8/26"
+      }
+    },
+    {
+      "inmate_number": "14060413",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1468.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/16/26"
       }
     },
     {
@@ -2225,6 +2390,72 @@
         "dt_delta_minutes": 1445.7,
         "textual_overlap": 1.0,
         "booked_date": "5/13/26"
+      }
+    },
+    {
+      "inmate_number": "14214752",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1454.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14214752",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 82,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 293.0,
+        "textual_overlap": 1.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 32,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 358.1,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 33,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 369.2,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 36,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 403.0,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1391.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -2701,6 +2932,28 @@
       }
     },
     {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 25,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 268.4,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1411.7,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14450585",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2509,
@@ -2987,6 +3240,28 @@
       }
     },
     {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 25,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 268.4,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1411.7,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14637836",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 313,
@@ -3033,21 +3308,10 @@
     {
       "inmate_number": "14652582",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
+      "cfs_row_index": 80,
       "confidence": 0.5,
       "signals": {
-        "dt_delta_minutes": 1404.1,
-        "textual_overlap": 1.0,
-        "booked_date": "5/17/26"
-      }
-    },
-    {
-      "inmate_number": "14652582",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 1418.9,
+        "dt_delta_minutes": 423.1,
         "textual_overlap": 1.0,
         "booked_date": "5/17/26"
       }
@@ -3779,6 +4043,17 @@
       }
     },
     {
+      "inmate_number": "14810618",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1468.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/16/26"
+      }
+    },
+    {
       "inmate_number": "1503982",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 313,
@@ -3941,6 +4216,50 @@
         "dt_delta_minutes": 311.0,
         "textual_overlap": 1.0,
         "booked_date": "5/4/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 32,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 358.1,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 33,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 369.2,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 36,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 403.0,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1391.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -5044,28 +5363,6 @@
       }
     },
     {
-      "inmate_number": "2378768",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 1475.9,
-        "textual_overlap": 1.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2378768",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 1461.1,
-        "textual_overlap": 1.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "2423479",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1611,
@@ -5173,6 +5470,50 @@
         "dt_delta_minutes": 311.0,
         "textual_overlap": 1.0,
         "booked_date": "5/4/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 32,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 358.1,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 33,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 369.2,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 36,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 403.0,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 1391.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -5484,31 +5825,9 @@
       }
     },
     {
-      "inmate_number": "1206859",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 100,
-      "confidence": 0.496,
-      "signals": {
-        "dt_delta_minutes": 122.2,
-        "textual_overlap": 0.5,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14208372",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 94,
-      "confidence": 0.496,
-      "signals": {
-        "dt_delta_minutes": 122.2,
-        "textual_overlap": 0.5,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14208372",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 100,
       "confidence": 0.496,
       "signals": {
         "dt_delta_minutes": 122.2,
@@ -5528,31 +5847,9 @@
       }
     },
     {
-      "inmate_number": "14810434",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 100,
-      "confidence": 0.496,
-      "signals": {
-        "dt_delta_minutes": 122.2,
-        "textual_overlap": 0.5,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "423747",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 94,
-      "confidence": 0.496,
-      "signals": {
-        "dt_delta_minutes": 122.2,
-        "textual_overlap": 0.5,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "423747",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 100,
       "confidence": 0.496,
       "signals": {
         "dt_delta_minutes": 122.2,
@@ -5778,6 +6075,94 @@
         "dt_delta_minutes": 123.6,
         "textual_overlap": 0.5,
         "booked_date": "5/13/26"
+      }
+    },
+    {
+      "inmate_number": "14137819",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 94,
+      "confidence": 0.489,
+      "signals": {
+        "dt_delta_minutes": 5.5,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14214752",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 94,
+      "confidence": 0.489,
+      "signals": {
+        "dt_delta_minutes": 5.5,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14652582",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 94,
+      "confidence": 0.489,
+      "signals": {
+        "dt_delta_minutes": 5.5,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14729781",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 94,
+      "confidence": 0.489,
+      "signals": {
+        "dt_delta_minutes": 5.5,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14749004",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 94,
+      "confidence": 0.489,
+      "signals": {
+        "dt_delta_minutes": 5.5,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14810625",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 94,
+      "confidence": 0.489,
+      "signals": {
+        "dt_delta_minutes": 5.5,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14810636",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 94,
+      "confidence": 0.489,
+      "signals": {
+        "dt_delta_minutes": 5.5,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "1667107",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 94,
+      "confidence": 0.489,
+      "signals": {
+        "dt_delta_minutes": 5.5,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
       }
     },
     {
@@ -6177,39 +6562,6 @@
       }
     },
     {
-      "inmate_number": "1995058",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3103,
-      "confidence": 0.487,
-      "signals": {
-        "dt_delta_minutes": 6.3,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
-      "inmate_number": "2521697",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3103,
-      "confidence": 0.487,
-      "signals": {
-        "dt_delta_minutes": 6.3,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
-      "inmate_number": "2793760",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3103,
-      "confidence": 0.487,
-      "signals": {
-        "dt_delta_minutes": 6.3,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
       "inmate_number": "1300841",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1596,
@@ -6353,39 +6705,6 @@
       }
     },
     {
-      "inmate_number": "1251342",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1339807",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14060413",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "14131762",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1377,
@@ -6408,39 +6727,6 @@
       }
     },
     {
-      "inmate_number": "14243879",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14268875",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14308122",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "14322803",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1377,
@@ -6460,17 +6746,6 @@
         "dt_delta_minutes": 7.9,
         "textual_overlap": 0.0,
         "booked_date": "5/4/26"
-      }
-    },
-    {
-      "inmate_number": "14409961",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -6529,28 +6804,6 @@
       }
     },
     {
-      "inmate_number": "14692341",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14715987",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "14809209",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1377,
@@ -6562,39 +6815,6 @@
       }
     },
     {
-      "inmate_number": "14809523",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14810618",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1703061",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "1851054",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1377,
@@ -6603,39 +6823,6 @@
         "dt_delta_minutes": 7.9,
         "textual_overlap": 0.0,
         "booked_date": "5/4/26"
-      }
-    },
-    {
-      "inmate_number": "1995058",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3102,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.7,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
-      "inmate_number": "2045436",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "2059450",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -6683,17 +6870,6 @@
       }
     },
     {
-      "inmate_number": "2521697",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3102,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.7,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
       "inmate_number": "2526424",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1377,
@@ -6724,50 +6900,6 @@
         "dt_delta_minutes": 7.9,
         "textual_overlap": 0.0,
         "booked_date": "5/4/26"
-      }
-    },
-    {
-      "inmate_number": "2793760",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3102,
-      "confidence": 0.484,
-      "signals": {
-        "dt_delta_minutes": 7.7,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
-      "inmate_number": "1995058",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3101,
-      "confidence": 0.482,
-      "signals": {
-        "dt_delta_minutes": 8.7,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
-      "inmate_number": "2521697",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3101,
-      "confidence": 0.482,
-      "signals": {
-        "dt_delta_minutes": 8.7,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
-      "inmate_number": "2793760",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3101,
-      "confidence": 0.482,
-      "signals": {
-        "dt_delta_minutes": 8.7,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
       }
     },
     {
@@ -9400,160 +9532,6 @@
       }
     },
     {
-      "inmate_number": "1251342",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1339807",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14060413",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14243879",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14268875",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14308122",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14409961",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14692341",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14715987",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14809523",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14810618",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1703061",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "2045436",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "2059450",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.471,
-      "signals": {
-        "dt_delta_minutes": 13.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "2259022",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2275,
@@ -9584,6 +9562,193 @@
         "dt_delta_minutes": 14.1,
         "textual_overlap": 0.0,
         "booked_date": "4/26/26"
+      }
+    },
+    {
+      "inmate_number": "1271602",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14303027",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14304767",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14324498",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14352390",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14379398",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14397774",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14419079",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14538378",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14568510",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14768153",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2149329",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2300881",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2403077",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 5,
+      "confidence": 0.47,
+      "signals": {
+        "dt_delta_minutes": 14.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -9650,6 +9815,193 @@
         "dt_delta_minutes": 15.0,
         "textual_overlap": 0.0,
         "booked_date": "5/2/26"
+      }
+    },
+    {
+      "inmate_number": "1271602",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14303027",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14304767",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14352390",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14397774",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14419079",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14538378",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14568510",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14768153",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14810723",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2149329",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2300881",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.468,
+      "signals": {
+        "dt_delta_minutes": 15.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -10346,28 +10698,6 @@
       }
     },
     {
-      "inmate_number": "1995058",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3104,
-      "confidence": 0.464,
-      "signals": {
-        "dt_delta_minutes": 17.2,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
-      "inmate_number": "2521697",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3104,
-      "confidence": 0.464,
-      "signals": {
-        "dt_delta_minutes": 17.2,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
       "inmate_number": "2612971",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2751,
@@ -10387,17 +10717,6 @@
         "dt_delta_minutes": 17.4,
         "textual_overlap": 0.0,
         "booked_date": "4/22/26"
-      }
-    },
-    {
-      "inmate_number": "2793760",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3104,
-      "confidence": 0.464,
-      "signals": {
-        "dt_delta_minutes": 17.2,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
       }
     },
     {
@@ -10973,6 +11292,28 @@
       }
     },
     {
+      "inmate_number": "1271602",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1271602",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "1326833",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 453,
@@ -11017,6 +11358,28 @@
       }
     },
     {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14299115",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 453,
@@ -11025,6 +11388,72 @@
         "dt_delta_minutes": 20.2,
         "textual_overlap": 0.0,
         "booked_date": "5/12/26"
+      }
+    },
+    {
+      "inmate_number": "14303027",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14303027",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14304767",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14304767",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14324498",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14324498",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -11039,6 +11468,28 @@
       }
     },
     {
+      "inmate_number": "14352390",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14352390",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14356015",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 453,
@@ -11047,6 +11498,28 @@
         "dt_delta_minutes": 20.2,
         "textual_overlap": 0.0,
         "booked_date": "5/12/26"
+      }
+    },
+    {
+      "inmate_number": "14379398",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14379398",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -11061,6 +11534,72 @@
       }
     },
     {
+      "inmate_number": "14397774",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14397774",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14419079",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14419079",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14535095",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 453,
@@ -11072,6 +11611,50 @@
       }
     },
     {
+      "inmate_number": "14538378",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14538378",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14568510",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14568510",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14609665",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 453,
@@ -11080,6 +11663,28 @@
         "dt_delta_minutes": 20.2,
         "textual_overlap": 0.0,
         "booked_date": "5/12/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -11116,6 +11721,50 @@
       }
     },
     {
+      "inmate_number": "14768153",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14768153",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14810723",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14810723",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "1682645",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 453,
@@ -11135,6 +11784,28 @@
         "dt_delta_minutes": 20.2,
         "textual_overlap": 0.0,
         "booked_date": "5/12/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -11160,6 +11831,28 @@
       }
     },
     {
+      "inmate_number": "2149329",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2149329",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "2236423",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 453,
@@ -11168,6 +11861,72 @@
         "dt_delta_minutes": 20.2,
         "textual_overlap": 0.0,
         "booked_date": "5/12/26"
+      }
+    },
+    {
+      "inmate_number": "2300881",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2300881",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2403077",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2403077",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.2,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.458,
+      "signals": {
+        "dt_delta_minutes": 20.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -11204,28 +11963,6 @@
       }
     },
     {
-      "inmate_number": "1251342",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14060413",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "14140644",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2507,
@@ -11234,39 +11971,6 @@
         "dt_delta_minutes": 21.2,
         "textual_overlap": 0.0,
         "booked_date": "4/24/26"
-      }
-    },
-    {
-      "inmate_number": "14243879",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14268875",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14308122",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -11292,17 +11996,6 @@
       }
     },
     {
-      "inmate_number": "14409961",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "14544157",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2507,
@@ -11322,28 +12015,6 @@
         "dt_delta_minutes": 21.2,
         "textual_overlap": 0.0,
         "booked_date": "4/24/26"
-      }
-    },
-    {
-      "inmate_number": "14692341",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14715987",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -11380,39 +12051,6 @@
       }
     },
     {
-      "inmate_number": "14809523",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14810618",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1703061",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "1948460",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2507,
@@ -11421,28 +12059,6 @@
         "dt_delta_minutes": 21.2,
         "textual_overlap": 0.0,
         "booked_date": "4/24/26"
-      }
-    },
-    {
-      "inmate_number": "2045436",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "2059450",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 1,
-      "confidence": 0.456,
-      "signals": {
-        "dt_delta_minutes": 21.1,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -11721,17 +12337,6 @@
       }
     },
     {
-      "inmate_number": "1995058",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3100,
-      "confidence": 0.453,
-      "signals": {
-        "dt_delta_minutes": 22.6,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
       "inmate_number": "2215765",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2505,
@@ -11751,17 +12356,6 @@
         "dt_delta_minutes": 22.4,
         "textual_overlap": 0.0,
         "booked_date": "4/24/26"
-      }
-    },
-    {
-      "inmate_number": "2521697",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3100,
-      "confidence": 0.453,
-      "signals": {
-        "dt_delta_minutes": 22.6,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
       }
     },
     {
@@ -11828,17 +12422,6 @@
         "dt_delta_minutes": 22.4,
         "textual_overlap": 0.0,
         "booked_date": "4/24/26"
-      }
-    },
-    {
-      "inmate_number": "2793760",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3100,
-      "confidence": 0.453,
-      "signals": {
-        "dt_delta_minutes": 22.6,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
       }
     },
     {
@@ -12040,17 +12623,6 @@
       }
     },
     {
-      "inmate_number": "1206859",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14049207",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2048,
@@ -12095,17 +12667,6 @@
       }
     },
     {
-      "inmate_number": "14208372",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14229274",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2048,
@@ -12139,17 +12700,6 @@
       }
     },
     {
-      "inmate_number": "14386251",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14391729",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2048,
@@ -12172,31 +12722,9 @@
       }
     },
     {
-      "inmate_number": "14433566",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14471694",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 98,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14471694",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
       "confidence": 0.448,
       "signals": {
         "dt_delta_minutes": 24.8,
@@ -12293,31 +12821,9 @@
       }
     },
     {
-      "inmate_number": "14810434",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14810527",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 98,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14810527",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
       "confidence": 0.448,
       "signals": {
         "dt_delta_minutes": 24.8,
@@ -12337,31 +12843,9 @@
       }
     },
     {
-      "inmate_number": "14810533",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14810556",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 98,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14810556",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
       "confidence": 0.448,
       "signals": {
         "dt_delta_minutes": 24.8,
@@ -12392,31 +12876,9 @@
       }
     },
     {
-      "inmate_number": "1698531",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "1702641",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 98,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "1702641",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
       "confidence": 0.448,
       "signals": {
         "dt_delta_minutes": 24.8,
@@ -12447,17 +12909,6 @@
       }
     },
     {
-      "inmate_number": "2160258",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "2352116",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 98,
@@ -12469,31 +12920,9 @@
       }
     },
     {
-      "inmate_number": "2352116",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "2378768",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 98,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2378768",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
       "confidence": 0.448,
       "signals": {
         "dt_delta_minutes": 24.8,
@@ -12546,31 +12975,9 @@
       }
     },
     {
-      "inmate_number": "2598423",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "423747",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 98,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "423747",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
       "confidence": 0.448,
       "signals": {
         "dt_delta_minutes": 24.8,
@@ -12593,17 +13000,6 @@
       "inmate_number": "951525",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 98,
-      "confidence": 0.448,
-      "signals": {
-        "dt_delta_minutes": 24.8,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "951525",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 104,
       "confidence": 0.448,
       "signals": {
         "dt_delta_minutes": 24.8,
@@ -13470,17 +13866,6 @@
       }
     },
     {
-      "inmate_number": "1995058",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3099,
-      "confidence": 0.442,
-      "signals": {
-        "dt_delta_minutes": 28.1,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
       "inmate_number": "2318694",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2049,
@@ -13514,17 +13899,6 @@
       }
     },
     {
-      "inmate_number": "2521697",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3099,
-      "confidence": 0.442,
-      "signals": {
-        "dt_delta_minutes": 28.1,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
       "inmate_number": "2592234",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2049,
@@ -13533,17 +13907,6 @@
         "dt_delta_minutes": 27.7,
         "textual_overlap": 0.0,
         "booked_date": "4/28/26"
-      }
-    },
-    {
-      "inmate_number": "2793760",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3099,
-      "confidence": 0.442,
-      "signals": {
-        "dt_delta_minutes": 28.1,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
       }
     },
     {
@@ -13569,6 +13932,17 @@
       }
     },
     {
+      "inmate_number": "14137819",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.441,
+      "signals": {
+        "dt_delta_minutes": 28.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
       "inmate_number": "14138029",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2630,
@@ -13577,6 +13951,72 @@
         "dt_delta_minutes": 148.5,
         "textual_overlap": 0.5,
         "booked_date": "4/23/26"
+      }
+    },
+    {
+      "inmate_number": "14652582",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.441,
+      "signals": {
+        "dt_delta_minutes": 28.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14729781",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.441,
+      "signals": {
+        "dt_delta_minutes": 28.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14749004",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.441,
+      "signals": {
+        "dt_delta_minutes": 28.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14810625",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.441,
+      "signals": {
+        "dt_delta_minutes": 28.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14810636",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.441,
+      "signals": {
+        "dt_delta_minutes": 28.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "1667107",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.441,
+      "signals": {
+        "dt_delta_minutes": 28.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
       }
     },
     {
@@ -13610,6 +14050,17 @@
         "dt_delta_minutes": 28.4,
         "textual_overlap": 0.0,
         "booked_date": "5/2/26"
+      }
+    },
+    {
+      "inmate_number": "2450915",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 93,
+      "confidence": 0.441,
+      "signals": {
+        "dt_delta_minutes": 28.3,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
       }
     },
     {
@@ -15285,6 +15736,17 @@
       }
     },
     {
+      "inmate_number": "1271602",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14061504",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 327,
@@ -15318,6 +15780,50 @@
       }
     },
     {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14303027",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14304767",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14324498",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14350356",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1825,
@@ -15326,6 +15832,39 @@
         "dt_delta_minutes": 33.8,
         "textual_overlap": 0.0,
         "booked_date": "4/30/26"
+      }
+    },
+    {
+      "inmate_number": "14352390",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14379398",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14397774",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -15340,6 +15879,28 @@
       }
     },
     {
+      "inmate_number": "14419079",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14460113",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1825,
@@ -15348,6 +15909,28 @@
         "dt_delta_minutes": 33.8,
         "textual_overlap": 0.0,
         "booked_date": "4/30/26"
+      }
+    },
+    {
+      "inmate_number": "14538378",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14568510",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -15370,6 +15953,17 @@
         "dt_delta_minutes": 33.8,
         "textual_overlap": 0.0,
         "booked_date": "4/30/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -15439,6 +16033,17 @@
       }
     },
     {
+      "inmate_number": "14768153",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14796214",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1825,
@@ -15469,6 +16074,17 @@
         "dt_delta_minutes": 33.4,
         "textual_overlap": 0.0,
         "booked_date": "5/13/26"
+      }
+    },
+    {
+      "inmate_number": "14810723",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -15505,6 +16121,17 @@
       }
     },
     {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "2025319",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1825,
@@ -15513,6 +16140,39 @@
         "dt_delta_minutes": 33.8,
         "textual_overlap": 0.0,
         "booked_date": "4/30/26"
+      }
+    },
+    {
+      "inmate_number": "2149329",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2300881",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2403077",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -15535,6 +16195,17 @@
         "dt_delta_minutes": 33.8,
         "textual_overlap": 0.0,
         "booked_date": "4/30/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.43,
+      "signals": {
+        "dt_delta_minutes": 33.8,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -15747,17 +16418,6 @@
       }
     },
     {
-      "inmate_number": "1995058",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3105,
-      "confidence": 0.429,
-      "signals": {
-        "dt_delta_minutes": 34.0,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
       "inmate_number": "2053527",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 2379,
@@ -15802,17 +16462,6 @@
       }
     },
     {
-      "inmate_number": "2521697",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3105,
-      "confidence": 0.429,
-      "signals": {
-        "dt_delta_minutes": 34.0,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
       "inmate_number": "2550131",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 3005,
@@ -15832,17 +16481,6 @@
         "dt_delta_minutes": 33.9,
         "textual_overlap": 0.0,
         "booked_date": "4/20/26"
-      }
-    },
-    {
-      "inmate_number": "2793760",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3105,
-      "confidence": 0.429,
-      "signals": {
-        "dt_delta_minutes": 34.0,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
       }
     },
     {
@@ -16118,149 +16756,6 @@
         "dt_delta_minutes": 35.3,
         "textual_overlap": 0.0,
         "booked_date": "5/7/26"
-      }
-    },
-    {
-      "inmate_number": "1251342",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14060413",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14243879",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14268875",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14308122",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14409961",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14692341",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14715987",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14809523",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14810618",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1703061",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "2045436",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "2059450",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.425,
-      "signals": {
-        "dt_delta_minutes": 35.9,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -17463,6 +17958,50 @@
       }
     },
     {
+      "inmate_number": "1271602",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14303027",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14304767",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14316414",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1489,
@@ -17471,6 +18010,50 @@
         "dt_delta_minutes": 37.7,
         "textual_overlap": 0.0,
         "booked_date": "5/3/26"
+      }
+    },
+    {
+      "inmate_number": "14324498",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14352390",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14379398",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14397774",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -17485,6 +18068,61 @@
       }
     },
     {
+      "inmate_number": "14419079",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14538378",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14568510",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14660451",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1489,
@@ -17496,6 +18134,17 @@
       }
     },
     {
+      "inmate_number": "14768153",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14782124",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1489,
@@ -17504,6 +18153,72 @@
         "dt_delta_minutes": 37.7,
         "textual_overlap": 0.0,
         "booked_date": "5/3/26"
+      }
+    },
+    {
+      "inmate_number": "14810723",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2149329",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2300881",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2403077",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.421,
+      "signals": {
+        "dt_delta_minutes": 38.0,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -17562,25 +18277,14 @@
       }
     },
     {
-      "inmate_number": "1206859",
+      "inmate_number": "1271602",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.3,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "1206859",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -17628,25 +18332,69 @@
       }
     },
     {
-      "inmate_number": "14208372",
+      "inmate_number": "14282224",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.3,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
-      "inmate_number": "14208372",
+      "inmate_number": "14303027",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.2,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14304767",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.42,
+      "signals": {
+        "dt_delta_minutes": 38.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14324498",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.42,
+      "signals": {
+        "dt_delta_minutes": 38.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14352390",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.42,
+      "signals": {
+        "dt_delta_minutes": 38.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14379398",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.42,
+      "signals": {
+        "dt_delta_minutes": 38.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -17672,25 +18420,25 @@
       }
     },
     {
-      "inmate_number": "14386251",
+      "inmate_number": "14397774",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.3,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
-      "inmate_number": "14386251",
+      "inmate_number": "14419079",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.2,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -17716,25 +18464,14 @@
       }
     },
     {
-      "inmate_number": "14433566",
+      "inmate_number": "14447221",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.3,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14433566",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -17760,25 +18497,36 @@
       }
     },
     {
-      "inmate_number": "14471694",
+      "inmate_number": "14538378",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.3,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
-      "inmate_number": "14471694",
+      "inmate_number": "14568510",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.2,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.42,
+      "signals": {
+        "dt_delta_minutes": 38.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -17815,6 +18563,17 @@
       }
     },
     {
+      "inmate_number": "14768153",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.42,
+      "signals": {
+        "dt_delta_minutes": 38.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14810160",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 326,
@@ -17848,28 +18607,6 @@
       }
     },
     {
-      "inmate_number": "14810434",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14810434",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14810527",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 96,
@@ -17884,28 +18621,6 @@
       "inmate_number": "14810527",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 97,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14810527",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14810527",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
       "confidence": 0.42,
       "signals": {
         "dt_delta_minutes": 38.2,
@@ -17936,28 +18651,6 @@
       }
     },
     {
-      "inmate_number": "14810533",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14810533",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14810556",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 96,
@@ -17980,25 +18673,14 @@
       }
     },
     {
-      "inmate_number": "14810556",
+      "inmate_number": "14810723",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.3,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14810556",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -18046,28 +18728,6 @@
       }
     },
     {
-      "inmate_number": "1698531",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "1698531",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "1702641",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 96,
@@ -18090,36 +18750,25 @@
       }
     },
     {
-      "inmate_number": "1702641",
+      "inmate_number": "1857507",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.3,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
-      "inmate_number": "1702641",
+      "inmate_number": "2149329",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.2,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "1995058",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3098,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -18145,25 +18794,14 @@
       }
     },
     {
-      "inmate_number": "2160258",
+      "inmate_number": "2300881",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.3,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2160258",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -18181,28 +18819,6 @@
       "inmate_number": "2352116",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 97,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2352116",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2352116",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
       "confidence": 0.42,
       "signals": {
         "dt_delta_minutes": 38.2,
@@ -18233,25 +18849,14 @@
       }
     },
     {
-      "inmate_number": "2378768",
+      "inmate_number": "2403077",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 1,
       "confidence": 0.42,
       "signals": {
-        "dt_delta_minutes": 38.3,
+        "dt_delta_minutes": 38.4,
         "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2378768",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -18266,6 +18871,17 @@
       }
     },
     {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.42,
+      "signals": {
+        "dt_delta_minutes": 38.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "2491810",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 326,
@@ -18274,17 +18890,6 @@
         "dt_delta_minutes": 38.5,
         "textual_overlap": 0.0,
         "booked_date": "5/13/26"
-      }
-    },
-    {
-      "inmate_number": "2521697",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3098,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
       }
     },
     {
@@ -18302,28 +18907,6 @@
       "inmate_number": "2598423",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 97,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2598423",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2598423",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
       "confidence": 0.42,
       "signals": {
         "dt_delta_minutes": 38.2,
@@ -18365,17 +18948,6 @@
       }
     },
     {
-      "inmate_number": "2793760",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3098,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "4/19/26"
-      }
-    },
-    {
       "inmate_number": "2829611",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 326,
@@ -18409,28 +18981,6 @@
       }
     },
     {
-      "inmate_number": "423747",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "423747",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "951525",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 96,
@@ -18445,28 +18995,6 @@
       "inmate_number": "951525",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 97,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.2,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "951525",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 102,
-      "confidence": 0.42,
-      "signals": {
-        "dt_delta_minutes": 38.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "951525",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 103,
       "confidence": 0.42,
       "signals": {
         "dt_delta_minutes": 38.2,
@@ -19597,6 +20125,17 @@
       }
     },
     {
+      "inmate_number": "1271602",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14061504",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 329,
@@ -19616,6 +20155,138 @@
         "dt_delta_minutes": 41.3,
         "textual_overlap": 0.0,
         "booked_date": "5/13/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14303027",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14304767",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14324498",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14352390",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14379398",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14397774",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14419079",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14538378",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14568510",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -19652,6 +20323,17 @@
       }
     },
     {
+      "inmate_number": "14768153",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "14810160",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 329,
@@ -19660,6 +20342,17 @@
         "dt_delta_minutes": 41.3,
         "textual_overlap": 0.0,
         "booked_date": "5/13/26"
+      }
+    },
+    {
+      "inmate_number": "14810723",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -19685,6 +20378,50 @@
       }
     },
     {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2149329",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2300881",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2403077",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "2406940",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 329,
@@ -19693,6 +20430,17 @@
         "dt_delta_minutes": 41.3,
         "textual_overlap": 0.0,
         "booked_date": "5/13/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.414,
+      "signals": {
+        "dt_delta_minutes": 41.4,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
       }
     },
     {
@@ -22237,6 +22985,83 @@
       }
     },
     {
+      "inmate_number": "14137819",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.399,
+      "signals": {
+        "dt_delta_minutes": 48.6,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14214752",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.399,
+      "signals": {
+        "dt_delta_minutes": 48.6,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14729781",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.399,
+      "signals": {
+        "dt_delta_minutes": 48.6,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14749004",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.399,
+      "signals": {
+        "dt_delta_minutes": 48.6,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14810625",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.399,
+      "signals": {
+        "dt_delta_minutes": 48.6,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14810636",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.399,
+      "signals": {
+        "dt_delta_minutes": 48.6,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "1667107",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.399,
+      "signals": {
+        "dt_delta_minutes": 48.6,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
       "inmate_number": "1700298",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1599,
@@ -22267,6 +23092,17 @@
         "dt_delta_minutes": 48.5,
         "textual_overlap": 0.0,
         "booked_date": "5/2/26"
+      }
+    },
+    {
+      "inmate_number": "2450915",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 92,
+      "confidence": 0.399,
+      "signals": {
+        "dt_delta_minutes": 48.6,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
       }
     },
     {
@@ -23128,31 +23964,9 @@
       }
     },
     {
-      "inmate_number": "1206859",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14208372",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 95,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14208372",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
       "confidence": 0.393,
       "signals": {
         "dt_delta_minutes": 51.4,
@@ -23172,31 +23986,9 @@
       }
     },
     {
-      "inmate_number": "14386251",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14433566",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 95,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14433566",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
       "confidence": 0.393,
       "signals": {
         "dt_delta_minutes": 51.4,
@@ -23216,31 +24008,9 @@
       }
     },
     {
-      "inmate_number": "14471694",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14810434",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 95,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14810434",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
       "confidence": 0.393,
       "signals": {
         "dt_delta_minutes": 51.4,
@@ -23260,31 +24030,9 @@
       }
     },
     {
-      "inmate_number": "14810527",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "14810533",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 95,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "14810533",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
       "confidence": 0.393,
       "signals": {
         "dt_delta_minutes": 51.4,
@@ -23304,31 +24052,9 @@
       }
     },
     {
-      "inmate_number": "14810556",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "1698531",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 95,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "1698531",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
       "confidence": 0.393,
       "signals": {
         "dt_delta_minutes": 51.4,
@@ -23348,31 +24074,9 @@
       }
     },
     {
-      "inmate_number": "1702641",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "2160258",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 95,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2160258",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
       "confidence": 0.393,
       "signals": {
         "dt_delta_minutes": 51.4,
@@ -23392,31 +24096,9 @@
       }
     },
     {
-      "inmate_number": "2352116",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "2378768",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 95,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "2378768",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
       "confidence": 0.393,
       "signals": {
         "dt_delta_minutes": 51.4,
@@ -23436,17 +24118,6 @@
       }
     },
     {
-      "inmate_number": "2598423",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "423747",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 95,
@@ -23458,31 +24129,9 @@
       }
     },
     {
-      "inmate_number": "423747",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
       "inmate_number": "951525",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 95,
-      "confidence": 0.393,
-      "signals": {
-        "dt_delta_minutes": 51.4,
-        "textual_overlap": 0.0,
-        "booked_date": "5/15/26"
-      }
-    },
-    {
-      "inmate_number": "951525",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 101,
       "confidence": 0.393,
       "signals": {
         "dt_delta_minutes": 51.4,
@@ -27880,6 +28529,226 @@
       }
     },
     {
+      "inmate_number": "1271602",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14282224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14303027",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14304767",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14324498",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14352390",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14379398",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14397774",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14419079",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14447221",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14538378",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14568510",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14610073",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14768153",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "14810723",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "1857507",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2149329",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2300881",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2403077",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
+      "inmate_number": "2482246",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.376,
+      "signals": {
+        "dt_delta_minutes": 59.7,
+        "textual_overlap": 0.0,
+        "booked_date": "5/18/26"
+      }
+    },
+    {
       "inmate_number": "2568641",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 467,
@@ -31598,28 +32467,6 @@
       }
     },
     {
-      "inmate_number": "1251342",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1339807",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "1384429",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 895,
@@ -31639,17 +32486,6 @@
         "dt_delta_minutes": 69.8,
         "textual_overlap": 0.0,
         "booked_date": "5/8/26"
-      }
-    },
-    {
-      "inmate_number": "14060413",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -31675,17 +32511,6 @@
       }
     },
     {
-      "inmate_number": "14243879",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "14257999",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 895,
@@ -31697,28 +32522,6 @@
       }
     },
     {
-      "inmate_number": "14268875",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14308122",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "14326817",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 895,
@@ -31727,17 +32530,6 @@
         "dt_delta_minutes": 69.8,
         "textual_overlap": 0.0,
         "booked_date": "5/8/26"
-      }
-    },
-    {
-      "inmate_number": "14409961",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -31785,17 +32577,6 @@
       }
     },
     {
-      "inmate_number": "14692341",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "14714337",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 895,
@@ -31807,50 +32588,6 @@
       }
     },
     {
-      "inmate_number": "14715987",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14809523",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "14810618",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "1703061",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
       "inmate_number": "1914577",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 895,
@@ -31859,28 +32596,6 @@
         "dt_delta_minutes": 69.8,
         "textual_overlap": 0.0,
         "booked_date": "5/8/26"
-      }
-    },
-    {
-      "inmate_number": "2045436",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
-      }
-    },
-    {
-      "inmate_number": "2059450",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.354,
-      "signals": {
-        "dt_delta_minutes": 70.3,
-        "textual_overlap": 0.0,
-        "booked_date": "5/16/26"
       }
     },
     {
@@ -32739,6 +33454,105 @@
         "dt_delta_minutes": 191.3,
         "textual_overlap": 0.5,
         "booked_date": "5/6/26"
+      }
+    },
+    {
+      "inmate_number": "14137819",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 91,
+      "confidence": 0.35,
+      "signals": {
+        "dt_delta_minutes": 71.9,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14214752",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 91,
+      "confidence": 0.35,
+      "signals": {
+        "dt_delta_minutes": 71.9,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14652582",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 91,
+      "confidence": 0.35,
+      "signals": {
+        "dt_delta_minutes": 71.9,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14729781",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 91,
+      "confidence": 0.35,
+      "signals": {
+        "dt_delta_minutes": 71.9,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14749004",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 91,
+      "confidence": 0.35,
+      "signals": {
+        "dt_delta_minutes": 71.9,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14810625",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 91,
+      "confidence": 0.35,
+      "signals": {
+        "dt_delta_minutes": 71.9,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "14810636",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 91,
+      "confidence": 0.35,
+      "signals": {
+        "dt_delta_minutes": 71.9,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "1667107",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 91,
+      "confidence": 0.35,
+      "signals": {
+        "dt_delta_minutes": 71.9,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
+      }
+    },
+    {
+      "inmate_number": "2450915",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 91,
+      "confidence": 0.35,
+      "signals": {
+        "dt_delta_minutes": 71.9,
+        "textual_overlap": 0.0,
+        "booked_date": "5/17/26"
       }
     }
   ]
