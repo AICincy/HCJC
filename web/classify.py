@@ -328,15 +328,12 @@ def _rfc822(iso_date_str: str | None) -> str:
     """
     if not iso_date_str:
         return ""
-    iso_date_str = str(iso_date_str).strip()
-    # Remove trailing Z and replace +00:00 with nothing.
-    iso_date_str = iso_date_str.rstrip("Z").replace("+00:00", "")
     try:
-        dt = datetime.fromisoformat(iso_date_str)
-        # Format: "Day, DD Mon YYYY HH:MM:SS +0000"
-        day_name = dt.strftime("%a")
-        month_name = dt.strftime("%b")
-        return f"{day_name}, {dt.day:02d} {month_name} {dt.year} {dt.hour:02d}:{dt.minute:02d}:{dt.second:02d} +0000"
+        # Handle 'Z' for Python < 3.11 and parse as aware datetime
+        dt = datetime.fromisoformat(str(iso_date_str).strip().replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
     except (ValueError, AttributeError):
         return ""
 
