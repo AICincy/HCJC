@@ -1,1 +1,0 @@
-"""JCStream static-site renderer."""
