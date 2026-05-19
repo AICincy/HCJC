@@ -764,20 +764,29 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 }
 #tier-tip .tip-row { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* Chapter / category pill */
+/* Chapter / category pill — categorical encoding via text + position only.
+   The .chap-{category} class stays for filter JS to read, but no longer
+   paints color. --cat custom property still set in .chap-* / .charge-* /
+   .cat-* rules but no longer consumed visually (dead-variable cleanup
+   belongs in a follow-up). */
 .chap {
   display: inline-flex;
   align-items: center;
   padding: 2px 9px;
   border-radius: var(--radius);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: var(--cat, var(--fg-soft));
-  background: color-mix(in srgb, var(--cat, var(--fg-soft)) 12%, transparent);
-  border: 1px solid color-mix(in srgb, var(--cat, var(--fg-soft)) 32%, transparent);
+  color: var(--fg-soft);
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+.chap[data-active="true"], .chap.is-active {
+  color: var(--fg);
+  border-top-color: var(--accent);
 }
 
 .rb-grid {
@@ -2435,7 +2444,7 @@ h2.legal-anchor {
 .rb-meta-sep { color: var(--fg-muted); opacity: 0.5; }
 
 /* --- Tag pills (event types) --- */
-.tag-booked   { background: rgba(196,62,44,.10); color: #8c2a1c; border-color: rgba(196,62,44,.25); }
+.tag-booked   { background: transparent; color: var(--fg); border-color: var(--fg-muted); }
 
 .cfs {
   list-style: none; padding: 0; margin: 0;

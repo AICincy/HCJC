@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-19T01:41:42Z",
+  "generated_utc": "2026-05-19T03:45:44Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3258,
+  "row_count": 3255,
   "rows": [
     {
       "address_x": "3XX EZZARD CHARLES DR",
@@ -4444,24 +4444,6 @@
       "longitude_x": "-84.581833"
     },
     {
-      "address_x": "47XX RED BANK RD",
-      "agency": "CPD",
-      "create_time_incident": "2026-05-15T09:01:14.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260515000387",
-      "incident_type_id": "TRAFFIC HAZARD",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-05-15T09:56:31.000",
-      "closed_time_incident": "2026-05-15T10:10:07.000",
-      "dispatch_time_primary_unit": "2026-05-15T09:18:48.000",
-      "beat": "P23",
-      "district": "2",
-      "cpd_neighborhood": "MADISONVILLE",
-      "community_council_neighborhood": "MADISONVILLE",
-      "latitude_x": "39.1591350000896",
-      "longitude_x": "-84.403899"
-    },
-    {
       "address_x": "70XX READING RD",
       "agency": "CPD",
       "create_time_incident": "2026-05-15T09:01:14.000",
@@ -4478,6 +4460,24 @@
       "community_council_neighborhood": "BOND HILL",
       "latitude_x": "39.1890460000896",
       "longitude_x": "-84.465348"
+    },
+    {
+      "address_x": "47XX RED BANK RD",
+      "agency": "CPD",
+      "create_time_incident": "2026-05-15T09:01:14.000",
+      "disposition_text": "CIT: CITED",
+      "event_number": "CPD260515000387",
+      "incident_type_id": "TRAFFIC HAZARD",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-05-15T09:56:31.000",
+      "closed_time_incident": "2026-05-15T10:10:07.000",
+      "dispatch_time_primary_unit": "2026-05-15T09:18:48.000",
+      "beat": "P23",
+      "district": "2",
+      "cpd_neighborhood": "MADISONVILLE",
+      "community_council_neighborhood": "MADISONVILLE",
+      "latitude_x": "39.1591350000896",
+      "longitude_x": "-84.403899"
     },
     {
       "address_x": "45XX GLENWAY AV",
@@ -23754,24 +23754,6 @@
       "longitude_x": "-84.55818"
     },
     {
-      "address_x": "8XX N I75",
-      "agency": "CPD",
-      "create_time_incident": "2026-05-05T18:28:07.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260505001641",
-      "incident_type_id": "CRASH NON-INJURY, HWY",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-05-05T18:40:15.000",
-      "closed_time_incident": "2026-05-05T19:38:30.000",
-      "dispatch_time_primary_unit": "2026-05-05T18:30:27.000",
-      "beat": "P45",
-      "district": "4",
-      "cpd_neighborhood": "BONDHILL",
-      "community_council_neighborhood": "BOND HILL",
-      "latitude_x": "39.1802680000896",
-      "longitude_x": "-84.48557"
-    },
-    {
       "address_x": "46XX RAPID RUN RD",
       "agency": "CPD",
       "create_time_incident": "2026-05-05T18:28:07.000",
@@ -23788,6 +23770,24 @@
       "community_council_neighborhood": "WEST PRICE HILL",
       "latitude_x": "39.1121280000897",
       "longitude_x": "-84.595719"
+    },
+    {
+      "address_x": "8XX N I75",
+      "agency": "CPD",
+      "create_time_incident": "2026-05-05T18:28:07.000",
+      "disposition_text": "CIT: CITED",
+      "event_number": "CPD260505001641",
+      "incident_type_id": "CRASH NON-INJURY, HWY",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-05-05T18:40:15.000",
+      "closed_time_incident": "2026-05-05T19:38:30.000",
+      "dispatch_time_primary_unit": "2026-05-05T18:30:27.000",
+      "beat": "P45",
+      "district": "4",
+      "cpd_neighborhood": "BONDHILL",
+      "community_council_neighborhood": "BOND HILL",
+      "latitude_x": "39.1802680000896",
+      "longitude_x": "-84.48557"
     },
     {
       "address_x": "55XX GLENWAY AV",
@@ -58319,59 +58319,6 @@
       "community_council_neighborhood": "DOWNTOWN",
       "latitude_x": "39.0972400000897",
       "longitude_x": "-84.51965"
-    },
-    {
-      "address_x": "27XX HARRISON AV",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T03:01:41.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260419000238",
-      "incident_type_id": "DOMESTIC DIST PHYS (IP)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-19T03:14:21.000",
-      "closed_time_incident": "2026-04-19T04:51:11.000",
-      "dispatch_time_primary_unit": "2026-04-19T03:03:24.000",
-      "beat": "P33",
-      "district": "3",
-      "cpd_neighborhood": "WESTWOOD",
-      "community_council_neighborhood": "WESTWOOD",
-      "latitude_x": "39.1422560000896",
-      "longitude_x": "-84.589118"
-    },
-    {
-      "address_x": "XX E 7TH ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T02:32:05.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260419000206",
-      "incident_type_id": "THEFT FROM VEH (JO)",
-      "priority": "12",
-      "closed_time_incident": "2026-04-19T06:02:19.000",
-      "dispatch_time_primary_unit": "2026-04-19T02:46:51.000",
-      "beat": "P61",
-      "district": "1",
-      "cpd_neighborhood": "C. B. D. / RIVERFRONT",
-      "community_council_neighborhood": "DOWNTOWN",
-      "latitude_x": "39.1026240000897",
-      "longitude_x": "-84.513602"
-    },
-    {
-      "address_x": "1XX E FREEDOM WY",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T02:20:43.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260419000197",
-      "incident_type_id": "FIGHT",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-19T02:20:43.000",
-      "closed_time_incident": "2026-04-19T03:50:10.000",
-      "dispatch_time_primary_unit": "2026-04-19T02:20:43.000",
-      "beat": "P61",
-      "district": "1",
-      "cpd_neighborhood": "C. B. D. / RIVERFRONT",
-      "community_council_neighborhood": "DOWNTOWN",
-      "latitude_x": "39.0964310000896",
-      "longitude_x": "-84.509629"
     }
   ]
 }
