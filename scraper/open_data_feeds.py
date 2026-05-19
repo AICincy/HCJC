@@ -84,18 +84,18 @@ FEEDS: tuple[FeedSpec, ...] = (
         cache_hours=24,
     ),
     FeedSpec(
-        dataset_id="hibq-hbnj",
+        dataset_id="w2kv-5pdg",
         filename="traffic_stops_drivers_recent.json",
-        label="PDI Traffic Stops (Drivers)",
+        label="Traffic Stops - Contact Cards",
         days=30,
         where_candidates=("interview_date > '{since}'",),
         order="interview_date DESC",
-        cache_hours=12,  # source updates daily; 12h catches AM and PM batches
+        cache_hours=12,
     ),
     FeedSpec(
-        dataset_id="jx3x-rh6i",
+        dataset_id="swrz-ak2i",
         filename="pedestrian_stops_recent.json",
-        label="PDI Pedestrian Stops",
+        label="Pedestrian Stops - Contact Cards",
         days=30,
         where_candidates=("interview_date > '{since}'",),
         order="interview_date DESC",
