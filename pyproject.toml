@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jcstream"
+version = "1.0.0"
+description = "JCStream: Real-time Hamilton County (Ohio) Justice Center inmate tracking and charge classification system"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "AI Cincinnati", email = "info@aicincy.org"},
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    "pydantic>=2.0,<3.0",
+    "jinja2>=3.1,<4.0",
+    "pillow>=9.0,<11.0",
+    "selectolax>=0.3,<1.0",
+    "requests>=2.28,<3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0,<8.0",
+    "pytest-cov>=4.0,<5.0",
+    "black>=23.0,<24.0",
+    "ruff>=0.1,<1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/AICincy/HCJC"
+Repository = "https://github.com/AICincy/HCJC.git"
+Issues = "https://github.com/AICincy/HCJC/issues"
+
+[tool.setuptools]
+packages = ["scraper", "web"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]  # line too long (handled by black)
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--tb=short"
