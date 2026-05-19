@@ -2,11 +2,11 @@
 
 JCStream is a static public-records mirror of the Hamilton County, Ohio Justice
 Center inmate roster. A Python script (`web/build.py`) regenerates `docs/` from
-`data/current.json` on a nominally-30-minute GitHub Actions cron
-(`.github/workflows/sweep.yml`). In practice the cron drifts. Observed
-intervals on a normal day run 30-60 minutes (GitHub Actions schedules `cron:`
-jobs on best-effort; high-load periods stretch the gap), and during incidents
-the next-run can slip past the hour. The sweep also runs the HCSO scraper
+`data/current.json` on a GitHub Actions cron that fires every 15 minutes with a
+20-minute skip-gate (`.github/workflows/sweep.yml` cron `*/15 * * * *`; the
+sweep no-ops if `current.json` is less than 20 minutes old). Effective cadence
+is roughly 20-45 minutes; during incidents the next-run can slip past the hour.
+The sweep also runs the HCSO scraper
 (`scraper/`) and pulls four Cincinnati Open Data feeds.
 Live at https://www.aretheyinjail.com (GitHub Pages, custom domain; build uses
 `JCSTREAM_SITE_BASE_URL=""` + a `CNAME` file written from `JCSTREAM_CNAME`).
