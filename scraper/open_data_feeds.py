@@ -90,7 +90,7 @@ FEEDS: tuple[FeedSpec, ...] = (
         days=30,
         where_candidates=("interview_date > '{since}'",),
         order="interview_date DESC",
-        cache_hours=12,
+        cache_hours=12,  # source updates daily; 12h catches AM and PM batches
     ),
     FeedSpec(
         dataset_id="swrz-ak2i",
@@ -99,7 +99,7 @@ FEEDS: tuple[FeedSpec, ...] = (
         days=30,
         where_candidates=("interview_date > '{since}'",),
         order="interview_date DESC",
-        cache_hours=12,
+        cache_hours=12,  # source updates daily; 12h catches AM and PM batches
     ),
     FeedSpec(
         dataset_id="7aqy-xrv9",

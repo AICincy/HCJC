@@ -616,14 +616,12 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     # Copy the raw data files into the published tree so they're fetchable.
     data_out = out_dir / "data"
     data_out.mkdir(parents=True, exist_ok=True)
+    from scraper.open_data_feeds import FEEDS
+    supplemental = [f.filename for f in FEEDS]
     for name in ("current.json", "changelog.json", "history.json", "cfs_recent.json",
                  "shootings_recent.json",
                  "cfs_pdi_recent.json", "courtclerk_cases.json", "orc_offenses.json",
-                 # Supplemental safety feeds (scraper/open_data_feeds.py)
-                 "use_of_force_pdi_recent.json",
-                 "use_of_force_incidents_recent.json",
-                 "traffic_stops_drivers_recent.json", "pedestrian_stops_recent.json",
-                 "crime_stars_recent.json", "cca_complaints_recent.json"):
+                 *supplemental):
         src = Path("data") / name
         if src.exists():
             shutil.copy2(src, data_out / name)

@@ -124,6 +124,14 @@ class HcsoClient:
         response.raise_for_status()
         return response.text
 
+    def get_bytes(self, url: str) -> bytes:
+        """Fetch a URL and return raw bytes. Used for direct photo URLs."""
+        assert self._client is not None, "use as context manager"
+        self._sleep_for_crawl_delay()
+        response = self._client.get(url)
+        response.raise_for_status()
+        return response.content
+
 
 def _retry_after_seconds(header_value: str | None) -> float:
     """Parse a Retry-After header value into seconds.

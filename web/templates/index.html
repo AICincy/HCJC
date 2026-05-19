@@ -16,60 +16,12 @@
   <p class="banner-fine"><strong>Not a consumer reporting agency.</strong> Do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act (15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em>). To report an error, or to request removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a> &mdash; <strong>there is never a fee, and there never will be</strong>. <a href="{{ base_url }}/data/#legal">Full legal notices &rarr;</a></p>
 </aside>
 
-<section class="hero-strip">
-  <div class="hero-l">
-    <div class="hero-eyebrow">Today in custody</div>
-    <h2 class="hero-h">
-      <span class="hero-num">{{ "{:,}".format(snapshot.inmate_count) }}</span>
-      <span class="hero-unit">{{ 'person' if snapshot.inmate_count == 1 else 'people' }}</span>
-    </h2>
-    <p class="hero-sub">
-      held at the Hamilton County Justice Center &middot; refreshed every 30 min
-      {% if trend is defined and trend.delta is not none and trend.delta != 0 %}
-        &middot;
-        {% if trend.delta > 0 %}<span class="hero-trend">&uarr; +{{ trend.delta }} vs yesterday</span>
-        {% else %}<span class="hero-trend" style="color: var(--warn)">&darr; {{ -trend.delta }} vs yesterday</span>
-        {% endif %}
-      {% endif %}
-    </p>
-    <p class="meta">Last sweep <code>{{ snapshot.generated_utc or 'pending' }}</code> &middot;
-      {{ recent_booked }} booked &middot; {{ recent_released }} released in the last 24 hours &middot;
-      <a href="{{ base_url }}/stats/">see statistics &rarr;</a></p>
-  </div>
-  <div class="hero-stats">
-    <div class="stat-card">
-      <div class="stat-row"><span class="stat-k">Booked, last 24h</span><span class="stat-v">{{ recent_booked }}</span></div>
-      <div class="stat-row"><span class="stat-k">Released, last 24h</span><span class="stat-v">{{ recent_released }}</span></div>
-      {% if trend is defined and trend.booked_7d is defined %}
-      <div class="stat-row"><span class="stat-k">Booked, last {{ trend.churn_days }}d</span><span class="stat-v">{{ trend.booked_7d }}</span></div>
-      <div class="stat-row"><span class="stat-k">Released, last {{ trend.churn_days }}d</span><span class="stat-v">{{ trend.released_7d }}</span></div>
-      {% endif %}
-    </div>
-    {% if trend is defined and trend.spark and trend.spark | length >= 2 %}
-    {% set mn = trend.spark | min %}{% set mx = trend.spark | max %}{% set rng = (mx - mn) or 1 %}
-    <div class="stat-card spark-card">
-      <div class="spark-h">
-        <div>
-          <div class="stat-k">Roster size &middot; last {{ trend.spark | length }} day{{ '' if trend.spark|length == 1 else 's' }}</div>
-          <div class="stat-v">{{ "{:,}".format(trend.spark[-1]) }}</div>
-        </div>
-        {% if trend.delta is not none %}
-          {% if trend.delta > 0 %}<span class="trend-pill is-up">&uarr; +{{ trend.delta }}</span>
-          {% elif trend.delta < 0 %}<span class="trend-pill is-down">&darr; {{ -trend.delta }}</span>
-          {% else %}<span class="trend-pill is-flat">no change</span>
-          {% endif %}
-        {% endif %}
-      </div>
-      <svg class="spark-svg" viewBox="0 0 200 56" preserveAspectRatio="none" aria-hidden="true">
-        <polyline points="{% for v in trend.spark %}{{ '%.1f' % (loop.index0 * 200 / (trend.spark|length - 1)) }},{{ '%.1f' % (52 - (v - mn) * 46 / rng) }} {% endfor %}"/>
-        {% set lastv = trend.spark[-1] %}
-        <circle cx="200" cy="{{ '%.1f' % (52 - (lastv - mn) * 46 / rng) }}" r="2.4"/>
-      </svg>
-      <div class="spark-ticks"><span>{{ mn }}</span><span>{{ mx }}</span></div>
-    </div>
-    {% endif %}
-  </div>
-</section>
+<p class="roster-meta">
+  <strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> {{ 'person' if snapshot.inmate_count == 1 else 'people' }} in custody.
+  Sweep <code>{{ snapshot.generated_utc or 'pending' }}</code>.
+  {{ recent_booked }} booked, {{ recent_released }} released in the last 24h.
+  <a href="{{ base_url }}/stats/">Statistics &rarr;</a>
+</p>
 
 {% if snapshot.inmate_count == 0 %}
 <div class="empty">
@@ -77,109 +29,6 @@
   <p>JCStream's first sweep hasn't completed. Trigger a manual run from the <a href="https://github.com/AICincy/JCStream/actions/workflows/sweep.yml">sweep workflow</a> or wait for the next 30-minute cron.</p>
 </div>
 {% else %}
-
-{% if recent_booked_inmates %}
-<section class="recent-bookings">
-  <div class="section-h">
-    <h2>Recent bookings</h2>
-    <span class="pill">{{ recent_booked_inmates | length }}</span>
-    <span class="grow"></span>
-    <span class="meta">last six people booked into HCSO custody</span>
-  </div>
-  <div class="rb-grid">
-    {% for inm in recent_booked_inmates %}
-    {% set deg = primary_degree(inm) %}
-    {% set tier = primary_tier(inm) %}
-    {% set top_charge = inm.charges[0] if inm.charges else None %}
-    <a class="rb-card" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/">
-      {% if inm.photo_filename %}
-      <span class="rb-photo">
-        <img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="Booking photo of {{ inm.full_name }}" loading="lazy" decoding="async">
-      </span>
-      {% else %}
-      <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(inm.full_name) }}"></span>
-      {% endif %}
-      <div class="rb-body">
-        {% if deg %}<span class="tier tier-{{ deg }}">{{ deg }}</span>{% elif tier %}<span class="tier tier-{{ tier.kind }}">{{ tier.short }}</span>{% endif %}
-        <h4 class="rb-name">{{ inm.full_name }}</h4>
-        <p class="rb-charge">{{ (top_charge.description | lower) if top_charge and top_charge.description else '—' }}</p>
-        <div class="rb-meta">
-          <span>{{ inm.booking_date or '—' }}</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
-        </div>
-      </div>
-    </a>
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
-
-{% if events_recent %}
-<section class="recent-activity">
-  <div class="section-h">
-    <h2>Recent activity</h2>
-    <span class="pill">{{ events_recent | length }}</span>
-    <span class="grow"></span>
-    <span class="meta">last 8 hours</span>
-  </div>
-  <div class="cards">
-    {% for e in events_recent %}
-    {% set inm = inmates_by_id.get(e.inmate_number) %}
-    {% set chap = primary_chapter(inm) if inm else None %}
-    {% set tier = primary_tier(inm) if inm else None %}
-    <article class="card-inmate" aria-labelledby="activity-card-{{ e.inmate_number }}-name">
-      {% if tier %}<span class="tier tier-{{ tier.kind }} tier-corner">{{ tier.short }}</span>{% endif %}
-      {% if inm and inm.photo_filename %}
-      <a class="thumb" href="{{ base_url }}/inmate/{{ e.inmate_number }}/" data-photo="{{ base_url }}/photos/{{ inm.photo_filename }}" data-photo-cap="{{ inm.full_name }} · booked {{ inm.booking_date }}" aria-label="View booking photo of {{ inm.full_name }}">
-        <img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="" width="48" height="60" loading="lazy" decoding="async">
-      </a>
-      {% else %}
-      <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(inm.full_name if inm else e.name) }}"></span>
-      {% endif %}
-      <div class="meta">
-        <div class="event-line">
-          <span class="tag tag-{{ e.event }}">{{ e.event }}</span>
-          <time datetime="{{ e.timestamp_utc }}">{{ e.timestamp_utc }}</time>
-        </div>
-        <p class="name" id="activity-card-{{ e.inmate_number }}-name">
-          {% if e.event != "released" %}
-            <a class="plain" href="{{ base_url }}/inmate/{{ e.inmate_number }}/">{{ inm.full_name if inm else e.name }}</a>
-          {% else %}
-            <span class="released-name">{{ e.name }}</span>
-          {% endif %}
-        </p>
-        {% if inm %}
-        <p class="charge {% if chap %}charge-{{ chap.cls }}{% endif %}">{{ (chap.label if chap else primary_charge(inm)) or '—' }}</p>
-        <a class="id-chip" href="{{ base_url }}/inmate/{{ e.inmate_number }}/">#&thinsp;{{ e.inmate_number }}</a>
-        {% endif %}
-      </div>
-    </article>
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
-
-{% if map_points %}
-<section class="dispatch-map-section">
-  <div class="section-h">
-    <h2>Recent CPD dispatches &amp; reported shootings</h2>
-    <span class="pill">{{ map_points }}</span>
-    <span class="grow"></span>
-    <span class="meta">arrest / citation / report calls &middot; data.cincinnati-oh.gov</span>
-  </div>
-  <div id="cfs-map" class="cfs-map" data-src="{{ base_url }}/dispatches.json"
-       aria-label="Map of recent Cincinnati Police dispatch calls ending in arrest, citation, or report, and recently reported shootings"
-       aria-describedby="cfs-map-fallback-hint">
-    <noscript><p class="muted" style="padding:1rem">The map needs JavaScript. The same calls are listed in the sections below this map.</p></noscript>
-  </div>
-  <p id="cfs-map-fallback-hint" class="sr-only">If this map fails to load, the same dispatch and shooting events are listed lower on this page as the &ldquo;Recent CFS&rdquo; and &ldquo;Recent reported shootings&rdquo; sections.</p>
-  <p class="map-legend muted">
-    <span class="map-key map-key-cfs" aria-hidden="true"></span> arrest / citation / report
-    <span class="map-key map-key-shooting" aria-hidden="true"></span> reported shooting
-    <span class="grow"></span>
-    <span>map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &middot; CPD dispositions are not arrests of the people listed above &mdash; this is area context, not identity matching</span>
-  </p>
-</section>
-{% endif %}
 
 <div class="filter-bar" id="filters" hidden>
   <label for="filter-tier">Tier
@@ -246,71 +95,7 @@
 </details>
 {% endfor %}
 
-{% if shooting_rows %}
-<section class="dispatch-section">
-  <div class="section-h">
-    <h2>Recent reported shootings</h2>
-    <span class="pill">{{ shooting_rows | length }}</span>
-    <span class="grow"></span>
-    <span class="meta">last 30 days &middot; <a href="https://data.cincinnati-oh.gov/safety/Reported-Shootings/sfea-4ksu">data.cincinnati-oh.gov &middot; sfea-4ksu &rarr;</a></span>
-  </div>
-  {% for district, drows in shoot_by_district %}
-  <details class="district-block" {% if loop.first %}open{% endif %}>
-    <summary class="district-h">
-      <span class="district-kicker">CPD District</span>
-      <span class="district-num">{{ district }}</span>
-      <span class="district-count"><strong>{{ drows | length }}</strong> event{{ '' if drows | length == 1 else 's' }}</span>
-    </summary>
-    <ul class="cfs cfs-scroll">
-      {% for r in drows %}
-      {% set t_sh = r.datetimeoccured or r.dateoccurred %}
-      {% set nb = r.sna_neighborhood or r.community_council_neighborhood %}
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">{{ r.type or 'SHOOTING' }}</span>
-          <time datetime="{{ t_sh }}">{{ t_sh }}</time>
-        </div>
-        <div class="cfs-body">{{ r.streetblock or '—' }}</div>
-        {% if nb %}<div class="cfs-foot">{{ nb }}</div>{% endif %}
-      </li>
-      {% endfor %}
-    </ul>
-  </details>
-  {% endfor %}
-</section>
-{% endif %}
 
-{% if cfs_rows %}
-<section class="dispatch-section">
-  <div class="section-h">
-    <h2>CPD calls ending in arrest, citation, or report</h2>
-    <span class="pill">{{ cfs_rows | length }}</span>
-    <span class="grow"></span>
-    <span class="meta">last 30 days &middot; <a href="https://data.cincinnati-oh.gov/d/qiik-bpks">data.cincinnati-oh.gov &middot; qiik-bpks &rarr;</a></span>
-  </div>
-  {% for district, drows in cfs_by_district %}
-  <details class="district-block" {% if loop.first %}open{% endif %}>
-    <summary class="district-h">
-      <span class="district-kicker">CPD District</span>
-      <span class="district-num">{{ district }}</span>
-      <span class="district-count"><strong>{{ drows | length }}</strong> event{{ '' if drows | length == 1 else 's' }}</span>
-    </summary>
-    <ul class="cfs cfs-scroll">
-      {% for r in drows %}
-      <li>
-        <div class="cfs-top">
-          <span class="cfs-disposition">{{ r.disposition_text }}</span>
-          <time datetime="{{ r.create_time_incident }}">{{ r.create_time_incident }}</time>
-        </div>
-        <div class="cfs-body">{{ r.address_x or '—' }}</div>
-        {% if r.cpd_neighborhood %}<div class="cfs-foot">{{ r.cpd_neighborhood }}</div>{% endif %}
-      </li>
-      {% endfor %}
-    </ul>
-  </details>
-  {% endfor %}
-</section>
-{% endif %}
 
 <details class="about-jcstream">
   <summary>About JCStream &mdash; purpose, removal policy, no fees</summary>
@@ -323,17 +108,5 @@
 
 {% endif %}
 
-{% if map_points %}
-{# Homepage-only: when the map scrolls near the viewport, lazily inject
-   Leaflet (vendored locally at /static/vendor/leaflet/) and plot
-   dispatches.json on OpenStreetMap tiles. Points are grouped into a coarse
-   grid so dense areas read as sized clusters, not an opaque blob.
-   Vendoring locally means no CDN dependency - ad blockers, corp firewalls,
-   and offline-cache browsers all load the map cleanly. If even the local
-   asset fails (e.g., 404 because someone deleted the file), the box is
-   replaced with a one-line note and the dispatch + shooting lists below
-   still work as the visible fallback. #}
-<script src="{{ base_url }}/static/map.js?v={{ map_js_version | default('dev', true) }}" defer></script>
-{% endif %}
 
 {% endblock %}
