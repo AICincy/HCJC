@@ -28,6 +28,12 @@
   var lastFocus = null;
   function openLB(src, caption) {
     lastFocus = document.activeElement;
+    // src comes from a [data-photo] DOM attribute. Validate it's a same-origin
+    // .jpg path before assigning to .src, both to neutralize the CodeQL
+    // js/xss-through-dom flow and to refuse anything that isn't a booking
+    // photo (javascript: URLs, protocol-relative //host/x, off-origin https://).
+    // Accepts /photos/123.jpg and /<base_url>/photos/123.jpg; rejects //host/...
+    if (typeof src !== 'string' || src.charAt(0) !== '/' || src.indexOf('//') !== -1 || !/\.jpg$/i.test(src)) return;
     lbImg.src = src;
     lbImg.alt = 'Booking photo';
     lbCap.textContent = caption || '';
