@@ -83,7 +83,7 @@
 </p>
 <div class="statbars" role="list">
   {% set chmax = [trend.booked_7d, trend.released_7d, 1] | max %}
-  <div class="statbar" role="listitem"><span class="statbar-label">Booked, last {{ trend.churn_days }} day{{ '' if trend.churn_days == 1 else 's' }}</span><span class="statbar-track" aria-hidden="true"><span class="statbar-fill cat-2925" style="width: {{ '%.1f' % (100.0 * trend.booked_7d / chmax) }}%"></span></span><span class="statbar-val">{{ "{:,}".format(trend.booked_7d) }}</span></div>
+  <div class="statbar" role="listitem"><span class="statbar-label">Booked, last {{ trend.churn_days }} day{{ '' if trend.churn_days == 1 else 's' }}</span><span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: {{ '%.1f' % (100.0 * trend.booked_7d / chmax) }}%"></span></span><span class="statbar-val">{{ "{:,}".format(trend.booked_7d) }}</span></div>
   <div class="statbar" role="listitem"><span class="statbar-label">Released, last {{ trend.churn_days }} day{{ '' if trend.churn_days == 1 else 's' }}</span><span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: {{ '%.1f' % (100.0 * trend.released_7d / chmax) }}%"></span></span><span class="statbar-val">{{ "{:,}".format(trend.released_7d) }}</span></div>
 </div>
 <p class="muted note-paragraph">Booking counts use the HCSO booking date, so a sweep that re-discovers older records doesn&rsquo;t inflate them. Roster size is committed daily to <a href="{{ base_url }}/data/history.json">history.json</a> &mdash; counts only, no individuals are archived.</p>
