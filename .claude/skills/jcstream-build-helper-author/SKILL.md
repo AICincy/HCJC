@@ -1,23 +1,24 @@
 ---
 name: jcstream-build-helper-author
-description: Use when adding or modifying Python helper functions in web/build.py that compute values for Jinja templates in the JCStream project. Covers the env.globals registration pattern, the Inmate/Snapshot models, _DEGREE_RE, _CHAPTER_LABEL, _OFFENSE_CATEGORY maps, and the date-parsing helpers. Trigger phrases: "add a helper for X", "compute Y per inmate", "expose Z to templates", "register a Jinja global", "compute bond/tier/category for inmate", "categorize this ORC code".
+description: Use when adding or modifying Python helper functions in web/build.py, web/classify.py, or web/shape.py that compute values for Jinja templates in the JCStream project. Covers the env.globals registration pattern (in web/build.py), the Inmate/Snapshot models, the _DEGREE_RE / _CHAPTER_LABEL / _OFFENSE_CATEGORY maps (now in web/classify.py), and the snapshot-shape helpers (now in web/shape.py). Trigger phrases: "add a helper for X", "compute Y per inmate", "expose Z to templates", "register a Jinja global", "compute bond/tier/category for inmate", "categorize this ORC code".
 ---
 
 # JCStream build-helper author
 
-You own the helper layer in `web/build.py` (1682 lines). Helpers are Python functions registered as Jinja env globals so templates can call them inline.
+You own the helper layer split across `web/build.py` (922 lines — orchestration + env.globals registration), `web/classify.py` (537 lines — ORC tier/chapter maps, regexes, date and bond parsing, per-charge helpers), and `web/shape.py` (688 lines — snapshot-shape and per-inmate display helpers). Helpers are Python functions registered as Jinja env globals so templates can call them inline.
 
 ## The registration pattern
 Every helper follows this contract:
 
-1. Define the function near related helpers (group by domain — tier helpers near `_primary_tier`, bond helpers near `_bond_total`, date helpers near `_parse_book_date`).
-2. Register on `env.globals` inside `build()` (around `build.py`):
+1. Define the function in the right file: tier / charge / date / bond / per-charge helpers belong in `web/classify.py` (near `_primary_tier`, `_parse_book_date`); per-inmate display and snapshot-shape helpers belong in `web/shape.py` (near `_bond_total`, `_recent_booked_inmates`); orchestration-only helpers (file I/O, template wiring) stay in `web/build.py`.
+2. Re-export the symbol from `web/build.py` if needed (the import block at `web/build.py:33-49` already pulls in most classify/shape symbols with `# noqa: F401` for tests).
+3. Register on `env.globals` inside `build()` (in `web/build.py:109-184`):
    ```python
    env.globals["my_helper"] = _my_helper
    # or lambda-wrapped when you need to bind snapshot or offenses:
    env.globals["bond_context"] = lambda inm: _bond_context(inm, snapshot.inmates, offenses)
    ```
-3. Call from a template:
+4. Call from a template:
    ```jinja
    {% set ctx = bond_context(inmate) %}
    ```
@@ -36,7 +37,7 @@ Every helper follows this contract:
 - `_primary_tier(inmate)` — most-severe tier label for the corner badge.
 - `_primary_degree(inmate)` — F1/F2/.../MM picker.
 - `_days_in_custody(inmate)` — filtered for sentinel dates.
-- `_offense_for_code(code)` (`web/build.py`) — the dispatcher between `_OFFENSE_CATEGORY` (fine, per-code) and `_CHAPTER_LABEL` (coarse, per-chapter); returns `{label, cls}` or `None`. Use this rather than reaching into either map directly.
+- `_offense_for_code(code)` (`web/classify.py`) — the dispatcher between `_OFFENSE_CATEGORY` (fine, per-code) and `_CHAPTER_LABEL` (coarse, per-chapter); returns `{label, cls}` or `None`. Use this rather than reaching into either map directly.
 
 ## Currently registered env.globals
 Before writing a new helper, check whether one of these already covers the need (search `env.globals[` in `web/build.py`):
@@ -46,7 +47,7 @@ Before writing a new helper, check whether one of these already covers the need 
 - Snapshot-level: `recent_booked_inmates`, `inmates_by_id`, `all_chapters`, `all_inmates_total`, `similar_by_statute`, `related_inmates`, `timeline_markers`, `display_date`.
 - Site/template plumbing (not Python helpers, but live in the same registration block — don't reinvent): `base_url`, `site_url`, `css_version`, `giscus`, `cck_name_search`, `cck_case_summary`.
 
-Snapshot-shape helpers feeding the above (call these when composing your own): `_recent_booked_inmates` (`web/build.py`), `_orc_frequency` (`web/build.py`), `_group_by_month` (`web/build.py`), `_short_month_label` (`web/build.py`).
+Snapshot-shape helpers feeding the above (call these when composing your own): `_recent_booked_inmates` (`web/shape.py`), `_orc_frequency` (`web/classify.py`), `_group_by_month` (`web/shape.py`), `_short_month_label` (`web/classify.py`).
 
 ## Static maps
 - `_DEGREE_RE` — matches `F1` … `MM` suffix in a description.

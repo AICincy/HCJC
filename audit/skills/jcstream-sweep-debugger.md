@@ -10,7 +10,7 @@
 - SKILL.md:69 instructs `pytest -q tests/test_sweep_guards.py` but no such file exists; guard tests live in `tests/test_sweep.py:6-12` (imports `from scraper import sweep, sweep_guards`). Command will fail.
 - SKILL.md:8 cites `_sweep_looks_healthy` as in-tree; the underscore name is now only a back-compat alias at `scraper/sweep.py:65` (`_sweep_looks_healthy = sweep_looks_healthy`). The real function is `sweep_looks_healthy` in `scraper/sweep_guards.py:46`. Minor — but `grep _sweep_looks_healthy` will mislead a reader.
 - SKILL.md:28 cites `scraper/sweep_guards.py:23-25` for the three thresholds. Correct as of `sweep_guards.py:23-25`.
-- SKILL.md:46 says `data/history.json` is "Stubby today (≈200 bytes)" — accurate (`wc -c` returns 209 bytes), but it omits that history.json is written by `web/build.py:1322-1344`, *not* by the sweep, so a stale history.json points at the build, not the scraper.
+- SKILL.md:46 says `data/history.json` is "Stubby today (≈200 bytes)" — accurate (`wc -c` returns 209 bytes), but it omits that history.json is written by `web/build.py:456-511`, *not* by the sweep, so a stale history.json points at the build, not the scraper.
 
 ## B. Coverage gaps
 - **Detail-page watchdog**: `sweep_guards.py:64-101` (`check_detail_watchdog`) is a second silent-fallback path with WARN floors (`DETAIL_WATCHDOG_NAME_FLOOR=0.70`, `PHOTO_FLOOR=0.50`) and BLOCK pair (`BLOCK_MIN_SAMPLE=100`, `BLOCK_NAME_FLOOR=0.60`). Triggered at `scraper/sweep.py:197-200` and sets `roster_ok=False`. The skill never mentions it — yet "stale photos but fresh roster count" is exactly when it fires.
@@ -33,5 +33,5 @@
 1. Fix the broken pytest invocation at SKILL.md:69 — point at `tests/test_sweep.py` (no `test_sweep_guards.py` exists).
 2. Add a Step-3b table for the detail-watchdog (WARN + BLOCK pairs at `sweep_guards.py:30-37`) — it's the second silent-fallback and the skill is currently blind to it.
 3. Add wall-clock cap, checkpoint-guard, save-failure, and corrupt-snapshot rows to the failure-mode table (all in `scraper/sweep.py`).
-4. Note that `data/history.json` is owned by `web/build.py:1322`, not the sweep — prevents misrouted debugging.
+4. Note that `data/history.json` is owned by `web/build.py:456` (`_update_history`), not the sweep — prevents misrouted debugging.
 5. Broaden trigger phrases to cover detail-page / partial-sweep symptoms.

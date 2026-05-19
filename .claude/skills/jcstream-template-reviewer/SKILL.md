@@ -71,7 +71,7 @@ The feed has `<?xml-stylesheet type="text/xsl" href="{{ base_url }}/static/feed.
 
 - Output method (`<xsl:output method="html"...>`) is set so the browser renders, not displays as raw XML.
 - Any string the XSLT pulls from RSS items is `xsl:value-of` (auto-escaped), not `xsl:copy-of` (raw).
-- Date formats match the human-facing convention (see `web/build.py:_rfc822`).
+- Date formats match the human-facing convention (see `web/classify.py:_rfc822`).
 - The stylesheet does not load remote resources (FCRA-sensitive — no third-party scripts / images / styles).
 
 ### `main.js` — progressive enhancement contract
