@@ -238,10 +238,6 @@ def build(out_dir: Path) -> int:
     return 0
 
 
-# Note: re-export imports for tests/test_build.py moved to the top of this
-# file (with the other module-level imports) per ruff E402.
-
-
 
 
 
