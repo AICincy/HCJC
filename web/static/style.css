@@ -2467,17 +2467,17 @@ h2.legal-anchor {
   white-space: nowrap;
 }
 .cfs-disposition {
-  background: var(--accent-bg);
-  color: var(--accent);
+  background: transparent;
+  color: var(--fg-muted);
   font-weight: 600;
   font-size: 10.5px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 3px 9px;
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   display: inline-block;
   margin: 0;
-  border: 0;
 }
 
 /* --- Month accordion summary --- */
