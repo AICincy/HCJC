@@ -29,7 +29,7 @@
 - Proposed rewording (additive only): add `, "edit the stylesheet", "tweak the lightbox", "fix the table view", "recolor the F3 chip", "tune the print layout"` to the trigger list.
 
 ## D. Applicability
-- Domain is alive and central — `web/static/style.css` is 1701 lines, edited every design pass, owns the entire visual surface; skill should not be retired.
+- Domain is alive and central — `web/static/style.css` is 2765 lines, edited every design pass, owns the entire visual surface; skill should not be retired.
 
 ## Recommended fixes (priority order)
 1. Fix the ladder-cell line range (point at `web/static/style.css:1217-1244`, not `:1008-area`) and the mobile-breakpoint enumeration (12 occurrences, not 6; list the real anchor lines or stop enumerating).

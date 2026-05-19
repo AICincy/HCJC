@@ -24,8 +24,7 @@ task ("update the FCRA disclaimer" routes to `legal-copy-author`). See
 ## Hard constraints (violations are accessibility failures, not style issues)
 
 The owner has AuDHD. These rules are medical accessibility accommodations.
-Violating them imposes cognitive cost the owner cannot afford. Read the memory
-system (`memory/` directory) for full context including the May 2026 post-mortem.
+Violating them imposes cognitive cost the owner cannot afford.
 
 ### Scope gate
 - Before writing any code, state what you think the task is in one sentence.
@@ -92,12 +91,13 @@ system (`memory/` directory) for full context including the May 2026 post-mortem
 
 ## Repo facts
 
-- Push target / dev branch: `claude/export-skill-agent-zip-gspVE` (my git access is
-  locked to this branch; I cannot push to `main` or create branches, that's on the owner).
+- Push target / dev branch: the per-task branch assigned by the agent harness
+  (e.g. `claude/<slug>-<id>`). Push there only; I cannot push to `main`, that's
+  on the owner.
 - `data/surnames.txt` is A-Z single letters on purpose (HCSO's last-name search is a
   substring match, so 26 letters cover the whole roster with dedup). Don't revert.
 - Build locally: `JCSTREAM_SITE_BASE_URL="" JCSTREAM_CNAME="www.aretheyinjail.com" python -m web.build`
-- Tests: `python -m pytest -q` (must stay green; ≥173 tests as of this writing, suite grows).
+- Tests: `python -m pytest -q` (must stay green; ≥193 tests as of this writing, suite grows).
 - The stylesheet is cache-busted by content hash (`css_version` in build.py); don't
   key it off the data timestamp again.
 - The sweep refuses to write a degraded roster (`_sweep_looks_healthy` in

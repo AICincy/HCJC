@@ -168,7 +168,7 @@ against HCSO's real behavior. Sentry observes them; it does not move them.
 
 ## Test posture
 
-- The pytest suite stays at 173 tests, fully offline.
+- The pytest suite stays at 193 tests, fully offline.
 - `_init_sentry()` is reachable only from `scraper.sweep.main()`, which
   tests never call. They import individual symbols
   (`sweep.run`, `sweep._fetch_one`, `sweep._read_surnames`,
