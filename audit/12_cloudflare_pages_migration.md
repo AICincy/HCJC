@@ -25,7 +25,7 @@
 
 ## Premise (read first)
 
-Audit 11 (spa-S2, spa-S4, spa-S5) flagged three HTTP-only security headers that GitHub Pages cannot serve: `X-Content-Type-Options: nosniff`, frame-ancestors / `X-Frame-Options`, and `Permissions-Policy`. A `_headers` stub already lives at the repo root (`C:\Users\krass\Documents\Claude AIO\HCJC\_headers`) in the format Cloudflare Pages parses. It is inert today because GitHub Pages does not read it.
+Audit 11 (spa-S2, spa-S4, spa-S5) flagged three HTTP-only security headers that GitHub Pages cannot serve: `X-Content-Type-Options: nosniff`, frame-ancestors / `X-Frame-Options`, and `Permissions-Policy`. A `_headers` stub already lives at the repo root in the format Cloudflare Pages parses. It is inert today because GitHub Pages does not read it.
 
 This runbook covers two paths to make those headers effective:
 
@@ -194,7 +194,7 @@ The one optional secret pattern is the `PAGES_WRANGLER_MAJOR_VERSION=4` env var 
 
 | ID | Sev | Conf | One-line summary | Owner |
 |----|-----|------|------------------|-------|
-| cf-mig-1 | info | high | Current `C:\Users\krass\Documents\Claude AIO\HCJC\_headers` is valid Cloudflare Pages syntax; no edits required before activation | site owner |
+| cf-mig-1 | info | high | Current `_headers` is valid Cloudflare Pages syntax; no edits required before activation | site owner |
 | cf-mig-2 | info | high | Cloudflare Pages adds `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin` by default, so the matching `_headers` lines are harmless redundancy | site owner |
 | cf-mig-3 | med | high | At 30-min sweep cadence, monthly build count (about 1,440) exceeds Cloudflare Pages free-tier limit (500/month); plan upgrade or build-skip strategy is part of the migration cost | site owner |
 | cf-mig-4 | low | high | `docs/CNAME` and `docs/.nojekyll` are GH-Pages-specific files that Cloudflare Pages ignores; safe to leave, optional cleanup gates on whether the owner ever fully retires GH Pages | jcstream-build-helper-author |
@@ -414,7 +414,7 @@ curl -sI https://www.aretheyinjail.com/        # expect same as Path A
 
 If a future tightening edits the CSP:
 
-- Path A: edit `C:\Users\krass\Documents\Claude AIO\HCJC\_headers` line 26 (the `/*` block's `Content-Security-Policy:` line). Commit. Next sweep deploys via Pages Git integration.
+- Path A: edit `_headers` (at repo root) line 26 (the `/*` block's `Content-Security-Policy:` line). Commit. Next sweep deploys via Pages Git integration.
 - Path B: edit the `SECURITY_HEADERS` constant in the Worker source. Redeploy via Wrangler or the dashboard. **The `_headers` file is inert under Path B; editing it has no effect**, which is why cf-mig-6 recommends deleting it under Path B.
 
 ### Why not Workers Static Assets
