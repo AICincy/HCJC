@@ -1,6 +1,6 @@
 # JCStream skills
 
-Eleven project-specific Claude Code skills, one per recurring domain. Each skill
+Twelve project-specific Claude Code skills, one per recurring domain. Each skill
 is auto-discovered by description (frontmatter `description:` field) and is
 paired with a same-named subagent in `../agents/`.
 
@@ -17,6 +17,7 @@ paired with a same-named subagent in `../agents/`.
 | [jcstream-a11y-auditor](jcstream-a11y-auditor/SKILL.md) | accessibility audit reports (read-only) | WCAG checks, contrast issues, ARIA review |
 | [jcstream-sweep-debugger](jcstream-sweep-debugger/SKILL.md) | diagnostic reports for sweep failures (read-only) | flat roster counts, silent fallback events |
 | [jcstream-python-reviewer](jcstream-python-reviewer/SKILL.md) | python code-review reports (read-only) for `scraper/`, `web/`, `tests/` | PR review, lint / type / regex / thread-safety review |
+| [jcstream-template-reviewer](jcstream-template-reviewer/SKILL.md) | template-layer review reports (read-only) for `web/templates/`, `feed.xml`, `feed.xsl`, `main.js` | XSS / JSON-LD / RSS / progressive-enhancement / third-party hygiene review |
 
 ## Handoff topology
 
@@ -45,13 +46,20 @@ paired with a same-named subagent in `../agents/`.
                       ├─► orc-curator
                       └─► sweep-debugger
 
+   template-reviewer ──┬─► template-author
+                       ├─► a11y-auditor
+                       ├─► legal-copy-author
+                       ├─► stylesheet-author
+                       ├─► build-helper-author
+                       └─► test-author
+
    orc-curator     legal-copy-author     (mostly terminal)
 ```
 
 Every code-path chain ends at **test-author** (for verification);
-diagnostic / review chains (a11y-auditor, sweep-debugger, python-reviewer)
-end with a written report referencing `file:line` evidence and a hand-off
-to the relevant author skill.
+diagnostic / review chains (a11y-auditor, sweep-debugger, python-reviewer,
+template-reviewer) end with a written report referencing `file:line`
+evidence and a hand-off to the relevant author skill.
 
 ## Conventions
 
