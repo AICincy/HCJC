@@ -22,6 +22,7 @@ import json
 import logging
 import os
 import sys
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -80,6 +81,43 @@ _sweep_looks_healthy = sweep_looks_healthy
 
 
 MIN_SWEEP_INTERVAL_S = 20 * 60  # 20 minutes
+
+# Self-healing backoff: when consecutive WAF-block-shaped responses
+# accumulate within a single sweep, workers sleep proportionally before
+# returning. The cumulative slow-down gives HCSO's WAF rate-limit window
+# time to clear without us issuing more blocked requests. Reset on any
+# successful parse that produced structured content.
+_waf_block_streak = 0
+_waf_block_lock = threading.Lock()
+_WAF_BACKOFF_BASE_S = 2.0
+_WAF_BACKOFF_CAP_S = 30.0
+
+
+def _on_waf_block_observed() -> int:
+    """Increment the WAF-block streak (thread-safe). Returns the new count."""
+    global _waf_block_streak
+    with _waf_block_lock:
+        _waf_block_streak += 1
+        return _waf_block_streak
+
+
+def _on_waf_block_cleared() -> None:
+    """Reset the WAF-block streak after a successful parse."""
+    global _waf_block_streak
+    with _waf_block_lock:
+        _waf_block_streak = 0
+
+
+def _waf_backoff_seconds(streak: int) -> float:
+    """Exponential backoff: 2s, 4s, 8s, 16s, 30s (capped)."""
+    return min(_WAF_BACKOFF_BASE_S * (2 ** (streak - 1)), _WAF_BACKOFF_CAP_S)
+
+
+def _reset_waf_block_streak_for_tests() -> None:
+    """Test-only: reset module state between cases. Not used at runtime."""
+    global _waf_block_streak
+    with _waf_block_lock:
+        _waf_block_streak = 0
 
 
 def run(
@@ -405,29 +443,35 @@ def _fetch_one(
     # WAF / geo-block check. Per the 2026-05-19 Claude.ai HCSO verification,
     # valid inmate-detail pages from HCSO are 91-230 KB. HCSO's WAF returns
     # truncated/blocked responses well under 5 KB to automated callers, and
-    # the parser silently produces an empty Inmate from them. When the page
-    # is tiny AND the parser found nothing AND we already have this inmate
-    # in `previous`, return None so the carry-forward path in `run()`
-    # preserves the previous-good record (cached photo, prior bio + charges)
-    # instead of overwriting it with empty data this cycle. For NEW inmates
-    # (not in previous) we fall through so the list_row fallback can still
-    # rescue an interstitial response into a minimal Inmate; better a name
-    # than nothing for a newly-booked record.
-    if (
+    # the parser silently produces an empty Inmate from them.
+    looks_like_waf_block = (
         len(html) < 5000
         and not inm.last_name
         and not inm.first_name
         and not inm.charges
         and not photo_bytes
         and not photo_url
-        and inmate_id in previous
-    ):
+    )
+    if looks_like_waf_block:
+        streak = _on_waf_block_observed()
+        backoff = _waf_backoff_seconds(streak)
         log.warning(
-            "detail page for id=%s parsed to empty Inmate (%d bytes); "
-            "treating as WAF/geo-block, returning None to trigger carry-forward",
-            inmate_id, len(html),
+            "WAF-block-shaped response for id=%s (%d bytes, streak=%d); "
+            "sleeping %.1fs before returning",
+            inmate_id, len(html), streak, backoff,
         )
-        return None, False, False
+        time.sleep(backoff)
+        # Known inmate: return None so the carry-forward path in `run()`
+        # preserves the previous-good record (cached photo, prior bio +
+        # charges) instead of overwriting it with empty data this cycle.
+        if inmate_id in previous:
+            return None, False, False
+        # New inmate (not in previous): fall through so the list_row
+        # fallback below can still rescue an interstitial response into a
+        # minimal Inmate. Better a name than nothing for a newly-booked
+        # record.
+    else:
+        _on_waf_block_cleared()
     detail_named = bool(inm.last_name or inm.first_name)
     detail_had_photo = bool(photo_bytes or photo_url)
 
