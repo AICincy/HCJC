@@ -477,26 +477,27 @@ def _tier_max(inmate, offenses: dict | None = None) -> str:
     return "UNK"
 
 
-def _orc_frequency(inmates: list, offenses: dict | None = None) -> dict[str, int]:
-    """Build a frequency map of ORC codes from the inmate roster.
+def _orc_frequency(inmates: list) -> dict[str, int]:
+    """Build a frequency map of ORC codes from the current inmate roster.
     
-    Returns {normalized_code: count, ...} mapping normalized ORC codes to
-    the number of inmates charged under each code (counted once per inmate).
+    Returns {normalized_code: count, ...} mapping ORC codes to how many
+    inmates are currently charged with each code.
     """
     from scraper import orc as orc_mod
     
-    counts: dict[str, int] = {}
+    freq: dict[str, int] = {}
     for inm in inmates:
         if not hasattr(inm, "charges"):
             continue
-        seen: set[str] = set()
         for charge in inm.charges:
-            code = orc_mod.normalize_code((charge.orc_code or "").strip())
-            if not code or code.upper() == "NONE" or code in seen:
+            if not hasattr(charge, "orc_code") or not charge.orc_code:
                 continue
-            seen.add(code)
-            counts[code] = counts.get(code, 0) + 1
-    return counts
+            code = str(charge.orc_code).strip()
+            if code.upper() == "NONE":
+                continue
+            norm_code = orc_mod.normalize_code(code)
+            freq[norm_code] = freq.get(norm_code, 0) + 1
+    return freq
 
 
 # ============================================================================
