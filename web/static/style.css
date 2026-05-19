@@ -2639,7 +2639,12 @@ footer.site .footer-legal strong { color: var(--fg); }
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   transition: box-shadow 140ms, transform 140ms, border-color 140ms;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
+.kpi .num { margin-top: auto; }
 @media (prefers-reduced-motion: no-preference) {
   .kpi:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); border-color: var(--accent); }
 }
@@ -2652,12 +2657,15 @@ footer.site .footer-legal strong { color: var(--fg); }
   margin-bottom: 8px;
 }
 .kpi .num {
-  font-size: clamp(28px, 3vw, 36px);
+  font-size: clamp(20px, 2.4vw, 32px);
   font-weight: 700;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
   color: var(--fg);
   line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .kpi:first-child {
   background: var(--surface);
