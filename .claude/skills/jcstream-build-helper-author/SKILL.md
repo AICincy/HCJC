@@ -12,7 +12,7 @@ Every helper follows this contract:
 
 1. Define the function in the right file: tier / charge / date / bond / per-charge helpers belong in `web/classify.py` (near `_primary_tier`, `_parse_book_date`); per-inmate display and snapshot-shape helpers belong in `web/shape.py` (near `_bond_total`, `_recent_booked_inmates`); orchestration-only helpers (file I/O, template wiring) stay in `web/build.py`.
 2. Re-export the symbol from `web/build.py` if needed (the import block at `web/build.py:33-49` already pulls in most classify/shape symbols with `# noqa: F401` for tests).
-3. Register on `env.globals` inside `build()` (in `web/build.py:111-184`):
+3. Register on `env.globals` inside `build()` (in `web/build.py:109-184`):
    ```python
    env.globals["my_helper"] = _my_helper
    # or lambda-wrapped when you need to bind snapshot or offenses:

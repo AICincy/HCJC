@@ -1,20 +1,20 @@
-# JCStream — working notes for Claude
+# JCStream: working notes for Claude
 
 JCStream is a static public-records mirror of the Hamilton County, Ohio Justice
 Center inmate roster. A Python script (`web/build.py`) regenerates `docs/` from
 `data/current.json` on a nominally-30-minute GitHub Actions cron
-(`.github/workflows/sweep.yml`). In practice the cron drifts — observed
+(`.github/workflows/sweep.yml`). In practice the cron drifts. Observed
 intervals on a normal day run 30-60 minutes (GitHub Actions schedules `cron:`
 jobs on best-effort; high-load periods stretch the gap), and during incidents
 the next-run can slip past the hour. The sweep also runs the HCSO scraper
 (`scraper/`) and pulls four Cincinnati Open Data feeds.
-Live at https://www.aretheyinjail.com (GitHub Pages, custom domain — build uses
+Live at https://www.aretheyinjail.com (GitHub Pages, custom domain; build uses
 `JCSTREAM_SITE_BASE_URL=""` + a `CNAME` file written from `JCSTREAM_CNAME`).
 
 ## Project specialists
 
 `.claude/skills/` and `.claude/agents/` ship ten paired specialists for the
-recurring domains in this repo — templates, CSS, build helpers, ORC data,
+recurring domains in this repo: templates, CSS, build helpers, ORC data,
 scraping, tests, design ports, legal copy, accessibility, and sweep
 debugging. They auto-discover in any Claude Code session; ask for one by
 name (e.g. "have the jcstream-template-author …") or by describing the
@@ -72,12 +72,12 @@ system (`memory/` directory) for full context including the May 2026 post-mortem
 - **Don't make the owner think of the options.** Whenever a chunk of work
   wraps up (and any time work *could* continue), END THE TURN with the
   AskUserQuestion tool (multiSelect): a *comprehensive* menu of next steps
-  with *truthful* recommendations — say which I'd actually do and why, and
-  which are marginal/skip — so the owner can accept items **individually,
+  with *truthful* recommendations. Say which I'd actually do and why, and
+  which are marginal/skip, so the owner can accept items **individually,
   all, or none**. Don't just summarize and stop; don't keep building past
   the obvious-in-scope work without surfacing the menu first.
   "Implement all suggestions" means: do everything in the last menu I
-  offered — so there must always be one.
+  offered, so there must always be one.
 - **Never offer "stop here" / "do nothing" / "reject the work" / "close the
   branch" as a menu option, and never tag any option as "recommended:
   stop".** Stopping is always implicitly available; surfacing it as an
@@ -88,40 +88,40 @@ system (`memory/` directory) for full context including the May 2026 post-mortem
 
 ### General
 - Keep replies short. Don't re-litigate settled things. Don't nag about
-  branches/PRs — this is a from-scratch solo repo; `main`/PR ceremony is moot.
+  branches/PRs. This is a from-scratch solo repo; `main`/PR ceremony is moot.
 
 ## Repo facts
 
 - Push target / dev branch: `claude/export-skill-agent-zip-gspVE` (my git access is
-  locked to this branch — I cannot push to `main` or create branches; that's on the owner).
-- `data/surnames.txt` is A–Z single letters on purpose (HCSO's last-name search is a
+  locked to this branch; I cannot push to `main` or create branches, that's on the owner).
+- `data/surnames.txt` is A-Z single letters on purpose (HCSO's last-name search is a
   substring match, so 26 letters cover the whole roster with dedup). Don't revert.
 - Build locally: `JCSTREAM_SITE_BASE_URL="" JCSTREAM_CNAME="www.aretheyinjail.com" python -m web.build`
 - Tests: `python -m pytest -q` (must stay green; ≥173 tests as of this writing, suite grows).
-- The stylesheet is cache-busted by content hash (`css_version` in build.py) — don't
+- The stylesheet is cache-busted by content hash (`css_version` in build.py); don't
   key it off the data timestamp again.
 - The sweep refuses to write a degraded roster (`_sweep_looks_healthy` in
   `scraper/sweep.py`): if >10% of surname fetches error, or the roster collapses
   to <50% of last cycle, it keeps the last-good `data/current.json` and exits 0.
   That's why the public count is stable even when HCSO rate-limits a sweep.
 
-### Optional features — owner-side setup, not something I can do from here
+### Optional features (owner-side setup, not something I can do from here)
 
 - **Giscus comments** on inmate pages (`web/templates/inmate.html` renders the
   policy block always, and the Giscus widget when `giscus.repo_id` is set):
   1. Repo → Settings → General → Features → enable **Discussions**.
   2. Create a Discussions **category** to hold the threads (e.g. "Announcements"
-     or a new "Records" one) — note its name.
+     or a new "Records" one). Note its name.
   3. Install the **Giscus GitHub App** (<https://github.com/apps/giscus>) and
      grant it access to `AICincy/JCStream`.
-  4. Go to <https://giscus.app>, enter `AICincy/JCStream`, pick the category —
+  4. Go to <https://giscus.app>, enter `AICincy/JCStream`, pick the category;
      it prints `data-repo-id` and `data-category-id`.
   5. Repo → Settings → Secrets and variables → Actions → **Variables**: add
      `JCSTREAM_GISCUS_REPO_ID`, `JCSTREAM_GISCUS_CATEGORY_ID` (and optionally
      `JCSTREAM_GISCUS_REPO`, `JCSTREAM_GISCUS_CATEGORY` to override the defaults).
   6. Next sweep rebuilds with the widget live. To turn it off, clear the vars.
 
-- **PRA email loop** — capias / mugshot-fallback public-records requests
+- **PRA email loop**: capias / mugshot-fallback public-records requests
   (`scraper/pra.py`, `scraper/pra_capias.py`, `.github/workflows/pra_daily.yml`):
   it dry-runs (logs only) until SMTP is configured. Repo → Settings → Secrets and
   variables → Actions → **Secrets**: `JCSTREAM_PRA_SMTP_HOST`, `JCSTREAM_PRA_SMTP_PORT`,
@@ -144,7 +144,7 @@ system (`memory/` directory) for full context including the May 2026 post-mortem
   - Events emitted (all from `scraper/sweep.py`):
     `sweep.degraded.roster_floor` (roster collapsed below 50% of prior),
     `sweep.degraded.surname_errors` (>10% of letter fetches errored),
-    `sweep.detail_watchdog_tripped` (detail-page parse rates degraded —
+    `sweep.detail_watchdog_tripped` (detail-page parse rates degraded;
     `blocked="true"` for the hard floor that keeps the last-good roster,
     `blocked="false"` for the WARN-only soft floors),
     `sweep.photo_prune.skipped` (would-be prune over 50% of photos),
@@ -155,7 +155,7 @@ system (`memory/` directory) for full context including the May 2026 post-mortem
     usually HCSO rate-limiting and resolves on the next cycle. Two or three
     cycles in a row of `sweep.degraded.*` means HCSO is actually down or
     has restructured the list page. Any `detail_watchdog_tripped` with
-    `blocked="true"` means HCSO redesigned the detail page — check
+    `blocked="true"` means HCSO redesigned the detail page. Check
     `scraper/parsers.py`. See `audit/13_sentry_instrumentation.md` for the
     full catalog and threshold cross-reference.
   - To turn it off: delete the `JCSTREAM_SENTRY_DSN` secret. No code change.
