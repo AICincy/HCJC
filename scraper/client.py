@@ -1,10 +1,12 @@
 """Polite parallel HTTP client for hcso.org.
 
-Identifies itself in the User-Agent. Parallelism (DEFAULT_CONCURRENCY=32) is
-the limiter; the crawl-delay token bucket is wired up but defaults to 0.0 for
-the 30-minute cron budget. Retries once on transient 5xx with a short
-exponential backoff (0.5s, 1s); also retries once on 429 honoring a capped
-Retry-After. Does NOT attempt to evade WAFs, rate limits, or CAPTCHAs.
+Identifies itself in the User-Agent. Parallelism (DEFAULT_CONCURRENCY=16)
+and a 0.5s crawl-delay together keep the request profile well under HCSO's
+WAF tripwires (the 2026-05-19 verification confirmed 32-worker no-delay was
+hitting WAF blocks on truncated <5 KB responses). Retries once on transient
+5xx with a short exponential backoff (0.5s, 1s); also retries once on 429
+honoring a capped Retry-After. Does NOT attempt to evade WAFs, rate limits,
+or CAPTCHAs.
 """
 
 from __future__ import annotations
@@ -23,15 +25,19 @@ DEFAULT_UA = (
     "JCStream/0.1 (+https://github.com/AICincy/JCStream; "
     "Hamilton County OH public-records mirror; parallelism-limited)"
 )
-DEFAULT_CRAWL_DELAY = 0.0  # seconds - parallelism is the limiter, not delay.
+DEFAULT_CRAWL_DELAY = 0.5  # seconds between requests per worker; gates the
+# minimum spacing the WAF sees from a single IP. Raised from 0.0 on 2026-05-19
+# after Claude.ai's HCSO verification confirmed WAF blocks on the no-delay
+# 32-worker profile.
 # Honored on 429 responses: if the server requests a longer wait, we cap it
 # at this many seconds so a misbehaving upstream can't extend the cron budget
-# indefinitely. Cron is 30 minutes; one 30s pause per worker is acceptable.
+# indefinitely. Cron is */15 with a 20-min skip-gate; one 30s pause per worker
+# is acceptable.
 RETRY_AFTER_CAP_S = 30.0
-# 32 = aggressive but realistic. HCSO's WordPress on nginx handles burst loads
-# fine; above ~32 we'd start risking 503s from front-end fpm pool exhaustion
-# without meaningfully shortening wall time (we already saturate at 32).
-DEFAULT_CONCURRENCY = 32
+# 16 (half of the prior 32) trades sweep wall-time for WAF-block reduction.
+# HCSO's WordPress on nginx handles 16 concurrent connections without 503s,
+# and the lower parallelism keeps us off the WAF's burst-rate heuristic.
+DEFAULT_CONCURRENCY = 16
 
 
 @dataclass

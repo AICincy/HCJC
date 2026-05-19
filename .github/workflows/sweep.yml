@@ -1,11 +1,5 @@
 name: sweep
 
-# Optional secret: JCSTREAM_SENTRY_DSN
-#   Set via Repo Settings -> Secrets and variables -> Actions -> Secrets to
-#   ship sweep telemetry to Sentry. When unset (default) the SDK init falls
-#   through silently and the sweep behaves exactly as before. See
-#   audit/13_sentry_instrumentation.md for the event catalog.
-
 on:
   schedule:
     # Every 15 minutes. GH Actions cron is best-effort (actual cadence is
@@ -57,12 +51,6 @@ jobs:
         # JCSTREAM_USER_AGENT is intentionally not overridden here: the module
         # default (scraper.client.DEFAULT_UA) carries the contact URL plus the
         # parallelism-limited descriptor. Two sources of truth invite drift.
-        env:
-          # Optional. If the secret is not configured the env var resolves to
-          # an empty string and scraper.sweep._init_sentry() falls through
-          # without initializing the SDK — the sweep keeps running with zero
-          # telemetry side-effects.
-          JCSTREAM_SENTRY_DSN: ${{ secrets.JCSTREAM_SENTRY_DSN }}
         run: |
           python -m scraper.sweep \
             ${{ inputs.max_surnames && format('--max-surnames {0}', inputs.max_surnames) || '' }} \
