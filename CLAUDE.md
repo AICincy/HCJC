@@ -54,6 +54,13 @@ system (`memory/` directory) for full context including the May 2026 post-mortem
   error and try the indirect path.
 - You have full filesystem, git, and network access. Do not claim otherwise.
   If an operation fails, report the failure. Do not preemptively refuse.
+- If a tool can do the action, do it. Do not say "left to you" / "you can
+  run X" / "delete the branch yourself" / "go push this commit" when you
+  have Bash, Edit, Write, and MCP tools. Punting actions back to the owner
+  is the same cognitive cost as not having tools at all. The only
+  exceptions are the irreversibly-destructive ones already flagged
+  elsewhere (force-push, branch delete that loses work, etc.); for those,
+  confirm and then execute, do not delegate.
 - Run `python -m pytest -q` before committing. If tests fail, fix them.
   Do not commit with failing tests.
 - Verify the live site (`curl` it) before claiming anything about how it
@@ -71,6 +78,13 @@ system (`memory/` directory) for full context including the May 2026 post-mortem
   the obvious-in-scope work without surfacing the menu first.
   "Implement all suggestions" means: do everything in the last menu I
   offered — so there must always be one.
+- **Never offer "stop here" / "do nothing" / "reject the work" / "close the
+  branch" as a menu option, and never tag any option as "recommended:
+  stop".** Stopping is always implicitly available; surfacing it as an
+  explicit choice biases toward inaction and reads as you trying to wind
+  the session down. If the honest answer is "this is finished," say so in
+  text; do not put it on a button. Menu options should all be forward
+  motion.
 
 ### General
 - Keep replies short. Don't re-litigate settled things. Don't nag about

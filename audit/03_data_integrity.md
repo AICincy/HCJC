@@ -16,7 +16,7 @@
 - `scraper/models.py:24-41` every `Inmate` field except `inmate_number` is optional and defaults to `""` or `[]`. No validator rejects an empty-string `inmate_number`, so a parser bug that yields `inmate_number=""` would create a single bucket that swallows multiple records as later-wins.
 - `scraper/sweep.py:152-155` checkpoint `save_current` runs every 50 details inside the `with ThreadPoolExecutor`. It rewrites the snapshot but does not append to the changelog (changelog write is in the `finally`, lines 162-175). A killed-mid-checkpoint cycle leaves a partial snapshot with no event history for that cycle; that is correct, but `store.py` has no comment marking the dependency.
 - `scraper/sweep.py:163-175` final write order is: `save_current`, then `diff(previous, current)`, then `save_changelog`, then `_prune_photos`. Photo prune happens after `save_current`, so the snapshot can transiently reference a photo that prune is about to delete. Today this is benign because the next sweep rewrites both, but the dependency is not pinned by code or comment.
-- `data/history.json` is a single flat array of `{date, count, booked_24h, released_24h}` written by `web/build.py:963-984`, not by the scraper layer. It is bounded at 400 days at write time and is the only artifact that retains anything beyond the current roster. The schema is undocumented in `scraper/models.py` and unvalidated.
+- `data/history.json` is a single flat array of `{date, count, booked_24h, released_24h}` written by `web/build.py:456-511`, not by the scraper layer. It is bounded at 400 days at write time and is the only artifact that retains anything beyond the current roster. The schema is undocumented in `scraper/models.py` and unvalidated.
 - `scraper/store.py:99-102` `diff` emits a warning when the previous/current dicts have entries keyed under a different `inmate_number` than the record's own field, but it does not deduplicate, it does not normalize, and it does not skip the record.
 
 ## Analysis (3-8 paragraphs, anchored)
@@ -29,13 +29,13 @@ The `inmate_count` / `len(inmates)` invariant is currently enforced only on the 
 
 The `charges` ordering issue is real. `Pydantic`'s `BaseModel.__eq__` is field-wise and `list[Charge]` compares element-wise. The HCSO detail parser produces charges in document order. If HCSO ever reorders them, every affected inmate will fire an `updated` event on the next sweep, even though the user-visible content is the same. The fix is either to sort charges at parse time (so the stored order is deterministic) or to canonicalize before comparison inside `_materially_changed`. The latter is a one-liner and preserves whatever display order the parser captured.
 
-Changelog growth is correctly bounded. The skill flagged a hypothetical "previous bug wrote 10000 events" case; the negative-slice trim at `scraper/store.py:80` makes this self-healing on the next save. The more interesting case is non-monotonic time: the changelog is appended in insertion order, not sorted, and the live file happens to be sorted by timestamp only because saves are serial and the cron clock is well-behaved. A defensive sort-by-`timestamp_utc` with insertion-order as the stable tiebreaker would cost nothing and harden the contract that downstream feeds rely on (`web/build.py:1022-1064` slices `events[-50:]` for the RSS feeds and trusts the ordering).
+Changelog growth is correctly bounded. The skill flagged a hypothetical "previous bug wrote 10000 events" case; the negative-slice trim at `scraper/store.py:80` makes this self-healing on the next save. The more interesting case is non-monotonic time: the changelog is appended in insertion order, not sorted, and the live file happens to be sorted by timestamp only because saves are serial and the cron clock is well-behaved. A defensive sort-by-`timestamp_utc` with insertion-order as the stable tiebreaker would cost nothing and harden the contract that downstream feeds rely on (`web/build.py:568-611` slices `events[-50:]` for the RSS feeds at `:577` and trusts the ordering).
 
 The carry-forward path at `scraper/sweep.py:117-120` does `model_copy(update={"last_seen_utc": utcnow_iso()})`, which already produces a new instance, so there is no in-place mutation risk. The skill's `model_copy(deep=True)` recommendation is unnecessary here because `model_copy` already produces a shallow copy that is independent at the top level and the `charges` list is not mutated downstream; `web/build.py` reads only.
 
 The photo-vs-record concern is currently latent. `_prune_photos` runs after `save_current` in `sweep.py:162-175`, and the snapshot only references photos that existed when the detail fetch ran or that were already on disk. The audit found zero broken references (1074 referenced, 1074 on disk, zero orphans). The risk is that nothing in code pins this ordering: someone reordering the `finally` block could ship a snapshot that references freshly-deleted JPGs. A short comment in `store.py` or `sweep.py` would prevent that regression.
 
-`data/history.json` is the only artifact with cross-day retention, and it has no model. The shape is stable (4-key dicts), but the read path at `web/build.py:971-974` only catches `JSONDecodeError, OSError`; a structurally-valid but wrong-shape file (e.g. someone hand-edited a record into a string) would crash the `_compute_stats` path. A small Pydantic model for the daily record would cost almost nothing and would make the shape audit-discoverable.
+`data/history.json` is the only artifact with cross-day retention, and it has no model. The shape is stable (4-key dicts), but the read path at `web/build.py:478-479` only catches `JSONDecodeError, OSError`; a structurally-valid but wrong-shape file (e.g. someone hand-edited a record into a string) would crash the `_compute_stats` path. A small Pydantic model for the daily record would cost almost nothing and would make the shape audit-discoverable.
 
 ## Technical notes (3-10 fenced blocks)
 
@@ -202,12 +202,12 @@ class HistoryRecord(BaseModel):
 ### data-F6. Changelog is not sorted on save - severity low - confidence high
 - File: scraper/store.py:79-84
 - Invariant at risk: changelog ordering contract
-- Failure mode: two saves with non-monotonic wall clock (NTP slew, container restart) leave an out-of-order changelog; the RSS feeds at `web/build.py:1031` slice `events[-50:]` and trust ordering.
+- Failure mode: two saves with non-monotonic wall clock (NTP slew, container restart) leave an out-of-order changelog; the RSS feeds at `web/build.py:577` slice `events[-50:]` and trust ordering.
 - Fix: sort by `(timestamp_utc, original_index)` before the trim. Pure addition, no migration.
 - Test to add: tests/test_store.py::test_save_changelog_sorts_by_timestamp_stable
 
 ### data-F7. history.json has no validated model - severity low - confidence med
-- File: web/build.py:963-984, data/history.json:1
+- File: web/build.py:456-511, data/history.json:1
 - Invariant at risk: shape of the only retained-over-time artifact
 - Failure mode: a structurally-valid but wrong-typed record (e.g. `count` as string) crashes `_compute_stats` or silently drives a bad sparkline.
 - Fix: add a `HistoryRecord` Pydantic model in `scraper/models.py`, validate on load in `_update_history`. Cross-scope on the write side; document in the data model regardless.
@@ -265,7 +265,7 @@ class HistoryRecord(BaseModel):
 
 ## Cross-references (out-of-scope items, one-liners, pointing to sibling skills)
 
-- `web/build.py:963-984` `_update_history` is the only writer of `data/history.json` and has no schema validation - cross-scope to jcstream-python-architecture (data model lives in scraper, write lives in web).
+- `web/build.py:456-511` `_update_history` is the only writer of `data/history.json` and has no schema validation - cross-scope to jcstream-python-architecture (data model lives in scraper, write lives in web).
 - `scraper/parsers.py` charge ordering and `inmate_number` extraction defenses - cross-scope to jcstream-python-parser-robustness; if charges are sorted at parse time, data-F3 closes from the other side.
 - `scraper/sweep.py:152-155` checkpoint-write semantics and KeyboardInterrupt recovery - cross-scope to jcstream-python-sweep-reliability; this audit only flagged the missing comment.
 - `scraper/sweep.py:290-314` `_prune_photos` 50% guard and ordering vs `save_current` - cross-scope to jcstream-python-sweep-reliability for the guard, this audit only flagged the ordering pin.
