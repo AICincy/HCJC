@@ -22,9 +22,11 @@ python -m scraper.cfs --hours 168          # Cincinnati Open Data calls-for-serv
 
 ## The automated cron
 
-`.github/workflows/sweep.yml` runs every 30 minutes (`workflow_dispatch` too): sweep → pull
-the four Cincinnati feeds → `python -m web.build` (with `JCSTREAM_SITE_BASE_URL=""` /
-`JCSTREAM_CNAME=www.aretheyinjail.com`) → commit `data/ docs/` → push. GitHub Pages serves
+`.github/workflows/sweep.yml` fires on a `*/15 * * * *` cron with a 20-minute skip-gate
+(the sweep no-ops if `current.json` is less than 20 minutes old), plus `workflow_dispatch`.
+Effective cadence is ~20-45 minutes. Each run: sweep → pull the four Cincinnati feeds →
+`python -m web.build` (with `JCSTREAM_SITE_BASE_URL=""` / `JCSTREAM_CNAME=www.aretheyinjail.com`)
+→ commit `data/ docs/` → push. GitHub Pages serves
 `docs/` from the branch, so the push *is* the deploy. Other workflows: `ci.yml` (tests on PR),
 `pra_daily.yml` (the optional PRA email loop), `ingest_case_data.yml` (the case-data issue form).
 

@@ -20,4 +20,9 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m pytest -v
       - name: Build site from empty data (smoke test)
+        # Mirror the production sweep env so this smoke test catches any
+        # deployment-config drift (root-relative paths + CNAME-only routing).
+        env:
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: www.aretheyinjail.com
         run: python -m web.build

@@ -10,8 +10,9 @@ Each invocation:
   4. Writes data/current.json and appends to data/changelog.json.
   5. Removes photos belonging to released inmates.
 
-Designed to fit a ~25-minute budget at Crawl-delay: 10s, so it can run as a
-30-minute cron in GitHub Actions.
+Designed to fit a ~25-minute budget at Crawl-delay: 10s, so it can run on the
+`*/15 * * * *` GitHub Actions cron (with a 20-minute skip-gate to keep effective
+cadence at ~20-45 min).
 """
 
 from __future__ import annotations
@@ -277,17 +278,29 @@ def run(
                         break
                     done += 1
                     n_detail_attempts += 1
+                    iid = futures[fut]
                     try:
                         inm, detail_named, detail_had_photo = fut.result()
                     except Exception as e:
                         # One worker raising shouldn't terminate the pool - the
                         # other detail fetches and the final write still run.
                         # Count it as an attempt with neither name nor photo so
-                        # the watchdog reflects the failure.
+                        # the watchdog reflects the failure. Fall back to the
+                        # previous snapshot entry if we have one so a transient
+                        # detail-page error doesn't drop the inmate from current.
                         log.warning("detail fetch worker raised: %s", e)
+                        if iid in previous:
+                            current[iid] = previous[iid].model_copy(update={"last_seen_utc": utcnow_iso()})
                         continue
                     if inm is not None:
                         current[inm.inmate_number] = inm
+                    elif iid in previous:
+                        # _fetch_one returned None (HCSO refused or timed out).
+                        # Without this fallback the inmate would silently drop
+                        # out of current.json for one cycle and re-appear on the
+                        # next; with it, we keep their previous record (preserves
+                        # cached photo and bio) until the next successful fetch.
+                        current[iid] = previous[iid].model_copy(update={"last_seen_utc": utcnow_iso()})
                     if detail_named:
                         n_detail_named += 1
                     if detail_had_photo:
@@ -298,7 +311,7 @@ def run(
                         # otherwise the in-memory size must still clear the
                         # 50% guard. A real catastrophic mid-sweep crash with
                         # a huge to_fetch list now keeps the previous-good
-                        # snapshot until the natural 30-minute retry, rather
+                        # snapshot until the next ~20-45 minute retry, rather
                         # than persisting a degraded baseline.
                         if (
                             len(previous) < SWEEP_BOOTSTRAP_FLOOR
@@ -543,9 +556,12 @@ def _fetch_one(
             inm.booking_date = list_row.admit_date
 
     photo_path = PHOTOS_DIR / f"{inm.inmate_number}.jpg"
-    if photo_bytes:
-        if downscale_and_save(photo_bytes, photo_path):
-            inm.photo_filename = photo_path.name
+    # Save fresh bytes if we got them AND they decoded; otherwise fall through
+    # to the disk-cached photo from a prior successful sweep. Previously the
+    # second branch was an `elif`, which meant a corrupt-bytes failure on one
+    # cycle would discard a previously-good cached photo from the snapshot.
+    if photo_bytes and downscale_and_save(photo_bytes, photo_path):
+        inm.photo_filename = photo_path.name
     elif photo_path.exists():
         inm.photo_filename = photo_path.name
 
