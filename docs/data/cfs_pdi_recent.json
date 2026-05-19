@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-19T15:24:25Z",
+  "generated_utc": "2026-05-19T16:34:32Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3206,
+  "row_count": 3203,
   "rows": [
     {
       "address_x": "3XX EZZARD CHARLES DR",
@@ -52082,24 +52082,6 @@
       "longitude_x": "-84.515573"
     },
     {
-      "address_x": "70XX VINE ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-22T07:20:27.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260422000207",
-      "incident_type_id": "TSTOP",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-22T07:20:27.000",
-      "closed_time_incident": "2026-04-22T08:38:19.000",
-      "dispatch_time_primary_unit": "2026-04-22T07:20:27.000",
-      "beat": "P46",
-      "district": "4",
-      "cpd_neighborhood": "CARTHAGE",
-      "community_council_neighborhood": "CARTHAGE",
-      "latitude_x": "39.1925140000896",
-      "longitude_x": "-84.481918"
-    },
-    {
       "address_x": "WARSAW AV / WELLS ST",
       "agency": "CPD",
       "create_time_incident": "2026-04-22T07:20:27.000",
@@ -52116,6 +52098,24 @@
       "community_council_neighborhood": "EAST PRICE HILL",
       "latitude_x": "39.1107860000897",
       "longitude_x": "-84.569047"
+    },
+    {
+      "address_x": "70XX VINE ST",
+      "agency": "CPD",
+      "create_time_incident": "2026-04-22T07:20:27.000",
+      "disposition_text": "ARR: ARREST",
+      "event_number": "CPD260422000207",
+      "incident_type_id": "TSTOP",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-04-22T07:20:27.000",
+      "closed_time_incident": "2026-04-22T08:38:19.000",
+      "dispatch_time_primary_unit": "2026-04-22T07:20:27.000",
+      "beat": "P46",
+      "district": "4",
+      "cpd_neighborhood": "CARTHAGE",
+      "community_council_neighborhood": "CARTHAGE",
+      "latitude_x": "39.1925140000896",
+      "longitude_x": "-84.481918"
     },
     {
       "address_x": "XX CRAFT ST",
@@ -57385,60 +57385,6 @@
       "community_council_neighborhood": "CORRYVILLE",
       "latitude_x": "39.1357630000896",
       "longitude_x": "-84.502902"
-    },
-    {
-      "address_x": "3XX EZZARD CHARLES DR",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T16:27:44.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260419000965",
-      "incident_type_id": "DOMVIO",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-19T16:27:44.000",
-      "closed_time_incident": "2026-04-19T18:01:45.000",
-      "dispatch_time_primary_unit": "2026-04-19T16:27:44.000",
-      "beat": "P13",
-      "district": "1",
-      "cpd_neighborhood": "WEST  END",
-      "community_council_neighborhood": "WEST END",
-      "latitude_x": "39.1092120000896",
-      "longitude_x": "-84.522009"
-    },
-    {
-      "address_x": "26XX W NORTH BEND RD",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T16:07:19.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260419000935",
-      "incident_type_id": "THEFT (NIP)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-19T17:04:15.000",
-      "closed_time_incident": "2026-04-19T18:17:00.000",
-      "dispatch_time_primary_unit": "2026-04-19T16:37:43.000",
-      "beat": "P36",
-      "district": "5",
-      "cpd_neighborhood": "MOUNT AIRY",
-      "community_council_neighborhood": "MOUNT AIRY",
-      "latitude_x": "39.1882580000896",
-      "longitude_x": "-84.572241"
-    },
-    {
-      "address_x": "10XX S I75",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T15:28:25.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260419000905",
-      "incident_type_id": "CRASH NON-INJURY, HWY",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-19T15:44:12.000",
-      "closed_time_incident": "2026-04-19T17:52:04.000",
-      "dispatch_time_primary_unit": "2026-04-19T15:29:48.000",
-      "beat": "P46",
-      "district": "4",
-      "cpd_neighborhood": "HARTWELL",
-      "community_council_neighborhood": "HARTWELL",
-      "latitude_x": "39.2032000000895",
-      "longitude_x": "-84.467907"
     }
   ]
 }
