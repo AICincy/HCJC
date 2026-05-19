@@ -843,14 +843,16 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   display: inline-block;
   padding: 2px 9px;
   border-radius: var(--radius);
-  border-width: 1px;
-  border-style: solid;
+  border: 1px solid var(--fg-muted);
+  background: transparent;
+  color: var(--fg);
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-.tag-booked   { background: rgba(196,62,44,.12);  color: #8c2a1c; border: 1px solid rgba(196,62,44,.22); }
+/* Event variants inherit the base — differentiation comes from the badge
+   text content (BOOKED, RELEASED, etc.), not from per-event color. */
 
 /* ===== CFS / shootings list ===== */
 .cfs {
