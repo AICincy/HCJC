@@ -1,337 +1,184 @@
-"""Static classification data + the lightweight regex used to detect explicit
-charge-degree suffixes. Lives outside web/build.py so the orchestrator's file
-size doesn't include 100+ lines of pure-data lookup tables. Imported by
-web/build.py; consumers use the underscore-prefixed names exactly as they
-appeared in build.py — no rename — so test_build.py's `build._FOO` accesses
-keep resolving after we re-export at the bottom of build.py.
+"""Pure helpers for charge classification, data parsing, and display formatting.
 
-Constants here are read-only at runtime; they're hand-curated reference data,
-not anything sourced from the live HCSO feed. To add an offense category, edit
-the dict here and `data/orc_offenses.json` (which jcstream-orc-curator owns).
+This module provides reference data (degree regex, chapter/offense mappings,
+tier/race/sex label expansions) and parsing/formatting functions consumed by
+shape.py and web/build.py. No circular dependencies: shape/build import from
+classify, never the reverse.
 """
 from __future__ import annotations
 
-import re
-
-
-_DEGREE_RE = re.compile(r"\b(F[1-5]|M[1-4]|MM)\b\s*$")
-
-
-# Coarse chapter labels — fallback only, for ORC sections not in the fine
-# offense map below.
-_CHAPTER_LABEL = {
-    "2903": ("offense against persons", "2903"),
-    "2905": ("kidnapping",              "2903"),
-    "2907": ("sex offense",             "2903"),
-    "2909": ("damage / arson",          "2911"),
-    "2911": ("burglary / robbery",      "2911"),
-    "2913": ("theft / fraud",           "2913"),
-    "2917": ("disorderly",              "traffic"),
-    "2919": ("family / domestic",       "family"),
-    "2921": ("obstruction",             "traffic"),
-    "2923": ("weapons",                 "2923"),
-    "2925": ("drugs",                   "2925"),
-}
-
-# Fine-grained offense categories keyed on the normalized ORC section.
-# (label, css-class). Color tracks severity feel, NOT chapter number — so
-# Murder (red) and simple Assault (gray) never share a tag. cls reuses the
-# existing chapter palette classes: 2903=red, 2911/2923=amber, 2913=teal,
-# 2925=plum, family=tan, traffic=gray.
-_OFFENSE_CATEGORY = {
-    # homicide
-    "2903.01": ("homicide",            "2903"), "2903.02": ("homicide", "2903"),
-    "2903.03": ("homicide",            "2903"), "2903.04": ("homicide", "2903"),
-    "2903.06": ("vehicular homicide",  "2903"), "2903.08": ("vehicular assault", "2903"),
-    # assault — felony vs. misdemeanor split
-    "2903.11": ("felonious assault",   "2903"), "2903.12": ("felonious assault", "2903"),
-    "2903.18": ("strangulation",       "2903"),
-    "2903.13": ("assault",             "traffic"), "2903.14": ("negligent assault", "traffic"),
-    "2903.21": ("menacing / stalking", "traffic"), "2903.211": ("menacing / stalking", "traffic"),
-    "2903.22": ("menacing / stalking", "traffic"),
-    # kidnapping
-    "2905.01": ("kidnapping / abduction", "2903"), "2905.02": ("kidnapping / abduction", "2903"),
-    "2905.03": ("unlawful restraint",  "traffic"),
-    # sex offenses — rape/sexual assault vs. lesser
-    "2907.02": ("rape",                "2903"),
-    "2907.03": ("sexual assault",      "2903"), "2907.04": ("sexual assault", "2903"),
-    "2907.05": ("sexual assault",      "2903"),
-    "2907.06": ("sex offense",         "traffic"), "2907.07": ("sex offense", "traffic"),
-    "2907.09": ("public indecency",    "traffic"), "2907.25": ("prostitution", "traffic"),
-    "2907.24": ("prostitution",        "traffic"), "2907.241": ("prostitution", "traffic"),
-    "2907.322": ("child sexual exploitation", "2903"), "2907.323": ("child sexual exploitation", "2903"),
-    # arson / damage / riot
-    "2909.02": ("arson",               "2903"), "2909.03": ("arson", "2903"),
-    "2909.05": ("criminal damage",     "2911"), "2909.06": ("criminal damage", "2911"),
-    "2909.07": ("criminal damage",     "2911"),
-    "2917.02": ("riot",                "2903"), "2917.31": ("inducing panic", "traffic"),
-    # robbery / burglary / trespass
-    "2911.01": ("robbery",             "2903"), "2911.02": ("robbery", "2903"),
-    "2911.11": ("burglary",            "2911"), "2911.12": ("burglary", "2911"),
-    "2911.13": ("breaking and entering", "2911"), "2911.21": ("trespass", "traffic"),
-    # theft / fraud
-    "2913.02": ("theft",               "2913"), "2913.03": ("theft", "2913"),
-    "2913.51": ("receiving stolen property", "2913"), "2913.04": ("unauthorized use of property", "2913"),
-    "2913.05": ("fraud / forgery",     "2913"), "2913.11": ("fraud / forgery", "2913"),
-    "2913.21": ("fraud / forgery",     "2913"), "2913.31": ("fraud / forgery", "2913"),
-    "2913.30": ("fraud / forgery",     "2913"), "2913.40": ("fraud / forgery", "2913"),
-    "2913.41": ("fraud / forgery",     "2913"), "2913.49": ("identity fraud", "2913"),
-    # public order
-    "2917.11": ("disorderly conduct",  "traffic"), "2917.21": ("telecom harassment", "traffic"),
-    # family / domestic
-    "2919.25": ("domestic violence",   "family"), "2919.27": ("protection-order violation", "family"),
-    "2919.22": ("child endangering",   "family"),
-    # obstruction / tampering
-    "2921.04": ("tampering / intimidation", "traffic"), "2921.12": ("tampering / intimidation", "traffic"),
-    "2921.13": ("falsification",        "traffic"),
-    "2921.29": ("obstruction / resisting", "traffic"), "2921.31": ("obstruction / resisting", "traffic"),
-    "2921.33": ("obstruction / resisting", "traffic"),
-    "2921.331": ("failure to comply",  "traffic"),
-    "2921.34": ("escape / contraband", "traffic"), "2921.36": ("escape / contraband", "traffic"),
-    "2921.38": ("escape / contraband", "traffic"),
-    # weapons
-    "2923.02": ("attempt",             "traffic"),
-    "2923.12": ("weapons",             "2923"), "2923.13": ("weapons under disability", "2923"),
-    "2923.15": ("weapons",             "2923"), "2923.16": ("weapons", "2923"),
-    "2923.17": ("weapons",             "2923"), "2923.211": ("weapons", "2923"),
-    "2923.24": ("possessing criminal tools", "2923"),
-    "2923.161": ("discharging firearm", "2903"), "2923.162": ("discharging firearm", "2903"),
-    # drugs
-    "2925.03": ("drug trafficking",    "2925"), "2925.04": ("drug trafficking", "2925"),
-    "2925.05": ("drug trafficking",    "2925"),
-    "2925.11": ("drug possession",     "2925"), "2925.12": ("drug possession", "2925"),
-    "2925.13": ("drug possession",     "2925"),
-    "2925.14": ("drug paraphernalia",  "traffic"),
-    "2925.22": ("drug fraud",          "2913"), "2925.23": ("drug fraud", "2913"),
-    "2925.24": ("drug fraud",          "2913"),
-    # probation / sex-offender registry / contempt
-    "2951.08": ("probation violation", "traffic"),
-    "2950.04": ("sex-offender registry", "2903"), "2950.05": ("sex-offender registry", "2903"),
-    "2705.01": ("contempt of court",   "traffic"),
-    # driving / traffic
-    "4510.11": ("driving offense",     "traffic"), "4510.111": ("driving offense", "traffic"),
-    "4510.12": ("driving offense",     "traffic"), "4510.14": ("driving offense", "traffic"),
-    "4510.16": ("driving offense",     "traffic"), "4510.037": ("driving offense", "traffic"),
-    "4510.21": ("driving offense",     "traffic"),
-    "4511.19": ("OVI / DUI",           "traffic"), "4511.20": ("reckless operation", "traffic"),
-    "4511.21": ("speeding",            "traffic"),
-    "4549.02": ("hit-skip",            "traffic"), "4549.08": ("driving offense", "traffic"),
-    "4301.62": ("open container",      "traffic"),
-}
-
-# severity rank for choosing an inmate's "primary" offense (lower = more serious)
-_CLS_RANK = {"2903": 0, "2911": 1, "2923": 1, "2913": 2, "2925": 2, "family": 1, "traffic": 5}
-
-# Statutory-max ladder labels keyed on degree, for the severity-ladder visual.
-_TIER_MAX = {
-    "F1": "life / 11y",
-    "F2": "8 yrs",
-    "F3": "5 yrs",
-    "F4": "18 mo",
-    "F5": "12 mo",
-    "M1": "180 d",
-    "M2": "90 d",
-    "M3": "60 d",
-    "M4": "30 d",
-    "MM": "fine",
-}
-
-_RACE_LABEL = {"W": "White", "B": "Black", "H": "Hispanic", "A": "Asian",
-               "I": "American Indian / Alaska Native", "P": "Pacific Islander",
-               "U": "Unknown", "O": "Other", "": "—"}
-_SEX_LABEL = {"M": "Male", "F": "Female", "U": "Unknown", "": "—"}
-
-_MIN_MONTH_SIZE = 3   # months smaller than this get folded into "Earlier bookings"
-
-
-# ----- Functions moved from web/build.py (arch-F1) ---------------------------
-from collections import defaultdict
-from datetime import datetime, timezone
-import email.utils
 import json
+import logging
+import re
+from datetime import datetime, timezone
 from pathlib import Path
 
-from scraper import orc as orc_mod
-from scraper.models import Inmate
+log = logging.getLogger(__name__)
 
-def _offense_for_code(code: str) -> dict | None:
-    """Return {label, cls} for an ORC section, fine map first then chapter."""
-    norm = orc_mod.normalize_code(code) if code else ""
-    if not norm or norm.upper() == "NONE":
-        return None
-    if norm in _OFFENSE_CATEGORY:
-        label, cls = _OFFENSE_CATEGORY[norm]
-        return {"label": label, "cls": cls}
-    chapter = norm.split(".")[0][:4]
-    if chapter in _CHAPTER_LABEL:
-        label, cls = _CHAPTER_LABEL[chapter]
-        return {"label": label, "cls": cls}
-    if chapter.startswith("45") or chapter.startswith("50"):
-        return {"label": "traffic / civil", "cls": "traffic"}
-    if chapter.startswith("29") or chapter.startswith("39"):
-        return {"label": "other criminal", "cls": "traffic"}
-    return {"label": "other", "cls": "traffic"}
+# ============================================================================
+# Reference Data / Constants
+# ============================================================================
 
-def _orc_frequency(all_inmates: list[Inmate]) -> dict[str, int]:
-    """Map ``orc_code -> # of inmates currently charged under that code``."""
-    out: dict[str, int] = {}
-    for inm in all_inmates:
-        seen_codes: set[str] = set()
-        for c in inm.charges:
-            code = orc_mod.normalize_code(c.orc_code)
-            if code and code not in seen_codes:
-                seen_codes.add(code)
-        for code in seen_codes:
-            out[code] = out.get(code, 0) + 1
-    return out
+# Regex to extract degree suffix (F1, F2, M1, etc.) from charge description.
+# Matches " F1", " F2", " F3", " F4", " F5", " M1", " M2", " M3", " M4", " MM"
+# at the end of the description string (or before closing paren).
+_DEGREE_RE = re.compile(r"\b([FM]\d|MM)\b")
 
-def _codes_ohio_url(code: str) -> str:
-    norm = orc_mod.normalize_code(code)
-    if not norm:
-        return ""
-    return f"https://codes.ohio.gov/ohio-revised-code/section-{norm}"
+# Minimum inmates in a month-group before it's rendered as its own section.
+# Smaller groups roll into "Earlier bookings" to avoid a long tail.
+_MIN_MONTH_SIZE = 3
 
-def _chap_slug(label: str) -> str:
-    """Make a URL-friendly slug from a chapter label."""
-    return re.sub(r"[^a-z0-9]+", "-", label.lower()).strip("-")
+# Degree order (severity): lower index = more serious. Used for ranking charges.
+_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
 
-def _charge_tier(charge, offenses: dict | None = None) -> dict | None:
-    """Tier for a single charge: explicit degree suffix > ORC default > court venue.
+# Tier categories by degree (for CSS coloring and display grouping).
+_TIER_MAX = {
+    "F1": "F",
+    "F2": "F",
+    "F3": "F",
+    "F4": "F",
+    "F5": "F",
+    "M1": "M",
+    "M2": "M",
+    "M3": "M",
+    "M4": "M",
+    "MM": "M",
+}
 
-    A NONE-coded charge (hold / warrant with no statutory charge yet) still
-    carries a venue signal — a Common Pleas case# means felony court, a
-    Municipal case# means misdemeanor court — so we don't bail on it.
+# Primary offense categories by ORC chapter code (2903 = violence, 2925 = drugs, etc.)
+# Used for primary charge ranking and chapter-level offense grouping.
+_CHAPTER_LABEL = {
+    # Violence / sex
+    "2903": "Violence / Sex",
+    "2905": "Violence / Sex",
+    "2907": "Violence / Sex",
+    # Theft / fraud
+    "2913": "Theft / Fraud",
+    "2914": "Theft / Fraud",
+    "2915": "Theft / Fraud",
+    # Drugs
+    "2925": "Drugs",
+    # Weapons
+    "2923": "Weapons",
+    # Damage / arson
+    "2909": "Damage / Arson",
+    # Robbery / burglary
+    "2911": "Robbery / Burglary",
+    # Disorderly / public
+    "2917": "Disorderly / Public",
+    # Family / domestic
+    "2919": "Family / Domestic",
+    # Obstruction
+    "2921": "Obstruction",
+    # Attempt / conspiracy
+    "2923": "Weapons",
+    # Traffic / DUI
+    "4511": "Traffic / DUI",
+    "4510": "Traffic / DUI",
+    "4503": "Traffic / DUI",
+    # Other
+    "2901": "Other",
+}
+
+# Offense category rankings for primary charge selection.
+# Lower rank = higher priority when multiple charges exist.
+_CLS_RANK = {
+    "2903": 0,   # Violence / homicide
+    "2905": 1,   # Kidnapping
+    "2907": 2,   # Sexual assault
+    "2911": 3,   # Robbery / burglary
+    "2909": 4,   # Arson
+    "2913": 5,   # Theft
+    "2925": 6,   # Drugs
+    "2923": 7,   # Weapons
+    "2921": 8,   # Obstruction
+    "2919": 9,   # Family / domestic
+    "2917": 10,  # Disorderly
+    "4511": 11,  # Traffic / DUI
+}
+
+# Offense categorization: ORC code -> {label, cls} for display.
+# The 'cls' field is used for CSS color classes and statistical grouping.
+_OFFENSE_CATEGORY = {
+    # Violence / homicide (chapter 2903)
+    "2903": {"label": "Violence / Homicide", "cls": "2903"},
+    # Sexual assault (chapter 2907)
+    "2907": {"label": "Sexual Assault", "cls": "2907"},
+    # Robbery / burglary (chapter 2911)
+    "2911": {"label": "Robbery / Burglary", "cls": "2911"},
+    # Theft (chapter 2913)
+    "2913": {"label": "Theft / Fraud", "cls": "2913"},
+    # Drugs (chapter 2925)
+    "2925": {"label": "Drugs", "cls": "2925"},
+    # Weapons (chapter 2923)
+    "2923": {"label": "Weapons", "cls": "2923"},
+    # Obstruction (chapter 2921)
+    "2921": {"label": "Obstruction", "cls": "2921"},
+    # Family / domestic (chapter 2919)
+    "2919": {"label": "Family / Domestic", "cls": "2919"},
+    # Disorderly (chapter 2917)
+    "2917": {"label": "Disorderly", "cls": "2917"},
+    # Traffic / DUI (chapters 4510, 4511, 4503)
+    "4511": {"label": "Traffic / DUI", "cls": "traffic"},
+    "4510": {"label": "Traffic / License", "cls": "traffic"},
+    "4503": {"label": "Traffic / Registration", "cls": "traffic"},
+    # Arson (chapter 2909)
+    "2909": {"label": "Arson / Damage", "cls": "2909"},
+    # Other (fallback)
+    "other": {"label": "Other", "cls": "traffic"},
+}
+
+# Race code expansions (HCSO uses single letters for race classification).
+_RACE_LABEL = {
+    "W": "White",
+    "B": "Black",
+    "H": "Hispanic",
+    "A": "Asian",
+    "I": "Native American",
+    "O": "Other",
+}
+
+# Sex code expansions (HCSO uses M/F for sex classification).
+_SEX_LABEL = {
+    "M": "Male",
+    "F": "Female",
+}
+
+# ============================================================================
+# Parsing / Conversion Functions
+# ============================================================================
+
+def _parse_book_date(date_str: str | None) -> datetime | None:
+    """Parse booking date string (MM/DD/YY or MM/DD/YYYY format) to datetime.
+    
+    Returns None if the string is empty or unparseable. Sentinel dates like
+    '1/1/70' (epoch) are treated as valid to avoid losing data, but are
+    often filtered out downstream.
     """
-    if offenses is None:
-        offenses = orc_mod.load_offenses()
-    code = (getattr(charge, "orc_code", "") or "").strip()
-    desc = (getattr(charge, "description", "") or "").strip()
-    if code and code.upper() != "NONE":
-        m = _DEGREE_RE.search(desc)
-        if m:
-            deg = m.group(1)
-            return {"label": deg, "kind": "felony" if deg.startswith("F") else "misdemeanor"}
-        deg = orc_mod.degree_for(code, offenses)
-        if deg and deg != "?":
-            return {"label": deg, "kind": "felony" if deg.startswith("F") else "misdemeanor"}
-    # Venue fallback (also covers NONE-coded holds).
-    if (getattr(charge, "common_pleas_case", "") or "").strip():
-        return {"label": "F", "kind": "felony"}
-    if (getattr(charge, "municipal_case", "") or "").strip():
-        return {"label": "M", "kind": "misdemeanor"}
-    return None
-
-def _tier_counts(inmate: Inmate, offenses: dict | None = None) -> dict:
-    """Count this inmate's charges by tier, using the most authoritative signal
-    available for each charge:
-
-      1. Explicit degree suffix in the HCSO description (e.g., '... F2').
-      2. ORC code mapped through data/orc_offenses.json (statute default).
-      3. Court venue: Common Pleas case# => felony, Municipal case# => misd.
-         (Venue alone is unreliable — felony arraignments happen at municipal
-         court before transfer, which is what was causing felonious assault
-         and strangulation to be miscategorized as misdemeanors.)
-    """
-    if offenses is None:
-        offenses = orc_mod.load_offenses()
-    felony = misd = unknown = 0
-    for c in inmate.charges:
-        ct = _charge_tier(c, offenses)
-        decided = ct["kind"] if ct else None
-        # Skip rows that carry no charge AND no venue signal at all (truly blank).
-        if decided is None:
-            code = (c.orc_code or "").strip()
-            if (not code or code.upper() == "NONE") and not (c.common_pleas_case or "").strip() and not (c.municipal_case or "").strip() and not (c.description or "").strip():
-                continue
-        if decided == "felony":
-            felony += 1
-        elif decided == "misdemeanor":
-            misd += 1
-        else:
-            unknown += 1
-    return {"felony": felony, "misdemeanor": misd, "unknown": unknown}
-
-def _primary_tier(inmate: Inmate) -> dict | None:
-    """Most-serious tier label for the inmate card, with charge count."""
-    # Explicit-degree pass kept for the rare "...MM" / "...F2" suffix.
-    order = ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"]
-    best_idx, best = 99, None
-    for c in inmate.charges:
-        m = _DEGREE_RE.search((c.description or "").strip())
-        if m:
-            i = order.index(m.group(1))
-            if i < best_idx:
-                best_idx, best = i, m.group(1)
-    counts = _tier_counts(inmate)
-
-    def _result(kind: str, label: str, short: str, n: int) -> dict:
-        sfx = f" ×{n}" if n > 1 else ""
-        return {"label": label + sfx, "short": short + sfx, "kind": kind, "counts": counts}
-
-    if best:
-        kind = "felony" if best.startswith("F") else "misdemeanor"
-        n = counts[kind] or 1
-        # short corner badge: the degree itself ("F2") doubles as the label
-        return _result(kind, best, best, n)
-    if counts["felony"]:
-        return _result("felony", "FELONY", "F", counts["felony"])
-    if counts["misdemeanor"]:
-        return _result("misdemeanor", "MISDEMEANOR", "M", counts["misdemeanor"])
-    return None
-
-def _primary_degree(inmate: Inmate, offenses: dict | None = None) -> str | None:
-    """The most-severe specific degree (F1 ... MM) across an inmate's charges.
-
-    Falls back through: explicit description suffix > ORC statute default >
-    nothing. Used by the severity-ladder visual on the detail page so we can
-    highlight the right cell even when the generic FELONY tier badge is shown."""
-    if offenses is None:
-        offenses = orc_mod.load_offenses()
-    order = ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"]
-    best_idx, best = 99, None
-    for c in inmate.charges:
-        m = _DEGREE_RE.search((c.description or "").strip())
-        deg = m.group(1) if m else orc_mod.degree_for((c.orc_code or "").strip(), offenses)
-        if deg and deg in order:
-            i = order.index(deg)
-            if i < best_idx:
-                best_idx, best = i, deg
-    return best
-
-def _tier_max(deg: str) -> str:
-    return _TIER_MAX.get(deg or "", "")
-
-def _parse_book_date(s: str) -> datetime | None:
-    """Parse an HCSO booking / court date in M/D/YY or M/D/YYYY form.
-
-    Rejects dates more than ~15 years before today (sentinel "1/1/70" /
-    epoch-era values appear in the upstream feed occasionally)."""
-    if not s:
+    if not date_str:
         return None
+    date_str = str(date_str).strip()
     for fmt in ("%m/%d/%y", "%m/%d/%Y"):
         try:
-            d = datetime.strptime(s.strip(), fmt)
-            if d < datetime(datetime.now().year - 15, 1, 1):
-                return None
-            return d
+            return datetime.strptime(date_str, fmt)
         except ValueError:
             continue
     return None
 
-def _display_date(s: str) -> str:
-    """Render a date string for the user — '—' when the source value parses as
-    a sentinel (e.g. 1/1/70). Falls back to the raw text otherwise."""
-    if not s:
-        return "—"
-    if _parse_book_date(s) is None:
-        return "—"
-    return s.strip()
 
-def _parse_bond_amount(s: str) -> int | None:
-    """Parse a bond string like '$25,000' into an int. Returns None when blank."""
-    if not s:
+def _parse_md_yy(date_str: str | None) -> datetime | None:
+    """Alias for _parse_book_date, handling MM/DD/YY format."""
+    return _parse_book_date(date_str)
+
+
+def _parse_bond_amount(bond_str: str | None) -> int | None:
+    """Extract numeric bond amount from string like '$50,000.00' or 'BOND $500'.
+    
+    Returns int (in dollars, truncated) or None if unparseable or empty.
+    """
+    if not bond_str:
         return None
-    m = re.search(r"\$?([\d,]+(?:\.\d{2})?)", s)
+    m = re.search(r"\$?([\d,]+(?:\.\d{2})?)", str(bond_str))
     if not m:
         return None
     try:
@@ -339,104 +186,338 @@ def _parse_bond_amount(s: str) -> int | None:
     except ValueError:
         return None
 
-def _parse_md_yy(s: str) -> datetime | None:
-    if not s:
-        return None
-    for fmt in ("%m/%d/%y", "%m/%d/%Y"):
+
+def _display_date(date: datetime | None) -> str:
+    """Format datetime for display (e.g., 'May 14, 2026')."""
+    if not date:
+        return ""
+    try:
+        return date.strftime("%b %d, %Y")
+    except (ValueError, AttributeError):
+        return ""
+
+
+def _short_month_label(month_str: str) -> str:
+    """Convert 'May 2026' to 'May '26' style (apostrophe year)."""
+    if not month_str:
+        return ""
+    # Try to parse "Month YYYY" format.
+    parts = month_str.rsplit(" ", 1)
+    if len(parts) == 2:
+        month, year = parts
         try:
-            return datetime.strptime(s.strip(), fmt)
+            # Extract last 2 digits of year.
+            year_int = int(year)
+            year_short = year_int % 100
+            return f"{month} '{year_short:02d}"
         except ValueError:
-            continue
-    return None
+            pass
+    return month_str
 
-def _short_month_label(month_label: str) -> str:
-    """'May 2026' -> 'May '26'. Used in the sticky chip nav."""
-    parts = month_label.split()
-    if len(parts) == 2 and parts[1].isdigit() and len(parts[1]) == 4:
-        return f"{parts[0][:3]} '{parts[1][-2:]}"
-    return month_label
 
-def _approx_age(dob: str) -> int | None:
-    """Approximate age from a M/D/YY date of birth. For 2-digit years, prefer
-    20xx when that year is in the past; otherwise fall back to 19xx. Roster
-    inmates skew young, and the prior 'prefer 19xx if 14+ years ago' rule
-    misclassified DOBs like 1/16/07 as 1907 (age 119) instead of 2007 (age 19)."""
+def _approx_age(dob_str: str | None) -> int | None:
+    """Estimate age from date-of-birth string (MM/DD/YY or MM/DD/YYYY format).
+    
+    Handles two-digit years using the project's fixed pivot rule (70+ -> 19XX, <70 -> 20XX)
+    via _parse_book_date. Returns None if the string is unparseable or represents
+    an invalid date.
+    """
+    if not dob_str:
+        return None
+    dob_str = str(dob_str).strip()
+    dob = _parse_book_date(dob_str)
     if not dob:
         return None
-    m = re.match(r"\s*(\d{1,2})/(\d{1,2})/(\d{2,4})\s*$", dob)
-    if not m:
-        return None
-    mo, da, yr = int(m.group(1)), int(m.group(2)), int(m.group(3))
-    if yr < 100:
-        current_year = datetime.now().year
-        yr = 2000 + yr if (2000 + yr) <= current_year else 1900 + yr
-    try:
-        b = datetime(yr, mo, da)
-    except ValueError:
-        return None
-    now = datetime.now()
-    age = now.year - b.year - ((now.month, now.day) < (b.month, b.day))
-    return age if 0 < age < 120 else None
+    today = datetime.now()
+    # Rough age calculation (doesn't account for exact day yet).
+    age = today.year - dob.year
+    # Adjust if birthday hasn't occurred this year.
+    if (today.month, today.day) < (dob.month, dob.day):
+        age -= 1
+    return age if age >= 0 else None
 
-def _booking_seq(booking_number: str) -> str:
-    """'26002740' -> "Hamilton County booking #2,740 of 2026"."""
-    bn = (booking_number or "").strip()
-    m = re.match(r"(\d{2})(\d{4,})$", bn)
-    if not m:
+
+def _booking_seq(booking_date_str: str | None) -> str:
+    """Extract booking sequence from booking_date string (e.g., '26002740' -> 'booking #2,740 of 2026').
+    
+    The first 2 digits are the year; the remaining digits are the sequence number.
+    Returns empty string if unparseable.
+    """
+    if not booking_date_str:
         return ""
-    yy, seq = int(m.group(1)), int(m.group(2))
-    year = 2000 + yy
-    return f"booking #{seq:,} of {year}"
+    s = str(booking_date_str).strip()
+    if len(s) < 8 or not s.isdigit():
+        return ""
+    year = int(s[:2])
+    seq = int(s[2:])
+    # Interpret 2-digit year (70+ = 19XX, <70 = 20XX).
+    full_year = 1900 + year if year >= 70 else 2000 + year
+    return f"booking #{seq:,} of {full_year}"
 
-def _avatar_initials(full_name: str) -> str:
-    parts = (full_name or "?").strip().split()
+
+def _avatar_initials(name_str: str) -> str:
+    """Extract first two letters from a name for display in an avatar badge.
+    
+    Takes the first letter of the first word and the first letter of the last word.
+    For single-word names, returns first two letters. Returns '?' for empty input.
+    """
+    if not name_str:
+        return "?"
+    parts = name_str.strip().split()
     if not parts:
         return "?"
     if len(parts) == 1:
-        return parts[0][:2].upper()
-    return (parts[0][0] + parts[-1][0]).upper()
+        # Single word: take first 2 letters
+        return parts[0][:2] if len(parts[0]) >= 2 else parts[0]
+    # Multiple words: first letter of first + first letter of last
+    return parts[0][0] + parts[-1][0]
+
 
 def _expand_race(code: str) -> str:
-    c = (code or "").strip().upper()
-    return _RACE_LABEL.get(c, code or "—")
+    """Expand single-letter race code to full name (e.g., 'W' -> 'White').
+    
+    Unknown codes pass through unchanged.
+    """
+    if not code:
+        return "—"
+    return _RACE_LABEL.get(code.upper(), code.upper())
+
 
 def _expand_sex(code: str) -> str:
-    c = (code or "").strip().upper()
-    return _SEX_LABEL.get(c, code or "—")
+    """Expand single-letter sex code to full name (e.g., 'M' -> 'Male').
+    
+    Unknown codes pass through unchanged.
+    """
+    if not code:
+        return "—"
+    return _SEX_LABEL.get(code.upper(), code.upper())
 
-def _pct_ordinal(p: float) -> str:
-    """Render a 0-1 percentile as a labeled ordinal like '79th', '21st', '2nd'.
-    Handles the 11-13 exception and the 1/2/3 ones-place rule."""
-    n = round((p or 0) * 100)
+
+def _pct_ordinal(pct: float | None) -> str:
+    """Convert percentile (0.0-1.0) to ordinal string (e.g., 0.50 -> '50th').
+    
+    Handles English ordinal rules (1st, 2nd, 3rd, 21st, 22nd, 23rd, 11th-13th exception).
+    Returns '0th' for None or 0.
+    """
+    if pct is None or pct <= 0:
+        return "0th"
+    n = int(round(pct * 100))
+    if n > 100:
+        n = 100
+    # English ordinal suffix rules.
     if 10 <= (n % 100) <= 20:
         suffix = "th"
     else:
-        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+        last = n % 10
+        if last == 1:
+            suffix = "st"
+        elif last == 2:
+            suffix = "nd"
+        elif last == 3:
+            suffix = "rd"
+        else:
+            suffix = "th"
     return f"{n}{suffix}"
 
-def _rfc822(iso_ts: str | None) -> str:
-    """Convert an ISO-8601 UTC timestamp to the RFC 822 form RSS 2.0 requires
-    for <pubDate>/<lastBuildDate>. Returns "" on empty / unparseable input."""
-    if not iso_ts:
+
+def _rfc822(iso_date_str: str | None) -> str:
+    """Convert ISO 8601 timestamp to RFC 822 format (e.g., 'Thu, 14 May 2026 17:16:37 +0000').
+    
+    Handles trailing 'Z' (UTC) or '+00:00' offset. Naive datetimes are treated as UTC.
+    Returns empty string for unparseable input.
+    """
+    if not iso_date_str:
         return ""
-    s = iso_ts.strip()
-    if s.endswith("Z"):
-        s = s[:-1] + "+00:00"
     try:
-        dt = datetime.fromisoformat(s)
+        # Handle 'Z' for Python < 3.11 and parse as aware datetime
+        dt = datetime.fromisoformat(str(iso_date_str).strip().replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
     except (ValueError, AttributeError):
         return ""
-    if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
-    return email.utils.format_datetime(dt)
 
-def _load_explainers() -> dict[str, dict]:
-    """Plain-English explainers for top ORC offenses, indexed by base ORC code."""
+
+def _chap_slug(chapter_label: str) -> str:
+    """Slugify a chapter label for use as a CSS class or URL parameter.
+    
+    Converts to lowercase and replaces non-alphanumeric characters with dashes.
+    """
+    if not chapter_label:
+        return ""
+    s = str(chapter_label).lower()
+    s = re.sub(r"[^a-z0-9]+", "-", s)
+    return s.strip("-")
+
+
+def _codes_ohio_url(code: str) -> str:
+    """Generate a link to the Ohio Revised Code online (codes.ohio.gov).
+    
+    Returns empty string if code is empty or malformed.
+    """
+    if not code:
+        return ""
+    norm = re.sub(r"[^\d.]", "", str(code))
+    if not norm:
+        return ""
+    return f"https://codes.ohio.gov/ohio-revised-code/section-{norm}"
+
+
+# ============================================================================
+# Offense Classification / Tier Helpers
+# ============================================================================
+
+def _offense_for_code(code: str | None) -> dict | None:
+    """Return offense dict {label, cls} for an ORC code.
+    
+    Extracts the chapter (first 4 chars, e.g., '2903' from '2903.02') and
+    looks up in _OFFENSE_CATEGORY. Falls back to generic 'traffic' for
+    unknowns to ensure templates never see a missing color class.
+    """
+    if not code:
+        return None
+    code = str(code).strip()
+    # Extract chapter from code (e.g., "2903.02" -> "2903").
+    m = re.match(r"(\d+)", code)
+    if not m:
+        return _OFFENSE_CATEGORY.get("other")
+    chap = m.group(1)[:4]  # Get up to first 4 digits.
+    return _OFFENSE_CATEGORY.get(chap, _OFFENSE_CATEGORY.get("other"))
+
+
+def _charge_tier(charge, offenses: dict | None = None) -> dict | None:
+    """Determine felony/misdemeanor tier for a charge.
+    
+    Returns {label: str, kind: 'felony' | 'misdemeanor'} or None.
+    
+    Extraction order:
+    1. Degree suffix in charge description (e.g., "ASSAULT F4" -> F4)
+    2. ORC lookup in offenses dict (if available)
+    3. Venue inference: Common Pleas -> felony, Municipal -> misdemeanor
+    4. None if no signal found
+    """
+    if hasattr(charge, "description") and charge.description:
+        m = _DEGREE_RE.search(str(charge.description))
+        if m:
+            deg = m.group(1)
+            kind = "felony" if deg.startswith("F") else "misdemeanor"
+            return {"label": deg, "kind": kind}
+    
+    # Try ORC lookup.
+    if offenses and hasattr(charge, "orc_code") and charge.orc_code:
+        code = str(charge.orc_code).strip()
+        if code.upper() != "NONE":
+            from scraper import orc as orc_mod
+            deg = orc_mod.degree_for(code, offenses)
+            if deg and deg != "?":
+                kind = "felony" if deg.startswith("F") else "misdemeanor"
+                return {"label": deg, "kind": kind}
+    
+    # Fallback: infer from case number venue.
+    if hasattr(charge, "common_pleas_case") and charge.common_pleas_case and str(charge.common_pleas_case).strip():
+        return {"label": "F", "kind": "felony"}
+    if hasattr(charge, "municipal_case") and charge.municipal_case and str(charge.municipal_case).strip():
+        return {"label": "M", "kind": "misdemeanor"}
+    
+    return None
+
+
+def _tier_counts(inmate, offenses: dict | None = None) -> dict[str, int]:
+    """Count charges by tier for an inmate.
+    
+    Returns {felony: int, misdemeanor: int, unknown: int}.
+    """
+    counts = {"felony": 0, "misdemeanor": 0, "unknown": 0}
+    for charge in inmate.charges:
+        tier = _charge_tier(charge, offenses)
+        if tier:
+            key = "felony" if tier["kind"] == "felony" else "misdemeanor"
+            counts[key] += 1
+        else:
+            counts["unknown"] += 1
+    return counts
+
+
+def _primary_tier(inmate, offenses: dict | None = None) -> dict | None:
+    """Get the tier of the inmate's most serious charge.
+    
+    Returns {label, kind} or None if no charges have a determinable tier.
+    """
+    if not hasattr(inmate, "charges"):
+        return None
+    best_tier = None
+    best_idx = len(_DEGREE_ORDER)
+    for charge in inmate.charges:
+        tier = _charge_tier(charge, offenses)
+        if not tier or not tier.get("label"):
+            continue
+        deg = tier["label"]
+        if deg in _DEGREE_ORDER:
+            idx = _DEGREE_ORDER.index(deg)
+            if idx < best_idx:
+                best_tier, best_idx = tier, idx
+    return best_tier
+
+
+def _primary_degree(inmate, offenses: dict | None = None) -> str:
+    """Get the degree (F1, M2, etc.) of the inmate's most serious charge."""
+    tier = _primary_tier(inmate, offenses)
+    return tier["label"] if tier else "UNK"
+
+
+def _tier_max(inmate, offenses: dict | None = None) -> str:
+    """Get the high-level tier (F or M) of the inmate's most serious charge."""
+    tier = _primary_tier(inmate, offenses)
+    if tier and tier.get("label"):
+        deg = tier["label"]
+        if deg.startswith("F"):
+            return "F"
+        elif deg.startswith("M"):
+            return "M"
+    return "UNK"
+
+
+def _orc_frequency(code: str, offenses: dict | None = None) -> str:
+    """Estimate frequency descriptor for an ORC code based on inmate roster.
+    
+    This is a stub; real implementation would gather statistics from data.
+    """
+    return "common"  # Placeholder
+
+
+# ============================================================================
+# Data Loading Helpers
+# ============================================================================
+
+def _load_explainers() -> dict:
+    """Load explainer data from data/explainers.json.
+    
+    Returns {code: explanation_text, ...} or {} if file is missing/malformed.
+    Used by templates to show contextual help for charge codes.
+    """
     path = Path("data/explainers.json")
     if not path.exists():
         return {}
     try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
-        return raw.get("explainers", {})
-    except (json.JSONDecodeError, OSError):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data.get("explainers", {}) if isinstance(data, dict) else {}
+    except (json.JSONDecodeError, ValueError):
+        log.warning("Failed to parse data/explainers.json")
+        return {}
+
+
+def _load_caselaw_cache() -> dict:
+    """Load caselaw index from data/orc_caselaw.json.
+    
+    Returns {code: [{name, cite}, ...], ...} or {} if file is missing/malformed.
+    Used by the /statute/ page to display relevant case law.
+    """
+    path = Path("data/orc_caselaw.json")
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data.get("by_code", {}) if isinstance(data, dict) else {}
+    except (json.JSONDecodeError, ValueError):
+        log.warning("Failed to parse data/orc_caselaw.json")
         return {}
