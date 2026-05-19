@@ -37,9 +37,8 @@ def pull_recent(days: int = 30, limit: int = 5000) -> list[dict]:
             log.info("shootings pull returned %d rows (filter=%s)", len(rows), where)
             return rows
         except httpx.HTTPStatusError as e:
-            # Same scope-narrowing as incidents.pull_recent: only swallow
-            # Socrata "bad column" rejections; let transport errors out so
-            # the unfiltered fallback isn't masking a real outage.
+            # Only swallow Socrata "bad column" rejections; let transport
+            # errors out so the unfiltered fallback isn't masking a real outage.
             log.debug("shootings filter %r rejected by Socrata: %s", where, e)
     log.warning("shootings pull failed all filters; falling back to unfiltered")
     return query(DATASET_ID, limit=limit)

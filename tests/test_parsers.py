@@ -21,7 +21,7 @@ def test_list_page_skips_rows_without_detail_link():
 
 
 def test_detail_page_extracts_bio_charges_and_inline_photo():
-    inm, photo = parse_detail_page(_load("detail_inmate.html"), "14502205")
+    inm, photo, photo_url = parse_detail_page(_load("detail_inmate.html"), "14502205")
     assert inm.inmate_number == "14502205"
     assert inm.booking_number == "26003334"
     assert inm.last_name == "ROE"
@@ -44,7 +44,7 @@ def test_detail_page_extracts_bio_charges_and_inline_photo():
 
 
 def test_detail_page_handles_empty_base64_photo():
-    inm, photo = parse_detail_page(_load("detail_no_photo.html"), "14600000")
+    inm, photo, photo_url = parse_detail_page(_load("detail_no_photo.html"), "14600000")
     assert inm.inmate_number == "14600000"
     assert inm.last_name == "DOE"
     assert inm.first_name == "JANE"
@@ -79,7 +79,7 @@ def test_parse_name_falls_back_to_og_title(caplog):
     """
     import logging
     caplog.set_level(logging.DEBUG, logger="scraper.parsers")
-    inm, _ = parse_detail_page(html, "1234567")
+    inm, _, _ = parse_detail_page(html, "1234567")
     assert inm.last_name == "ROE"
     assert inm.first_name == "RICHARD"
     assert any("og:title fallback" in rec.message for rec in caplog.records)
@@ -100,7 +100,7 @@ def test_parse_name_handles_inmate_label_prefix():
       </ul>
     </body></html>
     """
-    inm, _ = parse_detail_page(html_prefixed, "14544515")
+    inm, _, _ = parse_detail_page(html_prefixed, "14544515")
     assert inm.last_name == "ACOSTA"
     assert inm.first_name == "ANDREW"
 
@@ -109,7 +109,7 @@ def test_parse_name_handles_inmate_label_prefix():
       <h2>ACOSTA, ANDREW</h2>
     </body></html>
     """
-    inm, _ = parse_detail_page(html_bare, "14544515")
+    inm, _, _ = parse_detail_page(html_bare, "14544515")
     assert inm.last_name == "ACOSTA"
     assert inm.first_name == "ANDREW"
 
@@ -125,7 +125,7 @@ def test_extract_inline_photo_jpeg_soi_fallback():
       <img src="data:image/png;base64,{encoded}" style="width:280px;" alt="">
     </body></html>
     """
-    inm, photo = parse_detail_page(html, "5555555")
+    inm, photo, photo_url = parse_detail_page(html, "5555555")
     assert photo == jpeg_bytes
 
 
@@ -165,7 +165,7 @@ def test_parse_charges_ignores_spurious_table_without_description_columns():
       </table>
     </body></html>
     """
-    inm, _ = parse_detail_page(html, "7777777")
+    inm, _, _ = parse_detail_page(html, "7777777")
     # Exactly one charge - the spurious holds row contributed nothing.
     assert len(inm.charges) == 1
     assert inm.charges[0].orc_code == "2903.13"
@@ -178,7 +178,7 @@ def test_parse_detail_page_logs_when_no_structured_fields_found(caplog):
     # per-id INFO log so the operator can find the affected ids.
     import logging
     caplog.set_level(logging.INFO, logger="scraper.parsers")
-    inm, photo = parse_detail_page(
+    inm, photo, photo_url = parse_detail_page(
         "<html><body><p>Service unavailable</p></body></html>",
         "8888888",
     )

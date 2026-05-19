@@ -71,24 +71,22 @@ def _extract_inmate_id_from_row(tr: Node) -> str:
     return ""
 
 
-def parse_detail_page(html: str, inmate_number: str) -> tuple[Inmate, bytes | None]:
+def parse_detail_page(html: str, inmate_number: str) -> tuple[Inmate, bytes | None, str | None]:
     """Parse an inmate-detail page.
 
-    Returns the structured ``Inmate`` plus the raw booking-photo JPEG bytes
-    (or ``None`` if the page lacks a non-empty inline image).
+    Returns ``(Inmate, photo_bytes, photo_url)``. ``photo_url`` is a direct
+    URL to the booking photo when the page provides one (preferred over base64).
+    ``photo_bytes`` is the base64-decoded fallback. Either or both can be None.
     """
     tree = HTMLParser(html)
     bio = _parse_bio(tree)
     name = _parse_name(tree)
     charges = _parse_charges(tree)
-    photo_bytes = _extract_inline_photo(tree)
+    photo_url = _extract_photo_url(tree)
+    photo_bytes = _extract_inline_photo(tree) if not photo_url else None
 
     last, first, middle = _split_name(name)
 
-    # parser-F8: per-id breadcrumb when a detail page passes raise_for_status
-    # but yields zero structured fields (HCSO error / interstitial page that
-    # still returned 200). The list-row fallback hides this in normal sweeps;
-    # this log gives the operator a discoverable signal per affected id.
     if not bio and not name and not charges:
         log.info("detail page produced no structured fields for id=%s", inmate_number)
 
@@ -108,6 +106,7 @@ def parse_detail_page(html: str, inmate_number: str) -> tuple[Inmate, bytes | No
             charges=charges,
         ),
         photo_bytes,
+        photo_url,
     )
 
 
@@ -287,16 +286,33 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
     return charges
 
 
+def _extract_photo_url(tree: HTMLParser) -> str | None:
+    """Return a direct URL to the booking photo, if found on the page.
+
+    Preferred over base64 extraction: a direct HTTP fetch is far more reliable
+    than decoding a multi-hundred-KB base64 payload from inline HTML.
+    """
+    for img in tree.css("img"):
+        src = img.attributes.get("src", "")
+        if src.startswith("data:") or not src:
+            continue
+        alt = (img.attributes.get("alt", "") or "").lower()
+        style = img.attributes.get("style", "")
+        cls = img.attributes.get("class", "") or ""
+        if any(k in alt for k in ("photo", "mug", "inmate", "booking")):
+            return src
+        if any(k in cls for k in ("photo", "mug", "inmate")):
+            return src
+        if "274px" in style:
+            return src
+    return None
+
+
 def _extract_inline_photo(tree: HTMLParser) -> bytes | None:
-    """Return raw image bytes from the inline base64 placeholder, if present.
+    """Return raw image bytes from an inline base64 data URI, if present.
 
-    HCSO embeds the booking photo as a data URI on the inmate-detail page,
-    declared as ``image/png`` but actually JPEG bytes (SOI marker ``\\xff\\xd8``).
-    The placeholder is the only ``<img>`` whose inline style sets ``width:274px``.
-
-    Falls back to any data-URI ``<img>`` whose decoded bytes start with the
-    JPEG SOI marker, so a HCSO width tweak (e.g. 274px to 280px) no longer
-    loses photos site-wide. The 274px hit still wins when present.
+    Fallback for when no direct photo URL is available. HCSO historically
+    embeds booking photos as data URIs (declared image/png, actually JPEG).
     """
     soi_candidate: bytes | None = None
     for img in tree.css("img"):

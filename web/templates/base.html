@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
   <title>{% block title %}JCStream{% endblock %}</title>
   {# noarchive = no Google-cache snapshot. We mirror; we don't archive. If a
      record is purged here pursuant to ORC § 2953.32 sealing/expungement, a
@@ -15,7 +15,7 @@
      Cloudflare Worker or migrate to Cloudflare Pages (see audit/11). #}
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#14181f">
+  <meta name="theme-color" content="#F5F0EB">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
   {# Site-level social card only — per-page links deliberately unfurl as the
      generic project card rather than splashing an individual's name/photo into
@@ -26,9 +26,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent — charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="{{ site_url }}/">
   <meta name="twitter:card" content="summary">
-  {# Public Sans + JetBrains Mono self-hosted under /static/fonts/ via @font-face in
-     style.css (audit/11 spa-P2). The Google Fonts preconnects and stylesheet
-     link were removed: one fewer render-blocking request, no third-party DNS. #}
+  {# IBM Plex Mono self-hosted under /static/fonts/ via @font-face in style.css. #}
   <link rel="stylesheet" href="{{ base_url }}/static/style.css?v={{ css_version | default('dev', true) }}">
   <link rel="manifest" href="{{ base_url }}/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream — all changes" href="{{ base_url }}/feed.xml">

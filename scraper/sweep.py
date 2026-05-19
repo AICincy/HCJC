@@ -143,6 +143,9 @@ SWEEP_WALLCLOCK_HARD_CAP_S = 22 * 60
 _sweep_looks_healthy = sweep_looks_healthy
 
 
+MIN_SWEEP_INTERVAL_S = 20 * 60  # 20 minutes
+
+
 def run(
     surnames: list[str],
     *,
@@ -152,6 +155,15 @@ def run(
 ) -> int:
     if max_surnames is not None:
         surnames = surnames[:max_surnames]
+
+    if CURRENT_PATH.exists():
+        age_s = time.time() - CURRENT_PATH.stat().st_mtime
+        if age_s < MIN_SWEEP_INTERVAL_S:
+            log.info(
+                "current.json is %.0fs old (< %ds); skipping this cycle",
+                age_s, MIN_SWEEP_INTERVAL_S,
+            )
+            return 0
 
     try:
         previous = load_current_or_raise(CURRENT_PATH)
@@ -228,6 +240,8 @@ def run(
                 if inmate_id not in previous:
                     to_fetch.append(inmate_id)
                 elif refresh_known:
+                    to_fetch.append(inmate_id)
+                elif not previous[inmate_id].photo_filename:
                     to_fetch.append(inmate_id)
 
             log.info("will fetch %d detail pages (refresh_known=%s)", len(to_fetch), refresh_known)
@@ -508,12 +522,18 @@ def _fetch_one(
     except Exception as e:
         log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
         return None, False, False
-    inm, photo_bytes = parse_detail_page(html, inmate_id)
+    inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
     detail_named = bool(inm.last_name or inm.first_name)
-    detail_had_photo = bool(photo_bytes)
+    detail_had_photo = bool(photo_bytes or photo_url)
 
-    # Fall back to the list-row name when the detail page heading isn't
-    # parseable. The list page reliably renders Last/First as separate cells.
+    # If the page provided a direct photo URL, fetch it (more reliable than
+    # base64). Fall back to inline bytes if the URL fetch fails.
+    if photo_url and not photo_bytes:
+        try:
+            photo_bytes = client.get_bytes(photo_url)
+        except Exception as e:
+            log.warning("photo URL fetch failed for id=%s url=%s: %s", inmate_id, photo_url, e)
+
     if list_row is not None:
         if not inm.last_name and list_row.last_name:
             inm.last_name = list_row.last_name
@@ -527,7 +547,6 @@ def _fetch_one(
         if downscale_and_save(photo_bytes, photo_path):
             inm.photo_filename = photo_path.name
     elif photo_path.exists():
-        # We've previously stored a photo for this person; keep it.
         inm.photo_filename = photo_path.name
 
     inm.first_seen_utc = (

@@ -8,9 +8,10 @@ name: sweep
 
 on:
   schedule:
-    # Every 30 minutes. GH Actions cron is best-effort; expect actual cadence
-    # to be 30-45 minutes during peak load.
-    - cron: '*/30 * * * *'
+    # Every 15 minutes. GH Actions cron is best-effort (actual cadence is
+    # 20-45 min). The sweep skips if current.json is < 20 min old, so
+    # back-to-back runs during low-load don't double-scrape.
+    - cron: '*/15 * * * *'
   workflow_dispatch:
     inputs:
       max_surnames:
@@ -77,18 +78,13 @@ jobs:
         run: python -m scraper.shootings --days 30
         continue-on-error: true
 
-      - name: Pull Cincinnati Open Data crime incidents (last 30 days, 24h cache)
-        run: python -m scraper.incidents --days 30
-        continue-on-error: true
-
       - name: Pull PDI Police CFS (last 30 days, 24h cache, arrest/citation dispositions)
         run: python -m scraper.cfs_pdi --hours 720
         continue-on-error: true
 
-      # Seven additional Cincinnati Open Data safety feeds (officer-involved
-      # shootings, use-of-force, traffic stops, pedestrian stops, STARS
-      # crime, CCA complaints). All gated to the same 24h cache as the
-      # primary feeds; FeedSpec list lives in scraper/open_data_feeds.py.
+      # Additional Cincinnati Open Data safety feeds (use-of-force, traffic
+      # stops, pedestrian stops, STARS crime, CCA complaints). All gated to
+      # per-feed cache windows; FeedSpec list lives in scraper/open_data_feeds.py.
       - name: Pull supplemental Cincinnati Open Data safety feeds
         run: python -m scraper.open_data_feeds
         continue-on-error: true
