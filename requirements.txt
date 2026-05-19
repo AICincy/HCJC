@@ -7,6 +7,7 @@ jinja2==3.1.2
 pillow==10.1.0
 selectolax==0.3.17
 requests==2.31.0
+httpx==0.25.2
 
 # Development dependencies (required for testing)
 pytest==7.4.3
