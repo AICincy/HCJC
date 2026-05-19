@@ -8,9 +8,10 @@ name: sweep
 
 on:
   schedule:
-    # Every 30 minutes. GH Actions cron is best-effort; expect actual cadence
-    # to be 30-45 minutes during peak load.
-    - cron: '*/30 * * * *'
+    # Every 15 minutes. GH Actions cron is best-effort (actual cadence is
+    # 20-45 min). The sweep skips if current.json is < 20 min old, so
+    # back-to-back runs during low-load don't double-scrape.
+    - cron: '*/15 * * * *'
   workflow_dispatch:
     inputs:
       max_surnames:

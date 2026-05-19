@@ -143,6 +143,9 @@ SWEEP_WALLCLOCK_HARD_CAP_S = 22 * 60
 _sweep_looks_healthy = sweep_looks_healthy
 
 
+MIN_SWEEP_INTERVAL_S = 20 * 60  # 20 minutes
+
+
 def run(
     surnames: list[str],
     *,
@@ -152,6 +155,15 @@ def run(
 ) -> int:
     if max_surnames is not None:
         surnames = surnames[:max_surnames]
+
+    if CURRENT_PATH.exists():
+        age_s = time.time() - CURRENT_PATH.stat().st_mtime
+        if age_s < MIN_SWEEP_INTERVAL_S:
+            log.info(
+                "current.json is %.0fs old (< %ds); skipping this cycle",
+                age_s, MIN_SWEEP_INTERVAL_S,
+            )
+            return 0
 
     try:
         previous = load_current_or_raise(CURRENT_PATH)
