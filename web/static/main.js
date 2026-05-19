@@ -28,7 +28,7 @@
   var lastFocus = null;
   function openLB(src, caption) {
     lastFocus = document.activeElement;
-    lbImg.src = src;
+    lbImg.src = src; lbImg.alt = caption ? 'Booking photo: ' + caption : 'Booking photo';
     lbImg.alt = 'Booking photo';
     lbCap.textContent = caption || '';
     lb.hidden = false;
