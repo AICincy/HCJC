@@ -651,16 +651,6 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 }
 .card-inmate .id-chip:hover { color: var(--accent); text-decoration: underline; }
 
-/* Category color tokens (chapter palette) */
-.charge-2903, .chap-2903, .cat-2903     { --cat: #c43e2c; }   /* violence / sex */
-.charge-2907, .chap-2907, .cat-2907     { --cat: #c43e2c; }
-.charge-2923, .chap-2923, .cat-2923     { --cat: #d96b46; }   /* weapons */
-.charge-2911, .chap-2911, .cat-2911     { --cat: #d6a85c; }   /* burglary / property */
-.charge-2913, .chap-2913, .cat-2913     { --cat: #6b8f6b; }   /* theft / fraud */
-.charge-2925, .chap-2925, .cat-2925     { --cat: #8a6dbf; }   /* drugs */
-.charge-family, .chap-family, .cat-family { --cat: #b48a6b; } /* family / domestic */
-.charge-traffic, .chap-traffic, .cat-traffic { --cat: #6b7280; } /* traffic / other */
-
 /* ===== Tier chips ===== */
 /* Binary tier (felony/misdemeanor) — kept for legend/search-results parity. */
 .tier {
