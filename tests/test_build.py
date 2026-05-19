@@ -58,6 +58,22 @@ def test_charge_tier_returns_none_when_nothing_decides():
     assert build._charge_tier(Charge(orc_code="NONE", description=""), {}) is None
 
 
+def test_charge_tier_regex_rejects_invalid_degree_letters():
+    # ORC defines F1-F5 and M1-M4 (plus MM). A widened regex like [FM]\d
+    # accepts F6/F9/M5/M0, etc., which are parsing artifacts, not degrees.
+    # With NONE ORC + no venue hint, an invalid suffix must fall through.
+    assert build._charge_tier(Charge(orc_code="NONE", description="MURDER F6"), {}) is None
+    assert build._charge_tier(Charge(orc_code="NONE", description="ROBBERY M5"), {}) is None
+    assert build._charge_tier(Charge(orc_code="NONE", description="ASSAULT F0"), {}) is None
+
+
+def test_charge_tier_regex_anchors_to_end_of_description():
+    # The regex must require the degree as the final non-whitespace token.
+    # Without the \s*$ anchor, a mid-string degree fragment would match.
+    c = Charge(orc_code="NONE", description="F1 PRELIM HEARING NOT SET")
+    assert build._charge_tier(c, {}) is None
+
+
 # ----- _tier_counts / _primary_tier ----------------------------------------
 
 def test_tier_counts_splits_felony_and_misdemeanor():

@@ -19,10 +19,11 @@ log = logging.getLogger(__name__)
 # Reference Data / Constants
 # ============================================================================
 
-# Regex to extract degree suffix (F1, F2, M1, etc.) from charge description.
-# Matches " F1", " F2", " F3", " F4", " F5", " M1", " M2", " M3", " M4", " MM"
-# at the end of the description string (or before closing paren).
-_DEGREE_RE = re.compile(r"\b([FM]\d|MM)\b")
+# Regex to extract degree suffix (F1-F5, M1-M4, MM) from charge description.
+# Matches the degree as the final non-whitespace token. Ohio Revised Code
+# only defines F1-F5 and M1-M4 (plus MM for minor misdemeanor); any other
+# letter+digit pair is a parsing artifact and must not match.
+_DEGREE_RE = re.compile(r"\b(F[1-5]|M[1-4]|MM)\b\s*$")
 
 # Minimum inmates in a month-group before it's rendered as its own section.
 # Smaller groups roll into "Earlier bookings" to avoid a long tail.
