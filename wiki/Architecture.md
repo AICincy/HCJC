@@ -51,12 +51,13 @@ GitHub Actions cron (*/30)         .github/workflows/sweep.yml
 - **`models.py`** — pydantic models (`Inmate`, `Charge` (nested), `ChangeEvent`, `Snapshot`, `ListRow`).
 - **`client.py`** — the HCSO HTTP client (httpx; respects a polite User-Agent; 0 s crawl-delay per robots.txt).
 
-## The site builder (`web/build.py`)
+## The site builder (`web/build.py`, `web/classify.py`, `web/shape.py`)
 
-`build(out_dir)` loads `data/current.json` + `data/changelog.json` + the cfs feeds, attaches
-dispatch candidates, builds a Jinja2 environment with a pile of template globals (offense
-categorisation, tier classification, the card data attributes, the per-card tooltip payload,
-bond/age/court-date helpers, …), then renders:
+`build(out_dir)` (in `web/build.py`) loads `data/current.json` + `data/changelog.json` + the cfs
+feeds, attaches dispatch candidates, builds a Jinja2 environment with a pile of template globals
+imported from `web/classify.py` (offense categorisation, tier classification, regex helpers,
+bond/date parsing) and `web/shape.py` (per-inmate display, the card data attributes, the per-card
+tooltip payload, bond/age/court-date / snapshot-shape helpers), then renders:
 
 - `index.html` — the roster: a legal banner, the headline count + sparkline, recent-activity
   cards, the dispatch map (`dispatches.json`, plotted with Leaflet loaded lazily from a CDN),

@@ -33,7 +33,8 @@ GH Actions cron is best-effort — expect 30–50 min cadence under load. The sw
 
 ## The sweep health guard
 
-`scraper.sweep._sweep_looks_healthy(prev_count, seen_count, n_surnames, n_failed)`: a sweep
+`scraper.sweep_guards.sweep_looks_healthy(prev_count, seen_count, n_surnames, n_failed)`
+(also exported from `scraper.sweep` as a back-compat alias `_sweep_looks_healthy`): a sweep
 is rejected (the last-good `current.json` is kept, the run exits 0) if more than 10 % of the
 26 surname list-fetches errored, or the resulting roster is below half of last cycle. This is
 what keeps the public count stable when HCSO rate-limits a sweep — otherwise a partial roster
@@ -65,8 +66,10 @@ These render their "policy" / "dry-run" form until you configure them:
 Dry-runs (logs only) until SMTP is configured. Repo → Settings → Secrets and variables →
 Actions → **Secrets**: `JCSTREAM_PRA_SMTP_HOST`, `JCSTREAM_PRA_SMTP_PORT`,
 `JCSTREAM_PRA_SMTP_USER`, `JCSTREAM_PRA_SMTP_PASS`, `JCSTREAM_PRA_FROM_EMAIL` (optionally
-`JCSTREAM_PRA_TO_EMAIL`; defaults to `HCAdmin@hamilton-co.org`). With
-`JCSTREAM_PRA_SMTP_HOST` + `JCSTREAM_PRA_FROM_EMAIL` set, it sends for real.
+the per-loop recipient overrides `JCSTREAM_PRA_TO_CAPIAS_EMAIL` for `scraper/pra_capias.py`
+and `JCSTREAM_PRA_TO_PHOTOS_EMAIL` for `scraper/pra.py`; both default to
+`HCAdmin@hamilton-co.org`). With `JCSTREAM_PRA_SMTP_HOST` + `JCSTREAM_PRA_FROM_EMAIL` set,
+it sends for real.
 
 ## Publishing this wiki
 

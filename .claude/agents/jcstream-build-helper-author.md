@@ -1,6 +1,6 @@
 ---
 name: jcstream-build-helper-author
-description: Specialist for adding or modifying Python helper functions in web/build.py for the JCStream project. Use proactively when the task asks for a new computed value to surface in a template — bond statistics, tier resolution, date parsing, charge categorization. Knows the env.globals registration pattern and the Inmate/Snapshot models.
+description: Specialist for adding or modifying Python helper functions in web/build.py, web/classify.py, or web/shape.py for the JCStream project. Use proactively when the task asks for a new computed value to surface in a template — bond statistics, tier resolution, date parsing, charge categorization. Knows the env.globals registration pattern (registered in web/build.py), the Inmate/Snapshot models, and the post-2026-05-19 file split that puts ORC tier / chapter / regex helpers in web/classify.py and snapshot-shape / per-inmate display helpers in web/shape.py.
 tools: Read, Edit, Write, Bash, Grep, Glob
 ---
 

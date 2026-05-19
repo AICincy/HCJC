@@ -73,10 +73,10 @@ Additional improvements not in pass-1 list: `@view-transition` + `prefers-reduce
 - Paired agent (`.claude/agents/jcstream-stylesheet-author.md`) was not updated to mirror the new component list — still references only the six pass-1 items (lines 11-16). Not blocking since the agent delegates to the skill on first turn (line 9), but the agent's own bullet list is slightly stale.
 
 ## Pass-2 lens checks
-- **Drift**: Clean. All line anchors verified against `web/static/style.css` (1701 lines total).
+- **Drift**: Clean as of 2026-05-14. All line anchors verified against `web/static/style.css` (1701 lines total then; 2765 lines now after subsequent design passes).
 - **Coverage**: Clean. Lightbox, photo-stack, dispatch map, comments, stats viz layer, view-toggle, view-transition all now named with anchors.
 - **Triggers**: Clean. Description covers cards, tier colors, hero, lightbox, table view, F3 chip, print, and bare "edit the stylesheet" (SKILL.md:3).
-- **Applicability**: Stylesheet remains the central visual surface (1701 lines, edited every design pass) — skill is correctly load-bearing.
+- **Applicability**: Stylesheet remains the central visual surface (2765 lines, edited every design pass) — skill is correctly load-bearing.
 
 ================================================================================
 ## Subagent 3/10 — pass-2 audit of `jcstream-build-helper-author`
