@@ -109,7 +109,7 @@ From https://developers.cloudflare.com/pages/platform/limits/:
 Current `docs/` tree count and size:
 
 ```
-$ find "C:\Users\krass\Documents\Claude AIO\HCJC\docs" -type f | wc -l
+$ find docs -type f | wc -l
 2321
 $ du -sh docs
 65M
