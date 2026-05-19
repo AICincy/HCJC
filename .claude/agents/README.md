@@ -1,6 +1,6 @@
 # JCStream subagents
 
-Eleven project-specific specialist subagents, each paired with a same-named
+Twelve project-specific specialist subagents, each paired with a same-named
 skill in `../skills/<name>/SKILL.md`. Spawn one via the `Agent` tool with
 `subagent_type: jcstream-<name>` when working in its domain.
 
@@ -17,10 +17,11 @@ skill in `../skills/<name>/SKILL.md`. Spawn one via the `Agent` tool with
 | [jcstream-a11y-auditor](jcstream-a11y-auditor.md) | Read, Bash, Grep, Glob, WebFetch | `jcstream-a11y-auditor` |
 | [jcstream-sweep-debugger](jcstream-sweep-debugger.md) | Read, Bash, Grep, Glob | `jcstream-sweep-debugger` |
 | [jcstream-python-reviewer](jcstream-python-reviewer.md) | Read, Bash, Grep, Glob | `jcstream-python-reviewer` |
+| [jcstream-template-reviewer](jcstream-template-reviewer.md) | Read, Bash, Grep, Glob, WebFetch | `jcstream-template-reviewer` |
 
-Three agents (`a11y-auditor`, `sweep-debugger`, `python-reviewer`) are
-intentionally read-only — their output is a written report, not an edit.
-The rest edit files in their owned area.
+Four agents (`a11y-auditor`, `sweep-debugger`, `python-reviewer`,
+`template-reviewer`) are intentionally read-only — their output is a
+written report, not an edit. The rest edit files in their owned area.
 
 ## Invocation patterns
 
