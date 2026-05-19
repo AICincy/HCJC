@@ -1,0 +1,21 @@
+{# Reusable inmate card. Expects `inm` in scope. #}
+{% set chap = primary_chapter(inm) %}
+{% set tier = primary_tier(inm) %}
+{% set d = card_data(inm) %}
+<article class="card-inmate" aria-labelledby="card-{{ inm.inmate_number }}-name" data-tier="{{ d.tier }}" data-chap="{{ d.chap }}" data-name="{{ d.name }}" data-search="{{ d.search }}">
+  {% if tier %}
+  <button type="button" class="tier tier-{{ tier.kind }} tier-corner" aria-label="{{ tier.label }}, charges detail" aria-describedby="tier-tip" data-tip="{{ card_tip(inm) }}">{{ tier.short }}</button>
+  {% endif %}
+  {% if inm.photo_filename %}
+  <a class="thumb" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/" data-photo="{{ base_url }}/photos/{{ inm.photo_filename }}" data-photo-cap="{{ inm.full_name }} · booked {{ inm.booking_date }}">
+    <img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="" width="48" height="60" loading="lazy" decoding="async">
+  </a>
+  {% else %}
+  <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(inm.full_name) }}"></span>
+  {% endif %}
+  <div class="meta">
+    <p class="name" id="card-{{ inm.inmate_number }}-name"><a class="plain" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/">{{ inm.full_name }}</a></p>
+    <p class="charge {% if chap %}charge-{{ chap.cls }}{% endif %}">{{ (chap.label if chap else primary_charge(inm)) or '—' }}{% if inm.charges | length > 1 %} <span class="ct-count">+{{ inm.charges | length - 1 }}</span>{% endif %}</p>
+    <a class="id-chip" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/">#&thinsp;{{ inm.inmate_number }}{% if inm.booking_date %} &middot; booked {{ inm.booking_date }}{% endif %}</a>
+  </div>
+</article>
