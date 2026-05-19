@@ -259,7 +259,7 @@ def _avatar_initials(name_str: str) -> str:
     """Extract first two letters from a name for display in an avatar badge.
     
     Takes the first letter of the first word and the first letter of the last word.
-    Returns '?' for empty / whitespace-only input.
+    For single-word names, returns first two letters. Returns '?' for empty input.
     """
     if not name_str:
         return "?"
@@ -267,7 +267,9 @@ def _avatar_initials(name_str: str) -> str:
     if not parts:
         return "?"
     if len(parts) == 1:
-        return (parts[0][:2] if len(parts[0]) >= 2 else parts[0][0]) + ("?" if len(parts[0]) < 2 else parts[0][1])
+        # Single word: take first 2 letters
+        return parts[0][:2] if len(parts[0]) >= 2 else parts[0]
+    # Multiple words: first letter of first + first letter of last
     return parts[0][0] + parts[-1][0]
 
 
