@@ -1885,16 +1885,19 @@ a.orc-code:hover { border-bottom-style: solid; }
   color: var(--accent);
   white-space: nowrap;
 }
-.ladder-F1 { background: #fde8e8; color: #6f1818; }
-.ladder-F2 { background: #fce0d8; color: #762a18; }
-.ladder-F3 { background: #fdebd8; color: #7a3c14; }
-.ladder-F4 { background: #fdf2e0; color: #7a4f1a; }
-.ladder-F5 { background: #fdf6e4; color: #7a5d24; }
-.ladder-M1 { background: #eef2dc; color: #3c4a14; }
-.ladder-M2 { background: #f1f4e2; color: #455218; }
-.ladder-M3 { background: #f3f6e6; color: #4f5a1f; }
-.ladder-M4 { background: #f4f6ea; color: #535d28; }
-.ladder-MM { background: #f5f6ee; color: #5a5e34; }
+/* Ladder cells: severity encoded by position (F1 leftmost = most severe)
+   and the .is-current accent ring — not by per-cell hue. */
+.ladder-F1, .ladder-F2, .ladder-F3, .ladder-F4, .ladder-F5,
+.ladder-M1, .ladder-M2, .ladder-M3, .ladder-M4, .ladder-MM {
+  background: var(--bg-soft);
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+}
+/* Felony grades get bolder label weight; misdemeanors stay regular. */
+.ladder-F1 .ladder-tier, .ladder-F2 .ladder-tier, .ladder-F3 .ladder-tier,
+.ladder-F4 .ladder-tier, .ladder-F5 .ladder-tier { font-weight: 700; color: var(--fg); }
+.ladder-M1 .ladder-tier, .ladder-M2 .ladder-tier, .ladder-M3 .ladder-tier,
+.ladder-M4 .ladder-tier, .ladder-MM .ladder-tier { font-weight: 400; color: var(--fg-soft); }
 .tier-meaning {
   font-size: 13px; color: var(--fg-soft);
   margin: 14px 0 0;
