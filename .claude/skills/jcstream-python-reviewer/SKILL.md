@@ -73,7 +73,7 @@ Any new public-ish helper in `web/build.py`, `web/classify.py`, `web/shape.py`, 
 
 ### Logging — never `print`
 
-All `scraper/` modules use `log = logging.getLogger(__name__)`. Flag:
+All `scraper/` modules should use `log = logging.getLogger(__name__)` (most do; `scraper/sweep.py:54` and `scraper/sweep_guards.py:17` are the legacy exceptions, using a hardcoded `"jcstream.sweep"` name — flag any new module that copies that pattern). Flag:
 
 - `print(` calls in production code (tests may use `print` for debugging, but it should be removed before commit)
 - `logging.info` / `logging.warning` / `logging.error` direct module calls (use the per-module logger)
@@ -125,7 +125,7 @@ mypy scraper/ web/
 bandit -r scraper/ web/ -x tests/
 
 # Targeted grep for the high-signal anti-patterns
-grep -rn "shell=True\|verify=False\|except Exception: pass\|print(" scraper/ web/
+grep -rnE "shell\s*=\s*True|verify\s*=\s*False|except\s+Exception\s*:\s*pass|\bprint\(|\bos\.system\(|\beval\(" scraper/ web/ tests/
 ```
 
 If `ruff` / `mypy` / `bandit` are not installed, fall back to manual grep and pytest only. Do not add them to `requirements.txt` without explicit user approval — they're dev tooling, not runtime.
