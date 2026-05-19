@@ -334,14 +334,22 @@ body.detail .page { max-width: 1080px; }
 
 /* Roster-trend (older inline trend block, kept for back-compat) */
 .roster-trend {
-  display: flex; align-items: center; gap: 0.6rem;
-  margin: 0.4rem 0 0;
-  font-size: 13px; color: var(--fg-muted); flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 16px 0 24px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font-size: 13px;
+  color: var(--fg-muted);
 }
 .roster-trend .delta-up   { color: var(--ok);    font-weight: 600; }
 .roster-trend .delta-down { color: var(--warn);  font-weight: 600; }
 .roster-trend .delta-flat { color: var(--fg-muted); }
-.sparkline polyline { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.sparkline polyline { fill: none; stroke: var(--accent); stroke-width: 1.8; }
 .sparkline circle { fill: var(--accent); }
 
 /* ===== Section heads ===== */
@@ -825,8 +833,10 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 
 .tag {
   display: inline-block;
-  padding: 1px 7px;
+  padding: 2px 9px;
   border-radius: var(--radius);
+  border-width: 1px;
+  border-style: solid;
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -2407,7 +2417,6 @@ h2.legal-anchor {
 .rb-meta-sep { color: var(--fg-muted); opacity: 0.5; }
 
 /* --- Tag pills (event types) --- */
-.tag { padding: 2px 9px; font-size: 10px; border-radius: var(--radius); border-width: 1px; border-style: solid; }
 .tag-booked   { background: rgba(196,62,44,.10); color: #8c2a1c; border-color: rgba(196,62,44,.25); }
 
 .cfs {
@@ -2679,20 +2688,6 @@ footer.site .footer-legal strong { color: var(--fg); }
   .statbar-val { text-align: left; }
 }
 
-/* Sparkline tune */
-.sparkline polyline { stroke: var(--accent); stroke-width: 1.8; }
-.roster-trend {
-  margin: 16px 0 24px;
-  padding: 16px 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  font-size: 13px;
-}
 
 /* Statute items */
 .statute-list { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
