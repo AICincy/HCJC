@@ -30,6 +30,8 @@ Ask the user (or infer from context) which scope applies:
 | `branch` | The diff against `main` (`git diff origin/main...HEAD`) |
 | `whole-repo` | The whole repo at HEAD |
 
+> **⚠ Session-startup requirement:** the Claude Code harness registers `Agent` subagent types once at session start by scanning `.claude/agents/*.md`. **Agents added or renamed mid-session will NOT be dispatchable** — the `Agent` tool will reject the call with `"Agent type 'jcstream-...' not found"`. If you've just added a new reviewer (or this orchestrator is firing for the first time after a reviewer-set change), **start a fresh Claude Code session** before dispatching. Verify all five required children are in the available list by checking that `Agent` accepts `subagent_type` values: `jcstream-python-reviewer`, `jcstream-template-reviewer`, `jcstream-css-reviewer`, `jcstream-security-reviewer`. If any are missing, abort and ask the operator to restart the session.
+
 For `pr` and `branch`, optimize: skip the python-reviewer if no `.py` files changed; skip the css-reviewer if `style.css` didn't change; etc. The security-reviewer ALWAYS runs (compliance is cross-cutting and any change can introduce a regression).
 
 ### Step 2 — fan out in parallel
@@ -63,7 +65,11 @@ Agent(subagent_type="jcstream-security-reviewer",
 Each reviewer returns a Markdown report with per-file/per-section finding tables. To merge:
 
 1. **Parse** each report's finding rows (Severity, file:line, Category, Finding, Fix owner).
-2. **Dedupe by `file:line`** — if two reviewers flag the same line, keep the highest-severity entry and merge the Finding text (e.g. "[python] dead code AND [security] this file leaks JCSTREAM_GISCUS_REPO if logged at DEBUG").
+2. **Dedupe by `file:line`** — if two or more reviewers flag the same line:
+   - Keep the **highest-severity** entry's severity rating
+   - Merge **all distinct Finding texts** (e.g. "[python] dead code AND [security] this file leaks JCSTREAM_GISCUS_REPO if logged at DEBUG")
+   - Concatenate **all distinct fix owners** as a comma-separated list (e.g. `jcstream-build-helper-author, jcstream-test-author`) — never drop an owner just because another reviewer already named one. The operator may need to dispatch multiple author skills for a single line.
+   - Concatenate the source-reviewer labels (e.g. `python + security`) so the trace stays auditable.
 3. **Rank** the merged list by severity (Critical → High → Med → Low → Info), then by file path alphabetically.
 4. **Cross-reference** findings that hand off to the same author skill — group them so the operator can fix in one pass.
 
@@ -78,7 +84,7 @@ Use the output template below. Keep the **top of report** dense and scannable: t
 
 **Reviewers run:** python ✓, template ✓, css ✓, security ✓
 **Tests:** `python -m pytest -q` → 193 passed
-**Tools available:** ruff ⨯, mypy ⨯, bandit ⨯, pip-audit ⨯, xmllint ⨯, stylelint ⨯
+**Tools available:** ruff ⨯, mypy ⨯, bandit ⨯, pip-audit ⨯, safety ⨯, xmllint ⨯, stylelint ⨯
 **Verdict:** ⚠ 1 High, 3 Med, 5 Low — see Top 3 actionable below.
 
 ## Top 3 actionable
@@ -136,7 +142,7 @@ After all hand-offs land:
 3. **Skipping security-reviewer because the diff "looks safe"** — security-reviewer ALWAYS runs. Compliance invariants don't care about the diff size.
 4. **Burying the verdict** — the top-of-report Verdict line is the single most important sentence. Lead with it.
 5. **Merging Critical findings without flagging the PR as blocked** — Critical = do not merge until fixed. Say so explicitly.
-6. **Forgetting tool-availability footnotes** — if `pip-audit` / `mypy` / `ruff` / `xmllint` / `stylelint` aren't installed in the environment, the reviewers fall back to manual grep; the consolidated report must note that gap so the operator knows the coverage is partial.
+6. **Forgetting tool-availability footnotes** — if `ruff` / `mypy` / `bandit` / `pip-audit` / `safety` / `xmllint` / `stylelint` aren't installed in the environment, the reviewers fall back to manual grep; the consolidated report must note that gap so the operator knows the coverage is partial. The Tools available line in the report header must enumerate all seven so a reader can see at a glance which were skipped.
 
 ## Tools to run
 
