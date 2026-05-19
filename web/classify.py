@@ -218,9 +218,9 @@ def _short_month_label(month_str: str) -> str:
 def _approx_age(dob_str: str | None) -> int | None:
     """Estimate age from date-of-birth string (MM/DD/YY or MM/DD/YYYY format).
     
-    Handles two-digit years using a ~25-year cutoff: if the year would make
-    the person ~60+ years old, prepend 19; otherwise prepend 20. Returns None
-    if the string is unparseable or represents an invalid date.
+    Handles two-digit years using the project's fixed pivot rule (70+ -> 19XX, <70 -> 20XX)
+    via _parse_book_date. Returns None if the string is unparseable or represents
+    an invalid date.
     """
     if not dob_str:
         return None
