@@ -29,13 +29,14 @@
   function openLB(src, caption) {
     lastFocus = document.activeElement;
     // src comes from a tainted [data-photo] DOM attribute. Extract just the
-    // basename via a restricted regex ([\w.\-]+\.jpg) and rebuild the URL
-    // from constants — this is a CodeQL-recognized sanitizer for
-    // js/xss-through-dom because the value flowing into lbImg.src is a
-    // constructed string, not the tainted source.
+    // basename via a restricted regex ([\w.\-]+\.jpg), then assign a URL
+    // built from constants + that capture, passed through encodeURI — the
+    // canonical CodeQL js/xss-through-dom sanitizer. encodeURI is a no-op
+    // for safe inputs (the regex already restricted the char class) and
+    // explicitly signals "this is a URL, not HTML" to the static analyzer.
     var m = typeof src === 'string' && src.match(/([\w.\-]+\.jpg)$/i);
     if (!m) return;
-    lbImg.src = ROOT + '/photos/' + m[1];
+    lbImg.src = encodeURI(ROOT + '/photos/' + m[1]);
     lbImg.alt = 'Booking photo';
     lbCap.textContent = caption || '';
     lb.hidden = false;
