@@ -178,10 +178,11 @@ def run(
                     "— NOT writing the roster this cycle; keeping last-good data",
                     len(previous), len(seen_ids), n_failed, len(surnames),
                 )
-                # Emit a Sentry alert distinguishing the two failure modes the
-                # guard checks (scraper/sweep_guards.sweep_looks_healthy for
-                # the thresholds). Both are already logged via `log.warning`
-                # in sweep_guards; no further telemetry needed.
+                # The list-sweep guard thresholds (>10% surname errors or
+                # roster collapsed below 50% of prior) are checked in
+                # scraper/sweep_guards.sweep_looks_healthy. The combined
+                # failure is logged above via log.error; no further
+                # telemetry needed.
                 return 0
 
             # Decide which detail pages to fetch.
