@@ -71,8 +71,6 @@ _CHAPTER_LABEL = {
     "2919": "Family / Domestic",
     # Obstruction
     "2921": "Obstruction",
-    # Attempt / conspiracy
-    "2923": "Weapons",
     # Traffic / DUI
     "4511": "Traffic / DUI",
     "4510": "Traffic / DUI",
