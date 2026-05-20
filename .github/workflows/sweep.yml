@@ -51,6 +51,13 @@ jobs:
         # JCSTREAM_USER_AGENT is intentionally not overridden here: the module
         # default (scraper.client.DEFAULT_UA) carries the contact URL plus the
         # parallelism-limited descriptor. Two sources of truth invite drift.
+        #
+        # JCSTREAM_HTTP_PROXY (optional secret): when HCSO's WAF blocks the
+        # Actions runner IP, set this repo secret to an egress proxy URL and
+        # the HCSO fetches route through it. Unset = direct connection (the
+        # secret resolves to "" which scraper.client treats as no proxy).
+        env:
+          JCSTREAM_HTTP_PROXY: ${{ secrets.JCSTREAM_HTTP_PROXY }}
         run: |
           python -m scraper.sweep \
             ${{ inputs.max_surnames && format('--max-surnames {0}', inputs.max_surnames) || '' }} \

@@ -59,6 +59,11 @@ class HcsoClient:
     crawl_delay: float = DEFAULT_CRAWL_DELAY
     timeout: float = 30.0
     concurrency: int = DEFAULT_CONCURRENCY
+    # Optional egress proxy (HTTP/HTTPS/SOCKS URL). When HCSO's WAF blocks the
+    # GitHub Actions runner IP, the operator sets JCSTREAM_HTTP_PROXY to route
+    # the HCSO fetches through a different egress. None = direct connection.
+    # Scoped to HCSO only; the Socrata open-data feeds use their own client.
+    proxy: str | None = None
     _last_request_at: float = field(default=0.0, init=False)
     _client: httpx.Client | None = field(default=None, init=False)
     _lock: threading.Lock = field(default_factory=threading.Lock, init=False)
@@ -88,7 +93,12 @@ class HcsoClient:
         # control here, and disabling it keeps the cron from breaking on
         # transient skew. Set on transport AND client so retries inside the
         # transport pool inherit the setting.
-        transport = httpx.HTTPTransport(retries=1, verify=False)
+        # Route through the egress proxy when configured (credentials, if any,
+        # stay in the env var and are never logged). The proxy is set on the
+        # transport so the client's retry pool inherits it.
+        if self.proxy:
+            log.info("HcsoClient routing HCSO fetches through a configured egress proxy")
+        transport = httpx.HTTPTransport(retries=1, verify=False, proxy=self.proxy)
         self._client = httpx.Client(
             base_url=self.base_url,
             timeout=self.timeout,
@@ -193,4 +203,5 @@ def make_client() -> HcsoClient:
         base_url=os.environ.get("JCSTREAM_BASE_URL", DEFAULT_BASE),
         user_agent=os.environ.get("JCSTREAM_USER_AGENT", DEFAULT_UA),
         crawl_delay=float(os.environ.get("JCSTREAM_CRAWL_DELAY", DEFAULT_CRAWL_DELAY)),
+        proxy=os.environ.get("JCSTREAM_HTTP_PROXY") or None,
     )
