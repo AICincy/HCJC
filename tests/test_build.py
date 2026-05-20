@@ -465,3 +465,26 @@ def test_iso_booking_date_returns_none_for_empty():
 def test_iso_booking_date_returns_none_for_garbage():
     assert build._iso_booking_date(_inm(booking_date="not a date")) is None
     assert build._iso_booking_date(_inm(booking_date="2026-05-12")) is None  # ISO input is rejected; only HCSO MM/DD forms
+
+
+# ----- _display_date (regression: was returning "" for string input) --------
+
+def test_display_date_parses_hcso_short_year_string():
+    # Regression: inmate.booking_date is a STRING ("5/19/26"); _display_date
+    # used to require a datetime and silently returned "" for strings, so the
+    # "Booked" field rendered empty on every inmate page.
+    assert build._display_date("5/19/26") == "May 19, 2026"
+    assert build._display_date("11/3/2025") == "Nov 03, 2025"
+
+
+def test_display_date_accepts_datetime_too():
+    from datetime import datetime
+    assert build._display_date(datetime(2026, 5, 19)) == "May 19, 2026"
+
+
+def test_display_date_suppresses_sentinel_and_empty():
+    # Sentinel epoch-era dates (>15 years) and empty/garbage all -> "".
+    assert build._display_date("1/1/70") == ""
+    assert build._display_date("") == ""
+    assert build._display_date(None) == ""
+    assert build._display_date("not a date") == ""

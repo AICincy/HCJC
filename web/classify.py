@@ -186,13 +186,29 @@ def _parse_bond_amount(bond_str: str | None) -> int | None:
         return None
 
 
-def _display_date(date: datetime | None) -> str:
-    """Format datetime for display (e.g., 'May 14, 2026')."""
+def _display_date(date) -> str:
+    """Format a date for display (e.g., 'May 14, 2026').
+
+    Accepts either a ``datetime`` or an HCSO ``MM/DD/YY`` / ``MM/DD/YYYY``
+    string. Templates pass ``inmate.booking_date``, which is a string, so
+    the string path is the common case; passing a datetime still works.
+
+    Returns "" for empty, unparseable, or sentinel dates more than 15 years
+    old (e.g. epoch-era "1/1/70"), matching the sentinel handling in
+    shape._days_in_custody so the formatted date and the "N days ago"
+    relative label stay consistent.
+    """
     if not date:
         return ""
+    if isinstance(date, str):
+        date = _parse_book_date(date)
+        if date is None:
+            return ""
     try:
+        if abs((datetime.now() - date).days) > 5475:  # 15 * 365, sentinel guard
+            return ""
         return date.strftime("%b %d, %Y")
-    except (ValueError, AttributeError):
+    except (ValueError, AttributeError, TypeError):
         return ""
 
 

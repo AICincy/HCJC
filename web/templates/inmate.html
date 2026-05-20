@@ -71,11 +71,11 @@
     <dl class="bio">
       <dt>Inmate&nbsp;#</dt><dd><code>{{ inmate.inmate_number }}</code></dd>
       <dt>Booking&nbsp;#</dt><dd><code>{{ inmate.booking_number or '—' }}</code>{% if seq %} <span class="muted">{{ seq }}</span>{% endif %}</dd>
-      <dt>Booked</dt><dd>{{ display_date(inmate.booking_date) }}{% if days is not none %} <span class="muted">{{ days }} day{{ '' if days == 1 else 's' }} ago</span>{% endif %}</dd>
+      <dt>Booked</dt><dd>{{ display_date(inmate.booking_date) or '—' }}{% if days is not none %} <span class="muted">{{ days }} day{{ '' if days == 1 else 's' }} ago</span>{% endif %}</dd>
       <dt>Projected&nbsp;release</dt><dd>{{ inmate.projected_release_date or '—' }}</dd>
       <dt>Next&nbsp;court&nbsp;date</dt><dd>{{ nextc or '—' }}</dd>
       <dt>Charges</dt><dd>{{ inmate.charges | length }}{% if status %} <span class="muted">{{ status }}</span>{% endif %}</dd>
-      <dt>Total&nbsp;bond</dt><dd>{{ bonds.total }}{% if bonds.felony != '$0' and bonds.misdemeanor != '$0' %} <span class="muted">felony {{ bonds.felony }} &middot; misd. {{ bonds.misdemeanor }}</span>{% endif %}</dd>
+      <dt>Total&nbsp;bond</dt><dd>{% if inmate.charges %}{{ bonds.total }}{% if bonds.felony != '$0' and bonds.misdemeanor != '$0' %} <span class="muted">felony {{ bonds.felony }} &middot; misd. {{ bonds.misdemeanor }}</span>{% endif %}{% else %}—{% endif %}</dd>
       <dt>Case&nbsp;#s</dt><dd>{% if cases %}{% for cn in cases %}<a href="{{ cck_case_summary(cn) }}" target="_blank" rel="noopener">{{ cn }}</a>{{ ', ' if not loop.last }}{% endfor %}{% else %}—{% endif %}</dd>
       <dt>Date&nbsp;of&nbsp;birth</dt><dd>{{ inmate.date_of_birth or '—' }}{% if age %} <span class="muted">age ~{{ age }}</span>{% endif %}</dd>
       <dt>Sex &middot; race</dt><dd>{{ expand_sex(inmate.sex) }} &middot; {{ expand_race(inmate.race) }}</dd>
