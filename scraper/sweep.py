@@ -124,6 +124,28 @@ def _waf_backoff_seconds(streak: int) -> float:
     return min(_WAF_BACKOFF_BASE_S * (2 ** (streak - 1)), _WAF_BACKOFF_CAP_S)
 
 
+# Valid HCSO inmate-detail pages are 91-230 KB (2026-05-19 verification). The
+# WAF returns truncated/blocked responses well under 5 KB to automated callers,
+# and parse_detail_page silently yields an empty Inmate from them.
+_WAF_BLOCK_MAX_BYTES = 5000
+
+
+def _looks_like_waf_block(html: str, inm: Inmate, photo_bytes: bytes | None,
+                          photo_url: str | None) -> bool:
+    """True when a detail response has the shape of a WAF block: a tiny body
+    that parsed to no name, no charges, and no photo. Pure predicate, extracted
+    from _fetch_one so the heuristic that drives the retry/backoff and the
+    carry-forward is unit-testable in isolation."""
+    return (
+        len(html) < _WAF_BLOCK_MAX_BYTES
+        and not inm.last_name
+        and not inm.first_name
+        and not inm.charges
+        and not photo_bytes
+        and not photo_url
+    )
+
+
 def _reset_waf_block_streak_for_tests() -> None:
     """Test-only: reset module state between cases. Not used at runtime."""
     global _waf_block_streak
@@ -462,14 +484,7 @@ def _fetch_one(
             log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
             return None, False, False
         inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
-        looks_like_waf_block = (
-            len(html) < 5000
-            and not inm.last_name
-            and not inm.first_name
-            and not inm.charges
-            and not photo_bytes
-            and not photo_url
-        )
+        looks_like_waf_block = _looks_like_waf_block(html, inm, photo_bytes, photo_url)
         if not looks_like_waf_block:
             _on_waf_block_cleared()
             break
