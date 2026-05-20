@@ -542,8 +542,8 @@ def test_run_empty_page_block_records_200_sample(tmp_path, monkeypatch):
     monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)  # bypass the skip-gate
 
     class _EmptyPageClient:
-        def __enter__(self):
-            return self
+    assert n_failed == 2          # detected as WAF blocks
+    assert status_counts == {"200": 2}    # tracked in the status histogram
 
         def __exit__(self, *a):
             return False
