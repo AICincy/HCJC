@@ -491,3 +491,19 @@ def test_forensic_sample_captures_status_hash_headers():
     assert s["body_sample"] == body.decode()
     assert s["headers"]["server"] == "cloudflare"
     assert s["headers"]["cf-ray"] == "abc123"
+
+
+def test_forensic_sample_captures_request_side():
+    import httpx
+
+    req = httpx.Request(
+        "GET",
+        "https://www.hcso.org/justice-center-services/inmate-search/?last=A",
+        headers={"user-agent": "JCStream/0.1"},
+    )
+    resp = httpx.Response(403, request=req, content=b"<html>Access denied</html>")
+    s = sweep._forensic_sample(resp)
+    assert s["request"]["method"] == "GET"
+    assert "last=A" in s["request"]["url"]
+    assert s["request"]["headers"]["user-agent"] == "JCStream/0.1"
+    assert isinstance(s["captured_utc"], str)
