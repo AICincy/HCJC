@@ -40,12 +40,10 @@ from .store import (
     save_current,
 )
 from .sweep_guards import (
-    ROSTER_STALE_ALARM_HOURS,
     SWEEP_BOOTSTRAP_FLOOR,
     SWEEP_MIN_ROSTER_FRACTION,
     check_detail_watchdog,
     prune_photos,
-    roster_stale_hours,
     sweep_looks_healthy,
 )
 
@@ -87,20 +85,6 @@ def _prev_generated_utc(path: Path) -> str | None:
     # malformed non-str generated_utc degrades to None rather than crashing
     # the freeze-alarm path.
     return gen if isinstance(gen, str) else None
-
-
-def _warn_if_roster_frozen(path: Path) -> None:
-    """Escalate to a loud, greppable alarm when the degraded-roster guard has
-    been keeping last-good data longer than ROSTER_STALE_ALARM_HOURS, so a
-    multi-hour silent freeze (e.g. a sustained HCSO WAF block) surfaces. The
-    workflow still exits 0 so the open-data feeds keep committing."""
-    stale_h = roster_stale_hours(_prev_generated_utc(path))
-    if stale_h is not None and stale_h >= ROSTER_STALE_ALARM_HOURS:
-        log.error(
-            "ROSTER FROZEN: last-good roster is %.1fh old (>= %.1fh alarm) and the "
-            "guard has refused to write again; investigate HCSO WAF / Actions egress",
-            stale_h, ROSTER_STALE_ALARM_HOURS,
-        )
 
 
 # Back-compat alias: prefer scraper.sweep_guards.sweep_looks_healthy in new code.
@@ -207,9 +191,10 @@ def run(
                 )
                 # The list-sweep guard thresholds (>10% surname errors or
                 # roster collapsed below 50% of prior) are checked in
-                # scraper/sweep_guards.sweep_looks_healthy. If the guard has
-                # been keeping last-good data for hours, escalate the freeze.
-                _warn_if_roster_frozen(CURRENT_PATH)
+                # scraper/sweep_guards.sweep_looks_healthy. A prolonged freeze
+                # is surfaced by the "Roster freeze alarm" step in sweep.yml
+                # (roster_stale_hours), which runs every cycle regardless of
+                # which guard path fired.
                 return 0
 
             # Decide which detail pages to fetch.
@@ -522,12 +507,12 @@ def _fetch_one(
         # minimal Inmate. Better a name than nothing for a newly-booked
         # record.
         break
-    if inm is None:
-        # Unreachable: range(2) always runs iteration 0, which either returns
-        # at the fetch-exception guard or assigns inm from parse_detail_page
-        # (which always yields an Inmate). The guard narrows Inmate | None for
-        # the type checker and documents the invariant.
-        return None, False, False
+    # range(2) always runs iteration 0, which either returns at the
+    # fetch-exception guard or assigns inm from parse_detail_page (which always
+    # yields an Inmate), so inm is never None here. The assert narrows
+    # Inmate | None for the type checker and documents the invariant without
+    # adding a runtime branch.
+    assert inm is not None
     detail_named = bool(inm.last_name or inm.first_name)
     detail_had_photo = bool(photo_bytes or photo_url)
 
