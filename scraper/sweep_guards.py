@@ -12,9 +12,37 @@ against HCSO's real behavior. Do not change them lightly.
 from __future__ import annotations
 
 import logging
+from datetime import datetime, timezone
 from pathlib import Path
 
 log = logging.getLogger("jcstream.sweep")
+
+# ===== Roster-freeze alarm =====
+# When the list-sweep guard refuses to write (keeping last-good data), the
+# roster stops advancing but the workflow still exits 0. If that persists, the
+# site silently shows stale data. Past this many hours since the last-good
+# snapshot's generated_utc, the degraded-sweep log is escalated to a loud,
+# greppable alarm so a multi-hour freeze surfaces instead of hiding.
+ROSTER_STALE_ALARM_HOURS = 6.0
+
+
+def roster_stale_hours(generated_utc: str | None) -> float | None:
+    """Hours since a roster snapshot's ``generated_utc``, or None when the
+    value is missing or unparseable. Lets the sweep escalate the
+    degraded-roster log once the guard has been holding last-good data for an
+    extended stretch (see ``ROSTER_STALE_ALARM_HOURS``)."""
+    if not generated_utc:
+        return None
+    ts = generated_utc.strip()
+    if ts.endswith("Z"):
+        ts = ts[:-1] + "+00:00"
+    try:
+        last = datetime.fromisoformat(ts)
+    except ValueError:
+        return None
+    if last.tzinfo is None:
+        last = last.replace(tzinfo=timezone.utc)
+    return (datetime.now(timezone.utc) - last).total_seconds() / 3600
 
 # ===== List-sweep degradation guards =====
 # Reject the cycle (keep last-good roster) when too many surname fetches

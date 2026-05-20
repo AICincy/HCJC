@@ -40,10 +40,12 @@ from .store import (
     save_current,
 )
 from .sweep_guards import (
+    ROSTER_STALE_ALARM_HOURS,
     SWEEP_BOOTSTRAP_FLOOR,
     SWEEP_MIN_ROSTER_FRACTION,
     check_detail_watchdog,
     prune_photos,
+    roster_stale_hours,
     sweep_looks_healthy,
 )
 
@@ -68,6 +70,18 @@ ANON_CHANGELOG_PATH = Path("data/anon_changelog.json")
 # cap a slow-but-not-failing HCSO front-end could let the runner kill the
 # job mid-checkpoint at 50 minutes rather than producing a clean partial.
 SWEEP_WALLCLOCK_HARD_CAP_S = 22 * 60
+
+
+def _prev_generated_utc(path: Path) -> str | None:
+    """The ``generated_utc`` of the last-good roster file, or None if the file
+    is missing/malformed. Used by the freeze alarm to measure how long the
+    degraded-roster guard has been holding stale data."""
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("generated_utc")
+    except (json.JSONDecodeError, OSError, AttributeError):
+        return None
 
 
 # Back-compat alias: prefer scraper.sweep_guards.sweep_looks_healthy in new code.
@@ -174,9 +188,19 @@ def run(
                 )
                 # The list-sweep guard thresholds (>10% surname errors or
                 # roster collapsed below 50% of prior) are checked in
-                # scraper/sweep_guards.sweep_looks_healthy. The combined
-                # failure is logged above via log.error; no further
-                # telemetry needed.
+                # scraper/sweep_guards.sweep_looks_healthy.
+                # Freeze alarm: if the guard has been keeping last-good data
+                # for hours, the roster is silently frozen. Escalate to a
+                # loud, greppable line with the duration so a multi-hour
+                # freeze surfaces (the workflow still exits 0 so the open-data
+                # feeds keep committing).
+                stale_h = roster_stale_hours(_prev_generated_utc(CURRENT_PATH))
+                if stale_h is not None and stale_h >= ROSTER_STALE_ALARM_HOURS:
+                    log.error(
+                        "ROSTER FROZEN: last-good roster is %.1fh old (>= %.1fh alarm) and the "
+                        "guard has refused to write again; investigate HCSO WAF / Actions egress",
+                        stale_h, ROSTER_STALE_ALARM_HOURS,
+                    )
                 return 0
 
             # Decide which detail pages to fetch.
