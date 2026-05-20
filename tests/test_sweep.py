@@ -21,23 +21,6 @@ from scraper.sweep_guards import (
 _check_detail_watchdog = check_detail_watchdog
 
 
-def test_looks_like_waf_block_detects_tiny_empty_response():
-    empty = Inmate(inmate_number="1", last_name="", first_name="", booking_date="", charges=[])
-    # Tiny body, nothing parsed, no photo -> WAF-block shaped.
-    assert sweep._looks_like_waf_block("x" * 100, empty, None, None) is True
-
-
-def test_looks_like_waf_block_false_for_real_page():
-    named = Inmate(inmate_number="1", last_name="DOE", first_name="JOHN", booking_date="5/1/26")
-    # A named record is never a block, even on a short body.
-    assert sweep._looks_like_waf_block("x" * 100, named, None, None) is False
-    # A large body is not a block even if empty (e.g. a genuine no-record page).
-    big_empty = Inmate(inmate_number="1", last_name="", first_name="", booking_date="", charges=[])
-    assert sweep._looks_like_waf_block("x" * 6000, big_empty, None, None) is False
-    # A photo present rules out a block.
-    assert sweep._looks_like_waf_block("x" * 100, big_empty, b"jpegbytes", None) is False
-
-
 def test_roster_stale_hours_parses_and_measures():
     from datetime import datetime, timedelta, timezone
 

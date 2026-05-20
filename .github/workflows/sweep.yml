@@ -22,9 +22,6 @@ permissions:
   contents: write
   pages: write
   id-token: write
-  # Lets the roster-freeze alarm open a GitHub issue when the roster has been
-  # frozen past the alarm window (scraper.freeze_alert).
-  issues: write
 
 concurrency:
   # Never run two sweeps simultaneously; cancel-in-progress: false means a
@@ -54,30 +51,34 @@ jobs:
         # JCSTREAM_USER_AGENT is intentionally not overridden here: the module
         # default (scraper.client.DEFAULT_UA) carries the contact URL plus the
         # parallelism-limited descriptor. Two sources of truth invite drift.
-        #
-        # JCSTREAM_HTTP_PROXY (optional secret): when HCSO's WAF blocks the
-        # Actions runner IP, set this repo secret to an egress proxy URL and
-        # the HCSO fetches route through it. Unset = direct connection (the
-        # secret resolves to "" which scraper.client treats as no proxy).
-        env:
-          JCSTREAM_HTTP_PROXY: ${{ secrets.JCSTREAM_HTTP_PROXY }}
         run: |
           python -m scraper.sweep \
             ${{ inputs.max_surnames && format('--max-surnames {0}', inputs.max_surnames) || '' }} \
             ${{ inputs.refresh_known && '--refresh-known' || '' }}
 
-      # Surface a prolonged roster freeze: emit a GitHub Actions ::error::
-      # annotation and open a (deduped) GitHub issue so it actively notifies.
-      # The degraded-roster guard correctly keeps last-good data and exits 0
-      # when HCSO's WAF blocks the runner, but a multi-hour freeze otherwise
-      # hides in the logs. This step never fails the job (the open-data feeds
-      # below must still commit); scraper.freeze_alert only acts when the
+      # Surface a prolonged roster freeze as a GitHub Actions annotation. The
+      # degraded-roster guard correctly keeps last-good data and exits 0 when
+      # HCSO's WAF blocks the runner, but a multi-hour freeze otherwise hides
+      # in the logs. This step never fails the job (the open-data feeds below
+      # must still commit); it only emits a ::error:: annotation when the
       # last-good roster is older than ROSTER_STALE_ALARM_HOURS.
       - name: Roster freeze alarm
         if: always()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python -m scraper.freeze_alert
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from scraper.sweep import _prev_generated_utc
+          from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
+          h = roster_stale_hours(_prev_generated_utc(Path("data/current.json")))
+          if h is not None and h >= ROSTER_STALE_ALARM_HOURS:
+              print(
+                  f"::error title=Roster frozen::current.json is {h:.1f}h old "
+                  f"(>= {ROSTER_STALE_ALARM_HOURS}h). HCSO WAF likely blocking the "
+                  f"runner IP; grep the sweep log for 'list sweep looks degraded'."
+              )
+          else:
+              print(f"roster freshness OK ({'unknown' if h is None else f'{h:.1f}h'})")
+          PY
 
       # All four open-data feeds: 30-day window, each module skips its API
       # pull if the existing JSON is < 24h old. Sweep cron is every 30 min;

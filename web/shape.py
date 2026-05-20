@@ -239,7 +239,7 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
         return max(0.0, min(100.0, v))
     raw: list[dict] = []
     raw.append({"x": _pct(booked), "label": "Booked", "date": inmate.booking_date or "", "kind": "booked", "sub": ""})
-    for d, desc, _code in courts:
+    for d, desc, code in courts:
         raw.append({
             "x": _pct(d),
             "label": "Court",
@@ -254,8 +254,6 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
     last_x = -1e9
     side = "below"
     for m in raw:
-        # Markers closer than 12% alternate above/below to avoid label overlap;
-        # a well-separated marker resets to below.
         if m["x"] - last_x < 12.0:
             side = "above" if side == "below" else "below"
         else:

@@ -115,24 +115,18 @@ run and keeping last-good data. This is the guard working, not a bug.
 1. Confirm: `git log -15 --format="%cI %s" origin/main -- data/current.json` —
    if `current.json` hasn't changed in hours but `sweep` commits keep landing,
    it's frozen.
-   You'll usually hear about it first from the auto-opened GitHub issue
-   ("Roster frozen: HCSO sweep is not updating current.json", from
-   `scraper.freeze_alert`) once the freeze passes `ROSTER_STALE_ALARM_HOURS`.
 2. Diagnose from the Actions sweep log (grep, in order):
-   - `ROSTER FROZEN` / the `::error::` "Roster frozen" annotation — the freeze
-     alarm (`roster_stale_hours` >= `ROSTER_STALE_ALARM_HOURS`, 6h), emitted by
-     the "Roster freeze alarm" step (`scraper.freeze_alert`) in `sweep.yml`.
+   - `ROSTER FROZEN` — the freeze alarm (`roster_stale_hours` >=
+     `ROSTER_STALE_ALARM_HOURS`, 6h); also emitted as a `::error::` annotation
+     by the "Roster freeze alarm" step in `sweep.yml`.
    - `list sweep looks degraded (prev=… seen=… N/M surname fetches failed)` —
      the guard fire. `N/M > 2/26` ⇒ WAF raising on fetches; `seen < 50% of prev`
      ⇒ WAF serving empty-but-parseable pages.
    - `WAF-block-shaped response for id=…` / `429 …` ⇒ WAF active.
 3. Cause is almost always HCSO's WAF blocking the GitHub Actions egress IP.
-   Code can't fix that. Options, in order:
-   - Set the `JCSTREAM_HTTP_PROXY` repo secret to an egress proxy URL
-     (HTTP/HTTPS/SOCKS); the HCSO fetches route through it on the next sweep.
-     Unset = direct. Scoped to HCSO; the Socrata feeds are unaffected.
-   - Wait for the block to rotate (cloud WAFs commonly 24-72h), or run from a
-     self-hosted runner, or contact HCSO for allowlisting.
+   Code can't fix that. Options: wait for the block to rotate (cloud WAFs
+   commonly 24-72h); run from a different egress (self-hosted runner / proxy);
+   or contact HCSO for allowlisting.
 4. NEVER lower `SWEEP_MAX_FAILED_FRACTION` (0.10) or `SWEEP_MIN_ROSTER_FRACTION`
    (0.5) to force the sweep through — that publishes a partial roster as if
    complete, which is worse than stale data. Tuning `crawl_delay` / `concurrency`
