@@ -252,6 +252,27 @@ def _find_charges_table(tree: HTMLParser):
     return None
 
 
+def _log_skipped_charge_rows(skipped: int, n_charges: int) -> None:
+    """Report charge rows that carried labeled cells but neither Description
+    nor ORC Code. A total drop (skipped rows, zero charges) is a label-drift
+    warning; a partial skip alongside real charges is usually benign
+    (non-charge labeled rows), so it logs at debug for label-drift diagnosis."""
+    if not skipped:
+        return
+    if not n_charges:
+        log.warning(
+            "charge table parser found %d labeled rows but extracted 0 charges "
+            "(Description/ORC Code labels may have drifted)",
+            skipped,
+        )
+    else:
+        log.debug(
+            "charge table parser skipped %d labeled rows that lacked both "
+            "Description and ORC Code (extracted %d charges)",
+            skipped, n_charges,
+        )
+
+
 def _parse_charges(tree: HTMLParser) -> list[Charge]:
     """Extract rows from the charges table.
 
@@ -293,21 +314,7 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
                 comments=cells.get("Comments", "").strip(),
             )
         )
-    if skipped_with_cells and not charges:
-        log.warning(
-            "charge table parser found %d labeled rows but extracted 0 charges "
-            "(Description/ORC Code labels may have drifted)",
-            skipped_with_cells,
-        )
-    elif skipped_with_cells:
-        # Partial skip: some charges parsed, some labeled rows had neither
-        # Description nor ORC Code. Usually benign (non-charge labeled rows),
-        # so debug rather than warn; visible when diagnosing label drift.
-        log.debug(
-            "charge table parser skipped %d labeled rows that lacked both "
-            "Description and ORC Code (extracted %d charges)",
-            skipped_with_cells, len(charges),
-        )
+    _log_skipped_charge_rows(skipped_with_cells, len(charges))
     # Per-process drift signal: when a detail page yielded charges but a
     # high-value column was absent from every row, warn once. Catches the
     # case where one column rename (e.g. "Bond Amount" to "Bond ($)") would
