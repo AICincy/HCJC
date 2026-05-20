@@ -2162,7 +2162,6 @@ h2.legal-anchor {
 }
 .rb-photo.is-placeholder {
   display: grid;
-  align-items: center;
   justify-content: center;
   color: var(--fg-muted);
   font-family: var(--font-mono);
@@ -2366,7 +2365,6 @@ h2.legal-anchor {
   align-items: center;
   gap: 10px;
   padding: 14px 16px;
-  margin-bottom: 14px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -2439,7 +2437,6 @@ h2.legal-anchor {
 /* --- Footer in ink for visual close --- */
 footer.site {
   margin-top: 4rem;
-  padding-top: 1rem;
   border-top: 1px solid var(--border);
   font-size: 12px;
   color: var(--fg-muted);
