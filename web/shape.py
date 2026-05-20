@@ -14,7 +14,6 @@ from datetime import datetime, timedelta, timezone
 
 from scraper import orc as orc_mod
 from scraper.models import ChangeEvent, Inmate, Snapshot
-
 from web.classify import (
     _CLS_RANK,
     _DEGREE_RE,

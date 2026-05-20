@@ -10,9 +10,10 @@ from scraper.sweep_guards import (
     ROSTER_STALE_ALARM_HOURS,
     check_detail_watchdog,
     roster_stale_hours,
+)
+from scraper.sweep_guards import (
     sweep_looks_healthy as _sweep_looks_healthy,
 )
-
 
 # Old underscore alias is kept by sweep.py for back-compat; new code uses the
 # public names from sweep_guards. The local rebinding keeps the existing test

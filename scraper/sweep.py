@@ -35,8 +35,8 @@ from .store import (
     diff,
     load_changelog,
     load_current_or_raise,
-    save_changelog,
     save_anon_changelog,
+    save_changelog,
     save_current,
 )
 from .sweep_guards import (

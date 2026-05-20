@@ -11,10 +11,10 @@ or CAPTCHAs.
 
 from __future__ import annotations
 
+import logging
 import os
 import threading
 import time
-import logging
 from dataclasses import dataclass, field
 from urllib.parse import urlparse
 
@@ -176,8 +176,8 @@ def _retry_after_seconds(header_value: str | None) -> float:
     except ValueError:
         pass
     try:
-        from email.utils import parsedate_to_datetime
         from datetime import datetime, timezone
+        from email.utils import parsedate_to_datetime
         target = parsedate_to_datetime(header_value)
         if target.tzinfo is None:
             target = target.replace(tzinfo=timezone.utc)
