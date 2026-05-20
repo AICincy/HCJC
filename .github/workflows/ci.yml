@@ -24,6 +24,11 @@ jobs:
       - name: Type check (mypy)
         run: mypy scraper web
       - run: python -m pytest -v
+      - name: Verify WAF-block evidence chain
+        # Walk the prev_sha256 hash chain in data/waf_block_log.json. Exits 0
+        # when intact (or absent/empty), 1 on a broken link, so an out-of-band
+        # edit to the committed evidence log fails CI.
+        run: python -m scraper.verify_block_log
       - name: Build site from empty data (smoke test)
         # Mirror the production sweep env so this smoke test catches any
         # deployment-config drift (root-relative paths + CNAME-only routing).

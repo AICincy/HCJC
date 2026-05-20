@@ -238,3 +238,12 @@ by the regularly-conducted sweep. Three independent integrity layers support
 it: the per-body `sha256` (the block page is unaltered), the `prev_sha256`
 chain (ordering and completeness within the file), and the git commit history
 (an external, timestamped, third-party-hosted seal on every cycle).
+
+### Evidence dossier (related files)
+
+| File or command | Role |
+|---|---|
+| `data/waf_block_log.json` | The append-only, hash-chained record of each block and recovery. |
+| `python -m scraper.verify_block_log` | On-demand integrity check: walks the `prev_sha256` chain, exit 0 intact / 1 broken. Also run in CI. |
+| `audit/15_pra_149_43B_request.md` | Draft written R.C. 149.43(B) request (roster export + the WAF rule/policy). |
+| `audit/16_evidence_affidavit.md` | Draft operator affidavit authenticating the log for the mandamus record. |

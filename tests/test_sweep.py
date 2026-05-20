@@ -521,6 +521,52 @@ def test_forensic_sample_redacts_response_set_cookie():
     assert s["headers"]["set-cookie"] == "[redacted]"  # token value redacted
 
 
+def test_run_empty_page_block_records_200_sample(tmp_path, monkeypatch):
+    # End-to-end: run() drives the real _sweep_list through the HTTP 200
+    # empty-page block mode and records a blocked event carrying a 200 sample
+    # (the 403 path is covered by test_run_degraded_sweep_records_block_evidence).
+    import httpx
+
+    from scraper.store import load_block_log, save_current
+
+    prev = [
+        Inmate(inmate_number=str(1000 + i), last_name="DOE", first_name=f"F{i}", booking_date="5/10/26")
+        for i in range(60)
+    ]
+    cur = tmp_path / "current.json"
+    save_current(cur, prev)
+    blog = tmp_path / "waf_block_log.json"
+    monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
+    monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)  # bypass the skip-gate
+
+    class _EmptyPageClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def get_response(self, path, params=None):
+            url = "https://www.hcso.org/inmate-search/?last=" + (params or {}).get("last", "")
+            return httpx.Response(200, request=httpx.Request("GET", url),
+                                  content=b"<html><body>blocked</body></html>")
+
+    monkeypatch.setattr(sweep, "make_client", lambda: _EmptyPageClient())
+
+    rc = sweep.run(surnames=list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+                   max_surnames=None, refresh_known=False, dry_run=False)
+    assert rc == 0
+    log = load_block_log(blog)
+    assert len(log) == 1
+    assert log[0]["event"] == "blocked"
+    assert log[0]["seen_count"] == 0
+    assert log[0]["surnames_failed"] == 0       # an HTTP 200 did not raise
+    assert log[0]["http_status_counts"] == {}   # so the status histogram is empty
+    assert log[0]["block_sample"]["status"] == 200
+
+
 def test_list_response_looks_blocked_predicate():
     # Tiny body + zero rows = WAF block stub served as HTTP 200.
     assert sweep._list_response_looks_blocked("x" * 100, []) is True
