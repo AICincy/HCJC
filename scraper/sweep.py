@@ -200,6 +200,15 @@ def _looks_like_waf_block(html: str, inm: Inmate, photo_bytes: bytes | None,
     )
 
 
+def _list_response_looks_blocked(html: str, rows: list[ListRow]) -> bool:
+    """True when a surname-search response has the shape of a WAF block served
+    as HTTP 200: a tiny body that parsed to zero rows. A legitimate no-results
+    search still returns the full page chrome (tens of KB), so the size floor
+    (``_WAF_BLOCK_MAX_BYTES``) discriminates a block stub from a real empty
+    result. This is the 200-mode sibling of the 403 path in ``_sweep_list``."""
+    return not rows and len(html) < _WAF_BLOCK_MAX_BYTES
+
+
 def _reset_waf_block_streak_for_tests() -> None:
     """Test-only: reset module state between cases. Not used at runtime."""
     global _waf_block_streak
@@ -517,8 +526,10 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     how many surname fetches raised (distinct from a surname that legitimately
     returned zero rows). ``status_counts`` is a histogram of HTTP status codes
     from failed fetches (e.g. ``{"403": 24}``); ``block_sample`` is one
-    representative forensic snapshot of the first blocked response (they are
-    identical WAF pages). Both feed the durable WAF-block evidence log.
+    representative forensic snapshot of the first blocked response, captured
+    from either an HTTP 403 that raised or an HTTP 200 whose tiny body parsed to
+    zero rows (the WAF's empty-page mode). ``status_counts`` and
+    ``block_sample`` both feed the durable WAF-block evidence log.
     """
     aggregated: list[ListRow] = []
     seen: set[str] = set()
@@ -531,27 +542,36 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     # (see scraper/sweep.py:run for the pattern) before merging.
     def fetch_one(surname: str) -> tuple[list[ListRow] | None, int | None, dict | None]:
         try:
-            html = client.get(SEARCH_PATH, params={"last": surname})
-            return parse_list_page(html), None, None
+            resp = client.get_response(SEARCH_PATH, params={"last": surname})
         except httpx.HTTPStatusError as e:
             log.warning("list fetch failed for surname=%s: %s", surname, e)
             return None, e.response.status_code, _forensic_sample(e.response)
         except Exception as e:
             log.warning("list fetch failed for surname=%s: %s", surname, e)
             return None, None, None
+        rows = parse_list_page(resp.text)
+        # Empty-page block mode: the WAF can serve HTTP 200 with a tiny body
+        # that parses to zero rows (instead of a 403). The fetch does not raise,
+        # so capture a forensic sample here too; the roster-collapse guard is
+        # what fires, and the sample documents what HCSO returned.
+        if _list_response_looks_blocked(resp.text, rows):
+            log.warning("list fetch for surname=%s looks WAF-blocked (HTTP %d, %d bytes, 0 rows)",
+                        surname, resp.status_code, len(resp.text))
+            return rows, None, _forensic_sample(resp)
+        return rows, None, None
 
     failed = 0
     status_counts: dict[str, int] = {}
     block_sample: dict | None = None
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
         for rows, status, sample in pool.map(fetch_one, surnames):
+            if block_sample is None and sample is not None:
+                block_sample = sample
             if rows is None:
                 failed += 1
                 if status is not None:
                     key = str(status)
                     status_counts[key] = status_counts.get(key, 0) + 1
-                if block_sample is None and sample is not None:
-                    block_sample = sample
                 continue
             for r in rows:
                 if r.inmate_number not in seen:

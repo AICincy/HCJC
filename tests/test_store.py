@@ -14,6 +14,7 @@ from scraper.store import (
     load_current,
     load_current_or_raise,
     save_current,
+    verify_block_chain,
 )
 
 
@@ -231,3 +232,26 @@ def test_block_log_hash_chains(tmp_path: Path):
     log = load_block_log(p)
     assert log[0]["prev_sha256"] is None
     assert log[1]["prev_sha256"] == _record_sha256(log[0])
+
+
+def test_verify_block_chain_detects_intact_and_tampered(tmp_path: Path):
+    p = tmp_path / "waf_block_log.json"
+    append_block_evidence({"event": "blocked", "seen_count": 0}, p)
+    append_block_evidence({"event": "recovered", "seen_count": 5}, p)
+    entries = load_block_log(p)
+    assert verify_block_chain(entries) == []  # intact straight off disk
+    # Edit the first record in place: the link from record 1 to it breaks.
+    entries[0]["seen_count"] = 999
+    problems = verify_block_chain(entries)
+    assert len(problems) == 1
+    assert problems[0].startswith("record 1")
+
+
+def test_verify_block_log_cli(tmp_path: Path, capsys):
+    from scraper import verify_block_log
+
+    p = tmp_path / "waf_block_log.json"
+    append_block_evidence({"event": "blocked"}, p)
+    rc = verify_block_log.main([str(p)])
+    assert rc == 0
+    assert "intact" in capsys.readouterr().out

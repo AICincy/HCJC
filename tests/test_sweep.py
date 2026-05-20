@@ -507,3 +507,32 @@ def test_forensic_sample_captures_request_side():
     assert "last=A" in s["request"]["url"]
     assert s["request"]["headers"]["user-agent"] == "JCStream/0.1"
     assert isinstance(s["captured_utc"], str)
+
+
+def test_list_response_looks_blocked_predicate():
+    # Tiny body + zero rows = WAF block stub served as HTTP 200.
+    assert sweep._list_response_looks_blocked("x" * 100, []) is True
+    # Zero rows but a full-size page = a legitimate no-results search.
+    assert sweep._list_response_looks_blocked("x" * 10000, []) is False
+    # Any parsed rows = not a block, regardless of size.
+    assert sweep._list_response_looks_blocked("x" * 100, [object()]) is False
+
+
+def test_sweep_list_captures_empty_page_block_sample():
+    import httpx
+
+    body = b"<html><body>blocked</body></html>"
+
+    class _EmptyPageClient:
+        def get_response(self, path, params=None):
+            url = "https://www.hcso.org/inmate-search/?last=" + (params or {}).get("last", "")
+            return httpx.Response(200, request=httpx.Request("GET", url), content=body)
+
+    rows, n_failed, status_counts, block_sample = sweep._sweep_list(_EmptyPageClient(), ["A", "B"])
+    assert rows == []
+    assert n_failed == 0          # an HTTP 200 did not raise
+    assert status_counts == {}    # no failed-fetch statuses in the empty-page mode
+    assert block_sample is not None
+    assert block_sample["status"] == 200
+    assert block_sample["bytes"] == len(body)
+    assert block_sample["request"]["method"] == "GET"

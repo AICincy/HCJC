@@ -98,6 +98,27 @@ def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None
     _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
 
 
+def verify_block_chain(entries: list[dict]) -> list[str]:
+    """Verify the ``prev_sha256`` hash chain over an in-order list of WAF-block
+    log records. Returns a list of human-readable problems; an empty list means
+    the chain is intact. The first record must carry ``prev_sha256 == None``;
+    every later record's ``prev_sha256`` must equal the canonical SHA-256 of the
+    record immediately before it. Detects in-place edits and out-of-band record
+    removal from the middle of the file; wholesale file deletion is caught by
+    git history, not the chain."""
+    problems: list[str] = []
+    for i, rec in enumerate(entries):
+        expected = _record_sha256(entries[i - 1]) if i > 0 else None
+        actual = rec.get("prev_sha256")
+        if actual != expected:
+            problems.append(
+                f"record {i} (event={rec.get('event')!r}, "
+                f"timestamp_utc={rec.get('timestamp_utc')!r}): "
+                f"prev_sha256={actual!r}, expected {expected!r}"
+            )
+    return problems
+
+
 def load_current(path: Path) -> dict[str, Inmate]:
     """Load the previous snapshot keyed by inmate_number; empty dict if missing.
 
