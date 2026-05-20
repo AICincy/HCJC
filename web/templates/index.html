@@ -10,9 +10,13 @@
   <div class="stamp">Sweep {{ snapshot.generated_utc[:16] }}Z</div>
 </header>
 
-{# DRAFT COPY — pending owner + counsel sign-off before merge (see plan). #}
 {% if roster_stale.blocked %}
 <aside class="banner" aria-label="Data access notice" role="status">
+  {% if waf_sheriff_available %}
+  <img src="{{ base_url }}/static/img/sheriff-waf.png"
+       alt="Illustration of the Hamilton County Sheriff with a speech bubble: &ldquo;Sorry about that, we&rsquo;re allegedly blocking access to keep inmates safe from county residents who believe public records should be accessible to the public.&rdquo;"
+       class="waf-sheriff" style="float:right;max-height:460px;max-width:45%;height:auto;margin:0 0 .5rem 1rem;">
+  {% endif %}
   <p><strong>Roster updates are currently interrupted.</strong> Since {{ roster_stale.since or '2026-05-19' }}, the Hamilton County Sheriff&rsquo;s Office public inmate-search portal has returned blocked responses (HTTP&nbsp;403) to this site&rsquo;s automated public-records retrieval. The figures below reflect the last successful update on {{ roster_stale.last_updated }}; they are not current.</p>
   <p class="banner-fine">This interruption is logged per cycle as timestamped evidence: <a href="{{ base_url }}/data/waf_block_log.json">waf_block_log.json</a>. JCStream does not attempt to circumvent the block; it documents it. See <a href="{{ base_url }}/data/#access">access interruptions</a>.</p>
 </aside>

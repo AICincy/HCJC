@@ -75,7 +75,6 @@
   </tbody>
 </table>
 
-{# DRAFT COPY — pending owner + counsel sign-off before merge (see plan). #}
 {% if roster_stale.ever_blocked %}
 <div class="section-h"><h2 id="access">Access interruptions</h2></div>
 <p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal as authorized by the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>). Beginning {{ roster_stale.since or '2026-05-19' }}, that portal began returning blocked responses (HTTP&nbsp;403) to this site&rsquo;s automated retrieval.{% if roster_stale.blocked %} As of the last build, retrieval is still blocked and the roster shown reflects the last successful update on {{ roster_stale.last_updated }}.{% else %} Retrieval has since resumed.{% endif %}</p>
