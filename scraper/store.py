@@ -174,6 +174,18 @@ def _anonymize_event(e: dict, charge_lookup: dict[str, dict] | None = None) -> d
     }
 
 
+def _anon_dedup_key(row: dict) -> tuple:
+    """Content key for anon-changelog dedup, branching on row shape so a
+    re-emitted row matches its stored twin. Recent rows carry a full
+    timestamp_utc + inmate_number; anonymized rows carry only a day-level
+    date + tier + category. Keying both with one uniform shape (the prior
+    bug) meant recent rows never matched and accumulated a duplicate every
+    sweep until they aged out."""
+    if row.get("timestamp_utc"):
+        return ("full", row.get("event"), row.get("timestamp_utc"), row.get("inmate_number"))
+    return ("anon", row.get("event"), row.get("date"), row.get("tier"), row.get("category"))
+
+
 def save_anon_changelog(
     path: Path,
     full_events: list[ChangeEvent],
@@ -217,7 +229,7 @@ def save_anon_changelog(
     seen_keys: set[tuple] = set()
     for row in existing:
         if isinstance(row, dict):
-            seen_keys.add((row.get("event"), row.get("date"), row.get("tier"), row.get("category"), row.get("inmate_number")))
+            seen_keys.add(_anon_dedup_key(row))
 
     out = list(existing)
     for ce in full_events:
@@ -229,7 +241,6 @@ def save_anon_changelog(
 
         if (d.get("timestamp_utc") or "") < cutoff:
             row = _anonymize_event(d)
-            key = (row.get("event"), row.get("date"), row.get("tier"), row.get("category"), None)
         else:
             row = {
                 "event": d.get("event"),
@@ -240,7 +251,7 @@ def save_anon_changelog(
                 "category": d.get("primary_category"),
                 "note": d.get("note"),
             }
-            key = (row.get("event"), row.get("timestamp_utc"), row.get("inmate_number"))
+        key = _anon_dedup_key(row)
         if key in seen_keys:
             continue
         seen_keys.add(key)

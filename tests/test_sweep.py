@@ -3,19 +3,55 @@ or partially-failed list sweep from being written as the live roster."""
 import logging
 from pathlib import Path
 
-from scraper import sweep, sweep_guards
+from scraper import sweep
 from scraper.models import Inmate, ListRow
 from scraper.sweep import _fetch_one
 from scraper.sweep_guards import (
+    ROSTER_STALE_ALARM_HOURS,
     check_detail_watchdog,
+    roster_stale_hours,
+)
+from scraper.sweep_guards import (
     sweep_looks_healthy as _sweep_looks_healthy,
 )
-
 
 # Old underscore alias is kept by sweep.py for back-compat; new code uses the
 # public names from sweep_guards. The local rebinding keeps the existing test
 # body unchanged below.
 _check_detail_watchdog = check_detail_watchdog
+
+
+def test_roster_stale_hours_parses_and_measures():
+    from datetime import datetime, timedelta, timezone
+
+    old = (datetime.now(timezone.utc) - timedelta(hours=10)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    h = roster_stale_hours(old)
+    assert h is not None and 9.5 < h < 10.5
+    assert h >= ROSTER_STALE_ALARM_HOURS  # 10h trips the 6h alarm
+
+
+def test_roster_stale_hours_none_on_missing_or_bad():
+    assert roster_stale_hours(None) is None
+    assert roster_stale_hours("") is None
+    assert roster_stale_hours("not a timestamp") is None
+
+
+def test_roster_stale_hours_recent_below_alarm():
+    from datetime import datetime, timezone
+
+    fresh = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    h = roster_stale_hours(fresh)
+    assert h is not None and h < ROSTER_STALE_ALARM_HOURS
+
+
+def test_prev_generated_utc_reads_field(tmp_path):
+    import json
+
+    p = tmp_path / "current.json"
+    p.write_text(json.dumps({"generated_utc": "2026-05-20T00:39:31Z", "inmates": []}),
+                 encoding="utf-8")
+    assert sweep._prev_generated_utc(p) == "2026-05-20T00:39:31Z"
+    assert sweep._prev_generated_utc(tmp_path / "nope.json") is None
 
 
 def test_bootstrap_is_always_accepted():

@@ -5,6 +5,7 @@ from __future__ import annotations
 import base64
 import logging
 import re
+import threading as _threading
 from typing import Iterable
 
 from selectolax.parser import HTMLParser, Node
@@ -38,7 +39,6 @@ _HIGH_VALUE_CHARGE_LABELS = ("Description", "ORC Code", "Bond Amount", "Court Da
 # mutation would no longer be serialized by the GIL. Lock scope is
 # intentionally narrow (read + possible add); the log.warning call runs
 # outside the critical section so a slow logger never serializes workers.
-import threading as _threading
 _WARNED_MISSING_LABELS: set[str] = set()
 _WARNED_MISSING_LABELS_LOCK = _threading.Lock()
 
@@ -51,7 +51,7 @@ def parse_list_page(html: str) -> list[ListRow]:
     tree = HTMLParser(html)
     rows: list[ListRow] = []
     for tr in tree.css("tr"):
-        cells = {c.attributes.get("label", ""): _text(c) for c in tr.css("td[label]")}
+        cells = {_attr(c, "label"): _text(c) for c in tr.css("td[label]")}
         last = cells.get("Last Name", "").strip()
         first = cells.get("First Name", "").strip()
         admit = cells.get("Admit Date", "").strip()
@@ -74,7 +74,7 @@ def parse_list_page(html: str) -> list[ListRow]:
 
 def _extract_inmate_id_from_row(tr: Node) -> str:
     for a in tr.css("a"):
-        href = a.attributes.get("href", "")
+        href = _attr(a, "href")
         m = _DETAIL_ID.search(href)
         if m:
             return m.group(1)
@@ -107,11 +107,11 @@ def parse_detail_page(html: str, inmate_number: str) -> tuple[Inmate, bytes | No
         img_count = sum(1 for _ in tree.css("img"))
         nondata_count = sum(
             1 for i in tree.css("img")
-            if (i.attributes.get("src") or "") and not (i.attributes.get("src") or "").startswith("data:")
+            if _attr(i, "src") and not _attr(i, "src").startswith("data:")
         )
         data_count = sum(
             1 for i in tree.css("img")
-            if (i.attributes.get("src") or "").startswith("data:")
+            if _attr(i, "src").startswith("data:")
         )
         log.info(
             "detail page id=%s parsed (bio=%d name=%s charges=%d) but no photo extracted "
@@ -187,7 +187,7 @@ def _parse_name(tree: HTMLParser) -> str:
     
     # Tier 2: meta[property="og:title"]
     for meta in tree.css('meta[property="og:title"]'):
-        content = (meta.attributes.get("content") or "").strip()
+        content = _attr(meta, "content").strip()
         if "," in content and content.upper() == content and any(c.isalpha() for c in content):
             log.debug("name extracted from og:title fallback")
             return content
@@ -204,7 +204,7 @@ def _parse_name(tree: HTMLParser) -> str:
     
     # Tier 4: Look for common name table cells (td/th with label attribute)
     for td in tree.css("td[label], th"):
-        label = td.attributes.get("label", "").strip()
+        label = _attr(td, "label").strip()
         if label.lower() in ("name", "full name", "inmate", "inmate name"):
             text = _text(td)
             if text:
@@ -252,6 +252,27 @@ def _find_charges_table(tree: HTMLParser):
     return None
 
 
+def _log_skipped_charge_rows(skipped: int, n_charges: int) -> None:
+    """Report charge rows that carried labeled cells but neither Description
+    nor ORC Code. A total drop (skipped rows, zero charges) is a label-drift
+    warning; a partial skip alongside real charges is usually benign
+    (non-charge labeled rows), so it logs at debug for label-drift diagnosis."""
+    if not skipped:
+        return
+    if not n_charges:
+        log.warning(
+            "charge table parser found %d labeled rows but extracted 0 charges "
+            "(Description/ORC Code labels may have drifted)",
+            skipped,
+        )
+    else:
+        log.debug(
+            "charge table parser skipped %d labeled rows that lacked both "
+            "Description and ORC Code (extracted %d charges)",
+            skipped, n_charges,
+        )
+
+
 def _parse_charges(tree: HTMLParser) -> list[Charge]:
     """Extract rows from the charges table.
 
@@ -266,7 +287,7 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
     charges_table = _find_charges_table(tree)
     row_source = charges_table if charges_table is not None else tree
     for tr in row_source.css("tr"):
-        cells = {c.attributes.get("label", ""): _text(c) for c in tr.css("td[label]")}
+        cells = {_attr(c, "label"): _text(c) for c in tr.css("td[label]")}
         if not cells:
             continue
         if {"Last Name", "First Name", "Admit Date"}.issubset(cells.keys()):
@@ -293,12 +314,7 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
                 comments=cells.get("Comments", "").strip(),
             )
         )
-    if skipped_with_cells and not charges:
-        log.warning(
-            "charge table parser found %d labeled rows but extracted 0 charges "
-            "(Description/ORC Code labels may have drifted)",
-            skipped_with_cells,
-        )
+    _log_skipped_charge_rows(skipped_with_cells, len(charges))
     # Per-process drift signal: when a detail page yielded charges but a
     # high-value column was absent from every row, warn once. Catches the
     # case where one column rename (e.g. "Bond Amount" to "Bond ($)") would
@@ -333,8 +349,8 @@ def _looks_like_ui_chrome(img) -> bool:
     _extract_photo_url so a permissive match doesn't latch onto a 51x51 alert
     icon when HCSO drops the 274px style hook.
     """
-    src = (img.attributes.get("src") or "").lower()
-    alt = (img.attributes.get("alt") or "").lower()
+    src = _attr(img, "src").lower()
+    alt = _attr(img, "alt").lower()
     if any(h in src for h in _UI_ICON_HINTS):
         return True
     if any(h in alt for h in ("logo", "icon", "menu", "alert", "warn")):
@@ -370,12 +386,12 @@ def _extract_photo_url(tree: HTMLParser) -> str | None:
     """
     fallback: str | None = None
     for img in tree.css("img"):
-        src = img.attributes.get("src", "")
+        src = _attr(img, "src")
         if src.startswith("data:") or not src:
             continue
-        alt = (img.attributes.get("alt", "") or "").lower()
-        style = img.attributes.get("style", "")
-        cls = img.attributes.get("class", "") or ""
+        alt = _attr(img, "alt").lower()
+        style = _attr(img, "style")
+        cls = _attr(img, "class")
         if any(k in alt for k in ("photo", "mug", "inmate", "booking")):
             return src
         if any(k in cls for k in ("photo", "mug", "inmate")):
@@ -401,7 +417,7 @@ def _extract_inline_photo(tree: HTMLParser) -> bytes | None:
     """
     soi_candidate: bytes | None = None
     for img in tree.css("img"):
-        src = img.attributes.get("src", "")
+        src = _attr(img, "src")
         if not src.startswith("data:"):
             continue
         header, _, payload = src.partition(",")
@@ -409,10 +425,10 @@ def _extract_inline_photo(tree: HTMLParser) -> bytes | None:
             continue
         try:
             data = base64.b64decode(payload, validate=False)
-        except (ValueError, base64.binascii.Error):
+        except ValueError:  # binascii.Error subclasses ValueError
             log.warning("failed to base64-decode inline photo candidate")
             continue
-        style = img.attributes.get("style", "")
+        style = _attr(img, "style")
         if "274px" in style:
             return data
         if soi_candidate is None and data[:3] == _JPEG_SOI:
@@ -425,6 +441,13 @@ def _extract_inline_photo(tree: HTMLParser) -> bytes | None:
 
 def _text(node: Node) -> str:
     return (node.text(deep=True, separator=" ", strip=True) or "").strip()
+
+
+def _attr(node: Node, key: str) -> str:
+    """A node attribute as a non-None str. selectolax returns ``str | None``
+    (a present-but-valueless attribute like ``disabled`` yields None); this
+    normalizes to ``""`` so callers can string-handle without guarding."""
+    return node.attributes.get(key) or ""
 
 
 def iter_inmate_ids(rows: Iterable[ListRow]) -> set[str]:

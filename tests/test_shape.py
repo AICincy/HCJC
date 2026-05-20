@@ -13,7 +13,6 @@ import pytest
 from scraper.models import ChangeEvent, Charge, Inmate
 from web import shape
 
-
 # ---------------------------------------------------------------------------
 # helpers
 # ---------------------------------------------------------------------------

@@ -20,10 +20,32 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==9.0.3"]
+dev = ["pytest==9.0.3", "ruff==0.14.2", "mypy==1.18.2"]
 
 [tool.setuptools.packages.find]
 include = ["scraper*", "web*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+# E/W: pycodestyle, F: pyflakes, I: import sorting. The tree is clean against
+# these; extend the set only after fixing the new findings it surfaces.
+select = ["E", "F", "I"]
+# E501 (line length) is not enforced: the codebase uses intentionally dense
+# layouts (see CLAUDE.md), and line-length above is advisory for the formatter.
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+no_implicit_optional = true
+# Third-party libs without bundled stubs (or not type-checked in CI): ignore
+# missing-import errors for them so mypy reports only first-party type issues.
+[[tool.mypy.overrides]]
+module = ["httpx", "selectolax.*", "PIL.*", "pydantic", "jinja2"]
+ignore_missing_imports = true

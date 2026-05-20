@@ -8,10 +8,25 @@ adding a helper here requires registering it there with the same name.
 """
 from __future__ import annotations
 
-import re
 import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
+
+from scraper import orc as orc_mod
+from scraper.models import ChangeEvent, Inmate, Snapshot
+from web.classify import (
+    _CLS_RANK,
+    _DEGREE_RE,
+    _MIN_MONTH_SIZE,
+    _chap_slug,
+    _charge_tier,
+    _offense_for_code,
+    _parse_bond_amount,
+    _parse_book_date,
+    _parse_md_yy,
+    _primary_degree,
+    _primary_tier,
+)
 
 
 def _strftime_nopad(dt, fmt: str) -> str:
@@ -23,39 +38,6 @@ def _strftime_nopad(dt, fmt: str) -> str:
         fmt = fmt.replace("%-", "%#")
     return dt.strftime(fmt)
 
-from scraper import orc as orc_mod
-from scraper.models import ChangeEvent, Inmate, Snapshot
-
-from web.classify import (
-    _CHAPTER_LABEL,
-    _CLS_RANK,
-    _DEGREE_RE,
-    _MIN_MONTH_SIZE,
-    _OFFENSE_CATEGORY,
-    _TIER_MAX,
-    _approx_age,
-    _avatar_initials,
-    _booking_seq,
-    _chap_slug,
-    _charge_tier,
-    _codes_ohio_url,
-    _display_date,
-    _expand_race,
-    _expand_sex,
-    _load_explainers,
-    _offense_for_code,
-    _orc_frequency,
-    _parse_bond_amount,
-    _parse_book_date,
-    _parse_md_yy,
-    _pct_ordinal,
-    _primary_degree,
-    _primary_tier,
-    _rfc822,
-    _short_month_label,
-    _tier_counts,
-    _tier_max,
-)
 
 def _related_inmates(target: Inmate, all_inmates: list[Inmate], limit: int = 6) -> list[Inmate]:
     """Other inmates in custody whose primary ORC chapter matches the target's."""
@@ -355,12 +337,8 @@ def _bond_by_tier(inmate: Inmate, offenses: dict | None = None) -> dict:
         offenses = orc_mod.load_offenses()
     out = {"felony": 0, "misdemeanor": 0, "other": 0}
     for c in inmate.charges:
-        m = re.search(r"\$?([\d,]+(?:\.\d{2})?)", c.bond_amount or "")
-        if not m:
-            continue
-        try:
-            amt = int(float(m.group(1).replace(",", "")))
-        except ValueError:
+        amt = _parse_bond_amount(c.bond_amount)
+        if amt is None:
             continue
         ct = _charge_tier(c, offenses)
         key = ct["kind"] if ct else "other"
@@ -523,12 +501,7 @@ def _bond_total(inmate: Inmate) -> str:
     """Sum the inmate's bond amounts where parseable, return a formatted string."""
     total = 0
     for c in inmate.charges:
-        m = re.search(r"\$?([\d,]+(?:\.\d{2})?)", c.bond_amount or "")
-        if m:
-            try:
-                total += int(float(m.group(1).replace(",", "")))
-            except ValueError:
-                continue
+        total += _parse_bond_amount(c.bond_amount) or 0
     return f"${total:,}" if total else ""
 
 def _days_in_custody(inmate: Inmate) -> int | None:

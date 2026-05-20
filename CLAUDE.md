@@ -105,6 +105,33 @@ Violating them imposes cognitive cost the owner cannot afford.
   to <50% of last cycle, it keeps the last-good `data/current.json` and exits 0.
   That's why the public count is stable even when HCSO rate-limits a sweep.
 
+### Runbook: roster frozen / "no new inmates" (HCSO WAF block)
+
+Signature: `data/current.json` (and `data/changelog.json`) stop changing while
+the sweep keeps committing the open-data feeds + `docs/` every cycle. Both
+freeze at the same `generated_utc`. The degraded-roster guard is firing every
+run and keeping last-good data. This is the guard working, not a bug.
+
+1. Confirm: `git log -15 --format="%cI %s" origin/main -- data/current.json` —
+   if `current.json` hasn't changed in hours but `sweep` commits keep landing,
+   it's frozen.
+2. Diagnose from the Actions sweep log (grep, in order):
+   - `ROSTER FROZEN` — the freeze alarm (`roster_stale_hours` >=
+     `ROSTER_STALE_ALARM_HOURS`, 6h); also emitted as a `::error::` annotation
+     by the "Roster freeze alarm" step in `sweep.yml`.
+   - `list sweep looks degraded (prev=… seen=… N/M surname fetches failed)` —
+     the guard fire. `N/M > 2/26` ⇒ WAF raising on fetches; `seen < 50% of prev`
+     ⇒ WAF serving empty-but-parseable pages.
+   - `WAF-block-shaped response for id=…` / `429 …` ⇒ WAF active.
+3. Cause is almost always HCSO's WAF blocking the GitHub Actions egress IP.
+   Code can't fix that. Options: wait for the block to rotate (cloud WAFs
+   commonly 24-72h); run from a different egress (self-hosted runner / proxy);
+   or contact HCSO for allowlisting.
+4. NEVER lower `SWEEP_MAX_FAILED_FRACTION` (0.10) or `SWEEP_MIN_ROSTER_FRACTION`
+   (0.5) to force the sweep through — that publishes a partial roster as if
+   complete, which is worse than stale data. Tuning `crawl_delay` / `concurrency`
+   in `client.py` only helps if errors are borderline (≈3/26), not a hard block.
+
 ### Optional features (owner-side setup, not something I can do from here)
 
 - **Giscus comments** on inmate pages (`web/templates/inmate.html` renders the

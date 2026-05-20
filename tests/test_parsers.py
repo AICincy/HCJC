@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytest
-
 from scraper.parsers import parse_detail_page, parse_list_page
 
 FIXTURES = Path(__file__).parent / "fixtures"

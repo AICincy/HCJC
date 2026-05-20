@@ -27,10 +27,10 @@ def downscale_and_save(raw: bytes, dest: Path) -> bool:
     """
     try:
         with Image.open(io.BytesIO(raw)) as im:
-            im = im.convert("RGB")
-            im.thumbnail(DISPLAY_SIZE, Image.Resampling.LANCZOS)
+            rgb = im.convert("RGB")
+            rgb.thumbnail(DISPLAY_SIZE, Image.Resampling.LANCZOS)
             dest.parent.mkdir(parents=True, exist_ok=True)
-            im.save(dest, format="JPEG", quality=JPEG_QUALITY, optimize=True)
+            rgb.save(dest, format="JPEG", quality=JPEG_QUALITY, optimize=True)
         return True
     except (UnidentifiedImageError, OSError) as e:
         log.warning("failed to decode/save photo to %s: %s", dest, e)

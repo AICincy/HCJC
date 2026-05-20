@@ -88,7 +88,6 @@ def send_daily_request(since: str, until: str) -> int:
 
 
 def main() -> int:
-    import sys
 
     logging.basicConfig(
         level=logging.INFO,

@@ -56,6 +56,30 @@ jobs:
             ${{ inputs.max_surnames && format('--max-surnames {0}', inputs.max_surnames) || '' }} \
             ${{ inputs.refresh_known && '--refresh-known' || '' }}
 
+      # Surface a prolonged roster freeze as a GitHub Actions annotation. The
+      # degraded-roster guard correctly keeps last-good data and exits 0 when
+      # HCSO's WAF blocks the runner, but a multi-hour freeze otherwise hides
+      # in the logs. This step never fails the job (the open-data feeds below
+      # must still commit); it only emits a ::error:: annotation when the
+      # last-good roster is older than ROSTER_STALE_ALARM_HOURS.
+      - name: Roster freeze alarm
+        if: always()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from scraper.sweep import _prev_generated_utc
+          from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
+          h = roster_stale_hours(_prev_generated_utc(Path("data/current.json")))
+          if h is not None and h >= ROSTER_STALE_ALARM_HOURS:
+              print(
+                  f"::error title=Roster frozen::current.json is {h:.1f}h old "
+                  f"(>= {ROSTER_STALE_ALARM_HOURS}h). HCSO WAF likely blocking the "
+                  f"runner IP; grep the sweep log for 'list sweep looks degraded'."
+              )
+          else:
+              print(f"roster freshness OK ({'unknown' if h is None else f'{h:.1f}h'})")
+          PY
+
       # All four open-data feeds: 30-day window, each module skips its API
       # pull if the existing JSON is < 24h old. Sweep cron is every 30 min;
       # this gates Socrata traffic to once per dataset per day.

@@ -7,14 +7,13 @@ that directory to GitHub Pages.
 from __future__ import annotations
 
 import argparse
-import email.utils
+import hashlib
 import json
 import logging
 import os
 import shutil
 import sys
-from collections import defaultdict
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -30,26 +29,69 @@ from scraper.models import ChangeEvent, HistoryRecord, Inmate, Snapshot
 # Static classification data moved to web/classify.py (arch-F1, partial).
 # Re-exported here so tests/test_build.py can `from web.build import _foo`.
 from web.classify import (  # noqa: F401  re-exported for test_build.py access
-    _DEGREE_RE, _CHAPTER_LABEL, _OFFENSE_CATEGORY, _CLS_RANK, _TIER_MAX,
-    _RACE_LABEL, _SEX_LABEL, _MIN_MONTH_SIZE,
-    _offense_for_code, _orc_frequency, _codes_ohio_url, _chap_slug,
-    _charge_tier, _tier_counts, _primary_tier, _primary_degree, _tier_max,
-    _parse_book_date, _display_date, _parse_bond_amount, _parse_md_yy,
-    _short_month_label, _approx_age, _booking_seq, _avatar_initials,
-    _expand_race, _expand_sex, _pct_ordinal, _rfc822, _load_explainers,
+    _CHAPTER_LABEL,
+    _CLS_RANK,
+    _DEGREE_RE,
+    _MIN_MONTH_SIZE,
+    _OFFENSE_CATEGORY,
+    _RACE_LABEL,
+    _SEX_LABEL,
+    _TIER_MAX,
+    _approx_age,
+    _avatar_initials,
+    _booking_seq,
+    _chap_slug,
+    _charge_tier,
+    _codes_ohio_url,
+    _display_date,
+    _expand_race,
+    _expand_sex,
+    _load_explainers,
+    _offense_for_code,
+    _orc_frequency,
+    _parse_bond_amount,
+    _parse_book_date,
+    _parse_md_yy,
+    _pct_ordinal,
+    _primary_degree,
+    _primary_tier,
+    _rfc822,
+    _short_month_label,
+    _tier_counts,
+    _tier_max,
 )
 from web.shape import (  # noqa: F401  re-exported for test_build.py access
-    _related_inmates, _crimes_of_month, _recent_booked_inmates,
-    _bond_context, _upcoming_courts, _tier_breakdown,
-    _top_offenses_with_orc, _all_top_offenses, _timeline_markers,
-    _similar_by_statute, _statute_held_inmates, _feed_description,
-    _bond_by_tier, _next_court_date, _case_numbers,
-    _charge_status_summary, _card_data_attrs, _card_tip,
-    _bond_total, _days_in_custody, _charges_by_chapter,
-    _primary_charge_obj, _primary_charge, _primary_chapter,
-    _sort_in_group, _group_by_month, _events_in_window,
-    _events_for_recent, _court_calendar, _events_for_inmate,
+    _all_top_offenses,
+    _bond_by_tier,
+    _bond_context,
+    _bond_total,
+    _card_data_attrs,
+    _card_tip,
+    _case_numbers,
+    _charge_status_summary,
+    _charges_by_chapter,
+    _court_calendar,
+    _crimes_of_month,
+    _days_in_custody,
+    _events_for_inmate,
+    _events_for_recent,
+    _events_in_window,
+    _feed_description,
+    _group_by_month,
+    _next_court_date,
+    _primary_chapter,
+    _primary_charge,
+    _primary_charge_obj,
+    _recent_booked_inmates,
+    _related_inmates,
+    _similar_by_statute,
+    _sort_in_group,
+    _statute_held_inmates,
     _strftime_nopad,
+    _tier_breakdown,
+    _timeline_markers,
+    _top_offenses_with_orc,
+    _upcoming_courts,
 )
 
 log = logging.getLogger("jcstream.site")
@@ -63,7 +105,12 @@ PHOTOS_DIR = Path("data/photos")
 DEFAULT_OUT = Path("docs")
 
 
-def build(out_dir: Path) -> int:
+def _load_inputs():
+    """Load the snapshot + changelog + dispatch feeds. Dedupe the two CFS
+    feeds on event_number (qiik-bpks often lags past its pull window and comes
+    back empty; gexm-h6bt pulls a wider window), attach dispatch candidates to
+    inmates, and build the map points. Returns
+    (snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points)."""
     current_path = Path("data/current.json")
     changelog_path = Path("data/changelog.json")
 
@@ -83,19 +130,35 @@ def build(out_dir: Path) -> int:
     cfs_rows = cfs_mod.load_recent()
     cfs_pdi_rows = cfs_pdi_mod.load()
     shooting_rows = shootings_mod.load()
-    # The matcher gets BOTH dispatch feeds (qiik-bpks often lags past its pull
-    # window and comes back empty; gexm-h6bt pulls a wider window), de-duplicated
-    # on event_number.
-    _seen_ev: set[str] = set()
-    _all_cfs: list[dict] = []
+    seen_ev: set[str] = set()
+    all_cfs: list[dict] = []
     for r in (cfs_rows + cfs_pdi_rows):
-        ev = r.get("event_number") or id(r)
-        if ev not in _seen_ev:
-            _seen_ev.add(ev)
-            _all_cfs.append(r)
-    matches = attach_candidates(snapshot.inmates, _all_cfs)
-    dispatch_points = _dispatch_points(_all_cfs, shooting_rows)
+        ev = str(r.get("event_number") or id(r))
+        if ev not in seen_ev:
+            seen_ev.add(ev)
+            all_cfs.append(r)
+    matches = attach_candidates(snapshot.inmates, all_cfs)
+    dispatch_points = _dispatch_points(all_cfs, shooting_rows)
+    return snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points
 
+
+def _distinct_chapters(inmates: list[Inmate]) -> list[tuple[str, str]]:
+    """Distinct (slug, label) ORC chapters present on the roster, sorted by
+    label, for the homepage filter dropdown."""
+    chap: dict[str, str] = {}
+    for inm in inmates:
+        ch = _primary_chapter(inm)
+        if ch:
+            chap[_chap_slug(ch["label"])] = ch["label"]
+    return sorted(chap.items(), key=lambda kv: kv[1])
+
+
+def _build_env(snapshot: Snapshot, offenses: dict[str, dict],
+               base_url: str, site_url: str) -> Environment:
+    """Construct the Jinja Environment and register every template global and
+    filter. The registered names ARE the template contract: a helper added in
+    web/shape.py or web/classify.py must be registered here under the same name
+    to be visible to templates."""
     env = Environment(
         loader=FileSystemLoader(TEMPLATE_DIR),
         autoescape=select_autoescape(["html", "xml"]),
@@ -108,34 +171,40 @@ def build(out_dir: Path) -> int:
     env.filters["dt_fmt"] = _strftime_nopad
     env.globals["cck_name_search"] = cck.name_search_url
     env.globals["cck_case_summary"] = cck.case_summary_url
-    env.globals["base_url"] = _resolve_base_url()
+    env.globals["base_url"] = base_url
     # Absolute origin (scheme + host) for RSS/Atom links, the web manifest and
     # JSON-LD — distinct from base_url, which is a path prefix and is empty when
     # we serve from a custom domain at the root.
-    env.globals["site_url"] = _resolve_site_url()
+    env.globals["site_url"] = site_url
     # Optional Giscus (GitHub-Discussions-backed) comments on inmate pages.
     # Activated only when JCSTREAM_GISCUS_REPO_ID is set as a secret/var; the
     # comment-policy section renders either way.
-    import os as _os
     env.globals["giscus"] = {
-        "repo": _os.environ.get("JCSTREAM_GISCUS_REPO", "AICincy/JCStream"),
-        "repo_id": _os.environ.get("JCSTREAM_GISCUS_REPO_ID", ""),
-        "category": _os.environ.get("JCSTREAM_GISCUS_CATEGORY", "Announcements"),
-        "category_id": _os.environ.get("JCSTREAM_GISCUS_CATEGORY_ID", ""),
+        "repo": os.environ.get("JCSTREAM_GISCUS_REPO", "AICincy/JCStream"),
+        "repo_id": os.environ.get("JCSTREAM_GISCUS_REPO_ID", ""),
+        "category": os.environ.get("JCSTREAM_GISCUS_CATEGORY", "Announcements"),
+        "category_id": os.environ.get("JCSTREAM_GISCUS_CATEGORY_ID", ""),
     }
     # Cache-bust the stylesheet by its CONTENT hash, not the data timestamp —
     # otherwise a CSS change with unchanged data ships new HTML against stale CSS.
-    import hashlib as _hl
     _css = STATIC_DIR / "style.css"
-    env.globals["css_version"] = (_hl.sha256(_css.read_bytes()).hexdigest()[:10]
+    env.globals["css_version"] = (hashlib.sha256(_css.read_bytes()).hexdigest()[:10]
                                   if _css.exists() else "dev")
     # Same pattern for the externalized JS module. `map.js` was removed; the
     # previous `map_js_version` env.global had no template reference and is
     # gone too.
     _main_js = STATIC_DIR / "main.js"
-    env.globals["main_js_version"] = (_hl.sha256(_main_js.read_bytes()).hexdigest()[:10]
+    env.globals["main_js_version"] = (hashlib.sha256(_main_js.read_bytes()).hexdigest()[:10]
                                       if _main_js.exists() else "dev")
-    offenses = orc_mod.load_offenses()
+    _register_template_helpers(env, snapshot, offenses)
+    return env
+
+
+def _register_template_helpers(env: Environment, snapshot: Snapshot,
+                               offenses: dict[str, dict]) -> None:
+    """Register the per-inmate / per-roster helper globals (from web.shape and
+    web.classify) that templates call. Split out of _build_env so each stays a
+    readable unit; the names here are part of the template contract."""
     env.globals["orc_title"] = lambda code: orc_mod.title_for(code, offenses)
     env.globals["primary_charge"] = _primary_charge
     env.globals["primary_chapter"] = _primary_chapter
@@ -165,13 +234,7 @@ def build(out_dir: Path) -> int:
     env.globals["next_court_date"] = _next_court_date
     env.globals["case_numbers"] = _case_numbers
     env.globals["charge_status_summary"] = _charge_status_summary
-    # Distinct chapters present, for the filter dropdown.
-    _chap_set: dict[str, str] = {}
-    for inm in snapshot.inmates:
-        ch = _primary_chapter(inm)
-        if ch:
-            _chap_set[_chap_slug(ch["label"])] = ch["label"]
-    env.globals["all_chapters"] = sorted(_chap_set.items(), key=lambda kv: kv[1])
+    env.globals["all_chapters"] = _distinct_chapters(snapshot.inmates)
     env.globals["bond_total"] = _bond_total
     env.globals["days_in_custody"] = _days_in_custody
     env.globals["charges_by_chapter"] = _charges_by_chapter
@@ -183,8 +246,11 @@ def build(out_dir: Path) -> int:
     env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates)
     env.globals["all_inmates_total"] = snapshot.inmate_count
 
-    _warn_about_unmapped_orcs(snapshot.inmates, offenses)
 
+def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
+    """Compute the month grouping, month-nav data, recent-event counts and
+    trend that the page renderers consume. Returned as a dict so build() can
+    pass the pieces to the individual _render_* calls."""
     by_month = _group_by_month(snapshot.inmates)
     # Month-nav data: short label + count.
     nav_months = [
@@ -201,18 +267,37 @@ def build(out_dir: Path) -> int:
     recent_released = sum(1 for e in recent_24h if e.event == "released")
     events_recent = list(reversed(_events_for_recent(events, hours=8)))[:12]
     trend = _update_history(snapshot, recent_booked, recent_released)
+    return {
+        "by_month": by_month,
+        "nav_months": nav_months,
+        "expanded_months": expanded_months,
+        "recent_booked": recent_booked,
+        "recent_released": recent_released,
+        "events_recent": events_recent,
+        "trend": trend,
+    }
+
+
+def build(out_dir: Path) -> int:
+    snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points = _load_inputs()
+    offenses = orc_mod.load_offenses()
+    base_url = _resolve_base_url()
+    site_url = _resolve_site_url()
+    env = _build_env(snapshot, offenses, base_url, site_url)
+    _warn_about_unmapped_orcs(snapshot.inmates, offenses)
+    rd = _prepare_render_data(snapshot, events)
 
     if out_dir.exists():
         shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True)
 
-    _render_index(env, snapshot, by_month, nav_months, expanded_months,
-                  events_recent, recent_booked, recent_released, trend,
+    _render_index(env, snapshot, rd["by_month"], rd["nav_months"], rd["expanded_months"],
+                  rd["events_recent"], rd["recent_booked"], rd["recent_released"], rd["trend"],
                   cfs_rows, shooting_rows, len(dispatch_points), out_dir)
     _render_inmates(env, snapshot, matches, events, out_dir)
     _render_feeds(env, events, out_dir)
     _render_data_page(env, snapshot, out_dir)
-    _render_stats_page(env, snapshot, by_month, trend, out_dir)
+    _render_stats_page(env, snapshot, rd["by_month"], rd["trend"], out_dir)
     _render_statute_page(env, snapshot, offenses, out_dir)
     _render_court_page(env, snapshot, out_dir)
     _render_visit_page(env, out_dir)
@@ -220,11 +305,11 @@ def build(out_dir: Path) -> int:
     _render_courts_page(env, out_dir)
     _copy_static(out_dir)
     _copy_photos(out_dir)
-    _write_manifest(out_dir, env.globals["base_url"])
+    _write_manifest(out_dir, base_url)
     _write_search_json(out_dir, snapshot)
     _write_dispatches(out_dir, dispatch_points)
     _write_cname(out_dir)
-    _write_well_known(out_dir, env.globals["site_url"], snapshot.generated_utc)
+    _write_well_known(out_dir, site_url, snapshot.generated_utc)
     _write_checksums(out_dir)
     # Tell GitHub Pages NOT to Jekyll-process the built site.
     (out_dir / ".nojekyll").write_text("", encoding="utf-8")
@@ -305,9 +390,13 @@ def _dispatch_points(cfs_rows: list[dict], shooting_rows: list[dict], limit: int
     t (timestamp as the source prints it).
     """
     def _coord(row: dict) -> tuple[float, float] | None:
+        lat_raw = row.get("latitude_x")
+        lon_raw = row.get("longitude_x")
+        if lat_raw is None or lon_raw is None:
+            return None
         try:
-            la = float(row.get("latitude_x"))
-            lo = float(row.get("longitude_x"))
+            la = float(lat_raw)
+            lo = float(lon_raw)
         except (TypeError, ValueError):
             return None
         # Greater-Cincinnati sanity box — drops 0,0 and obviously bad rows.
@@ -346,7 +435,7 @@ def _write_dispatches(out_dir: Path, points: list[dict]) -> None:
     (out_dir / "dispatches.json").write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
 
 
-def _warn_about_unmapped_orcs(inmates: list[Inmate], offenses: dict[str, str]) -> None:
+def _warn_about_unmapped_orcs(inmates: list[Inmate], offenses: dict[str, dict]) -> None:
     codes = [c.orc_code for inm in inmates for c in inm.charges if c.orc_code]
     missing = orc_mod.codes_without_titles(codes, offenses)
     # Strip HCSO's placeholder rows (0000.00, 0001.00, 0002.00 etc.) — those

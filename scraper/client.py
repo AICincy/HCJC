@@ -11,9 +11,10 @@ or CAPTCHAs.
 
 from __future__ import annotations
 
-import os
-import time
 import logging
+import os
+import threading
+import time
 from dataclasses import dataclass, field
 from urllib.parse import urlparse
 
@@ -60,11 +61,9 @@ class HcsoClient:
     concurrency: int = DEFAULT_CONCURRENCY
     _last_request_at: float = field(default=0.0, init=False)
     _client: httpx.Client | None = field(default=None, init=False)
-    _lock: object = field(default=None, init=False)
+    _lock: threading.Lock = field(default_factory=threading.Lock, init=False)
 
     def __enter__(self) -> "HcsoClient":
-        import threading
-        self._lock = threading.Lock()
         # verify=False below is sound only for the HCSO host. If a future
         # operator (or JCSTREAM_BASE_URL override) points this client at any
         # other host, the unverified TLS would let an on-path attacker
@@ -177,8 +176,8 @@ def _retry_after_seconds(header_value: str | None) -> float:
     except ValueError:
         pass
     try:
-        from email.utils import parsedate_to_datetime
         from datetime import datetime, timezone
+        from email.utils import parsedate_to_datetime
         target = parsedate_to_datetime(header_value)
         if target.tzinfo is None:
             target = target.replace(tzinfo=timezone.utc)
