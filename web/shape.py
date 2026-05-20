@@ -338,7 +338,7 @@ def _bond_by_tier(inmate: Inmate, offenses: dict | None = None) -> dict:
     out = {"felony": 0, "misdemeanor": 0, "other": 0}
     for c in inmate.charges:
         amt = _parse_bond_amount(c.bond_amount)
-        if not amt:
+        if amt is None:
             continue
         ct = _charge_tier(c, offenses)
         key = ct["kind"] if ct else "other"
