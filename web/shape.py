@@ -76,14 +76,12 @@ def _recent_booked_inmates(snapshot: Snapshot, n: int = 6) -> list[Inmate]:
     arr.sort(key=lambda i: _parse_book_date(i.booking_date) or datetime.min, reverse=True)
     return arr[:n]
 
-def _bond_context(target: Inmate, all_inmates: list[Inmate], offenses: dict | None = None) -> dict | None:
-    """Percentile distribution of bond amounts across current peers charged
-    under the target inmate's most-severe ORC section. Returns None when there
-    aren't enough peers to draw a meaningful distribution (<5)."""
-    if offenses is None:
-        offenses = orc_mod.load_offenses()
-    # Pick the target's most-severe ORC code (lowest degree rank) with a bond.
-    order = ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"]
+
+_BOND_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
+
+
+def _bond_primary_code_and_bond(target: Inmate, offenses: dict) -> tuple[str, int | None]:
+    """Return (primary_code, my_bond) for target's most severe ORC code."""
     primary = None
     primary_idx = 99
     my_bond = None
@@ -93,16 +91,18 @@ def _bond_context(target: Inmate, all_inmates: list[Inmate], offenses: dict | No
             continue
         m = _DEGREE_RE.search((c.description or "").strip())
         deg = m.group(1) if m else orc_mod.degree_for(code, offenses)
-        idx = order.index(deg) if deg in order else 99
+        idx = _BOND_DEGREE_ORDER.index(deg) if deg in _BOND_DEGREE_ORDER else 99
         if idx < primary_idx:
             primary, primary_idx = c, idx
             my_bond = _parse_bond_amount(c.bond_amount)
     if not primary:
-        return None
+        return "", None
     primary_code = orc_mod.normalize_code((primary.orc_code or "").strip())
-    if not primary_code:
-        return None
-    # Collect peer bond amounts (any positive bond, exclude $0 / NONE / blank).
+    return primary_code, my_bond
+
+
+def _bond_peer_amounts(target: Inmate, all_inmates: list[Inmate], primary_code: str) -> list[int]:
+    """Return sorted peer bond amounts for the given ORC code."""
     peers: list[int] = []
     for inm in all_inmates:
         if inm.inmate_number == target.inmate_number:
@@ -114,13 +114,28 @@ def _bond_context(target: Inmate, all_inmates: list[Inmate], offenses: dict | No
             if v is not None and v > 0:
                 peers.append(v)
                 break  # one bond per peer for this stat
+    peers.sort()
+    return peers
+
+
+def _sorted_pct(values: list[int], p: float) -> int:
+    idx = max(0, min(len(values) - 1, int(round((len(values) - 1) * p))))
+    return values[idx]
+
+
+def _bond_context(target: Inmate, all_inmates: list[Inmate], offenses: dict | None = None) -> dict | None:
+    """Percentile distribution of bond amounts across current peers charged
+    under the target inmate's most-severe ORC section. Returns None when there
+    aren't enough peers to draw a meaningful distribution (<5)."""
+    if offenses is None:
+        offenses = orc_mod.load_offenses()
+    primary_code, my_bond = _bond_primary_code_and_bond(target, offenses)
+    if not primary_code:
+        return None
+    peers = _bond_peer_amounts(target, all_inmates, primary_code)
     if len(peers) < 5:
         return None
-    peers.sort()
-    def _pct(p: float) -> int:
-        idx = max(0, min(len(peers) - 1, int(round((len(peers) - 1) * p))))
-        return peers[idx]
-    p10, p25, p50, p75, p90 = (_pct(x) for x in (0.10, 0.25, 0.50, 0.75, 0.90))
+    p10, p25, p50, p75, p90 = (_sorted_pct(peers, x) for x in (0.10, 0.25, 0.50, 0.75, 0.90))
     my_percentile = None
     if my_bond is not None and my_bond > 0:
         below = sum(1 for v in peers if v < my_bond)
