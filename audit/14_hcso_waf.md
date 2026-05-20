@@ -68,3 +68,61 @@ If after one or two full sweep cycles with the defenses live the new-inmate phot
 - **High confidence** that the parser is correct, the cached-photo fallback works, and the WAF guard triggers carry-forward as designed. Verified by running the sweep locally with the post-PR-60 code and observing both successful photo extraction (id 14809523) and correct skip behavior on empty-base64-payload pages (id 2683700).
 - **Medium confidence** that the GH Actions IP range is the blocked one. Inferred from the differential between local-IP success and GH-Actions-IP failure on the same code. Not directly verified because we cannot test from a known GH Actions IP from this container.
 - **Limitations.** I could not view the live Sentry or GH Actions workflow logs from this container, so the `scripts/grep_waf_blocks.sh` numbers are deferred to the maintainer's next run.
+
+## Architectural appendix (added 2026-05-20)
+
+After PRs #58 / #59 / #60 had been live for 1-2 sweep cycles and roster photo coverage had not visibly improved for the 6 inmates from the first verification, a second analysis from Claude.ai (Opus 4.6) characterized why and what to do.
+
+### Why none of the shipped defenses can fix the root cause
+
+The three defenses operate at three different layers but none changes the variable that actually matters:
+
+| PR | What it does | What it does NOT do |
+|----|--------------|---------------------|
+| #58 — WAF-block guard | Prevents the scraper from overwriting good data with empty data when a WAF-block response comes back. Existing photo references survive blocked cycles. | Move the request off the WAF-blocked source IP. |
+| #59 — same-cycle retry | Sleeps exponential backoff and retries once when the first attempt looks WAF-blocked. Recovers if the block is brief and intermittent. | Help when the WAF is blocking the source IP range hard, since the retry comes from the same IP. |
+| #60 — browser-shape headers | Adds `Connection: keep-alive` and `Upgrade-Insecure-Requests: 1`. Slightly more polite request profile. | Influence WAFs that classify at the TLS handshake or first byte (Imperva, Akamai, F5), well before application-layer headers are read. |
+
+The defenses are correct as data-integrity protections. They prevent erosion of previously-extracted photos and make recovery faster when blocks are transient. They cannot manufacture a successful detail-page fetch when the WAF is filtering by source IP at L4 / L5.
+
+### How to discriminate hypothesis A (intermittent block) from hypothesis D (hard block)
+
+The new `WAF-block-shaped response for id=X (N bytes, streak=K)` warning carries a streak counter that resets on every successful parse and increments on every WAF-block-shaped response. From a single sweep's workflow log:
+
+| Streak pattern in one run | Diagnosis |
+|---|---|
+| Monotonic growth (1, 2, 3, ... 10, 11) | Every detail-page fetch came back truncated. The runner IP is uniformly blocked. **Hypothesis D**. |
+| Repeated resets (1, 0, 1, 0, 1, 2, 0) | Some requests get through. Retries are occasionally clearing transient blocks. **Hypothesis A**. |
+
+Cross-check with `scraper/sweep_guards.check_detail_watchdog` rates from the same log:
+
+| name_rate vs photo_rate | Diagnosis |
+|---|---|
+| Both collapse together (~0.1 each) | Detail pages aren't arriving at all. Consistent with WAF blocking. |
+| name_rate high (~1.0), photo_rate low (~0.1) | Detail pages arrive and parse for everything except the photo. Parser regression, not network. |
+
+Given the 2026-05-19 local-sweep diagnostic from a non-GHA IP showed the parser extracts photos correctly, the watchdog rates should collapse together rather than diverge. If they diverge, HCSO has changed the photo markup specifically and the parser needs another look.
+
+### Infrastructure options (in order of preference, all zero ongoing cost)
+
+1. **Self-hosted GitHub Actions runner on always-on residential hardware.**
+   - Raspberry Pi, old laptop, desktop that stays on; runs `actions-runner` from `github.com/AICincy/JCStream/settings/actions/runners/new`.
+   - sweep.yml change: `runs-on: [self-hosted, hcso-fetch]` instead of `ubuntu-latest`.
+   - Consumer ISP IP is indistinguishable from any other home internet user fetching HCSO in a browser. High probability the WAF stops blocking immediately.
+   - Downside: dependency on operator's network and hardware uptime.
+
+2. **Oracle Cloud Always Free ARM VM.**
+   - The only major cloud provider with a genuinely permanent free tier (not a trial).
+   - One-off probe required: register the VM, run a single `curl https://www.hcso.org/justice-center-services/inmate-search/inmate-detail/?id=<known-id>` from it, check response size. If full-size, deploy. If truncated, abandon.
+   - Datacenter IP, but Oracle's ranges are less heavily abused than Azure's; block probability is meaningfully lower than GH Actions.
+
+3. **Free trial at Hetzner / DigitalOcean / Vultr for 30-90 days.**
+   - Stopgap while a permanent path develops. Remove the credit card before trial expiry.
+
+### Decision criterion
+
+If the post-merge diagnostic confirms hypothesis D (monotonic streak growth across multiple runs), the urgency of moving off GH Actions exceeds what the PRA path can absorb on its own timeline. Both tracks (PRA escalation + runner migration) should run in parallel.
+
+If hypothesis A (intermittent), the existing defenses are already adding coverage, just slowly. The runner migration is still worthwhile but less urgent; the PRA path stays the strategic anchor.
+
+The signal-discrimination is the next decision-gating data point.

@@ -28,17 +28,17 @@ import json
 import re
 import sys
 import time
-import urllib.error
-import urllib.parse
-import urllib.request
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
+import httpx
+
+from scraper.client import DEFAULT_UA
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 API = "https://www.courtlistener.com/api/rest/v4/search/"
-UA = "JCStream/1.0 (contact via github.com/AICincy/JCStream)"
 
 # Strip a trailing alpha-numeric suffix so "2925.11A" and "2913.02A1" group
 # with their base section. This mirrors scraper/orc.py:normalize_code.
@@ -72,13 +72,14 @@ def fetch_for_code(code: str, max_results: int = 3, max_retries: int = 3) -> lis
         "stat_Published": "true",
         "order_by": "dateFiled desc",
     }
-    url = API + "?" + urllib.parse.urlencode(params)
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
-    
+    headers = {"User-Agent": DEFAULT_UA}
+
     for attempt in range(max_retries):
         try:
-            with urllib.request.urlopen(req, timeout=30) as r:
-                payload = json.load(r)
+            with httpx.Client(timeout=30.0, headers=headers) as client:
+                r = client.get(API, params=params)
+                r.raise_for_status()
+                payload = r.json()
             out = []
             for hit in payload.get("results", [])[:max_results]:
                 cites = hit.get("citation") or []
@@ -92,8 +93,8 @@ def fetch_for_code(code: str, max_results: int = 3, max_retries: int = 3) -> lis
                     "url": ("https://www.courtlistener.com" + rel) if rel else "",
                 })
             return out
-        except urllib.error.HTTPError as e:
-            if e.code == 429 and attempt < max_retries - 1:
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 429 and attempt < max_retries - 1:
                 # Exponential backoff: 2s, 4s, 8s
                 backoff = 2 ** (attempt + 1)
                 print(f"    rate limited (429), retrying in {backoff}s...", file=sys.stderr)
