@@ -20,7 +20,6 @@ from __future__ import annotations
 import argparse
 import json
 import logging
-import os
 import sys
 import threading
 import time
@@ -41,12 +40,7 @@ from .store import (
     save_current,
 )
 from .sweep_guards import (
-    DETAIL_WATCHDOG_MIN_SAMPLE,
-    DETAIL_WATCHDOG_NAME_FLOOR,
-    DETAIL_WATCHDOG_PHOTO_FLOOR,
-    PHOTO_PRUNE_MAX_FRACTION,
     SWEEP_BOOTSTRAP_FLOOR,
-    SWEEP_MAX_FAILED_FRACTION,
     SWEEP_MIN_ROSTER_FRACTION,
     check_detail_watchdog,
     prune_photos,

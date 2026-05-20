@@ -5,6 +5,7 @@ from __future__ import annotations
 import base64
 import logging
 import re
+import threading as _threading
 from typing import Iterable
 
 from selectolax.parser import HTMLParser, Node
@@ -38,7 +39,6 @@ _HIGH_VALUE_CHARGE_LABELS = ("Description", "ORC Code", "Bond Amount", "Court Da
 # mutation would no longer be serialized by the GIL. Lock scope is
 # intentionally narrow (read + possible add); the log.warning call runs
 # outside the critical section so a slow logger never serializes workers.
-import threading as _threading
 _WARNED_MISSING_LABELS: set[str] = set()
 _WARNED_MISSING_LABELS_LOCK = _threading.Lock()
 

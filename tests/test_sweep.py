@@ -3,7 +3,7 @@ or partially-failed list sweep from being written as the live roster."""
 import logging
 from pathlib import Path
 
-from scraper import sweep, sweep_guards
+from scraper import sweep
 from scraper.models import Inmate, ListRow
 from scraper.sweep import _fetch_one
 from scraper.sweep_guards import (

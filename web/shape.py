@@ -13,6 +13,23 @@ import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
+from scraper import orc as orc_mod
+from scraper.models import ChangeEvent, Inmate, Snapshot
+
+from web.classify import (
+    _CLS_RANK,
+    _DEGREE_RE,
+    _MIN_MONTH_SIZE,
+    _chap_slug,
+    _charge_tier,
+    _offense_for_code,
+    _parse_bond_amount,
+    _parse_book_date,
+    _parse_md_yy,
+    _primary_degree,
+    _primary_tier,
+)
+
 
 def _strftime_nopad(dt, fmt: str) -> str:
     """strftime that honors %-d / %-m on Windows by mapping to %#d / %#m.
@@ -23,39 +40,6 @@ def _strftime_nopad(dt, fmt: str) -> str:
         fmt = fmt.replace("%-", "%#")
     return dt.strftime(fmt)
 
-from scraper import orc as orc_mod
-from scraper.models import ChangeEvent, Inmate, Snapshot
-
-from web.classify import (
-    _CHAPTER_LABEL,
-    _CLS_RANK,
-    _DEGREE_RE,
-    _MIN_MONTH_SIZE,
-    _OFFENSE_CATEGORY,
-    _TIER_MAX,
-    _approx_age,
-    _avatar_initials,
-    _booking_seq,
-    _chap_slug,
-    _charge_tier,
-    _codes_ohio_url,
-    _display_date,
-    _expand_race,
-    _expand_sex,
-    _load_explainers,
-    _offense_for_code,
-    _orc_frequency,
-    _parse_bond_amount,
-    _parse_book_date,
-    _parse_md_yy,
-    _pct_ordinal,
-    _primary_degree,
-    _primary_tier,
-    _rfc822,
-    _short_month_label,
-    _tier_counts,
-    _tier_max,
-)
 
 def _related_inmates(target: Inmate, all_inmates: list[Inmate], limit: int = 6) -> list[Inmate]:
     """Other inmates in custody whose primary ORC chapter matches the target's."""
