@@ -17,7 +17,6 @@ future site work can read from them without touching the scraper layer.
 """
 from __future__ import annotations
 
-import json
 import logging
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -25,7 +24,14 @@ from pathlib import Path
 
 import httpx
 
-from .cincy_open import query, recently_refreshed, since_iso, warn_on_row_drop
+from .cincy_open import (
+    dumps_rows_per_line,
+    prev_row_count,
+    query,
+    recently_refreshed,
+    since_iso,
+    warn_on_row_drop,
+)
 
 log = logging.getLogger(__name__)
 
@@ -131,8 +137,8 @@ def _save(spec: FeedSpec, rows: list[dict]) -> None:
     }
     out = DATA_DIR / spec.filename
     out.parent.mkdir(parents=True, exist_ok=True)
-    warn_on_row_drop(out, spec.label, len(rows))
-    out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    warn_on_row_drop(spec.label, prev_row_count(out), len(rows))
+    out.write_text(dumps_rows_per_line(payload), encoding="utf-8")
     log.info("wrote %s (%d rows)", out, len(rows))
 
 

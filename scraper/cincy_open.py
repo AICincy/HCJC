@@ -67,16 +67,26 @@ def prev_row_count(path) -> int | None:
         return None
 
 
-def warn_on_row_drop(path, label: str, new_count: int, *, drop_frac: float = 0.5) -> None:
-    """Log a WARNING when `new_count` falls below `drop_frac` of the prior
-    snapshot's row_count at `path`, distinguishing a real feed collapse from
-    the few-percent churn a rolling window normally shows. Call before
-    overwriting the file. No-op when there is no prior count to compare."""
-    prev = prev_row_count(path)
-    if prev and new_count < prev * drop_frac:
+def warn_on_row_drop(label: str, prev_count: int | None, new_count: int, *,
+                     drop_frac: float = 0.5, min_rows: int = 50) -> None:
+    """Log a WARNING when `new_count` falls below `drop_frac` of `prev_count`,
+    distinguishing a real feed collapse from the few-percent churn a rolling
+    window normally shows.
+
+    Pure comparison: the caller passes the prior count (typically
+    `prev_row_count(path)`) so the single file read is explicit at the call
+    site and not a hidden side effect of this function. Advisory only: it
+    logs, it does not block the write, because for these enrichment feeds a
+    silent refuse-to-write would just preserve stale data (the failure mode
+    that motivated the guard).
+
+    No-op when `prev_count` is None (no prior snapshot) or below `min_rows`: a
+    percentage guard is meaningless on small rare-event feeds (e.g. CCA
+    complaints), where a 4 -> 1 swing is noise, not a collapse."""
+    if prev_count is not None and prev_count >= min_rows and new_count < prev_count * drop_frac:
         log.warning(
             "%s: row_count dropped sharply %d -> %d (< %.0f%% of prior); possible feed collapse",
-            label, prev, new_count, drop_frac * 100,
+            label, prev_count, new_count, drop_frac * 100,
         )
 
 
