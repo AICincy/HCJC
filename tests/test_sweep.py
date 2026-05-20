@@ -403,7 +403,10 @@ def test_record_block_evidence_writes_blocked(tmp_path, monkeypatch):
     blog = tmp_path / "waf_block_log.json"
     monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
     monkeypatch.setattr(sweep, "CURRENT_PATH", tmp_path / "missing.json")  # -> stale None
-    sweep._record_block_evidence(60, 0, 26, 24, {"403": 24})
+    sample = {"status": 403, "bytes": 162, "sha256": "abc", "body_sample": "blocked", "headers": {"server": "x"}}
+    sweep._record_block_evidence(sweep._BlockObservation(
+        prev_count=60, seen_count=0, n_surnames=26, n_failed=24,
+        status_counts={"403": 24}, block_sample=sample))
     log = load_block_log(blog)
     assert len(log) == 1
     rec = log[0]
@@ -411,6 +414,8 @@ def test_record_block_evidence_writes_blocked(tmp_path, monkeypatch):
     assert rec["surnames_failed"] == 24
     assert rec["failed_fraction"] == round(24 / 26, 4)
     assert rec["http_status_counts"] == {"403": 24}
+    assert rec["block_sample"]["status"] == 403
+    assert rec["block_sample"]["sha256"] == "abc"
 
 
 def test_record_recovery_only_after_blocked(tmp_path, monkeypatch):
@@ -448,8 +453,12 @@ def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
     monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
     monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
     monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)  # bypass the skip-gate
-    # Degraded list sweep: zero seen, most fetches 403 (the WAF block shape).
-    monkeypatch.setattr(sweep, "_sweep_list", lambda client, surnames: ([], 24, {"403": 24}))
+    # Degraded list sweep: zero seen, most fetches 403 (the WAF block shape),
+    # with a forensic sample of the block response.
+    sample = {"status": 403, "bytes": 162, "sha256": "deadbeef",
+              "body_sample": "Access denied", "headers": {"server": "cloudflare"}}
+    monkeypatch.setattr(sweep, "_sweep_list",
+                        lambda client, surnames: ([], 24, {"403": 24}, sample))
 
     class FakeClient:
         def __enter__(self): return self
@@ -464,3 +473,21 @@ def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
     assert len(log) == 1
     assert log[0]["event"] == "blocked"
     assert log[0]["http_status_counts"] == {"403": 24}
+    assert log[0]["block_sample"]["sha256"] == "deadbeef"
+    assert log[0]["block_sample"]["headers"]["server"] == "cloudflare"
+
+
+def test_forensic_sample_captures_status_hash_headers():
+    import hashlib
+
+    import httpx
+
+    body = b"<html>Access denied by WAF</html>"
+    resp = httpx.Response(403, headers={"server": "cloudflare", "cf-ray": "abc123"}, content=body)
+    s = sweep._forensic_sample(resp)
+    assert s["status"] == 403
+    assert s["bytes"] == len(body)
+    assert s["sha256"] == hashlib.sha256(body).hexdigest()
+    assert s["body_sample"] == body.decode()
+    assert s["headers"]["server"] == "cloudflare"
+    assert s["headers"]["cf-ray"] == "abc123"
