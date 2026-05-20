@@ -30,6 +30,10 @@ def _charge_on(dt: datetime, *, code: str = "2913.02", desc: str = "THEFT M1") -
     return Charge(orc_code=code, description=desc, court_date=dt.strftime("%m/%d/%y"))
 
 
+def _bond_charge(*, code: str, desc: str, bond: str) -> Charge:
+    return Charge(orc_code=code, description=desc, bond_amount=bond)
+
+
 def _freeze_now(monkeypatch: pytest.MonkeyPatch, frozen: datetime) -> None:
     """Pin `datetime.now()` inside web.shape so bucketing is deterministic.
 
@@ -222,3 +226,64 @@ def test_events_for_inmate_returns_multiple_matches_in_order():
     out = shape._events_for_inmate([e3, noise, e1, e2], "12345")
     assert out == [e1, e2, e3]
     assert [e.event for e in out] == ["booked", "updated", "released"]
+
+
+# ---------------------------------------------------------------------------
+# _bond_context
+# ---------------------------------------------------------------------------
+
+
+def test_bond_context_returns_none_when_target_has_no_orc_code():
+    target = _inm("1", "DOE", "JOHN", charges=[_bond_charge(code="", desc="THEFT M1", bond="$100")])
+    assert shape._bond_context(target, [target], offenses={}) is None
+
+
+def test_bond_context_returns_percentiles_and_my_percentile():
+    offenses = {"2913.02": {"title": "Theft", "degree": "M1"}}
+    target = _inm("1", "DOE", "JOHN", charges=[_bond_charge(code="2913.02", desc="THEFT M1", bond="$300")])
+    peers = [
+        _inm(str(i), "PEER", f"P{i}", charges=[_bond_charge(code="2913.02", desc="THEFT M1", bond=bond)])
+        for i, bond in zip(range(2, 7), ("$100", "$200", "$300", "$400", "$500"), strict=True)
+    ]
+    out = shape._bond_context(target, [target, *peers], offenses=offenses)
+    assert out == {
+        "code": "2913.02",
+        "title": "Theft",
+        "min": 100,
+        "max": 500,
+        "p10": 100,
+        "p25": 200,
+        "p50": 300,
+        "p75": 400,
+        "p90": 500,
+        "peer_count": 5,
+        "my_bond": 300,
+        "my_percentile": 0.4,
+    }
+
+
+def test_bond_context_picks_most_severe_degree_even_without_target_bond():
+    offenses = {
+        "2913.02": {"title": "Theft", "degree": "M1"},
+        "2903.11": {"title": "Assault", "degree": "F2"},
+    }
+    target = _inm(
+        "1",
+        "DOE",
+        "JOHN",
+        charges=[
+            _bond_charge(code="2913.02", desc="THEFT M1", bond="$300"),
+            _bond_charge(code="2903.11", desc="ASSAULT F2", bond=""),
+        ],
+    )
+    peers = [
+        _inm(str(i), "PEER", f"P{i}", charges=[_bond_charge(code="2903.11", desc="ASSAULT F2", bond=bond)])
+        for i, bond in zip(range(2, 7), ("$100", "$200", "$300", "$400", "$500"), strict=True)
+    ]
+    out = shape._bond_context(target, [target, *peers], offenses=offenses)
+    assert out is not None
+    assert out["code"] == "2903.11"
+    assert out["title"] == "Assault"
+    assert out["peer_count"] == 5
+    assert out["my_bond"] is None
+    assert out["my_percentile"] is None
