@@ -30,11 +30,14 @@ _JPEG_SOI = b"\xff\xd8\xff"
 # High-value charge labels: if any of these is absent from every charge row in
 # a single detail page, the parser warns once per process (label-drift signal).
 _HIGH_VALUE_CHARGE_LABELS = ("Description", "ORC Code", "Bond Amount", "Court Date")
-# Module-level set of labels already warned about, gated by a lock so the
-# sweep's ThreadPoolExecutor workers (and any future async refactor) can't
-# race the "warn once per process" semantic into "warn many times" or skip
-# the warning entirely. The lock scope is intentionally narrow: read +
-# possible add. The log call itself runs outside the critical section.
+# Module-level set of labels already warned about. Under CPython 3.12 + the
+# GIL + ThreadPoolExecutor the bare `set.add` is benign: the worst observable
+# consequence is a few redundant warning emissions across workers, not a
+# data race. The lock below is forward-looking defense in advance of any
+# free-threaded Python (PEP 703) or async-worker refactor, where the bare
+# mutation would no longer be serialized by the GIL. Lock scope is
+# intentionally narrow (read + possible add); the log.warning call runs
+# outside the critical section so a slow logger never serializes workers.
 import threading as _threading
 _WARNED_MISSING_LABELS: set[str] = set()
 _WARNED_MISSING_LABELS_LOCK = _threading.Lock()
