@@ -200,11 +200,7 @@ def run(
             # Decide which detail pages to fetch.
             to_fetch: list[str] = []
             for inmate_id in sorted(seen_ids):
-                if inmate_id not in previous:
-                    to_fetch.append(inmate_id)
-                elif refresh_known:
-                    to_fetch.append(inmate_id)
-                elif not previous[inmate_id].photo_filename:
+                if inmate_id not in previous or refresh_known or not previous[inmate_id].photo_filename:
                     to_fetch.append(inmate_id)
 
             log.info("will fetch %d detail pages (refresh_known=%s)", len(to_fetch), refresh_known)
@@ -537,9 +533,7 @@ def _fetch_one(
     # to the disk-cached photo from a prior successful sweep. Previously the
     # second branch was an `elif`, which meant a corrupt-bytes failure on one
     # cycle would discard a previously-good cached photo from the snapshot.
-    if photo_bytes and downscale_and_save(photo_bytes, photo_path):
-        inm.photo_filename = photo_path.name
-    elif photo_path.exists():
+    if photo_bytes and downscale_and_save(photo_bytes, photo_path) or photo_path.exists():
         inm.photo_filename = photo_path.name
 
     inm.first_seen_utc = (

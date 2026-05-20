@@ -196,11 +196,11 @@ def _parse_name(tree: HTMLParser) -> str:
     # This catches cases where HCSO moved the name to a span, div, or other container
     for div in tree.css("div, span, p"):
         text = _text(div)
-        if text and "," in text and text.upper() == text and any(c.isalpha() for c in text):
-            # Avoid capturing very long strings (likely content bleed)
-            if len(text) < 200:
-                log.debug("name extracted from container text fallback (tag=%s)", div.tag)
-                return text.strip()
+        # len < 200 avoids capturing very long strings (likely content bleed).
+        if (text and "," in text and text.upper() == text
+                and any(c.isalpha() for c in text) and len(text) < 200):
+            log.debug("name extracted from container text fallback (tag=%s)", div.tag)
+            return text.strip()
     
     # Tier 4: Look for common name table cells (td/th with label attribute)
     for td in tree.css("td[label], th"):
@@ -361,9 +361,7 @@ def _looks_like_ui_chrome(img) -> bool:
     except (TypeError, ValueError):
         w = h = 0
     # Booking mug shots are ~200-300 px wide. UI chrome is usually <80 px.
-    if 0 < w < 80 or 0 < h < 80:
-        return True
-    return False
+    return 0 < w < 80 or 0 < h < 80
 
 
 def _extract_photo_url(tree: HTMLParser) -> str | None:

@@ -84,9 +84,7 @@ def sweep_looks_healthy(
         return True
     if n_surnames > 0 and (n_failed / n_surnames) > SWEEP_MAX_FAILED_FRACTION:
         return False
-    if seen_count < SWEEP_MIN_ROSTER_FRACTION * prev_count:
-        return False
-    return True
+    return seen_count >= SWEEP_MIN_ROSTER_FRACTION * prev_count
 
 
 def check_detail_watchdog(attempts: int, named: int, with_photo: int) -> bool:
