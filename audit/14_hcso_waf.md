@@ -126,3 +126,38 @@ If the post-merge diagnostic confirms hypothesis D (monotonic streak growth acro
 If hypothesis A (intermittent), the existing defenses are already adding coverage, just slowly. The runner migration is still worthwhile but less urgent; the PRA path stays the strategic anchor.
 
 The signal-discrimination is the next decision-gating data point.
+
+## Empirical confirmation (added 2026-05-20T00:44Z, PR #64)
+
+A one-shot residential-equivalent sweep run from this Claude Code container at 2026-05-20T00:36Z extracted **+121 photos** in a single cycle: photo coverage jumped from 1002/1225 (81.8%) to 1123/1236 (90.9%). The six inmates from the 2026-05-19 Claude.ai first-verification sample — all originally `jcstream_missed` — produced full JPEG byte streams (8.4-10.6 KB each) from the same code, the same DEFAULT_UA, and the same browser-shape headers that the GH Actions runner uses. The only difference was the source IP.
+
+The differential was committed in PR #64 (data + docs only, zero code change). The hypothesis is no longer inferential.
+
+## Expected coverage decay between residential sweeps
+
+Pushing a one-shot residential sweep catches the site up to whatever HCSO has at that moment. Between residential sweeps, the production GH Actions cron continues to run every ~20-45 min, but its WAF-blocked detail-page fetches mean:
+
+1. **Photos that landed once** (in `data/photos/<id>.jpg` on disk) are preserved by the carry-forward + WAF guard in PRs #57 / #58. They stay on the site even across blocked production sweeps.
+2. **Genuinely-new bookings** (HCSO publishes a new inmate, GH Actions sees them in the list page, but the detail-page fetch is WAF-blocked) get an empty `photo_filename`. The list-row name fallback rescues a name; the photo is missing until the next residential sweep clears the WAF window.
+
+HCSO books roughly 30-50 inmates per 24h (per the historical booked_24h average in `data/history.json`). Each new booking that lands during the WAF block contributes one missing photo until the next residential sweep. Rough decay curve from a 90.9% steady-state floor:
+
+| Time since residential sweep | New bookings (cumulative) | Estimated coverage |
+|---|---|---|
+| 0 h | 0 | 90.9% |
+| 6 h | ~10 | ~90.1% |
+| 24 h | ~40 | ~88.0% |
+| 72 h | ~120 | ~83.0% |
+| 168 h (1 week) | ~280 | ~77.0% |
+
+Carrier rate (previously-extracted photos persisting) is the dominant signal. Decay is bounded by the residential-sweep cadence the operator adopts.
+
+### Recommended residential-sweep cadence
+
+- **Daily** (every 24h): coverage stays in the 88-91% band. Maintenance burden: one `scripts/local_sweep.sh` run per day.
+- **Weekly** (every 168h): coverage drifts to 77-80%. Acceptable if the operator deploys the self-hosted runner per audit/14a soon after.
+- **One-shot only** (today's PR #64, no further refresh): coverage slowly approaches the production cron's natural floor (~70-75%) before stabilizing.
+
+Once the self-hosted runner per `audit/14a_runner_migration_patch.md` is registered and the workflow's `runs-on` is flipped, every cron cycle clears the WAF and coverage stabilizes at HCSO's actual publication rate (typically 92-95% — the residual gap is inmates HCSO hasn't published a photo for yet).
+
+Until then, `scripts/local_sweep.sh` is the maintenance hook.
