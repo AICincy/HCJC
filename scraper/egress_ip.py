@@ -23,6 +23,7 @@ from .models import utcnow_iso
 
 META_URL = "https://api.github.com/meta"
 IPIFY_URL = "https://api.ipify.org?format=json"
+EGRESS_EVIDENCE_PATH = Path("data/egress_evidence.json")
 
 
 def _get_json(url: str, timeout: float = 30.0) -> dict:
@@ -73,6 +74,16 @@ def snapshot(runner_ip: str | None) -> dict:
     }
 
 
+def write_snapshot(path: Path = EGRESS_EVIDENCE_PATH, runner_ip: str | None = None) -> dict:
+    """Capture a snapshot and write it to ``path`` (overwrite), returning the
+    record. Overwriting keeps the file small; git history is the durable,
+    timestamped log."""
+    rec = snapshot(runner_ip)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(rec, indent=2) + "\n", encoding="utf-8")
+    return rec
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Snapshot GitHub Actions egress IP evidence.")
     parser.add_argument("runner_ip", nargs="?",
@@ -80,12 +91,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", help="Also write the snapshot JSON to this path.")
     args = parser.parse_args(argv)
 
-    rec = snapshot(args.runner_ip)
+    rec = write_snapshot(Path(args.out), args.runner_ip) if args.out else snapshot(args.runner_ip)
     print(json.dumps(rec, indent=2))
-    if args.out:
-        out = Path(args.out)
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(json.dumps(rec, indent=2) + "\n", encoding="utf-8")
     return 0
 
 

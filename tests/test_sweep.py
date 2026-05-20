@@ -615,3 +615,23 @@ def test_fetch_list_page_treats_403_and_empty_200_as_failures():
 
     rows, status, sample = sweep._fetch_list_page(_Client("200"), "A")
     assert rows is None and status == 200 and sample["status"] == 200
+
+
+def test_record_egress_evidence_gated_on_env(monkeypatch):
+    from scraper import egress_ip
+
+    calls = []
+
+    def fake_write(*a, **k):
+        calls.append(1)
+        return {"runner_ip": "1.2.3.4", "runner_ip_in_actions_range": True}
+
+    monkeypatch.setattr(egress_ip, "write_snapshot", fake_write)
+
+    monkeypatch.delenv("JCSTREAM_CAPTURE_EGRESS", raising=False)
+    sweep._record_egress_evidence()
+    assert calls == []  # gated off by default (no network in tests)
+
+    monkeypatch.setenv("JCSTREAM_CAPTURE_EGRESS", "1")
+    sweep._record_egress_evidence()
+    assert calls == [1]  # fires only when the env flag is set
