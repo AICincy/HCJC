@@ -562,8 +562,8 @@ def test_run_empty_page_block_records_200_sample(tmp_path, monkeypatch):
     assert len(log) == 1
     assert log[0]["event"] == "blocked"
     assert log[0]["seen_count"] == 0
-    assert log[0]["surnames_failed"] == 0       # an HTTP 200 did not raise
-    assert log[0]["http_status_counts"] == {}   # so the status histogram is empty
+    assert log[0]["surnames_failed"] == 26              # all detected as 200-blocks
+    assert log[0]["http_status_counts"] == {"200": 26}
     assert log[0]["block_sample"]["status"] == 200
 
 
@@ -588,9 +588,30 @@ def test_sweep_list_captures_empty_page_block_sample():
 
     rows, n_failed, status_counts, block_sample = sweep._sweep_list(_EmptyPageClient(), ["A", "B"])
     assert rows == []
-    assert n_failed == 0          # an HTTP 200 did not raise
-    assert status_counts == {}    # no failed-fetch statuses in the empty-page mode
+    assert n_failed == 2              # detected 200-blocks count as failures
+    assert status_counts == {"200": 2}
     assert block_sample is not None
     assert block_sample["status"] == 200
     assert block_sample["bytes"] == len(body)
     assert block_sample["request"]["method"] == "GET"
+
+
+def test_fetch_list_page_treats_403_and_empty_200_as_failures():
+    import httpx
+
+    class _Client:
+        def __init__(self, mode):
+            self.mode = mode
+
+        def get_response(self, path, params=None):
+            req = httpx.Request("GET", "https://www.hcso.org/inmate-search/?last=A")
+            if self.mode == "403":
+                resp = httpx.Response(403, request=req, content=b"<html>Access denied</html>")
+                raise httpx.HTTPStatusError("403", request=req, response=resp)
+            return httpx.Response(200, request=req, content=b"<html>blocked</html>")
+
+    rows, status, sample = sweep._fetch_list_page(_Client("403"), "A")
+    assert rows is None and status == 403 and sample["status"] == 403
+
+    rows, status, sample = sweep._fetch_list_page(_Client("200"), "A")
+    assert rows is None and status == 200 and sample["status"] == 200

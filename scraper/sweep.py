@@ -537,10 +537,12 @@ def _forensic_sample(resp: httpx.Response) -> dict:
 
 def _fetch_list_page(client: HcsoClient, surname: str) -> tuple[list[ListRow] | None, int | None, dict | None]:
     """Fetch one surname-search page for ``_sweep_list``. Returns
-    ``(rows, status, sample)``: ``rows`` is None when the fetch raised (with the
-    HTTP status, plus a forensic sample for a 403); otherwise ``rows`` is the
-    parsed list, with a forensic sample attached when the response is
-    WAF-block-shaped (HTTP 200, tiny body, zero rows).
+    ``(rows, status, sample)``. ``rows`` is None on a failed fetch, which is
+    either a raised error or a detected WAF block (an HTTP 403 that raised, or an
+    HTTP 200 whose tiny body parsed to zero rows); the HTTP status and a forensic
+    sample accompany it. Otherwise ``rows`` is the parsed list. Treating a
+    detected 200-block as a failure keeps the blocked record self-consistent:
+    it is counted in n_failed and the status histogram, not silently dropped.
 
     sweep-F8: this MUST swallow every exception and return (None, ...) on
     failure. ``pool.map`` in the caller surfaces the first worker raise when
@@ -559,13 +561,13 @@ def _fetch_list_page(client: HcsoClient, surname: str) -> tuple[list[ListRow] | 
         return None, None, None
     rows = parse_list_page(resp.text)
     # Empty-page block mode: the WAF can serve HTTP 200 with a tiny body that
-    # parses to zero rows (instead of a 403). The fetch does not raise, so
-    # capture a forensic sample here too; the roster-collapse guard is what
-    # fires, and the sample documents what HCSO returned.
+    # parses to zero rows (instead of a 403). The fetch does not raise, so treat
+    # it as a failure here (rows=None) carrying the 200 status and a forensic
+    # sample, so it is counted like the 403 path rather than silently dropped.
     if _list_response_looks_blocked(resp.text, rows):
         log.warning("list fetch for surname=%s looks WAF-blocked (HTTP %d, %d bytes, 0 rows)",
                     surname, resp.status_code, len(resp.text))
-        return rows, None, _forensic_sample(resp)
+        return None, resp.status_code, _forensic_sample(resp)
     return rows, None, None
 
 
@@ -573,14 +575,13 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     """Parallel surname search across the configured list.
 
     Returns ``(rows, n_failed, status_counts, block_sample)`` — ``n_failed`` is
-    how many surname fetches raised (distinct from a surname that legitimately
-    returned zero rows). ``status_counts`` is a histogram of HTTP status codes
-    from failed fetches (e.g. ``{"403": 24}``); ``block_sample`` is one
-    representative forensic snapshot of the first blocked response, captured
-    from either an HTTP 403 that raised or an HTTP 200 whose tiny body parsed to
-    zero rows (the WAF's empty-page mode). ``status_counts`` and
-    ``block_sample`` both feed the durable WAF-block evidence log. Each page is
-    fetched by ``_fetch_list_page``.
+    how many surname fetches failed, counting both raised errors and detected
+    WAF blocks (an HTTP 403, or an HTTP 200 stripped to zero rows), distinct
+    from a surname that legitimately returned zero rows. ``status_counts`` is a
+    histogram of those statuses (e.g. ``{"403": 24}`` or ``{"200": 26}``);
+    ``block_sample`` is one representative forensic snapshot of the first blocked
+    response. ``status_counts`` and ``block_sample`` both feed the durable
+    WAF-block evidence log. Each page is fetched by ``_fetch_list_page``.
     """
     aggregated: list[ListRow] = []
     seen: set[str] = set()
