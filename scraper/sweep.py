@@ -44,6 +44,7 @@ from .sweep_guards import (
     SWEEP_MIN_ROSTER_FRACTION,
     check_detail_watchdog,
     prune_photos,
+    roster_stale_hours,
     sweep_looks_healthy,
 )
 
@@ -164,13 +165,20 @@ def run(
         surnames = surnames[:max_surnames]
 
     if CURRENT_PATH.exists():
-        age_s = time.time() - CURRENT_PATH.stat().st_mtime
-        if age_s < MIN_SWEEP_INTERVAL_S:
-            log.info(
-                "current.json is %.0fs old (< %ds); skipping this cycle",
-                age_s, MIN_SWEEP_INTERVAL_S,
-            )
-            return 0
+        # Skip-gate: check the data's generated_utc (not file mtime).
+        # File mtime can be updated by git checkout or other ops without the data
+        # being refreshed, which would cause the sweep to stay frozen indefinitely.
+        # Using generated_utc ensures the gate respects the *actual* data staleness
+        # and isn't fooled by filesystem touches.
+        prev_gen_utc = _prev_generated_utc(CURRENT_PATH)
+        if prev_gen_utc:
+            data_age_h = roster_stale_hours(prev_gen_utc)
+            if data_age_h is not None and data_age_h * 3600 < MIN_SWEEP_INTERVAL_S:
+                log.info(
+                    "current.json data is %.1fh old (< %.0fmin); skipping this cycle",
+                    data_age_h, MIN_SWEEP_INTERVAL_S / 60,
+                )
+                return 0
 
     try:
         previous = load_current_or_raise(CURRENT_PATH)
