@@ -63,7 +63,7 @@ def prev_row_count(path) -> int | None:
     try:
         rc = json.loads(p.read_text(encoding="utf-8")).get("row_count")
         return rc if isinstance(rc, int) else None
-    except (json.JSONDecodeError, OSError):
+    except (json.JSONDecodeError, OSError, AttributeError):
         return None
 
 
