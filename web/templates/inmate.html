@@ -92,11 +92,11 @@
   </div>
 </section>
 
-{% if inmate.charges %}
 <div class="section-h">
   <h2>Charges</h2>
   <span class="pill">{{ inmate.charges | length }}</span>
 </div>
+{% if inmate.charges %}
 <table class="charges">
   <caption class="sr-only">Charges against {{ inmate.full_name }}</caption>
   <thead><tr>
@@ -332,10 +332,6 @@
 </details>
 {% endif %}
 {% else %}
-<div class="section-h">
-  <h2>Charges</h2>
-  <span class="pill">0</span>
-</div>
 <p class="muted note-paragraph">
   No charges are currently listed for this booking on HCSO's public roster.
   This is common for a recent booking before charges are entered, or for a
