@@ -86,18 +86,30 @@ def _parse_booking_dt(s: str | None) -> datetime | None:
     return None
 
 
-def _parse_cfs_dt(row: dict) -> datetime | None:
+def _parse_cfs_dt(row: dict) -> tuple[datetime, bool] | None:
     """CFS feeds use slightly different timestamp fields per dataset.
-    Try the common ones in order."""
+    Try the common ones in order.
+
+    Returns ``(datetime, has_time)`` where ``has_time`` is True when the
+    Socrata string contained a 'T' separator (real time-of-day) and
+    False when it was a date-only string that ``datetime.fromisoformat``
+    defaulted to midnight UTC. Returns None when no field parses.
+
+    The ``has_time`` flag lets the caller avoid the prior heuristic
+    ``cfs_dt.hour != 0`` which mis-classified a legitimate midnight UTC
+    row as date-only.
+    """
     for key in ("event_datetime", "create_time_incident", "dispatch_time",
                 "incident_date", "datereported", "eventdate", "interview_date"):
         v = row.get(key)
         if not v:
             continue
+        s = str(v)
+        has_time = "T" in s
         # Socrata returns ISO-8601 strings like '2026-05-15T18:23:00.000'
         try:
-            dt = datetime.fromisoformat(str(v).replace("Z", "+00:00").split(".")[0])
-            return dt.replace(tzinfo=timezone.utc) if dt.tzinfo is None else dt
+            dt = datetime.fromisoformat(s.replace("Z", "+00:00").split(".")[0])
+            return (dt.replace(tzinfo=timezone.utc) if dt.tzinfo is None else dt), has_time
         except ValueError:
             continue
     return None
@@ -146,17 +158,19 @@ def correlate(
             continue
 
         for idx, row in enumerate(cfs_rows):
-            cfs_dt = _parse_cfs_dt(row)
-            if not cfs_dt:
+            parsed = _parse_cfs_dt(row)
+            if not parsed:
                 continue
+            cfs_dt, has_time = parsed
             # Same-day filter first (cheap)
             if abs((cfs_dt.date() - booked.date()).days) > 1:
                 continue
-            # If we have time-of-day on the CFS side, tighten to the window.
+            # If Socrata returned a real time-of-day (T-separator present),
+            # tighten to the window. A legitimate midnight-UTC event keeps
+            # has_time=True and is filtered correctly; a date-only response
+            # defaults to midnight but skips this tighten step.
             dt_delta_min = abs((cfs_dt - booked).total_seconds()) / 60.0
-            if cfs_dt.hour != 0 and dt_delta_min > WINDOW_MINUTES * 8:
-                # Still within ~8 hours; loose filter. The hour=0 check
-                # avoids dropping rows where Socrata didn't return a time.
+            if has_time and dt_delta_min > WINDOW_MINUTES * 8:
                 continue
 
             # Textual overlap on the disposition + incident type

@@ -131,3 +131,27 @@ def test_make_client_uses_defaults_when_env_unset(monkeypatch):
     assert c.base_url == client_mod.DEFAULT_BASE
     assert c.user_agent == client_mod.DEFAULT_UA
     assert c.crawl_delay == client_mod.DEFAULT_CRAWL_DELAY
+
+
+# ----- base_url guard around verify=False ----------------------------------
+
+def test_enter_refuses_non_hcso_base_url():
+    # __enter__ asserts the host is hcso.org because verify=False is unsafe
+    # anywhere else. A future operator pointing JCSTREAM_BASE_URL elsewhere
+    # must explicitly re-enable verify before retargeting.
+    c = client_mod.HcsoClient(base_url="https://example.com")
+    with pytest.raises(ValueError, match="non-HCSO"):
+        c.__enter__()
+
+
+def test_enter_accepts_hcso_subdomain():
+    # The guard accepts hcso.org and any subdomain of it. Use a context
+    # manager so the implicit __exit__ runs and closes the underlying client.
+    with client_mod.HcsoClient(base_url="https://www.hcso.org") as c:
+        assert c._client is not None
+
+
+def test_enter_accepts_default_base_url():
+    # The default constructor (used by make_client) targets hcso.org.
+    with client_mod.HcsoClient() as c:
+        assert c._client is not None

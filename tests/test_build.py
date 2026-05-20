@@ -442,3 +442,26 @@ def test_load_caselaw_cache_returns_empty_when_by_code_key_missing(tmp_path: Pat
         json.dumps({"generated_utc": "2026-05-14T00:00:00Z"}), encoding="utf-8"
     )
     assert build._load_caselaw_cache() == {}
+
+
+# ----- _iso_booking_date ----------------------------------------------------
+
+def test_iso_booking_date_parses_short_year():
+    # HCSO's MM/DD/YY form should round-trip to ISO-8601 YYYY-MM-DD.
+    inm = _inm(booking_date="5/12/26")
+    assert build._iso_booking_date(inm) == "2026-05-12"
+
+
+def test_iso_booking_date_parses_four_digit_year():
+    inm = _inm(booking_date="11/3/2025")
+    assert build._iso_booking_date(inm) == "2025-11-03"
+
+
+def test_iso_booking_date_returns_none_for_empty():
+    assert build._iso_booking_date(_inm(booking_date="")) is None
+    assert build._iso_booking_date(_inm()) is None  # default empty
+
+
+def test_iso_booking_date_returns_none_for_garbage():
+    assert build._iso_booking_date(_inm(booking_date="not a date")) is None
+    assert build._iso_booking_date(_inm(booking_date="2026-05-12")) is None  # ISO input is rejected; only HCSO MM/DD forms

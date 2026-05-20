@@ -23,7 +23,7 @@
                {"@type":"PropertyValue","name":"HCSO booking number","value": {{ inmate.booking_number | tojson }}}],
  "subjectOf":{"@type":"WebPage","name":"JCStream record page",
    "url": {{ ((site_url or "") ~ "/inmate/" ~ inmate.inmate_number ~ "/") | tojson }},
-   {% if inmate.booking_date %}"dateCreated": {{ inmate.booking_date | tojson }},{% endif %}
+   {% set iso_booking = iso_booking_date(inmate) %}{% if iso_booking %}"dateCreated": {{ iso_booking | tojson }},{% endif %}
    "isAccessibleForFree":true,
    "license":"https://creativecommons.org/licenses/by-nc/4.0/",
    "isBasedOn":{"@type":"WebPage",
