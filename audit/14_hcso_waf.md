@@ -245,5 +245,9 @@ chain (ordering and completeness within the file), and the git commit history
 |---|---|
 | `data/waf_block_log.json` | The append-only, hash-chained record of each block and recovery. |
 | `python -m scraper.verify_block_log` | On-demand integrity check: walks the `prev_sha256` chain, exit 0 intact / 1 broken. Also run in CI. |
+| `python -m scraper.egress_ip` / `data/egress_evidence.json` | Snapshots the runner egress IP against GitHub's published Actions ranges; auto-written on a block when `JCSTREAM_CAPTURE_EGRESS=1`. |
 | `audit/15_pra_149_43B_request.md` | Draft written R.C. 149.43(B) request (roster export + the WAF rule/policy). |
 | `audit/16_evidence_affidavit.md` | Draft operator affidavit authenticating the log for the mandamus record. |
+| `audit/17_mandamus_petition.md` | Draft R.C. 149.43(C) petition for a writ of mandamus. |
+| `audit/18_offplatform_capture.md` | Runbook to corroborate a block from a non-GitHub IP (curl + SHA-256 + Wayback). |
+| `audit/19_counsel_cover_memo.md` | One-page entry point for counsel: the dossier, the integrity model, and the R.C. 149.43 hooks. |
