@@ -26,6 +26,7 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
+from functools import partial
 from pathlib import Path
 
 import httpx
@@ -534,6 +535,40 @@ def _forensic_sample(resp: httpx.Response) -> dict:
     return sample
 
 
+def _fetch_list_page(client: HcsoClient, surname: str) -> tuple[list[ListRow] | None, int | None, dict | None]:
+    """Fetch one surname-search page for ``_sweep_list``. Returns
+    ``(rows, status, sample)``: ``rows`` is None when the fetch raised (with the
+    HTTP status, plus a forensic sample for a 403); otherwise ``rows`` is the
+    parsed list, with a forensic sample attached when the response is
+    WAF-block-shaped (HTTP 200, tiny body, zero rows).
+
+    sweep-F8: this MUST swallow every exception and return (None, ...) on
+    failure. ``pool.map`` in the caller surfaces the first worker raise when
+    iterated, which would truncate the surname sweep below
+    SWEEP_MAX_FAILED_FRACTION and look like a healthy partial sweep. If you ever
+    change this to re-raise a typed error, switch the caller to
+    ThreadPoolExecutor + as_completed (see scraper/sweep.py:run) before merging.
+    """
+    try:
+        resp = client.get_response(SEARCH_PATH, params={"last": surname})
+    except httpx.HTTPStatusError as e:
+        log.warning("list fetch failed for surname=%s: %s", surname, e)
+        return None, e.response.status_code, _forensic_sample(e.response)
+    except Exception as e:
+        log.warning("list fetch failed for surname=%s: %s", surname, e)
+        return None, None, None
+    rows = parse_list_page(resp.text)
+    # Empty-page block mode: the WAF can serve HTTP 200 with a tiny body that
+    # parses to zero rows (instead of a 403). The fetch does not raise, so
+    # capture a forensic sample here too; the roster-collapse guard is what
+    # fires, and the sample documents what HCSO returned.
+    if _list_response_looks_blocked(resp.text, rows):
+        log.warning("list fetch for surname=%s looks WAF-blocked (HTTP %d, %d bytes, 0 rows)",
+                    surname, resp.status_code, len(resp.text))
+        return rows, None, _forensic_sample(resp)
+    return rows, None, None
+
+
 def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow], int, dict[str, int], dict | None]:
     """Parallel surname search across the configured list.
 
@@ -544,42 +579,16 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     representative forensic snapshot of the first blocked response, captured
     from either an HTTP 403 that raised or an HTTP 200 whose tiny body parsed to
     zero rows (the WAF's empty-page mode). ``status_counts`` and
-    ``block_sample`` both feed the durable WAF-block evidence log.
+    ``block_sample`` both feed the durable WAF-block evidence log. Each page is
+    fetched by ``_fetch_list_page``.
     """
     aggregated: list[ListRow] = []
     seen: set[str] = set()
-
-    # sweep-F8: fetch_one MUST swallow every exception and return (None, ...) on
-    # failure. pool.map below surfaces the first worker raise when iterated,
-    # which would truncate the surname sweep below SWEEP_MAX_FAILED_FRACTION
-    # and look like a healthy partial sweep. If you ever change fetch_one to
-    # re-raise a typed error, switch to ThreadPoolExecutor + as_completed
-    # (see scraper/sweep.py:run for the pattern) before merging.
-    def fetch_one(surname: str) -> tuple[list[ListRow] | None, int | None, dict | None]:
-        try:
-            resp = client.get_response(SEARCH_PATH, params={"last": surname})
-        except httpx.HTTPStatusError as e:
-            log.warning("list fetch failed for surname=%s: %s", surname, e)
-            return None, e.response.status_code, _forensic_sample(e.response)
-        except Exception as e:
-            log.warning("list fetch failed for surname=%s: %s", surname, e)
-            return None, None, None
-        rows = parse_list_page(resp.text)
-        # Empty-page block mode: the WAF can serve HTTP 200 with a tiny body
-        # that parses to zero rows (instead of a 403). The fetch does not raise,
-        # so capture a forensic sample here too; the roster-collapse guard is
-        # what fires, and the sample documents what HCSO returned.
-        if _list_response_looks_blocked(resp.text, rows):
-            log.warning("list fetch for surname=%s looks WAF-blocked (HTTP %d, %d bytes, 0 rows)",
-                        surname, resp.status_code, len(resp.text))
-            return rows, None, _forensic_sample(resp)
-        return rows, None, None
-
     failed = 0
     status_counts: dict[str, int] = {}
     block_sample: dict | None = None
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
-        for rows, status, sample in pool.map(fetch_one, surnames):
+        for rows, status, sample in pool.map(partial(_fetch_list_page, client), surnames):
             if block_sample is None and sample is not None:
                 block_sample = sample
             if rows is None:
