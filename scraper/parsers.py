@@ -30,7 +30,14 @@ _JPEG_SOI = b"\xff\xd8\xff"
 # High-value charge labels: if any of these is absent from every charge row in
 # a single detail page, the parser warns once per process (label-drift signal).
 _HIGH_VALUE_CHARGE_LABELS = ("Description", "ORC Code", "Bond Amount", "Court Date")
+# Module-level set of labels already warned about, gated by a lock so the
+# sweep's ThreadPoolExecutor workers (and any future async refactor) can't
+# race the "warn once per process" semantic into "warn many times" or skip
+# the warning entirely. The lock scope is intentionally narrow: read +
+# possible add. The log call itself runs outside the critical section.
+import threading as _threading
 _WARNED_MISSING_LABELS: set[str] = set()
+_WARNED_MISSING_LABELS_LOCK = _threading.Lock()
 
 
 def parse_list_page(html: str) -> list[ListRow]:
@@ -295,9 +302,12 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
     # otherwise silently empty that field with no aggregate watchdog hit.
     if charges:
         for label in _HIGH_VALUE_CHARGE_LABELS:
-            if label in seen_charge_labels or label in _WARNED_MISSING_LABELS:
+            if label in seen_charge_labels:
                 continue
-            _WARNED_MISSING_LABELS.add(label)
+            with _WARNED_MISSING_LABELS_LOCK:
+                if label in _WARNED_MISSING_LABELS:
+                    continue
+                _WARNED_MISSING_LABELS.add(label)
             log.warning(
                 "charge label %r absent from every row on a detail page; "
                 "HCSO may have renamed the column",
