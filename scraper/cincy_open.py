@@ -67,13 +67,17 @@ def prev_row_count(path) -> int | None:
         return None
 
 
-def warn_on_row_drop(path, label: str, new_count: int, *, drop_frac: float = 0.5) -> None:
+def warn_on_row_drop(path, label: str, new_count: int, *, drop_frac: float = 0.5,
+                     min_rows: int = 50) -> None:
     """Log a WARNING when `new_count` falls below `drop_frac` of the prior
     snapshot's row_count at `path`, distinguishing a real feed collapse from
     the few-percent churn a rolling window normally shows. Call before
-    overwriting the file. No-op when there is no prior count to compare."""
+    overwriting the file. No-op when there is no prior count to compare, or
+    when the prior count is below `min_rows`: a percentage guard is meaningless
+    on small rare-event feeds (e.g. CCA complaints), where a 4 -> 1 swing is
+    noise, not a collapse. Advisory only; it does not block the write."""
     prev = prev_row_count(path)
-    if prev and new_count < prev * drop_frac:
+    if prev and prev >= min_rows and new_count < prev * drop_frac:
         log.warning(
             "%s: row_count dropped sharply %d -> %d (< %.0f%% of prior); possible feed collapse",
             label, prev, new_count, drop_frac * 100,

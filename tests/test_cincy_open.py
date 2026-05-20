@@ -99,6 +99,22 @@ def test_dumps_rows_per_line_empty_rows_is_valid():
     assert json.loads(dumps_rows_per_line(payload)) == payload
 
 
+def test_warn_on_row_drop_silent_below_min_rows(tmp_path, caplog):
+    p = tmp_path / "feed.json"
+    _write_feed(p, 30, rows=[])  # small rare-event feed
+    with caplog.at_level(logging.WARNING):
+        warn_on_row_drop(p, "CCA complaints", 1)  # 97% drop, but tiny baseline
+    assert caplog.records == []
+
+
+def test_warn_on_row_drop_fires_at_min_rows_baseline(tmp_path, caplog):
+    p = tmp_path / "feed.json"
+    _write_feed(p, 111, rows=[])  # CFS-sized baseline, above the floor
+    with caplog.at_level(logging.WARNING):
+        warn_on_row_drop(p, "CFS", 0)
+    assert any("dropped sharply" in r.message for r in caplog.records)
+
+
 def test_warn_on_row_drop_silent_when_prior_is_zero(tmp_path, caplog):
     p = tmp_path / "feed.json"
     _write_feed(p, 0, rows=[])
