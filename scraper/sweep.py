@@ -84,6 +84,20 @@ def _prev_generated_utc(path: Path) -> str | None:
         return None
 
 
+def _warn_if_roster_frozen(path: Path) -> None:
+    """Escalate to a loud, greppable alarm when the degraded-roster guard has
+    been keeping last-good data longer than ROSTER_STALE_ALARM_HOURS, so a
+    multi-hour silent freeze (e.g. a sustained HCSO WAF block) surfaces. The
+    workflow still exits 0 so the open-data feeds keep committing."""
+    stale_h = roster_stale_hours(_prev_generated_utc(path))
+    if stale_h is not None and stale_h >= ROSTER_STALE_ALARM_HOURS:
+        log.error(
+            "ROSTER FROZEN: last-good roster is %.1fh old (>= %.1fh alarm) and the "
+            "guard has refused to write again; investigate HCSO WAF / Actions egress",
+            stale_h, ROSTER_STALE_ALARM_HOURS,
+        )
+
+
 # Back-compat alias: prefer scraper.sweep_guards.sweep_looks_healthy in new code.
 _sweep_looks_healthy = sweep_looks_healthy
 
@@ -188,19 +202,9 @@ def run(
                 )
                 # The list-sweep guard thresholds (>10% surname errors or
                 # roster collapsed below 50% of prior) are checked in
-                # scraper/sweep_guards.sweep_looks_healthy.
-                # Freeze alarm: if the guard has been keeping last-good data
-                # for hours, the roster is silently frozen. Escalate to a
-                # loud, greppable line with the duration so a multi-hour
-                # freeze surfaces (the workflow still exits 0 so the open-data
-                # feeds keep committing).
-                stale_h = roster_stale_hours(_prev_generated_utc(CURRENT_PATH))
-                if stale_h is not None and stale_h >= ROSTER_STALE_ALARM_HOURS:
-                    log.error(
-                        "ROSTER FROZEN: last-good roster is %.1fh old (>= %.1fh alarm) and the "
-                        "guard has refused to write again; investigate HCSO WAF / Actions egress",
-                        stale_h, ROSTER_STALE_ALARM_HOURS,
-                    )
+                # scraper/sweep_guards.sweep_looks_healthy. If the guard has
+                # been keeping last-good data for hours, escalate the freeze.
+                _warn_if_roster_frozen(CURRENT_PATH)
                 return 0
 
             # Decide which detail pages to fetch.

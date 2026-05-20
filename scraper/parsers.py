@@ -51,7 +51,7 @@ def parse_list_page(html: str) -> list[ListRow]:
     tree = HTMLParser(html)
     rows: list[ListRow] = []
     for tr in tree.css("tr"):
-        cells = {c.attributes.get("label", ""): _text(c) for c in tr.css("td[label]")}
+        cells = {(c.attributes.get("label") or ""): _text(c) for c in tr.css("td[label]")}
         last = cells.get("Last Name", "").strip()
         first = cells.get("First Name", "").strip()
         admit = cells.get("Admit Date", "").strip()
@@ -74,7 +74,7 @@ def parse_list_page(html: str) -> list[ListRow]:
 
 def _extract_inmate_id_from_row(tr: Node) -> str:
     for a in tr.css("a"):
-        href = a.attributes.get("href", "")
+        href = a.attributes.get("href") or ""
         m = _DETAIL_ID.search(href)
         if m:
             return m.group(1)
@@ -204,7 +204,7 @@ def _parse_name(tree: HTMLParser) -> str:
     
     # Tier 4: Look for common name table cells (td/th with label attribute)
     for td in tree.css("td[label], th"):
-        label = td.attributes.get("label", "").strip()
+        label = (td.attributes.get("label") or "").strip()
         if label.lower() in ("name", "full name", "inmate", "inmate name"):
             text = _text(td)
             if text:
@@ -266,7 +266,7 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
     charges_table = _find_charges_table(tree)
     row_source = charges_table if charges_table is not None else tree
     for tr in row_source.css("tr"):
-        cells = {c.attributes.get("label", ""): _text(c) for c in tr.css("td[label]")}
+        cells = {(c.attributes.get("label") or ""): _text(c) for c in tr.css("td[label]")}
         if not cells:
             continue
         if {"Last Name", "First Name", "Admit Date"}.issubset(cells.keys()):
@@ -379,12 +379,12 @@ def _extract_photo_url(tree: HTMLParser) -> str | None:
     """
     fallback: str | None = None
     for img in tree.css("img"):
-        src = img.attributes.get("src", "")
+        src = img.attributes.get("src") or ""
         if src.startswith("data:") or not src:
             continue
-        alt = (img.attributes.get("alt", "") or "").lower()
-        style = img.attributes.get("style", "")
-        cls = img.attributes.get("class", "") or ""
+        alt = (img.attributes.get("alt") or "").lower()
+        style = img.attributes.get("style") or ""
+        cls = img.attributes.get("class") or ""
         if any(k in alt for k in ("photo", "mug", "inmate", "booking")):
             return src
         if any(k in cls for k in ("photo", "mug", "inmate")):
@@ -410,7 +410,7 @@ def _extract_inline_photo(tree: HTMLParser) -> bytes | None:
     """
     soi_candidate: bytes | None = None
     for img in tree.css("img"):
-        src = img.attributes.get("src", "")
+        src = img.attributes.get("src") or ""
         if not src.startswith("data:"):
             continue
         header, _, payload = src.partition(",")
@@ -421,7 +421,7 @@ def _extract_inline_photo(tree: HTMLParser) -> bytes | None:
         except ValueError:  # binascii.Error subclasses ValueError
             log.warning("failed to base64-decode inline photo candidate")
             continue
-        style = img.attributes.get("style", "")
+        style = img.attributes.get("style") or ""
         if "274px" in style:
             return data
         if soi_candidate is None and data[:3] == _JPEG_SOI:

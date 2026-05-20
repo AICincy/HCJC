@@ -142,7 +142,19 @@ def _load_inputs():
     return snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points
 
 
-def _build_env(snapshot: Snapshot, offenses: dict[str, dict]) -> Environment:
+def _distinct_chapters(inmates: list[Inmate]) -> list[tuple[str, str]]:
+    """Distinct (slug, label) ORC chapters present on the roster, sorted by
+    label, for the homepage filter dropdown."""
+    chap: dict[str, str] = {}
+    for inm in inmates:
+        ch = _primary_chapter(inm)
+        if ch:
+            chap[_chap_slug(ch["label"])] = ch["label"]
+    return sorted(chap.items(), key=lambda kv: kv[1])
+
+
+def _build_env(snapshot: Snapshot, offenses: dict[str, dict],
+               base_url: str, site_url: str) -> Environment:
     """Construct the Jinja Environment and register every template global and
     filter. The registered names ARE the template contract: a helper added in
     web/shape.py or web/classify.py must be registered here under the same name
@@ -159,11 +171,11 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict]) -> Environment:
     env.filters["dt_fmt"] = _strftime_nopad
     env.globals["cck_name_search"] = cck.name_search_url
     env.globals["cck_case_summary"] = cck.case_summary_url
-    env.globals["base_url"] = _resolve_base_url()
+    env.globals["base_url"] = base_url
     # Absolute origin (scheme + host) for RSS/Atom links, the web manifest and
     # JSON-LD — distinct from base_url, which is a path prefix and is empty when
     # we serve from a custom domain at the root.
-    env.globals["site_url"] = _resolve_site_url()
+    env.globals["site_url"] = site_url
     # Optional Giscus (GitHub-Discussions-backed) comments on inmate pages.
     # Activated only when JCSTREAM_GISCUS_REPO_ID is set as a secret/var; the
     # comment-policy section renders either way.
@@ -213,13 +225,7 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict]) -> Environment:
     env.globals["next_court_date"] = _next_court_date
     env.globals["case_numbers"] = _case_numbers
     env.globals["charge_status_summary"] = _charge_status_summary
-    # Distinct chapters present, for the filter dropdown.
-    _chap_set: dict[str, str] = {}
-    for inm in snapshot.inmates:
-        ch = _primary_chapter(inm)
-        if ch:
-            _chap_set[_chap_slug(ch["label"])] = ch["label"]
-    env.globals["all_chapters"] = sorted(_chap_set.items(), key=lambda kv: kv[1])
+    env.globals["all_chapters"] = _distinct_chapters(snapshot.inmates)
     env.globals["bond_total"] = _bond_total
     env.globals["days_in_custody"] = _days_in_custody
     env.globals["charges_by_chapter"] = _charges_by_chapter
@@ -267,7 +273,9 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
 def build(out_dir: Path) -> int:
     snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points = _load_inputs()
     offenses = orc_mod.load_offenses()
-    env = _build_env(snapshot, offenses)
+    base_url = _resolve_base_url()
+    site_url = _resolve_site_url()
+    env = _build_env(snapshot, offenses, base_url, site_url)
     _warn_about_unmapped_orcs(snapshot.inmates, offenses)
     rd = _prepare_render_data(snapshot, events)
 
@@ -289,11 +297,11 @@ def build(out_dir: Path) -> int:
     _render_courts_page(env, out_dir)
     _copy_static(out_dir)
     _copy_photos(out_dir)
-    _write_manifest(out_dir, env.globals["base_url"])
+    _write_manifest(out_dir, base_url)
     _write_search_json(out_dir, snapshot)
     _write_dispatches(out_dir, dispatch_points)
     _write_cname(out_dir)
-    _write_well_known(out_dir, env.globals["site_url"], snapshot.generated_utc)
+    _write_well_known(out_dir, site_url, snapshot.generated_utc)
     _write_checksums(out_dir)
     # Tell GitHub Pages NOT to Jekyll-process the built site.
     (out_dir / ".nojekyll").write_text("", encoding="utf-8")
