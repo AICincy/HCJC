@@ -499,14 +499,26 @@ def test_forensic_sample_captures_request_side():
     req = httpx.Request(
         "GET",
         "https://www.hcso.org/justice-center-services/inmate-search/?last=A",
-        headers={"user-agent": "JCStream/0.1"},
+        headers={"user-agent": "JCStream/0.1", "cookie": "cf_clearance=secret"},
     )
     resp = httpx.Response(403, request=req, content=b"<html>Access denied</html>")
     s = sweep._forensic_sample(resp)
     assert s["request"]["method"] == "GET"
     assert "last=A" in s["request"]["url"]
     assert s["request"]["headers"]["user-agent"] == "JCStream/0.1"
+    # A session cookie echoed by the client's jar must not land in the public log.
+    assert s["request"]["headers"]["cookie"] == "[redacted]"
     assert isinstance(s["captured_utc"], str)
+
+
+def test_forensic_sample_redacts_response_set_cookie():
+    import httpx
+
+    resp = httpx.Response(403, headers={"server": "cloudflare", "set-cookie": "cf_clearance=secret"},
+                          content=b"blocked")
+    s = sweep._forensic_sample(resp)
+    assert s["headers"]["server"] == "cloudflare"      # benign WAF header kept
+    assert s["headers"]["set-cookie"] == "[redacted]"  # token value redacted
 
 
 def test_list_response_looks_blocked_predicate():

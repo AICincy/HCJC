@@ -491,12 +491,27 @@ def _prune_and_report(photos_dir: Path, active_ids: set[str]) -> None:
     prune_photos(photos_dir, active_ids)
 
 
+_SENSITIVE_HEADERS = frozenset({"cookie", "set-cookie", "authorization", "proxy-authorization"})
+
+
+def _redact_headers(headers: httpx.Headers) -> dict:
+    """Copy request/response headers for the evidence log, replacing the value
+    of any session or credential header with a placeholder. The header's
+    presence is preserved (forensically useful) but its token value never
+    reaches the public data/waf_block_log.json: a WAF can set a clearance
+    cookie that the client's cookie jar echoes back, and a proxy could add an
+    auth header."""
+    return {k: ("[redacted]" if k.lower() in _SENSITIVE_HEADERS else v)
+            for k, v in headers.items()}
+
+
 def _forensic_sample(resp: httpx.Response) -> dict:
     """Forensic snapshot of a WAF-block response for the evidence log: capture
     time, the denied request (method/url/headers), status, body length +
-    SHA-256 (tamper-evidence), a bounded body sample, and the full response
-    headers. A 403 block page carries no PII/secrets; the request headers carry
-    no auth (the HCSO client sends no credentials)."""
+    SHA-256 (tamper-evidence), a bounded body sample, and the response headers.
+    A 403 block page carries no PII; session/credential headers (Cookie,
+    Set-Cookie, Authorization, Proxy-Authorization) are redacted before they
+    reach the public log."""
     body = resp.content or b""
     sample: dict = {
         "captured_utc": utcnow_iso(),
@@ -504,7 +519,7 @@ def _forensic_sample(resp: httpx.Response) -> dict:
         "bytes": len(body),
         "sha256": hashlib.sha256(body).hexdigest(),
         "body_sample": (resp.text or "")[:1000],
-        "headers": dict(resp.headers),
+        "headers": _redact_headers(resp.headers),
     }
     try:
         req = resp.request
@@ -514,7 +529,7 @@ def _forensic_sample(resp: httpx.Response) -> dict:
         sample["request"] = {
             "method": req.method,
             "url": str(req.url),
-            "headers": dict(req.headers),
+            "headers": _redact_headers(req.headers),
         }
     return sample
 
