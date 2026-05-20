@@ -79,8 +79,11 @@ def _prev_generated_utc(path: Path) -> str | None:
     if not path.exists():
         return None
     try:
-        return json.loads(path.read_text(encoding="utf-8")).get("generated_utc")
-    except (json.JSONDecodeError, OSError, AttributeError):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(data, dict):
+            return data.get("generated_utc")
+        return None
+    except (json.JSONDecodeError, OSError):
         return None
 
 
