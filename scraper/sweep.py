@@ -489,6 +489,12 @@ def _fetch_one(
         # minimal Inmate. Better a name than nothing for a newly-booked
         # record.
         break
+    if inm is None:
+        # Unreachable: range(2) always runs iteration 0, which either returns
+        # at the fetch-exception guard or assigns inm from parse_detail_page
+        # (which always yields an Inmate). The guard narrows Inmate | None for
+        # the type checker and documents the invariant.
+        return None, False, False
     detail_named = bool(inm.last_name or inm.first_name)
     detail_had_photo = bool(photo_bytes or photo_url)
 

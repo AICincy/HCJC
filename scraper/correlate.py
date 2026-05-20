@@ -166,9 +166,13 @@ def correlate(
             if abs((cfs_dt.date() - booked.date()).days) > 1:
                 continue
             # If Socrata returned a real time-of-day (T-separator present),
-            # tighten to the window. A legitimate midnight-UTC event keeps
-            # has_time=True and is filtered correctly; a date-only response
-            # defaults to midnight but skips this tighten step.
+            # drop pairs beyond a coarse 8x-window (8h) outer bound. This is
+            # deliberately wider than the WINDOW_MINUTES*4 score-decay below
+            # (line 184): inside 8h a strong text overlap can still clear
+            # MIN_CONFIDENCE on its own even after the temporal score hits 0.
+            # A legitimate midnight-UTC event keeps has_time=True and is bounded
+            # correctly; a date-only response defaults to midnight and skips
+            # this step (the same-day filter above already bounds it).
             dt_delta_min = abs((cfs_dt - booked).total_seconds()) / 60.0
             if has_time and dt_delta_min > WINDOW_MINUTES * 8:
                 continue

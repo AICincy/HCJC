@@ -87,7 +87,7 @@ def build(out_dir: Path) -> int:
     _seen_ev: set[str] = set()
     _all_cfs: list[dict] = []
     for r in (cfs_rows + cfs_pdi_rows):
-        ev = r.get("event_number") or id(r)
+        ev = str(r.get("event_number") or id(r))
         if ev not in _seen_ev:
             _seen_ev.add(ev)
             _all_cfs.append(r)
@@ -303,9 +303,13 @@ def _dispatch_points(cfs_rows: list[dict], shooting_rows: list[dict], limit: int
     t (timestamp as the source prints it).
     """
     def _coord(row: dict) -> tuple[float, float] | None:
+        lat_raw = row.get("latitude_x")
+        lon_raw = row.get("longitude_x")
+        if lat_raw is None or lon_raw is None:
+            return None
         try:
-            la = float(row.get("latitude_x"))
-            lo = float(row.get("longitude_x"))
+            la = float(lat_raw)
+            lo = float(lon_raw)
         except (TypeError, ValueError):
             return None
         # Greater-Cincinnati sanity box — drops 0,0 and obviously bad rows.
@@ -344,7 +348,7 @@ def _write_dispatches(out_dir: Path, points: list[dict]) -> None:
     (out_dir / "dispatches.json").write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
 
 
-def _warn_about_unmapped_orcs(inmates: list[Inmate], offenses: dict[str, str]) -> None:
+def _warn_about_unmapped_orcs(inmates: list[Inmate], offenses: dict[str, dict]) -> None:
     codes = [c.orc_code for inm in inmates for c in inm.charges if c.orc_code]
     missing = orc_mod.codes_without_titles(codes, offenses)
     # Strip HCSO's placeholder rows (0000.00, 0001.00, 0002.00 etc.) — those

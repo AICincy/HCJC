@@ -12,6 +12,7 @@ or CAPTCHAs.
 from __future__ import annotations
 
 import os
+import threading
 import time
 import logging
 from dataclasses import dataclass, field
@@ -60,11 +61,9 @@ class HcsoClient:
     concurrency: int = DEFAULT_CONCURRENCY
     _last_request_at: float = field(default=0.0, init=False)
     _client: httpx.Client | None = field(default=None, init=False)
-    _lock: object = field(default=None, init=False)
+    _lock: threading.Lock = field(default_factory=threading.Lock, init=False)
 
     def __enter__(self) -> "HcsoClient":
-        import threading
-        self._lock = threading.Lock()
         # verify=False below is sound only for the HCSO host. If a future
         # operator (or JCSTREAM_BASE_URL override) points this client at any
         # other host, the unverified TLS would let an on-path attacker

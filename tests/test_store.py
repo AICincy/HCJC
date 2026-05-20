@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -172,3 +173,28 @@ def test_load_current_forgiving_still_returns_empty_on_corrupt(tmp_path: Path, c
     bad.write_text("{not json", encoding="utf-8")
     assert load_current(bad) == {}
     assert any("could not deserialize" in r.message for r in caplog.records)
+
+
+def test_anon_changelog_dedupes_recent_rows_across_sweeps(tmp_path: Path):
+    # Regression: recent (non-anonymized) rows were keyed with a 3-tuple that
+    # never matched the 5-tuple seen_keys built from existing rows, so every
+    # sweep re-appended the same recent event. A second identical sweep must
+    # not grow the file.
+    from datetime import datetime, timezone
+
+    from scraper.models import ChangeEvent
+    from scraper.store import save_anon_changelog
+
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    ev = ChangeEvent(event="booked", inmate_number="42", name="DOE, JOHN",
+                     timestamp_utc=now)
+    path = tmp_path / "anon_changelog.json"
+    enr = {"42": {"tier": "F1", "category": "violent"}}
+
+    save_anon_changelog(path, [ev], enrichment=enr)
+    first = json.loads(path.read_text(encoding="utf-8"))
+    save_anon_changelog(path, [ev], enrichment=enr)
+    second = json.loads(path.read_text(encoding="utf-8"))
+
+    assert len(first) == 1
+    assert len(second) == 1  # not duplicated on the second sweep

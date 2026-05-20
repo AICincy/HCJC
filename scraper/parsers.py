@@ -299,6 +299,15 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
             "(Description/ORC Code labels may have drifted)",
             skipped_with_cells,
         )
+    elif skipped_with_cells:
+        # Partial skip: some charges parsed, some labeled rows had neither
+        # Description nor ORC Code. Usually benign (non-charge labeled rows),
+        # so debug rather than warn; visible when diagnosing label drift.
+        log.debug(
+            "charge table parser skipped %d labeled rows that lacked both "
+            "Description and ORC Code (extracted %d charges)",
+            skipped_with_cells, len(charges),
+        )
     # Per-process drift signal: when a detail page yielded charges but a
     # high-value column was absent from every row, warn once. Catches the
     # case where one column rename (e.g. "Bond Amount" to "Bond ($)") would
@@ -409,7 +418,7 @@ def _extract_inline_photo(tree: HTMLParser) -> bytes | None:
             continue
         try:
             data = base64.b64decode(payload, validate=False)
-        except (ValueError, base64.binascii.Error):
+        except ValueError:  # binascii.Error subclasses ValueError
             log.warning("failed to base64-decode inline photo candidate")
             continue
         style = img.attributes.get("style", "")

@@ -83,7 +83,9 @@ def warn_on_row_drop(label: str, prev_count: int | None, new_count: int, *,
     No-op when `prev_count` is None (no prior snapshot) or below `min_rows`: a
     percentage guard is meaningless on small rare-event feeds (e.g. CCA
     complaints), where a 4 -> 1 swing is noise, not a collapse."""
-    if prev_count and prev_count >= min_rows and new_count < prev_count * drop_frac:
+    if not prev_count or prev_count < min_rows:
+        return
+    if new_count < prev_count * drop_frac:
         log.warning(
             "%s: row_count dropped sharply %d -> %d (< %.0f%% of prior); possible feed collapse",
             label, prev_count, new_count, drop_frac * 100,
