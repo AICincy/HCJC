@@ -361,9 +361,7 @@ def _looks_like_ui_chrome(img) -> bool:
     except (TypeError, ValueError):
         w = h = 0
     # Booking mug shots are ~200-300 px wide. UI chrome is usually <80 px.
-    if 0 < w < 80 or 0 < h < 80:
-        return True
-    return False
+    return 0 < w < 80 or 0 < h < 80
 
 
 def _extract_photo_url(tree: HTMLParser) -> str | None:

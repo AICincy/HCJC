@@ -33,9 +33,12 @@ target-version = "py311"
 line-length = 120
 
 [tool.ruff.lint]
-# E/W: pycodestyle, F: pyflakes, I: import sorting. The tree is clean against
-# these; extend the set only after fixing the new findings it surfaces.
-select = ["E", "F", "I"]
+# E/W pycodestyle, F pyflakes, I import-sort, B flake8-bugbear (real bug
+# patterns). SIM (flake8-simplify) is deliberately excluded: its "combine
+# conditions" fixes directly worsen CodeScene's Complex Conditional metric
+# (the two tools disagree), and CodeScene is the project's quality gate. UP
+# (pyupgrade) is excluded as cosmetic timezone.utc churn with no safety gain.
+select = ["E", "F", "I", "B"]
 # E501 (line length) is not enforced: the codebase uses intentionally dense
 # layouts (see CLAUDE.md), and line-length above is advisory for the formatter.
 ignore = ["E501"]
@@ -44,6 +47,12 @@ ignore = ["E501"]
 python_version = "3.11"
 warn_unused_ignores = true
 no_implicit_optional = true
+# Type-check the bodies of functions even when they lack annotations, so a
+# real type error in an un-annotated helper is caught. (Stricter than the
+# default; full disallow_untyped_defs was skipped as low-value annotation
+# churn — the tree already passes this with zero findings.)
+check_untyped_defs = true
+warn_redundant_casts = true
 # Third-party libs without bundled stubs (or not type-checked in CI): ignore
 # missing-import errors for them so mypy reports only first-party type issues.
 [[tool.mypy.overrides]]

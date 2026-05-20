@@ -155,3 +155,25 @@ def test_enter_accepts_default_base_url():
     # The default constructor (used by make_client) targets hcso.org.
     with client_mod.HcsoClient() as c:
         assert c._client is not None
+
+
+def test_make_client_reads_proxy_env(monkeypatch):
+    monkeypatch.setenv("JCSTREAM_HTTP_PROXY", "http://proxy.example:8080")
+    assert client_mod.make_client().proxy == "http://proxy.example:8080"
+
+
+def test_make_client_empty_proxy_is_none(monkeypatch):
+    # An unset GitHub secret resolves to "" in the workflow; treat it as no proxy.
+    monkeypatch.setenv("JCSTREAM_HTTP_PROXY", "")
+    assert client_mod.make_client().proxy is None
+    monkeypatch.delenv("JCSTREAM_HTTP_PROXY", raising=False)
+    assert client_mod.make_client().proxy is None
+
+
+def test_enter_builds_with_proxy():
+    # __enter__ must construct successfully when a proxy is configured.
+    # Constructing a proxied client does NOT open a connection, so this
+    # exercises the real httpx.HTTPTransport(proxy=...) path end-to-end and
+    # would fail if the library didn't accept the proxy argument.
+    with client_mod.HcsoClient(proxy="http://proxy.example:8080") as c:
+        assert c._client is not None
