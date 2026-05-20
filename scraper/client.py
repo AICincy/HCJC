@@ -71,7 +71,10 @@ class HcsoClient:
         # substitute a forged cert. Refuse to instantiate against anything
         # other than hcso.org so the TLS-skip decision stays tied to its
         # justification.
-        host = urlparse(self.base_url).hostname or ""
+        # urlparse().hostname returns lowercase per the stdlib docs, but
+        # `.lower()` here is a cheap belt-and-suspenders against a future
+        # python urlparse change or a subclass that overrides the property.
+        host = (urlparse(self.base_url).hostname or "").lower()
         if host != "hcso.org" and not host.endswith(".hcso.org"):
             raise ValueError(
                 f"HcsoClient refuses to run with verify=False against "
