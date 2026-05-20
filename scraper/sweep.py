@@ -573,8 +573,8 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     """Parallel surname search across the configured list.
 
     Returns ``(rows, n_failed, status_counts, block_sample)`` — ``n_failed`` is
-    how many surname fetches raised (distinct from a surname that legitimately
-    returned zero rows). ``status_counts`` is a histogram of HTTP status codes
+    how many surname fetches failed (either raised or were detected as a WAF
+    block, distinct from a surname that legitimately returned zero rows).
     from failed fetches (e.g. ``{"403": 24}``); ``block_sample`` is one
     representative forensic snapshot of the first blocked response, captured
     from either an HTTP 403 that raised or an HTTP 200 whose tiny body parsed to
