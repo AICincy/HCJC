@@ -58,25 +58,21 @@ def test_prev_row_count_none_when_missing_or_malformed(tmp_path):
     assert prev_row_count(bad) is None
 
 
-def test_warn_on_row_drop_fires_on_collapse(tmp_path, caplog):
-    p = tmp_path / "feed.json"
-    _write_feed(p, 3230)
+def test_warn_on_row_drop_fires_on_collapse(caplog):
     with caplog.at_level(logging.WARNING):
-        warn_on_row_drop(p, "PDI CFS", 100)
+        warn_on_row_drop("PDI CFS", 3230, 100)
     assert any("dropped sharply" in r.message for r in caplog.records)
 
 
-def test_warn_on_row_drop_silent_on_normal_churn(tmp_path, caplog):
-    p = tmp_path / "feed.json"
-    _write_feed(p, 3230)
+def test_warn_on_row_drop_silent_on_normal_churn(caplog):
     with caplog.at_level(logging.WARNING):
-        warn_on_row_drop(p, "PDI CFS", 3207)  # the real -23 churn
+        warn_on_row_drop("PDI CFS", 3230, 3207)  # the real -23 churn
     assert caplog.records == []
 
 
-def test_warn_on_row_drop_silent_with_no_prior(tmp_path, caplog):
+def test_warn_on_row_drop_silent_with_no_prior(caplog):
     with caplog.at_level(logging.WARNING):
-        warn_on_row_drop(tmp_path / "new.json", "PDI CFS", 0)
+        warn_on_row_drop("PDI CFS", None, 0)  # no prior snapshot
     assert caplog.records == []
 
 
@@ -99,25 +95,19 @@ def test_dumps_rows_per_line_empty_rows_is_valid():
     assert json.loads(dumps_rows_per_line(payload)) == payload
 
 
-def test_warn_on_row_drop_silent_below_min_rows(tmp_path, caplog):
-    p = tmp_path / "feed.json"
-    _write_feed(p, 30, rows=[])  # small rare-event feed
+def test_warn_on_row_drop_silent_below_min_rows(caplog):
     with caplog.at_level(logging.WARNING):
-        warn_on_row_drop(p, "CCA complaints", 1)  # 97% drop, but tiny baseline
+        warn_on_row_drop("CCA complaints", 30, 1)  # 97% drop, but tiny baseline
     assert caplog.records == []
 
 
-def test_warn_on_row_drop_fires_at_min_rows_baseline(tmp_path, caplog):
-    p = tmp_path / "feed.json"
-    _write_feed(p, 111, rows=[])  # CFS-sized baseline, above the floor
+def test_warn_on_row_drop_fires_at_min_rows_baseline(caplog):
     with caplog.at_level(logging.WARNING):
-        warn_on_row_drop(p, "CFS", 0)
+        warn_on_row_drop("CFS", 111, 0)  # CFS-sized baseline, above the floor
     assert any("dropped sharply" in r.message for r in caplog.records)
 
 
-def test_warn_on_row_drop_silent_when_prior_is_zero(tmp_path, caplog):
-    p = tmp_path / "feed.json"
-    _write_feed(p, 0, rows=[])
+def test_warn_on_row_drop_silent_when_prior_is_zero(caplog):
     with caplog.at_level(logging.WARNING):
-        warn_on_row_drop(p, "Use of Force", 0)
+        warn_on_row_drop("Use of Force", 0, 0)
     assert caplog.records == []

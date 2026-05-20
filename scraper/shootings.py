@@ -14,7 +14,7 @@ from pathlib import Path
 
 import httpx
 
-from .cincy_open import query, since_iso
+from .cincy_open import dumps_rows_per_line, prev_row_count, query, since_iso, warn_on_row_drop
 
 log = logging.getLogger(__name__)
 
@@ -46,13 +46,14 @@ def pull_recent(days: int = 30, limit: int = 5000) -> list[dict]:
 
 def save(rows: list[dict], path: Path = LOCAL_PATH) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    warn_on_row_drop("Shootings", prev_row_count(path), len(rows))
     payload = {
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "dataset_id": DATASET_ID,
         "row_count": len(rows),
         "rows": rows,
     }
-    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    path.write_text(dumps_rows_per_line(payload), encoding="utf-8")
 
 
 def load(path: Path = LOCAL_PATH) -> list[dict]:
