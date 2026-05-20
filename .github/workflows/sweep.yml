@@ -61,6 +61,9 @@ jobs:
         # secret resolves to "" which scraper.client treats as no proxy).
         env:
           JCSTREAM_HTTP_PROXY: ${{ secrets.JCSTREAM_HTTP_PROXY }}
+          # On a blocked cycle, snapshot the runner egress IP against GitHub's
+          # published Actions ranges (data/egress_evidence.json) for the record.
+          JCSTREAM_CAPTURE_EGRESS: "1"
         run: |
           python -m scraper.sweep \
             ${{ inputs.max_surnames && format('--max-surnames {0}', inputs.max_surnames) || '' }} \

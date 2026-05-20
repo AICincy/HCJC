@@ -21,6 +21,7 @@ import argparse
 import hashlib
 import json
 import logging
+import os
 import sys
 import threading
 import time
@@ -140,6 +141,23 @@ def _record_recovery_if_blocked(seen_count: int) -> None:
             "seen_count": seen_count,
             "note": "HCSO list sweep succeeded; automated access restored.",
         }, WAF_BLOCK_LOG_PATH)
+
+
+def _record_egress_evidence() -> None:
+    """Best-effort: on a block, snapshot the runner egress IP against GitHub's
+    published Actions ranges into data/egress_evidence.json, so the record shows
+    which source IP HCSO blocked. Gated on JCSTREAM_CAPTURE_EGRESS=1 so it runs
+    only in the CI sweep (it makes a network call), not in unit tests. Never
+    raises: an egress-lookup failure must not break the sweep."""
+    if os.environ.get("JCSTREAM_CAPTURE_EGRESS") != "1":
+        return
+    try:
+        from . import egress_ip
+        rec = egress_ip.write_snapshot()
+        log.info("egress evidence captured: runner_ip=%s in_actions_range=%s",
+                 rec.get("runner_ip"), rec.get("runner_ip_in_actions_range"))
+    except Exception as e:
+        log.warning("egress evidence capture failed (non-fatal): %s", e)
 
 
 # Back-compat alias: prefer scraper.sweep_guards.sweep_looks_healthy in new code.
@@ -286,6 +304,7 @@ def run(
                     prev_count=len(previous), seen_count=len(seen_ids),
                     n_surnames=len(surnames), n_failed=n_failed,
                     status_counts=status_counts, block_sample=block_sample))
+                _record_egress_evidence()
                 return 0
 
             # Healthy sweep: if we were previously blocked, close the denial
