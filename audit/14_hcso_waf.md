@@ -161,3 +161,24 @@ Carrier rate (previously-extracted photos persisting) is the dominant signal. De
 Once the self-hosted runner per `audit/14a_runner_migration_patch.md` is registered and the workflow's `runs-on` is flipped, every cron cycle clears the WAF and coverage stabilizes at HCSO's actual publication rate (typically 92-95% — the residual gap is inmates HCSO hasn't published a photo for yet).
 
 Until then, `scripts/local_sweep.sh` is the maintenance hook.
+
+## Strategy update (2026-05-20): document the block, do not evade it
+
+The owner is building a public-records mandamus record (ORC § 149.43). A clean,
+documented, persisting block is more valuable to that action than restored data,
+and evading it (residential proxy) would damage the posture (weakens the
+denial evidence, invites an "abuse" counter-narrative, implicates Ohio access
+law + third-party ToS). Decision:
+
+- **Do not route around the block.** The `JCSTREAM_HTTP_PROXY` capability stays
+  in the code but is deliberately left unset/unused while the record is built.
+  Presence is not use.
+- **Document the denial as durable evidence.** Each blocked sweep cycle, and
+  each recovery, is appended to `data/waf_block_log.json` (timestamp, HTTP
+  status histogram, surname-failure ratio, roster staleness) by
+  `scraper.sweep._record_block_evidence` / `_record_recovery_if_blocked`. The
+  sweep commits it every cycle, so git history timestamps each denial event
+  beyond GitHub Actions' ~90-day log retention.
+- **Surface it publicly.** The homepage shows an interruption notice while
+  blocked; the Data page documents it and links the evidence log. Copy is
+  pending owner + counsel sign-off (draft in the templates).

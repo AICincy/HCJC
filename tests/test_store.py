@@ -6,7 +6,9 @@ import pytest
 from scraper.models import Charge, Inmate
 from scraper.store import (
     SnapshotCorruptError,
+    append_block_evidence,
     diff,
+    load_block_log,
     load_changelog,
     load_current,
     load_current_or_raise,
@@ -198,3 +200,24 @@ def test_anon_changelog_dedupes_recent_rows_across_sweeps(tmp_path: Path):
 
     assert len(first) == 1
     assert len(second) == 1  # not duplicated on the second sweep
+
+
+def test_block_log_round_trips(tmp_path: Path):
+    p = tmp_path / "waf_block_log.json"
+    assert load_block_log(p) == []  # missing file -> empty
+    append_block_evidence({"event": "blocked", "surnames_failed": 24}, p)
+    append_block_evidence({"event": "recovered"}, p)
+    log = load_block_log(p)
+    assert [r["event"] for r in log] == ["blocked", "recovered"]
+
+
+def test_load_block_log_tolerates_corrupt(tmp_path: Path):
+    p = tmp_path / "waf_block_log.json"
+    p.write_text("{not json", encoding="utf-8")
+    assert load_block_log(p) == []
+    # A valid-JSON-but-not-a-list payload also degrades to [].
+    p.write_text('{"event": "blocked"}', encoding="utf-8")
+    assert load_block_log(p) == []
+    # append_block_evidence recovers by starting a fresh list.
+    append_block_evidence({"event": "blocked"}, p)
+    assert load_block_log(p) == [{"event": "blocked"}]

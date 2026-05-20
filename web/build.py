@@ -242,6 +242,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     env.globals["inmates_by_id"] = {i.inmate_number: i for i in snapshot.inmates}
     orc_freq = _orc_frequency(snapshot.inmates)
     env.globals["orc_freq"] = lambda code: orc_freq.get(orc_mod.normalize_code(code), 0)
+    env.globals["roster_stale"] = _roster_stale_context(snapshot)
     env.globals["codes_ohio_url"] = _codes_ohio_url
     env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates)
     env.globals["all_inmates_total"] = snapshot.inmate_count
@@ -713,6 +714,32 @@ def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) ->
            [e for e in events if e.event == "released"])
 
 
+def _roster_stale_context(snapshot: Snapshot) -> dict:
+    """Staleness / transparency context for templates. ``blocked`` is True once
+    the last-good roster is older than the freeze-alarm threshold, which
+    (verified 2026-05-19 onward) means HCSO's WAF is denying this site's
+    automated public-records retrieval. ``since`` is the first recorded block
+    date from the durable evidence log; ``ever_blocked`` keeps the Data-page
+    documentation present after recovery."""
+    from scraper.store import load_block_log
+    from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
+    hours = roster_stale_hours(snapshot.generated_utc)
+    log = load_block_log()
+    since = None
+    for rec in log:
+        if rec.get("event") == "blocked":
+            ts = rec.get("timestamp_utc") or ""
+            since = ts[:10] if ts else None
+            break
+    return {
+        "hours": round(hours, 1) if hours is not None else None,
+        "blocked": hours is not None and hours >= ROSTER_STALE_ALARM_HOURS,
+        "since": since,
+        "ever_blocked": any(r.get("event") == "blocked" for r in log),
+        "last_updated": (snapshot.generated_utc or "")[:10],
+    }
+
+
 def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> None:
     """Documentation + download index for the raw JSON the site is built from."""
     # Copy the raw data files into the published tree so they're fetchable.
@@ -721,7 +748,7 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     from scraper.open_data_feeds import FEEDS
     supplemental = [f.filename for f in FEEDS]
     for name in ("current.json", "changelog.json", "history.json", "cfs_recent.json",
-                 "shootings_recent.json",
+                 "shootings_recent.json", "waf_block_log.json",
                  "cfs_pdi_recent.json", "courtclerk_cases.json", "orc_offenses.json",
                  *supplemental):
         src = Path("data") / name

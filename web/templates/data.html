@@ -56,6 +56,7 @@
     <tr><td><a href="changelog.json">changelog.json</a></td><td>Last ~10,000 change events (~8 days of activity at 30-min sweep cadence): <code>{event: "booked"|"released"|"updated", inmate_number, name, timestamp_utc, note}</code>. Raised from 500 in Phase 9 so the RSS streams and the homepage feed actually see institutional behavior over time.</td></tr>
     <tr><td><a href="anon_changelog.json">anon_changelog.json</a></td><td><strong>Phase 11.</strong> PII-stripped append-only log of all change events, kept <strong>forever</strong>. Events older than 7 days lose name + inmate_number + booking_number; only event type, date (day-precision), tier (F1-MM), and primary charge category survive. The point: long-term institutional patterns (Friday vs Tuesday booking rates, felony share of roster over years) without keeping individual records visible after release. Schema: <code>{event, timestamp_utc|date, inmate_number?, name?, tier, category}</code>.</td></tr>
     <tr><td><a href="history.json">history.json</a></td><td>Daily roster-size series (counts only, no individuals): <code>[{date, count, booked_24h, released_24h}, &hellip;]</code>, last ~400 days. Drives the homepage and <a href="../stats/">stats-page</a> trend lines.</td></tr>
+    <tr><td><a href="waf_block_log.json">waf_block_log.json</a></td><td>Append-only, timestamped record of every sweep cycle in which HCSO&rsquo;s public portal returned blocked responses to this site&rsquo;s automated retrieval, plus each recovery. Schema: <code>[{timestamp_utc, event: "blocked"|"recovered", prev_count, seen_count, surnames_total, surnames_failed, failed_fraction, http_status_counts, roster_stale_hours, note}]</code>. Documents access interruptions; the site does not circumvent them.</td></tr>
     <tr><td><a href="../search.json">search.json</a></td><td>Compact searchable index of the current roster: <code>{generated_utc, count, rows: [{n: name, c: primary offense category, t: tier, b: booking date, id}]}</code>.</td></tr>
     <tr><td><a href="../dispatches.json">dispatches.json</a></td><td>Geocoded points behind the homepage map: <code>{generated_utc, count, points: [{la, lo, k: "cfs"|"shooting", d: disposition/type, a: address/block, n: neighborhood, t: time}]}</code>. Cincinnati Open Data only &mdash; <strong>not</strong> matched to anyone on the roster.</td></tr>
     <tr><td><a href="orc_offenses.json">orc_offenses.json</a></td><td>Hand-curated lookup of common Ohio Revised Code criminal sections &rarr; <code>{title, degree}</code>. Degree (F1&hellip;MM) is the statute&rsquo;s default classification; the degree actually charged can vary by subsection.</td></tr>
@@ -73,6 +74,13 @@
     <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build &mdash; cheap tamper-evidence on top of the authenticated git history.</td></tr>
   </tbody>
 </table>
+
+{# DRAFT COPY — pending owner + counsel sign-off before merge (see plan). #}
+{% if roster_stale.ever_blocked %}
+<div class="section-h"><h2 id="access">Access interruptions</h2></div>
+<p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal as authorized by the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>). Beginning {{ roster_stale.since or '2026-05-19' }}, that portal began returning blocked responses (HTTP&nbsp;403) to this site&rsquo;s automated retrieval.{% if roster_stale.blocked %} As of the last build, retrieval is still blocked and the roster shown reflects the last successful update on {{ roster_stale.last_updated }}.{% else %} Retrieval has since resumed.{% endif %}</p>
+<p class="muted">Every blocked cycle, and each recovery, is recorded with a UTC timestamp in <a href="waf_block_log.json">waf_block_log.json</a> (and in this repository&rsquo;s authenticated git history). JCStream does not attempt to circumvent the block: it preserves the last-known-good roster, declines to publish a partial one, and documents the interruption. The site does not route around HCSO&rsquo;s controls.</p>
+{% endif %}
 
 <div class="section-h"><h2>Feeds</h2></div>
 <p class="muted">RSS&nbsp;2.0, newest first, ~50 items each:
