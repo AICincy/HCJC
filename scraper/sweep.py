@@ -483,17 +483,31 @@ def _prune_and_report(photos_dir: Path, active_ids: set[str]) -> None:
 
 
 def _forensic_sample(resp: httpx.Response) -> dict:
-    """Forensic snapshot of a WAF-block response for the evidence log: status,
-    body length + SHA-256 (tamper-evidence), a bounded body sample, and the
-    full response headers. A 403 block page carries no PII/secrets."""
+    """Forensic snapshot of a WAF-block response for the evidence log: capture
+    time, the denied request (method/url/headers), status, body length +
+    SHA-256 (tamper-evidence), a bounded body sample, and the full response
+    headers. A 403 block page carries no PII/secrets; the request headers carry
+    no auth (the HCSO client sends no credentials)."""
     body = resp.content or b""
-    return {
+    sample: dict = {
+        "captured_utc": utcnow_iso(),
         "status": resp.status_code,
         "bytes": len(body),
         "sha256": hashlib.sha256(body).hexdigest(),
         "body_sample": (resp.text or "")[:1000],
         "headers": dict(resp.headers),
     }
+    try:
+        req = resp.request
+    except RuntimeError:
+        req = None
+    if req is not None:
+        sample["request"] = {
+            "method": req.method,
+            "url": str(req.url),
+            "headers": dict(req.headers),
+        }
+    return sample
 
 
 def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow], int, dict[str, int], dict | None]:
