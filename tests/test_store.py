@@ -6,7 +6,6 @@ import pytest
 from scraper.models import Charge, Inmate
 from scraper.store import (
     SnapshotCorruptError,
-    _record_sha256,
     append_block_evidence,
     diff,
     load_block_log,
@@ -221,13 +220,4 @@ def test_load_block_log_tolerates_corrupt(tmp_path: Path):
     assert load_block_log(p) == []
     # append_block_evidence recovers by starting a fresh list.
     append_block_evidence({"event": "blocked"}, p)
-    assert load_block_log(p) == [{"event": "blocked", "prev_sha256": None}]
-
-
-def test_block_log_hash_chains(tmp_path: Path):
-    p = tmp_path / "waf_block_log.json"
-    append_block_evidence({"event": "blocked", "seen_count": 0}, p)
-    append_block_evidence({"event": "recovered", "seen_count": 1200}, p)
-    log = load_block_log(p)
-    assert log[0]["prev_sha256"] is None
-    assert log[1]["prev_sha256"] == _record_sha256(log[0])
+    assert load_block_log(p) == [{"event": "blocked"}]

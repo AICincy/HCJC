@@ -8,7 +8,6 @@ so the front page can show a live feed.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import logging
 import os
@@ -79,21 +78,9 @@ def load_block_log(path: Path = WAF_BLOCK_LOG_PATH) -> list[dict]:
         return []
 
 
-def _record_sha256(record: dict) -> str:
-    """Canonical SHA-256 of one log record, for the append-only hash chain."""
-    canonical = json.dumps(record, sort_keys=True, separators=(",", ":"))
-    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
-
-
 def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None:
-    """Append one timestamped record to the WAF-block evidence log (atomic).
-
-    Each record carries ``prev_sha256`` (SHA-256 of the prior record's canonical
-    JSON, ``None`` for the first), forming a hash chain so the append-only log
-    self-verifies independent of git history.
-    """
+    """Append one timestamped record to the WAF-block evidence log (atomic)."""
     entries = load_block_log(path)
-    record["prev_sha256"] = _record_sha256(entries[-1]) if entries else None
     entries.append(record)
     _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
 

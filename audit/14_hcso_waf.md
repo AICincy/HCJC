@@ -175,66 +175,10 @@ law + third-party ToS). Decision:
   Presence is not use.
 - **Document the denial as durable evidence.** Each blocked sweep cycle, and
   each recovery, is appended to `data/waf_block_log.json` (timestamp, HTTP
-  status histogram, surname-failure ratio, roster staleness, a forensic sample
-  of the block response, and a `prev_sha256` hash chain) by
+  status histogram, surname-failure ratio, roster staleness) by
   `scraper.sweep._record_block_evidence` / `_record_recovery_if_blocked`. The
   sweep commits it every cycle, so git history timestamps each denial event
-  beyond GitHub Actions' ~90-day log retention. The on-disk record shape is
-  documented in "Evidence file schema" below.
+  beyond GitHub Actions' ~90-day log retention.
 - **Surface it publicly.** The homepage shows an interruption notice while
   blocked; the Data page documents it and links the evidence log. Copy is
   pending owner + counsel sign-off (draft in the templates).
-
-### Evidence file schema (`data/waf_block_log.json`)
-
-The log is a JSON array, append-only, never truncated. It is created on the
-first blocked cycle and is absent until then. Two record types:
-
-| `blocked` field | Meaning |
-|---|---|
-| `timestamp_utc` | When the degraded-roster guard fired (ISO 8601 UTC). |
-| `event` | `"blocked"`. |
-| `prev_count` | Roster size carried from the last good cycle. |
-| `seen_count` | Unique inmate IDs the blocked sweep managed to parse. |
-| `surnames_total` | Surname searches attempted (26, A-Z). |
-| `surnames_failed` | Surname fetches that raised. |
-| `failed_fraction` | `surnames_failed / surnames_total`, 4 decimals. |
-| `http_status_counts` | Histogram of failed-fetch HTTP statuses, e.g. `{"403": 24}`. |
-| `block_sample` | Forensic snapshot of the first blocked response (sub-object below), or `null`. |
-| `roster_stale_hours` | Hours since the last good roster, or `null`. |
-| `note` | Fixed human-readable description. |
-| `prev_sha256` | Hash-chain link (see below). |
-
-| `recovered` field | Meaning |
-|---|---|
-| `timestamp_utc` | When automated access was restored (ISO 8601 UTC). |
-| `event` | `"recovered"`. |
-| `seen_count` | Unique inmate IDs the recovered sweep parsed. |
-| `note` | Fixed human-readable description. |
-| `prev_sha256` | Hash-chain link (see below). |
-
-`block_sample` sub-object (one representative blocked response is kept; the WAF
-serves identical pages, so the first failure is captured):
-
-| Field | Meaning |
-|---|---|
-| `captured_utc` | When the sample was taken (ISO 8601 UTC). |
-| `request` | The denied request: `method`, `url`, `headers`. Present whenever the response carries its originating request (always in production). |
-| `status` | HTTP status of the block (e.g. 403). |
-| `bytes` | Response body length. |
-| `sha256` | SHA-256 of the raw response body (per-artifact tamper-evidence). |
-| `body_sample` | First 1000 characters of the body text. |
-| `headers` | Full response headers (HCSO/WAF server headers; a 403 block page carries no PII or secrets). |
-
-**Hash chain.** Each record's `prev_sha256` is the SHA-256 of the previous
-record's canonical JSON (`json.dumps(record, sort_keys=True,
-separators=(",", ":"))`), or `null` for the first record. The chain lets the
-file self-verify that no earlier record was altered or dropped, independent of
-git.
-
-**Evidentiary framing (Ohio Evid.R. 803(6)).** The log is a contemporaneous
-business record: each entry is written automatically, at the time of the event,
-by the regularly-conducted sweep. Three independent integrity layers support
-it: the per-body `sha256` (the block page is unaltered), the `prev_sha256`
-chain (ordering and completeness within the file), and the git commit history
-(an external, timestamped, third-party-hosted seal on every cycle).
