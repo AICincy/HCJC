@@ -14,7 +14,13 @@ from pathlib import Path
 
 import httpx
 
-from .cincy_open import dumps_rows_per_line, prev_row_count, query, since_iso, warn_on_row_drop
+from .cincy_open import (
+    dumps_rows_per_line,
+    prev_row_count,
+    query,
+    since_iso,
+    warn_on_row_drop,
+)
 
 log = logging.getLogger(__name__)
 
