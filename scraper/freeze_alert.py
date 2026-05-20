@@ -43,9 +43,14 @@ def _gh(method: str, url: str, token: str, payload: dict | None = None) -> list 
 
 
 def _open_freeze_issue_exists(repo: str, token: str) -> bool:
-    """True if an open issue with the marker title already exists."""
-    issues = _gh("GET", f"{API}/repos/{repo}/issues?state=open&per_page=100", token)
-    return any(isinstance(i, dict) and i.get("title") == ISSUE_TITLE for i in issues)
+    """True if an open issue with the marker title already exists. Uses the
+    search API with an in-title query so it can't miss the marker behind a
+    large backlog of open issues (a paginated /issues list could)."""
+    import urllib.parse
+    q = urllib.parse.quote(f'repo:{repo} is:issue is:open in:title "{ISSUE_TITLE}"')
+    result = _gh("GET", f"{API}/search/issues?q={q}", token)
+    items = result.get("items", []) if isinstance(result, dict) else []
+    return any(isinstance(i, dict) and i.get("title") == ISSUE_TITLE for i in items)
 
 
 def _issue_body(stale_h: float) -> str:

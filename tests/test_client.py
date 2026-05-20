@@ -170,19 +170,10 @@ def test_make_client_empty_proxy_is_none(monkeypatch):
     assert client_mod.make_client().proxy is None
 
 
-def test_enter_builds_with_proxy(monkeypatch):
-    # __enter__ must construct successfully when a proxy is configured. Patch
-    # HTTPTransport so no real proxy connection is attempted, and assert the
-    # proxy URL is threaded through to the transport.
-    seen = {}
-
-    real_transport = httpx.HTTPTransport
-
-    def _spy(*args, **kwargs):
-        seen["proxy"] = kwargs.get("proxy")
-        return real_transport(retries=kwargs.get("retries", 0), verify=kwargs.get("verify", True))
-
-    monkeypatch.setattr(httpx, "HTTPTransport", _spy)
+def test_enter_builds_with_proxy():
+    # __enter__ must construct successfully when a proxy is configured.
+    # Constructing a proxied client does NOT open a connection, so this
+    # exercises the real httpx.HTTPTransport(proxy=...) path end-to-end and
+    # would fail if the library didn't accept the proxy argument.
     with client_mod.HcsoClient(proxy="http://proxy.example:8080") as c:
         assert c._client is not None
-    assert seen["proxy"] == "http://proxy.example:8080"

@@ -254,12 +254,10 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
     last_x = -1e9
     side = "below"
     for m in raw:
-        # Markers closer than 12% alternate above/below to avoid label
-        # overlap; a well-separated marker resets to below.
-        if m["x"] - last_x >= 12.0:
-            side = "below"
-        elif side == "below":
-            side = "above"
+        # Markers closer than 12% alternate above/below to avoid label overlap;
+        # a well-separated marker resets to below.
+        if m["x"] - last_x < 12.0:
+            side = "above" if side == "below" else "below"
         else:
             side = "below"
         m["side"] = side

@@ -34,10 +34,11 @@ line-length = 120
 
 [tool.ruff.lint]
 # E/W pycodestyle, F pyflakes, I import-sort, B flake8-bugbear (real bug
-# patterns), SIM flake8-simplify (readability). UP (pyupgrade) is deliberately
-# excluded: it's dominated by cosmetic timezone.utc -> datetime.UTC rewrites
-# with no safety gain.
-select = ["E", "F", "I", "B", "SIM"]
+# patterns). SIM (flake8-simplify) is deliberately excluded: its "combine
+# conditions" fixes directly worsen CodeScene's Complex Conditional metric
+# (the two tools disagree), and CodeScene is the project's quality gate. UP
+# (pyupgrade) is excluded as cosmetic timezone.utc churn with no safety gain.
+select = ["E", "F", "I", "B"]
 # E501 (line length) is not enforced: the codebase uses intentionally dense
 # layouts (see CLAUDE.md), and line-length above is advisory for the formatter.
 ignore = ["E501"]
