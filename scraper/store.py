@@ -58,6 +58,33 @@ def _atomic_write_text(path: Path, content: str) -> None:
     os.replace(tmp, path)
 
 
+# Durable, git-committed record that HCSO's WAF is blocking automated
+# public-records access. Each blocked sweep cycle and each recovery is appended
+# here, so the denial is preserved as timestamped evidence beyond GitHub
+# Actions' ~90-day log retention. Append-only by design: the growing,
+# persisting record is the point (ORC 149.43 / mandamus support).
+WAF_BLOCK_LOG_PATH = Path("data/waf_block_log.json")
+
+
+def load_block_log(path: Path = WAF_BLOCK_LOG_PATH) -> list[dict]:
+    """Load the append-only WAF-block evidence log. Returns [] when the file is
+    missing or unreadable, so a first run or a corrupt file still proceeds."""
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except (json.JSONDecodeError, OSError):
+        return []
+
+
+def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None:
+    """Append one timestamped record to the WAF-block evidence log (atomic)."""
+    entries = load_block_log(path)
+    entries.append(record)
+    _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
+
+
 def load_current(path: Path) -> dict[str, Inmate]:
     """Load the previous snapshot keyed by inmate_number; empty dict if missing.
 

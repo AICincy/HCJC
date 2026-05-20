@@ -26,13 +26,18 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
+import httpx
+
 from .client import DEFAULT_CONCURRENCY, HcsoClient, make_client
 from .models import Inmate, ListRow, utcnow_iso
 from .parsers import parse_detail_page, parse_list_page
 from .photos import downscale_and_save
 from .store import (
+    WAF_BLOCK_LOG_PATH,
     SnapshotCorruptError,
+    append_block_evidence,
     diff,
+    load_block_log,
     load_changelog,
     load_current_or_raise,
     save_anon_changelog,
@@ -44,6 +49,7 @@ from .sweep_guards import (
     SWEEP_MIN_ROSTER_FRACTION,
     check_detail_watchdog,
     prune_photos,
+    roster_stale_hours,
     sweep_looks_healthy,
 )
 
@@ -85,6 +91,39 @@ def _prev_generated_utc(path: Path) -> str | None:
     # malformed non-str generated_utc degrades to None rather than crashing
     # the freeze-alarm path.
     return gen if isinstance(gen, str) else None
+
+
+def _record_block_evidence(prev_count: int, seen_count: int, n_surnames: int,
+                           n_failed: int, status_counts: dict[str, int]) -> None:
+    """Append a 'blocked' record to the durable WAF-block evidence log when the
+    degraded-roster guard fires. Do-not-evade posture: we document the denial
+    rather than route around it."""
+    stale_h = roster_stale_hours(_prev_generated_utc(CURRENT_PATH))
+    append_block_evidence({
+        "timestamp_utc": utcnow_iso(),
+        "event": "blocked",
+        "prev_count": prev_count,
+        "seen_count": seen_count,
+        "surnames_total": n_surnames,
+        "surnames_failed": n_failed,
+        "failed_fraction": round(n_failed / n_surnames, 4) if n_surnames else 0.0,
+        "http_status_counts": status_counts,
+        "roster_stale_hours": round(stale_h, 1) if stale_h is not None else None,
+        "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+    }, WAF_BLOCK_LOG_PATH)
+
+
+def _record_recovery_if_blocked(seen_count: int) -> None:
+    """If the last evidence entry was 'blocked', append a single 'recovered'
+    record so each denial period has a clean end-timestamp. No-op otherwise."""
+    entries = load_block_log(WAF_BLOCK_LOG_PATH)
+    if entries and entries[-1].get("event") == "blocked":
+        append_block_evidence({
+            "timestamp_utc": utcnow_iso(),
+            "event": "recovered",
+            "seen_count": seen_count,
+            "note": "HCSO list sweep succeeded; automated access restored.",
+        }, WAF_BLOCK_LOG_PATH)
 
 
 # Back-compat alias: prefer scraper.sweep_guards.sweep_looks_healthy in new code.
@@ -199,7 +238,7 @@ def run(
 
     try:
         with make_client() as client:
-            rows, n_failed = _sweep_list(client, surnames)
+            rows, n_failed, status_counts = _sweep_list(client, surnames)
             seen_ids = {r.inmate_number for r in rows}
             log.info("list sweep returned %d unique inmate ids (%d/%d surname fetches failed)",
                      len(seen_ids), n_failed, len(surnames))
@@ -216,8 +255,14 @@ def run(
                 # scraper/sweep_guards.sweep_looks_healthy. A prolonged freeze
                 # is surfaced by the "Roster freeze alarm" step in sweep.yml
                 # (roster_stale_hours), which runs every cycle regardless of
-                # which guard path fired.
+                # which guard path fired. Document the denial as durable
+                # evidence (do-not-evade posture); never route around it.
+                _record_block_evidence(len(previous), len(seen_ids), len(surnames), n_failed, status_counts)
                 return 0
+
+            # Healthy sweep: if we were previously blocked, close the denial
+            # period with a 'recovered' evidence record.
+            _record_recovery_if_blocked(len(seen_ids))
 
             # Decide which detail pages to fetch.
             to_fetch: list[str] = []
@@ -419,41 +464,50 @@ def _prune_and_report(photos_dir: Path, active_ids: set[str]) -> None:
     prune_photos(photos_dir, active_ids)
 
 
-def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow], int]:
+def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow], int, dict[str, int]]:
     """Parallel surname search across the configured list.
 
-    Returns ``(rows, n_failed)`` — ``n_failed`` is how many surname fetches
-    raised (distinct from a surname that legitimately returned zero rows), so
-    the caller can decide whether the roster is trustworthy this cycle.
+    Returns ``(rows, n_failed, status_counts)`` — ``n_failed`` is how many
+    surname fetches raised (distinct from a surname that legitimately returned
+    zero rows), so the caller can decide whether the roster is trustworthy this
+    cycle. ``status_counts`` is a histogram of HTTP status codes from failed
+    fetches (e.g. ``{"403": 24}``), captured as WAF-block evidence.
     """
     aggregated: list[ListRow] = []
     seen: set[str] = set()
 
-    # sweep-F8: fetch_one MUST swallow every exception and return None on
-    # failure. pool.map below surfaces the first worker raise when iterated,
+    # sweep-F8: fetch_one MUST swallow every exception and return (None, status)
+    # on failure. pool.map below surfaces the first worker raise when iterated,
     # which would truncate the surname sweep below SWEEP_MAX_FAILED_FRACTION
     # and look like a healthy partial sweep. If you ever change fetch_one to
     # re-raise a typed error, switch to ThreadPoolExecutor + as_completed
     # (see scraper/sweep.py:run for the pattern) before merging.
-    def fetch_one(surname: str) -> list[ListRow] | None:
+    def fetch_one(surname: str) -> tuple[list[ListRow] | None, int | None]:
         try:
             html = client.get(SEARCH_PATH, params={"last": surname})
-            return parse_list_page(html)
+            return parse_list_page(html), None
+        except httpx.HTTPStatusError as e:
+            log.warning("list fetch failed for surname=%s: %s", surname, e)
+            return None, e.response.status_code
         except Exception as e:
             log.warning("list fetch failed for surname=%s: %s", surname, e)
-            return None
+            return None, None
 
     failed = 0
+    status_counts: dict[str, int] = {}
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
-        for rows in pool.map(fetch_one, surnames):
+        for rows, status in pool.map(fetch_one, surnames):
             if rows is None:
                 failed += 1
+                if status is not None:
+                    key = str(status)
+                    status_counts[key] = status_counts.get(key, 0) + 1
                 continue
             for r in rows:
                 if r.inmate_number not in seen:
                     seen.add(r.inmate_number)
                     aggregated.append(r)
-    return aggregated, failed
+    return aggregated, failed, status_counts
 
 
 def _fetch_one(

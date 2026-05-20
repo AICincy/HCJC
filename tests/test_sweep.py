@@ -395,3 +395,72 @@ def test_interrupted_sweep_does_not_append_released_events(tmp_path: Path, monke
             f"interrupted sweep emitted {len(events)} bogus events into the "
             f"changelog; clean_finish gate failed"
         )
+
+
+def test_record_block_evidence_writes_blocked(tmp_path, monkeypatch):
+    from scraper.store import load_block_log
+
+    blog = tmp_path / "waf_block_log.json"
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
+    monkeypatch.setattr(sweep, "CURRENT_PATH", tmp_path / "missing.json")  # -> stale None
+    sweep._record_block_evidence(60, 0, 26, 24, {"403": 24})
+    log = load_block_log(blog)
+    assert len(log) == 1
+    rec = log[0]
+    assert rec["event"] == "blocked"
+    assert rec["surnames_failed"] == 24
+    assert rec["failed_fraction"] == round(24 / 26, 4)
+    assert rec["http_status_counts"] == {"403": 24}
+
+
+def test_record_recovery_only_after_blocked(tmp_path, monkeypatch):
+    from scraper.store import append_block_evidence, load_block_log
+
+    blog = tmp_path / "waf_block_log.json"
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
+
+    # Empty log -> no-op (no recovery without a prior block).
+    sweep._record_recovery_if_blocked(1200)
+    assert load_block_log(blog) == []
+
+    # After a 'blocked' entry, one 'recovered' is appended.
+    append_block_evidence({"event": "blocked"}, blog)
+    sweep._record_recovery_if_blocked(1200)
+    events = [r["event"] for r in load_block_log(blog)]
+    assert events == ["blocked", "recovered"]
+
+    # Calling again does not append a second 'recovered' (last is not 'blocked').
+    sweep._record_recovery_if_blocked(1200)
+    assert [r["event"] for r in load_block_log(blog)] == ["blocked", "recovered"]
+
+
+def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
+    from scraper.store import load_block_log, save_current
+
+    prev = [
+        Inmate(inmate_number=str(1000 + i), last_name="DOE", first_name=f"F{i}", booking_date="5/10/26")
+        for i in range(60)
+    ]
+    cur = tmp_path / "current.json"
+    save_current(cur, prev)
+    blog = tmp_path / "waf_block_log.json"
+    monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
+    monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)  # bypass the skip-gate
+    # Degraded list sweep: zero seen, most fetches 403 (the WAF block shape).
+    monkeypatch.setattr(sweep, "_sweep_list", lambda client, surnames: ([], 24, {"403": 24}))
+
+    class FakeClient:
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+
+    monkeypatch.setattr(sweep, "make_client", lambda: FakeClient())
+
+    rc = sweep.run(surnames=list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+                   max_surnames=None, refresh_known=False, dry_run=False)
+    assert rc == 0
+    log = load_block_log(blog)
+    assert len(log) == 1
+    assert log[0]["event"] == "blocked"
+    assert log[0]["http_status_counts"] == {"403": 24}

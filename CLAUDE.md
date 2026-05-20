@@ -127,11 +127,19 @@ run and keeping last-good data. This is the guard working, not a bug.
      ⇒ WAF serving empty-but-parseable pages.
    - `WAF-block-shaped response for id=…` / `429 …` ⇒ WAF active.
 3. Cause is almost always HCSO's WAF blocking the GitHub Actions egress IP.
-   Code can't fix that. Options, in order:
-   - Set the `JCSTREAM_HTTP_PROXY` repo secret to an egress proxy URL
-     (HTTP/HTTPS/SOCKS); the HCSO fetches route through it on the next sweep.
-     Unset = direct. Scoped to HCSO; the Socrata feeds are unaffected.
-   - Wait for the block to rotate (cloud WAFs commonly 24-72h), or run from a
+   Code can't fix that. **Posture (2026-05-20): document the block, do not
+   evade it.** A clean, persisting, documented denial supports the ORC § 149.43
+   mandamus record; evading it would weaken that. Each blocked cycle + each
+   recovery is recorded in `data/waf_block_log.json` (see `audit/14_hcso_waf.md`),
+   and the site surfaces an interruption notice. Options, in order:
+   - **Do nothing but wait** for the block to rotate (cloud WAFs commonly
+     24-72h); the evidence log keeps growing, which is the point.
+   - The `JCSTREAM_HTTP_PROXY` repo secret routes HCSO fetches through an egress
+     proxy (HTTP/HTTPS/SOCKS), unset = direct, scoped to HCSO. It is kept
+     available but is **deliberately left unset** while the mandamus record is
+     built. Use it only on an explicit decision to prioritize data over the
+     denial record.
+   - Run from a
      self-hosted runner, or contact HCSO for allowlisting.
 4. NEVER lower `SWEEP_MAX_FAILED_FRACTION` (0.10) or `SWEEP_MIN_ROSTER_FRACTION`
    (0.5) to force the sweep through — that publishes a partial roster as if

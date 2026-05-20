@@ -10,6 +10,14 @@
   <div class="stamp">Sweep {{ snapshot.generated_utc[:16] }}Z</div>
 </header>
 
+{# DRAFT COPY — pending owner + counsel sign-off before merge (see plan). #}
+{% if roster_stale.blocked %}
+<aside class="banner" aria-label="Data access notice" role="status">
+  <p><strong>Roster updates are currently interrupted.</strong> Since {{ roster_stale.since or '2026-05-19' }}, the Hamilton County Sheriff&rsquo;s Office public inmate-search portal has returned blocked responses (HTTP&nbsp;403) to this site&rsquo;s automated public-records retrieval. The figures below reflect the last successful update on {{ roster_stale.last_updated }}; they are not current.</p>
+  <p class="banner-fine">This interruption is logged per cycle as timestamped evidence: <a href="{{ base_url }}/data/waf_block_log.json">waf_block_log.json</a>. JCStream does not attempt to circumvent the block; it documents it. See <a href="{{ base_url }}/data/#access">access interruptions</a>.</p>
+</aside>
+{% endif %}
+
 <aside class="banner" aria-label="Legal notice">
   <p><strong>Arrest is not conviction.</strong> Everyone listed here is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges shown are accusations only and may be reduced, dismissed, or result in acquittal.</p>
   <p>JCStream republishes public records of the Hamilton County Sheriff&rsquo;s Office (HCSO) as authorized by the Ohio Public Records Act, <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> &mdash; derived from HCSO&rsquo;s public inmate roster at <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>. When HCSO removes a record, it is removed here on the next update cycle; this site keeps no historical archive. JCStream is an <strong>independent, non-governmental project</strong> &mdash; not affiliated with, endorsed by, or operated by HCSO or any government agency.</p>
