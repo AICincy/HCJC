@@ -810,7 +810,7 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   .court-hero {
     grid-template-columns: 1fr;
     gap: 20px;
-    padding: 24px 20px 24px;
+    padding: 24px 20px;
   }
   .court-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .court-stat { padding: 14px 16px; }
@@ -1189,7 +1189,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
    anchored on the inmate detail page; not paginated because the sitewide
    changelog is capped at 500 events so per-inmate counts are small. */
 .status-history {
-  list-style: none; padding: 0; margin: 0 0 1rem 0;
+  list-style: none; padding: 0; margin: 0 0 1rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
