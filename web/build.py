@@ -7,6 +7,7 @@ that directory to GitHub Pages.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import logging
 import os
@@ -61,7 +62,12 @@ PHOTOS_DIR = Path("data/photos")
 DEFAULT_OUT = Path("docs")
 
 
-def build(out_dir: Path) -> int:
+def _load_inputs():
+    """Load the snapshot + changelog + dispatch feeds. Dedupe the two CFS
+    feeds on event_number (qiik-bpks often lags past its pull window and comes
+    back empty; gexm-h6bt pulls a wider window), attach dispatch candidates to
+    inmates, and build the map points. Returns
+    (snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points)."""
     current_path = Path("data/current.json")
     changelog_path = Path("data/changelog.json")
 
@@ -81,19 +87,23 @@ def build(out_dir: Path) -> int:
     cfs_rows = cfs_mod.load_recent()
     cfs_pdi_rows = cfs_pdi_mod.load()
     shooting_rows = shootings_mod.load()
-    # The matcher gets BOTH dispatch feeds (qiik-bpks often lags past its pull
-    # window and comes back empty; gexm-h6bt pulls a wider window), de-duplicated
-    # on event_number.
-    _seen_ev: set[str] = set()
-    _all_cfs: list[dict] = []
+    seen_ev: set[str] = set()
+    all_cfs: list[dict] = []
     for r in (cfs_rows + cfs_pdi_rows):
         ev = str(r.get("event_number") or id(r))
-        if ev not in _seen_ev:
-            _seen_ev.add(ev)
-            _all_cfs.append(r)
-    matches = attach_candidates(snapshot.inmates, _all_cfs)
-    dispatch_points = _dispatch_points(_all_cfs, shooting_rows)
+        if ev not in seen_ev:
+            seen_ev.add(ev)
+            all_cfs.append(r)
+    matches = attach_candidates(snapshot.inmates, all_cfs)
+    dispatch_points = _dispatch_points(all_cfs, shooting_rows)
+    return snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points
 
+
+def _build_env(snapshot: Snapshot, offenses: dict[str, dict]) -> Environment:
+    """Construct the Jinja Environment and register every template global and
+    filter. The registered names ARE the template contract: a helper added in
+    web/shape.py or web/classify.py must be registered here under the same name
+    to be visible to templates."""
     env = Environment(
         loader=FileSystemLoader(TEMPLATE_DIR),
         autoescape=select_autoescape(["html", "xml"]),
@@ -114,26 +124,23 @@ def build(out_dir: Path) -> int:
     # Optional Giscus (GitHub-Discussions-backed) comments on inmate pages.
     # Activated only when JCSTREAM_GISCUS_REPO_ID is set as a secret/var; the
     # comment-policy section renders either way.
-    import os as _os
     env.globals["giscus"] = {
-        "repo": _os.environ.get("JCSTREAM_GISCUS_REPO", "AICincy/JCStream"),
-        "repo_id": _os.environ.get("JCSTREAM_GISCUS_REPO_ID", ""),
-        "category": _os.environ.get("JCSTREAM_GISCUS_CATEGORY", "Announcements"),
-        "category_id": _os.environ.get("JCSTREAM_GISCUS_CATEGORY_ID", ""),
+        "repo": os.environ.get("JCSTREAM_GISCUS_REPO", "AICincy/JCStream"),
+        "repo_id": os.environ.get("JCSTREAM_GISCUS_REPO_ID", ""),
+        "category": os.environ.get("JCSTREAM_GISCUS_CATEGORY", "Announcements"),
+        "category_id": os.environ.get("JCSTREAM_GISCUS_CATEGORY_ID", ""),
     }
     # Cache-bust the stylesheet by its CONTENT hash, not the data timestamp —
     # otherwise a CSS change with unchanged data ships new HTML against stale CSS.
-    import hashlib as _hl
     _css = STATIC_DIR / "style.css"
-    env.globals["css_version"] = (_hl.sha256(_css.read_bytes()).hexdigest()[:10]
+    env.globals["css_version"] = (hashlib.sha256(_css.read_bytes()).hexdigest()[:10]
                                   if _css.exists() else "dev")
     # Same pattern for the externalized JS module. `map.js` was removed; the
     # previous `map_js_version` env.global had no template reference and is
     # gone too.
     _main_js = STATIC_DIR / "main.js"
-    env.globals["main_js_version"] = (_hl.sha256(_main_js.read_bytes()).hexdigest()[:10]
+    env.globals["main_js_version"] = (hashlib.sha256(_main_js.read_bytes()).hexdigest()[:10]
                                       if _main_js.exists() else "dev")
-    offenses = orc_mod.load_offenses()
     env.globals["orc_title"] = lambda code: orc_mod.title_for(code, offenses)
     env.globals["primary_charge"] = _primary_charge
     env.globals["primary_chapter"] = _primary_chapter
@@ -180,9 +187,13 @@ def build(out_dir: Path) -> int:
     env.globals["codes_ohio_url"] = _codes_ohio_url
     env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates)
     env.globals["all_inmates_total"] = snapshot.inmate_count
+    return env
 
-    _warn_about_unmapped_orcs(snapshot.inmates, offenses)
 
+def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
+    """Compute the month grouping, month-nav data, recent-event counts and
+    trend that the page renderers consume. Returned as a dict so build() can
+    pass the pieces to the individual _render_* calls."""
     by_month = _group_by_month(snapshot.inmates)
     # Month-nav data: short label + count.
     nav_months = [
@@ -199,18 +210,35 @@ def build(out_dir: Path) -> int:
     recent_released = sum(1 for e in recent_24h if e.event == "released")
     events_recent = list(reversed(_events_for_recent(events, hours=8)))[:12]
     trend = _update_history(snapshot, recent_booked, recent_released)
+    return {
+        "by_month": by_month,
+        "nav_months": nav_months,
+        "expanded_months": expanded_months,
+        "recent_booked": recent_booked,
+        "recent_released": recent_released,
+        "events_recent": events_recent,
+        "trend": trend,
+    }
+
+
+def build(out_dir: Path) -> int:
+    snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points = _load_inputs()
+    offenses = orc_mod.load_offenses()
+    env = _build_env(snapshot, offenses)
+    _warn_about_unmapped_orcs(snapshot.inmates, offenses)
+    rd = _prepare_render_data(snapshot, events)
 
     if out_dir.exists():
         shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True)
 
-    _render_index(env, snapshot, by_month, nav_months, expanded_months,
-                  events_recent, recent_booked, recent_released, trend,
+    _render_index(env, snapshot, rd["by_month"], rd["nav_months"], rd["expanded_months"],
+                  rd["events_recent"], rd["recent_booked"], rd["recent_released"], rd["trend"],
                   cfs_rows, shooting_rows, len(dispatch_points), out_dir)
     _render_inmates(env, snapshot, matches, events, out_dir)
     _render_feeds(env, events, out_dir)
     _render_data_page(env, snapshot, out_dir)
-    _render_stats_page(env, snapshot, by_month, trend, out_dir)
+    _render_stats_page(env, snapshot, rd["by_month"], rd["trend"], out_dir)
     _render_statute_page(env, snapshot, offenses, out_dir)
     _render_court_page(env, snapshot, out_dir)
     _render_visit_page(env, out_dir)

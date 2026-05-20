@@ -8,7 +8,6 @@ adding a helper here requires registering it there with the same name.
 """
 from __future__ import annotations
 
-import re
 import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
@@ -339,12 +338,8 @@ def _bond_by_tier(inmate: Inmate, offenses: dict | None = None) -> dict:
         offenses = orc_mod.load_offenses()
     out = {"felony": 0, "misdemeanor": 0, "other": 0}
     for c in inmate.charges:
-        m = re.search(r"\$?([\d,]+(?:\.\d{2})?)", c.bond_amount or "")
-        if not m:
-            continue
-        try:
-            amt = int(float(m.group(1).replace(",", "")))
-        except ValueError:
+        amt = _parse_bond_amount(c.bond_amount)
+        if not amt:
             continue
         ct = _charge_tier(c, offenses)
         key = ct["kind"] if ct else "other"
@@ -507,12 +502,7 @@ def _bond_total(inmate: Inmate) -> str:
     """Sum the inmate's bond amounts where parseable, return a formatted string."""
     total = 0
     for c in inmate.charges:
-        m = re.search(r"\$?([\d,]+(?:\.\d{2})?)", c.bond_amount or "")
-        if m:
-            try:
-                total += int(float(m.group(1).replace(",", "")))
-            except ValueError:
-                continue
+        total += _parse_bond_amount(c.bond_amount) or 0
     return f"${total:,}" if total else ""
 
 def _days_in_custody(inmate: Inmate) -> int | None:
