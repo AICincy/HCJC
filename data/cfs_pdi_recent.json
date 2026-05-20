@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-19T22:52:54Z",
+  "generated_utc": "2026-05-20T00:38:54Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3174,
+  "row_count": 3172,
   "rows": [
     {
       "address_x": "3XX EZZARD CHARLES DR",
@@ -52082,24 +52082,6 @@
       "longitude_x": "-84.515573"
     },
     {
-      "address_x": "WARSAW AV / WELLS ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-22T07:20:27.000",
-      "disposition_text": "ARR: ARREST",
-      "event_number": "CPD260422000123",
-      "incident_type_id": "SUSPECT STOP (SI)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-22T03:31:22.000",
-      "closed_time_incident": "2026-04-22T13:35:52.000",
-      "dispatch_time_primary_unit": "2026-04-22T03:31:22.000",
-      "beat": "P32",
-      "district": "3",
-      "cpd_neighborhood": "EAST PRICE HILL",
-      "community_council_neighborhood": "EAST PRICE HILL",
-      "latitude_x": "39.1107860000897",
-      "longitude_x": "-84.569047"
-    },
-    {
       "address_x": "70XX VINE ST",
       "agency": "CPD",
       "create_time_incident": "2026-04-22T07:20:27.000",
@@ -52116,6 +52098,24 @@
       "community_council_neighborhood": "CARTHAGE",
       "latitude_x": "39.1925140000896",
       "longitude_x": "-84.481918"
+    },
+    {
+      "address_x": "WARSAW AV / WELLS ST",
+      "agency": "CPD",
+      "create_time_incident": "2026-04-22T07:20:27.000",
+      "disposition_text": "ARR: ARREST",
+      "event_number": "CPD260422000123",
+      "incident_type_id": "SUSPECT STOP (SI)",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-04-22T03:31:22.000",
+      "closed_time_incident": "2026-04-22T13:35:52.000",
+      "dispatch_time_primary_unit": "2026-04-22T03:31:22.000",
+      "beat": "P32",
+      "district": "3",
+      "cpd_neighborhood": "EAST PRICE HILL",
+      "community_council_neighborhood": "EAST PRICE HILL",
+      "latitude_x": "39.1107860000897",
+      "longitude_x": "-84.569047"
     },
     {
       "address_x": "XX CRAFT ST",
@@ -56830,42 +56830,6 @@
       "community_council_neighborhood": "CARTHAGE",
       "latitude_x": "39.1957910000896",
       "longitude_x": "-84.477842"
-    },
-    {
-      "address_x": "23XX MAY ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T23:26:06.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260419001506",
-      "incident_type_id": "+PARKING COMPLAINT",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-19T23:26:06.000",
-      "closed_time_incident": "2026-04-19T23:31:47.000",
-      "dispatch_time_primary_unit": "2026-04-19T23:26:06.000",
-      "beat": "P26",
-      "district": "4",
-      "cpd_neighborhood": "WALNUT HILLS",
-      "community_council_neighborhood": "WALNUT HILLS",
-      "latitude_x": "39.1235920000896",
-      "longitude_x": "-84.495908"
-    },
-    {
-      "address_x": "8XX OAK ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-19T23:14:05.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260419001491",
-      "incident_type_id": "+PARKING COMPLAINT",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-19T23:14:05.000",
-      "closed_time_incident": "2026-04-19T23:20:14.000",
-      "dispatch_time_primary_unit": "2026-04-19T23:14:05.000",
-      "beat": "P26",
-      "district": "4",
-      "cpd_neighborhood": "WALNUT HILLS",
-      "community_council_neighborhood": "WALNUT HILLS",
-      "latitude_x": "39.1298290000896",
-      "longitude_x": "-84.489903"
     }
   ]
 }
