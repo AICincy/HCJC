@@ -175,7 +175,7 @@ law + third-party ToS). Decision:
   Presence is not use.
 - **Document the denial as durable evidence.** Each blocked sweep cycle, and
   each recovery, is appended to `data/waf_block_log.json` (timestamp, HTTP
-  status histogram, surname-failure ratio, roster staleness) by
+  status histogram, surname-failure ratio, roster staleness, a forensic sample of the block response) by
   `scraper.sweep._record_block_evidence` / `_record_recovery_if_blocked`. The
   sweep commits it every cycle, so git history timestamps each denial event
   beyond GitHub Actions' ~90-day log retention.
