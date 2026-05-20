@@ -146,6 +146,14 @@ class HcsoClient:
         Retry-After header is honored (parsed in seconds or HTTP-date form),
         capped at RETRY_AFTER_CAP_S.
         """
+        return self.get_response(path, params=params).text
+
+    def get_response(self, path: str, params: dict[str, str] | None = None) -> httpx.Response:
+        """Same retry/backoff as ``get``, but return the raised-for-status
+        ``httpx.Response`` instead of its text. Callers that need the status +
+        headers (e.g. capturing a WAF-block forensic sample from an HTTP 200
+        empty-page block) use this; ``get`` wraps it for the text-only path.
+        """
         assert self._client is not None, "use as context manager"
         self._sleep_for_crawl_delay()
         response = self._client.get(path, params=params)
@@ -161,7 +169,7 @@ class HcsoClient:
                 break
             response = self._client.get(path, params=params)
         response.raise_for_status()
-        return response.text
+        return response
 
     def get_bytes(self, url: str) -> bytes:
         """Fetch a URL and return raw bytes. Used for direct photo URLs."""

@@ -499,11 +499,119 @@ def test_forensic_sample_captures_request_side():
     req = httpx.Request(
         "GET",
         "https://www.hcso.org/justice-center-services/inmate-search/?last=A",
-        headers={"user-agent": "JCStream/0.1"},
+        headers={"user-agent": "JCStream/0.1", "cookie": "cf_clearance=secret"},
     )
     resp = httpx.Response(403, request=req, content=b"<html>Access denied</html>")
     s = sweep._forensic_sample(resp)
     assert s["request"]["method"] == "GET"
     assert "last=A" in s["request"]["url"]
     assert s["request"]["headers"]["user-agent"] == "JCStream/0.1"
+    # A session cookie echoed by the client's jar must not land in the public log.
+    assert s["request"]["headers"]["cookie"] == "[redacted]"
     assert isinstance(s["captured_utc"], str)
+
+
+def test_forensic_sample_redacts_response_set_cookie():
+    import httpx
+
+    resp = httpx.Response(403, headers={"server": "cloudflare", "set-cookie": "cf_clearance=secret"},
+                          content=b"blocked")
+    s = sweep._forensic_sample(resp)
+    assert s["headers"]["server"] == "cloudflare"      # benign WAF header kept
+    assert s["headers"]["set-cookie"] == "[redacted]"  # token value redacted
+
+
+def test_run_empty_page_block_records_200_sample(tmp_path, monkeypatch):
+    # End-to-end: run() drives the real _sweep_list through the HTTP 200
+    # empty-page block mode and records a blocked event carrying a 200 sample
+    # (the 403 path is covered by test_run_degraded_sweep_records_block_evidence).
+    import httpx
+
+    from scraper.store import load_block_log, save_current
+
+    prev = [
+        Inmate(inmate_number=str(1000 + i), last_name="DOE", first_name=f"F{i}", booking_date="5/10/26")
+        for i in range(60)
+    ]
+    cur = tmp_path / "current.json"
+    save_current(cur, prev)
+    blog = tmp_path / "waf_block_log.json"
+    monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
+    monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)  # bypass the skip-gate
+
+    class _EmptyPageClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def get_response(self, path, params=None):
+            url = "https://www.hcso.org/inmate-search/?last=" + (params or {}).get("last", "")
+            return httpx.Response(200, request=httpx.Request("GET", url),
+                                  content=b"<html><body>blocked</body></html>")
+
+    monkeypatch.setattr(sweep, "make_client", lambda: _EmptyPageClient())
+
+    rc = sweep.run(surnames=list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+                   max_surnames=None, refresh_known=False, dry_run=False)
+    assert rc == 0
+    log = load_block_log(blog)
+    assert len(log) == 1
+    assert log[0]["event"] == "blocked"
+    assert log[0]["seen_count"] == 0
+    assert log[0]["surnames_failed"] == 26              # all detected as 200-blocks
+    assert log[0]["http_status_counts"] == {"200": 26}
+    assert log[0]["block_sample"]["status"] == 200
+
+
+def test_list_response_looks_blocked_predicate():
+    # Tiny body + zero rows = WAF block stub served as HTTP 200.
+    assert sweep._list_response_looks_blocked("x" * 100, []) is True
+    # Zero rows but a full-size page = a legitimate no-results search.
+    assert sweep._list_response_looks_blocked("x" * 10000, []) is False
+    # Any parsed rows = not a block, regardless of size.
+    assert sweep._list_response_looks_blocked("x" * 100, [object()]) is False
+
+
+def test_sweep_list_captures_empty_page_block_sample():
+    import httpx
+
+    body = b"<html><body>blocked</body></html>"
+
+    class _EmptyPageClient:
+        def get_response(self, path, params=None):
+            url = "https://www.hcso.org/inmate-search/?last=" + (params or {}).get("last", "")
+            return httpx.Response(200, request=httpx.Request("GET", url), content=body)
+
+    rows, n_failed, status_counts, block_sample = sweep._sweep_list(_EmptyPageClient(), ["A", "B"])
+    assert rows == []
+    assert n_failed == 2              # detected 200-blocks count as failures
+    assert status_counts == {"200": 2}
+    assert block_sample is not None
+    assert block_sample["status"] == 200
+    assert block_sample["bytes"] == len(body)
+    assert block_sample["request"]["method"] == "GET"
+
+
+def test_fetch_list_page_treats_403_and_empty_200_as_failures():
+    import httpx
+
+    class _Client:
+        def __init__(self, mode):
+            self.mode = mode
+
+        def get_response(self, path, params=None):
+            req = httpx.Request("GET", "https://www.hcso.org/inmate-search/?last=A")
+            if self.mode == "403":
+                resp = httpx.Response(403, request=req, content=b"<html>Access denied</html>")
+                raise httpx.HTTPStatusError("403", request=req, response=resp)
+            return httpx.Response(200, request=req, content=b"<html>blocked</html>")
+
+    rows, status, sample = sweep._fetch_list_page(_Client("403"), "A")
+    assert rows is None and status == 403 and sample["status"] == 403
+
+    rows, status, sample = sweep._fetch_list_page(_Client("200"), "A")
+    assert rows is None and status == 200 and sample["status"] == 200
