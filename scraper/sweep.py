@@ -80,11 +80,13 @@ def _prev_generated_utc(path: Path) -> str | None:
         return None
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-        if isinstance(data, dict):
-            return data.get("generated_utc")
-        return None
     except (json.JSONDecodeError, OSError):
         return None
+    gen = data.get("generated_utc") if isinstance(data, dict) else None
+    # Only a str is usable by roster_stale_hours (which calls .strip()); a
+    # malformed non-str generated_utc degrades to None rather than crashing
+    # the freeze-alarm path.
+    return gen if isinstance(gen, str) else None
 
 
 def _warn_if_roster_frozen(path: Path) -> None:

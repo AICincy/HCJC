@@ -196,6 +196,15 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict],
     _main_js = STATIC_DIR / "main.js"
     env.globals["main_js_version"] = (hashlib.sha256(_main_js.read_bytes()).hexdigest()[:10]
                                       if _main_js.exists() else "dev")
+    _register_template_helpers(env, snapshot, offenses)
+    return env
+
+
+def _register_template_helpers(env: Environment, snapshot: Snapshot,
+                               offenses: dict[str, dict]) -> None:
+    """Register the per-inmate / per-roster helper globals (from web.shape and
+    web.classify) that templates call. Split out of _build_env so each stays a
+    readable unit; the names here are part of the template contract."""
     env.globals["orc_title"] = lambda code: orc_mod.title_for(code, offenses)
     env.globals["primary_charge"] = _primary_charge
     env.globals["primary_chapter"] = _primary_chapter
@@ -236,7 +245,6 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict],
     env.globals["codes_ohio_url"] = _codes_ohio_url
     env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates)
     env.globals["all_inmates_total"] = snapshot.inmate_count
-    return env
 
 
 def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
