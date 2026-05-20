@@ -243,6 +243,9 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     orc_freq = _orc_frequency(snapshot.inmates)
     env.globals["orc_freq"] = lambda code: orc_freq.get(orc_mod.normalize_code(code), 0)
     env.globals["roster_stale"] = _roster_stale_context(snapshot)
+    # The satirical Sheriff overlay renders on the blocked notice only when the
+    # asset is present, so there is no broken image before it is added.
+    env.globals["waf_sheriff_available"] = (STATIC_DIR / "img" / "sheriff-waf.png").exists()
     env.globals["codes_ohio_url"] = _codes_ohio_url
     env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates)
     env.globals["all_inmates_total"] = snapshot.inmate_count
