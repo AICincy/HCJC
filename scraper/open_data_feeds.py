@@ -25,7 +25,7 @@ from pathlib import Path
 
 import httpx
 
-from .cincy_open import query, recently_refreshed, since_iso
+from .cincy_open import query, recently_refreshed, since_iso, warn_on_row_drop
 
 log = logging.getLogger(__name__)
 
@@ -131,6 +131,7 @@ def _save(spec: FeedSpec, rows: list[dict]) -> None:
     }
     out = DATA_DIR / spec.filename
     out.parent.mkdir(parents=True, exist_ok=True)
+    warn_on_row_drop(out, spec.label, len(rows))
     out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     log.info("wrote %s (%d rows)", out, len(rows))
 

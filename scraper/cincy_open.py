@@ -7,10 +7,12 @@ shootings, crime incidents) live in dedicated modules that build on top.
 
 from __future__ import annotations
 
+import json
 import logging
 import os
 import urllib.parse
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import httpx
 
@@ -31,8 +33,6 @@ def recently_refreshed(path, max_age_hours: float = 24) -> bool:
     when the existing data is still fresh. False if the file is missing,
     malformed, or older. Used by the open-data scrapers' main() to gate
     once-per-day refresh on top of the 30-min sweep cron."""
-    import json
-    from pathlib import Path
     p = Path(path)
     if not p.exists():
         return False
@@ -50,6 +50,53 @@ def recently_refreshed(path, max_age_hours: float = 24) -> bool:
         return age_h < max_age_hours
     except (json.JSONDecodeError, ValueError, OSError):
         return False
+
+
+def prev_row_count(path) -> int | None:
+    """The `row_count` recorded in an existing feed file, or None if the file
+    is missing/malformed. Lets a save() compare a fresh pull against the prior
+    snapshot to flag a sharp collapse vs the normal few-percent rolling-window
+    churn."""
+    p = Path(path)
+    if not p.exists():
+        return None
+    try:
+        rc = json.loads(p.read_text(encoding="utf-8")).get("row_count")
+        return rc if isinstance(rc, int) else None
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
+def warn_on_row_drop(path, label: str, new_count: int, *, drop_frac: float = 0.5) -> None:
+    """Log a WARNING when `new_count` falls below `drop_frac` of the prior
+    snapshot's row_count at `path`, distinguishing a real feed collapse from
+    the few-percent churn a rolling window normally shows. Call before
+    overwriting the file. No-op when there is no prior count to compare."""
+    prev = prev_row_count(path)
+    if prev and new_count < prev * drop_frac:
+        log.warning(
+            "%s: row_count dropped sharply %d -> %d (< %.0f%% of prior); possible feed collapse",
+            label, prev, new_count, drop_frac * 100,
+        )
+
+
+def dumps_rows_per_line(payload: dict) -> str:
+    """Serialize a `{generated_utc, ..., rows: [...]}` feed payload as valid
+    JSON with each row on its own line, so a sweep diff shows one changed line
+    per changed row instead of ~18 (one per field). Envelope scalars stay on
+    their own lines; row keys are sorted for diff stability across pulls."""
+    rows = payload.get("rows", [])
+    head = {k: v for k, v in payload.items() if k != "rows"}
+    parts = ["{"]
+    for k, v in head.items():
+        parts.append(f"  {json.dumps(k)}: {json.dumps(v)},")
+    parts.append('  "rows": [')
+    for i, row in enumerate(rows):
+        tail = "," if i < len(rows) - 1 else ""
+        parts.append("    " + json.dumps(row, separators=(",", ":"), sort_keys=True) + tail)
+    parts.append("  ]")
+    parts.append("}")
+    return "\n".join(parts) + "\n"
 
 
 def utc_floor_isoformat(dt: datetime) -> str:

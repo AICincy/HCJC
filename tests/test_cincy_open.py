@@ -4,9 +4,17 @@ These don't hit the network — they verify URL/param construction so the
 GH Actions workflow can't silently regress.
 """
 
+import json
+import logging
 import urllib.parse
 
-from scraper.cincy_open import resource_url, since_iso
+from scraper.cincy_open import (
+    dumps_rows_per_line,
+    prev_row_count,
+    resource_url,
+    since_iso,
+    warn_on_row_drop,
+)
 
 
 def test_resource_url_format():
@@ -26,3 +34,74 @@ def test_url_encoding_is_compatible_with_socrata():
     qs = urllib.parse.urlencode(params, safe=":")
     assert "2026-05-10T00:00:00" in qs
     assert "%3A" not in qs  # colons remain literal
+
+
+def _write_feed(path, row_count, rows=None):
+    path.write_text(json.dumps({
+        "generated_utc": "2026-05-20T13:39:27Z",
+        "dataset_id": "gexm-h6bt",
+        "row_count": row_count,
+        "rows": rows if rows is not None else [{"i": i} for i in range(row_count)],
+    }), encoding="utf-8")
+
+
+def test_prev_row_count_reads_existing(tmp_path):
+    p = tmp_path / "feed.json"
+    _write_feed(p, 3230)
+    assert prev_row_count(p) == 3230
+
+
+def test_prev_row_count_none_when_missing_or_malformed(tmp_path):
+    assert prev_row_count(tmp_path / "nope.json") is None
+    bad = tmp_path / "bad.json"
+    bad.write_text("not json", encoding="utf-8")
+    assert prev_row_count(bad) is None
+
+
+def test_warn_on_row_drop_fires_on_collapse(tmp_path, caplog):
+    p = tmp_path / "feed.json"
+    _write_feed(p, 3230)
+    with caplog.at_level(logging.WARNING):
+        warn_on_row_drop(p, "PDI CFS", 100)
+    assert any("dropped sharply" in r.message for r in caplog.records)
+
+
+def test_warn_on_row_drop_silent_on_normal_churn(tmp_path, caplog):
+    p = tmp_path / "feed.json"
+    _write_feed(p, 3230)
+    with caplog.at_level(logging.WARNING):
+        warn_on_row_drop(p, "PDI CFS", 3207)  # the real -23 churn
+    assert caplog.records == []
+
+
+def test_warn_on_row_drop_silent_with_no_prior(tmp_path, caplog):
+    with caplog.at_level(logging.WARNING):
+        warn_on_row_drop(tmp_path / "new.json", "PDI CFS", 0)
+    assert caplog.records == []
+
+
+def test_dumps_rows_per_line_is_valid_and_one_row_per_line():
+    payload = {
+        "generated_utc": "2026-05-20T13:39:27Z",
+        "dataset_id": "gexm-h6bt",
+        "row_count": 2,
+        "rows": [{"b": 2, "a": 1}, {"a": 3, "b": 4}],
+    }
+    text = dumps_rows_per_line(payload)
+    assert json.loads(text) == payload  # valid, round-trips
+    body = [ln for ln in text.splitlines() if ln.startswith("    {")]
+    assert len(body) == 2  # one compact line per row
+    assert '{"a":1,"b":2}' in body[0]  # keys sorted, no inter-key spaces
+
+
+def test_dumps_rows_per_line_empty_rows_is_valid():
+    payload = {"generated_utc": "2026-05-20T13:39:27Z", "row_count": 0, "rows": []}
+    assert json.loads(dumps_rows_per_line(payload)) == payload
+
+
+def test_warn_on_row_drop_silent_when_prior_is_zero(tmp_path, caplog):
+    p = tmp_path / "feed.json"
+    _write_feed(p, 0, rows=[])
+    with caplog.at_level(logging.WARNING):
+        warn_on_row_drop(p, "Use of Force", 0)
+    assert caplog.records == []

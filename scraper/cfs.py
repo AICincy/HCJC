@@ -12,7 +12,7 @@ import logging
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .cincy_open import query, since_iso
+from .cincy_open import query, since_iso, warn_on_row_drop
 
 log = logging.getLogger(__name__)
 
@@ -43,6 +43,7 @@ def pull_recent(hours: int = 168, limit: int = 5000) -> list[dict]:
 
 def save_recent(rows: list[dict], path: Path = CFS_PATH) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    warn_on_row_drop(path, "CFS", len(rows))
     payload = {
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "row_count": len(rows),
