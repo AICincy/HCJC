@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-20T05:21:49Z",
+  "generated_utc": "2026-05-20T06:46:51Z",
   "dataset_id": "gexm-h6bt",
-  "row_count": 3262,
+  "row_count": 3259,
   "rows": [
     {
       "address_x": "23XX FERGUSON RD",
@@ -28407,24 +28407,6 @@
       "longitude_x": "-84.47384"
     },
     {
-      "address_x": "8XX BEECHER ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-05-04T13:37:24.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260504001013",
-      "incident_type_id": "INVESTIGATION (SI)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-05-04T13:37:24.000",
-      "closed_time_incident": "2026-05-04T14:12:13.000",
-      "dispatch_time_primary_unit": "2026-05-04T13:37:24.000",
-      "beat": "P26",
-      "district": "4",
-      "cpd_neighborhood": "WALNUT HILLS",
-      "community_council_neighborhood": "WALNUT HILLS",
-      "latitude_x": "39.1329090000896",
-      "longitude_x": "-84.489278"
-    },
-    {
       "address_x": "7XX DUTCH COLONY DR",
       "agency": "CPD",
       "create_time_incident": "2026-05-04T13:37:24.000",
@@ -28441,6 +28423,24 @@
       "community_council_neighborhood": "WINTON HILLS",
       "latitude_x": "39.1915730000896",
       "longitude_x": "-84.51764"
+    },
+    {
+      "address_x": "8XX BEECHER ST",
+      "agency": "CPD",
+      "create_time_incident": "2026-05-04T13:37:24.000",
+      "disposition_text": "301:OFFENSE REPORT",
+      "event_number": "CPD260504001013",
+      "incident_type_id": "INVESTIGATION (SI)",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-05-04T13:37:24.000",
+      "closed_time_incident": "2026-05-04T14:12:13.000",
+      "dispatch_time_primary_unit": "2026-05-04T13:37:24.000",
+      "beat": "P26",
+      "district": "4",
+      "cpd_neighborhood": "WALNUT HILLS",
+      "community_council_neighborhood": "WALNUT HILLS",
+      "latitude_x": "39.1329090000896",
+      "longitude_x": "-84.489278"
     },
     {
       "address_x": "61XX GLENWAY AV",
@@ -52777,24 +52777,6 @@
       "longitude_x": "-84.5204"
     },
     {
-      "address_x": "3XX W 5TH ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-22T15:24:33.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260422001101",
-      "incident_type_id": "+PARKING COMPLAINT",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-22T15:32:23.000",
-      "closed_time_incident": "2026-04-22T15:39:17.000",
-      "dispatch_time_primary_unit": "2026-04-22T15:31:06.000",
-      "beat": "P61",
-      "district": "1",
-      "cpd_neighborhood": "C. B. D. / RIVERFRONT",
-      "community_council_neighborhood": "DOWNTOWN",
-      "latitude_x": "39.0996460000897",
-      "longitude_x": "-84.519165"
-    },
-    {
       "address_x": "23XX FERGUSON RD",
       "agency": "CPD",
       "create_time_incident": "2026-04-22T15:24:33.000",
@@ -52811,6 +52793,24 @@
       "community_council_neighborhood": "WESTWOOD",
       "latitude_x": "39.1281620000896",
       "longitude_x": "-84.597051"
+    },
+    {
+      "address_x": "3XX W 5TH ST",
+      "agency": "CPD",
+      "create_time_incident": "2026-04-22T15:24:33.000",
+      "disposition_text": "CIT: CITED",
+      "event_number": "CPD260422001101",
+      "incident_type_id": "+PARKING COMPLAINT",
+      "priority": "12",
+      "arrival_time_primary_unit": "2026-04-22T15:32:23.000",
+      "closed_time_incident": "2026-04-22T15:39:17.000",
+      "dispatch_time_primary_unit": "2026-04-22T15:31:06.000",
+      "beat": "P61",
+      "district": "1",
+      "cpd_neighborhood": "C. B. D. / RIVERFRONT",
+      "community_council_neighborhood": "DOWNTOWN",
+      "latitude_x": "39.0996460000897",
+      "longitude_x": "-84.519165"
     },
     {
       "address_x": "E CENTRAL PKWY / MAIN ST",
@@ -58384,58 +58384,6 @@
       "community_council_neighborhood": "OTR",
       "latitude_x": "39.1202670000896",
       "longitude_x": "-84.520686"
-    },
-    {
-      "address_x": "3XX EZZARD CHARLES DR",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-20T06:39:41.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260420000218",
-      "incident_type_id": "+LOST PROPERTY",
-      "priority": "12",
-      "closed_time_incident": "2026-04-20T06:40:11.000",
-      "beat": "P13",
-      "district": "1",
-      "cpd_neighborhood": "WEST  END",
-      "community_council_neighborhood": "WEST END",
-      "latitude_x": "39.1102620000896",
-      "longitude_x": "-84.522079"
-    },
-    {
-      "address_x": "E 3RD ST / MONASTERY ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-20T06:29:42.000",
-      "disposition_text": "CIT: CITED",
-      "event_number": "CPD260420000214",
-      "incident_type_id": "TSTOP",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-20T06:29:42.000",
-      "closed_time_incident": "2026-04-20T06:36:13.000",
-      "dispatch_time_primary_unit": "2026-04-20T06:29:42.000",
-      "beat": "P61",
-      "district": "1",
-      "cpd_neighborhood": "C. B. D. / RIVERFRONT",
-      "community_council_neighborhood": "EAST END",
-      "latitude_x": "39.1035000000896",
-      "longitude_x": "-84.499235"
-    },
-    {
-      "address_x": "3XX ELM ST",
-      "agency": "CPD",
-      "create_time_incident": "2026-04-20T06:04:27.000",
-      "disposition_text": "301:OFFENSE REPORT",
-      "event_number": "CPD260420000076",
-      "incident_type_id": "SUSPICIOUS PERSON (IP)",
-      "priority": "12",
-      "arrival_time_primary_unit": "2026-04-20T01:37:08.000",
-      "closed_time_incident": "2026-04-20T06:15:29.000",
-      "dispatch_time_primary_unit": "2026-04-20T01:32:43.000",
-      "beat": "P61",
-      "district": "1",
-      "cpd_neighborhood": "C. B. D. / RIVERFRONT",
-      "community_council_neighborhood": "DOWNTOWN",
-      "latitude_x": "39.0977070000897",
-      "longitude_x": "-84.515437"
     }
   ]
 }
