@@ -461,6 +461,12 @@ def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
               "body_sample": "Access denied", "headers": {"server": "cloudflare"}}
     monkeypatch.setattr(sweep, "_sweep_list",
                         lambda client, surnames: ([], 24, {"403": 24}, sample))
+    dd_events: list[str] = []
+    monkeypatch.setattr(
+        sweep,
+        "ddlog_emit",
+        lambda event, **kwargs: dd_events.append(event) or True,
+    )
 
     class FakeClient:
         def __enter__(self): return self
@@ -477,6 +483,45 @@ def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
     assert log[0]["http_status_counts"] == {"403": 24}
     assert log[0]["block_sample"]["sha256"] == "deadbeef"
     assert log[0]["block_sample"]["headers"]["server"] == "cloudflare"
+    assert dd_events == ["sweep.degraded.list"]
+
+
+def test_run_emits_ddlog_when_watchdog_blocks(tmp_path, monkeypatch):
+    from scraper.store import save_current
+
+    prev = [Inmate(inmate_number="1000", last_name="DOE", first_name="F0", booking_date="5/10/26")]
+    cur = tmp_path / "current.json"
+    save_current(cur, prev)
+    monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
+    monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path / "photos")
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)
+    monkeypatch.setattr(
+        sweep,
+        "_sweep_list",
+        lambda client, surnames: ([ListRow(inmate_number="1000", last_name="DOE", first_name="J", admit_date="")], 0, {}, None),
+    )
+    monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh: ["1000"])
+    monkeypatch.setattr(sweep, "_fetch_details", lambda **kwargs: (100, 0, 0))
+    monkeypatch.setattr(sweep, "check_detail_watchdog", lambda *args: False)
+    monkeypatch.setattr(sweep, "_prune_and_report", lambda photos_dir, active_ids: None)
+
+    dd_events: list[str] = []
+    monkeypatch.setattr(
+        sweep,
+        "ddlog_emit",
+        lambda event, **kwargs: dd_events.append(event) or True,
+    )
+
+    class FakeClient:
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+
+    monkeypatch.setattr(sweep, "make_client", lambda: FakeClient())
+
+    rc = sweep.run(surnames=["A"], max_surnames=None, refresh_known=False, dry_run=False)
+    assert rc == 0
+    assert "sweep.degraded.detail_watchdog" in dd_events
 
 
 def test_forensic_sample_captures_status_hash_headers():
