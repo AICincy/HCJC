@@ -162,7 +162,7 @@ def _parse_name(tree: HTMLParser) -> str:
       1. h1/h2/h3 with comma + all-caps + at least one letter (current shape).
          A leading "Inmate:" (or similar single-label-with-colon prefix that
          HCSO added 2026-05-18) is stripped before the all-caps check, so the
-         parser tolerates both "ACOSTA, ANDREW" and "Inmate: ACOSTA, ANDREW".
+         parser tolerates both "VOE, ANDREW" and "Inmate: VOE, ANDREW".
       2. meta[property="og:title"] with the same shape.
       3. Any text node with comma + all-caps (e.g., in container divs).
       4. Bio table extraction: look for cells labeled "Name", "Full Name", 
