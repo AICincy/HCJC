@@ -18,6 +18,7 @@ import json
 import sys
 import urllib.request
 from pathlib import Path
+from urllib.parse import urlparse
 
 from .models import utcnow_iso
 
@@ -27,6 +28,9 @@ EGRESS_EVIDENCE_PATH = Path("data/egress_evidence.json")
 
 
 def _get_json(url: str, timeout: float = 30.0) -> dict:
+    scheme = urlparse(url).scheme.lower()
+    if scheme not in {"https"}:
+        raise ValueError(f"Unsupported URL scheme for JSON fetch: {scheme or '<none>'}")
     req = urllib.request.Request(url, headers={"Accept": "application/json"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return json.loads(resp.read().decode())

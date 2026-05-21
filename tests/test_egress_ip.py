@@ -1,6 +1,15 @@
 from scraper import egress_ip
 
 
+def test_get_json_rejects_non_https_scheme():
+    try:
+        egress_ip._get_json("file:///etc/passwd")
+    except ValueError as exc:
+        assert "Unsupported URL scheme" in str(exc)
+    else:
+        raise AssertionError("Expected ValueError for non-https URL scheme")
+
+
 def test_ip_in_ranges():
     assert egress_ip.ip_in_ranges("192.30.252.1", ["192.30.252.0/22"]) is True
     assert egress_ip.ip_in_ranges("8.8.8.8", ["192.30.252.0/22"]) is False

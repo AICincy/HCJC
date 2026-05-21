@@ -172,37 +172,69 @@ def _parse_name(tree: HTMLParser) -> str:
     Each non-tier-1 success logs a debug breadcrumb so the operator can see
     which tier saved the cycle.
     """
-    # Tier 1: h1/h2/h3 with comma + all-caps + at least one letter (original)
+    heading_name = _name_from_heading_tags(tree)
+    if heading_name:
+        return heading_name
+    og_title_name = _name_from_og_title(tree)
+    if og_title_name:
+        return og_title_name
+    container_name = _name_from_container_text(tree)
+    if container_name:
+        return container_name
+    labeled_cell_name = _name_from_labeled_cell(tree)
+    if labeled_cell_name:
+        return labeled_cell_name
+    title_name = _name_from_title(tree)
+    if title_name:
+        return title_name
+
+    # All tiers missed. Sweep's list-row fallback will still produce a
+    # usable record for new bookings; --refresh-known has no fallback.
+    log.warning("inmate-detail name heading (LAST, FIRST all-caps) not found")
+    return ""
+
+
+def _looks_like_formal_name(text: str) -> bool:
+    return "," in text and text.upper() == text and any(c.isalpha() for c in text)
+
+
+def _strip_name_label_prefix(text: str) -> str:
+    return text.split(":", 1)[1].strip() if ":" in text else text.strip()
+
+
+def _name_from_heading_tags(tree: HTMLParser) -> str:
     for tag in ("h1", "h2", "h3"):
         for node in tree.css(tag):
             text = _text(node)
             if "," not in text:
                 continue
-            # Strip a leading "<Label>:" prefix (HCSO drift, 2026-05-18). If
-            # there is no colon, candidate == text.strip() and the historical
-            # shape still parses.
-            candidate = text.split(":", 1)[1].strip() if ":" in text else text.strip()
-            if "," in candidate and candidate.upper() == candidate and any(c.isalpha() for c in candidate):
+            candidate = _strip_name_label_prefix(text)
+            if _looks_like_formal_name(candidate):
                 return candidate
-    
-    # Tier 2: meta[property="og:title"]
+    return ""
+
+
+def _name_from_og_title(tree: HTMLParser) -> str:
     for meta in tree.css('meta[property="og:title"]'):
         content = _attr(meta, "content").strip()
-        if "," in content and content.upper() == content and any(c.isalpha() for c in content):
+        if _looks_like_formal_name(content):
             log.debug("name extracted from og:title fallback")
             return content
-    
-    # Tier 3: Scan all text nodes looking for comma + all-caps pattern
-    # This catches cases where HCSO moved the name to a span, div, or other container
+    return ""
+
+
+def _name_from_container_text(tree: HTMLParser) -> str:
     for div in tree.css("div, span, p"):
         text = _text(div)
-        if text and "," in text and text.upper() == text and any(c.isalpha() for c in text):
-            # Avoid capturing very long strings (likely content bleed)
-            if len(text) < 200:
-                log.debug("name extracted from container text fallback (tag=%s)", div.tag)
-                return text.strip()
-    
-    # Tier 4: Look for common name table cells (td/th with label attribute)
+        if not text:
+            continue
+        if _looks_like_formal_name(text) and len(text) < 200:
+            log.debug("name extracted from container text fallback (tag=%s)", div.tag)
+            return text.strip()
+    return ""
+
+
+def _name_from_labeled_cell(tree: HTMLParser) -> str:
     for td in tree.css("td[label], th"):
         label = _attr(td, "label").strip()
         if label.lower() in ("name", "full name", "inmate", "inmate name"):
@@ -210,18 +242,16 @@ def _parse_name(tree: HTMLParser) -> str:
             if text:
                 log.debug("name extracted from labeled cell (label=%s)", label)
                 return text.strip()
-    
-    # Tier 5: document <title>
+    return ""
+
+
+def _name_from_title(tree: HTMLParser) -> str:
     title = tree.css_first("title")
     if title is not None:
         text = _text(title)
         if "," in text:
             log.debug("name extracted from <title> fallback")
             return text.strip()
-    
-    # All tiers missed. Sweep's list-row fallback will still produce a
-    # usable record for new bookings; --refresh-known has no fallback.
-    log.warning("inmate-detail name heading (LAST, FIRST all-caps) not found")
     return ""
 
 
