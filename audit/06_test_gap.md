@@ -1,5 +1,10 @@
 # tests - Test Gap Analysis
 
+> **Reconciliation 2026-05-21 (see #201):** tests-F1 (watchdog asserts),
+> tests-F2 (`_fetch_one` fallbacks), tests-F4 (guard boundary cases), and
+> tests-F5 (scrub real-seeming fixture names, via #199) are RESOLVED on `main`.
+> tests-F3/F6/F7/F8 not re-verified this pass; treat as open until checked.
+
 ## Audit metadata
 - Skill: jcstream-python-test-gap-analysis
 - Commit: 8355cc81463433ecdc869685e1e16d652f662863
