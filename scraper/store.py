@@ -273,21 +273,19 @@ def _compact_anon_entries(entries: list[dict]) -> list[dict]:
     old_groups: Counter = Counter()
 
     for row in entries:
-    for row in entries:
-        is_summary = row.get("event_summary")
-        ts = row.get("timestamp_utc") or row.get("date") or ""
-        date_str = ts[:10] if ts else ""
-
-        if not is_summary and (not date_str or date_str >= compact_cutoff):
-            recent.append(row)
-            continue
-
-        month = row.get("month") if is_summary else date_str[:7]
-        event = row.get("event")
-        tier = row.get("tier")
-        category = row.get("category")
-        count = row.get("count", 1) if is_summary else 1
-        old_groups[(month, event, tier, category)] += count
+        if row.get("event_summary"):
+            month = row.get("month")
+            count = row.get("count", 1)
+        else:
+            ts = row.get("timestamp_utc") or row.get("date") or ""
+            date_str = ts[:10] if ts else ""
+            if not date_str or date_str >= compact_cutoff:
+                recent.append(row)
+                continue
+            month = date_str[:7]
+            count = 1
+        key = (month, row.get("event"), row.get("tier"), row.get("category"))
+        old_groups[key] += count
 
     summaries: list[dict] = []
     for (month, event, tier, category), count in sorted(old_groups.items()):
