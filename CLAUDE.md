@@ -104,6 +104,10 @@ Violating them imposes cognitive cost the owner cannot afford.
   `scraper/sweep.py`): if >10% of surname fetches error, or the roster collapses
   to <50% of last cycle, it keeps the last-good `data/current.json` and exits 0.
   That's why the public count is stable even when HCSO rate-limits a sweep.
+- `data/anon_changelog.json` is bounded by `_compact_anon_entries` in
+  `scraper/store.py`: anon rows older than `ANON_COMPACTION_MAX_DAYS` (365) are
+  collapsed to one monthly summary row per (month, event, tier, category) with a
+  `count`. Compaction runs at write time (not as a migration) and is idempotent.
 
 ### Runbook: roster frozen / "no new inmates" (HCSO WAF block)
 
