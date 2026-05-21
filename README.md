@@ -1,12 +1,20 @@
 # JCStream
 
+> [!CAUTION]
+> **Roster updates are PAUSED (since 2026-05-19).** The Hamilton County
+> Sheriff's Office is blocking JCStream's automated access to its public inmate
+> roster (HTTP 403). The counts and records shown are from the **last successful
+> update and are not current.** JCStream documents this denial as Ohio Public
+> Records Act (ORC § 149.43) evidence and does not evade it. Details:
+> [HCSO access interruption](#hcso-access-interruption-current) and
+> [`audit/14_hcso_waf.md`](audit/14_hcso_waf.md).
+
 A near-real-time public-records mirror of the Hamilton County (Ohio) Justice Center
 inmate roster, generated entirely from publicly-published Hamilton County Sheriff's
 Office data under Ohio Revised Code § 149.43.
 
-JCStream is a static site rebuilt every ~30 minutes by GitHub Actions.
-Automated roster updates are currently paused upstream; see the status note
-below. It republishes only what `hcso.org` itself publishes for each currently-in-custody
+JCStream is a static site rebuilt every ~30 minutes by GitHub Actions. It
+republishes only what `hcso.org` itself publishes for each currently-in-custody
 person: name, inmate / booking number, booking date, sex, race, projected release
 date, and the charge / bond / court-date table.
 
@@ -14,22 +22,6 @@ JCStream **mirrors** the public HCSO roster. When HCSO removes a person from the
 public roster (release, sealing, transfer, error correction, etc.) JCStream removes
 that record on its next run. There is no historical archive of released
 individuals.
-
-> **Current status: automated roster updates are paused (since 2026-05-19).**
-> HCSO's web application firewall is blocking JCStream's automated retrieval of
-> the public roster from the GitHub Actions egress IP (HTTP 403, and at times an
-> HTTP 200 page stripped of its results). The degraded-roster guard keeps the
-> last-good `data/current.json` rather than publish a partial roster, so the
-> figures shown reflect the last successful update, not the current jail
-> population.
->
-> **JCStream documents the block; it does not evade it.** Each blocked sweep
-> cycle and each recovery is appended to a hash-chained, git-committed evidence
-> log (`data/waf_block_log.json`), preserved as a contemporaneous record toward
-> an Ohio Public Records Act (ORC § 149.43) mandamus posture. The dormant
-> `JCSTREAM_HTTP_PROXY` egress-proxy capability is deliberately left unset. See
-> [`audit/14_hcso_waf.md`](audit/14_hcso_waf.md) and the dossier it links
-> (`audit/15` through `audit/19`).
 
 ## Status
 
