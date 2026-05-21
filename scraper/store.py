@@ -273,6 +273,7 @@ def _compact_anon_entries(entries: list[dict]) -> list[dict]:
     old_groups: Counter = Counter()
 
     for row in entries:
+    for row in entries:
         is_summary = row.get("event_summary")
         ts = row.get("timestamp_utc") or row.get("date") or ""
         date_str = ts[:10] if ts else ""
