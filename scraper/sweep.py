@@ -698,6 +698,24 @@ def _fetch_one(
     fallback or disk-cached photo carry-forward is applied, so callers can
     measure detail-page health distinct from the list-side path.
     """
+    inm, photo_bytes, photo_url = _fetch_detail_with_retry(client, inmate_id, previous)
+    if inm is None:
+        return None, False, False
+    detail_named = bool(inm.last_name or inm.first_name)
+    detail_had_photo = bool(photo_bytes or photo_url)
+
+    photo_bytes = _fetch_photo_bytes_from_url(client, inmate_id, photo_url, photo_bytes)
+    _apply_list_row_fallback(inm, list_row)
+    _attach_photo_filename(inm, photo_bytes)
+    _set_seen_timestamps(inm, inmate_id, previous)
+    return inm, detail_named, detail_had_photo
+
+
+def _fetch_detail_with_retry(
+    client: HcsoClient,
+    inmate_id: str,
+    previous: dict[str, Inmate],
+) -> tuple[Inmate | None, bytes | None, str | None]:
     # WAF / geo-block tolerant fetch. Per the 2026-05-19 Claude.ai HCSO
     # verification, valid inmate-detail pages from HCSO are 91-230 KB.
     # HCSO's WAF returns truncated/blocked responses well under 5 KB to
@@ -715,10 +733,9 @@ def _fetch_one(
             html = client.get(DETAIL_PATH, params={"id": inmate_id})
         except Exception as e:
             log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
-            return None, False, False
+            return None, None, None
         inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
-        looks_like_waf_block = _looks_like_waf_block(html, inm, photo_bytes, photo_url)
-        if not looks_like_waf_block:
+        if not _looks_like_waf_block(html, inm, photo_bytes, photo_url):
             _on_waf_block_cleared()
             break
         streak = _on_waf_block_observed()
@@ -745,7 +762,7 @@ def _fetch_one(
             # Known inmate: return None so the carry-forward path in
             # `run()` preserves the previous-good record (cached photo,
             # prior bio + charges) instead of overwriting with empty data.
-            return None, False, False
+            return None, None, None
         # New inmate (not in previous): fall through so the list_row
         # fallback below can rescue the interstitial response into a
         # minimal Inmate. Better a name than nothing for a newly-booked
@@ -757,25 +774,37 @@ def _fetch_one(
     # Inmate | None for the type checker and documents the invariant without
     # adding a runtime branch.
     assert inm is not None
-    detail_named = bool(inm.last_name or inm.first_name)
-    detail_had_photo = bool(photo_bytes or photo_url)
+    return inm, photo_bytes, photo_url
 
+
+def _fetch_photo_bytes_from_url(
+    client: HcsoClient,
+    inmate_id: str,
+    photo_url: str | None,
+    photo_bytes: bytes | None,
+) -> bytes | None:
     # If the page provided a direct photo URL, fetch it (more reliable than
     # base64). Fall back to inline bytes if the URL fetch fails.
     if photo_url and not photo_bytes:
         try:
-            photo_bytes = client.get_bytes(photo_url)
+            return client.get_bytes(photo_url)
         except Exception as e:
             log.warning("photo URL fetch failed for id=%s url=%s: %s", inmate_id, photo_url, e)
+    return photo_bytes
 
-    if list_row is not None:
-        if not inm.last_name and list_row.last_name:
-            inm.last_name = list_row.last_name
-        if not inm.first_name and list_row.first_name:
-            inm.first_name = list_row.first_name
-        if not inm.booking_date and list_row.admit_date:
-            inm.booking_date = list_row.admit_date
 
+def _apply_list_row_fallback(inm: Inmate, list_row: ListRow | None) -> None:
+    if list_row is None:
+        return
+    if not inm.last_name and list_row.last_name:
+        inm.last_name = list_row.last_name
+    if not inm.first_name and list_row.first_name:
+        inm.first_name = list_row.first_name
+    if not inm.booking_date and list_row.admit_date:
+        inm.booking_date = list_row.admit_date
+
+
+def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None) -> None:
     photo_path = PHOTOS_DIR / f"{inm.inmate_number}.jpg"
     # Save fresh bytes if we got them AND they decoded; otherwise fall through
     # to the disk-cached photo from a prior successful sweep. Previously the
@@ -786,13 +815,14 @@ def _fetch_one(
     elif photo_path.exists():
         inm.photo_filename = photo_path.name
 
+
+def _set_seen_timestamps(inm: Inmate, inmate_id: str, previous: dict[str, Inmate]) -> None:
     inm.first_seen_utc = (
         previous[inmate_id].first_seen_utc
         if inmate_id in previous and previous[inmate_id].first_seen_utc
         else utcnow_iso()
     )
     inm.last_seen_utc = utcnow_iso()
-    return inm, detail_named, detail_had_photo
 
 
 # Back-compat alias: prefer scraper.sweep_guards.prune_photos in new code.
