@@ -4,8 +4,8 @@ Identifies itself in the User-Agent. Parallelism (DEFAULT_CONCURRENCY=16)
 and a 0.5s crawl-delay together keep the request profile well under HCSO's
 WAF tripwires (the 2026-05-19 verification confirmed 32-worker no-delay was
 hitting WAF blocks on truncated <5 KB responses). Retries once on transient
-5xx with a short exponential backoff (0.5s, 1s); also retries once on 429
-honoring a capped Retry-After. Does NOT attempt to evade WAFs, rate limits,
+5xx with a 0.5s backoff; also retries once on 429 honoring a capped
+Retry-After. Does NOT attempt to evade WAFs, rate limits,
 or CAPTCHAs.
 """
 
@@ -127,9 +127,9 @@ class HcsoClient:
         self._sleep_for_crawl_delay()
         response = self._client.get(path, params=params)
         # One inspection pass = at most one retry (429 or 5xx), then
-        # raise_for_status below. Do NOT bump to range(2): the re-fetched
-        # response is not re-inspected by the loop, so a higher range would
-        # silently issue extra requests against HCSO without re-checking.
+        # raise_for_status below. The single 5xx backoff is 0.5s (attempt=0
+        # only). Keep range(1): a higher range would issue additional
+        # retries beyond the one this method documents.
         for attempt in range(1):
             if response.status_code == 429:
                 wait = _retry_after_seconds(response.headers.get("retry-after"))
@@ -137,7 +137,7 @@ class HcsoClient:
                 log.info("429 on %s; sleeping %.1fs before retry", path, wait)
                 time.sleep(wait)
             elif response.status_code >= 500:
-                time.sleep(0.5 * (2 ** attempt))  # 0.5s, 1s
+                time.sleep(0.5 * (2 ** attempt))  # 0.5s (attempt=0 only)
             else:
                 break
             response = self._client.get(path, params=params)
