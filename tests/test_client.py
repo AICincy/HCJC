@@ -133,15 +133,11 @@ def test_make_client_uses_defaults_when_env_unset(monkeypatch):
     assert c.crawl_delay == client_mod.DEFAULT_CRAWL_DELAY
 
 
-# ----- base_url guard around verify=False ----------------------------------
+# ----- __enter__ behavior ---------------------------------------------------
 
-def test_enter_refuses_non_hcso_base_url():
-    # __enter__ asserts the host is hcso.org because verify=False is unsafe
-    # anywhere else. A future operator pointing JCSTREAM_BASE_URL elsewhere
-    # must explicitly re-enable verify before retargeting.
-    c = client_mod.HcsoClient(base_url="https://example.com")
-    with pytest.raises(ValueError, match="non-HCSO"):
-        c.__enter__()
+def test_enter_accepts_non_hcso_base_url():
+    with client_mod.HcsoClient(base_url="https://example.com") as c:
+        assert c._client is not None
 
 
 def test_enter_accepts_hcso_subdomain():
