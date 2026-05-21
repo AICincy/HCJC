@@ -189,7 +189,9 @@ def test_fetch_one_uses_list_row_name_when_detail_heading_missing(tmp_path, monk
     list_row = ListRow(
         inmate_number="9876543", last_name="ROE", first_name="JANE", admit_date="5/10/26"
     )
-    inm, named, had_photo = _fetch_one(client, "9876543", previous={}, list_row=list_row)
+    inm, named, had_photo = _fetch_one(
+        client, "9876543", previous={}, list_row=list_row, waf_tracker=WafBackoffTracker()
+    )
     # detail parser produced no name, so detail_named must be False.
     assert named is False
     assert had_photo is False
@@ -212,7 +214,7 @@ def test_fetch_one_carries_existing_photo_when_no_inline_image(tmp_path, monkeyp
         "<ul><li>Inmate Number : 1234567</li></ul></body></html>"
     )
     client = _FakeClient(html)
-    inm, named, had_photo = _fetch_one(client, "1234567", previous={}, list_row=None)
+    inm, named, had_photo = _fetch_one(client, "1234567", previous={}, list_row=None, waf_tracker=WafBackoffTracker())
     assert had_photo is False  # no inline image on the page
     assert inm is not None
     # carry-forward kicked in because the photo file existed on disk.
@@ -240,7 +242,7 @@ def test_fetch_one_falls_back_to_disk_when_pillow_rejects_bytes(tmp_path, monkey
         '</body></html>'
     )
     client = _FakeClient(html)
-    inm, _, had_photo = _fetch_one(client, "5550000", previous={}, list_row=None)
+    inm, _, had_photo = _fetch_one(client, "5550000", previous={}, list_row=None, waf_tracker=WafBackoffTracker())
     assert had_photo is True  # detail parser found inline bytes
     assert inm is not None
     # Cached file on disk rescued the snapshot even though decode failed.
