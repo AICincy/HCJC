@@ -16,7 +16,6 @@ import os
 import threading
 import time
 from dataclasses import dataclass, field
-from urllib.parse import urlparse
 
 import httpx
 
@@ -45,14 +44,7 @@ DEFAULT_CONCURRENCY = 16
 @dataclass
 class HcsoClient:
     """HTTP client bound to the Hamilton County Sheriff's Office public inmate
-    roster at `hcso.org`. **TLS verification is intentionally disabled** (see
-    `verify=False` in `__enter__`) — that decision is sound for the HCSO host
-    only, which serves unauthenticated public records with no auth or PII over
-    the wire. Repointing `base_url` to any other host without restoring
-    `verify=True` would be a security regression: an attacker on the network
-    path could substitute a forged certificate and the client would accept it.
-    If the workflow ever uses this class against a non-HCSO endpoint, that
-    must be paired with restoring TLS verification."""
+    roster at `hcso.org`."""
 
     base_url: str = DEFAULT_BASE
     user_agent: str = DEFAULT_UA
@@ -69,36 +61,12 @@ class HcsoClient:
     _lock: threading.Lock = field(default_factory=threading.Lock, init=False)
 
     def __enter__(self) -> "HcsoClient":
-        # verify=False below is sound only for the HCSO host. If a future
-        # operator (or JCSTREAM_BASE_URL override) points this client at any
-        # other host, the unverified TLS would let an on-path attacker
-        # substitute a forged cert. Refuse to instantiate against anything
-        # other than hcso.org so the TLS-skip decision stays tied to its
-        # justification.
-        # urlparse().hostname returns lowercase per the stdlib docs, but
-        # `.lower()` here is a cheap belt-and-suspenders against a future
-        # python urlparse change or a subclass that overrides the property.
-        host = (urlparse(self.base_url).hostname or "").lower()
-        if host != "hcso.org" and not host.endswith(".hcso.org"):
-            raise ValueError(
-                f"HcsoClient refuses to run with verify=False against "
-                f"non-HCSO host {host!r} (base_url={self.base_url!r}). "
-                f"Restore verify=True before retargeting."
-            )
-        # verify=False: HCSO's public site uses Let's Encrypt; in practice the
-        # cert chain has presented a notBefore in the future relative to GitHub
-        # runner clocks, which makes verification flap. We fetch only
-        # unauthenticated public records — no auth, no cookies, no PII
-        # transmitted — so TLS chain verification isn't a meaningful security
-        # control here, and disabling it keeps the cron from breaking on
-        # transient skew. Set on transport AND client so retries inside the
-        # transport pool inherit the setting.
         # Route through the egress proxy when configured (credentials, if any,
         # stay in the env var and are never logged). The proxy is set on the
         # transport so the client's retry pool inherits it.
         if self.proxy:
             log.info("HcsoClient routing HCSO fetches through a configured egress proxy")
-        transport = httpx.HTTPTransport(retries=1, verify=False, proxy=self.proxy)
+        transport = httpx.HTTPTransport(retries=1, proxy=self.proxy)
         self._client = httpx.Client(
             base_url=self.base_url,
             timeout=self.timeout,
@@ -118,7 +86,6 @@ class HcsoClient:
                 "Upgrade-Insecure-Requests": "1",
             },
             follow_redirects=True,
-            verify=False,
         )
         return self
 
