@@ -42,11 +42,13 @@ def test_emit_posts_expected_payload(monkeypatch):
     assert "event:sweep.degraded.list" in sent["json"]["ddtags"]
 
 
-def test_emit_swallows_send_errors(monkeypatch):
+def test_emit_swallows_send_errors(monkeypatch, caplog):
     monkeypatch.setenv("DD_API_KEY", "k")
 
     def _boom(*args, **kwargs):
         raise RuntimeError("nope")
 
     monkeypatch.setattr(ddlog.httpx, "post", _boom)
-    assert ddlog.emit("x", message="msg") is False
+    with caplog.at_level("WARNING"):
+        assert ddlog.emit("x", message="msg") is False
+    assert "Datadog transport send failed for event=x" in caplog.text
