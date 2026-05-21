@@ -1,5 +1,12 @@
 # data - Data Integrity Audit
 
+> **Reconciliation 2026-05-21 (see #201):** data-F1 (schema_version + reject
+> future), data-F2 (inmate_count check), data-F3 (order-insensitive charge
+> compare), data-F4 (reject empty inmate_number), data-F5 (generated_utc
+> validator), and data-F6 (changelog sort on save) are RESOLVED on `main`.
+> data-F7 (HistoryRecord) and data-F8 (post-prune photo reconcile) not
+> re-verified this pass; treat as open until checked.
+
 ## Audit metadata
 - Skill: jcstream-python-data-integrity
 - Commit: 8355cc81463433ecdc869685e1e16d652f662863

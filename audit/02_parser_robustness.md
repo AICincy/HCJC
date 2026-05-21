@@ -1,5 +1,10 @@
 # parser - Parser Robustness Audit
 
+> **Reconciliation 2026-05-21 (see #201):** parser-F1 (tiered `_parse_name`),
+> parser-F3 (JPEG-SOI fallback), and parser-F8 (empty-parse INFO sentinel) are
+> RESOLVED on `main`. parser-F2/F4/F5/F6/F7 not re-verified this pass; treat as
+> open until checked.
+
 ## Audit metadata
 - Skill: jcstream-python-parser-robustness
 - Commit: 8355cc81463433ecdc869685e1e16d652f662863
