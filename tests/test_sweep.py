@@ -5,7 +5,7 @@ from pathlib import Path
 
 from scraper import sweep
 from scraper.models import Inmate, ListRow
-from scraper.sweep import _fetch_one
+from scraper.sweep import WafBackoffTracker, _fetch_one
 from scraper.sweep_guards import (
     ROSTER_STALE_ALARM_HOURS,
     check_detail_watchdog,
@@ -257,23 +257,23 @@ def test_fetch_one_returns_none_on_waf_blocked_response_for_known_inmate(tmp_pat
     # Stub out the backoff sleep so the test doesn't actually wait 2-16s
     # for each WAF-block path. The retry loop itself is still exercised.
     monkeypatch.setattr(sweep.time, "sleep", lambda _s: None)
-    sweep._reset_waf_block_streak_for_tests()
+    tracker = WafBackoffTracker()
     tiny_blocked_html = "<html><body>Access Denied</body></html>"  # 41 bytes
     client = _FakeClient(tiny_blocked_html)
 
     # Known inmate (in previous): WAF block triggers carry-forward path.
     prior = Inmate(inmate_number="7770000", last_name="DOE", first_name="JOHN", booking_date="5/1/26")
-    inm, named, had_photo = _fetch_one(client, "7770000", previous={"7770000": prior}, list_row=None)
+    inm, named, had_photo = _fetch_one(client, "7770000", previous={"7770000": prior}, list_row=None, waf_tracker=tracker)
     assert inm is None  # signals run() to carry forward from previous
     assert named is False
     assert had_photo is False
 
     # Unknown inmate (not in previous): list_row fallback still works.
-    sweep._reset_waf_block_streak_for_tests()
+    tracker = WafBackoffTracker()
     list_row = ListRow(
         inmate_number="8880000", last_name="ROE", first_name="JANE", admit_date="5/12/26"
     )
-    inm, _, _ = _fetch_one(client, "8880000", previous={}, list_row=list_row)
+    inm, _, _ = _fetch_one(client, "8880000", previous={}, list_row=list_row, waf_tracker=tracker)
     assert inm is not None  # falls through; list_row rescues the name
     assert inm.last_name == "ROE"
 
@@ -285,7 +285,7 @@ def test_fetch_one_retries_within_same_cycle_and_recovers_on_second_attempt(tmp_
     # forward, photo extraction runs normally, and the streak is reset.
     monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
     monkeypatch.setattr(sweep.time, "sleep", lambda _s: None)
-    sweep._reset_waf_block_streak_for_tests()
+    tracker = WafBackoffTracker()
     tiny = "<html><body>Access Denied</body></html>"
     full = (
         "<html><body><h1>DOE, JOHN</h1>"
@@ -301,7 +301,7 @@ def test_fetch_one_retries_within_same_cycle_and_recovers_on_second_attempt(tmp_
             return tiny if self.calls == 1 else full
 
     client = _FlipClient()
-    inm, named, _ = _fetch_one(client, "6660000", previous={}, list_row=None)
+    inm, named, _ = _fetch_one(client, "6660000", previous={}, list_row=None, waf_tracker=tracker)
     assert client.calls == 2  # retry actually ran
     assert inm is not None
     assert inm.last_name == "DOE"

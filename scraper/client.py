@@ -72,7 +72,8 @@ class HcsoClient:
             timeout=self.timeout,
             transport=transport,
             limits=httpx.Limits(max_connections=self.concurrency * 2,
-                                max_keepalive_connections=self.concurrency),
+                                max_keepalive_connections=self.concurrency,
+                                keepalive_expiry=30),
             headers={
                 "User-Agent": self.user_agent,
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -97,21 +98,22 @@ class HcsoClient:
     def _sleep_for_crawl_delay(self) -> None:
         if self.crawl_delay <= 0:
             return
-        with self._lock:  # serialize the gating, not the request itself
+        with self._lock:  # serialize gating AND sleep so concurrent workers
+            # cannot all read the same elapsed and burst simultaneously.
             elapsed = time.monotonic() - self._last_request_at
             wait = self.crawl_delay - elapsed
-            self._last_request_at = time.monotonic() + max(wait, 0.0)
-        if wait > 0:
-            time.sleep(wait)
+            if wait > 0:
+                time.sleep(wait)
+            self._last_request_at = time.monotonic()
 
     def get(self, path: str, params: dict[str, str] | None = None) -> str:
         """Issue a GET request and return the response body as text.
 
-        Thread-safe. Raises httpx.HTTPStatusError on non-2xx after retries on
-        transient 5xx and 429. Retries use a short exponential backoff so a
-        degraded HCSO front-end isn't hammered immediately. On 429, the
-        Retry-After header is honored (parsed in seconds or HTTP-date form),
-        capped at RETRY_AFTER_CAP_S.
+        Thread-safe. Raises httpx.HTTPStatusError on non-2xx after one retry on
+        transient 5xx and 429. Uses a 0.5s backoff on 5xx so a degraded HCSO
+        front-end isn't hammered immediately. On 429, the Retry-After header
+        is honored (parsed in seconds or HTTP-date form), capped at
+        RETRY_AFTER_CAP_S.
         """
         return self.get_response(path, params=params).text
 
@@ -124,7 +126,7 @@ class HcsoClient:
         assert self._client is not None, "use as context manager"
         self._sleep_for_crawl_delay()
         response = self._client.get(path, params=params)
-        for attempt in range(2):
+        for attempt in range(1):
             if response.status_code == 429:
                 wait = _retry_after_seconds(response.headers.get("retry-after"))
                 wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)

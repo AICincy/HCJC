@@ -26,7 +26,7 @@ import sys
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import partial
 from pathlib import Path
 
@@ -166,35 +166,43 @@ _sweep_looks_healthy = sweep_looks_healthy
 
 MIN_SWEEP_INTERVAL_S = 20 * 60  # 20 minutes
 
-# Self-healing backoff: when consecutive WAF-block-shaped responses
-# accumulate within a single sweep, workers sleep proportionally before
-# returning. The cumulative slow-down gives HCSO's WAF rate-limit window
-# time to clear without us issuing more blocked requests. Reset on any
-# successful parse that produced structured content.
-_waf_block_streak = 0
-_waf_block_lock = threading.Lock()
-_WAF_BACKOFF_BASE_S = 2.0
-_WAF_BACKOFF_CAP_S = 30.0
 
+@dataclass
+class WafBackoffTracker:
+    """Thread-safe WAF-block backoff tracker, instantiated once per sweep run.
 
-def _on_waf_block_observed() -> int:
-    """Increment the WAF-block streak (thread-safe). Returns the new count."""
-    global _waf_block_streak
-    with _waf_block_lock:
-        _waf_block_streak += 1
-        return _waf_block_streak
+    Replaces the prior module-level globals (_waf_block_streak, _waf_block_lock)
+    so each run() gets a clean instance and there is no stale-streak window:
+    observe() atomically increments the streak AND computes the backoff inside
+    the lock, returning the backoff seconds directly.
+    """
 
+    _BASE_S: float = 2.0
+    _CAP_S: float = 30.0
+    _streak: int = field(default=0, init=False)
+    _lock: threading.Lock = field(default_factory=threading.Lock, init=False)
 
-def _on_waf_block_cleared() -> None:
-    """Reset the WAF-block streak after a successful parse."""
-    global _waf_block_streak
-    with _waf_block_lock:
-        _waf_block_streak = 0
+    def observe(self) -> tuple[int, float]:
+        """Record a WAF-block-shaped response (thread-safe).
 
+        Returns ``(streak, backoff_seconds)`` computed atomically so the
+        caller never acts on a stale streak value.
+        """
+        with self._lock:
+            self._streak += 1
+            streak = self._streak
+            backoff = min(self._BASE_S * (2 ** (streak - 1)), self._CAP_S)
+        return streak, backoff
 
-def _waf_backoff_seconds(streak: int) -> float:
-    """Exponential backoff: 2s, 4s, 8s, 16s, 30s (capped)."""
-    return min(_WAF_BACKOFF_BASE_S * (2 ** (streak - 1)), _WAF_BACKOFF_CAP_S)
+    def clear(self) -> None:
+        """Reset the streak after a successful parse."""
+        with self._lock:
+            self._streak = 0
+
+    @property
+    def streak(self) -> int:
+        with self._lock:
+            return self._streak
 
 
 # Valid HCSO inmate-detail pages are 91-230 KB (2026-05-19 verification). The
@@ -226,13 +234,6 @@ def _list_response_looks_blocked(html: str, rows: list[ListRow]) -> bool:
     (``_WAF_BLOCK_MAX_BYTES``) discriminates a block stub from a real empty
     result. This is the 200-mode sibling of the 403 path in ``_sweep_list``."""
     return not rows and len(html) < _WAF_BLOCK_MAX_BYTES
-
-
-def _reset_waf_block_streak_for_tests() -> None:
-    """Test-only: reset module state between cases. Not used at runtime."""
-    global _waf_block_streak
-    with _waf_block_lock:
-        _waf_block_streak = 0
 
 
 def _plan_detail_fetch(
@@ -293,6 +294,7 @@ def _fetch_details(
     current: dict[str, Inmate],
     row_by_id: dict[str, ListRow],
     dry_run: bool,
+    waf_tracker: WafBackoffTracker,
 ) -> tuple[int, int, int]:
     """Run the detail-page worker pool and merge successful or fallback rows."""
     done = 0
@@ -302,7 +304,7 @@ def _fetch_details(
     sweep_started = time.monotonic()
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
         futures = {
-            pool.submit(_fetch_one, client, iid, previous, row_by_id.get(iid)): iid
+            pool.submit(_fetch_one, client, iid, previous, row_by_id.get(iid), waf_tracker): iid
             for iid in to_fetch
         }
         for fut in as_completed(futures):
@@ -492,6 +494,7 @@ def run(
             # Map inmate_id -> list row for name fallback when the detail
             # page heading is missing/unparseable.
             row_by_id = {r.inmate_number: r for r in rows}
+            waf_tracker = WafBackoffTracker()
             n_detail_attempts, n_detail_named, n_detail_with_photo = _fetch_details(
                 client=client,
                 to_fetch=to_fetch,
@@ -499,6 +502,7 @@ def run(
                 current=current,
                 row_by_id=row_by_id,
                 dry_run=dry_run,
+                waf_tracker=waf_tracker,
             )
             watchdog_ok = check_detail_watchdog(
                 n_detail_attempts, n_detail_named, n_detail_with_photo
@@ -690,6 +694,7 @@ def _fetch_one(
     inmate_id: str,
     previous: dict[str, Inmate],
     list_row: ListRow | None = None,
+    waf_tracker: WafBackoffTracker | None = None,
 ) -> tuple[Inmate | None, bool, bool]:
     """Fetch and parse one detail page.
 
@@ -698,7 +703,9 @@ def _fetch_one(
     fallback or disk-cached photo carry-forward is applied, so callers can
     measure detail-page health distinct from the list-side path.
     """
-    inm, photo_bytes, photo_url = _fetch_detail_with_retry(client, inmate_id, previous)
+    inm, photo_bytes, photo_url = _fetch_detail_with_retry(
+        client, inmate_id, previous, waf_tracker or WafBackoffTracker()
+    )
     if inm is None:
         return None, False, False
     detail_named = bool(inm.last_name or inm.first_name)
@@ -715,6 +722,7 @@ def _fetch_detail_with_retry(
     client: HcsoClient,
     inmate_id: str,
     previous: dict[str, Inmate],
+    waf_tracker: WafBackoffTracker,
 ) -> tuple[Inmate | None, bytes | None, str | None]:
     # WAF / geo-block tolerant fetch. Per the 2026-05-19 Claude.ai HCSO
     # verification, valid inmate-detail pages from HCSO are 91-230 KB.
@@ -736,10 +744,9 @@ def _fetch_detail_with_retry(
             return None, None, None
         inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
         if not _looks_like_waf_block(html, inm, photo_bytes, photo_url):
-            _on_waf_block_cleared()
+            waf_tracker.clear()
             break
-        streak = _on_waf_block_observed()
-        backoff = _waf_backoff_seconds(streak)
+        streak, backoff = waf_tracker.observe()
         if attempt == 0:
             log.warning(
                 "WAF-block-shaped response for id=%s (%d bytes, streak=%d); "
