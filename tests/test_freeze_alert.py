@@ -1,5 +1,7 @@
 """Tests for the roster-freeze alert. No network: the GitHub API calls are
 monkeypatched, so only the staleness gating and the send-gate are exercised."""
+import pytest
+
 from scraper import freeze_alert
 from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS
 
@@ -55,3 +57,9 @@ def test_alert_swallows_api_errors(monkeypatch):
     monkeypatch.setattr(freeze_alert, "_open_freeze_issue_exists", _boom)
     # Must not raise; alerting failure can't break the sweep workflow.
     assert freeze_alert.alert(ROSTER_STALE_ALARM_HOURS + 5) == "dry-run"
+
+
+def test_gh_rejects_non_https_urls():
+    for bad_url in ("file:///tmp/x", "ftp://example.com/x", "mailto:test@example.com"):
+        with pytest.raises(ValueError):
+            freeze_alert._gh("GET", bad_url, "tok")

@@ -8,11 +8,11 @@ change rendered output.
 from __future__ import annotations
 
 import json
-import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import pytest
+from defusedxml import ElementTree as ET
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from scraper.models import ChangeEvent, Charge, Inmate

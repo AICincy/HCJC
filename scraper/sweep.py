@@ -235,6 +235,172 @@ def _reset_waf_block_streak_for_tests() -> None:
         _waf_block_streak = 0
 
 
+def _plan_detail_fetch(
+    seen_ids: set[str], previous: dict[str, Inmate], refresh_known: bool
+) -> list[str]:
+    """Return the sorted inmate ids whose detail pages should be fetched."""
+    to_fetch: list[str] = []
+    for inmate_id in sorted(seen_ids):
+        if inmate_id not in previous:
+            to_fetch.append(inmate_id)
+        elif refresh_known:
+            to_fetch.append(inmate_id)
+        elif not previous[inmate_id].photo_filename:
+            to_fetch.append(inmate_id)
+    return to_fetch
+
+
+def _carry_forward_known(
+    current: dict[str, Inmate],
+    seen_ids: set[str],
+    previous: dict[str, Inmate],
+    to_fetch: list[str],
+) -> None:
+    """Copy unchanged known inmates into ``current`` with refreshed last_seen."""
+    to_fetch_set = set(to_fetch)
+    for inmate_id in seen_ids:
+        if inmate_id in previous and inmate_id not in to_fetch_set:
+            current[inmate_id] = previous[inmate_id].model_copy(update={"last_seen_utc": utcnow_iso()})
+
+
+def _maybe_checkpoint_partial(
+    previous: dict[str, Inmate],
+    current: dict[str, Inmate],
+    done: int,
+    total: int,
+) -> None:
+    """Persist an in-progress roster checkpoint when it clears safety guards."""
+    if (
+        len(previous) < SWEEP_BOOTSTRAP_FLOOR
+        or len(current) >= SWEEP_MIN_ROSTER_FRACTION * len(previous)
+    ):
+        save_current(CURRENT_PATH, current.values())
+        log.info("checkpoint: %d/%d details fetched, %d inmates", done, total, len(current))
+    else:
+        log.info(
+            "checkpoint skipped at %d/%d details: in-memory "
+            "roster %d below %.0f%% of previous %d",
+            done, total, len(current),
+            100 * SWEEP_MIN_ROSTER_FRACTION, len(previous),
+        )
+
+
+def _fetch_details(
+    *,
+    client: HcsoClient,
+    to_fetch: list[str],
+    previous: dict[str, Inmate],
+    current: dict[str, Inmate],
+    row_by_id: dict[str, ListRow],
+    dry_run: bool,
+) -> tuple[int, int, int]:
+    """Run the detail-page worker pool and merge successful or fallback rows."""
+    done = 0
+    n_detail_attempts = 0
+    n_detail_named = 0
+    n_detail_with_photo = 0
+    sweep_started = time.monotonic()
+    with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
+        futures = {
+            pool.submit(_fetch_one, client, iid, previous, row_by_id.get(iid)): iid
+            for iid in to_fetch
+        }
+        for fut in as_completed(futures):
+            # sweep-F6: bail out cleanly when we've burned the wall-clock
+            # budget. The finally block still writes the partial roster
+            # (clean_finish=True because we exited the try-body naturally).
+            if time.monotonic() - sweep_started > SWEEP_WALLCLOCK_HARD_CAP_S:
+                log.warning(
+                    "sweep wall-clock cap reached at %d/%d details; finalizing",
+                    done, len(to_fetch),
+                )
+                break
+            done += 1
+            n_detail_attempts += 1
+            iid = futures[fut]
+            try:
+                inm, detail_named, detail_had_photo = fut.result()
+            except Exception as e:
+                # One worker raising shouldn't terminate the pool - the
+                # other detail fetches and the final write still run.
+                # Count it as an attempt with neither name nor photo so
+                # the watchdog reflects the failure. Fall back to the
+                # previous snapshot entry if we have one so a transient
+                # detail-page error doesn't drop the inmate from current.
+                log.warning("detail fetch worker raised: %s", e)
+                if iid in previous:
+                    current[iid] = previous[iid].model_copy(update={"last_seen_utc": utcnow_iso()})
+                continue
+            if inm is not None:
+                current[inm.inmate_number] = inm
+            elif iid in previous:
+                # _fetch_one returned None (HCSO refused or timed out).
+                # Without this fallback the inmate would silently drop
+                # out of current.json for one cycle and re-appear on the
+                # next; with it, we keep their previous record (preserves
+                # cached photo and bio) until the next successful fetch.
+                current[iid] = previous[iid].model_copy(update={"last_seen_utc": utcnow_iso()})
+            if detail_named:
+                n_detail_named += 1
+            if detail_had_photo:
+                n_detail_with_photo += 1
+            if not dry_run and done % 50 == 0:
+                # sweep-F3: don't checkpoint a sub-threshold roster.
+                # Bootstrap (previous below floor) always checkpoints;
+                # otherwise the in-memory size must still clear the
+                # 50% guard. A real catastrophic mid-sweep crash with
+                # a huge to_fetch list now keeps the previous-good
+                # snapshot until the next ~20-45 minute retry, rather
+                # than persisting a degraded baseline.
+                _maybe_checkpoint_partial(previous, current, done, len(to_fetch))
+    return n_detail_attempts, n_detail_named, n_detail_with_photo
+
+
+def _save_changelog_and_anon(
+    previous: dict[str, Inmate],
+    current: dict[str, Inmate],
+) -> None:
+    """Append diff events and refresh the anonymized rolling feed."""
+    events = diff(previous, current)
+    if not events:
+        return
+    log.info("diff: %d events (%d booked, %d released, %d updated)",
+             len(events),
+             sum(1 for e in events if e.event == "booked"),
+             sum(1 for e in events if e.event == "released"),
+             sum(1 for e in events if e.event == "updated"))
+    changelog = load_changelog(CHANGELOG_PATH)
+    changelog.extend(events)
+    save_changelog(CHANGELOG_PATH, changelog)
+    # Phase 11: maintain the PII-expiring append-only feed.
+    # Build enrichment so anonymized rows still carry tier +
+    # category aggregate signal (which is what makes the
+    # long-term feed useful at all).
+    enrichment: dict[str, dict] = {}
+    offenses_path = Path("data/orc_offenses.json")
+    offenses: dict = {}
+    if offenses_path.exists():
+        try:
+            offenses = json.loads(offenses_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            offenses = {}
+    for inm in current.values():
+        first_charge = inm.charges[0] if inm.charges else None
+        tier = None
+        category = None
+        if first_charge:
+            code = (first_charge.orc_code or "").strip()
+            ent = offenses.get(code) if isinstance(offenses, dict) else None
+            if isinstance(ent, dict):
+                tier = ent.get("degree")
+                category = ent.get("title")
+        enrichment[inm.inmate_number] = {
+            "tier": tier,
+            "category": category,
+        }
+    save_anon_changelog(ANON_CHANGELOG_PATH, changelog, enrichment)
+
+
 def run(
     surnames: list[str],
     *,
@@ -316,97 +482,24 @@ def run(
             _record_recovery_if_blocked(len(seen_ids))
 
             # Decide which detail pages to fetch.
-            to_fetch: list[str] = []
-            for inmate_id in sorted(seen_ids):
-                if inmate_id not in previous:
-                    to_fetch.append(inmate_id)
-                elif refresh_known:
-                    to_fetch.append(inmate_id)
-                elif not previous[inmate_id].photo_filename:
-                    to_fetch.append(inmate_id)
+            to_fetch = _plan_detail_fetch(seen_ids, previous, refresh_known)
 
             log.info("will fetch %d detail pages (refresh_known=%s)", len(to_fetch), refresh_known)
 
             # Carry forward records we already know about and aren't re-fetching.
-            for inmate_id in seen_ids:
-                if inmate_id in previous and inmate_id not in to_fetch:
-                    carry = previous[inmate_id].model_copy(update={"last_seen_utc": utcnow_iso()})
-                    current[inmate_id] = carry
+            _carry_forward_known(current, seen_ids, previous, to_fetch)
 
             # Map inmate_id -> list row for name fallback when the detail
             # page heading is missing/unparseable.
             row_by_id = {r.inmate_number: r for r in rows}
-            done = 0
-            n_detail_attempts = 0
-            n_detail_named = 0
-            n_detail_with_photo = 0
-            sweep_started = time.monotonic()
-            with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
-                futures = {
-                    pool.submit(_fetch_one, client, iid, previous, row_by_id.get(iid)): iid
-                    for iid in to_fetch
-                }
-                for fut in as_completed(futures):
-                    # sweep-F6: bail out cleanly when we've burned the wall-clock
-                    # budget. The finally block still writes the partial roster
-                    # (clean_finish=True because we exited the try-body naturally).
-                    if time.monotonic() - sweep_started > SWEEP_WALLCLOCK_HARD_CAP_S:
-                        log.warning(
-                            "sweep wall-clock cap reached at %d/%d details; finalizing",
-                            done, len(to_fetch),
-                        )
-                        break
-                    done += 1
-                    n_detail_attempts += 1
-                    iid = futures[fut]
-                    try:
-                        inm, detail_named, detail_had_photo = fut.result()
-                    except Exception as e:
-                        # One worker raising shouldn't terminate the pool - the
-                        # other detail fetches and the final write still run.
-                        # Count it as an attempt with neither name nor photo so
-                        # the watchdog reflects the failure. Fall back to the
-                        # previous snapshot entry if we have one so a transient
-                        # detail-page error doesn't drop the inmate from current.
-                        log.warning("detail fetch worker raised: %s", e)
-                        if iid in previous:
-                            current[iid] = previous[iid].model_copy(update={"last_seen_utc": utcnow_iso()})
-                        continue
-                    if inm is not None:
-                        current[inm.inmate_number] = inm
-                    elif iid in previous:
-                        # _fetch_one returned None (HCSO refused or timed out).
-                        # Without this fallback the inmate would silently drop
-                        # out of current.json for one cycle and re-appear on the
-                        # next; with it, we keep their previous record (preserves
-                        # cached photo and bio) until the next successful fetch.
-                        current[iid] = previous[iid].model_copy(update={"last_seen_utc": utcnow_iso()})
-                    if detail_named:
-                        n_detail_named += 1
-                    if detail_had_photo:
-                        n_detail_with_photo += 1
-                    if not dry_run and done % 50 == 0:
-                        # sweep-F3: don't checkpoint a sub-threshold roster.
-                        # Bootstrap (previous below floor) always checkpoints;
-                        # otherwise the in-memory size must still clear the
-                        # 50% guard. A real catastrophic mid-sweep crash with
-                        # a huge to_fetch list now keeps the previous-good
-                        # snapshot until the next ~20-45 minute retry, rather
-                        # than persisting a degraded baseline.
-                        if (
-                            len(previous) < SWEEP_BOOTSTRAP_FLOOR
-                            or len(current) >= SWEEP_MIN_ROSTER_FRACTION * len(previous)
-                        ):
-                            save_current(CURRENT_PATH, current.values())
-                            log.info("checkpoint: %d/%d details fetched, %d inmates",
-                                     done, len(to_fetch), len(current))
-                        else:
-                            log.info(
-                                "checkpoint skipped at %d/%d details: in-memory "
-                                "roster %d below %.0f%% of previous %d",
-                                done, len(to_fetch), len(current),
-                                100 * SWEEP_MIN_ROSTER_FRACTION, len(previous),
-                            )
+            n_detail_attempts, n_detail_named, n_detail_with_photo = _fetch_details(
+                client=client,
+                to_fetch=to_fetch,
+                previous=previous,
+                current=current,
+                row_by_id=row_by_id,
+                dry_run=dry_run,
+            )
             watchdog_ok = check_detail_watchdog(
                 n_detail_attempts, n_detail_named, n_detail_with_photo
             )
@@ -439,43 +532,7 @@ def run(
                 # deleting photos for ids that never made it to current.json.
                 log.error("save_current failed (%s); skipping changelog and prune", e)
             if save_ok and clean_finish:
-                events = diff(previous, current)
-                if events:
-                    log.info("diff: %d events (%d booked, %d released, %d updated)",
-                             len(events),
-                             sum(1 for e in events if e.event == "booked"),
-                             sum(1 for e in events if e.event == "released"),
-                             sum(1 for e in events if e.event == "updated"))
-                    changelog = load_changelog(CHANGELOG_PATH)
-                    changelog.extend(events)
-                    save_changelog(CHANGELOG_PATH, changelog)
-                    # Phase 11: maintain the PII-expiring append-only feed.
-                    # Build enrichment so anonymized rows still carry tier +
-                    # category aggregate signal (which is what makes the
-                    # long-term feed useful at all).
-                    enrichment: dict[str, dict] = {}
-                    offenses_path = Path("data/orc_offenses.json")
-                    offenses: dict = {}
-                    if offenses_path.exists():
-                        try:
-                            offenses = json.loads(offenses_path.read_text(encoding="utf-8"))
-                        except (json.JSONDecodeError, OSError):
-                            offenses = {}
-                    for inm in current.values():
-                        first_charge = inm.charges[0] if inm.charges else None
-                        tier = None
-                        category = None
-                        if first_charge:
-                            code = (first_charge.orc_code or "").strip()
-                            ent = offenses.get(code) if isinstance(offenses, dict) else None
-                            if isinstance(ent, dict):
-                                tier = ent.get("degree")
-                                category = ent.get("title")
-                        enrichment[inm.inmate_number] = {
-                            "tier": tier,
-                            "category": category,
-                        }
-                    save_anon_changelog(ANON_CHANGELOG_PATH, changelog, enrichment)
+                _save_changelog_and_anon(previous, current)
             elif save_ok:
                 # Interrupted (or otherwise short-circuited) sweep: do not diff.
                 # `current` is a partial subset of `previous`, so every unreached
@@ -641,6 +698,24 @@ def _fetch_one(
     fallback or disk-cached photo carry-forward is applied, so callers can
     measure detail-page health distinct from the list-side path.
     """
+    inm, photo_bytes, photo_url = _fetch_detail_with_retry(client, inmate_id, previous)
+    if inm is None:
+        return None, False, False
+    detail_named = bool(inm.last_name or inm.first_name)
+    detail_had_photo = bool(photo_bytes or photo_url)
+
+    photo_bytes = _fetch_photo_bytes_from_url(client, inmate_id, photo_url, photo_bytes)
+    _apply_list_row_fallback(inm, list_row)
+    _attach_photo_filename(inm, photo_bytes)
+    _set_seen_timestamps(inm, inmate_id, previous)
+    return inm, detail_named, detail_had_photo
+
+
+def _fetch_detail_with_retry(
+    client: HcsoClient,
+    inmate_id: str,
+    previous: dict[str, Inmate],
+) -> tuple[Inmate | None, bytes | None, str | None]:
     # WAF / geo-block tolerant fetch. Per the 2026-05-19 Claude.ai HCSO
     # verification, valid inmate-detail pages from HCSO are 91-230 KB.
     # HCSO's WAF returns truncated/blocked responses well under 5 KB to
@@ -658,10 +733,9 @@ def _fetch_one(
             html = client.get(DETAIL_PATH, params={"id": inmate_id})
         except Exception as e:
             log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
-            return None, False, False
+            return None, None, None
         inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
-        looks_like_waf_block = _looks_like_waf_block(html, inm, photo_bytes, photo_url)
-        if not looks_like_waf_block:
+        if not _looks_like_waf_block(html, inm, photo_bytes, photo_url):
             _on_waf_block_cleared()
             break
         streak = _on_waf_block_observed()
@@ -688,7 +762,7 @@ def _fetch_one(
             # Known inmate: return None so the carry-forward path in
             # `run()` preserves the previous-good record (cached photo,
             # prior bio + charges) instead of overwriting with empty data.
-            return None, False, False
+            return None, None, None
         # New inmate (not in previous): fall through so the list_row
         # fallback below can rescue the interstitial response into a
         # minimal Inmate. Better a name than nothing for a newly-booked
@@ -700,25 +774,37 @@ def _fetch_one(
     # Inmate | None for the type checker and documents the invariant without
     # adding a runtime branch.
     assert inm is not None
-    detail_named = bool(inm.last_name or inm.first_name)
-    detail_had_photo = bool(photo_bytes or photo_url)
+    return inm, photo_bytes, photo_url
 
+
+def _fetch_photo_bytes_from_url(
+    client: HcsoClient,
+    inmate_id: str,
+    photo_url: str | None,
+    photo_bytes: bytes | None,
+) -> bytes | None:
     # If the page provided a direct photo URL, fetch it (more reliable than
     # base64). Fall back to inline bytes if the URL fetch fails.
     if photo_url and not photo_bytes:
         try:
-            photo_bytes = client.get_bytes(photo_url)
+            return client.get_bytes(photo_url)
         except Exception as e:
             log.warning("photo URL fetch failed for id=%s url=%s: %s", inmate_id, photo_url, e)
+    return photo_bytes
 
-    if list_row is not None:
-        if not inm.last_name and list_row.last_name:
-            inm.last_name = list_row.last_name
-        if not inm.first_name and list_row.first_name:
-            inm.first_name = list_row.first_name
-        if not inm.booking_date and list_row.admit_date:
-            inm.booking_date = list_row.admit_date
 
+def _apply_list_row_fallback(inm: Inmate, list_row: ListRow | None) -> None:
+    if list_row is None:
+        return
+    if not inm.last_name and list_row.last_name:
+        inm.last_name = list_row.last_name
+    if not inm.first_name and list_row.first_name:
+        inm.first_name = list_row.first_name
+    if not inm.booking_date and list_row.admit_date:
+        inm.booking_date = list_row.admit_date
+
+
+def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None) -> None:
     photo_path = PHOTOS_DIR / f"{inm.inmate_number}.jpg"
     # Save fresh bytes if we got them AND they decoded; otherwise fall through
     # to the disk-cached photo from a prior successful sweep. Previously the
@@ -729,13 +815,14 @@ def _fetch_one(
     elif photo_path.exists():
         inm.photo_filename = photo_path.name
 
+
+def _set_seen_timestamps(inm: Inmate, inmate_id: str, previous: dict[str, Inmate]) -> None:
     inm.first_seen_utc = (
         previous[inmate_id].first_seen_utc
         if inmate_id in previous and previous[inmate_id].first_seen_utc
         else utcnow_iso()
     )
     inm.last_seen_utc = utcnow_iso()
-    return inm, detail_named, detail_had_photo
 
 
 # Back-compat alias: prefer scraper.sweep_guards.prune_photos in new code.
