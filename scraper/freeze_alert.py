@@ -18,6 +18,7 @@ import json
 import logging
 import os
 import urllib.error
+import urllib.parse
 import urllib.request
 
 from .sweep import CURRENT_PATH, _prev_generated_utc
@@ -31,6 +32,9 @@ ISSUE_TITLE = "Roster frozen: HCSO sweep is not updating current.json"
 
 def _gh(method: str, url: str, token: str, payload: dict | None = None) -> list | dict:
     """Minimal GitHub REST call using stdlib urllib (no extra dependency)."""
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme != "https" or not parsed.netloc:
+        raise ValueError(f"unsupported GitHub API URL: {url!r}")
     data = json.dumps(payload).encode() if payload is not None else None
     req = urllib.request.Request(url, data=data, method=method)
     req.add_header("Authorization", f"Bearer {token}")
