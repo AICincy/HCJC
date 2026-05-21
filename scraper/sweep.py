@@ -304,7 +304,7 @@ def _fetch_details(
     sweep_started = time.monotonic()
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
         futures = {
-            pool.submit(_fetch_one, client, iid, previous, row_by_id.get(iid), waf_tracker): iid
+            pool.submit(_fetch_one, client, iid, previous, row_by_id.get(iid), waf_tracker=waf_tracker): iid
             for iid in to_fetch
         }
         for fut in as_completed(futures):
@@ -694,7 +694,8 @@ def _fetch_one(
     inmate_id: str,
     previous: dict[str, Inmate],
     list_row: ListRow | None = None,
-    waf_tracker: WafBackoffTracker | None = None,
+    *,
+    waf_tracker: WafBackoffTracker,
 ) -> tuple[Inmate | None, bool, bool]:
     """Fetch and parse one detail page.
 
@@ -702,9 +703,13 @@ def _fetch_one(
     reflect what the *detail parser* produced, before any list-row name
     fallback or disk-cached photo carry-forward is applied, so callers can
     measure detail-page health distinct from the list-side path.
+
+    ``waf_tracker`` is required (keyword-only): the WAF-block streak is shared
+    across the worker pool, so a caller that omitted it would silently get a
+    throwaway tracker and disable cross-call backoff.
     """
     inm, photo_bytes, photo_url = _fetch_detail_with_retry(
-        client, inmate_id, previous, waf_tracker or WafBackoffTracker()
+        client, inmate_id, previous, waf_tracker
     )
     if inm is None:
         return None, False, False
