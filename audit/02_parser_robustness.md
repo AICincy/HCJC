@@ -1,9 +1,13 @@
 # parser - Parser Robustness Audit
 
-> **Reconciliation 2026-05-21 (see #201):** parser-F1 (tiered `_parse_name`),
-> parser-F3 (JPEG-SOI fallback), and parser-F8 (empty-parse INFO sentinel) are
-> RESOLVED on `main`. parser-F2/F4/F5/F6/F7 not re-verified this pass; treat as
-> open until checked.
+> **Reconciliation 2026-05-21 (see #201):** all parser findings are RESOLVED
+> on `main`: F1 (tiered `_parse_name`), F2 (per-label charge drift telemetry,
+> `_HIGH_VALUE_CHARGE_LABELS`), F3 (JPEG-SOI fallback), F4 (path-form id regex
+> in `_DETAIL_ID`), F5 (relaxed `_BIO_LINE`), F6 (`_find_charges_table`
+> scoping), F8 (empty-parse INFO sentinel). F7 (no-candidate vs decode-failed)
+> is covered at the call site by the image-inventory log in `parse_detail_page`
+> rather than inside the helper. (Line citations below are from the original
+> generation commit in the metadata, not current `main`.)
 
 ## Audit metadata
 - Skill: jcstream-python-parser-robustness

@@ -1,9 +1,13 @@
 # tests - Test Gap Analysis
 
-> **Reconciliation 2026-05-21 (see #201):** tests-F1 (watchdog asserts),
-> tests-F2 (`_fetch_one` fallbacks), tests-F4 (guard boundary cases), and
-> tests-F5 (scrub real-seeming fixture names, via #199) are RESOLVED on `main`.
-> tests-F3/F6/F7/F8 not re-verified this pass; treat as open until checked.
+> **Reconciliation 2026-05-21 (see #201):** RESOLVED on `main`: tests-F1
+> (watchdog asserts), tests-F2 (`_fetch_one` fallbacks), tests-F4 (guard
+> boundary cases), tests-F5 (scrub real-seeming fixture names, via #199 + #203),
+> tests-F7 (`_materially_changed` order test, `test_diff_ignores_charge_reorder_with_same_content`),
+> tests-F8 (`make_client` env test, `test_make_client_respects_env_overrides`).
+> Still OPEN: tests-F3 (`_split_name` edge cases have no dedicated test; the
+> code exists but the cases aren't pinned) and tests-F6 (PRA header-injection
+> assertion). (Line citations below are from the original generation commit.)
 
 ## Audit metadata
 - Skill: jcstream-python-test-gap-analysis
