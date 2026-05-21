@@ -115,3 +115,20 @@ def test_photos_send_implicit_tls_path(monkeypatch, smtp_recorder):
     # SMTP_SSL path: no STARTTLS handshake.
     assert not inst.starttls_called
     assert inst.logged_in
+
+
+def test_pra_build_message_rejects_header_injection():
+    # tests-F6: a CR/LF in any envelope header field must be refused so a
+    # crafted recipient/sender cannot smuggle an extra header (e.g. Bcc).
+    # EmailMessage's default policy rejects it at set time; pin that here so
+    # a swap to raw sendmail can't silently regress the defense.
+    import pytest
+
+    for build in (pra._build_message, pra_capias._build_message):
+        with pytest.raises(ValueError):
+            build("2026-05-01", "2026-05-02",
+                  "victim@example.com\r\nBcc: evil@example.com",
+                  "from@example.com")
+        with pytest.raises(ValueError):
+            build("2026-05-01", "2026-05-02", "victim@example.com",
+                  "from@example.com\r\nBcc: evil@example.com")

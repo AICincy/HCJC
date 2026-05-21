@@ -197,3 +197,20 @@ def test_looks_like_person_name_rejects_boilerplate():
     assert _looks_like_person_name("HAMILTON COUNTY, OHIO") is False
     assert _looks_like_person_name("SHERIFF, OFFICE") is False
     assert _looks_like_person_name("DOE,") is False  # no letters after comma
+
+
+def test_split_name_edge_cases():
+    # tests-F3: pin _split_name across the shapes HCSO headings take, so a
+    # refactor can't silently regress the no-comma, middle-name, or
+    # whitespace-around-comma handling.
+    from scraper.parsers import _split_name
+
+    assert _split_name("DOE, JOHN") == ("DOE", "JOHN", "")
+    assert _split_name("DOE, JOHN MICHAEL") == ("DOE", "JOHN", "MICHAEL")
+    assert _split_name("DOE, JOHN ALLEN SR") == ("DOE", "JOHN", "ALLEN SR")
+    # No comma: whole string is the surname, first/middle empty.
+    assert _split_name("CHER") == ("CHER", "", "")
+    # Trailing/leading whitespace around the comma is stripped.
+    assert _split_name("DOE ,  JOHN") == ("DOE", "JOHN", "")
+    # Comma but nothing after it.
+    assert _split_name("DOE,") == ("DOE", "", "")
