@@ -124,55 +124,7 @@ jobs:
         run: python -m web.build
 
       - name: Commit data + built site
-      - name: Commit data + built site
         run: |
-          git config user.name "jcstream-bot"
-          git config user.email "noreply@github.com"
-          git add data/ docs/
-          if git diff --cached --quiet; then
-            echo "no changes"
-            exit 0
-          fi
-
-          git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
-
-          for attempt in 1 2 3; do
-            if git pull --rebase --autostash origin main && git push; then
-              exit 0
-            fi
-            git rebase --abort || true
-            echo "::warning::push attempt ${attempt}/3 failed; retrying"
-            sleep $((attempt * 5))
-          done
-
-          echo "::warning::Could not push sweep commit after 3 attempts. Continuing so Pages deploy can run."
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
-      - id: deploy
-        uses: actions/deploy-pages@v4
-        continue-on-error: true        run: |
-          git config user.name "jcstream-bot"
-          git config user.email "noreply@github.com"
-          git add data/ docs/
-          if git diff --cached --quiet; then
-            echo "no changes"
-            exit 0
-          fi
-
-          git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
-
-          for attempt in 1 2 3; do
-            if git pull --rebase --autostash origin main && git push; then
-              exit 0
-            fi
-            git rebase --abort || true
-            echo "::warning::push attempt ${attempt}/3 failed; retrying"
-            sleep $((attempt * 5))
-          done
-
-          echo "::warning::Could not push sweep commit after 3 attempts. Continuing so Pages deploy can run."
           git config user.name "jcstream-bot"
           git config user.email "noreply@github.com"
           git add data/ docs/
