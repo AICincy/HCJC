@@ -4,8 +4,9 @@ A near-real-time public-records mirror of the Hamilton County (Ohio) Justice Cen
 inmate roster, generated entirely from publicly-published Hamilton County Sheriff's
 Office data under Ohio Revised Code § 149.43.
 
-JCStream is a static site rebuilt every ~30 minutes by GitHub Actions. It
-republishes only what `hcso.org` itself publishes for each currently-in-custody
+JCStream is a static site rebuilt every ~30 minutes by GitHub Actions.
+Automated roster updates are currently paused upstream; see the status note
+below. It republishes only what `hcso.org` itself publishes for each currently-in-custody
 person: name, inmate / booking number, booking date, sex, race, projected release
 date, and the charge / bond / court-date table.
 
@@ -13,6 +14,22 @@ JCStream **mirrors** the public HCSO roster. When HCSO removes a person from the
 public roster (release, sealing, transfer, error correction, etc.) JCStream removes
 that record on its next run. There is no historical archive of released
 individuals.
+
+> **Current status: automated roster updates are paused (since 2026-05-19).**
+> HCSO's web application firewall is blocking JCStream's automated retrieval of
+> the public roster from the GitHub Actions egress IP (HTTP 403, and at times an
+> HTTP 200 page stripped of its results). The degraded-roster guard keeps the
+> last-good `data/current.json` rather than publish a partial roster, so the
+> figures shown reflect the last successful update, not the current jail
+> population.
+>
+> **JCStream documents the block; it does not evade it.** Each blocked sweep
+> cycle and each recovery is appended to a hash-chained, git-committed evidence
+> log (`data/waf_block_log.json`), preserved as a contemporaneous record toward
+> an Ohio Public Records Act (ORC § 149.43) mandamus posture. The dormant
+> `JCSTREAM_HTTP_PROXY` egress-proxy capability is deliberately left unset. See
+> [`audit/14_hcso_waf.md`](audit/14_hcso_waf.md) and the dossier it links
+> (`audit/15` through `audit/19`).
 
 ## Status
 
@@ -27,6 +44,34 @@ individuals.
 | P2.8 | Public Records Act email loop to Clerk of Courts for daily new-capias roster (SMTP-enabled when secrets are set) | done |
 | P2.9 | Manual case-data submission path: GitHub Issue template + ingest workflow | done |
 | P3 | RSS feed, transparency dashboard, takedown form | partial (RSS done) |
+
+### HCSO access interruption (current)
+
+Since 2026-05-19, HCSO's WAF has blocked automated retrieval of the public
+roster from the GitHub Actions runner IP (HTTP 403, and at times an HTTP 200
+page with the results stripped out). The sweep's degraded-roster guard
+(`sweep_looks_healthy` in `scraper/sweep_guards.py`) refuses to overwrite the
+last-good roster with a partial or empty one, so the site stays stable but
+stale; the homepage shows an interruption notice and the
+[data page](https://www.aretheyinjail.com/data/#access) documents it.
+
+JCStream's posture is to **document the denial, not evade it**:
+
+- Every blocked cycle and every recovery is appended to
+  [`data/waf_block_log.json`](data/waf_block_log.json): an append-only,
+  hash-chained log capturing the HTTP status, response headers, a body sample,
+  and the SHA-256 of the body. Run `python -m scraper.verify_block_log` to
+  verify the chain (exit 0 intact, 1 broken).
+- On a blocked cycle the runner egress IP is snapshotted against GitHub's
+  published Actions ranges (`data/egress_evidence.json`), documenting that the
+  blocked source is a GitHub IP.
+- The `JCSTREAM_HTTP_PROXY` egress-proxy capability stays in the code but is
+  deliberately unset; the persisting, documented block is the point.
+
+The full diagnosis, the evidence-file schema, and the legal-record drafts (the
+ORC § 149.43(B) request, an operator affidavit, a § 149.43(C) mandamus
+petition, an off-platform capture runbook, and a counsel cover memo) live in
+[`audit/14_hcso_waf.md`](audit/14_hcso_waf.md) through `audit/19`.
 
 ### courtclerk.org access policy
 
@@ -107,6 +152,10 @@ Jekyll-process the built HTML.
 - **No commercial use, no removal fees.** Code is MIT, data is CC-BY-NC 4.0.
 - **No CAPTCHA / WAF bypass.** We scrape only the unprotected public endpoints
   on `hcso.org`. We do not touch `courtclerk.org` (CAPTCHA-protected).
+- **When blocked, we document rather than evade.** HCSO's WAF currently blocks
+  our automated retrieval (see Current status). We preserve the last-good
+  roster, record the denial as evidence, and leave the dormant
+  `JCSTREAM_HTTP_PROXY` capability unset.
 - **We obey `robots.txt`**: `User-agent: *  Crawl-delay: 10`.
 - **We identify ourselves** in the `User-Agent` header.
 
