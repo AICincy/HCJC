@@ -188,3 +188,12 @@ def test_parse_detail_page_logs_when_no_structured_fields_found(caplog):
         "no structured fields" in r.message and "8888888" in r.message
         for r in caplog.records
     )
+
+
+def test_looks_like_person_name_rejects_boilerplate():
+    from scraper.parsers import _looks_like_person_name
+
+    assert _looks_like_person_name("DOE, JOHN MICHAEL") is True
+    assert _looks_like_person_name("HAMILTON COUNTY, OHIO") is False
+    assert _looks_like_person_name("SHERIFF, OFFICE") is False
+    assert _looks_like_person_name("DOE,") is False  # no letters after comma

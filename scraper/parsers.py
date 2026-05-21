@@ -223,12 +223,35 @@ def _name_from_og_title(tree: HTMLParser) -> str:
     return ""
 
 
+_BOILERPLATE_KEYWORDS = frozenset({
+    "COUNTY", "STATE", "OFFICE", "DEPARTMENT", "SHERIFF",
+    "COURT", "OHIO", "JUSTICE", "CENTER", "SERVICES",
+    "GOVERNMENT", "DISTRICT", "MUNICIPAL", "COMMON PLEAS",
+})
+
+
+def _looks_like_person_name(text: str) -> bool:
+    """Stricter check than _looks_like_formal_name for the container fallback.
+
+    Requires LAST, FIRST shape (second part has at least one letter after the
+    comma) and rejects strings containing known boilerplate keywords."""
+    if not _looks_like_formal_name(text):
+        return False
+    words = set(text.split())
+    if words & _BOILERPLATE_KEYWORDS:
+        return False
+    _, _, after_comma = text.partition(",")
+    if not after_comma.strip() or not any(c.isalpha() for c in after_comma):
+        return False
+    return True
+
+
 def _name_from_container_text(tree: HTMLParser) -> str:
     for div in tree.css("div, span, p"):
         text = _text(div)
         if not text:
             continue
-        if _looks_like_formal_name(text) and len(text) < 200:
+        if _looks_like_person_name(text) and len(text) < 200:
             log.debug("name extracted from container text fallback (tag=%s)", div.tag)
             return text.strip()
     return ""

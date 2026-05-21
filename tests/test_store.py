@@ -255,3 +255,29 @@ def test_verify_block_log_cli(tmp_path: Path, capsys):
     rc = verify_block_log.main([str(p)])
     assert rc == 0
     assert "intact" in capsys.readouterr().out
+
+
+def test_compact_anon_entries_is_idempotent():
+    from datetime import datetime, timedelta, timezone
+
+    from scraper.store import _compact_anon_entries
+
+    old_day = (
+        datetime.now(timezone.utc) - timedelta(days=400)
+    ).strftime("%Y-%m-%d")
+    recent_day = (
+        datetime.now(timezone.utc) - timedelta(days=10)
+    ).strftime("%Y-%m-%d")
+
+    entries = [
+        {"event": "booked", "date": old_day, "tier": "F5", "category": "theft"},
+        {"event": "booked", "date": old_day, "tier": "F5", "category": "theft"},
+        {"event": "released", "date": recent_day, "tier": "M1", "category": "traffic"},
+    ]
+
+    first = _compact_anon_entries(entries)
+    second = _compact_anon_entries(first)
+
+    assert first == second, "compaction must be idempotent"
+    assert any(r.get("event_summary") and r.get("count") == 2 for r in first)
+    assert any(r.get("event") == "released" and not r.get("event_summary") for r in first)

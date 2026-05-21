@@ -218,6 +218,12 @@ def save_changelog(path: Path, events: list[ChangeEvent]) -> None:
 # the rolling RSS streams and homepage feed enough overlap with the live
 # changelog to feel continuous, while still expiring identifying info quickly.
 ANON_EXPIRY_DAYS = 7
+# Compaction horizon: anonymized records older than this are collapsed into
+# monthly summary counts (one row per month+event+tier+category). Preserves
+# aggregate signal for long-term institutional trend analysis while bounding
+# file growth. At ~30-min cron cadence, 365 days ≈ 17k raw anon rows before
+# compaction; afterwards each month compresses to a handful of summary rows.
+ANON_COMPACTION_MAX_DAYS = 365
 
 
 def _anonymize_event(e: dict, charge_lookup: dict[str, dict] | None = None) -> dict:
@@ -245,6 +251,54 @@ def _anon_dedup_key(row: dict) -> tuple:
     if row.get("timestamp_utc"):
         return ("full", row.get("event"), row.get("timestamp_utc"), row.get("inmate_number"))
     return ("anon", row.get("event"), row.get("date"), row.get("tier"), row.get("category"))
+
+
+def _compact_anon_entries(entries: list[dict]) -> list[dict]:
+    """Compact old anonymized records into monthly summary counts.
+
+    Records newer than ``ANON_COMPACTION_MAX_DAYS`` pass through unchanged.
+    Older records are grouped by (year-month, event type, tier, category) and
+    replaced with a single summary dict per group carrying a ``count``.
+    Already-compacted summary rows (``event_summary: True``) are merged into
+    the same grouping so re-runs are idempotent.
+    """
+    from datetime import datetime, timedelta, timezone
+    from collections import Counter
+
+    compact_cutoff = (
+        datetime.now(timezone.utc) - timedelta(days=ANON_COMPACTION_MAX_DAYS)
+    ).strftime("%Y-%m-%d")
+
+    recent: list[dict] = []
+    old_groups: Counter = Counter()
+
+    for row in entries:
+        ts = row.get("timestamp_utc") or row.get("date") or ""
+        date_str = ts[:10] if ts else ""
+
+        if not date_str or date_str >= compact_cutoff:
+            recent.append(row)
+            continue
+
+        month = date_str[:7]
+        event = row.get("event")
+        tier = row.get("tier")
+        category = row.get("category")
+        count = row.get("count", 1) if row.get("event_summary") else 1
+        old_groups[(month, event, tier, category)] += count
+
+    summaries: list[dict] = []
+    for (month, event, tier, category), count in sorted(old_groups.items()):
+        summaries.append({
+            "event_summary": True,
+            "month": month,
+            "event": event,
+            "tier": tier,
+            "category": category,
+            "count": count,
+        })
+
+    return summaries + recent
 
 
 def save_anon_changelog(
@@ -330,6 +384,7 @@ def save_anon_changelog(
 
     # Stable sort by date/timestamp, oldest first for append-only feel
     out.sort(key=lambda r: r.get("timestamp_utc") or r.get("date") or "")
+    out = _compact_anon_entries(out)
     _atomic_write_text(path, json.dumps(out, indent=2))
 
 
