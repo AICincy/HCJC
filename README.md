@@ -6,6 +6,7 @@
 [![evidence: logged](https://img.shields.io/badge/evidence-LOGGED-8B0000?style=for-the-badge)](data/waf_block_log.json)
 
 > [!CAUTION]
+> <img src="web/static/img/Gemini_Generated_Image_hngttohngttohngt.png" align="right" width="120" alt="Caricature of the Hamilton County Sheriff snarling with a raised finger, over a red 'I DID THAT' banner.">
 > **Roster updates are PAUSED (since 2026-05-19).** The Hamilton County
 > Sheriff's Office is blocking JCStream's automated access to its public inmate
 > roster (HTTP 403). The counts and records shown are from the **last successful
