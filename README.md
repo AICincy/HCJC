@@ -1,5 +1,10 @@
 # JCStream
 
+[![roster updates: PAUSED](https://img.shields.io/badge/roster_updates-PAUSED-critical?style=for-the-badge)](#hcso-access-interruption-current)
+[![cause: HCSO WAF block](https://img.shields.io/badge/cause-HCSO_WAF_block-red?style=for-the-badge)](audit/14_hcso_waf.md)
+[![since: 2026-05-19](https://img.shields.io/badge/since-2026--05--19-red?style=for-the-badge)](data/waf_block_log.json)
+[![evidence: logged](https://img.shields.io/badge/evidence-LOGGED-8B0000?style=for-the-badge)](data/waf_block_log.json)
+
 > [!CAUTION]
 > **Roster updates are PAUSED (since 2026-05-19).** The Hamilton County
 > Sheriff's Office is blocking JCStream's automated access to its public inmate
