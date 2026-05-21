@@ -228,6 +228,11 @@ _BOILERPLATE_KEYWORDS = frozenset({
     "COURT", "OHIO", "JUSTICE", "CENTER", "SERVICES",
     "GOVERNMENT", "DISTRICT", "MUNICIPAL", "COMMON PLEAS",
 })
+# Single word-boundary alternation, longest-first so "COMMON PLEAS" wins over
+# a bare token match. Compiled once instead of per-call per-keyword.
+_BOILERPLATE_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(k) for k in sorted(_BOILERPLATE_KEYWORDS, key=len, reverse=True)) + r")\b"
+)
 
 
 def _looks_like_person_name(text: str) -> bool:
@@ -237,7 +242,7 @@ def _looks_like_person_name(text: str) -> bool:
     comma) and rejects strings containing known boilerplate keywords."""
     if not _looks_like_formal_name(text):
         return False
-    if any(re.search(rf"\b{re.escape(k)}\b", text) for k in _BOILERPLATE_KEYWORDS):
+    if _BOILERPLATE_RE.search(text):
         return False
     _, _, after_comma = text.partition(",")
     if not after_comma.strip() or not any(c.isalpha() for c in after_comma):
