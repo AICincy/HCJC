@@ -126,6 +126,10 @@ class HcsoClient:
         assert self._client is not None, "use as context manager"
         self._sleep_for_crawl_delay()
         response = self._client.get(path, params=params)
+        # One inspection pass = at most one retry (429 or 5xx), then
+        # raise_for_status below. Do NOT bump to range(2): the re-fetched
+        # response is not re-inspected by the loop, so a higher range would
+        # silently issue extra requests against HCSO without re-checking.
         for attempt in range(1):
             if response.status_code == 429:
                 wait = _retry_after_seconds(response.headers.get("retry-after"))
