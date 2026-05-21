@@ -33,6 +33,7 @@ from pathlib import Path
 import httpx
 
 from .client import DEFAULT_CONCURRENCY, HcsoClient, make_client
+from .ddlog import emit as ddlog_emit
 from .models import Inmate, ListRow, utcnow_iso
 from .parsers import parse_detail_page, parse_list_page
 from .photos import downscale_and_save
@@ -465,6 +466,17 @@ def run(
                     "— NOT writing the roster this cycle; keeping last-good data",
                     len(previous), len(seen_ids), n_failed, len(surnames),
                 )
+                ddlog_emit(
+                    "sweep.degraded.list",
+                    level="error",
+                    message="List sweep degraded, keeping last-good roster",
+                    attrs={
+                        "prev_count": len(previous),
+                        "seen_count": len(seen_ids),
+                        "surnames_total": len(surnames),
+                        "surnames_failed": n_failed,
+                    },
+                )
                 # The list-sweep guard thresholds (>10% surname errors or
                 # roster collapsed below 50% of prior) are checked in
                 # scraper/sweep_guards.sweep_looks_healthy. A prolonged freeze
@@ -512,6 +524,16 @@ def run(
             # the last-good roster.
             if not watchdog_ok:
                 roster_ok = False
+                ddlog_emit(
+                    "sweep.degraded.detail_watchdog",
+                    level="warning",
+                    message="Detail watchdog blocked roster write",
+                    attrs={
+                        "detail_attempts": n_detail_attempts,
+                        "detail_named": n_detail_named,
+                        "detail_with_photo": n_detail_with_photo,
+                    },
+                )
         clean_finish = True
     except KeyboardInterrupt:
         log.warning("interrupted; persisting %d partial inmates", len(current))
@@ -521,6 +543,11 @@ def run(
         # guard; the `finally` will use that to decide whether to persist
         # the partial roster.
         log.exception("unhandled exception in sweep main loop")
+        ddlog_emit(
+            "sweep.unhandled_exception",
+            level="error",
+            message="Unhandled exception in sweep main loop",
+        )
         raise
     finally:
         # Write whatever we have so far (so an interrupted sweep doesn't blank
