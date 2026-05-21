@@ -57,5 +57,5 @@ warn_redundant_casts = true
 # Third-party libs without bundled stubs (or not type-checked in CI): ignore
 # missing-import errors for them so mypy reports only first-party type issues.
 [[tool.mypy.overrides]]
-module = ["httpx", "selectolax.*", "PIL.*", "pydantic", "jinja2"]
+module = ["httpx", "selectolax.*", "PIL.*", "pydantic", "jinja2", "defusedxml", "defusedxml.*"]
 ignore_missing_imports = true
