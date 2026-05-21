@@ -245,14 +245,18 @@ def run(
     if max_surnames is not None:
         surnames = surnames[:max_surnames]
 
-    if CURRENT_PATH.exists():
-        age_s = time.time() - CURRENT_PATH.stat().st_mtime
-        if age_s < MIN_SWEEP_INTERVAL_S:
-            log.info(
-                "current.json is %.0fs old (< %ds); skipping this cycle",
-                age_s, MIN_SWEEP_INTERVAL_S,
-            )
-            return 0
+    # Skip-gate: don't re-scrape if the roster DATA is still fresh. Key off the
+    # generated_utc inside current.json, NOT the file mtime: actions/checkout
+    # rewrites every file each run, so st_mtime is always "just now" on CI and an
+    # mtime-based gate skipped the scrape every cycle (the 2026-05-19 roster
+    # freeze). generated_utc is file content, so it survives the checkout.
+    stale_h = roster_stale_hours(_prev_generated_utc(CURRENT_PATH))
+    if stale_h is not None and stale_h * 3600 < MIN_SWEEP_INTERVAL_S:
+        log.info(
+            "current.json data is %.0fs old (< %ds); skipping this cycle",
+            stale_h * 3600, MIN_SWEEP_INTERVAL_S,
+        )
+        return 0
 
     try:
         previous = load_current_or_raise(CURRENT_PATH)
