@@ -5,12 +5,15 @@ No-op when DD_API_KEY is unset. Never raises to callers.
 
 from __future__ import annotations
 
+import logging
 import os
 import socket
 from datetime import datetime, timezone
 from typing import Any
 
 import httpx
+
+log = logging.getLogger(__name__)
 
 
 def _now_utc() -> str:
@@ -71,5 +74,6 @@ def emit(
         resp = httpx.post(url, json=payload, headers=headers, timeout=timeout_s)
         resp.raise_for_status()
         return True
-    except Exception:
+    except Exception as e:
+        log.warning("Datadog transport send failed for event=%s (%s)", event, e)
         return False

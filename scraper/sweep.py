@@ -129,6 +129,18 @@ def _record_block_evidence(obs: _BlockObservation) -> None:
         "roster_stale_hours": round(stale_h, 1) if stale_h is not None else None,
         "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
     }, WAF_BLOCK_LOG_PATH)
+    ddlog_emit(
+        "waf_block",
+        level="warning",
+        message="WAF block evidence recorded",
+        attrs={
+            "prev_count": obs.prev_count,
+            "seen_count": obs.seen_count,
+            "surnames_total": obs.n_surnames,
+            "surnames_failed": obs.n_failed,
+            "http_status_counts": obs.status_counts,
+        },
+    )
 
 
 def _record_recovery_if_blocked(seen_count: int) -> None:
@@ -142,6 +154,11 @@ def _record_recovery_if_blocked(seen_count: int) -> None:
             "seen_count": seen_count,
             "note": "HCSO list sweep succeeded; automated access restored.",
         }, WAF_BLOCK_LOG_PATH)
+        ddlog_emit(
+            "waf_recovery",
+            message="WAF recovery recorded",
+            attrs={"seen_count": seen_count},
+        )
 
 
 def _record_egress_evidence() -> None:
@@ -413,6 +430,16 @@ def run(
 ) -> int:
     if max_surnames is not None:
         surnames = surnames[:max_surnames]
+    ddlog_emit(
+        "sweep_start",
+        message="Sweep started",
+        attrs={
+            "surnames_total": len(surnames),
+            "max_surnames": max_surnames,
+            "refresh_known": refresh_known,
+            "dry_run": dry_run,
+        },
+    )
 
     # Skip-gate: don't re-scrape if the roster DATA is still fresh. Key off the
     # generated_utc inside current.json, NOT the file mtime: actions/checkout
@@ -424,6 +451,11 @@ def run(
         log.info(
             "current.json data is %.0fs old (< %ds); skipping this cycle",
             stale_h * 3600, MIN_SWEEP_INTERVAL_S,
+        )
+        ddlog_emit(
+            "sweep_complete",
+            message="Sweep skipped by freshness gate",
+            attrs={"outcome": "skipped_fresh_data", "roster_stale_hours": stale_h},
         )
         return 0
 
@@ -438,6 +470,12 @@ def run(
             "refusing sweep: data/current.json is unreadable (%s); "
             "last-good file kept in place for inspection",
             e,
+        )
+        ddlog_emit(
+            "sweep_complete",
+            level="error",
+            message="Sweep aborted due to unreadable current snapshot",
+            attrs={"outcome": "aborted_corrupt_current"},
         )
         return 0
     log.info("loaded %d previously-known inmates", len(previous))
@@ -489,6 +527,16 @@ def run(
                     n_surnames=len(surnames), n_failed=n_failed,
                     status_counts=status_counts, block_sample=block_sample))
                 _record_egress_evidence()
+                ddlog_emit(
+                    "sweep_complete",
+                    level="warning",
+                    message="Sweep completed with degraded list guard",
+                    attrs={
+                        "outcome": "degraded_list_guard",
+                        "prev_count": len(previous),
+                        "seen_count": len(seen_ids),
+                    },
+                )
                 return 0
 
             # Healthy sweep: if we were previously blocked, close the denial
@@ -548,6 +596,12 @@ def run(
             level="error",
             message="Unhandled exception in sweep main loop",
         )
+        ddlog_emit(
+            "sweep_complete",
+            level="error",
+            message="Sweep failed with unhandled exception",
+            attrs={"outcome": "failed_unhandled_exception"},
+        )
         raise
     finally:
         # Write whatever we have so far (so an interrupted sweep doesn't blank
@@ -581,6 +635,18 @@ def run(
 
     if dry_run:
         log.info("dry-run; not writing")
+    ddlog_emit(
+        "sweep_complete",
+        message="Sweep completed",
+        attrs={
+            "outcome": "completed",
+            "dry_run": dry_run,
+            "roster_ok": roster_ok,
+            "clean_finish": clean_finish,
+            "seen_count": len(seen_ids),
+            "current_count": len(current),
+        },
+    )
     return 0
 
 
