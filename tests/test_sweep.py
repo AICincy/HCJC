@@ -189,7 +189,9 @@ def test_fetch_one_uses_list_row_name_when_detail_heading_missing(tmp_path, monk
     list_row = ListRow(
         inmate_number="9876543", last_name="ROE", first_name="JANE", admit_date="5/10/26"
     )
-    inm, named, had_photo = _fetch_one(client, "9876543", previous={}, list_row=list_row, waf_tracker=WafBackoffTracker())
+    inm, named, had_photo = _fetch_one(
+        client, "9876543", previous={}, list_row=list_row, waf_tracker=WafBackoffTracker()
+    )
     # detail parser produced no name, so detail_named must be False.
     assert named is False
     assert had_photo is False
