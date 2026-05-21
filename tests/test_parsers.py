@@ -91,24 +91,24 @@ def test_parse_name_handles_inmate_label_prefix():
     # stay green.
     html_prefixed = """
     <html><body>
-      <h2>Inmate: ACOSTA, ANDREW</h2>
+      <h2>Inmate: VOE, ANDREW</h2>
       <ul>
-        <li>Inmate Number : 14544515</li>
-        <li>Booking Number : 26002866</li>
+        <li>Inmate Number : 99000017</li>
+        <li>Booking Number : 99000018</li>
       </ul>
     </body></html>
     """
-    inm, _, _ = parse_detail_page(html_prefixed, "14544515")
-    assert inm.last_name == "ACOSTA"
+    inm, _, _ = parse_detail_page(html_prefixed, "99000017")
+    assert inm.last_name == "VOE"
     assert inm.first_name == "ANDREW"
 
     html_bare = """
     <html><body>
-      <h2>ACOSTA, ANDREW</h2>
+      <h2>VOE, ANDREW</h2>
     </body></html>
     """
-    inm, _, _ = parse_detail_page(html_bare, "14544515")
-    assert inm.last_name == "ACOSTA"
+    inm, _, _ = parse_detail_page(html_bare, "99000017")
+    assert inm.last_name == "VOE"
     assert inm.first_name == "ANDREW"
 
 
