@@ -262,8 +262,8 @@ def _compact_anon_entries(entries: list[dict]) -> list[dict]:
     Already-compacted summary rows (``event_summary: True``) are merged into
     the same grouping so re-runs are idempotent.
     """
-    from datetime import datetime, timedelta, timezone
     from collections import Counter
+    from datetime import datetime, timedelta, timezone
 
     compact_cutoff = (
         datetime.now(timezone.utc) - timedelta(days=ANON_COMPACTION_MAX_DAYS)
