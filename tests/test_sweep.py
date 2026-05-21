@@ -489,10 +489,7 @@ def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
 def test_run_emits_ddlog_when_watchdog_blocks(tmp_path, monkeypatch):
     from scraper.store import save_current
 
-    prev = [
-        Inmate(inmate_number=str(1000 + i), last_name="DOE", first_name=f"F{i}", booking_date="5/10/26")
-        for i in range(60)
-    ]
+    prev = [Inmate(inmate_number="1000", last_name="DOE", first_name="F0", booking_date="5/10/26")]
     cur = tmp_path / "current.json"
     save_current(cur, prev)
     monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
