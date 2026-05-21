@@ -281,3 +281,18 @@ def test_compact_anon_entries_is_idempotent():
     assert first == second, "compaction must be idempotent"
     assert any(r.get("event_summary") and r.get("count") == 2 for r in first)
     assert any(r.get("event") == "released" and not r.get("event_summary") for r in first)
+
+
+def test_compact_anon_entries_merges_existing_summaries():
+    from scraper.store import _compact_anon_entries
+
+    entries = [
+        {"event_summary": True, "month": "2024-01", "event": "booked",
+         "tier": "F5", "category": "theft", "count": 5},
+        {"event_summary": True, "month": "2024-01", "event": "booked",
+         "tier": "F5", "category": "theft", "count": 3},
+    ]
+    out = _compact_anon_entries(entries)
+    summaries = [r for r in out if r.get("event_summary")]
+    assert len(summaries) == 1
+    assert summaries[0]["count"] == 8
