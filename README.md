@@ -14,6 +14,8 @@
 > [HCSO access interruption](#hcso-access-interruption-current) and
 > [`audit/14_hcso_waf.md`](audit/14_hcso_waf.md).
 
+<img src="web/static/img/sheriff-waf.png" align="right" width="300" alt="Illustration of the Hamilton County Sheriff with a speech bubble: 'Sorry about that, we're allegedly blocking access to keep inmates safe from county residents who believe public records should be accessible to the public.'">
+
 A near-real-time public-records mirror of the Hamilton County (Ohio) Justice Center
 inmate roster, generated entirely from publicly-published Hamilton County Sheriff's
 Office data under Ohio Revised Code § 149.43.
