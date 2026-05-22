@@ -175,11 +175,11 @@
   {% set top = s.offenses[0].count if s.offenses else 1 %}
   {% for o in s.offenses[:18] %}
   {% set pct = (100.0 * o.count / top) %}
-  <div class="statbar" role="listitem">
+  <a class="statbar" role="listitem" href="{{ base_url }}/?chap={{ chap_slug(o.label) }}">
     <span class="statbar-label"><span class="chap chap-{{ o.cls }}">{{ o.label }}</span></span>
     <span class="statbar-track" aria-hidden="true"><span class="statbar-fill cat-{{ o.cls }}" style="width: {{ '%.1f' % pct }}%"></span></span>
     <span class="statbar-val">{{ o.count }}</span>
-  </div>
+  </a>
   {% endfor %}
   {% if s.offenses | length > 18 %}<p class="muted note-paragraph-tight">+ {{ s.offenses|length - 18 }} more offense categories</p>{% endif %}
 </div>

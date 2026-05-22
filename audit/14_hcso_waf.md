@@ -185,6 +185,25 @@ law + third-party ToS). Decision:
   blocked; the Data page documents it and links the evidence log. Copy is
   pending owner + counsel sign-off (draft in the templates).
 
+### Parked option (2026-05-22): DigitalOcean egress (deferred)
+
+The owner has free DigitalOcean credit via GitHub Education. It could route
+HCSO fetches off the GitHub-Actions IP two ways: (a) a droplet HTTP/SOCKS proxy
+set via the existing `JCSTREAM_HTTP_PROXY` secret (already wired, HCSO-scoped),
+or (b) a self-hosted GH Actions runner on the droplet (`runs-on` flip per
+`audit/14a_runner_migration_patch.md`). Two reasons it stays parked, not adopted:
+
+1. **Datacenter IP.** DigitalOcean is a datacenter ASN, the same reputation
+   class as GitHub's runners. Commercial WAF bot-management (Akamai/Cloudflare,
+   suspected here) commonly blocks datacenter ranges; a fresh droplet may clear
+   briefly, then get flagged. The empirically-confirmed fix (2026-05-20, +121
+   photos) used a residential-equivalent IP, not a datacenter one.
+2. **Posture.** Routing around the block is evasion and weakens the mandamus
+   record per the decision above.
+
+Decision: **weigh later.** Revisit if the owner prioritizes data over the denial
+record, or if a residential egress (not DO) becomes available.
+
 ### Evidence file schema (`data/waf_block_log.json`)
 
 The log is a JSON array, append-only, never truncated. It is created on the

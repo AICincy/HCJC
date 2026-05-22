@@ -282,6 +282,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     env.globals["waf_sheriff_available"] = (STATIC_DIR / "img" / "sheriff-waf.png").exists()
     _orc_chaps = _orc_chapters(offenses)
     env.globals["codes_ohio_url"] = lambda code: _statute_url(code, offenses, _orc_chaps)
+    env.globals["chap_slug"] = _chap_slug
     env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates)
     env.globals["all_inmates_total"] = snapshot.inmate_count
 

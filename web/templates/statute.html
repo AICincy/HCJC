@@ -42,7 +42,8 @@
     <summary>
       <span class="tier tier-{{ s.degree }}">{{ s.degree }}</span>
       <span class="statute-item-title">
-        <span class="orc-code">&sect; {{ s.code }}</span>
+        {% set hdr_url = codes_ohio_url(s.code) %}
+        {% if hdr_url %}<a class="orc-code" href="{{ hdr_url }}" target="_blank" rel="noopener">&sect; {{ s.code }}</a>{% else %}<span class="orc-code">&sect; {{ s.code }}</span>{% endif %}
         <span class="statute-item-name">{{ s.title or 'Section title not in lookup' }}</span>
       </span>
       <span class="statute-item-count"><strong>{{ s.count }}</strong> held &middot; {{ '%.1f' % s.pct }}%</span>
