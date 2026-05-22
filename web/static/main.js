@@ -189,6 +189,22 @@
     i.addEventListener('input', apply);
     i.addEventListener('change', apply);
   });
+  // Deep-link: ?chap=... / ?tier=... (e.g. from the stats offense-category
+  // links) pre-applies the matching filter so the link lands on a filtered
+  // roster. Only sets a value the corresponding <select> actually offers.
+  try {
+    var params = new URLSearchParams(location.search);
+    inputs.forEach(function (i) {
+      var key = i.getAttribute('data-filter');
+      var val = (params.get(key) || '').trim().toLowerCase();
+      if (!val) return;
+      if (i.tagName === 'SELECT') {
+        var ok = Array.prototype.some.call(i.options, function (o) { return o.value === val; });
+        if (!ok) return;
+      }
+      i.value = val;
+    });
+  } catch (e) {}
   apply();
 
   // (3b) Crime-of-month pills: click to filter roster by that chapter.

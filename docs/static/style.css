@@ -2578,7 +2578,10 @@ footer.site .footer-legal strong { color: var(--fg); }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  color: inherit;
+  text-decoration: none;
 }
+a.statbar:hover { border-color: var(--accent); }
 .statbar-label {
   color: var(--fg-soft);
   white-space: nowrap;
