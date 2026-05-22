@@ -6,8 +6,8 @@ Run locally once after the first sweep that ran with DD_API_KEY set in CI:
 
 DD_API_KEY writes to intake and is already in CI. DD_APP_KEY reads via the API
 and is needed only for this script (create a read-only application key, keep it
-local, do not add it to CI). DD_SITE defaults to us5.datadoghq.com to match
-.github/workflows/sweep.yml.
+local, do not add it to CI). DD_SITE defaults to datadoghq.com to match
+scraper/ddlog.py; set it (e.g. us5.datadoghq.com) if the sweep ships elsewhere.
 
 Exit codes: 0 = events found in the last hour, 1 = none found, 2 = misconfig.
 Stdlib only.
@@ -20,19 +20,18 @@ import sys
 import urllib.request
 
 
-def main() -> int:
-    api_key = os.environ.get("DD_API_KEY")
-    app_key = os.environ.get("DD_APP_KEY")
-    site = os.environ.get("DD_SITE", "us5.datadoghq.com")
+def _event_name(entry: dict) -> str | None:
+    attrs = entry.get("attributes", {}) or {}
+    inner = attrs.get("attributes", {}) or {}
+    return inner.get("event", attrs.get("event"))
 
-    if not (api_key and app_key):
-        print("Need DD_API_KEY and DD_APP_KEY in env.", file=sys.stderr)
-        return 2
 
+def _search(api_key: str, app_key: str, site: str) -> list | None:
+    """Return the matching log events, or None on transport error."""
     body = {
         "filter": {"query": "service:jcstream", "from": "now-1h", "to": "now"},
         "sort": "-timestamp",
-        "page": {"limit": 10},
+        "page": {"limit": 100},
     }
     req = urllib.request.Request(
         f"https://api.{site}/api/v2/logs/events/search",
@@ -46,12 +45,36 @@ def main() -> int:
     )
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read())
+            return json.loads(resp.read()).get("data") or []
     except Exception as exc:
         print(f"Search failed: {exc!r}", file=sys.stderr)
-        return 1
+        return None
 
-    events = data.get("data") or []
+
+def _report(events: list) -> None:
+    print(f"OK. Found {len(events)} JCStream events in the last hour.")
+    print("Most recent:")
+    for e in events[:5]:
+        ts = (e.get("attributes", {}) or {}).get("timestamp", "?")
+        print(f"  - {ts}  event={_event_name(e) or '?'}")
+
+    missing = {"sweep_start", "sweep_complete"} - {_event_name(e) for e in events}
+    if missing:
+        print(f"WARNING: missing expected events in the last hour: {sorted(missing)}")
+
+
+def main() -> int:
+    api_key = os.environ.get("DD_API_KEY")
+    app_key = os.environ.get("DD_APP_KEY")
+    site = os.environ.get("DD_SITE", "datadoghq.com")
+
+    if not (api_key and app_key):
+        print("Need DD_API_KEY and DD_APP_KEY in env.", file=sys.stderr)
+        return 2
+
+    events = _search(api_key, app_key, site)
+    if events is None:
+        return 1
     if not events:
         print("No JCStream logs in the last hour. Ingest is not yet flowing.")
         print("Checklist:")
@@ -60,23 +83,7 @@ def main() -> int:
         print("  3. scraper/ddlog.py emit() is reached on this run's code path.")
         return 1
 
-    print(f"OK. Found {len(events)} JCStream events in the last hour.")
-    print("Most recent:")
-    for e in events[:5]:
-        attrs = e.get("attributes", {}) or {}
-        inner = attrs.get("attributes", {}) or {}
-        event_name = inner.get("event", attrs.get("event", "?"))
-        ts = attrs.get("timestamp", "?")
-        print(f"  - {ts}  event={event_name}")
-
-    seen = set()
-    for e in events:
-        attrs = e.get("attributes", {}) or {}
-        inner = attrs.get("attributes", {}) or {}
-        seen.add(inner.get("event", attrs.get("event")))
-    missing = {"sweep_start", "sweep_complete"} - seen
-    if missing:
-        print(f"WARNING: missing expected events in the last hour: {sorted(missing)}")
+    _report(events)
     return 0
 
 
