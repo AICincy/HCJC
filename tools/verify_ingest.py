@@ -17,6 +17,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+import urllib.error
 import urllib.request
 
 
@@ -46,7 +47,7 @@ def _search(api_key: str, app_key: str, site: str) -> list | None:
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
             return json.loads(resp.read()).get("data") or []
-    except Exception as exc:
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as exc:
         print(f"Search failed: {exc!r}", file=sys.stderr)
         return None
 
