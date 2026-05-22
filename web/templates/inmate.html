@@ -47,7 +47,7 @@
 <section class="inmate-hero">
   {% if inmate.photo_filename %}
   <figure class="record-photo">
-    <a href="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo-cap="{{ inmate.full_name }} · booked {{ inmate.booking_date }}" aria-label="Enlarge booking photo">
+    <a href="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo-cap="{{ inmate.full_name }} · booked {{ display_date(inmate.booking_date) or 'date not reported' }}" aria-label="Enlarge booking photo">
       <img src="{{ base_url }}/photos/{{ inmate.photo_filename }}" alt="HCSO booking photo of {{ inmate.full_name }}" width="240" height="300" decoding="async">
     </a>
     <figcaption>Booking photo &middot; ORC &sect; 149.43</figcaption>
@@ -326,8 +326,7 @@
           {% if plain %}<p class="statute-plain">{{ plain }}</p>{% endif %}
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <strong>{{ freq }}</strong>
-            <span class="muted">of {{ "{:,}".format(all_inmates_total) }}</span>
+            <a href="{{ base_url }}/statute/#orc-{{ orc_base(c.orc_code) | replace('.', '-') }}"><strong>{{ freq }}</strong> <span class="muted">of {{ "{:,}".format(all_inmates_total) }}</span> &rarr;</a>
             {% if codeurl %}<a class="statute-srclink" href="{{ codeurl }}" target="_blank" rel="noopener">read statute ↗</a>{% endif %}
           </div>
         </div>
@@ -339,7 +338,7 @@
 
 {% set similar = similar_by_statute(inmate) %}
 {% if similar %}
-<details class="section-details">
+<details class="section-details" open>
   <summary><span class="section-summary-h">Similar inmates &middot; held under the same statute</span> <span class="pill">{{ similar | length }}</span> <span class="muted">&middot; peer match by primary ORC section, then chapter</span></summary>
   <div class="rb-grid">
     {% for inm in similar %}
@@ -408,7 +407,7 @@
     <li class="status-row">
       <span class="tag tag-{{ e.event }}">{{ e.event }}</span>
       <time datetime="{{ e.timestamp_utc }}">{{ e.timestamp_utc }}</time>
-      {% if e.note %}<span class="muted">&middot; {{ e.note }}</span>{% endif %}
+      {% if e.note %}<span class="muted">&middot; {{ e.note | clean_note }}</span>{% endif %}
     </li>
     {% endfor %}
   {% else %}

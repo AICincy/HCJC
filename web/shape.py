@@ -254,13 +254,20 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
         return max(0.0, min(100.0, v))
     raw: list[dict] = []
     raw.append({"x": _pct(booked), "label": "Booked", "date": inmate.booking_date or "", "kind": "booked", "sub": ""})
+    # Collapse charges that share a court date into one marker so their labels
+    # don't stack on the same x and overlap (REQ-007).
+    by_date: dict[datetime, list[str]] = {}
     for d, desc, _code in courts:
+        by_date.setdefault(d, []).append(desc or "")
+    for d in sorted(by_date):
+        descs = by_date[d]
+        sub = descs[0].lower()[:40] if len(descs) == 1 else f"{len(descs)} hearings"
         raw.append({
             "x": _pct(d),
             "label": "Court",
             "date": _strftime_nopad(d, "%-m/%-d/%y") if hasattr(d, "strftime") else "",
             "kind": "court",
-            "sub": (desc or "").lower()[:48],
+            "sub": sub,
         })
     raw.append({"x": _pct(now), "label": "Today", "date": _strftime_nopad(now, "%b %-d, %Y"), "kind": "now", "sub": ""})
     if release:

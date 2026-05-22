@@ -107,6 +107,15 @@ PHOTOS_DIR = Path("data/photos")
 DEFAULT_OUT = Path("docs")
 
 
+def _clean_event_note(note: str | None) -> str:
+    """Scrub the HCSO epoch-0 sentinel ('1/1/70') out of historical changelog
+    notes so the status history never shows a 1970 date."""
+    s = note or ""
+    for sentinel in ("01/01/1970", "1/1/1970", "01/01/70", "1/1/70"):
+        s = s.replace(sentinel, "date not reported")
+    return s
+
+
 def _load_inputs():
     """Load the snapshot + changelog + dispatch feeds. Dedupe the two CFS
     feeds on event_number (qiik-bpks often lags past its pull window and comes
@@ -171,6 +180,7 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict],
     # maps %-d/%-m to %#d/%#m on Windows so the build is portable between the
     # Linux CI runner and Windows dev boxes.
     env.filters["dt_fmt"] = _strftime_nopad
+    env.filters["clean_note"] = _clean_event_note
     env.globals["cck_name_search"] = cck.name_search_url
     env.globals["cck_case_summary"] = cck.case_summary_url
     env.globals["base_url"] = base_url
@@ -241,6 +251,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     env.globals["orc_explainer"] = lambda code: (
         (_explainers.get(orc_mod.normalize_code(code)) or {}).get("plain") if code else None
     )
+    env.globals["orc_base"] = orc_mod.normalize_code
     env.globals["charge_status_summary"] = _charge_status_summary
     env.globals["all_chapters"] = _distinct_chapters(snapshot.inmates)
     env.globals["bond_total"] = _bond_total

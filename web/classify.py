@@ -149,19 +149,23 @@ _SEX_LABEL = {
 
 def _parse_book_date(date_str: str | None) -> datetime | None:
     """Parse booking date string (MM/DD/YY or MM/DD/YYYY format) to datetime.
-    
-    Returns None if the string is empty or unparseable. Sentinel dates like
-    '1/1/70' (epoch) are treated as valid to avoid losing data, but are
-    often filtered out downstream.
+
+    Returns None if the string is empty, unparseable, or an epoch sentinel.
+    HCSO emits '1/1/70' (Unix epoch 0) when it has no real date; treating it
+    as None here means every downstream consumer (display, timeline, age,
+    days-in-custody) uniformly shows "unknown" instead of 1970.
     """
     if not date_str:
         return None
     date_str = str(date_str).strip()
     for fmt in ("%m/%d/%y", "%m/%d/%Y"):
         try:
-            return datetime.strptime(date_str, fmt)
+            parsed = datetime.strptime(date_str, fmt)
         except ValueError:
             continue
+        if parsed.year <= 1971:  # epoch sentinel, not a real booking date
+            return None
+        return parsed
     return None
 
 
