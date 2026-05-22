@@ -68,6 +68,7 @@ from web.shape import (  # noqa: F401  re-exported for test_build.py access
     _card_data_attrs,
     _card_tip,
     _case_numbers,
+    _cases_grouped,
     _charge_status_summary,
     _charges_by_chapter,
     _court_calendar,
@@ -233,6 +234,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     env.globals["bond_by_tier"] = lambda inm: _bond_by_tier(inm, offenses)
     env.globals["next_court_date"] = _next_court_date
     env.globals["case_numbers"] = _case_numbers
+    env.globals["cases_grouped"] = _cases_grouped
     env.globals["charge_status_summary"] = _charge_status_summary
     env.globals["all_chapters"] = _distinct_chapters(snapshot.inmates)
     env.globals["bond_total"] = _bond_total

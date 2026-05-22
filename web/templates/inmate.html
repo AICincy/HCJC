@@ -76,7 +76,7 @@
       <div class="bio-field"><dt>Next&nbsp;court&nbsp;date</dt><dd>{{ nextc or '—' }}</dd></div>
       <div class="bio-field"><dt>Charges</dt><dd>{{ inmate.charges | length }}{% if status %} <span class="muted">{{ status }}</span>{% endif %}</dd></div>
       <div class="bio-field"><dt>Total&nbsp;bond</dt><dd>{% if inmate.charges %}{{ bonds.total }}{% if bonds.felony != '$0' and bonds.misdemeanor != '$0' %} <span class="muted">felony {{ bonds.felony }} &middot; misd. {{ bonds.misdemeanor }}</span>{% endif %}{% else %}—{% endif %}</dd></div>
-      <div class="bio-field"><dt>Case&nbsp;#s</dt><dd>{% if cases %}{% for cn in cases %}<a href="{{ cck_case_summary(cn) }}" target="_blank" rel="noopener">{{ cn }}</a>{{ ', ' if not loop.last }}{% endfor %}{% else %}—{% endif %}</dd></div>
+      <div class="bio-field"><dt>Case&nbsp;#s</dt><dd>{% if cases %}{{ cases | length }}{% else %}—{% endif %}</dd></div>
       <div class="bio-field"><dt>Date&nbsp;of&nbsp;birth</dt><dd>{{ inmate.date_of_birth or '—' }}{% if age %} <span class="muted">age ~{{ age }}</span>{% endif %}</dd></div>
       <div class="bio-field"><dt>Sex &middot; race</dt><dd>{{ expand_sex(inmate.sex) }} &middot; {{ expand_race(inmate.race) }}</dd></div>
       <div class="bio-field"><dt>Holder&nbsp;/&nbsp;detainer</dt><dd>{{ inmate.holder_status or '—' }}</dd></div>
@@ -129,6 +129,30 @@
 <p class="muted">
   <a href="{{ cck_name_search(inmate.last_name, inmate.first_name, inmate.date_of_birth) }}" target="_blank" rel="noopener">Run a full name + DOB search on courtclerk.org ↗</a>
 </p>
+
+{% set case_groups = cases_grouped(inmate) %}
+{% if case_groups %}
+<div class="section-h">
+  <h2>Cases</h2>
+  <span class="pill">{{ cases | length }}</span>
+</div>
+<p class="muted note-paragraph">Cases on this booking, grouped by type and year. Each links to the docket of record at courtclerk.org.</p>
+<div class="case-groups">
+  {% for g in case_groups %}
+  <section class="case-group">
+    <h3 class="case-group-h"><span class="case-cat case-cat-{{ g.key }}">{{ g.label }}</span> <span class="muted">{{ g.cases_n }}</span></h3>
+    {% for yr in g.years %}
+    <div class="case-year">
+      <span class="case-year-lab">{{ yr.year }}</span>
+      <ul class="case-list">
+        {% for cn in yr.cases %}<li><a href="{{ cck_case_summary(cn) }}" target="_blank" rel="noopener">{{ cn }} ↗</a></li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </section>
+  {% endfor %}
+</div>
+{% endif %}
 
 {% if crowdsourced_for_inmate %}
 <aside class="crowdsource-block" aria-label="Crowdsourced case data">

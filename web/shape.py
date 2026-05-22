@@ -447,6 +447,38 @@ def _case_numbers(inmate: Inmate) -> list[str]:
                 out.append(v)
     return out
 
+_CASE_CAT_ORDER = ("criminal", "traffic", "civil", "other")
+_CASE_CAT_LABEL = {"criminal": "Criminal", "traffic": "Traffic", "civil": "Civil", "other": "Other"}
+
+
+def _cases_grouped(inmate: Inmate) -> list[dict]:
+    """Group this inmate's case numbers by category then by year (newest first).
+
+    Returns [{key, label, cases_n, years: [{year, cases: [num, ...]}]}] in a
+    fixed category order. Years sort descending; unknown year sorts last. Each
+    case number is left raw so the template deep-links it via cck_case_summary
+    (the working courtclerk.org link).
+    """
+    from web.classify import case_category, case_year
+    buckets: dict[str, dict] = defaultdict(lambda: defaultdict(list))
+    for cn in _case_numbers(inmate):
+        buckets[case_category(cn)][case_year(cn)].append(cn)
+    out: list[dict] = []
+    for cat in _CASE_CAT_ORDER:
+        years = buckets.get(cat)
+        if not years:
+            continue
+        ordered = sorted(years.keys(), key=lambda y: (y is None, -(y or 0)))
+        year_rows = [{"year": (y if y is not None else "—"), "cases": years[y]} for y in ordered]
+        out.append({
+            "key": cat,
+            "label": _CASE_CAT_LABEL[cat],
+            "cases_n": sum(len(years[y]) for y in years),
+            "years": year_rows,
+        })
+    return out
+
+
 def _charge_status_summary(inmate: Inmate) -> str:
     """e.g. '3 pending · 1 disposed' across the charge rows."""
     pending = disposed = 0

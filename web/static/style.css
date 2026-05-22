@@ -1413,6 +1413,26 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 }
 .bio dd a { color: var(--accent); font-family: var(--font-mono); border-bottom: 1px dashed var(--accent-hi); padding-bottom: 1px; text-decoration: none; }
 .bio dd a:hover { border-bottom-style: solid; }
+.case-groups { display: grid; gap: 14px; margin: 8px 0 0; }
+.case-group-h { display: flex; align-items: baseline; gap: 8px; margin: 0 0 4px; font-size: 13px; font-weight: 600; }
+.case-cat {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--fg);
+  border: 1px solid var(--border);
+}
+.case-cat-criminal { color: var(--accent); border-color: var(--accent-hi); }
+.case-year { display: flex; gap: 10px; align-items: baseline; padding: 5px 0; border-top: 1px solid var(--border); }
+.case-year:first-of-type { border-top: none; }
+.case-year-lab { font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); min-width: 3.5ch; font-weight: 600; }
+.case-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.case-list a { font-family: var(--font-mono); font-size: 13px; color: var(--accent); border-bottom: 1px dashed var(--accent-hi); padding-bottom: 1px; text-decoration: none; }
+.case-list a:hover { border-bottom-style: solid; }
 .chapter-mix { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; }
 .chapter-mix strong { margin-left: 0.25rem; font-weight: 700; font-variant-numeric: tabular-nums; }
 .chapter-mix .muted { color: var(--fg-muted); }
