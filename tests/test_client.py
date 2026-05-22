@@ -173,3 +173,36 @@ def test_enter_builds_with_proxy():
     # would fail if the library didn't accept the proxy argument.
     with client_mod.HcsoClient(proxy="http://proxy.example:8080") as c:
         assert c._client is not None
+
+
+# ----- crawl-delay lock + pool keepalive ------------------------------------
+
+def test_crawl_delay_sleep_holds_lock(monkeypatch):
+    # The crawl-delay sleep must run inside `with self._lock`, so concurrent
+    # workers can't all read the same elapsed time and burst the WAF together.
+    # If time.sleep ran outside the lock, the lock would be free during it.
+    c = client_mod.HcsoClient(crawl_delay=0.05)
+    c._last_request_at = client_mod.time.monotonic()  # force a pending wait
+    locked_during_sleep = []
+    monkeypatch.setattr(
+        client_mod.time, "sleep",
+        lambda _s: locked_during_sleep.append(c._lock.locked()),
+    )
+    c._sleep_for_crawl_delay()
+    assert locked_during_sleep == [True]
+
+
+def test_pool_sets_keepalive_expiry(monkeypatch):
+    # Idle connections must expire (keepalive_expiry=30) so the pool doesn't
+    # leak sockets across a long sweep. Capture the limits passed to httpx.Client.
+    captured = {}
+    real_client = client_mod.httpx.Client
+
+    def _capture(*args, **kwargs):
+        captured["limits"] = kwargs.get("limits")
+        return real_client(*args, **kwargs)
+
+    monkeypatch.setattr(client_mod.httpx, "Client", _capture)
+    with client_mod.HcsoClient():
+        pass
+    assert captured["limits"].keepalive_expiry == 30

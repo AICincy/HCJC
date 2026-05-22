@@ -1,0 +1,61 @@
+name: WAF block incident
+description: File when the WAF-block monitor fires and the HCSO block persists
+labels: ["incident", "waf"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when HCSO's WAF is blocking the sweep and the block has
+        persisted. See the audit runbook triage procedure before filing.
+  - type: input
+    id: start
+    attributes:
+      label: Block start (UTC)
+      description: First blocked sweep, ISO 8601 (e.g. 2026-05-19T14:30:00Z)
+    validations:
+      required: true
+  - type: input
+    id: duration
+    attributes:
+      label: Block duration so far
+      description: Approximate consecutive block window (e.g. 18h)
+    validations:
+      required: true
+  - type: dropdown
+    id: vendor
+    attributes:
+      label: WAF vendor signature observed
+      description: From the response Server / vendor headers on the blocked request
+      options:
+        - akamai
+        - cloudflare
+        - aws_cloudfront
+        - imperva
+        - unknown
+    validations:
+      required: true
+  - type: checkboxes
+    id: triage
+    attributes:
+      label: Triage steps completed
+      options:
+        - label: Confirmed the block is real and persistent
+        - label: Ruled out an HCSO outage (tested from a non-runner network)
+        - label: Identified the WAF vendor (above)
+        - label: Notified per the runbook if duration exceeded 24h
+  - type: dropdown
+    id: remediation
+    attributes:
+      label: Decided remediation path
+      options:
+        - Wait and re-evaluate
+        - Self-hosted runner on a different egress
+        - Formal data-feed request to HCSO records office
+        - Graceful sunset
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and notes
+      description: Log lines, response headers, dashboard links, screenshots

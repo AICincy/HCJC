@@ -1,0 +1,84 @@
+"""Confirm JCStream sweep telemetry is reaching Datadog.
+
+Run locally once after the first sweep that ran with DD_API_KEY set in CI:
+
+    DD_API_KEY=<key> DD_APP_KEY=<key> python tools/verify_ingest.py
+
+DD_API_KEY writes to intake and is already in CI. DD_APP_KEY reads via the API
+and is needed only for this script (create a read-only application key, keep it
+local, do not add it to CI). DD_SITE defaults to us5.datadoghq.com to match
+.github/workflows/sweep.yml.
+
+Exit codes: 0 = events found in the last hour, 1 = none found, 2 = misconfig.
+Stdlib only.
+"""
+from __future__ import annotations
+
+import json
+import os
+import sys
+import urllib.request
+
+
+def main() -> int:
+    api_key = os.environ.get("DD_API_KEY")
+    app_key = os.environ.get("DD_APP_KEY")
+    site = os.environ.get("DD_SITE", "us5.datadoghq.com")
+
+    if not (api_key and app_key):
+        print("Need DD_API_KEY and DD_APP_KEY in env.", file=sys.stderr)
+        return 2
+
+    body = {
+        "filter": {"query": "service:jcstream", "from": "now-1h", "to": "now"},
+        "sort": "-timestamp",
+        "page": {"limit": 10},
+    }
+    req = urllib.request.Request(
+        f"https://api.{site}/api/v2/logs/events/search",
+        method="POST",
+        data=json.dumps(body).encode("utf-8"),
+        headers={
+            "DD-API-KEY": api_key,
+            "DD-APPLICATION-KEY": app_key,
+            "Content-Type": "application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read())
+    except Exception as exc:
+        print(f"Search failed: {exc!r}", file=sys.stderr)
+        return 1
+
+    events = data.get("data") or []
+    if not events:
+        print("No JCStream logs in the last hour. Ingest is not yet flowing.")
+        print("Checklist:")
+        print("  1. DD_API_KEY is set in the GitHub Actions sweep job env.")
+        print("  2. A sweep has run since the secret was added.")
+        print("  3. scraper/ddlog.py emit() is reached on this run's code path.")
+        return 1
+
+    print(f"OK. Found {len(events)} JCStream events in the last hour.")
+    print("Most recent:")
+    for e in events[:5]:
+        attrs = e.get("attributes", {}) or {}
+        inner = attrs.get("attributes", {}) or {}
+        event_name = inner.get("event", attrs.get("event", "?"))
+        ts = attrs.get("timestamp", "?")
+        print(f"  - {ts}  event={event_name}")
+
+    seen = set()
+    for e in events:
+        attrs = e.get("attributes", {}) or {}
+        inner = attrs.get("attributes", {}) or {}
+        seen.add(inner.get("event", attrs.get("event")))
+    missing = {"sweep_start", "sweep_complete"} - seen
+    if missing:
+        print(f"WARNING: missing expected events in the last hour: {sorted(missing)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
