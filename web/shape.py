@@ -444,6 +444,14 @@ def _events_for_inmate(events: list[ChangeEvent], inmate_number: str) -> list[Ch
     out.sort(key=lambda e: e.timestamp_utc or "")
     return out
 
+def _clean_case_number(cn: str | None) -> str:
+    """Tidy a case number for display and linking. HCSO sometimes drops the
+    leading court-prefix letter, leaving a stray leading slash ("/25/CRA/17789");
+    strip leading/trailing slashes and whitespace so it reads "25/CRA/17789".
+    Internal separators and any co-defendant suffix (".../B") are preserved."""
+    return (cn or "").strip().strip("/").strip()
+
+
 def _case_numbers(inmate: Inmate) -> list[str]:
     seen, out = set(), []
     for c in inmate.charges:

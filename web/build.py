@@ -74,6 +74,7 @@ from web.shape import (  # noqa: F401  re-exported for test_build.py access
     _cases_grouped,
     _charge_status_summary,
     _charges_by_chapter,
+    _clean_case_number,
     _court_calendar,
     _crimes_of_month,
     _days_in_custody,
@@ -194,6 +195,7 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict],
     # Linux CI runner and Windows dev boxes.
     env.filters["dt_fmt"] = _strftime_nopad
     env.filters["clean_note"] = _clean_event_note
+    env.filters["case_fmt"] = _clean_case_number
     env.globals["cck_name_search"] = cck.name_search_url
     env.globals["cck_case_summary"] = cck.case_summary_url
     env.globals["base_url"] = base_url

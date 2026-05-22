@@ -118,7 +118,7 @@
       <td>{{ c.court_date or '—' }}</td>
       <td>{{ (c.bond_type ~ ' ' ~ c.bond_amount) | trim or '—' }}</td>
       <td>{{ c.disposition or '—' }}</td>
-      <td>{% if case %}<a class="case-link case-{{ case_category(case) }}" href="{{ cck_case_summary(case) }}" target="_blank" rel="noopener">{{ case }} ↗</a>{% else %}—{% endif %}</td>
+      <td>{% if case %}<a class="case-link case-{{ case_category(case) }}" href="{{ cck_case_summary(case | case_fmt) }}" target="_blank" rel="noopener">{{ case | case_fmt }} ↗</a>{% else %}—{% endif %}</td>
     </tr>
   {% endfor %}
   </tbody>
@@ -141,7 +141,7 @@
 <div class="case-year">
   <span class="case-year-lab">{{ yr.year }}</span>
   <ul class="case-list case-{{ g.key }}">
-    {% for cn in yr.cases %}<li><a class="case-link case-{{ g.key }}" href="{{ cck_case_summary(cn) }}" target="_blank" rel="noopener">{{ cn }} ↗</a></li>{% endfor %}
+    {% for cn in yr.cases %}<li><a class="case-link case-{{ g.key }}" href="{{ cck_case_summary(cn | case_fmt) }}" target="_blank" rel="noopener">{{ cn | case_fmt }} ↗</a></li>{% endfor %}
   </ul>
 </div>
 {% endmacro %}
