@@ -44,7 +44,7 @@ Because of this, PR #220 wrote fresh tests against the real surface rather than 
 | 6 | Tune `>=8 events/6h` threshold | Owner-side — external, after live data |
 | 7 | Add 5 missing unit tests | DONE — repo had 4/6; #220 adds #1 and #5 |
 | 8 | Decide data-acquisition strategy | Owner decision (see HCSO feed finding below) |
-| 9 | Freshness banner on site | Off-limits — design change, needs explicit per-session authorization |
+| 9 | Freshness banner on site | Already implemented — `index.html:13-22` renders a server-side `<aside role="status">` interruption banner driven by `roster_stale.blocked` (build.py `_roster_stale_context`), no JS required. The runbook's JS every-page version is not needed. |
 | 10 | Investigate HCSO RSS/JSON feed | See below |
 
 ## Item 10: HCSO structured-feed finding

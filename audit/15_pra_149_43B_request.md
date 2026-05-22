@@ -15,11 +15,14 @@ policy, and related communications). A clean written request, and any denial or
 non-response to it, is the predicate for the R.C. 149.43(C) mandamus record the
 owner is building. Counsel finalizes and sends; this file is the starting text.
 
-> **Counsel note on citations.** The subsection letters below reflect
-> R.C. 149.43 as commonly cited. The section has been amended repeatedly and the
-> lettering has shifted across versions. Verify every citation against the
-> current statute before sending. Items marked `[VERIFY]` are the ones most
-> likely to have moved.
+> **Counsel note on citations.** The subsection letters below were cross-checked
+> on 2026-05-22 against R.C. 149.43 as published on codes.ohio.gov (version
+> effective 2025-09-30). (B)(1), (B)(3), (B)(4), and (B)(6) matched as cited; the
+> identity/purpose provision is (B)(4) (the older "(B)(4)-(B)(5)" pairing is
+> corrected below). The (C) mandamus sublettering for statutory damages, costs,
+> and fees still carries `[VERIFY]` because the damages clause has moved across
+> amendments. Counsel confirms every citation against the controlling version on
+> the send date.
 
 ## Recipient and channel
 
@@ -51,7 +54,7 @@ owner is building. Counsel finalizes and sends; this file is the starting text.
 > status, and each charge row (charge description, ORC code, court and case
 > number, bond type, bond amount, and disposition). If the office maintains this
 > data in an electronic system, I ask to receive it in the medium in which it is
-> kept, as I am entitled to choose under R.C. 149.43(B)(6) `[VERIFY]`. I am not
+> kept, as I am entitled to choose under R.C. 149.43(B)(6). I am not
 > requesting physical inspection or pickup.
 >
 > **Item 2: Records concerning the restriction of automated access to the
@@ -78,12 +81,11 @@ owner is building. Counsel finalizes and sends; this file is the starting text.
 >    through the date of this request.
 >
 > I do not need to state my identity or the purpose of this request as a
-> condition of receiving these records (R.C. 149.43(B)(4)-(B)(5) `[VERIFY]`).
-> Please provide the records within a reasonable period of time
-> (R.C. 149.43(B)(1) `[VERIFY]`). If you deny any part of this request, please
-> provide the denial in writing with an explanation that includes the legal
-> authority for the denial, as R.C. 149.43(B)(3) `[VERIFY]` requires, and
-> provide the remaining responsive records.
+> condition of receiving these records (R.C. 149.43(B)(4)). Please provide the
+> records within a reasonable period of time (R.C. 149.43(B)(1)). If you deny any
+> part of this request, please provide the denial in writing with an explanation
+> that includes the legal authority for the denial, as R.C. 149.43(B)(3)
+> requires, and provide the remaining responsive records.
 >
 > If any portion is voluminous or needs clarification, please contact me so I
 > can narrow or prioritize rather than have the request denied.
@@ -97,11 +99,11 @@ owner is building. Counsel finalizes and sends; this file is the starting text.
 
 | Provision (as commonly cited) | Use in this request |
 |---|---|
-| R.C. 149.43(B)(1) `[VERIFY]` | Records made available within a reasonable period of time. |
-| R.C. 149.43(B)(3) `[VERIFY]` | A denial must be in writing with the legal authority for it. |
-| R.C. 149.43(B)(4)-(B)(5) `[VERIFY]` | No requirement to disclose identity or purpose as a condition. |
-| R.C. 149.43(B)(6) `[VERIFY]` | Requester may choose the medium the office keeps the record in (the machine-readable hook for Item 1). |
-| R.C. 149.43(C) `[VERIFY]` | Mandamus remedy, with potential statutory damages, court costs, and attorney fees, if the request is ignored or improperly denied. |
+| R.C. 149.43(B)(1) (checked 2026-05-22) | Records made available within a reasonable period of time. |
+| R.C. 149.43(B)(3) (checked 2026-05-22) | A denial must be in writing with the legal authority for it. |
+| R.C. 149.43(B)(4) (checked 2026-05-22) | No requirement to disclose identity or purpose as a condition. |
+| R.C. 149.43(B)(6) (checked 2026-05-22) | Requester may choose the medium the office keeps the record in (the machine-readable hook for Item 1). |
+| R.C. 149.43(C) `[VERIFY]` | Mandamus remedy, with statutory damages (currently $100 per business day, capped), court costs, and attorney fees, if the request is ignored or improperly denied. Confirm the (C) sublettering for the damages clause. |
 
 ## Evidentiary linkage
 
