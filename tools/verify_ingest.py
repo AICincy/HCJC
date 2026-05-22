@@ -10,15 +10,13 @@ local, do not add it to CI). DD_SITE defaults to datadoghq.com to match
 scraper/ddlog.py; set it (e.g. us5.datadoghq.com) if the sweep ships elsewhere.
 
 Exit codes: 0 = events found in the last hour, 1 = none found, 2 = misconfig.
-Stdlib only.
 """
 from __future__ import annotations
 
-import json
 import os
 import sys
-import urllib.error
-import urllib.request
+
+import httpx
 
 
 def _event_name(entry: dict) -> str | None:
@@ -34,20 +32,19 @@ def _search(api_key: str, app_key: str, site: str) -> list | None:
         "sort": "-timestamp",
         "page": {"limit": 100},
     }
-    req = urllib.request.Request(
-        f"https://api.{site}/api/v2/logs/events/search",
-        method="POST",
-        data=json.dumps(body).encode("utf-8"),
-        headers={
-            "DD-API-KEY": api_key,
-            "DD-APPLICATION-KEY": app_key,
-            "Content-Type": "application/json",
-        },
-    )
+    headers = {
+        "DD-API-KEY": api_key,
+        "DD-APPLICATION-KEY": app_key,
+        "Content-Type": "application/json",
+    }
     try:
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            return json.loads(resp.read()).get("data") or []
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as exc:
+        resp = httpx.post(
+            f"https://api.{site}/api/v2/logs/events/search",
+            json=body, headers=headers, timeout=10.0,
+        )
+        resp.raise_for_status()
+        return resp.json().get("data") or []
+    except (httpx.HTTPError, ValueError) as exc:
         print(f"Search failed: {exc!r}", file=sys.stderr)
         return None
 
