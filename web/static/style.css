@@ -30,7 +30,7 @@
   --danger:       #B33A2A;
   --warn:         #B33A2A;
   --warn-bg:      #FDF5EE;
-  --ok:           #4f7c3a;
+  --ok:           #4d7838;
 
   --case-criminal: #B33A2A;
   --case-traffic:  #8A5A00;
@@ -1731,12 +1731,10 @@ a.orc-code:hover { border-bottom-style: solid; }
   border-radius: var(--radius-lg);
   text-align: center;
   position: relative;
-  opacity: 0.55;
-  transition: opacity 120ms;
 }
 /* Current-tier ring uses a dark inner + light outer band so it stays visible
    on every ramp colour (the old accent ring vanished on the accent-red cell). */
-.ladder-cell.is-current { opacity: 1; box-shadow: inset 0 0 0 2px var(--fg), inset 0 0 0 4px var(--bg); }
+.ladder-cell.is-current { box-shadow: inset 0 0 0 2px var(--fg), inset 0 0 0 4px var(--bg); }
 .ladder-tier { font-weight: 700; font-size: 14px; }
 .ladder-max { font-size: 10px; margin-top: 4px; opacity: 0.85; line-height: 1.2; }
 .ladder-tag {
