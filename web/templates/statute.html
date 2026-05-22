@@ -54,9 +54,12 @@
           {% if s.explainer and s.explainer.tier_meaning %}
           <p class="statute-tier-meaning"><strong>Severity:</strong> {{ s.explainer.tier_meaning }}</p>
           {% endif %}
+          {% set s_url = codes_ohio_url(s.code) %}
+          {% if s_url %}
           <p class="muted">
-            <a href="https://codes.ohio.gov/ohio-revised-code/section-{{ s.code }}" target="_blank" rel="noopener">Read the statute on codes.ohio.gov &rarr;</a>
+            <a href="{{ s_url }}" target="_blank" rel="noopener">Read the statute on codes.ohio.gov &rarr;</a>
           </p>
+          {% endif %}
         </div>
         <aside class="statute-side">
           <div class="stat-card">
