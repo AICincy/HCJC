@@ -59,6 +59,7 @@ from web.classify import (  # noqa: F401  re-exported for test_build.py access
     _short_month_label,
     _tier_counts,
     _tier_max,
+    case_category,
 )
 from web.shape import (  # noqa: F401  re-exported for test_build.py access
     _all_top_offenses,
@@ -235,6 +236,11 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     env.globals["next_court_date"] = _next_court_date
     env.globals["case_numbers"] = _case_numbers
     env.globals["cases_grouped"] = _cases_grouped
+    env.globals["case_category"] = case_category
+    _explainers = _load_explainers()
+    env.globals["orc_explainer"] = lambda code: (
+        (_explainers.get(orc_mod.normalize_code(code)) or {}).get("plain") if code else None
+    )
     env.globals["charge_status_summary"] = _charge_status_summary
     env.globals["all_chapters"] = _distinct_chapters(snapshot.inmates)
     env.globals["bond_total"] = _bond_total
