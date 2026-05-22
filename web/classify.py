@@ -382,6 +382,50 @@ def _codes_ohio_url(code: str) -> str:
     return f"https://codes.ohio.gov/ohio-revised-code/section-{norm}"
 
 
+# Title markers that mean a charge code is NOT an Ohio Revised Code section, so
+# it must never deep-link to codes.ohio.gov: municipal ordinances (Cincinnati /
+# suburb / mayor's courts) and HCSO placeholder hold codes (0000.00 etc.).
+_NON_ORC_TITLE_MARKERS = ("Municipal Code", "no ORC code on file")
+
+
+def _is_non_orc_title(title: str) -> bool:
+    return any(m in title for m in _NON_ORC_TITLE_MARKERS)
+
+
+def _orc_chapters(offenses: dict | None) -> frozenset[str]:
+    """The set of chapter prefixes (e.g. '2925') of every offense entry that
+    carries a real ORC title. Self-maintaining ORC whitelist derived from
+    data/orc_offenses.json: used to classify untitled charge codes."""
+    from scraper import orc as orc_mod
+    chapters: set[str] = set()
+    for code, info in (offenses or {}).items():
+        title = (info.get("title") if isinstance(info, dict) else "") or ""
+        if title and not _is_non_orc_title(title):
+            chap = orc_mod.normalize_code(code).split(".")[0]
+            if chap:
+                chapters.add(chap)
+    return frozenset(chapters)
+
+
+def is_orc_code(code: str, offenses: dict | None = None,
+                orc_chapters_set: frozenset[str] | None = None) -> bool:
+    """True only when ``code`` is a genuine Ohio Revised Code section that should
+    deep-link to codes.ohio.gov. Precedence: a municipal/placeholder title is not
+    ORC; a real ORC title is ORC; an untitled code is ORC only when its chapter
+    is in the known-ORC-chapter whitelist (otherwise we don't guess)."""
+    from scraper import orc as orc_mod
+    title = orc_mod.title_for(code, offenses) or ""
+    if _is_non_orc_title(title):
+        return False
+    if title:
+        return True
+    chap = orc_mod.normalize_code(code).split(".")[0]
+    if not chap:
+        return False
+    chapters = orc_chapters_set if orc_chapters_set is not None else _orc_chapters(offenses)
+    return chap in chapters
+
+
 # ============================================================================
 # Offense Classification / Tier Helpers
 # ============================================================================
