@@ -137,6 +137,8 @@ jobs:
           git add data/ docs/
           if ! git diff --cached --quiet; then
             git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
+            git fetch origin main
+            git rebase origin/main
             git push
           else
             echo "no changes"
