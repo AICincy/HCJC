@@ -107,6 +107,15 @@ PHOTOS_DIR = Path("data/photos")
 DEFAULT_OUT = Path("docs")
 
 
+def _statute_url(code: str, offenses: dict) -> str:
+    """codes.ohio.gov link for a charge code, but empty for municipal-code
+    charges (Cincinnati / suburb codes, mayor's courts) since those are not in
+    the Ohio Revised Code. Detected via the "...Municipal Code..." offense title."""
+    if "Municipal Code" in (orc_mod.title_for(code, offenses) or ""):
+        return ""
+    return _codes_ohio_url(code)
+
+
 def _clean_event_note(note: str | None) -> str:
     """Scrub the HCSO epoch-0 sentinel ('1/1/70') out of historical changelog
     notes so the status history never shows a 1970 date."""
@@ -265,7 +274,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     # The satirical Sheriff overlay renders on the blocked notice only when the
     # asset is present, so there is no broken image before it is added.
     env.globals["waf_sheriff_available"] = (STATIC_DIR / "img" / "sheriff-waf.png").exists()
-    env.globals["codes_ohio_url"] = _codes_ohio_url
+    env.globals["codes_ohio_url"] = lambda code: _statute_url(code, offenses)
     env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates)
     env.globals["all_inmates_total"] = snapshot.inmate_count
 
