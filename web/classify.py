@@ -149,19 +149,23 @@ _SEX_LABEL = {
 
 def _parse_book_date(date_str: str | None) -> datetime | None:
     """Parse booking date string (MM/DD/YY or MM/DD/YYYY format) to datetime.
-    
-    Returns None if the string is empty or unparseable. Sentinel dates like
-    '1/1/70' (epoch) are treated as valid to avoid losing data, but are
-    often filtered out downstream.
+
+    Returns None if the string is empty, unparseable, or an epoch sentinel.
+    HCSO emits '1/1/70' (Unix epoch 0) when it has no real date; treating it
+    as None here means every downstream consumer (display, timeline, age,
+    days-in-custody) uniformly shows "unknown" instead of 1970.
     """
     if not date_str:
         return None
     date_str = str(date_str).strip()
     for fmt in ("%m/%d/%y", "%m/%d/%Y"):
         try:
-            return datetime.strptime(date_str, fmt)
+            parsed = datetime.strptime(date_str, fmt)
         except ValueError:
             continue
+        if parsed.year <= 1971:  # epoch sentinel, not a real booking date
+            return None
+        return parsed
     return None
 
 
@@ -398,6 +402,54 @@ def _offense_for_code(code: str | None) -> dict | None:
         return _OFFENSE_CATEGORY.get("other")
     chap = m.group(1)[:4]  # Get up to first 4 digits.
     return _OFFENSE_CATEGORY.get(chap, _OFFENSE_CATEGORY.get("other"))
+
+
+# Hamilton County case-number type tokens. Common Pleas uses a single-letter
+# prefix (B = criminal, A = civil). Municipal/County uses a 3-letter token after
+# the 2-digit year: CR[AB] criminal, TR* traffic, CV* civil. Anything else
+# (domestic relations DR, juvenile, probate, unrecognized) stays "other" rather
+# than risk mislabeling on a presumed-innocent records page. See court.html.
+_CASE_TYPE_RE = re.compile(r"\b(CR[AB]|TR[A-Z]|CV[A-Z]|DR|J[CV])\b")
+_CASE_CP_RE = re.compile(r"^([A-Z])\s*\d")
+_CASE_CP_YEAR_RE = re.compile(r"^[A-Z]\s*(\d{2})\d{4,}$")
+_CASE_MUNI_YEAR_RE = re.compile(r"(?:^|[/ ])(\d{2})/(?:CR[AB]|TR[A-Z]|CV[A-Z]|DR|J[CV])\b")
+_CASE_ANY_YEAR_RE = re.compile(r"(?:^|[/ ])(\d{2})(?=[/ ])")
+
+
+def case_category(case_number: str | None) -> str:
+    """Bucket a Hamilton County case number into criminal/traffic/civil/other."""
+    s = (case_number or "").strip().upper()
+    if not s:
+        return "other"
+    m = _CASE_TYPE_RE.search(s)
+    if m:
+        token = m.group(1)
+        if token.startswith("CR"):
+            return "criminal"
+        if token.startswith("TR"):
+            return "traffic"
+        if token.startswith("CV"):
+            return "civil"
+        return "other"
+    cp = _CASE_CP_RE.match(s)
+    if cp:
+        if cp.group(1) == "B":
+            return "criminal"
+        if cp.group(1) == "A":
+            return "civil"
+    return "other"
+
+
+def case_year(case_number: str | None) -> int | None:
+    """Extract the 4-digit filing year from a Hamilton County case number."""
+    s = (case_number or "").strip().upper()
+    if not s:
+        return None
+    for rx in (_CASE_CP_YEAR_RE, _CASE_MUNI_YEAR_RE, _CASE_ANY_YEAR_RE):
+        m = rx.search(s)
+        if m:
+            return 2000 + int(m.group(1))
+    return None
 
 
 def _charge_tier(charge, offenses: dict | None = None) -> dict | None:

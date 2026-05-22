@@ -254,13 +254,20 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
         return max(0.0, min(100.0, v))
     raw: list[dict] = []
     raw.append({"x": _pct(booked), "label": "Booked", "date": inmate.booking_date or "", "kind": "booked", "sub": ""})
+    # Collapse charges that share a court date into one marker so their labels
+    # don't stack on the same x and overlap (REQ-007).
+    by_date: dict[datetime, list[str]] = {}
     for d, desc, _code in courts:
+        by_date.setdefault(d, []).append(desc or "")
+    for d in sorted(by_date):
+        descs = by_date[d]
+        sub = descs[0].lower()[:40] if len(descs) == 1 else f"{len(descs)} hearings"
         raw.append({
             "x": _pct(d),
             "label": "Court",
             "date": _strftime_nopad(d, "%-m/%-d/%y") if hasattr(d, "strftime") else "",
             "kind": "court",
-            "sub": (desc or "").lower()[:48],
+            "sub": sub,
         })
     raw.append({"x": _pct(now), "label": "Today", "date": _strftime_nopad(now, "%b %-d, %Y"), "kind": "now", "sub": ""})
     if release:
@@ -446,6 +453,38 @@ def _case_numbers(inmate: Inmate) -> list[str]:
                 seen.add(v)
                 out.append(v)
     return out
+
+_CASE_CAT_ORDER = ("criminal", "traffic", "civil", "other")
+_CASE_CAT_LABEL = {"criminal": "Criminal", "traffic": "Traffic", "civil": "Civil", "other": "Other"}
+
+
+def _cases_grouped(inmate: Inmate) -> list[dict]:
+    """Group this inmate's case numbers by category then by year (newest first).
+
+    Returns [{key, label, cases_n, years: [{year, cases: [num, ...]}]}] in a
+    fixed category order. Years sort descending; unknown year sorts last. Each
+    case number is left raw so the template deep-links it via cck_case_summary
+    (the working courtclerk.org link).
+    """
+    from web.classify import case_category, case_year
+    buckets: dict[str, dict] = defaultdict(lambda: defaultdict(list))
+    for cn in _case_numbers(inmate):
+        buckets[case_category(cn)][case_year(cn)].append(cn)
+    out: list[dict] = []
+    for cat in _CASE_CAT_ORDER:
+        years = buckets.get(cat)
+        if not years:
+            continue
+        ordered = sorted(years.keys(), key=lambda y: (y is None, -(y or 0)))
+        year_rows = [{"year": (y if y is not None else "—"), "cases": years[y]} for y in ordered]
+        out.append({
+            "key": cat,
+            "label": _CASE_CAT_LABEL[cat],
+            "cases_n": sum(len(years[y]) for y in years),
+            "years": year_rows,
+        })
+    return out
+
 
 def _charge_status_summary(inmate: Inmate) -> str:
     """e.g. '3 pending · 1 disposed' across the charge rows."""

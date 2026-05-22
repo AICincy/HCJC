@@ -393,6 +393,14 @@ def diff(
     current: dict[str, Inmate],
 ) -> list[ChangeEvent]:
     """Compare previous vs current roster, emit booked/released/updated events."""
+    # HCSO emits "1/1/70" (epoch 0) when it has no booking date; don't bake that
+    # sentinel into the human-readable event note.
+    def _booked_note(booking_date: str | None) -> str:
+        bd = (booking_date or "").strip()
+        if bd in ("", "1/1/70", "01/01/70", "1/1/1970", "01/01/1970"):
+            return "booked (date not reported)"
+        return f"booked {bd}"
+
     now = utcnow_iso()
     events: list[ChangeEvent] = []
 
@@ -413,7 +421,7 @@ def diff(
                     inmate_number=inmate_number,
                     name=inm.full_name,
                     timestamp_utc=now,
-                    note=f"booked {inm.booking_date}",
+                    note=_booked_note(inm.booking_date),
                 )
             )
             continue

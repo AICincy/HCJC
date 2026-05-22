@@ -47,7 +47,7 @@
 <section class="inmate-hero">
   {% if inmate.photo_filename %}
   <figure class="record-photo">
-    <a href="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo-cap="{{ inmate.full_name }} · booked {{ inmate.booking_date }}" aria-label="Enlarge booking photo">
+    <a href="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo-cap="{{ inmate.full_name }} · booked {{ display_date(inmate.booking_date) or 'date not reported' }}" aria-label="Enlarge booking photo">
       <img src="{{ base_url }}/photos/{{ inmate.photo_filename }}" alt="HCSO booking photo of {{ inmate.full_name }}" width="240" height="300" decoding="async">
     </a>
     <figcaption>Booking photo &middot; ORC &sect; 149.43</figcaption>
@@ -69,17 +69,17 @@
     <h1 class="record-name">{{ inmate.full_name }}</h1>
     <p class="alert"><strong>Arrest is not conviction.</strong> This individual is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges below are accusations only and are not evidence of guilt.</p>
     <dl class="bio">
-      <dt>Inmate&nbsp;#</dt><dd><code>{{ inmate.inmate_number }}</code></dd>
-      <dt>Booking&nbsp;#</dt><dd><code>{{ inmate.booking_number or '—' }}</code>{% if seq %} <span class="muted">{{ seq }}</span>{% endif %}</dd>
-      <dt>Booked</dt><dd>{{ display_date(inmate.booking_date) or '—' }}{% if days is not none %} <span class="muted">{{ days }} day{{ '' if days == 1 else 's' }} ago</span>{% endif %}</dd>
-      <dt>Projected&nbsp;release</dt><dd>{{ inmate.projected_release_date or '—' }}</dd>
-      <dt>Next&nbsp;court&nbsp;date</dt><dd>{{ nextc or '—' }}</dd>
-      <dt>Charges</dt><dd>{{ inmate.charges | length }}{% if status %} <span class="muted">{{ status }}</span>{% endif %}</dd>
-      <dt>Total&nbsp;bond</dt><dd>{% if inmate.charges %}{{ bonds.total }}{% if bonds.felony != '$0' and bonds.misdemeanor != '$0' %} <span class="muted">felony {{ bonds.felony }} &middot; misd. {{ bonds.misdemeanor }}</span>{% endif %}{% else %}—{% endif %}</dd>
-      <dt>Case&nbsp;#s</dt><dd>{% if cases %}{% for cn in cases %}<a href="{{ cck_case_summary(cn) }}" target="_blank" rel="noopener">{{ cn }}</a>{{ ', ' if not loop.last }}{% endfor %}{% else %}—{% endif %}</dd>
-      <dt>Date&nbsp;of&nbsp;birth</dt><dd>{{ inmate.date_of_birth or '—' }}{% if age %} <span class="muted">age ~{{ age }}</span>{% endif %}</dd>
-      <dt>Sex &middot; race</dt><dd>{{ expand_sex(inmate.sex) }} &middot; {{ expand_race(inmate.race) }}</dd>
-      <dt>Holder&nbsp;/&nbsp;detainer</dt><dd>{{ inmate.holder_status or '—' }}</dd>
+      <div class="bio-field"><dt>Inmate&nbsp;#</dt><dd><code>{{ inmate.inmate_number }}</code></dd></div>
+      <div class="bio-field"><dt>Booking&nbsp;#</dt><dd><code>{{ inmate.booking_number or '—' }}</code>{% if seq %} <span class="muted">{{ seq }}</span>{% endif %}</dd></div>
+      <div class="bio-field"><dt>Booked</dt><dd>{{ display_date(inmate.booking_date) or '—' }}{% if days is not none %} <span class="muted">{{ days }} day{{ '' if days == 1 else 's' }} ago</span>{% endif %}</dd></div>
+      <div class="bio-field"><dt>Projected&nbsp;release</dt><dd>{{ inmate.projected_release_date or '—' }}</dd></div>
+      <div class="bio-field"><dt>Next&nbsp;court&nbsp;date</dt><dd>{{ nextc or '—' }}</dd></div>
+      <div class="bio-field"><dt>Charges</dt><dd>{{ inmate.charges | length }}{% if status %} <span class="muted">{{ status }}</span>{% endif %}</dd></div>
+      <div class="bio-field"><dt>Total&nbsp;bond</dt><dd>{% if inmate.charges %}{{ bonds.total }}{% if bonds.felony != '$0' and bonds.misdemeanor != '$0' %} <span class="muted">felony {{ bonds.felony }} &middot; misd. {{ bonds.misdemeanor }}</span>{% endif %}{% else %}—{% endif %}</dd></div>
+      <div class="bio-field"><dt>Case&nbsp;#s</dt><dd>{% if cases %}{{ cases | length }}{% else %}—{% endif %}</dd></div>
+      <div class="bio-field"><dt>Date&nbsp;of&nbsp;birth</dt><dd>{{ inmate.date_of_birth or '—' }}{% if age %} <span class="muted">age ~{{ age }}</span>{% endif %}</dd></div>
+      <div class="bio-field"><dt>Sex &middot; race</dt><dd>{{ expand_sex(inmate.sex) }} &middot; {{ expand_race(inmate.race) }}</dd></div>
+      <div class="bio-field"><dt>Holder&nbsp;/&nbsp;detainer</dt><dd>{{ inmate.holder_status or '—' }}</dd></div>
     </dl>
     {% set bc = charges_by_chapter(inmate) %}
     {% if bc | length > 1 %}
@@ -118,7 +118,7 @@
       <td>{{ c.court_date or '—' }}</td>
       <td>{{ (c.bond_type ~ ' ' ~ c.bond_amount) | trim or '—' }}</td>
       <td>{{ c.disposition or '—' }}</td>
-      <td>{% if case %}<a href="{{ cck_case_summary(case) }}" target="_blank" rel="noopener">{{ case }} ↗</a>{% else %}—{% endif %}</td>
+      <td>{% if case %}<a class="case-link case-{{ case_category(case) }}" href="{{ cck_case_summary(case) }}" target="_blank" rel="noopener">{{ case }} ↗</a>{% else %}—{% endif %}</td>
     </tr>
   {% endfor %}
   </tbody>
@@ -129,6 +129,37 @@
 <p class="muted">
   <a href="{{ cck_name_search(inmate.last_name, inmate.first_name, inmate.date_of_birth) }}" target="_blank" rel="noopener">Run a full name + DOB search on courtclerk.org ↗</a>
 </p>
+
+{% set case_groups = cases_grouped(inmate) %}
+{% if case_groups %}
+<div class="section-h">
+  <h2>Cases</h2>
+  <span class="pill">{{ cases | length }}</span>
+</div>
+<p class="muted note-paragraph">Cases on this booking, grouped by type and year. Each links to the docket of record at courtclerk.org.</p>
+{% macro case_year_row(g, yr) %}
+<div class="case-year">
+  <span class="case-year-lab">{{ yr.year }}</span>
+  <ul class="case-list case-{{ g.key }}">
+    {% for cn in yr.cases %}<li><a class="case-link case-{{ g.key }}" href="{{ cck_case_summary(cn) }}" target="_blank" rel="noopener">{{ cn }} ↗</a></li>{% endfor %}
+  </ul>
+</div>
+{% endmacro %}
+<div class="case-groups">
+  {% for g in case_groups %}
+  <section class="case-group">
+    <h3 class="case-group-h"><span class="case-cat case-cat-{{ g.key }}">{{ g.label }}</span> <span class="muted">{{ g.cases_n }}</span></h3>
+    {{ case_year_row(g, g.years[0]) }}
+    {% if g.years | length > 1 %}
+    <details class="case-earlier">
+      <summary>{{ g.years | length - 1 }} earlier year{{ '' if (g.years | length - 1) == 1 else 's' }}</summary>
+      {% for yr in g.years[1:] %}{{ case_year_row(g, yr) }}{% endfor %}
+    </details>
+    {% endif %}
+  </section>
+  {% endfor %}
+</div>
+{% endif %}
 
 {% if crowdsourced_for_inmate %}
 <aside class="crowdsource-block" aria-label="Crowdsourced case data">
@@ -286,16 +317,17 @@
         {% set t = orc_title(c.orc_code) %}
         {% set freq = orc_freq(c.orc_code) %}
         {% set codeurl = codes_ohio_url(c.orc_code) %}
+        {% set plain = orc_explainer(c.orc_code) %}
         <div class="statute">
           <div class="statute-head">
             <code class="orc-code">{{ c.orc_code }}</code>
             {% if t %}<span class="statute-title">{{ t }}</span>{% endif %}
           </div>
+          {% if plain %}<p class="statute-plain">{{ plain }}</p>{% endif %}
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <strong>{{ freq }}</strong>
-            <span class="muted">of {{ "{:,}".format(all_inmates_total) }}</span>
-            {% if codeurl %}&middot; <a href="{{ codeurl }}" target="_blank" rel="noopener">read statute ↗</a>{% endif %}
+            <a href="{{ base_url }}/statute/#orc-{{ orc_base(c.orc_code) | replace('.', '-') }}"><strong>{{ freq }}</strong> <span class="muted">of {{ "{:,}".format(all_inmates_total) }}</span> &rarr;</a>
+            {% if codeurl %}<a class="statute-srclink" href="{{ codeurl }}" target="_blank" rel="noopener">read statute ↗</a>{% endif %}
           </div>
         </div>
       {% endif %}
@@ -306,7 +338,7 @@
 
 {% set similar = similar_by_statute(inmate) %}
 {% if similar %}
-<details class="section-details">
+<details class="section-details" open>
   <summary><span class="section-summary-h">Similar inmates &middot; held under the same statute</span> <span class="pill">{{ similar | length }}</span> <span class="muted">&middot; peer match by primary ORC section, then chapter</span></summary>
   <div class="rb-grid">
     {% for inm in similar %}
@@ -375,7 +407,7 @@
     <li class="status-row">
       <span class="tag tag-{{ e.event }}">{{ e.event }}</span>
       <time datetime="{{ e.timestamp_utc }}">{{ e.timestamp_utc }}</time>
-      {% if e.note %}<span class="muted">&middot; {{ e.note }}</span>{% endif %}
+      {% if e.note %}<span class="muted">&middot; {{ e.note | clean_note }}</span>{% endif %}
     </li>
     {% endfor %}
   {% else %}
