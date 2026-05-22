@@ -30,12 +30,26 @@
   --danger:       #B33A2A;
   --warn:         #B33A2A;
   --warn-bg:      #FDF5EE;
-  --ok:           #4f7c3a;
+  --ok:           #4d7838;
 
   --case-criminal: #B33A2A;
   --case-traffic:  #8A5A00;
   --case-civil:    #2F5E8C;
   --case-other:    #777777;
+
+  /* Tier color layer (design-system handoff; additive: weight, case, and
+     left-to-right position remain the primary severity signal). Felony fills
+     ramp dark-red to amber; misdemeanor is a blue outline (alias of
+     --case-civil). F4 was lightened from the handoff #C8602A to #D2722E so
+     near-black text clears WCAG AA at small sizes. */
+  --tier-felony-dark:   #6B1F14;  /* F1, most severe, light text */
+  --tier-felony-mid:    #8C2E21;  /* F2, light text */
+  --tier-felony-base:   #B33A2A;  /* F3 (= accent), light text */
+  --tier-felony-warm:   #D2722E;  /* F4, dark text (AA-adjusted) */
+  --tier-felony-amber:  #D98840;  /* F5, least severe felony, dark text */
+  --tier-felony-ink:    #FDF5EE;  /* warm-white text on the dark felony cells */
+  --tier-felony-ink-lo: #1A1A1A;  /* near-black text on the warm F4/F5 cells */
+  --tier-misdemeanor:   #2F5E8C;  /* misdemeanor outline + text */
 
   --radius:       0;
   --radius-sm:    0;
@@ -627,6 +641,25 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 }
 .tier-lg { height: 28px; padding: 0 14px; font-size: 12px; border-radius: var(--radius-lg); }
 
+/* ----- Tier color layer -----
+   Scoped to .tier-corner (roster card, per-grade ramp) and .tier-lg (inmate
+   hero summary). The bare .tier in the charges table keeps the typography-only
+   treatment above. Color is additive: weight, case, and position still carry
+   severity. */
+.tier-corner.tier-F1 { background: var(--tier-felony-dark);  border: 1px solid #551810;                 color: var(--tier-felony-ink); }
+.tier-corner.tier-F2 { background: var(--tier-felony-mid);   border: 1px solid var(--tier-felony-dark); color: var(--tier-felony-ink); }
+.tier-corner.tier-F3 { background: var(--tier-felony-base);  border: 1px solid var(--tier-felony-mid);  color: var(--tier-felony-ink); }
+.tier-corner.tier-F4 { background: var(--tier-felony-warm);  border: 1px solid #A8501C;                 color: var(--tier-felony-ink-lo); }
+.tier-corner.tier-F5 { background: var(--tier-felony-amber); border: 1px solid #B36B28;                 color: var(--tier-felony-ink-lo); }
+.tier-corner.tier-M1, .tier-corner.tier-M2, .tier-corner.tier-M3,
+.tier-corner.tier-M4, .tier-corner.tier-MM {
+  background: var(--surface); color: var(--fg-soft);
+  border: 1px solid var(--fg-muted); font-weight: 400; text-transform: none;
+}
+/* Hero summary chips: felony base red fill, misdemeanor near-black fill. */
+.tier-lg.tier-felony      { background: var(--tier-felony-base); color: var(--tier-felony-ink); border: 0; }
+.tier-lg.tier-misdemeanor { background: var(--fg); color: var(--bg); border: 0; }
+
 /* Tier badge pinned to the top-right corner of each card. */
 .card-inmate > .tier.tier-corner {
   position: absolute;
@@ -703,6 +736,12 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   color: var(--fg);
   border-top-color: var(--accent);
 }
+/* Category color layer: top-border + text hue per ORC chapter, collapsed onto
+   five buckets. "Other" keeps the neutral base (gray) so its text clears AA. */
+.chap-2903, .chap-2907, .chap-2919, .chap-2917 { color: var(--case-criminal); border-top-color: var(--case-criminal); }  /* violence / sex */
+.chap-2923                                      { color: var(--case-traffic);  border-top-color: var(--case-traffic); }   /* weapons */
+.chap-2911, .chap-2913, .chap-2909              { color: var(--case-civil);    border-top-color: var(--case-civil); }     /* property */
+.chap-2925                                      { color: var(--ok);            border-top-color: var(--ok); }             /* drugs */
 
 @media (max-width: 1080px) { .rb-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 540px) { .rb-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1692,10 +1731,10 @@ a.orc-code:hover { border-bottom-style: solid; }
   border-radius: var(--radius-lg);
   text-align: center;
   position: relative;
-  opacity: 0.55;
-  transition: opacity 120ms;
 }
-.ladder-cell.is-current { opacity: 1; box-shadow: inset 0 0 0 2px var(--accent); }
+/* Current-tier ring uses a dark inner + light outer band so it stays visible
+   on every ramp colour (the old accent ring vanished on the accent-red cell). */
+.ladder-cell.is-current { box-shadow: inset 0 0 0 2px var(--fg), inset 0 0 0 4px var(--bg); }
 .ladder-tier { font-weight: 700; font-size: 14px; }
 .ladder-max { font-size: 10px; margin-top: 4px; opacity: 0.85; line-height: 1.2; }
 .ladder-tag {
@@ -1704,19 +1743,33 @@ a.orc-code:hover { border-bottom-style: solid; }
   color: var(--accent);
   white-space: nowrap;
 }
-/* Ladder cells: severity encoded by position (F1 leftmost = most severe)
-   and the .is-current accent ring — not by per-cell hue. */
-.ladder-F1, .ladder-F2, .ladder-F3, .ladder-F4, .ladder-F5,
+/* Severity color layer: felony cells use the F1 to F5 red-to-amber ramp (light
+   text on the dark reds, near-black on the warm F4/F5); misdemeanor cells use a
+   blue outline. Position and the .is-current ring remain primary signals. */
+.ladder-F1 { background: var(--tier-felony-dark);  border: 1px solid #551810; }
+.ladder-F2 { background: var(--tier-felony-mid);   border: 1px solid var(--tier-felony-dark); }
+.ladder-F3 { background: var(--tier-felony-base);  border: 1px solid var(--tier-felony-mid); }
+.ladder-F4 { background: var(--tier-felony-warm);  border: 1px solid #A8501C; }
+.ladder-F5 { background: var(--tier-felony-amber); border: 1px solid #B36B28; }
 .ladder-M1, .ladder-M2, .ladder-M3, .ladder-M4, .ladder-MM {
-  background: var(--bg-soft);
-  color: var(--fg-muted);
-  border: 1px solid var(--border);
+  background: var(--surface); border: 1px solid var(--tier-misdemeanor);
 }
-/* Felony grades get bolder label weight; misdemeanors stay regular. */
+/* Felony cell text: light on F1 to F3, near-black on the warm F4/F5. */
 .ladder-F1 .ladder-tier, .ladder-F2 .ladder-tier, .ladder-F3 .ladder-tier,
-.ladder-F4 .ladder-tier, .ladder-F5 .ladder-tier { font-weight: 700; color: var(--fg); }
+.ladder-F1 .ladder-max,  .ladder-F2 .ladder-max,  .ladder-F3 .ladder-max,
+.ladder-F1 .ladder-tag,  .ladder-F2 .ladder-tag,  .ladder-F3 .ladder-tag { color: var(--tier-felony-ink); }
+.ladder-F4 .ladder-tier, .ladder-F5 .ladder-tier,
+.ladder-F4 .ladder-max,  .ladder-F5 .ladder-max,
+.ladder-F4 .ladder-tag,  .ladder-F5 .ladder-tag { color: var(--tier-felony-ink-lo); }
+.ladder-F1 .ladder-tier, .ladder-F2 .ladder-tier, .ladder-F3 .ladder-tier,
+.ladder-F4 .ladder-tier, .ladder-F5 .ladder-tier { font-weight: 700; }
+/* Misdemeanor cell text: blue label, neutral sub-text. */
 .ladder-M1 .ladder-tier, .ladder-M2 .ladder-tier, .ladder-M3 .ladder-tier,
-.ladder-M4 .ladder-tier, .ladder-MM .ladder-tier { font-weight: 400; color: var(--fg-soft); }
+.ladder-M4 .ladder-tier, .ladder-MM .ladder-tier { font-weight: 400; color: var(--tier-misdemeanor); }
+.ladder-M1 .ladder-max, .ladder-M2 .ladder-max, .ladder-M3 .ladder-max,
+.ladder-M4 .ladder-max, .ladder-MM .ladder-max { color: var(--fg-soft); }
+.ladder-M1 .ladder-tag, .ladder-M2 .ladder-tag, .ladder-M3 .ladder-tag,
+.ladder-M4 .ladder-tag, .ladder-MM .ladder-tag { color: var(--tier-misdemeanor); }
 .tier-meaning {
   font-size: 13px; color: var(--fg-soft);
   margin: 14px 0 0;
@@ -2599,7 +2652,7 @@ a.statbar:hover { border-color: var(--accent); }
 .statbar-fill {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-hi) 100%);
+  background: var(--accent);
   min-width: 2px;
   border-radius: var(--radius-lg);
   transition: width 400ms ease;
