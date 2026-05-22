@@ -27,3 +27,4 @@ Later standalone records:
 | `18_offplatform_capture.md` | Off-platform capture of an HCSO block |
 | `19_counsel_cover_memo.md` | Cover memo for counsel on the evidence dossier |
 | `20_audit_runbook_reconcile.md` | External audit runbook reconciled against the repo |
+| `21_nodata_monitor.md` | Datadog no-data monitor spec: detect a missed sweep (absent sweep_start) |
