@@ -4,7 +4,7 @@
 {% set d = card_data(inm) %}
 <article class="card-inmate" aria-labelledby="card-{{ inm.inmate_number }}-name" data-tier="{{ d.tier }}" data-chap="{{ d.chap }}" data-name="{{ d.name }}" data-search="{{ d.search }}">
   {% if tier %}
-  <button type="button" class="tier tier-{{ tier.kind }} tier-corner" aria-label="{{ tier.label }}, charges detail" aria-describedby="tier-tip" data-tip="{{ card_tip(inm) }}">{{ tier.short }}</button>
+  <button type="button" class="tier tier-{{ tier.kind }} tier-{{ tier.label }} tier-corner" aria-label="{{ tier.label }}, charges detail" aria-describedby="tier-tip" data-tip="{{ card_tip(inm) }}">{{ tier.label }}</button>
   {% endif %}
   {% if inm.photo_filename %}
   <a class="thumb" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/" data-photo="{{ base_url }}/photos/{{ inm.photo_filename }}" data-photo-cap="{{ inm.full_name }} · booked {{ inm.booking_date }}">
