@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-23T04:46:59Z",
+  "generated_utc": "2026-05-23T05:56:03Z",
   "min_confidence": 0.35,
   "window_minutes": 60,
   "count": 2756,
@@ -22347,6 +22347,17 @@
       }
     },
     {
+      "inmate_number": "1711426",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 0,
+      "confidence": 0.395,
+      "signals": {
+        "dt_delta_minutes": 50.5,
+        "textual_overlap": 0.0,
+        "booked_date": "5/22/26"
+      }
+    },
+    {
       "inmate_number": "1851054",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 1847,
@@ -22436,17 +22447,6 @@
     },
     {
       "inmate_number": "2582491",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.395,
-      "signals": {
-        "dt_delta_minutes": 50.5,
-        "textual_overlap": 0.0,
-        "booked_date": "5/22/26"
-      }
-    },
-    {
-      "inmate_number": "2593253",
       "cfs_source": "cfs_recent",
       "cfs_row_index": 0,
       "confidence": 0.395,
