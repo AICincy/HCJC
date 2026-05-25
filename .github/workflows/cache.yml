@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v4
 
     - name: Cache Primes
       id: cache-primes
@@ -16,9 +16,12 @@ jobs:
         path: prime-numbers
         key: ${{ runner.os }}-primes
 
+    - name: Make scripts executable
+      run: chmod +x ./generate-primes.sh ./primes.sh
+
     - name: Generate Prime Numbers
       if: steps.cache-primes.outputs.cache-hit != 'true'
-      run: /generate-primes.sh -d prime-numbers
+      run: ./generate-primes.sh -d prime-numbers
 
     - name: Use Prime Numbers
-      run: /primes.sh -d prime-numbers
+      run: ./primes.sh -d prime-numbers
