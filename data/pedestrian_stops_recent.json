@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-05-24T20:13:16Z",
+  "generated_utc": "2026-05-25T08:43:51Z",
   "dataset_id": "swrz-ak2i",
-  "row_count": 46,
+  "row_count": 45,
   "rows": [
     {"action_taken_cid":"WARNING","age_range_cid":"46+","data_source":"AXON RMS","field_subject_cid":"PEDESTRIAN","instance_id":"a365a671-b2ed-4132-ab58-c23d13601b89","interview_date":"2026-12-10T17:15:00.000","is_juvenile":false,"location_type":"STREET_ADDRESS","location_x":"14XX Race St Cincinnati, OH","officer_assignment":"PV","race":"WHITE","sex":"MALE"},
     {"action_taken_cid":"NONE","age_range_cid":"0-17","data_source":"AXON RMS","district":"CP4","event_number":"CPD260429000060","field_subject_cid":"PEDESTRIAN","instance_id":"c8c168fc-cbd3-4e6f-a7cc-d9fbb9770d03","interview_date":"2026-04-29T06:38:00.000","is_juvenile":true,"location_type":"STREET_ADDRESS","location_x":"53XX Winneste Ave Cincinnati, OH","priority":"124","race":"BLACK_OR_AFRICAN_AMERICAN","sex":"MALE"},
@@ -47,7 +47,6 @@
     {"action_taken_cid":"NONE","age_range_cid":"26-35","data_source":"AXON RMS","district":"CP3","event_number":"CPD260425000835","field_subject_cid":"PEDESTRIAN","instance_id":"d2af48ec-a683-4e06-9d7b-85e8da9dc610","interview_date":"2026-04-25T17:03:00.000","is_juvenile":false,"location_type":"STREET_ADDRESS","location_x":"30XX Queen City Ave Cincinnati, OH","officer_assignment":"D_3_S","priority":"123","race":"WHITE","sex":"MALE"},
     {"action_taken_cid":"NONE","age_range_cid":"36-45","data_source":"AXON RMS","district":"CBS","event_number":"CPD260425000597","field_subject_cid":"PEDESTRIAN","instance_id":"225237bc-8ec0-4a57-83fd-535646506f2c","interview_date":"2026-04-25T14:45:00.000","is_juvenile":false,"location_type":"CROSS_STREET","location_x":"Court St and Walnut St","officer_assignment":"CB_B","priority":"122","race":"WHITE","sex":"MALE"},
     {"action_taken_cid":"WARNING","age_range_cid":"36-45","data_source":"AXON RMS","district":"CBS","event_number":"CPD260425000450","field_subject_cid":"PEDESTRIAN","instance_id":"5f8f42a1-68a6-47f3-bdb1-1dd46faa5a55","interview_date":"2026-04-25T12:21:00.000","is_juvenile":false,"location_type":"CROSS_STREET","location_x":"4th St and Main St","officer_assignment":"CB_B","priority":"122","race":"WHITE","sex":"MALE"},
-    {"action_taken_cid":"WARNING","age_range_cid":"36-45","data_source":"AXON RMS","district":"CBS","event_number":"CPD260425000440","field_subject_cid":"PEDESTRIAN","instance_id":"f32d3ac2-7baa-4d79-92d2-a35ea0699600","interview_date":"2026-04-25T12:14:00.000","is_juvenile":false,"location_type":"CROSS_STREET","location_x":"Court St and Walnut St","officer_assignment":"CB_B","priority":"122","race":"BLACK_OR_AFRICAN_AMERICAN","sex":"MALE"},
-    {"action_taken_cid":"NONE","age_range_cid":"46+","data_source":"AXON RMS","district":"CP4","event_number":"CPD260424001820","field_subject_cid":"PEDESTRIAN","instance_id":"c701e5c4-3949-44db-97e0-85babd64f2fe","interview_date":"2026-04-25T03:01:00.000","is_juvenile":false,"location_type":"STREET_ADDRESS","location_x":"6XX Rockdale Ave Cincinnati, OH","officer_assignment":"D_4_T","priority":"124","race":"WHITE","sex":"MALE"}
+    {"action_taken_cid":"WARNING","age_range_cid":"36-45","data_source":"AXON RMS","district":"CBS","event_number":"CPD260425000440","field_subject_cid":"PEDESTRIAN","instance_id":"f32d3ac2-7baa-4d79-92d2-a35ea0699600","interview_date":"2026-04-25T12:14:00.000","is_juvenile":false,"location_type":"CROSS_STREET","location_x":"Court St and Walnut St","officer_assignment":"CB_B","priority":"122","race":"BLACK_OR_AFRICAN_AMERICAN","sex":"MALE"}
   ]
 }
