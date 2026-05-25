@@ -28,7 +28,6 @@ _CODE_RE = re.compile(r"\d+\.\d+(?:\.\d+)?")
 DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
 UNKNOWN = "?"
 
-
 @functools.lru_cache(maxsize=1)
 def load_offenses(path: Path = LOOKUP_PATH) -> dict[str, dict]:
     """Return ``{normalized_code: {title, degree}}``. Cached: the file is read
@@ -41,13 +40,11 @@ def load_offenses(path: Path = LOOKUP_PATH) -> dict[str, dict]:
     raw = json.loads(path.read_text(encoding="utf-8"))
     return raw.get("offenses", {})
 
-
 def normalize_code(code: str) -> str:
     if not code:
         return ""
     m = _CODE_RE.search(code)
     return m.group(0) if m else ""
-
 
 def lookup(code: str, offenses: dict[str, dict] | None = None) -> dict:
     """Return ``{title, degree}`` for an ORC code; empty defaults if unknown."""
@@ -56,14 +53,11 @@ def lookup(code: str, offenses: dict[str, dict] | None = None) -> dict:
     norm = normalize_code(code)
     return offenses.get(norm, {"title": "", "degree": UNKNOWN})
 
-
 def title_for(code: str, offenses: dict[str, dict] | None = None) -> str:
     return lookup(code, offenses).get("title", "")
 
-
 def degree_for(code: str, offenses: dict[str, dict] | None = None) -> str:
     return lookup(code, offenses).get("degree", UNKNOWN)
-
 
 def primary_degree(codes: list[str], offenses: dict[str, dict] | None = None) -> str:
     """Return the most severe degree across a list of ORC codes."""
@@ -81,15 +75,15 @@ def primary_degree(codes: list[str], offenses: dict[str, dict] | None = None) ->
             best = d
     return best
 
-
 def codes_without_titles(codes: list[str], offenses: dict[str, dict] | None = None) -> list[str]:
+    """Return normalized input codes for which there's no title, deduped."""
     if offenses is None:
         offenses = load_offenses()
     seen: set[str] = set()
     missing: list[str] = []
     for c in codes:
         norm = normalize_code(c)
-        if norm and norm not in offenses and norm not in seen:
+        if norm and not title_for(norm, offenses) and norm not in seen:
             missing.append(norm)
             seen.add(norm)
     return missing
