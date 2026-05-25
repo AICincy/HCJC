@@ -33,26 +33,30 @@ from web.shape import (
 )
 
 
+def _extract_row_dt(row: dict, field_candidates: tuple[str, ...]) -> datetime | None:
+    """Try each candidate field in order, returning the first parseable datetime."""
+    from web.build import _parse_dispatch_dt
+    for key in field_candidates:
+        v = row.get(key)
+        if v:
+            dt = _parse_dispatch_dt(str(v))
+            if dt:
+                return dt
+    return None
+
+
 def _filter_last_days(rows: list[dict], field_candidates: tuple[str, ...], days: int = 30) -> list[dict]:
     """Return rows whose date in one of ``field_candidates`` is within the
     last ``days`` days. Rows with unparseable dates are kept (defensive: the
     Socrata feeds occasionally ship a row with a NULL date and we'd rather
     surface it than silently drop it). Sorted newest-first.
     """
-    from web.build import _parse_dispatch_dt
     cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).replace(tzinfo=None)
     parsed: list[tuple[datetime | None, dict]] = []
     for r in rows:
-        dt = None
-        for key in field_candidates:
-            v = r.get(key)
-            if v:
-                dt = _parse_dispatch_dt(str(v))
-                if dt:
-                    break
+        dt = _extract_row_dt(r, field_candidates)
         if dt is None or dt >= cutoff:
             parsed.append((dt, r))
-    # Sort newest first; unparseable dates (None) go to the bottom.
     parsed.sort(key=lambda t: (t[0] is None, t[0] or datetime.min), reverse=True)
     return [r for _, r in parsed]
 
@@ -230,56 +234,91 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     (data_out / "index.html").write_text(page, encoding="utf-8")
 
 
-def _compute_stats(snapshot: Snapshot, by_month) -> dict:
-    """Aggregates for the /stats/ page — all from the current snapshot."""
-    inmates = snapshot.inmates
-    n = len(inmates)
-    months = [(m, len(g)) for m, g in by_month]
-    offenses = _crimes_of_month(inmates)
-    tiers = {"felony": 0, "misdemeanor": 0, "other": 0}
+def _tally_attribute(inmates: list[Inmate], attr: str, expand) -> list[tuple[str, int]]:
+    """Count inmates by a demographic attribute, returning (label, count) descending."""
+    out: dict[str, int] = {}
+    for inm in inmates:
+        label = expand(getattr(inm, attr, ""))
+        out[label] = out.get(label, 0) + 1
+    return sorted(out.items(), key=lambda kv: -kv[1])
+
+
+def _tier_summary(inmates: list[Inmate]) -> dict[str, int]:
+    """Count inmates by primary tier kind (felony/misdemeanor/other)."""
+    tiers: dict[str, int] = {"felony": 0, "misdemeanor": 0, "other": 0}
     for inm in inmates:
         t = _primary_tier(inm)
         tiers[t["kind"] if t else "other"] += 1
-    def _tally(attr, expand):
-        out: dict[str, int] = {}
-        for inm in inmates:
-            out[expand(getattr(inm, attr, ""))] = out.get(expand(getattr(inm, attr, "")), 0) + 1
-        return sorted(out.items(), key=lambda kv: -kv[1])
-    sex = _tally("sex", _expand_sex)
-    race = _tally("race", _expand_race)
-    bond_vals = []
+    return tiers
+
+
+def _inmate_bond_total(inmate: Inmate) -> float | None:
+    """Sum all parseable bond amounts for an inmate; None if no amounts found."""
+    total = 0.0
+    any_amt = False
+    for c in inmate.charges:
+        amt = _parse_bond_amount(c.bond_amount)
+        if amt is not None:
+            any_amt = True
+            total += amt
+    return total if any_amt else None
+
+
+def _bond_stats(inmates: list[Inmate]) -> dict:
+    """Aggregate bond statistics across all inmates."""
+    bond_vals: list[float] = []
     zero_bond = 0
     for inm in inmates:
-        total = 0
-        any_amt = False
-        for c in inm.charges:
-            amt = _parse_bond_amount(c.bond_amount)
-            if amt is not None:
-                any_amt = True
-                total += amt
-        if any_amt:
+        total = _inmate_bond_total(inm)
+        if total is not None:
             bond_vals.append(total)
             if total == 0:
                 zero_bond += 1
     bond_vals.sort()
-    median_bond = bond_vals[len(bond_vals)//2] if bond_vals else 0
-    total_bond = sum(bond_vals)
+    return {
+        "bond_total": sum(bond_vals),
+        "bond_median": bond_vals[len(bond_vals) // 2] if bond_vals else 0,
+        "bond_zero": zero_bond,
+        "bond_known": len(bond_vals),
+    }
+
+
+def _charge_stats(inmates: list[Inmate]) -> dict:
+    """Aggregate charge-count statistics across all inmates."""
+    n = len(inmates)
     ch_counts = [len(inm.charges) for inm in inmates]
     avg_ch = (sum(ch_counts) / n) if n else 0
-    max_ch = max(ch_counts) if ch_counts else 0
-    one_charge = sum(1 for c in ch_counts if c == 1)
-    with_photo = sum(1 for inm in inmates if inm.photo_filename)
+    return {
+        "avg_charges": round(avg_ch, 1),
+        "max_charges": max(ch_counts) if ch_counts else 0,
+        "one_charge": sum(1 for c in ch_counts if c == 1),
+    }
+
+
+def _custody_stats(inmates: list[Inmate]) -> dict:
+    """Aggregate days-in-custody statistics across all inmates."""
     days = [d for inm in inmates if (d := _days_in_custody(inm)) is not None]
     avg_days = (sum(days) / len(days)) if days else 0
-    max_days = max(days) if days else 0
+    return {"avg_days": round(avg_days), "max_days": max(days) if days else 0}
+
+
+def _compute_stats(snapshot: Snapshot, by_month) -> dict:
+    """Aggregates for the /stats/ page."""
+    inmates = snapshot.inmates
+    n = len(inmates)
+    with_photo = sum(1 for inm in inmates if inm.photo_filename)
     return {
-        "n": n, "months": months, "offenses": offenses, "tiers": tiers,
-        "sex": sex, "race": race,
-        "bond_total": total_bond, "bond_median": median_bond, "bond_zero": zero_bond,
-        "bond_known": len(bond_vals),
-        "avg_charges": round(avg_ch, 1), "max_charges": max_ch, "one_charge": one_charge,
-        "with_photo": with_photo, "no_photo": n - with_photo,
-        "avg_days": round(avg_days), "max_days": max_days,
+        "n": n,
+        "months": [(m, len(g)) for m, g in by_month],
+        "offenses": _crimes_of_month(inmates),
+        "tiers": _tier_summary(inmates),
+        "sex": _tally_attribute(inmates, "sex", _expand_sex),
+        "race": _tally_attribute(inmates, "race", _expand_race),
+        **_bond_stats(inmates),
+        **_charge_stats(inmates),
+        "with_photo": with_photo,
+        "no_photo": n - with_photo,
+        **_custody_stats(inmates),
         "tier_breakdown": _tier_breakdown(snapshot),
         "top_offenses": _top_offenses_with_orc(snapshot, top_n=12),
         "court_calendar": _upcoming_courts(snapshot, days_ahead=14),
