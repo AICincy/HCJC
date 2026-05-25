@@ -21,7 +21,7 @@ from pathlib import Path
 
 log = logging.getLogger(__name__)
 
-LOOKUP_PATH = Path("data/orc_offenses.json")
+LOOKUP_PATH = (Path(__file__).resolve().parent.parent / "data" / "orc_offenses.json")
 _CODE_RE = re.compile(r"\d+\.\d+(?:\.\d+)?")
 
 # Severity order: lower index = more serious.
