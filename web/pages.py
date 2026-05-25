@@ -40,7 +40,7 @@ def _filter_last_days(rows: list[dict], field_candidates: tuple[str, ...], days:
     surface it than silently drop it). Sorted newest-first.
     """
     from web.build import _parse_dispatch_dt
-    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).replace(tzinfo=None)
     parsed: list[tuple[datetime | None, dict]] = []
     for r in rows:
         dt = None

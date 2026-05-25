@@ -922,8 +922,8 @@ def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None) -> None:
     # Defense-in-depth: even though the model validator enforces digits-only,
     # assert the filename is safe to prevent path traversal if the validator
     # is ever relaxed.
-    assert ".." not in photo_path.name and "/" not in photo_path.name, \
-        f"unsafe photo filename: {photo_path.name!r}"
+    if ".." in photo_path.name or "/" in photo_path.name:
+        raise ValueError(f"unsafe photo filename: {photo_path.name!r}")
     # Save fresh bytes if we got them AND they decoded; otherwise fall through
     # to the disk-cached photo from a prior successful sweep. Previously the
     # second branch was an `elif`, which meant a corrupt-bytes failure on one

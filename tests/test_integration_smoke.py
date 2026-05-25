@@ -39,6 +39,6 @@ def test_build_produces_index(tmp_path, monkeypatch):
     try:
         build(out)
         assert (out / "index.html").exists()
-    except (FileNotFoundError, Exception):
+    except FileNotFoundError:
         # Template files not available in test env -- still validates imports work
         pass
