@@ -39,8 +39,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      - run: pip install -r requirements.txt
-
       - name: Refresh ORC case-law cache
         run: |
           python3 scripts/refresh_caselaw.py
