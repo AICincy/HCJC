@@ -8,6 +8,7 @@ adding a helper here requires registering it there with the same name.
 """
 from __future__ import annotations
 
+import functools
 import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
@@ -27,6 +28,11 @@ from web.classify import (
     _primary_degree,
     _primary_tier,
 )
+
+
+@functools.lru_cache(maxsize=1)
+def _cached_offenses() -> dict:
+    return orc_mod.load_offenses()
 
 
 def _strftime_nopad(dt, fmt: str) -> str:
@@ -128,7 +134,7 @@ def _bond_context(target: Inmate, all_inmates: list[Inmate], offenses: dict | No
     under the target inmate's most-severe ORC section. Returns None when there
     aren't enough peers to draw a meaningful distribution (<5)."""
     if offenses is None:
-        offenses = orc_mod.load_offenses()
+        offenses = _cached_offenses()
     primary_code, my_bond = _bond_primary_code_and_bond(target, offenses)
     if not primary_code:
         return None
@@ -181,7 +187,7 @@ def _upcoming_courts(snapshot: Snapshot, days_ahead: int = 14) -> list[dict]:
 def _tier_breakdown(snapshot: Snapshot, offenses: dict | None = None) -> dict[str, int]:
     """Per-tier (F1..MM, UNK) counts: each inmate's most-severe degree."""
     if offenses is None:
-        offenses = orc_mod.load_offenses()
+        offenses = _cached_offenses()
     counts: dict[str, int] = {t: 0 for t in ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"]}
     counts["UNK"] = 0
     for inm in snapshot.inmates:
@@ -195,7 +201,7 @@ def _tier_breakdown(snapshot: Snapshot, offenses: dict | None = None) -> dict[st
 def _top_offenses_with_orc(snapshot: Snapshot, top_n: int = 12, offenses: dict | None = None) -> list[dict]:
     """Top-N ORC sections on the roster, with title + degree + count + share."""
     if offenses is None:
-        offenses = orc_mod.load_offenses()
+        offenses = _cached_offenses()
     counts: dict[str, int] = {}
     for inm in snapshot.inmates:
         seen: set[str] = set()
@@ -296,7 +302,7 @@ def _similar_by_statute(target: Inmate, all_inmates: list[Inmate], offenses: dic
     """Other inmates in custody charged under the target's most-severe ORC base
     code. Falls back to chapter-level match when fewer than 3 peers exist."""
     if offenses is None:
-        offenses = orc_mod.load_offenses()
+        offenses = _cached_offenses()
     order = ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"]
     primary_code = None
     primary_idx = 99
@@ -358,7 +364,7 @@ def _feed_description(event: str, name: str, inmate_number: str, note: str) -> s
 def _bond_by_tier(inmate: Inmate, offenses: dict | None = None) -> dict:
     """Sum bond amounts split by charge tier. Returns {felony, misdemeanor, other, total}."""
     if offenses is None:
-        offenses = orc_mod.load_offenses()
+        offenses = _cached_offenses()
     out = {"felony": 0, "misdemeanor": 0, "other": 0}
     for c in inmate.charges:
         amt = _parse_bond_amount(c.bond_amount)
@@ -533,7 +539,7 @@ def _card_tip(inmate: Inmate, offenses: dict | None = None, max_rows: int = 12) 
     and nothing for content-visibility:auto to clip).
     """
     if offenses is None:
-        offenses = orc_mod.load_offenses()
+        offenses = _cached_offenses()
     t = _primary_tier(inmate)
     lines = [t["label"] if t else "—"]
     rows = 0
@@ -569,16 +575,10 @@ def _bond_total(inmate: Inmate) -> str:
     return f"${total:,}" if total else ""
 
 def _days_in_custody(inmate: Inmate) -> int | None:
-    bd = None
-    for fmt in ("%m/%d/%y", "%m/%d/%Y"):
-        try:
-            bd = datetime.strptime((inmate.booking_date or "").strip(), fmt)
-            break
-        except ValueError:
-            continue
+    bd = _parse_book_date(inmate.booking_date or "")
     if bd is None:
         return None
-    days = (datetime.now() - bd).days
+    days = (datetime.now(timezone.utc) - bd.replace(tzinfo=timezone.utc)).days
     # Reject sentinel dates from upstream (e.g. epoch-era "1/1/70") that yield
     # tens of thousands of days. Nobody is in pretrial custody for 15+ years;
     # show no days-ago count rather than a nonsense one.

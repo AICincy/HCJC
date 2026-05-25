@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
@@ -83,7 +83,7 @@ class ListRow(BaseModel):
 class ChangeEvent(BaseModel):
     """A change event written to the changelog."""
 
-    event: str  # "booked" | "released" | "updated"
+    event: Literal["booked", "released", "updated"]
     inmate_number: str
     name: str
     timestamp_utc: str
@@ -157,9 +157,9 @@ class HistoryRecord(BaseModel):
     """
 
     date: str       # YYYY-MM-DD, UTC
-    count: int      # roster size at write time
-    booked_24h: int = 0
-    released_24h: int = 0
+    count: int = Field(ge=0)  # roster size at write time
+    booked_24h: int = Field(default=0, ge=0)
+    released_24h: int = Field(default=0, ge=0)
 
     @field_validator("date")
     @classmethod

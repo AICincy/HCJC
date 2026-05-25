@@ -126,20 +126,15 @@ class HcsoClient:
         assert self._client is not None, "use as context manager"
         self._sleep_for_crawl_delay()
         response = self._client.get(path, params=params)
-        # One inspection pass = at most one retry (429 or 5xx), then
-        # raise_for_status below. The single 5xx backoff is 0.5s (attempt=0
-        # only). Keep range(1): a higher range would issue additional
-        # retries beyond the one this method documents.
-        for attempt in range(1):
-            if response.status_code == 429:
-                wait = _retry_after_seconds(response.headers.get("retry-after"))
-                wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)
-                log.info("429 on %s; sleeping %.1fs before retry", path, wait)
-                time.sleep(wait)
-            elif response.status_code >= 500:
-                time.sleep(0.5 * (2 ** attempt))  # 0.5s (attempt=0 only)
-            else:
-                break
+        # One retry pass: handle 429 or 5xx, then re-check.
+        if response.status_code == 429:
+            wait = _retry_after_seconds(response.headers.get("retry-after"))
+            wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)
+            log.info("429 on %s; sleeping %.1fs before retry", path, wait)
+            time.sleep(wait)
+            response = self._client.get(path, params=params)
+        elif response.status_code >= 500:
+            time.sleep(0.5)
             response = self._client.get(path, params=params)
         response.raise_for_status()
         return response
