@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import shutil
+from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -81,43 +82,45 @@ def _group_by_district(rows: list[dict]) -> list[tuple[str, list[dict]]]:
     return ordered
 
 
-def _render_index(
-    env: Environment,
-    snapshot: Snapshot,
-    by_month: list[tuple[str, list[Inmate]]],
-    nav_months: list[dict],
-    expanded_months: set,
-    events_recent: list[ChangeEvent],
-    recent_booked: int,
-    recent_released: int,
-    trend: dict,
-    cfs_rows: list[dict],
-    shooting_rows: list[dict],
-    map_points: int,
-    out_dir: Path,
-) -> None:
+@dataclass
+class IndexContext:
+    """Bundle of pre-computed data for the index page template."""
+    snapshot: Snapshot
+    by_month: list[tuple[str, list[Inmate]]]
+    nav_months: list[dict]
+    expanded_months: set
+    events_recent: list[ChangeEvent]
+    recent_booked: int
+    recent_released: int
+    trend: dict
+    cfs_rows: list[dict]
+    shooting_rows: list[dict]
+    map_points: int
+
+
+def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
     cfs_30d = _filter_last_days(
-        cfs_rows, ("create_time_incident", "create_time_dispatch", "dispatch_time_primary_unit"),
+        ctx.cfs_rows, ("create_time_incident", "create_time_dispatch", "dispatch_time_primary_unit"),
         days=30,
     )
     shoot_30d = _filter_last_days(
-        shooting_rows, ("datetimeoccured", "dateoccurred"),
+        ctx.shooting_rows, ("datetimeoccured", "dateoccurred"),
         days=30,
     )
     page = env.get_template("index.html").render(
-        snapshot=snapshot,
-        by_month=by_month,
-        nav_months=nav_months,
-        expanded_months=expanded_months,
-        events_recent=events_recent,
-        recent_booked=recent_booked,
-        recent_released=recent_released,
-        trend=trend,
+        snapshot=ctx.snapshot,
+        by_month=ctx.by_month,
+        nav_months=ctx.nav_months,
+        expanded_months=ctx.expanded_months,
+        events_recent=ctx.events_recent,
+        recent_booked=ctx.recent_booked,
+        recent_released=ctx.recent_released,
+        trend=ctx.trend,
         cfs_rows=cfs_30d,
         shooting_rows=shoot_30d,
         cfs_by_district=_group_by_district(cfs_30d),
         shoot_by_district=_group_by_district(shoot_30d),
-        map_points=map_points,
+        map_points=ctx.map_points,
     )
     (out_dir / "index.html").write_text(page, encoding="utf-8")
 

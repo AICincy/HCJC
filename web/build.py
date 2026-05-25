@@ -307,9 +307,20 @@ def build(out_dir: Path) -> int:
         shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True)
 
-    _render_index(env, snapshot, rd["by_month"], rd["nav_months"], rd["expanded_months"],
-                  rd["events_recent"], rd["recent_booked"], rd["recent_released"], rd["trend"],
-                  cfs_rows, shooting_rows, len(dispatch_points), out_dir)
+    idx_ctx = IndexContext(
+        snapshot=snapshot,
+        by_month=rd["by_month"],
+        nav_months=rd["nav_months"],
+        expanded_months=rd["expanded_months"],
+        events_recent=rd["events_recent"],
+        recent_booked=rd["recent_booked"],
+        recent_released=rd["recent_released"],
+        trend=rd["trend"],
+        cfs_rows=cfs_rows,
+        shooting_rows=shooting_rows,
+        map_points=len(dispatch_points),
+    )
+    _render_index(env, idx_ctx, out_dir)
     _render_inmates(env, snapshot, matches, events, out_dir)
     _render_feeds(env, events, out_dir)
     _render_data_page(env, snapshot, out_dir)
@@ -492,6 +503,7 @@ from web.outputs import (  # noqa: E402
     _write_well_known,
 )
 from web.pages import (  # noqa: E402
+    IndexContext,
     _render_court_page,
     _render_courts_page,
     _render_data_page,
