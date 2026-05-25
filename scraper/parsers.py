@@ -39,6 +39,9 @@ _HIGH_VALUE_CHARGE_LABELS = ("Description", "ORC Code", "Bond Amount", "Court Da
 # mutation would no longer be serialized by the GIL. Lock scope is
 # intentionally narrow (read + possible add); the log.warning call runs
 # outside the critical section so a slow logger never serializes workers.
+# Module-level dedup set: suppresses repeated warnings for the same missing
+# label within a single process lifetime. In the cron-per-process model this
+# is fine; a long-running daemon would need per-run scoping or TTL eviction.
 _WARNED_MISSING_LABELS: set[str] = set()
 _WARNED_MISSING_LABELS_LOCK = _threading.Lock()
 

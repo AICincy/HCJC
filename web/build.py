@@ -13,7 +13,7 @@ import logging
 import os
 import shutil
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -25,18 +25,7 @@ from scraper import orc as orc_mod
 from scraper import shootings as shootings_mod
 from scraper.match import attach_candidates
 from scraper.models import ChangeEvent, HistoryRecord, Inmate, Snapshot
-
-# Static classification data moved to web/classify.py (arch-F1, partial).
-# Re-exported here so tests/test_build.py can `from web.build import _foo`.
-from web.classify import (  # noqa: F401  re-exported for test_build.py access
-    _CHAPTER_LABEL,
-    _CLS_RANK,
-    _DEGREE_RE,
-    _MIN_MONTH_SIZE,
-    _OFFENSE_CATEGORY,
-    _RACE_LABEL,
-    _SEX_LABEL,
-    _TIER_MAX,
+from web.classify import (
     _approx_age,
     _avatar_initials,
     _booking_seq,
@@ -47,12 +36,9 @@ from web.classify import (  # noqa: F401  re-exported for test_build.py access
     _expand_race,
     _expand_sex,
     _load_explainers,
-    _offense_for_code,
     _orc_chapters,
     _orc_frequency,
-    _parse_bond_amount,
     _parse_book_date,
-    _parse_md_yy,
     _pct_ordinal,
     _primary_degree,
     _primary_tier,
@@ -63,8 +49,7 @@ from web.classify import (  # noqa: F401  re-exported for test_build.py access
     case_category,
     is_orc_code,
 )
-from web.shape import (  # noqa: F401  re-exported for test_build.py access
-    _all_top_offenses,
+from web.shape import (
     _bond_by_tier,
     _bond_context,
     _bond_total,
@@ -75,28 +60,19 @@ from web.shape import (  # noqa: F401  re-exported for test_build.py access
     _charge_status_summary,
     _charges_by_chapter,
     _clean_case_number,
-    _court_calendar,
     _crimes_of_month,
     _days_in_custody,
-    _events_for_inmate,
     _events_for_recent,
-    _events_in_window,
     _feed_description,
     _group_by_month,
     _next_court_date,
     _primary_chapter,
     _primary_charge,
-    _primary_charge_obj,
     _recent_booked_inmates,
     _related_inmates,
     _similar_by_statute,
-    _sort_in_group,
-    _statute_held_inmates,
     _strftime_nopad,
-    _tier_breakdown,
     _timeline_markers,
-    _top_offenses_with_orc,
-    _upcoming_courts,
 )
 
 log = logging.getLogger("jcstream.site")
@@ -466,15 +442,6 @@ def _dispatch_points(cfs_rows: list[dict], shooting_rows: list[dict], limit: int
     return pts[:limit]
 
 
-def _write_dispatches(out_dir: Path, points: list[dict]) -> None:
-    payload = {
-        "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "count": len(points),
-        "points": points,
-    }
-    (out_dir / "dispatches.json").write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
-
-
 def _warn_about_unmapped_orcs(inmates: list[Inmate], offenses: dict[str, dict]) -> None:
     codes = [c.orc_code for inm in inmates for c in inm.charges if c.orc_code]
     missing = orc_mod.codes_without_titles(codes, offenses)
@@ -512,88 +479,30 @@ def _parse_dispatch_dt(s: str) -> datetime | None:
     return None
 
 
-def _filter_last_days(rows: list[dict], field_candidates: tuple[str, ...], days: int = 30) -> list[dict]:
-    """Return rows whose date in one of ``field_candidates`` is within the
-    last ``days`` days. Rows with unparseable dates are kept (defensive: the
-    Socrata feeds occasionally ship a row with a NULL date and we'd rather
-    surface it than silently drop it). Sorted newest-first.
-    """
-    cutoff = datetime.now() - timedelta(days=days)
-    parsed: list[tuple[datetime | None, dict]] = []
-    for r in rows:
-        dt = None
-        for key in field_candidates:
-            v = r.get(key)
-            if v:
-                dt = _parse_dispatch_dt(str(v))
-                if dt:
-                    break
-        if dt is None or dt >= cutoff:
-            parsed.append((dt, r))
-    # Sort newest first; unparseable dates (None) go to the bottom.
-    parsed.sort(key=lambda t: (t[0] is None, t[0] or datetime.min), reverse=True)
-    return [r for _, r in parsed]
 
-
-def _group_by_district(rows: list[dict]) -> list[tuple[str, list[dict]]]:
-    """Group rows by CPD district (the 'district' field), preserving each
-    group's input order (newest-first if the caller filtered+sorted).
-    Districts are returned in CPD's natural numeric order (1..5), with the
-    unknown / centralized districts ('C', 'UNK', '—') appended after.
-    """
-    groups: dict[str, list[dict]] = {}
-    for r in rows:
-        key = str(r.get("district") or "").strip() or "—"
-        groups.setdefault(key, []).append(r)
-    ordered: list[tuple[str, list[dict]]] = []
-    for k in ("1", "2", "3", "4", "5"):
-        if k in groups:
-            ordered.append((k, groups.pop(k)))
-    # Remaining keys (C, UNK, —, ...) sorted alphabetically at the end.
-    for k in sorted(groups.keys()):
-        ordered.append((k, groups[k]))
-    return ordered
-
-
-def _render_index(
-    env: Environment,
-    snapshot: Snapshot,
-    by_month: list[tuple[str, list[Inmate]]],
-    nav_months: list[dict],
-    expanded_months: set,
-    events_recent: list[ChangeEvent],
-    recent_booked: int,
-    recent_released: int,
-    trend: dict,
-    cfs_rows: list[dict],
-    shooting_rows: list[dict],
-    map_points: int,
-    out_dir: Path,
-) -> None:
-    cfs_30d = _filter_last_days(
-        cfs_rows, ("create_time_incident", "create_time_dispatch", "dispatch_time_primary_unit"),
-        days=30,
-    )
-    shoot_30d = _filter_last_days(
-        shooting_rows, ("datetimeoccured", "dateoccurred"),
-        days=30,
-    )
-    page = env.get_template("index.html").render(
-        snapshot=snapshot,
-        by_month=by_month,
-        nav_months=nav_months,
-        expanded_months=expanded_months,
-        events_recent=events_recent,
-        recent_booked=recent_booked,
-        recent_released=recent_released,
-        trend=trend,
-        cfs_rows=cfs_30d,
-        shooting_rows=shoot_30d,
-        cfs_by_district=_group_by_district(cfs_30d),
-        shoot_by_district=_group_by_district(shoot_30d),
-        map_points=map_points,
-    )
-    (out_dir / "index.html").write_text(page, encoding="utf-8")
+# Page renderers and output writers extracted to web/pages.py and web/outputs.py.
+from web.outputs import (  # noqa: E402
+    _copy_photos,
+    _copy_static,
+    _write_checksums,
+    _write_cname,
+    _write_dispatches,
+    _write_manifest,
+    _write_search_json,
+    _write_well_known,
+)
+from web.pages import (  # noqa: E402
+    _render_court_page,
+    _render_courts_page,
+    _render_data_page,
+    _render_feeds,
+    _render_help_page,
+    _render_index,
+    _render_inmates,
+    _render_stats_page,
+    _render_statute_page,
+    _render_visit_page,
+)
 
 
 def _update_history(snapshot: Snapshot, booked_24h: int, released_24h: int) -> dict:
@@ -654,105 +563,6 @@ def _update_history(snapshot: Snapshot, booked_24h: int, released_24h: int) -> d
     }
 
 
-def _load_crowdsourced_cases() -> dict[str, list[dict]]:
-    """Read data/courtclerk_cases.json (populated via the case-data issue
-    workflow) and index entries by inmate_number. Each inmate gets a list of
-    submitted case records they're named on; the inmate.html template can
-    then render them under a 'Submitted by readers' aside."""
-    path = Path("data/courtclerk_cases.json")
-    if not path.exists():
-        return {}
-    try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
-        return {}
-    entries = raw.get("cases", []) if isinstance(raw, dict) else (raw if isinstance(raw, list) else [])
-    by_inmate: dict[str, list[dict]] = {}
-    for entry in entries:
-        if not isinstance(entry, dict):
-            continue
-        key = entry.get("inmate_number") or entry.get("inmate")
-        if key:
-            by_inmate.setdefault(str(key), []).append(entry)
-    return by_inmate
-
-
-def _render_inmates(
-    env: Environment,
-    snapshot: Snapshot,
-    matches: dict[str, list[dict]],
-    events: list[ChangeEvent],
-    out_dir: Path,
-) -> None:
-    template = env.get_template("inmate.html")
-    # Pre-index events by inmate_number for O(1) per-render lookup instead of
-    # filtering the full changelog (Phase 9: capped at 10000) for each inmate.
-    events_by_inmate: dict[str, list[ChangeEvent]] = {}
-    for e in events:
-        events_by_inmate.setdefault(e.inmate_number, []).append(e)
-    for ev_list in events_by_inmate.values():
-        ev_list.sort(key=lambda e: e.timestamp_utc or "")
-    # Phase 11: load the crowdsourced courtclerk submissions once so each
-    # inmate.render() can grab their own list in O(1).
-    crowdsourced = _load_crowdsourced_cases()
-    for inm in snapshot.inmates:
-        page = template.render(
-            inmate=inm,
-            snapshot=snapshot,
-            cfs_matches=matches.get(inm.inmate_number, []),
-            inmate_events=events_by_inmate.get(inm.inmate_number, []),
-            crowdsourced_for_inmate=crowdsourced.get(inm.inmate_number, []),
-        )
-        target = out_dir / "inmate" / inm.inmate_number / "index.html"
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(page, encoding="utf-8")
-
-
-def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) -> None:
-    """Three RSS feeds: everything, bookings only, releases only.
-
-    Each is the most recent ~50 matching events, newest first.
-    """
-    tmpl = env.get_template("feed.xml")
-
-    def _write(name: str, title: str, desc: str, evs: list[ChangeEvent]) -> None:
-        xml = tmpl.render(
-            events=list(reversed(evs[-50:])),
-            feed_title=title,
-            feed_desc=desc,
-            self_path="/" + name,
-        )
-        (out_dir / name).write_text(xml, encoding="utf-8")
-
-    # "booked" feed = booked events whose HCSO booking date is genuinely recent —
-    # so a sweep that re-discovers months-old records (e.g. after a degraded
-    # cycle) doesn't fill booked.xml with stale "new bookings".
-    cutoff = datetime.now(timezone.utc).date() - timedelta(days=21)
-
-    def _recent_booked(e: ChangeEvent) -> bool:
-        if e.event != "booked":
-            return False
-        if not (e.note or "").startswith("booked "):
-            return True
-        bd_str = e.note[len("booked "):].strip()
-        for fmt in ("%m/%d/%y", "%m/%d/%Y"):
-            try:
-                return datetime.strptime(bd_str, fmt).date() >= cutoff
-            except ValueError:
-                continue
-        return True
-
-    _write("feed.xml", "JCStream changes",
-           "New, updated, and released records on the Hamilton County, OH Justice Center public roster.",
-           events)
-    _write("booked.xml", "JCStream — new bookings",
-           "People recently booked into the Hamilton County, OH Justice Center.",
-           [e for e in events if _recent_booked(e)])
-    _write("released.xml", "JCStream — releases",
-           "People released from the Hamilton County, OH Justice Center public roster.",
-           [e for e in events if e.event == "released"])
-
-
 def _roster_stale_context(snapshot: Snapshot) -> dict:
     """Staleness / transparency context for templates. ``blocked`` is True once
     the last-good roster is older than the freeze-alarm threshold, which
@@ -777,301 +587,6 @@ def _roster_stale_context(snapshot: Snapshot) -> dict:
         "ever_blocked": any(r.get("event") == "blocked" for r in log),
         "last_updated": (snapshot.generated_utc or "")[:10],
     }
-
-
-def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> None:
-    """Documentation + download index for the raw JSON the site is built from."""
-    # Copy the raw data files into the published tree so they're fetchable.
-    data_out = out_dir / "data"
-    data_out.mkdir(parents=True, exist_ok=True)
-    from scraper.open_data_feeds import FEEDS
-    supplemental = [f.filename for f in FEEDS]
-    for name in ("current.json", "changelog.json", "history.json", "cfs_recent.json",
-                 "shootings_recent.json", "waf_block_log.json",
-                 "cfs_pdi_recent.json", "courtclerk_cases.json", "orc_offenses.json",
-                 *supplemental):
-        src = Path("data") / name
-        if src.exists():
-            shutil.copy2(src, data_out / name)
-    page = env.get_template("data.html").render(
-        snapshot=snapshot,
-        courtclerk_cases_available=(Path("data") / "courtclerk_cases.json").exists(),
-    )
-    (data_out / "index.html").write_text(page, encoding="utf-8")
-
-
-def _write_manifest(out_dir: Path, base_url: str) -> None:
-    """Minimal web app manifest — gives the bookmark a name/icon/theme.
-    Deliberately `display: browser` (not a PWA): a stale cached jail roster
-    would be misleading, so no service worker."""
-    manifest = {
-        "name": "JCStream — Hamilton County, OH jail roster mirror",
-        "short_name": "JCStream",
-        "description": "Public-records mirror of the Hamilton County (Ohio) Justice Center inmate roster.",
-        "start_url": (base_url or "") + "/",
-        "scope": (base_url or "") + "/",
-        "display": "browser",
-        "background_color": "#14181f",
-        "theme_color": "#14181f",
-        "icons": [],
-    }
-    (out_dir / "manifest.webmanifest").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-
-
-def _compute_stats(snapshot: Snapshot, by_month) -> dict:
-    """Aggregates for the /stats/ page — all from the current snapshot."""
-    inmates = snapshot.inmates
-    n = len(inmates)
-    months = [(m, len(g)) for m, g in by_month]                       # newest-first already
-    offenses = _crimes_of_month(inmates)                              # [{label, cls, count}] desc
-    tiers = {"felony": 0, "misdemeanor": 0, "other": 0}
-    for inm in inmates:
-        t = _primary_tier(inm)
-        tiers[t["kind"] if t else "other"] += 1
-    def _tally(attr, expand):
-        out: dict[str, int] = {}
-        for inm in inmates:
-            out[expand(getattr(inm, attr, ""))] = out.get(expand(getattr(inm, attr, "")), 0) + 1
-        return sorted(out.items(), key=lambda kv: -kv[1])
-    sex = _tally("sex", _expand_sex)
-    race = _tally("race", _expand_race)
-    # bonds
-    bond_vals = []
-    zero_bond = 0
-    for inm in inmates:
-        total = 0
-        any_amt = False
-        for c in inm.charges:
-            amt = _parse_bond_amount(c.bond_amount)
-            if amt is not None:
-                any_amt = True
-                total += amt
-        if any_amt:
-            bond_vals.append(total)
-            if total == 0:
-                zero_bond += 1
-    bond_vals.sort()
-    median_bond = bond_vals[len(bond_vals)//2] if bond_vals else 0
-    total_bond = sum(bond_vals)
-    # charges per inmate
-    ch_counts = [len(inm.charges) for inm in inmates]
-    avg_ch = (sum(ch_counts) / n) if n else 0
-    max_ch = max(ch_counts) if ch_counts else 0
-    one_charge = sum(1 for c in ch_counts if c == 1)
-    # photo coverage
-    with_photo = sum(1 for inm in inmates if inm.photo_filename)
-    # days in custody (where parseable)
-    days = [d for inm in inmates if (d := _days_in_custody(inm)) is not None]
-    avg_days = (sum(days) / len(days)) if days else 0
-    max_days = max(days) if days else 0
-    return {
-        "n": n, "months": months, "offenses": offenses, "tiers": tiers,
-        "sex": sex, "race": race,
-        "bond_total": total_bond, "bond_median": median_bond, "bond_zero": zero_bond,
-        "bond_known": len(bond_vals),
-        "avg_charges": round(avg_ch, 1), "max_charges": max_ch, "one_charge": one_charge,
-        "with_photo": with_photo, "no_photo": n - with_photo,
-        "avg_days": round(avg_days), "max_days": max_days,
-        "tier_breakdown": _tier_breakdown(snapshot),
-        "top_offenses": _top_offenses_with_orc(snapshot, top_n=12),
-        "court_calendar": _upcoming_courts(snapshot, days_ahead=14),
-    }
-
-
-def _render_stats_page(env: Environment, snapshot: Snapshot, by_month, trend: dict, out_dir: Path) -> None:
-    stats = _compute_stats(snapshot, by_month)
-    page = env.get_template("stats.html").render(snapshot=snapshot, s=stats, trend=trend)
-    target = out_dir / "stats" / "index.html"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(page, encoding="utf-8")
-
-
-def _render_court_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> None:
-    """Aggregate every inmate's earliest upcoming court date into today /
-    tomorrow / this-week / next-30-days buckets. Court-watchers and journalists
-    get a docket view that the per-record pages cannot offer.
-    """
-    cal = _court_calendar(snapshot.inmates)
-    now_eastern = datetime.now()
-    page = env.get_template("court.html").render(
-        snapshot=snapshot,
-        cal=cal,
-        now_eastern=now_eastern,
-        one_day=timedelta(days=1),
-    )
-    target = out_dir / "court" / "index.html"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(page, encoding="utf-8")
-
-
-def _render_visit_page(env: Environment, out_dir: Path) -> None:
-    """Static visitation-policy info page. Links out to HCSO's authoritative
-    policy; deliberately does NOT show visitation records (privacy creep)."""
-    page = env.get_template("visit.html").render()
-    target = out_dir / "visit" / "index.html"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(page, encoding="utf-8")
-
-
-def _render_help_page(env: Environment, out_dir: Path) -> None:
-    """Static "Get help" resources page. Mirrors current contact info for the
-    free Hamilton County legal and crisis resources most relevant to people
-    who land on JCStream looking for help. No data dependencies."""
-    page = env.get_template("help.html").render()
-    target = out_dir / "help" / "index.html"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(page, encoding="utf-8")
-
-
-def _render_courts_page(env: Environment, out_dir: Path) -> None:
-    """Static "Hamilton County court system" reference page. Mirrors directory
-    and jurisdictional info from hamiltoncountycourts.org (Municipal +
-    Common Pleas), probatect.org, and the Clerk of Courts. Distinct from
-    /court/ which is the operational calendar of upcoming hearings."""
-    page = env.get_template("courts.html").render()
-    target = out_dir / "courts" / "index.html"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(page, encoding="utf-8")
-
-
-def _load_caselaw_cache() -> dict:
-    """Read data/orc_caselaw.json (populated by scripts/refresh_caselaw.py).
-    Missing or malformed file degrades silently to {} so the statute page
-    still renders without the case-law block."""
-    p = Path("data/orc_caselaw.json")
-    if not p.exists():
-        return {}
-    try:
-        return json.loads(p.read_text(encoding="utf-8")).get("by_code", {})
-    except (json.JSONDecodeError, OSError):
-        return {}
-
-
-def _render_statute_page(env: Environment, snapshot: Snapshot, offenses: dict, out_dir: Path) -> None:
-    """Statute lookup — one page with each ORC section currently on the roster."""
-    explainers = _load_explainers()
-    caselaw = _load_caselaw_cache()
-    rows = _top_offenses_with_orc(snapshot, top_n=60, offenses=offenses)
-    sections = []
-    for r in rows:
-        sections.append({
-            **r,
-            "tier_max": _tier_max(r["degree"]),
-            "explainer": explainers.get(r["code"]),
-            "held": _statute_held_inmates(snapshot, r["code"], limit=18),
-            "caselaw": caselaw.get(r["code"], []),
-        })
-    page = env.get_template("statute.html").render(
-        snapshot=snapshot,
-        sections=sections,
-        total_roster=snapshot.inmate_count,
-    )
-    target = out_dir / "statute" / "index.html"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(page, encoding="utf-8")
-
-
-def _write_search_json(out_dir: Path, snapshot: Snapshot) -> None:
-    """Compact searchable index of the current roster — useful for API
-    consumers and as a base for a future client-side search UI.
-    One row per inmate: n=name, c=primary offense category, t=tier, id."""
-    rows = []
-    for inm in snapshot.inmates:
-        tier = _primary_tier(inm)
-        chap = _primary_chapter(inm)
-        rows.append({
-            "n": inm.full_name,
-            "c": (chap["label"] if chap else _primary_charge(inm)) or "",
-            "t": tier["kind"] if tier else "",
-            "b": inm.booking_date or "",
-            "id": inm.inmate_number,
-        })
-    payload = {
-        "generated_utc": snapshot.generated_utc,
-        "count": len(rows),
-        "rows": rows,
-    }
-    (out_dir / "search.json").write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
-
-
-def _write_cname(out_dir: Path) -> None:
-    """GitHub Pages custom-domain file. Written from JCSTREAM_CNAME so it
-    survives the docs/ rebuild; skipped if the env var is empty."""
-    import os as _os
-    domain = (_os.environ.get("JCSTREAM_CNAME", "") or "").strip()
-    if domain:
-        (out_dir / "CNAME").write_text(domain + "\n", encoding="utf-8")
-
-
-def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
-    """robots.txt + .well-known/security.txt + humans.txt — make the
-    don't-amplify posture explicit at the protocol level and give crawlers /
-    researchers a clear, no-fee contact point. RSS readers ignore robots.txt,
-    so the feeds stay usable for people."""
-    issues = "https://github.com/AICincy/JCStream/issues"
-    (out_dir / "robots.txt").write_text(
-        "# JCStream mirrors public records and asks search engines not to index it\n"
-        "# (every page also carries <meta name=\"robots\" content=\"noindex\">).\n"
-        "# Feeds and raw data are linked from /data/ — RSS readers don't honour\n"
-        "# robots.txt, so subscriptions still work.\n"
-        "User-agent: *\n"
-        "Disallow: /\n",
-        encoding="utf-8",
-    )
-    # security.txt (RFC 9116) — Expires is required; keep it ~1 year out (the
-    # cron rebuilds every ~20-45 min so it never actually goes stale).
-    expires = (datetime.now(timezone.utc) + timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%SZ")
-    wk = out_dir / ".well-known"
-    wk.mkdir(parents=True, exist_ok=True)
-    (wk / "security.txt").write_text(
-        f"# JCStream is a static mirror of public records (ORC §149.43). For data\n"
-        f"# corrections, sealing/expungement removal, or any security or privacy\n"
-        f"# concern, open an issue — there is never a fee.\n"
-        f"Contact: {issues}\n"
-        f"Expires: {expires}\n"
-        f"Preferred-Languages: en\n"
-        + (f"Canonical: {site_url}/.well-known/security.txt\n" if site_url else ""),
-        encoding="utf-8",
-    )
-    (out_dir / "humans.txt").write_text(
-        "/* PROJECT */\n"
-        "  JCStream — mirror of the Hamilton County, OH Justice Center inmate roster\n"
-        f"  Site: {site_url or 'https://www.aretheyinjail.com'}\n"
-        "  Source: https://github.com/AICincy/JCStream (MIT)\n"
-        f"  Corrections / sealing / removal: {issues} — no fee, ever\n"
-        "\n/* DATA */\n"
-        "  HCSO public inmate roster (ORC §149.43) + Cincinnati Open Data feeds\n"
-        "  No historical archive — records drop off when HCSO removes them\n"
-        f"  Rebuilt every ~20-45 minutes via GitHub Actions · last build {generated_utc or '—'}\n"
-        "\n/* BUILT WITH */\n"
-        "  Python · Jinja2 · httpx · selectolax · Pillow · GitHub Pages\n",
-        encoding="utf-8",
-    )
-
-
-def _write_checksums(out_dir: Path) -> None:
-    """SHA-256 manifest of the published data files — cheap tamper-evidence
-    on top of the (already authenticated) git history. Not 'Web3'; just hygiene."""
-    import hashlib
-    data_out = out_dir / "data"
-    if not data_out.exists():
-        return
-    lines = []
-    for f in sorted(data_out.glob("*.json")):
-        h = hashlib.sha256(f.read_bytes()).hexdigest()
-        lines.append(f"{h}  {f.name}")
-    if lines:
-        (data_out / "SHA256SUMS").write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
-def _copy_static(out_dir: Path) -> None:
-    if STATIC_DIR.exists():
-        shutil.copytree(STATIC_DIR, out_dir / "static", dirs_exist_ok=True)
-
-
-def _copy_photos(out_dir: Path) -> None:
-    if PHOTOS_DIR.exists() and any(PHOTOS_DIR.iterdir()):
-        shutil.copytree(PHOTOS_DIR, out_dir / "photos", dirs_exist_ok=True)
 
 
 def main(argv: list[str] | None = None) -> int:

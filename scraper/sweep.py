@@ -22,6 +22,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 import sys
 import threading
 import time
@@ -691,12 +692,16 @@ def _forensic_sample(resp: httpx.Response) -> dict:
     Set-Cookie, Authorization, Proxy-Authorization) are redacted before they
     reach the public log."""
     body = resp.content or b""
+    # Strip potential user-specific tokens from body (defense-in-depth;
+    # WAF block pages should not contain PII but upstream can change).
+    body_text = (resp.text or "")[:1000]
+    body_text = re.sub(r'[0-9a-fA-F]{32,}', '[redacted-token]', body_text)
     sample: dict = {
         "captured_utc": utcnow_iso(),
         "status": resp.status_code,
         "bytes": len(body),
         "sha256": hashlib.sha256(body).hexdigest(),
-        "body_sample": (resp.text or "")[:1000],
+        "body_sample": body_text,
         "headers": _redact_headers(resp.headers),
     }
     try:
@@ -765,6 +770,9 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     failed = 0
     status_counts: dict[str, int] = {}
     block_sample: dict | None = None
+    # TODO(sweep-F8): switch to ThreadPoolExecutor + as_completed to avoid
+    # pool.map truncating results on first worker exception. Currently safe
+    # because _fetch_list_page swallows all exceptions (see guard above).
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
         for rows, status, sample in pool.map(partial(_fetch_list_page, client), surnames):
             if block_sample is None and sample is not None:
@@ -911,6 +919,11 @@ def _apply_list_row_fallback(inm: Inmate, list_row: ListRow | None) -> None:
 
 def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None) -> None:
     photo_path = PHOTOS_DIR / f"{inm.inmate_number}.jpg"
+    # Defense-in-depth: even though the model validator enforces digits-only,
+    # assert the filename is safe to prevent path traversal if the validator
+    # is ever relaxed.
+    assert ".." not in photo_path.name and "/" not in photo_path.name, \
+        f"unsafe photo filename: {photo_path.name!r}"
     # Save fresh bytes if we got them AND they decoded; otherwise fall through
     # to the disk-cached photo from a prior successful sweep. Previously the
     # second branch was an `elif`, which meant a corrupt-bytes failure on one

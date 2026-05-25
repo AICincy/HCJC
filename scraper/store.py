@@ -174,6 +174,8 @@ def _load_current_strict(path: Path) -> dict[str, Inmate]:
 
 
 def save_current(path: Path, inmates: Iterable[Inmate]) -> None:
+    # Note: for rosters significantly larger than ~5k, consider streaming
+    # serialization to avoid holding the full JSON string in memory.
     materialized = sorted(inmates, key=lambda i: (i.last_name, i.first_name, i.inmate_number))
     snapshot = Snapshot(
         generated_utc=utcnow_iso(),

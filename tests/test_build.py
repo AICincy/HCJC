@@ -17,6 +17,8 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from scraper.models import ChangeEvent, Charge, Inmate
 from web import build
+from web.classify import _load_caselaw_cache, _offense_for_code
+from web.shape import _events_in_window
 
 
 def _inm(charges=None, dob="", booking_date="") -> Inmate:
@@ -347,7 +349,7 @@ def test_events_in_window_drops_old_events():
     now = datetime.now(timezone.utc)
     recent = _evt("updated", now - timedelta(hours=1))
     old = _evt("updated", now - timedelta(hours=48))
-    kept = build._events_in_window([recent, old], hours=8)
+    kept = _events_in_window([recent, old], hours=8)
     assert kept == [recent]
 
 
@@ -380,7 +382,7 @@ def test_events_for_recent_keeps_releases_regardless_of_note():
 def test_offense_for_code_falls_back_to_other_for_unknown():
     # Codes that don't match any known chapter still get classified as the
     # generic "other" bucket so the renderer never has a missing color.
-    off = build._offense_for_code("9999.99")
+    off = _offense_for_code("9999.99")
     assert off is not None and off["cls"] == "traffic"
 
 
@@ -390,7 +392,7 @@ def test_offense_for_code_falls_back_to_other_for_unknown():
     ("2913.02", "2913"),  # theft / fraud
 ])
 def test_offense_for_code_classifies_known_chapters(code, expected_cls):
-    off = build._offense_for_code(code)
+    off = _offense_for_code(code)
     assert off is not None
     assert off["cls"] == expected_cls
 
@@ -406,14 +408,14 @@ def test_offense_for_code_classifies_known_chapters(code, expected_cls):
 def test_load_caselaw_cache_returns_empty_when_file_missing(tmp_path: Path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     # No data/ directory at all — the missing-file path.
-    assert build._load_caselaw_cache() == {}
+    assert _load_caselaw_cache() == {}
 
 
 def test_load_caselaw_cache_returns_empty_on_malformed_json(tmp_path: Path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     (tmp_path / "data").mkdir()
     (tmp_path / "data" / "orc_caselaw.json").write_text("{not valid json", encoding="utf-8")
-    assert build._load_caselaw_cache() == {}
+    assert _load_caselaw_cache() == {}
 
 
 def test_load_caselaw_cache_returns_by_code_dict(tmp_path: Path, monkeypatch):
@@ -429,7 +431,7 @@ def test_load_caselaw_cache_returns_by_code_dict(tmp_path: Path, monkeypatch):
     (tmp_path / "data" / "orc_caselaw.json").write_text(
         json.dumps(payload), encoding="utf-8"
     )
-    out = build._load_caselaw_cache()
+    out = _load_caselaw_cache()
     assert out == payload["by_code"]
     assert "2903.02" in out and out["2903.02"][0]["name"] == "State v. Doe"
 
@@ -441,7 +443,7 @@ def test_load_caselaw_cache_returns_empty_when_by_code_key_missing(tmp_path: Pat
     (tmp_path / "data" / "orc_caselaw.json").write_text(
         json.dumps({"generated_utc": "2026-05-14T00:00:00Z"}), encoding="utf-8"
     )
-    assert build._load_caselaw_cache() == {}
+    assert _load_caselaw_cache() == {}
 
 
 # ----- _iso_booking_date ----------------------------------------------------
