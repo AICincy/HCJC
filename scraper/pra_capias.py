@@ -18,6 +18,7 @@ from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 
 from .pra_base import dry_run_required, env, send_smtp
+from .pra_log import append_pra_record, make_pra_record
 
 log = logging.getLogger(__name__)
 
@@ -44,8 +45,8 @@ judge, and any associated bond information.
 Please send the responsive records as a CSV attachment or via a download
 link to this address. No physical inspection or pickup is requested.
 
-This request is hand-typed and electronically transmitted; per § 149.43(C)(2)
-I respectfully ask for a response within a reasonable period of time.
+This request is electronically transmitted; per § 149.43(C)(2) I
+respectfully ask for a response within a reasonable period of time.
 
 Thank you,
 JCStream — https://github.com/AICincy/JCStream
@@ -75,14 +76,26 @@ def send_daily_request(since: str, until: str) -> int:
         msg = _build_message(since, until, to_addr, from_addr or "<unset>")
         log.info("[PRA-capias DRY-RUN] To=%s\nSubject=%s\n\n%s",
                  to_addr, SUBJECT, msg.get_content())
+        append_pra_record(make_pra_record(
+            module="capias", to=to_addr, subject=SUBJECT,
+            window_since=since, window_until=until, status="dry_run",
+        ))
         return 0
 
     msg = _build_message(since, until, to_addr, from_addr)
     try:
         send_smtp(msg)
         log.info("PRA-capias request sent to %s for window %s -> %s", to_addr, since, until)
+        append_pra_record(make_pra_record(
+            module="capias", to=to_addr, subject=SUBJECT,
+            window_since=since, window_until=until, status="sent",
+        ))
     except Exception as e:
         log.error("PRA-capias SMTP send failed: %s", e)
+        append_pra_record(make_pra_record(
+            module="capias", to=to_addr, subject=SUBJECT,
+            window_since=since, window_until=until, status="failed",
+        ))
         return 1
     return 0
 
