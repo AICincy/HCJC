@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-05-26T21:21:08Z",
+  "generated_utc": "2026-05-26T22:05:56Z",
   "min_confidence": 0.45,
   "window_minutes": 60,
-  "count": 565,
+  "count": 580,
   "disclaimer": "Researcher-mode output. Pairs are CANDIDATES only, not asserted matches. A high-confidence pair still requires human verification before any public claim is made that a specific dispatch led to a specific arrest. JCStream does not publish these joins on its own pages. Joining keys are inmate_number (vs current.json) and cfs_row_index (vs the cfs_recent.json or cfs_pdi_recent.json feed identified by cfs_source). Confidence weights: 50% temporal proximity within a +/- 60 minute window, 50% textual overlap between the charge description and the CFS row's disposition/incident-type fields. Purely temporal matches (textual overlap = 0) are excluded. Confirmed-arrest dispositions (ARR: ARREST) receive a +0.15 confidence boost.",
   "pairs": [
     {
@@ -19,6 +19,18 @@
     },
     {
       "inmate_number": "14687958",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 292,
+      "confidence": 0.991,
+      "signals": {
+        "dt_delta_minutes": 4.5,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 292,
       "confidence": 0.991,
@@ -1590,6 +1602,18 @@
       }
     },
     {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 289,
+      "confidence": 0.665,
+      "signals": {
+        "dt_delta_minutes": 160.7,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
       "inmate_number": "2138329",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 289,
@@ -2118,6 +2142,18 @@
       }
     },
     {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 287,
+      "confidence": 0.575,
+      "signals": {
+        "dt_delta_minutes": 204.2,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
       "inmate_number": "2138329",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 287,
@@ -2210,6 +2246,18 @@
         "dt_delta_minutes": 88.4,
         "textual_overlap": 0.5,
         "booked_date": "5/25/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14609273",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 383,
+      "confidence": 0.564,
+      "signals": {
+        "dt_delta_minutes": 89.4,
+        "textual_overlap": 0.5,
+        "booked_date": "5/20/26",
         "arrest_disposition_boost": false
       }
     },
@@ -2587,6 +2635,18 @@
     },
     {
       "inmate_number": "14687958",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 299,
+      "confidence": 0.502,
+      "signals": {
+        "dt_delta_minutes": 238.8,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 299,
       "confidence": 0.502,
@@ -5954,6 +6014,126 @@
         "dt_delta_minutes": 375.8,
         "textual_overlap": 1.0,
         "booked_date": "5/1/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 281,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 469.2,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 282,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 455.8,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 283,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 451.2,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 286,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 412.8,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 316,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 386.8,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 317,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 390.1,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 322,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 411.9,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 324,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 420.8,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 325,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 427.3,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2080017",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 330,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 460.7,
+        "textual_overlap": 1.0,
+        "booked_date": "5/21/26",
         "arrest_disposition_boost": false
       }
     },
