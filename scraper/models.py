@@ -13,6 +13,25 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 # file exists yet); a real, written snapshot must use utcnow_iso().
 _GENERATED_UTC_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 
+# HCSO dates: M/D/YY, M/D/YYYY, MM/DD/YY, MM/DD/YYYY.  The epoch sentinel
+# "1/1/70" means "unknown"; we pass it through rather than discarding so
+# downstream code can handle it explicitly.
+_HCSO_DATE_RE = re.compile(r"^\d{1,2}/\d{1,2}/\d{2,4}$")
+# HCSO sends these when the date field is empty/unknown.
+_HCSO_DATE_SENTINELS = frozenset({"NA", "N/A", "n/a", "na", "TBD", "NONE"})
+
+
+def _validate_hcso_date(v: str, field_name: str) -> str:
+    """Accept empty, known sentinels, or a plausible M/D/YY(YY) date."""
+    stripped = (v or "").strip()
+    if not stripped:
+        return stripped
+    if stripped.upper() in {s.upper() for s in _HCSO_DATE_SENTINELS}:
+        return stripped
+    if not _HCSO_DATE_RE.match(stripped):
+        raise ValueError(f"{field_name} must be empty, a known sentinel, or M/D/YY(YY), got {stripped!r}")
+    return stripped
+
 
 class Charge(BaseModel):
     common_pleas_case: str = ""
@@ -25,6 +44,11 @@ class Charge(BaseModel):
     bond_amount: str = ""
     disposition: str = ""
     comments: str = ""
+
+    @field_validator("court_date")
+    @classmethod
+    def _court_date_shape(cls, v: str) -> str:
+        return _validate_hcso_date(v, "court_date")
 
 
 class Inmate(BaseModel):
@@ -57,6 +81,13 @@ class Inmate(BaseModel):
     booking_date: str = ""
     projected_release_date: str = ""
     holder_status: str = ""
+
+    @field_validator("date_of_birth", "booking_date", "projected_release_date")
+    @classmethod
+    def _hcso_date_shape(cls, v: str, info: object) -> str:
+        # info.field_name gives the field being validated.
+        name = getattr(info, "field_name", "date")
+        return _validate_hcso_date(v, name)
     charges: list[Charge] = Field(default_factory=list)
     photo_filename: Optional[str] = None
     first_seen_utc: str = ""
@@ -167,6 +198,58 @@ class HistoryRecord(BaseModel):
         if not re.match(r"^\d{4}-\d{2}-\d{2}$", v or ""):
             raise ValueError(f"date must be YYYY-MM-DD, got {v!r}")
         return v
+
+
+class BlockLogEntry(BaseModel):
+    """One record in the append-only WAF-block evidence log.
+
+    The ``event`` field is either 'blocked' or 'recovered'. ``prev_sha256``
+    links to the prior record's canonical SHA-256, forming a hash chain.
+    """
+
+    timestamp_utc: str
+    event: Literal["blocked", "recovered"]
+    prev_sha256: Optional[str] = None
+    # 'blocked' fields — optional because 'recovered' entries omit them.
+    prev_count: Optional[int] = None
+    seen_count: Optional[int] = None
+    surnames_total: Optional[int] = None
+    surnames_failed: Optional[int] = None
+    failed_fraction: Optional[float] = None
+    http_status_counts: Optional[dict[str, int]] = None
+    block_sample: Optional[dict[str, object]] = None
+    roster_stale_hours: Optional[float] = None
+    note: str = ""
+
+    @field_validator("timestamp_utc")
+    @classmethod
+    def _timestamp_shape(cls, v: str) -> str:
+        if not _GENERATED_UTC_RE.match(v):
+            raise ValueError(
+                f"timestamp_utc must be YYYY-MM-DDTHH:MM:SSZ, got {v!r}"
+            )
+        return v
+
+
+class AnonChangelogEntry(BaseModel):
+    """One row in ``data/anon_changelog.json``.
+
+    Within the PII-retention window rows carry ``inmate_number`` and ``name``;
+    after expiry those fields are stripped and only aggregate signal survives.
+    """
+
+    event: Optional[str] = None
+    # Present within retention window, absent after PII expiry.
+    timestamp_utc: Optional[str] = None
+    inmate_number: Optional[str] = None
+    name: Optional[str] = None
+    # Aggregate signal (survives anonymization).
+    tier: Optional[str] = None
+    category: Optional[str] = None
+    note: Optional[str] = None
+    # Anonymized-only fields.
+    date: Optional[str] = None  # YYYY-MM-DD, present after anonymization
+    count: Optional[int] = None  # compacted monthly count
 
 
 def utcnow_iso() -> str:

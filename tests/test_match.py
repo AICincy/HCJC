@@ -35,7 +35,7 @@ def test_non_cpd_agency_excluded():
 
 
 def test_unparseable_booking_date_returns_empty():
-    inm = _inmate("garbage")
+    inm = _inmate("NA")
     assert candidates_for(inm, [_cfs("2026-05-10T01:00:00")]) == []
 
 

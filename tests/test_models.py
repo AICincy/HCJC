@@ -1,6 +1,13 @@
 import pytest
 
-from scraper.models import HistoryRecord, Inmate, Snapshot
+from scraper.models import (
+    AnonChangelogEntry,
+    BlockLogEntry,
+    Charge,
+    HistoryRecord,
+    Inmate,
+    Snapshot,
+)
 
 
 def test_full_name_joins_present_parts():
@@ -110,3 +117,59 @@ def test_history_record_defaults_booked_and_released_to_zero():
     r = HistoryRecord(date="2026-05-14", count=1210)
     assert r.booked_24h == 0
     assert r.released_24h == 0
+
+
+# ----- H19: date field validation -------------------------------------------
+
+def test_inmate_accepts_hcso_date_formats():
+    for bd in ("5/10/26", "05/10/2026", "1/1/70", "12/31/99", ""):
+        inm = Inmate(inmate_number="1", booking_date=bd)
+        assert inm.booking_date == bd.strip()
+
+
+def test_inmate_accepts_sentinel_dates():
+    for sentinel in ("NA", "N/A", "TBD", "NONE"):
+        inm = Inmate(inmate_number="1", projected_release_date=sentinel)
+        assert inm.projected_release_date == sentinel
+
+
+def test_inmate_rejects_malformed_dates():
+    for bad in ("not a date", "2026-05-12", "May 14, 2026", "garbage"):
+        with pytest.raises(ValueError, match="must be empty"):
+            Inmate(inmate_number="1", booking_date=bad)
+
+
+def test_charge_court_date_validated():
+    c = Charge(court_date="6/15/26")
+    assert c.court_date == "6/15/26"
+    with pytest.raises(ValueError, match="court_date"):
+        Charge(court_date="invalid")
+
+
+# ----- H20: BlockLogEntry & AnonChangelogEntry ------------------------------
+
+def test_block_log_entry_round_trip():
+    e = BlockLogEntry(
+        timestamp_utc="2026-05-20T12:00:00Z",
+        event="blocked",
+        prev_count=100,
+        seen_count=5,
+        surnames_total=26,
+        surnames_failed=24,
+        failed_fraction=0.9231,
+        note="WAF block",
+    )
+    d = e.model_dump()
+    assert d["event"] == "blocked"
+    assert BlockLogEntry(**d) == e
+
+
+def test_block_log_entry_rejects_bad_timestamp():
+    with pytest.raises(ValueError, match="timestamp_utc"):
+        BlockLogEntry(timestamp_utc="bad", event="blocked")
+
+
+def test_anon_changelog_entry_accepts_anonymized_row():
+    row = AnonChangelogEntry(event="booked", date="2026-05", tier="F3", category="drugs")
+    assert row.inmate_number is None
+    assert row.name is None

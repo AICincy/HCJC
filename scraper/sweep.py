@@ -26,6 +26,7 @@ import re
 import sys
 import threading
 import time
+import uuid
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -34,6 +35,7 @@ import httpx
 
 from .client import DEFAULT_CONCURRENCY, HcsoClient, make_client
 from .ddlog import emit as ddlog_emit
+from .ddlog import set_sweep_id
 from .models import Inmate, ListRow, utcnow_iso
 from .parsers import parse_detail_page, parse_list_page
 from .photos import downscale_and_save
@@ -50,6 +52,7 @@ from .store import (
     save_current,
 )
 from .sweep_guards import (
+    PHOTO_PRUNE_MAX_FRACTION,
     SWEEP_BOOTSTRAP_FLOOR,
     SWEEP_MIN_ROSTER_FRACTION,
     check_detail_watchdog,
@@ -319,6 +322,7 @@ def _fetch_details(
     n_detail_attempts = 0
     n_detail_named = 0
     n_detail_with_photo = 0
+    t0 = time.monotonic()
     sweep_started = time.monotonic()
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
         futures = {
@@ -373,6 +377,18 @@ def _fetch_details(
                 # snapshot until the next ~20-45 minute retry, rather
                 # than persisting a degraded baseline.
                 _maybe_checkpoint_partial(previous, current, done, len(to_fetch))
+    elapsed_s = round(time.monotonic() - t0, 2)
+    ddlog_emit(
+        "sweep.detail_phase.timing",
+        message=f"Detail phase completed in {elapsed_s}s",
+        attrs={
+            "elapsed_s": elapsed_s,
+            "detail_attempts": n_detail_attempts,
+            "detail_named": n_detail_named,
+            "detail_with_photo": n_detail_with_photo,
+            "total_to_fetch": len(to_fetch),
+        },
+    )
     return n_detail_attempts, n_detail_named, n_detail_with_photo
 
 
@@ -430,10 +446,13 @@ def run(
 ) -> int:
     if max_surnames is not None:
         surnames = surnames[:max_surnames]
+    sweep_id = uuid.uuid4().hex[:12]
+    set_sweep_id(sweep_id)
     ddlog_emit(
         "sweep_start",
         message="Sweep started",
         attrs={
+            "sweep_id": sweep_id,
             "surnames_total": len(surnames),
             "max_surnames": max_surnames,
             "refresh_known": refresh_known,
@@ -457,6 +476,7 @@ def run(
             message="Sweep skipped by freshness gate",
             attrs={"outcome": "skipped_fresh_data", "roster_stale_hours": stale_h},
         )
+        set_sweep_id(None)
         return 0
 
     try:
@@ -477,6 +497,7 @@ def run(
             message="Sweep aborted due to unreadable current snapshot",
             attrs={"outcome": "aborted_corrupt_current"},
         )
+        set_sweep_id(None)
         return 0
     log.info("loaded %d previously-known inmates", len(previous))
 
@@ -616,6 +637,12 @@ def run(
                 # snapshot is unchanged on disk; just skip the prune to avoid
                 # deleting photos for ids that never made it to current.json.
                 log.error("save_current failed (%s); skipping changelog and prune", e)
+                ddlog_emit(
+                    "sweep.save_current_failed",
+                    level="error",
+                    message=f"save_current failed: {e}",
+                    attrs={"error": str(e)},
+                )
             if save_ok and clean_finish:
                 _save_changelog_and_anon(previous, current)
             elif save_ok:
@@ -647,6 +674,7 @@ def run(
             "current_count": len(current),
         },
     )
+    set_sweep_id(None)
     return 0
 
 
@@ -663,9 +691,24 @@ def _prune_and_report(photos_dir: Path, active_ids: set[str]) -> None:
     filesystem the prune is about to inspect, so it can't lie about what the
     prune would have done. We keep the prune logic untouched and just report.
     """
-    # prune_photos itself logs (log.warning) and bails on its own when the
+    # prune_photos itself logs (log.error) and bails on its own when the
     # delete fraction would exceed PHOTO_PRUNE_MAX_FRACTION; we always call
     # it so the actual delete behavior stays owned by sweep_guards.
+    # Pre-check: detect a prune-skip condition so we can emit to Datadog.
+    if photos_dir.exists():
+        existing = list(photos_dir.glob("*.jpg"))
+        doomed = [f for f in existing if f.stem not in active_ids]
+        if doomed and existing and len(doomed) / len(existing) > PHOTO_PRUNE_MAX_FRACTION:
+            ddlog_emit(
+                "sweep.photo_prune_skipped",
+                level="warning",
+                message=f"Photo prune skipped: {len(doomed)}/{len(existing)} exceed threshold",
+                attrs={
+                    "doomed_count": len(doomed),
+                    "existing_count": len(existing),
+                    "fraction": round(len(doomed) / len(existing), 3),
+                },
+            )
     prune_photos(photos_dir, active_ids)
 
 
@@ -766,6 +809,7 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     failed = 0
     status_counts: dict[str, int] = {}
     block_sample: dict | None = None
+    t0 = time.monotonic()
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
         futures = {pool.submit(_fetch_list_page, client, s): s for s in surnames}
         for future in as_completed(futures):
@@ -782,6 +826,17 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
                 if r.inmate_number not in seen:
                     seen.add(r.inmate_number)
                     aggregated.append(r)
+    elapsed_s = round(time.monotonic() - t0, 2)
+    ddlog_emit(
+        "sweep.list_phase.timing",
+        message=f"List phase completed in {elapsed_s}s",
+        attrs={
+            "elapsed_s": elapsed_s,
+            "surnames_total": len(surnames),
+            "surnames_failed": failed,
+            "unique_ids": len(seen),
+        },
+    )
     return aggregated, failed, status_counts, block_sample
 
 
