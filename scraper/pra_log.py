@@ -43,22 +43,24 @@ def _record_sha256(record: dict) -> str:
 def load_pra_log(path: Path = PRA_LOG_PATH) -> list[dict]:
     if not path.exists():
         return []
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-        return data if isinstance(data, list) else []
-    except (json.JSONDecodeError, OSError):
-        return []
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return data if isinstance(data, list) else []
 
 
 def append_pra_record(record: dict, path: Path = PRA_LOG_PATH) -> None:
     """Append one PRA send record with hash chain linkage.
 
     Thread-safe via a module-level lock. The caller supplies the record
-    dict (without ``prev_sha256``); this function adds the chain link
-    and writes atomically.
+    dict (without ``prev_sha256``, ``sent_utc``, or ``request_id``);
+    this function populates those fields and writes atomically.
     """
     with _pra_lock:
         entries = load_pra_log(path)
+        now = datetime.now(timezone.utc)
+        record["sent_utc"] = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        seq = len(entries) + 1
+        date_tag = now.strftime("%Y%m%d")
+        record["request_id"] = f"pra-{date_tag}-{record['module']}-{seq:03d}"
         record["prev_sha256"] = _record_sha256(entries[-1]) if entries else None
         entries.append(record)
         _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
@@ -91,14 +93,10 @@ def make_pra_record(
 ) -> dict:
     """Build a PRA log record dict ready for ``append_pra_record``.
 
+    ``sent_utc`` and ``request_id`` are populated by ``append_pra_record``
+    under the thread lock, not here.
     ``status`` is one of: ``"sent"``, ``"dry_run"``, ``"failed"``."""
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    seq = len(load_pra_log()) + 1
-    date_tag = datetime.now(timezone.utc).strftime("%Y%m%d")
-    request_id = f"pra-{date_tag}-{module}-{seq:03d}"
     return {
-        "request_id": request_id,
-        "sent_utc": now,
         "module": module,
         "to": to,
         "subject": subject,
@@ -122,16 +120,17 @@ def record_response(
     success, False if not found. Does NOT re-chain (the hash chain covers
     the original send record, not the mutable response fields).
     """
-    entries = load_pra_log(path)
-    for rec in entries:
-        if rec.get("request_id") == request_id:
-            rec["response_received_utc"] = datetime.now(timezone.utc).strftime(
-                "%Y-%m-%dT%H:%M:%SZ"
-            )
-            rec["response_notes"] = notes
-            _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
-            return True
-    return False
+    with _pra_lock:
+        entries = load_pra_log(path)
+        for rec in entries:
+            if rec.get("request_id") == request_id:
+                rec["response_received_utc"] = datetime.now(timezone.utc).strftime(
+                    "%Y-%m-%dT%H:%M:%SZ"
+                )
+                rec["response_notes"] = notes
+                _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
+                return True
+        return False
 
 
 def _list_pending(path: Path = PRA_LOG_PATH) -> list[dict]:
