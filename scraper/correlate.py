@@ -50,8 +50,16 @@ OUT_PATH = DATA_DIR / "dispatch_correlations.json"
 WINDOW_MINUTES = 60
 
 # Confidence floor: pairs below this are dropped before write. Keeps the
-# output feed sparse (high-signal only).
-MIN_CONFIDENCE = 0.35
+# output feed sparse (high-signal only). Raised from 0.35 to 0.45 to
+# eliminate purely-temporal matches with zero textual overlap.
+MIN_CONFIDENCE = 0.45
+
+# Disposition strings indicating a confirmed arrest. CFS rows with these
+# dispositions are inherently more likely to correlate with a booking.
+ARREST_DISPOSITIONS = frozenset({"ARR: ARREST", "ARR:ARREST"})
+
+# Confidence boost for rows whose disposition confirms an arrest.
+ARREST_BOOST = 0.15
 
 
 @dataclass
@@ -184,9 +192,19 @@ def correlate(
             ))
             overlap = _category_overlap(primary_desc, cfs_text)
 
+            # Require at least some textual signal to avoid purely-temporal matches
+            if overlap == 0.0:
+                continue
+
             # Confidence weights: temporal proximity 0.5 + textual overlap 0.5
             temporal_score = max(0.0, 1.0 - dt_delta_min / (WINDOW_MINUTES * 4))
             conf = 0.5 * temporal_score + 0.5 * overlap
+
+            # Boost for confirmed-arrest dispositions
+            disp = (str(row.get("disposition_text", "")) or "").strip().upper()
+            is_arrest = any(ad in disp for ad in ARREST_DISPOSITIONS)
+            if is_arrest:
+                conf = min(1.0, conf + ARREST_BOOST)
 
             if conf < MIN_CONFIDENCE:
                 continue
@@ -200,6 +218,7 @@ def correlate(
                     "dt_delta_minutes": round(dt_delta_min, 1),
                     "textual_overlap": round(overlap, 3),
                     "booked_date": inm.get("booking_date"),
+                    "arrest_disposition_boost": is_arrest,
                 },
             ))
     return out
@@ -247,7 +266,9 @@ def run(write: bool = True) -> int:
                 "feed identified by cfs_source). Confidence weights: 50% temporal "
                 "proximity within a +/- 60 minute window, 50% textual overlap "
                 "between the charge description and the CFS row's disposition/"
-                "incident-type fields."
+                "incident-type fields. Purely temporal matches (textual "
+                "overlap = 0) are excluded. Confirmed-arrest dispositions "
+                "(ARR: ARREST) receive a +0.15 confidence boost."
             ),
             "pairs": [
                 {
