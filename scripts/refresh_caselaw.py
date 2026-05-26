@@ -34,7 +34,13 @@ from pathlib import Path
 
 import httpx
 
-from scraper.client import DEFAULT_UA
+# Keep this script self-contained for GitHub Actions: it runs in a fresh venv
+# created from requirements.txt and should not depend on repo-internal modules
+# being importable as packages.
+DEFAULT_UA = (
+    "HCJC-caselaw-refresh/1.0 "
+    "(https://github.com/AICincy/HCJC; weekly refresh workflow)"
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -124,7 +130,9 @@ def main() -> int:
     }
     target = DATA / "orc_caselaw.json"
     target.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"wrote {target} ({target.stat().st_size:,} bytes, {sum(len(v) for v in by_code.values())} total opinions)")
+    print(
+        f"wrote {target} ({target.stat().st_size:,} bytes, {sum(len(v) for v in by_code.values())} total opinions)"
+    )
     return 0
 
 
