@@ -12,6 +12,8 @@ import hashlib
 import json
 import logging
 import os
+import sys
+import threading
 from pathlib import Path
 from typing import Iterable
 
@@ -85,17 +87,52 @@ def _record_sha256(record: dict) -> str:
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
+_evidence_lock = threading.Lock()
+
+
+def _flock_exclusive(fh):
+    """Acquire an exclusive advisory file lock (POSIX or Windows)."""
+    if sys.platform == "win32":
+        import msvcrt
+        msvcrt.locking(fh.fileno(), msvcrt.LK_LOCK, 1)
+    else:
+        import fcntl
+        fcntl.flock(fh, fcntl.LOCK_EX)
+
+
+def _flock_release(fh):
+    """Release the advisory file lock."""
+    if sys.platform == "win32":
+        import msvcrt
+        msvcrt.locking(fh.fileno(), msvcrt.LK_UNLCK, 1)
+    else:
+        import fcntl
+        fcntl.flock(fh, fcntl.LOCK_UN)
+
+
 def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None:
     """Append one timestamped record to the WAF-block evidence log (atomic).
 
     Each record carries ``prev_sha256`` (SHA-256 of the prior record's canonical
     JSON, ``None`` for the first), forming a hash chain so the append-only log
     self-verifies independent of git history.
+
+    Uses both a threading lock and an advisory file lock to prevent TOCTOU
+    races from concurrent callers (threads or processes).
     """
-    entries = load_block_log(path)
-    record["prev_sha256"] = _record_sha256(entries[-1]) if entries else None
-    entries.append(record)
-    _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
+    with _evidence_lock:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        lock_path = path.with_suffix(path.suffix + ".lock")
+        lock_path.touch(exist_ok=True)
+        with open(lock_path, "r") as lock_fh:
+            _flock_exclusive(lock_fh)
+            try:
+                entries = load_block_log(path)
+                record["prev_sha256"] = _record_sha256(entries[-1]) if entries else None
+                entries.append(record)
+                _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
+            finally:
+                _flock_release(lock_fh)
 
 
 def verify_block_chain(entries: list[dict]) -> list[str]:
@@ -226,6 +263,11 @@ ANON_EXPIRY_DAYS = 7
 # file growth. At ~30-min cron cadence, 365 days ≈ 17k raw anon rows before
 # compaction; afterwards each month compresses to a handful of summary rows.
 ANON_COMPACTION_MAX_DAYS = 365
+# Hard cap on anon_changelog.json entries after compaction. At ~30-min cadence,
+# 365 days produces ~17k raw rows pre-compaction; after compaction each month
+# collapses to a handful of summary rows. 50k allows ~2-3 years of data with
+# room for recent un-compacted entries (~400 bytes/row → ~20 MB worst case).
+ANON_CHANGELOG_LIMIT = 50000
 
 
 def _anonymize_event(e: dict, charge_lookup: dict[str, dict] | None = None) -> dict:
@@ -320,7 +362,7 @@ def save_anon_changelog(
       3. Stable-dedupe by a content key (event + timestamp + inmate hash
          within retention, or just event + date + tier + category for older
          rows).
-      4. Write back. No CHANGELOG_LIMIT applies; this file grows forever.
+      4. Write back, capped at ANON_CHANGELOG_LIMIT (oldest summaries dropped first).
 
     The enrichment dict, if provided, maps inmate_number -> {tier, category}
     derived from current.json at sweep time so we can anonymize without
@@ -387,6 +429,8 @@ def save_anon_changelog(
     # Stable sort by date/timestamp, oldest first for append-only feel
     out.sort(key=lambda r: r.get("timestamp_utc") or r.get("date") or "")
     out = _compact_anon_entries(out)
+    if len(out) > ANON_CHANGELOG_LIMIT:
+        out = out[-ANON_CHANGELOG_LIMIT:]
     _atomic_write_text(path, json.dumps(out, indent=2))
 
 

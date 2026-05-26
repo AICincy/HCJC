@@ -50,6 +50,7 @@ from web.classify import (
     is_orc_code,
 )
 from web.shape import (
+    RosterIndexes,
     _bond_by_tier,
     _bond_context,
     _bond_total,
@@ -215,12 +216,13 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     env.globals["primary_degree"] = _primary_degree
     env.globals["tier_max"] = _tier_max
     env.globals["tier_ladder"] = ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"]
-    env.globals["bond_context"] = lambda inm: _bond_context(inm, snapshot.inmates, offenses)
+    idx = RosterIndexes(snapshot.inmates, offenses)
+    env.globals["bond_context"] = lambda inm: _bond_context(inm, snapshot.inmates, offenses, indexes=idx)
     env.globals["recent_booked_inmates"] = _recent_booked_inmates(snapshot, n=6)
     env.globals["timeline_markers"] = _timeline_markers
     env.globals["display_date"] = _display_date
     env.globals["iso_booking_date"] = _iso_booking_date
-    env.globals["similar_by_statute"] = lambda inm: _similar_by_statute(inm, snapshot.inmates, offenses, limit=6)
+    env.globals["similar_by_statute"] = lambda inm: _similar_by_statute(inm, snapshot.inmates, offenses, limit=6, indexes=idx)
     env.globals["tier_counts"] = _tier_counts
     env.globals["charge_tier"] = _charge_tier
     env.globals["avatar_initials"] = _avatar_initials
@@ -259,7 +261,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     _orc_chaps = _orc_chapters(offenses)
     env.globals["codes_ohio_url"] = lambda code: _statute_url(code, offenses, _orc_chaps)
     env.globals["chap_slug"] = _chap_slug
-    env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates)
+    env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates, indexes=idx)
     env.globals["all_inmates_total"] = snapshot.inmate_count
 
 

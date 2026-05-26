@@ -38,6 +38,7 @@ def test_get_returns_body_on_first_try():
 def test_get_retries_on_5xx_then_succeeds(monkeypatch):
     slept: list[float] = []
     monkeypatch.setattr(client_mod.time, "sleep", lambda s: slept.append(s))
+    monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)  # zero jitter
     c = _make_client_with_responses([
         httpx.Response(503, text="busy"),
         httpx.Response(200, text="ok"),
@@ -46,16 +47,18 @@ def test_get_retries_on_5xx_then_succeeds(monkeypatch):
         assert c.get("/x") == "ok"
     finally:
         c._client.close()
-    # Backoff fired exactly once with the first-attempt delay.
+    # Backoff fired once: base=0.5 * 2^0 = 0.5s, jitter=0 (random→0.5).
     assert slept == [0.5]
 
 
 def test_get_raises_after_repeated_5xx(monkeypatch):
     monkeypatch.setattr(client_mod.time, "sleep", lambda s: None)
+    monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)
     c = _make_client_with_responses([
         httpx.Response(503),
         httpx.Response(503),
         httpx.Response(503),
+        httpx.Response(503),  # initial + MAX_RETRIES retries
     ])
     try:
         with pytest.raises(httpx.HTTPStatusError):

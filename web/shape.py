@@ -45,12 +45,20 @@ def _strftime_nopad(dt, fmt: str) -> str:
     return dt.strftime(fmt)
 
 
-def _related_inmates(target: Inmate, all_inmates: list[Inmate], limit: int = 6) -> list[Inmate]:
+def _related_inmates(
+    target: Inmate,
+    all_inmates: list[Inmate],
+    limit: int = 6,
+    indexes: RosterIndexes | None = None,
+) -> list[Inmate]:
     """Other inmates in custody whose primary ORC chapter matches the target's."""
     target_chap = _primary_chapter(target)
     if not target_chap:
         return []
     target_label = target_chap["label"]
+    if indexes is not None:
+        candidates = indexes.by_chapter.get(target_label, [])
+        return [i for i in candidates if i.inmate_number != target.inmate_number][:limit]
     out: list[Inmate] = []
     for inm in all_inmates:
         if inm.inmate_number == target.inmate_number:
@@ -86,6 +94,45 @@ def _recent_booked_inmates(snapshot: Snapshot, n: int = 6) -> list[Inmate]:
 _BOND_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
 
 
+# ---------------------------------------------------------------------------
+# Pre-computed indexes for O(1) lookup (C1: eliminate O(n²) per-inmate scans)
+# ---------------------------------------------------------------------------
+
+class RosterIndexes:
+    """Pre-built indexes over the full inmate roster.
+
+    Built once in O(n) during ``build()``; passed to per-inmate helpers so
+    they do O(1) dict lookups instead of scanning all_inmates each time.
+    """
+    __slots__ = ("by_chapter", "by_code", "bonds_by_code")
+
+    def __init__(self, inmates: list[Inmate], offenses: dict | None = None) -> None:
+        by_chapter: dict[str, list[Inmate]] = defaultdict(list)
+        by_code: dict[str, list[Inmate]] = defaultdict(list)
+        bonds_by_code: dict[str, list[int]] = defaultdict(list)
+
+        for inm in inmates:
+            chap = _primary_chapter(inm)
+            if chap:
+                by_chapter[chap["label"]].append(inm)
+            for c in inm.charges:
+                code = orc_mod.normalize_code((c.orc_code or "").strip())
+                if not code or code.upper() == "NONE":
+                    continue
+                by_code[code].append(inm)
+                v = _parse_bond_amount(c.bond_amount)
+                if v is not None and v > 0:
+                    bonds_by_code[code].append(v)
+                break  # one code per inmate for bond stats
+
+        for vals in bonds_by_code.values():
+            vals.sort()
+
+        self.by_chapter = dict(by_chapter)
+        self.by_code = dict(by_code)
+        self.bonds_by_code = dict(bonds_by_code)
+
+
 def _bond_primary_code_and_bond(target: Inmate, offenses: dict) -> tuple[str, int | None]:
     """Return (primary_code, my_bond) for target's most severe ORC code."""
     primary = None
@@ -107,8 +154,24 @@ def _bond_primary_code_and_bond(target: Inmate, offenses: dict) -> tuple[str, in
     return primary_code, my_bond
 
 
-def _bond_peer_amounts(target: Inmate, all_inmates: list[Inmate], primary_code: str) -> list[int]:
+def _bond_peer_amounts(
+    target: Inmate,
+    all_inmates: list[Inmate],
+    primary_code: str,
+    indexes: RosterIndexes | None = None,
+) -> list[int]:
     """Return sorted peer bond amounts for the given ORC code."""
+    if indexes is not None:
+        all_bonds = indexes.bonds_by_code.get(primary_code, [])
+        my_bond = _parse_bond_amount(
+            next((c.bond_amount for c in target.charges
+                  if orc_mod.normalize_code((c.orc_code or "").strip()) == primary_code), None)
+        )
+        if my_bond is not None and my_bond > 0 and my_bond in all_bonds:
+            result = list(all_bonds)
+            result.remove(my_bond)
+            return result
+        return list(all_bonds)
     peers: list[int] = []
     for inm in all_inmates:
         if inm.inmate_number == target.inmate_number:
@@ -129,7 +192,12 @@ def _sorted_pct(values: list[int], p: float) -> int:
     return values[idx]
 
 
-def _bond_context(target: Inmate, all_inmates: list[Inmate], offenses: dict | None = None) -> dict | None:
+def _bond_context(
+    target: Inmate,
+    all_inmates: list[Inmate],
+    offenses: dict | None = None,
+    indexes: RosterIndexes | None = None,
+) -> dict | None:
     """Percentile distribution of bond amounts across current peers charged
     under the target inmate's most-severe ORC section. Returns None when there
     aren't enough peers to draw a meaningful distribution (<5)."""
@@ -138,7 +206,7 @@ def _bond_context(target: Inmate, all_inmates: list[Inmate], offenses: dict | No
     primary_code, my_bond = _bond_primary_code_and_bond(target, offenses)
     if not primary_code:
         return None
-    peers = _bond_peer_amounts(target, all_inmates, primary_code)
+    peers = _bond_peer_amounts(target, all_inmates, primary_code, indexes=indexes)
     if len(peers) < 5:
         return None
     p10, p25, p50, p75, p90 = (_sorted_pct(peers, x) for x in (0.10, 0.25, 0.50, 0.75, 0.90))
@@ -298,7 +366,13 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
         "total_days": max(1, (end - start).days),
     }
 
-def _similar_by_statute(target: Inmate, all_inmates: list[Inmate], offenses: dict | None = None, limit: int = 6) -> list[Inmate]:
+def _similar_by_statute(
+    target: Inmate,
+    all_inmates: list[Inmate],
+    offenses: dict | None = None,
+    limit: int = 6,
+    indexes: RosterIndexes | None = None,
+) -> list[Inmate]:
     """Other inmates in custody charged under the target's most-severe ORC base
     code. Falls back to chapter-level match when fewer than 3 peers exist."""
     if offenses is None:
@@ -318,6 +392,12 @@ def _similar_by_statute(target: Inmate, all_inmates: list[Inmate], offenses: dic
             primary_idx = idx
     if not primary_code:
         return []
+    if indexes is not None:
+        candidates = indexes.by_code.get(primary_code, [])
+        matched = [i for i in candidates if i.inmate_number != target.inmate_number][:limit]
+        if len(matched) >= 3:
+            return matched
+        return _related_inmates(target, all_inmates, limit=limit, indexes=indexes)
     out: list[Inmate] = []
     for inm in all_inmates:
         if inm.inmate_number == target.inmate_number:
@@ -328,7 +408,6 @@ def _similar_by_statute(target: Inmate, all_inmates: list[Inmate], offenses: dic
                 break
     if len(out) >= 3:
         return out
-    # Fallback: chapter-level match through the existing related lookup.
     return _related_inmates(target, all_inmates, limit=limit)
 
 def _statute_held_inmates(snapshot: Snapshot, code: str, limit: int = 24) -> list[Inmate]:
