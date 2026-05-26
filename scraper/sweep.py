@@ -28,7 +28,6 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
-from functools import partial
 from pathlib import Path
 
 import httpx
@@ -727,11 +726,8 @@ def _fetch_list_page(client: HcsoClient, surname: str) -> tuple[list[ListRow] | 
     it is counted in n_failed and the status histogram, not silently dropped.
 
     sweep-F8: this MUST swallow every exception and return (None, ...) on
-    failure. ``pool.map`` in the caller surfaces the first worker raise when
-    iterated, which would truncate the surname sweep below
-    SWEEP_MAX_FAILED_FRACTION and look like a healthy partial sweep. If you ever
-    change this to re-raise a typed error, switch the caller to
-    ThreadPoolExecutor + as_completed (see scraper/sweep.py:run) before merging.
+    failure so ``as_completed`` in the caller can process all surnames even
+    when individual fetches fail.
     """
     try:
         resp = client.get_response(SEARCH_PATH, params={"last": surname})
@@ -770,11 +766,10 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     failed = 0
     status_counts: dict[str, int] = {}
     block_sample: dict | None = None
-    # TODO(sweep-F8): switch to ThreadPoolExecutor + as_completed to avoid
-    # pool.map truncating results on first worker exception. Currently safe
-    # because _fetch_list_page swallows all exceptions (see guard above).
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
-        for rows, status, sample in pool.map(partial(_fetch_list_page, client), surnames):
+        futures = {pool.submit(_fetch_list_page, client, s): s for s in surnames}
+        for future in as_completed(futures):
+            rows, status, sample = future.result()
             if block_sample is None and sample is not None:
                 block_sample = sample
             if rows is None:

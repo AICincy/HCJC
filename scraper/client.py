@@ -3,16 +3,17 @@
 Identifies itself in the User-Agent. Parallelism (DEFAULT_CONCURRENCY=16)
 and a 0.5s crawl-delay together keep the request profile well under HCSO's
 WAF tripwires (the 2026-05-19 verification confirmed 32-worker no-delay was
-hitting WAF blocks on truncated <5 KB responses). Retries once on transient
-5xx with a 0.5s backoff; also retries once on 429 honoring a capped
-Retry-After. Does NOT attempt to evade WAFs, rate limits,
-or CAPTCHAs.
+hitting WAF blocks on truncated <5 KB responses). Retries up to MAX_RETRIES
+times on transient 5xx with exponential backoff + jitter; also retries on
+429 honoring a capped Retry-After. Does NOT attempt to evade WAFs, rate
+limits, or CAPTCHAs.
 """
 
 from __future__ import annotations
 
 import logging
 import os
+import random
 import threading
 import time
 from dataclasses import dataclass, field
@@ -39,6 +40,11 @@ RETRY_AFTER_CAP_S = 30.0
 # HCSO's WordPress on nginx handles 16 concurrent connections without 503s,
 # and the lower parallelism keeps us off the WAF's burst-rate heuristic.
 DEFAULT_CONCURRENCY = 16
+# Retry configuration: up to MAX_RETRIES attempts on transient 5xx/429,
+# with exponential backoff (base * 2^attempt) and ±JITTER_FRACTION jitter.
+MAX_RETRIES = 3
+RETRY_BASE_DELAY = 0.5
+RETRY_JITTER_FRACTION = 0.25
 
 
 @dataclass
@@ -109,11 +115,11 @@ class HcsoClient:
     def get(self, path: str, params: dict[str, str] | None = None) -> str:
         """Issue a GET request and return the response body as text.
 
-        Thread-safe. Raises httpx.HTTPStatusError on non-2xx after one retry on
-        transient 5xx and 429. Uses a 0.5s backoff on 5xx so a degraded HCSO
-        front-end isn't hammered immediately. On 429, the Retry-After header
-        is honored (parsed in seconds or HTTP-date form), capped at
-        RETRY_AFTER_CAP_S.
+        Thread-safe. Raises httpx.HTTPStatusError on non-2xx after up to
+        MAX_RETRIES retries on transient 5xx and 429. Uses exponential backoff
+        with ±25% jitter on 5xx so a degraded HCSO front-end isn't hammered.
+        On 429, the Retry-After header is honored (parsed in seconds or
+        HTTP-date form), capped at RETRY_AFTER_CAP_S.
         """
         return self.get_response(path, params=params).text
 
@@ -126,16 +132,24 @@ class HcsoClient:
         assert self._client is not None, "use as context manager"
         self._sleep_for_crawl_delay()
         response = self._client.get(path, params=params)
-        # One retry pass: handle 429 or 5xx, then re-check.
-        if response.status_code == 429:
-            wait = _retry_after_seconds(response.headers.get("retry-after"))
-            wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)
-            log.info("429 on %s; sleeping %.1fs before retry", path, wait)
-            time.sleep(wait)
-            response = self._client.get(path, params=params)
-        elif response.status_code >= 500:
-            time.sleep(0.5)
-            response = self._client.get(path, params=params)
+        for attempt in range(MAX_RETRIES):
+            if response.status_code == 429:
+                wait = _retry_after_seconds(response.headers.get("retry-after"))
+                wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)
+                log.info("429 on %s; sleeping %.1fs before retry %d/%d",
+                         path, wait, attempt + 1, MAX_RETRIES)
+                time.sleep(wait)
+                response = self._client.get(path, params=params)
+            elif response.status_code >= 500:
+                delay = RETRY_BASE_DELAY * (2 ** attempt)
+                jitter = delay * RETRY_JITTER_FRACTION * (2 * random.random() - 1)
+                wait = delay + jitter
+                log.info("%d on %s; sleeping %.2fs before retry %d/%d",
+                         response.status_code, path, wait, attempt + 1, MAX_RETRIES)
+                time.sleep(wait)
+                response = self._client.get(path, params=params)
+            else:
+                break
         response.raise_for_status()
         return response
 
