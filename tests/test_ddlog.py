@@ -52,3 +52,37 @@ def test_emit_swallows_send_errors(monkeypatch, caplog):
     with caplog.at_level("WARNING"):
         assert ddlog.emit("x", message="msg") is False
     assert "Datadog transport send failed for event=x" in caplog.text
+
+
+def test_sweep_id_threaded_into_payload(monkeypatch):
+    monkeypatch.setenv("DD_API_KEY", "k")
+    sent: dict = {}
+
+    def _fake_post(url, json=None, headers=None, timeout=None):
+        sent["json"] = json
+        return httpx.Response(202, request=httpx.Request("POST", url))
+
+    monkeypatch.setattr(ddlog.httpx, "post", _fake_post)
+
+    ddlog.set_sweep_id("abc123")
+    try:
+        ddlog.emit("test_event", message="test")
+        assert sent["json"]["sweep_id"] == "abc123"
+        assert "sweep_id:abc123" in sent["json"]["ddtags"]
+    finally:
+        ddlog.set_sweep_id(None)
+
+
+def test_sweep_id_absent_when_not_set(monkeypatch):
+    monkeypatch.setenv("DD_API_KEY", "k")
+    sent: dict = {}
+
+    def _fake_post(url, json=None, headers=None, timeout=None):
+        sent["json"] = json
+        return httpx.Response(202, request=httpx.Request("POST", url))
+
+    monkeypatch.setattr(ddlog.httpx, "post", _fake_post)
+    ddlog.set_sweep_id(None)
+    ddlog.emit("test_event", message="test")
+    assert "sweep_id" not in sent["json"]
+    assert "sweep_id:" not in sent["json"]["ddtags"]

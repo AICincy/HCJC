@@ -1,6 +1,10 @@
 """Best-effort Datadog log emitter for sweep telemetry.
 
 No-op when DD_API_KEY is unset. Never raises to callers.
+
+The module-level ``sweep_id`` (set once per ``scraper.sweep.run()``) is
+threaded into every emitted event, enabling end-to-end trace correlation
+in Datadog without touching each call-site.
 """
 
 from __future__ import annotations
@@ -14,6 +18,20 @@ from typing import Any
 import httpx
 
 log = logging.getLogger(__name__)
+
+# Unique id for the current sweep run.  Set by ``set_sweep_id`` at the start
+# of each ``scraper.sweep.run()`` invocation; reset to ``None`` at sweep end.
+_sweep_id: str | None = None
+
+
+def set_sweep_id(sid: str | None) -> None:
+    """Set (or clear) the sweep_id threaded into every emitted event."""
+    global _sweep_id
+    _sweep_id = sid
+
+
+def get_sweep_id() -> str | None:
+    return _sweep_id
 
 
 def _now_utc() -> str:
@@ -53,6 +71,9 @@ def emit(
     dd_site = os.getenv("DD_SITE", "datadoghq.com").strip() or "datadoghq.com"
     url = f"https://http-intake.logs.{dd_site}/api/v2/logs"
 
+    tags = _base_tags() + [f"event:{event}"]
+    if _sweep_id:
+        tags.append(f"sweep_id:{_sweep_id}")
     payload: dict[str, Any] = {
         "timestamp": _now_utc(),
         "status": level,
@@ -61,8 +82,10 @@ def emit(
         "service": os.getenv("DD_SERVICE", "jcstream"),
         "ddsource": os.getenv("DD_SOURCE", "jcstream"),
         "hostname": socket.gethostname(),
-        "ddtags": ",".join(_base_tags() + [f"event:{event}"]),
+        "ddtags": ",".join(tags),
     }
+    if _sweep_id:
+        payload["sweep_id"] = _sweep_id
     if attrs:
         payload.update(attrs)
 

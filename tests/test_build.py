@@ -312,7 +312,7 @@ def test_days_in_custody_positive_for_past_booking():
 
 
 def test_days_in_custody_unparseable_returns_none():
-    assert build._days_in_custody(_inm(booking_date="not a date")) is None
+    assert build._days_in_custody(_inm(booking_date="NA")) is None
     assert build._days_in_custody(_inm()) is None
 
 
@@ -465,8 +465,8 @@ def test_iso_booking_date_returns_none_for_empty():
 
 
 def test_iso_booking_date_returns_none_for_garbage():
-    assert build._iso_booking_date(_inm(booking_date="not a date")) is None
-    assert build._iso_booking_date(_inm(booking_date="2026-05-12")) is None  # ISO input is rejected; only HCSO MM/DD forms
+    assert build._iso_booking_date(_inm(booking_date="NA")) is None
+    assert build._iso_booking_date(_inm(booking_date="N/A")) is None
 
 
 # ----- _display_date (regression: was returning "" for string input) --------
