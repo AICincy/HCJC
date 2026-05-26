@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from scraper.correlate import (
+    ARREST_BOOST,
     MIN_CONFIDENCE,
     _category_overlap,
     _parse_cfs_dt,
@@ -146,6 +147,34 @@ def test_correlate_filters_by_time_window():
     far_away = _make_cfs("2026-05-17T12:00:00", disposition="THEFT SHOPLIFTING")
     result = correlate(current, [far_away], "cfs_recent")
     assert result == []
+
+
+def test_correlate_requires_textual_overlap():
+    """Purely temporal matches (overlap=0) should be excluded."""
+    current = _make_current("5/15/26", "THEFT SHOPLIFTING")
+    cfs_rows = [_make_cfs("2026-05-15T00:05:00", disposition="TRAFFIC STOP WARNING")]
+    result = correlate(current, cfs_rows, "cfs_recent")
+    assert result == []
+
+
+def test_correlate_arrest_disposition_boost():
+    """CFS rows with 'ARR: ARREST' disposition get a confidence boost."""
+    current = _make_current("5/15/26", "THEFT SHOPLIFTING")
+    cfs_no_arrest = [_make_cfs("2026-05-15T00:30:00", disposition="THEFT SHOPLIFTING RPT")]
+    cfs_arrest = [_make_cfs("2026-05-15T00:30:00", disposition="THEFT SHOPLIFTING ARR: ARREST")]
+    result_no = correlate(current, cfs_no_arrest, "cfs_recent")
+    result_yes = correlate(current, cfs_arrest, "cfs_recent")
+    if result_no and result_yes:
+        assert result_yes[0].confidence > result_no[0].confidence
+        assert result_yes[0].signals["arrest_disposition_boost"] is True
+
+
+def test_min_confidence_raised():
+    assert MIN_CONFIDENCE >= 0.45
+
+
+def test_arrest_boost_value():
+    assert ARREST_BOOST == 0.15
 
 
 # ----- run() ---------------------------------------------------------------

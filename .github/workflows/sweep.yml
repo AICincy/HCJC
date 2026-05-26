@@ -159,4 +159,20 @@ jobs:
           path: docs
       - id: deploy
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e  # v4
-        continue-on-error: true
+
+      - name: Deploy health check
+        if: steps.deploy.outcome == 'success'
+        run: |
+          SITE_URL="${{ steps.deploy.outputs.page_url }}"
+          if [ -z "$SITE_URL" ]; then
+            echo "::warning::No page_url output from deploy step; skipping health check"
+            exit 0
+          fi
+          echo "Checking $SITE_URL ..."
+          STATUS=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 15 "$SITE_URL" || echo "000")
+          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+            echo "Health check passed (HTTP $STATUS)"
+          else
+            echo "::error::Deploy health check failed (HTTP $STATUS for $SITE_URL)"
+            exit 1
+          fi

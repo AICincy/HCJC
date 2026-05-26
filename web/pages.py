@@ -6,7 +6,9 @@ them to the output directory. Extracted from web/build.py for modularity.
 from __future__ import annotations
 
 import json
+import os
 import shutil
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -162,7 +164,8 @@ def _render_inmates(
     for ev_list in events_by_inmate.values():
         ev_list.sort(key=lambda e: e.timestamp_utc or "")
     crowdsourced = _load_crowdsourced_cases()
-    for inm in snapshot.inmates:
+
+    def _render_one(inm: Inmate) -> None:
         page = template.render(
             inmate=inm,
             snapshot=snapshot,
@@ -173,6 +176,14 @@ def _render_inmates(
         target = out_dir / "inmate" / inm.inmate_number / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(page, encoding="utf-8")
+
+    workers = min(os.cpu_count() or 1, len(snapshot.inmates), 8)
+    if workers <= 1 or len(snapshot.inmates) <= 4:
+        for inm in snapshot.inmates:
+            _render_one(inm)
+    else:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            list(pool.map(_render_one, snapshot.inmates))
 
 
 def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) -> None:
