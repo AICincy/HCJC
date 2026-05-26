@@ -659,6 +659,13 @@ def run(
             # that were never written and that the next cycle still needs.
             if save_ok and seen_ids:
                 _prune_and_report(PHOTOS_DIR, seen_ids)
+        # Clear the sweep_id correlation tag on every exit path: degraded-list
+        # `return 0` above, the `raise` in the unhandled-exception branch, and
+        # the normal completion below all flow through this finally. Doing the
+        # reset here (instead of after the try/except/finally) honors the
+        # ddlog._sweep_id "reset to None at sweep end" contract even when the
+        # try-body short-circuits.
+        set_sweep_id(None)
 
     if dry_run:
         log.info("dry-run; not writing")
@@ -674,7 +681,6 @@ def run(
             "current_count": len(current),
         },
     )
-    set_sweep_id(None)
     return 0
 
 
