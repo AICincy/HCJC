@@ -35,8 +35,12 @@ def _atomic_write_text(path: Path, content: str) -> None:
     os.replace(tmp, path)
 
 
+_MUTABLE_FIELDS = {"response_received_utc", "response_notes"}
+
+
 def _record_sha256(record: dict) -> str:
-    canonical = json.dumps(record, sort_keys=True, separators=(",", ":"))
+    immutable = {k: v for k, v in record.items() if k not in _MUTABLE_FIELDS}
+    canonical = json.dumps(immutable, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
