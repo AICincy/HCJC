@@ -9,7 +9,7 @@ is roughly 20-45 minutes; during incidents the next-run can slip past the hour.
 The sweep also runs the HCSO scraper
 (`scraper/`) and pulls four Cincinnati Open Data feeds.
 Live at https://www.aretheyinjail.com (GitHub Pages, custom domain; build uses
-`JCSTREAM_SITE_BASE_URL=""` + a `CNAME` file written from `JCSTREAM_CNAME`).
+`JCSTREAM_SITE_BASE_URL=""` and the Pages custom-domain setting).
 
 ## Project specialists
 
@@ -96,7 +96,7 @@ Violating them imposes cognitive cost the owner cannot afford.
   on the owner.
 - `data/surnames.txt` is A-Z single letters on purpose (HCSO's last-name search is a
   substring match, so 26 letters cover the whole roster with dedup). Don't revert.
-- Build locally: `JCSTREAM_SITE_BASE_URL="" JCSTREAM_CNAME="www.aretheyinjail.com" python -m web.build`
+- Build locally: `JCSTREAM_SITE_BASE_URL="" python -m web.build`
 - Tests: `python -m pytest -q` (must stay green; ≥193 tests as of this writing, suite grows).
 - The stylesheet is cache-busted by content hash (`css_version` in build.py); don't
   key it off the data timestamp again.
@@ -182,4 +182,3 @@ run and keeping last-good data. This is the guard working, not a bug.
   for `scraper/pra.py` and `JCSTREAM_PRA_TO_CAPIAS_EMAIL` for `scraper/pra_capias.py`;
   both default to `HCAdmin@hamilton-co.org`).
   With `JCSTREAM_PRA_SMTP_HOST` + `JCSTREAM_PRA_FROM_EMAIL` present it sends for real.
-

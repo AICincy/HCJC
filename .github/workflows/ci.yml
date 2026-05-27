@@ -36,8 +36,7 @@ jobs:
         run: python -m scraper.verify_pra_log
       - name: Build site from empty data (smoke test)
         # Mirror the production sweep env so this smoke test catches any
-        # deployment-config drift (root-relative paths + CNAME-only routing).
+        # deployment-config drift (root-relative paths).
         env:
           JCSTREAM_SITE_BASE_URL: ""
-          JCSTREAM_CNAME: www.aretheyinjail.com
         run: python -m web.build
