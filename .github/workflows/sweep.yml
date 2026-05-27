@@ -115,8 +115,14 @@ jobs:
 
       - name: Build static site
         env:
-          # Root-relative links keep the site portable across Pages hosts.
+          # Custom domain (aretheyinjail.com) serves at the ROOT, so links are
+          # root-relative — base URL is empty. Also emit the CNAME file so GitHub
+          # Pages keeps the custom domain across rebuilds.
+          # (If you ever drop the custom domain and go back to the
+          #  <owner>.github.io/<repo>/ URL, set JCSTREAM_SITE_BASE_URL to
+          #  /${{ github.event.repository.name }} and clear JCSTREAM_CNAME.)
           JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: www.aretheyinjail.com
         run: python -m web.build
 
       - name: Commit data + built site

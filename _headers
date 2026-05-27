@@ -1,0 +1,63 @@
+# Cloudflare Pages headers stub - inert on GitHub Pages.
+#
+# GitHub Pages ignores this file. It is shipped now so that a future migration
+# to Cloudflare Pages (or fronting the apex with a Cloudflare Worker) lands
+# the full Zero-Trust HTTP-header set without a second source change.
+#
+# Background: audit/11_spa_structural_audit.md spa-S2 / S4 / S5 cannot be
+# expressed as <meta http-equiv> tags (X-Content-Type-Options is partial,
+# frame-ancestors and Permissions-Policy are HTTP-only). Once headers can
+# be set at the boundary, the meta CSP in web/templates/base.html should be
+# removed in favor of the policy below (one source of truth).
+#
+# References:
+#   audit/11_spa_structural_audit.md
+#   https://developers.cloudflare.com/pages/configuration/headers/
+#
+# To activate:
+#   1. Configure Cloudflare Pages with publish directory = docs/
+#   2. Either move this file to docs/_headers, or update web/build.py to
+#      copy it there as part of the build (suggested: alongside the
+#      shutil.copytree(STATIC_DIR, ...) call at build.py:1728).
+#   3. Drop the <meta http-equiv="Content-Security-Policy"> from base.html
+#      and the <meta name="referrer"> tag (both are now HTTP-side).
+
+/*
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+# Photos and static assets are public records intentionally served with
+# permissive CORS so syndication tools can fetch them. Inmate photos are
+# public under ORC 149.43; data files (search.json, dispatches.json, RSS)
+# are licensed CC BY-NC 4.0 per audit/00_index.md and the data page footer.
+/photos/*
+  Access-Control-Allow-Origin: *
+  Cross-Origin-Resource-Policy: cross-origin
+
+/static/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+
+/feed.xml
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+/booked.xml
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+/released.xml
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+# Search and dispatch JSON used by the homepage; same caching as RSS.
+/search.json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+/dispatches.json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
