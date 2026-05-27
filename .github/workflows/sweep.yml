@@ -64,11 +64,6 @@ jobs:
           # On a blocked cycle, snapshot the runner egress IP against GitHub's
           # published Actions ranges (data/egress_evidence.json) for the record.
           JCSTREAM_CAPTURE_EGRESS: "1"
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
-          DD_SITE: us5.datadoghq.com
-          DD_SERVICE: jcstream
-          DD_SOURCE: jcstream
-          DD_ENV: prod
           WORKFLOW_RUN_ID: ${{ github.run_id }}
           COMMIT_SHA: ${{ github.sha }}
         run: |

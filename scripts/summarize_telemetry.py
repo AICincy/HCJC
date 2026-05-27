@@ -7,8 +7,7 @@ is, and block/recovery counts.
 
     python -m scripts.summarize_telemetry
 
-Offline; no network, no Datadog. Complements tools/verify_ingest.py (which
-checks the Datadog side). Exit 0 always; this is a report, not a gate.
+Offline; no network. Exit 0 always; this is a report, not a gate.
 """
 from __future__ import annotations
 

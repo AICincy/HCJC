@@ -34,8 +34,6 @@ from pathlib import Path
 import httpx
 
 from .client import DEFAULT_CONCURRENCY, HcsoClient, make_client
-from .ddlog import emit as ddlog_emit
-from .ddlog import set_sweep_id
 from .models import Inmate, ListRow, utcnow_iso
 from .parsers import parse_detail_page, parse_list_page
 from .photos import downscale_and_save
@@ -132,18 +130,7 @@ def _record_block_evidence(obs: _BlockObservation) -> None:
         "roster_stale_hours": round(stale_h, 1) if stale_h is not None else None,
         "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
     }, WAF_BLOCK_LOG_PATH)
-    ddlog_emit(
-        "waf_block",
-        level="warning",
-        message="WAF block evidence recorded",
-        attrs={
-            "prev_count": obs.prev_count,
-            "seen_count": obs.seen_count,
-            "surnames_total": obs.n_surnames,
-            "surnames_failed": obs.n_failed,
-            "http_status_counts": obs.status_counts,
-        },
-    )
+
 
 
 def _record_recovery_if_blocked(seen_count: int) -> None:
@@ -157,11 +144,7 @@ def _record_recovery_if_blocked(seen_count: int) -> None:
             "seen_count": seen_count,
             "note": "HCSO list sweep succeeded; automated access restored.",
         }, WAF_BLOCK_LOG_PATH)
-        ddlog_emit(
-            "waf_recovery",
-            message="WAF recovery recorded",
-            attrs={"seen_count": seen_count},
-        )
+
 
 
 def _record_egress_evidence() -> None:
@@ -378,16 +361,9 @@ def _fetch_details(
                 # than persisting a degraded baseline.
                 _maybe_checkpoint_partial(previous, current, done, len(to_fetch))
     elapsed_s = round(time.monotonic() - t0, 2)
-    ddlog_emit(
-        "sweep.detail_phase.timing",
-        message=f"Detail phase completed in {elapsed_s}s",
-        attrs={
-            "elapsed_s": elapsed_s,
-            "detail_attempts": n_detail_attempts,
-            "detail_named": n_detail_named,
-            "detail_with_photo": n_detail_with_photo,
-            "total_to_fetch": len(to_fetch),
-        },
+    log.info(
+        "detail phase: %d attempts, %d named, %d with photo in %.1fs",
+        n_detail_attempts, n_detail_named, n_detail_with_photo, elapsed_s,
     )
     return n_detail_attempts, n_detail_named, n_detail_with_photo
 
@@ -447,17 +423,9 @@ def run(
     if max_surnames is not None:
         surnames = surnames[:max_surnames]
     sweep_id = uuid.uuid4().hex[:12]
-    set_sweep_id(sweep_id)
-    ddlog_emit(
-        "sweep_start",
-        message="Sweep started",
-        attrs={
-            "sweep_id": sweep_id,
-            "surnames_total": len(surnames),
-            "max_surnames": max_surnames,
-            "refresh_known": refresh_known,
-            "dry_run": dry_run,
-        },
+    log.info(
+        "sweep %s started (surnames=%d, max=%s, refresh=%s, dry_run=%s)",
+        sweep_id, len(surnames), max_surnames, refresh_known, dry_run,
     )
 
     # Skip-gate: don't re-scrape if the roster DATA is still fresh. Key off the
@@ -471,12 +439,6 @@ def run(
             "current.json data is %.0fs old (< %ds); skipping this cycle",
             stale_h * 3600, MIN_SWEEP_INTERVAL_S,
         )
-        ddlog_emit(
-            "sweep_complete",
-            message="Sweep skipped by freshness gate",
-            attrs={"outcome": "skipped_fresh_data", "roster_stale_hours": stale_h},
-        )
-        set_sweep_id(None)
         return 0
 
     try:
@@ -491,13 +453,6 @@ def run(
             "last-good file kept in place for inspection",
             e,
         )
-        ddlog_emit(
-            "sweep_complete",
-            level="error",
-            message="Sweep aborted due to unreadable current snapshot",
-            attrs={"outcome": "aborted_corrupt_current"},
-        )
-        set_sweep_id(None)
         return 0
     log.info("loaded %d previously-known inmates", len(previous))
 
@@ -525,17 +480,7 @@ def run(
                     "— NOT writing the roster this cycle; keeping last-good data",
                     len(previous), len(seen_ids), n_failed, len(surnames),
                 )
-                ddlog_emit(
-                    "sweep.degraded.list",
-                    level="error",
-                    message="List sweep degraded, keeping last-good roster",
-                    attrs={
-                        "prev_count": len(previous),
-                        "seen_count": len(seen_ids),
-                        "surnames_total": len(surnames),
-                        "surnames_failed": n_failed,
-                    },
-                )
+
                 # The list-sweep guard thresholds (>10% surname errors or
                 # roster collapsed below 50% of prior) are checked in
                 # scraper/sweep_guards.sweep_looks_healthy. A prolonged freeze
@@ -548,16 +493,6 @@ def run(
                     n_surnames=len(surnames), n_failed=n_failed,
                     status_counts=status_counts, block_sample=block_sample))
                 _record_egress_evidence()
-                ddlog_emit(
-                    "sweep_complete",
-                    level="warning",
-                    message="Sweep completed with degraded list guard",
-                    attrs={
-                        "outcome": "degraded_list_guard",
-                        "prev_count": len(previous),
-                        "seen_count": len(seen_ids),
-                    },
-                )
                 return 0
 
             # Healthy sweep: if we were previously blocked, close the denial
@@ -593,16 +528,7 @@ def run(
             # the last-good roster.
             if not watchdog_ok:
                 roster_ok = False
-                ddlog_emit(
-                    "sweep.degraded.detail_watchdog",
-                    level="warning",
-                    message="Detail watchdog blocked roster write",
-                    attrs={
-                        "detail_attempts": n_detail_attempts,
-                        "detail_named": n_detail_named,
-                        "detail_with_photo": n_detail_with_photo,
-                    },
-                )
+
         clean_finish = True
     except KeyboardInterrupt:
         log.warning("interrupted; persisting %d partial inmates", len(current))
@@ -612,17 +538,6 @@ def run(
         # guard; the `finally` will use that to decide whether to persist
         # the partial roster.
         log.exception("unhandled exception in sweep main loop")
-        ddlog_emit(
-            "sweep.unhandled_exception",
-            level="error",
-            message="Unhandled exception in sweep main loop",
-        )
-        ddlog_emit(
-            "sweep_complete",
-            level="error",
-            message="Sweep failed with unhandled exception",
-            attrs={"outcome": "failed_unhandled_exception"},
-        )
         raise
     finally:
         # Write whatever we have so far (so an interrupted sweep doesn't blank
@@ -637,12 +552,7 @@ def run(
                 # snapshot is unchanged on disk; just skip the prune to avoid
                 # deleting photos for ids that never made it to current.json.
                 log.error("save_current failed (%s); skipping changelog and prune", e)
-                ddlog_emit(
-                    "sweep.save_current_failed",
-                    level="error",
-                    message=f"save_current failed: {e}",
-                    attrs={"error": str(e)},
-                )
+
             if save_ok and clean_finish:
                 _save_changelog_and_anon(previous, current)
             elif save_ok:
@@ -659,27 +569,13 @@ def run(
             # that were never written and that the next cycle still needs.
             if save_ok and seen_ids:
                 _prune_and_report(PHOTOS_DIR, seen_ids)
-        # Clear the sweep_id correlation tag on every exit path: degraded-list
-        # `return 0` above, the `raise` in the unhandled-exception branch, and
-        # the normal completion below all flow through this finally. Doing the
-        # reset here (instead of after the try/except/finally) honors the
-        # ddlog._sweep_id "reset to None at sweep end" contract even when the
-        # try-body short-circuits.
-        set_sweep_id(None)
+
 
     if dry_run:
         log.info("dry-run; not writing")
-    ddlog_emit(
-        "sweep_complete",
-        message="Sweep completed",
-        attrs={
-            "outcome": "completed",
-            "dry_run": dry_run,
-            "roster_ok": roster_ok,
-            "clean_finish": clean_finish,
-            "seen_count": len(seen_ids),
-            "current_count": len(current),
-        },
+    log.info(
+        "sweep %s completed (roster_ok=%s, clean=%s, seen=%d, current=%d)",
+        sweep_id, roster_ok, clean_finish, len(seen_ids), len(current),
     )
     return 0
 
@@ -689,7 +585,7 @@ _check_detail_watchdog = check_detail_watchdog
 
 
 def _prune_and_report(photos_dir: Path, active_ids: set[str]) -> None:
-    """Run ``prune_photos`` and emit a Sentry breadcrumb when it skips.
+    """Run ``prune_photos`` and log when the safety threshold skips the prune.
 
     The skip path in ``sweep_guards.prune_photos`` is one of the silent-staleness
     pre-conditions: the prune passes but the on-disk photo set drifts out of
@@ -697,23 +593,14 @@ def _prune_and_report(photos_dir: Path, active_ids: set[str]) -> None:
     filesystem the prune is about to inspect, so it can't lie about what the
     prune would have done. We keep the prune logic untouched and just report.
     """
-    # prune_photos itself logs (log.error) and bails on its own when the
-    # delete fraction would exceed PHOTO_PRUNE_MAX_FRACTION; we always call
-    # it so the actual delete behavior stays owned by sweep_guards.
-    # Pre-check: detect a prune-skip condition so we can emit to Datadog.
     if photos_dir.exists():
         existing = list(photos_dir.glob("*.jpg"))
         doomed = [f for f in existing if f.stem not in active_ids]
         if doomed and existing and len(doomed) / len(existing) > PHOTO_PRUNE_MAX_FRACTION:
-            ddlog_emit(
-                "sweep.photo_prune_skipped",
-                level="warning",
-                message=f"Photo prune skipped: {len(doomed)}/{len(existing)} exceed threshold",
-                attrs={
-                    "doomed_count": len(doomed),
-                    "existing_count": len(existing),
-                    "fraction": round(len(doomed) / len(existing), 3),
-                },
+            log.warning(
+                "photo prune skipped: %d/%d (%.1f%%) exceed threshold",
+                len(doomed), len(existing),
+                100.0 * len(doomed) / len(existing),
             )
     prune_photos(photos_dir, active_ids)
 
@@ -833,15 +720,9 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
                     seen.add(r.inmate_number)
                     aggregated.append(r)
     elapsed_s = round(time.monotonic() - t0, 2)
-    ddlog_emit(
-        "sweep.list_phase.timing",
-        message=f"List phase completed in {elapsed_s}s",
-        attrs={
-            "elapsed_s": elapsed_s,
-            "surnames_total": len(surnames),
-            "surnames_failed": failed,
-            "unique_ids": len(seen),
-        },
+    log.info(
+        "list phase: %d unique ids, %d/%d failed in %.1fs",
+        len(seen), failed, len(surnames), elapsed_s,
     )
     return aggregated, failed, status_counts, block_sample
 
