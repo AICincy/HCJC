@@ -453,6 +453,7 @@ def run(
             "last-good file kept in place for inspection",
             e,
         )
+        log.error("sweep %s aborted (corrupt snapshot)", sweep_id)
         return 0
     log.info("loaded %d previously-known inmates", len(previous))
 
@@ -493,6 +494,7 @@ def run(
                     n_surnames=len(surnames), n_failed=n_failed,
                     status_counts=status_counts, block_sample=block_sample))
                 _record_egress_evidence()
+                log.warning("sweep %s completed (degraded list guard)", sweep_id)
                 return 0
 
             # Healthy sweep: if we were previously blocked, close the denial
@@ -538,6 +540,7 @@ def run(
         # guard; the `finally` will use that to decide whether to persist
         # the partial roster.
         log.exception("unhandled exception in sweep main loop")
+        log.error("sweep %s failed with unhandled exception", sweep_id)
         raise
     finally:
         # Write whatever we have so far (so an interrupted sweep doesn't blank
