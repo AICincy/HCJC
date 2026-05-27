@@ -494,7 +494,7 @@ def run(
                     n_surnames=len(surnames), n_failed=n_failed,
                     status_counts=status_counts, block_sample=block_sample))
                 _record_egress_evidence()
-                log.warning("sweep %s completed (degraded list guard)", sweep_id)
+                log.error("sweep %s blocked (degraded list guard)", sweep_id)
                 return 0
 
             # Healthy sweep: if we were previously blocked, close the denial
