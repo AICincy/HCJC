@@ -22,7 +22,7 @@ git clone https://github.com/AICincy/JCStream.git
 cd JCStream
 pip install -r requirements.txt
 python -m pytest -q                                          # must stay green
-JCSTREAM_SITE_BASE_URL="" JCSTREAM_CNAME="www.aretheyinjail.com" python -m web.build
+JCSTREAM_SITE_BASE_URL="" python -m web.build
 # open docs/index.html in a browser
 ```
 
