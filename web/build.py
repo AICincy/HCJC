@@ -337,7 +337,6 @@ def build(out_dir: Path) -> int:
     _write_manifest(out_dir, base_url)
     _write_search_json(out_dir, snapshot)
     _write_dispatches(out_dir, dispatch_points)
-    _write_cname(out_dir)
     _write_well_known(out_dir, site_url, snapshot.generated_utc)
     _write_checksums(out_dir)
     # Tell GitHub Pages NOT to Jekyll-process the built site.
@@ -459,7 +458,6 @@ from web.outputs import (  # noqa: E402
     _copy_photos,
     _copy_static,
     _write_checksums,
-    _write_cname,
     _write_dispatches,
     _write_manifest,
     _write_search_json,
