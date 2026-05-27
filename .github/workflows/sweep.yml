@@ -116,7 +116,7 @@ jobs:
       - name: Build static site
         env:
           # Custom domain (aretheyinjail.com) serves at the ROOT, so links are
-          # root-relative — base URL is empty. Also emit the CNAME file so GitHub
+          # root-relative -- base URL is empty. Also emit the CNAME file so GitHub
           # Pages keeps the custom domain across rebuilds.
           # (If you ever drop the custom domain and go back to the
           #  <owner>.github.io/<repo>/ URL, set JCSTREAM_SITE_BASE_URL to
