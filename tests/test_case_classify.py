@@ -5,6 +5,9 @@ from __future__ import annotations
 import pytest
 
 from web.classify import case_category, case_year
+from typing import cast
+from scraper.models import Inmate
+
 from web.shape import _cases_grouped
 
 
@@ -58,7 +61,7 @@ def test_cases_grouped_orders_categories_and_years():
         _Charge(muni="C/25/TRD/29405"),   # traffic 2025
         _Charge(cp="A 2601234"),          # civil 2026
     ])
-    groups = _cases_grouped(inmate)
+    groups = _cases_grouped(cast(Inmate, inmate))
     # Category order is fixed: criminal, traffic, civil, other (present only).
     assert [g["key"] for g in groups] == ["criminal", "traffic", "civil"]
 
@@ -70,4 +73,4 @@ def test_cases_grouped_orders_categories_and_years():
 
 
 def test_cases_grouped_empty_when_no_cases():
-    assert _cases_grouped(_Inmate([_Charge()])) == []
+    assert _cases_grouped(cast(Inmate, _Inmate([_Charge()]))) == []

@@ -6,6 +6,7 @@ import httpx
 import pytest
 
 from scraper import client as client_mod
+from typing import cast
 
 
 def _make_client_with_responses(responses):
@@ -208,4 +209,4 @@ def test_pool_sets_keepalive_expiry(monkeypatch):
     monkeypatch.setattr(client_mod.httpx, "Client", _capture)
     with client_mod.HcsoClient():
         pass
-    assert captured["limits"].keepalive_expiry == 30
+    assert cast(httpx.Limits, captured["limits"]).keepalive_expiry == 30

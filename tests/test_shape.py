@@ -10,6 +10,8 @@ from datetime import datetime, timedelta
 
 import pytest
 
+from typing import Literal
+
 from scraper.models import ChangeEvent, Charge, Inmate
 from web import shape
 
@@ -176,7 +178,7 @@ def test_court_calendar_bucket_sorted_by_date_then_name(monkeypatch):
 # _events_for_inmate
 # ---------------------------------------------------------------------------
 
-def _evt(num: str, when: str, *, event: str = "updated", name: str = "DOE JOHN") -> ChangeEvent:
+def _evt(num: str, when: str, *, event: Literal["booked", "released", "updated"] = "updated", name: str = "DOE JOHN") -> ChangeEvent:
     return ChangeEvent(event=event, inmate_number=num, name=name, timestamp_utc=when)
 
 

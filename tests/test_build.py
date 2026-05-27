@@ -335,7 +335,10 @@ def test_chap_slug_lowercases_and_dashes():
 
 # ----- _events_in_window / _events_for_recent ------------------------------
 
-def _evt(event: str, when: datetime, note: str = "") -> ChangeEvent:
+from typing import Literal
+
+
+def _evt(event: Literal["booked", "released", "updated"], when: datetime, note: str = "") -> ChangeEvent:
     return ChangeEvent(
         event=event,
         inmate_number="1",

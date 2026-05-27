@@ -6,6 +6,7 @@ from pathlib import Path
 from scraper import sweep
 from scraper.models import Inmate, ListRow
 from scraper.sweep import WafBackoffTracker, _fetch_one
+from typing import Any, cast
 from scraper.sweep_guards import (
     ROSTER_STALE_ALARM_HOURS,
     check_detail_watchdog,
@@ -190,7 +191,7 @@ def test_fetch_one_uses_list_row_name_when_detail_heading_missing(tmp_path, monk
         inmate_number="9876543", last_name="ROE", first_name="JANE", admit_date="5/10/26"
     )
     inm, named, had_photo = _fetch_one(
-        client, "9876543", previous={}, list_row=list_row, waf_tracker=WafBackoffTracker()
+        cast(Any, client), "9876543", previous={}, list_row=list_row, waf_tracker=WafBackoffTracker()
     )
     # detail parser produced no name, so detail_named must be False.
     assert named is False
@@ -214,7 +215,7 @@ def test_fetch_one_carries_existing_photo_when_no_inline_image(tmp_path, monkeyp
         "<ul><li>Inmate Number : 1234567</li></ul></body></html>"
     )
     client = _FakeClient(html)
-    inm, named, had_photo = _fetch_one(client, "1234567", previous={}, list_row=None, waf_tracker=WafBackoffTracker())
+    inm, named, had_photo = _fetch_one(cast(Any, client), "1234567", previous={}, list_row=None, waf_tracker=WafBackoffTracker())
     assert had_photo is False  # no inline image on the page
     assert inm is not None
     # carry-forward kicked in because the photo file existed on disk.
@@ -242,7 +243,7 @@ def test_fetch_one_falls_back_to_disk_when_pillow_rejects_bytes(tmp_path, monkey
         '</body></html>'
     )
     client = _FakeClient(html)
-    inm, _, had_photo = _fetch_one(client, "5550000", previous={}, list_row=None, waf_tracker=WafBackoffTracker())
+    inm, _, had_photo = _fetch_one(cast(Any, client), "5550000", previous={}, list_row=None, waf_tracker=WafBackoffTracker())
     assert had_photo is True  # detail parser found inline bytes
     assert inm is not None
     # Cached file on disk rescued the snapshot even though decode failed.
@@ -265,7 +266,7 @@ def test_fetch_one_returns_none_on_waf_blocked_response_for_known_inmate(tmp_pat
 
     # Known inmate (in previous): WAF block triggers carry-forward path.
     prior = Inmate(inmate_number="7770000", last_name="DOE", first_name="JOHN", booking_date="5/1/26")
-    inm, named, had_photo = _fetch_one(client, "7770000", previous={"7770000": prior}, list_row=None, waf_tracker=tracker)
+    inm, named, had_photo = _fetch_one(cast(Any, client), "7770000", previous={"7770000": prior}, list_row=None, waf_tracker=tracker)
     assert inm is None  # signals run() to carry forward from previous
     assert named is False
     assert had_photo is False
@@ -275,7 +276,7 @@ def test_fetch_one_returns_none_on_waf_blocked_response_for_known_inmate(tmp_pat
     list_row = ListRow(
         inmate_number="8880000", last_name="ROE", first_name="JANE", admit_date="5/12/26"
     )
-    inm, _, _ = _fetch_one(client, "8880000", previous={}, list_row=list_row, waf_tracker=tracker)
+    inm, _, _ = _fetch_one(cast(Any, client), "8880000", previous={}, list_row=list_row, waf_tracker=tracker)
     assert inm is not None  # falls through; list_row rescues the name
     assert inm.last_name == "ROE"
 
@@ -303,7 +304,7 @@ def test_fetch_one_retries_within_same_cycle_and_recovers_on_second_attempt(tmp_
             return tiny if self.calls == 1 else full
 
     client = _FlipClient()
-    inm, named, _ = _fetch_one(client, "6660000", previous={}, list_row=None, waf_tracker=tracker)
+    inm, named, _ = _fetch_one(cast(Any, client), "6660000", previous={}, list_row=None, waf_tracker=tracker)
     assert client.calls == 2  # retry actually ran
     assert inm is not None
     assert inm.last_name == "DOE"
@@ -611,7 +612,9 @@ def test_list_response_looks_blocked_predicate():
     # Zero rows but a full-size page = a legitimate no-results search.
     assert sweep._list_response_looks_blocked("x" * 10000, []) is False
     # Any parsed rows = not a block, regardless of size.
-    assert sweep._list_response_looks_blocked("x" * 100, [object()]) is False
+    from scraper.models import ListRow
+
+    assert sweep._list_response_looks_blocked("x" * 100, [ListRow(inmate_number="1", last_name="", first_name="", admit_date="")]) is False
 
 
 def test_sweep_list_captures_empty_page_block_sample():
@@ -624,7 +627,7 @@ def test_sweep_list_captures_empty_page_block_sample():
             url = "https://www.hcso.org/inmate-search/?last=" + (params or {}).get("last", "")
             return httpx.Response(200, request=httpx.Request("GET", url), content=body)
 
-    rows, n_failed, status_counts, block_sample = sweep._sweep_list(_EmptyPageClient(), ["A", "B"])
+    rows, n_failed, status_counts, block_sample = sweep._sweep_list(cast(Any, _EmptyPageClient()), ["A", "B"])
     assert rows == []
     assert n_failed == 2              # detected 200-blocks count as failures
     assert status_counts == {"200": 2}
@@ -648,11 +651,11 @@ def test_fetch_list_page_treats_403_and_empty_200_as_failures():
                 raise httpx.HTTPStatusError("403", request=req, response=resp)
             return httpx.Response(200, request=req, content=b"<html>blocked</html>")
 
-    rows, status, sample = sweep._fetch_list_page(_Client("403"), "A")
-    assert rows is None and status == 403 and sample["status"] == 403
+    rows, status, sample = sweep._fetch_list_page(cast(Any, _Client("403")), "A")
+    assert rows is None and status == 403 and (sample is not None and sample["status"] == 403)
 
-    rows, status, sample = sweep._fetch_list_page(_Client("200"), "A")
-    assert rows is None and status == 200 and sample["status"] == 200
+    rows, status, sample = sweep._fetch_list_page(cast(Any, _Client("200")), "A")
+    assert rows is None and status == 200 and (sample is not None and sample["status"] == 200)
 
 
 def test_record_egress_evidence_gated_on_env(monkeypatch):
@@ -697,7 +700,11 @@ def test_skip_gate_uses_generated_utc_not_file_mtime(tmp_path, monkeypatch):
     monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 20 * 60)
 
     calls = []
-    monkeypatch.setattr(sweep, "_sweep_list", lambda c, s: (calls.append(1), ([], 0, {}, None))[1])
+    def _record_call_and_return(c, s):
+        calls.append(1)
+        return ([], 0, {}, None)
+
+    monkeypatch.setattr(sweep, "_sweep_list", _record_call_and_return)
 
     class FakeClient:
         def __enter__(self): return self

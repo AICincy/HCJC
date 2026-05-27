@@ -13,7 +13,8 @@ def test_parse_book_date_rejects_epoch_sentinel():
     assert _parse_book_date("1/1/70") is None
     assert _parse_book_date("01/01/1970") is None
     assert _parse_book_date("5/16/2026") is not None
-    assert _parse_book_date("5/16/26").year == 2026
+    d = _parse_book_date("5/16/26")
+    assert d is not None and d.year == 2026
 
 
 def test_display_date_blanks_epoch_sentinel():

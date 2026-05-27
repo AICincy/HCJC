@@ -51,7 +51,7 @@ API = "https://www.courtlistener.com/api/rest/v4/search/"
 _SUFFIX_RE = re.compile(r"[A-Z]\d*$")
 
 
-def _normalize(code: str) -> str:
+def _normalize(code: str | None) -> str:
     code = (code or "").strip().upper()
     if not code or code in ("NONE", "OTHER"):
         return ""
@@ -107,6 +107,11 @@ def fetch_for_code(code: str, max_results: int = 3, max_retries: int = 3) -> lis
                 time.sleep(backoff)
             else:
                 raise
+
+    # If all retries exhausted without a successful return, return empty list
+    # so the caller receives a consistent `list[dict]` result and mypy is
+    # satisfied that all code paths return the annotated type.
+    return []
 
 
 def main() -> int:

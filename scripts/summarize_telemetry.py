@@ -42,7 +42,8 @@ def summarize(entries: list[dict], generated_utc: str) -> list[str]:
     blocked = [r for r in entries if r.get("event") == "blocked"]
     recovered = [r for r in entries if r.get("event") == "recovered"]
     last = entries[-1] if entries else None
-    currently_blocked = bool(last) and last.get("event") == "blocked"
+    last_event = last.get("event") if last is not None else None
+    currently_blocked = last_event == "blocked"
     stale = roster_stale_hours(generated_utc)
 
     lines = [

@@ -54,6 +54,15 @@ no_implicit_optional = true
 # churn — the tree already passes this with zero findings.)
 check_untyped_defs = true
 warn_redundant_casts = true
+explicit_package_bases = true
+# Run mypy only on package source directories used by the runtime and CI.
+# Exclude `scripts/` (utility scripts) and `tests/` from mypy so local
+# development and GitHub Actions perform consistent checks without requiring
+# test-suite typing changes.
+files = ["scraper", "web", "scripts", "tests"]
+# Allow mypy to check scripts/tests too. Keep explicit_package_bases enabled
+# to avoid duplicate-module mapping errors when packages and scripts overlap.
+exclude = ""
 # Third-party libs without bundled stubs (or not type-checked in CI): ignore
 # missing-import errors for them so mypy reports only first-party type issues.
 [[tool.mypy.overrides]]
