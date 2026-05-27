@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-27T06:39:09Z",
+  "generated_utc": "2026-05-27T19:22:38Z",
   "source": "CourtListener REST API v4 (Ohio appellate courts, published opinions only)",
   "by_code": {
     "2913.02": [
@@ -30,6 +30,14 @@
     ],
     "2925.11": [
       {
+        "case_name": "State v. Geul",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-05-27",
+        "citation": "2026 Ohio 1943",
+        "neutral_cite": "2026 Ohio 1943",
+        "url": "https://www.courtlistener.com/opinion/10865000/state-v-geul/"
+      },
+      {
         "case_name": "State v. Hinkle",
         "court": "Ohio Ct. App.",
         "date_filed": "2026-05-21",
@@ -38,20 +46,12 @@
         "url": "https://www.courtlistener.com/opinion/10862944/state-v-hinkle/"
       },
       {
-        "case_name": "State v. Davis",
+        "case_name": "State v. Brink",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-05-15",
-        "citation": "2026 Ohio 1798",
-        "neutral_cite": "2026 Ohio 1798",
-        "url": "https://www.courtlistener.com/opinion/10860130/state-v-davis/"
-      },
-      {
-        "case_name": "State v. Freeman",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-05-15",
-        "citation": "2026 Ohio 1795",
-        "neutral_cite": "2026 Ohio 1795",
-        "url": "https://www.courtlistener.com/opinion/10860128/state-v-freeman/"
+        "date_filed": "2026-05-20",
+        "citation": "2026 Ohio 1934",
+        "neutral_cite": "2026 Ohio 1934",
+        "url": "https://www.courtlistener.com/opinion/10864995/state-v-brink/"
       }
     ],
     "2925.03": [
@@ -82,28 +82,28 @@
     ],
     "2903.11": [
       {
+        "case_name": "State v. Boykins",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-05-27",
+        "citation": "2026 Ohio 1936",
+        "neutral_cite": "2026 Ohio 1936",
+        "url": "https://www.courtlistener.com/opinion/10865003/state-v-boykins/"
+      },
+      {
+        "case_name": "In re K.G.",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-05-27",
+        "citation": "2026 Ohio 1938",
+        "neutral_cite": "2026 Ohio 1938",
+        "url": "https://www.courtlistener.com/opinion/10864989/in-re-kg/"
+      },
+      {
         "case_name": "State v. Noble",
         "court": "Ohio Ct. App.",
         "date_filed": "2026-05-26",
         "citation": "2026 Ohio 1921",
         "neutral_cite": "2026 Ohio 1921",
         "url": "https://www.courtlistener.com/opinion/10864234/state-v-noble/"
-      },
-      {
-        "case_name": "State v. Schwarz",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-05-26",
-        "citation": "2026 Ohio 1902",
-        "neutral_cite": "2026 Ohio 1902",
-        "url": "https://www.courtlistener.com/opinion/10864209/state-v-schwarz/"
-      },
-      {
-        "case_name": "State v. Salmon",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-05-22",
-        "citation": "2026 Ohio 1896",
-        "neutral_cite": "2026 Ohio 1896",
-        "url": "https://www.courtlistener.com/opinion/10863487/state-v-salmon/"
       }
     ],
     "2903.13": [
@@ -340,32 +340,6 @@
         "url": "https://www.courtlistener.com/opinion/10859431/state-v-charleston/"
       }
     ],
-    "2921.33": [
-      {
-        "case_name": "In re L.K.H-R.",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-05-26",
-        "citation": "2026 Ohio 1906",
-        "neutral_cite": "2026 Ohio 1906",
-        "url": "https://www.courtlistener.com/opinion/10864213/in-re-lkh-r/"
-      },
-      {
-        "case_name": "State v. Stiffler",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-04-30",
-        "citation": "2026 Ohio 1576",
-        "neutral_cite": "2026 Ohio 1576",
-        "url": "https://www.courtlistener.com/opinion/10851348/state-v-stiffler/"
-      },
-      {
-        "case_name": "State v. Jester",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-04-29",
-        "citation": "2026 Ohio 1542",
-        "neutral_cite": "2026 Ohio 1542",
-        "url": "https://www.courtlistener.com/opinion/10850312/state-v-jester/"
-      }
-    ],
     "2913.51": [
       {
         "case_name": "State v. Church",
@@ -392,7 +366,41 @@
         "url": "https://www.courtlistener.com/opinion/10848522/state-v-kendrick/"
       }
     ],
+    "2921.33": [
+      {
+        "case_name": "In re L.K.H-R.",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-05-26",
+        "citation": "2026 Ohio 1906",
+        "neutral_cite": "2026 Ohio 1906",
+        "url": "https://www.courtlistener.com/opinion/10864213/in-re-lkh-r/"
+      },
+      {
+        "case_name": "State v. Stiffler",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-04-30",
+        "citation": "2026 Ohio 1576",
+        "neutral_cite": "2026 Ohio 1576",
+        "url": "https://www.courtlistener.com/opinion/10851348/state-v-stiffler/"
+      },
+      {
+        "case_name": "State v. Jester",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-04-29",
+        "citation": "2026 Ohio 1542",
+        "neutral_cite": "2026 Ohio 1542",
+        "url": "https://www.courtlistener.com/opinion/10850312/state-v-jester/"
+      }
+    ],
     "2903.02": [
+      {
+        "case_name": "State v. Peasley",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-05-27",
+        "citation": "2026 Ohio 1946",
+        "neutral_cite": "2026 Ohio 1946",
+        "url": "https://www.courtlistener.com/opinion/10864999/state-v-peasley/"
+      },
       {
         "case_name": "State v. Salmon",
         "court": "Ohio Ct. App.",
@@ -408,17 +416,34 @@
         "citation": "2026 Ohio 1871",
         "neutral_cite": "2026 Ohio 1871",
         "url": "https://www.courtlistener.com/opinion/10863016/shaker-hts-v-thompson/"
-      },
-      {
-        "case_name": "State v. Liccardo",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-05-21",
-        "citation": "2026 Ohio 1864",
-        "neutral_cite": "2026 Ohio 1864",
-        "url": "https://www.courtlistener.com/opinion/10863013/state-v-liccardo/"
       }
     ],
-    "4510.16": [],
+    "4510.16": [
+      {
+        "case_name": "In re R.C.",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-04-06",
+        "citation": "2026 Ohio 1244",
+        "neutral_cite": "2026 Ohio 1244",
+        "url": "https://www.courtlistener.com/opinion/10838274/in-re-rc/"
+      },
+      {
+        "case_name": "State v. Posey",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-03-25",
+        "citation": "2026 Ohio 1033",
+        "neutral_cite": "2026 Ohio 1033",
+        "url": "https://www.courtlistener.com/opinion/10815600/state-v-posey/"
+      },
+      {
+        "case_name": "State v. Arnold",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-03-19",
+        "citation": "2026 Ohio 998",
+        "neutral_cite": "2026 Ohio 998",
+        "url": "https://www.courtlistener.com/opinion/10814281/state-v-arnold/"
+      }
+    ],
     "2923.12": [
       {
         "case_name": "State v. Jovonni",
@@ -445,24 +470,6 @@
         "url": "https://www.courtlistener.com/opinion/10858819/state-v-moncrief/"
       }
     ],
-    "4511.19A1": [
-      {
-        "case_name": "State v. Ross, 06-Ca-0148 (4-11-2008)",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2008-04-11",
-        "citation": "2008 Ohio 1758",
-        "neutral_cite": "",
-        "url": "https://www.courtlistener.com/opinion/4015420/state-v-ross-06-ca-0148-4-11-2008/"
-      },
-      {
-        "case_name": "State v. Large, 2006ca00359 (9-10-2007)",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2007-09-10",
-        "citation": "2007 Ohio 4685",
-        "neutral_cite": "",
-        "url": "https://www.courtlistener.com/opinion/3937451/state-v-large-2006ca00359-9-10-2007/"
-      }
-    ],
     "2911.01": [
       {
         "case_name": "State ex rel. Walker v. Bolin",
@@ -487,6 +494,24 @@
         "citation": "2026 Ohio 1725",
         "neutral_cite": "2026 Ohio 1725",
         "url": "https://www.courtlistener.com/opinion/10857607/state-v-thompson/"
+      }
+    ],
+    "4511.19A1": [
+      {
+        "case_name": "State v. Ross, 06-Ca-0148 (4-11-2008)",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2008-04-11",
+        "citation": "2008 Ohio 1758",
+        "neutral_cite": "",
+        "url": "https://www.courtlistener.com/opinion/4015420/state-v-ross-06-ca-0148-4-11-2008/"
+      },
+      {
+        "case_name": "State v. Large, 2006ca00359 (9-10-2007)",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2007-09-10",
+        "citation": "2007 Ohio 4685",
+        "neutral_cite": "",
+        "url": "https://www.courtlistener.com/opinion/3937451/state-v-large-2006ca00359-9-10-2007/"
       }
     ],
     "2919.27": [
