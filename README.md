@@ -205,7 +205,7 @@ GitHub Actions cron (*/30)
   site.build  ──▶  site/_dist/  (static HTML + RSS)
         │
         ▼
-  git commit + push  →  GitHub Pages auto-deploy
+  git commit + push  →  GitHub Pages auto-deploy at www.aretheyinjail.com
 ```
 
 ## Repo layout

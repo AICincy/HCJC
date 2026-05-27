@@ -17,7 +17,7 @@ GitHub Actions cron (*/30)         .github/workflows/sweep.yml
    │                                          feed.xml + booked.xml + released.xml,
    │                                          search.json, dispatches.json, history.json,
    │                                          robots.txt, .well-known/security.txt, humans.txt,
-   │                                          CNAME, .nojekyll, static/, photos/)
+   │                                          .nojekyll, static/, photos/)
    │
    └─ git commit data/ docs/  ──────▶ branch  ──▶  GitHub Pages  ──▶  www.aretheyinjail.com
 ```
@@ -73,13 +73,13 @@ tooltip payload, bond/age/court-date / snapshot-shape helpers), then renders:
 - `feed.xml` / `booked.xml` / `released.xml` — RSS 2.0 (all changes / new bookings / releases).
 - `search.json`, `dispatches.json`, `history.json` — see **[[Data]]**.
 - `manifest.webmanifest` (display: browser, no PWA), `robots.txt`, `.well-known/security.txt`,
-  `humans.txt`, `CNAME` (from `JCSTREAM_CNAME`), `data/SHA256SUMS`, `.nojekyll`.
+  `humans.txt`, `data/SHA256SUMS`, `.nojekyll`.
 
 ## Hosting
 
 GitHub Pages, Source = "Deploy from a branch → /docs". The build runs with
-`JCSTREAM_SITE_BASE_URL=""` (so links are root-relative) and writes a `CNAME` file from
-`JCSTREAM_CNAME=www.aretheyinjail.com`. Pushing `docs/` makes the change live within a
-minute or two — no Actions deploy step is on the critical path. `JCSTREAM_SITE_URL` (or, by
-default, `https://<JCSTREAM_CNAME>`) is the absolute origin used in the RSS feeds, the OG
-tags and `security.txt`.
+`JCSTREAM_SITE_BASE_URL=""` (so links are root-relative). GitHub Pages serves `docs/`, and
+the repository's Pages custom-domain setting points the site at `www.aretheyinjail.com`.
+Pushing `docs/` makes the change live within a minute or two — no Actions deploy step is on
+the critical path. `JCSTREAM_SITE_URL` (or, by default, the live site origin) is the absolute
+origin used in the RSS feeds, the OG tags and `security.txt`.

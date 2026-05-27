@@ -1,7 +1,7 @@
 """Non-HTML output functions for the JCStream static site.
 
-Handles static file copying, JSON manifests, CNAME, well-known files, and
-checksums. Extracted from web/build.py for modularity.
+Handles static file copying, JSON manifests, well-known files, and checksums.
+Extracted from web/build.py for modularity.
 """
 from __future__ import annotations
 
@@ -82,15 +82,6 @@ def _write_dispatches(out_dir: Path, points: list[dict]) -> None:
         "points": points,
     }
     (out_dir / "dispatches.json").write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
-
-
-def _write_cname(out_dir: Path) -> None:
-    """GitHub Pages custom-domain file. Written from JCSTREAM_CNAME so it
-    survives the docs/ rebuild; skipped if the env var is empty."""
-    import os as _os
-    domain = (_os.environ.get("JCSTREAM_CNAME", "") or "").strip()
-    if domain:
-        (out_dir / "CNAME").write_text(domain + "\n", encoding="utf-8")
 
 
 def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:

@@ -3,8 +3,8 @@
 ## Build & test locally
 
 ```bash
-# Regenerate docs/ from data/current.json (root-relative links + CNAME file)
-JCSTREAM_SITE_BASE_URL="" JCSTREAM_CNAME="www.aretheyinjail.com" python -m web.build
+# Regenerate docs/ from data/current.json (root-relative links)
+JCSTREAM_SITE_BASE_URL="" python -m web.build
 
 # Run the test suite (must stay green)
 python -m pytest -q
@@ -25,9 +25,10 @@ python -m scraper.cfs --hours 168          # Cincinnati Open Data calls-for-serv
 `.github/workflows/sweep.yml` fires on a `*/15 * * * *` cron with a 20-minute skip-gate
 (the sweep no-ops if `current.json` is less than 20 minutes old), plus `workflow_dispatch`.
 Effective cadence is ~20-45 minutes. Each run: sweep → pull the four Cincinnati feeds →
-`python -m web.build` (with `JCSTREAM_SITE_BASE_URL=""` / `JCSTREAM_CNAME=www.aretheyinjail.com`)
+`python -m web.build` (with `JCSTREAM_SITE_BASE_URL=""`)
 → commit `data/ docs/` → push. GitHub Pages serves
-`docs/` from the branch, so the push *is* the deploy. Other workflows: `ci.yml` (tests on PR),
+`docs/` from the branch and the custom domain points at `www.aretheyinjail.com`, so the push
+*is* the deploy. Other workflows: `ci.yml` (tests on PR),
 `pra_daily.yml` (the optional PRA email loop), `ingest_case_data.yml` (the case-data issue form).
 
 GH Actions cron is best-effort — expect 30–50 min cadence under load. The sweep step has a
