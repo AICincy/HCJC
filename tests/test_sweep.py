@@ -512,7 +512,7 @@ def test_run_watchdog_blocks_roster_write(tmp_path, monkeypatch):
     assert rc == 0
     # The roster file must still contain the original data (watchdog blocked write).
     after_data = json.loads(cur.read_text(encoding="utf-8"))
-    assert after_data["inmate_count"] == original_data["inmate_count"]
+    assert after_data == original_data
 
 
 def test_forensic_sample_captures_status_hash_headers():
