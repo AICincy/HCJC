@@ -405,12 +405,6 @@ def test_record_block_evidence_writes_blocked(tmp_path, monkeypatch):
     blog = tmp_path / "waf_block_log.json"
     monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
     monkeypatch.setattr(sweep, "CURRENT_PATH", tmp_path / "missing.json")  # -> stale None
-    dd_events: list[str] = []
-    monkeypatch.setattr(
-        sweep,
-        "ddlog_emit",
-        lambda event, **kwargs: dd_events.append(event) or True,
-    )
     sample = {"status": 403, "bytes": 162, "sha256": "abc", "body_sample": "blocked", "headers": {"server": "x"}}
     sweep._record_block_evidence(sweep._BlockObservation(
         prev_count=60, seen_count=0, n_surnames=26, n_failed=24,
@@ -424,7 +418,6 @@ def test_record_block_evidence_writes_blocked(tmp_path, monkeypatch):
     assert rec["http_status_counts"] == {"403": 24}
     assert rec["block_sample"]["status"] == 403
     assert rec["block_sample"]["sha256"] == "abc"
-    assert dd_events == ["waf_block"]
 
 
 def test_record_recovery_only_after_blocked(tmp_path, monkeypatch):
@@ -432,13 +425,6 @@ def test_record_recovery_only_after_blocked(tmp_path, monkeypatch):
 
     blog = tmp_path / "waf_block_log.json"
     monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
-    dd_events: list[str] = []
-    monkeypatch.setattr(
-        sweep,
-        "ddlog_emit",
-        lambda event, **kwargs: dd_events.append(event) or True,
-    )
-
     # Empty log -> no-op (no recovery without a prior block).
     sweep._record_recovery_if_blocked(1200)
     assert load_block_log(blog) == []
@@ -452,7 +438,6 @@ def test_record_recovery_only_after_blocked(tmp_path, monkeypatch):
     # Calling again does not append a second 'recovered' (last is not 'blocked').
     sweep._record_recovery_if_blocked(1200)
     assert [r["event"] for r in load_block_log(blog)] == ["blocked", "recovered"]
-    assert dd_events == ["waf_recovery"]
 
 
 def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
@@ -475,13 +460,6 @@ def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
               "body_sample": "Access denied", "headers": {"server": "cloudflare"}}
     monkeypatch.setattr(sweep, "_sweep_list",
                         lambda client, surnames: ([], 24, {"403": 24}, sample))
-    dd_events: list[str] = []
-    monkeypatch.setattr(
-        sweep,
-        "ddlog_emit",
-        lambda event, **kwargs: dd_events.append(event) or True,
-    )
-
     class FakeClient:
         def __enter__(self): return self
         def __exit__(self, *a): return False
@@ -497,15 +475,19 @@ def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
     assert log[0]["http_status_counts"] == {"403": 24}
     assert log[0]["block_sample"]["sha256"] == "deadbeef"
     assert log[0]["block_sample"]["headers"]["server"] == "cloudflare"
-    assert dd_events == ["sweep_start", "sweep.degraded.list", "waf_block", "sweep_complete"]
 
 
-def test_run_emits_ddlog_when_watchdog_blocks(tmp_path, monkeypatch):
+def test_run_watchdog_blocks_roster_write(tmp_path, monkeypatch):
+    """When the detail watchdog returns False, the sweep must NOT overwrite
+    the roster with a degraded snapshot."""
+    import json
+
     from scraper.store import save_current
 
     prev = [Inmate(inmate_number="1000", last_name="DOE", first_name="F0", booking_date="5/10/26")]
     cur = tmp_path / "current.json"
     save_current(cur, prev)
+    original_data = json.loads(cur.read_text(encoding="utf-8"))
     monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
     monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
     monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path / "photos")
@@ -520,13 +502,6 @@ def test_run_emits_ddlog_when_watchdog_blocks(tmp_path, monkeypatch):
     monkeypatch.setattr(sweep, "check_detail_watchdog", lambda *args: False)
     monkeypatch.setattr(sweep, "_prune_and_report", lambda photos_dir, active_ids: None)
 
-    dd_events: list[str] = []
-    monkeypatch.setattr(
-        sweep,
-        "ddlog_emit",
-        lambda event, **kwargs: dd_events.append(event) or True,
-    )
-
     class FakeClient:
         def __enter__(self): return self
         def __exit__(self, *a): return False
@@ -535,7 +510,9 @@ def test_run_emits_ddlog_when_watchdog_blocks(tmp_path, monkeypatch):
 
     rc = sweep.run(surnames=["A"], max_surnames=None, refresh_known=False, dry_run=False)
     assert rc == 0
-    assert "sweep.degraded.detail_watchdog" in dd_events
+    # The roster file must still contain the original data (watchdog blocked write).
+    after_data = json.loads(cur.read_text(encoding="utf-8"))
+    assert after_data == original_data
 
 
 def test_forensic_sample_captures_status_hash_headers():
