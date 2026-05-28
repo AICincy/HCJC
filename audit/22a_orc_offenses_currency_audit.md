@@ -43,6 +43,6 @@
 
 ## Notes
 
-1. 2925.37 was recently amended (April 9, 2025, HB 29, 135th GA). The amendment does not change the section title or the default M1 degree for possession violations. No update needed.
+1. 2925.37 was recently amended (April 9, 2025, HB 29, 135th GA). The amendment does not change the section title or the default M1 degree for possession violations. No update needed. **Recheck after the next legislative session** in case a follow-on amendment changes the degree.
 2. 4507.76 does not exist in ORC. This matches the existing convention for HCSO data artifacts (see 1101.71, 1601.31, 2907.71 in the same file).
 3. The Devin Review comment flagging 2923.121 as "wrong title" was itself incorrect. The reviewer confused 2923.121 (liquor permit premises) with 2923.122 (school safety zones).

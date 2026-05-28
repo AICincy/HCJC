@@ -331,4 +331,9 @@ Each item links to its source finding and a reason.
 - [gov](./09_content_governance.md) - 8 findings
 - [css](./10_css_a11y_performance.md) - 8 findings
 
+## Supplemental audit documents
+
+- [22: WAF freeze monitor](./22_waf_freeze_monitor.md) - Datadog log monitor config for roster staleness (warning 3h, critical 6h)
+- [22a: ORC offenses currency audit](./22a_orc_offenses_currency_audit.md) - authority-currency audit of 20 new ORC entries added in PR #276
+
 End of index.

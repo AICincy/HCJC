@@ -12,6 +12,7 @@ _OFFENSES = {
     "0000.00": {"title": "Booking hold (no ORC code on file)", "degree": ""},
     "2903.13": {"title": "Assault", "degree": "M1"},
     "959.131": {"title": "Cruelty to companion animals", "degree": "M1"},
+    "4507.76": {"title": "Code not found in Ohio Revised Code (HCSO data artifact)", "degree": "MM"},
 }
 
 
@@ -44,3 +45,7 @@ def test_untitled_code_in_unknown_chapter_suppressed():
     # 777.01: untitled and chapter 777 is not a known ORC chapter -> no link.
     chaps = _orc_chapters(_OFFENSES)
     assert _statute_url("777.01", _OFFENSES, chaps) == ""
+
+
+def test_hcso_data_artifact_gets_no_orc_link():
+    assert _statute_url("4507.76", _OFFENSES) == ""
