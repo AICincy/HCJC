@@ -7,10 +7,9 @@ silently corrupts rendered pages.
 from __future__ import annotations
 
 from datetime import datetime, timedelta
+from typing import Literal
 
 import pytest
-
-from typing import Literal
 
 from scraper.models import ChangeEvent, Charge, Inmate
 from web import shape

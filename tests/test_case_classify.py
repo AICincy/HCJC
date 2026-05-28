@@ -2,12 +2,12 @@
 the grouped view-model (web/shape.py _cases_grouped)."""
 from __future__ import annotations
 
+from typing import cast
+
 import pytest
 
-from web.classify import case_category, case_year
-from typing import cast
 from scraper.models import Inmate
-
+from web.classify import case_category, case_year
 from web.shape import _cases_grouped
 
 

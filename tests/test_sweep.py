@@ -2,11 +2,11 @@
 or partially-failed list sweep from being written as the live roster."""
 import logging
 from pathlib import Path
+from typing import Any, cast
 
 from scraper import sweep
 from scraper.models import Inmate, ListRow
 from scraper.sweep import WafBackoffTracker, _fetch_one
-from typing import Any, cast
 from scraper.sweep_guards import (
     ROSTER_STALE_ALARM_HOURS,
     check_detail_watchdog,
