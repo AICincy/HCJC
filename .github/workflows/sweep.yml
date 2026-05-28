@@ -136,7 +136,7 @@ jobs:
             git rebase origin/main || {
               echo "::warning::Rebase conflict detected; attempting merge"
               git rebase --abort
-              git merge origin/main --no-edit || {
+              git merge -X ours origin/main --no-edit || {
                 echo "::error::Both rebase and merge failed"
                 exit 1
               }
