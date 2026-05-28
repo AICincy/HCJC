@@ -115,11 +115,11 @@ class HcsoClient:
     def get(self, path: str, params: dict[str, str] | None = None) -> str:
         """Issue a GET request and return the response body as text.
 
-        Thread-safe. Raises httpx.HTTPStatusError on non-2xx after up to
-        MAX_RETRIES retries on transient 5xx and 429. Uses exponential backoff
-        with ±25% jitter on 5xx so a degraded HCSO front-end isn't hammered.
-        On 429, the Retry-After header is honored (parsed in seconds or
-        HTTP-date form), capped at RETRY_AFTER_CAP_S.
+        Thread-safe. Raises httpx.HTTPStatusError on non-2xx after one retry on
+        transient 5xx and 429. Uses a 0.5s backoff on 5xx so a degraded HCSO
+        front-end isn't hammered immediately. On 429, the Retry-After header
+        is honored (parsed in seconds or HTTP-date form), capped at
+        RETRY_AFTER_CAP_S.
         """
         return self.get_response(path, params=params).text
 
@@ -132,20 +132,20 @@ class HcsoClient:
         assert self._client is not None, "use as context manager"
         self._sleep_for_crawl_delay()
         response = self._client.get(path, params=params)
-        for attempt in range(MAX_RETRIES):
+        for attempt in range(1):
             if response.status_code == 429:
                 wait = _retry_after_seconds(response.headers.get("retry-after"))
                 wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)
-                log.info("429 on %s; sleeping %.1fs before retry %d/%d",
-                         path, wait, attempt + 1, MAX_RETRIES)
+                log.info("429 on %s; sleeping %.1fs before retry 1/1",
+                         path, wait)
                 time.sleep(wait)
                 response = self._client.get(path, params=params)
             elif response.status_code >= 500:
                 delay = RETRY_BASE_DELAY * (2 ** attempt)
                 jitter = delay * RETRY_JITTER_FRACTION * (2 * random.random() - 1)
                 wait = delay + jitter
-                log.info("%d on %s; sleeping %.2fs before retry %d/%d",
-                         response.status_code, path, wait, attempt + 1, MAX_RETRIES)
+                log.info("%d on %s; sleeping %.2fs before retry 1/1",
+                         response.status_code, path, wait)
                 time.sleep(wait)
                 response = self._client.get(path, params=params)
             else:

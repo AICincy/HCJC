@@ -40,3 +40,16 @@ jobs:
         env:
           JCSTREAM_SITE_BASE_URL: ""
         run: python -m web.build
+
+      - name: Verify CNAME written when custom domain env var is set
+        # Catches any build regression that drops the _write_cname call.
+        # GitHub Pages silently stops serving the custom domain if CNAME
+        # disappears from docs/; this makes that a CI failure.
+        env:
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: "www.aretheyinjail.com"
+        run: |
+          python -m web.build
+          test -f docs/CNAME || { echo "::error::docs/CNAME not written by build"; exit 1; }
+          grep -q "aretheyinjail.com" docs/CNAME || { echo "::error::docs/CNAME content wrong"; exit 1; }
+          echo "CNAME OK: $(cat docs/CNAME)"
