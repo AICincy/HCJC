@@ -164515,21 +164515,15 @@
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-21T10:49:52Z",
-    "inmate_number": "14414495",
-    "name": "BARRON QUANISHA",
+    "date": "2026-05-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-21T10:49:52Z",
-    "inmate_number": "14811010",
-    "name": "MOORE AUSHALEI",
+    "date": "2026-05-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
@@ -184843,5 +184837,14 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-28T11:03:57Z",
+    "inmate_number": "2647410",
+    "name": "RANSOME ROBERT",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/28/26"
   }
 ]
