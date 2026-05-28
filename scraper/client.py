@@ -40,7 +40,7 @@ RETRY_AFTER_CAP_S = 30.0
 # HCSO's WordPress on nginx handles 16 concurrent connections without 503s,
 # and the lower parallelism keeps us off the WAF's burst-rate heuristic.
 DEFAULT_CONCURRENCY = 16
-# Retry configuration: up to MAX_RETRIES attempts on transient 5xx/429,
+# Retry configuration: up to MAX_RETRIES retries on transient 5xx/429,
 # with exponential backoff (base * 2^attempt) and ±JITTER_FRACTION jitter.
 MAX_RETRIES = 1
 RETRY_BASE_DELAY = 0.5
