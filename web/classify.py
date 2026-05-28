@@ -385,7 +385,7 @@ def _codes_ohio_url(code: str) -> str:
 # Title markers that mean a charge code is NOT an Ohio Revised Code section, so
 # it must never deep-link to codes.ohio.gov: municipal ordinances (Cincinnati /
 # suburb / mayor's courts) and HCSO placeholder hold codes (0000.00 etc.).
-_NON_ORC_TITLE_MARKERS = ("Municipal Code", "no ORC code on file")
+_NON_ORC_TITLE_MARKERS = ("Municipal Code", "no ORC code on file", "Code not found in Ohio Revised Code")
 
 
 def _is_non_orc_title(title: str) -> bool:

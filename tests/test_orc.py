@@ -37,3 +37,15 @@ def test_offense_file_is_well_formed():
     assert "offenses" in raw
     assert isinstance(raw["offenses"], dict)
     assert len(raw["offenses"]) >= 50
+
+
+def test_all_offenses_have_valid_degree():
+    raw = json.loads(Path("data/orc_offenses.json").read_text(encoding="utf-8"))
+    valid_degrees = set(raw["_degree_order"])
+    for code, entry in raw["offenses"].items():
+        assert "title" in entry, f"{code} missing 'title'"
+        assert "degree" in entry, f"{code} missing 'degree'"
+        assert entry["title"], f"{code} has empty title"
+        assert entry["degree"] in valid_degrees, (
+            f"{code} has invalid degree {entry['degree']!r}"
+        )
