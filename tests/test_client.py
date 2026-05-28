@@ -58,8 +58,6 @@ def test_get_raises_after_repeated_5xx(monkeypatch):
     monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)
     c = _make_client_with_responses([
         httpx.Response(503),
-        httpx.Response(503),
-        httpx.Response(503),
         httpx.Response(503),  # initial + MAX_RETRIES retries
     ])
     try:

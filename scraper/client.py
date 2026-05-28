@@ -40,9 +40,9 @@ RETRY_AFTER_CAP_S = 30.0
 # HCSO's WordPress on nginx handles 16 concurrent connections without 503s,
 # and the lower parallelism keeps us off the WAF's burst-rate heuristic.
 DEFAULT_CONCURRENCY = 16
-# Retry configuration: up to MAX_RETRIES attempts on transient 5xx/429,
+# Retry configuration: up to MAX_RETRIES retries on transient 5xx/429,
 # with exponential backoff (base * 2^attempt) and ±JITTER_FRACTION jitter.
-MAX_RETRIES = 3
+MAX_RETRIES = 1
 RETRY_BASE_DELAY = 0.5
 RETRY_JITTER_FRACTION = 0.25
 
@@ -115,11 +115,11 @@ class HcsoClient:
     def get(self, path: str, params: dict[str, str] | None = None) -> str:
         """Issue a GET request and return the response body as text.
 
-        Thread-safe. Raises httpx.HTTPStatusError on non-2xx after up to
-        MAX_RETRIES retries on transient 5xx and 429. Uses exponential backoff
-        with ±25% jitter on 5xx so a degraded HCSO front-end isn't hammered.
-        On 429, the Retry-After header is honored (parsed in seconds or
-        HTTP-date form), capped at RETRY_AFTER_CAP_S.
+        Thread-safe. Raises httpx.HTTPStatusError on non-2xx after one retry on
+        transient 5xx and 429. Uses a 0.5s backoff on 5xx so a degraded HCSO
+        front-end isn't hammered immediately. On 429, the Retry-After header
+        is honored (parsed in seconds or HTTP-date form), capped at
+        RETRY_AFTER_CAP_S.
         """
         return self.get_response(path, params=params).text
 
