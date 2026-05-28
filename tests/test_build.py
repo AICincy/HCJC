@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Literal
 
 import pytest
 from defusedxml import ElementTree as ET
@@ -334,8 +335,6 @@ def test_chap_slug_lowercases_and_dashes():
 
 
 # ----- _events_in_window / _events_for_recent ------------------------------
-
-from typing import Literal
 
 
 def _evt(event: Literal["booked", "released", "updated"], when: datetime, note: str = "") -> ChangeEvent:

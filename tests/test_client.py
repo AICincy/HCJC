@@ -2,11 +2,12 @@
 real network traffic happens."""
 from __future__ import annotations
 
+from typing import cast
+
 import httpx
 import pytest
 
 from scraper import client as client_mod
-from typing import cast
 
 
 def _make_client_with_responses(responses):
