@@ -42,7 +42,7 @@ RETRY_AFTER_CAP_S = 30.0
 DEFAULT_CONCURRENCY = 16
 # Retry configuration: up to MAX_RETRIES attempts on transient 5xx/429,
 # with exponential backoff (base * 2^attempt) and ±JITTER_FRACTION jitter.
-MAX_RETRIES = 3
+MAX_RETRIES = 1
 RETRY_BASE_DELAY = 0.5
 RETRY_JITTER_FRACTION = 0.25
 
@@ -132,20 +132,20 @@ class HcsoClient:
         assert self._client is not None, "use as context manager"
         self._sleep_for_crawl_delay()
         response = self._client.get(path, params=params)
-        for attempt in range(1):
+        for attempt in range(MAX_RETRIES):
             if response.status_code == 429:
                 wait = _retry_after_seconds(response.headers.get("retry-after"))
                 wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)
-                log.info("429 on %s; sleeping %.1fs before retry 1/1",
-                         path, wait)
+                log.info("429 on %s; sleeping %.1fs before retry %d/%d",
+                         path, wait, attempt + 1, MAX_RETRIES)
                 time.sleep(wait)
                 response = self._client.get(path, params=params)
             elif response.status_code >= 500:
                 delay = RETRY_BASE_DELAY * (2 ** attempt)
                 jitter = delay * RETRY_JITTER_FRACTION * (2 * random.random() - 1)
                 wait = delay + jitter
-                log.info("%d on %s; sleeping %.2fs before retry 1/1",
-                         response.status_code, path, wait)
+                log.info("%d on %s; sleeping %.2fs before retry %d/%d",
+                         response.status_code, path, wait, attempt + 1, MAX_RETRIES)
                 time.sleep(wait)
                 response = self._client.get(path, params=params)
             else:
