@@ -168907,21 +168907,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-22T01:28:25Z",
-    "inmate_number": "2215028",
-    "name": "AVERY BOBBY",
+    "date": "2026-05-22",
     "tier": null,
-    "category": null,
-    "note": "booked 1/1/70"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-22T01:28:25Z",
-    "inmate_number": "2666438",
-    "name": "COLLINS KAYMONI",
+    "date": "2026-05-22",
     "tier": null,
-    "category": null,
-    "note": "booked 1/1/70"
+    "category": null
   },
   {
     "event": "updated",
@@ -184339,5 +184333,59 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-29T02:21:29Z",
+    "inmate_number": "14364756",
+    "name": "SWEETEN DEVONTE",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-29T02:21:29Z",
+    "inmate_number": "14400902",
+    "name": "ALLEN MARQUITA",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T02:21:29Z",
+    "inmate_number": "14696831",
+    "name": "MAPP CHRISTOPHER",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T02:21:29Z",
+    "inmate_number": "14811825",
+    "name": "NORVELL AMILEO",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-29T02:21:29Z",
+    "inmate_number": "2411894",
+    "name": "HERALD RAYSHAWN",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T02:21:29Z",
+    "inmate_number": "2547601",
+    "name": "TYE EVERETT",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
