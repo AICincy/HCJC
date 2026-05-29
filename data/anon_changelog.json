@@ -168865,12 +168865,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-21T23:50:20Z",
-    "inmate_number": "2253471",
-    "name": "BOOKER MARK",
+    "date": "2026-05-21",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -184180,5 +184177,86 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-29T00:11:27Z",
+    "inmate_number": "14121229",
+    "name": "EVERETT JAURESSE",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T00:11:27Z",
+    "inmate_number": "14281717",
+    "name": "OTTO BRETT",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T00:11:27Z",
+    "inmate_number": "14371271",
+    "name": "FOUNTAIN MARSHANEE",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T00:11:27Z",
+    "inmate_number": "14371701",
+    "name": "THOMAS ZARION",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T00:11:27Z",
+    "inmate_number": "1770911",
+    "name": "PHILLIPS KENO",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T00:11:27Z",
+    "inmate_number": "1832523",
+    "name": "DUFFY TERRANCE",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-29T00:11:27Z",
+    "inmate_number": "1892470",
+    "name": "BROOKINS CRYSTAL",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-29T00:11:27Z",
+    "inmate_number": "2313848",
+    "name": "WITHERSPOON MATTHEW",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/28/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-29T00:11:27Z",
+    "inmate_number": "1994785",
+    "name": "JOHNSON DAMON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
