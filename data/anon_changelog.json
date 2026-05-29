@@ -169201,30 +169201,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-22T10:33:11Z",
-    "inmate_number": "14689531",
-    "name": "SMITH-JACKSON FAITH",
+    "date": "2026-05-22",
     "tier": null,
-    "category": null,
-    "note": "booked 5/22/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-22T10:33:11Z",
-    "inmate_number": "2582491",
-    "name": "PATTON BLAKE",
+    "date": "2026-05-22",
     "tier": null,
-    "category": null,
-    "note": "booked 5/22/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-22T10:33:11Z",
-    "inmate_number": "14440882",
-    "name": "ELMORE DONALD",
+    "date": "2026-05-22",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -184603,6 +184594,51 @@
     "timestamp_utc": "2026-05-29T09:48:49Z",
     "inmate_number": "14794978",
     "name": "RIVERA FRANCISCO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-29T11:07:53Z",
+    "inmate_number": "14171742",
+    "name": "EUBANKS BENNIE",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/29/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T11:07:53Z",
+    "inmate_number": "14224825",
+    "name": "WHITE BRIANNA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T11:07:53Z",
+    "inmate_number": "14538056",
+    "name": "JACKSON-DUKES KIMARIN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-29T11:07:53Z",
+    "inmate_number": "1610531",
+    "name": "FAIRBANKS ANTHONY",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/29/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-29T11:07:53Z",
+    "inmate_number": "14810160",
+    "name": "HARRIS RICHARD",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
