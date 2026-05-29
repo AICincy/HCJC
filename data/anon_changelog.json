@@ -168871,39 +168871,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-22T00:38:41Z",
-    "inmate_number": "14071163",
-    "name": "SCOTT ERIC",
+    "date": "2026-05-22",
     "tier": null,
-    "category": null,
-    "note": "booked 5/21/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-22T00:38:41Z",
-    "inmate_number": "1591645",
-    "name": "COSTON LEONARD",
+    "date": "2026-05-22",
     "tier": null,
-    "category": null,
-    "note": "booked 5/21/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-22T00:38:41Z",
-    "inmate_number": "2192771",
-    "name": "MORRIS ERIC",
+    "date": "2026-05-22",
     "tier": null,
-    "category": null,
-    "note": "booked 5/21/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-22T00:38:41Z",
-    "inmate_number": "2286280",
-    "name": "BERNARD ALVIN",
+    "date": "2026-05-22",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-22",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-22",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -184255,6 +184255,87 @@
     "timestamp_utc": "2026-05-29T00:11:27Z",
     "inmate_number": "1994785",
     "name": "JOHNSON DAMON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T01:21:43Z",
+    "inmate_number": "14121229",
+    "name": "EVERETT JAURESSE",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T01:21:43Z",
+    "inmate_number": "14457585",
+    "name": "SMITH SHENIYA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T01:21:43Z",
+    "inmate_number": "14696831",
+    "name": "MAPP CHRISTOPHER",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T01:21:43Z",
+    "inmate_number": "1582738",
+    "name": "ALLEN ANDREW",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-29T01:21:43Z",
+    "inmate_number": "2055873",
+    "name": "CUNNINGHAM GREGORY",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T01:21:43Z",
+    "inmate_number": "2052148",
+    "name": "JENNINGS JAMES",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-29T01:21:43Z",
+    "inmate_number": "2313848",
+    "name": "WITHERSPOON MATTHEW",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-29T01:21:43Z",
+    "inmate_number": "14674989",
+    "name": "BLASSINGAME RIQUAAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-29T01:21:43Z",
+    "inmate_number": "14811301",
+    "name": "RIGGS JACOB",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
