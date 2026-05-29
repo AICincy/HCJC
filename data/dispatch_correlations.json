@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-05-29T17:27:33Z",
+  "generated_utc": "2026-05-29T18:24:33Z",
   "min_confidence": 0.45,
   "window_minutes": 60,
-  "count": 601,
+  "count": 598,
   "disclaimer": "Researcher-mode output. Pairs are CANDIDATES only, not asserted matches. A high-confidence pair still requires human verification before any public claim is made that a specific dispatch led to a specific arrest. JCStream does not publish these joins on its own pages. Joining keys are inmate_number (vs current.json) and cfs_row_index (vs the cfs_recent.json or cfs_pdi_recent.json feed identified by cfs_source). Confidence weights: 50% temporal proximity within a +/- 60 minute window, 50% textual overlap between the charge description and the CFS row's disposition/incident-type fields. Purely temporal matches (textual overlap = 0) are excluded. Confirmed-arrest dispositions (ARR: ARREST) receive a +0.15 confidence boost.",
   "pairs": [
     {
@@ -662,18 +662,6 @@
         "dt_delta_minutes": 20.9,
         "textual_overlap": 0.333,
         "booked_date": "5/19/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
-      "inmate_number": "14811283",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 523,
-      "confidence": 0.77,
-      "signals": {
-        "dt_delta_minutes": 182.3,
-        "textual_overlap": 1.0,
-        "booked_date": "5/23/26",
         "arrest_disposition_boost": true
       }
     },
@@ -2143,30 +2131,6 @@
     },
     {
       "inmate_number": "14364756",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 19,
-      "confidence": 0.547,
-      "signals": {
-        "dt_delta_minutes": 217.7,
-        "textual_overlap": 1.0,
-        "booked_date": "5/28/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14546489",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 11,
-      "confidence": 0.547,
-      "signals": {
-        "dt_delta_minutes": 217.7,
-        "textual_overlap": 1.0,
-        "booked_date": "5/28/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14546489",
       "cfs_source": "cfs_recent",
       "cfs_row_index": 19,
       "confidence": 0.547,
