@@ -170569,12 +170569,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-23T18:37:10Z",
-    "inmate_number": "2309215",
-    "name": "LONG DANIEL",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
@@ -186268,6 +186265,24 @@
     "timestamp_utc": "2026-05-30T18:08:09Z",
     "inmate_number": "1756797",
     "name": "CLIETT LATRIS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-30T18:39:42Z",
+    "inmate_number": "2496554",
+    "name": "GIBSON DANTE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-30T18:39:42Z",
+    "inmate_number": "14565132",
+    "name": "LAGRANDIER ANGEL",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
