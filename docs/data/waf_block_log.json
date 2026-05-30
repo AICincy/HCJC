@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "timestamp_utc": "2026-05-30T23:07:48Z",
+    "event": "blocked",
+    "prev_count": 1253,
+    "seen_count": 1161,
+    "surnames_total": 26,
+    "surnames_failed": 16,
+    "failed_fraction": 0.6154,
+    "http_status_counts": {},
+    "block_sample": null,
+    "roster_stale_hours": 0.5,
+    "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+    "prev_sha256": null
+  }
+]

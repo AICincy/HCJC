@@ -149,6 +149,9 @@
   </tbody>
 </table>
 
+<div class="section-h"><h2 id="access">Access interruptions</h2></div>
+<p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal as authorized by the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>). Beginning 2026-05-30, that portal began returning blocked responses (HTTP&nbsp;403, and at times HTTP&nbsp;200 pages stripped of their results) to this site&rsquo;s automated retrieval. Retrieval has since resumed.</p>
+<p class="muted">Every blocked cycle, and each recovery, is recorded with a UTC timestamp in <a href="waf_block_log.json">waf_block_log.json</a> (hash-chained, and mirrored in this repository&rsquo;s authenticated git history). JCStream does not attempt to circumvent the block: it preserves the last-known-good roster, declines to publish a partial one, and documents the interruption. The site does not route around HCSO&rsquo;s controls.</p>
 
 <div class="section-h"><h2>Feeds</h2></div>
 <p class="muted">RSS&nbsp;2.0, newest first, ~50 items each:
