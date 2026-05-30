@@ -170335,57 +170335,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T10:45:51Z",
-    "inmate_number": "14706357",
-    "name": "WEBSTER RACHEL",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T11:15:47Z",
-    "inmate_number": "14706357",
-    "name": "WEBSTER RACHEL",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T11:44:34Z",
-    "inmate_number": "1551481",
-    "name": "MOATS DONTA",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-23T11:44:34Z",
-    "inmate_number": "2523404",
-    "name": "COOK CANDY",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-23T12:08:19Z",
-    "inmate_number": "14774413",
-    "name": "JACKSON SAMUEL",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-23T12:08:19Z",
-    "inmate_number": "14768200",
-    "name": "NDOUYO ALASSANE",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -185866,5 +185848,41 @@
     "tier": null,
     "category": null,
     "note": "booked 5/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-30T12:08:35Z",
+    "inmate_number": "14811005",
+    "name": "KEARNEY MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/30/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-30T12:08:35Z",
+    "inmate_number": "2523404",
+    "name": "COOK CANDY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-30T12:08:35Z",
+    "inmate_number": "14589263",
+    "name": "JACKSON ANTON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-30T12:08:35Z",
+    "inmate_number": "14502724",
+    "name": "WILSON JOEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
