@@ -170329,12 +170329,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-23T10:07:49Z",
-    "inmate_number": "14706357",
-    "name": "WEBSTER RACHEL",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
@@ -185860,5 +185857,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-30T10:14:24Z",
+    "inmate_number": "1756797",
+    "name": "CLIETT LATRIS",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/30/26"
   }
 ]
