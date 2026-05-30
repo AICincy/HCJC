@@ -170563,12 +170563,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T18:07:22Z",
-    "inmate_number": "14811283",
-    "name": "JONES-LANG GREGORY",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -186253,6 +186250,24 @@
     "timestamp_utc": "2026-05-30T17:38:36Z",
     "inmate_number": "14203258",
     "name": "CARNES BARBARA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-30T18:08:09Z",
+    "inmate_number": "14232241",
+    "name": "WALKER TURON",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/30/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-30T18:08:09Z",
+    "inmate_number": "1756797",
+    "name": "CLIETT LATRIS",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
