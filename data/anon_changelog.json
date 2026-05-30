@@ -170587,12 +170587,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-23T19:42:33Z",
-    "inmate_number": "1666693",
-    "name": "MCCLAIN CHRISTOPHER",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": "booked 5/23/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -186307,5 +186304,50 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-30T19:44:43Z",
+    "inmate_number": "14262643",
+    "name": "NORTHCUTT JEFFREY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-30T19:44:43Z",
+    "inmate_number": "14319801",
+    "name": "HELTON KAYLA",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-30T19:44:43Z",
+    "inmate_number": "14317143",
+    "name": "WYNN COURTNEY",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-30T19:44:43Z",
+    "inmate_number": "1951725",
+    "name": "BELL LEE",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-30T19:44:43Z",
+    "inmate_number": "794859",
+    "name": "SWANSON DAVID",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
