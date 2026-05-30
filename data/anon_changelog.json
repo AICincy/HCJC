@@ -170593,12 +170593,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-23T20:10:13Z",
-    "inmate_number": "14802874",
-    "name": "TARRANCE MYRAEL",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
@@ -186349,5 +186346,32 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-30T20:13:32Z",
+    "inmate_number": "14317143",
+    "name": "WYNN COURTNEY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-30T20:13:32Z",
+    "inmate_number": "1951725",
+    "name": "BELL LEE",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-30T20:13:32Z",
+    "inmate_number": "794859",
+    "name": "SWANSON DAVID",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
