@@ -170647,66 +170647,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-23T21:34:56Z",
-    "inmate_number": "14227420",
-    "name": "FROMEYER STEVEN",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T21:34:56Z",
-    "inmate_number": "2447252",
-    "name": "SMITH JOHN",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T21:34:56Z",
-    "inmate_number": "2423479",
-    "name": "WHITBY AKILAH",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T21:34:56Z",
-    "inmate_number": "2450915",
-    "name": "OWENS LEROY",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T21:34:56Z",
-    "inmate_number": "2463849",
-    "name": "HARRIS DEMITRIOUS",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T21:34:56Z",
-    "inmate_number": "2458191",
-    "name": "COOPER BENJAMIN",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-23T21:34:56Z",
-    "inmate_number": "2535490",
-    "name": "MCCREE SIERRA",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
@@ -186394,5 +186373,23 @@
     "tier": null,
     "category": null,
     "note": "booked 5/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-30T21:37:07Z",
+    "inmate_number": "180823",
+    "name": "CAMPBELL JOSEPH",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/30/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-30T21:37:07Z",
+    "inmate_number": "2531845",
+    "name": "MAUPIN BRANDON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
