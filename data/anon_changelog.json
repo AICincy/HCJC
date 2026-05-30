@@ -170167,12 +170167,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-23T02:02:44Z",
-    "inmate_number": "14811255",
-    "name": "OWENS BRANDY",
+    "date": "2026-05-23",
     "tier": null,
-    "category": null,
-    "note": "booked 5/22/26"
+    "category": null
   },
   {
     "event": "updated",
@@ -185617,5 +185614,23 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-30T02:20:37Z",
+    "inmate_number": "1372934",
+    "name": "BROWN CURTIS",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-30T02:20:37Z",
+    "inmate_number": "1636467",
+    "name": "TAYLOR FANNIE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
