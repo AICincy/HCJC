@@ -171265,21 +171265,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-24T20:36:16Z",
-    "inmate_number": "14811314",
-    "name": "MILLER MATHEW",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-24T20:36:16Z",
-    "inmate_number": "14811325",
-    "name": "JUAREZ JOSE",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
@@ -187012,5 +187006,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-31T20:40:36Z",
+    "inmate_number": "14162304",
+    "name": "KOVACH ZACHERY",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/31/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-31T20:40:36Z",
+    "inmate_number": "14688231",
+    "name": "JOHNSON DEVARI",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-31T20:40:36Z",
+    "inmate_number": "1536997",
+    "name": "WILLIAMS RONALD",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
