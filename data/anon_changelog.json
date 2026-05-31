@@ -171055,21 +171055,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-24T10:59:09Z",
-    "inmate_number": "2027318",
-    "name": "GAMBLE GREGORY",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-24T10:59:09Z",
-    "inmate_number": "2821235",
-    "name": "JACKSON NIKITA",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": "booked 5/24/26"
+    "category": null
   },
   {
     "event": "updated",
@@ -186919,5 +186913,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-31T11:10:36Z",
+    "inmate_number": "14812031",
+    "name": "AVALOS-POLANCO NORA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-31T11:10:36Z",
+    "inmate_number": "2269421",
+    "name": "WISE CARLA",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/31/26"
   }
 ]
