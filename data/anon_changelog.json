@@ -171241,39 +171241,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-24T19:44:38Z",
-    "inmate_number": "1310124",
-    "name": "HANSFORD ERIC",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-24T19:44:38Z",
-    "inmate_number": "14721483",
-    "name": "SCHMITT MATTHEW",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": "booked 5/24/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-24T19:44:38Z",
-    "inmate_number": "2203872",
-    "name": "STEFFEN NINA",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-24T19:44:38Z",
-    "inmate_number": "14811298",
-    "name": "CARTER RICHELLA",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -186943,5 +186931,41 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-31T19:44:57Z",
+    "inmate_number": "14812047",
+    "name": "PEREZ-AMBROCIO ROLDAN",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/31/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-31T19:44:57Z",
+    "inmate_number": "2425228",
+    "name": "BRONAUGH BREIA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-31T19:44:57Z",
+    "inmate_number": "14812033",
+    "name": "KAISERLIAN EMANUEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-05-31T19:44:57Z",
+    "inmate_number": "2177042",
+    "name": "WALKER TERRENCE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
