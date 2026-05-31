@@ -171403,12 +171403,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-24T23:38:23Z",
-    "inmate_number": "14287783",
-    "name": "BAKER IYONNA",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": "booked 5/24/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -187096,5 +187093,23 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-05-31T23:39:38Z",
+    "inmate_number": "14327000",
+    "name": "ABERNATHY CHARLISHA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-31T23:39:38Z",
+    "inmate_number": "14811385",
+    "name": "SMITH GARY",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/31/26"
   }
 ]
