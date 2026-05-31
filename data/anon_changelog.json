@@ -171151,30 +171151,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-24T15:41:55Z",
-    "inmate_number": "1996989",
-    "name": "ROSS ANTHONY",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-24T15:41:55Z",
-    "inmate_number": "2424503",
-    "name": "GANDY JESSE",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-24T16:08:49Z",
-    "inmate_number": "14541840",
-    "name": "WELLS RYAN",
+    "date": "2026-05-24",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -186925,5 +186916,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-05-31T16:13:21Z",
+    "inmate_number": "445158",
+    "name": "PUCK BRYAN",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/31/26"
   }
 ]
