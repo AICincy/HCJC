@@ -171409,57 +171409,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-25T01:22:21Z",
-    "inmate_number": "14225909",
-    "name": "MAXBERRY TAVIANCE",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-25T01:22:21Z",
-    "inmate_number": "14451208",
-    "name": "RUCKER KENNETH",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-25T01:22:21Z",
-    "inmate_number": "14811328",
-    "name": "BURDETTE TREVOR",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-25T01:22:21Z",
-    "inmate_number": "14811332",
-    "name": "VASQUEZ AMADO",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": "booked 5/24/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-25T01:22:21Z",
-    "inmate_number": "1802733",
-    "name": "EVANS AARON",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-25T01:22:21Z",
-    "inmate_number": "2819441",
-    "name": "MOCK JESSICA",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-25",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-25",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -187120,5 +187114,50 @@
     "tier": null,
     "category": null,
     "note": "booked 5/31/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-01T01:28:45Z",
+    "inmate_number": "14811385",
+    "name": "SMITH GARY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-01T01:28:45Z",
+    "inmate_number": "1967208",
+    "name": "HENRY DEZIRAE",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/31/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-01T01:28:45Z",
+    "inmate_number": "2208910",
+    "name": "DILLINGHAM TALISHA",
+    "tier": null,
+    "category": null,
+    "note": "booked 5/31/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-01T01:28:45Z",
+    "inmate_number": "14812031",
+    "name": "AVALOS-POLANCO NORA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-01T01:28:45Z",
+    "inmate_number": "14693848",
+    "name": "COOPER RICHAY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
