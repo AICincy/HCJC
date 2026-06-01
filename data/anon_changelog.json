@@ -172039,21 +172039,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-25T23:09:49Z",
-    "inmate_number": "1579187",
-    "name": "GAMBREL ANTHONY",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": "booked 5/25/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-25T23:09:49Z",
-    "inmate_number": "261954",
-    "name": "BAKER ALTHA",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": "booked 5/25/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -188677,5 +188671,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-01T23:33:32Z",
+    "inmate_number": "1403090",
+    "name": "SARTOR DECARLOS",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-01T23:33:32Z",
+    "inmate_number": "2566190",
+    "name": "MEECE HERSTEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/1/26"
   }
 ]
