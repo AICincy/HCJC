@@ -13,7 +13,7 @@ dependencies = [
     # `pip install -r requirements.txt` resolve identically. Bumps to
     # requirements.txt must also bump here.
     "httpx==0.28.1",
-    "selectolax==0.4.9",
+    "selectolax==0.4.10",
     "pydantic==2.13.4",
     "jinja2==3.1.6",
     "defusedxml==0.7.1",
@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==9.0.3", "ruff==0.15.14", "mypy==2.1.0"]
+dev = ["pytest==9.0.3", "ruff==0.15.15", "mypy==2.1.0"]
 
 [tool.setuptools.packages.find]
 include = ["scraper*", "web*"]
