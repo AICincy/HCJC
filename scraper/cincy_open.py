@@ -119,6 +119,24 @@ def since_iso(hours: int) -> str:
     return utc_floor_isoformat(datetime.now(timezone.utc) - timedelta(hours=hours))
 
 
+def _default_socrata_client() -> httpx.Client:
+    """Build a one-shot Socrata client with the project UA."""
+    ua = os.environ.get("JCSTREAM_USER_AGENT", DEFAULT_UA)
+    return httpx.Client(timeout=30.0, headers={"User-Agent": ua})
+
+
+def make_socrata_client() -> httpx.Client:
+    """Create a reusable Socrata client for callers that issue multiple queries.
+
+    Use as a context manager so connections are released::
+
+        with make_socrata_client() as client:
+            rows_a = query("dataset-a", client=client)
+            rows_b = query("dataset-b", client=client)
+    """
+    return _default_socrata_client()
+
+
 def query(
     dataset_id: str,
     *,
@@ -126,8 +144,14 @@ def query(
     order: str | None = None,
     limit: int = 5000,
     select: str | None = None,
+    client: httpx.Client | None = None,
 ) -> list[dict]:
-    """Run a SODA query and return rows as a list of dicts."""
+    """Run a SODA query and return rows as a list of dicts.
+
+    When *client* is provided, it is reused (no new TLS handshake). When
+    omitted, a throwaway client is created and closed per call (preserving
+    backward compatibility for standalone scripts).
+    """
     params: dict[str, str] = {"$limit": str(limit)}
     if where:
         params["$where"] = where
@@ -136,12 +160,12 @@ def query(
     if select:
         params["$select"] = select
     url = f"{resource_url(dataset_id)}?{urllib.parse.urlencode(params, safe=':')}"
-    # Fall back to the full module DEFAULT_UA (with contact URL) when the
-    # workflow doesn't override JCSTREAM_USER_AGENT, so the bare "JCStream/0.1"
-    # never reaches Socrata. Politeness is the only social control here.
-    ua = os.environ.get("JCSTREAM_USER_AGENT", DEFAULT_UA)
     log.info("Socrata query %s", url)
-    with httpx.Client(timeout=30.0, headers={"User-Agent": ua}) as client:
+    if client is not None:
         resp = client.get(url)
+        resp.raise_for_status()
+        return resp.json()
+    with _default_socrata_client() as c:
+        resp = c.get(url)
         resp.raise_for_status()
         return resp.json()

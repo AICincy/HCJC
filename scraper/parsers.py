@@ -95,27 +95,14 @@ def parse_detail_page(html: str, inmate_number: str) -> tuple[Inmate, bytes | No
     bio = _parse_bio(tree)
     name = _parse_name(tree)
     charges = _parse_charges(tree)
-    photo_url = _extract_photo_url(tree)
-    photo_bytes = _extract_inline_photo(tree) if not photo_url else None
+    photo_url, photo_bytes, img_stats = _extract_photo(tree)
 
     last, first, middle = _split_name(name)
 
     if not bio and not name and not charges:
         log.info("detail page produced no structured fields for id=%s", inmate_number)
     elif photo_url is None and photo_bytes is None:
-        # Real inmate page (has bio/name/charges) but no photo matched. Most
-        # often: HCSO published the record but hasn't attached a mug shot yet.
-        # Less often: HCSO HTML drifted away from the alt/class/274px hooks.
-        # Log a compact image inventory so the operator can spot-check.
-        img_count = sum(1 for _ in tree.css("img"))
-        nondata_count = sum(
-            1 for i in tree.css("img")
-            if _attr(i, "src") and not _attr(i, "src").startswith("data:")
-        )
-        data_count = sum(
-            1 for i in tree.css("img")
-            if _attr(i, "src").startswith("data:")
-        )
+        img_count, nondata_count, data_count = img_stats
         log.info(
             "detail page id=%s parsed (bio=%d name=%s charges=%d) but no photo extracted "
             "(imgs=%d non-data=%d data=%d). If HCSO has a photo here, the alt/class/274px "
@@ -406,7 +393,7 @@ _UI_ICON_HINTS = (
 def _looks_like_ui_chrome(img) -> bool:
     """True if an <img> looks like UI chrome (a logo, icon, alert glyph, etc.)
     rather than a booking photo. Used by the size-fallback path in
-    _extract_photo_url so a permissive match doesn't latch onto a 51x51 alert
+    _extract_photo so a permissive match doesn't latch onto a 51x51 alert
     icon when HCSO drops the 274px style hook.
     """
     src = _attr(img, "src").lower()
@@ -424,77 +411,87 @@ def _looks_like_ui_chrome(img) -> bool:
     return 0 < w < 80 or 0 < h < 80
 
 
-def _extract_photo_url(tree: HTMLParser) -> str | None:
-    """Return a direct URL to the booking photo, if found on the page.
+def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[int, int, int]]:
+    """Single-pass photo extraction and image inventory.
 
-    Preferred over base64 extraction: a direct HTTP fetch is far more reliable
-    than decoding a multi-hundred-KB base64 payload from inline HTML.
+    Walks ``tree.css("img")`` once, combining the URL-extraction tiers,
+    inline-base64 decoding, and image counting that previously required up
+    to five separate traversals.
 
-    Three matching tiers:
+    Returns ``(photo_url, photo_bytes, (img_count, nondata_count, data_count))``.
+    ``photo_url`` is preferred over ``photo_bytes``; when a URL is found,
+    inline base64 decoding is skipped for remaining images.
+
+    URL tiers (first match wins):
       1. alt / class / style hooks ("photo", "mug", "inmate", "booking",
-         "274px"). Historical HCSO pattern; preferred when present.
-      2. Size-and-extension fallback: any non-data <img> whose src ends in
-         a common image extension and that doesn't look like UI chrome
-         (rejects logos, icons, alert glyphs by URL/alt/dimensions).
-      3. None.
+         "274px"). Historical HCSO pattern.
+      2. Size-and-extension fallback: non-data ``<img>`` ending in a common
+         image extension that does not look like UI chrome.
 
-    Tier 2 is the diagnostic for the "HCSO renamed alt/class/style but
-    still serves a real <img>" failure mode that's been costing us photo
-    coverage for recent bookings.
+    Inline tiers (only when no URL found):
+      1. ``274px`` in the ``style`` attribute.
+      2. JPEG start-of-image marker in decoded bytes.
     """
-    fallback: str | None = None
-    for img in tree.css("img"):
-        src = _attr(img, "src")
-        if src.startswith("data:") or not src:
-            continue
-        alt = _attr(img, "alt").lower()
-        style = _attr(img, "style")
-        cls = _attr(img, "class")
-        if any(k in alt for k in ("photo", "mug", "inmate", "booking")):
-            return src
-        if any(k in cls for k in ("photo", "mug", "inmate")):
-            return src
-        if "274px" in style:
-            return src
-        # Tier 2 candidate: stash the first non-chrome image as a fallback.
-        if fallback is None and src.lower().rsplit("?", 1)[0].endswith(
-            (".jpg", ".jpeg", ".png", ".webp")
-        ) and not _looks_like_ui_chrome(img):
-            fallback = src
-    if fallback is not None:
-        log.info("photo url matched size+extension fallback (no alt/class/274px hook): %s", fallback)
-        return fallback
-    return None
-
-
-def _extract_inline_photo(tree: HTMLParser) -> bytes | None:
-    """Return raw image bytes from an inline base64 data URI, if present.
-
-    Fallback for when no direct photo URL is available. HCSO historically
-    embeds booking photos as data URIs (declared image/png, actually JPEG).
-    """
+    photo_url: str | None = None
+    url_fallback: str | None = None
+    inline_274px: bytes | None = None
     soi_candidate: bytes | None = None
+    img_count = 0
+    nondata_count = 0
+    data_count = 0
+
     for img in tree.css("img"):
+        img_count += 1
         src = _attr(img, "src")
-        if not src.startswith("data:"):
-            continue
-        header, _, payload = src.partition(",")
-        if "base64" not in header or not payload:
-            continue
-        try:
-            data = base64.b64decode(payload, validate=False)
-        except ValueError:  # binascii.Error subclasses ValueError
-            log.warning("failed to base64-decode inline photo candidate")
-            continue
-        style = _attr(img, "style")
-        if "274px" in style:
-            return data
-        if soi_candidate is None and data[:3] == _JPEG_SOI:
-            soi_candidate = data
-    if soi_candidate is not None:
-        log.info("inline photo matched JPEG-SOI fallback, not the 274px hook")
-        return soi_candidate
-    return None
+
+        if src.startswith("data:"):
+            data_count += 1
+            if photo_url is not None or url_fallback is not None:
+                continue
+            header, _, payload = src.partition(",")
+            if "base64" not in header or not payload:
+                continue
+            try:
+                raw = base64.b64decode(payload, validate=False)
+            except ValueError:  # binascii.Error subclasses ValueError
+                log.warning("failed to base64-decode inline photo candidate")
+                continue
+            style = _attr(img, "style")
+            if "274px" in style:
+                inline_274px = raw
+            elif soi_candidate is None and raw[:3] == _JPEG_SOI:
+                soi_candidate = raw
+        elif src:
+            nondata_count += 1
+            if photo_url is not None:
+                continue
+            alt = _attr(img, "alt").lower()
+            style = _attr(img, "style")
+            cls = _attr(img, "class")
+            if any(k in alt for k in ("photo", "mug", "inmate", "booking")):
+                photo_url = src
+            elif any(k in cls for k in ("photo", "mug", "inmate")):
+                photo_url = src
+            elif "274px" in style:
+                photo_url = src
+            elif url_fallback is None and src.lower().rsplit("?", 1)[0].endswith(
+                (".jpg", ".jpeg", ".png", ".webp")
+            ) and not _looks_like_ui_chrome(img):
+                url_fallback = src
+
+    if photo_url is None and url_fallback is not None:
+        log.info("photo url matched size+extension fallback (no alt/class/274px hook): %s", url_fallback)
+        photo_url = url_fallback
+
+    photo_bytes: bytes | None = None
+    if photo_url is None:
+        if inline_274px is not None:
+            photo_bytes = inline_274px
+        elif soi_candidate is not None:
+            log.info("inline photo matched JPEG-SOI fallback, not the 274px hook")
+            photo_bytes = soi_candidate
+
+    return photo_url, photo_bytes, (img_count, nondata_count, data_count)
 
 
 def _text(node: Node) -> str:

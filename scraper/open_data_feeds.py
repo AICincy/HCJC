@@ -26,6 +26,7 @@ import httpx
 
 from .cincy_open import (
     dumps_rows_per_line,
+    make_socrata_client,
     prev_row_count,
     query,
     recently_refreshed,
@@ -142,7 +143,7 @@ def _save(spec: FeedSpec, rows: list[dict]) -> None:
     log.info("wrote %s (%d rows)", out, len(rows))
 
 
-def _pull_one(spec: FeedSpec) -> list[dict]:
+def _pull_one(spec: FeedSpec, *, client: httpx.Client | None = None) -> list[dict]:
     """Pull one feed, falling back through any column-name candidates the
     dataset historically uses. Returns rows; empty on total failure."""
     since = since_iso(hours=spec.days * 24)
@@ -153,20 +154,20 @@ def _pull_one(spec: FeedSpec) -> list[dict]:
             if order is None and where:
                 order = where.split()[0] + " DESC"
             try:
-                rows = query(spec.dataset_id, where=where, order=order, limit=spec.limit)
+                rows = query(spec.dataset_id, where=where, order=order, limit=spec.limit, client=client)
                 log.info("%s: %d rows (filter=%s)", spec.label, len(rows), where)
                 return rows
             except httpx.HTTPStatusError as e:
                 log.debug("%s where %r rejected: %s", spec.label, where, e)
         log.warning("%s: all column-name filters rejected; falling back to unfiltered", spec.label)
         try:
-            return query(spec.dataset_id, order=spec.order, limit=spec.limit)
+            return query(spec.dataset_id, order=spec.order, limit=spec.limit, client=client)
         except httpx.HTTPStatusError as e:
             log.warning("%s: unfiltered pull also failed: %s", spec.label, e)
             return []
     # No filter — just pull most recent N rows by configured order.
     try:
-        return query(spec.dataset_id, order=spec.order, limit=spec.limit)
+        return query(spec.dataset_id, order=spec.order, limit=spec.limit, client=client)
     except httpx.HTTPStatusError as e:
         log.warning("%s: pull failed: %s", spec.label, e)
         return []
@@ -177,16 +178,21 @@ def pull_all(force: bool = False) -> int:
     Each FeedSpec carries its own ``cache_hours`` so rare-event feeds
     (officer-involved shootings, CCA complaints) stay on 24h while feeds
     that update sub-daily at the source (crime_stars, traffic / pedestrian
-    stops) refresh as often as 12h. Returns count refreshed."""
+    stops) refresh as often as 12h. Returns count refreshed.
+
+    A single ``httpx.Client`` is shared across all feeds so the TLS session
+    and TCP connection pool to ``data.cincinnati-oh.gov`` are reused.
+    """
     refreshed = 0
-    for spec in FEEDS:
-        path = DATA_DIR / spec.filename
-        if not force and recently_refreshed(path, max_age_hours=spec.cache_hours):
-            log.info("%s: < %dh old, skipping (path=%s)", spec.label, spec.cache_hours, path)
-            continue
-        rows = _pull_one(spec)
-        _save(spec, rows)
-        refreshed += 1
+    with make_socrata_client() as client:
+        for spec in FEEDS:
+            path = DATA_DIR / spec.filename
+            if not force and recently_refreshed(path, max_age_hours=spec.cache_hours):
+                log.info("%s: < %dh old, skipping (path=%s)", spec.label, spec.cache_hours, path)
+                continue
+            rows = _pull_one(spec, client=client)
+            _save(spec, rows)
+            refreshed += 1
     return refreshed
 
 
