@@ -446,7 +446,7 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
 
         if src.startswith("data:"):
             data_count += 1
-            if photo_url is not None:
+            if photo_url is not None or url_fallback is not None:
                 continue
             header, _, payload = src.partition(",")
             if "base64" not in header or not payload:
