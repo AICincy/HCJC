@@ -171601,30 +171601,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-25T10:12:56Z",
-    "inmate_number": "14144720",
-    "name": "HIXON BARRY",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-25T10:12:56Z",
-    "inmate_number": "14621267",
-    "name": "TRIGUEROS WALTER",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": "booked 5/25/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-25T10:12:56Z",
-    "inmate_number": "1919141",
-    "name": "ROBINSON BRANDON",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -187519,5 +187510,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-01T11:19:25Z",
+    "inmate_number": "14090346",
+    "name": "PITTMAN BRITTNEY",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
