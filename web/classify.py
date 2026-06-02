@@ -105,12 +105,17 @@ _CLS_RANK = {
 _OFFENSE_CATEGORY = {
     # Violence / homicide (chapter 2903)
     "2903": {"label": "Violence / Homicide", "cls": "2903"},
+    # Kidnapping / Abduction (chapter 2905)
+    "2905": {"label": "Kidnapping / Abduction", "cls": "2903"},
     # Sexual assault (chapter 2907)
     "2907": {"label": "Sexual Assault", "cls": "2907"},
     # Robbery / burglary (chapter 2911)
     "2911": {"label": "Robbery / Burglary", "cls": "2911"},
     # Theft (chapter 2913)
     "2913": {"label": "Theft / Fraud", "cls": "2913"},
+    # Telecommunications fraud / Gambling (chapters 2914, 2915)
+    "2914": {"label": "Theft / Fraud", "cls": "2913"},
+    "2915": {"label": "Theft / Fraud", "cls": "2913"},
     # Drugs (chapter 2925)
     "2925": {"label": "Drugs", "cls": "2925"},
     # Weapons (chapter 2923)
@@ -129,6 +134,8 @@ _OFFENSE_CATEGORY = {
     "4503": {"label": "Traffic / Registration", "cls": "traffic"},
     # Arson (chapter 2909)
     "2909": {"label": "Arson / Damage", "cls": "2909"},
+    # General provisions (chapter 2901)
+    "2901": {"label": "Other", "cls": "other"},
     # Other (fallback)
     "other": {"label": "Other", "cls": "traffic"},
 }

@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   send:
@@ -43,3 +43,24 @@ jobs:
           JCSTREAM_PRA_FROM_EMAIL: ${{ secrets.JCSTREAM_PRA_FROM_EMAIL }}
           JCSTREAM_PRA_TO_PHOTOS_EMAIL: ${{ secrets.JCSTREAM_PRA_TO_PHOTOS_EMAIL }}
         run: python -m scraper.pra
+
+      - name: Commit PRA requests log
+        run: |
+          git config user.name "jcstream-bot"
+          git config user.email "noreply@github.com"
+          git add data/pra_requests.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: pra log update $(date -u +%Y-%m-%dT%H:%MZ)"
+            git fetch origin main
+            git rebase origin/main || {
+              echo "::warning::Rebase conflict detected; attempting merge"
+              git rebase --abort
+              git merge -X ours origin/main --no-edit || {
+                echo "::error::Both rebase and merge failed"
+                exit 1
+              }
+            }
+            git push
+          else
+            echo "no changes"
+          fi

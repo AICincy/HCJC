@@ -28,6 +28,45 @@ _CODE_RE = re.compile(r"\d+\.\d+(?:\.\d+)?")
 DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
 UNKNOWN = "?"
 
+def _parse_hamco_offenses() -> dict[str, dict]:
+    """Parse scraped Clerk of Courts files in HAMCO/ to extract additional offenses."""
+    hamco_dir = LOOKUP_PATH.parent.parent / "HAMCO"
+    parsed_offenses: dict[str, dict] = {}
+    if not hamco_dir.exists():
+        return parsed_offenses
+
+    criminal_file = hamco_dir / "www.courtclerk.org_records-search_criminal-case-listings-section-number_.json"
+    traffic_file = hamco_dir / "www.courtclerk.org_records-search_traffic-case-listings-section-number_.json"
+
+    line_re = re.compile(r"^([\w.-]+)\s+(?:nbsp;)?(ORCN|CMCN)\s+(.+)$")
+
+    for file_path in (criminal_file, traffic_file):
+        if not file_path.exists():
+            continue
+        try:
+            data = json.loads(file_path.read_text(encoding="utf-8"))
+            markdown = data.get("markdown", "")
+            for line in markdown.splitlines():
+                line = line.strip()
+                m = line_re.match(line)
+                if m:
+                    raw_code, jurisdiction, desc = m.groups()
+                    # Convert dashes in middle of codes to dots to enable normalize_code lookup
+                    raw_code_dotted = raw_code.replace("-", ".")
+                    norm_code = normalize_code(raw_code_dotted)
+                    if not norm_code:
+                        continue
+                    deg = "MM" if (jurisdiction == "CMCN" or "45" in norm_code) else "?"
+                    desc_clean = desc.strip()
+                    if desc_clean:
+                        title = desc_clean.capitalize() if desc_clean.isupper() else desc_clean
+                        parsed_offenses[norm_code] = {"title": title, "degree": deg}
+        except Exception as e:
+            log.warning(f"Failed to parse HAMCO file {file_path.name}: {e}")
+
+    return parsed_offenses
+
+
 @functools.lru_cache(maxsize=1)
 def load_offenses(path: Path = LOOKUP_PATH) -> dict[str, dict]:
     """Return ``{normalized_code: {title, degree}}``. Cached: the file is read
@@ -35,10 +74,24 @@ def load_offenses(path: Path = LOOKUP_PATH) -> dict[str, dict]:
     times per build (once per charge × inmate); without the cache that's
     ~3,500 redundant file reads on a typical roster. If the file changes
     between calls, `load_offenses.cache_clear()` invalidates."""
-    if not path.exists():
-        return {}
-    raw = json.loads(path.read_text(encoding="utf-8"))
-    return raw.get("offenses", {})
+    offenses = {}
+    if path.exists():
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+            offenses.update(raw.get("offenses", {}))
+        except Exception as e:
+            log.warning(f"Failed to load orc_offenses.json: {e}")
+
+    # Dynamically enrich with HAMCO scraped listings
+    try:
+        hamco_offenses = _parse_hamco_offenses()
+        for code, info in hamco_offenses.items():
+            if code not in offenses or not offenses[code].get("title"):
+                offenses[code] = info
+    except Exception as e:
+        log.warning(f"Failed to parse or merge HAMCO offenses: {e}")
+
+    return offenses
 
 def normalize_code(code: str) -> str:
     if not code:
