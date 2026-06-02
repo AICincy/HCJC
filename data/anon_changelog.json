@@ -172051,102 +172051,81 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-25T23:40:13Z",
-    "inmate_number": "14699960",
-    "name": "GIVENS KEVIN",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": "booked 5/25/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-25T23:40:13Z",
-    "inmate_number": "2368491",
-    "name": "RIDER MICHELLE",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": "booked 5/25/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-25T23:40:13Z",
-    "inmate_number": "261954",
-    "name": "BAKER ALTHA",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-25T23:40:13Z",
-    "inmate_number": "2759053",
-    "name": "ROBINSON DAVID",
+    "date": "2026-05-25",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-26T00:09:16Z",
-    "inmate_number": "1327794",
-    "name": "SIMS MARK",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": "booked 5/25/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-26T00:09:16Z",
-    "inmate_number": "14699960",
-    "name": "GIVENS KEVIN",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-26T00:09:16Z",
-    "inmate_number": "14811374",
-    "name": "SIMS NATASHA",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": "booked 5/25/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-26T00:09:16Z",
-    "inmate_number": "14811377",
-    "name": "COX STEVEN",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": "booked 5/25/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-26T00:09:16Z",
-    "inmate_number": "1579187",
-    "name": "GAMBREL ANTHONY",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-26T00:09:16Z",
-    "inmate_number": "2285258",
-    "name": "GAINES LANCE",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": "booked 5/25/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-26T00:09:16Z",
-    "inmate_number": "261954",
-    "name": "BAKER ALTHA",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-26",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-26",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -188689,5 +188668,59 @@
     "tier": null,
     "category": null,
     "note": "booked 6/1/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-02T00:11:18Z",
+    "inmate_number": "1403090",
+    "name": "SARTOR DECARLOS",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-02T00:11:18Z",
+    "inmate_number": "14095584",
+    "name": "SMITH RAYSHAUN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/1/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-02T00:11:18Z",
+    "inmate_number": "14812225",
+    "name": "LOPEZ ALFREDO",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/1/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-02T00:11:18Z",
+    "inmate_number": "14812229",
+    "name": "BASS LANCE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/1/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-02T00:11:18Z",
+    "inmate_number": "2392783",
+    "name": "LACKEY SARA",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/1/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-02T00:11:18Z",
+    "inmate_number": "2309215",
+    "name": "LONG DANIEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
