@@ -157,18 +157,18 @@ def _pull_one(spec: FeedSpec, *, client: httpx.Client | None = None) -> list[dic
                 rows = query(spec.dataset_id, where=where, order=order, limit=spec.limit, client=client)
                 log.info("%s: %d rows (filter=%s)", spec.label, len(rows), where)
                 return rows
-            except httpx.HTTPStatusError as e:
+            except httpx.HTTPError as e:
                 log.debug("%s where %r rejected: %s", spec.label, where, e)
         log.warning("%s: all column-name filters rejected; falling back to unfiltered", spec.label)
         try:
             return query(spec.dataset_id, order=spec.order, limit=spec.limit, client=client)
-        except httpx.HTTPStatusError as e:
+        except httpx.HTTPError as e:
             log.warning("%s: unfiltered pull also failed: %s", spec.label, e)
             return []
     # No filter — just pull most recent N rows by configured order.
     try:
         return query(spec.dataset_id, order=spec.order, limit=spec.limit, client=client)
-    except httpx.HTTPStatusError as e:
+    except httpx.HTTPError as e:
         log.warning("%s: pull failed: %s", spec.label, e)
         return []
 
