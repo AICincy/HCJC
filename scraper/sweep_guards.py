@@ -75,14 +75,13 @@ PHOTO_PRUNE_MAX_FRACTION = 0.5
 def sweep_looks_healthy(prev_count: int, seen_count: int, n_surnames: int, n_failed: int) -> bool:
     """Heuristic: did the list sweep come back with a believable roster?
 
-    A first/tiny run is always accepted. Otherwise reject if too many surname
-    fetches errored, or the roster shrank to less than half of what it was -
-    both are symptoms of a degraded sweep rather than real jail churn.
+    A first/tiny run allows the size floor to be bypassed. However, we still reject
+    the cycle if too many surname fetches errored (which indicates a network/WAF block).
     """
-    if prev_count < SWEEP_BOOTSTRAP_FLOOR:
-        return True
     if n_surnames > 0 and (n_failed / n_surnames) > SWEEP_MAX_FAILED_FRACTION:
         return False
+    if prev_count < SWEEP_BOOTSTRAP_FLOOR:
+        return True
     return seen_count >= SWEEP_MIN_ROSTER_FRACTION * prev_count
 
 

@@ -73,9 +73,10 @@ def test_prev_generated_utc_reads_field(tmp_path):
 
 
 def test_bootstrap_is_always_accepted():
-    # First run (no prior data) and tiny datasets are trusted unconditionally.
+    # First run (no prior data) and tiny datasets are trusted if fetches succeed.
     assert _sweep_looks_healthy(prev_count=0, seen_count=0, n_surnames=26, n_failed=0)
-    assert _sweep_looks_healthy(prev_count=10, seen_count=2, n_surnames=26, n_failed=20)
+    # Rejects even on bootstrap if fetches failed (e.g. WAF block/network error).
+    assert not _sweep_looks_healthy(prev_count=10, seen_count=2, n_surnames=26, n_failed=20)
 
 
 def test_normal_sweeps_pass():
