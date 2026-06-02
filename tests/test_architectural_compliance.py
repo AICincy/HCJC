@@ -164,6 +164,8 @@ def test_repository_architectural_compliance():
             f"- {f.rule_id} in {f.target_file}: {f.description} (Remediation: {f.remediation})"
             for f in report.findings
         )
-        raise AssertionError(f"Codebase violated repository architectural rules:\n{details}")
+        raise AssertionError(
+            f"Codebase violated repository architectural rules:\n{details}"
+        )
 
     assert report.violations_found == 0
