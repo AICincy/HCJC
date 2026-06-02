@@ -6,6 +6,7 @@ PRA send log fails the build.
 
 Run: ``python -m scraper.verify_pra_log`` (optionally a path argument).
 """
+
 from __future__ import annotations
 
 import argparse
@@ -15,9 +16,7 @@ from .pra_log import PRA_LOG_PATH, load_pra_log, verify_pra_chain
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        description="Verify the PRA send log hash chain."
-    )
+    parser = argparse.ArgumentParser(description="Verify the PRA send log hash chain.")
     parser.add_argument(
         "path",
         nargs="?",
@@ -33,10 +32,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     problems = verify_pra_chain(entries)
     if problems:
-        print(
-            f"{path}: hash chain BROKEN "
-            f"({len(problems)} of {len(entries)} records affected):"
-        )
+        print(f"{path}: hash chain BROKEN ({len(problems)} of {len(entries)} records affected):")
         for p in problems:
             print(f"  - {p}")
         return 1

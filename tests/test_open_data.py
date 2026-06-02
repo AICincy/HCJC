@@ -5,6 +5,7 @@ shape: ``{generated_utc, dataset_id, row_count, rows}`` (cfs omits dataset_id).
 The ``query()`` shim in cincy_open is the only thing that touches the network;
 these tests stub it out so the suite never makes a real request.
 """
+
 from __future__ import annotations
 
 import json
@@ -26,22 +27,30 @@ def _socrata_400() -> httpx.HTTPStatusError:
 
 # ----- load() returns [] when file is missing -----------------------------
 
-@pytest.mark.parametrize("mod,attr", [
-    (cfs, "load_recent"),
-    (cfs_pdi, "load"),
-    (shootings, "load"),
-])
+
+@pytest.mark.parametrize(
+    "mod,attr",
+    [
+        (cfs, "load_recent"),
+        (cfs_pdi, "load"),
+        (shootings, "load"),
+    ],
+)
 def test_loader_returns_empty_when_file_missing(mod, attr, tmp_path: Path):
     assert getattr(mod, attr)(tmp_path / "nope.json") == []
 
 
 # ----- save -> load round trip -------------------------------------------
 
-@pytest.mark.parametrize("mod,save_name,load_name", [
-    (cfs, "save_recent", "load_recent"),
-    (cfs_pdi, "save", "load"),
-    (shootings, "save", "load"),
-])
+
+@pytest.mark.parametrize(
+    "mod,save_name,load_name",
+    [
+        (cfs, "save_recent", "load_recent"),
+        (cfs_pdi, "save", "load"),
+        (shootings, "save", "load"),
+    ],
+)
 def test_save_load_round_trip(mod, save_name, load_name, tmp_path: Path):
     path = tmp_path / "feed.json"
     rows = [{"id": "1", "x": "a"}, {"id": "2", "x": "b"}]
@@ -54,6 +63,7 @@ def test_save_load_round_trip(mod, save_name, load_name, tmp_path: Path):
 
 
 # ----- pull_recent uses the configured Socrata dataset --------------------
+
 
 def test_cfs_pull_recent_filters_dispositions(monkeypatch):
     # cfs now routes through cincy_open.query like the other three feeds,

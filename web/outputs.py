@@ -3,6 +3,7 @@
 Handles static file copying, JSON manifests, well-known files, and checksums.
 Extracted from web/build.py for modularity.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -61,13 +62,15 @@ def _write_search_json(out_dir: Path, snapshot: Snapshot) -> None:
     for inm in snapshot.inmates:
         tier = _primary_tier(inm)
         chap = _primary_chapter(inm)
-        rows.append({
-            "n": inm.full_name,
-            "c": (chap["label"] if chap else _primary_charge(inm)) or "",
-            "t": tier["kind"] if tier else "",
-            "b": inm.booking_date or "",
-            "id": inm.inmate_number,
-        })
+        rows.append(
+            {
+                "n": inm.full_name,
+                "c": (chap["label"] if chap else _primary_charge(inm)) or "",
+                "t": tier["kind"] if tier else "",
+                "b": inm.booking_date or "",
+                "id": inm.inmate_number,
+            }
+        )
     payload = {
         "generated_utc": snapshot.generated_utc,
         "count": len(rows),
@@ -101,7 +104,7 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
     issues = "https://github.com/AICincy/JCStream/issues"
     (out_dir / "robots.txt").write_text(
         "# JCStream mirrors public records and asks search engines not to index it\n"
-        "# (every page also carries <meta name=\"robots\" content=\"noindex\">).\n"
+        '# (every page also carries <meta name="robots" content="noindex">).\n'
         "# Feeds and raw data are linked from /data/ -- RSS readers don't honour\n"
         "# robots.txt, so subscriptions still work.\n"
         "User-agent: *\n"
@@ -117,8 +120,7 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
         f"# concern, open an issue -- there is never a fee.\n"
         f"Contact: {issues}\n"
         f"Expires: {expires}\n"
-        f"Preferred-Languages: en\n"
-        + (f"Canonical: {site_url}/.well-known/security.txt\n" if site_url else ""),
+        f"Preferred-Languages: en\n" + (f"Canonical: {site_url}/.well-known/security.txt\n" if site_url else ""),
         encoding="utf-8",
     )
     (out_dir / "humans.txt").write_text(

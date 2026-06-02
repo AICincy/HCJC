@@ -24,8 +24,7 @@ log = logging.getLogger(__name__)
 
 DEFAULT_BASE = "https://www.hcso.org"
 DEFAULT_UA = (
-    "JCStream/0.1 (+https://github.com/AICincy/JCStream; "
-    "Hamilton County OH public-records mirror; parallelism-limited)"
+    "JCStream/0.1 (+https://github.com/AICincy/JCStream; Hamilton County OH public-records mirror; parallelism-limited)"
 )
 DEFAULT_CRAWL_DELAY = 0.5  # seconds between requests per worker; gates the
 # minimum spacing the WAF sees from a single IP. Raised from 0.0 on 2026-05-19
@@ -77,9 +76,9 @@ class HcsoClient:
             base_url=self.base_url,
             timeout=self.timeout,
             transport=transport,
-            limits=httpx.Limits(max_connections=self.concurrency * 2,
-                                max_keepalive_connections=self.concurrency,
-                                keepalive_expiry=30),
+            limits=httpx.Limits(
+                max_connections=self.concurrency * 2, max_keepalive_connections=self.concurrency, keepalive_expiry=30
+            ),
             headers={
                 "User-Agent": self.user_agent,
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -136,17 +135,22 @@ class HcsoClient:
             if response.status_code == 429:
                 wait = _retry_after_seconds(response.headers.get("retry-after"))
                 wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)
-                log.info("429 on %s; sleeping %.1fs before retry %d/%d",
-                         path, wait, attempt + 1, MAX_RETRIES)
+                log.info("429 on %s; sleeping %.1fs before retry %d/%d", path, wait, attempt + 1, MAX_RETRIES)
                 time.sleep(wait)
                 self._sleep_for_crawl_delay()
                 response = self._client.get(path, params=params)
             elif response.status_code >= 500:
-                delay = RETRY_BASE_DELAY * (2 ** attempt)
+                delay = RETRY_BASE_DELAY * (2**attempt)
                 jitter = delay * RETRY_JITTER_FRACTION * (2 * random.random() - 1)
                 wait = delay + jitter
-                log.info("%d on %s; sleeping %.2fs before retry %d/%d",
-                         response.status_code, path, wait, attempt + 1, MAX_RETRIES)
+                log.info(
+                    "%d on %s; sleeping %.2fs before retry %d/%d",
+                    response.status_code,
+                    path,
+                    wait,
+                    attempt + 1,
+                    MAX_RETRIES,
+                )
                 time.sleep(wait)
                 self._sleep_for_crawl_delay()
                 response = self._client.get(path, params=params)
@@ -164,17 +168,22 @@ class HcsoClient:
             if response.status_code == 429:
                 wait = _retry_after_seconds(response.headers.get("retry-after"))
                 wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)
-                log.info("429 on %s; sleeping %.1fs before retry %d/%d",
-                         url, wait, attempt + 1, MAX_RETRIES)
+                log.info("429 on %s; sleeping %.1fs before retry %d/%d", url, wait, attempt + 1, MAX_RETRIES)
                 time.sleep(wait)
                 self._sleep_for_crawl_delay()
                 response = self._client.get(url)
             elif response.status_code >= 500:
-                delay = RETRY_BASE_DELAY * (2 ** attempt)
+                delay = RETRY_BASE_DELAY * (2**attempt)
                 jitter = delay * RETRY_JITTER_FRACTION * (2 * random.random() - 1)
                 wait = delay + jitter
-                log.info("%d on %s; sleeping %.2fs before retry %d/%d",
-                         response.status_code, url, wait, attempt + 1, MAX_RETRIES)
+                log.info(
+                    "%d on %s; sleeping %.2fs before retry %d/%d",
+                    response.status_code,
+                    url,
+                    wait,
+                    attempt + 1,
+                    MAX_RETRIES,
+                )
                 time.sleep(wait)
                 self._sleep_for_crawl_delay()
                 response = self._client.get(url)
@@ -200,6 +209,7 @@ def _retry_after_seconds(header_value: str | None) -> float:
     try:
         from datetime import datetime, timezone
         from email.utils import parsedate_to_datetime
+
         target = parsedate_to_datetime(header_value)
         if target.tzinfo is None:
             target = target.replace(tzinfo=timezone.utc)

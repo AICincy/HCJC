@@ -5,6 +5,7 @@ stateless formatting/parsing helpers consumed by templates. It had no test
 file; these lock in the string-munging contracts (date parsing, bond parsing,
 ordinals, initials, slugs) that templates depend on.
 """
+
 from datetime import datetime
 
 from web.classify import (

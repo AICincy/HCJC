@@ -9,6 +9,7 @@ is, and block/recovery counts.
 
 Offline; no network. Exit 0 always; this is a report, not a gate.
 """
+
 from __future__ import annotations
 
 import json

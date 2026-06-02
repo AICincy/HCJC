@@ -15,6 +15,7 @@ templates. They land as files in ``data/`` (and after the build, also in
 ``docs/data/``) so the public Data page links + downloads them, and any
 future site work can read from them without touching the scraper layer.
 """
+
 from __future__ import annotations
 
 import logging
@@ -143,9 +144,9 @@ def _save(spec: FeedSpec, rows: list[dict]) -> None:
     log.info("wrote %s (%d rows)", out, len(rows))
 
 
-def _pull_one(spec: FeedSpec, *, client: httpx.Client | None = None) -> list[dict]:
+def _pull_one(spec: FeedSpec, *, client: httpx.Client | None = None) -> list[dict] | None:
     """Pull one feed, falling back through any column-name candidates the
-    dataset historically uses. Returns rows; empty on total failure."""
+    dataset historically uses. Returns rows; None on total failure."""
     since = since_iso(hours=spec.days * 24)
     if spec.where_candidates:
         for where_tpl in spec.where_candidates:
@@ -164,13 +165,13 @@ def _pull_one(spec: FeedSpec, *, client: httpx.Client | None = None) -> list[dic
             return query(spec.dataset_id, order=spec.order, limit=spec.limit, client=client)
         except httpx.HTTPError as e:
             log.warning("%s: unfiltered pull also failed: %s", spec.label, e)
-            return []
+            return None
     # No filter — just pull most recent N rows by configured order.
     try:
         return query(spec.dataset_id, order=spec.order, limit=spec.limit, client=client)
     except httpx.HTTPError as e:
         log.warning("%s: pull failed: %s", spec.label, e)
-        return []
+        return None
 
 
 def pull_all(force: bool = False) -> int:
@@ -191,6 +192,9 @@ def pull_all(force: bool = False) -> int:
                 log.info("%s: < %dh old, skipping (path=%s)", spec.label, spec.cache_hours, path)
                 continue
             rows = _pull_one(spec, client=client)
+            if rows is None:
+                log.error("%s: pull failed; keeping existing cached file", spec.label)
+                continue
             _save(spec, rows)
             refreshed += 1
     return refreshed
@@ -198,11 +202,10 @@ def pull_all(force: bool = False) -> int:
 
 def main() -> int:
     import argparse
+
     parser = argparse.ArgumentParser(description="Pull the configured Cincinnati Open Data feeds.")
-    parser.add_argument("--force", action="store_true",
-                        help="Refresh even if a feed's local file is < 24h old.")
-    parser.add_argument("--list", action="store_true",
-                        help="Print the configured feeds and exit, without pulling.")
+    parser.add_argument("--force", action="store_true", help="Refresh even if a feed's local file is < 24h old.")
+    parser.add_argument("--list", action="store_true", help="Print the configured feeds and exit, without pulling.")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args()
     logging.basicConfig(
@@ -220,4 +223,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     import sys
+
     sys.exit(main())

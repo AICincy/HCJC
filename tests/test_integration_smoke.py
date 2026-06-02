@@ -1,4 +1,5 @@
 """End-to-end smoke test: sweep (mocked HTTP) -> build -> verify output structure."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -33,6 +34,7 @@ def test_build_produces_index(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
 
     from web.build import build
+
     out = tmp_path / "docs"
     # If build raises due to missing templates/data, that's an acceptable
     # failure mode for a smoke test -- the point is to catch import/wiring errors.

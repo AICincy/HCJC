@@ -37,12 +37,17 @@ def test_url_encoding_is_compatible_with_socrata():
 
 
 def _write_feed(path, row_count, rows=None):
-    path.write_text(json.dumps({
-        "generated_utc": "2026-05-20T13:39:27Z",
-        "dataset_id": "gexm-h6bt",
-        "row_count": row_count,
-        "rows": rows if rows is not None else [{"i": i} for i in range(row_count)],
-    }), encoding="utf-8")
+    path.write_text(
+        json.dumps(
+            {
+                "generated_utc": "2026-05-20T13:39:27Z",
+                "dataset_id": "gexm-h6bt",
+                "row_count": row_count,
+                "rows": rows if rows is not None else [{"i": i} for i in range(row_count)],
+            }
+        ),
+        encoding="utf-8",
+    )
 
 
 def test_prev_row_count_reads_existing(tmp_path):

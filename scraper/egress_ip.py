@@ -10,6 +10,7 @@ Run: ``python -m scraper.egress_ip [runner_ip] [--out PATH]``
 Prints the snapshot JSON; with ``--out`` it also writes the file (git history
 is the durable, timestamped log).
 """
+
 from __future__ import annotations
 
 import argparse
@@ -90,8 +91,7 @@ def write_snapshot(path: Path = EGRESS_EVIDENCE_PATH, runner_ip: str | None = No
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Snapshot GitHub Actions egress IP evidence.")
-    parser.add_argument("runner_ip", nargs="?",
-                        help="Runner public IP to check (default: best-effort lookup).")
+    parser.add_argument("runner_ip", nargs="?", help="Runner public IP to check (default: best-effort lookup).")
     parser.add_argument("--out", help="Also write the snapshot JSON to this path.")
     args = parser.parse_args(argv)
 

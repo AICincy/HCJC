@@ -68,10 +68,10 @@ def load(path: Path = LOCAL_PATH) -> list[dict]:
 
 def main() -> int:
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--hours", type=int, default=720)  # 30 days
-    parser.add_argument("--force", action="store_true",
-                        help="Refresh even if the local file is < 1h old.")
+    parser.add_argument("--force", action="store_true", help="Refresh even if the local file is < 1h old.")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args()
     logging.basicConfig(
@@ -79,6 +79,7 @@ def main() -> int:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
     from .cincy_open import recently_refreshed
+
     if not args.force and recently_refreshed(LOCAL_PATH, max_age_hours=1):
         log.info("cfs_pdi_recent.json is < 1h old; skipping refresh (use --force to override)")
         return 0
@@ -88,4 +89,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     import sys
+
     sys.exit(main())

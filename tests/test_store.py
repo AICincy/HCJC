@@ -132,6 +132,7 @@ def test_save_current_writes_schema_version(tmp_path: Path):
     # data-F1: every snapshot we write should carry schema_version so a
     # future reader can detect a too-new file.
     import json
+
     path = tmp_path / "current.json"
     save_current(path, [_inm("1")])
     raw = json.loads(path.read_text(encoding="utf-8"))
@@ -190,8 +191,7 @@ def test_anon_changelog_dedupes_recent_rows_across_sweeps(tmp_path: Path):
     from scraper.store import save_anon_changelog
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    ev = ChangeEvent(event="booked", inmate_number="42", name="DOE, JOHN",
-                     timestamp_utc=now)
+    ev = ChangeEvent(event="booked", inmate_number="42", name="DOE, JOHN", timestamp_utc=now)
     path = tmp_path / "anon_changelog.json"
     enr = {"42": {"tier": "F1", "category": "violent"}}
 
@@ -262,12 +262,8 @@ def test_compact_anon_entries_is_idempotent():
 
     from scraper.store import _compact_anon_entries
 
-    old_day = (
-        datetime.now(timezone.utc) - timedelta(days=400)
-    ).strftime("%Y-%m-%d")
-    recent_day = (
-        datetime.now(timezone.utc) - timedelta(days=10)
-    ).strftime("%Y-%m-%d")
+    old_day = (datetime.now(timezone.utc) - timedelta(days=400)).strftime("%Y-%m-%d")
+    recent_day = (datetime.now(timezone.utc) - timedelta(days=10)).strftime("%Y-%m-%d")
 
     entries = [
         {"event": "booked", "date": old_day, "tier": "F5", "category": "theft"},
@@ -287,10 +283,8 @@ def test_compact_anon_entries_merges_existing_summaries():
     from scraper.store import _compact_anon_entries
 
     entries = [
-        {"event_summary": True, "month": "2024-01", "event": "booked",
-         "tier": "F5", "category": "theft", "count": 5},
-        {"event_summary": True, "month": "2024-01", "event": "booked",
-         "tier": "F5", "category": "theft", "count": 3},
+        {"event_summary": True, "month": "2024-01", "event": "booked", "tier": "F5", "category": "theft", "count": 5},
+        {"event_summary": True, "month": "2024-01", "event": "booked", "tier": "F5", "category": "theft", "count": 3},
     ]
     out = _compact_anon_entries(entries)
     summaries = [r for r in out if r.get("event_summary")]

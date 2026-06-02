@@ -10,6 +10,7 @@ Exits 0 when the chain is intact (or the log is empty), 1 when a link is broken.
 
 Run: ``python -m scraper.verify_block_log`` (optionally a path argument).
 """
+
 from __future__ import annotations
 
 import argparse
@@ -20,8 +21,12 @@ from .store import WAF_BLOCK_LOG_PATH, load_block_log, verify_block_chain
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Verify the WAF-block evidence log hash chain.")
-    parser.add_argument("path", nargs="?", default=str(WAF_BLOCK_LOG_PATH),
-                        help="Path to the block log JSON (default: data/waf_block_log.json).")
+    parser.add_argument(
+        "path",
+        nargs="?",
+        default=str(WAF_BLOCK_LOG_PATH),
+        help="Path to the block log JSON (default: data/waf_block_log.json).",
+    )
     args = parser.parse_args(argv)
     path = Path(args.path)
 

@@ -65,32 +65,47 @@ def send_daily_request(since: str, until: str) -> int:
     to_addr = env("JCSTREAM_PRA_TO_PHOTOS_EMAIL") or DEFAULT_TO
     from_addr = env("JCSTREAM_PRA_FROM_EMAIL")
     if dry_run_required(from_addr):
-        log.warning(
-            "PRA-photos dry-run (set JCSTREAM_PRA_FROM_EMAIL + JCSTREAM_PRA_SMTP_HOST to enable send)"
-        )
+        log.warning("PRA-photos dry-run (set JCSTREAM_PRA_FROM_EMAIL + JCSTREAM_PRA_SMTP_HOST to enable send)")
         msg = _build_message(since, until, to_addr, from_addr or "<unset>")
-        log.info("[PRA-photos DRY-RUN] To=%s\nSubject=%s\n\n%s",
-                 to_addr, SUBJECT, msg.get_content())
-        append_pra_record(make_pra_record(
-            module="photos", to=to_addr, subject=SUBJECT,
-            window_since=since, window_until=until, status="dry_run",
-        ))
+        log.info("[PRA-photos DRY-RUN] To=%s\nSubject=%s\n\n%s", to_addr, SUBJECT, msg.get_content())
+        append_pra_record(
+            make_pra_record(
+                module="photos",
+                to=to_addr,
+                subject=SUBJECT,
+                window_since=since,
+                window_until=until,
+                status="dry_run",
+            )
+        )
         return 0
 
     msg = _build_message(since, until, to_addr, from_addr)
     try:
         send_smtp(msg)
         log.info("PRA-photos request sent to %s for window %s -> %s", to_addr, since, until)
-        append_pra_record(make_pra_record(
-            module="photos", to=to_addr, subject=SUBJECT,
-            window_since=since, window_until=until, status="sent",
-        ))
+        append_pra_record(
+            make_pra_record(
+                module="photos",
+                to=to_addr,
+                subject=SUBJECT,
+                window_since=since,
+                window_until=until,
+                status="sent",
+            )
+        )
     except Exception as e:
         log.error("PRA-photos SMTP send failed: %s", e)
-        append_pra_record(make_pra_record(
-            module="photos", to=to_addr, subject=SUBJECT,
-            window_since=since, window_until=until, status="failed",
-        ))
+        append_pra_record(
+            make_pra_record(
+                module="photos",
+                to=to_addr,
+                subject=SUBJECT,
+                window_since=since,
+                window_until=until,
+                status="failed",
+            )
+        )
         return 1
     return 0
 
@@ -108,4 +123,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     import sys
+
     sys.exit(main())

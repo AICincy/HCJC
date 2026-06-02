@@ -1,4 +1,5 @@
 """Tests for the offline summary logic in scripts/summarize_telemetry.py."""
+
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
@@ -12,8 +13,10 @@ def _ts(hours_ago: float) -> str:
 
 def test_trailing_block_streak_counts_only_trailing_blocks():
     entries = [
-        {"event": "blocked"}, {"event": "recovered"},
-        {"event": "blocked"}, {"event": "blocked"},
+        {"event": "blocked"},
+        {"event": "recovered"},
+        {"event": "blocked"},
+        {"event": "blocked"},
     ]
     assert st._trailing_block_streak(entries) == 2
 

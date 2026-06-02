@@ -67,8 +67,9 @@ def prev_row_count(path) -> int | None:
         return None
 
 
-def warn_on_row_drop(label: str, prev_count: int | None, new_count: int, *,
-                     drop_frac: float = 0.5, min_rows: int = 50) -> None:
+def warn_on_row_drop(
+    label: str, prev_count: int | None, new_count: int, *, drop_frac: float = 0.5, min_rows: int = 50
+) -> None:
     """Log a WARNING when `new_count` falls below `drop_frac` of `prev_count`,
     distinguishing a real feed collapse from the few-percent churn a rolling
     window normally shows.
@@ -88,7 +89,10 @@ def warn_on_row_drop(label: str, prev_count: int | None, new_count: int, *,
     if new_count < prev_count * drop_frac:
         log.warning(
             "%s: row_count dropped sharply %d -> %d (< %.0f%% of prior); possible feed collapse",
-            label, prev_count, new_count, drop_frac * 100,
+            label,
+            prev_count,
+            new_count,
+            drop_frac * 100,
         )
 
 

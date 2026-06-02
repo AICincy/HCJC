@@ -1,4 +1,5 @@
 """Tests for scraper.pra_log: hash chain, response tracking, verification."""
+
 from __future__ import annotations
 
 import json
@@ -16,14 +17,22 @@ from scraper.pra_log import (
 def test_append_creates_chain(tmp_path: Path):
     log_path = tmp_path / "pra.json"
     r1 = make_pra_record(
-        module="photos", to="a@b.com", subject="S",
-        window_since="a", window_until="b", status="sent",
+        module="photos",
+        to="a@b.com",
+        subject="S",
+        window_since="a",
+        window_until="b",
+        status="sent",
     )
     append_pra_record(r1, path=log_path)
 
     r2 = make_pra_record(
-        module="capias", to="c@d.com", subject="S2",
-        window_since="c", window_until="d", status="dry_run",
+        module="capias",
+        to="c@d.com",
+        subject="S2",
+        window_since="c",
+        window_until="d",
+        status="dry_run",
     )
     append_pra_record(r2, path=log_path)
 
@@ -37,8 +46,12 @@ def test_verify_intact_chain(tmp_path: Path):
     log_path = tmp_path / "pra.json"
     for _ in range(3):
         r = make_pra_record(
-            module="photos", to="a@b.com", subject="S",
-            window_since="a", window_until="b", status="sent",
+            module="photos",
+            to="a@b.com",
+            subject="S",
+            window_since="a",
+            window_until="b",
+            status="sent",
         )
         append_pra_record(r, path=log_path)
     entries = load_pra_log(log_path)
@@ -49,8 +62,12 @@ def test_verify_broken_chain(tmp_path: Path):
     log_path = tmp_path / "pra.json"
     for _ in range(3):
         r = make_pra_record(
-            module="photos", to="a@b.com", subject="S",
-            window_since="a", window_until="b", status="sent",
+            module="photos",
+            to="a@b.com",
+            subject="S",
+            window_since="a",
+            window_until="b",
+            status="sent",
         )
         append_pra_record(r, path=log_path)
 
@@ -67,8 +84,12 @@ def test_verify_broken_chain(tmp_path: Path):
 def test_record_response(tmp_path: Path):
     log_path = tmp_path / "pra.json"
     r = make_pra_record(
-        module="photos", to="a@b.com", subject="S",
-        window_since="a", window_until="b", status="sent",
+        module="photos",
+        to="a@b.com",
+        subject="S",
+        window_since="a",
+        window_until="b",
+        status="sent",
     )
     append_pra_record(r, path=log_path)
     rid = load_pra_log(log_path)[0]["request_id"]

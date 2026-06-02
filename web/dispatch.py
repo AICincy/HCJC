@@ -2,6 +2,7 @@
 
 Extracted from ``web/build.py`` to keep each module under one concern.
 """
+
 from __future__ import annotations
 
 import logging
@@ -17,6 +18,7 @@ def _dispatch_points(cfs_rows: list[dict], shooting_rows: list[dict], limit: int
     'cfs'|'shooting'), d (disposition/type), a (address/block), n (neighborhood),
     t (timestamp as the source prints it).
     """
+
     def _coord(row: dict) -> tuple[float, float] | None:
         lat_raw = row.get("latitude_x")
         lon_raw = row.get("longitude_x")
@@ -37,18 +39,30 @@ def _dispatch_points(cfs_rows: list[dict], shooting_rows: list[dict], limit: int
         c = _coord(r)
         if not c:
             continue
-        pts.append({"la": c[0], "lo": c[1], "k": "cfs",
-                    "d": (r.get("disposition_text") or "").strip(),
-                    "a": (r.get("address_x") or "").strip(),
-                    "n": (r.get("cpd_neighborhood") or r.get("community_council_neighborhood") or "").strip(),
-                    "t": (r.get("create_time_incident") or "").strip()})
+        pts.append(
+            {
+                "la": c[0],
+                "lo": c[1],
+                "k": "cfs",
+                "d": (r.get("disposition_text") or "").strip(),
+                "a": (r.get("address_x") or "").strip(),
+                "n": (r.get("cpd_neighborhood") or r.get("community_council_neighborhood") or "").strip(),
+                "t": (r.get("create_time_incident") or "").strip(),
+            }
+        )
     for r in shooting_rows:
         c = _coord(r)
         if not c:
             continue
-        pts.append({"la": c[0], "lo": c[1], "k": "shooting",
-                    "d": (r.get("type") or "SHOOTING").strip() or "SHOOTING",
-                    "a": (r.get("streetblock") or "").strip(),
-                    "n": (r.get("sna_neighborhood") or r.get("community_council_neighborhood") or "").strip(),
-                    "t": (r.get("datetimeoccured") or r.get("dateoccurred") or "").strip()})
+        pts.append(
+            {
+                "la": c[0],
+                "lo": c[1],
+                "k": "shooting",
+                "d": (r.get("type") or "SHOOTING").strip() or "SHOOTING",
+                "a": (r.get("streetblock") or "").strip(),
+                "n": (r.get("sna_neighborhood") or r.get("community_council_neighborhood") or "").strip(),
+                "t": (r.get("datetimeoccured") or r.get("dateoccurred") or "").strip(),
+            }
+        )
     return pts[:limit]

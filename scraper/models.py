@@ -68,10 +68,9 @@ class Inmate(BaseModel):
         if not stripped:
             raise ValueError("inmate_number must be non-empty")
         if not stripped.isdigit():
-            raise ValueError(
-                f"inmate_number must be digits, got {stripped!r}"
-            )
+            raise ValueError(f"inmate_number must be digits, got {stripped!r}")
         return stripped
+
     last_name: str = ""
     first_name: str = ""
     middle_name: str = ""
@@ -88,6 +87,7 @@ class Inmate(BaseModel):
         # info.field_name gives the field being validated.
         name = getattr(info, "field_name", "date")
         return _validate_hcso_date(v, name)
+
     charges: list[Charge] = Field(default_factory=list)
     photo_filename: Optional[str] = None
     first_seen_utc: str = ""
@@ -145,9 +145,7 @@ class Snapshot(BaseModel):
         if v == "":
             return v
         if not _GENERATED_UTC_RE.match(v):
-            raise ValueError(
-                f"generated_utc must be empty or YYYY-MM-DDTHH:MM:SSZ, got {v!r}"
-            )
+            raise ValueError(f"generated_utc must be empty or YYYY-MM-DDTHH:MM:SSZ, got {v!r}")
         return v
 
     @model_validator(mode="after")
@@ -156,9 +154,7 @@ class Snapshot(BaseModel):
         # nothing on healthy files and catches a hand-edited or merged file
         # before web/build.py renders incorrect totals.
         if self.inmate_count != len(self.inmates):
-            raise ValueError(
-                f"inmate_count={self.inmate_count} != len(inmates)={len(self.inmates)}"
-            )
+            raise ValueError(f"inmate_count={self.inmate_count} != len(inmates)={len(self.inmates)}")
         ids = [i.inmate_number for i in self.inmates]
         if len(set(ids)) != len(ids):
             # Find the duplicate(s) for a useful error message.
@@ -168,9 +164,7 @@ class Snapshot(BaseModel):
                 if iid in seen:
                     dupes.add(iid)
                 seen.add(iid)
-            raise ValueError(
-                f"duplicate inmate_number in snapshot: {sorted(dupes)}"
-            )
+            raise ValueError(f"duplicate inmate_number in snapshot: {sorted(dupes)}")
         return self
 
 
@@ -187,7 +181,7 @@ class HistoryRecord(BaseModel):
     per build day (the latest record for `date` is replaced in place).
     """
 
-    date: str       # YYYY-MM-DD, UTC
+    date: str  # YYYY-MM-DD, UTC
     count: int = Field(ge=0)  # roster size at write time
     booked_24h: int = Field(default=0, ge=0)
     released_24h: int = Field(default=0, ge=0)
@@ -225,9 +219,7 @@ class BlockLogEntry(BaseModel):
     @classmethod
     def _timestamp_shape(cls, v: str) -> str:
         if not _GENERATED_UTC_RE.match(v):
-            raise ValueError(
-                f"timestamp_utc must be YYYY-MM-DDTHH:MM:SSZ, got {v!r}"
-            )
+            raise ValueError(f"timestamp_utc must be YYYY-MM-DDTHH:MM:SSZ, got {v!r}")
         return v
 
 

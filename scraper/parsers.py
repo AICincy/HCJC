@@ -107,7 +107,13 @@ def parse_detail_page(html: str, inmate_number: str) -> tuple[Inmate, bytes | No
             "detail page id=%s parsed (bio=%d name=%s charges=%d) but no photo extracted "
             "(imgs=%d non-data=%d data=%d). If HCSO has a photo here, the alt/class/274px "
             "hooks and the size+extension fallback all missed it - investigate HTML drift.",
-            inmate_number, len(bio), bool(name), len(charges), img_count, nondata_count, data_count,
+            inmate_number,
+            len(bio),
+            bool(name),
+            len(charges),
+            img_count,
+            nondata_count,
+            data_count,
         )
 
     return (
@@ -155,10 +161,10 @@ def _parse_name(tree: HTMLParser) -> str:
          parser tolerates both "VOE, ANDREW" and "Inmate: VOE, ANDREW".
       2. meta[property="og:title"] with the same shape.
       3. Any text node with comma + all-caps (e.g., in container divs).
-      4. Bio table extraction: look for cells labeled "Name", "Full Name", 
+      4. Bio table extraction: look for cells labeled "Name", "Full Name",
          "Inmate", or similar.
       5. document <title> with at least a comma.
-    
+
     Each non-tier-1 success logs a debug breadcrumb so the operator can see
     which tier saved the cycle.
     """
@@ -213,11 +219,24 @@ def _name_from_og_title(tree: HTMLParser) -> str:
     return ""
 
 
-_BOILERPLATE_KEYWORDS = frozenset({
-    "COUNTY", "STATE", "OFFICE", "DEPARTMENT", "SHERIFF",
-    "COURT", "OHIO", "JUSTICE", "CENTER", "SERVICES",
-    "GOVERNMENT", "DISTRICT", "MUNICIPAL", "COMMON PLEAS",
-})
+_BOILERPLATE_KEYWORDS = frozenset(
+    {
+        "COUNTY",
+        "STATE",
+        "OFFICE",
+        "DEPARTMENT",
+        "SHERIFF",
+        "COURT",
+        "OHIO",
+        "JUSTICE",
+        "CENTER",
+        "SERVICES",
+        "GOVERNMENT",
+        "DISTRICT",
+        "MUNICIPAL",
+        "COMMON PLEAS",
+    }
+)
 # Single word-boundary alternation, longest-first so "COMMON PLEAS" wins over
 # a bare token match. Compiled once instead of per-call per-keyword.
 _BOILERPLATE_RE = re.compile(
@@ -316,7 +335,8 @@ def _log_skipped_charge_rows(skipped: int, n_charges: int) -> None:
         log.debug(
             "charge table parser skipped %d labeled rows that lacked both "
             "Description and ORC Code (extracted %d charges)",
-            skipped, n_charges,
+            skipped,
+            n_charges,
         )
 
 
@@ -375,18 +395,35 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
                     continue
                 _WARNED_MISSING_LABELS.add(label)
             log.warning(
-                "charge label %r absent from every row on a detail page; "
-                "HCSO may have renamed the column",
+                "charge label %r absent from every row on a detail page; HCSO may have renamed the column",
                 label,
             )
     return charges
 
 
 _UI_ICON_HINTS = (
-    "logo", "icon", "menu", "header", "footer", "spinner", "loader",
-    "alert", "warn", "search", "social", "share", "facebook", "twitter",
-    "instagram", "youtube", "linkedin", "/uploads/", "/themes/",
-    "/plugins/", "/wp-content/", "/wp-includes/",
+    "logo",
+    "icon",
+    "menu",
+    "header",
+    "footer",
+    "spinner",
+    "loader",
+    "alert",
+    "warn",
+    "search",
+    "social",
+    "share",
+    "facebook",
+    "twitter",
+    "instagram",
+    "youtube",
+    "linkedin",
+    "/uploads/",
+    "/themes/",
+    "/plugins/",
+    "/wp-content/",
+    "/wp-includes/",
 )
 
 
@@ -443,9 +480,14 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
     for img in tree.css("img"):
         img_count += 1
         src = _attr(img, "src")
-        
+
         # Fallback to lazy-loaded source if src is absent or a tiny/SVG placeholder
-        if not src or "placeholder" in src.lower() or src.startswith("data:image/svg") or src.startswith("data:image/gif"):
+        if (
+            not src
+            or "placeholder" in src.lower()
+            or src.startswith("data:image/svg")
+            or src.startswith("data:image/gif")
+        ):
             for attr in ("data-src", "data-lazy-src", "data-original"):
                 val = _attr(img, attr)
                 if val:
@@ -488,9 +530,11 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
                 photo_url = src
             elif "274px" in style:
                 photo_url = src
-            elif url_fallback is None and src.lower().rsplit("?", 1)[0].endswith(
-                (".jpg", ".jpeg", ".png", ".webp")
-            ) and not _looks_like_ui_chrome(img):
+            elif (
+                url_fallback is None
+                and src.lower().rsplit("?", 1)[0].endswith((".jpg", ".jpeg", ".png", ".webp"))
+                and not _looks_like_ui_chrome(img)
+            ):
                 url_fallback = src
 
     if photo_url is None and url_fallback is not None:

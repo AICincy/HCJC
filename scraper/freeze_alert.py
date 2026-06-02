@@ -12,6 +12,7 @@ Send-gate (mirrors the PRA loop): it dry-runs (logs only) unless both
 with the marker title already exists it does nothing, so a cron firing every
 ~15 minutes during a long freeze does not spam new issues or comments.
 """
+
 from __future__ import annotations
 
 import json
@@ -51,6 +52,7 @@ def _open_freeze_issue_exists(repo: str, token: str) -> bool:
     search API with an in-title query so it can't miss the marker behind a
     large backlog of open issues (a paginated /issues list could)."""
     import urllib.parse
+
     q = urllib.parse.quote(f'repo:{repo} is:issue is:open in:title "{ISSUE_TITLE}"')
     result = _gh("GET", f"{API}/search/issues?q={q}", token)
     items = result.get("items", []) if isinstance(result, dict) else []
@@ -79,8 +81,7 @@ def alert(stale_h: float | None) -> str:
     ``"ok"`` (not frozen), ``"dry-run"`` (frozen, no token), ``"exists"``
     (issue already open), or ``"created"``."""
     if stale_h is None or stale_h < ROSTER_STALE_ALARM_HOURS:
-        log.info("roster freshness OK (%s)",
-                 "unknown" if stale_h is None else f"{stale_h:.1f}h")
+        log.info("roster freshness OK (%s)", "unknown" if stale_h is None else f"{stale_h:.1f}h")
         return "ok"
 
     # Frozen: surface in the Actions UI regardless of token availability.
@@ -92,15 +93,15 @@ def alert(stale_h: float | None) -> str:
     token = os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPOSITORY")
     if not token or not repo:
-        log.warning("roster frozen %.1fh; GITHUB_TOKEN/GITHUB_REPOSITORY unset, "
-                    "not opening an issue (dry-run)", stale_h)
+        log.warning(
+            "roster frozen %.1fh; GITHUB_TOKEN/GITHUB_REPOSITORY unset, not opening an issue (dry-run)", stale_h
+        )
         return "dry-run"
     try:
         if _open_freeze_issue_exists(repo, token):
             log.info("roster frozen %.1fh; freeze issue already open, not duplicating", stale_h)
             return "exists"
-        _gh("POST", f"{API}/repos/{repo}/issues", token,
-            {"title": ISSUE_TITLE, "body": _issue_body(stale_h)})
+        _gh("POST", f"{API}/repos/{repo}/issues", token, {"title": ISSUE_TITLE, "body": _issue_body(stale_h)})
         log.error("roster frozen %.1fh; opened a freeze issue on %s", stale_h, repo)
         return "created"
     except (urllib.error.URLError, urllib.error.HTTPError, ValueError) as e:
@@ -118,4 +119,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     import sys
+
     sys.exit(main())

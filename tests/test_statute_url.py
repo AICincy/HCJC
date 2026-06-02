@@ -1,5 +1,6 @@
 """Municipal-code charges (Cincinnati / suburb codes, mayor's courts) must not
 deep-link to the Ohio Revised Code; real ORC sections still do."""
+
 from __future__ import annotations
 
 from web.build import _statute_url

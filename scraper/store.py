@@ -37,6 +37,7 @@ class SnapshotCorruptError(Exception):
     ``load_current_or_raise`` instead of ``load_current``.
     """
 
+
 log = logging.getLogger(__name__)
 
 # Phase 9: raised from 500 to 10000. The old 500 cap was a 2024 instinct to
@@ -94,9 +95,11 @@ def _flock_exclusive(fh):
     """Acquire an exclusive advisory file lock (POSIX or Windows)."""
     if sys.platform == "win32":
         import msvcrt
+
         msvcrt.locking(fh.fileno(), msvcrt.LK_LOCK, 1)
     else:
         import fcntl
+
         fcntl.flock(fh, fcntl.LOCK_EX)
 
 
@@ -104,9 +107,11 @@ def _flock_release(fh):
     """Release the advisory file lock."""
     if sys.platform == "win32":
         import msvcrt
+
         msvcrt.locking(fh.fileno(), msvcrt.LK_UNLCK, 1)
     else:
         import fcntl
+
         fcntl.flock(fh, fcntl.LOCK_UN)
 
 
@@ -195,14 +200,11 @@ def _load_current_strict(path: Path) -> dict[str, Inmate]:
     except json.JSONDecodeError as e:
         raise SnapshotCorruptError(f"JSON decode error: {e}") from e
     if not isinstance(raw, dict):
-        raise SnapshotCorruptError(
-            f"top-level JSON is {type(raw).__name__}, expected object"
-        )
+        raise SnapshotCorruptError(f"top-level JSON is {type(raw).__name__}, expected object")
     version = raw.get("schema_version", 1)
     if not isinstance(version, int) or version > SNAPSHOT_SCHEMA_VERSION:
         raise SnapshotCorruptError(
-            f"snapshot schema_version={version!r} is newer than reader max "
-            f"{SNAPSHOT_SCHEMA_VERSION}"
+            f"snapshot schema_version={version!r} is newer than reader max {SNAPSHOT_SCHEMA_VERSION}"
         )
     try:
         return {i["inmate_number"]: Inmate(**i) for i in raw.get("inmates", [])}
@@ -309,9 +311,7 @@ def _compact_anon_entries(entries: list[dict]) -> list[dict]:
     from collections import Counter
     from datetime import datetime, timedelta, timezone
 
-    compact_cutoff = (
-        datetime.now(timezone.utc) - timedelta(days=ANON_COMPACTION_MAX_DAYS)
-    ).strftime("%Y-%m-%d")
+    compact_cutoff = (datetime.now(timezone.utc) - timedelta(days=ANON_COMPACTION_MAX_DAYS)).strftime("%Y-%m-%d")
 
     recent: list[dict] = []
     old_groups: Counter = Counter()
@@ -333,14 +333,16 @@ def _compact_anon_entries(entries: list[dict]) -> list[dict]:
 
     summaries: list[dict] = []
     for (month, event, tier, category), count in sorted(old_groups.items()):
-        summaries.append({
-            "event_summary": True,
-            "month": month,
-            "event": event,
-            "tier": tier,
-            "category": category,
-            "count": count,
-        })
+        summaries.append(
+            {
+                "event_summary": True,
+                "month": month,
+                "event": event,
+                "tier": tier,
+                "category": category,
+                "count": count,
+            }
+        )
 
     return summaries + recent
 
@@ -381,6 +383,7 @@ def save_anon_changelog(
 
     # Determine cutoff
     from datetime import datetime, timedelta, timezone
+
     cutoff = (datetime.now(timezone.utc) - timedelta(days=ANON_EXPIRY_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     # Build a set of (event, timestamp_utc) keys already in existing so we
@@ -419,12 +422,14 @@ def save_anon_changelog(
     # Re-anonymize any retained rows that have crossed the expiry boundary.
     for i, row in enumerate(out):
         if "timestamp_utc" in row and row["timestamp_utc"] and row["timestamp_utc"] < cutoff:
-            out[i] = _anonymize_event({
-                "event": row.get("event"),
-                "timestamp_utc": row.get("timestamp_utc"),
-                "primary_tier": row.get("tier"),
-                "primary_category": row.get("category"),
-            })
+            out[i] = _anonymize_event(
+                {
+                    "event": row.get("event"),
+                    "timestamp_utc": row.get("timestamp_utc"),
+                    "primary_tier": row.get("tier"),
+                    "primary_category": row.get("category"),
+                }
+            )
 
     # Stable sort by date/timestamp, oldest first for append-only feel
     out.sort(key=lambda r: r.get("timestamp_utc") or r.get("date") or "")
@@ -439,6 +444,7 @@ def diff(
     current: dict[str, Inmate],
 ) -> list[ChangeEvent]:
     """Compare previous vs current roster, emit booked/released/updated events."""
+
     # HCSO emits "1/1/70" (epoch 0) when it has no booking date; don't bake that
     # sentinel into the human-readable event note.
     def _booked_note(booking_date: str | None) -> str:

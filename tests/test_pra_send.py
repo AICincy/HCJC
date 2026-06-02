@@ -4,6 +4,7 @@ The dry-run path (no env) is already covered in test_pra.py. These exercise
 what happens when ``JCSTREAM_PRA_SMTP_HOST`` + ``JCSTREAM_PRA_FROM_EMAIL``
 are set, without actually opening a socket.
 """
+
 from __future__ import annotations
 
 import smtplib
@@ -92,7 +93,8 @@ def test_capias_send_returns_one_on_smtp_failure(monkeypatch):
     _set_smtp_env(monkeypatch)
 
     class _Boom:
-        def __init__(self, *a, **kw): raise OSError("connection refused")
+        def __init__(self, *a, **kw):
+            raise OSError("connection refused")
 
     monkeypatch.setattr(smtplib, "SMTP", _Boom)
     assert pra_capias.send_daily_request("a", "b") == 1
@@ -126,9 +128,6 @@ def test_pra_build_message_rejects_header_injection():
 
     for build in (pra._build_message, pra_capias._build_message):
         with pytest.raises(ValueError):
-            build("2026-05-01", "2026-05-02",
-                  "victim@example.com\r\nBcc: evil@example.com",
-                  "from@example.com")
+            build("2026-05-01", "2026-05-02", "victim@example.com\r\nBcc: evil@example.com", "from@example.com")
         with pytest.raises(ValueError):
-            build("2026-05-01", "2026-05-02", "victim@example.com",
-                  "from@example.com\r\nBcc: evil@example.com")
+            build("2026-05-01", "2026-05-02", "victim@example.com", "from@example.com\r\nBcc: evil@example.com")

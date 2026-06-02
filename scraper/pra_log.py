@@ -128,9 +128,7 @@ def record_response(
         entries = load_pra_log(path)
         for rec in entries:
             if rec.get("request_id") == request_id:
-                rec["response_received_utc"] = datetime.now(timezone.utc).strftime(
-                    "%Y-%m-%dT%H:%M:%SZ"
-                )
+                rec["response_received_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
                 rec["response_notes"] = notes
                 _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
                 return True
@@ -140,22 +138,18 @@ def record_response(
 def _list_pending(path: Path = PRA_LOG_PATH) -> list[dict]:
     """Return PRA records that have status='sent' but no response."""
     entries = load_pra_log(path)
-    return [
-        r for r in entries
-        if r.get("status") == "sent" and not r.get("response_received_utc")
-    ]
+    return [r for r in entries if r.get("status") == "sent" and not r.get("response_received_utc")]
 
 
 # ---------------------------------------------------------------------------
 # CLI: python -m scraper.pra_log {verify,record-response,pending}
 # ---------------------------------------------------------------------------
 
+
 def main(argv: list[str] | None = None) -> int:
     import argparse
 
-    parser = argparse.ArgumentParser(
-        description="PRA send log management (hash chain, response tracking)."
-    )
+    parser = argparse.ArgumentParser(description="PRA send log management (hash chain, response tracking).")
     sub = parser.add_subparsers(dest="command")
 
     # verify
@@ -210,4 +204,5 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     import sys
+
     sys.exit(main())

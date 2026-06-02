@@ -44,6 +44,7 @@ def roster_stale_hours(generated_utc: str | None) -> float | None:
         last = last.replace(tzinfo=timezone.utc)
     return (datetime.now(timezone.utc) - last).total_seconds() / 3600
 
+
 # ===== List-sweep degradation guards =====
 # Reject the cycle (keep last-good roster) when too many surname fetches
 # errored or the roster collapsed to less than half of prior. Below the
@@ -71,9 +72,7 @@ DETAIL_WATCHDOG_BLOCK_NAME_FLOOR = 0.60
 PHOTO_PRUNE_MAX_FRACTION = 0.5
 
 
-def sweep_looks_healthy(
-    prev_count: int, seen_count: int, n_surnames: int, n_failed: int
-) -> bool:
+def sweep_looks_healthy(prev_count: int, seen_count: int, n_surnames: int, n_failed: int) -> bool:
     """Heuristic: did the list sweep come back with a believable roster?
 
     A first/tiny run is always accepted. Otherwise reject if too many surname
@@ -106,22 +105,26 @@ def check_detail_watchdog(attempts: int, named: int, with_photo: int) -> bool:
         log.warning(
             "detail watchdog: only %d/%d (%.0f%%) parsed a name - HCSO detail "
             "page structure may have changed; check scraper/parsers.py",
-            named, attempts, 100 * name_rate,
+            named,
+            attempts,
+            100 * name_rate,
         )
     if photo_rate < DETAIL_WATCHDOG_PHOTO_FLOOR:
         log.warning(
             "detail watchdog: only %d/%d (%.0f%%) yielded a photo - HCSO may "
             "have changed the inline-image embedding; check scraper/parsers.py",
-            with_photo, attempts, 100 * photo_rate,
+            with_photo,
+            attempts,
+            100 * photo_rate,
         )
-    if (
-        attempts >= DETAIL_WATCHDOG_BLOCK_MIN_SAMPLE
-        and name_rate < DETAIL_WATCHDOG_BLOCK_NAME_FLOOR
-    ):
+    if attempts >= DETAIL_WATCHDOG_BLOCK_MIN_SAMPLE and name_rate < DETAIL_WATCHDOG_BLOCK_NAME_FLOOR:
         log.error(
             "detail watchdog BLOCK: %d/%d (%.0f%%) named at >= %d attempts; "
             "refusing this cycle's write to keep last-good roster in place",
-            named, attempts, 100 * name_rate, DETAIL_WATCHDOG_BLOCK_MIN_SAMPLE,
+            named,
+            attempts,
+            100 * name_rate,
+            DETAIL_WATCHDOG_BLOCK_MIN_SAMPLE,
         )
         return False
     return True
@@ -146,7 +149,9 @@ def prune_photos(photos_dir: Path, active_ids: set[str]) -> None:
         log.error(
             "photo prune would remove %d/%d photos (>%.0f%%) - skipping prune; "
             "this is usually a degraded sweep, not a real release wave",
-            len(doomed), len(existing), PHOTO_PRUNE_MAX_FRACTION * 100,
+            len(doomed),
+            len(existing),
+            PHOTO_PRUNE_MAX_FRACTION * 100,
         )
         return
     for f in doomed:

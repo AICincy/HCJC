@@ -1,5 +1,6 @@
 """Tests for the roster-freeze alert. No network: the GitHub API calls are
 monkeypatched, so only the staleness gating and the send-gate are exercised."""
+
 import pytest
 
 from scraper import freeze_alert
@@ -23,8 +24,11 @@ def test_alert_skips_when_issue_already_open(monkeypatch):
     monkeypatch.setenv("GITHUB_TOKEN", "tok")
     monkeypatch.setenv("GITHUB_REPOSITORY", "AICincy/HCJC")
     monkeypatch.setattr(freeze_alert, "_open_freeze_issue_exists", lambda repo, token: True)
-    monkeypatch.setattr(freeze_alert, "_gh", lambda *a, **k: (_ for _ in ()).throw(
-        AssertionError("must not POST when an issue is already open")))
+    monkeypatch.setattr(
+        freeze_alert,
+        "_gh",
+        lambda *a, **k: (_ for _ in ()).throw(AssertionError("must not POST when an issue is already open")),
+    )
     assert freeze_alert.alert(ROSTER_STALE_ALARM_HOURS + 5) == "exists"
 
 

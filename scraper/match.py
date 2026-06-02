@@ -21,8 +21,8 @@ from .models import Inmate
 
 log = logging.getLogger(__name__)
 
-WINDOW_BEFORE = timedelta(hours=12)   # prior-evening dispatch -> next-day booking
-WINDOW_AFTER = timedelta(hours=36)    # booking-day + overnight
+WINDOW_BEFORE = timedelta(hours=12)  # prior-evening dispatch -> next-day booking
+WINDOW_AFTER = timedelta(hours=36)  # booking-day + overnight
 MAX_CANDIDATES_PER_INMATE = 4
 ARREST_PREFIXES = ("ARR", "CIT", "301")  # disposition codes that end in a booking-ish outcome
 
@@ -79,6 +79,10 @@ def attach_candidates(inmates: Iterable[Inmate], cfs_rows: list[dict]) -> dict[s
         cands = candidates_for(inm, cfs_rows)
         if cands:
             out[inm.inmate_number] = cands
-    log.info("CFS matcher: %d/%d inmates have candidate dispatch calls (%d CFS rows scanned)",
-             len(out), len(inmates), len(cfs_rows))
+    log.info(
+        "CFS matcher: %d/%d inmates have candidate dispatch calls (%d CFS rows scanned)",
+        len(out),
+        len(inmates),
+        len(cfs_rows),
+    )
     return out

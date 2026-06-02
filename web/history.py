@@ -2,6 +2,7 @@
 
 Extracted from ``web/build.py`` to keep each module under one concern.
 """
+
 from __future__ import annotations
 
 import json

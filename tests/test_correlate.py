@@ -2,6 +2,7 @@
 
 Covers: _parse_cfs_dt, _category_overlap, correlate(), and run().
 """
+
 from __future__ import annotations
 
 import json
@@ -69,6 +70,7 @@ def test_parse_cfs_dt_returns_none_when_no_field_matches():
 
 # ----- _category_overlap ---------------------------------------------------
 
+
 def test_category_overlap_exact_match():
     score = _category_overlap("THEFT SHOPLIFTING", "THEFT SHOPLIFTING ARREST")
     assert score > 0.5
@@ -96,13 +98,16 @@ def test_category_overlap_partial():
 
 # ----- correlate() end-to-end ----------------------------------------------
 
+
 def _make_current(booking_date: str, charge_desc: str, inmate_number: str = "100") -> dict:
     return {
-        "inmates": [{
-            "inmate_number": inmate_number,
-            "booking_date": booking_date,
-            "charges": [{"description": charge_desc}],
-        }],
+        "inmates": [
+            {
+                "inmate_number": inmate_number,
+                "booking_date": booking_date,
+                "charges": [{"description": charge_desc}],
+            }
+        ],
     }
 
 
@@ -179,6 +184,7 @@ def test_arrest_boost_value():
 
 # ----- run() ---------------------------------------------------------------
 
+
 def test_run_no_data_returns_zero(tmp_path: Path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     assert run(write=False) == 0
@@ -192,11 +198,13 @@ def test_run_with_matching_data_writes_output(tmp_path: Path, monkeypatch):
     current = {
         "generated_utc": "2026-05-15T12:00:00Z",
         "inmate_count": 1,
-        "inmates": [{
-            "inmate_number": "200",
-            "booking_date": "5/15/26",
-            "charges": [{"description": "THEFT SHOPLIFTING UNDER 1000"}],
-        }],
+        "inmates": [
+            {
+                "inmate_number": "200",
+                "booking_date": "5/15/26",
+                "charges": [{"description": "THEFT SHOPLIFTING UNDER 1000"}],
+            }
+        ],
     }
     (data_dir / "current.json").write_text(json.dumps(current), encoding="utf-8")
 

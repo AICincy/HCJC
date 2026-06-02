@@ -1,5 +1,6 @@
 """Case-number display cleaning: HCSO drops the court-prefix letter, leaving a
 stray leading slash ("/25/CRA/17789"); the display must read "25/CRA/17789"."""
+
 from __future__ import annotations
 
 from web.shape import _clean_case_number

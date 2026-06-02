@@ -75,6 +75,7 @@ def test_build_message_rejects_crlf_in_recipient_header():
 
 def test_safe_port_parsing_invalid_or_missing(monkeypatch):
     from scraper import pra_base
+
     monkeypatch.setenv("JCSTREAM_PRA_SMTP_HOST", "localhost")
     monkeypatch.setenv("JCSTREAM_PRA_SMTP_PORT", "not-a-number")
     captured_port = None
@@ -98,6 +99,7 @@ def test_safe_port_parsing_invalid_or_missing(monkeypatch):
 
     monkeypatch.setattr(pra_base.smtplib, "SMTP", MockSMTP)
     from email.message import EmailMessage
+
     msg = EmailMessage()
     pra_base.send_smtp(msg)
     assert captured_port == 587

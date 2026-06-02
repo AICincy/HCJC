@@ -87,8 +87,7 @@ PHOTOS_DIR = Path("data/photos")
 DEFAULT_OUT = Path("docs")
 
 
-def _statute_url(code: str, offenses: dict,
-                 orc_chapters_set: frozenset[str] | None = None) -> str:
+def _statute_url(code: str, offenses: dict, orc_chapters_set: frozenset[str] | None = None) -> str:
     """codes.ohio.gov link for a charge code, empty for anything that is not a
     genuine ORC section: municipal-code charges (Cincinnati / suburb / mayor's
     courts), HCSO placeholder hold codes (0000.00, etc.), and untitled codes
@@ -134,7 +133,7 @@ def _load_inputs():
     shooting_rows = shootings_mod.load()
     seen_ev: set[str] = set()
     all_cfs: list[dict] = []
-    for r in (cfs_rows + cfs_pdi_rows):
+    for r in cfs_rows + cfs_pdi_rows:
         ev = str(r.get("event_number") or id(r))
         if ev not in seen_ev:
             seen_ev.add(ev)
@@ -155,8 +154,7 @@ def _distinct_chapters(inmates: list[Inmate]) -> list[tuple[str, str]]:
     return sorted(chap.items(), key=lambda kv: kv[1])
 
 
-def _build_env(snapshot: Snapshot, offenses: dict[str, dict],
-               base_url: str, site_url: str) -> Environment:
+def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, site_url: str) -> Environment:
     """Construct the Jinja Environment and register every template global and
     filter. The registered names ARE the template contract: a helper added in
     web/shape.py or web/classify.py must be registered here under the same name
@@ -192,20 +190,19 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict],
     # Cache-bust the stylesheet by its CONTENT hash, not the data timestamp —
     # otherwise a CSS change with unchanged data ships new HTML against stale CSS.
     _css = STATIC_DIR / "style.css"
-    env.globals["css_version"] = (hashlib.sha256(_css.read_bytes()).hexdigest()[:10]
-                                  if _css.exists() else "dev")
+    env.globals["css_version"] = hashlib.sha256(_css.read_bytes()).hexdigest()[:10] if _css.exists() else "dev"
     # Same pattern for the externalized JS module. `map.js` was removed; the
     # previous `map_js_version` env.global had no template reference and is
     # gone too.
     _main_js = STATIC_DIR / "main.js"
-    env.globals["main_js_version"] = (hashlib.sha256(_main_js.read_bytes()).hexdigest()[:10]
-                                      if _main_js.exists() else "dev")
+    env.globals["main_js_version"] = (
+        hashlib.sha256(_main_js.read_bytes()).hexdigest()[:10] if _main_js.exists() else "dev"
+    )
     _register_template_helpers(env, snapshot, offenses)
     return env
 
 
-def _register_template_helpers(env: Environment, snapshot: Snapshot,
-                               offenses: dict[str, dict]) -> None:
+def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: dict[str, dict]) -> None:
     """Register the per-inmate / per-roster helper globals (from web.shape and
     web.classify) that templates call. Split out of _build_env so each stays a
     readable unit; the names here are part of the template contract."""
@@ -222,7 +219,9 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot,
     env.globals["timeline_markers"] = _timeline_markers
     env.globals["display_date"] = _display_date
     env.globals["iso_booking_date"] = _iso_booking_date
-    env.globals["similar_by_statute"] = lambda inm: _similar_by_statute(inm, snapshot.inmates, offenses, limit=6, indexes=idx)
+    env.globals["similar_by_statute"] = lambda inm: _similar_by_statute(
+        inm, snapshot.inmates, offenses, limit=6, indexes=idx
+    )
     env.globals["tier_counts"] = _tier_counts
     env.globals["charge_tier"] = _charge_tier
     env.globals["avatar_initials"] = _avatar_initials
@@ -272,8 +271,7 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
     by_month = _group_by_month(snapshot.inmates)
     # Month-nav data: short label + count.
     nav_months = [
-        {"slug": m.replace(" ", "-").lower(), "label": _short_month_label(m), "count": len(g)}
-        for m, g in by_month
+        {"slug": m.replace(" ", "-").lower(), "label": _short_month_label(m), "count": len(g)} for m, g in by_month
     ]
     # Only the newest month renders expanded; older ones collapsed by default.
     expanded_months = {m for m, _ in by_month[:1]}
@@ -352,9 +350,6 @@ def build(out_dir: Path) -> int:
     return 0
 
 
-
-
-
 def _iso_booking_date(inmate: Inmate) -> str | None:
     """ISO-8601 (YYYY-MM-DD) form of an inmate's booking_date.
 
@@ -392,10 +387,10 @@ def _resolve_base_url() -> str:
 def _resolve_site_url() -> str:
     """Absolute site origin (no trailing slash) for feeds / manifest / JSON-LD.
 
-      1. ``JCSTREAM_SITE_URL`` env var (explicit, e.g. ``https://www.aretheyinjail.com``)
-      2. ``https://<JCSTREAM_CNAME>`` if a custom domain is configured
-      3. Derived from GitHub Actions: ``https://<owner>.github.io/<repo>``
-      4. Fallback: ``https://aicincy.github.io/JCStream``
+    1. ``JCSTREAM_SITE_URL`` env var (explicit, e.g. ``https://www.aretheyinjail.com``)
+    2. ``https://<JCSTREAM_CNAME>`` if a custom domain is configured
+    3. Derived from GitHub Actions: ``https://<owner>.github.io/<repo>``
+    4. Fallback: ``https://aicincy.github.io/JCStream``
     """
     explicit = os.environ.get("JCSTREAM_SITE_URL", "").strip()
     if explicit:
@@ -428,9 +423,9 @@ def _warn_about_unmapped_orcs(inmates: list[Inmate], offenses: dict[str, dict]) 
 
 
 _CFS_DT_FORMATS = (
-    "%Y %b %d %I:%M:%S %p",   # CFS: "2026 May 12 12:09:57 AM"
-    "%m/%d/%Y %I:%M:%S %p",   # shootings: "5/10/2026 10:35:00 PM"
-    "%Y-%m-%dT%H:%M:%S",      # ISO-8601 (Socrata default for some columns)
+    "%Y %b %d %I:%M:%S %p",  # CFS: "2026 May 12 12:09:57 AM"
+    "%m/%d/%Y %I:%M:%S %p",  # shootings: "5/10/2026 10:35:00 PM"
+    "%Y-%m-%dT%H:%M:%S",  # ISO-8601 (Socrata default for some columns)
     "%Y-%m-%dT%H:%M:%S.%f",
     "%Y-%m-%d %H:%M:%S",
 )
@@ -449,7 +444,6 @@ def _parse_dispatch_dt(s: str) -> datetime | None:
         except ValueError:
             continue
     return None
-
 
 
 # Page renderers and output writers extracted to web/pages.py and web/outputs.py.
@@ -489,6 +483,7 @@ def _roster_stale_context(snapshot: Snapshot) -> dict:
     documentation present after recovery."""
     from scraper.store import load_block_log
     from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
+
     hours = roster_stale_hours(snapshot.generated_utc)
     log = load_block_log()
     since = None

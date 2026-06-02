@@ -76,6 +76,7 @@ def test_parse_name_falls_back_to_og_title(caplog):
     </html>
     """
     import logging
+
     caplog.set_level(logging.DEBUG, logger="scraper.parsers")
     inm, _, _ = parse_detail_page(html, "1234567")
     assert inm.last_name == "ROE"
@@ -116,6 +117,7 @@ def test_extract_inline_photo_jpeg_soi_fallback():
     # parser-F3: when the 274px hook drifts (e.g. 280px), JPEG SOI bytes
     # are accepted as a fallback so photos don't disappear site-wide.
     import base64
+
     jpeg_bytes = b"\xff\xd8\xff\xe0\x00\x10JFIFsynthetic"
     encoded = base64.b64encode(jpeg_bytes).decode("ascii")
     html = f"""
@@ -175,6 +177,7 @@ def test_parse_detail_page_logs_when_no_structured_fields_found(caplog):
     # fields (HCSO error / interstitial page) must produce a discoverable
     # per-id INFO log so the operator can find the affected ids.
     import logging
+
     caplog.set_level(logging.INFO, logger="scraper.parsers")
     inm, photo, photo_url = parse_detail_page(
         "<html><body><p>Service unavailable</p></body></html>",
@@ -184,10 +187,7 @@ def test_parse_detail_page_logs_when_no_structured_fields_found(caplog):
     assert inm.first_name == ""
     assert inm.charges == []
     assert photo is None
-    assert any(
-        "no structured fields" in r.message and "8888888" in r.message
-        for r in caplog.records
-    )
+    assert any("no structured fields" in r.message and "8888888" in r.message for r in caplog.records)
 
 
 def test_looks_like_person_name_rejects_boilerplate():

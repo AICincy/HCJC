@@ -1,5 +1,6 @@
 """Tests for the HCSO HTTP client retry behavior. Uses MockTransport so no
 real network traffic happens."""
+
 from __future__ import annotations
 
 from typing import cast
@@ -41,10 +42,12 @@ def test_get_retries_on_5xx_then_succeeds(monkeypatch):
     slept: list[float] = []
     monkeypatch.setattr(client_mod.time, "sleep", lambda s: slept.append(s))
     monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)  # zero jitter
-    c = _make_client_with_responses([
-        httpx.Response(503, text="busy"),
-        httpx.Response(200, text="ok"),
-    ])
+    c = _make_client_with_responses(
+        [
+            httpx.Response(503, text="busy"),
+            httpx.Response(200, text="ok"),
+        ]
+    )
     try:
         assert c.get("/x") == "ok"
     finally:
@@ -56,10 +59,12 @@ def test_get_retries_on_5xx_then_succeeds(monkeypatch):
 def test_get_raises_after_repeated_5xx(monkeypatch):
     monkeypatch.setattr(client_mod.time, "sleep", lambda s: None)
     monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)
-    c = _make_client_with_responses([
-        httpx.Response(503),
-        httpx.Response(503),  # initial + MAX_RETRIES retries
-    ])
+    c = _make_client_with_responses(
+        [
+            httpx.Response(503),
+            httpx.Response(503),  # initial + MAX_RETRIES retries
+        ]
+    )
     try:
         with pytest.raises(httpx.HTTPStatusError):
             c.get("/x")
@@ -71,10 +76,12 @@ def test_get_retries_on_429_honoring_retry_after(monkeypatch):
     # sec-net-F3: 429 must trigger the retry envelope (it didn't before).
     slept: list[float] = []
     monkeypatch.setattr(client_mod.time, "sleep", lambda s: slept.append(s))
-    c = _make_client_with_responses([
-        httpx.Response(429, headers={"retry-after": "3"}, text="slow down"),
-        httpx.Response(200, text="ok"),
-    ])
+    c = _make_client_with_responses(
+        [
+            httpx.Response(429, headers={"retry-after": "3"}, text="slow down"),
+            httpx.Response(200, text="ok"),
+        ]
+    )
     try:
         assert c.get("/x") == "ok"
     finally:
@@ -88,10 +95,12 @@ def test_get_caps_retry_after_at_30_seconds(monkeypatch):
     # indefinitely; Retry-After is capped at RETRY_AFTER_CAP_S.
     slept: list[float] = []
     monkeypatch.setattr(client_mod.time, "sleep", lambda s: slept.append(s))
-    c = _make_client_with_responses([
-        httpx.Response(429, headers={"retry-after": "600"}, text="slow down"),
-        httpx.Response(200, text="ok"),
-    ])
+    c = _make_client_with_responses(
+        [
+            httpx.Response(429, headers={"retry-after": "600"}, text="slow down"),
+            httpx.Response(200, text="ok"),
+        ]
+    )
     try:
         assert c.get("/x") == "ok"
     finally:
@@ -102,10 +111,12 @@ def test_get_caps_retry_after_at_30_seconds(monkeypatch):
 def test_get_falls_back_to_one_second_when_retry_after_missing(monkeypatch):
     slept: list[float] = []
     monkeypatch.setattr(client_mod.time, "sleep", lambda s: slept.append(s))
-    c = _make_client_with_responses([
-        httpx.Response(429, text="slow down"),
-        httpx.Response(200, text="ok"),
-    ])
+    c = _make_client_with_responses(
+        [
+            httpx.Response(429, text="slow down"),
+            httpx.Response(200, text="ok"),
+        ]
+    )
     try:
         assert c.get("/x") == "ok"
     finally:
@@ -137,6 +148,7 @@ def test_make_client_uses_defaults_when_env_unset(monkeypatch):
 
 
 # ----- __enter__ behavior ---------------------------------------------------
+
 
 def test_enter_accepts_non_hcso_base_url():
     with client_mod.HcsoClient(base_url="https://example.com") as c:
@@ -180,6 +192,7 @@ def test_enter_builds_with_proxy():
 
 # ----- crawl-delay lock + pool keepalive ------------------------------------
 
+
 def test_crawl_delay_sleep_holds_lock(monkeypatch):
     # The crawl-delay sleep must run inside `with self._lock`, so concurrent
     # workers can't all read the same elapsed time and burst the WAF together.
@@ -188,7 +201,8 @@ def test_crawl_delay_sleep_holds_lock(monkeypatch):
     c._last_request_at = client_mod.time.monotonic()  # force a pending wait
     locked_during_sleep = []
     monkeypatch.setattr(
-        client_mod.time, "sleep",
+        client_mod.time,
+        "sleep",
         lambda _s: locked_during_sleep.append(c._lock.locked()),
     )
     c._sleep_for_crawl_delay()
@@ -214,10 +228,12 @@ def test_pool_sets_keepalive_expiry(monkeypatch):
 def test_get_bytes_retries_on_5xx(monkeypatch):
     monkeypatch.setattr(client_mod.time, "sleep", lambda s: None)
     monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)
-    c = _make_client_with_responses([
-        httpx.Response(503),
-        httpx.Response(200, content=b"image_bytes"),
-    ])
+    c = _make_client_with_responses(
+        [
+            httpx.Response(503),
+            httpx.Response(200, content=b"image_bytes"),
+        ]
+    )
     try:
         assert c.get_bytes("/photo.jpg") == b"image_bytes"
     finally:
@@ -225,10 +241,12 @@ def test_get_bytes_retries_on_5xx(monkeypatch):
 
 
 def test_retry_updates_last_request_at(monkeypatch):
-    c = _make_client_with_responses([
-        httpx.Response(503),
-        httpx.Response(200, text="ok"),
-    ])
+    c = _make_client_with_responses(
+        [
+            httpx.Response(503),
+            httpx.Response(200, text="ok"),
+        ]
+    )
     c.crawl_delay = 0.5
     monkeypatch.setattr(client_mod.time, "sleep", lambda s: None)
     monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)

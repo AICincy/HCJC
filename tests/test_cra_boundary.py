@@ -10,6 +10,7 @@ These tests enforce the compliance boundary by verifying that:
 4. The "presumed innocent" disclaimer appears in all individual-facing templates.
 5. No historical archive endpoint exists (we mirror, not archive).
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -23,12 +24,14 @@ def _read_template(name: str) -> str:
 
 # --- 1. noindex meta tag ---------------------------------------------------
 
+
 def test_base_template_has_noindex():
     html = _read_template("base.html")
     assert 'content="noindex' in html, "base.html must carry noindex meta tag"
 
 
 # --- 2. robots.txt disallow -------------------------------------------------
+
 
 def test_robots_txt_disallow_all():
     """The _write_well_known function must emit 'Disallow: /'."""
@@ -38,21 +41,19 @@ def test_robots_txt_disallow_all():
 
 # --- 3. FCRA disclaimer -----------------------------------------------------
 
+
 def test_visit_template_has_fcra_disclaimer():
     html = _read_template("visit.html")
-    assert "consumer reporting agency" in html.lower(), (
-        "visit.html must contain the FCRA disclaimer"
-    )
+    assert "consumer reporting agency" in html.lower(), "visit.html must contain the FCRA disclaimer"
 
 
 def test_data_template_has_presumed_innocent():
     html = _read_template("data.html")
-    assert "presumed innocent" in html.lower(), (
-        "data.html must contain presumed-innocent language"
-    )
+    assert "presumed innocent" in html.lower(), "data.html must contain presumed-innocent language"
 
 
 # --- 4. presumed-innocent disclaimer on individual-facing pages -------------
+
 
 def test_index_has_presumed_innocent():
     html = _read_template("index.html")
@@ -76,9 +77,8 @@ def test_stats_has_presumed_innocent():
 
 # --- 5. no historical archive -----------------------------------------------
 
+
 def test_no_archive_endpoint():
     """No template named 'archive' should exist — we mirror, not archive."""
     archive_templates = list(TEMPLATE_DIR.glob("*archive*"))
-    assert archive_templates == [], (
-        f"unexpected archive template(s): {archive_templates}"
-    )
+    assert archive_templates == [], f"unexpected archive template(s): {archive_templates}"

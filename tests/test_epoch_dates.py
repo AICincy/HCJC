@@ -3,6 +3,7 @@
 HCSO emits 1/1/70 when it has no real booking date; the site must never show
 1970. Covers the parser guard, the changelog note, and the render filter.
 """
+
 from __future__ import annotations
 
 from web.build import _clean_event_note

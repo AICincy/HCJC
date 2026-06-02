@@ -101,7 +101,10 @@ def test_history_record_round_trip():
     r = HistoryRecord(date="2026-05-14", count=1210, booked_24h=42, released_24h=37)
     dumped = r.model_dump()
     assert dumped == {
-        "date": "2026-05-14", "count": 1210, "booked_24h": 42, "released_24h": 37,
+        "date": "2026-05-14",
+        "count": 1210,
+        "booked_24h": 42,
+        "released_24h": 37,
     }
     assert HistoryRecord(**dumped) == r
 
@@ -120,6 +123,7 @@ def test_history_record_defaults_booked_and_released_to_zero():
 
 
 # ----- H19: date field validation -------------------------------------------
+
 
 def test_inmate_accepts_hcso_date_formats():
     for bd in ("5/10/26", "05/10/2026", "1/1/70", "12/31/99", ""):
@@ -147,6 +151,7 @@ def test_charge_court_date_validated():
 
 
 # ----- H20: BlockLogEntry & AnonChangelogEntry ------------------------------
+
 
 def test_block_log_entry_round_trip():
     e = BlockLogEntry(

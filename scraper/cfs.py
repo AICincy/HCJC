@@ -33,9 +33,7 @@ def pull_recent(hours: int = 168, limit: int = 5000) -> list[dict]:
     # days, so a 48h window often returns zero rows.
     """Return ARREST/CITATION/OFFENSE rows from the last `hours`."""
     since = since_iso(hours=hours)
-    disposition_filter = " OR ".join(
-        f"disposition_text like '{d}'" for d in ARREST_DISPOSITIONS
-    )
+    disposition_filter = " OR ".join(f"disposition_text like '{d}'" for d in ARREST_DISPOSITIONS)
     where = f"create_time_incident > '{since}' AND ({disposition_filter})"
     rows = query(
         DATASET_ID,
@@ -70,8 +68,7 @@ def main() -> int:
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--hours", type=int, default=720)  # 30 days
-    parser.add_argument("--force", action="store_true",
-                        help="Refresh even if the local file is < 1h old.")
+    parser.add_argument("--force", action="store_true", help="Refresh even if the local file is < 1h old.")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args()
 
@@ -80,6 +77,7 @@ def main() -> int:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
     from .cincy_open import recently_refreshed
+
     if not args.force and recently_refreshed(CFS_PATH, max_age_hours=1):
         log.info("cfs_recent.json is < 1h old; skipping refresh (use --force to override)")
         return 0
@@ -90,4 +88,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     import sys
+
     sys.exit(main())

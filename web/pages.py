@@ -3,6 +3,7 @@
 Each function renders one or more HTML pages from Jinja2 templates and writes
 them to the output directory. Extracted from web/build.py for modularity.
 """
+
 from __future__ import annotations
 
 import json
@@ -39,6 +40,7 @@ from web.shape import (
 def _extract_row_dt(row: dict, field_candidates: tuple[str, ...]) -> datetime | None:
     """Try each candidate field in order, returning the first parseable datetime."""
     from web.build import _parse_dispatch_dt
+
     for key in field_candidates:
         v = row.get(key)
         if v:
@@ -87,6 +89,7 @@ def _group_by_district(rows: list[dict]) -> list[tuple[str, list[dict]]]:
 @dataclass
 class IndexContext:
     """Bundle of pre-computed data for the index page template."""
+
     snapshot: Snapshot
     by_month: list[tuple[str, list[Inmate]]]
     nav_months: list[dict]
@@ -102,11 +105,13 @@ class IndexContext:
 
 def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
     cfs_30d = _filter_last_days(
-        ctx.cfs_rows, ("create_time_incident", "create_time_dispatch", "dispatch_time_primary_unit"),
+        ctx.cfs_rows,
+        ("create_time_incident", "create_time_dispatch", "dispatch_time_primary_unit"),
         days=30,
     )
     shoot_30d = _filter_last_days(
-        ctx.shooting_rows, ("datetimeoccured", "dateoccurred"),
+        ctx.shooting_rows,
+        ("datetimeoccured", "dateoccurred"),
         days=30,
     )
     page = env.get_template("index.html").render(
@@ -209,7 +214,7 @@ def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) ->
             return False
         if not (e.note or "").startswith("booked "):
             return True
-        bd_str = e.note[len("booked "):].strip()
+        bd_str = e.note[len("booked ") :].strip()
         for fmt in ("%m/%d/%y", "%m/%d/%Y"):
             try:
                 return datetime.strptime(bd_str, fmt).date() >= cutoff
@@ -217,15 +222,24 @@ def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) ->
                 continue
         return True
 
-    _write("feed.xml", "JCStream changes",
-           "New, updated, and released records on the Hamilton County, OH Justice Center public roster.",
-           events)
-    _write("booked.xml", "JCStream — new bookings",
-           "People recently booked into the Hamilton County, OH Justice Center.",
-           [e for e in events if _recent_booked(e)])
-    _write("released.xml", "JCStream — releases",
-           "People released from the Hamilton County, OH Justice Center public roster.",
-           [e for e in events if e.event == "released"])
+    _write(
+        "feed.xml",
+        "JCStream changes",
+        "New, updated, and released records on the Hamilton County, OH Justice Center public roster.",
+        events,
+    )
+    _write(
+        "booked.xml",
+        "JCStream — new bookings",
+        "People recently booked into the Hamilton County, OH Justice Center.",
+        [e for e in events if _recent_booked(e)],
+    )
+    _write(
+        "released.xml",
+        "JCStream — releases",
+        "People released from the Hamilton County, OH Justice Center public roster.",
+        [e for e in events if e.event == "released"],
+    )
 
 
 def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> None:
@@ -233,11 +247,20 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     data_out = out_dir / "data"
     data_out.mkdir(parents=True, exist_ok=True)
     from scraper.open_data_feeds import FEEDS
+
     supplemental = [f.filename for f in FEEDS]
-    for name in ("current.json", "changelog.json", "history.json", "cfs_recent.json",
-                 "shootings_recent.json", "waf_block_log.json",
-                 "cfs_pdi_recent.json", "courtclerk_cases.json", "orc_offenses.json",
-                 *supplemental):
+    for name in (
+        "current.json",
+        "changelog.json",
+        "history.json",
+        "cfs_recent.json",
+        "shootings_recent.json",
+        "waf_block_log.json",
+        "cfs_pdi_recent.json",
+        "courtclerk_cases.json",
+        "orc_offenses.json",
+        *supplemental,
+    ):
         src = Path("data") / name
         if src.exists():
             shutil.copy2(src, data_out / name)
@@ -389,6 +412,7 @@ def _parse_judges() -> tuple[list[dict], list[dict]]:
     Returns (common_pleas_list, municipal_list) sorted by judge's last name or clean name.
     """
     import re
+
     hamco_dir = Path("HAMCO")
     if not hamco_dir.exists():
         return [], []
@@ -429,14 +453,11 @@ def _parse_judges() -> tuple[list[dict], list[dict]]:
             header_line = header_line.title()
 
         header_line_clean = re.sub(r"common please", "Common Pleas", header_line, flags=re.IGNORECASE)
-        
-        prefix_pat = re.compile(
-            r"^(common pleas (court )?judge|municipal (court )?judge)\s*",
-            re.IGNORECASE
-        )
-        
+
+        prefix_pat = re.compile(r"^(common pleas (court )?judge|municipal (court )?judge)\s*", re.IGNORECASE)
+
         clean_name = prefix_pat.sub("", header_line_clean).strip()
-        
+
         if clean_name in ("Sorry!", "Page Not Found", "Court & Judge Schedules"):
             continue
 
@@ -537,13 +558,15 @@ def _render_statute_page(env: Environment, snapshot: Snapshot, offenses: dict, o
     rows = _top_offenses_with_orc(snapshot, top_n=60, offenses=offenses)
     sections = []
     for r in rows:
-        sections.append({
-            **r,
-            "tier_max": _tier_max(r["degree"]),
-            "explainer": explainers.get(r["code"]),
-            "held": _statute_held_inmates(snapshot, r["code"], limit=18),
-            "caselaw": caselaw.get(r["code"], []),
-        })
+        sections.append(
+            {
+                **r,
+                "tier_max": _tier_max(r["degree"]),
+                "explainer": explainers.get(r["code"]),
+                "held": _statute_held_inmates(snapshot, r["code"], limit=18),
+                "caselaw": caselaw.get(r["code"], []),
+            }
+        )
     page = env.get_template("statute.html").render(
         snapshot=snapshot,
         sections=sections,

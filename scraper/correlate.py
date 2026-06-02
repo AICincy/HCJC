@@ -31,6 +31,7 @@ The module is callable as ``python -m scraper.correlate`` and is gated
 to run only when both ``data/current.json`` and at least one of the CFS
 feeds are present. No external network calls. No fabrication.
 """
+
 from __future__ import annotations
 
 import json
@@ -107,8 +108,15 @@ def _parse_cfs_dt(row: dict) -> tuple[datetime, bool] | None:
     ``cfs_dt.hour != 0`` which mis-classified a legitimate midnight UTC
     row as date-only.
     """
-    for key in ("event_datetime", "create_time_incident", "dispatch_time",
-                "incident_date", "datereported", "eventdate", "interview_date"):
+    for key in (
+        "event_datetime",
+        "create_time_incident",
+        "dispatch_time",
+        "incident_date",
+        "datereported",
+        "eventdate",
+        "interview_date",
+    ):
         v = row.get(key)
         if not v:
             continue
@@ -186,10 +194,17 @@ def correlate(
                 continue
 
             # Textual overlap on the disposition + incident type
-            cfs_text = " ".join(str(row.get(k, "")) for k in (
-                "disposition_text", "disposition", "incident_type_id",
-                "incident_type_desc", "offense_classification", "offense_name",
-            ))
+            cfs_text = " ".join(
+                str(row.get(k, ""))
+                for k in (
+                    "disposition_text",
+                    "disposition",
+                    "incident_type_id",
+                    "incident_type_desc",
+                    "offense_classification",
+                    "offense_name",
+                )
+            )
             overlap = _category_overlap(primary_desc, cfs_text)
 
             # Require at least some textual signal to avoid purely-temporal matches
@@ -209,18 +224,20 @@ def correlate(
             if conf < MIN_CONFIDENCE:
                 continue
 
-            out.append(Candidate(
-                inmate_number=inum,
-                cfs_source=cfs_source,
-                cfs_row_index=idx,
-                confidence=round(conf, 3),
-                signals={
-                    "dt_delta_minutes": round(dt_delta_min, 1),
-                    "textual_overlap": round(overlap, 3),
-                    "booked_date": inm.get("booking_date"),
-                    "arrest_disposition_boost": is_arrest,
-                },
-            ))
+            out.append(
+                Candidate(
+                    inmate_number=inum,
+                    cfs_source=cfs_source,
+                    cfs_row_index=idx,
+                    confidence=round(conf, 3),
+                    signals={
+                        "dt_delta_minutes": round(dt_delta_min, 1),
+                        "textual_overlap": round(overlap, 3),
+                        "booked_date": inm.get("booking_date"),
+                        "arrest_disposition_boost": is_arrest,
+                    },
+                )
+            )
     return out
 
 

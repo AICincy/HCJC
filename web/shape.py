@@ -6,6 +6,7 @@ classify.py for the pure helpers + reference data; no circular dep.
 This module's contract is the env.globals[] keys at the bottom of build.py:
 adding a helper here requires registering it there with the same name.
 """
+
 from __future__ import annotations
 
 import functools
@@ -78,6 +79,7 @@ def _related_inmates(
                 break
     return out
 
+
 def _crimes_of_month(group: list[Inmate]) -> list[dict]:
     """Return [{label, cls, count}] for the month's crimes by primary offense
     category, sorted by count descending then label. Used in each month-section
@@ -91,6 +93,7 @@ def _crimes_of_month(group: list[Inmate]) -> list[dict]:
         counts[key] = counts.get(key, 0) + 1
     items = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0][0]))
     return [{"label": k[0], "cls": k[1], "count": v} for k, v in items]
+
 
 def _recent_booked_inmates(snapshot: Snapshot, n: int = 6) -> list[Inmate]:
     """Most-recently-booked inmates by HCSO booking_date (descending), N max."""
@@ -106,12 +109,14 @@ _BOND_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"
 # Pre-computed indexes for O(1) lookup (C1: eliminate O(n²) per-inmate scans)
 # ---------------------------------------------------------------------------
 
+
 class RosterIndexes:
     """Pre-built indexes over the full inmate roster.
 
     Built once in O(n) during ``build()``; passed to per-inmate helpers so
     they do O(1) dict lookups instead of scanning all_inmates each time.
     """
+
     __slots__ = ("by_chapter", "by_code", "bonds_by_code")
 
     def __init__(self, inmates: list[Inmate], offenses: dict | None = None) -> None:
@@ -172,8 +177,14 @@ def _bond_peer_amounts(
     if indexes is not None:
         all_bonds = indexes.bonds_by_code.get(primary_code, [])
         my_bond = _parse_bond_amount(
-            next((c.bond_amount for c in target.charges
-                  if orc_mod.normalize_code((c.orc_code or "").strip()) == primary_code), None)
+            next(
+                (
+                    c.bond_amount
+                    for c in target.charges
+                    if orc_mod.normalize_code((c.orc_code or "").strip()) == primary_code
+                ),
+                None,
+            )
         )
         if my_bond is not None and my_bond > 0 and my_bond in all_bonds:
             result = list(all_bonds)
@@ -225,12 +236,18 @@ def _bond_context(
     return {
         "code": primary_code,
         "title": orc_mod.title_for(primary_code, offenses),
-        "min": peers[0], "max": peers[-1],
-        "p10": p10, "p25": p25, "p50": p50, "p75": p75, "p90": p90,
+        "min": peers[0],
+        "max": peers[-1],
+        "p10": p10,
+        "p25": p25,
+        "p50": p50,
+        "p75": p75,
+        "p90": p90,
         "peer_count": len(peers),
         "my_bond": my_bond,
         "my_percentile": my_percentile,
     }
+
 
 def _upcoming_courts(snapshot: Snapshot, days_ahead: int = 14) -> list[dict]:
     """Group upcoming court dates across the roster into a [{date, weekday,
@@ -250,15 +267,18 @@ def _upcoming_courts(snapshot: Snapshot, days_ahead: int = 14) -> list[dict]:
     out = []
     for d in sorted(by_day.keys()):
         rows = by_day[d]
-        out.append({
-            "date": d,
-            "dnum": d.day,
-            "dmon": d.strftime("%b %a"),
-            "count": len(rows),
-            "entries": rows[:6],
-            "more": max(0, len(rows) - 6),
-        })
+        out.append(
+            {
+                "date": d,
+                "dnum": d.day,
+                "dmon": d.strftime("%b %a"),
+                "count": len(rows),
+                "entries": rows[:6],
+                "more": max(0, len(rows) - 6),
+            }
+        )
     return out
+
 
 def _tier_breakdown(snapshot: Snapshot, offenses: dict | None = None) -> dict[str, int]:
     """Per-tier (F1..MM, UNK) counts: each inmate's most-severe degree."""
@@ -273,6 +293,7 @@ def _tier_breakdown(snapshot: Snapshot, offenses: dict | None = None) -> dict[st
         else:
             counts["UNK"] += 1
     return counts
+
 
 def _top_offenses_with_orc(snapshot: Snapshot, top_n: int = 12, offenses: dict | None = None) -> list[dict]:
     """Top-N ORC sections on the roster, with title + degree + count + share."""
@@ -292,18 +313,22 @@ def _top_offenses_with_orc(snapshot: Snapshot, top_n: int = 12, offenses: dict |
     for code, count in sorted(counts.items(), key=lambda kv: -kv[1])[:top_n]:
         title = orc_mod.title_for(code, offenses) or ""
         deg = orc_mod.degree_for(code, offenses) or "UNK"
-        rows.append({
-            "code": code,
-            "title": title,
-            "degree": deg,
-            "count": count,
-            "pct": 100.0 * count / n,
-        })
+        rows.append(
+            {
+                "code": code,
+                "title": title,
+                "degree": deg,
+                "count": count,
+                "pct": 100.0 * count / n,
+            }
+        )
     return rows
+
 
 def _all_top_offenses(snapshot: Snapshot, offenses: dict | None = None) -> list[dict]:
     """Like _top_offenses_with_orc but unbounded — used for the statute page."""
     return _top_offenses_with_orc(snapshot, top_n=10_000, offenses=offenses)
+
 
 def _timeline_markers(inmate: Inmate) -> dict | None:
     """Markers for the time-in-custody timeline: Booked, each court date,
@@ -331,9 +356,11 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
         end = now + timedelta(days=30)
     start = booked
     total = max(timedelta(days=1), end - start)
+
     def _pct(d: datetime) -> float:
         v = (d - start).total_seconds() / total.total_seconds() * 100.0
         return max(0.0, min(100.0, v))
+
     raw: list[dict] = []
     raw.append({"x": _pct(booked), "label": "Booked", "date": inmate.booking_date or "", "kind": "booked", "sub": ""})
     # Collapse charges that share a court date into one marker so their labels
@@ -344,16 +371,26 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
     for d in sorted(by_date):
         descs = by_date[d]
         sub = descs[0].lower()[:40] if len(descs) == 1 else f"{len(descs)} hearings"
-        raw.append({
-            "x": _pct(d),
-            "label": "Court",
-            "date": _strftime_nopad(d, "%-m/%-d/%y") if hasattr(d, "strftime") else "",
-            "kind": "court",
-            "sub": sub,
-        })
+        raw.append(
+            {
+                "x": _pct(d),
+                "label": "Court",
+                "date": _strftime_nopad(d, "%-m/%-d/%y") if hasattr(d, "strftime") else "",
+                "kind": "court",
+                "sub": sub,
+            }
+        )
     raw.append({"x": _pct(now), "label": "Today", "date": _strftime_nopad(now, "%b %-d, %Y"), "kind": "now", "sub": ""})
     if release:
-        raw.append({"x": _pct(release), "label": "Projected release", "date": inmate.projected_release_date or "", "kind": "release", "sub": ""})
+        raw.append(
+            {
+                "x": _pct(release),
+                "label": "Projected release",
+                "date": inmate.projected_release_date or "",
+                "kind": "release",
+                "sub": "",
+            }
+        )
     raw.sort(key=lambda m: m["x"])
     last_x = -1e9
     side = "below"
@@ -373,6 +410,7 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
         "end": end,
         "total_days": max(1, (end - start).days),
     }
+
 
 def _similar_by_statute(
     target: Inmate,
@@ -418,6 +456,7 @@ def _similar_by_statute(
         return out
     return _related_inmates(target, all_inmates, limit=limit)
 
+
 def _statute_held_inmates(snapshot: Snapshot, code: str, limit: int = 24) -> list[Inmate]:
     """Inmates currently charged under a given ORC base code, capped at limit."""
     code_norm = orc_mod.normalize_code(code)
@@ -430,6 +469,7 @@ def _statute_held_inmates(snapshot: Snapshot, code: str, limit: int = 24) -> lis
         if len(out) >= limit:
             break
     return out
+
 
 def _feed_description(event: str, name: str, inmate_number: str, note: str) -> str:
     """Build a readable per-item <description> for the RSS feeds. The template
@@ -448,6 +488,7 @@ def _feed_description(event: str, name: str, inmate_number: str, note: str) -> s
         return f"{nm} (#{inmate_number}): record updated{(' — ' + n) if n else ''}."
     return f"{nm} (#{inmate_number}): {event}{(' — ' + n) if n else ''}."
 
+
 def _bond_by_tier(inmate: Inmate, offenses: dict | None = None) -> dict:
     """Sum bond amounts split by charge tier. Returns {felony, misdemeanor, other, total}."""
     if offenses is None:
@@ -462,6 +503,7 @@ def _bond_by_tier(inmate: Inmate, offenses: dict | None = None) -> dict:
         out[key] = out.get(key, 0) + amt
     out["total"] = out["felony"] + out["misdemeanor"] + out["other"]
     return {k: (f"${v:,}" if v else "$0") for k, v in out.items()}
+
 
 def _next_court_date(inmate: Inmate) -> str:
     """Earliest upcoming (or any) court date among the charges, as printed by HCSO."""
@@ -537,6 +579,7 @@ def _events_for_inmate(events: list[ChangeEvent], inmate_number: str) -> list[Ch
     out.sort(key=lambda e: e.timestamp_utc or "")
     return out
 
+
 def _clean_case_number(cn: str | None) -> str:
     """Tidy a case number for display and linking. HCSO sometimes drops the
     leading court-prefix letter, leaving a stray leading slash ("/25/CRA/17789");
@@ -555,6 +598,7 @@ def _case_numbers(inmate: Inmate) -> list[str]:
                 out.append(v)
     return out
 
+
 _CASE_CAT_ORDER = ("criminal", "traffic", "civil", "other")
 _CASE_CAT_LABEL = {"criminal": "Criminal", "traffic": "Traffic", "civil": "Civil", "other": "Other"}
 
@@ -568,6 +612,7 @@ def _cases_grouped(inmate: Inmate) -> list[dict]:
     (the working courtclerk.org link).
     """
     from web.classify import case_category, case_year
+
     buckets: dict[str, dict] = defaultdict(lambda: defaultdict(list))
     for cn in _case_numbers(inmate):
         buckets[case_category(cn)][case_year(cn)].append(cn)
@@ -578,12 +623,14 @@ def _cases_grouped(inmate: Inmate) -> list[dict]:
             continue
         ordered = sorted(years.keys(), key=lambda y: (y is None, -(y or 0)))
         year_rows = [{"year": (y if y is not None else "—"), "cases": years[y]} for y in ordered]
-        out.append({
-            "key": cat,
-            "label": _CASE_CAT_LABEL[cat],
-            "cases_n": sum(len(years[y]) for y in years),
-            "years": year_rows,
-        })
+        out.append(
+            {
+                "key": cat,
+                "label": _CASE_CAT_LABEL[cat],
+                "cases_n": sum(len(years[y]) for y in years),
+                "years": year_rows,
+            }
+        )
     return out
 
 
@@ -603,6 +650,7 @@ def _charge_status_summary(inmate: Inmate) -> str:
         parts.append(f"{disposed} disposed")
     return " · ".join(parts)
 
+
 def _card_data_attrs(inmate: Inmate) -> dict:
     """Return data-* values for client-side filtering / search on the cards."""
     tier = _primary_tier(inmate)
@@ -615,6 +663,7 @@ def _card_data_attrs(inmate: Inmate) -> dict:
         "name": (inmate.full_name or "").lower(),
         "search": f"{inmate.full_name} {charges_txt} {orc_codes} #{inmate.inmate_number}".lower(),
     }
+
 
 def _card_tip(inmate: Inmate, offenses: dict | None = None, max_rows: int = 12) -> str:
     """Newline-joined tooltip payload for a card's tier badge.
@@ -654,12 +703,14 @@ def _card_tip(inmate: Inmate, offenses: dict | None = None, max_rows: int = 12) 
         rows += 1
     return "\n".join(lines)
 
+
 def _bond_total(inmate: Inmate) -> str:
     """Sum the inmate's bond amounts where parseable, return a formatted string."""
     total = 0
     for c in inmate.charges:
         total += _parse_bond_amount(c.bond_amount) or 0
     return f"${total:,}" if total else ""
+
 
 def _days_in_custody(inmate: Inmate) -> int | None:
     bd = _parse_book_date(inmate.booking_date or "")
@@ -673,6 +724,7 @@ def _days_in_custody(inmate: Inmate) -> int | None:
         return None
     return days
 
+
 def _charges_by_chapter(inmate: Inmate) -> list[dict]:
     """Return [{label, cls, count}] for this inmate's charges by offense category."""
     counts: dict[tuple[str, str], int] = {}
@@ -684,6 +736,7 @@ def _charges_by_chapter(inmate: Inmate) -> list[dict]:
         counts[key] = counts.get(key, 0) + 1
     items = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0][0]))
     return [{"label": k[0], "cls": k[1], "count": v} for k, v in items]
+
 
 def _primary_charge_obj(inmate: Inmate):
     """Return the inmate's most-serious charge object (or None).
@@ -708,6 +761,7 @@ def _primary_charge_obj(inmate: Inmate):
             best, best_key = c, key
     return best
 
+
 def _primary_charge(inmate: Inmate) -> str:
     """Best single-line description for the inmate's top charge."""
     c = _primary_charge_obj(inmate)
@@ -723,6 +777,7 @@ def _primary_charge(inmate: Inmate) -> str:
             return off["label"].upper()
     return ""
 
+
 def _primary_chapter(inmate: Inmate) -> dict | None:
     """Return ``{label, cls}`` for the inmate's most-serious offense category —
     derived from the SAME charge as _primary_charge, so text and color agree."""
@@ -731,8 +786,10 @@ def _primary_chapter(inmate: Inmate) -> dict | None:
         return None
     return _offense_for_code(c.orc_code)
 
+
 def _sort_in_group(group: list[Inmate]) -> list[Inmate]:
     """Newest first: by booking number (sequential YYNNNNNN), then admit date, then name."""
+
     def _key(i):
         try:
             bn = int(i.booking_number) if i.booking_number else 0
@@ -740,7 +797,9 @@ def _sort_in_group(group: list[Inmate]) -> list[Inmate]:
             bn = 0
         dt = _parse_md_yy(i.booking_date) or datetime(1970, 1, 1)
         return (-bn, -dt.toordinal(), i.last_name, i.first_name)
+
     return sorted(group, key=_key)
+
 
 def _group_by_month(inmates: list[Inmate]) -> list[tuple[str, list[Inmate]]]:
     """Return list of (month_label, [inmates]) sorted newest-first. Months with
@@ -751,7 +810,7 @@ def _group_by_month(inmates: list[Inmate]) -> list[tuple[str, list[Inmate]]]:
     no_date: list[Inmate] = []
     for inm in inmates:
         dt = _parse_md_yy(inm.booking_date)
-        if dt is None or dt.year < 2015:    # 2015 cutoff also catches the '1/1/70'-style junk
+        if dt is None or dt.year < 2015:  # 2015 cutoff also catches the '1/1/70'-style junk
             no_date.append(inm)
             continue
         buckets[(dt.year, dt.month)].append(inm)
@@ -768,6 +827,7 @@ def _group_by_month(inmates: list[Inmate]) -> list[tuple[str, list[Inmate]]]:
         out.append((f"Earlier bookings ({len(tail)})", _sort_in_group(tail)))
     return out
 
+
 def _events_in_window(events: list[ChangeEvent], hours: int) -> list[ChangeEvent]:
     cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
     keep: list[ChangeEvent] = []
@@ -779,6 +839,7 @@ def _events_in_window(events: list[ChangeEvent], hours: int) -> list[ChangeEvent
         if ts >= cutoff:
             keep.append(e)
     return keep
+
 
 def _events_for_recent(events: list[ChangeEvent], hours: int = 8) -> list[ChangeEvent]:
     """Recent activity feed: events JCStream observed within the window,
@@ -798,7 +859,7 @@ def _events_for_recent(events: list[ChangeEvent], hours: int = 8) -> list[Change
         if ts < cutoff_ts:
             continue
         if e.event == "booked" and e.note.startswith("booked "):
-            bd_str = e.note[len("booked "):].strip()
+            bd_str = e.note[len("booked ") :].strip()
             bd = None
             for fmt in ("%m/%d/%y", "%m/%d/%Y"):
                 try:

@@ -21,12 +21,13 @@ from pathlib import Path
 
 log = logging.getLogger(__name__)
 
-LOOKUP_PATH = (Path(__file__).resolve().parent.parent / "data" / "orc_offenses.json")
+LOOKUP_PATH = Path(__file__).resolve().parent.parent / "data" / "orc_offenses.json"
 _CODE_RE = re.compile(r"\d+\.\d+(?:\.\d+)?")
 
 # Severity order: lower index = more serious.
 DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
 UNKNOWN = "?"
+
 
 def _parse_hamco_offenses() -> dict[str, dict]:
     """Parse scraped Clerk of Courts files in HAMCO/ to extract additional offenses."""
@@ -93,11 +94,13 @@ def load_offenses(path: Path = LOOKUP_PATH) -> dict[str, dict]:
 
     return offenses
 
+
 def normalize_code(code: str) -> str:
     if not code:
         return ""
     m = _CODE_RE.search(code)
     return m.group(0) if m else ""
+
 
 def lookup(code: str, offenses: dict[str, dict] | None = None) -> dict:
     """Return ``{title, degree}`` for an ORC code; empty defaults if unknown."""
@@ -106,11 +109,14 @@ def lookup(code: str, offenses: dict[str, dict] | None = None) -> dict:
     norm = normalize_code(code)
     return offenses.get(norm, {"title": "", "degree": UNKNOWN})
 
+
 def title_for(code: str, offenses: dict[str, dict] | None = None) -> str:
     return lookup(code, offenses).get("title", "")
 
+
 def degree_for(code: str, offenses: dict[str, dict] | None = None) -> str:
     return lookup(code, offenses).get("degree", UNKNOWN)
+
 
 def primary_degree(codes: list[str], offenses: dict[str, dict] | None = None) -> str:
     """Return the most severe degree across a list of ORC codes."""
@@ -127,6 +133,7 @@ def primary_degree(codes: list[str], offenses: dict[str, dict] | None = None) ->
             best_idx = idx
             best = d
     return best
+
 
 def codes_without_titles(codes: list[str], offenses: dict[str, dict] | None = None) -> list[str]:
     """Return normalized input codes for which there's no title, deduped."""

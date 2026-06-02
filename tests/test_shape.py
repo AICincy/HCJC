@@ -4,6 +4,7 @@ These exercise the view-model layer that web/build.py registers as Jinja
 globals — the templates consume their output directly, so a regression here
 silently corrupts rendered pages.
 """
+
 from __future__ import annotations
 
 from datetime import datetime, timedelta
@@ -17,6 +18,7 @@ from web import shape
 # ---------------------------------------------------------------------------
 # helpers
 # ---------------------------------------------------------------------------
+
 
 def _inm(num: str, last: str, first: str, charges=None) -> Inmate:
     return Inmate(
@@ -177,7 +179,10 @@ def test_court_calendar_bucket_sorted_by_date_then_name(monkeypatch):
 # _events_for_inmate
 # ---------------------------------------------------------------------------
 
-def _evt(num: str, when: str, *, event: Literal["booked", "released", "updated"] = "updated", name: str = "DOE JOHN") -> ChangeEvent:
+
+def _evt(
+    num: str, when: str, *, event: Literal["booked", "released", "updated"] = "updated", name: str = "DOE JOHN"
+) -> ChangeEvent:
     return ChangeEvent(event=event, inmate_number=num, name=name, timestamp_utc=when)
 
 

@@ -104,6 +104,7 @@ class _BlockObservation:
     """One degraded-sweep observation, bundled so _record_block_evidence takes a
     single cohesive argument. ``block_sample`` is the forensic snapshot of the
     block response (status, body length + SHA-256, body sample, headers)."""
+
     prev_count: int
     seen_count: int
     n_surnames: int
@@ -117,20 +118,22 @@ def _record_block_evidence(obs: _BlockObservation) -> None:
     degraded-roster guard fires. Do-not-evade posture: we document the denial
     rather than route around it."""
     stale_h = roster_stale_hours(_prev_generated_utc(CURRENT_PATH))
-    append_block_evidence({
-        "timestamp_utc": utcnow_iso(),
-        "event": "blocked",
-        "prev_count": obs.prev_count,
-        "seen_count": obs.seen_count,
-        "surnames_total": obs.n_surnames,
-        "surnames_failed": obs.n_failed,
-        "failed_fraction": round(obs.n_failed / obs.n_surnames, 4) if obs.n_surnames else 0.0,
-        "http_status_counts": obs.status_counts,
-        "block_sample": obs.block_sample,
-        "roster_stale_hours": round(stale_h, 1) if stale_h is not None else None,
-        "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
-    }, WAF_BLOCK_LOG_PATH)
-
+    append_block_evidence(
+        {
+            "timestamp_utc": utcnow_iso(),
+            "event": "blocked",
+            "prev_count": obs.prev_count,
+            "seen_count": obs.seen_count,
+            "surnames_total": obs.n_surnames,
+            "surnames_failed": obs.n_failed,
+            "failed_fraction": round(obs.n_failed / obs.n_surnames, 4) if obs.n_surnames else 0.0,
+            "http_status_counts": obs.status_counts,
+            "block_sample": obs.block_sample,
+            "roster_stale_hours": round(stale_h, 1) if stale_h is not None else None,
+            "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+        },
+        WAF_BLOCK_LOG_PATH,
+    )
 
 
 def _record_recovery_if_blocked(seen_count: int) -> None:
@@ -138,13 +141,15 @@ def _record_recovery_if_blocked(seen_count: int) -> None:
     record so each denial period has a clean end-timestamp. No-op otherwise."""
     entries = load_block_log(WAF_BLOCK_LOG_PATH)
     if entries and entries[-1].get("event") == "blocked":
-        append_block_evidence({
-            "timestamp_utc": utcnow_iso(),
-            "event": "recovered",
-            "seen_count": seen_count,
-            "note": "HCSO list sweep succeeded; automated access restored.",
-        }, WAF_BLOCK_LOG_PATH)
-
+        append_block_evidence(
+            {
+                "timestamp_utc": utcnow_iso(),
+                "event": "recovered",
+                "seen_count": seen_count,
+                "note": "HCSO list sweep succeeded; automated access restored.",
+            },
+            WAF_BLOCK_LOG_PATH,
+        )
 
 
 def _record_egress_evidence() -> None:
@@ -157,9 +162,13 @@ def _record_egress_evidence() -> None:
         return
     try:
         from . import egress_ip
+
         rec = egress_ip.write_snapshot()
-        log.info("egress evidence captured: runner_ip=%s in_actions_range=%s",
-                 rec.get("runner_ip"), rec.get("runner_ip_in_actions_range"))
+        log.info(
+            "egress evidence captured: runner_ip=%s in_actions_range=%s",
+            rec.get("runner_ip"),
+            rec.get("runner_ip_in_actions_range"),
+        )
     except Exception as e:
         log.warning("egress evidence capture failed (non-fatal): %s", e)
 
@@ -215,8 +224,7 @@ class WafBackoffTracker:
 _WAF_BLOCK_MAX_BYTES = 5000
 
 
-def _looks_like_waf_block(html: str, inm: Inmate, photo_bytes: bytes | None,
-                          photo_url: str | None) -> bool:
+def _looks_like_waf_block(html: str, inm: Inmate, photo_bytes: bytes | None, photo_url: str | None) -> bool:
     """True when a detail response has the shape of a WAF block: a tiny body
     that parsed to no name, no charges, and no photo. Pure predicate, extracted
     from _fetch_one so the heuristic that drives the retry/backoff and the
@@ -240,9 +248,7 @@ def _list_response_looks_blocked(html: str, rows: list[ListRow]) -> bool:
     return not rows and len(html) < _WAF_BLOCK_MAX_BYTES
 
 
-def _plan_detail_fetch(
-    seen_ids: set[str], previous: dict[str, Inmate], refresh_known: bool
-) -> list[str]:
+def _plan_detail_fetch(seen_ids: set[str], previous: dict[str, Inmate], refresh_known: bool) -> list[str]:
     """Return the sorted inmate ids whose detail pages should be fetched."""
     to_fetch: list[str] = []
     for inmate_id in sorted(seen_ids):
@@ -275,18 +281,17 @@ def _maybe_checkpoint_partial(
     total: int,
 ) -> None:
     """Persist an in-progress roster checkpoint when it clears safety guards."""
-    if (
-        len(previous) < SWEEP_BOOTSTRAP_FLOOR
-        or len(current) >= SWEEP_MIN_ROSTER_FRACTION * len(previous)
-    ):
+    if len(previous) < SWEEP_BOOTSTRAP_FLOOR or len(current) >= SWEEP_MIN_ROSTER_FRACTION * len(previous):
         save_current(CURRENT_PATH, current.values())
         log.info("checkpoint: %d/%d details fetched, %d inmates", done, total, len(current))
     else:
         log.info(
-            "checkpoint skipped at %d/%d details: in-memory "
-            "roster %d below %.0f%% of previous %d",
-            done, total, len(current),
-            100 * SWEEP_MIN_ROSTER_FRACTION, len(previous),
+            "checkpoint skipped at %d/%d details: in-memory roster %d below %.0f%% of previous %d",
+            done,
+            total,
+            len(current),
+            100 * SWEEP_MIN_ROSTER_FRACTION,
+            len(previous),
         )
 
 
@@ -319,7 +324,8 @@ def _fetch_details(
             if time.monotonic() - sweep_started > SWEEP_WALLCLOCK_HARD_CAP_S:
                 log.warning(
                     "sweep wall-clock cap reached at %d/%d details; finalizing",
-                    done, len(to_fetch),
+                    done,
+                    len(to_fetch),
                 )
                 break
             done += 1
@@ -363,7 +369,10 @@ def _fetch_details(
     elapsed_s = round(time.monotonic() - t0, 2)
     log.info(
         "detail phase: %d attempts, %d named, %d with photo in %.1fs",
-        n_detail_attempts, n_detail_named, n_detail_with_photo, elapsed_s,
+        n_detail_attempts,
+        n_detail_named,
+        n_detail_with_photo,
+        elapsed_s,
     )
     return n_detail_attempts, n_detail_named, n_detail_with_photo
 
@@ -376,11 +385,13 @@ def _save_changelog_and_anon(
     events = diff(previous, current)
     if not events:
         return
-    log.info("diff: %d events (%d booked, %d released, %d updated)",
-             len(events),
-             sum(1 for e in events if e.event == "booked"),
-             sum(1 for e in events if e.event == "released"),
-             sum(1 for e in events if e.event == "updated"))
+    log.info(
+        "diff: %d events (%d booked, %d released, %d updated)",
+        len(events),
+        sum(1 for e in events if e.event == "booked"),
+        sum(1 for e in events if e.event == "released"),
+        sum(1 for e in events if e.event == "updated"),
+    )
     changelog = load_changelog(CHANGELOG_PATH)
     changelog.extend(events)
     save_changelog(CHANGELOG_PATH, changelog)
@@ -425,7 +436,11 @@ def run(
     sweep_id = uuid.uuid4().hex[:12]
     log.info(
         "sweep %s started (surnames=%d, max=%s, refresh=%s, dry_run=%s)",
-        sweep_id, len(surnames), max_surnames, refresh_known, dry_run,
+        sweep_id,
+        len(surnames),
+        max_surnames,
+        refresh_known,
+        dry_run,
     )
 
     # Skip-gate: don't re-scrape if the roster DATA is still fresh. Key off the
@@ -437,7 +452,8 @@ def run(
     if stale_h is not None and stale_h * 3600 < MIN_SWEEP_INTERVAL_S:
         log.info(
             "current.json data is %.0fs old (< %ds); skipping this cycle",
-            stale_h * 3600, MIN_SWEEP_INTERVAL_S,
+            stale_h * 3600,
+            MIN_SWEEP_INTERVAL_S,
         )
         return 0
 
@@ -449,8 +465,7 @@ def run(
         # let any non-trivial sweep canonicalize a degraded roster. Keep the
         # last-good (broken) file in place so the operator can inspect it.
         log.error(
-            "refusing sweep: data/current.json is unreadable (%s); "
-            "last-good file kept in place for inspection",
+            "refusing sweep: data/current.json is unreadable (%s); last-good file kept in place for inspection",
             e,
         )
         log.error("sweep %s aborted (corrupt snapshot)", sweep_id)
@@ -471,15 +486,22 @@ def run(
         with make_client() as client:
             rows, n_failed, status_counts, block_sample = _sweep_list(client, surnames)
             seen_ids = {r.inmate_number for r in rows}
-            log.info("list sweep returned %d unique inmate ids (%d/%d surname fetches failed)",
-                     len(seen_ids), n_failed, len(surnames))
+            log.info(
+                "list sweep returned %d unique inmate ids (%d/%d surname fetches failed)",
+                len(seen_ids),
+                n_failed,
+                len(surnames),
+            )
 
             if not sweep_looks_healthy(len(previous), len(seen_ids), len(surnames), n_failed):
                 roster_ok = False
                 log.error(
                     "list sweep looks degraded (prev=%d, seen=%d, %d/%d surname fetches failed) "
                     "— NOT writing the roster this cycle; keeping last-good data",
-                    len(previous), len(seen_ids), n_failed, len(surnames),
+                    len(previous),
+                    len(seen_ids),
+                    n_failed,
+                    len(surnames),
                 )
 
                 # The list-sweep guard thresholds (>10% surname errors or
@@ -489,10 +511,16 @@ def run(
                 # (roster_stale_hours), which runs every cycle regardless of
                 # which guard path fired. Document the denial as durable
                 # evidence (do-not-evade posture); never route around it.
-                _record_block_evidence(_BlockObservation(
-                    prev_count=len(previous), seen_count=len(seen_ids),
-                    n_surnames=len(surnames), n_failed=n_failed,
-                    status_counts=status_counts, block_sample=block_sample))
+                _record_block_evidence(
+                    _BlockObservation(
+                        prev_count=len(previous),
+                        seen_count=len(seen_ids),
+                        n_surnames=len(surnames),
+                        n_failed=n_failed,
+                        status_counts=status_counts,
+                        block_sample=block_sample,
+                    )
+                )
                 _record_egress_evidence()
                 log.error("sweep %s blocked (degraded list guard)", sweep_id)
                 return 0
@@ -522,9 +550,7 @@ def run(
                 dry_run=dry_run,
                 waf_tracker=waf_tracker,
             )
-            watchdog_ok = check_detail_watchdog(
-                n_detail_attempts, n_detail_named, n_detail_with_photo
-            )
+            watchdog_ok = check_detail_watchdog(n_detail_attempts, n_detail_named, n_detail_with_photo)
             # Watchdog already logs WARN to stdout via check_detail_watchdog;
             # the hard-BLOCK path flips roster_ok so the finally block keeps
             # the last-good roster.
@@ -563,9 +589,7 @@ def run(
                 # `current` is a partial subset of `previous`, so every unreached
                 # id would synthesize a bogus `released` event and evict real
                 # events from the rolling CHANGELOG_LIMIT=500 window.
-                log.warning(
-                    "skipping diff/changelog append: sweep did not finish cleanly"
-                )
+                log.warning("skipping diff/changelog append: sweep did not finish cleanly")
             # sweep-F5: only prune photos when save_current succeeded for this
             # cycle. A failed save leaves seen_ids ungrounded against any
             # persisted snapshot; pruning then could delete photos for ids
@@ -573,12 +597,15 @@ def run(
             if save_ok and seen_ids:
                 _prune_and_report(PHOTOS_DIR, seen_ids)
 
-
     if dry_run:
         log.info("dry-run; not writing")
     log.info(
         "sweep %s completed (roster_ok=%s, clean=%s, seen=%d, current=%d)",
-        sweep_id, roster_ok, clean_finish, len(seen_ids), len(current),
+        sweep_id,
+        roster_ok,
+        clean_finish,
+        len(seen_ids),
+        len(current),
     )
     return 0
 
@@ -602,7 +629,8 @@ def _prune_and_report(photos_dir: Path, active_ids: set[str]) -> None:
         if doomed and existing and len(doomed) / len(existing) > PHOTO_PRUNE_MAX_FRACTION:
             log.warning(
                 "photo prune skipped: %d/%d (%.1f%%) exceed threshold",
-                len(doomed), len(existing),
+                len(doomed),
+                len(existing),
                 100.0 * len(doomed) / len(existing),
             )
     prune_photos(photos_dir, active_ids)
@@ -618,8 +646,7 @@ def _redact_headers(headers: httpx.Headers) -> dict:
     reaches the public data/waf_block_log.json: a WAF can set a clearance
     cookie that the client's cookie jar echoes back, and a proxy could add an
     auth header."""
-    return {k: ("[redacted]" if k.lower() in _SENSITIVE_HEADERS else v)
-            for k, v in headers.items()}
+    return {k: ("[redacted]" if k.lower() in _SENSITIVE_HEADERS else v) for k, v in headers.items()}
 
 
 def _forensic_sample(resp: httpx.Response) -> dict:
@@ -633,7 +660,7 @@ def _forensic_sample(resp: httpx.Response) -> dict:
     # Strip potential user-specific tokens from body (defense-in-depth;
     # WAF block pages should not contain PII but upstream can change).
     body_text = (resp.text or "")[:1000]
-    body_text = re.sub(r'[0-9a-fA-F]{32,}', '[redacted-token]', body_text)
+    body_text = re.sub(r"[0-9a-fA-F]{32,}", "[redacted-token]", body_text)
     sample: dict = {
         "captured_utc": utcnow_iso(),
         "status": resp.status_code,
@@ -682,8 +709,12 @@ def _fetch_list_page(client: HcsoClient, surname: str) -> tuple[list[ListRow] | 
     # it as a failure here (rows=None) carrying the 200 status and a forensic
     # sample, so it is counted like the 403 path rather than silently dropped.
     if _list_response_looks_blocked(resp.text, rows):
-        log.warning("list fetch for surname=%s looks WAF-blocked (HTTP %d, %d bytes, 0 rows)",
-                    surname, resp.status_code, len(resp.text))
+        log.warning(
+            "list fetch for surname=%s looks WAF-blocked (HTTP %d, %d bytes, 0 rows)",
+            surname,
+            resp.status_code,
+            len(resp.text),
+        )
         return None, resp.status_code, _forensic_sample(resp)
     return rows, None, None
 
@@ -725,7 +756,10 @@ def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow],
     elapsed_s = round(time.monotonic() - t0, 2)
     log.info(
         "list phase: %d unique ids, %d/%d failed in %.1fs",
-        len(seen), failed, len(surnames), elapsed_s,
+        len(seen),
+        failed,
+        len(surnames),
+        elapsed_s,
     )
     return aggregated, failed, status_counts, block_sample
 
@@ -749,9 +783,7 @@ def _fetch_one(
     across the worker pool, so a caller that omitted it would silently get a
     throwaway tracker and disable cross-call backoff.
     """
-    inm, photo_bytes, photo_url = _fetch_detail_with_retry(
-        client, inmate_id, previous, waf_tracker
-    )
+    inm, photo_bytes, photo_url = _fetch_detail_with_retry(client, inmate_id, previous, waf_tracker)
     if inm is None:
         return None, False, False
     detail_named = bool(inm.last_name or inm.first_name)
@@ -795,9 +827,11 @@ def _fetch_detail_with_retry(
         streak, backoff = waf_tracker.observe()
         if attempt == 0:
             log.warning(
-                "WAF-block-shaped response for id=%s (%d bytes, streak=%d); "
-                "sleeping %.1fs and retrying once",
-                inmate_id, len(html), streak, backoff,
+                "WAF-block-shaped response for id=%s (%d bytes, streak=%d); sleeping %.1fs and retrying once",
+                inmate_id,
+                len(html),
+                streak,
+                backoff,
             )
             time.sleep(backoff)
             continue
@@ -808,7 +842,9 @@ def _fetch_detail_with_retry(
         log.warning(
             "WAF-block-shaped response for id=%s (%d bytes, streak=%d); "
             "retry also blocked, returning without overwriting",
-            inmate_id, len(html), streak,
+            inmate_id,
+            len(html),
+            streak,
         )
         time.sleep(backoff)
         if inmate_id in previous:
@@ -896,20 +932,16 @@ def _read_surnames(path: Path) -> list[str]:
     # HCSO returns zero rows for it, and no guard fires (one zero-row letter
     # is below the 10% failure threshold).
     text = path.read_text(encoding="utf-8").lstrip("﻿")
-    return [
-        line.strip().upper()
-        for line in text.splitlines()
-        if line.strip() and not line.startswith("#")
-    ]
+    return [line.strip().upper() for line in text.splitlines() if line.strip() and not line.startswith("#")]
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run one JCStream sweep")
     parser.add_argument("--surnames", default="data/surnames.txt", type=Path)
-    parser.add_argument("--max-surnames", type=int, default=None,
-                        help="cap the surname list for quick smoke tests")
-    parser.add_argument("--refresh-known", action="store_true",
-                        help="re-fetch detail pages even for already-known inmates")
+    parser.add_argument("--max-surnames", type=int, default=None, help="cap the surname list for quick smoke tests")
+    parser.add_argument(
+        "--refresh-known", action="store_true", help="re-fetch detail pages even for already-known inmates"
+    )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args(argv)

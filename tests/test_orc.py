@@ -46,6 +46,4 @@ def test_all_offenses_have_valid_degree():
         assert "title" in entry, f"{code} missing 'title'"
         assert "degree" in entry, f"{code} missing 'degree'"
         assert entry["title"], f"{code} has empty title"
-        assert entry["degree"] in valid_degrees, (
-            f"{code} has invalid degree {entry['degree']!r}"
-        )
+        assert entry["degree"] in valid_degrees, f"{code} has invalid degree {entry['degree']!r}"

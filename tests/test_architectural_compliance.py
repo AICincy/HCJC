@@ -9,8 +9,10 @@ from pydantic import BaseModel, Field
 # HARD ARCHITECTURAL COMPLIANCE SCHEMAS
 # =====================================================================
 
+
 class ComplianceFinding(BaseModel):
     """Encapsulates a verified deviation from core repository architectural rules."""
+
     rule_id: str = Field(..., description="The unique architectural rule identifier")
     target_file: str = Field(..., description="The relative path of the scanned asset")
     status: str = Field(..., description="The compliance validation state")
@@ -20,6 +22,7 @@ class ComplianceFinding(BaseModel):
 
 class ComplianceReport(BaseModel):
     """Validates the consolidated output of the architectural guard execution."""
+
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     files_evaluated: int = Field(..., ge=0)
     violations_found: int = Field(..., ge=0)
@@ -30,9 +33,10 @@ class ComplianceReport(BaseModel):
 # ARCHITECTURAL GUARD ENGINE
 # =====================================================================
 
+
 class RepositoryArchitecturalGuard:
     """Validates codebase elements to prevent drift from strict GitOps constraints."""
-    
+
     def __init__(self, repository_root: str) -> None:
         self.root_path = Path(repository_root)
 
@@ -59,13 +63,15 @@ class RepositoryArchitecturalGuard:
                 content = py_file.read_text(encoding="utf-8")
                 clean_content = self._clean_content(content)
                 if "utcnow()" in clean_content:
-                    findings.append(ComplianceFinding(
-                        rule_id="RULE-TIME-001",
-                        target_file=str(py_file.relative_to(self.root_path)),
-                        status="NON-COMPLIANT",
-                        description="File utilizes deprecated naive datetime.utcnow() function.",
-                        remediation="Replace with modern timezone-aware execution utilizing datetime.now(timezone.utc)."
-                    ))
+                    findings.append(
+                        ComplianceFinding(
+                            rule_id="RULE-TIME-001",
+                            target_file=str(py_file.relative_to(self.root_path)),
+                            status="NON-COMPLIANT",
+                            description="File utilizes deprecated naive datetime.utcnow() function.",
+                            remediation="Replace with modern timezone-aware execution utilizing datetime.now(timezone.utc).",
+                        )
+                    )
             except IOError:
                 continue
         return findings
@@ -81,13 +87,15 @@ class RepositoryArchitecturalGuard:
                 clean_content = self._clean_content(content)
                 # Detect forbidden database engines or ORM drivers
                 if re.search(r"sqlite3|sqlalchemy|psycopg2|mysql", clean_content, re.IGNORECASE):
-                    findings.append(ComplianceFinding(
-                        rule_id="RULE-STOR-001",
-                        target_file=str(py_file.relative_to(self.root_path)),
-                        status="NON-COMPLIANT",
-                        description="File introduces SQL database components or external storage drivers.",
-                        remediation="Remove database libraries, persist state exclusively within version-controlled flat JSON files."
-                    ))
+                    findings.append(
+                        ComplianceFinding(
+                            rule_id="RULE-STOR-001",
+                            target_file=str(py_file.relative_to(self.root_path)),
+                            status="NON-COMPLIANT",
+                            description="File introduces SQL database components or external storage drivers.",
+                            remediation="Remove database libraries, persist state exclusively within version-controlled flat JSON files.",
+                        )
+                    )
             except IOError:
                 continue
         return findings
@@ -103,13 +111,15 @@ class RepositoryArchitecturalGuard:
                 clean_content = self._clean_content(content)
                 # Detect proxy rotations or subdivision logic that attempts evasion
                 if re.search(r"rotate_proxy|proxy_pool|recursive_subdivision", clean_content, re.IGNORECASE):
-                    findings.append(ComplianceFinding(
-                        rule_id="RULE-EVAS-001",
-                        target_file=str(py_file.relative_to(self.root_path)),
-                        status="NON-COMPLIANT",
-                        description="File introduces active proxy rotation or network evasion tactics.",
-                        remediation="Halt execution on blocks, log the firewall block as public records legal evidence."
-                    ))
+                    findings.append(
+                        ComplianceFinding(
+                            rule_id="RULE-EVAS-001",
+                            target_file=str(py_file.relative_to(self.root_path)),
+                            status="NON-COMPLIANT",
+                            description="File introduces active proxy rotation or network evasion tactics.",
+                            remediation="Halt execution on blocks, log the firewall block as public records legal evidence.",
+                        )
+                    )
             except IOError:
                 continue
         return findings
@@ -125,13 +135,15 @@ class RepositoryArchitecturalGuard:
                     clean_content = self._clean_content(content)
                     # Ensure workflows execute direct repository data updates
                     if "git commit" in clean_content and "gh-pages" in clean_content:
-                        findings.append(ComplianceFinding(
-                            rule_id="RULE-PIPE-001",
-                            target_file=str(yaml_file.relative_to(self.root_path)),
-                            status="NON-COMPLIANT",
-                            description="Workflow isolates data updates onto a separate deployment branch.",
-                            remediation="Commit updated data files directly back to the active repository to trigger Pages compilation."
-                        ))
+                        findings.append(
+                            ComplianceFinding(
+                                rule_id="RULE-PIPE-001",
+                                target_file=str(yaml_file.relative_to(self.root_path)),
+                                status="NON-COMPLIANT",
+                                description="Workflow isolates data updates onto a separate deployment branch.",
+                                remediation="Commit updated data files directly back to the active repository to trigger Pages compilation.",
+                            )
+                        )
                 except IOError:
                     continue
         return findings
@@ -145,12 +157,8 @@ class RepositoryArchitecturalGuard:
         all_findings.extend(self.verify_gitops_pipeline())
 
         total_files = len(list(self.root_path.glob("**/*")))
-        
-        return ComplianceReport(
-            files_evaluated=total_files,
-            violations_found=len(all_findings),
-            findings=all_findings
-        )
+
+        return ComplianceReport(files_evaluated=total_files, violations_found=len(all_findings), findings=all_findings)
 
 
 def test_repository_architectural_compliance():
@@ -158,14 +166,11 @@ def test_repository_architectural_compliance():
     repo_root = Path(__file__).resolve().parent.parent
     guard = RepositoryArchitecturalGuard(str(repo_root))
     report = guard.execute_guard_suite()
-    
+
     if report.violations_found > 0:
         details = "\n".join(
-            f"- {f.rule_id} in {f.target_file}: {f.description} (Remediation: {f.remediation})"
-            for f in report.findings
+            f"- {f.rule_id} in {f.target_file}: {f.description} (Remediation: {f.remediation})" for f in report.findings
         )
-        raise AssertionError(
-            f"Codebase violated repository architectural rules:\n{details}"
-        )
+        raise AssertionError(f"Codebase violated repository architectural rules:\n{details}")
 
     assert report.violations_found == 0
