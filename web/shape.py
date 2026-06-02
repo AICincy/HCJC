@@ -45,6 +45,14 @@ def _strftime_nopad(dt, fmt: str) -> str:
     return dt.strftime(fmt)
 
 
+def _now_naive_est() -> datetime:
+    """Return the current Eastern Time (UTC-5 offset) as a naive datetime,
+    aligning with HCSO's local clock for deterministic calendar bucketing.
+    """
+    est = timezone(timedelta(hours=-5))
+    return datetime.now(timezone.utc).astimezone(est).replace(tzinfo=None)
+
+
 def _related_inmates(
     target: Inmate,
     all_inmates: list[Inmate],
@@ -227,7 +235,7 @@ def _bond_context(
 def _upcoming_courts(snapshot: Snapshot, days_ahead: int = 14) -> list[dict]:
     """Group upcoming court dates across the roster into a [{date, weekday,
     items: [{inmate, charge}]}] list, day by day, for the stats calendar."""
-    now = datetime.now()
+    now = _now_naive_est()
     horizon = now + timedelta(days=days_ahead + 1)
     by_day: dict[datetime, list[dict]] = {}
     for inm in snapshot.inmates:
@@ -304,7 +312,7 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
     booked = _parse_book_date((inmate.booking_date or "").strip())
     if booked is None:
         return None
-    now = datetime.now()
+    now = _now_naive_est()
     release = _parse_book_date((inmate.projected_release_date or "").strip())
     courts: list[tuple[datetime, str, str]] = []
     for c in inmate.charges:
@@ -467,7 +475,7 @@ def _next_court_date(inmate: Inmate) -> str:
             dates.append((dt, d))
     if not dates:
         return ""
-    today = datetime.now()
+    today = _now_naive_est()
     future = sorted(d for d in dates if d[0] >= today)
     if future:
         return future[0][1]
@@ -484,7 +492,7 @@ def _court_calendar(inmates: list[Inmate]) -> dict:
     record by at most a few hours at the day boundary. Acceptable for a
     "today's docket" surface; not used for any decision-critical logic.
     """
-    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    today = _now_naive_est().replace(hour=0, minute=0, second=0, microsecond=0)
     tomorrow = today + timedelta(days=1)
     week_end = today + timedelta(days=7)
     month_end = today + timedelta(days=30)

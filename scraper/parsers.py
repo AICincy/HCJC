@@ -443,8 +443,22 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
     for img in tree.css("img"):
         img_count += 1
         src = _attr(img, "src")
+        
+        # Fallback to lazy-loaded source if src is absent or a tiny/SVG placeholder
+        if not src or "placeholder" in src.lower() or src.startswith("data:image/svg") or src.startswith("data:image/gif"):
+            for attr in ("data-src", "data-lazy-src", "data-original"):
+                val = _attr(img, attr)
+                if val:
+                    src = val
+                    break
+
+        if not src:
+            continue
 
         if src.startswith("data:"):
+            # Skip SVG base64 strings as they are vector silhouettes, not real photo bytes
+            if "image/svg" in src or "xml" in src:
+                continue
             data_count += 1
             if photo_url is not None or url_fallback is not None:
                 continue
@@ -461,7 +475,7 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
                 inline_274px = raw
             elif soi_candidate is None and raw[:3] == _JPEG_SOI:
                 soi_candidate = raw
-        elif src:
+        else:
             nondata_count += 1
             if photo_url is not None:
                 continue

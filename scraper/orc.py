@@ -56,7 +56,7 @@ def _parse_hamco_offenses() -> dict[str, dict]:
                     norm_code = normalize_code(raw_code_dotted)
                     if not norm_code:
                         continue
-                    deg = "MM" if (jurisdiction == "CMCN" or "45" in norm_code) else "?"
+                    deg = "MM" if jurisdiction == "CMCN" else "?"
                     desc_clean = desc.strip()
                     if desc_clean:
                         title = desc_clean.capitalize() if desc_clean.isupper() else desc_clean

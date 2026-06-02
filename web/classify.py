@@ -84,20 +84,18 @@ _CHAPTER_LABEL = {
 # Offense category rankings for primary charge selection.
 # Lower rank = higher priority when multiple charges exist.
 _CLS_RANK = {
-    "2903": 0,   # Violence / homicide
-    "2905": 1,   # Kidnapping
+    "2903": 0,   # Violence / homicide / kidnapping
     "2907": 2,   # Sexual assault
     "2911": 3,   # Robbery / burglary
     "2909": 4,   # Arson
-    "2913": 5,   # Theft
+    "2913": 5,   # Theft / fraud / gambling
     "2925": 6,   # Drugs
     "2923": 7,   # Weapons
     "2921": 8,   # Obstruction
     "2919": 9,   # Family / domestic
     "2917": 10,  # Disorderly
-    "4511": 11,  # Traffic / DUI
-    "4507": 11,  # Traffic / license
-    "4509": 11,  # Traffic / financial responsibility
+    "traffic": 11,  # Traffic / DUI / license / registration
+    "other": 12,  # General provisions (Other)
 }
 
 # Offense categorization: ORC code -> {label, cls} for display.

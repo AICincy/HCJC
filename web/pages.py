@@ -384,12 +384,147 @@ def _render_help_page(env: Environment, out_dir: Path) -> None:
     target.write_text(page, encoding="utf-8")
 
 
+def _parse_judges() -> tuple[list[dict], list[dict]]:
+    """Parse Common Pleas and Municipal judge profile JSON files in HAMCO/.
+    Returns (common_pleas_list, municipal_list) sorted by judge's last name or clean name.
+    """
+    import re
+    hamco_dir = Path("HAMCO")
+    if not hamco_dir.exists():
+        return [], []
+
+    common_pleas: list[dict] = []
+    municipal: list[dict] = []
+
+    for path in hamco_dir.glob("*.json"):
+        filename = path.name.lower()
+        if "court-judge-" not in filename or "schedules" in filename:
+            continue
+
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+
+        # Skip error pages (like 404)
+        metadata = data.get("metadata", {}) or {}
+        status_code = metadata.get("statusCode", 200)
+        if status_code >= 400 or data.get("error"):
+            continue
+
+        markdown = data.get("markdown", "")
+        if not markdown:
+            continue
+
+        header_line = ""
+        for line in markdown.splitlines():
+            if line.startswith("# "):
+                header_line = line.lstrip("# ").strip()
+                break
+
+        if not header_line:
+            continue
+
+        if header_line.isupper():
+            header_line = header_line.title()
+
+        header_line_clean = re.sub(r"common please", "Common Pleas", header_line, flags=re.IGNORECASE)
+        
+        prefix_pat = re.compile(
+            r"^(common pleas (court )?judge|municipal (court )?judge)\s*",
+            re.IGNORECASE
+        )
+        
+        clean_name = prefix_pat.sub("", header_line_clean).strip()
+        
+        if clean_name in ("Sorry!", "Page Not Found", "Court & Judge Schedules"):
+            continue
+
+        if "municipal" in header_line_clean.lower() or "municipal" in filename:
+            court_type = "municipal"
+            title = "Municipal Court Judge"
+        else:
+            court_type = "common_pleas"
+            title = "Common Pleas Court Judge"
+
+        image_url = ""
+        img_match = re.search(r"!\[.*?\]\((.*?)\)", markdown)
+        if img_match:
+            image_url = img_match.group(1)
+
+        room = ""
+        bailiff = ""
+        phone = ""
+        for line in markdown.splitlines():
+            line_str = line.strip()
+            if line_str.lower().startswith("room"):
+                room = line_str
+                if room.isupper():
+                    room = room.capitalize()
+            elif "bailiff" in line_str.lower():
+                bailiff = line_str
+            elif "phone number" in line_str.lower() or "phone:" in line_str.lower():
+                if not phone:
+                    phone = line_str
+
+        bio_lines = []
+        proc_lines = []
+        current_section = None
+        for line in markdown.splitlines():
+            line_stripped = line.strip()
+            if line_stripped.startswith("##"):
+                lower_stripped = line_stripped.lower()
+                if "about" in lower_stripped:
+                    current_section = "bio"
+                elif "procedures" in lower_stripped:
+                    current_section = "procedures"
+                else:
+                    current_section = "other"
+            elif current_section == "bio":
+                bio_lines.append(line)
+            elif current_section == "procedures":
+                proc_lines.append(line)
+
+        bio = "\n".join(bio_lines).strip()
+        procedures = "\n".join(proc_lines).strip()
+
+        name_parts = clean_name.split()
+        last_name = name_parts[-1] if name_parts else clean_name
+
+        judge_dict = {
+            "name": clean_name,
+            "title": title,
+            "room": room,
+            "bailiff": bailiff,
+            "phone": phone,
+            "image_url": image_url,
+            "bio": bio,
+            "procedures": procedures,
+            "last_name": last_name,
+            "filename": path.name,
+        }
+
+        if court_type == "municipal":
+            municipal.append(judge_dict)
+        else:
+            common_pleas.append(judge_dict)
+
+    common_pleas.sort(key=lambda j: (j["last_name"].lower(), j["name"].lower()))
+    municipal.sort(key=lambda j: (j["last_name"].lower(), j["name"].lower()))
+
+    return common_pleas, municipal
+
+
 def _render_courts_page(env: Environment, out_dir: Path) -> None:
     """Static "Hamilton County court system" reference page. Mirrors directory
     and jurisdictional info from hamiltoncountycourts.org (Municipal +
     Common Pleas), probatect.org, and the Clerk of Courts. Distinct from
     /court/ which is the operational calendar of upcoming hearings."""
-    page = env.get_template("courts.html").render()
+    common_pleas, municipal = _parse_judges()
+    page = env.get_template("courts.html").render(
+        common_pleas=common_pleas,
+        municipal=municipal,
+    )
     target = out_dir / "courts" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
