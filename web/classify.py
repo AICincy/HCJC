@@ -74,6 +74,8 @@ _CHAPTER_LABEL = {
     # Traffic / DUI
     "4511": "Traffic / DUI",
     "4510": "Traffic / DUI",
+    "4507": "Traffic / DUI",
+    "4509": "Traffic / License",
     "4503": "Traffic / DUI",
     # Other
     "2901": "Other",
@@ -94,6 +96,8 @@ _CLS_RANK = {
     "2919": 9,   # Family / domestic
     "2917": 10,  # Disorderly
     "4511": 11,  # Traffic / DUI
+    "4507": 11,  # Traffic / license
+    "4509": 11,  # Traffic / financial responsibility
 }
 
 # Offense categorization: ORC code -> {label, cls} for display.
@@ -117,9 +121,11 @@ _OFFENSE_CATEGORY = {
     "2919": {"label": "Family / Domestic", "cls": "2919"},
     # Disorderly (chapter 2917)
     "2917": {"label": "Disorderly", "cls": "2917"},
-    # Traffic / DUI (chapters 4510, 4511, 4503)
+    # Traffic / DUI (chapters 4503, 4507, 4509, 4510, 4511)
     "4511": {"label": "Traffic / DUI", "cls": "traffic"},
     "4510": {"label": "Traffic / License", "cls": "traffic"},
+    "4507": {"label": "Traffic / DUI", "cls": "traffic"},
+    "4509": {"label": "Traffic / License", "cls": "traffic"},
     "4503": {"label": "Traffic / Registration", "cls": "traffic"},
     # Arson (chapter 2909)
     "2909": {"label": "Arson / Damage", "cls": "2909"},
