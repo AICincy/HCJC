@@ -27,10 +27,10 @@ permissions:
   issues: write
 
 concurrency:
-  # Never run two sweeps simultaneously; cancel-in-progress: false means a
-  # new run waits for the prior one to finish rather than killing it mid-sweep.
+  # Never run two sweeps simultaneously; cancel-in-progress: true means a
+  # newer run replaces an older in-progress run.
   group: jcstream-sweep
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   sweep:
