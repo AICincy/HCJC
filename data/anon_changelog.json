@@ -173731,39 +173731,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-26T09:33:20Z",
-    "inmate_number": "14791428",
-    "name": "RAMIREZ-PEREZ JOELSON",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": "booked 5/26/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-26T09:33:20Z",
-    "inmate_number": "2568412",
-    "name": "MCCLINTON PORSHA",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-26T09:33:20Z",
-    "inmate_number": "14204484",
-    "name": "GUYTON DVONTE",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-26T09:33:20Z",
-    "inmate_number": "14520422",
-    "name": "SANDERS ELIJAH",
+    "date": "2026-05-26",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -188479,5 +188467,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-02T10:34:34Z",
+    "inmate_number": "14564425",
+    "name": "REESE KELVIN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/2/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-02T10:34:34Z",
+    "inmate_number": "2630474",
+    "name": "GRONE KYNDRA",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/2/26"
   }
 ]
