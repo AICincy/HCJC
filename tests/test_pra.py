@@ -71,3 +71,33 @@ def test_build_message_rejects_crlf_in_recipient_header():
             to_addr="HCAdmin@hamilton-co.org",
             from_addr="me@example.com\r\nBcc: leak@example.test",
         )
+
+
+def test_safe_port_parsing_invalid_or_missing(monkeypatch):
+    from scraper import pra_base
+    monkeypatch.setenv("JCSTREAM_PRA_SMTP_HOST", "localhost")
+    monkeypatch.setenv("JCSTREAM_PRA_SMTP_PORT", "not-a-number")
+    captured_port = None
+
+    class MockSMTP:
+        def __init__(self, host, port, timeout=None):
+            nonlocal captured_port
+            captured_port = port
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            pass
+
+        def starttls(self, context=None):
+            pass
+
+        def send_message(self, msg):
+            pass
+
+    monkeypatch.setattr(pra_base.smtplib, "SMTP", MockSMTP)
+    from email.message import EmailMessage
+    msg = EmailMessage()
+    pra_base.send_smtp(msg)
+    assert captured_port == 587

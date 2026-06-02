@@ -139,6 +139,7 @@ class HcsoClient:
                 log.info("429 on %s; sleeping %.1fs before retry %d/%d",
                          path, wait, attempt + 1, MAX_RETRIES)
                 time.sleep(wait)
+                self._sleep_for_crawl_delay()
                 response = self._client.get(path, params=params)
             elif response.status_code >= 500:
                 delay = RETRY_BASE_DELAY * (2 ** attempt)
@@ -147,6 +148,7 @@ class HcsoClient:
                 log.info("%d on %s; sleeping %.2fs before retry %d/%d",
                          response.status_code, path, wait, attempt + 1, MAX_RETRIES)
                 time.sleep(wait)
+                self._sleep_for_crawl_delay()
                 response = self._client.get(path, params=params)
             else:
                 break
@@ -158,6 +160,26 @@ class HcsoClient:
         assert self._client is not None, "use as context manager"
         self._sleep_for_crawl_delay()
         response = self._client.get(url)
+        for attempt in range(MAX_RETRIES):
+            if response.status_code == 429:
+                wait = _retry_after_seconds(response.headers.get("retry-after"))
+                wait = min(max(wait, 0.0), RETRY_AFTER_CAP_S)
+                log.info("429 on %s; sleeping %.1fs before retry %d/%d",
+                         url, wait, attempt + 1, MAX_RETRIES)
+                time.sleep(wait)
+                self._sleep_for_crawl_delay()
+                response = self._client.get(url)
+            elif response.status_code >= 500:
+                delay = RETRY_BASE_DELAY * (2 ** attempt)
+                jitter = delay * RETRY_JITTER_FRACTION * (2 * random.random() - 1)
+                wait = delay + jitter
+                log.info("%d on %s; sleeping %.2fs before retry %d/%d",
+                         response.status_code, url, wait, attempt + 1, MAX_RETRIES)
+                time.sleep(wait)
+                self._sleep_for_crawl_delay()
+                response = self._client.get(url)
+            else:
+                break
         response.raise_for_status()
         return response.content
 

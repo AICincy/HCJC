@@ -209,3 +209,40 @@ def test_pool_sets_keepalive_expiry(monkeypatch):
     with client_mod.HcsoClient():
         pass
     assert cast(httpx.Limits, captured["limits"]).keepalive_expiry == 30
+
+
+def test_get_bytes_retries_on_5xx(monkeypatch):
+    monkeypatch.setattr(client_mod.time, "sleep", lambda s: None)
+    monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)
+    c = _make_client_with_responses([
+        httpx.Response(503),
+        httpx.Response(200, content=b"image_bytes"),
+    ])
+    try:
+        assert c.get_bytes("/photo.jpg") == b"image_bytes"
+    finally:
+        c._client.close()
+
+
+def test_retry_updates_last_request_at(monkeypatch):
+    c = _make_client_with_responses([
+        httpx.Response(503),
+        httpx.Response(200, text="ok"),
+    ])
+    c.crawl_delay = 0.5
+    monkeypatch.setattr(client_mod.time, "sleep", lambda s: None)
+    monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)
+    c._last_request_at = 1000.0
+    current_time = 1000.0
+
+    def mock_monotonic():
+        nonlocal current_time
+        current_time += 10.0
+        return current_time
+
+    monkeypatch.setattr(client_mod.time, "monotonic", mock_monotonic)
+    try:
+        assert c.get("/x") == "ok"
+        assert c._last_request_at == current_time
+    finally:
+        c._client.close()

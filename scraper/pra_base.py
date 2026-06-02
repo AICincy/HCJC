@@ -38,7 +38,12 @@ def send_smtp(msg: EmailMessage) -> None:
     any underlying smtplib exception on transport failure.
     """
     host = env("JCSTREAM_PRA_SMTP_HOST")
-    port = int(env("JCSTREAM_PRA_SMTP_PORT") or "587")
+    port_str = env("JCSTREAM_PRA_SMTP_PORT")
+    try:
+        port = int(port_str) if port_str else 587
+    except ValueError:
+        log.warning("Invalid JCSTREAM_PRA_SMTP_PORT %r; falling back to 587", port_str)
+        port = 587
     user = env("JCSTREAM_PRA_SMTP_USER")
     password = env("JCSTREAM_PRA_SMTP_PASS")
     if not host:
