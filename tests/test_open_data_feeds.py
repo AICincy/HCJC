@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import httpx
-import pytest
+
 from scraper import open_data_feeds
 
 
