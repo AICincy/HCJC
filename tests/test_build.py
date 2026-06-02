@@ -5,6 +5,7 @@ helper that derives a card field, a tier label, a bond figure, or a stat
 should have a fixed-point regression here so a later reorg can't silently
 change rendered output.
 """
+
 from __future__ import annotations
 
 import json
@@ -34,6 +35,7 @@ def _inm(charges=None, dob="", booking_date="") -> Inmate:
 
 
 # ----- _charge_tier ---------------------------------------------------------
+
 
 def test_charge_tier_uses_explicit_degree_suffix():
     c = Charge(orc_code="2903.02", description="MURDER F1")
@@ -79,21 +81,26 @@ def test_charge_tier_regex_anchors_to_end_of_description():
 
 # ----- _tier_counts / _primary_tier ----------------------------------------
 
+
 def test_tier_counts_splits_felony_and_misdemeanor():
-    inm = _inm(charges=[
-        Charge(orc_code="2903.02", description="MURDER F1"),
-        Charge(orc_code="2913.02", description="THEFT M1"),
-        Charge(orc_code="2903.13", description="ASSAULT F4"),
-    ])
+    inm = _inm(
+        charges=[
+            Charge(orc_code="2903.02", description="MURDER F1"),
+            Charge(orc_code="2913.02", description="THEFT M1"),
+            Charge(orc_code="2903.13", description="ASSAULT F4"),
+        ]
+    )
     counts = build._tier_counts(inm, {})
     assert counts == {"felony": 2, "misdemeanor": 1, "unknown": 0}
 
 
 def test_primary_tier_prefers_more_serious_degree():
-    inm = _inm(charges=[
-        Charge(orc_code="2913.02", description="THEFT M1"),
-        Charge(orc_code="2903.02", description="MURDER F1"),
-    ])
+    inm = _inm(
+        charges=[
+            Charge(orc_code="2913.02", description="THEFT M1"),
+            Charge(orc_code="2903.02", description="MURDER F1"),
+        ]
+    )
     t = build._primary_tier(inm)
     assert t is not None and t["kind"] == "felony"
     assert t["label"].startswith("F1")
@@ -104,6 +111,7 @@ def test_primary_tier_returns_none_for_no_chargeable_signal():
 
 
 # ----- _avatar_initials ----------------------------------------------------
+
 
 def test_avatar_initials_first_and_last():
     assert build._avatar_initials("DOE JOHN") == "DJ"
@@ -119,6 +127,7 @@ def test_avatar_initials_empty_uses_question_mark():
 
 
 # ----- _expand_race / _expand_sex ------------------------------------------
+
 
 def test_expand_race_known_codes():
     assert build._expand_race("W") == "White"
@@ -138,6 +147,7 @@ def test_expand_race_passthrough_unknown():
 
 # ----- _approx_age ---------------------------------------------------------
 
+
 def test_approx_age_handles_two_digit_year():
     # '90 -> 1990 (mapping rule: 1900 + yr if that makes the person older
     # than ~25 today). Compute the expectation off datetime.now() so the
@@ -155,23 +165,27 @@ def test_approx_age_invalid_returns_none():
 
 # ----- _pct_ordinal --------------------------------------------------------
 
-@pytest.mark.parametrize("p,expected", [
-    (0.01, "1st"),
-    (0.02, "2nd"),
-    (0.03, "3rd"),
-    (0.04, "4th"),
-    (0.11, "11th"),
-    (0.12, "12th"),
-    (0.13, "13th"),
-    (0.21, "21st"),
-    (0.22, "22nd"),
-    (0.23, "23rd"),
-    (0.50, "50th"),
-    (0.79, "79th"),
-    (0.99, "99th"),
-    (1.00, "100th"),
-    (0.0, "0th"),
-])
+
+@pytest.mark.parametrize(
+    "p,expected",
+    [
+        (0.01, "1st"),
+        (0.02, "2nd"),
+        (0.03, "3rd"),
+        (0.04, "4th"),
+        (0.11, "11th"),
+        (0.12, "12th"),
+        (0.13, "13th"),
+        (0.21, "21st"),
+        (0.22, "22nd"),
+        (0.23, "23rd"),
+        (0.50, "50th"),
+        (0.79, "79th"),
+        (0.99, "99th"),
+        (1.00, "100th"),
+        (0.0, "0th"),
+    ],
+)
 def test_pct_ordinal_handles_ones_place_and_teens(p, expected):
     assert build._pct_ordinal(p) == expected
 
@@ -182,6 +196,7 @@ def test_pct_ordinal_none_or_zero_safe():
 
 
 # ----- _rfc822 -------------------------------------------------------------
+
 
 def test_rfc822_iso_utc_z_form():
     # Trailing Z (Zulu / UTC) is the format ChangeEvent.timestamp_utc uses.
@@ -208,6 +223,7 @@ def test_rfc822_garbage_returns_empty(bad):
 
 # ----- _feed_description ---------------------------------------------------
 
+
 def test_feed_description_booked_with_note_in_note_form():
     out = build._feed_description("booked", "DOE JANE", "12345", "booked 5/14/26")
     assert "DOE JANE" in out and "(#12345)" in out and "5/14/26" in out
@@ -229,6 +245,7 @@ def test_feed_description_unknown_event_falls_through():
 
 
 # ----- feed.xml renders as strict XML (regression: &middot; bug) -----------
+
 
 def test_feed_template_emits_strict_xml(tmp_path):
     """Lock in PR #34's fix: titles + descriptions must not contain HTML
@@ -273,6 +290,7 @@ def test_feed_template_emits_strict_xml(tmp_path):
 
 # ----- _booking_seq --------------------------------------------------------
 
+
 def test_booking_seq_formats_year_and_sequence():
     assert build._booking_seq("26002740") == "booking #2,740 of 2026"
 
@@ -284,12 +302,15 @@ def test_booking_seq_returns_empty_on_garbage():
 
 # ----- _bond_by_tier -------------------------------------------------------
 
+
 def test_bond_by_tier_sums_by_kind():
-    inm = _inm(charges=[
-        Charge(orc_code="2903.02", description="MURDER F1", bond_amount="$50,000.00"),
-        Charge(orc_code="2913.02", description="THEFT M1", bond_amount="$500"),
-        Charge(orc_code="NONE", description="HOLD", bond_amount="$100"),
-    ])
+    inm = _inm(
+        charges=[
+            Charge(orc_code="2903.02", description="MURDER F1", bond_amount="$50,000.00"),
+            Charge(orc_code="2913.02", description="THEFT M1", bond_amount="$500"),
+            Charge(orc_code="NONE", description="HOLD", bond_amount="$100"),
+        ]
+    )
     bonds = build._bond_by_tier(inm, {})
     assert bonds["felony"] == "$50,000"
     assert bonds["misdemeanor"] == "$500"
@@ -305,6 +326,7 @@ def test_bond_by_tier_zero_for_empty_amounts():
 
 # ----- _days_in_custody ----------------------------------------------------
 
+
 def test_days_in_custody_positive_for_past_booking():
     d = datetime.now() - timedelta(days=3)
     three_days_ago = f"{d.month}/{d.day}/{d.year % 100:02d}"
@@ -319,6 +341,7 @@ def test_days_in_custody_unparseable_returns_none():
 
 # ----- _short_month_label --------------------------------------------------
 
+
 def test_short_month_label_formats_to_apostrophe_year():
     assert build._short_month_label("May 2026") == "May '26"
 
@@ -328,6 +351,7 @@ def test_short_month_label_passes_through_unrecognized():
 
 
 # ----- _chap_slug ----------------------------------------------------------
+
 
 def test_chap_slug_lowercases_and_dashes():
     assert build._chap_slug("Violence / Sex") == "violence-sex"
@@ -381,18 +405,22 @@ def test_events_for_recent_keeps_releases_regardless_of_note():
 
 # ----- _offense_for_code ---------------------------------------------------
 
+
 def test_offense_for_code_falls_back_to_other_for_unknown():
     # Codes that don't match any known chapter still get classified as the
     # generic "other" bucket so the renderer never has a missing color.
     off = _offense_for_code("9999.99")
-    assert off is not None and off["cls"] == "traffic"
+    assert off is not None and off["cls"] == "other"
 
 
-@pytest.mark.parametrize("code,expected_cls", [
-    ("2903.02", "2903"),  # homicide / violence
-    ("2925.11", "2925"),  # drugs
-    ("2913.02", "2913"),  # theft / fraud
-])
+@pytest.mark.parametrize(
+    "code,expected_cls",
+    [
+        ("2903.02", "2903"),  # homicide / violence
+        ("2925.11", "2925"),  # drugs
+        ("2913.02", "2913"),  # theft / fraud
+    ],
+)
 def test_offense_for_code_classifies_known_chapters(code, expected_cls):
     off = _offense_for_code(code)
     assert off is not None
@@ -406,6 +434,7 @@ def test_offense_for_code_classifies_known_chapters(code, expected_cls):
 # it looks. Failure modes (missing file, malformed JSON, missing key) must all
 # degrade silently to {} so the /statute/ page renders without the case-law
 # block instead of 500-ing.
+
 
 def test_load_caselaw_cache_returns_empty_when_file_missing(tmp_path: Path, monkeypatch):
     monkeypatch.chdir(tmp_path)
@@ -430,9 +459,7 @@ def test_load_caselaw_cache_returns_by_code_dict(tmp_path: Path, monkeypatch):
         },
         "generated_utc": "2026-05-14T00:00:00Z",
     }
-    (tmp_path / "data" / "orc_caselaw.json").write_text(
-        json.dumps(payload), encoding="utf-8"
-    )
+    (tmp_path / "data" / "orc_caselaw.json").write_text(json.dumps(payload), encoding="utf-8")
     out = _load_caselaw_cache()
     assert out == payload["by_code"]
     assert "2903.02" in out and out["2903.02"][0]["name"] == "State v. Doe"
@@ -449,6 +476,7 @@ def test_load_caselaw_cache_returns_empty_when_by_code_key_missing(tmp_path: Pat
 
 
 # ----- _iso_booking_date ----------------------------------------------------
+
 
 def test_iso_booking_date_parses_short_year():
     # HCSO's MM/DD/YY form should round-trip to ISO-8601 YYYY-MM-DD.
@@ -473,6 +501,7 @@ def test_iso_booking_date_returns_none_for_garbage():
 
 # ----- _display_date (regression: was returning "" for string input) --------
 
+
 def test_display_date_parses_hcso_short_year_string():
     # Regression: inmate.booking_date is a STRING ("5/19/26"); _display_date
     # used to require a datetime and silently returned "" for strings, so the
@@ -483,6 +512,7 @@ def test_display_date_parses_hcso_short_year_string():
 
 def test_display_date_accepts_datetime_too():
     from datetime import datetime
+
     assert build._display_date(datetime(2026, 5, 19)) == "May 19, 2026"
 
 

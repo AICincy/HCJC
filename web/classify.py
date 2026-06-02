@@ -5,6 +5,7 @@ tier/race/sex label expansions) and parsing/formatting functions consumed by
 shape.py and web/build.py. No circular dependencies: shape/build import from
 classify, never the reverse.
 """
+
 from __future__ import annotations
 
 import json
@@ -84,15 +85,15 @@ _CHAPTER_LABEL = {
 # Offense category rankings for primary charge selection.
 # Lower rank = higher priority when multiple charges exist.
 _CLS_RANK = {
-    "2903": 0,   # Violence / homicide / kidnapping
-    "2907": 2,   # Sexual assault
-    "2911": 3,   # Robbery / burglary
-    "2909": 4,   # Arson
-    "2913": 5,   # Theft / fraud / gambling
-    "2925": 6,   # Drugs
-    "2923": 7,   # Weapons
-    "2921": 8,   # Obstruction
-    "2919": 9,   # Family / domestic
+    "2903": 0,  # Violence / homicide / kidnapping
+    "2907": 2,  # Sexual assault
+    "2911": 3,  # Robbery / burglary
+    "2909": 4,  # Arson
+    "2913": 5,  # Theft / fraud / gambling
+    "2925": 6,  # Drugs
+    "2923": 7,  # Weapons
+    "2921": 8,  # Obstruction
+    "2919": 9,  # Family / domestic
     "2917": 10,  # Disorderly
     "traffic": 11,  # Traffic / DUI / license / registration
     "other": 12,  # General provisions (Other)
@@ -135,7 +136,7 @@ _OFFENSE_CATEGORY = {
     # General provisions (chapter 2901)
     "2901": {"label": "Other", "cls": "other"},
     # Other (fallback)
-    "other": {"label": "Other", "cls": "traffic"},
+    "other": {"label": "Other", "cls": "other"},
 }
 
 # Race code expansions (HCSO uses single letters for race classification).
@@ -157,6 +158,7 @@ _SEX_LABEL = {
 # ============================================================================
 # Parsing / Conversion Functions
 # ============================================================================
+
 
 def _parse_book_date(date_str: str | None) -> datetime | None:
     """Parse booking date string (MM/DD/YY or MM/DD/YYYY format) to datetime.
@@ -187,7 +189,7 @@ def _parse_md_yy(date_str: str | None) -> datetime | None:
 
 def _parse_bond_amount(bond_str: str | None) -> int | None:
     """Extract numeric bond amount from string like '$50,000.00' or 'BOND $500'.
-    
+
     Returns int (in dollars, truncated) or None if unparseable or empty.
     """
     if not bond_str:
@@ -247,7 +249,7 @@ def _short_month_label(month_str: str) -> str:
 
 def _approx_age(dob_str: str | None) -> int | None:
     """Estimate age from date-of-birth string (MM/DD/YY or MM/DD/YYYY format).
-    
+
     Handles two-digit years using the project's fixed pivot rule (70+ -> 19XX, <70 -> 20XX)
     via _parse_book_date. Returns None if the string is unparseable or represents
     an invalid date.
@@ -269,7 +271,7 @@ def _approx_age(dob_str: str | None) -> int | None:
 
 def _booking_seq(booking_date_str: str | None) -> str:
     """Extract booking sequence from booking_date string (e.g., '26002740' -> 'booking #2,740 of 2026').
-    
+
     The first 2 digits are the year; the remaining digits are the sequence number.
     Returns empty string if unparseable.
     """
@@ -287,7 +289,7 @@ def _booking_seq(booking_date_str: str | None) -> str:
 
 def _avatar_initials(name_str: str) -> str:
     """Extract first two letters from a name for display in an avatar badge.
-    
+
     Takes the first letter of the first word and the first letter of the last word.
     For single-word names, returns first two letters. Returns '?' for empty input.
     """
@@ -305,7 +307,7 @@ def _avatar_initials(name_str: str) -> str:
 
 def _expand_race(code: str) -> str:
     """Expand single-letter race code to full name (e.g., 'W' -> 'White').
-    
+
     Unknown codes pass through unchanged.
     """
     if not code:
@@ -315,7 +317,7 @@ def _expand_race(code: str) -> str:
 
 def _expand_sex(code: str) -> str:
     """Expand single-letter sex code to full name (e.g., 'M' -> 'Male').
-    
+
     Unknown codes pass through unchanged.
     """
     if not code:
@@ -325,7 +327,7 @@ def _expand_sex(code: str) -> str:
 
 def _pct_ordinal(pct: float | None) -> str:
     """Convert percentile (0.0-1.0) to ordinal string (e.g., 0.50 -> '50th').
-    
+
     Handles English ordinal rules (1st, 2nd, 3rd, 21st, 22nd, 23rd, 11th-13th exception).
     Returns '0th' for None or 0.
     """
@@ -352,7 +354,7 @@ def _pct_ordinal(pct: float | None) -> str:
 
 def _rfc822(iso_date_str: str | None) -> str:
     """Convert ISO 8601 timestamp to RFC 822 format (e.g., 'Thu, 14 May 2026 17:16:37 +0000').
-    
+
     Handles trailing 'Z' (UTC) or '+00:00' offset. Naive datetimes are treated as UTC.
     Returns empty string for unparseable input.
     """
@@ -370,7 +372,7 @@ def _rfc822(iso_date_str: str | None) -> str:
 
 def _chap_slug(chapter_label: str) -> str:
     """Slugify a chapter label for use as a CSS class or URL parameter.
-    
+
     Converts to lowercase and replaces non-alphanumeric characters with dashes.
     """
     if not chapter_label:
@@ -382,7 +384,7 @@ def _chap_slug(chapter_label: str) -> str:
 
 def _codes_ohio_url(code: str) -> str:
     """Generate a link to the Ohio Revised Code online (codes.ohio.gov).
-    
+
     Returns empty string if code is empty or malformed.
     """
     if not code:
@@ -408,6 +410,7 @@ def _orc_chapters(offenses: dict | None) -> frozenset[str]:
     carries a real ORC title. Self-maintaining ORC whitelist derived from
     data/orc_offenses.json: used to classify untitled charge codes."""
     from scraper import orc as orc_mod
+
     chapters: set[str] = set()
     for code, info in (offenses or {}).items():
         title = (info.get("title") if isinstance(info, dict) else "") or ""
@@ -418,13 +421,13 @@ def _orc_chapters(offenses: dict | None) -> frozenset[str]:
     return frozenset(chapters)
 
 
-def is_orc_code(code: str, offenses: dict | None = None,
-                orc_chapters_set: frozenset[str] | None = None) -> bool:
+def is_orc_code(code: str, offenses: dict | None = None, orc_chapters_set: frozenset[str] | None = None) -> bool:
     """True only when ``code`` is a genuine Ohio Revised Code section that should
     deep-link to codes.ohio.gov. Precedence: a municipal/placeholder title is not
     ORC; a real ORC title is ORC; an untitled code is ORC only when its chapter
     is in the known-ORC-chapter whitelist (otherwise we don't guess)."""
     from scraper import orc as orc_mod
+
     title = orc_mod.title_for(code, offenses) or ""
     if _is_non_orc_title(title):
         return False
@@ -441,9 +444,10 @@ def is_orc_code(code: str, offenses: dict | None = None,
 # Offense Classification / Tier Helpers
 # ============================================================================
 
+
 def _offense_for_code(code: str | None) -> dict | None:
     """Return offense dict {label, cls} for an ORC code.
-    
+
     Extracts the chapter (first 4 chars, e.g., '2903' from '2903.02') and
     looks up in _OFFENSE_CATEGORY. Falls back to generic 'traffic' for
     unknowns to ensure templates never see a missing color class.
@@ -509,9 +513,9 @@ def case_year(case_number: str | None) -> int | None:
 
 def _charge_tier(charge, offenses: dict | None = None) -> dict | None:
     """Determine felony/misdemeanor tier for a charge.
-    
+
     Returns {label: str, kind: 'felony' | 'misdemeanor'} or None.
-    
+
     Extraction order:
     1. Degree suffix in charge description (e.g., "ASSAULT F4" -> F4)
     2. ORC lookup in offenses dict (if available)
@@ -524,29 +528,30 @@ def _charge_tier(charge, offenses: dict | None = None) -> dict | None:
             deg = m.group(1)
             kind = "felony" if deg.startswith("F") else "misdemeanor"
             return {"label": deg, "kind": kind}
-    
+
     # Try ORC lookup.
     if offenses and hasattr(charge, "orc_code") and charge.orc_code:
         code = str(charge.orc_code).strip()
         if code.upper() != "NONE":
             from scraper import orc as orc_mod
+
             deg = orc_mod.degree_for(code, offenses)
             if deg and deg != "?":
                 kind = "felony" if deg.startswith("F") else "misdemeanor"
                 return {"label": deg, "kind": kind}
-    
+
     # Fallback: infer from case number venue.
     if hasattr(charge, "common_pleas_case") and charge.common_pleas_case and str(charge.common_pleas_case).strip():
         return {"label": "F", "kind": "felony"}
     if hasattr(charge, "municipal_case") and charge.municipal_case and str(charge.municipal_case).strip():
         return {"label": "M", "kind": "misdemeanor"}
-    
+
     return None
 
 
 def _tier_counts(inmate, offenses: dict | None = None) -> dict[str, int]:
     """Count charges by tier for an inmate.
-    
+
     Returns {felony: int, misdemeanor: int, unknown: int}.
     """
     counts = {"felony": 0, "misdemeanor": 0, "unknown": 0}
@@ -562,7 +567,7 @@ def _tier_counts(inmate, offenses: dict | None = None) -> dict[str, int]:
 
 def _primary_tier(inmate, offenses: dict | None = None) -> dict | None:
     """Get the tier of the inmate's most serious charge.
-    
+
     Returns {label, kind} or None if no charges have a determinable tier.
     """
     if not hasattr(inmate, "charges"):
@@ -601,12 +606,12 @@ def _tier_max(inmate, offenses: dict | None = None) -> str:
 
 def _orc_frequency(inmates: list) -> dict[str, int]:
     """Build a frequency map of ORC codes from the current inmate roster.
-    
+
     Returns {normalized_code: count, ...} mapping ORC codes to how many
     inmates are currently charged with each code.
     """
     from scraper import orc as orc_mod
-    
+
     freq: dict[str, int] = {}
     for inm in inmates:
         if not hasattr(inm, "charges"):
@@ -626,9 +631,10 @@ def _orc_frequency(inmates: list) -> dict[str, int]:
 # Data Loading Helpers
 # ============================================================================
 
+
 def _load_explainers() -> dict:
     """Load explainer data from data/explainers.json.
-    
+
     Returns {code: explanation_text, ...} or {} if file is missing/malformed.
     Used by templates to show contextual help for charge codes.
     """
@@ -645,7 +651,7 @@ def _load_explainers() -> dict:
 
 def _load_caselaw_cache() -> dict:
     """Load caselaw index from data/orc_caselaw.json.
-    
+
     Returns {code: [{name, cite}, ...], ...} or {} if file is missing/malformed.
     Used by the /statute/ page to display relevant case law.
     """

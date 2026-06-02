@@ -22,6 +22,7 @@ Output schema:
 The build (web/build.py) reads this cache; if absent or malformed, the
 statute page renders without the case-law block. Failure mode is silent.
 """
+
 from __future__ import annotations
 
 import json
@@ -37,10 +38,7 @@ import httpx
 # Keep this script self-contained for GitHub Actions: it runs in a fresh venv
 # created from requirements.txt and should not depend on repo-internal modules
 # being importable as packages.
-DEFAULT_UA = (
-    "HCJC-caselaw-refresh/1.0 "
-    "(https://github.com/AICincy/HCJC; weekly refresh workflow)"
-)
+DEFAULT_UA = "HCJC-caselaw-refresh/1.0 (https://github.com/AICincy/HCJC; weekly refresh workflow)"
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -90,20 +88,24 @@ def fetch_for_code(code: str, max_results: int = 3, max_retries: int = 3) -> lis
             for hit in payload.get("results", [])[:max_results]:
                 cites = hit.get("citation") or []
                 rel = hit.get("absolute_url") or ""
-                out.append({
-                    "case_name": hit.get("caseName") or hit.get("caseNameFull") or "",
-                    "court": hit.get("court_citation_string") or hit.get("court") or "",
-                    "date_filed": hit.get("dateFiled") or "",
-                    "citation": cites[0] if cites else "",
-                    "neutral_cite": hit.get("neutralCite") or "",
-                    "url": ("https://www.courtlistener.com" + rel) if rel else "",
-                })
+                out.append(
+                    {
+                        "case_name": hit.get("caseName") or hit.get("caseNameFull") or "",
+                        "court": hit.get("court_citation_string") or hit.get("court") or "",
+                        "date_filed": hit.get("dateFiled") or "",
+                        "citation": cites[0] if cites else "",
+                        "neutral_cite": hit.get("neutralCite") or "",
+                        "url": ("https://www.courtlistener.com" + rel) if rel else "",
+                    }
+                )
             return out
-        except httpx.HTTPStatusError as e:
-            if e.response.status_code == 429 and attempt < max_retries - 1:
+        except httpx.HTTPError as e:
+            is_429 = isinstance(e, httpx.HTTPStatusError) and e.response.status_code == 429
+            is_request_error = isinstance(e, httpx.RequestError)
+            if (is_429 or is_request_error) and attempt < max_retries - 1:
                 # Exponential backoff: 2s, 4s, 8s
                 backoff = 2 ** (attempt + 1)
-                print(f"    rate limited (429), retrying in {backoff}s...", file=sys.stderr)
+                print(f"    network error or rate limit ({e}), retrying in {backoff}s...", file=sys.stderr)
                 time.sleep(backoff)
             else:
                 raise
@@ -135,9 +137,7 @@ def main() -> int:
     }
     target = DATA / "orc_caselaw.json"
     target.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(
-        f"wrote {target} ({target.stat().st_size:,} bytes, {sum(len(v) for v in by_code.values())} total opinions)"
-    )
+    print(f"wrote {target} ({target.stat().st_size:,} bytes, {sum(len(v) for v in by_code.values())} total opinions)")
     return 0
 
 
