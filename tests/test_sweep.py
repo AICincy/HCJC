@@ -84,14 +84,14 @@ def test_bootstrap_is_always_accepted():
 def test_normal_sweeps_pass():
     # Roster grew a little, nothing failed.
     assert _sweep_looks_healthy(prev_count=1200, seen_count=1240, n_surnames=26, n_failed=0)
-    # One letter errored, roster basically stable — still fine.
+    # One letter errored, roster basically stable - still fine.
     assert _sweep_looks_healthy(prev_count=1200, seen_count=1185, n_surnames=26, n_failed=1)
     # Real churn: a meaningful drop but well above half.
     assert _sweep_looks_healthy(prev_count=1200, seen_count=1000, n_surnames=26, n_failed=0)
 
 
 def test_too_many_failed_fetches_is_rejected():
-    # 5 of 26 surname fetches errored (~19%) — don't trust this roster.
+    # 5 of 26 surname fetches errored (~19%) - don't trust this roster.
     assert not _sweep_looks_healthy(prev_count=1200, seen_count=1100, n_surnames=26, n_failed=5)
 
 
@@ -107,7 +107,7 @@ def test_prune_photos_skips_when_most_would_disappear(tmp_path: Path, monkeypatc
     for i in range(10):
         (photos / f"{i}.jpg").write_bytes(b"x")
     monkeypatch.setattr(sweep, "PHOTOS_DIR", photos)
-    # Active roster only includes one of the ten — 9/10 would be deleted, way
+    # Active roster only includes one of the ten - 9/10 would be deleted, way
     # above the safety threshold.
     sweep._prune_photos({"0"})
     assert sum(1 for _ in photos.glob("*.jpg")) == 10, "anomaly guard should have skipped"
@@ -119,7 +119,7 @@ def test_prune_photos_removes_only_inactive(tmp_path: Path, monkeypatch):
     for i in range(10):
         (photos / f"{i}.jpg").write_bytes(b"x")
     monkeypatch.setattr(sweep, "PHOTOS_DIR", photos)
-    # Drop just two — well under the threshold.
+    # Drop just two - well under the threshold.
     sweep._prune_photos({str(i) for i in range(10) if i not in (3, 7)})
     survivors = {p.stem for p in photos.glob("*.jpg")}
     assert survivors == {"0", "1", "2", "4", "5", "6", "8", "9"}

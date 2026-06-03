@@ -1,7 +1,7 @@
 """Coverage for the pure helpers in web/shape.py.
 
 These exercise the view-model layer that web/build.py registers as Jinja
-globals — the templates consume their output directly, so a regression here
+globals - the templates consume their output directly, so a regression here
 silently corrupts rendered pages.
 """
 
@@ -149,7 +149,7 @@ def test_court_calendar_uses_earliest_future_date_across_charges(monkeypatch):
 
 def test_court_calendar_ignores_past_dates_when_picking_earliest(monkeypatch):
     _freeze_now(monkeypatch, NOW)
-    # A past date plus a future date — past must NOT be picked, even though
+    # A past date plus a future date - past must NOT be picked, even though
     # it's the chronologically earliest.
     charges = [
         _charge_on(NOW - timedelta(days=5)),

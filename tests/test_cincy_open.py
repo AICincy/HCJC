@@ -1,6 +1,6 @@
 """Smoke tests for the generic Cincinnati Open Data client.
 
-These don't hit the network — they verify URL/param construction so the
+These don't hit the network - they verify URL/param construction so the
 GH Actions workflow can't silently regress.
 """
 

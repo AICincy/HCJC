@@ -30,7 +30,7 @@
     lastFocus = document.activeElement;
     // src comes from a tainted [data-photo] DOM attribute. Extract just the
     // basename via a restricted regex ([\w.\-]+\.jpg), then assign a URL
-    // built from constants + that capture, passed through encodeURI — the
+    // built from constants + that capture, passed through encodeURI - the
     // canonical CodeQL js/xss-through-dom sanitizer. encodeURI is a no-op
     // for safe inputs (the regex already restricted the char class) and
     // explicitly signals "this is a URL, not HTML" to the static analyzer.

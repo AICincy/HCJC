@@ -70,17 +70,17 @@ def _group_by_district(rows: list[dict]) -> list[tuple[str, list[dict]]]:
     """Group rows by CPD district (the 'district' field), preserving each
     group's input order (newest-first if the caller filtered+sorted).
     Districts are returned in CPD's natural numeric order (1..5), with the
-    unknown / centralized districts ('C', 'UNK', '—') appended after.
+    unknown / centralized districts ('C', 'UNK', '-') appended after.
     """
     groups: dict[str, list[dict]] = {}
     for r in rows:
-        key = str(r.get("district") or "").strip() or "—"
+        key = str(r.get("district") or "").strip() or "-"
         groups.setdefault(key, []).append(r)
     ordered: list[tuple[str, list[dict]]] = []
     for k in ("1", "2", "3", "4", "5"):
         if k in groups:
             ordered.append((k, groups.pop(k)))
-    # Remaining keys (C, UNK, —, ...) sorted alphabetically at the end.
+    # Remaining keys (C, UNK, -, ...) sorted alphabetically at the end.
     for k in sorted(groups.keys()):
         ordered.append((k, groups[k]))
     return ordered
@@ -230,13 +230,13 @@ def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) ->
     )
     _write(
         "booked.xml",
-        "JCStream — new bookings",
+        "JCStream - new bookings",
         "People recently booked into the Hamilton County, OH Justice Center.",
         [e for e in events if _recent_booked(e)],
     )
     _write(
         "released.xml",
-        "JCStream — releases",
+        "JCStream - releases",
         "People released from the Hamilton County, OH Justice Center public roster.",
         [e for e in events if e.event == "released"],
     )

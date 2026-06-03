@@ -496,7 +496,7 @@ def run(
                 roster_ok = False
                 log.error(
                     "list sweep looks degraded (prev=%d, seen=%d, %d/%d surname fetches failed) "
-                    "— NOT writing the roster this cycle; keeping last-good data",
+                    "- NOT writing the roster this cycle; keeping last-good data",
                     len(previous),
                     len(seen_ids),
                     n_failed,
@@ -702,7 +702,7 @@ def _fetch_list_page(client: HcsoClient, surname: str) -> tuple[list[ListRow] | 
 def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow], int, dict[str, int], dict | None]:
     """Parallel surname search across the configured list.
 
-    Returns ``(rows, n_failed, status_counts, block_sample)`` — ``n_failed`` is
+    Returns ``(rows, n_failed, status_counts, block_sample)`` - ``n_failed`` is
     how many surname fetches failed, counting both raised errors and detected
     WAF blocks (an HTTP 403, or an HTTP 200 stripped to zero rows), distinct
     from a surname that legitimately returned zero rows. ``status_counts`` is a
@@ -754,7 +754,7 @@ def _fetch_one(
 ) -> tuple[Inmate | None, bool, bool]:
     """Fetch and parse one detail page.
 
-    Returns ``(inmate, detail_named, detail_had_photo)`` — the two booleans
+    Returns ``(inmate, detail_named, detail_had_photo)`` - the two booleans
     reflect what the *detail parser* produced, before any list-row name
     fallback or disk-cached photo carry-forward is applied, so callers can
     measure detail-page health distinct from the list-side path.

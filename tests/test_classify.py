@@ -65,9 +65,9 @@ def test_avatar_initials():
 def test_expand_race_and_sex():
     assert _expand_sex("M") == "Male"
     assert _expand_sex("m") == "Male"  # case-insensitive
-    assert _expand_sex("") == "—"
+    assert _expand_sex("") == "-"
     assert _expand_sex("Z") == "Z"  # unknown passthrough (upper)
-    assert _expand_race("") == "—"
+    assert _expand_race("") == "-"
 
 
 def test_pct_ordinal_english_suffix_rules():

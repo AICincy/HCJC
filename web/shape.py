@@ -1,6 +1,6 @@
 """Per-inmate / per-snapshot view-model helpers registered as Jinja globals
 in web/build.py. Each function returns dicts / lists / scalars that templates
-consume directly — no further computation in the .html files. Imports
+consume directly - no further computation in the .html files. Imports
 classify.py for the pure helpers + reference data; no circular dep.
 
 This module's contract is the env.globals[] keys at the bottom of build.py:
@@ -329,7 +329,7 @@ def _top_offenses_with_orc(snapshot: Snapshot, top_n: int = 12, offenses: dict |
 
 
 def _all_top_offenses(snapshot: Snapshot, offenses: dict | None = None) -> list[dict]:
-    """Like _top_offenses_with_orc but unbounded — used for the statute page."""
+    """Like _top_offenses_with_orc but unbounded - used for the statute page."""
     return _top_offenses_with_orc(snapshot, top_n=10_000, offenses=offenses)
 
 
@@ -488,8 +488,8 @@ def _feed_description(event: str, name: str, inmate_number: str, note: str) -> s
     if event == "released":
         return f"{nm} (#{inmate_number}) is no longer on the HCSO public roster."
     if event == "updated":
-        return f"{nm} (#{inmate_number}): record updated{(' — ' + n) if n else ''}."
-    return f"{nm} (#{inmate_number}): {event}{(' — ' + n) if n else ''}."
+        return f"{nm} (#{inmate_number}): record updated{(' - ' + n) if n else ''}."
+    return f"{nm} (#{inmate_number}): {event}{(' - ' + n) if n else ''}."
 
 
 def _bond_by_tier(inmate: Inmate, offenses: dict | None = None) -> dict:
@@ -625,7 +625,7 @@ def _cases_grouped(inmate: Inmate) -> list[dict]:
         if not years:
             continue
         ordered = sorted(years.keys(), key=lambda y: (y is None, -(y or 0)))
-        year_rows = [{"year": (y if y is not None else "—"), "cases": years[y]} for y in ordered]
+        year_rows = [{"year": (y if y is not None else "-"), "cases": years[y]} for y in ordered]
         out.append(
             {
                 "key": cat,
@@ -674,13 +674,13 @@ def _card_tip(inmate: Inmate, offenses: dict | None = None, max_rows: int = 12) 
     Line 0 is the tier label ("FELONY ×2"); each later line is one charge as
     ``CODE · DEGREE · ORC-title-or-description``. The card template drops this
     into ``data-tip`` and the shared #tier-tip element renders it on hover/focus
-    — so cards carry no nested tooltip DOM (≈8 fewer nodes each over 1k+ cards,
+    - so cards carry no nested tooltip DOM (≈8 fewer nodes each over 1k+ cards,
     and nothing for content-visibility:auto to clip).
     """
     if offenses is None:
         offenses = _cached_offenses()
     t = _primary_tier(inmate)
-    lines = [t["label"] if t else "—"]
+    lines = [t["label"] if t else "-"]
     rows = 0
     for c in inmate.charges:
         code = (c.orc_code or "").strip()
@@ -701,8 +701,8 @@ def _card_tip(inmate: Inmate, offenses: dict | None = None, max_rows: int = 12) 
         last = title or desc
         if len(last) > 56:
             last = last[:55].rstrip() + "…"
-        bits = [b for b in (code or "—", (ct["label"] if ct else ""), last) if b]
-        lines.append(" · ".join(bits) if bits else "—")
+        bits = [b for b in (code or "-", (ct["label"] if ct else ""), last) if b]
+        lines.append(" · ".join(bits) if bits else "-")
         rows += 1
     return "\n".join(lines)
 
@@ -782,7 +782,7 @@ def _primary_charge(inmate: Inmate) -> str:
 
 
 def _primary_chapter(inmate: Inmate) -> dict | None:
-    """Return ``{label, cls}`` for the inmate's most-serious offense category —
+    """Return ``{label, cls}`` for the inmate's most-serious offense category -
     derived from the SAME charge as _primary_charge, so text and color agree."""
     c = _primary_charge_obj(inmate)
     if c is None:
@@ -806,8 +806,8 @@ def _sort_in_group(group: list[Inmate]) -> list[Inmate]:
 
 def _group_by_month(inmates: list[Inmate]) -> list[tuple[str, list[Inmate]]]:
     """Return list of (month_label, [inmates]) sorted newest-first. Months with
-    fewer than _MIN_MONTH_SIZE people — plus anyone with an unparseable booking
-    date — are folded into one trailing "Earlier bookings" section so the roster
+    fewer than _MIN_MONTH_SIZE people - plus anyone with an unparseable booking
+    date - are folded into one trailing "Earlier bookings" section so the roster
     doesn't end in a long tail of one-person 'sections'."""
     buckets: dict[tuple[int, int], list[Inmate]] = defaultdict(list)
     no_date: list[Inmate] = []
@@ -950,7 +950,7 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
     # Only the newest month renders expanded; older ones collapsed by default.
     expanded_months = {m for m, _ in by_month[:1]}
     # "in the last 24h" must mean the EVENT happened in the last 24h AND (for
-    # 'booked') the HCSO booking date is recent too — otherwise the first-ever
+    # 'booked') the HCSO booking date is recent too - otherwise the first-ever
     # sweep counts every inmate it ever saw as "booked in the last 24h".
     recent_24h = _events_for_recent(events, hours=24)
     recent_booked = sum(1 for e in recent_24h if e.event == "booked")

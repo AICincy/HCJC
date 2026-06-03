@@ -132,13 +132,13 @@ def test_avatar_initials_empty_uses_question_mark():
 def test_expand_race_known_codes():
     assert build._expand_race("W") == "White"
     assert build._expand_race("B") == "Black"
-    assert build._expand_race("") == "—"
+    assert build._expand_race("") == "-"
 
 
 def test_expand_sex_known_codes():
     assert build._expand_sex("M") == "Male"
     assert build._expand_sex("F") == "Female"
-    assert build._expand_sex("") == "—"
+    assert build._expand_sex("") == "-"
 
 
 def test_expand_race_passthrough_unknown():
@@ -230,7 +230,7 @@ def test_feed_description_booked_with_note_in_note_form():
 
 
 def test_feed_description_released_drops_redundant_note():
-    # The old form was "released no longer on HCSO public roster" — broken
+    # The old form was "released no longer on HCSO public roster" - broken
     # English. The new form composes a clean sentence regardless of note.
     out = build._feed_description("released", "DOE JOHN", "67890", "no longer on HCSO public roster")
     assert "DOE JOHN" in out
@@ -251,7 +251,7 @@ def test_feed_template_emits_strict_xml(tmp_path):
     """Lock in PR #34's fix: titles + descriptions must not contain HTML
     entities that strict XML parsers reject (`&middot;`, `&rsquo;`, etc).
     Renders feed.xml with a synthetic event and parses with ElementTree
-    — any undefined entity would raise ParseError."""
+    - any undefined entity would raise ParseError."""
     env = Environment(
         loader=FileSystemLoader(str(Path(__file__).resolve().parent.parent / "web" / "templates")),
         autoescape=select_autoescape(["html", "xml"]),
@@ -438,7 +438,7 @@ def test_offense_for_code_classifies_known_chapters(code, expected_cls):
 
 def test_load_caselaw_cache_returns_empty_when_file_missing(tmp_path: Path, monkeypatch):
     monkeypatch.chdir(tmp_path)
-    # No data/ directory at all — the missing-file path.
+    # No data/ directory at all - the missing-file path.
     assert _load_caselaw_cache() == {}
 
 
@@ -466,7 +466,7 @@ def test_load_caselaw_cache_returns_by_code_dict(tmp_path: Path, monkeypatch):
 
 
 def test_load_caselaw_cache_returns_empty_when_by_code_key_missing(tmp_path: Path, monkeypatch):
-    # Valid JSON, but no by_code key — the .get("by_code", {}) fallback path.
+    # Valid JSON, but no by_code key - the .get("by_code", {}) fallback path.
     monkeypatch.chdir(tmp_path)
     (tmp_path / "data").mkdir()
     (tmp_path / "data" / "orc_caselaw.json").write_text(

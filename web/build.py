@@ -176,7 +176,7 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, sit
     env.globals["cck_case_summary"] = cck.case_summary_url
     env.globals["base_url"] = base_url
     # Absolute origin (scheme + host) for RSS/Atom links, the web manifest and
-    # JSON-LD — distinct from base_url, which is a path prefix and is empty when
+    # JSON-LD - distinct from base_url, which is a path prefix and is empty when
     # we serve from a custom domain at the root.
     env.globals["site_url"] = site_url
     # Optional Giscus (GitHub-Discussions-backed) comments on inmate pages.
@@ -188,7 +188,7 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, sit
         "category": os.environ.get("JCSTREAM_GISCUS_CATEGORY", "Announcements"),
         "category_id": os.environ.get("JCSTREAM_GISCUS_CATEGORY_ID", ""),
     }
-    # Cache-bust the stylesheet by its CONTENT hash, not the data timestamp —
+    # Cache-bust the stylesheet by its CONTENT hash, not the data timestamp -
     # otherwise a CSS change with unchanged data ships new HTML against stale CSS.
     _css = STATIC_DIR / "style.css"
     env.globals["css_version"] = hashlib.sha256(_css.read_bytes()).hexdigest()[:10] if _css.exists() else "dev"

@@ -316,7 +316,7 @@ def _expand_race(code: str) -> str:
     Unknown codes pass through unchanged.
     """
     if not code:
-        return "—"
+        return "-"
     return _RACE_LABEL.get(code.upper(), code.upper())
 
 
@@ -326,7 +326,7 @@ def _expand_sex(code: str) -> str:
     Unknown codes pass through unchanged.
     """
     if not code:
-        return "—"
+        return "-"
     return _SEX_LABEL.get(code.upper(), code.upper())
 
 
