@@ -177907,75 +177907,69 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-27T13:47:05Z",
-    "inmate_number": "14272621",
-    "name": "MULLINS ROBERT",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-27T13:47:05Z",
-    "inmate_number": "14811564",
-    "name": "CLARK ARINN",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": "booked 5/27/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-27T13:47:05Z",
-    "inmate_number": "2282261",
-    "name": "WILLIS ARTRELL",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-27T13:47:05Z",
-    "inmate_number": "2458191",
-    "name": "COOPER BENJAMIN",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-27T13:47:05Z",
-    "inmate_number": "2780422",
-    "name": "TRACY TEVIN",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-27T13:47:05Z",
-    "inmate_number": "2829611",
-    "name": "NASH RODNEY",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-27T13:47:05Z",
-    "inmate_number": "14811328",
-    "name": "BURDETTE TREVOR",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-27T13:47:05Z",
-    "inmate_number": "14786995",
-    "name": "GONZALEZ-CASTILLO ANER",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-27",
+    "tier": "F4",
+    "category": "Promoting prostitution"
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-27",
+    "tier": "F5",
+    "category": "Breaking and entering"
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-27",
+    "tier": "F1",
+    "category": "Murder"
   },
   {
     "event": "updated",
@@ -196108,6 +196102,105 @@
     "timestamp_utc": "2026-06-03T13:00:04Z",
     "inmate_number": "14805832",
     "name": "RAMIREZ JUNIOR",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "14454528",
+    "name": "ALBRIGHT MARIO",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "14710232",
+    "name": "COLLINS MELISSA",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "14781991",
+    "name": "COBO CRUZ",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "14806865",
+    "name": "MITCHELL FABIAN",
+    "tier": "F4",
+    "category": "Unlawful sexual conduct with a minor",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "1774932",
+    "name": "WESTBROOK DARYL",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/3/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "2400591",
+    "name": "WELCH BRITTANY",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "2492021",
+    "name": "CURLESS JOHN",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "2707499",
+    "name": "BEAM AARON",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/3/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "2711711",
+    "name": "CROSSITY STEPHON",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "2839413",
+    "name": "JANSEN ADAM",
+    "tier": "MM",
+    "category": "Turn and stop signals",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-03T14:40:42Z",
+    "inmate_number": "14733159",
+    "name": "CLARKE CIERA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
