@@ -2,12 +2,12 @@
   JCStream -- mirror of the Hamilton County, OH Justice Center inmate roster
   Site: https://www.aretheyinjail.com
   Source: https://github.com/AICincy/JCStream (MIT)
-  Corrections / sealing / removal: https://github.com/AICincy/JCStream/issues -- no fee, ever
+  Corrections / sealing / removal: https://github.com/AICincy/HCJC/issues -- no fee, ever
 
 /* DATA */
   HCSO public inmate roster (ORC §149.43) + Cincinnati Open Data feeds
   No historical archive -- records drop off when HCSO removes them
-  Rebuilt every ~20-45 minutes via GitHub Actions -- last build 2026-06-03T00:19:38Z
+  Rebuilt every ~20-45 minutes via GitHub Actions -- last build 2026-06-03T01:17:06Z
 
 /* BUILT WITH */
   Python -- Jinja2 -- httpx -- selectolax -- Pillow -- GitHub Pages
