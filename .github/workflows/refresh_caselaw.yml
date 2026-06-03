@@ -21,6 +21,10 @@ on:
     - cron: '0 6 * * 0'
   workflow_dispatch: {}
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 # Run on the same branch as the sweep so the commit lands on the dev branch.
 # A merge from dev to main is owner-driven.
 permissions:
