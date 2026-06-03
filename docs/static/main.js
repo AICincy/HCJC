@@ -40,10 +40,13 @@
     lbImg.alt = 'Booking photo';
     lbCap.textContent = caption || '';
     lb.hidden = false;
-    // Confine focus to the dialog: mark all other body children inert.
+    // Confine focus to the dialog: mark all other body children inert and aria-hidden.
     // Browsers without inert support fall back to the Tab cycler below.
     Array.prototype.forEach.call(document.body.children, function (n) {
-      if (n !== lb) n.inert = true;
+      if (n !== lb) {
+        n.inert = true;
+        n.setAttribute('aria-hidden', 'true');
+      }
     });
     lb.querySelector('.lightbox-close').focus();
   }
@@ -51,6 +54,7 @@
     lb.hidden = true; lbImg.src = '';
     Array.prototype.forEach.call(document.body.children, function (n) {
       n.inert = false;
+      n.removeAttribute('aria-hidden');
     });
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }

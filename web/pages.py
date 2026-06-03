@@ -39,12 +39,12 @@ from web.shape import (
 
 def _extract_row_dt(row: dict, field_candidates: tuple[str, ...]) -> datetime | None:
     """Try each candidate field in order, returning the first parseable datetime."""
-    from web.build import _parse_dispatch_dt
+    from web.classify import parse_dispatch_dt
 
     for key in field_candidates:
         v = row.get(key)
         if v:
-            dt = _parse_dispatch_dt(str(v))
+            dt = parse_dispatch_dt(str(v))
             if dt:
                 return dt
     return None

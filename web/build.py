@@ -38,7 +38,6 @@ from web.classify import (
     _load_explainers,
     _orc_chapters,
     _orc_frequency,
-    _parse_book_date,
     _pct_ordinal,
     _primary_degree,
     _primary_tier,
@@ -48,6 +47,8 @@ from web.classify import (
     _tier_max,
     case_category,
     is_orc_code,
+    judge_link,
+    statute_url,
 )
 from web.shape import (
     RosterIndexes,
@@ -61,19 +62,25 @@ from web.shape import (
     _charge_status_summary,
     _charges_by_chapter,
     _clean_case_number,
+    _clean_event_note,
     _crimes_of_month,
     _days_in_custody,
+    _distinct_chapters,
     _events_for_recent,
     _feed_description,
     _group_by_month,
+    _iso_booking_date,
     _next_court_date,
+    _prepare_render_data,
     _primary_chapter,
     _primary_charge,
     _recent_booked_inmates,
     _related_inmates,
+    _roster_stale_context,
     _similar_by_statute,
     _strftime_nopad,
     _timeline_markers,
+    _warn_about_unmapped_orcs,
 )
 
 log = logging.getLogger("jcstream.site")
@@ -87,93 +94,7 @@ PHOTOS_DIR = Path("data/photos")
 DEFAULT_OUT = Path("docs")
 
 
-def _statute_url(code: str, offenses: dict, orc_chapters_set: frozenset[str] | None = None) -> str:
-    """codes.ohio.gov link for a charge code, empty for anything that is not a
-    genuine ORC section: municipal-code charges (Cincinnati / suburb / mayor's
-    courts), HCSO placeholder hold codes (0000.00, etc.), and untitled codes
-    whose chapter is not a known ORC chapter. See classify.is_orc_code."""
-    if is_orc_code(code, offenses, orc_chapters_set):
-        return _codes_ohio_url(code)
-    return ""
 
-
-def _clean_event_note(note: str | None) -> str:
-    """Scrub the HCSO epoch-0 sentinel ('1/1/70') out of historical changelog
-    notes so the status history never shows a 1970 date."""
-    s = note or ""
-    for sentinel in ("01/01/1970", "1/1/1970", "01/01/70", "1/1/70"):
-        s = s.replace(sentinel, "date not reported")
-    return s
-
-
-_ALL_JUDGES_CACHE: list[dict] | None = None
-
-
-def _judge_link(judge_name: str | None, all_judges: list[dict] | None = None) -> str | None:
-    if not judge_name:
-        return None
-
-    import re
-    cleaned = judge_name.lower().strip()
-    cleaned = re.sub(r"^(hon\.?|honorable|judge|presiding|chief magistrate|magistrate)\s+", "", cleaned)
-    cleaned = re.sub(r"[.,]", " ", cleaned)
-    cleaned = " ".join(cleaned.split())
-    if not cleaned:
-        return None
-
-    # Hardcoded/special entries
-    if "powers" in cleaned:
-        return "#juvenile"
-
-    global _ALL_JUDGES_CACHE
-    if all_judges is None:
-        if _ALL_JUDGES_CACHE is None:
-            from web.pages import _parse_judges
-            common_pleas, municipal = _parse_judges()
-            _ALL_JUDGES_CACHE = common_pleas + municipal
-        all_judges = _ALL_JUDGES_CACHE
-
-    # Winkler check first because of collision between CP and Probate
-    if "winkler" in cleaned:
-        if "ralph" in cleaned:
-            return "#probate"
-        if "robert" in cleaned or "rob" in cleaned or " c " in f" {cleaned} ":
-            return "#judge-robert-c-winkler"
-        # Ambiguous Winkler
-        return "#common-pleas"
-
-    # Dinkelacker collision
-    if "dinkelacker" in cleaned:
-        if "leah" in cleaned or " l " in f" {cleaned} ":
-            return "#judge-leah-dinkelacker"
-        if "patrick" in cleaned or "pat" in cleaned or " p " in f" {cleaned} ":
-            return "#judge-patrick-t-dinkelacker"
-        # Ambiguous Dinkelacker
-        return "#common-pleas"
-
-    # Mallory collision
-    if "mallory" in cleaned:
-        if "william" in cleaned or "bill" in cleaned or " w " in f" {cleaned} ":
-            return "#judge-william-mallory"
-        if "dwane" in cleaned or " d " in f" {cleaned} ":
-            return "#judge-dwane-mallory"
-        # Ambiguous Mallory
-        return "#municipal"
-
-    # Try full match first
-    for judge in all_judges:
-        j_name_clean = re.sub(r"[.,]", " ", judge["name"].lower())
-        j_name_clean = " ".join(j_name_clean.split())
-        if j_name_clean == cleaned:
-            return f"#judge-{judge['slug']}"
-
-    # Try matching last name
-    for judge in all_judges:
-        last_name_lower = judge["last_name"].lower()
-        if last_name_lower in cleaned:
-            return f"#judge-{judge['slug']}"
-
-    return None
 
 
 def _load_inputs():
@@ -231,15 +152,7 @@ def _load_inputs():
     return snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points
 
 
-def _distinct_chapters(inmates: list[Inmate]) -> list[tuple[str, str]]:
-    """Distinct (slug, label) ORC chapters present on the roster, sorted by
-    label, for the homepage filter dropdown."""
-    chap: dict[str, str] = {}
-    for inm in inmates:
-        ch = _primary_chapter(inm)
-        if ch:
-            chap[_chap_slug(ch["label"])] = ch["label"]
-    return sorted(chap.items(), key=lambda kv: kv[1])
+
 
 
 def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, site_url: str) -> Environment:
@@ -346,42 +259,15 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     # asset is present, so there is no broken image before it is added.
     env.globals["waf_sheriff_available"] = (STATIC_DIR / "img" / "sheriff-waf.png").exists()
     _orc_chaps = _orc_chapters(offenses)
-    env.globals["codes_ohio_url"] = lambda code: _statute_url(code, offenses, _orc_chaps)
+    env.globals["codes_ohio_url"] = lambda code: statute_url(code, offenses, _orc_chaps)
     env.globals["chap_slug"] = _chap_slug
     env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates, indexes=idx)
     env.globals["all_inmates_total"] = snapshot.inmate_count
 
-    env.globals["judge_link"] = _judge_link
+    env.globals["judge_link"] = judge_link
 
 
-def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
-    """Compute the month grouping, month-nav data, recent-event counts and
-    trend that the page renderers consume. Returned as a dict so build() can
-    pass the pieces to the individual _render_* calls."""
-    by_month = _group_by_month(snapshot.inmates)
-    # Month-nav data: short label + count.
-    nav_months = [
-        {"slug": m.replace(" ", "-").lower(), "label": _short_month_label(m), "count": len(g)} for m, g in by_month
-    ]
-    # Only the newest month renders expanded; older ones collapsed by default.
-    expanded_months = {m for m, _ in by_month[:1]}
-    # "in the last 24h" must mean the EVENT happened in the last 24h AND (for
-    # 'booked') the HCSO booking date is recent too — otherwise the first-ever
-    # sweep counts every inmate it ever saw as "booked in the last 24h".
-    recent_24h = _events_for_recent(events, hours=24)
-    recent_booked = sum(1 for e in recent_24h if e.event == "booked")
-    recent_released = sum(1 for e in recent_24h if e.event == "released")
-    events_recent = list(reversed(_events_for_recent(events, hours=8)))[:12]
-    trend = _update_history(snapshot, recent_booked, recent_released)
-    return {
-        "by_month": by_month,
-        "nav_months": nav_months,
-        "expanded_months": expanded_months,
-        "recent_booked": recent_booked,
-        "recent_released": recent_released,
-        "events_recent": events_recent,
-        "trend": trend,
-    }
+
 
 
 def build(out_dir: Path) -> int:
@@ -443,18 +329,7 @@ def build(out_dir: Path) -> int:
     return 0
 
 
-def _iso_booking_date(inmate: Inmate) -> str | None:
-    """ISO-8601 (YYYY-MM-DD) form of an inmate's booking_date.
 
-    Returns None when booking_date is empty or unparseable; the JSON-LD
-    template suppresses the `dateCreated` key in that case so schema.org
-    consumers see "no booking date known" rather than a malformed string.
-    HCSO sentinel dates like "1/1/70" parse to a real 1970-01-01 ISO
-    string, which is acceptable for schema.org (it's a real date even
-    if it's a sentinel); downstream filtering of sentinels is unchanged.
-    """
-    dt = _parse_book_date(inmate.booking_date)
-    return dt.date().isoformat() if dt is not None else None
 
 
 def _resolve_base_url() -> str:
@@ -502,41 +377,10 @@ def _resolve_site_url() -> str:
 from web.dispatch import _dispatch_points  # noqa: E402
 
 
-def _warn_about_unmapped_orcs(inmates: list[Inmate], offenses: dict[str, dict]) -> None:
-    codes = [c.orc_code for inm in inmates for c in inm.charges if c.orc_code]
-    missing = orc_mod.codes_without_titles(codes, offenses)
-    # Strip HCSO's placeholder rows (0000.00, 0001.00, 0002.00 etc.) — those
-    # are sentinel values the booking system writes when a charge has been
-    # entered but the ORC section hasn't yet been classified. They're not real
-    # ORC codes and can't be looked up. Filtering keeps the warning's signal
-    # focused on genuine lookup gaps that the orc-curator should fix.
-    missing = [c for c in missing if not c.startswith(("0000", "0001", "0002"))]
-    if missing:
-        log.info("ORC titles missing for %d codes: %s", len(missing), ", ".join(missing[:20]))
 
 
-_CFS_DT_FORMATS = (
-    "%Y %b %d %I:%M:%S %p",  # CFS: "2026 May 12 12:09:57 AM"
-    "%m/%d/%Y %I:%M:%S %p",  # shootings: "5/10/2026 10:35:00 PM"
-    "%Y-%m-%dT%H:%M:%S",  # ISO-8601 (Socrata default for some columns)
-    "%Y-%m-%dT%H:%M:%S.%f",
-    "%Y-%m-%d %H:%M:%S",
-)
 
 
-def _parse_dispatch_dt(s: str) -> datetime | None:
-    s = (s or "").strip()
-    if not s:
-        return None
-    # ISO with trailing Z
-    if s.endswith("Z"):
-        s = s[:-1]
-    for fmt in _CFS_DT_FORMATS:
-        try:
-            return datetime.strptime(s, fmt)
-        except ValueError:
-            continue
-    return None
 
 
 # Page renderers and output writers extracted to web/pages.py and web/outputs.py.
@@ -567,31 +411,7 @@ from web.pages import (  # noqa: E402
 )
 
 
-def _roster_stale_context(snapshot: Snapshot) -> dict:
-    """Staleness / transparency context for templates. ``blocked`` is True once
-    the last-good roster is older than the freeze-alarm threshold, which
-    (verified 2026-05-19 onward) means HCSO's WAF is denying this site's
-    automated public-records retrieval. ``since`` is the first recorded block
-    date from the durable evidence log; ``ever_blocked`` keeps the Data-page
-    documentation present after recovery."""
-    from scraper.store import load_block_log
-    from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
 
-    hours = roster_stale_hours(snapshot.generated_utc)
-    log = load_block_log()
-    since = None
-    for rec in log:
-        if rec.get("event") == "blocked":
-            ts = rec.get("timestamp_utc") or ""
-            since = ts[:10] if ts else None
-            break
-    return {
-        "hours": round(hours, 1) if hours is not None else None,
-        "blocked": hours is not None and hours >= ROSTER_STALE_ALARM_HOURS,
-        "since": since,
-        "ever_blocked": any(r.get("event") == "blocked" for r in log),
-        "last_updated": (snapshot.generated_utc or "")[:10],
-    }
 
 
 def main(argv: list[str] | None = None) -> int:

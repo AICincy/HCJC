@@ -8,11 +8,12 @@ silently corrupts rendered pages.
 from __future__ import annotations
 
 from datetime import datetime, timedelta
+from pathlib import Path
 from typing import Literal
 
 import pytest
 
-from scraper.models import ChangeEvent, Charge, Inmate
+from scraper.models import ChangeEvent, Charge, Inmate, Snapshot
 from web import shape
 
 # ---------------------------------------------------------------------------
@@ -293,3 +294,74 @@ def test_bond_context_picks_most_severe_degree_even_without_target_bond():
     assert out["peer_count"] == 5
     assert out["my_bond"] is None
     assert out["my_percentile"] is None
+
+
+# ---------------------------------------------------------------------------
+# Ported helpers from build.py
+# ---------------------------------------------------------------------------
+
+
+def test_clean_event_note():
+    assert shape._clean_event_note("booked 1/1/70") == "booked date not reported"
+    assert shape._clean_event_note("released 01/01/1970") == "released date not reported"
+    assert shape._clean_event_note("updated 5/14/26") == "updated 5/14/26"
+
+
+def test_iso_booking_date():
+    inm = _inm("1", "DOE", "JOHN")
+    inm.booking_date = "5/12/26"
+    assert shape._iso_booking_date(inm) == "2026-05-12"
+
+    inm.booking_date = ""
+    assert shape._iso_booking_date(inm) is None
+
+
+def test_distinct_chapters():
+    inm1 = _inm("1", "DOE", "JOHN", charges=[Charge(orc_code="2903.13", description="ASSAULT")])
+    inm2 = _inm("2", "SMITH", "JANE", charges=[Charge(orc_code="2925.11", description="DRUGS")])
+    res = shape._distinct_chapters([inm1, inm2])
+    assert res == [("drugs", "Drugs"), ("violence-homicide", "Violence / Homicide")]
+
+
+def test_roster_stale_context(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    from scraper.store import WAF_BLOCK_LOG_PATH
+    import json
+
+    (tmp_path / "data").mkdir(exist_ok=True)
+    log_data = [{"timestamp_utc": "2026-06-03T10:00:00Z", "event": "blocked"}]
+    Path(WAF_BLOCK_LOG_PATH).write_text(json.dumps(log_data), encoding="utf-8")
+
+    snapshot = Snapshot(generated_utc="2026-06-03T18:00:00Z", inmates=[], inmate_count=0)
+    ctx = shape._roster_stale_context(snapshot)
+    assert ctx["ever_blocked"] is True
+    assert ctx["since"] == "2026-06-03"
+
+
+def test_prepare_render_data(monkeypatch):
+    import web.history
+    monkeypatch.setattr(web.history, "_update_history", lambda *args: {"trend": "up"})
+
+    snapshot = Snapshot(generated_utc="2026-06-03T18:00:00Z", inmates=[], inmate_count=0)
+    events = [
+        ChangeEvent(
+            event="booked",
+            inmate_number="1",
+            name="DOE",
+            timestamp_utc="2026-06-03T17:00:00Z",
+            note="booked 5/14/26",
+        )
+    ]
+
+    rd = shape._prepare_render_data(snapshot, events)
+    assert rd["recent_booked"] == 0
+
+
+def test_warn_about_unmapped_orcs(caplog):
+    inm = _inm("1", "DOE", "JOHN", charges=[Charge(orc_code="9999.99")])
+    import logging
+
+    with caplog.at_level(logging.INFO):
+        shape._warn_about_unmapped_orcs([inm], offenses={})
+    assert any("ORC titles missing" in r.message for r in caplog.records)
+

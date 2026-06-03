@@ -671,3 +671,106 @@ def _load_caselaw_cache() -> dict:
     except (json.JSONDecodeError, ValueError):
         log.warning("Failed to parse data/orc_caselaw.json")
         return {}
+
+
+def statute_url(code: str, offenses: dict, orc_chapters_set: frozenset[str] | None = None) -> str:
+    """Generate a codes.ohio.gov link for a charge code. Returns an empty string for non ORC sections."""
+    if is_orc_code(code, offenses, orc_chapters_set):
+        return _codes_ohio_url(code)
+    return ""
+
+
+_ALL_JUDGES_CACHE: list[dict] | None = None
+
+
+def judge_link(judge_name: str | None, all_judges: list[dict] | None = None) -> str | None:
+    """Map a judge name to their corresponding page anchor link. Returns None if unmapped."""
+    if not judge_name:
+        return None
+
+    import re
+    cleaned = judge_name.lower().strip()
+    cleaned = re.sub(r"^(hon\.?|honorable|judge|presiding|chief magistrate|magistrate)\s+", "", cleaned)
+    cleaned = re.sub(r"[.,]", " ", cleaned)
+    cleaned = " ".join(cleaned.split())
+    if not cleaned:
+        return None
+
+    # Hardcoded/special entries
+    if "powers" in cleaned:
+        return "#juvenile"
+
+    global _ALL_JUDGES_CACHE
+    if all_judges is None:
+        if _ALL_JUDGES_CACHE is None:
+            from web.pages import _parse_judges
+            common_pleas, municipal = _parse_judges()
+            _ALL_JUDGES_CACHE = common_pleas + municipal
+        all_judges = _ALL_JUDGES_CACHE
+
+    # Winkler check first because of collision between CP and Probate
+    if "winkler" in cleaned:
+        if "ralph" in cleaned:
+            return "#probate"
+        if "robert" in cleaned or "rob" in cleaned or " c " in f" {cleaned} ":
+            return "#judge-robert-c-winkler"
+        # Ambiguous Winkler
+        return "#common-pleas"
+
+    # Dinkelacker collision
+    if "dinkelacker" in cleaned:
+        if "leah" in cleaned or " l " in f" {cleaned} ":
+            return "#judge-leah-dinkelacker"
+        if "patrick" in cleaned or "pat" in cleaned or " p " in f" {cleaned} ":
+            return "#judge-patrick-t-dinkelacker"
+        # Ambiguous Dinkelacker
+        return "#common-pleas"
+
+    # Mallory collision
+    if "mallory" in cleaned:
+        if "william" in cleaned or "bill" in cleaned or " w " in f" {cleaned} ":
+            return "#judge-william-mallory"
+        if "dwane" in cleaned or " d " in f" {cleaned} ":
+            return "#judge-dwane-mallory"
+        # Ambiguous Mallory
+        return "#municipal"
+
+    # Try full match first
+    for judge in all_judges:
+        j_name_clean = re.sub(r"[.,]", " ", judge["name"].lower())
+        j_name_clean = " ".join(j_name_clean.split())
+        if j_name_clean == cleaned:
+            return f"#judge-{judge['slug']}"
+
+    # Try matching last name
+    for judge in all_judges:
+        last_name_lower = judge["last_name"].lower()
+        if last_name_lower in cleaned:
+            return f"#judge-{judge['slug']}"
+
+    return None
+
+
+_CFS_DT_FORMATS = (
+    "%Y %b %d %I:%M:%S %p",  # CFS: "2026 May 12 12:09:57 AM"
+    "%m/%d/%Y %I:%M:%S %p",  # shootings: "5/10/2026 10:35:00 PM"
+    "%Y-%m-%dT%H:%M:%S",  # ISO-8601 (Socrata default for some columns)
+    "%Y-%m-%dT%H:%M:%S.%f",
+    "%Y-%m-%d %H:%M:%S",
+)
+
+
+def parse_dispatch_dt(s: str) -> datetime | None:
+    """Parse a dispatch date string into a datetime object. Returns None on failure."""
+    s = (s or "").strip()
+    if not s:
+        return None
+    # ISO with trailing Z
+    if s.endswith("Z"):
+        s = s[:-1]
+    for fmt in _CFS_DT_FORMATS:
+        try:
+            return datetime.strptime(s, fmt)
+        except ValueError:
+            continue
+    return None

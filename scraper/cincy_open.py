@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import time
 import urllib.parse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -166,10 +167,59 @@ def query(
     url = f"{resource_url(dataset_id)}?{urllib.parse.urlencode(params, safe=':')}"
     log.info("Socrata query %s", url)
     if client is not None:
-        resp = client.get(url)
-        resp.raise_for_status()
+        resp = _execute_with_retry(client, url)
         return resp.json()
     with _default_socrata_client() as c:
-        resp = c.get(url)
-        resp.raise_for_status()
+        resp = _execute_with_retry(c, url)
         return resp.json()
+
+
+def _execute_with_retry(client: httpx.Client, url: str) -> httpx.Response:
+    """Execute a GET request on Socrata with retries, backoff, and jitter on transient errors (5xx, 429, or RequestError)."""
+    import random
+    from .client import _retry_after_seconds
+
+    max_retries = 3
+    retry_base_delay = 1.0
+    retry_jitter_fraction = 0.25
+
+    for attempt in range(max_retries + 1):
+        try:
+            response = client.get(url)
+            if response.status_code == 429 or response.status_code >= 500:
+                if attempt == max_retries:
+                    response.raise_for_status()
+                if response.status_code == 429:
+                    wait = _retry_after_seconds(response.headers.get("retry-after"))
+                else:
+                    delay = retry_base_delay * (2 ** attempt)
+                    jitter = delay * retry_jitter_fraction * (2 * random.random() - 1)
+                    wait = delay + jitter
+                log.info(
+                    "Socrata query returned status %d on %s; sleeping %.2fs before retry %d/%d",
+                    response.status_code,
+                    url,
+                    wait,
+                    attempt + 1,
+                    max_retries,
+                )
+                time.sleep(wait)
+                continue
+            response.raise_for_status()
+            return response
+        except httpx.RequestError as e:
+            if attempt == max_retries:
+                raise
+            delay = retry_base_delay * (2 ** attempt)
+            jitter = delay * retry_jitter_fraction * (2 * random.random() - 1)
+            wait = delay + jitter
+            log.info(
+                "Socrata query failed with network error (%s) on %s; sleeping %.2fs before retry %d/%d",
+                e,
+                url,
+                wait,
+                attempt + 1,
+                max_retries,
+            )
+            time.sleep(wait)
+    raise httpx.HTTPError("Unexpected retry loop exit")

@@ -11,6 +11,7 @@ import urllib.parse
 from scraper.cincy_open import (
     dumps_rows_per_line,
     prev_row_count,
+    query,
     resource_url,
     since_iso,
     warn_on_row_drop,
@@ -116,3 +117,97 @@ def test_warn_on_row_drop_silent_when_prior_is_zero(caplog):
     with caplog.at_level(logging.WARNING):
         warn_on_row_drop("Use of Force", 0, 0)
     assert caplog.records == []
+
+
+def test_query_retry_on_500_success(monkeypatch):
+    import httpx
+    import scraper.cincy_open as co
+
+    calls = 0
+
+    class MockClient:
+        def get(self, url, params=None):
+            nonlocal calls
+            calls += 1
+            if calls == 1:
+                return httpx.Response(500, request=httpx.Request("GET", url))
+            return httpx.Response(200, json=[{"row": 1}], request=httpx.Request("GET", url))
+
+    # Minimize delays for testing
+    monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda *args: None}))
+
+    res = co.query("test-dataset", client=MockClient())
+    assert res == [{"row": 1}]
+    assert calls == 2
+
+
+def test_query_retry_on_429_retry_after(monkeypatch):
+    import httpx
+    import scraper.cincy_open as co
+
+    calls = 0
+
+    class MockClient:
+        def get(self, url, params=None):
+            nonlocal calls
+            calls += 1
+            if calls == 1:
+                return httpx.Response(
+                    429,
+                    headers={"retry-after": "0.1"},
+                    request=httpx.Request("GET", url),
+                )
+            return httpx.Response(200, json=[{"row": 1}], request=httpx.Request("GET", url))
+
+    # Mock time.sleep to verify it gets called or minimize wait
+    sleep_calls = []
+    monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda s: sleep_calls.append(s)}))
+
+    res = co.query("test-dataset", client=MockClient())
+    assert res == [{"row": 1}]
+    assert calls == 2
+    assert len(sleep_calls) == 1
+    # Verify we parse retry-after correctly (since we mock sleep we don't block)
+    assert sleep_calls[0] == 0.1
+
+
+def test_query_retry_fails_after_max_retries(monkeypatch):
+    import httpx
+    import scraper.cincy_open as co
+    import pytest
+
+    calls = 0
+
+    class MockClient:
+        def get(self, url, params=None):
+            nonlocal calls
+            calls += 1
+            return httpx.Response(500, request=httpx.Request("GET", url))
+
+    monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda *args: None}))
+
+    with pytest.raises(httpx.HTTPStatusError):
+        co.query("test-dataset", client=MockClient())
+    # 1 initial call + 3 retries = 4 total attempts
+    assert calls == 4
+
+
+def test_query_retry_on_network_error(monkeypatch):
+    import httpx
+    import scraper.cincy_open as co
+
+    calls = 0
+
+    class MockClient:
+        def get(self, url, params=None):
+            nonlocal calls
+            calls += 1
+            if calls == 1:
+                raise httpx.ConnectError("Connection timed out", request=httpx.Request("GET", url))
+            return httpx.Response(200, json=[{"row": 1}], request=httpx.Request("GET", url))
+
+    monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda *args: None}))
+
+    res = co.query("test-dataset", client=MockClient())
+    assert res == [{"row": 1}]
+    assert calls == 2

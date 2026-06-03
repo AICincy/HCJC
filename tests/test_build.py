@@ -539,45 +539,45 @@ def test_judge_link_resolution():
     ]
 
     # Full matches
-    assert build._judge_link("Hon. Alison Hatheway", mock_judges) == "#judge-alison-hatheway"
-    assert build._judge_link("Judge Alan C. Triggs", mock_judges) == "#judge-alan-c-triggs"
+    assert build.judge_link("Hon. Alison Hatheway", mock_judges) == "#judge-alison-hatheway"
+    assert build.judge_link("Judge Alan C. Triggs", mock_judges) == "#judge-alan-c-triggs"
 
     # Cleaning & prefixes
-    assert build._judge_link("  Chief Magistrate   Alan C. Triggs  ", mock_judges) == "#judge-alan-c-triggs"
-    assert build._judge_link("Magistrate Alan C. Triggs", mock_judges) == "#judge-alan-c-triggs"
-    assert build._judge_link("Presiding Alan C. Triggs", mock_judges) == "#judge-alan-c-triggs"
+    assert build.judge_link("  Chief Magistrate   Alan C. Triggs  ", mock_judges) == "#judge-alan-c-triggs"
+    assert build.judge_link("Magistrate Alan C. Triggs", mock_judges) == "#judge-alan-c-triggs"
+    assert build.judge_link("Presiding Alan C. Triggs", mock_judges) == "#judge-alan-c-triggs"
 
     # Winkler check first because of collision between CP and Probate
-    assert build._judge_link("Ralph Winkler", mock_judges) == "#probate"
-    assert build._judge_link("Robert C. Winkler", mock_judges) == "#judge-robert-c-winkler"
-    assert build._judge_link("Robert Winkler", mock_judges) == "#judge-robert-c-winkler"
-    assert build._judge_link("Rob Winkler", mock_judges) == "#judge-robert-c-winkler"
-    assert build._judge_link("Winkler", mock_judges) == "#common-pleas"
+    assert build.judge_link("Ralph Winkler", mock_judges) == "#probate"
+    assert build.judge_link("Robert C. Winkler", mock_judges) == "#judge-robert-c-winkler"
+    assert build.judge_link("Robert Winkler", mock_judges) == "#judge-robert-c-winkler"
+    assert build.judge_link("Rob Winkler", mock_judges) == "#judge-robert-c-winkler"
+    assert build.judge_link("Winkler", mock_judges) == "#common-pleas"
 
     # Dinkelacker collision
-    assert build._judge_link("Leah Dinkelacker", mock_judges) == "#judge-leah-dinkelacker"
-    assert build._judge_link("Patrick T. Dinkelacker", mock_judges) == "#judge-patrick-t-dinkelacker"
-    assert build._judge_link("Pat Dinkelacker", mock_judges) == "#judge-patrick-t-dinkelacker"
-    assert build._judge_link("Dinkelacker", mock_judges) == "#common-pleas"
+    assert build.judge_link("Leah Dinkelacker", mock_judges) == "#judge-leah-dinkelacker"
+    assert build.judge_link("Patrick T. Dinkelacker", mock_judges) == "#judge-patrick-t-dinkelacker"
+    assert build.judge_link("Pat Dinkelacker", mock_judges) == "#judge-patrick-t-dinkelacker"
+    assert build.judge_link("Dinkelacker", mock_judges) == "#common-pleas"
 
     # Mallory collision
-    assert build._judge_link("William Mallory", mock_judges) == "#judge-william-mallory"
-    assert build._judge_link("Bill Mallory", mock_judges) == "#judge-william-mallory"
-    assert build._judge_link("Dwane Mallory", mock_judges) == "#judge-dwane-mallory"
-    assert build._judge_link("Mallory", mock_judges) == "#municipal"
+    assert build.judge_link("William Mallory", mock_judges) == "#judge-william-mallory"
+    assert build.judge_link("Bill Mallory", mock_judges) == "#judge-william-mallory"
+    assert build.judge_link("Dwane Mallory", mock_judges) == "#judge-dwane-mallory"
+    assert build.judge_link("Mallory", mock_judges) == "#municipal"
 
     # Hardcoded/special entries
-    assert build._judge_link("Melissa Powers", mock_judges) == "#juvenile"
-    assert build._judge_link("Powers", mock_judges) == "#juvenile"
+    assert build.judge_link("Melissa Powers", mock_judges) == "#juvenile"
+    assert build.judge_link("Powers", mock_judges) == "#juvenile"
 
     # Empty and invalid cases
-    assert build._judge_link("Non-existent Judge", mock_judges) is None
-    assert build._judge_link("", mock_judges) is None
-    assert build._judge_link(None, mock_judges) is None
-    assert build._judge_link("  ", mock_judges) is None
+    assert build.judge_link("Non-existent Judge", mock_judges) is None
+    assert build.judge_link("", mock_judges) is None
+    assert build.judge_link(None, mock_judges) is None
+    assert build.judge_link("  ", mock_judges) is None
 
     # Verify cached loading from real files
-    assert build._judge_link("Hon. Alison Hatheway") == "#judge-alison-hatheway"
+    assert build.judge_link("Hon. Alison Hatheway") == "#judge-alison-hatheway"
 
 
 def test_roster_indexes_indexes_secondary_charges():

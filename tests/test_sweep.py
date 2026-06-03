@@ -11,6 +11,8 @@ from scraper.sweep import WafBackoffTracker, _fetch_one
 from scraper.sweep_guards import (
     ROSTER_STALE_ALARM_HOURS,
     check_detail_watchdog,
+    list_response_looks_blocked,
+    looks_like_waf_block,
     roster_stale_hours,
 )
 from scraper.sweep_guards import (
@@ -26,18 +28,18 @@ _check_detail_watchdog = check_detail_watchdog
 def test_looks_like_waf_block_detects_tiny_empty_response():
     empty = Inmate(inmate_number="1", last_name="", first_name="", booking_date="", charges=[])
     # Tiny body, nothing parsed, no photo -> WAF-block shaped.
-    assert sweep._looks_like_waf_block("x" * 100, empty, None, None) is True
+    assert looks_like_waf_block("x" * 100, empty, None, None) is True
 
 
 def test_looks_like_waf_block_false_for_real_page():
     named = Inmate(inmate_number="1", last_name="DOE", first_name="JOHN", booking_date="5/1/26")
     # A named record is never a block, even on a short body.
-    assert sweep._looks_like_waf_block("x" * 100, named, None, None) is False
+    assert looks_like_waf_block("x" * 100, named, None, None) is False
     # A large body is not a block even if empty (e.g. a genuine no-record page).
     big_empty = Inmate(inmate_number="1", last_name="", first_name="", booking_date="", charges=[])
-    assert sweep._looks_like_waf_block("x" * 6000, big_empty, None, None) is False
+    assert looks_like_waf_block("x" * 6000, big_empty, None, None) is False
     # A photo present rules out a block.
-    assert sweep._looks_like_waf_block("x" * 100, big_empty, b"jpegbytes", None) is False
+    assert looks_like_waf_block("x" * 100, big_empty, b"jpegbytes", None) is False
 
 
 def test_roster_stale_hours_parses_and_measures():
@@ -396,6 +398,11 @@ def test_interrupted_sweep_does_not_append_released_events(tmp_path: Path, monke
     rc = sweep.run(surnames=["A"], max_surnames=None, refresh_known=False, dry_run=False)
     assert rc == 0
 
+    # The roster database must remain intact and not be overwritten/blanked out.
+    assert current_path.exists()
+    current_data = json.loads(current_path.read_text(encoding="utf-8"))
+    assert len(current_data.get("inmates", [])) == 60, "Roster database must not be blanked out on list phase interrupt"
+
     # The changelog must not have been written (or must contain zero events).
     if changelog_path.exists():
         events = json.loads(changelog_path.read_text(encoding="utf-8"))
@@ -519,7 +526,7 @@ def test_run_watchdog_blocks_roster_write(tmp_path, monkeypatch):
     monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh: ["1000"])
     monkeypatch.setattr(sweep, "_fetch_details", lambda **kwargs: (100, 0, 0))
     monkeypatch.setattr(sweep, "check_detail_watchdog", lambda *args: False)
-    monkeypatch.setattr(sweep, "_prune_and_report", lambda photos_dir, active_ids: None)
+    monkeypatch.setattr(sweep, "prune_photos", lambda photos_dir, active_ids: None)
 
     class FakeClient:
         def __enter__(self):
@@ -628,14 +635,14 @@ def test_run_empty_page_block_records_200_sample(tmp_path, monkeypatch):
 
 def test_list_response_looks_blocked_predicate():
     # Tiny body + zero rows = WAF block stub served as HTTP 200.
-    assert sweep._list_response_looks_blocked("x" * 100, []) is True
+    assert list_response_looks_blocked("x" * 100, []) is True
     # Zero rows but a full-size page = a legitimate no-results search.
-    assert sweep._list_response_looks_blocked("x" * 10000, []) is False
+    assert list_response_looks_blocked("x" * 10000, []) is False
     # Any parsed rows = not a block, regardless of size.
     from scraper.models import ListRow
 
     assert (
-        sweep._list_response_looks_blocked(
+        list_response_looks_blocked(
             "x" * 100, [ListRow(inmate_number="1", last_name="", first_name="", admit_date="")]
         )
         is False

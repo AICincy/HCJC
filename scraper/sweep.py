@@ -54,6 +54,8 @@ from .sweep_guards import (
     SWEEP_BOOTSTRAP_FLOOR,
     SWEEP_MIN_ROSTER_FRACTION,
     check_detail_watchdog,
+    list_response_looks_blocked,
+    looks_like_waf_block,
     prune_photos,
     roster_stale_hours,
     sweep_looks_healthy,
@@ -218,34 +220,7 @@ class WafBackoffTracker:
             return self._streak
 
 
-# Valid HCSO inmate-detail pages are 91-230 KB (2026-05-19 verification). The
-# WAF returns truncated/blocked responses well under 5 KB to automated callers,
-# and parse_detail_page silently yields an empty Inmate from them.
-_WAF_BLOCK_MAX_BYTES = 5000
 
-
-def _looks_like_waf_block(html: str, inm: Inmate, photo_bytes: bytes | None, photo_url: str | None) -> bool:
-    """True when a detail response has the shape of a WAF block: a tiny body
-    that parsed to no name, no charges, and no photo. Pure predicate, extracted
-    from _fetch_one so the heuristic that drives the retry/backoff and the
-    carry-forward is unit-testable in isolation."""
-    return (
-        len(html) < _WAF_BLOCK_MAX_BYTES
-        and not inm.last_name
-        and not inm.first_name
-        and not inm.charges
-        and not photo_bytes
-        and not photo_url
-    )
-
-
-def _list_response_looks_blocked(html: str, rows: list[ListRow]) -> bool:
-    """True when a surname-search response has the shape of a WAF block served
-    as HTTP 200: a tiny body that parsed to zero rows. A legitimate no-results
-    search still returns the full page chrome (tens of KB), so the size floor
-    (``_WAF_BLOCK_MAX_BYTES``) discriminates a block stub from a real empty
-    result. This is the 200-mode sibling of the 403 path in ``_sweep_list``."""
-    return not rows and len(html) < _WAF_BLOCK_MAX_BYTES
 
 
 def _plan_detail_fetch(seen_ids: set[str], previous: dict[str, Inmate], refresh_known: bool) -> list[str]:
@@ -493,7 +468,7 @@ def run(
 
     current: dict[str, Inmate] = {}
     seen_ids: set[str] = set()
-    roster_ok = True
+    roster_ok = False
     # Set just before the try-block exits cleanly. The finally below uses this
     # flag to decide whether to compute a diff() and append to the changelog:
     # an interrupted sweep persists its partial roster snapshot (so the next
@@ -548,6 +523,8 @@ def run(
                 _record_egress_evidence()
                 log.error("sweep %s blocked (degraded list guard)", sweep_id)
                 return 0
+
+            roster_ok = True
 
             # Healthy sweep: if we were previously blocked, close the denial
             # period with a 'recovered' evidence record.
@@ -620,7 +597,7 @@ def run(
             # persisted snapshot; pruning then could delete photos for ids
             # that were never written and that the next cycle still needs.
             if save_ok and seen_ids:
-                _prune_and_report(PHOTOS_DIR, seen_ids)
+                prune_photos(PHOTOS_DIR, seen_ids)
 
     if dry_run:
         log.info("dry-run; not writing")
@@ -637,28 +614,6 @@ def run(
 
 # Back-compat alias: prefer scraper.sweep_guards.check_detail_watchdog in new code.
 _check_detail_watchdog = check_detail_watchdog
-
-
-def _prune_and_report(photos_dir: Path, active_ids: set[str]) -> None:
-    """Run ``prune_photos`` and log when the safety threshold skips the prune.
-
-    The skip path in ``sweep_guards.prune_photos`` is one of the silent-staleness
-    pre-conditions: the prune passes but the on-disk photo set drifts out of
-    sync with the roster. The check below is a *read* against the same
-    filesystem the prune is about to inspect, so it can't lie about what the
-    prune would have done. We keep the prune logic untouched and just report.
-    """
-    if photos_dir.exists():
-        existing = list(photos_dir.glob("*.jpg"))
-        doomed = [f for f in existing if f.stem not in active_ids]
-        if doomed and existing and len(doomed) / len(existing) > PHOTO_PRUNE_MAX_FRACTION:
-            log.warning(
-                "photo prune skipped: %d/%d (%.1f%%) exceed threshold",
-                len(doomed),
-                len(existing),
-                100.0 * len(doomed) / len(existing),
-            )
-    prune_photos(photos_dir, active_ids)
 
 
 _SENSITIVE_HEADERS = frozenset({"cookie", "set-cookie", "authorization", "proxy-authorization"})
@@ -733,7 +688,7 @@ def _fetch_list_page(client: HcsoClient, surname: str) -> tuple[list[ListRow] | 
     # parses to zero rows (instead of a 403). The fetch does not raise, so treat
     # it as a failure here (rows=None) carrying the 200 status and a forensic
     # sample, so it is counted like the 403 path rather than silently dropped.
-    if _list_response_looks_blocked(resp.text, rows):
+    if list_response_looks_blocked(resp.text, rows):
         log.warning(
             "list fetch for surname=%s looks WAF-blocked (HTTP %d, %d bytes, 0 rows)",
             surname,
@@ -846,7 +801,7 @@ def _fetch_detail_with_retry(
             log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
             return None, None, None
         inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
-        if not _looks_like_waf_block(html, inm, photo_bytes, photo_url):
+        if not looks_like_waf_block(html, inm, photo_bytes, photo_url):
             waf_tracker.clear()
             break
         streak, backoff = waf_tracker.observe()

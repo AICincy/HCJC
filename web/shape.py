@@ -28,6 +28,7 @@ from web.classify import (
     _parse_md_yy,
     _primary_degree,
     _primary_tier,
+    _short_month_label,
 )
 
 
@@ -873,3 +874,106 @@ def _events_for_recent(events: list[ChangeEvent], hours: int = 8) -> list[Change
                 continue
         out.append(e)
     return out
+
+
+def _clean_event_note(note: str | None) -> str:
+    """Scrub the HCSO epoch-0 sentinel ('1/1/70') out of historical changelog
+    notes so the status history never shows a 1970 date."""
+    s = note or ""
+    for sentinel in ("01/01/1970", "1/1/1970", "01/01/70", "1/1/70"):
+        s = s.replace(sentinel, "date not reported")
+    return s
+
+
+def _iso_booking_date(inmate: Inmate) -> str | None:
+    """ISO-8601 (YYYY-MM-DD) form of an inmate's booking_date.
+
+    Returns None when booking_date is empty or unparseable; the JSON-LD
+    template suppresses the `dateCreated` key in that case so schema.org
+    consumers see "no booking date known" rather than a malformed string.
+    HCSO sentinel dates like "1/1/70" parse to a real 1970-01-01 ISO
+    string, which is acceptable for schema.org (it's a real date even
+    if it's a sentinel); downstream filtering of sentinels is unchanged.
+    """
+    dt = _parse_book_date(inmate.booking_date)
+    return dt.date().isoformat() if dt is not None else None
+
+
+def _roster_stale_context(snapshot: Snapshot) -> dict:
+    """Staleness / transparency context for templates. ``blocked`` is True once
+    the last-good roster is older than the freeze-alarm threshold, which
+    (verified 2026-05-19 onward) means HCSO's WAF is denying this site's
+    automated public-records retrieval. ``since`` is the first recorded block
+    date from the durable evidence log; ``ever_blocked`` keeps the Data-page
+    documentation present after recovery."""
+    from scraper.store import load_block_log
+    from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
+
+    hours = roster_stale_hours(snapshot.generated_utc)
+    log = load_block_log()
+    since = None
+    for rec in log:
+        if rec.get("event") == "blocked":
+            ts = rec.get("timestamp_utc") or ""
+            since = ts[:10] if ts else None
+            break
+    return {
+        "hours": round(hours, 1) if hours is not None else None,
+        "blocked": hours is not None and hours >= ROSTER_STALE_ALARM_HOURS,
+        "since": since,
+        "ever_blocked": any(r.get("event") == "blocked" for r in log),
+        "last_updated": (snapshot.generated_utc or "")[:10],
+    }
+
+
+def _distinct_chapters(inmates: list[Inmate]) -> list[tuple[str, str]]:
+    """Distinct (slug, label) ORC chapters present on the roster, sorted by
+    label, for the homepage filter dropdown."""
+    chap: dict[str, str] = {}
+    for inm in inmates:
+        ch = _primary_chapter(inm)
+        if ch:
+            chap[_chap_slug(ch["label"])] = ch["label"]
+    return sorted(chap.items(), key=lambda kv: kv[1])
+
+
+def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
+    """Compute the month grouping, month-nav data, recent-event counts and
+    trend that the page renderers consume. Returned as a dict so build() can
+    pass the pieces to the individual _render_* calls."""
+    from web.history import _update_history
+    by_month = _group_by_month(snapshot.inmates)
+    # Month-nav data: short label + count.
+    nav_months = [
+        {"slug": m.replace(" ", "-").lower(), "label": _short_month_label(m), "count": len(g)} for m, g in by_month
+    ]
+    # Only the newest month renders expanded; older ones collapsed by default.
+    expanded_months = {m for m, _ in by_month[:1]}
+    # "in the last 24h" must mean the EVENT happened in the last 24h AND (for
+    # 'booked') the HCSO booking date is recent too — otherwise the first-ever
+    # sweep counts every inmate it ever saw as "booked in the last 24h".
+    recent_24h = _events_for_recent(events, hours=24)
+    recent_booked = sum(1 for e in recent_24h if e.event == "booked")
+    recent_released = sum(1 for e in recent_24h if e.event == "released")
+    events_recent = list(reversed(_events_for_recent(events, hours=8)))[:12]
+    trend = _update_history(snapshot, recent_booked, recent_released)
+    return {
+        "by_month": by_month,
+        "nav_months": nav_months,
+        "expanded_months": expanded_months,
+        "recent_booked": recent_booked,
+        "recent_released": recent_released,
+        "events_recent": events_recent,
+        "trend": trend,
+    }
+
+
+def _warn_about_unmapped_orcs(inmates: list[Inmate], offenses: dict[str, dict]) -> None:
+    import logging
+    logger = logging.getLogger("jcstream.site")
+    codes = [c.orc_code for inm in inmates for c in inm.charges if c.orc_code]
+    missing = orc_mod.codes_without_titles(codes, offenses)
+    missing = [c for c in missing if not c.startswith(("0000", "0001", "0002"))]
+    if missing:
+        logger.info("ORC titles missing for %d codes: %s", len(missing), ", ".join(missing[:20]))
+

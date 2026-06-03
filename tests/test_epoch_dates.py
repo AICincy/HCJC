@@ -6,7 +6,7 @@ HCSO emits 1/1/70 when it has no real booking date; the site must never show
 
 from __future__ import annotations
 
-from web.build import _clean_event_note
+from web.shape import _clean_event_note
 from web.classify import _display_date, _parse_book_date
 
 

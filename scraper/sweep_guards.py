@@ -15,6 +15,8 @@ import logging
 from datetime import datetime, timezone
 from pathlib import Path
 
+from scraper.models import Inmate, ListRow
+
 log = logging.getLogger("jcstream.sweep")
 
 # ===== Roster-freeze alarm =====
@@ -157,3 +159,34 @@ def prune_photos(photos_dir: Path, active_ids: set[str]) -> None:
         f.unlink()
     if doomed:
         log.info("pruned %d released-inmate photos", len(doomed))
+
+
+# ===== WAF block detection =====
+# Valid HCSO inmate-detail pages are 91-230 KB (2026-05-19 verification). The
+# WAF returns truncated/blocked responses well under 5 KB to automated callers,
+# and parse_detail_page silently yields an empty Inmate from them.
+WAF_BLOCK_MAX_BYTES = 5000
+
+
+def looks_like_waf_block(html: str, inm: Inmate, photo_bytes: bytes | None, photo_url: str | None) -> bool:
+    """True when a detail response has the shape of a WAF block: a tiny body
+    that parsed to no name, no charges, and no photo. Pure predicate, extracted
+    from _fetch_one so the heuristic that drives the retry/backoff and the
+    carry-forward is unit-testable in isolation."""
+    return (
+        len(html) < WAF_BLOCK_MAX_BYTES
+        and not inm.last_name
+        and not inm.first_name
+        and not inm.charges
+        and not photo_bytes
+        and not photo_url
+    )
+
+
+def list_response_looks_blocked(html: str, rows: list[ListRow]) -> bool:
+    """True when a surname-search response has the shape of a WAF block served
+    as HTTP 200: a tiny body that parsed to zero rows. A legitimate no-results
+    search still returns the full page chrome (tens of KB), so the size floor
+    (``WAF_BLOCK_MAX_BYTES``) discriminates a block stub from a real empty
+    result. This is the 200-mode sibling of the 403 path in ``_sweep_list``."""
+    return not rows and len(html) < WAF_BLOCK_MAX_BYTES
