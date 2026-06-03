@@ -10,6 +10,8 @@ import logging
 import re
 from pathlib import Path
 
+from scraper.orc import normalize_code
+
 log = logging.getLogger(__name__)
 
 # Paths
@@ -17,8 +19,6 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 OFFENSES_PATH = ROOT_DIR / "data" / "orc_offenses.json"
 CURRENT_PATH = ROOT_DIR / "data" / "current.json"
 HAMCO_DIR = ROOT_DIR / "HAMCO"
-
-from scraper.orc import normalize_code
 
 # Regex patterns
 _CODE_END_RE = re.compile(r"(\d+(?:[-.]\w+)*|PBR-?\d+|OVERTRAF)$", re.IGNORECASE)

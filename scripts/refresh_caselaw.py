@@ -26,7 +26,6 @@ statute page renders without the case-law block. Failure mode is silent.
 from __future__ import annotations
 
 import json
-import re
 import sys
 import time
 from collections import Counter
@@ -45,7 +44,7 @@ DATA = ROOT / "data"
 API = "https://www.courtlistener.com/api/rest/v4/search/"
 
 sys.path.append(str(ROOT))
-from scraper.orc import normalize_code
+from scraper.orc import normalize_code  # noqa: E402
 
 
 def _normalize(code: str | None) -> str:
