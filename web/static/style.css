@@ -16,7 +16,7 @@
 
   --fg:           #1A1A1A;
   --fg-soft:      #333333;
-  --fg-muted:     #707070;
+  --fg-muted:     #6c6c6c;
   --fg-dim:       #858585;
 
   --accent:       #B33A2A;
@@ -1450,7 +1450,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 .bio dd .muted {
   font-size: 11px;
   font-weight: 400;
-  color: var(--fg-dim);
+  color: var(--fg-muted);
   margin-top: 2px;
   display: block;
 }
@@ -1817,7 +1817,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 .tl-side-above .tl-cap { bottom: 62px; top: auto; }
 .tl-lab { font-size: 11px; font-weight: 600; color: var(--fg); }
 .tl-date { font-size: 11px; color: var(--fg-muted); font-family: var(--font-mono); }
-.tl-sub { font-size: 10px; color: var(--fg-dim); text-transform: lowercase; }
+.tl-sub { font-size: 10px; color: var(--fg-muted); text-transform: lowercase; }
 .tl-m-now .tl-lab { color: var(--warn); }
 .tl-foot {
   display: flex; justify-content: space-between;
@@ -2004,7 +2004,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 .stacked-sw-m { background: var(--fg-muted); }
 .stacked-k { flex: 1; color: var(--fg-soft); }
 .stacked-v { color: var(--fg-muted); font-variant-numeric: tabular-nums; }
-.stacked-v em { color: var(--fg-dim); font-style: normal; }
+.stacked-v em { color: var(--fg-muted); font-style: normal; }
 @media (max-width: 720px) { .stacked-leg { grid-template-columns: 1fr; } }
 
 /* ===== Top-list (ranked offenses) ===== */
@@ -2021,7 +2021,7 @@ a.orc-code:hover { border-bottom-style: solid; }
   transition: background 100ms;
 }
 .toplist-row:hover { background: var(--accent-bg); text-decoration: none; }
-.toplist-rank { font-family: var(--font-mono); color: var(--fg-dim); font-size: 11px; }
+.toplist-rank { font-family: var(--font-mono); color: var(--fg-muted); font-size: 11px; }
 .toplist-name { min-width: 0; }
 .toplist-title {
   font-size: 14px; font-weight: 500; color: var(--fg);
@@ -2069,7 +2069,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 .cal-item:hover { background: var(--bg-soft); text-decoration: none; }
 .cal-name { font-weight: 500; color: var(--fg); }
 .cal-charge { color: var(--fg-muted); text-transform: capitalize; }
-.cal-more { font-size: 11px; color: var(--fg-dim); padding-left: 28px; }
+.cal-more { font-size: 11px; color: var(--fg-muted); padding-left: 28px; }
 
 .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
 @media (max-width: 720px) {
@@ -2119,7 +2119,7 @@ h2.legal-anchor {
 .comment-policy strong { color: var(--warn); font-weight: 700; }
 
 /* ===== Attribution ===== */
-.attribution { font-size: 11px; color: var(--fg-dim); margin-top: 14px; }
+.attribution { font-size: 11px; color: var(--fg-muted); margin-top: 14px; }
 .attribution a { color: var(--fg-muted); }
 
 /* ===== Print ===== */
