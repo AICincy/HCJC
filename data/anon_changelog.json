@@ -179929,21 +179929,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-27T22:01:25Z",
-    "inmate_number": "14275455",
-    "name": "SICURELLA MATTHEW",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": "booked 5/27/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-27T22:01:25Z",
-    "inmate_number": "2496554",
-    "name": "GIBSON DANTE",
+    "date": "2026-05-27",
     "tier": null,
-    "category": null,
-    "note": "booked 5/27/26"
+    "category": null
   },
   {
     "event": "updated",
@@ -196879,6 +196873,42 @@
     "timestamp_utc": "2026-06-03T21:42:20Z",
     "inmate_number": "2042972",
     "name": "WILLIAMS RONEEKA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-03T22:34:55Z",
+    "inmate_number": "14427694",
+    "name": "KATTUS NICHOLAS",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-03T22:34:55Z",
+    "inmate_number": "14812553",
+    "name": "KING JACOB",
+    "tier": "M1",
+    "category": "Misuse of credit cards",
+    "note": "booked 6/3/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-03T22:34:55Z",
+    "inmate_number": "2549166",
+    "name": "CRADDOCK ISREAL",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 6/3/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-03T22:34:55Z",
+    "inmate_number": "2455880",
+    "name": "POLLITT SHIANE",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
