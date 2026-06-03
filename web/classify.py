@@ -222,9 +222,13 @@ def _display_date(date) -> str:
         if date is None:
             return ""
     try:
-        if abs((datetime.now() - date).days) > 5475:  # 15 * 365, sentinel guard
+        now_utc = datetime.now(timezone.utc)
+        date_aware = date
+        if date_aware.tzinfo is None:
+            date_aware = date_aware.replace(tzinfo=timezone.utc)
+        if abs((now_utc - date_aware).days) > 5475:  # 15 * 365, sentinel guard
             return ""
-        return date.strftime("%b %d, %Y")
+        return date_aware.strftime("%b %d, %Y")
     except (ValueError, AttributeError, TypeError):
         return ""
 
@@ -260,11 +264,12 @@ def _approx_age(dob_str: str | None) -> int | None:
     dob = _parse_book_date(dob_str)
     if not dob:
         return None
-    today = datetime.now()
+    today = datetime.now(timezone.utc)
+    dob_aware = dob.replace(tzinfo=timezone.utc) if dob.tzinfo is None else dob
     # Rough age calculation (doesn't account for exact day yet).
-    age = today.year - dob.year
+    age = today.year - dob_aware.year
     # Adjust if birthday hasn't occurred this year.
-    if (today.month, today.day) < (dob.month, dob.day):
+    if (today.month, today.day) < (dob_aware.month, dob_aware.day):
         age -= 1
     return age if age >= 0 else None
 
@@ -594,6 +599,8 @@ def _primary_degree(inmate, offenses: dict | None = None) -> str:
 
 def _tier_max(inmate, offenses: dict | None = None) -> str:
     """Get the high-level tier (F or M) of the inmate's most serious charge."""
+    if isinstance(inmate, str):
+        return _TIER_MAX.get(inmate.strip().upper(), "UNK")
     tier = _primary_tier(inmate, offenses)
     if tier and tier.get("label"):
         deg = tier["label"]

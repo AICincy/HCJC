@@ -44,16 +44,13 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 API = "https://www.courtlistener.com/api/rest/v4/search/"
 
-# Strip a trailing alpha-numeric suffix so "2925.11A" and "2913.02A1" group
-# with their base section. This mirrors scraper/orc.py:normalize_code.
-_SUFFIX_RE = re.compile(r"[A-Z]\d*$")
+sys.path.append(str(ROOT))
+from scraper.orc import normalize_code
 
 
 def _normalize(code: str | None) -> str:
-    code = (code or "").strip().upper()
-    if not code or code in ("NONE", "OTHER"):
-        return ""
-    return _SUFFIX_RE.sub("", code)
+    return normalize_code(code or "")
+
 
 
 def top_codes(limit: int = 30) -> list[str]:

@@ -413,7 +413,7 @@ def _save_changelog_and_anon(
         category = None
         if first_charge:
             code = (first_charge.orc_code or "").strip()
-            ent = offenses.get(code) if isinstance(offenses, dict) else None
+            ent = offenses.get("offenses", {}).get(code) if isinstance(offenses, dict) else None
             if isinstance(ent, dict):
                 tier = ent.get("degree")
                 category = ent.get("title")
@@ -469,8 +469,27 @@ def run(
             e,
         )
         log.error("sweep %s aborted (corrupt snapshot)", sweep_id)
-        return 0
+        return 1
     log.info("loaded %d previously-known inmates", len(previous))
+
+    # Read expunged inmate IDs from data/takedowns.json
+    takedowns_path = Path("data/takedowns.json")
+    takedowns_set = set()
+    if takedowns_path.exists():
+        try:
+            t_data = json.loads(takedowns_path.read_text(encoding="utf-8"))
+            if isinstance(t_data, list):
+                takedowns_set = {str(x) for x in t_data}
+            elif isinstance(t_data, dict):
+                takedowns_set = {str(x) for x in t_data.keys()}
+        except (json.JSONDecodeError, OSError) as e:
+            log.warning("failed to load data/takedowns.json (non-fatal): %s", e)
+
+    if takedowns_set:
+        original_prev_len = len(previous)
+        previous = {iid: inm for iid, inm in previous.items() if iid not in takedowns_set}
+        if len(previous) < original_prev_len:
+            log.info("filtered out %d expunged inmates from previous database", original_prev_len - len(previous))
 
     current: dict[str, Inmate] = {}
     seen_ids: set[str] = set()
@@ -485,6 +504,11 @@ def run(
     try:
         with make_client() as client:
             rows, n_failed, status_counts, block_sample = _sweep_list(client, surnames)
+            if takedowns_set:
+                original_rows_len = len(rows)
+                rows = [r for r in rows if r.inmate_number not in takedowns_set]
+                if len(rows) < original_rows_len:
+                    log.info("filtered out %d expunged inmates from sweep list", original_rows_len - len(rows))
             seen_ids = {r.inmate_number for r in rows}
             log.info(
                 "list sweep returned %d unique inmate ids (%d/%d surname fetches failed)",
@@ -560,6 +584,7 @@ def run(
         clean_finish = True
     except KeyboardInterrupt:
         log.warning("interrupted; persisting %d partial inmates", len(current))
+        raise
     except Exception:
         # Anything else escaping the sweep body is unexpected: log and re-raise.
         # `roster_ok` stays True only if we already cleared the list-sweep
@@ -898,8 +923,19 @@ def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None) -> None:
     # Defense-in-depth: even though the model validator enforces digits-only,
     # assert the filename is safe to prevent path traversal if the validator
     # is ever relaxed.
-    if ".." in photo_path.name or "/" in photo_path.name:
+    if ".." in photo_path.name or "/" in photo_path.name or "\\" in photo_path.name:
         raise ValueError(f"unsafe photo filename: {photo_path.name!r}")
+
+    try:
+        resolved_photos_dir = PHOTOS_DIR.resolve()
+        resolved_photo_path = photo_path.resolve()
+    except Exception as e:
+        raise ValueError(f"could not resolve photo path: {e}")
+
+    try:
+        resolved_photo_path.relative_to(resolved_photos_dir)
+    except ValueError:
+        raise ValueError(f"unsafe photo path traversal: {photo_path} (resolved: {resolved_photo_path}) is outside PHOTOS_DIR ({resolved_photos_dir})")
     # Save fresh bytes if we got them AND they decoded; otherwise fall through
     # to the disk-cached photo from a prior successful sweep. Previously the
     # second branch was an `elif`, which meant a corrupt-bytes failure on one

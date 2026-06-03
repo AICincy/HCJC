@@ -83,7 +83,11 @@
   //      Uses DOM APIs (not innerHTML) to avoid CodeQL DOM-text-reinterpreted-as-HTML.
   var tip = document.getElementById('tier-tip');
   if (tip) {
-    function hideTip() { tip.hidden = true; tip.style.left = '-9999px'; }
+    var _activeBadge = null;
+    function hideTip() {
+      tip.hidden = true; tip.style.left = '-9999px';
+      if (_activeBadge) { _activeBadge.removeAttribute('aria-describedby'); _activeBadge = null; }
+    }
     function showTip(badge) {
       var raw = badge.getAttribute('data-tip') || '';
       if (!raw) { hideTip(); return; }
@@ -100,11 +104,13 @@
         tip.appendChild(row);
       }
       tip.hidden = false;
+      _activeBadge = badge;
       var r = badge.getBoundingClientRect();
       var tw = tip.offsetWidth, th = tip.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight, m = 6;
       var left = Math.min(r.right - tw, vw - tw - m); if (left < m) left = m;
       var top = r.bottom + m; if (top + th > vh - m) top = Math.max(m, r.top - th - m);
       tip.style.left = left + 'px'; tip.style.top = top + 'px';
+      badge.setAttribute('aria-describedby', 'tier-tip');
     }
     document.addEventListener('pointerover', function (e) {
       var b = e.target.closest && e.target.closest('[data-tip]');
@@ -218,7 +224,8 @@
       if (!cls) return;
       chapSelect.value = cls;
       chapSelect.dispatchEvent(new Event('change'));
-      bar.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      var scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      bar.scrollIntoView({ block: 'start', behavior: scrollBehavior });
     });
   }
 

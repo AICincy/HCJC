@@ -6,7 +6,7 @@ file; these lock in the string-munging contracts (date parsing, bond parsing,
 ordinals, initials, slugs) that templates depend on.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from web.classify import (
     _approx_age,
@@ -23,6 +23,7 @@ from web.classify import (
     _pct_ordinal,
     _rfc822,
     _short_month_label,
+    _tier_max,
 )
 
 
@@ -124,3 +125,17 @@ def test_approx_age_none_paths():
     assert _approx_age("") is None
     assert _approx_age("not a date") is None
     assert isinstance(_approx_age("5/14/90"), int)
+
+
+def test_tier_max_supports_string_input():
+    assert _tier_max("F1") == "F"
+    assert _tier_max("M2") == "M"
+    assert _tier_max("MM") == "M"
+    assert _tier_max("garbage") == "UNK"
+
+
+def test_display_date_timezone_aware():
+    # Pass timezone-aware UTC datetime and check it works
+    dt_aware = datetime(2026, 5, 14, tzinfo=timezone.utc)
+    assert _display_date(dt_aware) == "May 14, 2026"
+

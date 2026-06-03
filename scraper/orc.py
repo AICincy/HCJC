@@ -98,7 +98,8 @@ def load_offenses(path: Path = LOOKUP_PATH) -> dict[str, dict]:
 def normalize_code(code: str) -> str:
     if not code:
         return ""
-    m = _CODE_RE.search(code)
+    dotted = code.replace("-", ".")
+    m = _CODE_RE.search(dotted)
     return m.group(0) if m else ""
 
 

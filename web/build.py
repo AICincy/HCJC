@@ -198,6 +198,24 @@ def _load_inputs():
     else:
         events = []
 
+    takedowns_path = Path("data/takedowns.json")
+    takedowns = set()
+    if takedowns_path.exists():
+        try:
+            takedowns = set(json.loads(takedowns_path.read_text(encoding="utf-8")))
+        except Exception as e:
+            log.warning("Failed to load data/takedowns.json: %s", e)
+
+    if takedowns:
+        filtered_inmates = [i for i in snapshot.inmates if i.inmate_number not in takedowns]
+        snapshot = Snapshot(
+            schema_version=snapshot.schema_version,
+            generated_utc=snapshot.generated_utc,
+            inmate_count=len(filtered_inmates),
+            inmates=filtered_inmates,
+        )
+        events = [e for e in events if e.inmate_number not in takedowns]
+
     cfs_rows = cfs_mod.load_recent()
     cfs_pdi_rows = cfs_pdi_mod.load()
     shooting_rows = shootings_mod.load()

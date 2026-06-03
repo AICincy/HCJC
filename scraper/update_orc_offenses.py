@@ -18,20 +18,12 @@ OFFENSES_PATH = ROOT_DIR / "data" / "orc_offenses.json"
 CURRENT_PATH = ROOT_DIR / "data" / "current.json"
 HAMCO_DIR = ROOT_DIR / "HAMCO"
 
+from scraper.orc import normalize_code
+
 # Regex patterns
-_CODE_RE = re.compile(r"\d+\.\d+(?:\.\d+)?")
 _CODE_END_RE = re.compile(r"(\d+(?:[-.]\w+)*|PBR-?\d+|OVERTRAF)$", re.IGNORECASE)
 _DEGREE_RE = re.compile(r"\b(F[1-5]|M[1-4]|MM)\b\s*$", re.IGNORECASE)
 _DEGREE_CONCAT_RE = re.compile(r"(F[1-5]|M[1-4]|MM)$", re.IGNORECASE)
-
-
-def normalize_code(code: str) -> str:
-    """Normalize code to standardized ORC format (e.g. 2903.11)."""
-    if not code:
-        return ""
-    dotted = code.replace("-", ".")
-    m = _CODE_RE.search(dotted)
-    return m.group(0) if m else ""
 
 
 def extract_degree(desc: str) -> tuple[str, str]:

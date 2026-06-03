@@ -673,7 +673,13 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 .card-inmate > .tier.tier-corner::before {
   content: "";
   position: absolute;
-  inset: -4px;
+  /* WCAG 2.2 SC 2.5.8: expand hit area to 44×44 minimum target size. */
+  inset: -12px;
+}
+/* Keyboard focus ring on tier corner badges. */
+.card-inmate > .tier.tier-corner:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* Shared tier-tooltip */
@@ -2122,7 +2128,9 @@ h2.legal-anchor {
           --border: #ccc; --border-hi: #bbb; --fg: #111; --fg-soft: #333;
           --fg-muted: #555; --fg-dim: #777; --accent: #2a3f9f; }
   html, body { background: #fff; color: #111; }
+  /* Hide non-content interactive UI from print output. */
   .masthead, .month-nav, .back-to-top, .filter-bar, .legend, .lightbox,
+  footer.site { display: none !important; }
   .card-inmate { content-visibility: visible; }
   .page { max-width: 100%; padding: 0; }
   details[open] > summary::after, details > summary::after { display: none; }
@@ -2140,6 +2148,8 @@ h2.legal-anchor {
   .bio { grid-template-columns: 1fr 1fr; }
   .bio-field:nth-child(-n/**/+3) { border-top: 1px solid var(--border); }
   .bio-field:nth-child(-n/**/+2) { border-top: none; }
+  /* Force background colors in print (tier badges, charts). */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
 /* ===== Mobile ===== */

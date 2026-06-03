@@ -579,3 +579,93 @@ def test_judge_link_resolution():
     # Verify cached loading from real files
     assert build._judge_link("Hon. Alison Hatheway") == "#judge-alison-hatheway"
 
+
+def test_roster_indexes_indexes_secondary_charges():
+    from web.shape import RosterIndexes
+    # john has multiple charges
+    inm = Inmate(
+        inmate_number="12345",
+        booking_number="26000001",
+        last_name="SMITH",
+        first_name="JOHN",
+        charges=[
+            Charge(orc_code="2903.11", description="ASSAULT F2", bond_amount="$10,000"),
+            Charge(orc_code="2925.11", description="DRUGS M1", bond_amount="$5,000"),
+        ]
+    )
+    # Build indexes
+    idx = RosterIndexes([inm])
+    # Both charge codes should index this inmate
+    assert "2903.11" in idx.by_code
+    assert inm in idx.by_code["2903.11"]
+    assert "2925.11" in idx.by_code
+    assert inm in idx.by_code["2925.11"]
+    # Only one bond (the first one) should be in bonds_by_code
+    assert "2903.11" in idx.bonds_by_code
+    assert 10000 in idx.bonds_by_code["2903.11"]
+    assert "2925.11" not in idx.bonds_by_code
+
+
+def test_takedowns_filtering(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    
+    # Create current.json
+    (tmp_path / "data").mkdir()
+    current_data = {
+        "schema_version": 1,
+        "generated_utc": "2026-05-14T17:16:37Z",
+        "inmate_count": 2,
+        "inmates": [
+            {
+                "inmate_number": "11111",
+                "booking_number": "26000001",
+                "last_name": "KEEP",
+                "first_name": "ME",
+            },
+            {
+                "inmate_number": "22222",
+                "booking_number": "26000002",
+                "last_name": "REMOVE",
+                "first_name": "ME",
+            }
+        ]
+    }
+    (tmp_path / "data" / "current.json").write_text(json.dumps(current_data), encoding="utf-8")
+    
+    # Create changelog.json
+    changelog_data = [
+        {
+            "event": "booked",
+            "inmate_number": "11111",
+            "name": "KEEP ME",
+            "timestamp_utc": "2026-05-14T17:16:37Z"
+        },
+        {
+            "event": "booked",
+            "inmate_number": "22222",
+            "name": "REMOVE ME",
+            "timestamp_utc": "2026-05-14T17:16:37Z"
+        }
+    ]
+    (tmp_path / "data" / "changelog.json").write_text(json.dumps(changelog_data), encoding="utf-8")
+    
+    # Create takedowns.json
+    (tmp_path / "data" / "takedowns.json").write_text(json.dumps(["22222"]), encoding="utf-8")
+    
+    # Run _load_inputs (mocking CFS modules to avoid real network/FS queries)
+    monkeypatch.setattr(build.cfs_mod, "load_recent", lambda: [])
+    monkeypatch.setattr(build.cfs_pdi_mod, "load", lambda: [])
+    monkeypatch.setattr(build.shootings_mod, "load", lambda: [])
+    
+    snap, evs, _, _, _, _ = build._load_inputs()
+    
+    # Inmate "22222" must be filtered
+    assert snap.inmate_count == 1
+    assert len(snap.inmates) == 1
+    assert snap.inmates[0].inmate_number == "11111"
+    
+    # Changelog event for "22222" must be filtered
+    assert len(evs) == 1
+    assert evs[0].inmate_number == "11111"
+
+
