@@ -172,7 +172,15 @@
     <li>
       <span class="crowdsource-case">Case # {{ entry.case_number }}</span>
       {% if entry.next_hearing %} &middot; next hearing <strong>{{ entry.next_hearing }}</strong>{% endif %}
-      {% if entry.judge %} &middot; before <strong>{{ entry.judge }}</strong>{% endif %}
+      {% if entry.judge %}
+        &middot; before
+        {% set j_link = judge_link(entry.judge) %}
+        {% if j_link %}
+          <strong><a href="{{ base_url }}/courts/{{ j_link }}">{{ entry.judge }}</a></strong>
+        {% else %}
+          <strong>{{ entry.judge }}</strong>
+        {% endif %}
+      {% endif %}
       {% if entry.disposition %} &middot; <em>{{ entry.disposition }}</em>{% endif %}
       <span class="crowdsource-attrib muted">submitted by <a href="{{ entry.issue_url }}" target="_blank" rel="noopener">@{{ entry.submitter }}</a> on {{ entry.submitted[:10] }}</span>
     </li>

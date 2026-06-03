@@ -106,6 +106,76 @@ def _clean_event_note(note: str | None) -> str:
     return s
 
 
+_ALL_JUDGES_CACHE: list[dict] | None = None
+
+
+def _judge_link(judge_name: str | None, all_judges: list[dict] | None = None) -> str | None:
+    if not judge_name:
+        return None
+
+    import re
+    cleaned = judge_name.lower().strip()
+    cleaned = re.sub(r"^(hon\.?|honorable|judge|presiding|chief magistrate|magistrate)\s+", "", cleaned)
+    cleaned = re.sub(r"[.,]", " ", cleaned)
+    cleaned = " ".join(cleaned.split())
+    if not cleaned:
+        return None
+
+    # Hardcoded/special entries
+    if "powers" in cleaned:
+        return "#juvenile"
+
+    global _ALL_JUDGES_CACHE
+    if all_judges is None:
+        if _ALL_JUDGES_CACHE is None:
+            from web.pages import _parse_judges
+            common_pleas, municipal = _parse_judges()
+            _ALL_JUDGES_CACHE = common_pleas + municipal
+        all_judges = _ALL_JUDGES_CACHE
+
+    # Winkler check first because of collision between CP and Probate
+    if "winkler" in cleaned:
+        if "ralph" in cleaned:
+            return "#probate"
+        if "robert" in cleaned or "rob" in cleaned or " c " in f" {cleaned} ":
+            return "#judge-robert-c-winkler"
+        # Ambiguous Winkler
+        return "#common-pleas"
+
+    # Dinkelacker collision
+    if "dinkelacker" in cleaned:
+        if "leah" in cleaned or " l " in f" {cleaned} ":
+            return "#judge-leah-dinkelacker"
+        if "patrick" in cleaned or "pat" in cleaned or " p " in f" {cleaned} ":
+            return "#judge-patrick-t-dinkelacker"
+        # Ambiguous Dinkelacker
+        return "#common-pleas"
+
+    # Mallory collision
+    if "mallory" in cleaned:
+        if "william" in cleaned or "bill" in cleaned or " w " in f" {cleaned} ":
+            return "#judge-william-mallory"
+        if "dwane" in cleaned or " d " in f" {cleaned} ":
+            return "#judge-dwane-mallory"
+        # Ambiguous Mallory
+        return "#municipal"
+
+    # Try full match first
+    for judge in all_judges:
+        j_name_clean = re.sub(r"[.,]", " ", judge["name"].lower())
+        j_name_clean = " ".join(j_name_clean.split())
+        if j_name_clean == cleaned:
+            return f"#judge-{judge['slug']}"
+
+    # Try matching last name
+    for judge in all_judges:
+        last_name_lower = judge["last_name"].lower()
+        if last_name_lower in cleaned:
+            return f"#judge-{judge['slug']}"
+
+    return None
+
+
 def _load_inputs():
     """Load the snapshot + changelog + dispatch feeds. Dedupe the two CFS
     feeds on event_number (qiik-bpks often lags past its pull window and comes
@@ -263,6 +333,8 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     env.globals["related_inmates"] = lambda inm: _related_inmates(inm, snapshot.inmates, indexes=idx)
     env.globals["all_inmates_total"] = snapshot.inmate_count
 
+    env.globals["judge_link"] = _judge_link
+
 
 def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
     """Compute the month grouping, month-nav data, recent-event counts and
@@ -295,6 +367,9 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
 
 
 def build(out_dir: Path) -> int:
+    from scraper.update_orc_offenses import update_orc_offenses
+    update_orc_offenses()
+
     snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points = _load_inputs()
     offenses = orc_mod.load_offenses()
     base_url = _resolve_base_url()

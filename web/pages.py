@@ -512,6 +512,10 @@ def _parse_judges() -> tuple[list[dict], list[dict]]:
         name_parts = clean_name.split()
         last_name = name_parts[-1] if name_parts else clean_name
 
+        slug = clean_name.lower()
+        slug = re.sub(r'[^a-z0-9]+', '-', slug)
+        slug = slug.strip('-')
+
         judge_dict = {
             "name": clean_name,
             "title": title,
@@ -522,6 +526,7 @@ def _parse_judges() -> tuple[list[dict], list[dict]]:
             "bio": bio,
             "procedures": procedures,
             "last_name": last_name,
+            "slug": slug,
             "filename": path.name,
         }
 

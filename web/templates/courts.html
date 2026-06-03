@@ -23,7 +23,7 @@
   Scammers actively impersonate Hamilton County Sheriff's Office, Electronic Monitoring Unit, and Clerk of Courts personnel, calling families of incarcerated individuals and demanding fees for "release via electronic GPS ankle monitor." They use spoofed numbers and publicly available arrest records, and request payment via Zelle, Venmo, or Cash App. Hamilton County <strong>will never require payment</strong> for electronic monitoring before release from the Justice Center. Verify directly with the Electronic Monitoring Unit at <strong>513-946-9800</strong>.
 </div>
 
-<h2 class="sect-h">Court of Common Pleas, General Division</h2>
+<h2 id="common-pleas" class="sect-h">Court of Common Pleas, General Division</h2>
 <p>
   The trial court of general jurisdiction. Hears felony criminal cases and civil cases in which the amount in controversy is more than $15,000, including matters involving title to real estate (e.g. foreclosures). 16 judges; cases are assigned to a single judge by lot at filing and stay with that judge through termination.
 </p>
@@ -44,7 +44,7 @@
   <div class="v">
     <div class="judge-directory" style="display: grid; gap: 8px; margin-top: 4px;">
       {% for judge in common_pleas %}
-        <details class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+        <details id="judge-{{ judge.slug }}" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
           <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
             <span>Hon. {{ judge.name }}</span>
             <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">{{ judge.room }}</span>
@@ -97,7 +97,7 @@
   <p style="margin: 0;"><em>Fairness includes the opportunity to be heard, the chance to have the court process explained, and the right to be treated with respect.</em></p>
 </blockquote>
 
-<h2 class="sect-h">Hamilton County Municipal Court</h2>
+<h2 id="municipal" class="sect-h">Hamilton County Municipal Court</h2>
 <p>
   Handles misdemeanor criminal cases, traffic offenses, and civil cases in which the amount in controversy is less than $15,000, including small claims and landlord-tenant matters. Also conducts preliminary hearings for felony cases before they transfer to Common Pleas, and oversees probation for misdemeanor offenders. The court operates several specialty divisions (housing, environmental, drug court, mental health court) and a Driver's License Intervention Program.
 </p>
@@ -110,7 +110,7 @@
   <div class="v">
     <div class="judge-directory" style="display: grid; gap: 8px; margin-top: 4px;">
       {% for judge in municipal %}
-        <details class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+        <details id="judge-{{ judge.slug }}" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
           <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
             <span>Hon. {{ judge.name }}</span>
             <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">{{ judge.room }}</span>
@@ -172,7 +172,7 @@
   <div class="v">Room 3-46. All motions must first be set for hearing here before filing with the Clerk of Courts.</div>
 </div>
 
-<h2 class="sect-h">Hamilton County Probate Court (Common Pleas, Probate Division)</h2>
+<h2 id="probate" class="sect-h">Hamilton County Probate Court (Common Pleas, Probate Division)</h2>
 <p>
   Mirrored from <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>. Provides over 80 unique services. The most common: administering estates from generation to generation, providing guardianship for residents who cannot care for themselves, growing families through marriage and adoptions, and presiding over mental-health civil-commitment cases.
 </p>
@@ -193,7 +193,7 @@
   <div class="v">Provided free of charge to facilitate participation in Court proceedings or services.</div>
 </div>
 
-<h2 class="sect-h">Hamilton County Juvenile Court (Common Pleas, Juvenile Division)</h2>
+<h2 id="juvenile" class="sect-h">Hamilton County Juvenile Court (Common Pleas, Juvenile Division)</h2>
 <p>
   Handles cases involving people under 18 (delinquency), plus custody disputes between parents or with a non-parent. The Clerk of Courts Help Center has a satellite office for custody issues inside Juvenile Court, on the first floor.
 </p>

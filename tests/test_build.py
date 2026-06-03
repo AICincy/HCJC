@@ -328,7 +328,7 @@ def test_bond_by_tier_zero_for_empty_amounts():
 
 
 def test_days_in_custody_positive_for_past_booking():
-    d = datetime.now() - timedelta(days=3)
+    d = datetime.now(timezone.utc) - timedelta(days=3)
     three_days_ago = f"{d.month}/{d.day}/{d.year % 100:02d}"
     days = build._days_in_custody(_inm(booking_date=three_days_ago))
     assert days == 3
@@ -522,3 +522,60 @@ def test_display_date_suppresses_sentinel_and_empty():
     assert build._display_date("") == ""
     assert build._display_date(None) == ""
     assert build._display_date("not a date") == ""
+
+
+# ----- _judge_link ----------------------------------------------------------
+
+
+def test_judge_link_resolution():
+    mock_judges = [
+        {"name": "Alison Hatheway", "last_name": "Hatheway", "slug": "alison-hatheway"},
+        {"name": "Alan C. Triggs", "last_name": "Triggs", "slug": "alan-c-triggs"},
+        {"name": "Robert C. Winkler", "last_name": "Winkler", "slug": "robert-c-winkler"},
+        {"name": "Leah Dinkelacker", "last_name": "Dinkelacker", "slug": "leah-dinkelacker"},
+        {"name": "Patrick T. Dinkelacker", "last_name": "Dinkelacker", "slug": "patrick-t-dinkelacker"},
+        {"name": "William Mallory", "last_name": "Mallory", "slug": "william-mallory"},
+        {"name": "Dwane Mallory", "last_name": "Mallory", "slug": "dwane-mallory"},
+    ]
+
+    # Full matches
+    assert build._judge_link("Hon. Alison Hatheway", mock_judges) == "#judge-alison-hatheway"
+    assert build._judge_link("Judge Alan C. Triggs", mock_judges) == "#judge-alan-c-triggs"
+
+    # Cleaning & prefixes
+    assert build._judge_link("  Chief Magistrate   Alan C. Triggs  ", mock_judges) == "#judge-alan-c-triggs"
+    assert build._judge_link("Magistrate Alan C. Triggs", mock_judges) == "#judge-alan-c-triggs"
+    assert build._judge_link("Presiding Alan C. Triggs", mock_judges) == "#judge-alan-c-triggs"
+
+    # Winkler check first because of collision between CP and Probate
+    assert build._judge_link("Ralph Winkler", mock_judges) == "#probate"
+    assert build._judge_link("Robert C. Winkler", mock_judges) == "#judge-robert-c-winkler"
+    assert build._judge_link("Robert Winkler", mock_judges) == "#judge-robert-c-winkler"
+    assert build._judge_link("Rob Winkler", mock_judges) == "#judge-robert-c-winkler"
+    assert build._judge_link("Winkler", mock_judges) == "#common-pleas"
+
+    # Dinkelacker collision
+    assert build._judge_link("Leah Dinkelacker", mock_judges) == "#judge-leah-dinkelacker"
+    assert build._judge_link("Patrick T. Dinkelacker", mock_judges) == "#judge-patrick-t-dinkelacker"
+    assert build._judge_link("Pat Dinkelacker", mock_judges) == "#judge-patrick-t-dinkelacker"
+    assert build._judge_link("Dinkelacker", mock_judges) == "#common-pleas"
+
+    # Mallory collision
+    assert build._judge_link("William Mallory", mock_judges) == "#judge-william-mallory"
+    assert build._judge_link("Bill Mallory", mock_judges) == "#judge-william-mallory"
+    assert build._judge_link("Dwane Mallory", mock_judges) == "#judge-dwane-mallory"
+    assert build._judge_link("Mallory", mock_judges) == "#municipal"
+
+    # Hardcoded/special entries
+    assert build._judge_link("Melissa Powers", mock_judges) == "#juvenile"
+    assert build._judge_link("Powers", mock_judges) == "#juvenile"
+
+    # Empty and invalid cases
+    assert build._judge_link("Non-existent Judge", mock_judges) is None
+    assert build._judge_link("", mock_judges) is None
+    assert build._judge_link(None, mock_judges) is None
+    assert build._judge_link("  ", mock_judges) is None
+
+    # Verify cached loading from real files
+    assert build._judge_link("Hon. Alison Hatheway") == "#judge-alison-hatheway"
+

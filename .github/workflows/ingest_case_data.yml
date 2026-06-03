@@ -40,6 +40,15 @@ jobs:
           git add data/courtclerk_cases.json
           if ! git diff --cached --quiet; then
             git commit -m "case-data: ingest issue #${{ github.event.issue.number }}"
+            git fetch origin main
+            git rebase origin/main || {
+              echo "::warning::Rebase conflict detected; attempting merge"
+              git rebase --abort
+              git merge -X ours origin/main --no-edit || {
+                echo "::error::Both rebase and merge failed"
+                exit 1
+              }
+            }
             git push
           else
             echo "no changes"

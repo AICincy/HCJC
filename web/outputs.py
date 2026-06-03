@@ -101,7 +101,8 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
     don't-amplify posture explicit at the protocol level and give crawlers /
     researchers a clear, no-fee contact point. RSS readers ignore robots.txt,
     so the feeds stay usable for people."""
-    issues = "https://github.com/AICincy/JCStream/issues"
+    repo = os.environ.get("GITHUB_REPOSITORY", "AICincy/JCStream")
+    issues = f"https://github.com/{repo}/issues"
     (out_dir / "robots.txt").write_text(
         "# JCStream mirrors public records and asks search engines not to index it\n"
         '# (every page also carries <meta name="robots" content="noindex">).\n'
