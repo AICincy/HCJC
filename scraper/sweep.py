@@ -930,12 +930,12 @@ def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None) -> None:
         resolved_photos_dir = PHOTOS_DIR.resolve()
         resolved_photo_path = photo_path.resolve()
     except Exception as e:
-        raise ValueError(f"could not resolve photo path: {e}")
+        raise ValueError(f"could not resolve photo path: {e}") from e
 
     try:
         resolved_photo_path.relative_to(resolved_photos_dir)
-    except ValueError:
-        raise ValueError(f"unsafe photo path traversal: {photo_path} (resolved: {resolved_photo_path}) is outside PHOTOS_DIR ({resolved_photos_dir})")
+    except ValueError as e:
+        raise ValueError(f"unsafe photo path traversal: {photo_path} (resolved: {resolved_photo_path}) is outside PHOTOS_DIR ({resolved_photos_dir})") from e
     # Save fresh bytes if we got them AND they decoded; otherwise fall through
     # to the disk-cached photo from a prior successful sweep. Previously the
     # second branch was an `elif`, which meant a corrupt-bytes failure on one
