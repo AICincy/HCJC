@@ -12,7 +12,7 @@
   if (!el) return;
   var ROOT = document.documentElement.dataset.baseUrl || '';
   var SRC = el.getAttribute('data-src') || 'dispatches.json';
-  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});}
+  function esc(s){return String(s).replace(/[&<>"\']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
   function fail(msg){ el.classList.add('cfs-map-failed'); el.innerHTML = '<p class="muted" style="padding:1rem">' + (msg||'Map unavailable.') + ' The same calls are listed in the sections below this map &mdash; scroll down to see &ldquo;Recent CFS&rdquo; and &ldquo;Recent reported shootings&rdquo;.</p>'; }
   function withLeaflet(cb){
     if (window.L) return cb();
