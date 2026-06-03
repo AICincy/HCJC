@@ -27,10 +27,10 @@ permissions:
   issues: write
 
 concurrency:
-  # Never run two sweeps simultaneously; cancel-in-progress: true means a
-  # newer run replaces an older in-progress run.
+  # Never run two sweeps simultaneously; cancel-in-progress: false queues
+  # the newer run so they don't collide on the GitHub Pages deployment API.
   group: jcstream-sweep
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   sweep:
