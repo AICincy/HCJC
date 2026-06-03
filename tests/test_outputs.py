@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
+
 from web.outputs import _write_well_known
+
 
 def test_write_well_known_defaults(tmp_path: Path):
     # Ensure environment is clean of GITHUB_REPOSITORY
