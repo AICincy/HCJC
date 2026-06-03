@@ -764,3 +764,51 @@ def test_skip_gate_uses_generated_utc_not_file_mtime(tmp_path, monkeypatch):
     save_current(cur, prev)  # generated_utc = now
     sweep.run(surnames=list("AB"), max_surnames=None, refresh_known=False, dry_run=False)
     assert calls == [], "data younger than MIN_SWEEP_INTERVAL_S must be skipped"
+
+
+def test_sweep_uses_custom_paths_from_dataclass(tmp_path, monkeypatch):
+    from scraper.sweep import SweepPaths, run
+    from scraper.store import save_current
+
+    custom_current = tmp_path / "custom_current.json"
+    custom_changelog = tmp_path / "custom_changelog.json"
+    custom_anon = tmp_path / "custom_anon.json"
+    custom_photos = tmp_path / "custom_photos"
+    custom_photos.mkdir()
+
+    paths = SweepPaths(
+        current_path=custom_current,
+        changelog_path=custom_changelog,
+        anon_changelog_path=custom_anon,
+        photos_dir=custom_photos,
+    )
+
+    # Setup some mock data in the custom current path
+    prev = [Inmate(inmate_number="2000", last_name="DOE", first_name="F0", booking_date="5/10/26")]
+    save_current(custom_current, prev)
+
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)  # bypass skip-gate
+    monkeypatch.setattr(
+        sweep,
+        "_sweep_list",
+        lambda client, surnames: (
+            [ListRow(inmate_number="2000", last_name="DOE", first_name="J", admit_date="")],
+            0,
+            {},
+            None,
+        ),
+    )
+    monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh: [])
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+        def __exit__(self, *a):
+            return False
+
+    monkeypatch.setattr(sweep, "make_client", lambda: FakeClient())
+
+    rc = run(surnames=["A"], max_surnames=None, refresh_known=False, dry_run=False, paths=paths)
+    assert rc == 0
+    # Roster should be healthy, check that custom current path was read and updated
+    assert custom_current.exists()

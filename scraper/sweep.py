@@ -74,6 +74,17 @@ CHANGELOG_PATH = Path("data/changelog.json")
 # event type, date (day), tier, and primary charge category survive.
 ANON_CHANGELOG_PATH = Path("data/anon_changelog.json")
 
+
+@dataclass(frozen=True)
+class SweepPaths:
+    photos_dir: Path = field(default_factory=lambda: PHOTOS_DIR)
+    current_path: Path = field(default_factory=lambda: CURRENT_PATH)
+    changelog_path: Path = field(default_factory=lambda: CHANGELOG_PATH)
+    anon_changelog_path: Path = field(default_factory=lambda: ANON_CHANGELOG_PATH)
+    takedowns_path: Path = field(default_factory=lambda: Path("data/takedowns.json"))
+    orc_offenses_path: Path = field(default_factory=lambda: Path("data/orc_offenses.json"))
+    waf_block_log_path: Path = field(default_factory=lambda: WAF_BLOCK_LOG_PATH)
+
 # sweep-F6: orchestrator-side wall-clock cap. The detail-fetch loop bails
 # when this many seconds have elapsed since make_client(); the finally
 # block then writes the partial roster (clean_finish=True). The GitHub
@@ -115,11 +126,13 @@ class _BlockObservation:
     block_sample: dict | None = None
 
 
-def _record_block_evidence(obs: _BlockObservation) -> None:
+def _record_block_evidence(obs: _BlockObservation, paths: SweepPaths | None = None) -> None:
     """Append a 'blocked' record to the durable WAF-block evidence log when the
     degraded-roster guard fires. Do-not-evade posture: we document the denial
     rather than route around it."""
-    stale_h = roster_stale_hours(_prev_generated_utc(CURRENT_PATH))
+    if paths is None:
+        paths = SweepPaths()
+    stale_h = roster_stale_hours(_prev_generated_utc(paths.current_path))
     append_block_evidence(
         {
             "timestamp_utc": utcnow_iso(),
@@ -134,14 +147,16 @@ def _record_block_evidence(obs: _BlockObservation) -> None:
             "roster_stale_hours": round(stale_h, 1) if stale_h is not None else None,
             "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
         },
-        WAF_BLOCK_LOG_PATH,
+        paths.waf_block_log_path,
     )
 
 
-def _record_recovery_if_blocked(seen_count: int) -> None:
+def _record_recovery_if_blocked(seen_count: int, waf_block_log_path: Path | None = None) -> None:
     """If the last evidence entry was 'blocked', append a single 'recovered'
     record so each denial period has a clean end-timestamp. No-op otherwise."""
-    entries = load_block_log(WAF_BLOCK_LOG_PATH)
+    if waf_block_log_path is None:
+        waf_block_log_path = WAF_BLOCK_LOG_PATH
+    entries = load_block_log(waf_block_log_path)
     if entries and entries[-1].get("event") == "blocked":
         append_block_evidence(
             {
@@ -150,7 +165,7 @@ def _record_recovery_if_blocked(seen_count: int) -> None:
                 "seen_count": seen_count,
                 "note": "HCSO list sweep succeeded; automated access restored.",
             },
-            WAF_BLOCK_LOG_PATH,
+            waf_block_log_path,
         )
 
 
@@ -254,10 +269,11 @@ def _maybe_checkpoint_partial(
     current: dict[str, Inmate],
     done: int,
     total: int,
+    current_path: Path,
 ) -> None:
     """Persist an in-progress roster checkpoint when it clears safety guards."""
     if len(previous) < SWEEP_BOOTSTRAP_FLOOR or len(current) >= SWEEP_MIN_ROSTER_FRACTION * len(previous):
-        save_current(CURRENT_PATH, current.values())
+        save_current(current_path, current.values())
         log.info("checkpoint: %d/%d details fetched, %d inmates", done, total, len(current))
     else:
         log.info(
@@ -279,6 +295,8 @@ def _fetch_details(
     row_by_id: dict[str, ListRow],
     dry_run: bool,
     waf_tracker: WafBackoffTracker,
+    current_path: Path,
+    photos_dir: Path,
 ) -> tuple[int, int, int]:
     """Run the detail-page worker pool and merge successful or fallback rows."""
     done = 0
@@ -289,7 +307,15 @@ def _fetch_details(
     sweep_started = time.monotonic()
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
         futures = {
-            pool.submit(_fetch_one, client, iid, previous, row_by_id.get(iid), waf_tracker=waf_tracker): iid
+            pool.submit(
+                _fetch_one,
+                client,
+                iid,
+                previous,
+                row_by_id.get(iid),
+                waf_tracker=waf_tracker,
+                photos_dir=photos_dir,
+            ): iid
             for iid in to_fetch
         }
         for fut in as_completed(futures):
@@ -340,7 +366,7 @@ def _fetch_details(
                 # a huge to_fetch list now keeps the previous-good
                 # snapshot until the next ~20-45 minute retry, rather
                 # than persisting a degraded baseline.
-                _maybe_checkpoint_partial(previous, current, done, len(to_fetch))
+                _maybe_checkpoint_partial(previous, current, done, len(to_fetch), current_path)
     elapsed_s = round(time.monotonic() - t0, 2)
     log.info(
         "detail phase: %d attempts, %d named, %d with photo in %.1fs",
@@ -355,6 +381,7 @@ def _fetch_details(
 def _save_changelog_and_anon(
     previous: dict[str, Inmate],
     current: dict[str, Inmate],
+    paths: SweepPaths,
 ) -> None:
     """Append diff events and refresh the anonymized rolling feed."""
     events = diff(previous, current)
@@ -367,15 +394,15 @@ def _save_changelog_and_anon(
         sum(1 for e in events if e.event == "released"),
         sum(1 for e in events if e.event == "updated"),
     )
-    changelog = load_changelog(CHANGELOG_PATH)
+    changelog = load_changelog(paths.changelog_path)
     changelog.extend(events)
-    save_changelog(CHANGELOG_PATH, changelog)
+    save_changelog(paths.changelog_path, changelog)
     # Phase 11: maintain the PII-expiring append-only feed.
     # Build enrichment so anonymized rows still carry tier +
     # category aggregate signal (which is what makes the
     # long-term feed useful at all).
     enrichment: dict[str, dict] = {}
-    offenses_path = Path("data/orc_offenses.json")
+    offenses_path = paths.orc_offenses_path
     offenses: dict = {}
     if offenses_path.exists():
         try:
@@ -396,7 +423,7 @@ def _save_changelog_and_anon(
             "tier": tier,
             "category": category,
         }
-    save_anon_changelog(ANON_CHANGELOG_PATH, changelog, enrichment)
+    save_anon_changelog(paths.anon_changelog_path, changelog, enrichment)
 
 
 def run(
@@ -405,7 +432,10 @@ def run(
     max_surnames: int | None,
     refresh_known: bool,
     dry_run: bool,
+    paths: SweepPaths | None = None,
 ) -> int:
+    if paths is None:
+        paths = SweepPaths()
     if max_surnames is not None:
         surnames = surnames[:max_surnames]
     sweep_id = uuid.uuid4().hex[:12]
@@ -423,7 +453,7 @@ def run(
     # rewrites every file each run, so st_mtime is always "just now" on CI and an
     # mtime-based gate skipped the scrape every cycle (the 2026-05-19 roster
     # freeze). generated_utc is file content, so it survives the checkout.
-    stale_h = roster_stale_hours(_prev_generated_utc(CURRENT_PATH))
+    stale_h = roster_stale_hours(_prev_generated_utc(paths.current_path))
     if stale_h is not None and stale_h * 3600 < MIN_SWEEP_INTERVAL_S:
         log.info(
             "current.json data is %.0fs old (< %ds); skipping this cycle",
@@ -433,7 +463,7 @@ def run(
         return 0
 
     try:
-        previous = load_current_or_raise(CURRENT_PATH)
+        previous = load_current_or_raise(paths.current_path)
     except SnapshotCorruptError as e:
         # Refuse the cycle: a missing-file bootstrap is fine, but a corrupted
         # current.json composed with the SWEEP_BOOTSTRAP_FLOOR semantics would
@@ -448,7 +478,7 @@ def run(
     log.info("loaded %d previously-known inmates", len(previous))
 
     # Read expunged inmate IDs from data/takedowns.json
-    takedowns_path = Path("data/takedowns.json")
+    takedowns_path = paths.takedowns_path
     takedowns_set = set()
     if takedowns_path.exists():
         try:
@@ -518,7 +548,8 @@ def run(
                         n_failed=n_failed,
                         status_counts=status_counts,
                         block_sample=block_sample,
-                    )
+                    ),
+                    paths,
                 )
                 _record_egress_evidence()
                 log.error("sweep %s blocked (degraded list guard)", sweep_id)
@@ -528,7 +559,7 @@ def run(
 
             # Healthy sweep: if we were previously blocked, close the denial
             # period with a 'recovered' evidence record.
-            _record_recovery_if_blocked(len(seen_ids))
+            _record_recovery_if_blocked(len(seen_ids), paths.waf_block_log_path)
 
             # Decide which detail pages to fetch.
             to_fetch = _plan_detail_fetch(seen_ids, previous, refresh_known)
@@ -550,6 +581,8 @@ def run(
                 row_by_id=row_by_id,
                 dry_run=dry_run,
                 waf_tracker=waf_tracker,
+                current_path=paths.current_path,
+                photos_dir=paths.photos_dir,
             )
             watchdog_ok = check_detail_watchdog(n_detail_attempts, n_detail_named, n_detail_with_photo)
             # Watchdog already logs WARN to stdout via check_detail_watchdog;
@@ -576,7 +609,7 @@ def run(
         save_ok = False
         if not dry_run and roster_ok:
             try:
-                save_current(CURRENT_PATH, current.values())
+                save_current(paths.current_path, current.values())
                 save_ok = True
             except OSError as e:
                 # Disk full, permission denied, atomic-rename failure. The
@@ -585,7 +618,7 @@ def run(
                 log.error("save_current failed (%s); skipping changelog and prune", e)
 
             if save_ok and clean_finish:
-                _save_changelog_and_anon(previous, current)
+                _save_changelog_and_anon(previous, current, paths)
             elif save_ok:
                 # Interrupted (or otherwise short-circuited) sweep: do not diff.
                 # `current` is a partial subset of `previous`, so every unreached
@@ -597,7 +630,7 @@ def run(
             # persisted snapshot; pruning then could delete photos for ids
             # that were never written and that the next cycle still needs.
             if save_ok and seen_ids:
-                prune_photos(PHOTOS_DIR, seen_ids)
+                prune_photos(paths.photos_dir, seen_ids)
 
     if dry_run:
         log.info("dry-run; not writing")
@@ -751,6 +784,7 @@ def _fetch_one(
     list_row: ListRow | None = None,
     *,
     waf_tracker: WafBackoffTracker,
+    photos_dir: Path | None = None,
 ) -> tuple[Inmate | None, bool, bool]:
     """Fetch and parse one detail page.
 
@@ -763,6 +797,8 @@ def _fetch_one(
     across the worker pool, so a caller that omitted it would silently get a
     throwaway tracker and disable cross-call backoff.
     """
+    if photos_dir is None:
+        photos_dir = PHOTOS_DIR
     inm, photo_bytes, photo_url = _fetch_detail_with_retry(client, inmate_id, previous, waf_tracker)
     if inm is None:
         return None, False, False
@@ -771,7 +807,7 @@ def _fetch_one(
 
     photo_bytes = _fetch_photo_bytes_from_url(client, inmate_id, photo_url, photo_bytes)
     _apply_list_row_fallback(inm, list_row)
-    _attach_photo_filename(inm, photo_bytes)
+    _attach_photo_filename(inm, photo_bytes, photos_dir)
     _set_seen_timestamps(inm, inmate_id, previous)
     return inm, detail_named, detail_had_photo
 
@@ -873,8 +909,8 @@ def _apply_list_row_fallback(inm: Inmate, list_row: ListRow | None) -> None:
         inm.booking_date = list_row.admit_date
 
 
-def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None) -> None:
-    photo_path = PHOTOS_DIR / f"{inm.inmate_number}.jpg"
+def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None, photos_dir: Path) -> None:
+    photo_path = photos_dir / f"{inm.inmate_number}.jpg"
     # Defense-in-depth: even though the model validator enforces digits-only,
     # assert the filename is safe to prevent path traversal if the validator
     # is ever relaxed.
@@ -882,7 +918,7 @@ def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None) -> None:
         raise ValueError(f"unsafe photo filename: {photo_path.name!r}")
 
     try:
-        resolved_photos_dir = PHOTOS_DIR.resolve()
+        resolved_photos_dir = photos_dir.resolve()
         resolved_photo_path = photo_path.resolve()
     except Exception as e:
         raise ValueError(f"could not resolve photo path: {e}") from e

@@ -155,6 +155,12 @@ def _load_inputs():
 
 
 
+def _rss_guid(event: ChangeEvent) -> str:
+    """Stable hash-based RSS GUID for a ChangeEvent."""
+    content = f"{event.event}|{event.inmate_number}|{event.timestamp_utc}"
+    return hashlib.sha1(content.encode("utf-8")).hexdigest()
+
+
 def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, site_url: str) -> Environment:
     """Construct the Jinja Environment and register every template global and
     filter. The registered names ARE the template contract: a helper added in
@@ -172,6 +178,7 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, sit
     env.filters["dt_fmt"] = _strftime_nopad
     env.filters["clean_note"] = _clean_event_note
     env.filters["case_fmt"] = _clean_case_number
+    env.filters["rss_guid"] = _rss_guid
     env.globals["cck_name_search"] = cck.name_search_url
     env.globals["cck_case_summary"] = cck.case_summary_url
     env.globals["base_url"] = base_url

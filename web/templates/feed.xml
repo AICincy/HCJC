@@ -14,7 +14,7 @@
     <item>
       <title>{{ e.event }} · {{ e.name }}</title>
       <link>{{ site_url }}/inmate/{{ e.inmate_number }}/</link>
-      <guid isPermaLink="false">{{ e.event }}-{{ e.inmate_number }}-{{ e.timestamp_utc }}</guid>
+      <guid isPermaLink="false">{{ e | rss_guid }}</guid>
       <pubDate>{{ rfc822(e.timestamp_utc) }}</pubDate>
       <category>{{ e.event }}</category>
       <description>{{ feed_description(e.event, e.name, e.inmate_number, e.note) }}</description>

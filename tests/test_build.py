@@ -258,6 +258,7 @@ def test_feed_template_emits_strict_xml(tmp_path):
     )
     env.globals["rfc822"] = build._rfc822
     env.globals["feed_description"] = build._feed_description
+    env.filters["rss_guid"] = build._rss_guid
 
     class _E:
         event = "released"
@@ -282,10 +283,24 @@ def test_feed_template_emits_strict_xml(tmp_path):
     pub = items[0].findtext("pubDate")
     cat = items[0].findtext("category")
     desc = items[0].findtext("description")
+    guid = items[0].findtext("guid")
     assert title == "released · DOE JANE"
     assert pub == "Thu, 14 May 2026 17:16:37 +0000"  # RFC 822, not ISO
     assert cat == "released"
     assert "DOE JANE" in desc and "(#12345)" in desc
+    assert guid == "7b8035660b0a3c563197242ee5d2c81d4bc17765"
+
+
+def test_rss_guid_is_hash_stable():
+    from scraper.models import ChangeEvent
+    e = ChangeEvent(
+        event="released",
+        inmate_number="12345",
+        name="DOE JANE",
+        timestamp_utc="2026-05-14T17:16:37Z",
+        note="no longer on HCSO public roster",
+    )
+    assert build._rss_guid(e) == "7b8035660b0a3c563197242ee5d2c81d4bc17765"
 
 
 # ----- _booking_seq --------------------------------------------------------
