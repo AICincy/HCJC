@@ -15,7 +15,7 @@
   {% endif %}
   <div class="meta">
     <p class="name" id="card-{{ inm.inmate_number }}-name"><a class="plain" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/">{{ inm.full_name }}</a></p>
-    <p class="charge {% if chap %}charge-{{ chap.cls }}{% endif %}">{{ (chap.label if chap else primary_charge(inm)) or '—' }}{% if inm.charges | length > 1 %} <span class="ct-count">+{{ inm.charges | length - 1 }}</span>{% endif %}</p>
+    <p class="charge {% if chap %}charge-{{ chap.cls }}{% endif %}">{{ (chap.label if chap else primary_charge(inm)) or ' - ' }}{% if inm.charges | length > 1 %} <span class="ct-count">+{{ inm.charges | length - 1 }}</span>{% endif %}</p>
     <a class="id-chip" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/">#&thinsp;{{ inm.inmate_number }}{% if inm.booking_date %} &middot; booked {{ inm.booking_date }}{% endif %}</a>
   </div>
 </article>

@@ -72,13 +72,13 @@
     {% if trend.delta > 0 %}<span class="delta-up">&uarr; {{ trend.delta }} vs yesterday</span>
     {% elif trend.delta < 0 %}<span class="delta-down">&darr; {{ -trend.delta }} vs yesterday</span>
     {% else %}<span class="delta-flat">unchanged vs yesterday</span>{% endif %}
-  {% else %}<span class="muted">first day on record &mdash; a trend line appears once there are two</span>{% endif %}
+  {% else %}<span class="muted">first day on record - a trend line appears once there are two</span>{% endif %}
   {% if trend.spark | length >= 2 %}
   <svg class="sparkline" width="200" height="32" viewBox="0 0 200 32" aria-hidden="true" preserveAspectRatio="none">
     <polyline points="{% for v in trend.spark %}{{ '%.1f' % (loop.index0 * 200 / (trend.spark|length - 1)) }},{{ '%.1f' % (30 - (v - mn) * 28 / rng) }} {% endfor %}"/>
     {% set lastv = trend.spark[-1] %}<circle cx="200" cy="{{ '%.1f' % (30 - (lastv - mn) * 28 / rng) }}" r="2.4"/>
   </svg>
-  <span class="muted">last {{ trend.spark|length }} day{{ '' if trend.spark|length == 1 else 's' }} ({{ mn }}&ndash;{{ mx }})</span>
+  <span class="muted">last {{ trend.spark|length }} day{{ '' if trend.spark|length == 1 else 's' }} ({{ mn }}-{{ mx }})</span>
   {% endif %}
 </p>
 <div class="statbars" role="list">
@@ -86,13 +86,13 @@
   <div class="statbar" role="listitem"><span class="statbar-label">Booked, last {{ trend.churn_days }} day{{ '' if trend.churn_days == 1 else 's' }}</span><span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: {{ '%.1f' % (100.0 * trend.booked_7d / chmax) }}%"></span></span><span class="statbar-val">{{ "{:,}".format(trend.booked_7d) }}</span></div>
   <div class="statbar" role="listitem"><span class="statbar-label">Released, last {{ trend.churn_days }} day{{ '' if trend.churn_days == 1 else 's' }}</span><span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: {{ '%.1f' % (100.0 * trend.released_7d / chmax) }}%"></span></span><span class="statbar-val">{{ "{:,}".format(trend.released_7d) }}</span></div>
 </div>
-<p class="muted note-paragraph">Booking counts use the HCSO booking date, so a sweep that re-discovers older records doesn&rsquo;t inflate them. Roster size is committed daily to <a href="{{ base_url }}/data/history.json">history.json</a> &mdash; counts only, no individuals are archived.</p>
+<p class="muted note-paragraph">Booking counts use the HCSO booking date, so a sweep that re-discovers older records doesn&rsquo;t inflate them. Roster size is committed daily to <a href="{{ base_url }}/data/history.json">history.json</a> - counts only, no individuals are archived.</p>
 {% endif %}
 
 <div class="section-h"><h2>Bookings by month</h2><span class="grow"></span><span class="meta">of the current roster</span></div>
 {{ bars(s.months, s.months[0][1] if s.months else 1) }}
 
-{# Stacked severity composition bar — design's tier mix in one strip. #}
+{# Stacked severity composition bar - design's tier mix in one strip. #}
 {% set tb = s.tier_breakdown %}
 {% set tb_tot = (tb.F1 + tb.F2 + tb.F3 + tb.F4 + tb.F5 + tb.M1 + tb.M2 + tb.M3 + tb.M4 + tb.MM) or 1 %}
 {% set tb_segs = [
@@ -133,7 +133,7 @@
   {% endfor %}
 </div>
 
-{# Court calendar — next 14 days of upcoming hearings. #}
+{# Court calendar - next 14 days of upcoming hearings. #}
 {% if s.court_calendar %}
 {% set cal_total = s.court_calendar | sum(attribute='count') %}
 <details class="section-h-details">
@@ -157,7 +157,7 @@
           <a class="cal-item" href="{{ base_url }}/inmate/{{ it.inmate.inmate_number }}/">
             {% if t %}<span class="tier tier-{{ t.label if (t.label|length >= 2 and t.label[0] in ('F','M')) else t.kind }}">{{ t.label }}</span>{% endif %}
             <span class="cal-name">{{ it.inmate.full_name }}</span>
-            <span class="cal-charge">&middot; {{ (it.charge.description or '—') | lower }}</span>
+            <span class="cal-charge">&middot; {{ (it.charge.description or ' - ') | lower }}</span>
           </a>
           {% endfor %}
           {% if d.more %}<div class="cal-more">+{{ d.more }} more</div>{% endif %}

@@ -27,9 +27,9 @@
 <div class="filter-bar" id="statute-jump-bar">
   <label class="search-wrap" for="statute-jump">Jump to
     <select id="statute-jump">
-      <option value="">— pick a section —</option>
+      <option value=""> -  pick a section  - </option>
       {% for s in sections %}
-      <option value="orc-{{ s.code | replace('.', '-') }}">&sect; {{ s.code }} &middot; {{ s.title or '—' }} ({{ s.count }})</option>
+      <option value="orc-{{ s.code | replace('.', '-') }}">&sect; {{ s.code }} &middot; {{ s.title or ' - ' }} ({{ s.count }})</option>
       {% endfor %}
     </select>
   </label>
@@ -100,9 +100,9 @@
           <div class="rb-body">
             {% if deg %}<span class="tier tier-{{ deg }}">{{ deg }}</span>{% endif %}
             <h4 class="rb-name">{{ inm.full_name }}</h4>
-            <p class="rb-charge">{{ ((inm.charges | selectattr('orc_code', 'defined') | first).description | lower) if inm.charges else '—' }}</p>
+            <p class="rb-charge">{{ ((inm.charges | selectattr('orc_code', 'defined') | first).description | lower) if inm.charges else ' - ' }}</p>
             <div class="rb-meta">
-              <span>{{ inm.booking_date or '—' }}</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
+              <span>{{ inm.booking_date or ' - ' }}</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
             </div>
           </div>
         </a>
@@ -126,7 +126,7 @@
           {% endfor %}
         </ul>
         <p class="muted note-paragraph-tight">
-          Opinions are pulled from <a href="https://www.courtlistener.com" target="_blank" rel="noopener">CourtListener</a> (Free Law Project), filtered to Ohio Supreme Court and Court of Appeals, status = Published, ordered newest-first. They show how courts have <em>interpreted</em> the cited section &mdash; not the outcome of any case on JCStream's roster. JCStream caches a snapshot weekly; the link goes to the authoritative CourtListener page.
+          Opinions are pulled from <a href="https://www.courtlistener.com" target="_blank" rel="noopener">CourtListener</a> (Free Law Project), filtered to Ohio Supreme Court and Court of Appeals, status = Published, ordered newest-first. They show how courts have <em>interpreted</em> the cited section - not the outcome of any case on JCStream's roster. JCStream caches a snapshot weekly; the link goes to the authoritative CourtListener page.
         </p>
       </details>
       {% endif %}
