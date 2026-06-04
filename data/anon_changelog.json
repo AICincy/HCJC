@@ -181597,93 +181597,75 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "14356452",
-    "name": "MCCREE SHARONNA",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "14371271",
-    "name": "FOUNTAIN MARSHANEE",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "14371701",
-    "name": "THOMAS ZARION",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "14457585",
-    "name": "SMITH SHENIYA",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "14696831",
-    "name": "MAPP CHRISTOPHER",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "14811825",
-    "name": "NORVELL AMILEO",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "2052148",
-    "name": "JENNINGS JAMES",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "2230399",
-    "name": "ENGLISH OBIE",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "2341790",
-    "name": "HARRIS TONYO",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T23:37:35Z",
-    "inmate_number": "2362242",
-    "name": "WALTON MICHAEL",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-28",
+    "tier": "M4",
+    "category": "Failure to disclose personal information"
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-28",
+    "tier": "F5",
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
@@ -198964,5 +198946,50 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T23:55:27Z",
+    "inmate_number": "14077151",
+    "name": "DENT THOMAS",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T23:55:27Z",
+    "inmate_number": "14480968",
+    "name": "ADAMS JOSEPH",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T23:55:27Z",
+    "inmate_number": "1609851",
+    "name": "LUNDY NIKKI",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T23:55:27Z",
+    "inmate_number": "2197250",
+    "name": "STOKES DAVID",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T23:55:27Z",
+    "inmate_number": "2836243",
+    "name": "HOOVER ALAENA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/4/26"
   }
 ]
