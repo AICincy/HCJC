@@ -180595,84 +180595,63 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T13:49:16Z",
-    "inmate_number": "1247879",
-    "name": "VASILIOU CARL",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T13:49:16Z",
-    "inmate_number": "14589876",
-    "name": "HALL-MACKEY DARRIAN",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T13:49:16Z",
-    "inmate_number": "14736225",
-    "name": "GOMEZ-PEREZ DIEGO",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T13:49:16Z",
-    "inmate_number": "1778333",
-    "name": "MOSLEY KENDALL",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T13:49:16Z",
-    "inmate_number": "2299013",
-    "name": "STRUM MICHAEL",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T13:49:16Z",
-    "inmate_number": "2327314",
-    "name": "BRAY KELLY",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T13:49:16Z",
-    "inmate_number": "2617526",
-    "name": "DEAN CHARLEMAGNE",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T13:49:16Z",
-    "inmate_number": "14108884",
-    "name": "HARPER ELIJAH",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T13:49:16Z",
-    "inmate_number": "2684357",
-    "name": "MERRIWEATHER MONTIANEZ",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-28",
+    "tier": "F3",
+    "category": "Illegal conveyance of items into a detention facility"
   },
   {
     "event": "updated",
@@ -197710,5 +197689,68 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T13:50:04Z",
+    "inmate_number": "14039624",
+    "name": "RUSH STEVEN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T13:50:04Z",
+    "inmate_number": "14151337",
+    "name": "VINCENT SHAWN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T13:50:04Z",
+    "inmate_number": "14567637",
+    "name": "JONES JAVONTE",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T13:50:04Z",
+    "inmate_number": "14810145",
+    "name": "DUCKSWORTH JAVION",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T13:50:04Z",
+    "inmate_number": "2151138",
+    "name": "WATSON JESSICA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T13:50:04Z",
+    "inmate_number": "2375977",
+    "name": "WRIGHT RICK",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T13:50:04Z",
+    "inmate_number": "2523404",
+    "name": "COOK CANDY",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/4/26"
   }
 ]
