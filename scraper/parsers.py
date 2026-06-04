@@ -498,13 +498,13 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
             continue
 
         if src.startswith("data:"):
+            header, _, payload = src.partition(",")
             # Skip SVG base64 strings as they are vector silhouettes, not real photo bytes
-            if "image/svg" in src or "xml" in src:
+            if "image/svg" in header or "xml" in header:
                 continue
             data_count += 1
             if photo_url is not None or url_fallback is not None:
                 continue
-            header, _, payload = src.partition(",")
             if "base64" not in header or not payload:
                 continue
             try:
