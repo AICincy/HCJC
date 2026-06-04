@@ -39,9 +39,9 @@ jobs:
     timeout-minutes: 50
     # deploy-pages@v4 requires this environment to be bound to the job.
     # GitHub auto-creates the "github-pages" environment when Settings > Pages > Source = "GitHub Actions".
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
@@ -149,25 +149,25 @@ jobs:
       # The built site now lives in docs/ on the working branch and gets served
       # directly by Pages when Source = "Deploy from a branch" -> <branch> -> /docs.
       # No artifact upload, no environment binding, no gh-pages branch needed.
-      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
-        with:
-          path: docs
-      - id: deploy
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128  # v5.0.0
-
-      - name: Deploy health check
-        if: steps.deploy.outcome == 'success'
-        run: |
-          SITE_URL="${{ steps.deploy.outputs.page_url }}"
-          if [ -z "$SITE_URL" ]; then
-            echo "::warning::No page_url output from deploy step; skipping health check"
-            exit 0
-          fi
-          echo "Checking $SITE_URL ..."
-          STATUS=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 15 "$SITE_URL" || echo "000")
-          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
-            echo "Health check passed (HTTP $STATUS)"
-          else
-            echo "::error::Deploy health check failed (HTTP $STATUS for $SITE_URL)"
-            exit 1
-          fi
+      # - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
+      #   with:
+      #     path: docs
+      # - id: deploy
+      #   uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128  # v5.0.0
+      #
+      # - name: Deploy health check
+      #   if: steps.deploy.outcome == 'success'
+      #   run: |
+      #     SITE_URL="${{ steps.deploy.outputs.page_url }}"
+      #     if [ -z "$SITE_URL" ]; then
+      #       echo "::warning::No page_url output from deploy step; skipping health check"
+      #       exit 0
+      #     fi
+      #     echo "Checking $SITE_URL ..."
+      #     STATUS=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 15 "$SITE_URL" || echo "000")
+      #     if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+      #       echo "Health check passed (HTTP $STATUS)"
+      #     else
+      #       echo "::error::Deploy health check failed (HTTP $STATUS for $SITE_URL)"
+      #       exit 1
+      #     fi
