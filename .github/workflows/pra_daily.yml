@@ -2,10 +2,14 @@ name: pra-daily
 
 on:
   schedule:
-    # 09:00 UTC = 05:00 EDT — early enough that the clerk's office sees it
+    # 09:00 UTC = 05:00 EDT - early enough that the clerk's office sees it
     # at the start of the business day.
     - cron: '0 9 * * *'
   workflow_dispatch:
+
+concurrency:
+  group: jcstream-pra-daily
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -23,7 +27,7 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
 
-      - name: PRA — daily new-capias roster (Clerk of Courts)
+      - name: PRA - daily new-capias roster (Clerk of Courts)
         env:
           JCSTREAM_PRA_SMTP_HOST: ${{ secrets.JCSTREAM_PRA_SMTP_HOST }}
           JCSTREAM_PRA_SMTP_PORT: ${{ secrets.JCSTREAM_PRA_SMTP_PORT }}
@@ -33,7 +37,7 @@ jobs:
           JCSTREAM_PRA_TO_CAPIAS_EMAIL: ${{ secrets.JCSTREAM_PRA_TO_CAPIAS_EMAIL }}
         run: python -m scraper.pra_capias
 
-      - name: PRA — booking photos (HCSO Media Relations, fallback)
+      - name: PRA - booking photos (HCSO Media Relations, fallback)
         if: ${{ vars.JCSTREAM_PRA_PHOTOS_ENABLED == '1' }}
         env:
           JCSTREAM_PRA_SMTP_HOST: ${{ secrets.JCSTREAM_PRA_SMTP_HOST }}

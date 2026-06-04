@@ -180,5 +180,5 @@ run and keeping last-good data. This is the guard working, not a bug.
   `JCSTREAM_PRA_SMTP_USER`, `JCSTREAM_PRA_SMTP_PASS`, `JCSTREAM_PRA_FROM_EMAIL`
   (and optionally per-loop recipient overrides `JCSTREAM_PRA_TO_PHOTOS_EMAIL`
   for `scraper/pra.py` and `JCSTREAM_PRA_TO_CAPIAS_EMAIL` for `scraper/pra_capias.py`;
-  both default to `HCAdmin@hamilton-co.org`).
   With `JCSTREAM_PRA_SMTP_HOST` + `JCSTREAM_PRA_FROM_EMAIL` present it sends for real.
+  To enable the daily booking photos fallback loop (`scraper/pra.py`), set the repository variable `JCSTREAM_PRA_PHOTOS_ENABLED` to `1` in Actions Variables.
