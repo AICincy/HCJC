@@ -62,6 +62,7 @@ from web.shape import (
     _crimes_of_month,
     _days_in_custody,
     _distinct_chapters,
+    _events_for_recent,
     _feed_description,
     _iso_booking_date,
     _next_court_date,
@@ -71,6 +72,7 @@ from web.shape import (
     _recent_booked_inmates,
     _related_inmates,
     _roster_stale_context,
+    _short_month_label,
     _similar_by_statute,
     _strftime_nopad,
     _timeline_markers,
@@ -78,6 +80,7 @@ from web.shape import (
 )
 
 log = logging.getLogger("jcstream.site")
+_COMPAT_EXPORTS = (_short_month_label, _events_for_recent)
 
 ROOT = Path(__file__).parent
 TEMPLATE_DIR = ROOT / "templates"
