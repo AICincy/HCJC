@@ -180493,57 +180493,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T08:09:01Z",
-    "inmate_number": "14157092",
-    "name": "BANKS KEONTA",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T08:09:01Z",
-    "inmate_number": "14402068",
-    "name": "HENDRIX WILLIE",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T08:09:01Z",
-    "inmate_number": "14546489",
-    "name": "HOLDER JAYQUAN",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T08:09:01Z",
-    "inmate_number": "14811692",
-    "name": "AGUSTIN RAYMUNDO",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T08:09:01Z",
-    "inmate_number": "1569644",
-    "name": "CARTER LOUIS",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T08:09:01Z",
-    "inmate_number": "2148132",
-    "name": "OVERSTREET DEMETRIUS",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-28",
+    "tier": "F3",
+    "category": "Tampering with evidence"
   },
   {
     "event": "updated",
@@ -197536,5 +197524,50 @@
     "tier": "MM",
     "category": "Open container of beer or intoxicating liquor in a vehicle",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T09:02:59Z",
+    "inmate_number": "1389996",
+    "name": "KEY LAWRENCE",
+    "tier": "M1",
+    "category": "Failure to reinstate a license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T09:02:59Z",
+    "inmate_number": "14196733",
+    "name": "CROSSTY ANTWAIN",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T09:02:59Z",
+    "inmate_number": "14585565",
+    "name": "JOHNSON DEONTE",
+    "tier": "F5",
+    "category": "Breaking and entering",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T09:02:59Z",
+    "inmate_number": "14750715",
+    "name": "SMITH SHAWNDAYA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T09:02:59Z",
+    "inmate_number": "14812573",
+    "name": "DAVIS CAMERON",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/4/26"
   }
 ]
