@@ -181567,48 +181567,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T22:59:35Z",
-    "inmate_number": "14371701",
-    "name": "THOMAS ZARION",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T22:59:35Z",
-    "inmate_number": "2230399",
-    "name": "ENGLISH OBIE",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T22:59:35Z",
-    "inmate_number": "1355692",
-    "name": "BURNS MEGAN",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T22:59:35Z",
-    "inmate_number": "14102499",
-    "name": "HERRLE KEVIN",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T22:59:35Z",
-    "inmate_number": "14530298",
-    "name": "KERR EMILY",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -198931,6 +198916,51 @@
     "timestamp_utc": "2026-06-04T22:49:46Z",
     "inmate_number": "14039624",
     "name": "RUSH STEVEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T23:27:45Z",
+    "inmate_number": "14804521",
+    "name": "WHITE DELMARION",
+    "tier": "M1",
+    "category": "Discharging a firearm on or near prohibited premises",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T23:27:45Z",
+    "inmate_number": "2103124",
+    "name": "TAYLOR NYAMEKYE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T23:27:45Z",
+    "inmate_number": "2003232",
+    "name": "MERRITT JONAH",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-04T23:27:45Z",
+    "inmate_number": "2711711",
+    "name": "CROSSITY STEPHON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-04T23:27:45Z",
+    "inmate_number": "2310849",
+    "name": "SMITH CIERRA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
