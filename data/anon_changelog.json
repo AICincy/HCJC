@@ -180547,66 +180547,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T12:26:03Z",
-    "inmate_number": "2523404",
-    "name": "COOK CANDY",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T12:26:03Z",
-    "inmate_number": "2647410",
-    "name": "RANSOME ROBERT",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T12:26:03Z",
-    "inmate_number": "14083543",
-    "name": "JAMES CALVIN",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T12:26:03Z",
-    "inmate_number": "2169560",
-    "name": "LEVY QUEENACELISTINE",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T12:26:03Z",
-    "inmate_number": "2686960",
-    "name": "NEIDICH MICHAEL",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T12:26:03Z",
-    "inmate_number": "14563403",
-    "name": "WILLIAMSON SUMMER",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T12:26:03Z",
-    "inmate_number": "14420198",
-    "name": "YISRAEL RAKIMUEL",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-05-28",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -197644,5 +197629,86 @@
     "tier": "M1",
     "category": "Assault",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T12:42:31Z",
+    "inmate_number": "1297074",
+    "name": "MONSON GREG",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T12:42:31Z",
+    "inmate_number": "1389996",
+    "name": "KEY LAWRENCE",
+    "tier": "M1",
+    "category": "Failure to reinstate a license",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T12:42:31Z",
+    "inmate_number": "14039624",
+    "name": "RUSH STEVEN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T12:42:31Z",
+    "inmate_number": "14535095",
+    "name": "SIMPSON TREVOR",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T12:42:31Z",
+    "inmate_number": "14495776",
+    "name": "MEATCHEM MARQUIS",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T12:42:31Z",
+    "inmate_number": "2400591",
+    "name": "WELCH BRITTANY",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-04T12:42:31Z",
+    "inmate_number": "14389165",
+    "name": "BLUNT CALIL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-04T12:42:31Z",
+    "inmate_number": "2333257",
+    "name": "MOORE ROBERT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-04T12:42:31Z",
+    "inmate_number": "14542338",
+    "name": "POLING SCOTTY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
