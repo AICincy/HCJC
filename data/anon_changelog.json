@@ -181525,66 +181525,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T22:20:50Z",
-    "inmate_number": "2547601",
-    "name": "TYE EVERETT",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T22:20:50Z",
-    "inmate_number": "2229262",
-    "name": "BA KANTEH",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T22:20:50Z",
-    "inmate_number": "14449795",
-    "name": "CLARK JUAN",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T22:20:50Z",
-    "inmate_number": "14527136",
-    "name": "EVANS DEVON",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T22:20:50Z",
-    "inmate_number": "2678212",
-    "name": "JONES DONAVAN",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T22:20:50Z",
-    "inmate_number": "2842279",
-    "name": "MCCREE JESTIN",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-28T22:20:50Z",
-    "inmate_number": "2095995",
-    "name": "SPICER BERNICE",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -198916,6 +198895,42 @@
     "timestamp_utc": "2026-06-04T22:14:49Z",
     "inmate_number": "1874548",
     "name": "TODD KEVIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T22:49:46Z",
+    "inmate_number": "14575351",
+    "name": "JOHNSON DAVION",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T22:49:46Z",
+    "inmate_number": "14804521",
+    "name": "WHITE DELMARION",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T22:49:46Z",
+    "inmate_number": "1633907",
+    "name": "SNEED BERNARD",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-04T22:49:46Z",
+    "inmate_number": "14039624",
+    "name": "RUSH STEVEN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
