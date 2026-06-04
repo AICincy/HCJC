@@ -180541,12 +180541,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T11:03:57Z",
-    "inmate_number": "2647410",
-    "name": "RANSOME ROBERT",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -197601,6 +197598,51 @@
     "name": "DAVIS CAMERON",
     "tier": "M2",
     "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T11:37:12Z",
+    "inmate_number": "1297074",
+    "name": "MONSON GREG",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T11:37:12Z",
+    "inmate_number": "1389996",
+    "name": "KEY LAWRENCE",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T11:37:12Z",
+    "inmate_number": "14039624",
+    "name": "RUSH STEVEN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T11:37:12Z",
+    "inmate_number": "14542338",
+    "name": "POLING SCOTTY",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T11:37:12Z",
+    "inmate_number": "14561712",
+    "name": "TILLER GABERIEL",
+    "tier": "M1",
+    "category": "Assault",
     "note": ""
   }
 ]
