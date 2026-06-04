@@ -130,11 +130,14 @@ class RosterIndexes:
             if chap:
                 by_chapter[chap["label"]].append(inm)
             has_first_charge = False
+            seen_codes_for_inmate = set()
             for c in inm.charges:
                 code = orc_mod.normalize_code((c.orc_code or "").strip())
                 if not code or code.upper() == "NONE":
                     continue
-                by_code[code].append(inm)
+                if code not in seen_codes_for_inmate:
+                    by_code[code].append(inm)
+                    seen_codes_for_inmate.add(code)
                 if not has_first_charge:
                     v = _parse_bond_amount(c.bond_amount)
                     if v is not None and v > 0:

@@ -621,6 +621,23 @@ def test_roster_indexes_indexes_secondary_charges():
     assert "2925.11" not in idx.bonds_by_code
 
 
+def test_roster_indexes_does_not_duplicate_same_code():
+    from web.shape import RosterIndexes
+    inm = Inmate(
+        inmate_number="12345",
+        booking_number="26000001",
+        last_name="SMITH",
+        first_name="JOHN",
+        charges=[
+            Charge(orc_code="2913.02", description="THEFT M1", bond_amount="$500"),
+            Charge(orc_code="2913.02", description="THEFT M1", bond_amount="$500"),
+        ]
+    )
+    idx = RosterIndexes([inm])
+    assert "2913.02" in idx.by_code
+    assert idx.by_code["2913.02"].count(inm) == 1
+
+
 def test_takedowns_filtering(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     
