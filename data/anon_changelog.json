@@ -180415,30 +180415,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T04:59:20Z",
-    "inmate_number": "14811692",
-    "name": "AGUSTIN RAYMUNDO",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T04:59:20Z",
-    "inmate_number": "1756666",
-    "name": "BLUNT JASON",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T04:59:20Z",
-    "inmate_number": "1938457",
-    "name": "HART CHARLIE",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/27/26"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-28",
+    "tier": "M1",
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -197329,6 +197326,123 @@
     "timestamp_utc": "2026-06-04T04:11:08Z",
     "inmate_number": "14037588",
     "name": "JULIUS DEAIRA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "14039624",
+    "name": "RUSH STEVEN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "14582251",
+    "name": "THOMAS CHRISTOPHER",
+    "tier": "M1",
+    "category": "Unauthorized use of property",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "14585565",
+    "name": "JOHNSON DEONTE",
+    "tier": "F5",
+    "category": "Breaking and entering",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "14614753",
+    "name": "MORRISON ROEMELLO",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "14652881",
+    "name": "HERNANDEZ JULIO",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "1465749",
+    "name": "KRAMER MARK",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "14737846",
+    "name": "MANUEL ANDREW",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "2310849",
+    "name": "SMITH CIERRA",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "2385100",
+    "name": "HOPKINS CIARA",
+    "tier": "M4",
+    "category": "Misconduct at an emergency",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "2448923",
+    "name": "DRUMMOND LESLIE",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "2694044",
+    "name": "DOSSENBACH RONALD",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "1748772",
+    "name": "BAKER DENISE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-04T05:55:34Z",
+    "inmate_number": "2760872",
+    "name": "COOGAN ASHLEY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
