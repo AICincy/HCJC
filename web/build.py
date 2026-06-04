@@ -13,7 +13,6 @@ import logging
 import os
 import shutil
 import sys
-from datetime import datetime
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -24,14 +23,13 @@ from scraper import courtclerk as cck
 from scraper import orc as orc_mod
 from scraper import shootings as shootings_mod
 from scraper.match import attach_candidates
-from scraper.models import ChangeEvent, Inmate, Snapshot
+from scraper.models import ChangeEvent, Snapshot
 from web.classify import (
     _approx_age,
     _avatar_initials,
     _booking_seq,
     _chap_slug,
     _charge_tier,
-    _codes_ohio_url,
     _display_date,
     _expand_race,
     _expand_sex,
@@ -42,11 +40,9 @@ from web.classify import (
     _primary_degree,
     _primary_tier,
     _rfc822,
-    _short_month_label,
     _tier_counts,
     _tier_max,
     case_category,
-    is_orc_code,
     judge_link,
     statute_url,
 )
@@ -66,9 +62,7 @@ from web.shape import (
     _crimes_of_month,
     _days_in_custody,
     _distinct_chapters,
-    _events_for_recent,
     _feed_description,
-    _group_by_month,
     _iso_booking_date,
     _next_court_date,
     _prepare_render_data,
@@ -383,16 +377,8 @@ def _resolve_site_url() -> str:
 # Dispatch geocoding extracted to web/dispatch.py.
 from web.dispatch import _dispatch_points  # noqa: E402
 
-
-
-
-
-
-
-
 # Page renderers and output writers extracted to web/pages.py and web/outputs.py.
 # History tracking extracted to web/history.py.
-from web.history import _update_history  # noqa: E402,F811
 from web.outputs import (  # noqa: E402
     _copy_photos,
     _copy_static,
@@ -416,9 +402,6 @@ from web.pages import (  # noqa: E402
     _render_statute_page,
     _render_visit_page,
 )
-
-
-
 
 
 def main(argv: list[str] | None = None) -> int:

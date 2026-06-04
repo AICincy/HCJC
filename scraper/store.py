@@ -19,7 +19,7 @@ from typing import Iterable
 
 from pydantic import ValidationError
 
-from .diff import diff
+from .diff import diff  # noqa: F401 — re-exported for sweep.py, test_store.py
 from .models import (
     SNAPSHOT_SCHEMA_VERSION,
     ChangeEvent,

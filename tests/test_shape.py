@@ -325,8 +325,9 @@ def test_distinct_chapters():
 
 def test_roster_stale_context(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)
-    from scraper.store import WAF_BLOCK_LOG_PATH
     import json
+
+    from scraper.store import WAF_BLOCK_LOG_PATH
 
     (tmp_path / "data").mkdir(exist_ok=True)
     log_data = [{"timestamp_utc": "2026-06-03T10:00:00Z", "event": "blocked"}]

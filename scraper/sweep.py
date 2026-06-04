@@ -50,7 +50,6 @@ from .store import (
     save_current,
 )
 from .sweep_guards import (
-    PHOTO_PRUNE_MAX_FRACTION,
     SWEEP_BOOTSTRAP_FLOOR,
     SWEEP_MIN_ROSTER_FRACTION,
     check_detail_watchdog,

@@ -3,7 +3,7 @@ deep-link to the Ohio Revised Code; real ORC sections still do."""
 
 from __future__ import annotations
 
-from web.classify import statute_url, _orc_chapters
+from web.classify import _orc_chapters, statute_url
 
 _OFFENSES = {
     "506.6": {"title": "Cincinnati Municipal Code: general offenses", "degree": "M1"},

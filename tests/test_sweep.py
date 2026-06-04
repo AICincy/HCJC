@@ -767,8 +767,8 @@ def test_skip_gate_uses_generated_utc_not_file_mtime(tmp_path, monkeypatch):
 
 
 def test_sweep_uses_custom_paths_from_dataclass(tmp_path, monkeypatch):
-    from scraper.sweep import SweepPaths, run
     from scraper.store import save_current
+    from scraper.sweep import SweepPaths, run
 
     custom_current = tmp_path / "custom_current.json"
     custom_changelog = tmp_path / "custom_changelog.json"

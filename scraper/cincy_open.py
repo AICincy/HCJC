@@ -177,6 +177,7 @@ def query(
 def _execute_with_retry(client: httpx.Client, url: str) -> httpx.Response:
     """Execute a GET request on Socrata with retries, backoff, and jitter on transient errors (5xx, 429, or RequestError)."""
     import random
+
     from .client import _retry_after_seconds
 
     max_retries = 3

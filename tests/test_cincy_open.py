@@ -11,7 +11,6 @@ import urllib.parse
 from scraper.cincy_open import (
     dumps_rows_per_line,
     prev_row_count,
-    query,
     resource_url,
     since_iso,
     warn_on_row_drop,
@@ -121,6 +120,7 @@ def test_warn_on_row_drop_silent_when_prior_is_zero(caplog):
 
 def test_query_retry_on_500_success(monkeypatch):
     import httpx
+
     import scraper.cincy_open as co
 
     calls = 0
@@ -143,6 +143,7 @@ def test_query_retry_on_500_success(monkeypatch):
 
 def test_query_retry_on_429_retry_after(monkeypatch):
     import httpx
+
     import scraper.cincy_open as co
 
     calls = 0
@@ -173,8 +174,9 @@ def test_query_retry_on_429_retry_after(monkeypatch):
 
 def test_query_retry_fails_after_max_retries(monkeypatch):
     import httpx
-    import scraper.cincy_open as co
     import pytest
+
+    import scraper.cincy_open as co
 
     calls = 0
 
@@ -194,6 +196,7 @@ def test_query_retry_fails_after_max_retries(monkeypatch):
 
 def test_query_retry_on_network_error(monkeypatch):
     import httpx
+
     import scraper.cincy_open as co
 
     calls = 0
