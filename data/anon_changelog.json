@@ -37014,6 +37014,12 @@
     "category": "Possession of drugs"
   },
   {
+    "event": "released",
+    "date": "2026-05-13",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
     "event": "booked",
     "date": "2026-05-14",
     "tier": null,
@@ -180439,75 +180445,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T06:00:06Z",
-    "inmate_number": "14262599",
-    "name": "GRIM AMBER",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T06:00:06Z",
-    "inmate_number": "14582366",
-    "name": "ENDALE HENOK",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T06:00:06Z",
-    "inmate_number": "14591010",
-    "name": "HILL TREVON",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T06:00:06Z",
-    "inmate_number": "1858470",
-    "name": "MEATCHEM STANLEY",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T06:31:57Z",
-    "inmate_number": "14262599",
-    "name": "GRIM AMBER",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T06:31:57Z",
-    "inmate_number": "14810152",
-    "name": "MOSLEY JALYN",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-28T06:31:57Z",
-    "inmate_number": "14811692",
-    "name": "AGUSTIN RAYMUNDO",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-28T06:31:57Z",
-    "inmate_number": "1569644",
-    "name": "CARTER LOUIS",
+    "date": "2026-05-28",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
@@ -197446,5 +197428,113 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "1389996",
+    "name": "KEY LAWRENCE",
+    "tier": "M1",
+    "category": "Failure to reinstate a license",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "14053387",
+    "name": "ROSSER VAUGHN",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "14159275",
+    "name": "LAMPLEY BRIANA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "14193065",
+    "name": "HEATH SHANITA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "14399693",
+    "name": "MCDULIN AMBER",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "14462271",
+    "name": "JONES JAQUALA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "14614753",
+    "name": "MORRISON ROEMELLO",
+    "tier": "M1",
+    "category": "Using weapons while intoxicated",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "14750715",
+    "name": "SMITH SHAWNDAYA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "14812564",
+    "name": "THOMAS BRENT",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "1584942",
+    "name": "SAYLOR ANTHONY",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "2385100",
+    "name": "HOPKINS CIARA",
+    "tier": "M4",
+    "category": "Misconduct at an emergency",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-04T07:39:13Z",
+    "inmate_number": "2448923",
+    "name": "DRUMMOND LESLIE",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
   }
 ]
