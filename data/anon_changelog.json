@@ -183073,21 +183073,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-29T23:16:45Z",
-    "inmate_number": "1600869",
-    "name": "BECHMANN ANGELA",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "booked 5/29/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T23:16:45Z",
-    "inmate_number": "2259746",
-    "name": "MOORE JOHN",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-29",
+    "tier": "F1",
+    "category": "Rape"
   },
   {
     "event": "booked",
@@ -200098,5 +200098,50 @@
     "tier": "M1",
     "category": "Receiving stolen property",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-05T23:43:26Z",
+    "inmate_number": "14069646",
+    "name": "NIXON JOE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-05T23:43:26Z",
+    "inmate_number": "14532231",
+    "name": "PHILMORE BRAD",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-05T23:43:26Z",
+    "inmate_number": "14812792",
+    "name": "JOHNSON TYQUAN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-05T23:43:26Z",
+    "inmate_number": "1794104",
+    "name": "CURRY LASHANNA",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-05T23:43:26Z",
+    "inmate_number": "2201150",
+    "name": "METTS RANDALL",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
