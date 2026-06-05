@@ -181765,84 +181765,75 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T01:21:43Z",
-    "inmate_number": "14121229",
-    "name": "EVERETT JAURESSE",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T01:21:43Z",
-    "inmate_number": "14457585",
-    "name": "SMITH SHENIYA",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T01:21:43Z",
-    "inmate_number": "14696831",
-    "name": "MAPP CHRISTOPHER",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T01:21:43Z",
-    "inmate_number": "1582738",
-    "name": "ALLEN ANDREW",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-29T01:21:43Z",
-    "inmate_number": "2055873",
-    "name": "CUNNINGHAM GREGORY",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T01:21:43Z",
-    "inmate_number": "2052148",
-    "name": "JENNINGS JAMES",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T01:21:43Z",
-    "inmate_number": "2313848",
-    "name": "WITHERSPOON MATTHEW",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-29T01:21:43Z",
-    "inmate_number": "14674989",
-    "name": "BLASSINGAME RIQUAAN",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-29T01:21:43Z",
-    "inmate_number": "14811301",
-    "name": "RIGGS JACOB",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-29",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-29",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses"
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-29",
+    "tier": "F5",
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
@@ -199024,5 +199015,32 @@
     "tier": "MM",
     "category": "Illegal use or possession of drug paraphernalia",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-05T01:32:50Z",
+    "inmate_number": "14367308",
+    "name": "WENDLING SAMUEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-05T01:32:50Z",
+    "inmate_number": "2211054",
+    "name": "HAWK MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/4/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-05T01:32:50Z",
+    "inmate_number": "2078866",
+    "name": "WATKINS JESSICA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
