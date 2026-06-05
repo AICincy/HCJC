@@ -181669,84 +181669,99 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-29T00:11:27Z",
-    "inmate_number": "14121229",
-    "name": "EVERETT JAURESSE",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T00:11:27Z",
-    "inmate_number": "14281717",
-    "name": "OTTO BRETT",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T00:11:27Z",
-    "inmate_number": "14371271",
-    "name": "FOUNTAIN MARSHANEE",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T00:11:27Z",
-    "inmate_number": "14371701",
-    "name": "THOMAS ZARION",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T00:11:27Z",
-    "inmate_number": "1770911",
-    "name": "PHILLIPS KENO",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T00:11:27Z",
-    "inmate_number": "1832523",
-    "name": "DUFFY TERRANCE",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-29T00:11:27Z",
-    "inmate_number": "1892470",
-    "name": "BROOKINS CRYSTAL",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-29T00:11:27Z",
-    "inmate_number": "2313848",
-    "name": "WITHERSPOON MATTHEW",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "booked 5/28/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-29T00:11:27Z",
-    "inmate_number": "1994785",
-    "name": "JOHNSON DAMON",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-29",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-29",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-29",
+    "tier": "M4",
+    "category": "Failure to disclose personal information"
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-29",
+    "tier": "M2",
+    "category": "Criminal damaging"
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-29",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-29",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-05-29",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -198991,5 +199006,23 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 6/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-05T00:42:50Z",
+    "inmate_number": "14804521",
+    "name": "WHITE DELMARION",
+    "tier": "M1",
+    "category": "Discharging a firearm on or near prohibited premises",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-05T00:42:50Z",
+    "inmate_number": "2197250",
+    "name": "STOKES DAVID",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
   }
 ]
