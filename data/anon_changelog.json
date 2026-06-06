@@ -183445,48 +183445,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T09:27:56Z",
-    "inmate_number": "14438322",
-    "name": "DILLINGHAM JANIYAH",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-30T09:27:56Z",
-    "inmate_number": "14472616",
-    "name": "RICHARDSON ERIC",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T09:27:56Z",
-    "inmate_number": "14811994",
-    "name": "MARSEE AUSTIN",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-30T09:27:56Z",
-    "inmate_number": "2585632",
-    "name": "CARMACK DENNIS",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T10:14:24Z",
-    "inmate_number": "1756797",
-    "name": "CLIETT LATRIS",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -200434,5 +200419,23 @@
     "tier": "M1",
     "category": "Assault",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T11:04:57Z",
+    "inmate_number": "14676649",
+    "name": "DAVIS EARNEST",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T11:04:57Z",
+    "inmate_number": "2229143",
+    "name": "SANDERS DAVID",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/6/26"
   }
 ]
