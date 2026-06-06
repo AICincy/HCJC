@@ -183991,21 +183991,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T21:37:07Z",
-    "inmate_number": "180823",
-    "name": "CAMPBELL JOSEPH",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-30T21:37:07Z",
-    "inmate_number": "2531845",
-    "name": "MAUPIN BRANDON",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -201088,5 +201082,23 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T21:50:37Z",
+    "inmate_number": "2661525",
+    "name": "TAUL SHARONTA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T21:50:37Z",
+    "inmate_number": "2742989",
+    "name": "BIEHL MICHAEL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/6/26"
   }
 ]
