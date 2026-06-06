@@ -183889,48 +183889,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-30T19:44:43Z",
-    "inmate_number": "14262643",
-    "name": "NORTHCUTT JEFFREY",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T19:44:43Z",
-    "inmate_number": "14319801",
-    "name": "HELTON KAYLA",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T19:44:43Z",
-    "inmate_number": "14317143",
-    "name": "WYNN COURTNEY",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T19:44:43Z",
-    "inmate_number": "1951725",
-    "name": "BELL LEE",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T19:44:43Z",
-    "inmate_number": "794859",
-    "name": "SWANSON DAVID",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-30",
+    "tier": "M4",
+    "category": "Menacing"
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-30",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
@@ -201031,5 +201028,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T19:49:15Z",
+    "inmate_number": "1669672",
+    "name": "RICE OLONDRIUS",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 6/6/26"
   }
 ]
