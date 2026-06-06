@@ -183337,12 +183337,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T06:34:50Z",
-    "inmate_number": "14621665",
-    "name": "SIMON YENNER",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -200344,5 +200341,68 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T06:39:08Z",
+    "inmate_number": "14255683",
+    "name": "LOWERY TEANA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T06:39:08Z",
+    "inmate_number": "14404416",
+    "name": "HOWARD DESTINY",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: vicious dogs",
+    "note": "booked 6/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T06:39:08Z",
+    "inmate_number": "14636550",
+    "name": "THOMPSON TREYVON",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T06:39:08Z",
+    "inmate_number": "2217040",
+    "name": "BAKER BRIAN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T06:39:08Z",
+    "inmate_number": "2507141",
+    "name": "ZEPF CLINTON",
+    "tier": "MM",
+    "category": "Code not found in Ohio Revised Code (HCSO data artifact)",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T06:39:08Z",
+    "inmate_number": "2547964",
+    "name": "KIRKSEY DIMITRIUS",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T06:39:08Z",
+    "inmate_number": "2765177",
+    "name": "THOMAS MICHAEL",
+    "tier": "M1",
+    "category": "Endangering children",
+    "note": ""
   }
 ]
