@@ -183841,21 +183841,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T18:08:09Z",
-    "inmate_number": "14232241",
-    "name": "WALKER TURON",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-30T18:08:09Z",
-    "inmate_number": "1756797",
-    "name": "CLIETT LATRIS",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
@@ -200962,6 +200956,24 @@
     "timestamp_utc": "2026-06-06T17:40:36Z",
     "inmate_number": "2507141",
     "name": "ZEPF CLINTON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T18:09:04Z",
+    "inmate_number": "14423878",
+    "name": "ZITO TIMOTHY",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-06T18:09:04Z",
+    "inmate_number": "14636550",
+    "name": "THOMPSON TREYVON",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
