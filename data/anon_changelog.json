@@ -183475,39 +183475,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T12:08:35Z",
-    "inmate_number": "14811005",
-    "name": "KEARNEY MICHAEL",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-30T12:08:35Z",
-    "inmate_number": "2523404",
-    "name": "COOK CANDY",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-30T12:08:35Z",
-    "inmate_number": "14589263",
-    "name": "JACKSON ANTON",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-30T12:08:35Z",
-    "inmate_number": "14502724",
-    "name": "WILSON JOEL",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-05-30",
+    "tier": "M4",
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "updated",
@@ -200479,6 +200473,33 @@
     "timestamp_utc": "2026-06-06T11:46:10Z",
     "inmate_number": "14764885",
     "name": "UPSHAW KAMERAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T12:14:05Z",
+    "inmate_number": "14676649",
+    "name": "DAVIS EARNEST",
+    "tier": "M1",
+    "category": "Stopping after accident on public roads",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-06T12:14:05Z",
+    "inmate_number": "14808295",
+    "name": "CISSE MOUHAMADOU",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-06T12:14:05Z",
+    "inmate_number": "14479093",
+    "name": "CRUZ OSCAR",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
