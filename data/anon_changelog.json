@@ -183181,21 +183181,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T01:26:36Z",
-    "inmate_number": "1382315",
-    "name": "CORNIST ANTHONY",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/29/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-30T01:26:36Z",
-    "inmate_number": "14565132",
-    "name": "LAGRANDIER ANGEL",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
@@ -200170,5 +200164,32 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T02:20:18Z",
+    "inmate_number": "14695240",
+    "name": "SEAY LADAIZSHA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T02:20:18Z",
+    "inmate_number": "2201150",
+    "name": "METTS RANDALL",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T02:20:18Z",
+    "inmate_number": "2449628",
+    "name": "WHITE JUSTIN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/5/26"
   }
 ]
