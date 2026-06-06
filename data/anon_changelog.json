@@ -183973,21 +183973,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T21:08:36Z",
-    "inmate_number": "14450767",
-    "name": "KING NICKELAUS",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T21:08:36Z",
-    "inmate_number": "14603656",
-    "name": "CRUTCHFIELD MONTEZ",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-30",
+    "tier": "F3",
+    "category": "Having weapons while under disability"
   },
   {
     "event": "booked",
@@ -201078,6 +201078,15 @@
     "name": "SCHMITT MICHAEL",
     "tier": "M1",
     "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T21:24:11Z",
+    "inmate_number": "1669672",
+    "name": "RICE OLONDRIUS",
+    "tier": "M1",
+    "category": "Aggravated menacing",
     "note": ""
   }
 ]
