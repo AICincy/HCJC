@@ -183193,93 +183193,75 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-30T02:20:37Z",
-    "inmate_number": "1372934",
-    "name": "BROWN CURTIS",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T02:20:37Z",
-    "inmate_number": "1636467",
-    "name": "TAYLOR FANNIE",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T03:46:41Z",
-    "inmate_number": "14298307",
-    "name": "MCFERRON CHRISTOPHER",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T03:46:41Z",
-    "inmate_number": "2007112",
-    "name": "TURNER CHARLES",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/29/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-30T03:46:41Z",
-    "inmate_number": "1636467",
-    "name": "TAYLOR FANNIE",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T03:46:41Z",
-    "inmate_number": "1784120",
-    "name": "FOSTER STANLEY",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/29/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T03:46:41Z",
-    "inmate_number": "2014606",
-    "name": "HAMPTON ALMA",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/29/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-30T03:46:41Z",
-    "inmate_number": "2585632",
-    "name": "CARMACK DENNIS",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "booked 5/29/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-30T03:46:41Z",
-    "inmate_number": "14214740",
-    "name": "HALL MYLAN",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-30T03:46:41Z",
-    "inmate_number": "14105203",
-    "name": "JONES KYLE",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-30",
+    "tier": "M2",
+    "category": "Resisting arrest"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-30",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -200191,5 +200173,68 @@
     "tier": "M1",
     "category": "Theft",
     "note": "booked 6/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T03:46:42Z",
+    "inmate_number": "2401769",
+    "name": "LEWIS BRUCE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/5/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T03:46:42Z",
+    "inmate_number": "2449628",
+    "name": "WHITE JUSTIN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T03:46:42Z",
+    "inmate_number": "2646094",
+    "name": "WASHINGTON SAMUEL",
+    "tier": "MM",
+    "category": "Speed limits",
+    "note": "booked 6/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T03:46:42Z",
+    "inmate_number": "2682769",
+    "name": "MAYES CHARLES",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T03:46:42Z",
+    "inmate_number": "988749",
+    "name": "PESKIN-HUTCHINSON LESLEE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/5/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-06T03:46:42Z",
+    "inmate_number": "1947658",
+    "name": "BROWN HORACE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-06T03:46:42Z",
+    "inmate_number": "1773183",
+    "name": "WHITE ALBERT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
