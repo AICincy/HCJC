@@ -184003,21 +184003,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-30T22:08:06Z",
-    "inmate_number": "2614864",
-    "name": "WILLIAMS TERENCE",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-30T22:08:06Z",
-    "inmate_number": "14438322",
-    "name": "DILLINGHAM JANIYAH",
+    "date": "2026-05-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -201100,5 +201094,23 @@
     "tier": "M1",
     "category": "Theft",
     "note": "booked 6/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T22:50:34Z",
+    "inmate_number": "2178818",
+    "name": "CHAPMAN KIMBERLY",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T22:50:34Z",
+    "inmate_number": "2742989",
+    "name": "BIEHL MICHAEL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
   }
 ]
