@@ -183091,48 +183091,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-29T23:48:48Z",
-    "inmate_number": "14565132",
-    "name": "LAGRANDIER ANGEL",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "booked 5/29/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T23:48:48Z",
-    "inmate_number": "1552850",
-    "name": "HARRIS MARCUS",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T23:48:48Z",
-    "inmate_number": "1530998",
-    "name": "HADDEN CLARENCE",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-29T23:48:48Z",
-    "inmate_number": "1600869",
-    "name": "BECHMANN ANGELA",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-29T23:48:48Z",
-    "inmate_number": "2683564",
-    "name": "SIMS KEVIN",
+    "date": "2026-05-29",
     "tier": null,
-    "category": null,
-    "note": "booked 5/29/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -200143,5 +200128,23 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-06T00:11:40Z",
+    "inmate_number": "14488496",
+    "name": "MINIARD MELISSA",
+    "tier": "M1",
+    "category": "Unauthorized use of a vehicle",
+    "note": "booked 6/5/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-06T00:11:40Z",
+    "inmate_number": "14812792",
+    "name": "JOHNSON TYQUAN",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
