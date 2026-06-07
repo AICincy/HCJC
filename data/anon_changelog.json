@@ -184729,21 +184729,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T21:37:10Z",
-    "inmate_number": "14732074",
-    "name": "BRADSHAW AHMIRA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T21:37:10Z",
-    "inmate_number": "1691229",
-    "name": "MOBLEY LARRY",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-31",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)"
   },
   {
     "event": "updated",
@@ -201763,5 +201763,41 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T21:54:37Z",
+    "inmate_number": "14640288",
+    "name": "PEREZ OSMAR",
+    "tier": "MM",
+    "category": "Operating a motor vehicle without reasonable control",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T21:54:37Z",
+    "inmate_number": "2822531",
+    "name": "BRYANT RAESHEENA",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-07T21:54:37Z",
+    "inmate_number": "14581770",
+    "name": "JEWELL ANTWAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-07T21:54:37Z",
+    "inmate_number": "14290928",
+    "name": "WASHINGTON CALVIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
