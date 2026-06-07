@@ -184561,12 +184561,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T16:13:21Z",
-    "inmate_number": "445158",
-    "name": "PUCK BRYAN",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -201667,5 +201664,14 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T16:15:54Z",
+    "inmate_number": "2459860",
+    "name": "VORNBERG ANDREW",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
   }
 ]
