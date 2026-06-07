@@ -184537,12 +184537,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T11:49:44Z",
-    "inmate_number": "2269421",
-    "name": "WISE CARLA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -201544,5 +201541,50 @@
     "tier": "M4",
     "category": "Criminal trespass",
     "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T12:15:16Z",
+    "inmate_number": "14812850",
+    "name": "WOODS LILY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T12:15:16Z",
+    "inmate_number": "1892463",
+    "name": "ROLAND FERNANDO",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-07T12:15:16Z",
+    "inmate_number": "14061178",
+    "name": "HENRY JONATHAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-07T12:15:16Z",
+    "inmate_number": "1879431",
+    "name": "LEE MAURICE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-07T12:15:16Z",
+    "inmate_number": "14689880",
+    "name": "LOPEZ-CHILEL MIGUEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
