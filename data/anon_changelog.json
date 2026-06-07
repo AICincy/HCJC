@@ -184807,21 +184807,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T23:39:38Z",
-    "inmate_number": "14327000",
-    "name": "ABERNATHY CHARLISHA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T23:39:38Z",
-    "inmate_number": "14811385",
-    "name": "SMITH GARY",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -201858,6 +201852,33 @@
     "name": "MAXBERRY BRYAN",
     "tier": "M1",
     "category": "Domestic violence",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T23:52:28Z",
+    "inmate_number": "14244981",
+    "name": "WILLIAMS ADAMU",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T23:52:28Z",
+    "inmate_number": "14812872",
+    "name": "ENGLISH LAZIRE",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T23:52:28Z",
+    "inmate_number": "14812873",
+    "name": "PHELPS ZIRIAHA",
+    "tier": "M4",
+    "category": "Criminal trespass",
     "note": "booked 6/7/26"
   }
 ]
