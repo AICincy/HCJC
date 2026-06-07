@@ -40,5 +40,19 @@
     "seen_count": 1244,
     "note": "HCSO list sweep succeeded; automated access restored.",
     "prev_sha256": "c3c91899cd60fb048331715d4e60a5895e64d2e133fd45fe08b1e701c8069a4f"
+  },
+  {
+    "timestamp_utc": "2026-06-07T10:47:29Z",
+    "event": "blocked",
+    "prev_count": 1275,
+    "seen_count": 0,
+    "surnames_total": 26,
+    "surnames_failed": 26,
+    "failed_fraction": 1.0,
+    "http_status_counts": {},
+    "block_sample": null,
+    "roster_stale_hours": 1.0,
+    "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+    "prev_sha256": "25384f750d0db6e721c3d01791de14898217c5c2edf2360c1abd6904ec7ca3c6"
   }
 ]
