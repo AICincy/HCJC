@@ -184603,48 +184603,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T19:11:32Z",
-    "inmate_number": "2089737",
-    "name": "BURBANKS ANTHONY",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T19:44:57Z",
-    "inmate_number": "14812047",
-    "name": "PEREZ-AMBROCIO ROLDAN",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-31T19:44:57Z",
-    "inmate_number": "2425228",
-    "name": "BRONAUGH BREIA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-31T19:44:57Z",
-    "inmate_number": "14812033",
-    "name": "KAISERLIAN EMANUEL",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-31T19:44:57Z",
-    "inmate_number": "2177042",
-    "name": "WALKER TERRENCE",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-31",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
@@ -201700,5 +201691,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T19:47:37Z",
+    "inmate_number": "14695015",
+    "name": "MEECE CHRISTOPHER",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/7/26"
   }
 ]
