@@ -184669,30 +184669,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T20:40:36Z",
-    "inmate_number": "14162304",
-    "name": "KOVACH ZACHERY",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T20:40:36Z",
-    "inmate_number": "14688231",
-    "name": "JOHNSON DEVARI",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T20:40:36Z",
-    "inmate_number": "1536997",
-    "name": "WILLIAMS RONALD",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
@@ -201711,6 +201702,51 @@
     "name": "SCARPINSKI JOSEPH",
     "tier": null,
     "category": null,
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T20:54:47Z",
+    "inmate_number": "14678959",
+    "name": "DELONEY JASMIN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T20:54:47Z",
+    "inmate_number": "14695015",
+    "name": "MEECE CHRISTOPHER",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T20:54:47Z",
+    "inmate_number": "14812868",
+    "name": "PEREZ ROGELIO",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T20:54:47Z",
+    "inmate_number": "1748772",
+    "name": "PERKINS DENISE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T20:54:47Z",
+    "inmate_number": "2822531",
+    "name": "BRYANT RAESHEENA",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
     "note": "booked 6/7/26"
   }
 ]
