@@ -184141,48 +184141,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T01:25:43Z",
-    "inmate_number": "14303324",
-    "name": "GREER AARON",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T01:25:43Z",
-    "inmate_number": "14683043",
-    "name": "RUSSO KADENCE",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T01:25:43Z",
-    "inmate_number": "14812016",
-    "name": "ISRAEL KEIILAH",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T01:25:43Z",
-    "inmate_number": "14805439",
-    "name": "SMITH DEREK",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T01:25:43Z",
-    "inmate_number": "14812018",
-    "name": "ALCORN AARON",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-31",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -201184,5 +201175,32 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T01:34:45Z",
+    "inmate_number": "14689880",
+    "name": "LOPEZ-CHILEL MIGUEL",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T01:34:45Z",
+    "inmate_number": "2178818",
+    "name": "CHAPMAN KIMBERLY",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T01:34:45Z",
+    "inmate_number": "797123",
+    "name": "HARMON WAYNE",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": ""
   }
 ]
