@@ -184249,66 +184249,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T05:32:31Z",
-    "inmate_number": "1340897",
-    "name": "ALLEN FREDERICK",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/30/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T05:32:31Z",
-    "inmate_number": "14210348",
-    "name": "JETER LASHE",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T05:32:31Z",
-    "inmate_number": "14444185",
-    "name": "RIDGEWAY RAHNYIA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T05:32:31Z",
-    "inmate_number": "14812026",
-    "name": "TERRY TARON",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T05:32:31Z",
-    "inmate_number": "2340752",
-    "name": "CORNELISON TERRON",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T05:32:31Z",
-    "inmate_number": "2436744",
-    "name": "LISEMBEE WILSON",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-31T05:32:31Z",
-    "inmate_number": "14621665",
-    "name": "SIMON YENNER",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -201328,5 +201307,95 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "14105015",
+    "name": "HERNDON LENDALE",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "14184652",
+    "name": "RICHMOND SIERRA",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "14290928",
+    "name": "WASHINGTON CALVIN",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "14319384",
+    "name": "BROWN BRANDON",
+    "tier": "M1",
+    "category": "Carrying concealed weapons",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "14650026",
+    "name": "CRUTCHFIELD MIKAYLA",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: parks and recreation",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "1465577",
+    "name": "LOVE PRIEST",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "14776884",
+    "name": "BIZZELL ADRIAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "1846518",
+    "name": "HICKS JOHN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "1892703",
+    "name": "SOLOMON MIKE",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: dangerous weapons and fireworks (discharging firearms)",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T05:50:40Z",
+    "inmate_number": "2618040",
+    "name": "LOWRY LEANDRE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/7/26"
   }
 ]
