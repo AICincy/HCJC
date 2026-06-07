@@ -184549,21 +184549,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T15:11:47Z",
-    "inmate_number": "2425228",
-    "name": "BRONAUGH BREIA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-05-31T15:11:47Z",
-    "inmate_number": "14608635",
-    "name": "HAWKINS CHARLES",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -201655,5 +201649,23 @@
     "tier": "M1",
     "category": "Assault",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T15:45:37Z",
+    "inmate_number": "14722915",
+    "name": "WASHINGTON MICHAEL",
+    "tier": "F2",
+    "category": "Robbery",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T15:45:37Z",
+    "inmate_number": "2459860",
+    "name": "VORNBERG ANDREW",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 6/7/26"
   }
 ]
