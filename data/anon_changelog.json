@@ -184098,6 +184098,12 @@
     "category": "Felonious assault"
   },
   {
+    "event": "released",
+    "date": "2026-05-30",
+    "tier": "M1",
+    "category": "Aggravated menacing"
+  },
+  {
     "event": "updated",
     "date": "2026-05-31",
     "tier": null,
@@ -184771,30 +184777,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T22:37:19Z",
-    "inmate_number": "14812052",
-    "name": "JONES KWAHYIA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T22:37:19Z",
-    "inmate_number": "1768537",
-    "name": "BISHOP BRANDON",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T22:37:19Z",
-    "inmate_number": "1691229",
-    "name": "MOBLEY LARRY",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -201841,5 +201838,14 @@
     "tier": "F2",
     "category": "Felonious assault",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T22:51:21Z",
+    "inmate_number": "2496554",
+    "name": "GIBSON DONTE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
   }
 ]
