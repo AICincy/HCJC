@@ -184687,48 +184687,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T21:08:43Z",
-    "inmate_number": "14162304",
-    "name": "KOVACH ZACHERY",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T21:08:43Z",
-    "inmate_number": "14732074",
-    "name": "BRADSHAW AHMIRA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T21:08:43Z",
-    "inmate_number": "1691229",
-    "name": "MOBLEY LARRY",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T21:08:43Z",
-    "inmate_number": "1536997",
-    "name": "WILLIAMS RONALD",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T21:08:43Z",
-    "inmate_number": "1768537",
-    "name": "BISHOP BRANDON",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-31",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)"
+  },
+  {
+    "event": "booked",
+    "date": "2026-05-31",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: traffic regulation"
   },
   {
     "event": "updated",
@@ -201747,6 +201744,24 @@
     "name": "BRYANT RAESHEENA",
     "tier": "M4",
     "category": "Failure to disclose personal information",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T21:28:18Z",
+    "inmate_number": "14678959",
+    "name": "DELONEY JASMIN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T21:28:18Z",
+    "inmate_number": "2146402",
+    "name": "WILLIAMS LAMONT",
+    "tier": "M1",
+    "category": "Domestic violence",
     "note": "booked 6/7/26"
   }
 ]
