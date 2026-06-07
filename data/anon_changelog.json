@@ -184092,6 +184092,12 @@
     "category": "Criminal damaging"
   },
   {
+    "event": "released",
+    "date": "2026-05-30",
+    "tier": "F2",
+    "category": "Felonious assault"
+  },
+  {
     "event": "updated",
     "date": "2026-05-31",
     "tier": null,
@@ -184747,21 +184753,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T22:08:32Z",
-    "inmate_number": "14732074",
-    "name": "BRADSHAW AHMIRA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T22:08:32Z",
-    "inmate_number": "1768537",
-    "name": "BISHOP BRANDON",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-31",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: traffic regulation"
   },
   {
     "event": "booked",
@@ -201799,5 +201805,41 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T22:24:21Z",
+    "inmate_number": "1302114",
+    "name": "WELLS SHARON",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T22:24:21Z",
+    "inmate_number": "14458923",
+    "name": "JOHNSON JADE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-07T22:24:21Z",
+    "inmate_number": "2146402",
+    "name": "WILLIAMS LAMONT",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T22:24:21Z",
+    "inmate_number": "2496554",
+    "name": "GIBSON DONTE",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked (date not reported)"
   }
 ]
