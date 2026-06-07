@@ -184795,21 +184795,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-05-31T23:09:32Z",
-    "inmate_number": "14327000",
-    "name": "ABERNATHY CHARLISHA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-05-31T23:09:32Z",
-    "inmate_number": "14812052",
-    "name": "JONES KWAHYIA",
+    "date": "2026-05-31",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
@@ -201847,5 +201841,23 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T23:25:21Z",
+    "inmate_number": "14812872",
+    "name": "ENGLISH LAZIRE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-07T23:25:21Z",
+    "inmate_number": "2838330",
+    "name": "MAXBERRY BRYAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/7/26"
   }
 ]
