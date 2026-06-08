@@ -184819,12 +184819,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T00:09:52Z",
-    "inmate_number": "14683680",
-    "name": "WOODWARD CIYANA",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-01",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -201879,6 +201882,33 @@
     "name": "PHELPS ZIRIAHA",
     "tier": "M4",
     "category": "Criminal trespass",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T00:44:07Z",
+    "inmate_number": "14458923",
+    "name": "JOHNSON JADE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T00:44:07Z",
+    "inmate_number": "14640288",
+    "name": "PEREZ OSMAR",
+    "tier": "MM",
+    "category": "Operating a motor vehicle without reasonable control",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T00:44:07Z",
+    "inmate_number": "2382487",
+    "name": "MAYS DOROTHY",
+    "tier": null,
+    "category": null,
     "note": "booked 6/7/26"
   }
 ]
