@@ -184921,75 +184921,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T03:49:50Z",
-    "inmate_number": "1257340",
-    "name": "ST CLAIR DANNY",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T03:49:50Z",
-    "inmate_number": "14122527",
-    "name": "WHITEHEAD KEYVAUGHN",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T03:49:50Z",
-    "inmate_number": "14512246",
-    "name": "JOHNSON HANNAH",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T03:49:50Z",
-    "inmate_number": "14647247",
-    "name": "HARPER ELLIOTT",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T03:49:50Z",
-    "inmate_number": "1831148",
-    "name": "JONES HUGH",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-01T03:49:50Z",
-    "inmate_number": "2558757",
-    "name": "METZ JENNIFER",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T03:49:50Z",
-    "inmate_number": "2614467",
-    "name": "OLIVER DAVID",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-01T03:49:50Z",
-    "inmate_number": "14683680",
-    "name": "WOODWARD CIYANA",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-01",
+    "tier": "M1",
+    "category": "Theft"
   },
   {
     "event": "updated",
@@ -202000,5 +201982,68 @@
     "tier": "M1",
     "category": "Assault",
     "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T04:10:31Z",
+    "inmate_number": "2171834",
+    "name": "PRICE BRANDON",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T04:10:31Z",
+    "inmate_number": "2413129",
+    "name": "PRICE JOSHUA",
+    "tier": "MM",
+    "category": "Driving an unsafe vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T04:10:31Z",
+    "inmate_number": "2511635",
+    "name": "BOULDIN DANIEL",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: parks and recreation",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T04:10:31Z",
+    "inmate_number": "2554264",
+    "name": "HEENEY ANDREA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T04:10:31Z",
+    "inmate_number": "866097",
+    "name": "SPEARS GARRETT",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T04:10:31Z",
+    "inmate_number": "2795141",
+    "name": "CLEM KASSANDRA",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-08T04:10:31Z",
+    "inmate_number": "1302114",
+    "name": "WELLS SHARON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
