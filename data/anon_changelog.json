@@ -185179,12 +185179,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T11:19:25Z",
-    "inmate_number": "14090346",
-    "name": "PITTMAN BRITTNEY",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
@@ -202168,5 +202165,32 @@
     "tier": "MM",
     "category": "Expired operators license",
     "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-08T12:44:06Z",
+    "inmate_number": "14419108",
+    "name": "BYRD VALERIE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-08T12:44:06Z",
+    "inmate_number": "1460339",
+    "name": "HILL MARK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-08T12:44:06Z",
+    "inmate_number": "2841823",
+    "name": "STEWART CARRERA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
