@@ -184831,48 +184831,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-01T01:28:45Z",
-    "inmate_number": "14811385",
-    "name": "SMITH GARY",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T01:28:45Z",
-    "inmate_number": "1967208",
-    "name": "HENRY DEZIRAE",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T01:28:45Z",
-    "inmate_number": "2208910",
-    "name": "DILLINGHAM TALISHA",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-01T01:28:45Z",
-    "inmate_number": "14812031",
-    "name": "AVALOS-POLANCO NORA",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-01T01:28:45Z",
-    "inmate_number": "14693848",
-    "name": "COOPER RICHAY",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-01",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-06-01",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -201910,5 +201907,32 @@
     "tier": null,
     "category": null,
     "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T01:35:44Z",
+    "inmate_number": "14637710",
+    "name": "QUALLS ARMONI",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-08T01:35:44Z",
+    "inmate_number": "14759246",
+    "name": "MORALES MARINO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-08T01:35:44Z",
+    "inmate_number": "2796133",
+    "name": "WENSTRUP PATRICK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
