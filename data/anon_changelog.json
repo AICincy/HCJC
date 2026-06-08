@@ -185131,75 +185131,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T09:20:56Z",
-    "inmate_number": "14679643",
-    "name": "HILL MAURICE",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-01T09:20:56Z",
-    "inmate_number": "14812065",
-    "name": "HARPER MORIAH",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-01T09:20:56Z",
-    "inmate_number": "14812068",
-    "name": "SMITH LENNIX",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T09:20:56Z",
-    "inmate_number": "2403632",
-    "name": "DUGGER TIFFANY",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T09:20:56Z",
-    "inmate_number": "2532617",
-    "name": "GLOVER LARON",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-01T09:20:56Z",
-    "inmate_number": "2695281",
-    "name": "GARVEY JONATHAN",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T09:20:56Z",
-    "inmate_number": "2748696",
-    "name": "BOEHM MATTHEW",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-01T09:20:56Z",
-    "inmate_number": "14122527",
-    "name": "WHITEHEAD KEYVAUGHN",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -202174,5 +202150,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T11:01:54Z",
+    "inmate_number": "14061483",
+    "name": "BONNER TIMOTHY",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T11:01:54Z",
+    "inmate_number": "14166805",
+    "name": "BRADFORD ALEXANDER",
+    "tier": "MM",
+    "category": "Expired operators license",
+    "note": ""
   }
 ]
