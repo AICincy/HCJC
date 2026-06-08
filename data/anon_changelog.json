@@ -184873,66 +184873,51 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-01T02:28:06Z",
-    "inmate_number": "14683680",
-    "name": "WOODWARD CIYANA",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-01T02:28:06Z",
-    "inmate_number": "1967208",
-    "name": "HENRY DEZIRAE",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T02:28:06Z",
-    "inmate_number": "2182130",
-    "name": "DAFLER JAMIE",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 5/31/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-01T02:28:06Z",
-    "inmate_number": "2208910",
-    "name": "DILLINGHAM TALISHA",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T02:28:06Z",
-    "inmate_number": "2558757",
-    "name": "METZ JENNIFER",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-01T02:28:06Z",
-    "inmate_number": "14812028",
-    "name": "AVALOS-POLANCO JOSUE",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-01T02:28:06Z",
-    "inmate_number": "14162304",
-    "name": "KOVACH ZACHERY",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-01",
+    "tier": "M1",
+    "category": "Theft"
   },
   {
     "event": "booked",
@@ -201934,5 +201919,86 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T02:41:39Z",
+    "inmate_number": "14637710",
+    "name": "QUALLS ARMONI",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T02:41:39Z",
+    "inmate_number": "14773956",
+    "name": "BARBAS-SAMUDIO HAROLD",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T02:41:39Z",
+    "inmate_number": "14812426",
+    "name": "MCVEY ERIC",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T02:41:39Z",
+    "inmate_number": "14812872",
+    "name": "ENGLISH LAZIRE",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T02:41:39Z",
+    "inmate_number": "14812873",
+    "name": "PHELPS ZIRIAHA",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T02:41:39Z",
+    "inmate_number": "2171834",
+    "name": "PRICE BRANDON",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T02:41:39Z",
+    "inmate_number": "2256705",
+    "name": "FOLZENLOGEN DONALD",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T02:41:39Z",
+    "inmate_number": "2413129",
+    "name": "PRICE JOSHUA",
+    "tier": "MM",
+    "category": "Driving an unsafe vehicle",
+    "note": "booked 6/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T02:41:39Z",
+    "inmate_number": "2663197",
+    "name": "SIMS LAASIA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/7/26"
   }
 ]
