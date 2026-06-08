@@ -186169,21 +186169,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T23:33:32Z",
-    "inmate_number": "1403090",
-    "name": "SARTOR DECARLOS",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-01T23:33:32Z",
-    "inmate_number": "2566190",
-    "name": "MEECE HERSTEL",
+    "date": "2026-06-01",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-01",
+    "tier": "M1",
+    "category": "Falsification"
   },
   {
     "event": "updated",
@@ -203104,5 +203104,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T23:35:26Z",
+    "inmate_number": "14184678",
+    "name": "RAMSEY RONALD",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-08T23:35:26Z",
+    "inmate_number": "1942386",
+    "name": "JOHNSON MICHAEL",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: vicious dogs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-08T23:35:26Z",
+    "inmate_number": "2445475",
+    "name": "FULLBECK RYAN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked (date not reported)"
   }
 ]
