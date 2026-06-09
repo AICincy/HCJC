@@ -186715,39 +186715,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T12:09:48Z",
-    "inmate_number": "14475642",
-    "name": "SHERRER VERSAUN",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T12:09:48Z",
-    "inmate_number": "2630474",
-    "name": "GRONE KYNDRA",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-02T12:09:48Z",
-    "inmate_number": "14811527",
-    "name": "RAMIREZ-MORROQUIN NARY",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-02T12:09:48Z",
-    "inmate_number": "14787432",
-    "name": "WYATT SABRINA",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-02",
+    "tier": "M1",
+    "category": "Aggravated menacing"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-02",
+    "tier": "M1",
+    "category": "Discharging a firearm on or near prohibited premises"
   },
   {
     "event": "booked",
@@ -203497,5 +203497,41 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T13:00:14Z",
+    "inmate_number": "2445475",
+    "name": "FULLBECK RYAN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T13:00:14Z",
+    "inmate_number": "14687505",
+    "name": "HARRIS BENJAMIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T13:00:14Z",
+    "inmate_number": "14700957",
+    "name": "VELASQUEZ-PEREZ YIMER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T13:00:14Z",
+    "inmate_number": "14812805",
+    "name": "YADGOROV DASTON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
