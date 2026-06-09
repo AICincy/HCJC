@@ -162337,6 +162337,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-05-18",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
+    "event": "booked",
     "date": "2026-05-19",
     "tier": null,
     "category": null
@@ -170026,6 +170032,12 @@
     "date": "2026-05-21",
     "tier": "M2",
     "category": "Criminal damaging"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-21",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
@@ -186301,48 +186313,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T02:28:47Z",
-    "inmate_number": "1124403",
-    "name": "BUSH WILLIE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T02:28:47Z",
-    "inmate_number": "14281075",
-    "name": "FRYE KVAUGHNTE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T02:28:47Z",
-    "inmate_number": "14682538",
-    "name": "THOMPSON SAPPHIRE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T02:28:47Z",
-    "inmate_number": "14812237",
-    "name": "SAPKOTA SUNIL",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T02:28:47Z",
-    "inmate_number": "1908199",
-    "name": "BEYAH BILAL",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-02",
+    "tier": "F4",
+    "category": "Attempt to commit an offense"
   },
   {
     "event": "booked",
@@ -203317,5 +203320,77 @@
     "tier": "M2",
     "category": "Obstructing official business",
     "note": "booked 6/8/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T03:46:35Z",
+    "inmate_number": "14281130",
+    "name": "JONES JAHRE",
+    "tier": "MM",
+    "category": "Code not found in Ohio Revised Code (HCSO data artifact)",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T03:46:35Z",
+    "inmate_number": "14397774",
+    "name": "DUSENBURY ANNA",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T03:46:35Z",
+    "inmate_number": "14669001",
+    "name": "BELL DEVANTE",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T03:46:35Z",
+    "inmate_number": "14756830",
+    "name": "KENNEDY NGANDU",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T03:46:35Z",
+    "inmate_number": "14808833",
+    "name": "ADAMS MACKENZIE",
+    "tier": "M1",
+    "category": "Unauthorized use of property",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T03:46:35Z",
+    "inmate_number": "1960443",
+    "name": "ADAMS EUGENE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T03:46:35Z",
+    "inmate_number": "1915793",
+    "name": "BUNCH GARY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T03:46:35Z",
+    "inmate_number": "1757601",
+    "name": "GOODSON DUANE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
