@@ -186187,57 +186187,57 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T00:11:18Z",
-    "inmate_number": "1403090",
-    "name": "SARTOR DECARLOS",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T00:11:18Z",
-    "inmate_number": "14095584",
-    "name": "SMITH RAYSHAUN",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T00:11:18Z",
-    "inmate_number": "14812225",
-    "name": "LOPEZ ALFREDO",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T00:11:18Z",
-    "inmate_number": "14812229",
-    "name": "BASS LANCE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T00:11:18Z",
-    "inmate_number": "2392783",
-    "name": "LACKEY SARA",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-02T00:11:18Z",
-    "inmate_number": "2309215",
-    "name": "LONG DANIEL",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-02",
+    "tier": "M1",
+    "category": "Falsification"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-02",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-06-02",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -203221,5 +203221,59 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T01:17:33Z",
+    "inmate_number": "14203736",
+    "name": "BARNES KEANU",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T01:17:33Z",
+    "inmate_number": "14514673",
+    "name": "SHELTON DAQUAN",
+    "tier": "M1",
+    "category": "Operating a motor vehicle without lawful registration",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T01:17:33Z",
+    "inmate_number": "14652984",
+    "name": "HENDERSON JEHAD",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T01:17:33Z",
+    "inmate_number": "14773429",
+    "name": "WALKER KEYSHAUN",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T01:17:33Z",
+    "inmate_number": "2445475",
+    "name": "FULLBECK RYAN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T01:17:33Z",
+    "inmate_number": "2575959",
+    "name": "EVANS KRISTIN",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
   }
 ]
