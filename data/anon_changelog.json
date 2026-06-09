@@ -186697,21 +186697,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T10:34:34Z",
-    "inmate_number": "14564425",
-    "name": "REESE KELVIN",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T10:34:34Z",
-    "inmate_number": "2630474",
-    "name": "GRONE KYNDRA",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-02",
+    "tier": "M1",
+    "category": "Discharging a firearm on or near prohibited premises"
   },
   {
     "event": "booked",
@@ -203452,5 +203452,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T10:43:47Z",
+    "inmate_number": "14637204",
+    "name": "TOMLIN SEANJAI",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T10:43:47Z",
+    "inmate_number": "2335874",
+    "name": "WENDLING NATHANIEL",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/9/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T10:43:47Z",
+    "inmate_number": "2458635",
+    "name": "JONES SEAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/9/26"
   }
 ]
