@@ -186241,75 +186241,63 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T01:31:16Z",
-    "inmate_number": "14765496",
-    "name": "MAURICIO JUANITO",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T01:31:16Z",
-    "inmate_number": "14804298",
-    "name": "THIAM DJIBY",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T01:31:16Z",
-    "inmate_number": "14812225",
-    "name": "LOPEZ ALFREDO",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T01:31:16Z",
-    "inmate_number": "14812233",
-    "name": "DEATON TRAVIS",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T01:31:16Z",
-    "inmate_number": "14812231",
-    "name": "ARMSTRONG JALIAH",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T01:31:16Z",
-    "inmate_number": "1673778",
-    "name": "FRYE ZEE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T01:31:16Z",
-    "inmate_number": "1947658",
-    "name": "BROWN HORACE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T01:31:16Z",
-    "inmate_number": "2561404",
-    "name": "SMITH JOSHUA",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-02",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-02",
+    "tier": "M1",
+    "category": "Falsification"
   },
   {
     "event": "updated",
@@ -203275,5 +203263,59 @@
     "tier": "M1",
     "category": "Driving without a valid license",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T02:20:16Z",
+    "inmate_number": "14231107",
+    "name": "DICKEY CHRISTOPHER",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T02:20:16Z",
+    "inmate_number": "14281130",
+    "name": "JONES JAHRE",
+    "tier": "MM",
+    "category": "Code not found in Ohio Revised Code (HCSO data artifact)",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T02:20:16Z",
+    "inmate_number": "14417222",
+    "name": "JONES KALUB",
+    "tier": "M1",
+    "category": "Driving under FRA suspension",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T02:20:16Z",
+    "inmate_number": "14669001",
+    "name": "BELL DEVANTE",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 6/8/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T02:20:16Z",
+    "inmate_number": "2575959",
+    "name": "EVANS KRISTIN",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T02:20:16Z",
+    "inmate_number": "2812722",
+    "name": "HUBER ERIC",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/8/26"
   }
 ]
