@@ -37032,6 +37032,12 @@
     "category": "Criminal damaging"
   },
   {
+    "event": "released",
+    "date": "2026-05-13",
+    "tier": "M1",
+    "category": "Receiving stolen property"
+  },
+  {
     "event": "booked",
     "date": "2026-05-14",
     "tier": null,
@@ -180150,6 +180156,12 @@
     "category": "Aggravated arson"
   },
   {
+    "event": "booked",
+    "date": "2026-05-27",
+    "tier": "M1",
+    "category": "Receiving stolen property"
+  },
+  {
     "event": "updated",
     "date": "2026-05-28",
     "tier": null,
@@ -181699,6 +181711,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-05-28",
+    "tier": "M1",
+    "category": "Receiving stolen property"
+  },
+  {
+    "event": "updated",
     "date": "2026-05-28",
     "tier": "M1",
     "category": "Receiving stolen property"
@@ -186529,102 +186547,81 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "1327535",
-    "name": "COLWELL LANNIE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "14285591",
-    "name": "DENHAM PARISH",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "14299620",
-    "name": "SHEPPARD ROBERT",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "14453449",
-    "name": "JACOBS ISAIAH",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "14625182",
-    "name": "SIMPSON KENYON",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "14730465",
-    "name": "WHITE ARTYRA",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "14812255",
-    "name": "NURMATOV TEMUR",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "1496493",
-    "name": "TOLBERT DONALD",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "1543257",
-    "name": "CLARK BRIAN",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "2479763",
-    "name": "WILSON ROY",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T07:13:57Z",
-    "inmate_number": "2636514",
-    "name": "ELLIS BROOK",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-02",
+    "tier": "M1",
+    "category": "Unauthorized use of a vehicle"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-02",
+    "tier": "M1",
+    "category": "Probation violation"
   },
   {
     "event": "booked",
@@ -203428,5 +203425,32 @@
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
     "note": "booked 6/9/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T08:14:29Z",
+    "inmate_number": "14450817",
+    "name": "FOSTER ARIAH",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 6/9/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T08:14:29Z",
+    "inmate_number": "14669001",
+    "name": "BELL DEVANTE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T08:14:29Z",
+    "inmate_number": "14281130",
+    "name": "JONES JAHRE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
