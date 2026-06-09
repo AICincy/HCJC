@@ -186751,21 +186751,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T13:40:59Z",
-    "inmate_number": "2778450",
-    "name": "NELSON ERICA",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-02T13:40:59Z",
-    "inmate_number": "2663700",
-    "name": "SLEDGE CYRON",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -203530,6 +203524,78 @@
     "timestamp_utc": "2026-06-09T13:00:14Z",
     "inmate_number": "14812805",
     "name": "YADGOROV DASTON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T13:57:43Z",
+    "inmate_number": "14778953",
+    "name": "SHARP MATTHEW",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/9/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T13:57:43Z",
+    "inmate_number": "2337097",
+    "name": "COLLINS HADIYAH",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 6/9/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T13:57:43Z",
+    "inmate_number": "2445475",
+    "name": "FULLBECK RYAN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T13:57:43Z",
+    "inmate_number": "2663197",
+    "name": "SIMS LAASIA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T13:57:43Z",
+    "inmate_number": "14812652",
+    "name": "DUEHART TYAUNA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T13:57:43Z",
+    "inmate_number": "2648979",
+    "name": "ROLAND DAMON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T13:57:43Z",
+    "inmate_number": "14811420",
+    "name": "SY IBRAHIMA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T13:57:43Z",
+    "inmate_number": "14802176",
+    "name": "VALERIUS JACOB",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
