@@ -186349,102 +186349,75 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "14037461",
-    "name": "HURST RANDALL",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "14226429",
-    "name": "JOHNSON LAMONTE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "14281075",
-    "name": "FRYE KVAUGHNTE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "14812231",
-    "name": "ARMSTRONG JALIAH",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "14812233",
-    "name": "DEATON TRAVIS",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "1673778",
-    "name": "FRYE ZEE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "1665833",
-    "name": "FERGUSON JAMES",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "1908199",
-    "name": "BEYAH BILAL",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "1947658",
-    "name": "BROWN HORACE",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "2051933",
-    "name": "MOORE HENRICO",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": "booked 6/1/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-02T03:50:55Z",
-    "inmate_number": "2561404",
-    "name": "SMITH JOSHUA",
+    "date": "2026-06-02",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-02",
+    "tier": "F2",
+    "category": "Felonious assault"
   },
   {
     "event": "updated",
@@ -203389,6 +203362,60 @@
     "timestamp_utc": "2026-06-09T03:46:35Z",
     "inmate_number": "1757601",
     "name": "GOODSON DUANE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-09T05:23:59Z",
+    "inmate_number": "14415227",
+    "name": "REED AUSTEN",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/9/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T05:23:59Z",
+    "inmate_number": "14756830",
+    "name": "KENNEDY NGANDU",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T05:23:59Z",
+    "inmate_number": "14808833",
+    "name": "ADAMS MACKENZIE",
+    "tier": "M1",
+    "category": "Unauthorized use of property",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T05:23:59Z",
+    "inmate_number": "2279441",
+    "name": "BOWENS KATHLEEN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-09T05:23:59Z",
+    "inmate_number": "2812722",
+    "name": "HUBER ERIC",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-09T05:23:59Z",
+    "inmate_number": "14695015",
+    "name": "MEECE CHRISTOPHER",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
