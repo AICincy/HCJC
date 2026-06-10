@@ -192799,39 +192799,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T22:34:55Z",
-    "inmate_number": "14427694",
-    "name": "KATTUS NICHOLAS",
+    "date": "2026-06-03",
     "tier": "F3",
-    "category": "Tampering with evidence",
-    "note": ""
+    "category": "Tampering with evidence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T22:34:55Z",
-    "inmate_number": "14812553",
-    "name": "KING JACOB",
+    "date": "2026-06-03",
     "tier": "M1",
-    "category": "Misuse of credit cards",
-    "note": "booked 6/3/26"
+    "category": "Misuse of credit cards"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T22:34:55Z",
-    "inmate_number": "2549166",
-    "name": "CRADDOCK ISREAL",
+    "date": "2026-06-03",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 6/3/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-03T22:34:55Z",
-    "inmate_number": "2455880",
-    "name": "POLLITT SHIANE",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-03",
+    "tier": "M2",
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
@@ -204691,6 +204685,96 @@
     "timestamp_utc": "2026-06-10T22:19:26Z",
     "inmate_number": "14794967",
     "name": "ANENIES GABRIEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "14213549",
+    "name": "KINZER CHARELLE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "14634420",
+    "name": "BRAVO JOSE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "14754311",
+    "name": "MILLER FAYTH",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/10/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "14784514",
+    "name": "HUBBARD JERMAUD",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "16593",
+    "name": "COOK DENNIS",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "2665681",
+    "name": "BROWN BRANDON",
+    "tier": "F3",
+    "category": "Having weapons while under disability",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "14514673",
+    "name": "SHELTON DAQUAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "14577869",
+    "name": "SHELTON SOLOMON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "2741832",
+    "name": "SINGLETON BRIANNA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T23:04:52Z",
+    "inmate_number": "2687301",
+    "name": "THOMPSON KISHERA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
