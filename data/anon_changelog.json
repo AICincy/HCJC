@@ -191179,93 +191179,75 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "14454528",
-    "name": "ALBRIGHT MARIO",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "14435718",
-    "name": "HUFF GAVIN",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "14561712",
-    "name": "TILLER GABERIEL",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "14704208",
-    "name": "RUSH ASHLEY",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "14710232",
-    "name": "COLLINS MELISSA",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "14812377",
-    "name": "SOW WOURY",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "2042972",
-    "name": "WILLIAMS RONEEKA",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "2492021",
-    "name": "CURLESS JOHN",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "2652577",
-    "name": "EGINGTON DANIEL",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "booked 6/2/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T02:42:13Z",
-    "inmate_number": "736249",
-    "name": "DEAN JOHNNIE",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-03",
+    "tier": "MM",
+    "category": "Criminal child enticement"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-03",
+    "tier": "M1",
+    "category": "Assault"
   },
   {
     "event": "updated",
@@ -203659,5 +203641,104 @@
     "tier": "F2",
     "category": "Burglary",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "1149509",
+    "name": "WILDER ANTONIO",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 6/9/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "14354371",
+    "name": "WOOTEN MARK",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "14813204",
+    "name": "ELLIS BRANDON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/9/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "2335874",
+    "name": "WENDLING NATHANIEL",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "2434816",
+    "name": "STEPHENS BRITTANY",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 6/9/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "2556271",
+    "name": "HOWARD NACEA",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 6/9/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "14483150",
+    "name": "COTTON TYLER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "14356015",
+    "name": "LARKINS LAJUAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "1405266",
+    "name": "MUSTAFA DAWUD",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "2474188",
+    "name": "REMBERT SHANTEZ",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T03:47:09Z",
+    "inmate_number": "14534696",
+    "name": "STYLES ROGER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
