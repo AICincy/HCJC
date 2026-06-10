@@ -191413,93 +191413,69 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "14449541",
-    "name": "WIGGINS TELON",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "booked 6/3/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "14710232",
-    "name": "COLLINS MELISSA",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "14733159",
-    "name": "CLARKE CIERA",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "booked 6/3/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "14759348",
-    "name": "HARRIS ZAMAR",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "booked 6/3/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "14811464",
-    "name": "SCHAPPACHER PYPER",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "booked 6/3/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "2711711",
-    "name": "CROSSITY STEPHON",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "booked 6/3/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "2725338",
-    "name": "LUESSEN MICHAEL",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "booked 6/3/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "2790069",
-    "name": "DAVIS KENDALL",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "2839413",
-    "name": "JANSEN ADAM",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-03T07:44:40Z",
-    "inmate_number": "14812229",
-    "name": "BASS LANCE",
+    "date": "2026-06-03",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-03",
+    "tier": "MM",
+    "category": "Turn and stop signals"
   },
   {
     "event": "booked",
@@ -203902,5 +203878,41 @@
     "tier": "M1",
     "category": "Assault",
     "note": "booked 6/10/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-10T08:34:41Z",
+    "inmate_number": "14809070",
+    "name": "ADKINS BRETT",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-10T08:34:41Z",
+    "inmate_number": "1602672",
+    "name": "IVORY NATHAN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-10T08:34:41Z",
+    "inmate_number": "2741832",
+    "name": "SINGLETON BRIANNA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-10T08:34:41Z",
+    "inmate_number": "14813203",
+    "name": "MODRESKI JADE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
