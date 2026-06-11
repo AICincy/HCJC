@@ -108,5 +108,12 @@
     "roster_stale_hours": 0.7,
     "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
     "prev_sha256": "f579b5e07e65598e0d97ee180a981ac92571d3c4fbf18897d0d735bae15648bd"
+  },
+  {
+    "timestamp_utc": "2026-06-11T23:03:14Z",
+    "event": "recovered",
+    "seen_count": 1212,
+    "note": "HCSO list sweep succeeded; automated access restored.",
+    "prev_sha256": "6d71efbf2a3b4e4084fb2de5c4759d57e22f053fb4b54a90b1556d3bedf14aaa"
   }
 ]
