@@ -193471,48 +193471,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-04T11:37:12Z",
-    "inmate_number": "1297074",
-    "name": "MONSON GREG",
+    "date": "2026-06-04",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-04T11:37:12Z",
-    "inmate_number": "1389996",
-    "name": "KEY LAWRENCE",
+    "date": "2026-06-04",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-04T11:37:12Z",
-    "inmate_number": "14039624",
-    "name": "RUSH STEVEN",
+    "date": "2026-06-04",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-04T11:37:12Z",
-    "inmate_number": "14542338",
-    "name": "POLING SCOTTY",
+    "date": "2026-06-04",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-04T11:37:12Z",
-    "inmate_number": "14561712",
-    "name": "TILLER GABERIEL",
+    "date": "2026-06-04",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-04",
+    "tier": "M1",
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
@@ -205321,5 +205312,68 @@
     "tier": "MM",
     "category": "Turn and stop signals",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-11T12:22:46Z",
+    "inmate_number": "14484974",
+    "name": "GEORGE NICKE",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-11T12:22:46Z",
+    "inmate_number": "1529884",
+    "name": "BROOKS CHRISTOPHER",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/11/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-11T12:22:46Z",
+    "inmate_number": "2523404",
+    "name": "COOK-MAYS CANDY",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/11/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-11T12:22:46Z",
+    "inmate_number": "2641135",
+    "name": "THARP RYAN",
+    "tier": "M1",
+    "category": "Using weapons while intoxicated",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-11T12:22:46Z",
+    "inmate_number": "1712471",
+    "name": "BRINKDOPKE FRED",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-11T12:22:46Z",
+    "inmate_number": "14736225",
+    "name": "GOMEZ-PEREZ DIEGO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-11T12:22:46Z",
+    "inmate_number": "14113729",
+    "name": "THOMAS CARSON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
