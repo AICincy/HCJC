@@ -195943,48 +195943,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T22:40:54Z",
-    "inmate_number": "14532231",
-    "name": "PHILMORE BRAD",
+    "date": "2026-06-05",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-05T22:40:54Z",
-    "inmate_number": "1794104",
-    "name": "CURRY LASHANNA",
+    "date": "2026-06-05",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": "booked (date not reported)"
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T22:40:54Z",
-    "inmate_number": "913348",
-    "name": "CADDELL JAMES",
+    "date": "2026-06-05",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T23:10:30Z",
-    "inmate_number": "14532231",
-    "name": "PHILMORE BRAD",
+    "date": "2026-06-05",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T23:10:30Z",
-    "inmate_number": "14546489",
-    "name": "HOLDER JAYQUAN",
+    "date": "2026-06-05",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-05",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
@@ -208042,6 +208033,42 @@
     "timestamp_utc": "2026-06-12T22:32:40Z",
     "inmate_number": "14803395",
     "name": "VENTURA ADAM",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T23:11:31Z",
+    "inmate_number": "14688613",
+    "name": "WILLIAMS MALIK",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T23:11:31Z",
+    "inmate_number": "2384393",
+    "name": "WIMMER JAMES",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T23:11:31Z",
+    "inmate_number": "2774649",
+    "name": "SUTHERLAND KAYLA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T23:11:31Z",
+    "inmate_number": "14146667",
+    "name": "JOHANNES TRISTA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
