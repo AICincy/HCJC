@@ -195871,30 +195871,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T21:32:49Z",
-    "inmate_number": "14069018",
-    "name": "WILLIAMS PAUL",
+    "date": "2026-06-05",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-05T21:32:49Z",
-    "inmate_number": "1531936",
-    "name": "CONRAD DANIEL",
+    "date": "2026-06-05",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T21:32:49Z",
-    "inmate_number": "1948542",
-    "name": "ANDERSON ANTONIO",
+    "date": "2026-06-05",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -207982,5 +207973,50 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T21:53:42Z",
+    "inmate_number": "14813597",
+    "name": "ZHAO HAISHENG",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T21:53:42Z",
+    "inmate_number": "1901747",
+    "name": "BOLES GEORGE",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: public order (improper solicitation)",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T21:53:42Z",
+    "inmate_number": "1912124",
+    "name": "WAGNER AMBER",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-12T21:53:42Z",
+    "inmate_number": "2384393",
+    "name": "WIMMER JAMES",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T21:53:42Z",
+    "inmate_number": "2479347",
+    "name": "MALLORY TEVONTE",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
   }
 ]
