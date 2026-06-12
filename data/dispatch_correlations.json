@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-06-12T00:46:24Z",
+  "generated_utc": "2026-06-12T01:50:11Z",
   "min_confidence": 0.45,
   "window_minutes": 60,
-  "count": 477,
+  "count": 495,
   "disclaimer": "Researcher-mode output. Pairs are CANDIDATES only, not asserted matches. A high-confidence pair still requires human verification before any public claim is made that a specific dispatch led to a specific arrest. JCStream does not publish these joins on its own pages. Joining keys are inmate_number (vs current.json) and cfs_row_index (vs the cfs_recent.json or cfs_pdi_recent.json feed identified by cfs_source). Confidence weights: 50% temporal proximity within a +/- 60 minute window, 50% textual overlap between the charge description and the CFS row's disposition/incident-type fields. Purely temporal matches (textual overlap = 0) are excluded. Confirmed-arrest dispositions (ARR: ARREST) receive a +0.15 confidence boost.",
   "pairs": [
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2221,
+      "cfs_row_index": 2346,
       "confidence": 0.991,
       "signals": {
         "dt_delta_minutes": 4.5,
@@ -20,7 +20,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2221,
+      "cfs_row_index": 2346,
       "confidence": 0.991,
       "signals": {
         "dt_delta_minutes": 4.5,
@@ -32,7 +32,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1928,
+      "cfs_row_index": 2053,
       "confidence": 0.987,
       "signals": {
         "dt_delta_minutes": 6.1,
@@ -42,33 +42,9 @@
       }
     },
     {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.96,
-      "signals": {
-        "dt_delta_minutes": 19.2,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.96,
-      "signals": {
-        "dt_delta_minutes": 19.2,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
       "inmate_number": "2375977",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 859,
+      "cfs_row_index": 984,
       "confidence": 0.959,
       "signals": {
         "dt_delta_minutes": 91.8,
@@ -80,7 +56,7 @@
     {
       "inmate_number": "2652577",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 859,
+      "cfs_row_index": 984,
       "confidence": 0.959,
       "signals": {
         "dt_delta_minutes": 91.8,
@@ -92,7 +68,7 @@
     {
       "inmate_number": "14561800",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1482,
+      "cfs_row_index": 1607,
       "confidence": 0.955,
       "signals": {
         "dt_delta_minutes": 21.4,
@@ -104,7 +80,7 @@
     {
       "inmate_number": "14589876",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1482,
+      "cfs_row_index": 1607,
       "confidence": 0.955,
       "signals": {
         "dt_delta_minutes": 21.4,
@@ -114,9 +90,33 @@
       }
     },
     {
+      "inmate_number": "14240981",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.947,
+      "signals": {
+        "dt_delta_minutes": 25.3,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2233022",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 2,
+      "confidence": 0.947,
+      "signals": {
+        "dt_delta_minutes": 25.3,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 988,
+      "cfs_row_index": 1113,
       "confidence": 0.918,
       "signals": {
         "dt_delta_minutes": 39.5,
@@ -128,7 +128,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1098,
+      "cfs_row_index": 1223,
       "confidence": 0.909,
       "signals": {
         "dt_delta_minutes": 43.7,
@@ -140,7 +140,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1098,
+      "cfs_row_index": 1223,
       "confidence": 0.909,
       "signals": {
         "dt_delta_minutes": 43.7,
@@ -152,7 +152,7 @@
     {
       "inmate_number": "2450915",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2611,
+      "cfs_row_index": 2736,
       "confidence": 0.899,
       "signals": {
         "dt_delta_minutes": 48.6,
@@ -164,7 +164,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1925,
+      "cfs_row_index": 2050,
       "confidence": 0.897,
       "signals": {
         "dt_delta_minutes": 49.6,
@@ -176,7 +176,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1601,
+      "cfs_row_index": 1726,
       "confidence": 0.894,
       "signals": {
         "dt_delta_minutes": 51.0,
@@ -188,7 +188,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1096,
+      "cfs_row_index": 1221,
       "confidence": 0.892,
       "signals": {
         "dt_delta_minutes": 51.7,
@@ -200,7 +200,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1096,
+      "cfs_row_index": 1221,
       "confidence": 0.892,
       "signals": {
         "dt_delta_minutes": 51.7,
@@ -210,9 +210,45 @@
       }
     },
     {
+      "inmate_number": "14048684",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.883,
+      "signals": {
+        "dt_delta_minutes": 8.3,
+        "textual_overlap": 0.5,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14240981",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.873,
+      "signals": {
+        "dt_delta_minutes": 61.1,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2233022",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 6,
+      "confidence": 0.873,
+      "signals": {
+        "dt_delta_minutes": 61.1,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 867,
+      "cfs_row_index": 992,
       "confidence": 0.872,
       "signals": {
         "dt_delta_minutes": 61.6,
@@ -224,7 +260,7 @@
     {
       "inmate_number": "14752599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 636,
+      "cfs_row_index": 761,
       "confidence": 0.867,
       "signals": {
         "dt_delta_minutes": 15.9,
@@ -236,7 +272,7 @@
     {
       "inmate_number": "14591010",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1600,
+      "cfs_row_index": 1725,
       "confidence": 0.848,
       "signals": {
         "dt_delta_minutes": 25.0,
@@ -248,7 +284,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1104,
+      "cfs_row_index": 1229,
       "confidence": 0.841,
       "signals": {
         "dt_delta_minutes": 76.1,
@@ -260,7 +296,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1104,
+      "cfs_row_index": 1229,
       "confidence": 0.841,
       "signals": {
         "dt_delta_minutes": 76.1,
@@ -272,7 +308,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 869,
+      "cfs_row_index": 994,
       "confidence": 0.838,
       "signals": {
         "dt_delta_minutes": 77.8,
@@ -284,7 +320,7 @@
     {
       "inmate_number": "1748772",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 323,
+      "cfs_row_index": 448,
       "confidence": 0.831,
       "signals": {
         "dt_delta_minutes": 81.1,
@@ -296,7 +332,7 @@
     {
       "inmate_number": "2382979",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 323,
+      "cfs_row_index": 448,
       "confidence": 0.831,
       "signals": {
         "dt_delta_minutes": 81.1,
@@ -308,7 +344,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1105,
+      "cfs_row_index": 1230,
       "confidence": 0.83,
       "signals": {
         "dt_delta_minutes": 81.4,
@@ -320,7 +356,7 @@
     {
       "inmate_number": "1748772",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 322,
+      "cfs_row_index": 447,
       "confidence": 0.83,
       "signals": {
         "dt_delta_minutes": 81.8,
@@ -332,7 +368,7 @@
     {
       "inmate_number": "2382979",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 322,
+      "cfs_row_index": 447,
       "confidence": 0.83,
       "signals": {
         "dt_delta_minutes": 81.8,
@@ -344,7 +380,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1105,
+      "cfs_row_index": 1230,
       "confidence": 0.83,
       "signals": {
         "dt_delta_minutes": 81.4,
@@ -354,9 +390,33 @@
       }
     },
     {
+      "inmate_number": "14080224",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 124,
+      "confidence": 0.828,
+      "signals": {
+        "dt_delta_minutes": 34.4,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14080224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 133,
+      "confidence": 0.828,
+      "signals": {
+        "dt_delta_minutes": 34.4,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
       "inmate_number": "14129827",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1336,
+      "cfs_row_index": 1461,
       "confidence": 0.826,
       "signals": {
         "dt_delta_minutes": 83.7,
@@ -366,21 +426,9 @@
       }
     },
     {
-      "inmate_number": "14080224",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.817,
-      "signals": {
-        "dt_delta_minutes": 39.7,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
       "inmate_number": "14298307",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1339,
+      "cfs_row_index": 1464,
       "confidence": 0.817,
       "signals": {
         "dt_delta_minutes": 39.7,
@@ -392,7 +440,7 @@
     {
       "inmate_number": "1521936",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2522,
+      "cfs_row_index": 2647,
       "confidence": 0.817,
       "signals": {
         "dt_delta_minutes": 88.0,
@@ -404,7 +452,7 @@
     {
       "inmate_number": "2482246",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2522,
+      "cfs_row_index": 2647,
       "confidence": 0.817,
       "signals": {
         "dt_delta_minutes": 88.0,
@@ -416,7 +464,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1845,
+      "cfs_row_index": 1970,
       "confidence": 0.814,
       "signals": {
         "dt_delta_minutes": 89.2,
@@ -428,7 +476,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1845,
+      "cfs_row_index": 1970,
       "confidence": 0.814,
       "signals": {
         "dt_delta_minutes": 89.2,
@@ -440,7 +488,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1924,
+      "cfs_row_index": 2049,
       "confidence": 0.813,
       "signals": {
         "dt_delta_minutes": 89.5,
@@ -450,33 +498,9 @@
       }
     },
     {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 6,
-      "confidence": 0.808,
-      "signals": {
-        "dt_delta_minutes": 92.0,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 6,
-      "confidence": 0.808,
-      "signals": {
-        "dt_delta_minutes": 92.0,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
       "inmate_number": "1521936",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2531,
+      "cfs_row_index": 2656,
       "confidence": 0.805,
       "signals": {
         "dt_delta_minutes": 93.5,
@@ -488,7 +512,7 @@
     {
       "inmate_number": "2482246",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2531,
+      "cfs_row_index": 2656,
       "confidence": 0.805,
       "signals": {
         "dt_delta_minutes": 93.5,
@@ -500,7 +524,7 @@
     {
       "inmate_number": "14298307",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1340,
+      "cfs_row_index": 1465,
       "confidence": 0.802,
       "signals": {
         "dt_delta_minutes": 47.2,
@@ -512,7 +536,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 522,
+      "cfs_row_index": 647,
       "confidence": 0.802,
       "signals": {
         "dt_delta_minutes": 94.8,
@@ -524,7 +548,7 @@
     {
       "inmate_number": "14591010",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1602,
+      "cfs_row_index": 1727,
       "confidence": 0.793,
       "signals": {
         "dt_delta_minutes": 51.5,
@@ -536,67 +560,19 @@
     {
       "inmate_number": "14370166",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 4,
+      "cfs_row_index": 129,
       "confidence": 0.791,
       "signals": {
         "dt_delta_minutes": 172.2,
         "textual_overlap": 1.0,
         "booked_date": "6/10/26",
         "arrest_disposition_boost": true
-      }
-    },
-    {
-      "inmate_number": "14370166",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 11,
-      "confidence": 0.791,
-      "signals": {
-        "dt_delta_minutes": 172.2,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
-      "inmate_number": "2829611",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3018,
-      "confidence": 0.79,
-      "signals": {
-        "dt_delta_minutes": 100.9,
-        "textual_overlap": 1.0,
-        "booked_date": "5/13/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 7,
-      "confidence": 0.789,
-      "signals": {
-        "dt_delta_minutes": 101.4,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 7,
-      "confidence": 0.789,
-      "signals": {
-        "dt_delta_minutes": 101.4,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
       }
     },
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 511,
+      "cfs_row_index": 636,
       "confidence": 0.786,
       "signals": {
         "dt_delta_minutes": 102.7,
@@ -608,7 +584,7 @@
     {
       "inmate_number": "14561800",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1479,
+      "cfs_row_index": 1604,
       "confidence": 0.785,
       "signals": {
         "dt_delta_minutes": 103.0,
@@ -620,7 +596,7 @@
     {
       "inmate_number": "14589876",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1479,
+      "cfs_row_index": 1604,
       "confidence": 0.785,
       "signals": {
         "dt_delta_minutes": 103.0,
@@ -632,7 +608,7 @@
     {
       "inmate_number": "14298307",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1342,
+      "cfs_row_index": 1467,
       "confidence": 0.781,
       "signals": {
         "dt_delta_minutes": 57.0,
@@ -644,7 +620,7 @@
     {
       "inmate_number": "14298307",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1338,
+      "cfs_row_index": 1463,
       "confidence": 0.774,
       "signals": {
         "dt_delta_minutes": 60.6,
@@ -656,7 +632,7 @@
     {
       "inmate_number": "913348",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 523,
+      "cfs_row_index": 648,
       "confidence": 0.774,
       "signals": {
         "dt_delta_minutes": 108.4,
@@ -668,7 +644,7 @@
     {
       "inmate_number": "2842548",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2422,
+      "cfs_row_index": 2547,
       "confidence": 0.773,
       "signals": {
         "dt_delta_minutes": 20.9,
@@ -678,9 +654,21 @@
       }
     },
     {
+      "inmate_number": "14048684",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 7,
+      "confidence": 0.765,
+      "signals": {
+        "dt_delta_minutes": 64.9,
+        "textual_overlap": 0.5,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
       "inmate_number": "14080224",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 0,
+      "cfs_row_index": 125,
       "confidence": 0.765,
       "signals": {
         "dt_delta_minutes": 64.7,
@@ -690,81 +678,129 @@
       }
     },
     {
-      "inmate_number": "14080224",
-      "cfs_source": "cfs_recent",
+      "inmate_number": "14811377",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 1972,
+      "confidence": 0.762,
+      "signals": {
+        "dt_delta_minutes": 114.2,
+        "textual_overlap": 1.0,
+        "booked_date": "5/25/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2055070",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 1972,
+      "confidence": 0.762,
+      "signals": {
+        "dt_delta_minutes": 114.2,
+        "textual_overlap": 1.0,
+        "booked_date": "5/25/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14811377",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 1973,
+      "confidence": 0.757,
+      "signals": {
+        "dt_delta_minutes": 116.7,
+        "textual_overlap": 1.0,
+        "booked_date": "5/25/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2055070",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 1973,
+      "confidence": 0.757,
+      "signals": {
+        "dt_delta_minutes": 116.7,
+        "textual_overlap": 1.0,
+        "booked_date": "5/25/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14111777",
+      "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 4,
-      "confidence": 0.765,
+      "confidence": 0.756,
       "signals": {
-        "dt_delta_minutes": 64.7,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
+        "dt_delta_minutes": 189.0,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
         "arrest_disposition_boost": true
       }
     },
     {
-      "inmate_number": "14080224",
+      "inmate_number": "14111777",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 5,
-      "confidence": 0.764,
+      "cfs_row_index": 11,
+      "confidence": 0.756,
       "signals": {
-        "dt_delta_minutes": 65.3,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
+        "dt_delta_minutes": 189.0,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
         "arrest_disposition_boost": true
       }
     },
     {
-      "inmate_number": "14811377",
+      "inmate_number": "14590989",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1847,
-      "confidence": 0.762,
+      "cfs_row_index": 4,
+      "confidence": 0.756,
       "signals": {
-        "dt_delta_minutes": 114.2,
+        "dt_delta_minutes": 189.0,
         "textual_overlap": 1.0,
-        "booked_date": "5/25/26",
-        "arrest_disposition_boost": false
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
       }
     },
     {
-      "inmate_number": "2055070",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1847,
-      "confidence": 0.762,
+      "inmate_number": "14590989",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 11,
+      "confidence": 0.756,
       "signals": {
-        "dt_delta_minutes": 114.2,
+        "dt_delta_minutes": 189.0,
         "textual_overlap": 1.0,
-        "booked_date": "5/25/26",
-        "arrest_disposition_boost": false
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
       }
     },
     {
-      "inmate_number": "14811377",
+      "inmate_number": "2110414",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1848,
-      "confidence": 0.757,
+      "cfs_row_index": 4,
+      "confidence": 0.756,
       "signals": {
-        "dt_delta_minutes": 116.7,
+        "dt_delta_minutes": 189.0,
         "textual_overlap": 1.0,
-        "booked_date": "5/25/26",
-        "arrest_disposition_boost": false
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
       }
     },
     {
-      "inmate_number": "2055070",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1848,
-      "confidence": 0.757,
+      "inmate_number": "2110414",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 11,
+      "confidence": 0.756,
       "signals": {
-        "dt_delta_minutes": 116.7,
+        "dt_delta_minutes": 189.0,
         "textual_overlap": 1.0,
-        "booked_date": "5/25/26",
-        "arrest_disposition_boost": false
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
       }
     },
     {
       "inmate_number": "14129827",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1349,
+      "cfs_row_index": 1474,
       "confidence": 0.755,
       "signals": {
         "dt_delta_minutes": 117.5,
@@ -776,7 +812,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1922,
+      "cfs_row_index": 2047,
       "confidence": 0.753,
       "signals": {
         "dt_delta_minutes": 118.7,
@@ -788,7 +824,7 @@
     {
       "inmate_number": "14298307",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1337,
+      "cfs_row_index": 1462,
       "confidence": 0.752,
       "signals": {
         "dt_delta_minutes": 71.0,
@@ -800,7 +836,7 @@
     {
       "inmate_number": "1521936",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2520,
+      "cfs_row_index": 2645,
       "confidence": 0.751,
       "signals": {
         "dt_delta_minutes": 119.3,
@@ -812,7 +848,7 @@
     {
       "inmate_number": "2482246",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2520,
+      "cfs_row_index": 2645,
       "confidence": 0.751,
       "signals": {
         "dt_delta_minutes": 119.3,
@@ -824,7 +860,7 @@
     {
       "inmate_number": "14229581",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2121,
+      "cfs_row_index": 2246,
       "confidence": 0.745,
       "signals": {
         "dt_delta_minutes": 122.3,
@@ -834,9 +870,33 @@
       }
     },
     {
+      "inmate_number": "14048684",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 1,
+      "confidence": 0.737,
+      "signals": {
+        "dt_delta_minutes": 78.4,
+        "textual_overlap": 0.5,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14048684",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.737,
+      "signals": {
+        "dt_delta_minutes": 78.4,
+        "textual_overlap": 0.5,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
       "inmate_number": "2586437",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2015,
+      "cfs_row_index": 2140,
       "confidence": 0.736,
       "signals": {
         "dt_delta_minutes": 6.9,
@@ -848,7 +908,7 @@
     {
       "inmate_number": "14411501",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2117,
+      "cfs_row_index": 2242,
       "confidence": 0.734,
       "signals": {
         "dt_delta_minutes": 79.6,
@@ -858,21 +918,9 @@
       }
     },
     {
-      "inmate_number": "14080224",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 0,
-      "confidence": 0.727,
-      "signals": {
-        "dt_delta_minutes": 83.0,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1832,
+      "cfs_row_index": 1957,
       "confidence": 0.724,
       "signals": {
         "dt_delta_minutes": 132.7,
@@ -884,7 +932,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1832,
+      "cfs_row_index": 1957,
       "confidence": 0.724,
       "signals": {
         "dt_delta_minutes": 132.7,
@@ -896,7 +944,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 984,
+      "cfs_row_index": 1109,
       "confidence": 0.717,
       "signals": {
         "dt_delta_minutes": 135.8,
@@ -908,7 +956,7 @@
     {
       "inmate_number": "14752599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 640,
+      "cfs_row_index": 765,
       "confidence": 0.716,
       "signals": {
         "dt_delta_minutes": 88.4,
@@ -920,7 +968,7 @@
     {
       "inmate_number": "14660361",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2123,
+      "cfs_row_index": 2248,
       "confidence": 0.713,
       "signals": {
         "dt_delta_minutes": 137.6,
@@ -932,7 +980,7 @@
     {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 646,
+      "cfs_row_index": 771,
       "confidence": 0.708,
       "signals": {
         "dt_delta_minutes": 139.9,
@@ -944,7 +992,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 646,
+      "cfs_row_index": 771,
       "confidence": 0.708,
       "signals": {
         "dt_delta_minutes": 139.9,
@@ -956,7 +1004,7 @@
     {
       "inmate_number": "1297074",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2314,
+      "cfs_row_index": 2439,
       "confidence": 0.696,
       "signals": {
         "dt_delta_minutes": 146.0,
@@ -968,7 +1016,7 @@
     {
       "inmate_number": "14738950",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2314,
+      "cfs_row_index": 2439,
       "confidence": 0.696,
       "signals": {
         "dt_delta_minutes": 146.0,
@@ -980,7 +1028,7 @@
     {
       "inmate_number": "1562311",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2314,
+      "cfs_row_index": 2439,
       "confidence": 0.696,
       "signals": {
         "dt_delta_minutes": 146.0,
@@ -992,7 +1040,7 @@
     {
       "inmate_number": "1625095",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2314,
+      "cfs_row_index": 2439,
       "confidence": 0.696,
       "signals": {
         "dt_delta_minutes": 146.0,
@@ -1004,7 +1052,7 @@
     {
       "inmate_number": "2647391",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2314,
+      "cfs_row_index": 2439,
       "confidence": 0.696,
       "signals": {
         "dt_delta_minutes": 146.0,
@@ -1016,7 +1064,7 @@
     {
       "inmate_number": "14660361",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2124,
+      "cfs_row_index": 2249,
       "confidence": 0.695,
       "signals": {
         "dt_delta_minutes": 146.3,
@@ -1028,7 +1076,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1089,
+      "cfs_row_index": 1214,
       "confidence": 0.689,
       "signals": {
         "dt_delta_minutes": 149.5,
@@ -1040,7 +1088,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1089,
+      "cfs_row_index": 1214,
       "confidence": 0.689,
       "signals": {
         "dt_delta_minutes": 149.5,
@@ -1052,7 +1100,7 @@
     {
       "inmate_number": "14752599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 632,
+      "cfs_row_index": 757,
       "confidence": 0.684,
       "signals": {
         "dt_delta_minutes": 103.6,
@@ -1064,7 +1112,7 @@
     {
       "inmate_number": "913348",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 509,
+      "cfs_row_index": 634,
       "confidence": 0.684,
       "signals": {
         "dt_delta_minutes": 151.7,
@@ -1076,7 +1124,7 @@
     {
       "inmate_number": "14752599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 641,
+      "cfs_row_index": 766,
       "confidence": 0.678,
       "signals": {
         "dt_delta_minutes": 106.3,
@@ -1088,7 +1136,7 @@
     {
       "inmate_number": "14561800",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1497,
+      "cfs_row_index": 1622,
       "confidence": 0.677,
       "signals": {
         "dt_delta_minutes": 227.2,
@@ -1100,7 +1148,7 @@
     {
       "inmate_number": "14589876",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1497,
+      "cfs_row_index": 1622,
       "confidence": 0.677,
       "signals": {
         "dt_delta_minutes": 227.2,
@@ -1112,7 +1160,7 @@
     {
       "inmate_number": "14752599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 642,
+      "cfs_row_index": 767,
       "confidence": 0.676,
       "signals": {
         "dt_delta_minutes": 107.5,
@@ -1124,7 +1172,7 @@
     {
       "inmate_number": "14140677",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1923,
+      "cfs_row_index": 2048,
       "confidence": 0.666,
       "signals": {
         "dt_delta_minutes": 112.5,
@@ -1136,7 +1184,7 @@
     {
       "inmate_number": "2607806",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1923,
+      "cfs_row_index": 2048,
       "confidence": 0.666,
       "signals": {
         "dt_delta_minutes": 112.5,
@@ -1148,7 +1196,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2218,
+      "cfs_row_index": 2343,
       "confidence": 0.665,
       "signals": {
         "dt_delta_minutes": 160.7,
@@ -1160,7 +1208,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2218,
+      "cfs_row_index": 2343,
       "confidence": 0.665,
       "signals": {
         "dt_delta_minutes": 160.7,
@@ -1172,7 +1220,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 755,
+      "cfs_row_index": 880,
       "confidence": 0.662,
       "signals": {
         "dt_delta_minutes": 162.3,
@@ -1184,7 +1232,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 999,
+      "cfs_row_index": 1124,
       "confidence": 0.659,
       "signals": {
         "dt_delta_minutes": 163.6,
@@ -1196,7 +1244,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1087,
+      "cfs_row_index": 1212,
       "confidence": 0.657,
       "signals": {
         "dt_delta_minutes": 164.7,
@@ -1208,7 +1256,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1087,
+      "cfs_row_index": 1212,
       "confidence": 0.657,
       "signals": {
         "dt_delta_minutes": 164.7,
@@ -1220,7 +1268,7 @@
     {
       "inmate_number": "2450915",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2619,
+      "cfs_row_index": 2744,
       "confidence": 0.656,
       "signals": {
         "dt_delta_minutes": 165.1,
@@ -1232,7 +1280,7 @@
     {
       "inmate_number": "934474",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2012,
+      "cfs_row_index": 2137,
       "confidence": 0.655,
       "signals": {
         "dt_delta_minutes": 77.4,
@@ -1244,7 +1292,7 @@
     {
       "inmate_number": "14593752",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 325,
+      "cfs_row_index": 450,
       "confidence": 0.651,
       "signals": {
         "dt_delta_minutes": 47.4,
@@ -1256,7 +1304,7 @@
     {
       "inmate_number": "14812850",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 325,
+      "cfs_row_index": 450,
       "confidence": 0.651,
       "signals": {
         "dt_delta_minutes": 47.4,
@@ -1266,9 +1314,57 @@
       }
     },
     {
+      "inmate_number": "14111777",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 273.9,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14111777",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 24,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 394.4,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14111777",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 15,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 273.9,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14111777",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 31,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 394.4,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 666,
+      "cfs_row_index": 791,
       "confidence": 0.65,
       "signals": {
         "dt_delta_minutes": 389.6,
@@ -1280,7 +1376,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 889,
+      "cfs_row_index": 1014,
       "confidence": 0.65,
       "signals": {
         "dt_delta_minutes": 370.1,
@@ -1290,9 +1386,57 @@
       }
     },
     {
+      "inmate_number": "14590989",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 273.9,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14590989",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 24,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 394.4,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14590989",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 15,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 273.9,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14590989",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 31,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 394.4,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1961,
+      "cfs_row_index": 2086,
       "confidence": 0.65,
       "signals": {
         "dt_delta_minutes": 470.2,
@@ -1304,7 +1448,7 @@
     {
       "inmate_number": "1521936",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2551,
+      "cfs_row_index": 2676,
       "confidence": 0.65,
       "signals": {
         "dt_delta_minutes": 358.1,
@@ -1316,7 +1460,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 666,
+      "cfs_row_index": 791,
       "confidence": 0.65,
       "signals": {
         "dt_delta_minutes": 389.6,
@@ -1326,9 +1470,57 @@
       }
     },
     {
+      "inmate_number": "2110414",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 8,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 273.9,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "2110414",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 24,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 394.4,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "2110414",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 15,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 273.9,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "2110414",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 31,
+      "confidence": 0.65,
+      "signals": {
+        "dt_delta_minutes": 394.4,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
       "inmate_number": "2482246",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2551,
+      "cfs_row_index": 2676,
       "confidence": 0.65,
       "signals": {
         "dt_delta_minutes": 358.1,
@@ -1340,7 +1532,7 @@
     {
       "inmate_number": "913348",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 548,
+      "cfs_row_index": 673,
       "confidence": 0.65,
       "signals": {
         "dt_delta_minutes": 417.5,
@@ -1352,7 +1544,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 875,
+      "cfs_row_index": 1000,
       "confidence": 0.646,
       "signals": {
         "dt_delta_minutes": 169.8,
@@ -1364,7 +1556,7 @@
     {
       "inmate_number": "14129827",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1351,
+      "cfs_row_index": 1476,
       "confidence": 0.644,
       "signals": {
         "dt_delta_minutes": 170.7,
@@ -1376,7 +1568,7 @@
     {
       "inmate_number": "2217040",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 401,
+      "cfs_row_index": 526,
       "confidence": 0.639,
       "signals": {
         "dt_delta_minutes": 173.2,
@@ -1388,7 +1580,7 @@
     {
       "inmate_number": "14140677",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1921,
+      "cfs_row_index": 2046,
       "confidence": 0.636,
       "signals": {
         "dt_delta_minutes": 126.5,
@@ -1398,21 +1590,9 @@
       }
     },
     {
-      "inmate_number": "14370166",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 12,
-      "confidence": 0.635,
-      "signals": {
-        "dt_delta_minutes": 175.2,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
       "inmate_number": "14129827",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1352,
+      "cfs_row_index": 1477,
       "confidence": 0.631,
       "signals": {
         "dt_delta_minutes": 177.2,
@@ -1424,7 +1604,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1917,
+      "cfs_row_index": 2042,
       "confidence": 0.631,
       "signals": {
         "dt_delta_minutes": 177.0,
@@ -1436,7 +1616,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1110,
+      "cfs_row_index": 1235,
       "confidence": 0.629,
       "signals": {
         "dt_delta_minutes": 178.2,
@@ -1448,7 +1628,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1110,
+      "cfs_row_index": 1235,
       "confidence": 0.629,
       "signals": {
         "dt_delta_minutes": 178.2,
@@ -1458,9 +1638,33 @@
       }
     },
     {
+      "inmate_number": "14080224",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 122,
+      "confidence": 0.627,
+      "signals": {
+        "dt_delta_minutes": 131.2,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14080224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 131,
+      "confidence": 0.627,
+      "signals": {
+        "dt_delta_minutes": 131.2,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1112,
+      "cfs_row_index": 1237,
       "confidence": 0.624,
       "signals": {
         "dt_delta_minutes": 180.5,
@@ -1472,7 +1676,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1112,
+      "cfs_row_index": 1237,
       "confidence": 0.624,
       "signals": {
         "dt_delta_minutes": 180.5,
@@ -1484,7 +1688,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1612,
+      "cfs_row_index": 1737,
       "confidence": 0.619,
       "signals": {
         "dt_delta_minutes": 183.0,
@@ -1496,7 +1700,7 @@
     {
       "inmate_number": "14411501",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2111,
+      "cfs_row_index": 2236,
       "confidence": 0.619,
       "signals": {
         "dt_delta_minutes": 62.7,
@@ -1508,7 +1712,7 @@
     {
       "inmate_number": "14140677",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1920,
+      "cfs_row_index": 2045,
       "confidence": 0.611,
       "signals": {
         "dt_delta_minutes": 138.5,
@@ -1520,7 +1724,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1002,
+      "cfs_row_index": 1127,
       "confidence": 0.609,
       "signals": {
         "dt_delta_minutes": 187.5,
@@ -1532,19 +1736,7 @@
     {
       "inmate_number": "14282477",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 5,
-      "confidence": 0.605,
-      "signals": {
-        "dt_delta_minutes": 189.8,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 13,
+      "cfs_row_index": 130,
       "confidence": 0.605,
       "signals": {
         "dt_delta_minutes": 189.8,
@@ -1556,19 +1748,7 @@
     {
       "inmate_number": "1462307",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 5,
-      "confidence": 0.605,
-      "signals": {
-        "dt_delta_minutes": 189.8,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 13,
+      "cfs_row_index": 130,
       "confidence": 0.605,
       "signals": {
         "dt_delta_minutes": 189.8,
@@ -1580,7 +1760,7 @@
     {
       "inmate_number": "2375977",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 876,
+      "cfs_row_index": 1001,
       "confidence": 0.602,
       "signals": {
         "dt_delta_minutes": 190.9,
@@ -1592,7 +1772,7 @@
     {
       "inmate_number": "2652577",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 876,
+      "cfs_row_index": 1001,
       "confidence": 0.602,
       "signals": {
         "dt_delta_minutes": 190.9,
@@ -1604,7 +1784,7 @@
     {
       "inmate_number": "14591010",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1606,
+      "cfs_row_index": 1731,
       "confidence": 0.599,
       "signals": {
         "dt_delta_minutes": 144.6,
@@ -1616,7 +1796,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1084,
+      "cfs_row_index": 1209,
       "confidence": 0.595,
       "signals": {
         "dt_delta_minutes": 194.5,
@@ -1628,7 +1808,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1084,
+      "cfs_row_index": 1209,
       "confidence": 0.595,
       "signals": {
         "dt_delta_minutes": 194.5,
@@ -1640,19 +1820,7 @@
     {
       "inmate_number": "14080224",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2,
-      "confidence": 0.594,
-      "signals": {
-        "dt_delta_minutes": 146.8,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
-      "inmate_number": "14080224",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 9,
+      "cfs_row_index": 127,
       "confidence": 0.594,
       "signals": {
         "dt_delta_minutes": 146.8,
@@ -1664,7 +1832,7 @@
     {
       "inmate_number": "14591010",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1607,
+      "cfs_row_index": 1732,
       "confidence": 0.593,
       "signals": {
         "dt_delta_minutes": 147.5,
@@ -1676,7 +1844,7 @@
     {
       "inmate_number": "14591010",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1597,
+      "cfs_row_index": 1722,
       "confidence": 0.592,
       "signals": {
         "dt_delta_minutes": 147.7,
@@ -1688,7 +1856,7 @@
     {
       "inmate_number": "2450915",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2605,
+      "cfs_row_index": 2730,
       "confidence": 0.592,
       "signals": {
         "dt_delta_minutes": 195.8,
@@ -1700,7 +1868,7 @@
     {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 652,
+      "cfs_row_index": 777,
       "confidence": 0.589,
       "signals": {
         "dt_delta_minutes": 197.5,
@@ -1712,7 +1880,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 652,
+      "cfs_row_index": 777,
       "confidence": 0.589,
       "signals": {
         "dt_delta_minutes": 197.5,
@@ -1724,7 +1892,7 @@
     {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 653,
+      "cfs_row_index": 778,
       "confidence": 0.587,
       "signals": {
         "dt_delta_minutes": 198.5,
@@ -1736,7 +1904,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 653,
+      "cfs_row_index": 778,
       "confidence": 0.587,
       "signals": {
         "dt_delta_minutes": 198.5,
@@ -1748,7 +1916,7 @@
     {
       "inmate_number": "1748772",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 319,
+      "cfs_row_index": 444,
       "confidence": 0.585,
       "signals": {
         "dt_delta_minutes": 199.3,
@@ -1760,7 +1928,7 @@
     {
       "inmate_number": "2382979",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 319,
+      "cfs_row_index": 444,
       "confidence": 0.585,
       "signals": {
         "dt_delta_minutes": 199.3,
@@ -1772,7 +1940,7 @@
     {
       "inmate_number": "14765496",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 986,
+      "cfs_row_index": 1111,
       "confidence": 0.583,
       "signals": {
         "dt_delta_minutes": 80.3,
@@ -1784,7 +1952,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2216,
+      "cfs_row_index": 2341,
       "confidence": 0.575,
       "signals": {
         "dt_delta_minutes": 204.2,
@@ -1796,7 +1964,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2216,
+      "cfs_row_index": 2341,
       "confidence": 0.575,
       "signals": {
         "dt_delta_minutes": 204.2,
@@ -1806,9 +1974,129 @@
       }
     },
     {
+      "inmate_number": "14080224",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 121,
+      "confidence": 0.569,
+      "signals": {
+        "dt_delta_minutes": 159.0,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14080224",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 130,
+      "confidence": 0.569,
+      "signals": {
+        "dt_delta_minutes": 159.0,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14224825",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 121,
+      "confidence": 0.569,
+      "signals": {
+        "dt_delta_minutes": 159.0,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14224825",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 130,
+      "confidence": 0.569,
+      "signals": {
+        "dt_delta_minutes": 159.0,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14561712",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 121,
+      "confidence": 0.569,
+      "signals": {
+        "dt_delta_minutes": 159.0,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14561712",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 130,
+      "confidence": 0.569,
+      "signals": {
+        "dt_delta_minutes": 159.0,
+        "textual_overlap": 0.5,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14282477",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 120,
+      "confidence": 0.566,
+      "signals": {
+        "dt_delta_minutes": 208.5,
+        "textual_overlap": 1.0,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14282477",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 129,
+      "confidence": 0.566,
+      "signals": {
+        "dt_delta_minutes": 208.5,
+        "textual_overlap": 1.0,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "1462307",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 120,
+      "confidence": 0.566,
+      "signals": {
+        "dt_delta_minutes": 208.5,
+        "textual_overlap": 1.0,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "1462307",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 129,
+      "confidence": 0.566,
+      "signals": {
+        "dt_delta_minutes": 208.5,
+        "textual_overlap": 1.0,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
       "inmate_number": "14752599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 647,
+      "cfs_row_index": 772,
       "confidence": 0.566,
       "signals": {
         "dt_delta_minutes": 160.2,
@@ -1820,7 +2108,7 @@
     {
       "inmate_number": "14752599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 631,
+      "cfs_row_index": 756,
       "confidence": 0.565,
       "signals": {
         "dt_delta_minutes": 160.9,
@@ -1832,7 +2120,7 @@
     {
       "inmate_number": "14609273",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2312,
+      "cfs_row_index": 2437,
       "confidence": 0.564,
       "signals": {
         "dt_delta_minutes": 89.4,
@@ -1844,7 +2132,7 @@
     {
       "inmate_number": "1465577",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 400,
+      "cfs_row_index": 525,
       "confidence": 0.564,
       "signals": {
         "dt_delta_minutes": 209.3,
@@ -1856,7 +2144,7 @@
     {
       "inmate_number": "14795711",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2312,
+      "cfs_row_index": 2437,
       "confidence": 0.564,
       "signals": {
         "dt_delta_minutes": 89.4,
@@ -1868,7 +2156,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 877,
+      "cfs_row_index": 1002,
       "confidence": 0.555,
       "signals": {
         "dt_delta_minutes": 213.7,
@@ -1880,7 +2168,7 @@
     {
       "inmate_number": "14783665",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1481,
+      "cfs_row_index": 1606,
       "confidence": 0.546,
       "signals": {
         "dt_delta_minutes": 25.9,
@@ -1892,7 +2180,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1118,
+      "cfs_row_index": 1243,
       "confidence": 0.542,
       "signals": {
         "dt_delta_minutes": 220.0,
@@ -1904,19 +2192,7 @@
     {
       "inmate_number": "14080224",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.542,
-      "signals": {
-        "dt_delta_minutes": 171.7,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
-      "inmate_number": "14080224",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 10,
+      "cfs_row_index": 128,
       "confidence": 0.542,
       "signals": {
         "dt_delta_minutes": 171.7,
@@ -1928,19 +2204,7 @@
     {
       "inmate_number": "14784514",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.542,
-      "signals": {
-        "dt_delta_minutes": 171.7,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
-      "inmate_number": "14784514",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 10,
+      "cfs_row_index": 128,
       "confidence": 0.542,
       "signals": {
         "dt_delta_minutes": 171.7,
@@ -1952,19 +2216,7 @@
     {
       "inmate_number": "2527860",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3,
-      "confidence": 0.542,
-      "signals": {
-        "dt_delta_minutes": 171.7,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
-      "inmate_number": "2527860",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 10,
+      "cfs_row_index": 128,
       "confidence": 0.542,
       "signals": {
         "dt_delta_minutes": 171.7,
@@ -1976,7 +2228,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1118,
+      "cfs_row_index": 1243,
       "confidence": 0.542,
       "signals": {
         "dt_delta_minutes": 220.0,
@@ -1988,19 +2240,7 @@
     {
       "inmate_number": "14080224",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.541,
-      "signals": {
-        "dt_delta_minutes": 172.2,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
-      "inmate_number": "14080224",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 11,
+      "cfs_row_index": 129,
       "confidence": 0.541,
       "signals": {
         "dt_delta_minutes": 172.2,
@@ -2012,19 +2252,7 @@
     {
       "inmate_number": "2630730",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 4,
-      "confidence": 0.541,
-      "signals": {
-        "dt_delta_minutes": 172.2,
-        "textual_overlap": 0.5,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": true
-      }
-    },
-    {
-      "inmate_number": "2630730",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 11,
+      "cfs_row_index": 129,
       "confidence": 0.541,
       "signals": {
         "dt_delta_minutes": 172.2,
@@ -2036,7 +2264,7 @@
     {
       "inmate_number": "1451860",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 523,
+      "cfs_row_index": 648,
       "confidence": 0.524,
       "signals": {
         "dt_delta_minutes": 108.4,
@@ -2046,9 +2274,45 @@
       }
     },
     {
+      "inmate_number": "14048684",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 3,
+      "confidence": 0.521,
+      "signals": {
+        "dt_delta_minutes": 181.9,
+        "textual_overlap": 0.5,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14048684",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 9,
+      "confidence": 0.521,
+      "signals": {
+        "dt_delta_minutes": 181.9,
+        "textual_overlap": 0.5,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14048684",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 10,
+      "confidence": 0.521,
+      "signals": {
+        "dt_delta_minutes": 181.9,
+        "textual_overlap": 0.5,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
       "inmate_number": "14140677",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1916,
+      "cfs_row_index": 2041,
       "confidence": 0.518,
       "signals": {
         "dt_delta_minutes": 183.6,
@@ -2060,7 +2324,7 @@
     {
       "inmate_number": "14140677",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1934,
+      "cfs_row_index": 2059,
       "confidence": 0.518,
       "signals": {
         "dt_delta_minutes": 183.2,
@@ -2072,7 +2336,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1082,
+      "cfs_row_index": 1207,
       "confidence": 0.517,
       "signals": {
         "dt_delta_minutes": 231.7,
@@ -2084,7 +2348,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1005,
+      "cfs_row_index": 1130,
       "confidence": 0.517,
       "signals": {
         "dt_delta_minutes": 232.0,
@@ -2096,7 +2360,7 @@
     {
       "inmate_number": "14411501",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2126,
+      "cfs_row_index": 2251,
       "confidence": 0.517,
       "signals": {
         "dt_delta_minutes": 183.8,
@@ -2108,7 +2372,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1082,
+      "cfs_row_index": 1207,
       "confidence": 0.517,
       "signals": {
         "dt_delta_minutes": 231.7,
@@ -2120,7 +2384,7 @@
     {
       "inmate_number": "14752599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 650,
+      "cfs_row_index": 775,
       "confidence": 0.51,
       "signals": {
         "dt_delta_minutes": 187.3,
@@ -2130,9 +2394,33 @@
       }
     },
     {
+      "inmate_number": "14048684",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 4,
+      "confidence": 0.506,
+      "signals": {
+        "dt_delta_minutes": 189.0,
+        "textual_overlap": 0.5,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
+      "inmate_number": "14048684",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 11,
+      "confidence": 0.506,
+      "signals": {
+        "dt_delta_minutes": 189.0,
+        "textual_overlap": 0.5,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": true
+      }
+    },
+    {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1616,
+      "cfs_row_index": 1741,
       "confidence": 0.506,
       "signals": {
         "dt_delta_minutes": 237.1,
@@ -2144,7 +2432,7 @@
     {
       "inmate_number": "14811226",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2120,
+      "cfs_row_index": 2245,
       "confidence": 0.506,
       "signals": {
         "dt_delta_minutes": 99.0,
@@ -2156,7 +2444,7 @@
     {
       "inmate_number": "14561800",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1498,
+      "cfs_row_index": 1623,
       "confidence": 0.505,
       "signals": {
         "dt_delta_minutes": 237.7,
@@ -2168,7 +2456,7 @@
     {
       "inmate_number": "14589876",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1498,
+      "cfs_row_index": 1623,
       "confidence": 0.505,
       "signals": {
         "dt_delta_minutes": 237.7,
@@ -2180,7 +2468,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1617,
+      "cfs_row_index": 1742,
       "confidence": 0.504,
       "signals": {
         "dt_delta_minutes": 238.0,
@@ -2192,7 +2480,7 @@
     {
       "inmate_number": "2217040",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 419,
+      "cfs_row_index": 544,
       "confidence": 0.504,
       "signals": {
         "dt_delta_minutes": 238.1,
@@ -2204,7 +2492,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1937,
+      "cfs_row_index": 2062,
       "confidence": 0.503,
       "signals": {
         "dt_delta_minutes": 238.6,
@@ -2216,7 +2504,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2228,
+      "cfs_row_index": 2353,
       "confidence": 0.502,
       "signals": {
         "dt_delta_minutes": 238.8,
@@ -2228,7 +2516,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2228,
+      "cfs_row_index": 2353,
       "confidence": 0.502,
       "signals": {
         "dt_delta_minutes": 238.8,
@@ -2240,7 +2528,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1072,
+      "cfs_row_index": 1197,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 456.0,
@@ -2252,7 +2540,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1073,
+      "cfs_row_index": 1198,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 435.2,
@@ -2264,7 +2552,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1079,
+      "cfs_row_index": 1204,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 353.1,
@@ -2276,7 +2564,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1080,
+      "cfs_row_index": 1205,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 293.6,
@@ -2288,7 +2576,7 @@
     {
       "inmate_number": "1257340",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1132,
+      "cfs_row_index": 1257,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 383.1,
@@ -2300,7 +2588,7 @@
     {
       "inmate_number": "1271599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3009,
+      "cfs_row_index": 3134,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 469.2,
@@ -2312,7 +2600,7 @@
     {
       "inmate_number": "1297074",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2303,
+      "cfs_row_index": 2428,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 429.2,
@@ -2324,7 +2612,7 @@
     {
       "inmate_number": "1297074",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2305,
+      "cfs_row_index": 2430,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 423.4,
@@ -2336,7 +2624,7 @@
     {
       "inmate_number": "1297074",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2318,
+      "cfs_row_index": 2443,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 281.5,
@@ -2348,7 +2636,7 @@
     {
       "inmate_number": "1297074",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2323,
+      "cfs_row_index": 2448,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 353.6,
@@ -2360,7 +2648,7 @@
     {
       "inmate_number": "1297074",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2324,
+      "cfs_row_index": 2449,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 369.6,
@@ -2372,7 +2660,7 @@
     {
       "inmate_number": "1297074",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2327,
+      "cfs_row_index": 2452,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 388.6,
@@ -2384,7 +2672,7 @@
     {
       "inmate_number": "1297074",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2330,
+      "cfs_row_index": 2455,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 428.5,
@@ -2396,7 +2684,7 @@
     {
       "inmate_number": "14082051",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2409,
+      "cfs_row_index": 2534,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 441.6,
@@ -2408,7 +2696,7 @@
     {
       "inmate_number": "14082051",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2436,
+      "cfs_row_index": 2561,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 280.6,
@@ -2420,7 +2708,7 @@
     {
       "inmate_number": "14082051",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2454,
+      "cfs_row_index": 2579,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 458.7,
@@ -2430,9 +2718,57 @@
       }
     },
     {
+      "inmate_number": "14111777",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 27,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 401.1,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14111777",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 29,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 412.8,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14111777",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 34,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 401.1,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14111777",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 36,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 412.8,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
       "inmate_number": "14129827",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1326,
+      "cfs_row_index": 1451,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 418.4,
@@ -2444,7 +2780,7 @@
     {
       "inmate_number": "14129827",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1357,
+      "cfs_row_index": 1482,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 276.4,
@@ -2456,7 +2792,7 @@
     {
       "inmate_number": "14129827",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1361,
+      "cfs_row_index": 1486,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 293.4,
@@ -2468,7 +2804,7 @@
     {
       "inmate_number": "14129827",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1365,
+      "cfs_row_index": 1490,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 368.6,
@@ -2480,7 +2816,7 @@
     {
       "inmate_number": "14129827",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1368,
+      "cfs_row_index": 1493,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 387.6,
@@ -2492,7 +2828,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2210,
+      "cfs_row_index": 2335,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 469.2,
@@ -2504,7 +2840,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2211,
+      "cfs_row_index": 2336,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 455.8,
@@ -2516,7 +2852,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2212,
+      "cfs_row_index": 2337,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 451.2,
@@ -2528,7 +2864,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2215,
+      "cfs_row_index": 2340,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 412.8,
@@ -2540,7 +2876,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2245,
+      "cfs_row_index": 2370,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 386.8,
@@ -2552,7 +2888,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2246,
+      "cfs_row_index": 2371,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 390.1,
@@ -2564,7 +2900,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2251,
+      "cfs_row_index": 2376,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 411.9,
@@ -2576,7 +2912,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2253,
+      "cfs_row_index": 2378,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 420.8,
@@ -2588,7 +2924,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2254,
+      "cfs_row_index": 2379,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 427.3,
@@ -2600,7 +2936,7 @@
     {
       "inmate_number": "14163387",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2259,
+      "cfs_row_index": 2384,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 460.7,
@@ -2612,7 +2948,7 @@
     {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 623,
+      "cfs_row_index": 748,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 441.4,
@@ -2624,7 +2960,7 @@
     {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 660,
+      "cfs_row_index": 785,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 306.2,
@@ -2636,7 +2972,7 @@
     {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 661,
+      "cfs_row_index": 786,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 307.1,
@@ -2648,7 +2984,7 @@
     {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 665,
+      "cfs_row_index": 790,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 389.1,
@@ -2660,7 +2996,7 @@
     {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 668,
+      "cfs_row_index": 793,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 399.0,
@@ -2672,7 +3008,7 @@
     {
       "inmate_number": "14193065",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 669,
+      "cfs_row_index": 794,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 399.4,
@@ -2684,7 +3020,7 @@
     {
       "inmate_number": "14229581",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2101,
+      "cfs_row_index": 2226,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 444.2,
@@ -2696,7 +3032,7 @@
     {
       "inmate_number": "14229581",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2103,
+      "cfs_row_index": 2228,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 375.0,
@@ -2708,7 +3044,7 @@
     {
       "inmate_number": "14229581",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2139,
+      "cfs_row_index": 2264,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 282.2,
@@ -2720,7 +3056,7 @@
     {
       "inmate_number": "14229581",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2156,
+      "cfs_row_index": 2281,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 457.2,
@@ -2730,9 +3066,33 @@
       }
     },
     {
+      "inmate_number": "14240981",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 11,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 312.5,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14240981",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 18,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 312.5,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1586,
+      "cfs_row_index": 1711,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 456.3,
@@ -2744,7 +3104,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1588,
+      "cfs_row_index": 1713,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 434.0,
@@ -2756,7 +3116,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1591,
+      "cfs_row_index": 1716,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 351.2,
@@ -2768,7 +3128,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1619,
+      "cfs_row_index": 1744,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 261.8,
@@ -2780,7 +3140,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1621,
+      "cfs_row_index": 1746,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 266.3,
@@ -2792,7 +3152,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1631,
+      "cfs_row_index": 1756,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 359.5,
@@ -2804,7 +3164,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1633,
+      "cfs_row_index": 1758,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 361.6,
@@ -2816,7 +3176,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1634,
+      "cfs_row_index": 1759,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 364.9,
@@ -2828,7 +3188,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1643,
+      "cfs_row_index": 1768,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 419.9,
@@ -2840,7 +3200,7 @@
     {
       "inmate_number": "14275455",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1652,
+      "cfs_row_index": 1777,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 468.3,
@@ -2852,7 +3212,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 963,
+      "cfs_row_index": 1088,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 471.9,
@@ -2864,7 +3224,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 964,
+      "cfs_row_index": 1089,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 468.8,
@@ -2876,7 +3236,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 965,
+      "cfs_row_index": 1090,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 431.3,
@@ -2888,7 +3248,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 966,
+      "cfs_row_index": 1091,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 422.9,
@@ -2900,7 +3260,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 967,
+      "cfs_row_index": 1092,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 422.2,
@@ -2912,7 +3272,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 968,
+      "cfs_row_index": 1093,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 415.5,
@@ -2924,7 +3284,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 969,
+      "cfs_row_index": 1094,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 407.7,
@@ -2936,7 +3296,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 970,
+      "cfs_row_index": 1095,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 403.6,
@@ -2948,7 +3308,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 972,
+      "cfs_row_index": 1097,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 400.8,
@@ -2960,7 +3320,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 973,
+      "cfs_row_index": 1098,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 392.5,
@@ -2972,7 +3332,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 975,
+      "cfs_row_index": 1100,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 376.5,
@@ -2984,7 +3344,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 977,
+      "cfs_row_index": 1102,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 357.7,
@@ -2996,7 +3356,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 979,
+      "cfs_row_index": 1104,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 329.2,
@@ -3008,7 +3368,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 981,
+      "cfs_row_index": 1106,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 309.8,
@@ -3020,7 +3380,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1009,
+      "cfs_row_index": 1134,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 257.2,
@@ -3032,7 +3392,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1012,
+      "cfs_row_index": 1137,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 303.4,
@@ -3044,7 +3404,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1018,
+      "cfs_row_index": 1143,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 368.2,
@@ -3056,7 +3416,7 @@
     {
       "inmate_number": "14276309",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1027,
+      "cfs_row_index": 1152,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 454.1,
@@ -3068,7 +3428,19 @@
     {
       "inmate_number": "14282477",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 10,
+      "cfs_row_index": 113,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 398.9,
+        "textual_overlap": 1.0,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14282477",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 135,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 270.6,
@@ -3080,7 +3452,7 @@
     {
       "inmate_number": "14282477",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 18,
+      "cfs_row_index": 143,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 345.6,
@@ -3092,7 +3464,7 @@
     {
       "inmate_number": "14282477",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 19,
+      "cfs_row_index": 144,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 366.7,
@@ -3104,7 +3476,7 @@
     {
       "inmate_number": "14282477",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 20,
+      "cfs_row_index": 145,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 389.9,
@@ -3116,7 +3488,7 @@
     {
       "inmate_number": "14282477",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 26,
+      "cfs_row_index": 151,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 457.9,
@@ -3128,7 +3500,7 @@
     {
       "inmate_number": "14282477",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 27,
+      "cfs_row_index": 152,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 458.1,
@@ -3140,7 +3512,7 @@
     {
       "inmate_number": "14282477",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 29,
+      "cfs_row_index": 154,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 476.0,
@@ -3152,82 +3524,10 @@
     {
       "inmate_number": "14282477",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 18,
+      "cfs_row_index": 122,
       "confidence": 0.5,
       "signals": {
-        "dt_delta_minutes": 270.6,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 26,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 345.6,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 27,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 366.7,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 28,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 389.9,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 34,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 457.9,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 35,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 458.1,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "14282477",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 37,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 476.0,
+        "dt_delta_minutes": 398.9,
         "textual_overlap": 1.0,
         "booked_date": "6/10/26",
         "arrest_disposition_boost": false
@@ -3236,7 +3536,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 853,
+      "cfs_row_index": 978,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 442.9,
@@ -3248,7 +3548,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 854,
+      "cfs_row_index": 979,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 432.6,
@@ -3260,7 +3560,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 855,
+      "cfs_row_index": 980,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 279.3,
@@ -3272,7 +3572,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 880,
+      "cfs_row_index": 1005,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 281.9,
@@ -3284,7 +3584,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 892,
+      "cfs_row_index": 1017,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 401.2,
@@ -3296,7 +3596,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 897,
+      "cfs_row_index": 1022,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 456.6,
@@ -3308,7 +3608,7 @@
     {
       "inmate_number": "14322334",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 899,
+      "cfs_row_index": 1024,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 467.1,
@@ -3320,7 +3620,19 @@
     {
       "inmate_number": "14370166",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 16,
+      "cfs_row_index": 116,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 380.1,
+        "textual_overlap": 1.0,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14370166",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 141,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 316.0,
@@ -3332,10 +3644,10 @@
     {
       "inmate_number": "14370166",
       "cfs_source": "cfs_recent",
-      "cfs_row_index": 24,
+      "cfs_row_index": 125,
       "confidence": 0.5,
       "signals": {
-        "dt_delta_minutes": 316.0,
+        "dt_delta_minutes": 380.1,
         "textual_overlap": 1.0,
         "booked_date": "6/10/26",
         "arrest_disposition_boost": false
@@ -3344,7 +3656,7 @@
     {
       "inmate_number": "14525252",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 659,
+      "cfs_row_index": 784,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 298.4,
@@ -3356,7 +3668,7 @@
     {
       "inmate_number": "14561800",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1465,
+      "cfs_row_index": 1590,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 337.9,
@@ -3368,7 +3680,7 @@
     {
       "inmate_number": "14561800",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1505,
+      "cfs_row_index": 1630,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 324.0,
@@ -3380,7 +3692,7 @@
     {
       "inmate_number": "14561800",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1509,
+      "cfs_row_index": 1634,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 358.8,
@@ -3392,7 +3704,7 @@
     {
       "inmate_number": "14561800",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1515,
+      "cfs_row_index": 1640,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 408.2,
@@ -3404,7 +3716,7 @@
     {
       "inmate_number": "14561800",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1516,
+      "cfs_row_index": 1641,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 415.9,
@@ -3416,7 +3728,7 @@
     {
       "inmate_number": "14589876",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1465,
+      "cfs_row_index": 1590,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 337.9,
@@ -3428,7 +3740,7 @@
     {
       "inmate_number": "14589876",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1505,
+      "cfs_row_index": 1630,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 324.0,
@@ -3440,7 +3752,7 @@
     {
       "inmate_number": "14589876",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1509,
+      "cfs_row_index": 1634,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 358.8,
@@ -3452,7 +3764,7 @@
     {
       "inmate_number": "14589876",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1515,
+      "cfs_row_index": 1640,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 408.2,
@@ -3464,7 +3776,7 @@
     {
       "inmate_number": "14589876",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1516,
+      "cfs_row_index": 1641,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 415.9,
@@ -3474,84 +3786,60 @@
       }
     },
     {
-      "inmate_number": "1462307",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 10,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 270.6,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "1462307",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 18,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 345.6,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "1462307",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 19,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 366.7,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "1462307",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 20,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 389.9,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "1462307",
-      "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 26,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 457.9,
-        "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "1462307",
+      "inmate_number": "14590989",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 27,
       "confidence": 0.5,
       "signals": {
-        "dt_delta_minutes": 458.1,
+        "dt_delta_minutes": 401.1,
         "textual_overlap": 1.0,
-        "booked_date": "6/10/26",
+        "booked_date": "6/11/26",
         "arrest_disposition_boost": false
       }
     },
     {
-      "inmate_number": "1462307",
+      "inmate_number": "14590989",
       "cfs_source": "cfs_pdi_recent",
       "cfs_row_index": 29,
       "confidence": 0.5,
       "signals": {
-        "dt_delta_minutes": 476.0,
+        "dt_delta_minutes": 412.8,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14590989",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 34,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 401.1,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "14590989",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 36,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 412.8,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "1462307",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 113,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 398.9,
         "textual_overlap": 1.0,
         "booked_date": "6/10/26",
         "arrest_disposition_boost": false
@@ -3559,8 +3847,8 @@
     },
     {
       "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 18,
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 135,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 270.6,
@@ -3571,8 +3859,8 @@
     },
     {
       "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 26,
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 143,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 345.6,
@@ -3583,8 +3871,8 @@
     },
     {
       "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 27,
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 144,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 366.7,
@@ -3595,8 +3883,8 @@
     },
     {
       "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 28,
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 145,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 389.9,
@@ -3607,8 +3895,8 @@
     },
     {
       "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 34,
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 151,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 457.9,
@@ -3619,8 +3907,8 @@
     },
     {
       "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 35,
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 152,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 458.1,
@@ -3631,11 +3919,23 @@
     },
     {
       "inmate_number": "1462307",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 37,
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 154,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 476.0,
+        "textual_overlap": 1.0,
+        "booked_date": "6/10/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "1462307",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 122,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 398.9,
         "textual_overlap": 1.0,
         "booked_date": "6/10/26",
         "arrest_disposition_boost": false
@@ -3644,7 +3944,7 @@
     {
       "inmate_number": "14637836",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3009,
+      "cfs_row_index": 3134,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 469.2,
@@ -3656,7 +3956,7 @@
     {
       "inmate_number": "1465577",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 423,
+      "cfs_row_index": 548,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 269.8,
@@ -3668,7 +3968,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2210,
+      "cfs_row_index": 2335,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 469.2,
@@ -3680,7 +3980,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2211,
+      "cfs_row_index": 2336,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 455.8,
@@ -3692,7 +3992,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2212,
+      "cfs_row_index": 2337,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 451.2,
@@ -3704,7 +4004,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2215,
+      "cfs_row_index": 2340,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 412.8,
@@ -3716,7 +4016,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2245,
+      "cfs_row_index": 2370,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 386.8,
@@ -3728,7 +4028,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2246,
+      "cfs_row_index": 2371,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 390.1,
@@ -3740,7 +4040,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2251,
+      "cfs_row_index": 2376,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 411.9,
@@ -3752,7 +4052,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2253,
+      "cfs_row_index": 2378,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 420.8,
@@ -3764,7 +4064,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2254,
+      "cfs_row_index": 2379,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 427.3,
@@ -3776,7 +4076,7 @@
     {
       "inmate_number": "14687958",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2259,
+      "cfs_row_index": 2384,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 460.7,
@@ -3788,7 +4088,7 @@
     {
       "inmate_number": "14738950",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2303,
+      "cfs_row_index": 2428,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 429.2,
@@ -3800,7 +4100,7 @@
     {
       "inmate_number": "14738950",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2305,
+      "cfs_row_index": 2430,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 423.4,
@@ -3812,7 +4112,7 @@
     {
       "inmate_number": "14738950",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2318,
+      "cfs_row_index": 2443,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 281.5,
@@ -3824,7 +4124,7 @@
     {
       "inmate_number": "14738950",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2323,
+      "cfs_row_index": 2448,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 353.6,
@@ -3836,7 +4136,7 @@
     {
       "inmate_number": "14738950",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2324,
+      "cfs_row_index": 2449,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 369.6,
@@ -3848,7 +4148,7 @@
     {
       "inmate_number": "14738950",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2327,
+      "cfs_row_index": 2452,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 388.6,
@@ -3860,7 +4160,7 @@
     {
       "inmate_number": "14738950",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2330,
+      "cfs_row_index": 2455,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 428.5,
@@ -3872,7 +4172,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1908,
+      "cfs_row_index": 2033,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 428.1,
@@ -3884,7 +4184,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1909,
+      "cfs_row_index": 2034,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 418.9,
@@ -3896,7 +4196,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1910,
+      "cfs_row_index": 2035,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 319.1,
@@ -3908,7 +4208,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1911,
+      "cfs_row_index": 2036,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 268.8,
@@ -3920,7 +4220,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1912,
+      "cfs_row_index": 2037,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 264.7,
@@ -3932,7 +4232,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1945,
+      "cfs_row_index": 2070,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 303.6,
@@ -3944,7 +4244,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1949,
+      "cfs_row_index": 2074,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 367.9,
@@ -3956,7 +4256,7 @@
     {
       "inmate_number": "14811314",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1958,
+      "cfs_row_index": 2083,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 421.7,
@@ -3968,7 +4268,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1821,
+      "cfs_row_index": 1946,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 460.1,
@@ -3980,7 +4280,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1822,
+      "cfs_row_index": 1947,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 443.6,
@@ -3992,7 +4292,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1823,
+      "cfs_row_index": 1948,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 418.4,
@@ -4004,7 +4304,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1824,
+      "cfs_row_index": 1949,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 384.4,
@@ -4016,7 +4316,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1825,
+      "cfs_row_index": 1950,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 328.2,
@@ -4028,7 +4328,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1856,
+      "cfs_row_index": 1981,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 325.5,
@@ -4040,7 +4340,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1861,
+      "cfs_row_index": 1986,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 388.9,
@@ -4052,7 +4352,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1863,
+      "cfs_row_index": 1988,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 413.0,
@@ -4064,7 +4364,7 @@
     {
       "inmate_number": "14811377",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1865,
+      "cfs_row_index": 1990,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 435.8,
@@ -4076,7 +4376,7 @@
     {
       "inmate_number": "1503982",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 3009,
+      "cfs_row_index": 3134,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 469.2,
@@ -4088,7 +4388,7 @@
     {
       "inmate_number": "1521936",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2507,
+      "cfs_row_index": 2632,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 465.1,
@@ -4100,7 +4400,7 @@
     {
       "inmate_number": "1521936",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2512,
+      "cfs_row_index": 2637,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 275.2,
@@ -4112,7 +4412,7 @@
     {
       "inmate_number": "1521936",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2552,
+      "cfs_row_index": 2677,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 369.2,
@@ -4124,7 +4424,7 @@
     {
       "inmate_number": "1521936",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2555,
+      "cfs_row_index": 2680,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 403.0,
@@ -4136,7 +4436,7 @@
     {
       "inmate_number": "1562311",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2303,
+      "cfs_row_index": 2428,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 429.2,
@@ -4148,7 +4448,7 @@
     {
       "inmate_number": "1562311",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2305,
+      "cfs_row_index": 2430,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 423.4,
@@ -4160,7 +4460,7 @@
     {
       "inmate_number": "1562311",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2318,
+      "cfs_row_index": 2443,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 281.5,
@@ -4172,7 +4472,7 @@
     {
       "inmate_number": "1562311",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2323,
+      "cfs_row_index": 2448,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 353.6,
@@ -4184,7 +4484,7 @@
     {
       "inmate_number": "1562311",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2324,
+      "cfs_row_index": 2449,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 369.6,
@@ -4196,7 +4496,7 @@
     {
       "inmate_number": "1562311",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2327,
+      "cfs_row_index": 2452,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 388.6,
@@ -4208,7 +4508,7 @@
     {
       "inmate_number": "1562311",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2330,
+      "cfs_row_index": 2455,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 428.5,
@@ -4220,7 +4520,7 @@
     {
       "inmate_number": "1625095",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2303,
+      "cfs_row_index": 2428,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 429.2,
@@ -4232,7 +4532,7 @@
     {
       "inmate_number": "1625095",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2305,
+      "cfs_row_index": 2430,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 423.4,
@@ -4244,7 +4544,7 @@
     {
       "inmate_number": "1625095",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2318,
+      "cfs_row_index": 2443,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 281.5,
@@ -4256,7 +4556,7 @@
     {
       "inmate_number": "1625095",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2323,
+      "cfs_row_index": 2448,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 353.6,
@@ -4268,7 +4568,7 @@
     {
       "inmate_number": "1625095",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2324,
+      "cfs_row_index": 2449,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 369.6,
@@ -4280,7 +4580,7 @@
     {
       "inmate_number": "1625095",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2327,
+      "cfs_row_index": 2452,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 388.6,
@@ -4292,7 +4592,7 @@
     {
       "inmate_number": "1625095",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2330,
+      "cfs_row_index": 2455,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 428.5,
@@ -4304,7 +4604,7 @@
     {
       "inmate_number": "1748772",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 310,
+      "cfs_row_index": 435,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 365.6,
@@ -4316,7 +4616,7 @@
     {
       "inmate_number": "1748772",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 340,
+      "cfs_row_index": 465,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 270.3,
@@ -4328,7 +4628,7 @@
     {
       "inmate_number": "1748772",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 344,
+      "cfs_row_index": 469,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 297.4,
@@ -4340,7 +4640,7 @@
     {
       "inmate_number": "1748772",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 348,
+      "cfs_row_index": 473,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 371.5,
@@ -4352,7 +4652,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 623,
+      "cfs_row_index": 748,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 441.4,
@@ -4364,7 +4664,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 660,
+      "cfs_row_index": 785,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 306.2,
@@ -4376,7 +4676,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 661,
+      "cfs_row_index": 786,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 307.1,
@@ -4388,7 +4688,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 665,
+      "cfs_row_index": 790,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 389.1,
@@ -4400,7 +4700,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 668,
+      "cfs_row_index": 793,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 399.0,
@@ -4412,7 +4712,7 @@
     {
       "inmate_number": "2003232",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 669,
+      "cfs_row_index": 794,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 399.4,
@@ -4424,7 +4724,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1821,
+      "cfs_row_index": 1946,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 460.1,
@@ -4436,7 +4736,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1822,
+      "cfs_row_index": 1947,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 443.6,
@@ -4448,7 +4748,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1823,
+      "cfs_row_index": 1948,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 418.4,
@@ -4460,7 +4760,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1824,
+      "cfs_row_index": 1949,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 384.4,
@@ -4472,7 +4772,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1825,
+      "cfs_row_index": 1950,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 328.2,
@@ -4484,7 +4784,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1856,
+      "cfs_row_index": 1981,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 325.5,
@@ -4496,7 +4796,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1861,
+      "cfs_row_index": 1986,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 388.9,
@@ -4508,7 +4808,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1863,
+      "cfs_row_index": 1988,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 413.0,
@@ -4520,7 +4820,7 @@
     {
       "inmate_number": "2055070",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1865,
+      "cfs_row_index": 1990,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 435.8,
@@ -4530,9 +4830,57 @@
       }
     },
     {
+      "inmate_number": "2110414",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 27,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 401.1,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2110414",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 29,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 412.8,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2110414",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 34,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 401.1,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2110414",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 36,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 412.8,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
       "inmate_number": "2217040",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 394,
+      "cfs_row_index": 519,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 423.4,
@@ -4544,7 +4892,7 @@
     {
       "inmate_number": "2217040",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 396,
+      "cfs_row_index": 521,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 288.9,
@@ -4556,7 +4904,7 @@
     {
       "inmate_number": "2217040",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 426,
+      "cfs_row_index": 551,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 298.5,
@@ -4568,7 +4916,7 @@
     {
       "inmate_number": "2217040",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 430,
+      "cfs_row_index": 555,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 315.3,
@@ -4580,7 +4928,7 @@
     {
       "inmate_number": "2217040",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 431,
+      "cfs_row_index": 556,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 316.1,
@@ -4590,9 +4938,33 @@
       }
     },
     {
+      "inmate_number": "2233022",
+      "cfs_source": "cfs_pdi_recent",
+      "cfs_row_index": 11,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 312.5,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
+      "inmate_number": "2233022",
+      "cfs_source": "cfs_recent",
+      "cfs_row_index": 18,
+      "confidence": 0.5,
+      "signals": {
+        "dt_delta_minutes": 312.5,
+        "textual_overlap": 1.0,
+        "booked_date": "6/11/26",
+        "arrest_disposition_boost": false
+      }
+    },
+    {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 495,
+      "cfs_row_index": 620,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 470.9,
@@ -4604,7 +4976,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 496,
+      "cfs_row_index": 621,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 462.1,
@@ -4616,7 +4988,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 498,
+      "cfs_row_index": 623,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 446.5,
@@ -4628,7 +5000,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 499,
+      "cfs_row_index": 624,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 429.3,
@@ -4640,7 +5012,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 500,
+      "cfs_row_index": 625,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 422.6,
@@ -4652,7 +5024,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 501,
+      "cfs_row_index": 626,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 410.4,
@@ -4664,7 +5036,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 502,
+      "cfs_row_index": 627,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 409.5,
@@ -4676,7 +5048,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 503,
+      "cfs_row_index": 628,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 408.3,
@@ -4688,7 +5060,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 504,
+      "cfs_row_index": 629,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 379.0,
@@ -4700,7 +5072,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 506,
+      "cfs_row_index": 631,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 313.0,
@@ -4712,7 +5084,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 532,
+      "cfs_row_index": 657,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 275.4,
@@ -4724,7 +5096,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 533,
+      "cfs_row_index": 658,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 287.5,
@@ -4736,7 +5108,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 535,
+      "cfs_row_index": 660,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 313.2,
@@ -4748,7 +5120,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 536,
+      "cfs_row_index": 661,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 331.7,
@@ -4760,7 +5132,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 537,
+      "cfs_row_index": 662,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 340.1,
@@ -4772,7 +5144,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 544,
+      "cfs_row_index": 669,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 392.6,
@@ -4784,7 +5156,7 @@
     {
       "inmate_number": "2274552",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 550,
+      "cfs_row_index": 675,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 449.8,
@@ -4796,7 +5168,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 97,
+      "cfs_row_index": 222,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 456.0,
@@ -4808,7 +5180,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 98,
+      "cfs_row_index": 223,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 442.7,
@@ -4820,7 +5192,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 99,
+      "cfs_row_index": 224,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 431.4,
@@ -4832,7 +5204,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 100,
+      "cfs_row_index": 225,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 426.4,
@@ -4844,7 +5216,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 101,
+      "cfs_row_index": 226,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 409.5,
@@ -4856,7 +5228,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 102,
+      "cfs_row_index": 227,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 403.1,
@@ -4868,7 +5240,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 103,
+      "cfs_row_index": 228,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 379.2,
@@ -4880,7 +5252,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 104,
+      "cfs_row_index": 229,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 375.9,
@@ -4892,7 +5264,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 105,
+      "cfs_row_index": 230,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 374.4,
@@ -4904,7 +5276,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 107,
+      "cfs_row_index": 232,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 345.8,
@@ -4916,7 +5288,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 108,
+      "cfs_row_index": 233,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 296.4,
@@ -4928,7 +5300,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 109,
+      "cfs_row_index": 234,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 242.9,
@@ -4940,7 +5312,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 131,
+      "cfs_row_index": 256,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 243.8,
@@ -4952,7 +5324,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 135,
+      "cfs_row_index": 260,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 289.6,
@@ -4964,7 +5336,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 136,
+      "cfs_row_index": 261,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 297.2,
@@ -4976,7 +5348,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 137,
+      "cfs_row_index": 262,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 302.1,
@@ -4988,7 +5360,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 146,
+      "cfs_row_index": 271,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 344.3,
@@ -5000,7 +5372,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 148,
+      "cfs_row_index": 273,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 358.4,
@@ -5012,7 +5384,7 @@
     {
       "inmate_number": "2335874",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 160,
+      "cfs_row_index": 285,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 422.8,
@@ -5022,165 +5394,9 @@
       }
     },
     {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 106,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 456.0,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 107,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 442.7,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 108,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 431.4,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 109,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 426.4,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 110,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 409.5,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 111,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 403.1,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 112,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 379.2,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 113,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 379.1,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 114,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 375.9,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 115,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 374.4,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 117,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 345.8,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 118,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 296.4,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
-      "inmate_number": "2335874",
-      "cfs_source": "cfs_recent",
-      "cfs_row_index": 119,
-      "confidence": 0.5,
-      "signals": {
-        "dt_delta_minutes": 242.9,
-        "textual_overlap": 1.0,
-        "booked_date": "6/9/26",
-        "arrest_disposition_boost": false
-      }
-    },
-    {
       "inmate_number": "2382979",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 310,
+      "cfs_row_index": 435,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 365.6,
@@ -5192,7 +5408,7 @@
     {
       "inmate_number": "2382979",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 340,
+      "cfs_row_index": 465,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 270.3,
@@ -5204,7 +5420,7 @@
     {
       "inmate_number": "2382979",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 344,
+      "cfs_row_index": 469,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 297.4,
@@ -5216,7 +5432,7 @@
     {
       "inmate_number": "2382979",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 348,
+      "cfs_row_index": 473,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 371.5,
@@ -5228,7 +5444,7 @@
     {
       "inmate_number": "2450915",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2599,
+      "cfs_row_index": 2724,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 423.1,
@@ -5240,7 +5456,7 @@
     {
       "inmate_number": "2450915",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2626,
+      "cfs_row_index": 2751,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 351.3,
@@ -5252,7 +5468,7 @@
     {
       "inmate_number": "2482246",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2507,
+      "cfs_row_index": 2632,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 465.1,
@@ -5264,7 +5480,7 @@
     {
       "inmate_number": "2482246",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2512,
+      "cfs_row_index": 2637,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 275.2,
@@ -5276,7 +5492,7 @@
     {
       "inmate_number": "2482246",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2552,
+      "cfs_row_index": 2677,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 369.2,
@@ -5288,7 +5504,7 @@
     {
       "inmate_number": "2482246",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2555,
+      "cfs_row_index": 2680,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 403.0,
@@ -5300,7 +5516,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 739,
+      "cfs_row_index": 864,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 404.1,
@@ -5312,7 +5528,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 740,
+      "cfs_row_index": 865,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 400.4,
@@ -5324,7 +5540,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 741,
+      "cfs_row_index": 866,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 361.8,
@@ -5336,7 +5552,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 742,
+      "cfs_row_index": 867,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 355.8,
@@ -5348,7 +5564,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 761,
+      "cfs_row_index": 886,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 286.0,
@@ -5360,7 +5576,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 762,
+      "cfs_row_index": 887,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 289.3,
@@ -5372,7 +5588,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 764,
+      "cfs_row_index": 889,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 314.1,
@@ -5384,7 +5600,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 768,
+      "cfs_row_index": 893,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 362.0,
@@ -5396,7 +5612,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 772,
+      "cfs_row_index": 897,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 409.3,
@@ -5408,7 +5624,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 773,
+      "cfs_row_index": 898,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 418.5,
@@ -5420,7 +5636,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 775,
+      "cfs_row_index": 900,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 430.6,
@@ -5432,7 +5648,7 @@
     {
       "inmate_number": "2523606",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 776,
+      "cfs_row_index": 901,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 434.2,
@@ -5444,7 +5660,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1072,
+      "cfs_row_index": 1197,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 456.0,
@@ -5456,7 +5672,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1073,
+      "cfs_row_index": 1198,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 435.2,
@@ -5468,7 +5684,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1079,
+      "cfs_row_index": 1204,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 353.1,
@@ -5480,7 +5696,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1080,
+      "cfs_row_index": 1205,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 293.6,
@@ -5492,7 +5708,7 @@
     {
       "inmate_number": "2558757",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1132,
+      "cfs_row_index": 1257,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 383.1,
@@ -5504,7 +5720,7 @@
     {
       "inmate_number": "2572120",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1585,
+      "cfs_row_index": 1710,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 461.5,
@@ -5516,7 +5732,7 @@
     {
       "inmate_number": "2572120",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1593,
+      "cfs_row_index": 1718,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 258.9,
@@ -5528,7 +5744,7 @@
     {
       "inmate_number": "2647391",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2303,
+      "cfs_row_index": 2428,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 429.2,
@@ -5540,7 +5756,7 @@
     {
       "inmate_number": "2647391",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2305,
+      "cfs_row_index": 2430,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 423.4,
@@ -5552,7 +5768,7 @@
     {
       "inmate_number": "2647391",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2318,
+      "cfs_row_index": 2443,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 281.5,
@@ -5564,7 +5780,7 @@
     {
       "inmate_number": "2647391",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2323,
+      "cfs_row_index": 2448,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 353.6,
@@ -5576,7 +5792,7 @@
     {
       "inmate_number": "2647391",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2324,
+      "cfs_row_index": 2449,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 369.6,
@@ -5588,7 +5804,7 @@
     {
       "inmate_number": "2647391",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2327,
+      "cfs_row_index": 2452,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 388.6,
@@ -5600,7 +5816,7 @@
     {
       "inmate_number": "2647391",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2330,
+      "cfs_row_index": 2455,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 428.5,
@@ -5612,7 +5828,7 @@
     {
       "inmate_number": "913348",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 552,
+      "cfs_row_index": 677,
       "confidence": 0.5,
       "signals": {
         "dt_delta_minutes": 463.7,
@@ -5624,7 +5840,7 @@
     {
       "inmate_number": "14810434",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 2790,
+      "cfs_row_index": 2915,
       "confidence": 0.496,
       "signals": {
         "dt_delta_minutes": 122.2,
@@ -5636,7 +5852,7 @@
     {
       "inmate_number": "14752599",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 651,
+      "cfs_row_index": 776,
       "confidence": 0.493,
       "signals": {
         "dt_delta_minutes": 195.5,
@@ -5648,7 +5864,7 @@
     {
       "inmate_number": "14783665",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1486,
+      "cfs_row_index": 1611,
       "confidence": 0.48,
       "signals": {
         "dt_delta_minutes": 57.5,
@@ -5660,7 +5876,7 @@
     {
       "inmate_number": "2556271",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 122,
+      "cfs_row_index": 247,
       "confidence": 0.474,
       "signals": {
         "dt_delta_minutes": 132.3,
@@ -5672,7 +5888,7 @@
     {
       "inmate_number": "14140677",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1936,
+      "cfs_row_index": 2061,
       "confidence": 0.473,
       "signals": {
         "dt_delta_minutes": 205.1,
@@ -5684,7 +5900,7 @@
     {
       "inmate_number": "14171742",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1334,
+      "cfs_row_index": 1459,
       "confidence": 0.463,
       "signals": {
         "dt_delta_minutes": 137.7,
@@ -5696,7 +5912,7 @@
     {
       "inmate_number": "14443470",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1334,
+      "cfs_row_index": 1459,
       "confidence": 0.463,
       "signals": {
         "dt_delta_minutes": 137.7,
@@ -5708,7 +5924,7 @@
     {
       "inmate_number": "14811919",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1334,
+      "cfs_row_index": 1459,
       "confidence": 0.463,
       "signals": {
         "dt_delta_minutes": 137.7,
@@ -5720,7 +5936,7 @@
     {
       "inmate_number": "2191687",
       "cfs_source": "cfs_pdi_recent",
-      "cfs_row_index": 1334,
+      "cfs_row_index": 1459,
       "confidence": 0.463,
       "signals": {
         "dt_delta_minutes": 137.7,
