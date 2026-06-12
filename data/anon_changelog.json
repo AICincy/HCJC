@@ -194719,66 +194719,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-04T23:55:27Z",
-    "inmate_number": "14077151",
-    "name": "DENT THOMAS",
+    "date": "2026-06-04",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 6/4/26"
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-04T23:55:27Z",
-    "inmate_number": "14480968",
-    "name": "ADAMS JOSEPH",
+    "date": "2026-06-04",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/4/26"
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-04T23:55:27Z",
-    "inmate_number": "1609851",
-    "name": "LUNDY NIKKI",
+    "date": "2026-06-04",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-04T23:55:27Z",
-    "inmate_number": "2197250",
-    "name": "STOKES DAVID",
+    "date": "2026-06-04",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-04T23:55:27Z",
-    "inmate_number": "2836243",
-    "name": "HOOVER ALAENA",
+    "date": "2026-06-04",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/4/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T00:42:50Z",
-    "inmate_number": "14804521",
-    "name": "WHITE DELMARION",
+    "date": "2026-06-05",
     "tier": "M1",
-    "category": "Discharging a firearm on or near prohibited premises",
-    "note": ""
+    "category": "Discharging a firearm on or near prohibited premises"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T00:42:50Z",
-    "inmate_number": "2197250",
-    "name": "STOKES DAVID",
+    "date": "2026-06-05",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-05",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-05",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
@@ -206370,6 +206361,51 @@
     "name": "SMITH BRANDON",
     "tier": "MM",
     "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 6/11/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-12T00:46:19Z",
+    "inmate_number": "14392547",
+    "name": "FRANKLIN JONAS",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/11/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-12T00:46:19Z",
+    "inmate_number": "14813484",
+    "name": "HAWKER SCOTT",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/11/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-12T00:46:19Z",
+    "inmate_number": "213622",
+    "name": "WASHINGTON DUANE",
+    "tier": "M1",
+    "category": "Operating a motor vehicle without lawful registration",
+    "note": "booked 6/11/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T00:46:19Z",
+    "inmate_number": "2233022",
+    "name": "HENDRICKS BRIAN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-12T00:46:19Z",
+    "inmate_number": "2703749",
+    "name": "BALL JESSE",
+    "tier": "M1",
+    "category": "Domestic violence",
     "note": "booked 6/11/26"
   }
 ]
