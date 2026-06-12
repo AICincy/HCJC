@@ -154285,6 +154285,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-05-17",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: public order (improper solicitation)"
+  },
+  {
+    "event": "booked",
     "date": "2026-05-18",
     "tier": null,
     "category": null
@@ -162388,6 +162394,12 @@
     "date": "2026-05-18",
     "tier": "M1",
     "category": "Driving under suspension"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-18",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: public order (improper solicitation)"
   },
   {
     "event": "booked",
@@ -195841,30 +195853,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T20:52:21Z",
-    "inmate_number": "14069018",
-    "name": "WILLIAMS PAUL",
+    "date": "2026-06-05",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T20:52:21Z",
-    "inmate_number": "2464278",
-    "name": "ARMSTRONG BRIDGETTE",
+    "date": "2026-06-05",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-05T20:52:21Z",
-    "inmate_number": "913348",
-    "name": "CADDELL JAMES",
+    "date": "2026-06-05",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
@@ -207868,6 +207871,114 @@
     "timestamp_utc": "2026-06-12T20:17:51Z",
     "inmate_number": "2659829",
     "name": "FAIRBANKS MONIER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "14512246",
+    "name": "JOHNSON HANNAH",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "14688613",
+    "name": "WILLIAMS MALIK",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 6/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "14751043",
+    "name": "EUSTACHE MATHIAS",
+    "tier": "M1",
+    "category": "Driving under OVI suspension",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "1912124",
+    "name": "WAGNER AMBER",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "1901747",
+    "name": "BOLES GEORGE",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: public order (improper solicitation)",
+    "note": "booked 6/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "2020308",
+    "name": "JOHNSON ALONZO",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "2284130",
+    "name": "BENZ SANDRA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "2479347",
+    "name": "MALLORY TEVONTE",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "booked 6/12/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "913348",
+    "name": "CADDELL JAMES",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "14568356",
+    "name": "HILL TONIKO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "14718888",
+    "name": "KING NECARDO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T21:07:45Z",
+    "inmate_number": "2482246",
+    "name": "TORREY AMBER",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
