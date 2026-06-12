@@ -195889,84 +195889,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-05T22:11:07Z",
-    "inmate_number": "14069646",
-    "name": "NIXON JOE",
+    "date": "2026-06-05",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/5/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-05T22:11:07Z",
-    "inmate_number": "14532231",
-    "name": "PHILMORE BRAD",
+    "date": "2026-06-05",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-05T22:11:07Z",
-    "inmate_number": "14546489",
-    "name": "HOLDER JAYQUAN",
+    "date": "2026-06-05",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 6/5/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-05T22:11:07Z",
-    "inmate_number": "1531936",
-    "name": "CONRAD DANIEL",
+    "date": "2026-06-05",
     "tier": "M1",
-    "category": "Stopping after accident on public roads",
-    "note": ""
+    "category": "Stopping after accident on public roads"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-05T22:11:07Z",
-    "inmate_number": "2133973",
-    "name": "HECKMAN BRANDON",
+    "date": "2026-06-05",
     "tier": null,
-    "category": null,
-    "note": "booked 6/5/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-05T22:11:07Z",
-    "inmate_number": "14209099",
-    "name": "HALL RUBY",
+    "date": "2026-06-05",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-05T22:11:07Z",
-    "inmate_number": "14715212",
-    "name": "JOHNSON DANIELLE",
+    "date": "2026-06-05",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-05T22:11:07Z",
-    "inmate_number": "14575351",
-    "name": "JOHNSON DAVION",
+    "date": "2026-06-05",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-05T22:11:07Z",
-    "inmate_number": "2344519",
-    "name": "SIMPSON ROBIN",
+    "date": "2026-06-05",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -208018,5 +207991,59 @@
     "tier": "F5",
     "category": "Trafficking in drugs",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-12T22:32:40Z",
+    "inmate_number": "2384393",
+    "name": "WIMMER JAMES",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T22:32:40Z",
+    "inmate_number": "14751043",
+    "name": "EUSTACHE MATHIAS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T22:32:40Z",
+    "inmate_number": "1455805",
+    "name": "HOLLOWAY BRYANT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T22:32:40Z",
+    "inmate_number": "1974246",
+    "name": "HUNTER MARCO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T22:32:40Z",
+    "inmate_number": "14080757",
+    "name": "TSIGHE HAWAZ",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-12T22:32:40Z",
+    "inmate_number": "14803395",
+    "name": "VENTURA ADAM",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
