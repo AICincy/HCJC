@@ -196357,30 +196357,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T15:00:08Z",
-    "inmate_number": "1794104",
-    "name": "CURRY LASHANNA",
+    "date": "2026-06-06",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T15:00:08Z",
-    "inmate_number": "2201150",
-    "name": "METTS RANDALL",
+    "date": "2026-06-06",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T15:00:08Z",
-    "inmate_number": "2455875",
-    "name": "WHITFIELD MARQUIS",
+    "date": "2026-06-06",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-06",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
@@ -208495,5 +208492,50 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T15:22:20Z",
+    "inmate_number": "14345290",
+    "name": "PRAYER BRANDON",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T15:22:20Z",
+    "inmate_number": "14784134",
+    "name": "GARDNER REGINALD",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T15:22:20Z",
+    "inmate_number": "1562544",
+    "name": "SMITH JERRELL",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T15:22:20Z",
+    "inmate_number": "2681882",
+    "name": "HAWKINS-TERRELL RECARDO",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T15:22:20Z",
+    "inmate_number": "1257340",
+    "name": "ST CLAIR DANNY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
