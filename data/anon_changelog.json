@@ -196813,39 +196813,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T20:26:53Z",
-    "inmate_number": "14423878",
-    "name": "ZITO TIMOTHY",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T20:26:53Z",
-    "inmate_number": "14502724",
-    "name": "WILSON JOEL",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T20:26:53Z",
-    "inmate_number": "2090173",
-    "name": "JOHNSON BRIAN",
+    "date": "2026-06-06",
     "tier": "M4",
-    "category": "Public indecency",
-    "note": "booked 6/6/26"
+    "category": "Public indecency"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T20:26:53Z",
-    "inmate_number": "2661525",
-    "name": "TAUL SHARONTA",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/6/26"
+    "category": "Domestic violence"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-06",
+    "tier": "M4",
+    "category": "Public indecency"
   },
   {
     "event": "updated",
@@ -208735,5 +208729,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T20:43:59Z",
+    "inmate_number": "14783541",
+    "name": "LESLIE EDWARD",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T20:43:59Z",
+    "inmate_number": "2015960",
+    "name": "TERRELL DEZI",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T20:43:59Z",
+    "inmate_number": "2742992",
+    "name": "CRAWFORD TIARA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
