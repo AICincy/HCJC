@@ -196009,21 +196009,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T00:11:40Z",
-    "inmate_number": "14488496",
-    "name": "MINIARD MELISSA",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Unauthorized use of a vehicle",
-    "note": "booked 6/5/26"
+    "category": "Unauthorized use of a vehicle"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T00:11:40Z",
-    "inmate_number": "14812792",
-    "name": "JOHNSON TYQUAN",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-06",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-06",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -208084,5 +208090,41 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T00:45:22Z",
+    "inmate_number": "1562544",
+    "name": "SMITH JERRELL",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T00:45:22Z",
+    "inmate_number": "1889086",
+    "name": "ROBERTS ERICA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T00:45:22Z",
+    "inmate_number": "2199719",
+    "name": "GAMBLE JOHNITA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T00:45:22Z",
+    "inmate_number": "2396985",
+    "name": "JACKSON JORDAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/12/26"
   }
 ]
