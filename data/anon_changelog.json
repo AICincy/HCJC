@@ -196051,30 +196051,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T02:20:18Z",
-    "inmate_number": "14695240",
-    "name": "SEAY LADAIZSHA",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T02:20:18Z",
-    "inmate_number": "2201150",
-    "name": "METTS RANDALL",
+    "date": "2026-06-06",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T02:20:18Z",
-    "inmate_number": "2449628",
-    "name": "WHITE JUSTIN",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/5/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
@@ -208186,6 +208177,51 @@
     "timestamp_utc": "2026-06-13T01:36:04Z",
     "inmate_number": "14443460",
     "name": "TURNER RICKALE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T02:40:43Z",
+    "inmate_number": "1562544",
+    "name": "SMITH JERRELL",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T02:40:43Z",
+    "inmate_number": "1889086",
+    "name": "ROBERTS ERICA",
+    "tier": "F5",
+    "category": "Identity fraud",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T02:40:43Z",
+    "inmate_number": "2065485",
+    "name": "MORRISON ERIC",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T02:40:43Z",
+    "inmate_number": "2199719",
+    "name": "GAMBLE JOHNITA",
+    "tier": "F5",
+    "category": "Identity fraud",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T02:40:43Z",
+    "inmate_number": "14142369",
+    "name": "WATKINS KARL",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
