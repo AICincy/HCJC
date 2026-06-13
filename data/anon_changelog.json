@@ -196225,48 +196225,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T07:41:25Z",
-    "inmate_number": "14763705",
-    "name": "HALCOMB MELISSA",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/6/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T07:41:25Z",
-    "inmate_number": "14812805",
-    "name": "YADGOROV DASTON",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/6/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T07:41:25Z",
-    "inmate_number": "2217040",
-    "name": "BAKER BRIAN",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T07:41:25Z",
-    "inmate_number": "2547964",
-    "name": "KIRKSEY DIMITRIUS",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T07:41:25Z",
-    "inmate_number": "2767346",
-    "name": "CRAWFORD WILBUR",
+    "date": "2026-06-06",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": "booked 6/6/26"
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "updated",
@@ -208335,6 +208320,33 @@
     "name": "NEIL KENNETH",
     "tier": null,
     "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T08:34:56Z",
+    "inmate_number": "1430359",
+    "name": "BRITTEN GERMALE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T08:34:56Z",
+    "inmate_number": "2094825",
+    "name": "SHEPARD JASON",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T08:34:56Z",
+    "inmate_number": "2558151",
+    "name": "MORGAN NINO",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
     "note": ""
   }
 ]
