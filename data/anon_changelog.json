@@ -196327,48 +196327,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T13:33:42Z",
-    "inmate_number": "2351940",
-    "name": "JOHNSON MARCUS",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": "booked 6/6/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T14:20:17Z",
-    "inmate_number": "14502724",
-    "name": "WILSON JOEL",
+    "date": "2026-06-06",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": ""
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T14:20:17Z",
-    "inmate_number": "14644762",
-    "name": "FRANKLIN MYLIK",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T14:20:17Z",
-    "inmate_number": "2201150",
-    "name": "METTS RANDALL",
+    "date": "2026-06-06",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T14:20:17Z",
-    "inmate_number": "2455875",
-    "name": "WHITFIELD MARQUIS",
+    "date": "2026-06-06",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "updated",
@@ -208429,5 +208414,86 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T14:45:07Z",
+    "inmate_number": "14345290",
+    "name": "PRAYER BRANDON",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T14:45:07Z",
+    "inmate_number": "14790057",
+    "name": "TAYLOR CHRISTIAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T14:45:07Z",
+    "inmate_number": "14784134",
+    "name": "GARDNER REGINALD",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T14:45:07Z",
+    "inmate_number": "1549201",
+    "name": "HIGGINS JOSEPH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T14:45:07Z",
+    "inmate_number": "2199719",
+    "name": "GAMBLE JOHNITA",
+    "tier": "F5",
+    "category": "Identity fraud",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T14:45:07Z",
+    "inmate_number": "2148132",
+    "name": "OVERSTREET DEMETRIUS",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T14:45:07Z",
+    "inmate_number": "2304157",
+    "name": "WALKER KEYONA",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T14:45:07Z",
+    "inmate_number": "2723704",
+    "name": "LACKEY DOMINICK",
+    "tier": "M4",
+    "category": "Misconduct at an emergency",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T14:45:07Z",
+    "inmate_number": "2763277",
+    "name": "JACKSON SAMSON",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
