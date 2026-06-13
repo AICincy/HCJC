@@ -196117,102 +196117,69 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "14255683",
-    "name": "LOWERY TEANA",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/6/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "14636550",
-    "name": "THOMPSON TREYVON",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked 6/6/26"
+    "category": "Driving without a valid license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "2401769",
-    "name": "LEWIS BRUCE",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "2449628",
-    "name": "WHITE JUSTIN",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "2507141",
-    "name": "ZEPF CLINTON",
+    "date": "2026-06-06",
     "tier": "MM",
-    "category": "Code not found in Ohio Revised Code (HCSO data artifact)",
-    "note": "booked 6/5/26"
+    "category": "Code not found in Ohio Revised Code (HCSO data artifact)"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "2646094",
-    "name": "WASHINGTON SAMUEL",
+    "date": "2026-06-06",
     "tier": "MM",
-    "category": "Speed limits",
-    "note": ""
+    "category": "Speed limits"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "2682769",
-    "name": "MAYES CHARLES",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "2765177",
-    "name": "THOMAS MICHAEL",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Endangering children",
-    "note": "booked 6/6/26"
+    "category": "Endangering children"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "2796133",
-    "name": "WENSTRUP PATRICK",
+    "date": "2026-06-06",
     "tier": "MM",
-    "category": "Rules for driving in marked lanes",
-    "note": "booked (date not reported)"
+    "category": "Rules for driving in marked lanes"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "988749",
-    "name": "PESKIN-HUTCHINSON LESLEE",
+    "date": "2026-06-06",
     "tier": "M3",
-    "category": "Criminal mischief",
-    "note": ""
+    "category": "Criminal mischief"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-06T05:19:13Z",
-    "inmate_number": "1531936",
-    "name": "CONRAD DANIEL",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -208252,6 +208219,60 @@
     "timestamp_utc": "2026-06-13T04:09:16Z",
     "inmate_number": "1617035",
     "name": "HAWKINS KATHLEEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T05:47:06Z",
+    "inmate_number": "14661538",
+    "name": "READ ANDREW",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T05:47:06Z",
+    "inmate_number": "14812817",
+    "name": "DEPAZ-CETO JUAN",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T05:47:06Z",
+    "inmate_number": "2256695",
+    "name": "WALKER ALICIA",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T05:47:06Z",
+    "inmate_number": "2364711",
+    "name": "MCKINNEY JEROME",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T05:47:06Z",
+    "inmate_number": "310513",
+    "name": "MCDONALD DANIEL",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T05:47:06Z",
+    "inmate_number": "2278656",
+    "name": "HILL ANTOWAN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
