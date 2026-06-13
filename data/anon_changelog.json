@@ -196321,12 +196321,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T12:48:00Z",
-    "inmate_number": "14701764",
-    "name": "ICE BENJAMIN",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -208422,6 +208419,15 @@
     "name": "JACKSON SAMSON",
     "tier": null,
     "category": null,
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T13:03:03Z",
+    "inmate_number": "1549201",
+    "name": "HIGGINS JOSEPH",
+    "tier": "M1",
+    "category": "Domestic violence",
     "note": "booked 6/13/26"
   }
 ]
