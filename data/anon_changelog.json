@@ -196807,12 +196807,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T19:49:15Z",
-    "inmate_number": "1669672",
-    "name": "RICE OLONDRIUS",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/6/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
@@ -208699,6 +208696,42 @@
     "timestamp_utc": "2026-06-13T19:39:05Z",
     "inmate_number": "14778729",
     "name": "WILLIAMS MARKEVION",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T20:11:25Z",
+    "inmate_number": "14813646",
+    "name": "ROUNDTREE DEVIN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T20:11:25Z",
+    "inmate_number": "2249981",
+    "name": "MITCHELL KEITH",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T20:11:25Z",
+    "inmate_number": "2326735",
+    "name": "HAYSBERT DARIELLE",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T20:11:25Z",
+    "inmate_number": "14813597",
+    "name": "ZHAO HAISHENG",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
