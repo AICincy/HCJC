@@ -196033,30 +196033,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T01:17:38Z",
-    "inmate_number": "1160045",
-    "name": "CRUTCHER ISIAH",
+    "date": "2026-06-06",
     "tier": "MM",
-    "category": "Slow speed (impeding traffic)",
-    "note": "booked 6/5/26"
+    "category": "Slow speed (impeding traffic)"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T01:17:38Z",
-    "inmate_number": "14695240",
-    "name": "SEAY LADAIZSHA",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T01:17:38Z",
-    "inmate_number": "2201150",
-    "name": "METTS RANDALL",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
@@ -208126,5 +208117,77 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 6/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T01:36:04Z",
+    "inmate_number": "1889086",
+    "name": "ROBERTS ERICA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T01:36:04Z",
+    "inmate_number": "2199719",
+    "name": "GAMBLE JOHNITA",
+    "tier": "F5",
+    "category": "Identity fraud",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T01:36:04Z",
+    "inmate_number": "2396985",
+    "name": "JACKSON JORDAN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T01:36:04Z",
+    "inmate_number": "14207016",
+    "name": "HOLMES ANDRINA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T01:36:04Z",
+    "inmate_number": "1254115",
+    "name": "HUGHES ERIC",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T01:36:04Z",
+    "inmate_number": "14727725",
+    "name": "MACK NKAYLA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T01:36:04Z",
+    "inmate_number": "14783665",
+    "name": "NIMAGA MADOU",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T01:36:04Z",
+    "inmate_number": "14443460",
+    "name": "TURNER RICKALE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
