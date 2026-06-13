@@ -196783,39 +196783,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-06T19:13:55Z",
-    "inmate_number": "14324606",
-    "name": "GARZA SILVERO",
+    "date": "2026-06-06",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/6/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-06T19:13:55Z",
-    "inmate_number": "1837436",
-    "name": "MOONEY WILLIAM",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-06T19:13:55Z",
-    "inmate_number": "1948542",
-    "name": "ANDERSON ANTONIO",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-06T19:13:55Z",
-    "inmate_number": "14451955",
-    "name": "WILLIAMS DELMAR",
+    "date": "2026-06-06",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -208651,5 +208639,68 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T19:39:05Z",
+    "inmate_number": "1021217",
+    "name": "MONTGOMERY DEZI",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-13T19:39:05Z",
+    "inmate_number": "14536881",
+    "name": "SALL DIEYNABA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T19:39:05Z",
+    "inmate_number": "14770754",
+    "name": "JOHNSON WALTER",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T19:39:05Z",
+    "inmate_number": "2326735",
+    "name": "HAYSBERT DARIELLE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T19:39:05Z",
+    "inmate_number": "2415503",
+    "name": "THOMAS DEMONTA",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: dangerous dogs",
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-13T19:39:05Z",
+    "inmate_number": "2533504",
+    "name": "HART JUSTIN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-13T19:39:05Z",
+    "inmate_number": "14778729",
+    "name": "WILLIAMS MARKEVION",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
