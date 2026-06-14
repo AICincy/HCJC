@@ -89,6 +89,7 @@ jobs:
       # this gates Socrata traffic to once per dataset per day.
       - name: Pull Cincinnati Open Data calls-for-service (last 30 days, 24h cache)
         run: python -m scraper.cfs --hours 720
+        continue-on-error: true
 
       - name: Pull Cincinnati Open Data shootings (last 30 days, 24h cache)
         run: python -m scraper.shootings --days 30
