@@ -70,6 +70,7 @@ jobs:
           python -m scraper.sweep \
             ${{ inputs.max_surnames && format('--max-surnames {0}', inputs.max_surnames) || '' }} \
             ${{ inputs.refresh_known && '--refresh-known' || '' }}
+        continue-on-error: true
 
       # Surface a prolonged roster freeze: emit a GitHub Actions ::error::
       # annotation and open a (deduped) GitHub issue so it actively notifies.
