@@ -85,7 +85,10 @@ def main() -> int:
     if not args.force and recently_refreshed(LOCAL_PATH, max_age_hours=6):
         log.info("shootings_recent.json is < 6h old; skipping refresh (use --force to override)")
         return 0
-    save(pull_recent(days=args.days))
+    try:
+        save(pull_recent(days=args.days))
+    except httpx.HTTPError as e:
+        log.error("Failed to pull shootings data: %s. Keeping existing cached file.", e)
     return 0
 
 

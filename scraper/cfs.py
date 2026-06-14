@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
+import httpx
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -81,8 +82,11 @@ def main() -> int:
     if not args.force and recently_refreshed(CFS_PATH, max_age_hours=1):
         log.info("cfs_recent.json is < 1h old; skipping refresh (use --force to override)")
         return 0
-    rows = pull_recent(hours=args.hours)
-    save_recent(rows)
+    try:
+        rows = pull_recent(hours=args.hours)
+        save_recent(rows)
+    except httpx.HTTPError as e:
+        log.error("Failed to pull CFS data: %s. Keeping existing cached file.", e)
     return 0
 
 
