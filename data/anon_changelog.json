@@ -173005,6 +173005,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-05-24",
+    "tier": "M1",
+    "category": "Assault"
+  },
+  {
+    "event": "booked",
     "date": "2026-05-25",
     "tier": null,
     "category": null
@@ -193032,6 +193038,12 @@
     "category": null
   },
   {
+    "event": "released",
+    "date": "2026-06-03",
+    "tier": "M1",
+    "category": "Assault"
+  },
+  {
     "event": "updated",
     "date": "2026-06-04",
     "tier": "M3",
@@ -197479,12 +197491,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T19:47:37Z",
-    "inmate_number": "14695015",
-    "name": "MEECE CHRISTOPHER",
+    "date": "2026-06-07",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/7/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
@@ -209212,5 +209221,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T20:13:06Z",
+    "inmate_number": "1310124",
+    "name": "HANSFORD ERIC",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/14/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T20:13:06Z",
+    "inmate_number": "14406417",
+    "name": "TOUSET KENNETH",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: dangerous dogs",
+    "note": "booked 6/14/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T20:13:06Z",
+    "inmate_number": "14619452",
+    "name": "WHEELER KATLYN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/14/26"
   }
 ]
