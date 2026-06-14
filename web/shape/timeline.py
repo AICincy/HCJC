@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 
 from scraper.models import Inmate
 from web.classify import _parse_book_date
+
 from .common import _now_naive_est, _strftime_nopad
 
 

@@ -7,6 +7,7 @@ ordinals, initials, slugs) that templates depend on.
 """
 
 from datetime import datetime, timezone
+from types import SimpleNamespace
 
 from web.classify import (
     _approx_age,
@@ -21,6 +22,7 @@ from web.classify import (
     _parse_bond_amount,
     _parse_book_date,
     _pct_ordinal,
+    _primary_chapter,
     _rfc822,
     _short_month_label,
     _tier_max,
@@ -112,6 +114,17 @@ def test_offense_for_code_chapter_extraction():
     assert _offense_for_code("9999.99") is not None
 
 
+def test_primary_chapter_picks_most_severe_class():
+    inmate = SimpleNamespace(
+        charges=[
+            SimpleNamespace(orc_code="2925.11"),  # Drugs
+            SimpleNamespace(orc_code="2903.13"),  # Violence / Homicide
+        ]
+    )
+    out = _primary_chapter(inmate)
+    assert out == {"label": "Violence / Homicide", "cls": "2903"}
+
+
 def test_booking_seq_year_and_sequence():
     # First 2 digits year, remainder sequence; <8 digits or non-digit -> "".
     assert _booking_seq("26002740") != ""
@@ -138,4 +151,3 @@ def test_display_date_timezone_aware():
     # Pass timezone-aware UTC datetime and check it works
     dt_aware = datetime(2026, 5, 14, tzinfo=timezone.utc)
     assert _display_date(dt_aware) == "May 14, 2026"
-

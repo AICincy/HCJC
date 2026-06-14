@@ -5,7 +5,7 @@ from __future__ import annotations
 import functools
 import sys
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from scraper import orc as orc_mod
 from scraper.models import Inmate
@@ -35,7 +35,7 @@ def _now_naive_est() -> datetime:
     utc_now = datetime.now(timezone.utc)
     # Fixed -0400/-0500 offset arithmetic is sufficient for static site display.
     # Ohio is Eastern Time; simple -5h offset works as a naive baseline.
-    return utc_now - timedelta(hours=5)
+    return (utc_now - timedelta(hours=5)).replace(tzinfo=None)
 
 
 # Pre-computed indexes for O(1) lookup (C1: eliminate O(n²) per-inmate scans)
@@ -81,6 +81,3 @@ class RosterIndexes:
         self.by_chapter = dict(by_chapter)
         self.by_code = dict(by_code)
         self.bonds_by_code = dict(bonds_by_code)
-
-
-from datetime import timedelta

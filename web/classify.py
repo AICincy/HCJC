@@ -468,6 +468,28 @@ def _offense_for_code(code: str | None) -> dict | None:
     return _OFFENSE_CATEGORY.get(chap, _OFFENSE_CATEGORY.get("other"))
 
 
+def _primary_chapter(inmate) -> dict | None:
+    """Return the inmate's highest-severity offense category dict.
+
+    Selection is based on ``_CLS_RANK`` (lower rank = more severe). Returns
+    ``None`` when no charge yields a classifiable ORC chapter.
+    """
+    if not hasattr(inmate, "charges"):
+        return None
+    best: dict | None = None
+    best_rank = _CLS_RANK.get("other", 99)
+    for c in inmate.charges:
+        off = _offense_for_code(getattr(c, "orc_code", None))
+        if not off:
+            continue
+        cls = str(off.get("cls") or "other")
+        rank = _CLS_RANK.get(cls, _CLS_RANK.get("other", 99))
+        if best is None or rank < best_rank:
+            best = off
+            best_rank = rank
+    return best
+
+
 # Hamilton County case-number type tokens. Common Pleas uses a single-letter
 # prefix (B = criminal, A = civil). Municipal/County uses a 3-letter token after
 # the 2-digit year: CR[AB] criminal, TR* traffic, CV* civil. Anything else

@@ -5,6 +5,7 @@ from __future__ import annotations
 from scraper import orc as orc_mod
 from scraper.models import Inmate
 from web.classify import _DEGREE_RE, _charge_tier, _parse_bond_amount
+
 from .common import RosterIndexes, _cached_offenses
 
 _BOND_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
