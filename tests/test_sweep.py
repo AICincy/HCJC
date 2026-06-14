@@ -1,0 +1,814 @@
+"""Tests for the sweep health heuristic - the guard that stops a rate-limited
+or partially-failed list sweep from being written as the live roster."""
+
+import logging
+from pathlib import Path
+from typing import Any, cast
+
+from scraper import sweep
+from scraper.models import Inmate, ListRow
+from scraper.sweep import WafBackoffTracker, _fetch_one
+from scraper.sweep_guards import (
+    ROSTER_STALE_ALARM_HOURS,
+    check_detail_watchdog,
+    list_response_looks_blocked,
+    looks_like_waf_block,
+    roster_stale_hours,
+)
+from scraper.sweep_guards import (
+    sweep_looks_healthy as _sweep_looks_healthy,
+)
+
+# Old underscore alias is kept by sweep.py for back-compat; new code uses the
+# public names from sweep_guards. The local rebinding keeps the existing test
+# body unchanged below.
+_check_detail_watchdog = check_detail_watchdog
+
+
+def test_looks_like_waf_block_detects_tiny_empty_response():
+    empty = Inmate(inmate_number="1", last_name="", first_name="", booking_date="", charges=[])
+    # Tiny body, nothing parsed, no photo -> WAF-block shaped.
+    assert looks_like_waf_block("x" * 100, empty, None, None) is True
+
+
+def test_looks_like_waf_block_false_for_real_page():
+    named = Inmate(inmate_number="1", last_name="DOE", first_name="JOHN", booking_date="5/1/26")
+    # A named record is never a block, even on a short body.
+    assert looks_like_waf_block("x" * 100, named, None, None) is False
+    # A large body is not a block even if empty (e.g. a genuine no-record page).
+    big_empty = Inmate(inmate_number="1", last_name="", first_name="", booking_date="", charges=[])
+    assert looks_like_waf_block("x" * 6000, big_empty, None, None) is False
+    # A photo present rules out a block.
+    assert looks_like_waf_block("x" * 100, big_empty, b"jpegbytes", None) is False
+
+
+def test_roster_stale_hours_parses_and_measures():
+    from datetime import datetime, timedelta, timezone
+
+    old = (datetime.now(timezone.utc) - timedelta(hours=10)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    h = roster_stale_hours(old)
+    assert h is not None and 9.5 < h < 10.5
+    assert h >= ROSTER_STALE_ALARM_HOURS  # 10h trips the 6h alarm
+
+
+def test_roster_stale_hours_none_on_missing_or_bad():
+    assert roster_stale_hours(None) is None
+    assert roster_stale_hours("") is None
+    assert roster_stale_hours("not a timestamp") is None
+
+
+def test_roster_stale_hours_recent_below_alarm():
+    from datetime import datetime, timezone
+
+    fresh = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    h = roster_stale_hours(fresh)
+    assert h is not None and h < ROSTER_STALE_ALARM_HOURS
+
+
+def test_prev_generated_utc_reads_field(tmp_path):
+    import json
+
+    p = tmp_path / "current.json"
+    p.write_text(json.dumps({"generated_utc": "2026-05-20T00:39:31Z", "inmates": []}), encoding="utf-8")
+    assert sweep._prev_generated_utc(p) == "2026-05-20T00:39:31Z"
+    assert sweep._prev_generated_utc(tmp_path / "nope.json") is None
+
+
+def test_bootstrap_is_always_accepted():
+    # First run (no prior data) and tiny datasets are trusted if fetches succeed.
+    assert _sweep_looks_healthy(prev_count=0, seen_count=0, n_surnames=26, n_failed=0)
+    # Rejects even on bootstrap if fetches failed (e.g. WAF block/network error).
+    assert not _sweep_looks_healthy(prev_count=10, seen_count=2, n_surnames=26, n_failed=20)
+
+
+def test_normal_sweeps_pass():
+    # Roster grew a little, nothing failed.
+    assert _sweep_looks_healthy(prev_count=1200, seen_count=1240, n_surnames=26, n_failed=0)
+    # One letter errored, roster basically stable - still fine.
+    assert _sweep_looks_healthy(prev_count=1200, seen_count=1185, n_surnames=26, n_failed=1)
+    # Real churn: a meaningful drop but well above half.
+    assert _sweep_looks_healthy(prev_count=1200, seen_count=1000, n_surnames=26, n_failed=0)
+
+
+def test_too_many_failed_fetches_is_rejected():
+    # 5 of 26 surname fetches errored (~19%) - don't trust this roster.
+    assert not _sweep_looks_healthy(prev_count=1200, seen_count=1100, n_surnames=26, n_failed=5)
+
+
+def test_collapsed_roster_is_rejected():
+    # Fetches "succeeded" but came back with less than half the population.
+    assert not _sweep_looks_healthy(prev_count=1200, seen_count=500, n_surnames=26, n_failed=0)
+    assert not _sweep_looks_healthy(prev_count=1200, seen_count=0, n_surnames=26, n_failed=0)
+
+
+def test_prune_photos_skips_when_most_would_disappear(tmp_path: Path, monkeypatch):
+    photos = tmp_path / "photos"
+    photos.mkdir()
+    for i in range(10):
+        (photos / f"{i}.jpg").write_bytes(b"x")
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", photos)
+    # Active roster only includes one of the ten - 9/10 would be deleted, way
+    # above the safety threshold.
+    sweep._prune_photos({"0"})
+    assert sum(1 for _ in photos.glob("*.jpg")) == 10, "anomaly guard should have skipped"
+
+
+def test_prune_photos_removes_only_inactive(tmp_path: Path, monkeypatch):
+    photos = tmp_path / "photos"
+    photos.mkdir()
+    for i in range(10):
+        (photos / f"{i}.jpg").write_bytes(b"x")
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", photos)
+    # Drop just two - well under the threshold.
+    sweep._prune_photos({str(i) for i in range(10) if i not in (3, 7)})
+    survivors = {p.stem for p in photos.glob("*.jpg")}
+    assert survivors == {"0", "1", "2", "4", "5", "6", "8", "9"}
+
+
+def test_watchdog_silent_below_min_sample(caplog):
+    # tests-F1: with too few attempts the watchdog is silent regardless of
+    # rates, so a tiny cycle doesn't trigger noisy false positives.
+    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    _check_detail_watchdog(attempts=5, named=0, with_photo=0)
+    assert not any("detail watchdog" in r.message for r in caplog.records)
+
+
+def test_watchdog_warns_on_low_name_rate(caplog):
+    # tests-F1: at or above the min sample, a name-rate under the floor warns.
+    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    _check_detail_watchdog(attempts=20, named=5, with_photo=20)
+    messages = [r.message for r in caplog.records]
+    assert any("parsed a name" in m for m in messages), messages
+    # Photo rate is fine; no photo warning expected.
+    assert not any("yielded a photo" in m for m in messages), messages
+
+
+def test_watchdog_warns_on_low_photo_rate(caplog):
+    # tests-F1: at or above the min sample, a photo-rate under the floor warns.
+    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    _check_detail_watchdog(attempts=20, named=20, with_photo=5)
+    messages = [r.message for r in caplog.records]
+    assert any("yielded a photo" in m for m in messages), messages
+    assert not any("parsed a name" in m for m in messages), messages
+
+
+def test_watchdog_returns_true_for_warn_only_thresholds(caplog):
+    # sweep-F4: WARN-only floors do NOT block writes. Below the BLOCK sample
+    # the watchdog must still return True even when the WARN floors trip.
+    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    assert _check_detail_watchdog(attempts=20, named=5, with_photo=20) is True
+
+
+def test_watchdog_blocks_when_large_sample_and_name_rate_collapsed(caplog):
+    # sweep-F4: with at least DETAIL_WATCHDOG_BLOCK_MIN_SAMPLE attempts and
+    # a name rate under DETAIL_WATCHDOG_BLOCK_NAME_FLOOR, refuse the write.
+    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    # 100 attempts, 30 named (30% < 60% block floor) -> block.
+    assert _check_detail_watchdog(attempts=100, named=30, with_photo=100) is False
+    assert any("BLOCK" in r.message for r in caplog.records)
+
+
+def test_watchdog_does_not_block_below_block_sample():
+    # sweep-F4: even a catastrophic name rate below DETAIL_WATCHDOG_BLOCK_
+    # MIN_SAMPLE attempts must NOT block; the smaller sample isn't trusted.
+    assert _check_detail_watchdog(attempts=50, named=0, with_photo=50) is True
+
+
+class _FakeClient:
+    """Stub HcsoClient.get that returns a fixed HTML string."""
+
+    def __init__(self, html: str):
+        self.html = html
+
+    def get(self, path, params=None):
+        return self.html
+
+
+def test_fetch_one_uses_list_row_name_when_detail_heading_missing(tmp_path, monkeypatch):
+    # tests-F2: a detail page whose heading drifted (no comma + all-caps,
+    # no og:title, no <title>) must fall back to the list-row Last/First.
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    html = "<html><body><h1>Some interstitial</h1></body></html>"
+    client = _FakeClient(html)
+    list_row = ListRow(inmate_number="9876543", last_name="ROE", first_name="JANE", admit_date="5/10/26")
+    inm, named, had_photo = _fetch_one(
+        cast(Any, client), "9876543", previous={}, list_row=list_row, waf_tracker=WafBackoffTracker()
+    )
+    # detail parser produced no name, so detail_named must be False.
+    assert named is False
+    assert had_photo is False
+    # list-row fallback rescued the name on the merged Inmate.
+    assert inm is not None
+    assert inm.last_name == "ROE"
+    assert inm.first_name == "JANE"
+    assert inm.booking_date == "5/10/26"
+
+
+def test_fetch_one_carries_existing_photo_when_no_inline_image(tmp_path, monkeypatch):
+    # tests-F2: when the detail page has no inline photo but we already have
+    # one on disk from a prior cycle, keep showing the cached photo rather
+    # than dropping the photo_filename to None.
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    cached = tmp_path / "1234567.jpg"
+    cached.write_bytes(b"\xff\xd8\xff\xe0cached-jpeg-bytes")
+    html = "<html><body><h1>DOE, JOHN</h1><ul><li>Inmate Number : 1234567</li></ul></body></html>"
+    client = _FakeClient(html)
+    inm, named, had_photo = _fetch_one(
+        cast(Any, client), "1234567", previous={}, list_row=None, waf_tracker=WafBackoffTracker()
+    )
+    assert had_photo is False  # no inline image on the page
+    assert inm is not None
+    # carry-forward kicked in because the photo file existed on disk.
+    assert inm.photo_filename == "1234567.jpg"
+
+
+def test_fetch_one_falls_back_to_disk_when_pillow_rejects_bytes(tmp_path, monkeypatch):
+    # Regression: if Pillow can't decode the bytes (downscale_and_save returns
+    # False) but a previously-good photo is sitting on disk, we should NOT
+    # drop the cached photo from the snapshot. The prior bug used an
+    # `if photo_bytes: if downscale_and_save: set` outer-if that skipped the
+    # disk-cached fallback `elif` whenever bytes were present-but-corrupt.
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    cached = tmp_path / "5550000.jpg"
+    cached.write_bytes(b"\xff\xd8\xff\xe0cached-jpeg-bytes")
+
+    def _always_fail_downscale(raw, dest):
+        return False  # simulate Pillow UnidentifiedImageError
+
+    monkeypatch.setattr(sweep, "downscale_and_save", _always_fail_downscale)
+    html = (
+        "<html><body><h1>DOE, JOHN</h1>"
+        "<ul><li>Inmate Number : 5550000</li></ul>"
+        '<img src="data:image/png;base64,UExBQ0VIT0xERVI=" style="width:274px;">'
+        "</body></html>"
+    )
+    client = _FakeClient(html)
+    inm, _, had_photo = _fetch_one(
+        cast(Any, client), "5550000", previous={}, list_row=None, waf_tracker=WafBackoffTracker()
+    )
+    assert had_photo is True  # detail parser found inline bytes
+    assert inm is not None
+    # Cached file on disk rescued the snapshot even though decode failed.
+    assert inm.photo_filename == "5550000.jpg"
+
+
+def test_fetch_one_returns_none_on_waf_blocked_response_for_known_inmate(tmp_path, monkeypatch):
+    # Regression: HCSO's WAF returns a tiny truncated response (<5 KB) that
+    # parses to an empty Inmate. For inmates already in `previous`, we should
+    # return None so the carry-forward path in `run()` preserves the prior-
+    # good record. For NEW inmates (not in previous), we still fall through
+    # so the list_row fallback can rescue a name into a minimal Inmate.
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    # Stub out the backoff sleep so the test doesn't actually wait 2-16s
+    # for each WAF-block path. The retry loop itself is still exercised.
+    monkeypatch.setattr(sweep.time, "sleep", lambda _s: None)
+    tracker = WafBackoffTracker()
+    tiny_blocked_html = "<html><body>Access Denied</body></html>"  # 41 bytes
+    client = _FakeClient(tiny_blocked_html)
+
+    # Known inmate (in previous): WAF block triggers carry-forward path.
+    prior = Inmate(inmate_number="7770000", last_name="DOE", first_name="JOHN", booking_date="5/1/26")
+    inm, named, had_photo = _fetch_one(
+        cast(Any, client), "7770000", previous={"7770000": prior}, list_row=None, waf_tracker=tracker
+    )
+    assert inm is None  # signals run() to carry forward from previous
+    assert named is False
+    assert had_photo is False
+
+    # Unknown inmate (not in previous): list_row fallback still works.
+    tracker = WafBackoffTracker()
+    list_row = ListRow(inmate_number="8880000", last_name="ROE", first_name="JANE", admit_date="5/12/26")
+    inm, _, _ = _fetch_one(cast(Any, client), "8880000", previous={}, list_row=list_row, waf_tracker=tracker)
+    assert inm is not None  # falls through; list_row rescues the name
+    assert inm.last_name == "ROE"
+
+
+def test_fetch_one_retries_within_same_cycle_and_recovers_on_second_attempt(tmp_path, monkeypatch):
+    # Regression: the same-cycle WAF-retry loop should call the client a
+    # second time when the first response is WAF-block-shaped. If the
+    # second attempt succeeds, the inmate is returned WITHOUT a carry-
+    # forward, photo extraction runs normally, and the streak is reset.
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    monkeypatch.setattr(sweep.time, "sleep", lambda _s: None)
+    tracker = WafBackoffTracker()
+    tiny = "<html><body>Access Denied</body></html>"
+    full = (
+        "<html><body><h1>DOE, JOHN</h1>"
+        "<ul><li>Inmate Number : 6660000</li></ul></body></html>"
+        + (" " * 5500)  # pad to clear the <5 KB WAF-block threshold
+    )
+
+    class _FlipClient:
+        def __init__(self):
+            self.calls = 0
+
+        def get(self, path, params=None):
+            self.calls += 1
+            return tiny if self.calls == 1 else full
+
+    client = _FlipClient()
+    inm, named, _ = _fetch_one(cast(Any, client), "6660000", previous={}, list_row=None, waf_tracker=tracker)
+    assert client.calls == 2  # retry actually ran
+    assert inm is not None
+    assert inm.last_name == "DOE"
+    assert named is True
+
+
+def test_sweep_healthy_at_failure_fraction_boundary():
+    # tests-F4: SWEEP_MAX_FAILED_FRACTION=0.10 uses strict `>`, so exactly
+    # 10% must still be accepted. Anything strictly above is rejected.
+    # 10/100 = 0.10 exactly -> True.
+    assert _sweep_looks_healthy(prev_count=1000, seen_count=900, n_surnames=100, n_failed=10)
+    # 11/100 = 0.11 > 0.10 -> False.
+    assert not _sweep_looks_healthy(prev_count=1000, seen_count=900, n_surnames=100, n_failed=11)
+
+
+def test_sweep_healthy_at_roster_fraction_boundary():
+    # tests-F4: SWEEP_MIN_ROSTER_FRACTION=0.5 uses strict `<`, so exactly
+    # half is still accepted; anything strictly below half is rejected.
+    assert _sweep_looks_healthy(prev_count=1000, seen_count=500, n_surnames=26, n_failed=0)
+    assert not _sweep_looks_healthy(prev_count=1000, seen_count=499, n_surnames=26, n_failed=0)
+
+
+def test_sweep_bootstrap_floor_edge():
+    # tests-F4: SWEEP_BOOTSTRAP_FLOOR=50 uses `<`, so prev_count below 50 is
+    # bootstrap (accept anything). At 50 the regular guards kick in and a
+    # tiny seen_count fails the roster-fraction check.
+    assert _sweep_looks_healthy(prev_count=49, seen_count=0, n_surnames=26, n_failed=0)
+    assert not _sweep_looks_healthy(prev_count=50, seen_count=0, n_surnames=26, n_failed=0)
+
+
+def test_read_surnames_strips_utf8_bom(tmp_path: Path):
+    # sweep-F7: a Windows editor saving data/surnames.txt prepends a BOM.
+    # Without stripping it, the first surname becomes "﻿A", HCSO returns
+    # zero rows, and no guard fires (one zero-row letter is below 10%).
+    p = tmp_path / "surnames.txt"
+    p.write_text("﻿A\nB\nC\n", encoding="utf-8")
+    assert sweep._read_surnames(p) == ["A", "B", "C"]
+
+
+def test_read_surnames_handles_comments_and_blanks(tmp_path: Path):
+    p = tmp_path / "surnames.txt"
+    p.write_text("# comment\nA\n\n  B  \n", encoding="utf-8")
+    assert sweep._read_surnames(p) == ["A", "B"]
+
+
+def test_interrupted_sweep_does_not_append_released_events(tmp_path: Path, monkeypatch):
+    """sweep-F2: a KeyboardInterrupt mid-sweep must persist the partial
+    snapshot but MUST NOT diff and emit synthetic 'released' events for
+    every id the sweep never reached."""
+    import json
+
+    from scraper.models import Inmate
+
+    # Pre-populate a previous snapshot with 60 inmates (above the 50 bootstrap
+    # floor so the healthy guard actually evaluates fractions).
+    previous_inmates = [
+        Inmate(inmate_number=str(1000 + i), last_name="DOE", first_name=f"F{i}", booking_date="5/10/26")
+        for i in range(60)
+    ]
+    current_path = tmp_path / "current.json"
+    changelog_path = tmp_path / "changelog.json"
+    photos = tmp_path / "photos"
+    photos.mkdir()
+
+    from scraper.store import save_current
+
+    save_current(current_path, previous_inmates)
+
+    monkeypatch.setattr(sweep, "CURRENT_PATH", current_path)
+    monkeypatch.setattr(sweep, "CHANGELOG_PATH", changelog_path)
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", photos)
+
+    # Stub HTTP layer so no network is touched. _sweep_list raising
+    # KeyboardInterrupt simulates a runner cancellation mid-orchestration.
+    def fake_sweep_list(client, surnames):
+        raise KeyboardInterrupt()
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    monkeypatch.setattr(sweep, "_sweep_list", fake_sweep_list)
+    monkeypatch.setattr(sweep, "make_client", lambda: FakeClient())
+
+    rc = sweep.run(surnames=["A"], max_surnames=None, refresh_known=False, dry_run=False)
+    assert rc == 0
+
+    # The roster database must remain intact and not be overwritten/blanked out.
+    assert current_path.exists()
+    current_data = json.loads(current_path.read_text(encoding="utf-8"))
+    assert len(current_data.get("inmates", [])) == 60, "Roster database must not be blanked out on list phase interrupt"
+
+    # The changelog must not have been written (or must contain zero events).
+    if changelog_path.exists():
+        events = json.loads(changelog_path.read_text(encoding="utf-8"))
+        assert events == [], (
+            f"interrupted sweep emitted {len(events)} bogus events into the changelog; clean_finish gate failed"
+        )
+
+
+def test_record_block_evidence_writes_blocked(tmp_path, monkeypatch):
+    from scraper.store import load_block_log
+
+    blog = tmp_path / "waf_block_log.json"
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
+    monkeypatch.setattr(sweep, "CURRENT_PATH", tmp_path / "missing.json")  # -> stale None
+    sample = {"status": 403, "bytes": 162, "sha256": "abc", "body_sample": "blocked", "headers": {"server": "x"}}
+    sweep._record_block_evidence(
+        sweep._BlockObservation(
+            prev_count=60, seen_count=0, n_surnames=26, n_failed=24, status_counts={"403": 24}, block_sample=sample
+        )
+    )
+    log = load_block_log(blog)
+    assert len(log) == 1
+    rec = log[0]
+    assert rec["event"] == "blocked"
+    assert rec["surnames_failed"] == 24
+    assert rec["failed_fraction"] == round(24 / 26, 4)
+    assert rec["http_status_counts"] == {"403": 24}
+    assert rec["block_sample"]["status"] == 403
+    assert rec["block_sample"]["sha256"] == "abc"
+
+
+def test_record_recovery_only_after_blocked(tmp_path, monkeypatch):
+    from scraper.store import append_block_evidence, load_block_log
+
+    blog = tmp_path / "waf_block_log.json"
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
+    # Empty log -> no-op (no recovery without a prior block).
+    sweep._record_recovery_if_blocked(1200)
+    assert load_block_log(blog) == []
+
+    # After a 'blocked' entry, one 'recovered' is appended.
+    append_block_evidence({"event": "blocked"}, blog)
+    sweep._record_recovery_if_blocked(1200)
+    events = [r["event"] for r in load_block_log(blog)]
+    assert events == ["blocked", "recovered"]
+
+    # Calling again does not append a second 'recovered' (last is not 'blocked').
+    sweep._record_recovery_if_blocked(1200)
+    assert [r["event"] for r in load_block_log(blog)] == ["blocked", "recovered"]
+
+
+def test_run_degraded_sweep_records_block_evidence(tmp_path, monkeypatch):
+    from scraper.store import load_block_log, save_current
+
+    prev = [
+        Inmate(inmate_number=str(1000 + i), last_name="DOE", first_name=f"F{i}", booking_date="5/10/26")
+        for i in range(60)
+    ]
+    cur = tmp_path / "current.json"
+    save_current(cur, prev)
+    blog = tmp_path / "waf_block_log.json"
+    monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
+    monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)  # bypass the skip-gate
+    # Degraded list sweep: zero seen, most fetches 403 (the WAF block shape),
+    # with a forensic sample of the block response.
+    sample = {
+        "status": 403,
+        "bytes": 162,
+        "sha256": "deadbeef",
+        "body_sample": "Access denied",
+        "headers": {"server": "cloudflare"},
+    }
+    monkeypatch.setattr(sweep, "_sweep_list", lambda client, surnames: ([], 24, {"403": 24}, sample))
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    monkeypatch.setattr(sweep, "make_client", lambda: FakeClient())
+
+    rc = sweep.run(surnames=list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), max_surnames=None, refresh_known=False, dry_run=False)
+    assert rc == 0
+    log = load_block_log(blog)
+    assert len(log) == 1
+    assert log[0]["event"] == "blocked"
+    assert log[0]["http_status_counts"] == {"403": 24}
+    assert log[0]["block_sample"]["sha256"] == "deadbeef"
+    assert log[0]["block_sample"]["headers"]["server"] == "cloudflare"
+
+
+def test_run_watchdog_blocks_roster_write(tmp_path, monkeypatch):
+    """When the detail watchdog returns False, the sweep must NOT overwrite
+    the roster with a degraded snapshot."""
+    import json
+
+    from scraper.store import save_current
+
+    prev = [Inmate(inmate_number="1000", last_name="DOE", first_name="F0", booking_date="5/10/26")]
+    cur = tmp_path / "current.json"
+    save_current(cur, prev)
+    original_data = json.loads(cur.read_text(encoding="utf-8"))
+    monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
+    monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path / "photos")
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)
+    monkeypatch.setattr(
+        sweep,
+        "_sweep_list",
+        lambda client, surnames: (
+            [ListRow(inmate_number="1000", last_name="DOE", first_name="J", admit_date="")],
+            0,
+            {},
+            None,
+        ),
+    )
+    monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh: ["1000"])
+    monkeypatch.setattr(sweep, "_fetch_details", lambda **kwargs: (100, 0, 0))
+    monkeypatch.setattr(sweep, "check_detail_watchdog", lambda *args: False)
+    monkeypatch.setattr(sweep, "prune_photos", lambda photos_dir, active_ids: None)
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    monkeypatch.setattr(sweep, "make_client", lambda: FakeClient())
+
+    rc = sweep.run(surnames=["A"], max_surnames=None, refresh_known=False, dry_run=False)
+    assert rc == 0
+    # The roster file must still contain the original data (watchdog blocked write).
+    after_data = json.loads(cur.read_text(encoding="utf-8"))
+    assert after_data == original_data
+
+
+def test_forensic_sample_captures_status_hash_headers():
+    import hashlib
+
+    import httpx
+
+    body = b"<html>Access denied by WAF</html>"
+    resp = httpx.Response(403, headers={"server": "cloudflare", "cf-ray": "abc123"}, content=body)
+    s = sweep._forensic_sample(resp)
+    assert s["status"] == 403
+    assert s["bytes"] == len(body)
+    assert s["sha256"] == hashlib.sha256(body).hexdigest()
+    assert s["body_sample"] == body.decode()
+    assert s["headers"]["server"] == "cloudflare"
+    assert s["headers"]["cf-ray"] == "abc123"
+
+
+def test_forensic_sample_captures_request_side():
+    import httpx
+
+    req = httpx.Request(
+        "GET",
+        "https://www.hcso.org/justice-center-services/inmate-search/?last=A",
+        headers={"user-agent": "JCStream/0.1", "cookie": "cf_clearance=secret"},
+    )
+    resp = httpx.Response(403, request=req, content=b"<html>Access denied</html>")
+    s = sweep._forensic_sample(resp)
+    assert s["request"]["method"] == "GET"
+    assert "last=A" in s["request"]["url"]
+    assert s["request"]["headers"]["user-agent"] == "JCStream/0.1"
+    # A session cookie echoed by the client's jar must not land in the public log.
+    assert s["request"]["headers"]["cookie"] == "[redacted]"
+    assert isinstance(s["captured_utc"], str)
+
+
+def test_forensic_sample_redacts_response_set_cookie():
+    import httpx
+
+    resp = httpx.Response(
+        403, headers={"server": "cloudflare", "set-cookie": "cf_clearance=secret"}, content=b"blocked"
+    )
+    s = sweep._forensic_sample(resp)
+    assert s["headers"]["server"] == "cloudflare"  # benign WAF header kept
+    assert s["headers"]["set-cookie"] == "[redacted]"  # token value redacted
+
+
+def test_run_empty_page_block_records_200_sample(tmp_path, monkeypatch):
+    # End-to-end: run() drives the real _sweep_list through the HTTP 200
+    # empty-page block mode and records a blocked event carrying a 200 sample
+    # (the 403 path is covered by test_run_degraded_sweep_records_block_evidence).
+    import httpx
+
+    from scraper.store import load_block_log, save_current
+
+    prev = [
+        Inmate(inmate_number=str(1000 + i), last_name="DOE", first_name=f"F{i}", booking_date="5/10/26")
+        for i in range(60)
+    ]
+    cur = tmp_path / "current.json"
+    save_current(cur, prev)
+    blog = tmp_path / "waf_block_log.json"
+    monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
+    monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", blog)
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)  # bypass the skip-gate
+
+    class _EmptyPageClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def get_response(self, path, params=None):
+            url = "https://www.hcso.org/inmate-search/?last=" + (params or {}).get("last", "")
+            return httpx.Response(200, request=httpx.Request("GET", url), content=b"<html><body>blocked</body></html>")
+
+    monkeypatch.setattr(sweep, "make_client", lambda: _EmptyPageClient())
+
+    rc = sweep.run(surnames=list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), max_surnames=None, refresh_known=False, dry_run=False)
+    assert rc == 0
+    log = load_block_log(blog)
+    assert len(log) == 1
+    assert log[0]["event"] == "blocked"
+    assert log[0]["seen_count"] == 0
+    assert log[0]["surnames_failed"] == 26  # all detected as 200-blocks
+    assert log[0]["http_status_counts"] == {"200": 26}
+    assert log[0]["block_sample"]["status"] == 200
+
+
+def test_list_response_looks_blocked_predicate():
+    # Tiny body + zero rows = WAF block stub served as HTTP 200.
+    assert list_response_looks_blocked("x" * 100, []) is True
+    # Zero rows but a full-size page = a legitimate no-results search.
+    assert list_response_looks_blocked("x" * 10000, []) is False
+    # Any parsed rows = not a block, regardless of size.
+    from scraper.models import ListRow
+
+    assert (
+        list_response_looks_blocked(
+            "x" * 100, [ListRow(inmate_number="1", last_name="", first_name="", admit_date="")]
+        )
+        is False
+    )
+
+
+def test_sweep_list_captures_empty_page_block_sample():
+    import httpx
+
+    body = b"<html><body>blocked</body></html>"
+
+    class _EmptyPageClient:
+        def get_response(self, path, params=None):
+            url = "https://www.hcso.org/inmate-search/?last=" + (params or {}).get("last", "")
+            return httpx.Response(200, request=httpx.Request("GET", url), content=body)
+
+    rows, n_failed, status_counts, block_sample = sweep._sweep_list(cast(Any, _EmptyPageClient()), ["A", "B"])
+    assert rows == []
+    assert n_failed == 2  # detected 200-blocks count as failures
+    assert status_counts == {"200": 2}
+    assert block_sample is not None
+    assert block_sample["status"] == 200
+    assert block_sample["bytes"] == len(body)
+    assert block_sample["request"]["method"] == "GET"
+
+
+def test_fetch_list_page_treats_403_and_empty_200_as_failures():
+    import httpx
+
+    class _Client:
+        def __init__(self, mode):
+            self.mode = mode
+
+        def get_response(self, path, params=None):
+            req = httpx.Request("GET", "https://www.hcso.org/inmate-search/?last=A")
+            if self.mode == "403":
+                resp = httpx.Response(403, request=req, content=b"<html>Access denied</html>")
+                raise httpx.HTTPStatusError("403", request=req, response=resp)
+            return httpx.Response(200, request=req, content=b"<html>blocked</html>")
+
+    rows, status, sample = sweep._fetch_list_page(cast(Any, _Client("403")), "A")
+    assert rows is None and status == 403 and (sample is not None and sample["status"] == 403)
+
+    rows, status, sample = sweep._fetch_list_page(cast(Any, _Client("200")), "A")
+    assert rows is None and status == 200 and (sample is not None and sample["status"] == 200)
+
+
+def test_record_egress_evidence_gated_on_env(monkeypatch):
+    from scraper import egress_ip
+
+    calls = []
+
+    def fake_write(*a, **k):
+        calls.append(1)
+        return {"runner_ip": "1.2.3.4", "runner_ip_in_actions_range": True}
+
+    monkeypatch.setattr(egress_ip, "write_snapshot", fake_write)
+
+    monkeypatch.delenv("JCSTREAM_CAPTURE_EGRESS", raising=False)
+    sweep._record_egress_evidence()
+    assert calls == []  # gated off by default (no network in tests)
+
+    monkeypatch.setenv("JCSTREAM_CAPTURE_EGRESS", "1")
+    sweep._record_egress_evidence()
+    assert calls == [1]  # fires only when the env flag is set
+
+
+def test_skip_gate_uses_generated_utc_not_file_mtime(tmp_path, monkeypatch):
+    # Regression: the skip-gate keyed off file mtime, which actions/checkout
+    # resets to "now" every run, so the CI sweep skipped the scrape every cycle
+    # (the 2026-05-19 roster freeze). It must key off generated_utc instead.
+    import json
+
+    from scraper.store import save_current
+
+    prev = [
+        Inmate(inmate_number=str(1000 + i), last_name="DOE", first_name=f"F{i}", booking_date="5/10/26")
+        for i in range(60)
+    ]
+    cur = tmp_path / "current.json"
+    save_current(cur, prev)
+    monkeypatch.setattr(sweep, "CURRENT_PATH", cur)
+    monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path / "photos")
+    monkeypatch.setattr(sweep, "CHANGELOG_PATH", tmp_path / "changelog.json")
+    monkeypatch.setattr(sweep, "ANON_CHANGELOG_PATH", tmp_path / "anon.json")
+    monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", tmp_path / "wbl.json")
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 20 * 60)
+
+    calls = []
+
+    def _record_call_and_return(c, s):
+        calls.append(1)
+        return ([], 0, {}, None)
+
+    monkeypatch.setattr(sweep, "_sweep_list", _record_call_and_return)
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    monkeypatch.setattr(sweep, "make_client", lambda: FakeClient())
+
+    def set_generated(ts):
+        d = json.loads(cur.read_text())
+        d["generated_utc"] = ts
+        cur.write_text(json.dumps(d))
+
+    # Stale data (weeks-old generated_utc) but a fresh file mtime, as on CI:
+    # the scrape MUST run (the degraded guard then keeps last-good data).
+    set_generated("2026-05-01T00:00:00Z")
+    sweep.run(surnames=list("AB"), max_surnames=None, refresh_known=False, dry_run=False)
+    assert calls == [1], "stale roster data must not be skipped despite a fresh file mtime"
+
+    # Genuinely fresh data: the skip-gate must short-circuit before scraping.
+    calls.clear()
+    save_current(cur, prev)  # generated_utc = now
+    sweep.run(surnames=list("AB"), max_surnames=None, refresh_known=False, dry_run=False)
+    assert calls == [], "data younger than MIN_SWEEP_INTERVAL_S must be skipped"
+
+
+def test_sweep_uses_custom_paths_from_dataclass(tmp_path, monkeypatch):
+    from scraper.store import save_current
+    from scraper.sweep import SweepPaths, run
+
+    custom_current = tmp_path / "custom_current.json"
+    custom_changelog = tmp_path / "custom_changelog.json"
+    custom_anon = tmp_path / "custom_anon.json"
+    custom_photos = tmp_path / "custom_photos"
+    custom_photos.mkdir()
+
+    paths = SweepPaths(
+        current_path=custom_current,
+        changelog_path=custom_changelog,
+        anon_changelog_path=custom_anon,
+        photos_dir=custom_photos,
+    )
+
+    # Setup some mock data in the custom current path
+    prev = [Inmate(inmate_number="2000", last_name="DOE", first_name="F0", booking_date="5/10/26")]
+    save_current(custom_current, prev)
+
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)  # bypass skip-gate
+    monkeypatch.setattr(
+        sweep,
+        "_sweep_list",
+        lambda client, surnames: (
+            [ListRow(inmate_number="2000", last_name="DOE", first_name="J", admit_date="")],
+            0,
+            {},
+            None,
+        ),
+    )
+    monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh: [])
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+        def __exit__(self, *a):
+            return False
+
+    monkeypatch.setattr(sweep, "make_client", lambda: FakeClient())
+
+    rc = run(surnames=["A"], max_surnames=None, refresh_known=False, dry_run=False, paths=paths)
+    assert rc == 0
+    # Roster should be healthy, check that custom current path was read and updated
+    assert custom_current.exists()

@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+{% block title %}Hamilton County court system &middot; JCStream{% endblock %}
+{% block body_class %}detail page-courts{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Court system</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">The Hamilton County Court System</div>
+    <div class="sub">Which court does what, where to find it, who presides &middot; ORC § 149.43 transparency</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  Most people who land on JCStream don't know which court will hear their case or their loved one's case. Hamilton County has six courts with overlapping geography and very different jurisdictions. This page mirrors the published information from <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">hamiltoncountycourts.org</a>, <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>, and the Clerk of Courts so the distinctions are in one place. Public records belong to the people; officials act as trustees.
+</p>
+
+<div class="alert inline-alert" role="note">
+  <strong>Scam alert (issued by the Court of Common Pleas)</strong>
+  Scammers actively impersonate Hamilton County Sheriff's Office, Electronic Monitoring Unit, and Clerk of Courts personnel, calling families of incarcerated individuals and demanding fees for "release via electronic GPS ankle monitor." They use spoofed numbers and publicly available arrest records, and request payment via Zelle, Venmo, or Cash App. Hamilton County <strong>will never require payment</strong> for electronic monitoring before release from the Justice Center. Verify directly with the Electronic Monitoring Unit at <strong>513-946-9800</strong>.
+</div>
+
+<h2 id="common-pleas" class="sect-h">Court of Common Pleas, General Division</h2>
+<p>
+  The trial court of general jurisdiction. Hears felony criminal cases and civil cases in which the amount in controversy is more than $15,000, including matters involving title to real estate (e.g. foreclosures). 16 judges; cases are assigned to a single judge by lot at filing and stay with that judge through termination.
+</p>
+<div class="fields">
+  <div class="k">Presiding &amp; Administrative Judge</div>
+  <div class="v">Hon. Alison Hatheway</div>
+  <div class="k">Court Administrator</div>
+  <div class="v">Thomas O. Beridon. Room 410, Hamilton County Courthouse. <a href="tel:+15139465801">513-946-5801</a>.</div>
+  <div class="k">Address</div>
+  <div class="v">Hamilton County Courthouse, 1000 Main Street, Room 410, Cincinnati, Ohio 45202</div>
+  <div class="k">Web</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas &rarr;</a></div>
+  <div class="k">Clerk's office</div>
+  <div class="v">Common Pleas Civil &amp; Criminal Divisions: 1000 Main Street, Room 315. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Personnel Director</div>
+  <div class="v">Krista Ventre, Esq. <a href="tel:+15139465802">513-946-5802</a>.</div>
+  <div class="k">Judges</div>
+  <div class="v">
+    <div class="judge-directory" style="display: grid; gap: 8px; margin-top: 4px;">
+      {% for judge in common_pleas %}
+        <details id="judge-{{ judge.slug }}" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. {{ judge.name }}</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">{{ judge.room }}</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+            {% if judge.image_url %}
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="{{ judge.image_url }}" alt="Hon. {{ judge.name }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            {% endif %}
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+              {% if judge.room %}<div style="margin-bottom: 4px;"><strong>Location:</strong> {{ judge.room }}</div>{% endif %}
+              {% if judge.bailiff %}<div style="margin-bottom: 4px;"><strong>Bailiff:</strong> {{ judge.bailiff }}</div>{% endif %}
+              {% if judge.phone %}<div style="margin-bottom: 4px;"><strong>Phone:</strong> {{ judge.phone }}</div>{% endif %}
+            </div>
+          </div>
+          {% if judge.bio %}
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge {{ judge.last_name }}</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">{{ judge.bio }}</div>
+            </details>
+          {% endif %}
+          {% if judge.procedures %}
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">Courtroom Procedures</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">{{ judge.procedures }}</div>
+            </details>
+          {% endif %}
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="k">Chief Magistrates</div>
+  <div class="v">Anita P. Berding and Thomas O. Beridon (Local Rule 23). Room 424, Hamilton County Courthouse. Magistrates: Christopher Liu, Stacey Piepmeier.</div>
+  <div class="k">Magistrate referrals</div>
+  <div class="v">Foreclosure, administrative appeals, civil forfeiture, certificates for qualification of employment, and car-title requests are heard by magistrates by General Order of Reference.</div>
+  <div class="k">Mediation &amp; ADR</div>
+  <div class="v">John J. Cruze, Director. Room 450. <a href="tel:+15139465470">513-946-5470</a>. Cases referred by the court; parties may also request mediation.</div>
+  <div class="k">Local Rules</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/local-rules/" target="_blank" rel="noopener">hamiltoncountycourts.org/local-rules &rarr;</a></div>
+</div>
+
+<h2 class="sect-h">Mission &amp; Pledge of Fairness</h2>
+<p class="page-lede">
+  Mirrored verbatim from <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas</a>. The Judges have published this commitment to the public:
+</p>
+<blockquote class="banner" style="border-left-color: var(--ink); margin: 0 0 18px;">
+  <p style="margin: 0 0 8px;"><strong>Mission.</strong> As an equal and independent branch of government, the Judges of the Hamilton County Court of Common Pleas, acting with integrity, shall provide a safe, accessible, transparent, efficient, and impartial system of justice by fairly resolving disputes, respecting the public interest, and preserving individual rights while maintaining the rule of law.</p>
+  <p style="margin: 0 0 8px;"><strong>Pledge of Fairness.</strong> The fundamental mission of the Hamilton County Court of Common Pleas is to provide a fair and impartial forum for the resolution of disputes according to the rule of law. The Judges and staff therefore make this pledge to each litigant, defendant, victim, witness, juror, and person involved in a court proceeding:</p>
+  <p style="margin: 0;"><em>Fairness includes the opportunity to be heard, the chance to have the court process explained, and the right to be treated with respect.</em></p>
+</blockquote>
+
+<h2 id="municipal" class="sect-h">Hamilton County Municipal Court</h2>
+<p>
+  Handles misdemeanor criminal cases, traffic offenses, and civil cases in which the amount in controversy is less than $15,000, including small claims and landlord-tenant matters. Also conducts preliminary hearings for felony cases before they transfer to Common Pleas, and oversees probation for misdemeanor offenders. The court operates several specialty divisions (housing, environmental, drug court, mental health court) and a Driver's License Intervention Program.
+</p>
+<div class="fields">
+  <div class="k">Presiding &amp; Administrative Judge</div>
+  <div class="v">Hon. William Mallory. Elected by the permanent judges in November of each even-numbered year for a two-year term beginning January 1 (Municipal Local Rule 1).</div>
+  <div class="k">Municipal Court Administrator</div>
+  <div class="v">Andrew Gillen. 1000 Main Street, Room 205. <a href="tel:+15139465200">513-946-5200</a>. Fax: 513-946-5223.</div>
+  <div class="k">Judges</div>
+  <div class="v">
+    <div class="judge-directory" style="display: grid; gap: 8px; margin-top: 4px;">
+      {% for judge in municipal %}
+        <details id="judge-{{ judge.slug }}" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. {{ judge.name }}</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">{{ judge.room }}</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+            {% if judge.image_url %}
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="{{ judge.image_url }}" alt="Hon. {{ judge.name }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            {% endif %}
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+              {% if judge.room %}<div style="margin-bottom: 4px;"><strong>Location:</strong> {{ judge.room }}</div>{% endif %}
+              {% if judge.bailiff %}<div style="margin-bottom: 4px;"><strong>Bailiff:</strong> {{ judge.bailiff }}</div>{% endif %}
+              {% if judge.phone %}<div style="margin-bottom: 4px;"><strong>Phone:</strong> {{ judge.phone }}</div>{% endif %}
+            </div>
+          </div>
+          {% if judge.bio %}
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge {{ judge.last_name }}</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">{{ judge.bio }}</div>
+            </details>
+          {% endif %}
+          {% if judge.procedures %}
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">Courtroom Procedures</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">{{ judge.procedures }}</div>
+            </details>
+          {% endif %}
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="k">Address</div>
+  <div class="v">Hamilton County Courthouse, 1000 Main Street, Room 205, Cincinnati, Ohio 45202</div>
+  <div class="k">Main phone</div>
+  <div class="v"><a href="tel:+15139465200">513-946-5200</a></div>
+  <div class="k">Web</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/municipal/" target="_blank" rel="noopener">hamiltoncountycourts.org/municipal &rarr;</a></div>
+  <div class="k">Civil Clerk</div>
+  <div class="v">1000 Main Street, Room 115. Hours: 8 AM-4 PM, Monday-Friday. Small claims, landlord-tenant, civil under $15,000. <a href="tel:+15139465700">513-946-5700</a>.</div>
+  <div class="k">Criminal &amp; Traffic Clerk</div>
+  <div class="v">Justice Center, 1000 Sycamore Street, Room 115. Hours: 8 AM-8 PM, Monday-Friday. Bond Window / Police Attorney Counter open 24/7. <a href="tel:+15139466040">513-946-6040</a>.</div>
+  <div class="k">Local Rules</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/" target="_blank" rel="noopener">hamiltoncountycourts.org/municipal-local-rules &rarr;</a></div>
+</div>
+
+<h2 class="sect-h">Court of Common Pleas, Domestic Relations Division</h2>
+<p>
+  Handles divorce, dissolution of marriage, legal separation, annulment, custody between parents, spousal support, and parental rights. Distinct from Juvenile Court (custody between a parent and a non-parent goes to Juvenile). Cases are assigned by lot to a judge at filing and stay with that judge.
+</p>
+<div class="fields">
+  <div class="k">Court address</div>
+  <div class="v">800 Broadway Street, Cincinnati, Ohio 45202</div>
+  <div class="k">Clerk's office</div>
+  <div class="v">800 Broadway Street, Room 347. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Statutory basis</div>
+  <div class="v"><a href="https://codes.ohio.gov/ohio-revised-code/section-2301.03" target="_blank" rel="noopener">ORC § 2301.03</a> - assignment, jurisdiction, and administrative authority over divorce, dissolution, legal separation, and annulment cases.</div>
+  <div class="k">Docket office</div>
+  <div class="v">Room 3-46. All motions must first be set for hearing here before filing with the Clerk of Courts.</div>
+</div>
+
+<h2 id="probate" class="sect-h">Hamilton County Probate Court (Common Pleas, Probate Division)</h2>
+<p>
+  Mirrored from <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>. Provides over 80 unique services. The most common: administering estates from generation to generation, providing guardianship for residents who cannot care for themselves, growing families through marriage and adoptions, and presiding over mental-health civil-commitment cases.
+</p>
+<div class="fields">
+  <div class="k">Presiding judge</div>
+  <div class="v">Hon. Ralph Winkler. Presided over more than 150,000 cases since 1999. 2015 Golden Gavel Award (Ohio Common Pleas Judges Association); 2008 Trial Judge of the Year (Hamilton County Trial Lawyers Association).</div>
+  <div class="k">Address</div>
+  <div class="v">William Howard Taft Center, 230 East Ninth Street, 9th &amp; 10th Floors, Cincinnati, Ohio 45202</div>
+  <div class="k">Main phone</div>
+  <div class="v"><a href="tel:+15139463570">513-946-3570</a></div>
+  <div class="k">Marriage licenses</div>
+  <div class="v"><a href="tel:+15139463590">513-946-3590</a> &middot; <a href="https://www.probatect.org/marriagelicenses/" target="_blank" rel="noopener">probatect.org/marriagelicenses &rarr;</a></div>
+  <div class="k">Cashier</div>
+  <div class="v">9th floor of the William Howard Taft Law Center. Hours: 8 AM-3:45 PM, Monday-Friday. <a href="tel:+15139463604">513-946-3604</a>.</div>
+  <div class="k">Free attorneys can't appear</div>
+  <div class="v">None of the Court's attorneys or personnel may give legal advice. For low-income filers, the Legal Aid Society's Volunteer Lawyers Project handles probate matters at reduced or no cost (<a href="tel:+15132419400">513-241-9400</a>).</div>
+  <div class="k">Interpreters</div>
+  <div class="v">Provided free of charge to facilitate participation in Court proceedings or services.</div>
+</div>
+
+<h2 id="juvenile" class="sect-h">Hamilton County Juvenile Court (Common Pleas, Juvenile Division)</h2>
+<p>
+  Handles cases involving people under 18 (delinquency), plus custody disputes between parents or with a non-parent. The Clerk of Courts Help Center has a satellite office for custody issues inside Juvenile Court, on the first floor.
+</p>
+<div class="fields">
+  <div class="k">Presiding judge</div>
+  <div class="v">Hon. Melissa Powers (elected January 1, 2017; previously Hamilton County Municipal Court judge 2006-2016 and Presiding Judge 2012-2014). Established the first Hamilton County Veterans Treatment Court.</div>
+  <div class="k">Address</div>
+  <div class="v">800 Broadway, 14th Floor, Cincinnati, Ohio 45202-1332</div>
+  <div class="k">Main phone</div>
+  <div class="v"><a href="tel:+15139469209">513-946-9209</a> &middot; Fax: 513-946-9216</div>
+  <div class="k">Help Center satellite (custody)</div>
+  <div class="v">1st floor of Juvenile Court. <a href="tel:+15139469442">513-946-9442</a>.</div>
+</div>
+
+<h2 class="sect-h">First District Court of Appeals</h2>
+<p>
+  The intermediate appellate court for Hamilton County. Hamilton County is the only county within the First District; the surrounding counties (Brown, Butler, Clermont, Clinton, Fayette, Madison, Preble, Warren) are in the Twelfth District. Reviews appeals from Common Pleas (all divisions) and Municipal Court. Three-judge panels hear each case; decisions from the panel can be appealed to the Ohio Supreme Court.
+</p>
+<div class="fields">
+  <div class="k">Address</div>
+  <div class="v">William Howard Taft Law Center, 12th Floor, Cincinnati, Ohio 45202</div>
+  <div class="k">Opinion release</div>
+  <div class="v">Wednesdays and Fridays.</div>
+  <div class="k">Web</div>
+  <div class="v"><a href="https://firstdistrictcoa.org" target="_blank" rel="noopener">firstdistrictcoa.org &rarr;</a></div>
+  <div class="k">Constitutional basis</div>
+  <div class="v">Established by Article IV, Section 1 of the Ohio Constitution; jurisdiction outlined in Article IV, Section 3.</div>
+  <div class="k">Original jurisdiction</div>
+  <div class="v">In addition to hearing appeals, the court has original jurisdiction over writs of habeas corpus, mandamus, procedendo, prohibition, and quo warranto.</div>
+</div>
+
+<h2 class="sect-h">Mayor's Courts in Hamilton County</h2>
+<p>
+  Ohio is one of only two states (the other is Louisiana) that allows the mayors of municipal corporations to preside over a court. In Hamilton County municipalities populated by more than 100 people with no municipal court of their own, Mayor's Courts hear cases involving local ordinance violations and state traffic laws. A mayor is not required to be a lawyer; they may appoint an attorney with at least three years of practice to preside. A person convicted in Mayor's Court may appeal to the Hamilton County Municipal Court.
+</p>
+<div class="fields">
+  <div class="k">Hamilton County Mayor's Courts</div>
+  <div class="v">Amberley Village &middot; Blue Ash &middot; Cheviot &middot; Cleves &middot; Forest Park &middot; Golf Manor &middot; Indian Hill &middot; Lockland &middot; Madeira &middot; Montgomery &middot; North College Hill &middot; Reading &middot; Sharonville &middot; St. Bernard &middot; Terrace Park &middot; Woodlawn &middot; Wyoming</div>
+  <div class="k">Jurisdiction</div>
+  <div class="v">Local ordinance violations and state traffic offenses only. No civil cases. No felonies.</div>
+  <div class="k">Appeals</div>
+  <div class="v">Convictions in Mayor's Court can be appealed to the Hamilton County Municipal Court.</div>
+</div>
+
+<h2 class="sect-h">Specialized Dockets (Common Pleas)</h2>
+<p>
+  Common Pleas operates three specialized dockets for felony-level offenders who meet clinical and legal eligibility criteria. Participation is voluntary and court-supervised.
+</p>
+<div class="fields">
+  <div class="k">Drug Treatment &amp; Recovery Court</div>
+  <div class="v">Hon. Nicole L. Sanders, presiding. Room 500, Hamilton County Courthouse. Felony 4 and 5 level offenses. First drug court established in Ohio and the only full-time drug court in the state. Bailiff: Doris Vincent, <a href="tel:+15139465770">513-946-5770</a>. Director: Keshia Jones, <a href="tel:+15139465773">513-946-5773</a>.</div>
+  <div class="k">Felony Veterans' Treatment Court</div>
+  <div class="v">Hon. Christopher A. Wagner, presiding. Room 330, Hamilton County Courthouse. Court-supervised treatment for veterans whose service-connected issues led to criminal justice contact. Five-phase program: orientation, treatment plan, ongoing treatment, stabilization, transition. Director: Gary Yuratovac, Esq., <a href="tel:+15136184215">513-618-4215</a>. Coordinator: Greg Street, <a href="tel:+15139463371">513-946-3371</a>.</div>
+  <div class="k">Reentry Docket ("Welcome Home")</div>
+  <div class="v">Hon. Wende C. Cross, presiding. Room 380, Hamilton County Courthouse. Judicial release program for low-level, non-violent offenders transitioning from state prison. Operated in partnership with the Hamilton County Office of Reentry (Director: Trina Jackson, <a href="tel:+15139464304">513-946-4304</a>). Specialist: Sheryl Miles, <a href="tel:+15139465556">513-946-5556</a>.</div>
+</div>
+
+<h2 class="sect-h">Probation</h2>
+<div class="fields">
+  <div class="k">Common Pleas (felony)</div>
+  <div class="v">Find your probation officer: <a href="tel:+15139469844">513-946-9844</a>. <a href="https://hamiltoncountycourts.org/index.php/common-pleas-probation/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas-probation &rarr;</a></div>
+  <div class="k">Municipal (misdemeanor)</div>
+  <div class="v">Find your probation officer: <a href="tel:+15139469600">513-946-9600</a>. <a href="https://hamiltoncountycourts.org/index.php/Probation%20Municipal/" target="_blank" rel="noopener">hamiltoncountycourts.org/probation-municipal &rarr;</a></div>
+  <div class="k">Drug screening</div>
+  <div class="v"><a href="https://probation.hamiltoncountycourts.org/DrugScreen/" target="_blank" rel="noopener">probation.hamiltoncountycourts.org/DrugScreen &rarr;</a></div>
+  <div class="k">Online payments</div>
+  <div class="v"><a href="https://probation.hamiltoncountycourts.org/Payments/" target="_blank" rel="noopener">probation.hamiltoncountycourts.org/Payments &rarr;</a></div>
+  <div class="k">Adult Parole Authority (state)</div>
+  <div class="v">7710 Reading Road, Suite 210, Cincinnati, OH 45237. <a href="tel:+15138214804">513-821-4804</a>. (Parole/post-release control is state-administered, distinct from county probation.)</div>
+</div>
+
+<h2 class="sect-h">Appearing in Court</h2>
+<p>
+  Mirrored from <a href="https://hamiltoncountycourts.org/index.php/appearing/" target="_blank" rel="noopener">hamiltoncountycourts.org/appearing</a>.
+</p>
+<div class="fields">
+  <div class="k">Arrive early</div>
+  <div class="v">Plan to arrive at least 30 minutes before your scheduled court appearance. All persons entering the Courthouse and Justice Center must pass through a metal detector. Between 8:30 AM and 9:30 AM, expect longer lines.</div>
+  <div class="k">Courtrooms A &amp; B</div>
+  <div class="v">Located in the Justice Center (the jail), 1000 Sycamore Street, behind the Courthouse. Separate from the Courthouse at 1000 Main Street.</div>
+  <div class="k">Parking</div>
+  <div class="v">Expect to pay $5-$10 depending on location. <a href="https://hamiltoncountycourts.org/index.php/parking-and-map/" target="_blank" rel="noopener">Map and parking lots &rarr;</a></div>
+  <div class="k">Dress code</div>
+  <div class="v">Neat, clean, and appropriate. No tank tops, tube tops, shorts above the knees, hats, do-rags, or caps.</div>
+  <div class="k">Electronics</div>
+  <div class="v">Cell phones, pagers, cameras, and other electronic devices are prohibited without court permission. Violations are subject to contempt, seizure, or ejection.</div>
+  <div class="k">Prohibited items</div>
+  <div class="v">Pocket knives, scissors, mace, or any other weapon. Deputies will not issue claim tickets for confiscated items. Leave them in your car.</div>
+  <div class="k">Failure to appear</div>
+  <div class="v">In a criminal case, a bench warrant is typically issued for your arrest. In a civil case, you may lose by default. If you cannot appear, contact your attorney, the bailiff, or the Assignment Commissioner at <a href="tel:+15139466250">513-946-6250</a>.</div>
+  <div class="k">Find your hearing</div>
+  <div class="v">Assignment Commissioner: <a href="tel:+15139466250">513-946-6250</a> (Room 117, Justice Center or Room 255, Courthouse, 8 AM-4 PM). Clerk of Courts 24-hour line: <a href="tel:+15139466010">513-946-6010</a>. Kiosk terminals near courthouse elevators show the next 7 days of scheduled hearings.</div>
+</div>
+
+<h2 class="sect-h">How a Case Moves Through the System</h2>
+<p>
+  An adult felony arrest in Hamilton County typically follows this path. The path for a misdemeanor differs at step 2 onward (it stays in Municipal Court).
+</p>
+<ul class="rule-list">
+  <li>Arrest by HCSO, Cincinnati PD, or another local jurisdiction. Booking at the Justice Center, 1000 Sycamore Street.</li>
+  <li>Arraignment in Hamilton County Municipal Court (Room 205) within a short time after booking. The judge sets bond and reads the charges. For misdemeanors and traffic, the case stays in Municipal Court; for felonies, this is a preliminary hearing.</li>
+  <li>If a felony, the case is bound over to the Court of Common Pleas, General Division (Room 410) after a preliminary hearing in Municipal Court or after a grand jury indictment.</li>
+  <li>Case is assigned by lot to one Common Pleas judge under the Individual Assignment System (Local Rule 7). That judge handles every motion, hearing, plea, and trial in the case.</li>
+  <li>Within 90 days of filing (120 days for foreclosure cases), the assigned judge holds a Case Management Conference to schedule the rest of the case (Local Rule 15).</li>
+  <li>Resolution: plea, trial verdict, dismissal, or transfer to a specialty court (drug court, mental health court, Veterans Treatment Court).</li>
+  <li>Sentence: probation, fines, restitution, county jail (typically misdemeanor), state prison (felonies). For diversion or treatment court, supervised release with treatment conditions.</li>
+  <li>Appeal: from Common Pleas or Municipal Court, to the First District Court of Appeals (12th floor, William Howard Taft Law Center). From there, by leave, to the Ohio Supreme Court.</li>
+</ul>
+
+<h2 class="sect-h">Where the Clerk of Courts Offices Are</h2>
+<p>
+  Pavan Parikh is the elected Clerk of Courts (<a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>). The Clerk's office is the record-keeper for every court in Hamilton County. Below are the public counters where you can file, look up, or pick up documents in person. E-filing is available at <a href="https://efiling.hamiltoncountycourts.org" target="_blank" rel="noopener">efiling.hamiltoncountycourts.org</a>.
+</p>
+<div class="fields">
+  <div class="k">Common Pleas Civil &amp; Criminal</div>
+  <div class="v">1000 Main Street, Room 315, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Domestic Relations</div>
+  <div class="v">800 Broadway Street, Room 347, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Municipal Civil</div>
+  <div class="v">1000 Main Street, Room 115, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Municipal Criminal &amp; Traffic</div>
+  <div class="v">Justice Center, 1000 Sycamore Street, Room 115, Cincinnati. Hours: 8 AM-8 PM Mon-Fri. Bond Window / Police Attorney Counter 24/7.</div>
+  <div class="k">Auto Title (Downtown)</div>
+  <div class="v">1001 Main Street, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Auto Title (Hamilton Ave.)</div>
+  <div class="v">10964 Hamilton Avenue, Cincinnati. Hours: 8 AM-4:30 PM Mon-Fri, 8 AM-12:30 PM Saturday.</div>
+  <div class="k">Auto Title (Red Bank Rd.)</div>
+  <div class="v">3370 Red Bank Road, Cincinnati. Hours: 8 AM-4:30 PM, Monday-Friday.</div>
+  <div class="k">Auto Title (Evendale)</div>
+  <div class="v">10400 Reading Road, Suite 105, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Appellate Division</div>
+  <div class="v">230 East 9th Street, 12th Floor, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Records search</div>
+  <div class="v"><a href="https://www.courtclerk.org/records-search/" target="_blank" rel="noopener">courtclerk.org/records-search &rarr;</a> Search by name, case number, court date, or attorney. <a href="https://www.courtclerk.org/records-search/case-schedules/" target="_blank" rel="noopener">Case schedules &rarr;</a></div>
+  <div class="k">Pay court costs / tickets</div>
+  <div class="v"><a href="https://www.courtclerk.org/payments/court_cost_search.php" target="_blank" rel="noopener">courtclerk.org/payments &rarr;</a></div>
+  <div class="k">Clerk contact</div>
+  <div class="v"><a href="mailto:webmaster@hamcoclerkoh.gov">webmaster@hamcoclerkoh.gov</a>. Administration: 1000 Main Street, Cincinnati 45202. Hours: 8 AM-4 PM, Monday-Friday.</div>
+</div>
+
+<h2 class="sect-h">The Operational View</h2>
+<p>
+  For who's actually scheduled in court today and the rest of this week, see the <a href="{{ base_url }}/court/">JCStream court calendar</a>. It aggregates next-court-date per inmate from the HCSO booking records, refreshed about every 30 minutes. For the official docket of record, including judge assignments and filings, search by name or case number at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+</p>
+
+<p class="note-paragraph">
+  This page is a public-records mirror, not legal advice. Phone numbers, addresses, and jurisdictional thresholds are verified from the Hamilton County Courts, Probate Court, and Clerk of Courts websites. If you find a contact that has changed, please <a href="https://github.com/AICincy/JCStream/issues">open an issue</a>. Authoritative sources of last resort: <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">hamiltoncountycourts.org</a>, <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>, <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+</p>
+
+{% endblock %}

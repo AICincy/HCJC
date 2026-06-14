@@ -1,0 +1,62 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        python-version: ['3.13', '3.14']
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: pip install ruff==0.15.15 mypy==2.1.0
+      - name: Lint (ruff)
+        run: ruff check .
+      - name: Type check (mypy)
+        run: mypy scraper web
+      - run: python -m pytest -v
+      - name: Verify WAF-block evidence chain
+        # Walk the prev_sha256 hash chain in data/waf_block_log.json. Exits 0
+        # when intact (or absent/empty), 1 on a broken link, so an out-of-band
+        # edit to the committed evidence log fails CI.
+        run: python -m scraper.verify_block_log
+      - name: Verify PRA send log chain
+        # Walk the prev_sha256 hash chain in data/pra_requests.json. Same
+        # integrity guarantee as the WAF block log above.
+        run: python -m scraper.verify_pra_log
+      - name: Build site from empty data (smoke test)
+        # Mirror the production sweep env so this smoke test catches any
+        # deployment-config drift (root-relative paths).
+        env:
+          JCSTREAM_SITE_BASE_URL: ""
+        run: python -m web.build
+
+      - name: Verify CNAME written when custom domain env var is set
+        # Catches any build regression that drops the _write_cname call.
+        # GitHub Pages silently stops serving the custom domain if CNAME
+        # disappears from docs/; this makes that a CI failure.
+        env:
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: "www.aretheyinjail.com"
+        run: |
+          python -m web.build
+          test -f docs/CNAME || { echo "::error::docs/CNAME not written by build"; exit 1; }
+          grep -q "aretheyinjail.com" docs/CNAME || { echo "::error::docs/CNAME content wrong"; exit 1; }
+          echo "CNAME OK: $(cat docs/CNAME)"

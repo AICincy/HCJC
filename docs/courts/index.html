@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="en" data-base-url="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Hamilton County court system &middot; JCStream</title>
+  <meta name="robots" content="noindex, noarchive">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#F5F0EB">
+  <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
+  <meta property="og:site_name" content="JCStream">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JCStream - Hamilton County, OH Justice Center roster mirror">
+  <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
+  <meta property="og:url" content="https://aicincy.github.io/JCStream/">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/static/style.css?v=3b97a7e712">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - all changes" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - new bookings" href="/booked.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - releases" href="/released.xml">
+  <link rel="author" href="/humans.txt">
+</head>
+<body id="top" class="detail page-courts">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="/">
+        <span class="brand-text">
+          <span class="brand-name">JCStream</span>
+          <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
+        </span>
+      </a>
+      <a class="masthead-seal masthead-seal-hcjc"
+         href="https://www.facebook.com/HCJCOH"
+         target="_blank" rel="noopener"
+         aria-label="Hamilton County Booking Photos on Facebook">
+        <img src="/static/img/hcjc-seal.png"
+             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
+             alt="Hamilton County Booking Photos seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <a class="masthead-seal masthead-seal-coc"
+         href="https://www.facebook.com/cityofcincinnati"
+         target="_blank" rel="noopener"
+         aria-label="City of Cincinnati on Facebook">
+        <img src="/static/img/coc-seal.png"
+             srcset="/static/img/coc-seal.png 1x, /static/img/coc-seal-2x.png 2x"
+             alt="City of Cincinnati seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <span class="spacer"></span>
+      <details class="nav-menu" open>
+        <summary class="nav-toggle" aria-label="Menu">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <div class="nav-drawer">
+          <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
+          <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who's due</span></a>
+          <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
+          <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
+          <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+          <a class="nav-link" href="/help/">Help <span class="nav-hint">free aid</span></a>
+          <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
+          <a class="nav-link" href="/feed.xml">RSS</a>
+          <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+        </div>
+      </details>
+    </div>
+  </header>
+  <main id="main" class="page">
+    <div class="doc-wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Court system</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">The Hamilton County Court System</div>
+    <div class="sub">Which court does what, where to find it, who presides &middot; ORC § 149.43 transparency</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  Most people who land on JCStream don't know which court will hear their case or their loved one's case. Hamilton County has six courts with overlapping geography and very different jurisdictions. This page mirrors the published information from <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">hamiltoncountycourts.org</a>, <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>, and the Clerk of Courts so the distinctions are in one place. Public records belong to the people; officials act as trustees.
+</p>
+
+<div class="alert inline-alert" role="note">
+  <strong>Scam alert (issued by the Court of Common Pleas)</strong>
+  Scammers actively impersonate Hamilton County Sheriff's Office, Electronic Monitoring Unit, and Clerk of Courts personnel, calling families of incarcerated individuals and demanding fees for "release via electronic GPS ankle monitor." They use spoofed numbers and publicly available arrest records, and request payment via Zelle, Venmo, or Cash App. Hamilton County <strong>will never require payment</strong> for electronic monitoring before release from the Justice Center. Verify directly with the Electronic Monitoring Unit at <strong>513-946-9800</strong>.
+</div>
+
+<h2 id="common-pleas" class="sect-h">Court of Common Pleas, General Division</h2>
+<p>
+  The trial court of general jurisdiction. Hears felony criminal cases and civil cases in which the amount in controversy is more than $15,000, including matters involving title to real estate (e.g. foreclosures). 16 judges; cases are assigned to a single judge by lot at filing and stay with that judge through termination.
+</p>
+<div class="fields">
+  <div class="k">Presiding &amp; Administrative Judge</div>
+  <div class="v">Hon. Alison Hatheway</div>
+  <div class="k">Court Administrator</div>
+  <div class="v">Thomas O. Beridon. Room 410, Hamilton County Courthouse. <a href="tel:+15139465801">513-946-5801</a>.</div>
+  <div class="k">Address</div>
+  <div class="v">Hamilton County Courthouse, 1000 Main Street, Room 410, Cincinnati, Ohio 45202</div>
+  <div class="k">Web</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas &rarr;</a></div>
+  <div class="k">Clerk's office</div>
+  <div class="v">Common Pleas Civil &amp; Criminal Divisions: 1000 Main Street, Room 315. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Personnel Director</div>
+  <div class="v">Krista Ventre, Esq. <a href="tel:+15139465802">513-946-5802</a>.</div>
+  <div class="k">Judges</div>
+  <div class="v">
+    <div class="judge-directory" style="display: grid; gap: 8px; margin-top: 4px;">
+        <details id="judge-jennifer-l-branch" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Jennifer L. Branch</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 320</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2026/04/Judge-Branch-2026.jpg" alt="Hon. Jennifer L. Branch" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 320</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> **Jury Trials**.  The Court sets multiple jury trials for the same day.  Criminal trials will take precedence over civil trials.  Defendants who are detained before trial will take priority over defendants who are not detained.  Please email the Court’s Bailiff (and copy all counsel) prior to the jury trial date to determine the status of your case on the docket.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone: 513-946-5117</div>            </div>
+          </div>
+        </details>
+        <details id="judge-katie-casch" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Katie Casch</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 510</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2026/01/Casch-New-2.jpg" alt="Hon. Katie Casch" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 510</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> The Court will set hearings for motions on a case-by-case basis, either _sua sponte_ or at the request of a party.  Motion hearing exhibits must be provided to the opposing party and the Court.  To request the status of a pending motion or to alert the court of an urgent request, counsel should contact either the bailiff (criminal cases) or the staff attorney (civil cases).</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5790</div>            </div>
+          </div>
+        </details>
+        <details id="judge-wende-c-cross" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Wende C. Cross</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;"></span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2022/01/Judge-Cross-New-Website-photo.jpg" alt="Hon. Wende C. Cross" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Punctuality, professionalism and civility are required at all times in the courtroom. Attorneys should stand when addressing the Court, questioning witnesses, and when objecting. If a case is in progress, attorneys should quietly wait for the Bailiff or Staff Attorney to approach.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5860</div>            </div>
+          </div>
+        </details>
+        <details id="judge-leah-dinkelacker" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Leah Dinkelacker</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 560</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2025/05/L-Dink-Robe.jpg" alt="Hon. Leah Dinkelacker" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 560</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> After filing a motion, please take a copy of the motion to the courtroom and meet with the bailiff to get a hearing date.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5750</div>            </div>
+          </div>
+        </details>
+        <details id="judge-patrick-t-dinkelacker" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Patrick T. Dinkelacker</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 360</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2015/12/honorable-patrick-j-dinkelacker-sm.jpg" alt="Hon. Patrick T. Dinkelacker" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 360</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Counsel in criminal cases should check in with the bailiff (Chris Collini).</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5851</div>            </div>
+          </div>
+        </details>
+        <details id="judge-robert-a-goering" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Robert A. Goering</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 520</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2021/03/Goering-Picture.jpg" alt="Hon. Robert A. Goering" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 520</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Kristie Cornelius, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5102</div>            </div>
+          </div>
+        </details>
+        <details id="judge-alison-hatheway" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Alison Hatheway</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 300</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2021/02/Hatheway-Judge-Picture.jpg" alt="Hon. Alison Hatheway" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 300</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Rule 40 of the Ohio Rules of Superintendence state the Court should issue its decision on a motion within 120 days from the date it was filed. However, to request the status of a pending motion or to alert the Court of an urgent request, counsel should contact either the bailiff (criminal cases) or the staff attorney (civil cases).</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5760</div>            </div>
+          </div>
+        </details>
+        <details id="judge-christian-a-jenkins" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Christian A. Jenkins</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 540</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2021/02/Jenkins-Judge-Photo.jpg" alt="Hon. Christian A. Jenkins" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 540</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Contact bailiff Adam Eiser (513) 946-5961 [aeiser@cms.hamilton-co.org](mailto:aeiser@cms.hamilton-co.org)</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5961</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Jenkins</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge Christian A. Jenkins was elected to the Hamilton County Court of Common Pleas for a six-year term commencing on January 2, 2021.  Prior to taking the bench, Judge Jenkins was in private practice for more than 25 years.  Judge Jenkins began his practice in the labor and employment and litigation departments of a large law firm in Milwaukee, Wisconsin before moving to Cincinnati in 1998.  Since that time Judge Jenkins devoted his practice to complex litigation, including national class actions, and representing public sector employee unions, including many employees of the City of Cincinnati and area school districts.
+
+Judge Jenkins received his undergraduate degree from Penn State University.  He attended the Georgetown University Law Center and the University of Wisconsin Law School, where he received his degree with high honors.  Judge Jenkins is an avid competitive long distance runner.</div>
+            </details>
+        </details>
+        <details id="judge-jody-m-luebbers" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Jody M. Luebbers</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 340</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2015/12/honorable-jody-m-luebbers-sm.jpg" alt="Hon. Jody M. Luebbers" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 340</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> I expect attorneys to be prompt, courteous and respectful at all times. Attorneys should stand when addressing the court, questioning witnesses and when objecting. If a case is in progress, attorneys should quietly wait for the bailiff to approach.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5755</div>            </div>
+          </div>
+        </details>
+        <details id="judge-melba-d-marsh" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Melba D. Marsh</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 310</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2021/11/Marsh-New.jpg" alt="Hon. Melba D. Marsh" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 310</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Attorneys may stand wherever is comfortable for them. Attorneys may approach witnesses after asking the court’s permission to do so. When attorneys arrive in the courtroom, they should report to the law clerk for civil matters. For criminal matters, contact the room prosecutor before reporting to the bailiff. If a case is in progress, please wait to report until an appropriate time.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5866</div>            </div>
+          </div>
+        </details>
+        <details id="judge-christopher-r-mcdowell" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Christopher R. McDowell</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 595</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2026/01/McDowell-resized.png" alt="Hon. Christopher R. McDowell" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 595</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> All attorneys and parties are expected to be familiar with, and follow, the Ohio Rules of Criminal Procedure, the Ohio Rules of Evidence, and the Ohio Rules of Professional Conduct. Defense attorneys and prosecutors are expected to appear in Court on time. If they have other matters to which they must attend, please call the Bailiff or check in with the Court as soon as possible.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5785</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge McDowell</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge McDowell was appointed by Governor Mike DeWine to the Hamilton County Court of Common Pleas in August 2025. Before stepping into his role in September 2025, he enjoyed a fulfilling career as a partner at Strauss Troy in Cincinnati and also served as the prosecutor for the Village of Newtown and the City of Wyoming. Prior to joining Strauss Troy in 2015, he was an equity partner at Dinsmore &amp; Shol’s Cincinnati office, where he practiced both civil and criminal law. Judge McDowell joined Dinsmore in 2000 after concluding active military service in the United States Army Judge Advocate General’s Corps, where he had the privilege of serving overseas in Korea, Germany, and Bosnia. During his military career, he took on roles as both a prosecutor and a criminal defense attorney. His last assignment was as the head of the criminal defense office at Fort Riley, Kansas, where he proudly provided all the criminal defense services for soldiers of the First Infantry Division.
+
+Judge McDowell and his wife have three children.</div>
+            </details>
+        </details>
+        <details id="judge-nicole-l-sanders" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Nicole L. Sanders</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 500</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2021/03/Sanders.jpg" alt="Hon. Nicole L. Sanders" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 500</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> - If an attorney is going to be late, please contact the court bailiff as soon as possible.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5770</div>            </div>
+          </div>
+        </details>
+        <details id="judge-virginia-tallent" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Virginia Tallent</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 495</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2025/04/Tallent-Robe.jpg" alt="Hon. Virginia Tallent" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 495</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Counsel must email the Bailiff (rbryan@cms.hamilton-co.org) and copy all parties no later than 7 days before trial to confirm the status of their case and whether it will proceed as scheduled.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5830</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Tallent</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge Virginia Tallent was elected to the Court of Common Pleas in November 2024, and her six-year term began on April 1, 2025. She graduated _summa cum laude_ from the University of Missouri-Columbia and earned her Juris Doctor _cum laude_ from the University of Cincinnati College of Law. Prior to joining the bench, Judge Tallent held roles as Supervising Attorney at the Legal Aid Society of Greater Cincinnati, Senior Assistant City Solicitor, and as a Deputy City Manager. Her legal career focused on housing law, civil litigation in state and federal courts, and public administration, with an emphasis on addressing complex systemic issues such as affordable housing, violent crime, public nuisance abatement, and homelessness prevention.</div>
+            </details>
+        </details>
+        <details id="judge-alan-c-triggs" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Alan C. Triggs</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 485</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2018/03/triggs.jpg" alt="Hon. Alan C. Triggs" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 485</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> The Court will set hearings for motions on a case-by-case basis, either _sua sponte_ or at the request of a party.  Motion hearing exhibits must be provided to the opposing party and the Court.  To request the status of a pending motion or to alert the court of an urgent request, counsel should contact either the bailiff (criminal cases) or the law clerk (civil cases).</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5841</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Triggs</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge Alan C. Triggs was elected to the Hamilton County Municipal Court for the term beginning January 3, 2018. Alan served as an assistant City of Cincinnati Prosecutor for 3 years and as a Hamilton County Municipal Court Magistrate for 11 years prior to being elected judge.
+
+Alan is a 1988 graduate of Walnut Hills High School; 1991 graduate of Memphis State University; 1994 graduate of the University of Akron Law; and 2012 graduate of Concord Law School with a Master of Laws Degree (LLM).</div>
+            </details>
+        </details>
+        <details id="judge-christopher-a-wagner" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Christopher A. Wagner</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 330</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2021/01/Wagner-CBA-Headshot_1.jpg" alt="Hon. Christopher A. Wagner" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 330</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> To set a hearing on a civil case, contact the Staff Attorney. To set a hearing on a criminal case, contact the Bailiff. A file stamped courtesy copy of the motion should be provided in advance to the court. Typically, we handle criminal motions in the morning and civil motions in the afternoon.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5890</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">Courtroom Procedures</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">**Courtroom Etiquette**
+
+Attorneys are to be prompt, courteous, and respectful at all times. This courtesy extends to all litigants, witnesses, jurors, and court staff.
+
+Attorneys should stand when addressing the Court, questioning witnesses, and when objecting. If a case is in progress, attorneys should quietly wait for the Bailiff or Staff Attorney to approach.  You may be asked to step into the hall to discuss your matter.
+
+The civil docket is tightly timed, therefore phone calls, Zoom calls, and in person appearances should be conducted at the time set by the Court.  If a party is going to be late or the court appearance needs to be rescheduled, attorneys should contact the Staff Attorney in advance.
+
+Attorneys should be prepared for trial on the day that the trial is set. If an attorney is going to be late, please notify the court’s staff in advance.
+
+**Initial Case Management Conference Civil Cases**
+
+The Assignment Commissioner sets the initial case management when the case is filed.  Those appearances are by phone unless you were contacted by the Staff Attorney to appear in person.  Parties should file a Civ. R 26(F) discovery plan before that conference, if possible, (see below).  This Court does not require a set form for a Civ. R. 26(F) filing. Contact the Staff Attorney in advance if you need to change the initial case management conference.
+
+**Calendaring and Continuances**
+
+The court sets its own calendar.  Continuances past the Supreme Court deadline will not be granted unless there is an extraordinary reason.
+
+Continuances of discovery deadlines without the Court’s consent shall be permitted as long as 1) all the parties agree and 2) the extension does not interfere with the dispositive motion date and the Trial date.
+
+Motions for continuances of a set trial date in civil cases must be made in writing even if both parties agree.  The matter may be set for a status conference or hearing by contacting the Staff Attorney.
+
+**Discovery Civil Cases**
+
+Discovery is set out in the case management order. Discovery disputes should not linger.  Attorneys are to make all reasonable efforts to settle discovery disputes amongst the parties. Prior to any party filing any Discovery Motion, the parties shall contact Judge Wagner’s Staff Attorney to set an Attorney Conference either via telephone, video, or in-person with the Court as soon as possible.
+
+**Remote Appearance**
+
+The court permits the use Telephone or Video Conference but this courtesy is at the Court&#39;s discretion.  This courtesy will be revoked for any number of reasons most especially for lack of preparedness.
+
+**Motion Practice**
+
+To set a hearing on a civil case, contact the Staff Attorney. To set a hearing on a criminal case, contact the Bailiff. A file stamped courtesy copy of the motion should be provided in advance to the court. Typically, we handle criminal motions in the morning and civil motions in the afternoon.
+
+There is a page limit on motion briefs of 20 pages, 60 pages total with exhibits.  Attorneys may ask for leave of court for additional pages.  Motions with more than 3 exhibits should provide a tabbed binder as a courtesy copy to the Court.  Failure to follow these directives without leave of court can result in the Court striking the motion.
+
+**Settlement**
+
+Regarding both criminal and civil matters, attorneys are encouraged to reach resolutions on their own. However, if that fails, the parties are encouraged to contact the Court, which will assist in settlement discussions in civil cases.
+
+**Pretrials**
+
+[Judge Wagner Criminal Cases Trial Checklist](https://hamiltoncountycourts.org/wp-content/uploads/2023/05/Judge-Wagner-Criminal-Cases-Trial-Checklist.pdf)
+
+[Judge Wagner Civil Cases Trial Checklist](https://hamiltoncountycourts.org/wp-content/uploads/2023/05/Judge-Wagner-Civil-Cases-Trial-Checklist.pdf)
+
+The Court will attempt to handle all Criminal and Civil Pretrials preferably in person. A Pretrial may be set by zoom at the request of the parties, particularly if an attorney practices out of town.  All attorneys should be prepared to discuss deadlines, motions, and settlement to help facilitate the resolution of the case as well as readiness for trial.  Clients or individuals with full settlement authority may be required to be either present at the final Pretrial or available by phone or video, you may contact the court’s staff for clarification for individual cases. Attorneys for all parties shall converse prior to the Pretrial regarding the case status.
+
+**Trials**
+
+- The court does not schedule trials for the purpose of satisfying curiosity as to whether witnesses will appear.
+- Motions in Limine, in accordance with Civ.R. 6, shall be filed at least 28 days before Trial.  Any Brief in Opposition is due 14 days thereafter.  No Reply shall be permitted.
+- Notice of Self Defense and Notice of Alibi must be filed 30 days in advance of trial.  The notices must contain specificity.  Crim. R. 12.1 and 12.2.
+- The Court additionally orders that at least 2 business days prior to Trial, the parties are to file the following: 1) Witness Lists, 2) Exhibit Lists, 3) Joint Jury Instructions, Jury Interrogatories, and /or Jury Verdict Forms if applicable, and 4) Stipulations.
+- All exhibits need to be marked in advance and a list submitted to both the Court and the court reporter (civil exhibits should be in the format of a tabbed binder see below). The witness list needs to be provided to both the Court and the court reporter before trial.
+- Transcripts of audio and video exhibits are highly encouraged.  A bench book of exhibits is extremely helpful.  Please prove the Court and the court reporter a bench book and transcripts before trial.  In displaying technical exhibits please contact court staff for an opportunity to practice with the courtroom audio and digital equipment before the trial date.
+- The court will only examine evidence or testimony at trial or as evidence in a Motion for Summary Judgement.
+- With respect to civil Jury Instructions, Jury Interrogatories, and Jury Verdict Forms, the Parties are to provide the Court with one consolidated set of Instructions/Interrogatories/Verdict Forms that includes all those to which the Parties agree and that identifies all those to which the Parties disagree.  A courtesy copy in a Word format should be emailed to the Staff Attorney. Any special criminal instructions or requested civil instructions should be emailed to the Staff Attorney in advance of trial.
+- _Voir dire_ will be of the panel in the box with individual jurors questioned as they get moved into the box. Jurors may take notes but may not ask questions.  Please refrain from asking similar questions as the Court.
+- No speaking objections in jury trials.  Please wait for instruction from the Court.
+
+**Sentencing**
+
+There is no greater exercise of judicial power than sentencing.  Attorneys must be prepared to argue the law, facts, and mitigation.  The court only accepts recommended sentences.  Sentencing Memorandums are highly encouraged and should be filed with the Court no later than 3 days before the sentencing hearing.  A file-stamped courtesy copy should be provided to the court.</div>
+            </details>
+        </details>
+        <details id="judge-robert-c-winkler" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Robert C. Winkler</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 530</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2015/12/honorable-robert-c-winkler-sm.jpg" alt="Hon. Robert C. Winkler" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 530</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> To set a hearing on a civil case, contact the Staff Attorney. To set a hearing on a criminal case, contact the Bailiff. A file stamped courtesy copy of the motion should be provided in advance to the court via US Mail, Email, or drop off Typically, we handle criminal motions in the morning and civil motions in the afternoon.</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5112</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">Courtroom Procedures</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">**Courtroom Etiquette**
+
+Attorneys are to be prompt, courteous, and respectful at all times. This courtesy extends to all litigants, witnesses, jurors, and court staff.
+
+Attorneys should stand when addressing the Court, questioning witnesses, and when objecting. If a case is in progress, attorneys should quietly wait for the Bailiff or Staff Attorney to approach.  You may be asked to step into the hall to discuss your matter.
+
+The civil docket is tightly timed, therefore phone calls, Zoom calls, and in person appearances should be conducted at the time set by the Court.  If a party is going to be late or the court appearance needs to be rescheduled, attorneys should contact the Staff Attorney in advance.
+
+Attorneys should be prepared for trial on the day that the trial is set. If an attorney is going to be late, please notify the court’s staff in advance.
+
+**Initial Case Management Conference Civil Cases**
+
+The Assignment Commissioner sets the initial case management conference when the case is filed.  Those appearances are by phone unless you were contacted by the Staff Attorney to appear in person.  Parties should file a Civ. R 26(F) discovery plan before that conference, if possible, (see below).  This Court does not require a set form for a Civ. R. 26(F) filing. Contact the Staff Attorney in advance if you need to reschedule the initial case management conference.
+
+**Calendaring and Continuances**
+
+The court sets its own calendar.  Continuances past the Ohio Supreme Court deadline will not be granted unless there is an extraordinary reason.
+
+Continuances of discovery deadlines without the Court’s consent shall be permitted as long as 1) all the parties agree and 2) the extension does not interfere with the dispositive motion date and the Trial date.
+
+Motions for continuances of a set trial date in civil cases must be made in writing even if both parties agree.  The matter may be set for a status conference or hearing by contacting the Staff Attorney.
+
+**Discovery Civil Cases**
+
+Discovery is set by the case management order.  Attorneys are to make all reasonable efforts to settle discovery disputes among the parties. Prior to any party filing any Discovery Motion, the parties shall contact Judge Wagner’s Staff Attorney to set an Attorney Conference either via telephone, video, or in-person with the Court as soon as possible.
+
+**Remote Appearance**
+
+The court permits the use of Telephone Conferences, but this courtesy is at the Court&#39;s discretion and may require an appearance of counsel as determined by the Court.
+
+**Motion Practice**
+
+To set a hearing on a civil case, contact the Staff Attorney. To set a hearing on a criminal case, contact the Bailiff. A file stamped courtesy copy of the motion should be provided in advance to the court via US Mail, Email, or drop off Typically, we handle criminal motions in the morning and civil motions in the afternoon.
+
+There is a page limit on motion briefs of 20 pages, 60 pages total with exhibits.  Attorneys may ask for leave of court for additional pages.  Motions with more than 3 exhibits should provide a tabbed binder as a courtesy copy to the Court.  Failure to follow these directives without leave of court can result in the Court striking the motion.
+
+**Settlement**
+
+Attorneys are encouraged to reach case resolution on their own. The Court will assist in settlement discussions in civil cases if requested.
+
+**Pretrials**
+
+[Judge Winkler Criminal Cases Trial Checklist](https://hamiltoncountycourts.org/wp-content/uploads/2023/05/Judge-Wagner-Criminal-Cases-Trial-Checklist.pdf)
+
+[Judge Winkler Civil Cases Trial Checklist](https://hamiltoncountycourts.org/wp-content/uploads/2023/05/Judge-Wagner-Civil-Cases-Trial-Checklist.pdf)
+
+The Court will attempt to handle all Criminal and Civil Pretrials preferably in person. A Pretrial may be set by zoom at the request of the parties, particularly if an attorney practices out of town.  All attorneys should be prepared to discuss deadlines, motions, and settlement to help facilitate the resolution of the case as well as readiness for trial.  Clients or individuals with full settlement authority may be required to be either present at the final Pretrial or available by phone or video, you may contact the court’s staff for clarification for individual cases. Attorneys for all parties shall converse prior to the Pretrial regarding the case status.
+
+**Trials**
+
+- The court does not schedule trials for the purpose of satisfying curiosity as to whether witnesses will appear.
+- Motions in Limine, in accordance with Civ.R. 6, shall be filed at least 28 days before Trial.  Any Brief in Opposition is due 14 days thereafter.  No Reply shall be permitted.
+- Notice of Self Defense and Notice of Alibi must be filed 30 days in advance of trial.  The notices must contain specificity.  Crim. R. 12.1 and 12.2.
+- The Court additionally orders that at least 2 business days prior to Trial, the parties are to file the following: 1) Witness Lists, 2) Exhibit Lists, 3) Joint Jury Instructions, Jury Interrogatories, and /or Jury Verdict Forms if applicable, and 4) Stipulations.
+- All exhibits need to be marked in advance and a list submitted to both the Court and the court reporter (civil exhibits should be in the format of a tabbed binder see below). The witness list needs to be provided to both the Court and the court reporter before trial.
+- Transcripts of audio and video exhibits are highly encouraged.  A bench book of exhibits is extremely helpful.  Please provide the Court and the court reporter a bench book and transcripts before trial.  In displaying technical exhibits please contact court staff for an opportunity to practice with the courtroom audio and digital equipment before the trial date.
+- The court will only examine evidence or testimony at trial or as evidence in a Motion for Summary Judgement.
+- With respect to civil Jury Instructions, Jury Interrogatories, and Jury Verdict Forms, the Parties are to provide the Court with one consolidated set of Instructions/Interrogatories/Verdict Forms that includes all those to which the Parties agree and that identifies all those to which the Parties disagree.  A courtesy copy in a Word format should be emailed to the Staff Attorney. Any special criminal instructions or requested civil instructions should be emailed to the Staff Attorney in advance of trial.
+- _Voir dire_ will be of the panel in the jury box with individual jurors questioned as they progress into the jury box. Jurors may take notes but may not ask questions.  Please refrain from asking similar questions as the Court.
+- No speaking objections in jury trials.  Please wait for instruction from the Court.</div>
+            </details>
+        </details>
+    </div>
+  </div>
+  <div class="k">Chief Magistrates</div>
+  <div class="v">Anita P. Berding and Thomas O. Beridon (Local Rule 23). Room 424, Hamilton County Courthouse. Magistrates: Christopher Liu, Stacey Piepmeier.</div>
+  <div class="k">Magistrate referrals</div>
+  <div class="v">Foreclosure, administrative appeals, civil forfeiture, certificates for qualification of employment, and car-title requests are heard by magistrates by General Order of Reference.</div>
+  <div class="k">Mediation &amp; ADR</div>
+  <div class="v">John J. Cruze, Director. Room 450. <a href="tel:+15139465470">513-946-5470</a>. Cases referred by the court; parties may also request mediation.</div>
+  <div class="k">Local Rules</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/local-rules/" target="_blank" rel="noopener">hamiltoncountycourts.org/local-rules &rarr;</a></div>
+</div>
+
+<h2 class="sect-h">Mission &amp; Pledge of Fairness</h2>
+<p class="page-lede">
+  Mirrored verbatim from <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas</a>. The Judges have published this commitment to the public:
+</p>
+<blockquote class="banner" style="border-left-color: var(--ink); margin: 0 0 18px;">
+  <p style="margin: 0 0 8px;"><strong>Mission.</strong> As an equal and independent branch of government, the Judges of the Hamilton County Court of Common Pleas, acting with integrity, shall provide a safe, accessible, transparent, efficient, and impartial system of justice by fairly resolving disputes, respecting the public interest, and preserving individual rights while maintaining the rule of law.</p>
+  <p style="margin: 0 0 8px;"><strong>Pledge of Fairness.</strong> The fundamental mission of the Hamilton County Court of Common Pleas is to provide a fair and impartial forum for the resolution of disputes according to the rule of law. The Judges and staff therefore make this pledge to each litigant, defendant, victim, witness, juror, and person involved in a court proceeding:</p>
+  <p style="margin: 0;"><em>Fairness includes the opportunity to be heard, the chance to have the court process explained, and the right to be treated with respect.</em></p>
+</blockquote>
+
+<h2 id="municipal" class="sect-h">Hamilton County Municipal Court</h2>
+<p>
+  Handles misdemeanor criminal cases, traffic offenses, and civil cases in which the amount in controversy is less than $15,000, including small claims and landlord-tenant matters. Also conducts preliminary hearings for felony cases before they transfer to Common Pleas, and oversees probation for misdemeanor offenders. The court operates several specialty divisions (housing, environmental, drug court, mental health court) and a Driver's License Intervention Program.
+</p>
+<div class="fields">
+  <div class="k">Presiding &amp; Administrative Judge</div>
+  <div class="v">Hon. William Mallory. Elected by the permanent judges in November of each even-numbered year for a two-year term beginning January 1 (Municipal Local Rule 1).</div>
+  <div class="k">Municipal Court Administrator</div>
+  <div class="v">Andrew Gillen. 1000 Main Street, Room 205. <a href="tel:+15139465200">513-946-5200</a>. Fax: 513-946-5223.</div>
+  <div class="k">Judges</div>
+  <div class="v">
+    <div class="judge-directory" style="display: grid; gap: 8px; margin-top: 4px;">
+        <details id="judge-gwen-bender" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Gwen Bender</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 174</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2025/03/honorable-gwen-bender-1.jpg" alt="Hon. Gwen Bender" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 174</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Scott Schiller, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5143</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Bender</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge Bender was appointed to the bench in February, 2017. Prior to taking the bench, Judge Bender served as a Chief Assistant Prosecutor at the Hamilton County Prosecutor’s Office, overseeing the Municipal Division.  Over the course of her 23 years at the Hamilton County Prosecutor’s Office, Bender successfully prosecuted cases at the appellate, felony and municipal levels.
+
+Judge Bender is actively involved in the community, having served on the Elderly Services Advisory Board, the Cincinnati Bar Association Grievance Committee, Mock Trial, and St. Xavier High School’s Athletic Board.  She often speaks to parent and student groups on a variety of topics including responsible social media use, criminal law and the court system.
+
+Judge Bender is a lifelong resident of the west side of Cincinnati, having attended C.O. Harrison and J.F. Dulles Elementary Schools and Delhi Junior High.  She is a proud graduate of Seton High School (1984), St. Mary’s College (Notre Dame, Indiana) and University of Cincinnati College of Law.
+
+Judge Bender represents District 7, which includes the communities of Addyston, Cleves, Crosby Township, Delhi Township, Harrison, Miami Township, North Bend, Price Hill, Sayler Park and Whitewater Township.</div>
+            </details>
+        </details>
+        <details id="judge-bernie-bouchard" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Bernie Bouchard</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 160</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2022/10/bouchard_new1.jpg" alt="Hon. Bernie Bouchard" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 160</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Andy Poli, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5175</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Bouchard</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge Bernie Bouchard is a lifelong resident of Cincinnati. His parents, doctors who practiced in Western Hills for over 30 years, instilled in him the values of hard work, education, and high moral standards. Judge Bouchard was appointed to the Hamilton County Municipal Court in 2006. He represents District 6 which includes Colerain Township, Green Township, Cheviot, and Springdale Township. Through his experience as a lawyer and magistrate, Bouchard possesses the legal knowledge and integrity to ensure that each citizen is treated fairly and with respect.
+
+Prior to becoming a judge, Bouchard was an Assistant Hamilton County Prosecuting Attorney for more than 5 years. He successfully prosecuted hundreds of felony and misdemeanor cases and tried over 25 jury trials. As the Director of the Sexual Predator Unit, Bouchard was the first to successfully prosecute sexual offenders with use of the &#39;1000 Foot Rule&#39; in the State of Ohio, which removes sexual offenders from school zones. He fought for sexual abuse victims left behind by the statute of limitations by drafting the first civil registry complaint in the State of Ohio.
+
+Judge Bouchard also served as a Hamilton County Juvenile Court Magistrate for 5 years, where he diligently presided over hundreds of felony and misdemeanor juvenile cases. He determined adult paternity and child support matters and adjudicated custody disputes.
+
+Judge Bouchard graduated from Saint Xavier High School, Xavier University, and Ohio Northern University College of Law.
+
+Judge Bouchard is actively involved in his community. He volunteered as a Green Township Magistrate from 2000-2005, he speaks at local schools about sexual offender issues, is a referee for grade school and high school football games, and a member of St. Ignatius Parish. He and his family reside in Green Township.</div>
+            </details>
+        </details>
+        <details id="judge-janaya-trotter-bratton" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Janaya Trotter Bratton</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 124</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2022/05/honorable-janaya-trotter-bratton-sm.jpg" alt="Hon. Janaya Trotter Bratton" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 124</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Shawnise Lewis, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5256</div>            </div>
+          </div>
+        </details>
+        <details id="judge-danielle-colliver" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Danielle Colliver</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 144</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2026/01/honorable-danielle-colliver-sm.jpg" alt="Hon. Danielle Colliver" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 144</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Tom Sauer, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5149</div>            </div>
+          </div>
+        </details>
+        <details id="judge-jackie-ginocchio" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Jackie Ginocchio</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 140</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2017/07/Ginnochio-1.bmp" alt="Hon. Jackie Ginocchio" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 140</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Brian Greene, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5148</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Ginocchio</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Jackie Ginocchio serves as Judge on Hamilton County Municipal Court, representing the 7th District. Jackie presides over misdemeanor criminal matters and civil matters involving disputes of $15,000 or less.
+
+Prior to becoming a judge Jackie was a Hamilton County assistant prosecuting attorney. As a prosecutor, Jackie tried hundreds of cases in both municipal court and common pleas court. Jackie prosecuted some of the offices most serious cases, including capital cases, sex crimes and murders.
+
+Jackie is a lifelong Cincinnati resident. Jackie attended Indiana University for undergrad and Ohio Northern University for law school.</div>
+            </details>
+        </details>
+        <details id="judge-brad-greenberg" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Brad Greenberg</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 164</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2015/12/honorable-brad-greenberg-sm.jpg" alt="Hon. Brad Greenberg" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 164</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Julie McCoy, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5215</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Greenberg</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge Brad Greenberg has served in Municipal Court since 2006. Greenberg also presides over Hamilton County&#39;s Municipal Veterans Court. Veterans Treatment Court is a judge-supervised treatment program whose goal is to help United States Veterans address the issues that led to contact with the criminal justice system.
+
+Judge Greenberg represents District 5 which includes Sycamore Township, Symmes Township, Loveland, Blue Ash, Montgomery, Sharonville, Madeira, Indian Hill, Reading, Deer Park, Springdale, Glendale, Evendale and Terrace Park.
+
+Prior to becoming a Judge, Greenberg spent 12 years as an assistant Hamilton County prosecutor.  He prosecuted over 1000 felony cases and tried over 75 jury trials including numerous homicide cases.  In 2004, Greenberg was named Chief of the Grand Jury Division.  He was also the Chief Prosecutor for Child Pornography, a member of the Riot Prosecution Task Force and an instructor at the Cincinnati Police Academy.
+
+In 2005, Greenberg left the Prosecutor’s Office to become the Administrator of the Hamilton County Clerk of Courts where he managed a staff of 320 employees.  Greenberg was also the Prosecutor for the City of Madeira for eight years.
+
+Judge Greenberg is a Hamilton County native. He graduated from Wyoming High School, The Ohio State University and the University of Virginia School of Law.
+
+Greenberg served on Loveland City Council for nine years including two years as Mayor and two years as Vice-Mayor. He and his family live in Symmes Township.</div>
+            </details>
+        </details>
+        <details id="judge-rodney-j-harris" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Rodney J. Harris</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 264</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2026/01/honorable-rodney-harris-sm-1.jpg" alt="Hon. Rodney J. Harris" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 264</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Tara Brown, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5154</div>            </div>
+          </div>
+        </details>
+        <details id="judge-donte-johnson" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Donte Johnson</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 270</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2025/03/honorable-donte-johnson-sm.jpg" alt="Hon. Donte Johnson" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 270</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Amber Worthen, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5165</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Johnson</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge Donte Johnson was elected to the Hamilton County Municipal Court bench on November 2, 2021. Prior to taking office, he served as a sole practitioner focusing on criminal defense, plaintiff&#39;s litigation and probate law. Before joining the private bar, he served as a Public Defender and Housing Attorney.
+
+Judge Johnson is a native of Cincinnati. He&#39;s a Cincinnati Public Schools graduate from Clark Montessori High School, a Howard University graduate, and a graduate of the University of Cincinnati, College of Law.
+
+He is very active in the community and serves as a motivational speaker and mentor to students and young attorneys. He’s a member of the American Judges Association, Ohio Black Judges Association, National Bar Association, Ohio Bar Association, Cincinnati Bar Association, Black Lawyers Association of Cincinnati, Cincinnati NAACP, and the League of United Latin American Citizens.</div>
+            </details>
+        </details>
+        <details id="judge-dwane-mallory" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Dwane Mallory</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 134</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2016/02/dwayne-mallory-sm1.jpg" alt="Hon. Dwane Mallory" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 134</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> J&#39;onae Wright, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5122</div>            </div>
+          </div>
+        </details>
+        <details id="judge-william-mallory" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. William Mallory</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 240</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2016/06/jwm-sm.jpg" alt="Hon. William Mallory" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 240</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Raymond Phoenix, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5160</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Mallory</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge William Mallory graduated valedictorian from Taft High School of Cincinnnati in 1976. He graduated from the University of Cincinnati with a degree in Political Science in 1981. He earned his Juris Doctorate degree from Salmon P. Chase College of Law in 1986.
+
+After graduation from law school, he began his legal career as an Assistant Attorney General for the State of Ohio. Judge Mallory later became an Assistant Prosecuting Attorney for the City of Cincinnati. In 1989, William left public service and went into private law practice with the labor law firm of Kircher and Phalen. William worked in the areas of criminal law, personal injury, probate, business law, liquor law, administrative law, juvenile, and family law.
+
+In 1993, William was elected Judge on the Hamilton County Municipal Court. He served until 2006. Judge Mallory also served on the Board of trustees of the Association of the Municipal/County Judges of Ohio. He also served as president of the Chase Law School Alumni Association.
+
+William Mallory was elected to the Hamilton County Court of Common Pleas in 2006. He served there until he was appointed as the first African-American judge on the Hamilton County First District Court of Appeals of Ohio. Judge Mallory was elected to the Hamilton county Municipal Court in 2011.
+
+He currently serves on the Board of Directors of the Dan Beard Council of the Boy Scouts of America. William has served as a judge of the Jack Grosse Moot Court competition at Chase Law School 2011, 2012 and 2013. He also served on the panel for the selection of the Harry S. Truman Foundation 2011, 2012 and 2013 Award recipients for Ohio, Kentucky, and Indiana. He is a member of the American Judges Association and the Association of County/municipal Judges of Ohio.</div>
+            </details>
+        </details>
+        <details id="judge-r-bernard-mundy" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. R. Bernard Mundy</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 220</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2026/01/honorable-r-bernard-mundy-sm.jpg" alt="Hon. R. Bernard Mundy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 220</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> LaTia Kemp, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5127</div>            </div>
+          </div>
+        </details>
+        <details id="judge-michael-peck" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Michael Peck</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 230</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2021/11/honorable-mike-peck-sm.jpg" alt="Hon. Michael Peck" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 230</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Jeff Baker, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5108</div>            </div>
+          </div>
+        </details>
+        <details id="judge-samantha-silverstein" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Samantha Silverstein</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 280</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads//2023/11/honorable-samantha-silverstein.jpg" alt="Hon. Samantha Silverstein" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 280</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> Ashley Harp, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5138</div>            </div>
+          </div>
+            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge Silverstein</summary>
+              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">Judge Silverstein was elected to the Hamilton County Municipal Court bench on November 7, 2023.  Judge Silverstein graduated from DePaul College of Law in 2013. During law school she clerked at the Cook County Public Defender&#39;s Office and was a student in the Center for Justice In Capital Cases. After graduation, she joined the public defender&#39;s office in West Palm Beach, Florida. In West Palm, she worked in the misdemeanor, juvenile, and felony divisions. She tried over 40 jury trials. In 2017, Judge Silverstein moved to Cincinnati to be closer to family. Before joining the public defender&#39;s office, she worked at Legal Aid for Southwest Ohio in the Child Law, Family Law, and Housing Law practice divisions. Before attending law school, Judge Silverstein was a journalism and political science student at Indiana University Bloomington.
+
+Education:
+
+Juris Doctor, DePaul University College of Law, 2013. Bachelor of Arts, Indiana University Bloomington, 2010.
+
+Bar Admissions:
+
+2019 Ohio, 2013 Florida</div>
+            </details>
+        </details>
+        <details id="judge-athena-stefanou" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
+          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+            <span>Hon. Athena Stefanou</span>
+            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">Room 154</span>
+          </summary>
+          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
+                <img src="https://hamiltoncountycourts.org/wp-content/uploads/2026/01/honorable-athena-stefanou-sm.jpg" alt="Hon. Athena Stefanou" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            <div style="flex: 1; min-width: 200px; font-size: 13px;">
+<div style="margin-bottom: 4px;"><strong>Location:</strong> Room 154</div><div style="margin-bottom: 4px;"><strong>Bailiff:</strong> John Wallace, Bailiff</div><div style="margin-bottom: 4px;"><strong>Phone:</strong> Phone Number: 513-946-5133</div>            </div>
+          </div>
+        </details>
+    </div>
+  </div>
+  <div class="k">Address</div>
+  <div class="v">Hamilton County Courthouse, 1000 Main Street, Room 205, Cincinnati, Ohio 45202</div>
+  <div class="k">Main phone</div>
+  <div class="v"><a href="tel:+15139465200">513-946-5200</a></div>
+  <div class="k">Web</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/municipal/" target="_blank" rel="noopener">hamiltoncountycourts.org/municipal &rarr;</a></div>
+  <div class="k">Civil Clerk</div>
+  <div class="v">1000 Main Street, Room 115. Hours: 8 AM-4 PM, Monday-Friday. Small claims, landlord-tenant, civil under $15,000. <a href="tel:+15139465700">513-946-5700</a>.</div>
+  <div class="k">Criminal &amp; Traffic Clerk</div>
+  <div class="v">Justice Center, 1000 Sycamore Street, Room 115. Hours: 8 AM-8 PM, Monday-Friday. Bond Window / Police Attorney Counter open 24/7. <a href="tel:+15139466040">513-946-6040</a>.</div>
+  <div class="k">Local Rules</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/" target="_blank" rel="noopener">hamiltoncountycourts.org/municipal-local-rules &rarr;</a></div>
+</div>
+
+<h2 class="sect-h">Court of Common Pleas, Domestic Relations Division</h2>
+<p>
+  Handles divorce, dissolution of marriage, legal separation, annulment, custody between parents, spousal support, and parental rights. Distinct from Juvenile Court (custody between a parent and a non-parent goes to Juvenile). Cases are assigned by lot to a judge at filing and stay with that judge.
+</p>
+<div class="fields">
+  <div class="k">Court address</div>
+  <div class="v">800 Broadway Street, Cincinnati, Ohio 45202</div>
+  <div class="k">Clerk's office</div>
+  <div class="v">800 Broadway Street, Room 347. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Statutory basis</div>
+  <div class="v"><a href="https://codes.ohio.gov/ohio-revised-code/section-2301.03" target="_blank" rel="noopener">ORC § 2301.03</a> - assignment, jurisdiction, and administrative authority over divorce, dissolution, legal separation, and annulment cases.</div>
+  <div class="k">Docket office</div>
+  <div class="v">Room 3-46. All motions must first be set for hearing here before filing with the Clerk of Courts.</div>
+</div>
+
+<h2 id="probate" class="sect-h">Hamilton County Probate Court (Common Pleas, Probate Division)</h2>
+<p>
+  Mirrored from <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>. Provides over 80 unique services. The most common: administering estates from generation to generation, providing guardianship for residents who cannot care for themselves, growing families through marriage and adoptions, and presiding over mental-health civil-commitment cases.
+</p>
+<div class="fields">
+  <div class="k">Presiding judge</div>
+  <div class="v">Hon. Ralph Winkler. Presided over more than 150,000 cases since 1999. 2015 Golden Gavel Award (Ohio Common Pleas Judges Association); 2008 Trial Judge of the Year (Hamilton County Trial Lawyers Association).</div>
+  <div class="k">Address</div>
+  <div class="v">William Howard Taft Center, 230 East Ninth Street, 9th &amp; 10th Floors, Cincinnati, Ohio 45202</div>
+  <div class="k">Main phone</div>
+  <div class="v"><a href="tel:+15139463570">513-946-3570</a></div>
+  <div class="k">Marriage licenses</div>
+  <div class="v"><a href="tel:+15139463590">513-946-3590</a> &middot; <a href="https://www.probatect.org/marriagelicenses/" target="_blank" rel="noopener">probatect.org/marriagelicenses &rarr;</a></div>
+  <div class="k">Cashier</div>
+  <div class="v">9th floor of the William Howard Taft Law Center. Hours: 8 AM-3:45 PM, Monday-Friday. <a href="tel:+15139463604">513-946-3604</a>.</div>
+  <div class="k">Free attorneys can't appear</div>
+  <div class="v">None of the Court's attorneys or personnel may give legal advice. For low-income filers, the Legal Aid Society's Volunteer Lawyers Project handles probate matters at reduced or no cost (<a href="tel:+15132419400">513-241-9400</a>).</div>
+  <div class="k">Interpreters</div>
+  <div class="v">Provided free of charge to facilitate participation in Court proceedings or services.</div>
+</div>
+
+<h2 id="juvenile" class="sect-h">Hamilton County Juvenile Court (Common Pleas, Juvenile Division)</h2>
+<p>
+  Handles cases involving people under 18 (delinquency), plus custody disputes between parents or with a non-parent. The Clerk of Courts Help Center has a satellite office for custody issues inside Juvenile Court, on the first floor.
+</p>
+<div class="fields">
+  <div class="k">Presiding judge</div>
+  <div class="v">Hon. Melissa Powers (elected January 1, 2017; previously Hamilton County Municipal Court judge 2006-2016 and Presiding Judge 2012-2014). Established the first Hamilton County Veterans Treatment Court.</div>
+  <div class="k">Address</div>
+  <div class="v">800 Broadway, 14th Floor, Cincinnati, Ohio 45202-1332</div>
+  <div class="k">Main phone</div>
+  <div class="v"><a href="tel:+15139469209">513-946-9209</a> &middot; Fax: 513-946-9216</div>
+  <div class="k">Help Center satellite (custody)</div>
+  <div class="v">1st floor of Juvenile Court. <a href="tel:+15139469442">513-946-9442</a>.</div>
+</div>
+
+<h2 class="sect-h">First District Court of Appeals</h2>
+<p>
+  The intermediate appellate court for Hamilton County. Hamilton County is the only county within the First District; the surrounding counties (Brown, Butler, Clermont, Clinton, Fayette, Madison, Preble, Warren) are in the Twelfth District. Reviews appeals from Common Pleas (all divisions) and Municipal Court. Three-judge panels hear each case; decisions from the panel can be appealed to the Ohio Supreme Court.
+</p>
+<div class="fields">
+  <div class="k">Address</div>
+  <div class="v">William Howard Taft Law Center, 12th Floor, Cincinnati, Ohio 45202</div>
+  <div class="k">Opinion release</div>
+  <div class="v">Wednesdays and Fridays.</div>
+  <div class="k">Web</div>
+  <div class="v"><a href="https://firstdistrictcoa.org" target="_blank" rel="noopener">firstdistrictcoa.org &rarr;</a></div>
+  <div class="k">Constitutional basis</div>
+  <div class="v">Established by Article IV, Section 1 of the Ohio Constitution; jurisdiction outlined in Article IV, Section 3.</div>
+  <div class="k">Original jurisdiction</div>
+  <div class="v">In addition to hearing appeals, the court has original jurisdiction over writs of habeas corpus, mandamus, procedendo, prohibition, and quo warranto.</div>
+</div>
+
+<h2 class="sect-h">Mayor's Courts in Hamilton County</h2>
+<p>
+  Ohio is one of only two states (the other is Louisiana) that allows the mayors of municipal corporations to preside over a court. In Hamilton County municipalities populated by more than 100 people with no municipal court of their own, Mayor's Courts hear cases involving local ordinance violations and state traffic laws. A mayor is not required to be a lawyer; they may appoint an attorney with at least three years of practice to preside. A person convicted in Mayor's Court may appeal to the Hamilton County Municipal Court.
+</p>
+<div class="fields">
+  <div class="k">Hamilton County Mayor's Courts</div>
+  <div class="v">Amberley Village &middot; Blue Ash &middot; Cheviot &middot; Cleves &middot; Forest Park &middot; Golf Manor &middot; Indian Hill &middot; Lockland &middot; Madeira &middot; Montgomery &middot; North College Hill &middot; Reading &middot; Sharonville &middot; St. Bernard &middot; Terrace Park &middot; Woodlawn &middot; Wyoming</div>
+  <div class="k">Jurisdiction</div>
+  <div class="v">Local ordinance violations and state traffic offenses only. No civil cases. No felonies.</div>
+  <div class="k">Appeals</div>
+  <div class="v">Convictions in Mayor's Court can be appealed to the Hamilton County Municipal Court.</div>
+</div>
+
+<h2 class="sect-h">Specialized Dockets (Common Pleas)</h2>
+<p>
+  Common Pleas operates three specialized dockets for felony-level offenders who meet clinical and legal eligibility criteria. Participation is voluntary and court-supervised.
+</p>
+<div class="fields">
+  <div class="k">Drug Treatment &amp; Recovery Court</div>
+  <div class="v">Hon. Nicole L. Sanders, presiding. Room 500, Hamilton County Courthouse. Felony 4 and 5 level offenses. First drug court established in Ohio and the only full-time drug court in the state. Bailiff: Doris Vincent, <a href="tel:+15139465770">513-946-5770</a>. Director: Keshia Jones, <a href="tel:+15139465773">513-946-5773</a>.</div>
+  <div class="k">Felony Veterans' Treatment Court</div>
+  <div class="v">Hon. Christopher A. Wagner, presiding. Room 330, Hamilton County Courthouse. Court-supervised treatment for veterans whose service-connected issues led to criminal justice contact. Five-phase program: orientation, treatment plan, ongoing treatment, stabilization, transition. Director: Gary Yuratovac, Esq., <a href="tel:+15136184215">513-618-4215</a>. Coordinator: Greg Street, <a href="tel:+15139463371">513-946-3371</a>.</div>
+  <div class="k">Reentry Docket ("Welcome Home")</div>
+  <div class="v">Hon. Wende C. Cross, presiding. Room 380, Hamilton County Courthouse. Judicial release program for low-level, non-violent offenders transitioning from state prison. Operated in partnership with the Hamilton County Office of Reentry (Director: Trina Jackson, <a href="tel:+15139464304">513-946-4304</a>). Specialist: Sheryl Miles, <a href="tel:+15139465556">513-946-5556</a>.</div>
+</div>
+
+<h2 class="sect-h">Probation</h2>
+<div class="fields">
+  <div class="k">Common Pleas (felony)</div>
+  <div class="v">Find your probation officer: <a href="tel:+15139469844">513-946-9844</a>. <a href="https://hamiltoncountycourts.org/index.php/common-pleas-probation/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas-probation &rarr;</a></div>
+  <div class="k">Municipal (misdemeanor)</div>
+  <div class="v">Find your probation officer: <a href="tel:+15139469600">513-946-9600</a>. <a href="https://hamiltoncountycourts.org/index.php/Probation%20Municipal/" target="_blank" rel="noopener">hamiltoncountycourts.org/probation-municipal &rarr;</a></div>
+  <div class="k">Drug screening</div>
+  <div class="v"><a href="https://probation.hamiltoncountycourts.org/DrugScreen/" target="_blank" rel="noopener">probation.hamiltoncountycourts.org/DrugScreen &rarr;</a></div>
+  <div class="k">Online payments</div>
+  <div class="v"><a href="https://probation.hamiltoncountycourts.org/Payments/" target="_blank" rel="noopener">probation.hamiltoncountycourts.org/Payments &rarr;</a></div>
+  <div class="k">Adult Parole Authority (state)</div>
+  <div class="v">7710 Reading Road, Suite 210, Cincinnati, OH 45237. <a href="tel:+15138214804">513-821-4804</a>. (Parole/post-release control is state-administered, distinct from county probation.)</div>
+</div>
+
+<h2 class="sect-h">Appearing in Court</h2>
+<p>
+  Mirrored from <a href="https://hamiltoncountycourts.org/index.php/appearing/" target="_blank" rel="noopener">hamiltoncountycourts.org/appearing</a>.
+</p>
+<div class="fields">
+  <div class="k">Arrive early</div>
+  <div class="v">Plan to arrive at least 30 minutes before your scheduled court appearance. All persons entering the Courthouse and Justice Center must pass through a metal detector. Between 8:30 AM and 9:30 AM, expect longer lines.</div>
+  <div class="k">Courtrooms A &amp; B</div>
+  <div class="v">Located in the Justice Center (the jail), 1000 Sycamore Street, behind the Courthouse. Separate from the Courthouse at 1000 Main Street.</div>
+  <div class="k">Parking</div>
+  <div class="v">Expect to pay $5-$10 depending on location. <a href="https://hamiltoncountycourts.org/index.php/parking-and-map/" target="_blank" rel="noopener">Map and parking lots &rarr;</a></div>
+  <div class="k">Dress code</div>
+  <div class="v">Neat, clean, and appropriate. No tank tops, tube tops, shorts above the knees, hats, do-rags, or caps.</div>
+  <div class="k">Electronics</div>
+  <div class="v">Cell phones, pagers, cameras, and other electronic devices are prohibited without court permission. Violations are subject to contempt, seizure, or ejection.</div>
+  <div class="k">Prohibited items</div>
+  <div class="v">Pocket knives, scissors, mace, or any other weapon. Deputies will not issue claim tickets for confiscated items. Leave them in your car.</div>
+  <div class="k">Failure to appear</div>
+  <div class="v">In a criminal case, a bench warrant is typically issued for your arrest. In a civil case, you may lose by default. If you cannot appear, contact your attorney, the bailiff, or the Assignment Commissioner at <a href="tel:+15139466250">513-946-6250</a>.</div>
+  <div class="k">Find your hearing</div>
+  <div class="v">Assignment Commissioner: <a href="tel:+15139466250">513-946-6250</a> (Room 117, Justice Center or Room 255, Courthouse, 8 AM-4 PM). Clerk of Courts 24-hour line: <a href="tel:+15139466010">513-946-6010</a>. Kiosk terminals near courthouse elevators show the next 7 days of scheduled hearings.</div>
+</div>
+
+<h2 class="sect-h">How a Case Moves Through the System</h2>
+<p>
+  An adult felony arrest in Hamilton County typically follows this path. The path for a misdemeanor differs at step 2 onward (it stays in Municipal Court).
+</p>
+<ul class="rule-list">
+  <li>Arrest by HCSO, Cincinnati PD, or another local jurisdiction. Booking at the Justice Center, 1000 Sycamore Street.</li>
+  <li>Arraignment in Hamilton County Municipal Court (Room 205) within a short time after booking. The judge sets bond and reads the charges. For misdemeanors and traffic, the case stays in Municipal Court; for felonies, this is a preliminary hearing.</li>
+  <li>If a felony, the case is bound over to the Court of Common Pleas, General Division (Room 410) after a preliminary hearing in Municipal Court or after a grand jury indictment.</li>
+  <li>Case is assigned by lot to one Common Pleas judge under the Individual Assignment System (Local Rule 7). That judge handles every motion, hearing, plea, and trial in the case.</li>
+  <li>Within 90 days of filing (120 days for foreclosure cases), the assigned judge holds a Case Management Conference to schedule the rest of the case (Local Rule 15).</li>
+  <li>Resolution: plea, trial verdict, dismissal, or transfer to a specialty court (drug court, mental health court, Veterans Treatment Court).</li>
+  <li>Sentence: probation, fines, restitution, county jail (typically misdemeanor), state prison (felonies). For diversion or treatment court, supervised release with treatment conditions.</li>
+  <li>Appeal: from Common Pleas or Municipal Court, to the First District Court of Appeals (12th floor, William Howard Taft Law Center). From there, by leave, to the Ohio Supreme Court.</li>
+</ul>
+
+<h2 class="sect-h">Where the Clerk of Courts Offices Are</h2>
+<p>
+  Pavan Parikh is the elected Clerk of Courts (<a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>). The Clerk's office is the record-keeper for every court in Hamilton County. Below are the public counters where you can file, look up, or pick up documents in person. E-filing is available at <a href="https://efiling.hamiltoncountycourts.org" target="_blank" rel="noopener">efiling.hamiltoncountycourts.org</a>.
+</p>
+<div class="fields">
+  <div class="k">Common Pleas Civil &amp; Criminal</div>
+  <div class="v">1000 Main Street, Room 315, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Domestic Relations</div>
+  <div class="v">800 Broadway Street, Room 347, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Municipal Civil</div>
+  <div class="v">1000 Main Street, Room 115, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Municipal Criminal &amp; Traffic</div>
+  <div class="v">Justice Center, 1000 Sycamore Street, Room 115, Cincinnati. Hours: 8 AM-8 PM Mon-Fri. Bond Window / Police Attorney Counter 24/7.</div>
+  <div class="k">Auto Title (Downtown)</div>
+  <div class="v">1001 Main Street, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Auto Title (Hamilton Ave.)</div>
+  <div class="v">10964 Hamilton Avenue, Cincinnati. Hours: 8 AM-4:30 PM Mon-Fri, 8 AM-12:30 PM Saturday.</div>
+  <div class="k">Auto Title (Red Bank Rd.)</div>
+  <div class="v">3370 Red Bank Road, Cincinnati. Hours: 8 AM-4:30 PM, Monday-Friday.</div>
+  <div class="k">Auto Title (Evendale)</div>
+  <div class="v">10400 Reading Road, Suite 105, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Appellate Division</div>
+  <div class="v">230 East 9th Street, 12th Floor, Cincinnati. Hours: 8 AM-4 PM, Monday-Friday.</div>
+  <div class="k">Records search</div>
+  <div class="v"><a href="https://www.courtclerk.org/records-search/" target="_blank" rel="noopener">courtclerk.org/records-search &rarr;</a> Search by name, case number, court date, or attorney. <a href="https://www.courtclerk.org/records-search/case-schedules/" target="_blank" rel="noopener">Case schedules &rarr;</a></div>
+  <div class="k">Pay court costs / tickets</div>
+  <div class="v"><a href="https://www.courtclerk.org/payments/court_cost_search.php" target="_blank" rel="noopener">courtclerk.org/payments &rarr;</a></div>
+  <div class="k">Clerk contact</div>
+  <div class="v"><a href="mailto:webmaster@hamcoclerkoh.gov">webmaster@hamcoclerkoh.gov</a>. Administration: 1000 Main Street, Cincinnati 45202. Hours: 8 AM-4 PM, Monday-Friday.</div>
+</div>
+
+<h2 class="sect-h">The Operational View</h2>
+<p>
+  For who's actually scheduled in court today and the rest of this week, see the <a href="/court/">JCStream court calendar</a>. It aggregates next-court-date per inmate from the HCSO booking records, refreshed about every 30 minutes. For the official docket of record, including judge assignments and filings, search by name or case number at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+</p>
+
+<p class="note-paragraph">
+  This page is a public-records mirror, not legal advice. Phone numbers, addresses, and jurisdictional thresholds are verified from the Hamilton County Courts, Probate Court, and Clerk of Courts websites. If you find a contact that has changed, please <a href="https://github.com/AICincy/JCStream/issues">open an issue</a>. Authoritative sources of last resort: <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">hamiltoncountycourts.org</a>, <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org</a>, <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>.
+</p>
+
+    </div>
+  </main>
+  <footer class="site">
+    <span>Generated  - </span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+    <span class="footer-legal">Independent, non-governmental project - not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law, including the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC&nbsp;&sect;&nbsp;149.43</a>).</span>
+  </footer>
+  <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+
+  <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
+    <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <figure class="lightbox-figure">
+      <img id="lb-img" src="" alt="" decoding="async">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+  </div>
+
+  <div id="tier-tip" role="tooltip" hidden></div>
+
+  <script src="/static/main.js?v=209956109e" defer></script>
+</body>
+</html>

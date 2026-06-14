@@ -1,0 +1,7546 @@
+{
+  "_comment": "Common Ohio Revised Code criminal offenses. 'degree' is the default Ohio classification per the statute's most-applied subsection — actual degree depends on the subsection and aggravating factors. F1=Felony 1st (most serious), MM=Minor misdemeanor (least). Use as a best-guess severity label, not adjudication.",
+  "_source": "Ohio Revised Code, codes.ohio.gov (read manually; we do not scrape that site)",
+  "_degree_order": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "MM"
+  ],
+  "offenses": {
+    "0000.00": {
+      "title": "Booking hold (no ORC code on file)",
+      "degree": "MM"
+    },
+    "0001.00": {
+      "title": "Juvenile hold (no ORC code on file)",
+      "degree": "MM"
+    },
+    "0002.00": {
+      "title": "Booking hold (no ORC code on file)",
+      "degree": "MM"
+    },
+    "0003.00": {
+      "title": "Booking hold (no ORC code on file)",
+      "degree": "MM"
+    },
+    "00053.11": {
+      "title": "Board of health regulation - fowl, animals and vermin",
+      "degree": "MM"
+    },
+    "00053.15": {
+      "title": "Lead paint violation/failure to abate lead",
+      "degree": "MM"
+    },
+    "00053.19": {
+      "title": "Board of health viol",
+      "degree": "MM"
+    },
+    "00053.5": {
+      "title": "Board of health violation - toilets, plumbing, sewerage, drainage",
+      "degree": "MM"
+    },
+    "00053.7": {
+      "title": "Board of health regulation - waste disposal",
+      "degree": "MM"
+    },
+    "00053.9": {
+      "title": "Board of health regulation - housing",
+      "degree": "MM"
+    },
+    "1000.50002925.03": {
+      "title": "Traf in drug lsd exceed",
+      "degree": "MM"
+    },
+    "10002925.03": {
+      "title": "Traf in drug lsd",
+      "degree": "MM"
+    },
+    "1002925.03": {
+      "title": "Traff in drugs exceed",
+      "degree": "MM"
+    },
+    "1007.11": {
+      "title": "Air pollution control",
+      "degree": "MM"
+    },
+    "1007.31": {
+      "title": "Visible emissions from veh",
+      "degree": "MM"
+    },
+    "101547.25": {
+      "title": "Prohibiting operation without personal flotation device",
+      "degree": "MM"
+    },
+    "102.02": {
+      "title": "Financial disclosure",
+      "degree": "MM"
+    },
+    "102.03": {
+      "title": "Restirctions public employee",
+      "degree": "MM"
+    },
+    "1021.5": {
+      "title": "No license for junk facility",
+      "degree": "MM"
+    },
+    "102925.03": {
+      "title": "Traf in drug heroin 10 to",
+      "degree": "MM"
+    },
+    "10755.07.10": {
+      "title": "Weapons",
+      "degree": "MM"
+    },
+    "1101.51": {
+      "title": "Heat",
+      "degree": "MM"
+    },
+    "1101.61": {
+      "title": "Orders and notice of violations",
+      "degree": "MM"
+    },
+    "1101.71": {
+      "title": "Code not found in Ohio Revised Code (HCSO data artifact)",
+      "degree": "MM"
+    },
+    "1101.71.1": {
+      "title": "Failure to comply with orders",
+      "degree": "MM"
+    },
+    "1101.711": {
+      "title": "Failure to comply with orders",
+      "degree": "MM"
+    },
+    "1107.11": {
+      "title": "Excessive dust emission",
+      "degree": "MM"
+    },
+    "1117.45": {
+      "title": "General maintenance/repair",
+      "degree": "MM"
+    },
+    "1117.451": {
+      "title": "Premises conditions",
+      "degree": "MM"
+    },
+    "1125.14": {
+      "title": "Recommendation of conservator",
+      "degree": "MM"
+    },
+    "1129.02": {
+      "title": "Misapplication bank funds",
+      "degree": "MM"
+    },
+    "1129.03": {
+      "title": "Wrongful certificatn of checks",
+      "degree": "MM"
+    },
+    "1129.04": {
+      "title": "Recpt of deposits,insolv bank",
+      "degree": "MM"
+    },
+    "1129.05": {
+      "title": "False rep as bank employee",
+      "degree": "MM"
+    },
+    "1153.01": {
+      "title": "Unauth acts by association off",
+      "degree": "MM"
+    },
+    "1153.03": {
+      "title": "Declaration of excessive dividend",
+      "degree": "MM"
+    },
+    "11755.07.11": {
+      "title": "Use of alcoholic beverages",
+      "degree": "MM"
+    },
+    "1201.01": {
+      "title": "Fire prevention",
+      "degree": "MM"
+    },
+    "1201.09": {
+      "title": "Burning w-o permit",
+      "degree": "MM"
+    },
+    "1201.1": {
+      "title": "Cinti fire prevention code",
+      "degree": "MM"
+    },
+    "1201.21": {
+      "title": "Fire prev",
+      "degree": "MM"
+    },
+    "1201.47": {
+      "title": "Fire code violation - failure to comply with orders",
+      "degree": "MM"
+    },
+    "1201.9": {
+      "title": "Burning w-o permit",
+      "degree": "MM"
+    },
+    "1213.1": {
+      "title": "Display or discharge fireworks",
+      "degree": "MM"
+    },
+    "1213.3": {
+      "title": "Sell explode fireworks",
+      "degree": "MM"
+    },
+    "1213.5": {
+      "title": "No permit for fireworks",
+      "degree": "MM"
+    },
+    "1213.7": {
+      "title": "Sale and use of fireworks",
+      "degree": "MM"
+    },
+    "1219.21": {
+      "title": "Cause fire, neglect",
+      "degree": "MM"
+    },
+    "1219.43": {
+      "title": "Fire escapes",
+      "degree": "MM"
+    },
+    "1229.01": {
+      "title": "Smoking where prohibited",
+      "degree": "MM"
+    },
+    "1229.03": {
+      "title": "Open flame prohibited",
+      "degree": "MM"
+    },
+    "1229.05": {
+      "title": "Post-unapprovd no smoking sign",
+      "degree": "MM"
+    },
+    "1229.07": {
+      "title": "Disobey-remove no smoking sign",
+      "degree": "MM"
+    },
+    "1229.1": {
+      "title": "Smoking where prohibited",
+      "degree": "MM"
+    },
+    "1229.3": {
+      "title": "Open flame prohibited",
+      "degree": "MM"
+    },
+    "1229.5": {
+      "title": "Post-unapprovd no smoking sign",
+      "degree": "MM"
+    },
+    "1229.7": {
+      "title": "Disobey-remove no smoking sign",
+      "degree": "MM"
+    },
+    "1229.9": {
+      "title": "Fail to maintain private fire hydrant",
+      "degree": "MM"
+    },
+    "1235.15": {
+      "title": "Elevator recall system",
+      "degree": "MM"
+    },
+    "1235.17": {
+      "title": "Fail to install fire communication system",
+      "degree": "MM"
+    },
+    "1235.3": {
+      "title": "Smoke detector violation - owner",
+      "degree": "MM"
+    },
+    "1235.5": {
+      "title": "Smoke detector violation - tenant",
+      "degree": "MM"
+    },
+    "1251.4": {
+      "title": "Fire starting apparatus",
+      "degree": "MM"
+    },
+    "12755.07.13": {
+      "title": "Fireworks in park-r",
+      "degree": "MM"
+    },
+    "12907.07": {
+      "title": "Importuning",
+      "degree": "MM"
+    },
+    "12917.41": {
+      "title": "Misconduct involving public transportation system",
+      "degree": "MM"
+    },
+    "12919.12": {
+      "title": "Selling abortifacient m",
+      "degree": "MM"
+    },
+    "12921.13": {
+      "title": "Falsification",
+      "degree": "MM"
+    },
+    "1311.012": {
+      "title": "Contrctr obtain pmt thru fraud",
+      "degree": "MM"
+    },
+    "1311.12": {
+      "title": "Contractor obtain payment thru fraud",
+      "degree": "MM"
+    },
+    "1315.15": {
+      "title": "Money laundering",
+      "degree": "MM"
+    },
+    "1315.53": {
+      "title": "Money laundering",
+      "degree": "MM"
+    },
+    "1315.55": {
+      "title": "Money laundering",
+      "degree": "MM"
+    },
+    "1321.52": {
+      "title": "Certificate of registration",
+      "degree": "MM"
+    },
+    "1322.02": {
+      "title": "Mortgage broker without license",
+      "degree": "MM"
+    },
+    "1322.07": {
+      "title": "Prohibition-mortgage broker",
+      "degree": "MM"
+    },
+    "1322.08": {
+      "title": "Violation of mortgage broker fee",
+      "degree": "MM"
+    },
+    "1327.54": {
+      "title": "Misrepresentation of price",
+      "degree": "MM"
+    },
+    "132907.13": {
+      "title": "Malicious entry",
+      "degree": "MM"
+    },
+    "1331.02": {
+      "title": "Prohibit discriminatory practice",
+      "degree": "MM"
+    },
+    "1331.04": {
+      "title": "Conspiracy against trade",
+      "degree": "MM"
+    },
+    "1331.05": {
+      "title": "Prohibition against combination to control price of food",
+      "degree": "MM"
+    },
+    "1333.36": {
+      "title": "Prohibition on sale of additional merchandise at bankruptcy or receiver's sale",
+      "degree": "MM"
+    },
+    "1333.51": {
+      "title": "Conversion of trade secrets",
+      "degree": "MM"
+    },
+    "1333.52": {
+      "title": "Record piracy",
+      "degree": "MM"
+    },
+    "1333.81": {
+      "title": "Breach of confidence",
+      "degree": "MM"
+    },
+    "1333.92": {
+      "title": "Plan, operate pyramid sales program",
+      "degree": "MM"
+    },
+    "1334.02": {
+      "title": "Business opportunity plan",
+      "degree": "MM"
+    },
+    "1334.06": {
+      "title": "Business opportunity plan",
+      "degree": "MM"
+    },
+    "13755.07.13": {
+      "title": "Fireworks",
+      "degree": "MM"
+    },
+    "1451.09": {
+      "title": "Zoning violations",
+      "degree": "MM"
+    },
+    "14549.08": {
+      "title": "Fictitious license plates or identification number or mark",
+      "degree": "MM"
+    },
+    "147.14": {
+      "title": "Notary violation",
+      "degree": "MM"
+    },
+    "14755.07.14": {
+      "title": "Gambling",
+      "degree": "MM"
+    },
+    "1477.202": {
+      "title": "Zoning order violation",
+      "degree": "MM"
+    },
+    "1477.203": {
+      "title": "Fail cmply bldg cde orders",
+      "degree": "MM"
+    },
+    "1501.24": {
+      "title": "Watercraft violation",
+      "degree": "MM"
+    },
+    "1506.32": {
+      "title": "Abandoned property greater then $",
+      "degree": "MM"
+    },
+    "1531.02": {
+      "title": "Ohio wildlife violation",
+      "degree": "MM"
+    },
+    "1531.2": {
+      "title": "Ohio wildlife violation",
+      "degree": "MM"
+    },
+    "1531.29": {
+      "title": "Pollute state land-water",
+      "degree": "MM"
+    },
+    "1533.07": {
+      "title": "Possess a non game bird",
+      "degree": "MM"
+    },
+    "1533.10": {
+      "title": "Hunting license - tourist's hunting license",
+      "degree": "MM"
+    },
+    "1533.11": {
+      "title": "Failure to obtain special deer prmit",
+      "degree": "MM"
+    },
+    "1533.161": {
+      "title": "Ohio wildlife violation-jacklighting",
+      "degree": "MM"
+    },
+    "1533.17": {
+      "title": "Hunting without permission",
+      "degree": "MM"
+    },
+    "1533.22": {
+      "title": "Ohio wildlife violation",
+      "degree": "MM"
+    },
+    "1533.32": {
+      "title": "Fishing without license",
+      "degree": "MM"
+    },
+    "1533.40": {
+      "title": "Selling bait without license",
+      "degree": "MM"
+    },
+    "1533.631": {
+      "title": "Permit for handling fish at wholesale",
+      "degree": "MM"
+    },
+    "1533.632": {
+      "title": "Sell aquatic species without license",
+      "degree": "MM"
+    },
+    "1533.67": {
+      "title": "Hinder wildlife officer",
+      "degree": "MM"
+    },
+    "1533.71": {
+      "title": "Possessing wild animal witouto license",
+      "degree": "MM"
+    },
+    "1545.072": {
+      "title": "Park commissioners-credit card misuse",
+      "degree": "MM"
+    },
+    "1545.09": {
+      "title": "Violation of park rules",
+      "degree": "MM"
+    },
+    "1545.09.1": {
+      "title": "Park-preserve prop",
+      "degree": "MM"
+    },
+    "1545.09.10": {
+      "title": "Park-post signs",
+      "degree": "MM"
+    },
+    "1545.09.11": {
+      "title": "Park-grazing",
+      "degree": "MM"
+    },
+    "1545.09.12": {
+      "title": "Park-dogs and cats",
+      "degree": "MM"
+    },
+    "1545.09.2": {
+      "title": "Park-garbage,etc.",
+      "degree": "MM"
+    },
+    "1545.09.3": {
+      "title": "Park-hunt,fish",
+      "degree": "MM"
+    },
+    "1545.09.4": {
+      "title": "Park-fires",
+      "degree": "MM"
+    },
+    "1545.09.5": {
+      "title": "Park-firearms",
+      "degree": "MM"
+    },
+    "1545.09.6": {
+      "title": "Park-camps",
+      "degree": "MM"
+    },
+    "1545.09.7": {
+      "title": "Park-district bylaws and rules (subsection 7)",
+      "degree": "M4"
+    },
+    "1545.09.8": {
+      "title": "Park-traffic-speed",
+      "degree": "MM"
+    },
+    "1545.09.9": {
+      "title": "Park-commerc entp",
+      "degree": "MM"
+    },
+    "1545.0908": {
+      "title": "Park districts regulations",
+      "degree": "MM"
+    },
+    "1545.9": {
+      "title": "Violation of park rules",
+      "degree": "MM"
+    },
+    "1545.9.1": {
+      "title": "Park-preserve prop",
+      "degree": "MM"
+    },
+    "1545.9.10": {
+      "title": "Park-post signs",
+      "degree": "MM"
+    },
+    "1545.9.11": {
+      "title": "Park-grazing",
+      "degree": "MM"
+    },
+    "1545.9.12": {
+      "title": "Park-dogs and cats",
+      "degree": "MM"
+    },
+    "1545.9.2": {
+      "title": "Park-garbage,etc.",
+      "degree": "MM"
+    },
+    "1545.9.3": {
+      "title": "Park-hunt,fish",
+      "degree": "MM"
+    },
+    "1545.9.4": {
+      "title": "Park-fires",
+      "degree": "MM"
+    },
+    "1545.9.5": {
+      "title": "Park-firearms",
+      "degree": "MM"
+    },
+    "1545.9.6": {
+      "title": "Park-camps",
+      "degree": "MM"
+    },
+    "1545.9.7": {
+      "title": "Park-disord conduct",
+      "degree": "MM"
+    },
+    "1545.9.8": {
+      "title": "Park-traffic-speed",
+      "degree": "MM"
+    },
+    "1545.9.9": {
+      "title": "Park-commerc entp",
+      "degree": "MM"
+    },
+    "1545.908": {
+      "title": "Park districts regulations",
+      "degree": "MM"
+    },
+    "1547.02": {
+      "title": "Watercraft to carry lights",
+      "degree": "MM"
+    },
+    "1547.03": {
+      "title": "Flashing lights prohibited",
+      "degree": "MM"
+    },
+    "1547.04": {
+      "title": "Siren prohibited",
+      "degree": "MM"
+    },
+    "1547.05": {
+      "title": "Operating regulations",
+      "degree": "MM"
+    },
+    "1547.06": {
+      "title": "Child operators prohibited",
+      "degree": "MM"
+    },
+    "1547.07": {
+      "title": "Reckless operation",
+      "degree": "MM"
+    },
+    "1547.071": {
+      "title": "Watercraft equipment violation",
+      "degree": "MM"
+    },
+    "1547.072": {
+      "title": "Failure to control watercraft",
+      "degree": "MM"
+    },
+    "1547.08": {
+      "title": "Operation in restricted area",
+      "degree": "MM"
+    },
+    "1547.09": {
+      "title": "Mooring prohibited",
+      "degree": "MM"
+    },
+    "1547.10": {
+      "title": "Reckless operation of a vessel",
+      "degree": "M4"
+    },
+    "1547.11": {
+      "title": "Operating under the influence-watercraft",
+      "degree": "MM"
+    },
+    "1547.111": {
+      "title": "Testing,implied consent susp",
+      "degree": "MM"
+    },
+    "1547.12": {
+      "title": "Incapacitated oper prohib",
+      "degree": "MM"
+    },
+    "1547.13": {
+      "title": "Lawful order,flee & elude",
+      "degree": "MM"
+    },
+    "1547.131": {
+      "title": "Fail to stop or give way upon approach of law enforcement vessel",
+      "degree": "MM"
+    },
+    "1547.14": {
+      "title": "Wwater skiing activity confined to ski zones",
+      "degree": "MM"
+    },
+    "1547.15": {
+      "title": "Observer required when towing skier",
+      "degree": "MM"
+    },
+    "1547.16": {
+      "title": "Water skiing after dark",
+      "degree": "MM"
+    },
+    "1547.17": {
+      "title": "No more than two skiers",
+      "degree": "MM"
+    },
+    "1547.18": {
+      "title": "Personal flotation device required for skier",
+      "degree": "MM"
+    },
+    "1547.19": {
+      "title": "Ski jump prohibited",
+      "degree": "MM"
+    },
+    "1547.2.06": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.07": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.08": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.09": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.10": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.11": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.12": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.13": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.14": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.15": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.16": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.17": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.18": {
+      "title": "Navigation rules",
+      "degree": "MM"
+    },
+    "1547.2.22": {
+      "title": "Lights for watercraft",
+      "degree": "MM"
+    },
+    "1547.2.23": {
+      "title": "Lights for watercraft",
+      "degree": "MM"
+    },
+    "1547.2.24": {
+      "title": "Lights for watercraft",
+      "degree": "MM"
+    },
+    "1547.2.25": {
+      "title": "Lights for watercraft",
+      "degree": "MM"
+    },
+    "1547.2.26": {
+      "title": "Lights for watercraft",
+      "degree": "MM"
+    },
+    "1547.2.27": {
+      "title": "Lights for watercraft",
+      "degree": "MM"
+    },
+    "1547.2.28": {
+      "title": "Lights for watercraft",
+      "degree": "MM"
+    },
+    "1547.2.29": {
+      "title": "Lights for watercraft",
+      "degree": "MM"
+    },
+    "1547.2.30": {
+      "title": "Lights for watercraft",
+      "degree": "MM"
+    },
+    "1547.20": {
+      "title": "Special water events",
+      "degree": "MM"
+    },
+    "1547.21": {
+      "title": "Requirements for inflatable vessel",
+      "degree": "MM"
+    },
+    "1547.22": {
+      "title": "Restrictions on sitting, standing, walking on moving vessel",
+      "degree": "MM"
+    },
+    "1547.23": {
+      "title": "Engine warm-up required",
+      "degree": "MM"
+    },
+    "1547.24": {
+      "title": "Personal flotation devices required for child under",
+      "degree": "MM"
+    },
+    "1547.25": {
+      "title": "Distress flag required",
+      "degree": "MM"
+    },
+    "1547.251": {
+      "title": "Distress flag required",
+      "degree": "MM"
+    },
+    "1547.26": {
+      "title": "Requiring anchor and line",
+      "degree": "MM"
+    },
+    "1547.27": {
+      "title": "Fire extinguishers required",
+      "degree": "MM"
+    },
+    "1547.28": {
+      "title": "Backfire flame control device",
+      "degree": "MM"
+    },
+    "1547.29": {
+      "title": "Ventilation requirements",
+      "degree": "MM"
+    },
+    "1547.30": {
+      "title": "Abandonment of watercraft",
+      "degree": "MM"
+    },
+    "1547.301": {
+      "title": "Abandoned vessels,public areas",
+      "degree": "MM"
+    },
+    "1547.302": {
+      "title": "Abandonmnt disposal requiremnt",
+      "degree": "MM"
+    },
+    "1547.303": {
+      "title": "Abandonmnt junk vessels,motors",
+      "degree": "MM"
+    },
+    "1547.305": {
+      "title": "Abandonmt junk ves motr prohib",
+      "degree": "MM"
+    },
+    "1547.31": {
+      "title": "Exhaust muffler required",
+      "degree": "MM"
+    },
+    "1547.32": {
+      "title": "Watercraft dwelling unlawful",
+      "degree": "MM"
+    },
+    "1547.33": {
+      "title": "Restrictions on sink, toilet or sanitary system",
+      "degree": "MM"
+    },
+    "1547.331": {
+      "title": "Discharge sanitary system",
+      "degree": "MM"
+    },
+    "1547.34": {
+      "title": "Viol inj dam evid negligence",
+      "degree": "MM"
+    },
+    "1547.38": {
+      "title": "Prohibiting rental of improperly equipped vessel",
+      "degree": "MM"
+    },
+    "1547.39": {
+      "title": "Capacity plate required",
+      "degree": "MM"
+    },
+    "1547.40": {
+      "title": "Load and horsepower limitation",
+      "degree": "MM"
+    },
+    "1547.41": {
+      "title": "Personal watercraft operation requirements",
+      "degree": "MM"
+    },
+    "1547.413": {
+      "title": "No person oper watercraft betw",
+      "degree": "MM"
+    },
+    "1547.42": {
+      "title": "Load horsepower limitation",
+      "degree": "MM"
+    },
+    "1547.49": {
+      "title": "Littering from a vessel",
+      "degree": "MM"
+    },
+    "1547.521": {
+      "title": "Watercraft officers",
+      "degree": "MM"
+    },
+    "1547.53": {
+      "title": "Numbering of watercraft",
+      "degree": "MM"
+    },
+    "1547.531": {
+      "title": "Operating watercraft with expired registration",
+      "degree": "MM"
+    },
+    "1547.54": {
+      "title": "Display numbers exprd license",
+      "degree": "MM"
+    },
+    "1547.541": {
+      "title": "Historic watercraft registration",
+      "degree": "MM"
+    },
+    "1547.542": {
+      "title": "Certificate of livery registration",
+      "degree": "MM"
+    },
+    "1547.543": {
+      "title": "Watercraft dealers license",
+      "degree": "MM"
+    },
+    "1547.57": {
+      "title": "Operate watercraft without decal",
+      "degree": "MM"
+    },
+    "1547.59": {
+      "title": "Watercraft accident report",
+      "degree": "MM"
+    },
+    "1547.61": {
+      "title": "Watercraft-rules and regulations",
+      "degree": "MM"
+    },
+    "1547.65": {
+      "title": "Hull identification number",
+      "degree": "MM"
+    },
+    "1547.66": {
+      "title": "Alterating identifying marks - false information on application for registration",
+      "degree": "MM"
+    },
+    "1547.69": {
+      "title": "Loaded firearm on a water craft",
+      "degree": "MM"
+    },
+    "1547.91": {
+      "title": "Watercraft wrecking",
+      "degree": "MM"
+    },
+    "1547.92": {
+      "title": "Watercraft offense-prohibited acts",
+      "degree": "MM"
+    },
+    "1548.18": {
+      "title": "Watercraft prohibitions noc",
+      "degree": "MM"
+    },
+    "1548.19": {
+      "title": "Stolen watercraft and certificates of title",
+      "degree": "MM"
+    },
+    "15755.07.16": {
+      "title": "Speeding in paek-r",
+      "degree": "MM"
+    },
+    "1601.13": {
+      "title": "Maximum occupancy",
+      "degree": "MM"
+    },
+    "1601.15": {
+      "title": "Unsanitary structures",
+      "degree": "MM"
+    },
+    "1601.17": {
+      "title": "Vermin control",
+      "degree": "MM"
+    },
+    "1601.23": {
+      "title": "Residential parking restrictions",
+      "degree": "MM"
+    },
+    "1601.27": {
+      "title": "Spitting in a public place",
+      "degree": "MM"
+    },
+    "1601.29": {
+      "title": "Graffiti",
+      "degree": "MM"
+    },
+    "1601.3": {
+      "title": "Accumulated waste",
+      "degree": "MM"
+    },
+    "1601.31": {
+      "title": "Code not found in Ohio Revised Code (HCSO data artifact)",
+      "degree": "MM"
+    },
+    "1601.33": {
+      "title": "Litter on private property",
+      "degree": "MM"
+    },
+    "1601.41": {
+      "title": "Littering by operators and occupants of motor vehicles",
+      "degree": "MM"
+    },
+    "1601.5": {
+      "title": "Residential storage",
+      "degree": "MM"
+    },
+    "1601.55": {
+      "title": "Vacate orders",
+      "degree": "MM"
+    },
+    "1601.7": {
+      "title": "Early fire warning system",
+      "degree": "MM"
+    },
+    "16755.07.16": {
+      "title": "Speeding",
+      "degree": "MM"
+    },
+    "169.13": {
+      "title": "Illegal compensation to recover unclaimed funds",
+      "degree": "MM"
+    },
+    "16911.27": {
+      "title": "Curfew minor 16-18 years old",
+      "degree": "MM"
+    },
+    "1707.44": {
+      "title": "Securities violation-prohibited acts",
+      "degree": "MM"
+    },
+    "1707.99": {
+      "title": "Security violation",
+      "degree": "MM"
+    },
+    "1708.05": {
+      "title": "Securities violation",
+      "degree": "MM"
+    },
+    "1709.35": {
+      "title": "Tamp fire hydrant-make inop m",
+      "degree": "MM"
+    },
+    "1709.39": {
+      "title": "Unlic use fire plug",
+      "degree": "MM"
+    },
+    "1711.551": {
+      "title": "Duty of rider to heed warnings",
+      "degree": "MM"
+    },
+    "1716.02": {
+      "title": "Charitable organizations to file annual registration statement - contents - fees",
+      "degree": "MM"
+    },
+    "1716.05": {
+      "title": "Solicitation fraud",
+      "degree": "MM"
+    },
+    "1716.17": {
+      "title": "Charitable organizations - fiduciary duties",
+      "degree": "MM"
+    },
+    "1721.21": {
+      "title": "Failure to maintain endowment",
+      "degree": "MM"
+    },
+    "1739.02": {
+      "title": "Employers operate group insurance program",
+      "degree": "MM"
+    },
+    "17755.07.18": {
+      "title": "Funerals",
+      "degree": "MM"
+    },
+    "1777.01": {
+      "title": "Partnership fraud",
+      "degree": "MM"
+    },
+    "1777.99": {
+      "title": "Partnership fraud",
+      "degree": "MM"
+    },
+    "18.11": {
+      "title": "Fail to obey-curfew",
+      "degree": "MM"
+    },
+    "184517.02": {
+      "title": "Engage in motor vehicle or manufactured home business - remanufacturers without lic",
+      "degree": "MM"
+    },
+    "184923.20": {
+      "title": "Drivers lic-all violations",
+      "degree": "MM"
+    },
+    "18755.07.19": {
+      "title": "Obstruct travel in park-r",
+      "degree": "MM"
+    },
+    "18837.17": {
+      "title": "Misrep age purch liquor",
+      "degree": "MM"
+    },
+    "1903.05": {
+      "title": "Dc at cc1,cs,other det facilm",
+      "degree": "MM"
+    },
+    "1903.1": {
+      "title": "Asslt-knowingly",
+      "degree": "MM"
+    },
+    "1903.3": {
+      "title": "Trespass upn cc1-entr,remainm",
+      "degree": "MM"
+    },
+    "1903.5": {
+      "title": "Disorderly conduct at any detention facility operated by or under control of the city of cincinnati",
+      "degree": "MM"
+    },
+    "1904.03": {
+      "title": "Personating law enfor officrm",
+      "degree": "MM"
+    },
+    "1904.05": {
+      "title": "Resist arrst,obstrct off busm",
+      "degree": "MM"
+    },
+    "1904.1": {
+      "title": "Asslt upon fireman m",
+      "degree": "MM"
+    },
+    "1904.3": {
+      "title": "Contempt of council",
+      "degree": "MM"
+    },
+    "1906.07": {
+      "title": "Operating a gambling house m",
+      "degree": "MM"
+    },
+    "1906.09": {
+      "title": "Public gaming m",
+      "degree": "MM"
+    },
+    "1906.11": {
+      "title": "Cheating-subject of bet m",
+      "degree": "MM"
+    },
+    "1906.5": {
+      "title": "Gambling m",
+      "degree": "MM"
+    },
+    "1906.7": {
+      "title": "Operating a gambling house m",
+      "degree": "MM"
+    },
+    "1906.9": {
+      "title": "Public gaming",
+      "degree": "MM"
+    },
+    "1907.07": {
+      "title": "Criminal mischief m3m",
+      "degree": "MM"
+    },
+    "1907.09": {
+      "title": "Criminal trespass m",
+      "degree": "MM"
+    },
+    "1907.11": {
+      "title": "Theft-without consent m",
+      "degree": "MM"
+    },
+    "1907.13": {
+      "title": "Receiving stolen propert m",
+      "degree": "MM"
+    },
+    "1907.17": {
+      "title": "Motr veh with conceald identm",
+      "degree": "MM"
+    },
+    "1907.19": {
+      "title": "Prowling m",
+      "degree": "MM"
+    },
+    "1907.5": {
+      "title": "Trespass - mediacl facilitygrng-recklslym2m",
+      "degree": "MM"
+    },
+    "1907.7": {
+      "title": "Criminal mischief m3m",
+      "degree": "MM"
+    },
+    "1907.9": {
+      "title": "Criminal trespass m",
+      "degree": "MM"
+    },
+    "1908.03": {
+      "title": "Ethnic intim ault m",
+      "degree": "MM"
+    },
+    "1908.1": {
+      "title": "Asslt-recklessly m",
+      "degree": "MM"
+    },
+    "1908.11": {
+      "title": "Criminal damaging",
+      "degree": "MM"
+    },
+    "1908.3": {
+      "title": "Criminal intimidation",
+      "degree": "MM"
+    },
+    "1910.1": {
+      "title": "Failure to send juvenile to school",
+      "degree": "MM"
+    },
+    "1910.21": {
+      "title": "Loitering with the intention of comitting unlawful drug transactions",
+      "degree": "MM"
+    },
+    "1910.5": {
+      "title": "False alarm m",
+      "degree": "MM"
+    },
+    "1910.7": {
+      "title": "Loud noises",
+      "degree": "MM"
+    },
+    "1911.03": {
+      "title": "Cross burning or similar actm",
+      "degree": "MM"
+    },
+    "1911.09": {
+      "title": "Emp ads-sex designatd clasif",
+      "degree": "MM"
+    },
+    "1911.11": {
+      "title": "Hypnotism",
+      "degree": "MM"
+    },
+    "1911.7": {
+      "title": "Mislead ad on eyeglass-pricem",
+      "degree": "MM"
+    },
+    "1911.9": {
+      "title": "EMPLOYMENT ADVERTISEMENTSΓö¼ΓöÉSEX DESIGNATED CLASSIFICATIONS",
+      "degree": "MM"
+    },
+    "19755.07.19": {
+      "title": "Travel",
+      "degree": "MM"
+    },
+    "200002925.03": {
+      "title": "Traff in drugs exceed",
+      "degree": "MM"
+    },
+    "202.05": {
+      "title": "Viol regul of pub rec comm",
+      "degree": "MM"
+    },
+    "202.5": {
+      "title": "Violation of regulations of the public recreation commission",
+      "degree": "MM"
+    },
+    "20755.07.21": {
+      "title": "Closing time",
+      "degree": "MM"
+    },
+    "2108.12": {
+      "title": "Unlawful sale of body parts",
+      "degree": "MM"
+    },
+    "214301.631": {
+      "title": "Purchase or consumption low-alcohol beverage by persons under eighteen prohibited",
+      "degree": "MM"
+    },
+    "214301.636": {
+      "title": "Manufacture, transfer, sell, or distribute false identification card or driver's license",
+      "degree": "MM"
+    },
+    "214919.79": {
+      "title": "All violations of drivers lic",
+      "degree": "MM"
+    },
+    "214921.32": {
+      "title": "All viol of drivers lic",
+      "degree": "MM"
+    },
+    "2151.02": {
+      "title": "Violation of court order",
+      "degree": "MM"
+    },
+    "2151.022": {
+      "title": "Incorrigible",
+      "degree": "MM"
+    },
+    "2151.41": {
+      "title": "Tend to cause delinq of child",
+      "degree": "MM"
+    },
+    "2152.87": {
+      "title": "Under age poss of tobacco",
+      "degree": "MM"
+    },
+    "21755.07.22": {
+      "title": "Lakes",
+      "degree": "MM"
+    },
+    "21837.15": {
+      "title": "Purch beer under",
+      "degree": "MM"
+    },
+    "22755.07.23": {
+      "title": "Brdle path-road prhibition-r",
+      "degree": "MM"
+    },
+    "22905.05": {
+      "title": "Criminal child enticement",
+      "degree": "MM"
+    },
+    "2305.46": {
+      "title": "False identifying information",
+      "degree": "M3"
+    },
+    "2317.21": {
+      "title": "Witness failure to appear",
+      "degree": "MM"
+    },
+    "23755.07.23": {
+      "title": "Bicycles, motorcycles, & horse",
+      "degree": "MM"
+    },
+    "24755.07.24": {
+      "title": "Skating,sledding, & skiing",
+      "degree": "MM"
+    },
+    "2502925.03": {
+      "title": "Traff in drugs lsd 250 to",
+      "degree": "MM"
+    },
+    "2525.32": {
+      "title": "Trafficking in harmful intoxicants",
+      "degree": "MM"
+    },
+    "25506.90": {
+      "title": "Improper turn",
+      "degree": "MM"
+    },
+    "25755.07.25": {
+      "title": "Swings",
+      "degree": "MM"
+    },
+    "26755.07.27": {
+      "title": "Disorderly conduct in park-r",
+      "degree": "MM"
+    },
+    "2705.01": {
+      "title": "Contempt in presence of court (direct)",
+      "degree": "M1"
+    },
+    "2705.02": {
+      "title": "Acts in contempt of court (indirect)",
+      "degree": "M1"
+    },
+    "2755.07.02": {
+      "title": "Advertising",
+      "degree": "MM"
+    },
+    "27755.07.27": {
+      "title": "Disorderly conduct",
+      "degree": "MM"
+    },
+    "2775513.1": {
+      "title": "Impound motor vehicle",
+      "degree": "MM"
+    },
+    "2825.31": {
+      "title": "Trafficking in harmful intoxicants",
+      "degree": "MM"
+    },
+    "28755.07.28": {
+      "title": "Park signs",
+      "degree": "MM"
+    },
+    "2900.00": {
+      "title": "Fugitive warrant",
+      "degree": "MM"
+    },
+    "2901.32": {
+      "title": "Improper solicitation of contributions for missing children",
+      "degree": "MM"
+    },
+    "2903.01": {
+      "title": "Aggravated murder",
+      "degree": "F1"
+    },
+    "2903.02": {
+      "title": "Murder",
+      "degree": "F1"
+    },
+    "2903.03": {
+      "title": "Voluntary manslaughter",
+      "degree": "F1"
+    },
+    "2903.04": {
+      "title": "Involuntary manslaughter",
+      "degree": "F1"
+    },
+    "2903.041": {
+      "title": "Reckless homicide",
+      "degree": "F3"
+    },
+    "2903.05": {
+      "title": "Negligent homicide",
+      "degree": "MM"
+    },
+    "2903.06": {
+      "title": "Aggravated vehicular homicide",
+      "degree": "F2"
+    },
+    "2903.07": {
+      "title": "Vehicular homicide m1f",
+      "degree": "MM"
+    },
+    "2903.08": {
+      "title": "Aggravated vehicular assault",
+      "degree": "F3"
+    },
+    "2903.11": {
+      "title": "Felonious assault",
+      "degree": "F2"
+    },
+    "2903.12": {
+      "title": "Aggravated assault",
+      "degree": "F4"
+    },
+    "2903.13": {
+      "title": "Assault",
+      "degree": "M1"
+    },
+    "2903.14": {
+      "title": "Negligent assault",
+      "degree": "M3"
+    },
+    "2903.15": {
+      "title": "Permitting child abuse",
+      "degree": "MM"
+    },
+    "2903.16": {
+      "title": "Failing to provide for a functionally impaired person",
+      "degree": "MM"
+    },
+    "2903.18": {
+      "title": "Strangulation",
+      "degree": "F2"
+    },
+    "2903.21": {
+      "title": "Aggravated menacing",
+      "degree": "M1"
+    },
+    "2903.211": {
+      "title": "Menacing by stalking",
+      "degree": "M1"
+    },
+    "2903.213": {
+      "title": "Menacing agg tres-fam member",
+      "degree": "MM"
+    },
+    "2903.214": {
+      "title": "Menacing agg tres-non family",
+      "degree": "MM"
+    },
+    "2903.216": {
+      "title": "Illegal use of a tracking device or application",
+      "degree": "M1"
+    },
+    "2903.22": {
+      "title": "Menacing",
+      "degree": "M4"
+    },
+    "2903.23": {
+      "title": "Make terroristic threats",
+      "degree": "MM"
+    },
+    "2903.34": {
+      "title": "Patient abuse or neglect",
+      "degree": "MM"
+    },
+    "2903.341": {
+      "title": "Patient endagerment",
+      "degree": "MM"
+    },
+    "2903.43": {
+      "title": "Offenders who have VOD duties; enrollment",
+      "degree": "F5"
+    },
+    "2904.07": {
+      "title": "Poss law enfor offi insignia",
+      "degree": "MM"
+    },
+    "2904.7": {
+      "title": "Posession law enforcement officer insignia",
+      "degree": "MM"
+    },
+    "2905.01": {
+      "title": "Kidnapping",
+      "degree": "F1"
+    },
+    "2905.02": {
+      "title": "Abduction",
+      "degree": "F3"
+    },
+    "2905.03": {
+      "title": "Unlawful restraint",
+      "degree": "M3"
+    },
+    "2905.04": {
+      "title": "Child stealing m1f4f",
+      "degree": "MM"
+    },
+    "2905.05": {
+      "title": "Criminal child enticement",
+      "degree": "MM"
+    },
+    "2905.11": {
+      "title": "Extortion",
+      "degree": "F3"
+    },
+    "2905.12": {
+      "title": "Coercion",
+      "degree": "MM"
+    },
+    "2905.22": {
+      "title": "Extortionate extension of credit - criminal usury",
+      "degree": "MM"
+    },
+    "2905.32": {
+      "title": "Trafficking in persons",
+      "degree": "F1"
+    },
+    "2905.33": {
+      "title": "Unlawful conduct with respect to documents",
+      "degree": "MM"
+    },
+    "2907.02": {
+      "title": "Rape",
+      "degree": "F1"
+    },
+    "2907.03": {
+      "title": "Sexual battery",
+      "degree": "F3"
+    },
+    "2907.04": {
+      "title": "Unlawful sexual conduct with a minor",
+      "degree": "F4"
+    },
+    "2907.05": {
+      "title": "Gross sexual imposition",
+      "degree": "F4"
+    },
+    "2907.06": {
+      "title": "Sexual imposition",
+      "degree": "M3"
+    },
+    "2907.07": {
+      "title": "Importuning",
+      "degree": "F5"
+    },
+    "2907.071": {
+      "title": "Grooming",
+      "degree": "MM"
+    },
+    "2907.08": {
+      "title": "Voyeurism",
+      "degree": "M3"
+    },
+    "2907.09": {
+      "title": "Public indecency",
+      "degree": "M4"
+    },
+    "2907.12": {
+      "title": "Felonious sexual penetration",
+      "degree": "MM"
+    },
+    "2907.1241": {
+      "title": "Loiter to solicit",
+      "degree": "MM"
+    },
+    "2907.19": {
+      "title": "Commercial sexual exploitation of a minor",
+      "degree": "MM"
+    },
+    "2907.21": {
+      "title": "Compelling prostitution",
+      "degree": "MM"
+    },
+    "2907.22": {
+      "title": "Promoting prostitution",
+      "degree": "F4"
+    },
+    "2907.23": {
+      "title": "Procuring",
+      "degree": "MM"
+    },
+    "2907.24": {
+      "title": "Soliciting",
+      "degree": "M3"
+    },
+    "2907.241": {
+      "title": "Loitering to engage in solicitation",
+      "degree": "M3"
+    },
+    "2907.25": {
+      "title": "Prostitution",
+      "degree": "M3"
+    },
+    "2907.31": {
+      "title": "Disseminating matter harmful to juveniles",
+      "degree": "M1"
+    },
+    "2907.32": {
+      "title": "Pandering obscenity",
+      "degree": "MM"
+    },
+    "2907.321": {
+      "title": "Pandering obscenity involving a minor or impaired person",
+      "degree": "F4"
+    },
+    "2907.322": {
+      "title": "Pandering sexually-oriented matter involving a minor",
+      "degree": "F2"
+    },
+    "2907.323": {
+      "title": "Illegal use of minor in nudity-oriented material",
+      "degree": "F2"
+    },
+    "2907.33": {
+      "title": "Deception to obtain matter harmful to juveniles",
+      "degree": "MM"
+    },
+    "2907.34": {
+      "title": "Compelling acceptance of objectionable materials",
+      "degree": "MM"
+    },
+    "2907.40": {
+      "title": "Illegally operating sexually oriented business",
+      "degree": "MM"
+    },
+    "2907.71": {
+      "title": "Code not found in Ohio Revised Code (HCSO data artifact)",
+      "degree": "MM"
+    },
+    "2909.02": {
+      "title": "Aggravated arson",
+      "degree": "F1"
+    },
+    "2909.03": {
+      "title": "Arson",
+      "degree": "F4"
+    },
+    "2909.04": {
+      "title": "Disrupting public services",
+      "degree": "F4"
+    },
+    "2909.05": {
+      "title": "Vandalism",
+      "degree": "F5"
+    },
+    "2909.06": {
+      "title": "Criminal damaging",
+      "degree": "M2"
+    },
+    "2909.07": {
+      "title": "Criminal mischief",
+      "degree": "M3"
+    },
+    "2909.08": {
+      "title": "Endangering aircraft or airport operations",
+      "degree": "MM"
+    },
+    "2909.081": {
+      "title": "Interfering with operation of aircraft with laser",
+      "degree": "MM"
+    },
+    "2909.09": {
+      "title": "Vehicular vandalism",
+      "degree": "MM"
+    },
+    "2909.10": {
+      "title": "Tresspass on railroad property",
+      "degree": "MM"
+    },
+    "2909.101": {
+      "title": "Railroad grade crossing device vandalism",
+      "degree": "MM"
+    },
+    "2909.15": {
+      "title": "Arson offender registration",
+      "degree": "F5"
+    },
+    "2909.22": {
+      "title": "Soliciting or providing support for act of terrorism",
+      "degree": "MM"
+    },
+    "2909.23": {
+      "title": "Making terroristic threat",
+      "degree": "MM"
+    },
+    "2909.24": {
+      "title": "Terrorism",
+      "degree": "MM"
+    },
+    "2909.26": {
+      "title": "Criminal possession of a weapon or explosive device",
+      "degree": "MM"
+    },
+    "2909.27": {
+      "title": "Criminal use of chemical, biological, radiological or nuclear weapon or explosive device",
+      "degree": "MM"
+    },
+    "2909.28": {
+      "title": "Illegal assembly or possession of chemicals or substances for manufacture of prohibited weapons",
+      "degree": "MM"
+    },
+    "2909.29": {
+      "title": "Money laundering as to terrorism",
+      "degree": "MM"
+    },
+    "2910.10": {
+      "title": "Criminal tress on railroad",
+      "degree": "MM"
+    },
+    "2911.01": {
+      "title": "Aggravated robbery",
+      "degree": "F1"
+    },
+    "2911.02": {
+      "title": "Robbery",
+      "degree": "F2"
+    },
+    "2911.05": {
+      "title": "Desecration m",
+      "degree": "MM"
+    },
+    "2911.07": {
+      "title": "Mislead ad in sale of eyglasm",
+      "degree": "MM"
+    },
+    "2911.11": {
+      "title": "Aggravated burglary",
+      "degree": "F1"
+    },
+    "2911.12": {
+      "title": "Burglary",
+      "degree": "F2"
+    },
+    "2911.123": {
+      "title": "Burglary",
+      "degree": "MM"
+    },
+    "2911.13": {
+      "title": "Breaking and entering",
+      "degree": "F5"
+    },
+    "2911.21": {
+      "title": "Criminal trespass",
+      "degree": "M4"
+    },
+    "2911.211": {
+      "title": "Aggravated trespassing",
+      "degree": "MM"
+    },
+    "2911.23": {
+      "title": "Criminal trespass on place of public amusement",
+      "degree": "MM"
+    },
+    "2911.31": {
+      "title": "Safecracking",
+      "degree": "F4"
+    },
+    "2911.32": {
+      "title": "Tampering with coin machines",
+      "degree": "M1"
+    },
+    "2911.5": {
+      "title": "Permitting drug abuse",
+      "degree": "MM"
+    },
+    "2913.02": {
+      "title": "Theft",
+      "degree": "M1"
+    },
+    "2913.03": {
+      "title": "Unauthorized use of a vehicle",
+      "degree": "M1"
+    },
+    "2913.04": {
+      "title": "Unauthorized use of property",
+      "degree": "M1"
+    },
+    "2913.041": {
+      "title": "Possession or sale of unauthorized cable television device",
+      "degree": "MM"
+    },
+    "2913.05": {
+      "title": "Telecommunications fraud",
+      "degree": "F5"
+    },
+    "2913.06": {
+      "title": "Unlawful use of telecommunications device",
+      "degree": "MM"
+    },
+    "2913.07": {
+      "title": "Motion picture piracy",
+      "degree": "MM"
+    },
+    "2913.11": {
+      "title": "Passing bad checks",
+      "degree": "M1"
+    },
+    "2913.21": {
+      "title": "Misuse of credit cards",
+      "degree": "M1"
+    },
+    "2913.30": {
+      "title": "Trademark counterfeiting",
+      "degree": "M1"
+    },
+    "2913.31": {
+      "title": "Forgery",
+      "degree": "F5"
+    },
+    "2913.32": {
+      "title": "Criminal simulation",
+      "degree": "MM"
+    },
+    "2913.33": {
+      "title": "Making or using slugs",
+      "degree": "MM"
+    },
+    "2913.34": {
+      "title": "Trademark counterfeiting",
+      "degree": "MM"
+    },
+    "2913.40": {
+      "title": "Medicaid fraud",
+      "degree": "F5"
+    },
+    "2913.401": {
+      "title": "Medicaid eligibility fraud",
+      "degree": "MM"
+    },
+    "2913.41": {
+      "title": "Defrauding a rental agency or hostelry",
+      "degree": "M1"
+    },
+    "2913.42": {
+      "title": "Tampering with records",
+      "degree": "M1"
+    },
+    "2913.421": {
+      "title": "Illegally transmitting multiple commercial electronic mail messages (spamming) - unauthorized access of computer",
+      "degree": "MM"
+    },
+    "2913.43": {
+      "title": "Securing writings by deception",
+      "degree": "MM"
+    },
+    "2913.44": {
+      "title": "Personating an officer",
+      "degree": "MM"
+    },
+    "2913.441": {
+      "title": "Law enforcement emblem display",
+      "degree": "MM"
+    },
+    "2913.45": {
+      "title": "Defrauding creditors",
+      "degree": "MM"
+    },
+    "2913.46": {
+      "title": "Illegal use of food stamps or wic program benefits",
+      "degree": "MM"
+    },
+    "2913.47": {
+      "title": "Insurance fraud",
+      "degree": "MM"
+    },
+    "2913.48": {
+      "title": "Workers' compensation fraud",
+      "degree": "MM"
+    },
+    "2913.49": {
+      "title": "Identity fraud",
+      "degree": "F5"
+    },
+    "2913.51": {
+      "title": "Receiving stolen property",
+      "degree": "M1"
+    },
+    "2913.71": {
+      "title": "Agg circumstances",
+      "degree": "MM"
+    },
+    "2913.72": {
+      "title": "Theft of rental property",
+      "degree": "MM"
+    },
+    "2913.81": {
+      "title": "Deny access to computer",
+      "degree": "MM"
+    },
+    "2914.04": {
+      "title": "Intimidation-victim or witness",
+      "degree": "MM"
+    },
+    "2914.14": {
+      "title": "Falsification of child abuse",
+      "degree": "MM"
+    },
+    "2915.02": {
+      "title": "Gambling",
+      "degree": "MM"
+    },
+    "2915.03": {
+      "title": "Operating a gambling house",
+      "degree": "MM"
+    },
+    "2915.04": {
+      "title": "Public gaming",
+      "degree": "MM"
+    },
+    "2915.05": {
+      "title": "Cheating - corrupting sports",
+      "degree": "MM"
+    },
+    "2915.06": {
+      "title": "Skill-based amusement machine prohibited conduct",
+      "degree": "MM"
+    },
+    "2915.07": {
+      "title": "Conduct illegal bingo",
+      "degree": "MM"
+    },
+    "2915.081": {
+      "title": "Illegally operating as distributor of bingo supplies",
+      "degree": "MM"
+    },
+    "2915.082": {
+      "title": "Illegally operating as manufacturer of bingo supplies",
+      "degree": "MM"
+    },
+    "2915.09": {
+      "title": "Illegally conducting bingo game",
+      "degree": "MM"
+    },
+    "2915.091": {
+      "title": "Illegally conducting instant bingo",
+      "degree": "MM"
+    },
+    "2915.092": {
+      "title": "Illegal conduct of raffle",
+      "degree": "MM"
+    },
+    "2915.093": {
+      "title": "Charitable organization conducting instant bingo other than at bingo session at location where primary activity is instant bingo",
+      "degree": "MM"
+    },
+    "2915.094": {
+      "title": "Owner or lessor conducting instant bingo other than at bingo session at location where primary activity is instant bingo",
+      "degree": "MM"
+    },
+    "2915.10": {
+      "title": "Bingo records retention",
+      "degree": "MM"
+    },
+    "2915.11": {
+      "title": "Prohibited person from bingo game",
+      "degree": "MM"
+    },
+    "2915.12": {
+      "title": "Conduct a non-conforming bingo",
+      "degree": "MM"
+    },
+    "2915.13": {
+      "title": "Veteran's organization or fraternal organization authorized to conduct bingo session",
+      "degree": "MM"
+    },
+    "2917.01": {
+      "title": "Inciting to violence",
+      "degree": "MM"
+    },
+    "2917.02": {
+      "title": "Aggravated riot",
+      "degree": "F4"
+    },
+    "2917.03": {
+      "title": "Riot",
+      "degree": "MM"
+    },
+    "2917.04": {
+      "title": "Failure to disperse",
+      "degree": "MM"
+    },
+    "2917.11": {
+      "title": "Disorderly conduct",
+      "degree": "MM"
+    },
+    "2917.12": {
+      "title": "Disturbing a lawful meeting",
+      "degree": "MM"
+    },
+    "2917.13": {
+      "title": "Misconduct at an emergency",
+      "degree": "M4"
+    },
+    "2917.19": {
+      "title": "Attempt persuade escape",
+      "degree": "MM"
+    },
+    "2917.21": {
+      "title": "Telecommunications harassment",
+      "degree": "M1"
+    },
+    "2917.211": {
+      "title": "Distribution of nonconsensual intimate images",
+      "degree": "M1"
+    },
+    "2917.31": {
+      "title": "Inducing panic",
+      "degree": "M1"
+    },
+    "2917.32": {
+      "title": "Making false alarms",
+      "degree": "M1"
+    },
+    "2917.33": {
+      "title": "Flse alrm to law enfor agncym",
+      "degree": "MM"
+    },
+    "2919.01": {
+      "title": "Bigamy",
+      "degree": "MM"
+    },
+    "2919.025": {
+      "title": "Domestic violence (HCSO variant of 2919.25)",
+      "degree": "M1"
+    },
+    "2919.11": {
+      "title": "Criminal abortion f",
+      "degree": "MM"
+    },
+    "2919.12": {
+      "title": "Unlawful abortion",
+      "degree": "MM"
+    },
+    "2919.121": {
+      "title": "Unlawful abortion upon minor",
+      "degree": "MM"
+    },
+    "2919.122": {
+      "title": "Application of unlawful abortion on a minor law",
+      "degree": "MM"
+    },
+    "2919.123": {
+      "title": "Unlawful distribution of an abortion-inducing drug",
+      "degree": "MM"
+    },
+    "2919.13": {
+      "title": "Abortion manslaughter",
+      "degree": "MM"
+    },
+    "2919.14": {
+      "title": "Abortion trafficking",
+      "degree": "MM"
+    },
+    "2919.151": {
+      "title": "Partial birth feticide",
+      "degree": "MM"
+    },
+    "2919.17": {
+      "title": "Termnat pregnancy after 24 wks",
+      "degree": "MM"
+    },
+    "2919.171": {
+      "title": "Physician's report to department on attempted or completed abortions",
+      "degree": "MM"
+    },
+    "2919.18": {
+      "title": "Failure to perform viability testing",
+      "degree": "MM"
+    },
+    "2919.192": {
+      "title": "Procedures after detection of fetal heartbeat",
+      "degree": "MM"
+    },
+    "2919.21": {
+      "title": "Nonsupport of dependents",
+      "degree": "M1"
+    },
+    "2919.22": {
+      "title": "Endangering children",
+      "degree": "M1"
+    },
+    "2919.222": {
+      "title": "Parental education neglect",
+      "degree": "MM"
+    },
+    "2919.224": {
+      "title": "Misrepresentation relating to provision of child care",
+      "degree": "MM"
+    },
+    "2919.225": {
+      "title": "Disclosure and notice regarding death or injury of child in facility",
+      "degree": "MM"
+    },
+    "2919.227": {
+      "title": "Information to be provided to prospective users - notice of death of child",
+      "degree": "MM"
+    },
+    "2919.23": {
+      "title": "Interference with custody",
+      "degree": "M1"
+    },
+    "2919.231": {
+      "title": "Interfering with action to issue or modify support order",
+      "degree": "MM"
+    },
+    "2919.24": {
+      "title": "Contributing to unruliness or delinquency of a child",
+      "degree": "M1"
+    },
+    "2919.242": {
+      "title": "Interfer w unruliness juv",
+      "degree": "MM"
+    },
+    "2919.25": {
+      "title": "Domestic violence",
+      "degree": "M1"
+    },
+    "2919.26": {
+      "title": "Domestic viol protective order",
+      "degree": "MM"
+    },
+    "2919.27": {
+      "title": "Violating protection order",
+      "degree": "M1"
+    },
+    "2921.02": {
+      "title": "Bribery",
+      "degree": "MM"
+    },
+    "2921.03": {
+      "title": "Intimidation",
+      "degree": "F3"
+    },
+    "2921.04": {
+      "title": "Intimidation of attorney, victim, or witness",
+      "degree": "M1"
+    },
+    "2921.05": {
+      "title": "Retaliation",
+      "degree": "F3"
+    },
+    "2921.11": {
+      "title": "Perjury",
+      "degree": "F3"
+    },
+    "2921.12": {
+      "title": "Tampering with evidence",
+      "degree": "F3"
+    },
+    "2921.13": {
+      "title": "Falsification",
+      "degree": "M1"
+    },
+    "2921.14": {
+      "title": "Making or causing false report of child abuse or neglect",
+      "degree": "MM"
+    },
+    "2921.15": {
+      "title": "Make false allegation of peace officer",
+      "degree": "MM"
+    },
+    "2921.21": {
+      "title": "Compounding a crime",
+      "degree": "MM"
+    },
+    "2921.22": {
+      "title": "Reporting felony; medical professional duties",
+      "degree": "M4"
+    },
+    "2921.23": {
+      "title": "Failure to aid a law enforcement officer",
+      "degree": "MM"
+    },
+    "2921.24": {
+      "title": "Disclosure of confidential information",
+      "degree": "MM"
+    },
+    "2921.25": {
+      "title": "Peace officer's home address not to be disclosed during trial",
+      "degree": "MM"
+    },
+    "2921.29": {
+      "title": "Failure to disclose personal information",
+      "degree": "M4"
+    },
+    "2921.31": {
+      "title": "Obstructing official business",
+      "degree": "M2"
+    },
+    "2921.311": {
+      "title": "Flee-elude",
+      "degree": "MM"
+    },
+    "2921.32": {
+      "title": "Obstructing justice",
+      "degree": "MM"
+    },
+    "2921.321": {
+      "title": "Assaulting or harassing police dog or horse or service dog",
+      "degree": "MM"
+    },
+    "2921.33": {
+      "title": "Resisting arrest",
+      "degree": "M2"
+    },
+    "2921.331": {
+      "title": "Failure to comply with order or signal of police officer",
+      "degree": "M1"
+    },
+    "2921.34": {
+      "title": "Escape",
+      "degree": "F3"
+    },
+    "2921.35": {
+      "title": "Aiding escape or resistance to lawful authority",
+      "degree": "MM"
+    },
+    "2921.36": {
+      "title": "Illegal conveyance of items into a detention facility",
+      "degree": "F3"
+    },
+    "2921.38": {
+      "title": "Harassment with a bodily substance",
+      "degree": "F5"
+    },
+    "2921.41": {
+      "title": "Theft in office",
+      "degree": "MM"
+    },
+    "2921.42": {
+      "title": "Having an unlawful interest in a public contract",
+      "degree": "MM"
+    },
+    "2921.43": {
+      "title": "Soliciting or accepting improper compensation",
+      "degree": "MM"
+    },
+    "2921.44": {
+      "title": "Dereliction of duty",
+      "degree": "MM"
+    },
+    "2921.45": {
+      "title": "Interfere with civil rights",
+      "degree": "MM"
+    },
+    "2921.51": {
+      "title": "Impersonation of peace officer or private police officer",
+      "degree": "MM"
+    },
+    "2921.52": {
+      "title": "Using sham legal process",
+      "degree": "MM"
+    },
+    "2923.01": {
+      "title": "Conspiracy felony",
+      "degree": "MM"
+    },
+    "2923.02": {
+      "title": "Attempt to commit an offense",
+      "degree": "F4"
+    },
+    "2923.03": {
+      "title": "Complicity",
+      "degree": "F3"
+    },
+    "2923.04": {
+      "title": "Engage in organized crime",
+      "degree": "MM"
+    },
+    "2923.12": {
+      "title": "Carrying concealed weapons",
+      "degree": "M1"
+    },
+    "2923.121": {
+      "title": "Possession of firearm in liquor permit premises",
+      "degree": "F5"
+    },
+    "2923.1211": {
+      "title": "Falsfication conceal weapon license",
+      "degree": "MM"
+    },
+    "2923.122": {
+      "title": "Illegal conveyance or possession of deadly weapon or dangerous ordnance in school safety zone",
+      "degree": "MM"
+    },
+    "2923.123": {
+      "title": "Weapon in courthouse",
+      "degree": "MM"
+    },
+    "2923.126": {
+      "title": "Duties of licensed individual",
+      "degree": "MM"
+    },
+    "2923.13": {
+      "title": "Having weapons while under disability",
+      "degree": "F3"
+    },
+    "2923.131": {
+      "title": "Possession of deadly weapon while under detention",
+      "degree": "F5"
+    },
+    "2923.15": {
+      "title": "Using weapons while intoxicated",
+      "degree": "M1"
+    },
+    "2923.16": {
+      "title": "Improperly handling firearms in a motor vehicle",
+      "degree": "M1"
+    },
+    "2923.161": {
+      "title": "Improperly discharging a firearm at or into a habitation",
+      "degree": "F2"
+    },
+    "2923.162": {
+      "title": "Discharging a firearm on or near prohibited premises",
+      "degree": "M1"
+    },
+    "2923.17": {
+      "title": "Unlawful possession of dangerous ordnance",
+      "degree": "F5"
+    },
+    "2923.19": {
+      "title": "Failure to secure dangerous ordnance",
+      "degree": "MM"
+    },
+    "2923.20": {
+      "title": "Unlawful transaction in weapons",
+      "degree": "MM"
+    },
+    "2923.201": {
+      "title": "Defacing identification mark of firearm",
+      "degree": "M1"
+    },
+    "2923.21": {
+      "title": "Improperly furnishing firearms to minor",
+      "degree": "MM"
+    },
+    "2923.211": {
+      "title": "Underage purchase of firearm",
+      "degree": "F4"
+    },
+    "2923.24": {
+      "title": "Possessing criminal tools",
+      "degree": "M1"
+    },
+    "2923.241": {
+      "title": "Hidden compartments in vehicles",
+      "degree": "MM"
+    },
+    "2923.32": {
+      "title": "Engaging in a pattern of corrupt activity",
+      "degree": "F2"
+    },
+    "2923.42": {
+      "title": "Participating in criminal gang",
+      "degree": "MM"
+    },
+    "2923.46": {
+      "title": "Traff in,ill use food stamps",
+      "degree": "MM"
+    },
+    "2925.02": {
+      "title": "Corrupting another with drugs",
+      "degree": "MM"
+    },
+    "2925.03": {
+      "title": "Trafficking in drugs",
+      "degree": "F5"
+    },
+    "2925.04": {
+      "title": "Illegal manufacture of drugs",
+      "degree": "F2"
+    },
+    "2925.041": {
+      "title": "Illegal assembly or possession of chemicals for manufacture of drugs",
+      "degree": "MM"
+    },
+    "2925.05": {
+      "title": "Funding of drug or marihuana trafficking",
+      "degree": "F2"
+    },
+    "2925.06": {
+      "title": "Illegal anabolic steroids",
+      "degree": "MM"
+    },
+    "2925.07": {
+      "title": "Prep drugs for sal",
+      "degree": "MM"
+    },
+    "2925.09": {
+      "title": "Sale or use of drugs not approved by the fda",
+      "degree": "MM"
+    },
+    "2925.11": {
+      "title": "Possession of drugs",
+      "degree": "F5"
+    },
+    "2925.12": {
+      "title": "Possessing drug abuse instruments",
+      "degree": "M2"
+    },
+    "2925.13": {
+      "title": "Permitting drug abuse",
+      "degree": "M1"
+    },
+    "2925.14": {
+      "title": "Illegal use or possession of drug paraphernalia",
+      "degree": "MM"
+    },
+    "2925.141": {
+      "title": "Illegal use/possession of marihuana drug paraphernalia",
+      "degree": "MM"
+    },
+    "2925.21": {
+      "title": "Theft of drugs",
+      "degree": "MM"
+    },
+    "2925.22": {
+      "title": "Deception to obtain a dangerous drug",
+      "degree": "M1"
+    },
+    "2925.23": {
+      "title": "Illegal processing of drug documents",
+      "degree": "F5"
+    },
+    "2925.24": {
+      "title": "Tampering with drugs",
+      "degree": "F4"
+    },
+    "2925.31": {
+      "title": "Abusing harmful intoxicants",
+      "degree": "MM"
+    },
+    "2925.32": {
+      "title": "Illegal dispensing of drug samples or counterfeit drugs",
+      "degree": "F5"
+    },
+    "2925.33": {
+      "title": "Possession of nitros oxide in vehicle",
+      "degree": "MM"
+    },
+    "2925.36": {
+      "title": "Illegal dispensing of drug samples",
+      "degree": "MM"
+    },
+    "2925.37": {
+      "title": "Counterfeit controlled substance offenses",
+      "degree": "M1"
+    },
+    "2925.51": {
+      "title": "Laboratory evidence",
+      "degree": "MM"
+    },
+    "2925.55": {
+      "title": "Unlawful purchase of pseudoephedrine or ephedrine product",
+      "degree": "MM"
+    },
+    "2925.56": {
+      "title": "Unlawful sale of pseudoephedrine or ephedrine product",
+      "degree": "MM"
+    },
+    "2927.01": {
+      "title": "Abuse of a corpse",
+      "degree": "M2"
+    },
+    "2927.02": {
+      "title": "Illegal distribution of or permitting children to use cigarettes or other tobacco products",
+      "degree": "MM"
+    },
+    "2927.021": {
+      "title": "Illegal tobacco or alternative nicotine product transaction scan",
+      "degree": "MM"
+    },
+    "2927.023": {
+      "title": "Unlawful transportation of tobacco products",
+      "degree": "MM"
+    },
+    "2927.03": {
+      "title": "Violation of civil rights-housing",
+      "degree": "MM"
+    },
+    "2927.11": {
+      "title": "Desecration",
+      "degree": "MM"
+    },
+    "2927.12": {
+      "title": "Ethnic intimid - agg menacing",
+      "degree": "MM"
+    },
+    "2927.13": {
+      "title": "Selling or donating contaminated blood",
+      "degree": "MM"
+    },
+    "2927.15": {
+      "title": "Unlawful collection of bodily substances",
+      "degree": "MM"
+    },
+    "2927.17": {
+      "title": "Advertising of massage services",
+      "degree": "MM"
+    },
+    "2927.21": {
+      "title": "Receiving proceeds of an offense subject to forfeiture proceedings",
+      "degree": "MM"
+    },
+    "2927.24": {
+      "title": "Contaminating substance for human consumption",
+      "degree": "MM"
+    },
+    "2927.27": {
+      "title": "Illegal bail bond agent practices",
+      "degree": "MM"
+    },
+    "2929.21": {
+      "title": "Viol vendor license",
+      "degree": "MM"
+    },
+    "2933.32": {
+      "title": "Unauthorized body cavity or strip search",
+      "degree": "MM"
+    },
+    "2933.52": {
+      "title": "Intercept wire, oral or electronic communications",
+      "degree": "MM"
+    },
+    "2933.59": {
+      "title": "Tampering with intercepted communication",
+      "degree": "MM"
+    },
+    "2933.591": {
+      "title": "Improper warning of communication interception warrant or order",
+      "degree": "MM"
+    },
+    "2933.75": {
+      "title": "Trustee withholding information regarding medicaid fraud",
+      "degree": "MM"
+    },
+    "2937.29": {
+      "title": "Fail to appear after released on own recognizance",
+      "degree": "MM"
+    },
+    "2950.02": {
+      "title": "Duty of registration",
+      "degree": "MM"
+    },
+    "2950.02.08": {
+      "title": "Habitual sex offender m1f",
+      "degree": "MM"
+    },
+    "2950.03": {
+      "title": "Dischrg of habitual sex offndr",
+      "degree": "MM"
+    },
+    "2950.04": {
+      "title": "Sex offender duty to register",
+      "degree": "F3"
+    },
+    "2950.05": {
+      "title": "Notice of change of residence, employment, or school",
+      "degree": "F3"
+    },
+    "2950.06": {
+      "title": "Periodic verification of residence",
+      "degree": "F3"
+    },
+    "2950.07": {
+      "title": "Registration requirements",
+      "degree": "MM"
+    },
+    "2950.08": {
+      "title": "Public inspection of registration",
+      "degree": "MM"
+    },
+    "2951.08": {
+      "title": "Probation violation",
+      "degree": "M1"
+    },
+    "2951.09": {
+      "title": "Violation of community control / probation",
+      "degree": "M1"
+    },
+    "29755.07.29": {
+      "title": "Permits",
+      "degree": "MM"
+    },
+    "3.60.03": {
+      "title": "Building code violationcc",
+      "degree": "MM"
+    },
+    "301.27": {
+      "title": "Incur debt-county credit card",
+      "degree": "MM"
+    },
+    "303.23": {
+      "title": "County zoning violation",
+      "degree": "MM"
+    },
+    "307.37": {
+      "title": "Unincorporated zoning",
+      "degree": "MM"
+    },
+    "30755.07.30": {
+      "title": "Resisting officer",
+      "degree": "MM"
+    },
+    "309.13": {
+      "title": "License required",
+      "degree": "MM"
+    },
+    "311.02": {
+      "title": "Park in fire",
+      "degree": "MM"
+    },
+    "311.37": {
+      "title": "Transient vendors,file info",
+      "degree": "MM"
+    },
+    "311.99": {
+      "title": "City income tax violation",
+      "degree": "MM"
+    },
+    "3113.01": {
+      "title": "Negl-child/preg womn",
+      "degree": "MM"
+    },
+    "3113.06": {
+      "title": "Failure to pay maintenance cost to agency",
+      "degree": "MM"
+    },
+    "3113.11": {
+      "title": "Notif of viol dth of suicidef",
+      "degree": "MM"
+    },
+    "31755.07.31": {
+      "title": "Animals and birds",
+      "degree": "MM"
+    },
+    "32755.07.32": {
+      "title": "Flying apparatus and motor veh",
+      "degree": "MM"
+    },
+    "3321.20": {
+      "title": "Fail to send child to school",
+      "degree": "MM"
+    },
+    "33755.07.33": {
+      "title": "Noise",
+      "degree": "MM"
+    },
+    "3504.06": {
+      "title": "False voter registration",
+      "degree": "MM"
+    },
+    "3507.29": {
+      "title": "Furn decpt birth rec",
+      "degree": "MM"
+    },
+    "3509.05": {
+      "title": "Absentee ballot voting proc",
+      "degree": "MM"
+    },
+    "3509.5": {
+      "title": "Absentee ballot voting proc",
+      "degree": "MM"
+    },
+    "3599.01": {
+      "title": "Bribery",
+      "degree": "MM"
+    },
+    "3599.091": {
+      "title": "Unfair campaign practices",
+      "degree": "MM"
+    },
+    "3599.11": {
+      "title": "False voter registration",
+      "degree": "MM"
+    },
+    "3599.12": {
+      "title": "Illegal voting",
+      "degree": "MM"
+    },
+    "3599.14": {
+      "title": "Prohibited acts concerning declarations or petitions",
+      "degree": "MM"
+    },
+    "3599.15": {
+      "title": "Petition violations",
+      "degree": "MM"
+    },
+    "3599.16": {
+      "title": "Misconduct of member, director, or employee of board of elections",
+      "degree": "MM"
+    },
+    "3599.21": {
+      "title": "Illegally obtain absent voter ballot",
+      "degree": "MM"
+    },
+    "3599.24": {
+      "title": "Destroy property, elections",
+      "degree": "MM"
+    },
+    "3599.26": {
+      "title": "Ballot stuffing",
+      "degree": "MM"
+    },
+    "3599.27": {
+      "title": "Tamper with election equipment",
+      "degree": "MM"
+    },
+    "3599.28": {
+      "title": "False signatures",
+      "degree": "MM"
+    },
+    "3599.29": {
+      "title": "Possess false election records",
+      "degree": "MM"
+    },
+    "3599.33": {
+      "title": "Altering ballots",
+      "degree": "MM"
+    },
+    "3599.34": {
+      "title": "Destroying ballots",
+      "degree": "MM"
+    },
+    "3599.36": {
+      "title": "Election falsification",
+      "degree": "MM"
+    },
+    "3701.29": {
+      "title": "Household sewage",
+      "degree": "MM"
+    },
+    "3701.352": {
+      "title": "Violations prohibited",
+      "degree": "MM"
+    },
+    "3701.48": {
+      "title": "Untreat sew",
+      "degree": "MM"
+    },
+    "3701.81": {
+      "title": "Exposing others to contagion",
+      "degree": "MM"
+    },
+    "3705.29": {
+      "title": "False statement in certificate",
+      "degree": "MM"
+    },
+    "3707.01": {
+      "title": "Health code sewage violation",
+      "degree": "MM"
+    },
+    "3707.48": {
+      "title": "Failure to comply with health board",
+      "degree": "MM"
+    },
+    "3715.52": {
+      "title": "Misbranded-adulterated drugs",
+      "degree": "MM"
+    },
+    "3716.11": {
+      "title": "Adulteration of food-placing harmful or hazardous objects in food or confection",
+      "degree": "MM"
+    },
+    "3717.41": {
+      "title": "Food service operation without license",
+      "degree": "MM"
+    },
+    "3719.02": {
+      "title": "Drugs-license to manufacture controlled substances",
+      "degree": "MM"
+    },
+    "3719.021": {
+      "title": "Drugs- license as wholesaler of controlled substances",
+      "degree": "MM"
+    },
+    "3719.03": {
+      "title": "Drugs-qualify,revoke-license",
+      "degree": "MM"
+    },
+    "3719.04": {
+      "title": "Drugs-regulations for sale",
+      "degree": "MM"
+    },
+    "3719.05": {
+      "title": "Drugs-dispensing by pharmacist",
+      "degree": "MM"
+    },
+    "3719.06": {
+      "title": "Drugs-dispensing by practioner",
+      "degree": "MM"
+    },
+    "3719.07": {
+      "title": "Drugs-records required",
+      "degree": "MM"
+    },
+    "3719.08": {
+      "title": "Drugs-alter,deface,remove label",
+      "degree": "MM"
+    },
+    "3719.09": {
+      "title": "Drugs-possession f",
+      "degree": "MM"
+    },
+    "3719.10": {
+      "title": "Drugs-maintaining a nuisance premisis or real estate",
+      "degree": "MM"
+    },
+    "3719.101": {
+      "title": "Drugs-prohib use of bldg, vehf",
+      "degree": "MM"
+    },
+    "3719.13": {
+      "title": "Drugs-hindering inspection",
+      "degree": "MM"
+    },
+    "3719.16": {
+      "title": "Overpurch-sell exemp narc",
+      "degree": "MM"
+    },
+    "3719.161": {
+      "title": "Drugs-altering substance to increase concentration",
+      "degree": "MM"
+    },
+    "3719.17": {
+      "title": "Drugs-illegal procurement f",
+      "degree": "MM"
+    },
+    "3719.171": {
+      "title": "Drugs-illegal prescriptions f",
+      "degree": "MM"
+    },
+    "3719.172": {
+      "title": "Possession or sale of hypodermics",
+      "degree": "MM"
+    },
+    "3719.20": {
+      "title": "Drugs-prohibition f",
+      "degree": "MM"
+    },
+    "3719.22": {
+      "title": "Drugs-hinder enfrc of narc law",
+      "degree": "MM"
+    },
+    "3719.24": {
+      "title": "Drugs-bar,amph prohibitionssmf",
+      "degree": "MM"
+    },
+    "3719.24.1": {
+      "title": "Prhbtn dlivr brbtuats",
+      "degree": "MM"
+    },
+    "3719.30": {
+      "title": "Prohibition against leaving or depositing dangerous drug or poison on thoroughfares",
+      "degree": "MM"
+    },
+    "3719.31": {
+      "title": "Careless distribution of samples containing drug or poison",
+      "degree": "MM"
+    },
+    "3719.32": {
+      "title": "Drugs-regulating the sale of poisons",
+      "degree": "MM"
+    },
+    "3719.33": {
+      "title": "Drugs-labeling poisons",
+      "degree": "MM"
+    },
+    "3719.40": {
+      "title": "Hallucinogen",
+      "degree": "MM"
+    },
+    "3719.41": {
+      "title": "Drugs-hallu purch,possess smf",
+      "degree": "MM"
+    },
+    "3719.42": {
+      "title": "Drugs-hallu mfg w/o license f",
+      "degree": "MM"
+    },
+    "3719.43": {
+      "title": "Drugs-hallu whlsalers license",
+      "degree": "MM"
+    },
+    "3719.44": {
+      "title": "Drugs-hallu prohibitions f",
+      "degree": "MM"
+    },
+    "3719.45": {
+      "title": "Drugs-hallu-secure by fraud f",
+      "degree": "MM"
+    },
+    "3719.46": {
+      "title": "Drugs-hallu-maintaining housef",
+      "degree": "MM"
+    },
+    "3719.47": {
+      "title": "Drugs-hallu-prmt use of premis",
+      "degree": "MM"
+    },
+    "3719.50": {
+      "title": "Drugs-glue sniffing smf",
+      "degree": "MM"
+    },
+    "3719.81": {
+      "title": "Drugs-illegal use of samples",
+      "degree": "MM"
+    },
+    "3730.02": {
+      "title": "Illegal tattoo/piercing business",
+      "degree": "MM"
+    },
+    "3730.06": {
+      "title": "Perform procedure on minor",
+      "degree": "MM"
+    },
+    "3731.17": {
+      "title": "Reg at hotel by fale name",
+      "degree": "MM"
+    },
+    "3734.02": {
+      "title": "Operate hazardous waste facility",
+      "degree": "MM"
+    },
+    "3734.03": {
+      "title": "Open burning or open dumping",
+      "degree": "MM"
+    },
+    "3734.11": {
+      "title": "Hazardous waste-prohibited acts",
+      "degree": "MM"
+    },
+    "3734.3": {
+      "title": "Open dumping",
+      "degree": "MM"
+    },
+    "3734.83": {
+      "title": "Trans tires",
+      "degree": "MM"
+    },
+    "3737.62": {
+      "title": "Negligent spread of fires",
+      "degree": "MM"
+    },
+    "3743.22": {
+      "title": "Discharge or possess fireworks",
+      "degree": "MM"
+    },
+    "3743.25": {
+      "title": "Safety requirements for fireworks showroom structures",
+      "degree": "MM"
+    },
+    "3743.29": {
+      "title": "Storage of fireworks",
+      "degree": "MM"
+    },
+    "3743.32": {
+      "title": "Sale and use of fireworks",
+      "degree": "MM"
+    },
+    "3743.321": {
+      "title": "Fireworks sale-no permit",
+      "degree": "MM"
+    },
+    "3743.34": {
+      "title": "Fireworks-no smoking",
+      "degree": "MM"
+    },
+    "3743.41": {
+      "title": "Fireworks-trans regulations",
+      "degree": "MM"
+    },
+    "3743.50": {
+      "title": "Applying for exhibitor's license",
+      "degree": "MM"
+    },
+    "3743.60": {
+      "title": "Unlicensed manufacture of fireworks",
+      "degree": "MM"
+    },
+    "3743.61": {
+      "title": "Wholesale sale without license",
+      "degree": "MM"
+    },
+    "3743.63": {
+      "title": "Fireworks laws",
+      "degree": "MM"
+    },
+    "3743.64": {
+      "title": "Exhibition without license",
+      "degree": "MM"
+    },
+    "3743.65": {
+      "title": "Possession of fireworks",
+      "degree": "MM"
+    },
+    "3743.66": {
+      "title": "Limiting shipping or transporting of fireworks",
+      "degree": "MM"
+    },
+    "3745.52.11": {
+      "title": "Ill disp haz waste",
+      "degree": "MM"
+    },
+    "3745.52.20": {
+      "title": "Ill open dumping",
+      "degree": "MM"
+    },
+    "3755.07.04": {
+      "title": "No races",
+      "degree": "MM"
+    },
+    "3761.12": {
+      "title": "Conspiracy while wearing disguise",
+      "degree": "MM"
+    },
+    "3767.14": {
+      "title": "Prohibition against throwing refuse, oil, or filth into lakes, streams, or drains",
+      "degree": "MM"
+    },
+    "3767.16": {
+      "title": "Deposit of dead animals and offal upon land or water",
+      "degree": "MM"
+    },
+    "3767.17": {
+      "title": "Obstructing township or county ditch",
+      "degree": "MM"
+    },
+    "3767.18": {
+      "title": "Defile spring or well",
+      "degree": "MM"
+    },
+    "3767.201": {
+      "title": "Destroying or removing barriers along limited access highways",
+      "degree": "MM"
+    },
+    "3767.29": {
+      "title": "Abandoned refrigerators",
+      "degree": "MM"
+    },
+    "3767.32": {
+      "title": "Discard litter-public place",
+      "degree": "MM"
+    },
+    "3769.11": {
+      "title": "Illegal horse racing",
+      "degree": "MM"
+    },
+    "3769.15": {
+      "title": "Fraud entry of horse in contst",
+      "degree": "MM"
+    },
+    "3769.16": {
+      "title": "Disguisd horse in competition",
+      "degree": "MM"
+    },
+    "3769.17": {
+      "title": "Misrepresent in speed contest",
+      "degree": "MM"
+    },
+    "3772.99": {
+      "title": "Casino violation",
+      "degree": "MM"
+    },
+    "37723772.99": {
+      "title": "Operating illegal casino",
+      "degree": "MM"
+    },
+    "3773.04": {
+      "title": "Point/disch fierarms",
+      "degree": "MM"
+    },
+    "3773.21": {
+      "title": "Discharging firearms",
+      "degree": "MM"
+    },
+    "3773.211": {
+      "title": "Discharge firearms on hgwy",
+      "degree": "MM"
+    },
+    "3773.22": {
+      "title": "Drunk",
+      "degree": "MM"
+    },
+    "3791.04": {
+      "title": "Submission of building plans",
+      "degree": "MM"
+    },
+    "3793.11": {
+      "title": "Operate methadone facility without license",
+      "degree": "MM"
+    },
+    "3793.13": {
+      "title": "Viol confidentl rcds,drug fac",
+      "degree": "MM"
+    },
+    "3796.06": {
+      "title": "Marijuana control",
+      "degree": "MM"
+    },
+    "3796.062": {
+      "title": "Transportation of marijuana",
+      "degree": "MM"
+    },
+    "3901.54": {
+      "title": "Prohibited use of securities",
+      "degree": "MM"
+    },
+    "3905.01": {
+      "title": "Unl insurnc applictn",
+      "degree": "MM"
+    },
+    "3908.1": {
+      "title": "Assault m",
+      "degree": "MM"
+    },
+    "3917.07": {
+      "title": "Failure to keep records",
+      "degree": "MM"
+    },
+    "3991.091": {
+      "title": "Smoking in prohibited places",
+      "degree": "MM"
+    },
+    "3999.17": {
+      "title": "Misrep prop insur application",
+      "degree": "MM"
+    },
+    "3999.21": {
+      "title": "Notice ail to pay premium",
+      "degree": "MM"
+    },
+    "3999.22": {
+      "title": "False claims, health insurance",
+      "degree": "MM"
+    },
+    "3999.32": {
+      "title": "Notice of failure to make required premium payment or contribution",
+      "degree": "MM"
+    },
+    "3999.36": {
+      "title": "Notice of impairment insurer",
+      "degree": "MM"
+    },
+    "3999.37": {
+      "title": "Concealing property",
+      "degree": "MM"
+    },
+    "3999.38": {
+      "title": "Prohibiting payment of dividend when insurer is impaired",
+      "degree": "MM"
+    },
+    "402.58": {
+      "title": "Only authorized persons to enter uponthe flying field",
+      "degree": "MM"
+    },
+    "406.73": {
+      "title": "Smoking on the metro bus",
+      "degree": "MM"
+    },
+    "407.03": {
+      "title": "License fees for public veh",
+      "degree": "MM"
+    },
+    "407.101": {
+      "title": "Motor vehicles resembling public vehicles",
+      "degree": "MM"
+    },
+    "407.103": {
+      "title": "Defraud taxi driver - failure to pay fare",
+      "degree": "MM"
+    },
+    "407.111": {
+      "title": "Other parking violation - taxicab stands",
+      "degree": "MM"
+    },
+    "407.27": {
+      "title": "Liability insurance, bond and irrevocable letter of credit requirements",
+      "degree": "MM"
+    },
+    "407.3": {
+      "title": "License fees for public vehicle",
+      "degree": "MM"
+    },
+    "407.71": {
+      "title": "Public vehicle rate card",
+      "degree": "MM"
+    },
+    "407.75": {
+      "title": "Taxi meter required",
+      "degree": "MM"
+    },
+    "407.97": {
+      "title": "Private carrying of passengers for hire prohibited",
+      "degree": "MM"
+    },
+    "407.99": {
+      "title": "Taxi license violation",
+      "degree": "MM"
+    },
+    "408.13": {
+      "title": "Drivers badge",
+      "degree": "MM"
+    },
+    "408.17": {
+      "title": "Identification card",
+      "degree": "MM"
+    },
+    "408.25": {
+      "title": "Smoking prohibited",
+      "degree": "MM"
+    },
+    "408.29": {
+      "title": "Position of driver (taxi)",
+      "degree": "MM"
+    },
+    "408.3": {
+      "title": "Drivers license fees",
+      "degree": "MM"
+    },
+    "4101.2.51": {
+      "title": "Unregistered plumber",
+      "degree": "MM"
+    },
+    "4109.21": {
+      "title": "Door sales minors",
+      "degree": "MM"
+    },
+    "4113.15": {
+      "title": "Failure to pay wages",
+      "degree": "MM"
+    },
+    "4113.16": {
+      "title": "Failure to pay",
+      "degree": "MM"
+    },
+    "4113.99": {
+      "title": "Failure to pay",
+      "degree": "MM"
+    },
+    "4123.35": {
+      "title": ")",
+      "degree": "MM"
+    },
+    "4123.50": {
+      "title": "Failure to comply with law(",
+      "degree": "MM"
+    },
+    "4141.39": {
+      "title": "Fraud unemp benefit",
+      "degree": "MM"
+    },
+    "4163.07": {
+      "title": "Transport radioactiv materials,without notice",
+      "degree": "MM"
+    },
+    "42903.07": {
+      "title": "Vehicular homicide",
+      "degree": "MM"
+    },
+    "42919.12": {
+      "title": "Unlawful abortion",
+      "degree": "MM"
+    },
+    "42923.02": {
+      "title": "Theft by threat m1f",
+      "degree": "MM"
+    },
+    "42950.02": {
+      "title": "Notice of change of address",
+      "degree": "MM"
+    },
+    "4301.21": {
+      "title": "Sale of beer or intoxicating liquor for consumption on the premises",
+      "degree": "MM"
+    },
+    "4301.22": {
+      "title": "Prohibited sale of beer or liquor",
+      "degree": "MM"
+    },
+    "4301.45": {
+      "title": "Transported beer or liquor illegally",
+      "degree": "MM"
+    },
+    "4301.58": {
+      "title": "Activities prohibited without permit",
+      "degree": "MM"
+    },
+    "4301.60": {
+      "title": "Illegal transport of liquor",
+      "degree": "MM"
+    },
+    "4301.62": {
+      "title": "Open container of beer or intoxicating liquor in a vehicle",
+      "degree": "MM"
+    },
+    "4301.63": {
+      "title": "Purchase liquor by a person under",
+      "degree": "MM"
+    },
+    "4301.632": {
+      "title": "Prohibit purchase liq by minor",
+      "degree": "MM"
+    },
+    "4301.633": {
+      "title": "Furnishing false information to obtain beer or intoxicating liquor for person under twenty-one",
+      "degree": "MM"
+    },
+    "4301.634": {
+      "title": "Furnishing false information to obtain beer or intoxicating liquor by person under twenty-one",
+      "degree": "MM"
+    },
+    "4301.635": {
+      "title": "Misrep by minor -",
+      "degree": "MM"
+    },
+    "4301.636": {
+      "title": "Manufacture, transfer, sell, or distribute false identification card or driver's license",
+      "degree": "MM"
+    },
+    "4301.637": {
+      "title": "Posting warnings",
+      "degree": "MM"
+    },
+    "4301.64": {
+      "title": "Open container of beer or intoxicating liquor",
+      "degree": "MM"
+    },
+    "4301.65": {
+      "title": "Sale, purchase, or use of alcohol vaporizing device prohibited",
+      "degree": "MM"
+    },
+    "4301.66": {
+      "title": "Obstructing premise search",
+      "degree": "MM"
+    },
+    "4301.67": {
+      "title": "Illegal possession of spirituous or intoxicating liquor or beer prohibited",
+      "degree": "MM"
+    },
+    "4301.68": {
+      "title": "Dilution and refilling",
+      "degree": "MM"
+    },
+    "4301.69": {
+      "title": "Underage person liquor offense",
+      "degree": "MM"
+    },
+    "4301.691": {
+      "title": "Alternate prohibitions",
+      "degree": "MM"
+    },
+    "4301.70": {
+      "title": "Violations not otherwise specified",
+      "degree": "MM"
+    },
+    "4303.15": {
+      "title": "Liquor sale after hours",
+      "degree": "MM"
+    },
+    "4303.25": {
+      "title": "Prohibited acts - sales representatives to be registered",
+      "degree": "MM"
+    },
+    "4399.09": {
+      "title": "Keeping place where beer or intoxicating liquors are sold, furnished, or given away",
+      "degree": "MM"
+    },
+    "4399.16": {
+      "title": "Rioting, reveling, intoxication, or drunkenness at taverns",
+      "degree": "MM"
+    },
+    "4399.17": {
+      "title": "Manufacture,sell poisoned liquor",
+      "degree": "MM"
+    },
+    "4501.15.06": {
+      "title": "Fog lights no dimmer switch",
+      "degree": "MM"
+    },
+    "4501.15.6": {
+      "title": "Fog lights no dimmer switch",
+      "degree": "MM"
+    },
+    "4502.02": {
+      "title": "Expired driver's license",
+      "degree": "MM"
+    },
+    "4502.2": {
+      "title": "Expired driver's license",
+      "degree": "MM"
+    },
+    "4503.05": {
+      "title": "Violate noncommercial registration",
+      "degree": "MM"
+    },
+    "4503.10": {
+      "title": "Fail to file registration",
+      "degree": "MM"
+    },
+    "4503.11": {
+      "title": "License or registration violation",
+      "degree": "MM"
+    },
+    "4503.12": {
+      "title": "Certificate of registration",
+      "degree": "MM"
+    },
+    "4503.181": {
+      "title": "Historical vehicle licensing",
+      "degree": "MM"
+    },
+    "4503.182": {
+      "title": "Temporary license placard or windshield sticker",
+      "degree": "MM"
+    },
+    "4503.19": {
+      "title": "No county embossment",
+      "degree": "MM"
+    },
+    "4503.21": {
+      "title": "Display of license plates",
+      "degree": "MM"
+    },
+    "4503.30": {
+      "title": "Display of placards issued to manufacturers, dealers or distributors",
+      "degree": "MM"
+    },
+    "4503.31": {
+      "title": "Placard on motor vehicle",
+      "degree": "MM"
+    },
+    "4503.32": {
+      "title": "Unath use of speciality plates",
+      "degree": "MM"
+    },
+    "4503.471": {
+      "title": "Licensing of motor vehicles (international association of firefighters license plates)",
+      "degree": "MM"
+    },
+    "4504.09": {
+      "title": "Oper mv wo cnty sticker",
+      "degree": "MM"
+    },
+    "4505.03": {
+      "title": "Auto certificate of title",
+      "degree": "MM"
+    },
+    "4505.18": {
+      "title": "Prohibited acts of chapter 4505 (certificate of title)",
+      "degree": "MM"
+    },
+    "4505.19": {
+      "title": "Prohibited acts involving certificates of title",
+      "degree": "MM"
+    },
+    "4505.21": {
+      "title": "Failure to surrender certificate of title",
+      "degree": "MM"
+    },
+    "4506.023": {
+      "title": "Oper comm veh without cdl",
+      "degree": "MM"
+    },
+    "4506.03": {
+      "title": "Commercial driver's license or temporary instruction permit requirements",
+      "degree": "MM"
+    },
+    "4506.04": {
+      "title": "Commercial drivers license suspension",
+      "degree": "MM"
+    },
+    "4506.05": {
+      "title": "Valid commercial driver's license",
+      "degree": "MM"
+    },
+    "4506.10": {
+      "title": "Operate commercial motor vehicle withoutmedical card",
+      "degree": "MM"
+    },
+    "4506.12": {
+      "title": "Classes of lic;endorse;restric",
+      "degree": "MM"
+    },
+    "4506.14": {
+      "title": "Failure to notify registrar of address change-cdl",
+      "degree": "MM"
+    },
+    "4506.15": {
+      "title": "Operate commercial motor vehicle-detectable alcohol",
+      "degree": "MM"
+    },
+    "4506.17": {
+      "title": "Fail to surr cdl to peace off",
+      "degree": "MM"
+    },
+    "4506.18": {
+      "title": "Driver to give notice of out-of-state conviction within 30 days",
+      "degree": "MM"
+    },
+    "4506.20": {
+      "title": "Duties of employer of commercial motor vehicle driver",
+      "degree": "MM"
+    },
+    "4506.3": {
+      "title": "Oper comercl veh wo cdl",
+      "degree": "MM"
+    },
+    "4507.02": {
+      "title": "Operating motor vehicle without valid license",
+      "degree": "M1"
+    },
+    "4507.021": {
+      "title": "License suspension-points",
+      "degree": "MM"
+    },
+    "4507.03": {
+      "title": "Emergency vehicle procedure",
+      "degree": "MM"
+    },
+    "4507.05": {
+      "title": "Temporary instruction permit",
+      "degree": "MM"
+    },
+    "4507.08": {
+      "title": "Drivers license restrictions",
+      "degree": "MM"
+    },
+    "4507.09": {
+      "title": "Expired operators license",
+      "degree": "MM"
+    },
+    "4507.11": {
+      "title": "Exp driver examiner permit",
+      "degree": "MM"
+    },
+    "4507.12": {
+      "title": "Driving w/o valid license",
+      "degree": "MM"
+    },
+    "4507.13": {
+      "title": "Chauffeur's license",
+      "degree": "MM"
+    },
+    "4507.14": {
+      "title": "Restr on license by registrar",
+      "degree": "MM"
+    },
+    "4507.16": {
+      "title": "Lic susp, revoc by trial judge",
+      "degree": "MM"
+    },
+    "4507.163": {
+      "title": "Oplic - viol liq law",
+      "degree": "MM"
+    },
+    "4507.17": {
+      "title": "Effect of suspension or cancellation of license",
+      "degree": "MM"
+    },
+    "4507.2": {
+      "title": "Oper motor vehicle w-o license",
+      "degree": "MM"
+    },
+    "4507.21": {
+      "title": "Horns, sirens, warning devices",
+      "degree": "MM"
+    },
+    "4507.3": {
+      "title": "Emergency vehicle procedure",
+      "degree": "MM"
+    },
+    "4507.30": {
+      "title": "Prohibited acts",
+      "degree": "MM"
+    },
+    "4507.31": {
+      "title": "Permitting unlicensed minor to operate vehicle",
+      "degree": "MM"
+    },
+    "4507.33": {
+      "title": "Lending auto to another",
+      "degree": "MM"
+    },
+    "4507.34": {
+      "title": "Driving under court suspension",
+      "degree": "MM"
+    },
+    "4507.35": {
+      "title": "Display drivers license",
+      "degree": "MM"
+    },
+    "4507.36": {
+      "title": "False statement",
+      "degree": "MM"
+    },
+    "4507.37": {
+      "title": "License suspension",
+      "degree": "MM"
+    },
+    "4507.38": {
+      "title": "Failure to display license",
+      "degree": "MM"
+    },
+    "4507.39": {
+      "title": "Drive with lic susp or revoked",
+      "degree": "MM"
+    },
+    "4507.40": {
+      "title": "Repeated traffic offender",
+      "degree": "MM"
+    },
+    "4507.5": {
+      "title": "Temporary instruction permit",
+      "degree": "MM"
+    },
+    "4507.52": {
+      "title": "Fail-surrender id for oplic",
+      "degree": "MM"
+    },
+    "4507.76": {
+      "title": "Code not found in Ohio Revised Code (HCSO data artifact)",
+      "degree": "MM"
+    },
+    "4507.77": {
+      "title": "Fail to return license",
+      "degree": "MM"
+    },
+    "4507.9": {
+      "title": "Expired operators license",
+      "degree": "MM"
+    },
+    "4509.01": {
+      "title": "No car insurancve",
+      "degree": "MM"
+    },
+    "4509.09": {
+      "title": "Susp-fail to report acc",
+      "degree": "MM"
+    },
+    "4509.101": {
+      "title": "Fra suspension",
+      "degree": "MM"
+    },
+    "4509.17": {
+      "title": "Lic susp fail dep security",
+      "degree": "MM"
+    },
+    "4509.19": {
+      "title": "Sell mtr veh/alt ser",
+      "degree": "MM"
+    },
+    "4509.31": {
+      "title": "Suspension of registration",
+      "degree": "MM"
+    },
+    "4509.36": {
+      "title": "Copies of judgements",
+      "degree": "MM"
+    },
+    "4509.38": {
+      "title": "Under f r a suspension",
+      "degree": "MM"
+    },
+    "4509.45": {
+      "title": "Oper susp-no proof ins",
+      "degree": "MM"
+    },
+    "4509.52": {
+      "title": "No car insurance",
+      "degree": "MM"
+    },
+    "4509.63": {
+      "title": "Under security suspension",
+      "degree": "MM"
+    },
+    "4509.66": {
+      "title": "Lic suspn fin responsibility",
+      "degree": "MM"
+    },
+    "4509.69": {
+      "title": "Failure to return operator's license or license plate to registrar",
+      "degree": "MM"
+    },
+    "4509.74": {
+      "title": "Failure to report a motor vehicle accident",
+      "degree": "MM"
+    },
+    "4509.75": {
+      "title": "Giving false information",
+      "degree": "MM"
+    },
+    "4509.76": {
+      "title": "Financial responsibility compliance",
+      "degree": "MM"
+    },
+    "4509.77": {
+      "title": "Failure to return license",
+      "degree": "MM"
+    },
+    "4510.02": {
+      "title": "Driving under suspension or cancellation",
+      "degree": "M1"
+    },
+    "4510.037": {
+      "title": "License restrictions during 12-point suspension",
+      "degree": "M1"
+    },
+    "4510.11": {
+      "title": "Driving under suspension",
+      "degree": "M1"
+    },
+    "4510.111": {
+      "title": "Driving under FRA suspension",
+      "degree": "M1"
+    },
+    "4510.12": {
+      "title": "Driving without a valid license",
+      "degree": "M1"
+    },
+    "4510.14": {
+      "title": "Driving under OVI suspension",
+      "degree": "M1"
+    },
+    "4510.15": {
+      "title": "Suspension of license/reckless operation",
+      "degree": "MM"
+    },
+    "4510.16": {
+      "title": "Driving on a suspended/revoked license",
+      "degree": "M1"
+    },
+    "4510.17": {
+      "title": "Suspension of license for drug or ovi offense",
+      "degree": "MM"
+    },
+    "4510.18": {
+      "title": "Driving under specified lifetime suspension",
+      "degree": "MM"
+    },
+    "4510.21": {
+      "title": "Failure to reinstate a license",
+      "degree": "M1"
+    },
+    "4510.22": {
+      "title": "Suspension of license for failure to appear",
+      "degree": "MM"
+    },
+    "4511.02": {
+      "title": "Fleeing from police officer",
+      "degree": "MM"
+    },
+    "4511.051": {
+      "title": "Signals for turns and stops",
+      "degree": "MM"
+    },
+    "4511.07": {
+      "title": "One way street",
+      "degree": "MM"
+    },
+    "4511.12": {
+      "title": "Obedience to traffic control devices",
+      "degree": "MM"
+    },
+    "4511.121": {
+      "title": "Weigh station violation",
+      "degree": "MM"
+    },
+    "4511.13": {
+      "title": "Traffic-control signal indications",
+      "degree": "MM"
+    },
+    "4511.132": {
+      "title": "Operation at intersections with malfunctioning traffic control signal lights",
+      "degree": "MM"
+    },
+    "4511.14": {
+      "title": "Walk lights",
+      "degree": "MM"
+    },
+    "4511.15": {
+      "title": "Flashing lights",
+      "degree": "MM"
+    },
+    "4511.16": {
+      "title": "Unauthorized sign or signal",
+      "degree": "MM"
+    },
+    "4511.17": {
+      "title": "Tampering with traffic control device",
+      "degree": "MM"
+    },
+    "4511.18": {
+      "title": "Purchase, possession or sale of traffic control device",
+      "degree": "MM"
+    },
+    "4511.181": {
+      "title": "Vehiclr homcd 1st deg",
+      "degree": "MM"
+    },
+    "4511.19": {
+      "title": "Operating a vehicle under the influence (OVI / DUI)",
+      "degree": "M1"
+    },
+    "4511.191": {
+      "title": "Dwi-implied consent",
+      "degree": "MM"
+    },
+    "4511.192": {
+      "title": "Advice to OVI arrestee",
+      "degree": "M1"
+    },
+    "4511.194": {
+      "title": "Having physical control of vehicle while under influence",
+      "degree": "M1"
+    },
+    "4511.20": {
+      "title": "Operation in willful or wanton disregard of safety",
+      "degree": "M4"
+    },
+    "4511.201": {
+      "title": "Reckless operation of motor vehicle - private property",
+      "degree": "MM"
+    },
+    "4511.202": {
+      "title": "Operating a motor vehicle without reasonable control",
+      "degree": "MM"
+    },
+    "4511.203": {
+      "title": "Wrongful entrustment",
+      "degree": "MM"
+    },
+    "4511.204": {
+      "title": "Driving while texting",
+      "degree": "MM"
+    },
+    "4511.205": {
+      "title": "Use of devises by persons under",
+      "degree": "MM"
+    },
+    "4511.21": {
+      "title": "Speed limits",
+      "degree": "MM"
+    },
+    "4511.213": {
+      "title": "Approaching stationary public safety vehicle displaying emergency light",
+      "degree": "MM"
+    },
+    "4511.22": {
+      "title": "Slow speed (impeding traffic)",
+      "degree": "MM"
+    },
+    "4511.24": {
+      "title": "Emergency vehicle procedure",
+      "degree": "MM"
+    },
+    "4511.25": {
+      "title": "Drive right side of highway",
+      "degree": "MM"
+    },
+    "4511.251": {
+      "title": "Lanes of travel upon roadways of sufficient width",
+      "degree": "MM"
+    },
+    "4511.26": {
+      "title": "Fail to yield half of roadway",
+      "degree": "MM"
+    },
+    "4511.27": {
+      "title": "Improper passing",
+      "degree": "MM"
+    },
+    "4511.28": {
+      "title": "Overtaking and passing upon the right of another vehicle",
+      "degree": "MM"
+    },
+    "4511.29": {
+      "title": "Left of center",
+      "degree": "MM"
+    },
+    "4511.30": {
+      "title": "Driving left of center",
+      "degree": "MM"
+    },
+    "4511.31": {
+      "title": "Hazardous zone",
+      "degree": "MM"
+    },
+    "4511.32": {
+      "title": "One-way traffic - rotary islands",
+      "degree": "MM"
+    },
+    "4511.33": {
+      "title": "Rules for driving in marked lanes",
+      "degree": "MM"
+    },
+    "4511.34": {
+      "title": "Following too closely",
+      "degree": "MM"
+    },
+    "4511.35": {
+      "title": "Divided roadways",
+      "degree": "MM"
+    },
+    "4511.36": {
+      "title": "Improper turn",
+      "degree": "MM"
+    },
+    "4511.37": {
+      "title": "Turning in roadway prohibited",
+      "degree": "MM"
+    },
+    "4511.38": {
+      "title": "Rules for starting and backing vehicles",
+      "degree": "MM"
+    },
+    "4511.39": {
+      "title": "Turn and stop signals",
+      "degree": "MM"
+    },
+    "4511.41": {
+      "title": "Right of way",
+      "degree": "MM"
+    },
+    "4511.42": {
+      "title": "Right-of-way at intersections; left turns",
+      "degree": "MM"
+    },
+    "4511.43": {
+      "title": "Right of way-stop sign",
+      "degree": "MM"
+    },
+    "4511.431": {
+      "title": "Stop at sidewalk area",
+      "degree": "MM"
+    },
+    "4511.432": {
+      "title": "Stop signs on private residential road or driveway",
+      "degree": "MM"
+    },
+    "4511.44": {
+      "title": "Right of way-highway",
+      "degree": "MM"
+    },
+    "4511.441": {
+      "title": "Right-of-way of pedestrian on sidewalk",
+      "degree": "MM"
+    },
+    "4511.45": {
+      "title": "Right-of-way of public safety or coroner's vehicle",
+      "degree": "MM"
+    },
+    "4511.451": {
+      "title": "Right-of way of funeral vehicle",
+      "degree": "MM"
+    },
+    "4511.452": {
+      "title": "Right-of-way yielded by pedestrian to public safety vehicle",
+      "degree": "MM"
+    },
+    "4511.46": {
+      "title": "Right-of-way of pedestrian within crosswalk",
+      "degree": "MM"
+    },
+    "4511.47": {
+      "title": "Right-of-way of blind person",
+      "degree": "MM"
+    },
+    "4511.48": {
+      "title": "Right-of-way yielded by pedestrian",
+      "degree": "MM"
+    },
+    "4511.481": {
+      "title": "Intoxicated or drugged pedestrian on highway",
+      "degree": "MM"
+    },
+    "4511.49": {
+      "title": "Pedestrians on right half of crosswalk",
+      "degree": "MM"
+    },
+    "4511.491": {
+      "title": "Motorized wheelchair operators",
+      "degree": "MM"
+    },
+    "4511.50": {
+      "title": "Pedestrians on roadways",
+      "degree": "MM"
+    },
+    "4511.51": {
+      "title": "Hitchhiking - soliciting employment, business, or contributions from occupant of vehicle",
+      "degree": "MM"
+    },
+    "4511.511": {
+      "title": "Pedestrian on bridge or railroad grade crossing",
+      "degree": "MM"
+    },
+    "4511.521": {
+      "title": "Operation of motorized bicycles",
+      "degree": "MM"
+    },
+    "4511.53": {
+      "title": "Operation of bicycles, motorcycles and snowmobiles",
+      "degree": "MM"
+    },
+    "4511.54": {
+      "title": "Prohibition against attaching bicycles and sleds to vehicles",
+      "degree": "MM"
+    },
+    "4511.55": {
+      "title": "Operating bicycles and motorcycles on roadway",
+      "degree": "MM"
+    },
+    "4511.56": {
+      "title": "Bicycle safety and signals",
+      "degree": "MM"
+    },
+    "4511.60": {
+      "title": "Driving through safety zone",
+      "degree": "MM"
+    },
+    "4511.61": {
+      "title": "Stop signs at dangerous highway crossings over railroad tracks",
+      "degree": "MM"
+    },
+    "4511.62": {
+      "title": "Stopping at railroad grade crossing",
+      "degree": "MM"
+    },
+    "4511.63": {
+      "title": "Stopping at grade crossings",
+      "degree": "MM"
+    },
+    "4511.66": {
+      "title": "Prohibition against parking on highways",
+      "degree": "MM"
+    },
+    "4511.661": {
+      "title": "Unattended motor vehicles",
+      "degree": "MM"
+    },
+    "4511.67": {
+      "title": "Remove illegally parked veh",
+      "degree": "MM"
+    },
+    "4511.68": {
+      "title": "Parking - prohibited acts",
+      "degree": "MM"
+    },
+    "4511.681": {
+      "title": "Park on property without owner consent",
+      "degree": "MM"
+    },
+    "4511.69": {
+      "title": "Parking requirements",
+      "degree": "MM"
+    },
+    "4511.70": {
+      "title": "Interfer with driver control",
+      "degree": "MM"
+    },
+    "4511.701": {
+      "title": "Occupy trailer in motion",
+      "degree": "MM"
+    },
+    "4511.71": {
+      "title": "Driving on closed highway",
+      "degree": "MM"
+    },
+    "4511.711": {
+      "title": "Driving on sidewalk",
+      "degree": "MM"
+    },
+    "4511.712": {
+      "title": "Obstructing intersection",
+      "degree": "MM"
+    },
+    "4511.713": {
+      "title": "Driving on bike trail",
+      "degree": "MM"
+    },
+    "4511.714": {
+      "title": "Operation of vehicle on roadway covered by water",
+      "degree": "MM"
+    },
+    "4511.72": {
+      "title": "Following an emergency or public safety vehicle too closely",
+      "degree": "MM"
+    },
+    "4511.73": {
+      "title": "Driving over unprotected fire hose",
+      "degree": "MM"
+    },
+    "4511.74": {
+      "title": "Spill load on roadway",
+      "degree": "MM"
+    },
+    "4511.75": {
+      "title": "Stopping for stopped school bus",
+      "degree": "MM"
+    },
+    "4511.771": {
+      "title": "Signal lamps to be equipped with flashing red and amber lights",
+      "degree": "MM"
+    },
+    "4511.79": {
+      "title": "Driving commercial vehicle with impaired ability or alertness",
+      "degree": "MM"
+    },
+    "4511.81": {
+      "title": "Child restraint / safety seat",
+      "degree": "MM"
+    },
+    "4511.82": {
+      "title": "Littering from a motor vehicle",
+      "degree": "MM"
+    },
+    "4511.83": {
+      "title": "Tamper w interlock device",
+      "degree": "MM"
+    },
+    "4511.84": {
+      "title": "Earphones or earplugs on operator prohibited",
+      "degree": "MM"
+    },
+    "4511.95": {
+      "title": "Oper mv-susp other state",
+      "degree": "MM"
+    },
+    "4513.02": {
+      "title": "Driving an unsafe vehicle",
+      "degree": "MM"
+    },
+    "4513.021": {
+      "title": "Use of lights and signals (commercial)",
+      "degree": "MM"
+    },
+    "4513.03": {
+      "title": "Lights when needed",
+      "degree": "MM"
+    },
+    "4513.04": {
+      "title": "Auxiliary lamps",
+      "degree": "MM"
+    },
+    "4513.05": {
+      "title": "Headlights",
+      "degree": "MM"
+    },
+    "4513.06": {
+      "title": "Red reflectors required",
+      "degree": "MM"
+    },
+    "4513.07": {
+      "title": "Safety lighting of commercial vehicles",
+      "degree": "MM"
+    },
+    "4513.071": {
+      "title": "Stop lights required",
+      "degree": "MM"
+    },
+    "4513.08": {
+      "title": "Obscured lights on vehicles",
+      "degree": "MM"
+    },
+    "4513.09": {
+      "title": "Red light or flag required",
+      "degree": "MM"
+    },
+    "4513.10": {
+      "title": "No lights on parked vehicle",
+      "degree": "MM"
+    },
+    "4513.11": {
+      "title": "Lamps, reflectors and emblems for slow-moving vehicles",
+      "degree": "MM"
+    },
+    "4513.12": {
+      "title": "Spotlights and auxiliary driving lights",
+      "degree": "MM"
+    },
+    "4513.13": {
+      "title": "Cowl,fender,and backup lights",
+      "degree": "MM"
+    },
+    "4513.14": {
+      "title": "Display of unauthorized signs/signals",
+      "degree": "MM"
+    },
+    "4513.15": {
+      "title": "Headlights required",
+      "degree": "MM"
+    },
+    "4513.16": {
+      "title": "Lights of less intensity",
+      "degree": "MM"
+    },
+    "4513.17": {
+      "title": "Number of lights permitted",
+      "degree": "MM"
+    },
+    "4513.181": {
+      "title": "Lights violation",
+      "degree": "MM"
+    },
+    "4513.19": {
+      "title": "Focus and aim of headlights",
+      "degree": "MM"
+    },
+    "4513.191": {
+      "title": "No county designation sticker",
+      "degree": "MM"
+    },
+    "4513.2": {
+      "title": "Unsafe vehicle",
+      "degree": "MM"
+    },
+    "4513.20": {
+      "title": "Improper brakes",
+      "degree": "MM"
+    },
+    "4513.21": {
+      "title": "Horns-sirens-warning devices",
+      "degree": "MM"
+    },
+    "4513.22": {
+      "title": "Mufflers",
+      "degree": "MM"
+    },
+    "4513.221": {
+      "title": "Excessive noise",
+      "degree": "MM"
+    },
+    "4513.23": {
+      "title": "Rear view mirror",
+      "degree": "MM"
+    },
+    "4513.24": {
+      "title": "Windshield and windshield wipers",
+      "degree": "MM"
+    },
+    "4513.241": {
+      "title": "Restrictions on light transmittance (tinted windows)",
+      "degree": "MM"
+    },
+    "4513.25": {
+      "title": "Solid tire requirements",
+      "degree": "MM"
+    },
+    "4513.261": {
+      "title": "Directional signals",
+      "degree": "MM"
+    },
+    "4513.263": {
+      "title": "Occupant restraining devices (seat belts)",
+      "degree": "MM"
+    },
+    "4513.27": {
+      "title": "Extra signal equipment",
+      "degree": "MM"
+    },
+    "4513.28": {
+      "title": "Warning on disabled vehicle",
+      "degree": "MM"
+    },
+    "4513.29": {
+      "title": "Requirements for vehicles transporting explosives",
+      "degree": "MM"
+    },
+    "4513.3": {
+      "title": "Improper lighting on vehicle",
+      "degree": "MM"
+    },
+    "4513.30": {
+      "title": "Limitation of load extension on left side of vehicle",
+      "degree": "MM"
+    },
+    "4513.31": {
+      "title": "Securing loads on vehicles",
+      "degree": "MM"
+    },
+    "4513.32": {
+      "title": "Towing violation",
+      "degree": "MM"
+    },
+    "4513.34": {
+      "title": "Issuance of special permit",
+      "degree": "MM"
+    },
+    "4513.36": {
+      "title": "Resisting arrest-traffic",
+      "degree": "MM"
+    },
+    "4513.361": {
+      "title": "Furnishing false information to officer issuing traffic ticket",
+      "degree": "M1"
+    },
+    "4513.4": {
+      "title": "Headlights",
+      "degree": "MM"
+    },
+    "4513.5": {
+      "title": "Improper rear lights",
+      "degree": "MM"
+    },
+    "4513.60": {
+      "title": "Towing violation",
+      "degree": "MM"
+    },
+    "4513.63": {
+      "title": "Junk vehicle abadoned",
+      "degree": "MM"
+    },
+    "4513.64": {
+      "title": "Willfully leaving abandoned junk motor vehicle",
+      "degree": "MM"
+    },
+    "4513.65": {
+      "title": "Retaining junk automobiles",
+      "degree": "MM"
+    },
+    "4517.03": {
+      "title": "Established place of business restrictions",
+      "degree": "MM"
+    },
+    "4517.18": {
+      "title": "Auction of large construction or transportation equipment; prohibited acts",
+      "degree": "MM"
+    },
+    "4519.40": {
+      "title": "Operate all purpose vehicle on highway or freeway",
+      "degree": "MM"
+    },
+    "4519.44": {
+      "title": "License requirement",
+      "degree": "MM"
+    },
+    "4549.02": {
+      "title": "Stopping after accident on public roads",
+      "degree": "M1"
+    },
+    "4549.021": {
+      "title": "Stopping after accident on other than public roads",
+      "degree": "M1"
+    },
+    "4549.03": {
+      "title": "Stopping after accident on unoccupied property",
+      "degree": "M1"
+    },
+    "4549.04": {
+      "title": "Auto larceny",
+      "degree": "MM"
+    },
+    "4549.041": {
+      "title": "Entrg lockd cmprtmts",
+      "degree": "MM"
+    },
+    "4549.05": {
+      "title": "Steal prts mtr vhcl",
+      "degree": "MM"
+    },
+    "4549.06": {
+      "title": "Auto tampering",
+      "degree": "MM"
+    },
+    "4549.07": {
+      "title": "Motor veh with concealed id m",
+      "degree": "MM"
+    },
+    "4549.08": {
+      "title": "Operating a motor vehicle without lawful registration",
+      "degree": "M1"
+    },
+    "4549.10": {
+      "title": "Operating manufacturer vehicle without placard",
+      "degree": "MM"
+    },
+    "4549.11": {
+      "title": "Operating with number of former owner",
+      "degree": "MM"
+    },
+    "4549.12": {
+      "title": "Resident operating with number issued by foreign state",
+      "degree": "MM"
+    },
+    "4549.18": {
+      "title": "Display of registration- commercial vehicle",
+      "degree": "MM"
+    },
+    "4549.2": {
+      "title": "Stop after accident",
+      "degree": "MM"
+    },
+    "4549.21": {
+      "title": "Auto thft conspiracy",
+      "degree": "MM"
+    },
+    "4549.3": {
+      "title": "Acdnt, damage to real estate",
+      "degree": "MM"
+    },
+    "4549.36": {
+      "title": "Tmpg mtr veh of another",
+      "degree": "MM"
+    },
+    "4549.42": {
+      "title": "Tampering with odometer",
+      "degree": "MM"
+    },
+    "4549.43": {
+      "title": "Sale or use of fraudulent odometer",
+      "degree": "MM"
+    },
+    "4549.44": {
+      "title": "Operating with disconnected or nonfunctional odometer",
+      "degree": "MM"
+    },
+    "4549.45": {
+      "title": "Sale vehicle with tampered odometer",
+      "degree": "MM"
+    },
+    "4549.46": {
+      "title": "Odometer disclosure",
+      "degree": "MM"
+    },
+    "4549.62": {
+      "title": "Fraudulent vehicle id number",
+      "degree": "MM"
+    },
+    "4561.15": {
+      "title": "Unsafe operation of aircraft",
+      "degree": "MM"
+    },
+    "4561.16": {
+      "title": "Take poss,aircraft wo permissn",
+      "degree": "MM"
+    },
+    "4561.24": {
+      "title": "Oper motor vehicle on airport runway",
+      "degree": "MM"
+    },
+    "4701.14": {
+      "title": "Unlawful practice",
+      "degree": "MM"
+    },
+    "4705.07": {
+      "title": "False representation-unauthorized practice",
+      "degree": "MM"
+    },
+    "4710.02": {
+      "title": "Disbursements to creditors - separate trust accounts - contributions - audit - insurance",
+      "degree": "MM"
+    },
+    "4712.02": {
+      "title": "Certificate of registration",
+      "degree": "MM"
+    },
+    "4712.04": {
+      "title": "Written statements,contracts",
+      "degree": "MM"
+    },
+    "4712.05": {
+      "title": "Written statements,surety bnd",
+      "degree": "MM"
+    },
+    "4712.06": {
+      "title": "Prohibit written statements",
+      "degree": "MM"
+    },
+    "4712.08": {
+      "title": "Fraudulent practices",
+      "degree": "MM"
+    },
+    "4712.09": {
+      "title": "Waiver of buyers rights",
+      "degree": "MM"
+    },
+    "4713.14": {
+      "title": "Operate salon without license",
+      "degree": "MM"
+    },
+    "4713.17": {
+      "title": "Sanctions violations",
+      "degree": "MM"
+    },
+    "4713.20": {
+      "title": "Operating w/o cosmetology lic",
+      "degree": "MM"
+    },
+    "4713.25": {
+      "title": "Unlicensed tanning bus",
+      "degree": "MM"
+    },
+    "4715.09": {
+      "title": "Practice dentistry without license",
+      "degree": "MM"
+    },
+    "4715.19": {
+      "title": "Employment of unlicensed dentist",
+      "degree": "MM"
+    },
+    "4715.20": {
+      "title": "Pracice dental hygiene wihout license",
+      "degree": "MM"
+    },
+    "4715.29": {
+      "title": "Employ dental hygienist without license",
+      "degree": "MM"
+    },
+    "4715.32": {
+      "title": "Sell dental degree, license",
+      "degree": "MM"
+    },
+    "4715.39": {
+      "title": "Violate state dental board rules",
+      "degree": "MM"
+    },
+    "4715.52": {
+      "title": "Practice dental xray operator without license",
+      "degree": "MM"
+    },
+    "4723.03": {
+      "title": "Unlicensed practice",
+      "degree": "MM"
+    },
+    "4723.37": {
+      "title": "Pract nursing wo license",
+      "degree": "MM"
+    },
+    "4727.02": {
+      "title": "Pawnbroker without license",
+      "degree": "MM"
+    },
+    "4728.99": {
+      "title": "Precious metal deal wo lic",
+      "degree": "MM"
+    },
+    "4729.141": {
+      "title": "Rob unlawful entry",
+      "degree": "MM"
+    },
+    "4729.37": {
+      "title": "Filling prescription records",
+      "degree": "MM"
+    },
+    "4729.51": {
+      "title": "Selling, purchasing, distributing, or delivering dangerous drugs",
+      "degree": "MM"
+    },
+    "4729.53": {
+      "title": "Ill poss-presc drug",
+      "degree": "MM"
+    },
+    "4729.54": {
+      "title": "Terminal distributors",
+      "degree": "MM"
+    },
+    "4729.61": {
+      "title": "Obtain dangerous drug by fraud",
+      "degree": "MM"
+    },
+    "4731.34": {
+      "title": "Unauthorized practice of medicine",
+      "degree": "MM"
+    },
+    "4731.41": {
+      "title": "Practice medicine without license",
+      "degree": "MM"
+    },
+    "4731.43": {
+      "title": "Prac osteopathy wo license",
+      "degree": "MM"
+    },
+    "4731.46": {
+      "title": "Issue false medical diploma",
+      "degree": "MM"
+    },
+    "4731.47": {
+      "title": "Sell false medical diploma",
+      "degree": "MM"
+    },
+    "4732.21": {
+      "title": "Prohibition against unlicensed practice",
+      "degree": "MM"
+    },
+    "4733.22": {
+      "title": "Engineering license prohibitions",
+      "degree": "MM"
+    },
+    "4734.17": {
+      "title": "Practice chiropratic without license",
+      "degree": "MM"
+    },
+    "4735.25": {
+      "title": "Qualification of foreign real estate fees",
+      "degree": "MM"
+    },
+    "4735.30": {
+      "title": "False statement,sell real estat",
+      "degree": "MM"
+    },
+    "4737.04": {
+      "title": "Scrap metal and merchandise container dealers; exertion of control over certain articles; record keeping",
+      "degree": "MM"
+    },
+    "4741.19": {
+      "title": "Veterinarian without license",
+      "degree": "MM"
+    },
+    "4749.13": {
+      "title": "Prohibited security services",
+      "degree": "MM"
+    },
+    "4755.07.05": {
+      "title": "Damage to park-r",
+      "degree": "MM"
+    },
+    "4773.02": {
+      "title": "Radiation therapist without license",
+      "degree": "MM"
+    },
+    "4902.25": {
+      "title": "Puco hearing",
+      "degree": "MM"
+    },
+    "4903.25": {
+      "title": "Puco hearings",
+      "degree": "MM"
+    },
+    "4905.56": {
+      "title": "Violation of puco statutes",
+      "degree": "MM"
+    },
+    "4906.11": {
+      "title": "Cheating m",
+      "degree": "MM"
+    },
+    "4907.11": {
+      "title": "Petty theft m",
+      "degree": "MM"
+    },
+    "4907.3": {
+      "title": "Vandalism",
+      "degree": "MM"
+    },
+    "4907.63": {
+      "title": "Failure to comply with puco",
+      "degree": "MM"
+    },
+    "4907.9": {
+      "title": "Trespass-knowingly m",
+      "degree": "MM"
+    },
+    "4908.01": {
+      "title": "Assault m",
+      "degree": "MM"
+    },
+    "4909.1": {
+      "title": "Public indecency m",
+      "degree": "MM"
+    },
+    "4909.14": {
+      "title": "Puco violation - wrongful valuation",
+      "degree": "MM"
+    },
+    "4909.3": {
+      "title": "Loud noise",
+      "degree": "MM"
+    },
+    "4909.41": {
+      "title": "Failure to comply w puco order",
+      "degree": "MM"
+    },
+    "4910.05": {
+      "title": "Making false alarm m",
+      "degree": "MM"
+    },
+    "4910.3": {
+      "title": "Disorderly conduct m",
+      "degree": "MM"
+    },
+    "4910.5": {
+      "title": "Making false alarm m",
+      "degree": "MM"
+    },
+    "4919.78": {
+      "title": "Towing service / abandoned-vehicle violations",
+      "degree": "M1"
+    },
+    "4919.79": {
+      "title": "Log book not current",
+      "degree": "MM"
+    },
+    "4919.85": {
+      "title": "Non co-op w fed agncy,haz mat",
+      "degree": "MM"
+    },
+    "4921.32": {
+      "title": "Avoiding inspection",
+      "degree": "MM"
+    },
+    "4923.02": {
+      "title": "Trnsprt of hazdrs mtrls",
+      "degree": "MM"
+    },
+    "4923.17": {
+      "title": "Puco violation",
+      "degree": "MM"
+    },
+    "4923.20": {
+      "title": "Avoiding inspection",
+      "degree": "MM"
+    },
+    "4931.31": {
+      "title": "Threat or harass by phone",
+      "degree": "MM"
+    },
+    "4931.32": {
+      "title": "Fraudulent use of phone serv",
+      "degree": "MM"
+    },
+    "4931.33": {
+      "title": "Device for phone theft",
+      "degree": "MM"
+    },
+    "4931.49": {
+      "title": "911 disclosure of information",
+      "degree": "MM"
+    },
+    "4933.18": {
+      "title": "Tampering with utility equipment",
+      "degree": "MM"
+    },
+    "4933.19": {
+      "title": "Notice to customers concerning theft offenses",
+      "degree": "MM"
+    },
+    "4933.22": {
+      "title": "Tampering with hydrant, pipe, or meter",
+      "degree": "MM"
+    },
+    "4933.42": {
+      "title": "Fraud use cable tv ser-equip",
+      "degree": "MM"
+    },
+    "4945.46": {
+      "title": "Fail to provide odometer readi",
+      "degree": "MM"
+    },
+    "4951.57": {
+      "title": "Misconduct in street cars",
+      "degree": "MM"
+    },
+    "4999.01": {
+      "title": "Drawing, driving, or moving vehicle on railroad track",
+      "degree": "MM"
+    },
+    "4999.02": {
+      "title": "Climbing upon railroad cars",
+      "degree": "MM"
+    },
+    "4999.03": {
+      "title": "Riding or driving into enclosures of railroads",
+      "degree": "MM"
+    },
+    "4999.04": {
+      "title": "Duties of engineer - failure to stop",
+      "degree": "MM"
+    },
+    "4999.05": {
+      "title": "Flagmen on railroads",
+      "degree": "MM"
+    },
+    "4999.06": {
+      "title": "Running passenger trains with less than full crew",
+      "degree": "MM"
+    },
+    "4999.10": {
+      "title": "Constructing bridges over tracks",
+      "degree": "MM"
+    },
+    "4999.11": {
+      "title": "Mail cranes/livestock chutes",
+      "degree": "MM"
+    },
+    "4999.13": {
+      "title": "Couplers/brakes on railroads",
+      "degree": "MM"
+    },
+    "4999.16": {
+      "title": "Examination of employee for color blindness",
+      "degree": "MM"
+    },
+    "4999.17": {
+      "title": "Discipline or discharge of employee without hearing",
+      "degree": "MM"
+    },
+    "4999.18": {
+      "title": "Demanding compensation when telegraph or telephone wires not working",
+      "degree": "MM"
+    },
+    "4999.19": {
+      "title": "Diverting freight",
+      "degree": "MM"
+    },
+    "4999.20": {
+      "title": "Seniority roster date of railroad employee",
+      "degree": "MM"
+    },
+    "5002925.03": {
+      "title": "Drug offense - possession",
+      "degree": "MM"
+    },
+    "502.02": {
+      "title": "Reg of emergency veh",
+      "degree": "MM"
+    },
+    "502.09": {
+      "title": "Fleeing from police",
+      "degree": "MM"
+    },
+    "502.11": {
+      "title": "Safety zone violation",
+      "degree": "MM"
+    },
+    "502.12": {
+      "title": "Improper turn",
+      "degree": "MM"
+    },
+    "502.19": {
+      "title": "Cincinnati Municipal Code: alcohol regulation",
+      "degree": "M1"
+    },
+    "502.2": {
+      "title": "Regulation of emergency and public safety vehicles",
+      "degree": "MM"
+    },
+    "502.21": {
+      "title": "Defacing traffic control device",
+      "degree": "MM"
+    },
+    "502.22": {
+      "title": "Unofficial traffic signs",
+      "degree": "MM"
+    },
+    "502.24": {
+      "title": "Driving in a construction zone",
+      "degree": "MM"
+    },
+    "502.3": {
+      "title": "Parking prohibited-street cleaning",
+      "degree": "MM"
+    },
+    "502.8": {
+      "title": "Direction of traffic violation",
+      "degree": "MM"
+    },
+    "502.9": {
+      "title": "Fail to follow police officer's signals",
+      "degree": "MM"
+    },
+    "502925.03": {
+      "title": "Traff in drugs 50 to",
+      "degree": "MM"
+    },
+    "503.01": {
+      "title": "Cincinnati Municipal Code: animals",
+      "degree": "M4"
+    },
+    "503.03": {
+      "title": "Vehicle lamps and reflectors",
+      "degree": "MM"
+    },
+    "503.05": {
+      "title": "Parking lights",
+      "degree": "MM"
+    },
+    "503.07": {
+      "title": "Auxiliary lights",
+      "degree": "MM"
+    },
+    "503.09": {
+      "title": "Deflection of rays",
+      "degree": "MM"
+    },
+    "503.1": {
+      "title": "Cincinnati Municipal Code: animals",
+      "degree": "M4"
+    },
+    "503.11": {
+      "title": "Lights improperly focused",
+      "degree": "MM"
+    },
+    "503.14": {
+      "title": "Dimensions of vehicles",
+      "degree": "MM"
+    },
+    "503.16": {
+      "title": "Cincinnati Municipal Code: animals (regulation)",
+      "degree": "M4"
+    },
+    "503.17": {
+      "title": "Veh trains-street rrestriction",
+      "degree": "MM"
+    },
+    "503.18": {
+      "title": "Truck restric intercity",
+      "degree": "MM"
+    },
+    "503.19": {
+      "title": "Weight of vehicles",
+      "degree": "MM"
+    },
+    "503.20": {
+      "title": "Weight on tires",
+      "degree": "MM"
+    },
+    "503.21": {
+      "title": "Total gross weight limits",
+      "degree": "MM"
+    },
+    "503.25": {
+      "title": "Damaging street surface",
+      "degree": "MM"
+    },
+    "503.27": {
+      "title": "Excess load moving permit",
+      "degree": "MM"
+    },
+    "503.29": {
+      "title": "Reg of adult oriented buss",
+      "degree": "MM"
+    },
+    "503.3": {
+      "title": "Vehicle lamps and reflectors",
+      "degree": "MM"
+    },
+    "503.31": {
+      "title": "Tires",
+      "degree": "MM"
+    },
+    "503.32": {
+      "title": "Solid tires",
+      "degree": "MM"
+    },
+    "503.34": {
+      "title": "Improper brakes",
+      "degree": "MM"
+    },
+    "503.35": {
+      "title": "Right of way",
+      "degree": "MM"
+    },
+    "503.38": {
+      "title": "Improper muffler",
+      "degree": "MM"
+    },
+    "503.39": {
+      "title": "Horn",
+      "degree": "MM"
+    },
+    "503.4": {
+      "title": "Tractor lamp",
+      "degree": "MM"
+    },
+    "503.40": {
+      "title": "Bells on bicycles",
+      "degree": "MM"
+    },
+    "503.41": {
+      "title": "Rear vision mirror",
+      "degree": "MM"
+    },
+    "503.42": {
+      "title": "Emission of smoke or vapor",
+      "degree": "MM"
+    },
+    "503.43": {
+      "title": "Excessive operation of engine",
+      "degree": "MM"
+    },
+    "503.44": {
+      "title": "Emission of smoke",
+      "degree": "MM"
+    },
+    "503.45": {
+      "title": "Police radio communication",
+      "degree": "MM"
+    },
+    "503.49": {
+      "title": "Funeral vehicles",
+      "degree": "MM"
+    },
+    "503.5": {
+      "title": "Parking lights",
+      "degree": "MM"
+    },
+    "503.51": {
+      "title": "Cincinnati Municipal Code: dangerous dogs",
+      "degree": "M4"
+    },
+    "503.52": {
+      "title": "Cincinnati Municipal Code: vicious dogs",
+      "degree": "M1"
+    },
+    "503.53": {
+      "title": "Permit, license requirement",
+      "degree": "MM"
+    },
+    "503.54": {
+      "title": "Windshield wiper",
+      "degree": "MM"
+    },
+    "503.55": {
+      "title": "Cincinnati Municipal Code: animals (regulation)",
+      "degree": "M4"
+    },
+    "503.56": {
+      "title": "Signs on windshield or windows",
+      "degree": "MM"
+    },
+    "503.57": {
+      "title": "Tv set in view of driver",
+      "degree": "MM"
+    },
+    "503.58": {
+      "title": "Splash guards",
+      "degree": "MM"
+    },
+    "503.59": {
+      "title": "Directional signals",
+      "degree": "MM"
+    },
+    "503.6": {
+      "title": "Flashing light vendors cart",
+      "degree": "MM"
+    },
+    "503.61": {
+      "title": "Smoke screen on motor veh",
+      "degree": "MM"
+    },
+    "503.65": {
+      "title": "Reg of adult oriented bussines",
+      "degree": "MM"
+    },
+    "503.7": {
+      "title": "Auxiliary lights",
+      "degree": "MM"
+    },
+    "503.9": {
+      "title": "Cincinnati Municipal Code: animals",
+      "degree": "M4"
+    },
+    "504.02": {
+      "title": "Motor vehicle inspection",
+      "degree": "MM"
+    },
+    "504.04": {
+      "title": "Safety sticker viol",
+      "degree": "MM"
+    },
+    "504.12": {
+      "title": "Detail of inspection",
+      "degree": "MM"
+    },
+    "504.16": {
+      "title": "Solicit car repairs at safe ln",
+      "degree": "MM"
+    },
+    "504.17": {
+      "title": "Repairing car at safety lane",
+      "degree": "MM"
+    },
+    "504.18": {
+      "title": "Advertising by employees",
+      "degree": "MM"
+    },
+    "504.2": {
+      "title": "Motor vehicle inspection",
+      "degree": "MM"
+    },
+    "504.20": {
+      "title": "Removing inspection seal",
+      "degree": "MM"
+    },
+    "504.22": {
+      "title": "Safety sticker viol",
+      "degree": "MM"
+    },
+    "504.4": {
+      "title": "Safety sticker viol",
+      "degree": "MM"
+    },
+    "505.01": {
+      "title": "Improper loading",
+      "degree": "MM"
+    },
+    "505.04": {
+      "title": "Deadening noise",
+      "degree": "MM"
+    },
+    "505.05": {
+      "title": "Improper loading",
+      "degree": "MM"
+    },
+    "505.07": {
+      "title": "Improper loading",
+      "degree": "MM"
+    },
+    "505.09": {
+      "title": "Transporting explosives",
+      "degree": "MM"
+    },
+    "505.1": {
+      "title": "Projecting material, rear",
+      "degree": "MM"
+    },
+    "505.11": {
+      "title": "Operator view control",
+      "degree": "MM"
+    },
+    "505.12": {
+      "title": "Overcrowding bike or motorcycle",
+      "degree": "MM"
+    },
+    "505.13": {
+      "title": "Moped no helmet or goggles",
+      "degree": "MM"
+    },
+    "505.150": {
+      "title": "Sprfld twp daytime curfew viol",
+      "degree": "MM"
+    },
+    "505.16": {
+      "title": "Passengers on vehicle",
+      "degree": "MM"
+    },
+    "505.17": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "505.172": {
+      "title": "Township noise violation",
+      "degree": "MM"
+    },
+    "505.173": {
+      "title": "Storage of junk motor vehicle",
+      "degree": "MM"
+    },
+    "505.18": {
+      "title": "Boarding or leaving moving vehicle",
+      "degree": "MM"
+    },
+    "505.19": {
+      "title": "Board or leave stopped vehicle",
+      "degree": "MM"
+    },
+    "505.2": {
+      "title": "Projecting materials sides",
+      "degree": "MM"
+    },
+    "505.373": {
+      "title": "Open burn wo permit",
+      "degree": "MM"
+    },
+    "505.374": {
+      "title": "Fire code violations",
+      "degree": "MM"
+    },
+    "505.4": {
+      "title": "Deadening noise",
+      "degree": "MM"
+    },
+    "505.5": {
+      "title": "Improper loading",
+      "degree": "MM"
+    },
+    "505.7": {
+      "title": "Improper loading",
+      "degree": "MM"
+    },
+    "505.74": {
+      "title": "Prohibition against violating resolution",
+      "degree": "MM"
+    },
+    "505.9": {
+      "title": "Transporting explosives",
+      "degree": "MM"
+    },
+    "505.94": {
+      "title": "Registration and regulation of transient vendors",
+      "degree": "MM"
+    },
+    "506.01": {
+      "title": "Driving while intoxicated",
+      "degree": "MM"
+    },
+    "506.02": {
+      "title": "Infirmities in driver",
+      "degree": "MM"
+    },
+    "506.03": {
+      "title": "Oper skateboard on sidewalk",
+      "degree": "MM"
+    },
+    "506.04": {
+      "title": "Bike and motorcycle regulation",
+      "degree": "MM"
+    },
+    "506.05": {
+      "title": "Bike operation by minors",
+      "degree": "MM"
+    },
+    "506.06": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.07": {
+      "title": "Reckless driving",
+      "degree": "MM"
+    },
+    "506.08": {
+      "title": "Speeding",
+      "degree": "MM"
+    },
+    "506.1": {
+      "title": "Driving while intoxicated",
+      "degree": "MM"
+    },
+    "506.10": {
+      "title": "Posted special speeds",
+      "degree": "MM"
+    },
+    "506.11": {
+      "title": "Railroad crossing interference",
+      "degree": "MM"
+    },
+    "506.12": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.13": {
+      "title": "Following emergency vehicles",
+      "degree": "MM"
+    },
+    "506.14": {
+      "title": "Follow public safety vehicles",
+      "degree": "MM"
+    },
+    "506.15": {
+      "title": "Gathering at accident scene",
+      "degree": "MM"
+    },
+    "506.16": {
+      "title": "Speeding in construction zone",
+      "degree": "MM"
+    },
+    "506.17": {
+      "title": "Following too closely",
+      "degree": "MM"
+    },
+    "506.18": {
+      "title": "Clinging to motor vehicle",
+      "degree": "MM"
+    },
+    "506.19": {
+      "title": "Ride outside rear end of veh",
+      "degree": "MM"
+    },
+    "506.2": {
+      "title": "Infirmities in driver",
+      "degree": "MM"
+    },
+    "506.20": {
+      "title": "Taxi cruising",
+      "degree": "MM"
+    },
+    "506.21": {
+      "title": "Crossing railroad tracks",
+      "degree": "MM"
+    },
+    "506.23": {
+      "title": "Grade crossings",
+      "degree": "MM"
+    },
+    "506.24": {
+      "title": "Use of bus stop",
+      "degree": "MM"
+    },
+    "506.25": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.26": {
+      "title": "Coasting on downgrade",
+      "degree": "MM"
+    },
+    "506.27": {
+      "title": "Crossing over fire hose",
+      "degree": "MM"
+    },
+    "506.28": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.3": {
+      "title": "Operate skateboard on sidewalk",
+      "degree": "MM"
+    },
+    "506.30": {
+      "title": "Racing on street",
+      "degree": "MM"
+    },
+    "506.31": {
+      "title": "Towing disabled vehicle",
+      "degree": "MM"
+    },
+    "506.34": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.35": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.36": {
+      "title": "Stop at r-r crossing",
+      "degree": "MM"
+    },
+    "506.37": {
+      "title": "Utility vehicles to stop at railroad crossings",
+      "degree": "MM"
+    },
+    "506.38": {
+      "title": "Failed to yield row",
+      "degree": "MM"
+    },
+    "506.39": {
+      "title": "Emerging from alleys or driveways",
+      "degree": "MM"
+    },
+    "506.4": {
+      "title": "Bike regulatons",
+      "degree": "MM"
+    },
+    "506.40": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.41": {
+      "title": "Violate reversible lane signal",
+      "degree": "MM"
+    },
+    "506.43": {
+      "title": "Flashing red light",
+      "degree": "MM"
+    },
+    "506.44": {
+      "title": "Flashing yellow signals",
+      "degree": "MM"
+    },
+    "506.45": {
+      "title": "Right of way",
+      "degree": "MM"
+    },
+    "506.46": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.47": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.48": {
+      "title": "Playing in street",
+      "degree": "MM"
+    },
+    "506.49": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.5": {
+      "title": "Bike operation",
+      "degree": "MM"
+    },
+    "506.51": {
+      "title": "Right of way - pedestrians",
+      "degree": "MM"
+    },
+    "506.52": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.53": {
+      "title": "Intoxicated pedestrian on public highway",
+      "degree": "MM"
+    },
+    "506.54": {
+      "title": "Stopping traffic-obstructing",
+      "degree": "MM"
+    },
+    "506.56": {
+      "title": "Pedestrian violation",
+      "degree": "MM"
+    },
+    "506.59": {
+      "title": "Wrong side of road",
+      "degree": "MM"
+    },
+    "506.6": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.60": {
+      "title": "Improper passing",
+      "degree": "MM"
+    },
+    "506.61": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.62": {
+      "title": "Driving thru safety zones",
+      "degree": "MM"
+    },
+    "506.63": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.64": {
+      "title": "Imp use-cred crd,twnshp trstee",
+      "degree": "MM"
+    },
+    "506.66": {
+      "title": "Restrictions on commercial vehicle",
+      "degree": "MM"
+    },
+    "506.67": {
+      "title": "Speed - semi rig",
+      "degree": "MM"
+    },
+    "506.69": {
+      "title": "School bus flashing lights",
+      "degree": "MM"
+    },
+    "506.7": {
+      "title": "Reckless on private property",
+      "degree": "MM"
+    },
+    "506.70": {
+      "title": "Improper passing",
+      "degree": "MM"
+    },
+    "506.71": {
+      "title": "Improper passing",
+      "degree": "MM"
+    },
+    "506.72": {
+      "title": "Improper passing",
+      "degree": "MM"
+    },
+    "506.73": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.74": {
+      "title": "Wrong side of road",
+      "degree": "MM"
+    },
+    "506.75": {
+      "title": "Hazardous zones; signs and markings",
+      "degree": "MM"
+    },
+    "506.76": {
+      "title": "Weaving",
+      "degree": "MM"
+    },
+    "506.77": {
+      "title": "Divided roadways",
+      "degree": "MM"
+    },
+    "506.78": {
+      "title": "Improper passing",
+      "degree": "MM"
+    },
+    "506.79": {
+      "title": "Improper passing",
+      "degree": "MM"
+    },
+    "506.8": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.80": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.81": {
+      "title": "Improper signal",
+      "degree": "MM"
+    },
+    "506.83": {
+      "title": "Hand signals",
+      "degree": "MM"
+    },
+    "506.84": {
+      "title": "Cincinnati Municipal Code: general offenses",
+      "degree": "M1"
+    },
+    "506.85": {
+      "title": "Motor bus turn",
+      "degree": "MM"
+    },
+    "506.86": {
+      "title": "Improper turn",
+      "degree": "MM"
+    },
+    "506.87": {
+      "title": "Improper turn",
+      "degree": "MM"
+    },
+    "506.88": {
+      "title": "Prohibit wide vehicles in ftw",
+      "degree": "MM"
+    },
+    "506.9": {
+      "title": "School zone over",
+      "degree": "MM"
+    },
+    "506.91": {
+      "title": "Street fetes",
+      "degree": "MM"
+    },
+    "506.92": {
+      "title": "Play streets",
+      "degree": "MM"
+    },
+    "506.93": {
+      "title": "Quiet zones",
+      "degree": "MM"
+    },
+    "506.94": {
+      "title": "Court house quiet zones",
+      "degree": "MM"
+    },
+    "506.96": {
+      "title": "Create unnecess noise",
+      "degree": "MM"
+    },
+    "506.97": {
+      "title": "Unnecessary horn-blowing",
+      "degree": "MM"
+    },
+    "506.98": {
+      "title": "Texting while driving",
+      "degree": "MM"
+    },
+    "507.01": {
+      "title": "Wrong way on a one way street",
+      "degree": "MM"
+    },
+    "507.1": {
+      "title": "Wrong way on a one-way street",
+      "degree": "MM"
+    },
+    "508.1": {
+      "title": "Unauthorized stop and park",
+      "degree": "MM"
+    },
+    "508.10": {
+      "title": "Parking overtime",
+      "degree": "MM"
+    },
+    "508.11": {
+      "title": "Restricted parking of truck",
+      "degree": "MM"
+    },
+    "508.12": {
+      "title": "Parking overtime",
+      "degree": "MM"
+    },
+    "508.17": {
+      "title": "Trucks obstructing traffic",
+      "degree": "MM"
+    },
+    "508.19": {
+      "title": "Bus stop and taxi stand",
+      "degree": "MM"
+    },
+    "508.2": {
+      "title": "Parking and stopping restrictions, authorization",
+      "degree": "MM"
+    },
+    "508.20": {
+      "title": "Use of bus stop",
+      "degree": "MM"
+    },
+    "508.21": {
+      "title": "Parking in a bus stop",
+      "degree": "MM"
+    },
+    "508.22": {
+      "title": "Unlawful taxi parking",
+      "degree": "MM"
+    },
+    "508.23": {
+      "title": "Trailer parking",
+      "degree": "MM"
+    },
+    "508.24": {
+      "title": "Taxi restrictions",
+      "degree": "MM"
+    },
+    "508.25": {
+      "title": "Unauthorized plates",
+      "degree": "MM"
+    },
+    "508.26": {
+      "title": "Parking at curbs",
+      "degree": "MM"
+    },
+    "508.27": {
+      "title": "Parking on narrow streets",
+      "degree": "MM"
+    },
+    "508.28": {
+      "title": "Parking on grade",
+      "degree": "MM"
+    },
+    "508.29": {
+      "title": "Parking vehicle for sale",
+      "degree": "MM"
+    },
+    "508.3": {
+      "title": "Parking create obstruction",
+      "degree": "MM"
+    },
+    "508.30": {
+      "title": "Parking on undedicated streets and private property",
+      "degree": "MM"
+    },
+    "508.31": {
+      "title": "Locks on motor vehicle",
+      "degree": "MM"
+    },
+    "508.32": {
+      "title": "Repaired, serviced or stored vehicles, parking on street",
+      "degree": "MM"
+    },
+    "508.33": {
+      "title": "Parking on controlled access highways",
+      "degree": "MM"
+    },
+    "508.34": {
+      "title": "Snow emergency",
+      "degree": "MM"
+    },
+    "508.36": {
+      "title": "Handicapped parking",
+      "degree": "MM"
+    },
+    "508.4": {
+      "title": "Removal of obstructing vehicle",
+      "degree": "MM"
+    },
+    "508.5": {
+      "title": "Vehicle obstructing after collision",
+      "degree": "MM"
+    },
+    "508.6": {
+      "title": "Parking or standing violation",
+      "degree": "MM"
+    },
+    "508.7": {
+      "title": "Truck loading zones",
+      "degree": "MM"
+    },
+    "508.8": {
+      "title": "No standing stop parking zone",
+      "degree": "MM"
+    },
+    "509.05": {
+      "title": "nbsp;PARKING IN METERED SPACES",
+      "degree": "MM"
+    },
+    "509.08": {
+      "title": "Repeat metering",
+      "degree": "MM"
+    },
+    "509.19": {
+      "title": "Solicit money on xway",
+      "degree": "MM"
+    },
+    "509.31": {
+      "title": "Parking violation",
+      "degree": "MM"
+    },
+    "509.4": {
+      "title": "Metered spaces",
+      "degree": "MM"
+    },
+    "509.5": {
+      "title": "Parking in metered spaces",
+      "degree": "MM"
+    },
+    "509.7": {
+      "title": "Unmetered parking",
+      "degree": "MM"
+    },
+    "509.8": {
+      "title": "Repeat metering",
+      "degree": "MM"
+    },
+    "510.01": {
+      "title": "Regulatory violation",
+      "degree": "MM"
+    },
+    "510.02": {
+      "title": "Parades",
+      "degree": "MM"
+    },
+    "510.04": {
+      "title": "Breaking procession",
+      "degree": "MM"
+    },
+    "510.06": {
+      "title": "Street sales",
+      "degree": "MM"
+    },
+    "510.07": {
+      "title": "Demonstrations on hgwy",
+      "degree": "MM"
+    },
+    "510.08": {
+      "title": "Assemblies",
+      "degree": "MM"
+    },
+    "510.09": {
+      "title": "Obstruct pedestrians-vehicles",
+      "degree": "MM"
+    },
+    "510.1": {
+      "title": "Regulatory violation",
+      "degree": "MM"
+    },
+    "510.2": {
+      "title": "Parades",
+      "degree": "MM"
+    },
+    "510.4": {
+      "title": "Breaking procession",
+      "degree": "MM"
+    },
+    "510.5": {
+      "title": "Parking on a parade route",
+      "degree": "MM"
+    },
+    "510.6": {
+      "title": "Street sales",
+      "degree": "MM"
+    },
+    "510.7": {
+      "title": "Demonstrations on highway",
+      "degree": "MM"
+    },
+    "510.8": {
+      "title": "Assemblies",
+      "degree": "MM"
+    },
+    "510.9": {
+      "title": "Obstruct pedestrians-vehicles",
+      "degree": "MM"
+    },
+    "5104.02": {
+      "title": "Oper of a day care cen wo lic",
+      "degree": "MM"
+    },
+    "5104.2": {
+      "title": "Oper of a day care cen wo lic",
+      "degree": "MM"
+    },
+    "5106.99": {
+      "title": "Fraud to obtain disability",
+      "degree": "MM"
+    },
+    "5107.17": {
+      "title": "Welfare fraud",
+      "degree": "MM"
+    },
+    "511.01": {
+      "title": "No advertising on vehicles",
+      "degree": "MM"
+    },
+    "511.02": {
+      "title": "Unnecessary noise from vehicle",
+      "degree": "MM"
+    },
+    "511.03": {
+      "title": "Cleaning veh on street",
+      "degree": "MM"
+    },
+    "511.04": {
+      "title": "Repair business from veh",
+      "degree": "MM"
+    },
+    "511.05": {
+      "title": "Waste carts in congested dist",
+      "degree": "MM"
+    },
+    "511.06": {
+      "title": "Placing harm mat on rdwy",
+      "degree": "MM"
+    },
+    "511.08": {
+      "title": "Animals on hgwy",
+      "degree": "MM"
+    },
+    "511.1": {
+      "title": "No advertising on vehicles",
+      "degree": "MM"
+    },
+    "511.10": {
+      "title": "Reporting accident on public highway",
+      "degree": "MM"
+    },
+    "511.11": {
+      "title": "Reporting accident on public or private property",
+      "degree": "MM"
+    },
+    "511.12": {
+      "title": "Moving a parked veh without authorization",
+      "degree": "MM"
+    },
+    "511.14": {
+      "title": "Watching parked cars",
+      "degree": "MM"
+    },
+    "511.15": {
+      "title": "Solicting rides",
+      "degree": "MM"
+    },
+    "511.16": {
+      "title": "Noisy muffler",
+      "degree": "MM"
+    },
+    "511.17": {
+      "title": "Distributing cards or stickers",
+      "degree": "MM"
+    },
+    "511.18": {
+      "title": "Other 0parking violation",
+      "degree": "MM"
+    },
+    "511.2": {
+      "title": "Unnecessary noise from vehicle",
+      "degree": "MM"
+    },
+    "511.23": {
+      "title": "Registering citation tags",
+      "degree": "MM"
+    },
+    "511.25": {
+      "title": "Owner's or lessee's responsibility",
+      "degree": "MM"
+    },
+    "511.26": {
+      "title": "Authorizing violations",
+      "degree": "MM"
+    },
+    "511.28": {
+      "title": "Controlled access highways; prohibitions thereon",
+      "degree": "MM"
+    },
+    "511.29": {
+      "title": "Throwing objects at or from vehicle",
+      "degree": "MM"
+    },
+    "511.3": {
+      "title": "Cleaning vehicle on street",
+      "degree": "MM"
+    },
+    "511.30": {
+      "title": "Giving false alarm or information",
+      "degree": "MM"
+    },
+    "511.31": {
+      "title": "Storage of unlicensed or inoperable vehicles in residence or commercial districts",
+      "degree": "MM"
+    },
+    "511.33": {
+      "title": "Front yard parking prohibed",
+      "degree": "MM"
+    },
+    "511.34": {
+      "title": "Opening and closing vehicle doors",
+      "degree": "MM"
+    },
+    "511.4": {
+      "title": "Repair business from vehicle",
+      "degree": "MM"
+    },
+    "511.5": {
+      "title": "Waste carts in congested district",
+      "degree": "MM"
+    },
+    "511.6": {
+      "title": "Placing harmful material on roadway",
+      "degree": "MM"
+    },
+    "511.75": {
+      "title": "Stopped school bus",
+      "degree": "MM"
+    },
+    "511.8": {
+      "title": "Animals on highway",
+      "degree": "MM"
+    },
+    "5113.13": {
+      "title": "Welfare fraud",
+      "degree": "MM"
+    },
+    "512.08": {
+      "title": "Driving while under susp",
+      "degree": "MM"
+    },
+    "512.8": {
+      "title": "Driving while under suspension",
+      "degree": "MM"
+    },
+    "513.4": {
+      "title": "Forfeiture of bond",
+      "degree": "MM"
+    },
+    "514.11": {
+      "title": "Parking permit only zone",
+      "degree": "MM"
+    },
+    "517.11": {
+      "title": "Log book/hazardous materials/others",
+      "degree": "MM"
+    },
+    "517.13": {
+      "title": "Lamps/reflectors-commercial vehicles",
+      "degree": "MM"
+    },
+    "517.15": {
+      "title": "Tractor lamps",
+      "degree": "MM"
+    },
+    "517.17": {
+      "title": "Marking vertical clearance",
+      "degree": "MM"
+    },
+    "517.19": {
+      "title": "Use of alleys",
+      "degree": "MM"
+    },
+    "517.21": {
+      "title": "Vehicle trains-street restrictions",
+      "degree": "MM"
+    },
+    "517.23": {
+      "title": "Truck restrictions-inner city",
+      "degree": "MM"
+    },
+    "517.25": {
+      "title": "Truck restrictions-residential",
+      "degree": "MM"
+    },
+    "517.27": {
+      "title": "Weight of vehicle",
+      "degree": "MM"
+    },
+    "517.29": {
+      "title": "Weight on tires",
+      "degree": "MM"
+    },
+    "517.3": {
+      "title": "Truck violations (oversize or overweight)",
+      "degree": "MM"
+    },
+    "517.31": {
+      "title": "Authority for inspection load",
+      "degree": "MM"
+    },
+    "517.33": {
+      "title": "Damaging street surface",
+      "degree": "MM"
+    },
+    "517.35": {
+      "title": "Bridges, carrying capacity",
+      "degree": "MM"
+    },
+    "517.37": {
+      "title": "Excess load, city permit",
+      "degree": "MM"
+    },
+    "517.39": {
+      "title": "Tires",
+      "degree": "MM"
+    },
+    "517.5": {
+      "title": "Maximum dimensions violations",
+      "degree": "MM"
+    },
+    "517.7": {
+      "title": "Route/load information upon request",
+      "degree": "MM"
+    },
+    "517.9": {
+      "title": "Mud flaps/wheel protectors",
+      "degree": "MM"
+    },
+    "519.23": {
+      "title": "Junk auto",
+      "degree": "MM"
+    },
+    "519.24": {
+      "title": "Township zoning violation",
+      "degree": "MM"
+    },
+    "52925.03": {
+      "title": "Traf in drug heroin 5 to",
+      "degree": "MM"
+    },
+    "5502.52": {
+      "title": "Violation of statewide emergency alert program",
+      "degree": "MM"
+    },
+    "5528.04": {
+      "title": "Unlawful operation",
+      "degree": "MM"
+    },
+    "5577.03": {
+      "title": "Improper loading",
+      "degree": "MM"
+    },
+    "5577.04": {
+      "title": "Maximum axle load",
+      "degree": "MM"
+    },
+    "5577.05": {
+      "title": "Oversized loads on truck",
+      "degree": "MM"
+    },
+    "5577.06": {
+      "title": "Oversized vehicle violation",
+      "degree": "MM"
+    },
+    "5577.11": {
+      "title": "Wheel protectors - flaps",
+      "degree": "MM"
+    },
+    "5577.4": {
+      "title": "Maximum axle load",
+      "degree": "MM"
+    },
+    "5589.04": {
+      "title": "Damage bridge on public hiway",
+      "degree": "MM"
+    },
+    "5589.08": {
+      "title": "Operating traction engines upon improved highways",
+      "degree": "MM"
+    },
+    "5589.081": {
+      "title": "Studded tires not permitted",
+      "degree": "MM"
+    },
+    "5589.10": {
+      "title": "Digging, excavating, piling earth, or building fence on highway",
+      "degree": "MM"
+    },
+    "5589.21": {
+      "title": "Obstruction of roads by railroads",
+      "degree": "MM"
+    },
+    "5703.26": {
+      "title": "Prohibition against making a false or fraudulent report,return,schedule,statement,claim,or document",
+      "degree": "MM"
+    },
+    "5715.47": {
+      "title": "False listing or valuation",
+      "degree": "MM"
+    },
+    "5728.02": {
+      "title": "No highway use permit or id",
+      "degree": "MM"
+    },
+    "5728.04": {
+      "title": "Operate without highway use tax sticker",
+      "degree": "MM"
+    },
+    "5739.12": {
+      "title": "Sales tax violation",
+      "degree": "MM"
+    },
+    "5739.30": {
+      "title": "Failure to file report",
+      "degree": "MM"
+    },
+    "5739.31": {
+      "title": "Vendor or transient vendor's license - prohibitions upon license suspension",
+      "degree": "MM"
+    },
+    "5743.071": {
+      "title": "Wholesale and retail dealers to maintain records",
+      "degree": "MM"
+    },
+    "5743.10": {
+      "title": "Sell cigarettes not bearing the stamps required",
+      "degree": "MM"
+    },
+    "5743.11": {
+      "title": "Fail to affix cigarette stamps",
+      "degree": "MM"
+    },
+    "5743.111": {
+      "title": "Possession of untaxed cigarettes",
+      "degree": "MM"
+    },
+    "5743.112": {
+      "title": "Trafficking in cigarettes",
+      "degree": "MM"
+    },
+    "5743.12": {
+      "title": "Prohibition against making false entries",
+      "degree": "MM"
+    },
+    "5743.13": {
+      "title": "Prohibition against forging, altering or counterfeiting stamps",
+      "degree": "MM"
+    },
+    "5743.14": {
+      "title": "Hindering inspection",
+      "degree": "MM"
+    },
+    "5743.19": {
+      "title": "Trafficking in cigarettes without license",
+      "degree": "MM"
+    },
+    "5743.20": {
+      "title": "Purchase cigarettes without license",
+      "degree": "MM"
+    },
+    "5743.21": {
+      "title": "Posses cigarettes without tax stamp",
+      "degree": "MM"
+    },
+    "5743.41": {
+      "title": "Failure to post license or comply with law",
+      "degree": "MM"
+    },
+    "5743.54": {
+      "title": "Maintain records",
+      "degree": "MM"
+    },
+    "5743.59": {
+      "title": "Possession of untaxed tobacco products",
+      "degree": "MM"
+    },
+    "5743.60": {
+      "title": "Trafficking tobacco products - no tax",
+      "degree": "MM"
+    },
+    "5743.61": {
+      "title": "Distributor license",
+      "degree": "MM"
+    },
+    "5747.06": {
+      "title": "Employer's duty to withhold tax",
+      "degree": "MM"
+    },
+    "5747.07": {
+      "title": "Employers to file return and pay withholding",
+      "degree": "MM"
+    },
+    "5747.19": {
+      "title": "Filing incomplete, false, and fraudulent returns",
+      "degree": "MM"
+    },
+    "5749.16": {
+      "title": "Failure to file return",
+      "degree": "MM"
+    },
+    "5753.99": {
+      "title": "Soft drink tax violation",
+      "degree": "MM"
+    },
+    "5755.07.05": {
+      "title": "Damage",
+      "degree": "MM"
+    },
+    "5939.29": {
+      "title": "Failure to collect tax",
+      "degree": "MM"
+    },
+    "601.17": {
+      "title": "Spitting in a public place",
+      "degree": "MM"
+    },
+    "601.19": {
+      "title": "Sale or use of toxic glue to produce a state of intoxication or other abnormal condition",
+      "degree": "MM"
+    },
+    "601.21": {
+      "title": "Sale of paregoric",
+      "degree": "MM"
+    },
+    "601.23": {
+      "title": "Cincinnati Municipal Code: public health (general provisions)",
+      "degree": "MM"
+    },
+    "601.99": {
+      "title": "Health code viol",
+      "degree": "MM"
+    },
+    "602.1": {
+      "title": "Unclean habitation",
+      "degree": "MM"
+    },
+    "602.7": {
+      "title": "Vacation of unsanitary premises",
+      "degree": "MM"
+    },
+    "604.05": {
+      "title": "Improved premises to be rat-pf",
+      "degree": "MM"
+    },
+    "604.5": {
+      "title": "All improved premises to be rat-proofed",
+      "degree": "MM"
+    },
+    "606.03": {
+      "title": "Vaccination of dogs",
+      "degree": "MM"
+    },
+    "606.3": {
+      "title": "Vaccination of dogs",
+      "degree": "MM"
+    },
+    "606.9": {
+      "title": "Dog vacination certificate to be retained by owner",
+      "degree": "MM"
+    },
+    "607.3": {
+      "title": "Sale of tobacco prod to minors",
+      "degree": "MM"
+    },
+    "609.3": {
+      "title": "Sale to minors prohibited",
+      "degree": "MM"
+    },
+    "6101.25": {
+      "title": "Constrction,maintenance-recreation facility",
+      "degree": "MM"
+    },
+    "6101.83": {
+      "title": "Unlawful use of moneys",
+      "degree": "MM"
+    },
+    "621.19": {
+      "title": "Sell,use tox glue for intoxif",
+      "degree": "MM"
+    },
+    "6755.07.07": {
+      "title": "Games-activities in park-r",
+      "degree": "MM"
+    },
+    "701.1": {
+      "title": "Injury",
+      "degree": "MM"
+    },
+    "701.2": {
+      "title": "Leash required",
+      "degree": "MM"
+    },
+    "701.23": {
+      "title": "Abusing dog",
+      "degree": "MM"
+    },
+    "701.24": {
+      "title": "Harbor pitt bull terrier(s)",
+      "degree": "MM"
+    },
+    "701.25": {
+      "title": "Vicious dog",
+      "degree": "MM"
+    },
+    "701.27": {
+      "title": "Loud dog",
+      "degree": "MM"
+    },
+    "701.29": {
+      "title": "Dog run at large",
+      "degree": "MM"
+    },
+    "701.30": {
+      "title": "Dog excrement viol",
+      "degree": "MM"
+    },
+    "701.4": {
+      "title": "Dangerous dog to be prop confined or leashed",
+      "degree": "MM"
+    },
+    "701.5": {
+      "title": "Vicious dog to be confined",
+      "degree": "MM"
+    },
+    "701.6": {
+      "title": "Poss of vicious dog prohibited",
+      "degree": "MM"
+    },
+    "701.7": {
+      "title": "Possession of dangerousor vicious dog limited",
+      "degree": "MM"
+    },
+    "701.8": {
+      "title": "Fail to register vicious dog",
+      "degree": "MM"
+    },
+    "701.9": {
+      "title": "Failure to obtain insurance for vicious dog",
+      "degree": "MM"
+    },
+    "708.03": {
+      "title": "Dstbute of weap-frrms to minor",
+      "degree": "MM"
+    },
+    "708.07": {
+      "title": "Obliterating weapon id",
+      "degree": "MM"
+    },
+    "708.19": {
+      "title": "False statement in application",
+      "degree": "MM"
+    },
+    "708.27": {
+      "title": "Cincinnati Municipal Code: dangerous weapons and fireworks (discharging firearms)",
+      "degree": "M4"
+    },
+    "708.3": {
+      "title": "Prevention of distribution of weapons to minors",
+      "degree": "MM"
+    },
+    "708.31": {
+      "title": "Ammunition, sale to minor",
+      "degree": "MM"
+    },
+    "708.33": {
+      "title": "Waiting period for transfer of firearms",
+      "degree": "MM"
+    },
+    "708.37": {
+      "title": "Possession of automatic weapon",
+      "degree": "MM"
+    },
+    "708.39": {
+      "title": "Dangerous weapon on school property",
+      "degree": "MM"
+    },
+    "708.7": {
+      "title": "Obliterating weapon id",
+      "degree": "MM"
+    },
+    "709.17": {
+      "title": "Bonfire",
+      "degree": "MM"
+    },
+    "709.31": {
+      "title": "False alarms",
+      "degree": "MM"
+    },
+    "709.35": {
+      "title": "Tampering with fire hydrantsm",
+      "degree": "MM"
+    },
+    "709.41": {
+      "title": "Endang species,poss and sale",
+      "degree": "MM"
+    },
+    "71.11": {
+      "title": "Ficticious licpl",
+      "degree": "MM"
+    },
+    "713.03": {
+      "title": "Prohibited use fountain square",
+      "degree": "MM"
+    },
+    "713.19": {
+      "title": "Prob ticket sales",
+      "degree": "MM"
+    },
+    "713.3": {
+      "title": "Prohibited use of fountain square",
+      "degree": "MM"
+    },
+    "714.03": {
+      "title": "Litter in public places",
+      "degree": "MM"
+    },
+    "714.11": {
+      "title": "Free sidewalks of litter",
+      "degree": "MM"
+    },
+    "714.13": {
+      "title": "Cincinnati Municipal Code: littering",
+      "degree": "M4"
+    },
+    "714.15": {
+      "title": "Vehicle causing litter",
+      "degree": "MM"
+    },
+    "714.17": {
+      "title": "Tracking mud-spilling dirt etc",
+      "degree": "MM"
+    },
+    "714.19": {
+      "title": "Litter in parks",
+      "degree": "MM"
+    },
+    "714.21": {
+      "title": "Litter in lake or fountain",
+      "degree": "MM"
+    },
+    "714.23": {
+      "title": "Distributing handbills",
+      "degree": "MM"
+    },
+    "714.25": {
+      "title": "Handbills on vehicles",
+      "degree": "MM"
+    },
+    "714.27": {
+      "title": "Depositing handbills on uninhabited or vacant premises",
+      "degree": "MM"
+    },
+    "714.29": {
+      "title": "Prohibiting distribution of handbills where posted",
+      "degree": "MM"
+    },
+    "714.3": {
+      "title": "Cincinnati Municipal Code: licensing",
+      "degree": "M4"
+    },
+    "714.31": {
+      "title": "Distributing handbills at inhabited private premises",
+      "degree": "MM"
+    },
+    "714.33": {
+      "title": "Post notices where prohibited",
+      "degree": "MM"
+    },
+    "714.35": {
+      "title": "Litter on occupied private property",
+      "degree": "MM"
+    },
+    "714.37": {
+      "title": "Owner to maintain premises free of litter",
+      "degree": "MM"
+    },
+    "714.39": {
+      "title": "Litter on vacant lots",
+      "degree": "MM"
+    },
+    "714.5": {
+      "title": "Place litter in receptacles",
+      "degree": "MM"
+    },
+    "714.7": {
+      "title": "Upsetting public or private receptacles",
+      "degree": "MM"
+    },
+    "714.9": {
+      "title": "Sweep litter into gutters",
+      "degree": "MM"
+    },
+    "715.07": {
+      "title": "Selling relief tokens",
+      "degree": "MM"
+    },
+    "715.55": {
+      "title": "Disturb municipality peace",
+      "degree": "MM"
+    },
+    "715.56": {
+      "title": "Punishment breach of peace",
+      "degree": "MM"
+    },
+    "715.7": {
+      "title": "Selling relief tokens",
+      "degree": "MM"
+    },
+    "719.71": {
+      "title": "Sell land w/o pub sewer,watr",
+      "degree": "MM"
+    },
+    "721.41": {
+      "title": "Street opening without permit",
+      "degree": "MM"
+    },
+    "723.1": {
+      "title": "Street obstructions",
+      "degree": "MM"
+    },
+    "723.12": {
+      "title": "Retail sidewalk displays",
+      "degree": "MM"
+    },
+    "723.21": {
+      "title": "Owner maint litter recep",
+      "degree": "MM"
+    },
+    "723.33": {
+      "title": "Sweeping onto sidewalk",
+      "degree": "MM"
+    },
+    "723.39": {
+      "title": "Writing drawing or inscribing on sidewalks",
+      "degree": "MM"
+    },
+    "723.5": {
+      "title": "Encumbering sidewalks",
+      "degree": "MM"
+    },
+    "723.57": {
+      "title": "Snow removal",
+      "degree": "MM"
+    },
+    "723.59": {
+      "title": "Ice on sidewalks",
+      "degree": "MM"
+    },
+    "723.75": {
+      "title": "Sol busin on street,sidewalk",
+      "degree": "MM"
+    },
+    "723.76": {
+      "title": "Sitting and lying within the public right of way",
+      "degree": "MM"
+    },
+    "723.77": {
+      "title": "Sol busin at street crossngs",
+      "degree": "MM"
+    },
+    "723.9": {
+      "title": "Sandwich board gigns",
+      "degree": "MM"
+    },
+    "729.15": {
+      "title": "Containers remove from curb",
+      "degree": "MM"
+    },
+    "729.27": {
+      "title": "Removal of dead animals",
+      "degree": "MM"
+    },
+    "729.29": {
+      "title": "Depositing garbage on public or private property",
+      "degree": "MM"
+    },
+    "729.30": {
+      "title": "Dumping prohibited",
+      "degree": "MM"
+    },
+    "729.41": {
+      "title": "Dispose combustible garbage",
+      "degree": "MM"
+    },
+    "729.47": {
+      "title": "Unlicensed coll unlawful",
+      "degree": "MM"
+    },
+    "729.53": {
+      "title": "Transporting putrescible commercial by-products",
+      "degree": "MM"
+    },
+    "729.63": {
+      "title": "Dumping",
+      "degree": "MM"
+    },
+    "729.69": {
+      "title": "Unload waste on sidewalk",
+      "degree": "MM"
+    },
+    "729.7": {
+      "title": "Setting out containers",
+      "degree": "MM"
+    },
+    "729.73": {
+      "title": "Discharge noisome substance",
+      "degree": "MM"
+    },
+    "729.75": {
+      "title": "Escaping hot water or steam",
+      "degree": "MM"
+    },
+    "729.77": {
+      "title": "Privy vaults",
+      "degree": "MM"
+    },
+    "729.83": {
+      "title": "Refrig,ice box- abandoning",
+      "degree": "MM"
+    },
+    "729.87": {
+      "title": "Recyclable materials",
+      "degree": "MM"
+    },
+    "729.9": {
+      "title": "Setting out in alleys",
+      "degree": "MM"
+    },
+    "731.3": {
+      "title": "Weed control",
+      "degree": "MM"
+    },
+    "735.13": {
+      "title": "Permit for weights,measures",
+      "degree": "MM"
+    },
+    "735.15": {
+      "title": "Operation or use",
+      "degree": "MM"
+    },
+    "735.19": {
+      "title": "Condemned weighing,meas device",
+      "degree": "MM"
+    },
+    "735.21": {
+      "title": "Temp comp spring scales",
+      "degree": "MM"
+    },
+    "735.23": {
+      "title": "Obstructing inspection",
+      "degree": "MM"
+    },
+    "735.7": {
+      "title": "Applicant's certification",
+      "degree": "MM"
+    },
+    "739.05": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.3": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.1": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.10": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.11": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.12": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.13": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.14": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.15": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.16": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.17": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.18": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.2": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.3": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.4": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.5": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.6": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.7": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.8": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "739.5.9": {
+      "title": "Riverfront ordinance",
+      "degree": "MM"
+    },
+    "743.7": {
+      "title": "Cut public tree-wo permit",
+      "degree": "MM"
+    },
+    "755.07.01": {
+      "title": "Public meetings in park",
+      "degree": "MM"
+    },
+    "755.07.02": {
+      "title": "Avertising in park-r",
+      "degree": "MM"
+    },
+    "755.07.03": {
+      "title": "No parade",
+      "degree": "MM"
+    },
+    "755.07.04": {
+      "title": "Racing in the park-r",
+      "degree": "MM"
+    },
+    "755.07.06": {
+      "title": "Refuse",
+      "degree": "MM"
+    },
+    "755.07.08": {
+      "title": "Sales-engage in park-r",
+      "degree": "MM"
+    },
+    "755.07.09": {
+      "title": "Animals in park-r",
+      "degree": "MM"
+    },
+    "755.07.10": {
+      "title": "Weapons-devices in park-r",
+      "degree": "MM"
+    },
+    "755.07.11": {
+      "title": "Alcoholic beverags in park-r",
+      "degree": "MM"
+    },
+    "755.07.12": {
+      "title": "Sale of alcoholic beverages",
+      "degree": "MM"
+    },
+    "755.07.14": {
+      "title": "Gambling in park-r",
+      "degree": "MM"
+    },
+    "755.07.15": {
+      "title": "Fires",
+      "degree": "MM"
+    },
+    "755.07.17": {
+      "title": "Vehicles",
+      "degree": "MM"
+    },
+    "755.07.18": {
+      "title": "Funerals in park-r",
+      "degree": "MM"
+    },
+    "755.07.20": {
+      "title": "Vehicle lights",
+      "degree": "MM"
+    },
+    "755.07.21": {
+      "title": "Cincinnati Municipal Code: parks and recreation",
+      "degree": "M4"
+    },
+    "755.07.22": {
+      "title": "Park lakes prohibition-r",
+      "degree": "MM"
+    },
+    "755.07.24": {
+      "title": "Skatng sledig sking in prk-r",
+      "degree": "MM"
+    },
+    "755.07.25": {
+      "title": "Swings-hammocks in park-r",
+      "degree": "MM"
+    },
+    "755.07.26": {
+      "title": "Clotheslines",
+      "degree": "MM"
+    },
+    "755.07.28": {
+      "title": "Park signs violations-r",
+      "degree": "MM"
+    },
+    "755.07.29": {
+      "title": "Permits needed in park-",
+      "degree": "MM"
+    },
+    "755.07.30": {
+      "title": "Resisting officer in park-",
+      "degree": "MM"
+    },
+    "755.07.31": {
+      "title": "Dsturb amnals-brds in park-r",
+      "degree": "MM"
+    },
+    "755.07.32": {
+      "title": "Propeled apparatus in park-r",
+      "degree": "MM"
+    },
+    "755.07.33": {
+      "title": "Loud-raucous noise in park-r",
+      "degree": "MM"
+    },
+    "770.7": {
+      "title": "Cincinnati Municipal Code: traffic regulation",
+      "degree": "M4"
+    },
+    "7755.07.07": {
+      "title": "Ball,golf &other games",
+      "degree": "MM"
+    },
+    "801.01": {
+      "title": "License requirements",
+      "degree": "MM"
+    },
+    "801.1": {
+      "title": "License requirements",
+      "degree": "MM"
+    },
+    "803.1": {
+      "title": "Billiard and pool tables",
+      "degree": "MM"
+    },
+    "811.31": {
+      "title": "Auction in streets",
+      "degree": "MM"
+    },
+    "819.03": {
+      "title": "Unlicensed cabaret",
+      "degree": "MM"
+    },
+    "819.3": {
+      "title": "Unlicensed cabaret",
+      "degree": "MM"
+    },
+    "826.01": {
+      "title": "Deceptive sales",
+      "degree": "MM"
+    },
+    "826.03": {
+      "title": "Consumer sales-decpt unfr acts",
+      "degree": "MM"
+    },
+    "826.05": {
+      "title": "Consumer sales-unconsable acts",
+      "degree": "MM"
+    },
+    "826.3": {
+      "title": "Deceptive or unfair acts or practices prohibited",
+      "degree": "MM"
+    },
+    "826.5": {
+      "title": "Unconscionable acts or practices prohibited",
+      "degree": "MM"
+    },
+    "827.5": {
+      "title": "Statement of buyers rights/disclosures",
+      "degree": "MM"
+    },
+    "829.3": {
+      "title": "Unlawful operation/dance hall",
+      "degree": "MM"
+    },
+    "833.3": {
+      "title": "License required",
+      "degree": "MM"
+    },
+    "837.03": {
+      "title": "Selling liq w o permit",
+      "degree": "MM"
+    },
+    "837.05": {
+      "title": "Transporting illegal liquor",
+      "degree": "MM"
+    },
+    "837.09": {
+      "title": "Sales for consumpt on premises",
+      "degree": "MM"
+    },
+    "837.11": {
+      "title": "Restrictions on sale liquor",
+      "degree": "MM"
+    },
+    "837.13": {
+      "title": "Purch liq under",
+      "degree": "MM"
+    },
+    "837.19": {
+      "title": "Misrep age purch beer",
+      "degree": "MM"
+    },
+    "837.23": {
+      "title": "Display age warning",
+      "degree": "MM"
+    },
+    "837.25": {
+      "title": "Misrep another's age get liq",
+      "degree": "MM"
+    },
+    "837.27": {
+      "title": "Hours of bus liq sales",
+      "degree": "MM"
+    },
+    "837.3": {
+      "title": "Selling liq w/o permit",
+      "degree": "MM"
+    },
+    "837.31": {
+      "title": "Liq sales-g permit",
+      "degree": "MM"
+    },
+    "837.35": {
+      "title": "Possession of flasks",
+      "degree": "MM"
+    },
+    "837.37": {
+      "title": "Consuming liq in vehicle",
+      "degree": "MM"
+    },
+    "837.39": {
+      "title": "Sell/give liq on election day",
+      "degree": "MM"
+    },
+    "837.41": {
+      "title": "Possession of illeg liquor",
+      "degree": "MM"
+    },
+    "837.5": {
+      "title": "Transporting illegal liquor",
+      "degree": "MM"
+    },
+    "837.9": {
+      "title": "Sales for consumpt on premises",
+      "degree": "MM"
+    },
+    "839.03": {
+      "title": "Vending w o license",
+      "degree": "MM"
+    },
+    "839.05": {
+      "title": "Vending w-o license",
+      "degree": "MM"
+    },
+    "839.11": {
+      "title": "Street sales",
+      "degree": "MM"
+    },
+    "839.13": {
+      "title": "Street sales in vending districts",
+      "degree": "MM"
+    },
+    "839.3": {
+      "title": "Vending w/o license",
+      "degree": "MM"
+    },
+    "839.5": {
+      "title": "Vending w-o license",
+      "degree": "MM"
+    },
+    "839.6": {
+      "title": "Vending without a license",
+      "degree": "MM"
+    },
+    "840.3": {
+      "title": "Street ticket sales without a license",
+      "degree": "MM"
+    },
+    "840.5": {
+      "title": "Street ticket license",
+      "degree": "MM"
+    },
+    "840.7": {
+      "title": "Street ticket sales",
+      "degree": "MM"
+    },
+    "840.9": {
+      "title": "Ticket sales face value",
+      "degree": "MM"
+    },
+    "843.09": {
+      "title": "Illegal operate pawn shop",
+      "degree": "MM"
+    },
+    "843.11": {
+      "title": "Regulation of home sales",
+      "degree": "MM"
+    },
+    "843.3": {
+      "title": "License required",
+      "degree": "MM"
+    },
+    "843.7": {
+      "title": "Fence required",
+      "degree": "MM"
+    },
+    "843.9": {
+      "title": "Illegal operate pawn shop",
+      "degree": "MM"
+    },
+    "845.17": {
+      "title": "Compliance with market rules",
+      "degree": "MM"
+    },
+    "845.19": {
+      "title": "Occupation without permit unlawful",
+      "degree": "MM"
+    },
+    "845.33": {
+      "title": "Transfer upon death",
+      "degree": "MM"
+    },
+    "846.3": {
+      "title": "License required",
+      "degree": "MM"
+    },
+    "846.7": {
+      "title": "Fence required",
+      "degree": "MM"
+    },
+    "846.9": {
+      "title": "Records required",
+      "degree": "MM"
+    },
+    "849.1": {
+      "title": "Viol cig machine ordinance",
+      "degree": "MM"
+    },
+    "851.03": {
+      "title": "Exhibiting pinball w o license",
+      "degree": "MM"
+    },
+    "851.05": {
+      "title": "Maintaining pinball",
+      "degree": "MM"
+    },
+    "851.07": {
+      "title": "Pinball license violation",
+      "degree": "MM"
+    },
+    "851.15": {
+      "title": "Playing by minors prohibited",
+      "degree": "MM"
+    },
+    "851.3": {
+      "title": "Exhibiting pinball w/o license",
+      "degree": "MM"
+    },
+    "851.5": {
+      "title": "License fees",
+      "degree": "MM"
+    },
+    "851.7": {
+      "title": "Aplication for license",
+      "degree": "MM"
+    },
+    "853.13": {
+      "title": "Sgn bail bnd w/o lic",
+      "degree": "MM"
+    },
+    "855.03": {
+      "title": "Operating room house w o lic",
+      "degree": "MM"
+    },
+    "855.17": {
+      "title": "Guest register required",
+      "degree": "MM"
+    },
+    "855.3": {
+      "title": "License required",
+      "degree": "MM"
+    },
+    "863.1": {
+      "title": "Permit required/solicitation",
+      "degree": "MM"
+    },
+    "865.17": {
+      "title": "Ticket scalping",
+      "degree": "MM"
+    },
+    "869.03": {
+      "title": "Operate wrecker w o license",
+      "degree": "MM"
+    },
+    "869.19": {
+      "title": "Failure to display t-sticker",
+      "degree": "MM"
+    },
+    "869.3": {
+      "title": "Operate wrecker w/o license",
+      "degree": "MM"
+    },
+    "869.7": {
+      "title": "Rules and regulations for police rotation list",
+      "degree": "MM"
+    },
+    "8755.07.08": {
+      "title": "Sales, solicitations & ticket",
+      "degree": "MM"
+    },
+    "879.7": {
+      "title": "Possess manufacture sell drug paraphernalia",
+      "degree": "MM"
+    },
+    "879.9": {
+      "title": "nbsp;SELL DRUG PARAPHERNALIA TO MINOR",
+      "degree": "MM"
+    },
+    "891.00": {
+      "title": "Viol home imp contract",
+      "degree": "MM"
+    },
+    "891.01": {
+      "title": "Fail to write cont/hom improve",
+      "degree": "MM"
+    },
+    "891.3": {
+      "title": "Home improvement contract required",
+      "degree": "MM"
+    },
+    "891.7": {
+      "title": "Cancelation notice",
+      "degree": "MM"
+    },
+    "891.99": {
+      "title": "Home improvement contractors",
+      "degree": "MM"
+    },
+    "897.5": {
+      "title": "License of massage practitioner",
+      "degree": "MM"
+    },
+    "898.9": {
+      "title": "Unlawful escort",
+      "degree": "MM"
+    },
+    "899.5": {
+      "title": "Sexual business license required",
+      "degree": "MM"
+    },
+    "900.3": {
+      "title": "Trespass upon cci-assist comun",
+      "degree": "MM"
+    },
+    "901.1": {
+      "title": "Scheme/game chance for profit",
+      "degree": "MM"
+    },
+    "901.76": {
+      "title": "Tampering with livestock",
+      "degree": "MM"
+    },
+    "902.13": {
+      "title": "Attempt to commit offense",
+      "degree": "MM"
+    },
+    "902.15": {
+      "title": "Complicity",
+      "degree": "MM"
+    },
+    "903.03": {
+      "title": "Trespass upon grounds of ccim",
+      "degree": "MM"
+    },
+    "903.3": {
+      "title": "Trespass upon grounds of ccim",
+      "degree": "MM"
+    },
+    "903.5": {
+      "title": "Disorderly conduct at detention facility - fighting",
+      "degree": "MM"
+    },
+    "904.01": {
+      "title": "Asslt firemn,law enfor offcrm",
+      "degree": "MM"
+    },
+    "904.1": {
+      "title": "Asslt firemn,law enfor offcrm",
+      "degree": "MM"
+    },
+    "904.5": {
+      "title": "Resist arrst,obstrct off busm",
+      "degree": "MM"
+    },
+    "906.05": {
+      "title": "Gambling m",
+      "degree": "MM"
+    },
+    "906.9": {
+      "title": "Cincinnati Municipal Code: gambling (public gaming)",
+      "degree": "MM"
+    },
+    "907.05": {
+      "title": "Crim tres medical facilitym2m",
+      "degree": "MM"
+    },
+    "907.5": {
+      "title": "Trespass - medical facility",
+      "degree": "MM"
+    },
+    "908.1": {
+      "title": "Assault m",
+      "degree": "MM"
+    },
+    "908.13": {
+      "title": "Criminal mischief",
+      "degree": "MM"
+    },
+    "908.15": {
+      "title": "Telephone harassment",
+      "degree": "MM"
+    },
+    "908.5": {
+      "title": "Assault",
+      "degree": "MM"
+    },
+    "908.7": {
+      "title": "Aggravated menacing",
+      "degree": "MM"
+    },
+    "908.9": {
+      "title": "Menacing",
+      "degree": "MM"
+    },
+    "909.01": {
+      "title": "Public indecency m",
+      "degree": "MM"
+    },
+    "909.5": {
+      "title": "Cincinnati Municipal Code: public order",
+      "degree": "M4"
+    },
+    "91.33": {
+      "title": "Board of health violation",
+      "degree": "MM"
+    },
+    "910.03": {
+      "title": "Disorderly conduct m",
+      "degree": "MM"
+    },
+    "910.1": {
+      "title": "Riot-commit misdemeanor m",
+      "degree": "MM"
+    },
+    "910.10": {
+      "title": "Loud sound",
+      "degree": "MM"
+    },
+    "910.11": {
+      "title": "Public disturb 2nd rspnse",
+      "degree": "MM"
+    },
+    "910.12": {
+      "title": "Cincinnati Municipal Code: public order (improper solicitation)",
+      "degree": "M4"
+    },
+    "910.13": {
+      "title": "Cincinnati Municipal Code: public order (interference with traffic)",
+      "degree": "M4"
+    },
+    "910.15": {
+      "title": "Damage city property on fountain square",
+      "degree": "MM"
+    },
+    "910.17": {
+      "title": "Wearing hood mask",
+      "degree": "MM"
+    },
+    "910.19": {
+      "title": "Violation of special event ordinance",
+      "degree": "MM"
+    },
+    "910.21": {
+      "title": "Cincinnati Municipal Code: public order (loitering for drug transactions)",
+      "degree": "M4"
+    },
+    "910.23": {
+      "title": "Possession of marijuana",
+      "degree": "MM"
+    },
+    "910.3": {
+      "title": "Cincinnati Municipal Code: public order",
+      "degree": "M4"
+    },
+    "910.8": {
+      "title": "Nightime const",
+      "degree": "MM"
+    },
+    "910.9": {
+      "title": "Loud musical noises",
+      "degree": "MM"
+    },
+    "911.01": {
+      "title": "Careless smoking m",
+      "degree": "MM"
+    },
+    "911.1": {
+      "title": "Careless smoking m",
+      "degree": "MM"
+    },
+    "911.13": {
+      "title": "Campaign expenditures",
+      "degree": "MM"
+    },
+    "911.15": {
+      "title": "Post bills on private property",
+      "degree": "MM"
+    },
+    "911.17": {
+      "title": "Post bills on streets",
+      "degree": "MM"
+    },
+    "911.27": {
+      "title": "Juvenile curfew violation",
+      "degree": "MM"
+    },
+    "911.29": {
+      "title": "Fail control",
+      "degree": "MM"
+    },
+    "911.3": {
+      "title": "Cross burning or similar actm",
+      "degree": "MM"
+    },
+    "911.5": {
+      "title": "Permitting drug abuse",
+      "degree": "MM"
+    },
+    "911.7": {
+      "title": "News rack in pub right-of-way",
+      "degree": "MM"
+    },
+    "913.01": {
+      "title": "Cannery,soft drink bottling",
+      "degree": "MM"
+    },
+    "913.02": {
+      "title": "Cannery,soft drink bottling-license",
+      "degree": "MM"
+    },
+    "913.03": {
+      "title": "Cannery,soft drink bottling",
+      "degree": "MM"
+    },
+    "913.04": {
+      "title": "Cannery,soft drink bottling",
+      "degree": "MM"
+    },
+    "913.05": {
+      "title": "Cannery,soft drink bottling-inspecting",
+      "degree": "MM"
+    },
+    "913.41": {
+      "title": "Unsanitary conditions",
+      "degree": "MM"
+    },
+    "915.05": {
+      "title": "Labels",
+      "degree": "MM"
+    },
+    "915.3": {
+      "title": "Child endangering",
+      "degree": "MM"
+    },
+    "917.05": {
+      "title": "Prohibited acts",
+      "degree": "MM"
+    },
+    "917.09": {
+      "title": "License types and categories",
+      "degree": "MM"
+    },
+    "918.04": {
+      "title": "Retail exemption",
+      "degree": "MM"
+    },
+    "918.11": {
+      "title": "Meat inspection violation",
+      "degree": "MM"
+    },
+    "918.31": {
+      "title": "Meat inspection violation",
+      "degree": "MM"
+    },
+    "921.25": {
+      "title": "Agr pesticide regulation",
+      "degree": "MM"
+    },
+    "923.51": {
+      "title": "Prohibited acts",
+      "degree": "MM"
+    },
+    "925.62": {
+      "title": "Dying rabbits and chicks",
+      "degree": "MM"
+    },
+    "926.04": {
+      "title": "Handling agricultural commodities without a license",
+      "degree": "MM"
+    },
+    "926.20": {
+      "title": "Receiving commodity for storage",
+      "degree": "MM"
+    },
+    "926.22": {
+      "title": "Issuing and cancelling receipts",
+      "degree": "MM"
+    },
+    "926.28": {
+      "title": "Disclose title,lien agricultural commodity",
+      "degree": "MM"
+    },
+    "926.29": {
+      "title": "Delayed price agreements",
+      "degree": "MM"
+    },
+    "926.31": {
+      "title": "Sale/storage of tainted/inferior agricultural commodity",
+      "degree": "MM"
+    },
+    "926.34": {
+      "title": "Misapplication or conversion of assets",
+      "degree": "MM"
+    },
+    "926.35": {
+      "title": "Insolvent handler accept deposit",
+      "degree": "MM"
+    },
+    "935.02": {
+      "title": "Possession of dangerous wild animal prohibited",
+      "degree": "MM"
+    },
+    "935.18": {
+      "title": "Sale or auction of animals prohibited",
+      "degree": "MM"
+    },
+    "941.041": {
+      "title": "Violate the seal placed on the vehicle",
+      "degree": "MM"
+    },
+    "947.05": {
+      "title": "Branding anothers livestock",
+      "degree": "MM"
+    },
+    "951.01": {
+      "title": "Animals running at large",
+      "degree": "MM"
+    },
+    "951.02": {
+      "title": "Animals running at large",
+      "degree": "MM"
+    },
+    "955.01": {
+      "title": "Registration of dogs",
+      "degree": "MM"
+    },
+    "955.10": {
+      "title": "Failure to display a valid dog tag",
+      "degree": "MM"
+    },
+    "955.11": {
+      "title": "Vicious dog",
+      "degree": "MM"
+    },
+    "955.13": {
+      "title": "Prhbtn against theft-animal",
+      "degree": "MM"
+    },
+    "955.21": {
+      "title": "Fail to reg dog or dog kennel",
+      "degree": "MM"
+    },
+    "955.22": {
+      "title": "Dog registration requirements",
+      "degree": "M4"
+    },
+    "955.221": {
+      "title": "Local ordinances or resolutions pertaining to dog control",
+      "degree": "MM"
+    },
+    "955.25": {
+      "title": "Unlawful tag",
+      "degree": "MM"
+    },
+    "959.01": {
+      "title": "Abandon dog/animal",
+      "degree": "MM"
+    },
+    "959.02": {
+      "title": "Injuring animals",
+      "degree": "MM"
+    },
+    "959.03": {
+      "title": "Poisoning animals",
+      "degree": "MM"
+    },
+    "959.13": {
+      "title": "Cruelty to animals",
+      "degree": "MM"
+    },
+    "959.131": {
+      "title": "Cruelty to companion animals",
+      "degree": "M1"
+    },
+    "959.16": {
+      "title": "Dogfighting",
+      "degree": "MM"
+    },
+    "9755.07.09": {
+      "title": "Animals",
+      "degree": "MM"
+    }
+  }
+}

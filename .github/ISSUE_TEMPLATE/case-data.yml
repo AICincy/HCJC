@@ -1,0 +1,83 @@
+name: Submit courtclerk case data
+description: Manually ingest a case summary you looked up at courtclerk.org. JCStream cannot scrape courtclerk.org (their robots.txt disallows /data/), so this template lets a human pass the bot check on their own browser and submit the structured data here.
+title: "[case] "
+labels: ["case-data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing case data. Please look up the case at
+        [courtclerk.org](https://www.courtclerk.org/data/) in your browser
+        (you may need to pass a one-time bot check), then paste the relevant
+        fields below. **Do not include personal opinions or anything that
+        isn't on the docket** — this is a public-records mirror.
+
+        All submissions are reviewed by the workflow before being merged
+        into `data/courtclerk_cases.json`.
+  - type: input
+    id: case_number
+    attributes:
+      label: Case number
+      description: As shown on courtclerk.org (e.g. `B 24 1234`, `25/CRA/12345`).
+      placeholder: B 24 1234
+    validations:
+      required: true
+  - type: input
+    id: defendant_name
+    attributes:
+      label: Defendant name (Last, First)
+      placeholder: SMITH, JOHN
+    validations:
+      required: true
+  - type: input
+    id: defendant_dob
+    attributes:
+      label: Defendant date of birth (MM/DD/YYYY)
+      placeholder: 01/15/1985
+    validations:
+      required: false
+  - type: input
+    id: filed_date
+    attributes:
+      label: Filed date (MM/DD/YYYY)
+      placeholder: 05/10/2026
+    validations:
+      required: false
+  - type: input
+    id: judge
+    attributes:
+      label: Judge
+      placeholder: Hon. Jane Doe
+    validations:
+      required: false
+  - type: textarea
+    id: charges
+    attributes:
+      label: Charges (one per line — ORC code, then description)
+      placeholder: |
+        2903.11 — Felonious assault
+        2925.11 — Possession of drugs
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes (verbatim docket entries only)
+      placeholder: 2026-05-10 — Capias issued. Bond set at $50,000.
+    validations:
+      required: false
+  - type: input
+    id: source_url
+    attributes:
+      label: Source URL (the courtclerk.org case_summary.php link)
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: I confirm this data was retrieved from courtclerk.org by my own browser, not by any automated tool.
+          required: true
+        - label: I confirm this data contains only verbatim docket information, no personal commentary or speculation.
+          required: true

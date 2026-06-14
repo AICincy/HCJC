@@ -1,0 +1,173 @@
+name: sweep
+
+on:
+  schedule:
+    # Every 15 minutes. GH Actions cron is best-effort (actual cadence is
+    # 20-45 min). The sweep skips if current.json is < 20 min old, so
+    # back-to-back runs during low-load don't double-scrape.
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      max_surnames:
+        description: 'Cap the surname list (blank = use all)'
+        required: false
+        default: ''
+      refresh_known:
+        description: 'Re-fetch detail pages for already-known inmates'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  # Lets the roster-freeze alarm open a GitHub issue when the roster has been
+  # frozen past the alarm window (scraper.freeze_alert).
+  issues: write
+
+concurrency:
+  # Never run two sweeps simultaneously; cancel-in-progress: false queues
+  # the newer run so they don't collide on the GitHub Pages deployment API.
+  group: jcstream-sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    name: Sweep + build + deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    # deploy-pages@v4 requires this environment to be bound to the job.
+    # GitHub auto-creates the "github-pages" environment when Settings > Pages > Source = "GitHub Actions".
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: HCSO inmate sweep
+        # JCSTREAM_USER_AGENT is intentionally not overridden here: the module
+        # default (scraper.client.DEFAULT_UA) carries the contact URL plus the
+        # parallelism-limited descriptor. Two sources of truth invite drift.
+        #
+        # JCSTREAM_HTTP_PROXY (optional secret): when HCSO's WAF blocks the
+        # Actions runner IP, set this repo secret to an egress proxy URL and
+        # the HCSO fetches route through it. Unset = direct connection (the
+        # secret resolves to "" which scraper.client treats as no proxy).
+        env:
+          JCSTREAM_HTTP_PROXY: ${{ secrets.JCSTREAM_HTTP_PROXY }}
+          # On a blocked cycle, snapshot the runner egress IP against GitHub's
+          # published Actions ranges (data/egress_evidence.json) for the record.
+          JCSTREAM_CAPTURE_EGRESS: "1"
+          WORKFLOW_RUN_ID: ${{ github.run_id }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          python -m scraper.sweep \
+            ${{ inputs.max_surnames && format('--max-surnames {0}', inputs.max_surnames) || '' }} \
+            ${{ inputs.refresh_known && '--refresh-known' || '' }}
+
+      # Surface a prolonged roster freeze: emit a GitHub Actions ::error::
+      # annotation and open a (deduped) GitHub issue so it actively notifies.
+      # The degraded-roster guard correctly keeps last-good data and exits 0
+      # when HCSO's WAF blocks the runner, but a multi-hour freeze otherwise
+      # hides in the logs. This step never fails the job (the open-data feeds
+      # below must still commit); scraper.freeze_alert only acts when the
+      # last-good roster is older than ROSTER_STALE_ALARM_HOURS.
+      - name: Roster freeze alarm
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m scraper.freeze_alert
+
+      # All four open-data feeds: 30-day window, each module skips its API
+      # pull if the existing JSON is < 24h old. Sweep cron is every 30 min;
+      # this gates Socrata traffic to once per dataset per day.
+      - name: Pull Cincinnati Open Data calls-for-service (last 30 days, 24h cache)
+        run: python -m scraper.cfs --hours 720
+
+      - name: Pull Cincinnati Open Data shootings (last 30 days, 24h cache)
+        run: python -m scraper.shootings --days 30
+        continue-on-error: true
+
+      - name: Pull PDI Police CFS (last 30 days, 24h cache, arrest/citation dispositions)
+        run: python -m scraper.cfs_pdi --hours 720
+        continue-on-error: true
+
+      # Additional Cincinnati Open Data safety feeds (use-of-force, traffic
+      # stops, pedestrian stops, STARS crime, CCA complaints). All gated to
+      # per-feed cache windows; FeedSpec list lives in scraper/open_data_feeds.py.
+      - name: Pull supplemental Cincinnati Open Data safety feeds
+        run: python -m scraper.open_data_feeds
+        continue-on-error: true
+
+      # Phase 11: build dispatch-to-arrest candidate pairs (researcher mode).
+      # No names, no assertions; just (inmate_number, cfs_row_index, confidence)
+      # joined keys that a researcher can investigate. Heavy disclaimer baked
+      # into the output JSON.
+      - name: Build dispatch correlation candidates
+        run: python -m scraper.correlate
+        continue-on-error: true
+
+      - name: Build static site
+        env:
+          # Custom domain (aretheyinjail.com) serves at the ROOT, so links are
+          # root-relative -- base URL is empty. Also emit the CNAME file so GitHub
+          # Pages keeps the custom domain across rebuilds.
+          # (If you ever drop the custom domain and go back to the
+          #  <owner>.github.io/<repo>/ URL, set JCSTREAM_SITE_BASE_URL to
+          #  /${{ github.event.repository.name }} and clear JCSTREAM_CNAME.)
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: www.aretheyinjail.com
+        run: python -m web.build
+
+      - name: Commit data + built site
+        run: |
+          git config user.name "jcstream-bot"
+          git config user.email "noreply@github.com"
+          git add data/ docs/
+          if ! git diff --cached --quiet; then
+            git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
+            git fetch origin main
+            git rebase origin/main || {
+              echo "::warning::Rebase conflict detected; attempting merge"
+              git rebase --abort
+              git merge -X ours origin/main --no-edit || {
+                echo "::error::Both rebase and merge failed"
+                exit 1
+              }
+            }
+            git push
+          else
+            echo "no changes"
+          fi
+
+      # The built site now lives in docs/ on the working branch and gets served
+      # directly by Pages when Source = "Deploy from a branch" -> <branch> -> /docs.
+      # No artifact upload, no environment binding, no gh-pages branch needed.
+      # - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
+      #   with:
+      #     path: docs
+      # - id: deploy
+      #   uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128  # v5.0.0
+      #
+      # - name: Deploy health check
+      #   if: steps.deploy.outcome == 'success'
+      #   run: |
+      #     SITE_URL="${{ steps.deploy.outputs.page_url }}"
+      #     if [ -z "$SITE_URL" ]; then
+      #       echo "::warning::No page_url output from deploy step; skipping health check"
+      #       exit 0
+      #     fi
+      #     echo "Checking $SITE_URL ..."
+      #     STATUS=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 15 "$SITE_URL" || echo "000")
+      #     if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+      #       echo "Health check passed (HTTP $STATUS)"
+      #     else
+      #       echo "::error::Deploy health check failed (HTTP $STATUS for $SITE_URL)"
+      #       exit 1
+      #     fi

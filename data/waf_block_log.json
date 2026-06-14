@@ -1,0 +1,119 @@
+[
+  {
+    "timestamp_utc": "2026-05-30T23:07:48Z",
+    "event": "blocked",
+    "prev_count": 1253,
+    "seen_count": 1161,
+    "surnames_total": 26,
+    "surnames_failed": 16,
+    "failed_fraction": 0.6154,
+    "http_status_counts": {},
+    "block_sample": null,
+    "roster_stale_hours": 0.5,
+    "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+    "prev_sha256": null
+  },
+  {
+    "timestamp_utc": "2026-05-30T23:36:14Z",
+    "event": "recovered",
+    "seen_count": 1261,
+    "note": "HCSO list sweep succeeded; automated access restored.",
+    "prev_sha256": "9b89aed69b02f41994ce83709e5e49bbcedd0583763872ec23c8069d4dddf7b8"
+  },
+  {
+    "timestamp_utc": "2026-06-06T16:40:58Z",
+    "event": "blocked",
+    "prev_count": 1252,
+    "seen_count": 0,
+    "surnames_total": 26,
+    "surnames_failed": 26,
+    "failed_fraction": 1.0,
+    "http_status_counts": {},
+    "block_sample": null,
+    "roster_stale_hours": 0.5,
+    "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+    "prev_sha256": "bd1bb40a3690608472f8d27f565a80057053fc42054fe3d8c3e297e03f6ac23c"
+  },
+  {
+    "timestamp_utc": "2026-06-06T17:09:17Z",
+    "event": "recovered",
+    "seen_count": 1244,
+    "note": "HCSO list sweep succeeded; automated access restored.",
+    "prev_sha256": "c3c91899cd60fb048331715d4e60a5895e64d2e133fd45fe08b1e701c8069a4f"
+  },
+  {
+    "timestamp_utc": "2026-06-07T10:47:29Z",
+    "event": "blocked",
+    "prev_count": 1275,
+    "seen_count": 0,
+    "surnames_total": 26,
+    "surnames_failed": 26,
+    "failed_fraction": 1.0,
+    "http_status_counts": {},
+    "block_sample": null,
+    "roster_stale_hours": 1.0,
+    "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+    "prev_sha256": "25384f750d0db6e721c3d01791de14898217c5c2edf2360c1abd6904ec7ca3c6"
+  },
+  {
+    "timestamp_utc": "2026-06-07T11:34:35Z",
+    "event": "recovered",
+    "seen_count": 1277,
+    "note": "HCSO list sweep succeeded; automated access restored.",
+    "prev_sha256": "084ae7ec2169392f1f26709984dc6919b2671be2874878da203f4a2e6223c1c5"
+  },
+  {
+    "timestamp_utc": "2026-06-11T22:23:52Z",
+    "event": "blocked",
+    "prev_count": 1210,
+    "seen_count": 0,
+    "surnames_total": 26,
+    "surnames_failed": 26,
+    "failed_fraction": 1.0,
+    "http_status_counts": {
+      "403": 26
+    },
+    "block_sample": {
+      "captured_utc": "2026-06-11T22:23:40Z",
+      "status": 403,
+      "bytes": 7117,
+      "sha256": "280c6edc50f705b0152ed2a64b368f330efe2c5e9ed3242a546c0082e45a66b1",
+      "body_sample": "<!DOCTYPE html>\n<html>\n<head>\n\t<meta charset=\"UTF-8\">\n\t<title>403 Forbidden</title>\n\t<style>\n\t\thtml {\n\t\t\tfont-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n\t\t\tfont-size: 14px;\n\t\t\tline-height: 1.42857143;\n\t\t\tcolor: #333;\n\t\t\tbackground-color: #fff;\n\t\t}\n\t\t\n\t\th1, h2, h3, h4, h45, h6 {\n\t\t\tfont-weight: 500;\n\t\t\tline-height: 1.1;\n\t\t}\n\t\t\n\t\th1 { font-size: 36px; }\n\t\th2 { font-size: 30px; }\n\t\th3 { font-size: 24px; }\n\t\th4 { font-size: 18px; }\n\t\th5 { font-size: 14px; }\n\t\th6 { font-size: 12px; }\n\t\t\n\t\th1, h2, h3 {\n\t\t\tmargin-top: 20px;\n\t\t\tmargin-bottom: 10px;\n\t\t}\n\t\th4, h5, h6 {\n\t\t\tmargin-top: 10px;\n\t\t\tmargin-bottom: 10px;\n\t\t}\n\t\t\n\t\t.btn {\n\t\t\tbackground-color: #00709e;\n\t\t\tborder: 1px solid #09486C;\n\t\t\tborder-radius: 4px;\n\t\t\tbox-sizing: border-box;\n\t\t\tcolor: #ffffff;\n\t\t\tcursor: pointer;\n\t\t\tdisplay: inline-block;\n\t\t\tfont-size: 14px;\n\t\t\tfont-weight: normal;\n\t\t\tletter-spacing: normal;\n\t\t\tline-height: 20px;\n\t\t\tmargin: 5px 0px;\n\t\t\tpadding: 12px 6px;\n\t\t\ttext-align: center;\n\t\t\ttext-decoration: none;\n\t",
+      "headers": {
+        "server": "nginx/1.18.0 (Ubuntu)",
+        "date": "Thu, 11 Jun 2026 22:23:40 GMT",
+        "content-type": "text/html; charset=UTF-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "pragma": "no-cache",
+        "cache-control": "no-cache, must-revalidate, private, max-age=0",
+        "expires": "Sat, 26 Jul 1997 05:00:00 GMT",
+        "content-encoding": "gzip"
+      },
+      "request": {
+        "method": "GET",
+        "url": "https://www.hcso.org/justice-center-services/inmate-search/?last=A",
+        "headers": {
+          "host": "www.hcso.org",
+          "accept-encoding": "gzip, deflate",
+          "user-agent": "JCStream/0.1 (+https://github.com/AICincy/JCStream; Hamilton County OH public-records mirror; parallelism-limited)",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "accept-language": "en-US,en;q=0.9",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1"
+        }
+      }
+    },
+    "roster_stale_hours": 0.7,
+    "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+    "prev_sha256": "f579b5e07e65598e0d97ee180a981ac92571d3c4fbf18897d0d735bae15648bd"
+  },
+  {
+    "timestamp_utc": "2026-06-11T23:03:14Z",
+    "event": "recovered",
+    "seen_count": 1212,
+    "note": "HCSO list sweep succeeded; automated access restored.",
+    "prev_sha256": "6d71efbf2a3b4e4084fb2de5c4759d57e22f053fb4b54a90b1556d3bedf14aaa"
+  }
+]

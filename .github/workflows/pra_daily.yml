@@ -1,0 +1,70 @@
+name: pra-daily
+
+on:
+  schedule:
+    # 09:00 UTC = 05:00 EDT - early enough that the clerk's office sees it
+    # at the start of the business day.
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: jcstream-pra-daily
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  send:
+    name: Send daily PRA requests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: PRA - daily new-capias roster (Clerk of Courts)
+        env:
+          JCSTREAM_PRA_SMTP_HOST: ${{ secrets.JCSTREAM_PRA_SMTP_HOST }}
+          JCSTREAM_PRA_SMTP_PORT: ${{ secrets.JCSTREAM_PRA_SMTP_PORT }}
+          JCSTREAM_PRA_SMTP_USER: ${{ secrets.JCSTREAM_PRA_SMTP_USER }}
+          JCSTREAM_PRA_SMTP_PASS: ${{ secrets.JCSTREAM_PRA_SMTP_PASS }}
+          JCSTREAM_PRA_FROM_EMAIL: ${{ secrets.JCSTREAM_PRA_FROM_EMAIL }}
+          JCSTREAM_PRA_TO_CAPIAS_EMAIL: ${{ secrets.JCSTREAM_PRA_TO_CAPIAS_EMAIL }}
+        run: python -m scraper.pra_capias
+
+      - name: PRA - booking photos (HCSO Media Relations, fallback)
+        if: ${{ vars.JCSTREAM_PRA_PHOTOS_ENABLED == '1' }}
+        env:
+          JCSTREAM_PRA_SMTP_HOST: ${{ secrets.JCSTREAM_PRA_SMTP_HOST }}
+          JCSTREAM_PRA_SMTP_PORT: ${{ secrets.JCSTREAM_PRA_SMTP_PORT }}
+          JCSTREAM_PRA_SMTP_USER: ${{ secrets.JCSTREAM_PRA_SMTP_USER }}
+          JCSTREAM_PRA_SMTP_PASS: ${{ secrets.JCSTREAM_PRA_SMTP_PASS }}
+          JCSTREAM_PRA_FROM_EMAIL: ${{ secrets.JCSTREAM_PRA_FROM_EMAIL }}
+          JCSTREAM_PRA_TO_PHOTOS_EMAIL: ${{ secrets.JCSTREAM_PRA_TO_PHOTOS_EMAIL }}
+        run: python -m scraper.pra
+
+      - name: Commit PRA requests log
+        run: |
+          git config user.name "jcstream-bot"
+          git config user.email "noreply@github.com"
+          git add data/pra_requests.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: pra log update $(date -u +%Y-%m-%dT%H:%MZ)"
+            git fetch origin main
+            git rebase origin/main || {
+              echo "::warning::Rebase conflict detected; attempting merge"
+              git rebase --abort
+              git merge -X ours origin/main --no-edit || {
+                echo "::error::Both rebase and merge failed"
+                exit 1
+              }
+            }
+            git push
+          else
+            echo "no changes"
+          fi

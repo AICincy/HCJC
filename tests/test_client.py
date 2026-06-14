@@ -1,0 +1,266 @@
+"""Tests for the HCSO HTTP client retry behavior. Uses MockTransport so no
+real network traffic happens."""
+
+from __future__ import annotations
+
+from typing import cast
+
+import httpx
+import pytest
+
+from scraper import client as client_mod
+
+
+def _make_client_with_responses(responses):
+    """Build an HcsoClient whose transport returns ``responses`` in order."""
+    it = iter(responses)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return next(it)
+
+    c = client_mod.HcsoClient(crawl_delay=0.0)
+    # Bypass __enter__ wiring up a real transport.
+    import threading
+
+    c._lock = threading.Lock()
+    c._client = httpx.Client(
+        base_url=c.base_url,
+        transport=httpx.MockTransport(handler),
+    )
+    return c
+
+
+def test_get_returns_body_on_first_try():
+    c = _make_client_with_responses([httpx.Response(200, text="hello")])
+    try:
+        assert c.get("/x") == "hello"
+    finally:
+        c._client.close()
+
+
+def test_get_retries_on_5xx_then_succeeds(monkeypatch):
+    slept: list[float] = []
+    monkeypatch.setattr(client_mod.time, "sleep", lambda s: slept.append(s))
+    monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)  # zero jitter
+    c = _make_client_with_responses(
+        [
+            httpx.Response(503, text="busy"),
+            httpx.Response(200, text="ok"),
+        ]
+    )
+    try:
+        assert c.get("/x") == "ok"
+    finally:
+        c._client.close()
+    # Backoff fired once: base=0.5 * 2^0 = 0.5s, jitter=0 (random→0.5).
+    assert slept == [0.5]
+
+
+def test_get_raises_after_repeated_5xx(monkeypatch):
+    monkeypatch.setattr(client_mod.time, "sleep", lambda s: None)
+    monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)
+    c = _make_client_with_responses(
+        [
+            httpx.Response(503),
+            httpx.Response(503),  # initial + MAX_RETRIES retries
+        ]
+    )
+    try:
+        with pytest.raises(httpx.HTTPStatusError):
+            c.get("/x")
+    finally:
+        c._client.close()
+
+
+def test_get_retries_on_429_honoring_retry_after(monkeypatch):
+    # sec-net-F3: 429 must trigger the retry envelope (it didn't before).
+    slept: list[float] = []
+    monkeypatch.setattr(client_mod.time, "sleep", lambda s: slept.append(s))
+    c = _make_client_with_responses(
+        [
+            httpx.Response(429, headers={"retry-after": "3"}, text="slow down"),
+            httpx.Response(200, text="ok"),
+        ]
+    )
+    try:
+        assert c.get("/x") == "ok"
+    finally:
+        c._client.close()
+    # Slept exactly 3 seconds per the Retry-After header (capped at 30).
+    assert slept == [3.0]
+
+
+def test_get_caps_retry_after_at_30_seconds(monkeypatch):
+    # sec-net-F3: a misbehaving upstream cannot extend the cron budget
+    # indefinitely; Retry-After is capped at RETRY_AFTER_CAP_S.
+    slept: list[float] = []
+    monkeypatch.setattr(client_mod.time, "sleep", lambda s: slept.append(s))
+    c = _make_client_with_responses(
+        [
+            httpx.Response(429, headers={"retry-after": "600"}, text="slow down"),
+            httpx.Response(200, text="ok"),
+        ]
+    )
+    try:
+        assert c.get("/x") == "ok"
+    finally:
+        c._client.close()
+    assert slept == [client_mod.RETRY_AFTER_CAP_S]
+
+
+def test_get_falls_back_to_one_second_when_retry_after_missing(monkeypatch):
+    slept: list[float] = []
+    monkeypatch.setattr(client_mod.time, "sleep", lambda s: slept.append(s))
+    c = _make_client_with_responses(
+        [
+            httpx.Response(429, text="slow down"),
+            httpx.Response(200, text="ok"),
+        ]
+    )
+    try:
+        assert c.get("/x") == "ok"
+    finally:
+        c._client.close()
+    assert slept == [1.0]
+
+
+def test_make_client_respects_env_overrides(monkeypatch):
+    # tests-F8: make_client is the seam between local dev and the workflow.
+    # A typo in any of the three env vars would silently fall back to default;
+    # this test pins the contract.
+    monkeypatch.setenv("JCSTREAM_BASE_URL", "https://example.test")
+    monkeypatch.setenv("JCSTREAM_USER_AGENT", "TestAgent/1.0")
+    monkeypatch.setenv("JCSTREAM_CRAWL_DELAY", "1.5")
+    c = client_mod.make_client()
+    assert c.base_url == "https://example.test"
+    assert c.user_agent == "TestAgent/1.0"
+    assert c.crawl_delay == 1.5
+
+
+def test_make_client_uses_defaults_when_env_unset(monkeypatch):
+    monkeypatch.delenv("JCSTREAM_BASE_URL", raising=False)
+    monkeypatch.delenv("JCSTREAM_USER_AGENT", raising=False)
+    monkeypatch.delenv("JCSTREAM_CRAWL_DELAY", raising=False)
+    c = client_mod.make_client()
+    assert c.base_url == client_mod.DEFAULT_BASE
+    assert c.user_agent == client_mod.DEFAULT_UA
+    assert c.crawl_delay == client_mod.DEFAULT_CRAWL_DELAY
+
+
+# ----- __enter__ behavior ---------------------------------------------------
+
+
+def test_enter_accepts_non_hcso_base_url():
+    with client_mod.HcsoClient(base_url="https://example.com") as c:
+        assert c._client is not None
+
+
+def test_enter_accepts_hcso_subdomain():
+    # The guard accepts hcso.org and any subdomain of it. Use a context
+    # manager so the implicit __exit__ runs and closes the underlying client.
+    with client_mod.HcsoClient(base_url="https://www.hcso.org") as c:
+        assert c._client is not None
+
+
+def test_enter_accepts_default_base_url():
+    # The default constructor (used by make_client) targets hcso.org.
+    with client_mod.HcsoClient() as c:
+        assert c._client is not None
+
+
+def test_make_client_reads_proxy_env(monkeypatch):
+    monkeypatch.setenv("JCSTREAM_HTTP_PROXY", "http://proxy.example:8080")
+    assert client_mod.make_client().proxy == "http://proxy.example:8080"
+
+
+def test_make_client_empty_proxy_is_none(monkeypatch):
+    # An unset GitHub secret resolves to "" in the workflow; treat it as no proxy.
+    monkeypatch.setenv("JCSTREAM_HTTP_PROXY", "")
+    assert client_mod.make_client().proxy is None
+    monkeypatch.delenv("JCSTREAM_HTTP_PROXY", raising=False)
+    assert client_mod.make_client().proxy is None
+
+
+def test_enter_builds_with_proxy():
+    # __enter__ must construct successfully when a proxy is configured.
+    # Constructing a proxied client does NOT open a connection, so this
+    # exercises the real httpx.HTTPTransport(proxy=...) path end-to-end and
+    # would fail if the library didn't accept the proxy argument.
+    with client_mod.HcsoClient(proxy="http://proxy.example:8080") as c:
+        assert c._client is not None
+
+
+# ----- crawl-delay lock + pool keepalive ------------------------------------
+
+
+def test_crawl_delay_sleep_holds_lock(monkeypatch):
+    # The crawl-delay sleep must run inside `with self._lock`, so concurrent
+    # workers can't all read the same elapsed time and burst the WAF together.
+    # If time.sleep ran outside the lock, the lock would be free during it.
+    c = client_mod.HcsoClient(crawl_delay=0.05)
+    c._last_request_at = client_mod.time.monotonic()  # force a pending wait
+    locked_during_sleep = []
+    monkeypatch.setattr(
+        client_mod.time,
+        "sleep",
+        lambda _s: locked_during_sleep.append(c._lock.locked()),
+    )
+    c._sleep_for_crawl_delay()
+    assert locked_during_sleep == [True]
+
+
+def test_pool_sets_keepalive_expiry(monkeypatch):
+    # Idle connections must expire (keepalive_expiry=30) so the pool doesn't
+    # leak sockets across a long sweep. Capture the limits passed to httpx.Client.
+    captured = {}
+    real_client = client_mod.httpx.Client
+
+    def _capture(*args, **kwargs):
+        captured["limits"] = kwargs.get("limits")
+        return real_client(*args, **kwargs)
+
+    monkeypatch.setattr(client_mod.httpx, "Client", _capture)
+    with client_mod.HcsoClient():
+        pass
+    assert cast(httpx.Limits, captured["limits"]).keepalive_expiry == 30
+
+
+def test_get_bytes_retries_on_5xx(monkeypatch):
+    monkeypatch.setattr(client_mod.time, "sleep", lambda s: None)
+    monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)
+    c = _make_client_with_responses(
+        [
+            httpx.Response(503),
+            httpx.Response(200, content=b"image_bytes"),
+        ]
+    )
+    try:
+        assert c.get_bytes("/photo.jpg") == b"image_bytes"
+    finally:
+        c._client.close()
+
+
+def test_retry_updates_last_request_at(monkeypatch):
+    c = _make_client_with_responses(
+        [
+            httpx.Response(503),
+            httpx.Response(200, text="ok"),
+        ]
+    )
+    c.crawl_delay = 0.5
+    monkeypatch.setattr(client_mod.time, "sleep", lambda s: None)
+    monkeypatch.setattr(client_mod.random, "random", lambda: 0.5)
+    c._last_request_at = 1000.0
+    current_time = 1000.0
+
+    def mock_monotonic():
+        nonlocal current_time
+        current_time += 10.0
+        return current_time
+
+    monkeypatch.setattr(client_mod.time, "monotonic", mock_monotonic)
+    try:
+        assert c.get("/x") == "ok"
+        assert c._last_request_at == current_time
+    finally:
+        c._client.close()

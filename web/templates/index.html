@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}JCStream &middot; {{ snapshot.inmate_count }} currently in custody{% endblock %}
+{% block content %}
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Inmate Roster</div>
+    <div class="sub">Hamilton County Justice Center · Cincinnati, Ohio · ORC § 149.43</div>
+  </div>
+  <div class="stamp">Sweep {{ snapshot.generated_utc[:16] }}Z</div>
+</header>
+
+{% if roster_stale.blocked %}
+<aside class="banner" aria-label="Data access notice" role="status">
+  {% if waf_sheriff_available %}
+  <img src="{{ base_url }}/static/img/sheriff-waf.png"
+       alt="Illustration of the Hamilton County Sheriff with a speech bubble: &ldquo;Sorry about that, we&rsquo;re allegedly blocking access to keep inmates safe from county residents who believe public records should be accessible to the public.&rdquo;"
+       class="waf-sheriff" style="float:right;max-height:460px;max-width:45%;height:auto;margin:0 0 .5rem 1rem;">
+  {% endif %}
+  <p><strong>Roster updates are currently interrupted.</strong> Since {{ roster_stale.since or '2026-05-19' }}, the Hamilton County Sheriff&rsquo;s Office public inmate-search portal has been returning blocked or empty responses to this site&rsquo;s automated public-records retrieval. The figures below reflect the last successful update on {{ roster_stale.last_updated }}; they are not current.</p>
+  <p class="banner-fine">This interruption is logged per cycle as timestamped, tamper-evident evidence: <a href="{{ base_url }}/data/waf_block_log.json">waf_block_log.json</a>. JCStream does not attempt to circumvent the block; it documents it. See <a href="{{ base_url }}/data/#access">access interruptions</a>.</p>
+</aside>
+{% endif %}
+
+<aside class="banner" aria-label="Legal notice">
+  <p><strong>Arrest is not conviction.</strong> Everyone listed here is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges shown are accusations only and may be reduced, dismissed, or result in acquittal.</p>
+  <p>JCStream republishes public records of the Hamilton County Sheriff&rsquo;s Office (HCSO) as authorized by the Ohio Public Records Act, <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> - derived from HCSO&rsquo;s public inmate roster at <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>. When HCSO removes a record, it is removed here on the next update cycle; this site keeps no historical archive. JCStream is an <strong>independent, non-governmental project</strong> - not affiliated with, endorsed by, or operated by HCSO or any government agency.</p>
+  <p class="banner-fine"><strong>Not a consumer reporting agency.</strong> Do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act (15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em>). To report an error, or to request removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a> - <strong>there is never a fee, and there never will be</strong>. <a href="{{ base_url }}/data/#legal">Full legal notices &rarr;</a></p>
+</aside>
+
+<p class="roster-meta">
+  <strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> {{ 'person' if snapshot.inmate_count == 1 else 'people' }} in custody.
+  Sweep <code>{{ snapshot.generated_utc or 'pending' }}</code>.
+  {{ recent_booked }} booked, {{ recent_released }} released in the last 24h.
+  <a href="{{ base_url }}/stats/">Statistics &rarr;</a>
+</p>
+
+{% if snapshot.inmate_count == 0 %}
+<div class="empty">
+  <h3>No roster data yet</h3>
+  <p>JCStream's first sweep hasn't completed. Trigger a manual run from the <a href="https://github.com/AICincy/JCStream/actions/workflows/sweep.yml">sweep workflow</a> or wait for the next 30-minute cron.</p>
+</div>
+{% else %}
+
+<div class="filter-bar" id="filters" hidden>
+  <label for="filter-tier">Tier
+    <select id="filter-tier" data-filter="tier">
+      <option value="">all</option>
+      <option value="felony">felony</option>
+      <option value="misdemeanor">misdemeanor</option>
+    </select>
+  </label>
+  <label for="filter-chap">Offense
+    <select id="filter-chap" data-filter="chap">
+      <option value="">all offenses</option>
+      {% for slug, label in all_chapters %}<option value="{{ slug }}">{{ label }}</option>{% endfor %}
+    </select>
+  </label>
+  <label class="search-wrap" for="search-box">Search
+    <input type="search" data-filter="search" id="search-box" placeholder="name, charge, ORC code, or #" autocomplete="off" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results">
+    <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
+  </label>
+  <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
+    <span class="view-toggle-icon" aria-hidden="true">≡</span>
+    <span class="view-toggle-text">Table view</span>
+  </button>
+  <span class="filter-count" aria-live="polite"></span>
+</div>
+<p class="empty" id="filter-empty" role="status" hidden>No one in custody matches that filter.</p>
+<p class="legend" aria-hidden="true">
+  <span class="swatch charge-2903"><span class="dot"></span> violence / sex</span>
+  <span class="swatch charge-2923"><span class="dot"></span> weapons</span>
+  <span class="swatch charge-2911"><span class="dot"></span> burglary / property</span>
+  <span class="swatch charge-2913"><span class="dot"></span> theft / fraud</span>
+  <span class="swatch charge-2925"><span class="dot"></span> drugs</span>
+  <span class="swatch charge-family"><span class="dot"></span> family / domestic</span>
+  <span class="swatch charge-traffic"><span class="dot"></span> traffic / other</span>
+  <span class="swatch"><span class="tier tier-felony" style="font-size:.55rem">F</span> felony</span>
+  <span class="swatch"><span class="tier tier-misdemeanor" style="font-size:.55rem">M</span> misdemeanor</span>
+</p>
+
+{% for month, group in by_month %}
+{% set month_slug = month | replace(' ', '-') | lower %}
+<details class="month" id="m-{{ month_slug }}" {% if month in expanded_months %}open{% endif %}>
+  <summary>
+    <h2>{{ month }}</h2>
+    <span class="count">{{ group | length }} booking{{ '' if group|length == 1 else 's' }}</span>
+  </summary>
+
+  {% set coms = crimes_of_month(group) %}
+  {% if coms %}
+  <details class="coms">
+    <summary>
+      <span class="coms-label">Crimes of {{ month.split(' ')[0] }}</span>
+      {% for c in coms[:4] %}<span class="coms-top chap chap-{{ c.cls }}">{{ c.label }} <strong>{{ c.count }}</strong></span>{% endfor %}
+      {% if coms | length > 4 %}<span class="coms-more">+{{ coms|length - 4 }} more</span>{% endif %}
+    </summary>
+    <div class="coms-grid">
+      {% for c in coms %}<span class="chap chap-{{ c.cls }}">{{ c.label }} <strong>{{ c.count }}</strong></span>{% endfor %}
+    </div>
+  </details>
+  {% endif %}
+
+  <div class="cards">
+    {% for inm in group %}{% include "_card.html" %}{% endfor %}
+  </div>
+</details>
+{% endfor %}
+
+
+
+<details class="about-jcstream">
+  <summary>About JCStream - purpose, removal policy, no fees</summary>
+  <div class="about-body">
+    <p><strong>Purpose.</strong> JCStream exists to increase public access to, and transparency of, Hamilton County&rsquo;s criminal justice system. By republishing the Hamilton County Sheriff&rsquo;s Office public inmate roster in a structured, searchable format, this project supports civic awareness, journalistic inquiry, court-watching, and public accountability. It does not editorialize about guilt or innocence, does not accept payment for record modification or removal, and removes records when the source agency removes them.</p>
+    <p><strong>No fees - no exceptions.</strong> This site will never charge any person for the review, correction, or removal of their record. If you encounter any third party claiming to offer paid removal services for records on this site, that party is not affiliated with JCStream and cannot fulfill that promise. Removal requests are processed at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a> at no cost.</p>
+    <p class="muted">See also: <a href="{{ base_url }}/data/#legal">full legal notices</a> &middot; <a href="{{ base_url }}/data/">data &amp; methodology</a> &middot; <a href="https://github.com/AICincy/JCStream">source code (MIT)</a>.</p>
+  </div>
+</details>
+
+{% endif %}
+
+
+{% endblock %}
