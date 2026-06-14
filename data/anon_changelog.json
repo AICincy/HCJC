@@ -197557,21 +197557,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-07T21:28:18Z",
-    "inmate_number": "14678959",
-    "name": "DELONEY JASMIN",
+    "date": "2026-06-07",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T21:28:18Z",
-    "inmate_number": "2146402",
-    "name": "WILLIAMS LAMONT",
+    "date": "2026-06-07",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/7/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -209254,5 +209248,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T21:46:52Z",
+    "inmate_number": "14546741",
+    "name": "PARHAM JASON",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked (date not reported)"
   }
 ]
