@@ -197467,21 +197467,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T19:11:00Z",
-    "inmate_number": "14759246",
-    "name": "MORALES MARINO",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "booked 6/7/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-07T19:11:00Z",
-    "inmate_number": "2450497",
-    "name": "ENGLAND BRANDON",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -209191,5 +209185,32 @@
     "tier": "M1",
     "category": "Assault",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T19:39:45Z",
+    "inmate_number": "2032212",
+    "name": "LONGMIRE ROBERT",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 6/14/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-14T19:39:45Z",
+    "inmate_number": "14257521",
+    "name": "BROCK CODY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-14T19:39:45Z",
+    "inmate_number": "2533504",
+    "name": "HART JUSTIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
