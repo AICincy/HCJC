@@ -180246,6 +180246,12 @@
     "category": "Receiving stolen property"
   },
   {
+    "event": "released",
+    "date": "2026-05-27",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
     "event": "updated",
     "date": "2026-05-28",
     "tier": null,
@@ -197419,30 +197425,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-07T15:05:33Z",
-    "inmate_number": "14807287",
-    "name": "WILLIAMS-ROBERTS BRITTANY",
+    "date": "2026-06-07",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T15:45:37Z",
-    "inmate_number": "14722915",
-    "name": "WASHINGTON MICHAEL",
+    "date": "2026-06-07",
     "tier": "F2",
-    "category": "Robbery",
-    "note": "booked 6/7/26"
+    "category": "Robbery"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T15:45:37Z",
-    "inmate_number": "2459860",
-    "name": "VORNBERG ANDREW",
+    "date": "2026-06-07",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 6/7/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
@@ -209089,5 +209086,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T15:54:00Z",
+    "inmate_number": "14566727",
+    "name": "TURNER CAMRON",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked (date not reported)"
   }
 ]
