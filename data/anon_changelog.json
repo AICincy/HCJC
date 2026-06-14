@@ -197029,66 +197029,63 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-07T04:10:17Z",
-    "inmate_number": "14105015",
-    "name": "HERNDON LENDALE",
+    "date": "2026-06-07",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-07T04:10:17Z",
-    "inmate_number": "14184652",
-    "name": "RICHMOND SIERRA",
+    "date": "2026-06-07",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T04:10:17Z",
-    "inmate_number": "1465577",
-    "name": "LOVE PRIEST",
+    "date": "2026-06-07",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/6/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T04:10:17Z",
-    "inmate_number": "1846518",
-    "name": "HICKS JOHN",
+    "date": "2026-06-07",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/6/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-07T04:10:17Z",
-    "inmate_number": "797123",
-    "name": "HARMON WAYNE",
+    "date": "2026-06-07",
     "tier": "M4",
-    "category": "Menacing",
-    "note": ""
+    "category": "Menacing"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-07T04:10:17Z",
-    "inmate_number": "2742989",
-    "name": "BIEHL MICHAEL",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-07T04:10:17Z",
-    "inmate_number": "2547964",
-    "name": "KIRKSEY DIMITRIUS",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-07",
+    "tier": "F2",
+    "category": "Felonious assault"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-07",
+    "tier": "M1",
+    "category": "Assault"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-07",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -208885,6 +208882,60 @@
     "timestamp_utc": "2026-06-14T03:48:00Z",
     "inmate_number": "2774649",
     "name": "SUTHERLAND KAYLA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T05:35:32Z",
+    "inmate_number": "14443442",
+    "name": "JAMISON SHIANA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/14/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T05:35:32Z",
+    "inmate_number": "1777439",
+    "name": "AARON KEVIN",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 6/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T05:35:32Z",
+    "inmate_number": "1949983",
+    "name": "ODOMS NIAMBI",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 6/14/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-14T05:35:32Z",
+    "inmate_number": "2031343",
+    "name": "BURNETT PEGGY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-14T05:35:32Z",
+    "inmate_number": "2808506",
+    "name": "RITCHIE ANTHONY",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-14T05:35:32Z",
+    "inmate_number": "2415040",
+    "name": "PORTIS JEFFERY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
