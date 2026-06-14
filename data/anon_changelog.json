@@ -197443,12 +197443,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-07T16:15:54Z",
-    "inmate_number": "2459860",
-    "name": "VORNBERG ANDREW",
+    "date": "2026-06-07",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-07",
+    "tier": "F5",
+    "category": "Possession of drugs"
   },
   {
     "event": "released",
@@ -209095,5 +209098,32 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-14T17:11:13Z",
+    "inmate_number": "14225477",
+    "name": "LANZA DEAVONIA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T17:11:13Z",
+    "inmate_number": "1458110",
+    "name": "STEVENSON ALFONZO",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/14/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-14T17:11:13Z",
+    "inmate_number": "14667305",
+    "name": "SANDERS ASA",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
