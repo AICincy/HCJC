@@ -197401,30 +197401,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T14:26:18Z",
-    "inmate_number": "14807287",
-    "name": "WILLIAMS-ROBERTS BRITTANY",
+    "date": "2026-06-07",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/7/26"
+    "category": "Assault"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-07T14:26:18Z",
-    "inmate_number": "2773517",
-    "name": "DANIELS KENDRICK",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-07T14:26:18Z",
-    "inmate_number": "14064003",
-    "name": "SHELTON JALYN",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -209086,6 +209077,15 @@
     "timestamp_utc": "2026-06-14T14:15:55Z",
     "inmate_number": "14179188",
     "name": "MIRANDA-AGUILON ELADIO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-14T15:03:54Z",
+    "inmate_number": "2322109",
+    "name": "PHILLIPS DAJA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
