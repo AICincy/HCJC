@@ -194814,6 +194814,18 @@
     "category": "Domestic violence"
   },
   {
+    "event": "booked",
+    "date": "2026-06-04",
+    "tier": "MM",
+    "category": "Flse alrm to law enfor agncym"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-04",
+    "tier": "MM",
+    "category": "Flse alrm to law enfor agncym"
+  },
+  {
     "event": "updated",
     "date": "2026-06-05",
     "tier": "M1",
@@ -197497,30 +197509,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T20:27:56Z",
-    "inmate_number": "14812868",
-    "name": "PEREZ ROGELIO",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "booked 6/7/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T20:27:56Z",
-    "inmate_number": "1748772",
-    "name": "PERKINS DENISE",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T20:27:56Z",
-    "inmate_number": "2199339",
-    "name": "SCARPINSKI JOSEPH",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "booked 6/7/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -209247,6 +209250,15 @@
     "name": "WHEELER KATLYN",
     "tier": null,
     "category": null,
+    "note": "booked 6/14/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T20:44:26Z",
+    "inmate_number": "2103124",
+    "name": "TAYLOR NYAMEKYE",
+    "tier": "MM",
+    "category": "Flse alrm to law enfor agncym",
     "note": "booked 6/14/26"
   }
 ]
