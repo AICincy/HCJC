@@ -5,6 +5,7 @@ from __future__ import annotations
 from scraper import orc as orc_mod
 from scraper.models import Inmate, Snapshot
 from web.classify import _chap_slug, _primary_chapter, _primary_degree
+
 from .common import _cached_offenses
 
 

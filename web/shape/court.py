@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 
 from scraper.models import Inmate, Snapshot
 from web.classify import _parse_book_date, _parse_md_yy, case_category, case_year
+
 from .common import _now_naive_est
 
 

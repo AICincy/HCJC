@@ -5,7 +5,7 @@ from __future__ import annotations
 import functools
 import sys
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from scraper import orc as orc_mod
 from scraper.models import Inmate
@@ -82,5 +82,3 @@ class RosterIndexes:
         self.by_code = dict(by_code)
         self.bonds_by_code = dict(bonds_by_code)
 
-
-from datetime import timedelta

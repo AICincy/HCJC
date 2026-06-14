@@ -15,14 +15,6 @@ from web.classify import (
     _short_month_label,
 )
 
-# --- common utilities --------------------------------------------------------
-from .common import (
-    RosterIndexes,
-    _cached_offenses,
-    _now_naive_est,
-    _strftime_nopad,
-)
-
 # --- bond helpers -------------------------------------------------------------
 from .bond import (
     _bond_by_tier,
@@ -31,6 +23,14 @@ from .bond import (
     _bond_primary_code_and_bond,
     _bond_total,
     _sorted_pct,
+)
+
+# --- common utilities --------------------------------------------------------
+from .common import (
+    RosterIndexes,
+    _cached_offenses,
+    _now_naive_est,
+    _strftime_nopad,
 )
 
 # --- court / case helpers -----------------------------------------------------
@@ -42,21 +42,6 @@ from .court import (
     _court_calendar,
     _next_court_date,
     _upcoming_courts,
-)
-
-# --- statistics ---------------------------------------------------------------
-from .stats import (
-    _all_top_offenses,
-    _distinct_chapters,
-    _tier_breakdown,
-    _top_offenses_with_orc,
-)
-
-# --- timeline -----------------------------------------------------------------
-from .timeline import (
-    _days_in_custody,
-    _iso_booking_date,
-    _timeline_markers,
 )
 
 # --- feeds / events -----------------------------------------------------------
@@ -85,6 +70,21 @@ from .inmates import (
     _sort_in_group,
     _statute_held_inmates,
     _warn_about_unmapped_orcs,
+)
+
+# --- statistics ---------------------------------------------------------------
+from .stats import (
+    _all_top_offenses,
+    _distinct_chapters,
+    _tier_breakdown,
+    _top_offenses_with_orc,
+)
+
+# --- timeline -----------------------------------------------------------------
+from .timeline import (
+    _days_in_custody,
+    _iso_booking_date,
+    _timeline_markers,
 )
 
 __all__ = [

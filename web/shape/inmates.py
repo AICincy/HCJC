@@ -4,7 +4,7 @@ similar inmates, roster staleness, and the full prepare_render_data pipeline."""
 from __future__ import annotations
 
 from collections import defaultdict
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 
 from scraper import orc as orc_mod
 from scraper.models import ChangeEvent, Inmate, Snapshot
@@ -15,14 +15,14 @@ from web.classify import (
     _chap_slug,
     _charge_tier,
     _offense_for_code,
-    _parse_bond_amount,
     _parse_book_date,
     _parse_md_yy,
     _primary_chapter,
     _primary_tier,
     _short_month_label,
 )
-from .common import RosterIndexes, _cached_offenses, _now_naive_est
+
+from .common import RosterIndexes, _cached_offenses
 
 
 def _related_inmates(
@@ -311,6 +311,7 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
     trend that the page renderers consume. Returned as a dict so build() can
     pass the pieces to the individual _render_* calls."""
     from web.history import _update_history
+
     from .feeds import _events_for_recent
 
     by_month = _group_by_month(snapshot.inmates)
