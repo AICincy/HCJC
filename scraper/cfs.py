@@ -9,9 +9,10 @@ from __future__ import annotations
 
 import json
 import logging
-import httpx
 from datetime import datetime, timezone
 from pathlib import Path
+
+import httpx
 
 from .cincy_open import (
     dumps_rows_per_line,
