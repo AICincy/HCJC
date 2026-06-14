@@ -197461,12 +197461,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-07T18:33:24Z",
-    "inmate_number": "2459860",
-    "name": "VORNBERG ANDREW",
+    "date": "2026-06-07",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -209176,5 +209173,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-14T19:00:14Z",
+    "inmate_number": "14813696",
+    "name": "SAUNDERS RICHARD",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T19:00:14Z",
+    "inmate_number": "2736309",
+    "name": "PHILLIPS EMONI",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked (date not reported)"
   }
 ]
