@@ -197329,75 +197329,51 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-07T11:35:26Z",
-    "inmate_number": "14461698",
-    "name": "BENNING SYDNEY",
+    "date": "2026-06-07",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": ""
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T11:35:26Z",
-    "inmate_number": "14581770",
-    "name": "JEWELL ANTWAN",
+    "date": "2026-06-07",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 6/7/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T11:35:26Z",
-    "inmate_number": "2520804",
-    "name": "BLAKE PHILLIP",
+    "date": "2026-06-07",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 6/7/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T12:15:16Z",
-    "inmate_number": "14812850",
-    "name": "WOODS LILY",
+    "date": "2026-06-07",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/7/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-07T12:15:16Z",
-    "inmate_number": "1892463",
-    "name": "ROLAND FERNANDO",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "booked 6/7/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-07T12:15:16Z",
-    "inmate_number": "14061178",
-    "name": "HENRY JONATHAN",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-07T12:15:16Z",
-    "inmate_number": "1879431",
-    "name": "LEE MAURICE",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-07T12:15:16Z",
-    "inmate_number": "14689880",
-    "name": "LOPEZ-CHILEL MIGUEL",
+    "date": "2026-06-07",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
@@ -209098,5 +209074,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T12:39:55Z",
+    "inmate_number": "14667305",
+    "name": "SANDERS ASA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-14T12:39:55Z",
+    "inmate_number": "1524103",
+    "name": "SCOTT JESSIE",
+    "tier": "M1",
+    "category": "Violation of community control / probation",
+    "note": "booked 6/14/26"
   }
 ]
