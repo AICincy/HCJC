@@ -34,7 +34,7 @@ _MIN_MONTH_SIZE = 3
 _DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
 
 # Tier categories by degree (for CSS coloring and display grouping).
-_TIER_MAX = {
+_TIER_MAX_DEFAULT = {
     "F1": "F",
     "F2": "F",
     "F3": "F",
@@ -49,7 +49,7 @@ _TIER_MAX = {
 
 # Primary offense categories by ORC chapter code (2903 = violence, 2925 = drugs, etc.)
 # Used for primary charge ranking and chapter-level offense grouping.
-_CHAPTER_LABEL = {
+_CHAPTER_LABEL_DEFAULT = {
     # Violence / sex
     "2903": "Violence / Sex",
     "2905": "Violence / Sex",
@@ -84,7 +84,7 @@ _CHAPTER_LABEL = {
 
 # Offense category rankings for primary charge selection.
 # Lower rank = higher priority when multiple charges exist.
-_CLS_RANK = {
+_CLS_RANK_DEFAULT = {
     "2903": 0,  # Violence / homicide / kidnapping
     "2907": 2,  # Sexual assault
     "2911": 3,  # Robbery / burglary
@@ -101,7 +101,7 @@ _CLS_RANK = {
 
 # Offense categorization: ORC code -> {label, cls} for display.
 # The 'cls' field is used for CSS color classes and statistical grouping.
-_OFFENSE_CATEGORY = {
+_OFFENSE_CATEGORY_DEFAULT = {
     # Violence / homicide (chapter 2903)
     "2903": {"label": "Violence / Homicide", "cls": "2903"},
     # Kidnapping / Abduction (chapter 2905)
@@ -140,7 +140,7 @@ _OFFENSE_CATEGORY = {
 }
 
 # Race code expansions (HCSO uses single letters for race classification).
-_RACE_LABEL = {
+_RACE_LABEL_DEFAULT = {
     "W": "White",
     "B": "Black",
     "H": "Hispanic",
@@ -150,10 +150,32 @@ _RACE_LABEL = {
 }
 
 # Sex code expansions (HCSO uses M/F for sex classification).
-_SEX_LABEL = {
+_SEX_LABEL_DEFAULT = {
     "M": "Male",
     "F": "Female",
 }
+
+
+def _load_classifications() -> dict:
+    """Load classifications from data/orc_classifications.json."""
+    path = Path("data/orc_classifications.json")
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        log.warning("Failed to parse data/orc_classifications.json: %s", e)
+        return {}
+
+
+_classifications = _load_classifications()
+_TIER_MAX = _classifications.get("tier_max", _TIER_MAX_DEFAULT)
+_CHAPTER_LABEL = _classifications.get("chapter_label", _CHAPTER_LABEL_DEFAULT)
+_CLS_RANK = _classifications.get("cls_rank", _CLS_RANK_DEFAULT)
+_OFFENSE_CATEGORY = _classifications.get("offense_category", _OFFENSE_CATEGORY_DEFAULT)
+_RACE_LABEL = _classifications.get("race_label", _RACE_LABEL_DEFAULT)
+_SEX_LABEL = _classifications.get("sex_label", _SEX_LABEL_DEFAULT)
+
 
 # ============================================================================
 # Parsing / Conversion Functions

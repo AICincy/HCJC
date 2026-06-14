@@ -1,0 +1,143 @@
+{
+  "tier_max": {
+    "F1": "F",
+    "F2": "F",
+    "F3": "F",
+    "F4": "F",
+    "F5": "F",
+    "M1": "M",
+    "M2": "M",
+    "M3": "M",
+    "M4": "M",
+    "MM": "M"
+  },
+  "chapter_label": {
+    "2903": "Violence / Sex",
+    "2905": "Violence / Sex",
+    "2907": "Violence / Sex",
+    "2913": "Theft / Fraud",
+    "2914": "Theft / Fraud",
+    "2915": "Theft / Fraud",
+    "2925": "Drugs",
+    "2923": "Weapons",
+    "2909": "Damage / Arson",
+    "2911": "Robbery / Burglary",
+    "2917": "Disorderly / Public",
+    "2919": "Family / Domestic",
+    "2921": "Obstruction",
+    "4511": "Traffic / DUI",
+    "4510": "Traffic / DUI",
+    "4507": "Traffic / DUI",
+    "4509": "Traffic / License",
+    "4503": "Traffic / DUI",
+    "2901": "Other"
+  },
+  "cls_rank": {
+    "2903": 0,
+    "2907": 2,
+    "2911": 3,
+    "2909": 4,
+    "2913": 5,
+    "2925": 6,
+    "2923": 7,
+    "2921": 8,
+    "2919": 9,
+    "2917": 10,
+    "traffic": 11,
+    "other": 12
+  },
+  "offense_category": {
+    "2903": {
+      "label": "Violence / Homicide",
+      "cls": "2903"
+    },
+    "2905": {
+      "label": "Kidnapping / Abduction",
+      "cls": "2903"
+    },
+    "2907": {
+      "label": "Sexual Assault",
+      "cls": "2907"
+    },
+    "2911": {
+      "label": "Robbery / Burglary",
+      "cls": "2911"
+    },
+    "2913": {
+      "label": "Theft / Fraud",
+      "cls": "2913"
+    },
+    "2914": {
+      "label": "Theft / Fraud",
+      "cls": "2913"
+    },
+    "2915": {
+      "label": "Theft / Fraud",
+      "cls": "2913"
+    },
+    "2925": {
+      "label": "Drugs",
+      "cls": "2925"
+    },
+    "2923": {
+      "label": "Weapons",
+      "cls": "2923"
+    },
+    "2921": {
+      "label": "Obstruction",
+      "cls": "2921"
+    },
+    "2919": {
+      "label": "Family / Domestic",
+      "cls": "2919"
+    },
+    "2917": {
+      "label": "Disorderly",
+      "cls": "2917"
+    },
+    "4511": {
+      "label": "Traffic / DUI",
+      "cls": "traffic"
+    },
+    "4510": {
+      "label": "Traffic / License",
+      "cls": "traffic"
+    },
+    "4507": {
+      "label": "Traffic / DUI",
+      "cls": "traffic"
+    },
+    "4509": {
+      "label": "Traffic / License",
+      "cls": "traffic"
+    },
+    "4503": {
+      "label": "Traffic / Registration",
+      "cls": "traffic"
+    },
+    "2909": {
+      "label": "Arson / Damage",
+      "cls": "2909"
+    },
+    "2901": {
+      "label": "Other",
+      "cls": "other"
+    },
+    "other": {
+      "label": "Other",
+      "cls": "other"
+    }
+  },
+  "race_label": {
+    "W": "White",
+    "B": "Black",
+    "H": "Hispanic",
+    "A": "Asian",
+    "I": "Native American",
+    "O": "Other"
+  },
+  "sex_label": {
+    "M": "Male",
+    "F": "Female"
+  }
+}
