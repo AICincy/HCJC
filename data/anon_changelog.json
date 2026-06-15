@@ -197923,48 +197923,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T07:42:21Z",
-    "inmate_number": "14623330",
-    "name": "CADLE-BUTLER JACOB",
+    "date": "2026-06-08",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 6/8/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T07:42:21Z",
-    "inmate_number": "14659035",
-    "name": "SICILIANO ANTHONY",
+    "date": "2026-06-08",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 6/8/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-08T07:42:21Z",
-    "inmate_number": "2434930",
-    "name": "BERRY JAMES",
+    "date": "2026-06-08",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": ""
+    "category": "Violating protection order"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-08T07:42:21Z",
-    "inmate_number": "2684420",
-    "name": "WILLIAMS ALFONZO",
+    "date": "2026-06-08",
     "tier": "M4",
-    "category": "Cincinnati Municipal Code: parks and recreation",
-    "note": ""
+    "category": "Cincinnati Municipal Code: parks and recreation"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-08T07:42:21Z",
-    "inmate_number": "14812873",
-    "name": "PHELPS ZIRIAHA",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -209565,6 +209550,60 @@
     "name": "ROGERS PERRY",
     "tier": null,
     "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T09:08:14Z",
+    "inmate_number": "14178183",
+    "name": "SAMS DEVON",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T09:08:14Z",
+    "inmate_number": "14288529",
+    "name": "GEE ERIC",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-15T09:08:14Z",
+    "inmate_number": "14339721",
+    "name": "ELLISON BRAXTON",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T09:08:14Z",
+    "inmate_number": "14740934",
+    "name": "ZAYAS HECTOR",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-15T09:08:14Z",
+    "inmate_number": "14807275",
+    "name": "LOPEZ EDWIN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/15/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T09:08:14Z",
+    "inmate_number": "2481050",
+    "name": "HARVEY JOSHUA",
+    "tier": "M1",
+    "category": "Aggravated menacing",
     "note": ""
   }
 ]
