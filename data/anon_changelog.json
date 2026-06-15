@@ -183330,6 +183330,12 @@
     "category": "Failure to comply with order or signal of police officer"
   },
   {
+    "event": "released",
+    "date": "2026-05-29",
+    "tier": "M2",
+    "category": "Obstructing official business"
+  },
+  {
     "event": "booked",
     "date": "2026-05-30",
     "tier": null,
@@ -198007,30 +198013,21 @@
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-08T12:44:06Z",
-    "inmate_number": "14419108",
-    "name": "BYRD VALERIE",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-08T12:44:06Z",
-    "inmate_number": "1460339",
-    "name": "HILL MARK",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-08T12:44:06Z",
-    "inmate_number": "2841823",
-    "name": "STEWART CARRERA",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -209623,5 +209620,104 @@
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer",
     "note": "booked 6/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "14155325",
+    "name": "WHITEHEAD COY",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "14813664",
+    "name": "ROBINSON-BOX TYLER",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 6/14/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "2199719",
+    "name": "GAMBLE JOHNITA",
+    "tier": "F5",
+    "category": "Identity fraud",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "2574935",
+    "name": "CHRISTIAN KIMBERLY",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/15/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "2835287",
+    "name": "KERSEY BRET",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "14308174",
+    "name": "CARR OMON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "1997176",
+    "name": "HALL WILLIE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "2455679",
+    "name": "KENYON HEATH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "1833907",
+    "name": "PROFFITT QUENTESIA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "14646151",
+    "name": "ROBINSON-BOX TYLER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T13:32:01Z",
+    "inmate_number": "14276376",
+    "name": "TAYLOR ANTONE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
