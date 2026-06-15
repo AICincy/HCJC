@@ -154309,6 +154309,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-05-17",
+    "tier": "F2",
+    "category": "Burglary"
+  },
+  {
+    "event": "booked",
     "date": "2026-05-18",
     "tier": null,
     "category": null
@@ -162418,6 +162424,12 @@
     "date": "2026-05-18",
     "tier": "M4",
     "category": "Cincinnati Municipal Code: public order (improper solicitation)"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-18",
+    "tier": "F2",
+    "category": "Burglary"
   },
   {
     "event": "booked",
@@ -198961,48 +198973,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T20:56:25Z",
-    "inmate_number": "14443433",
-    "name": "THORNTON TERRELLA",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "booked 6/8/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T20:56:25Z",
-    "inmate_number": "1570818",
-    "name": "WILLIAMS STACIE",
+    "date": "2026-06-08",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 6/8/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-08T20:56:25Z",
-    "inmate_number": "1627857",
-    "name": "CHAFFIN SCOTT",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-08T20:56:25Z",
-    "inmate_number": "14812842",
-    "name": "BOBIE KWASI",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-08T20:56:25Z",
-    "inmate_number": "1837436",
-    "name": "MOONEY WILLIAM",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -216919,6 +216916,123 @@
     "timestamp_utc": "2026-06-15T20:13:26Z",
     "inmate_number": "14491528",
     "name": "THOMAS ANTHONY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "14072887",
+    "name": "FEARS ASHLEY",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "14745026",
+    "name": "CHAPA JONATHAN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "1987882",
+    "name": "LEICHMAN TICO",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/15/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "2025008",
+    "name": "ROSS DONNIE",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "2198472",
+    "name": "HARRIS CALESHA",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": "booked 6/15/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "2409539",
+    "name": "DUKES DONTE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "1604958",
+    "name": "JETTER KENNETH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "1297074",
+    "name": "MONSON GREG",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "1021217",
+    "name": "MONTGOMERY DEZI",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "2344826",
+    "name": "RACK KEVIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "14364756",
+    "name": "SWEETEN DEVONTE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "2620243",
+    "name": "WELLS BEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-15T21:21:15Z",
+    "inmate_number": "14641990",
+    "name": "WIGGINS LAMONT",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
