@@ -170119,6 +170119,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-05-21",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer"
+  },
+  {
+    "event": "booked",
     "date": "2026-05-22",
     "tier": null,
     "category": null
@@ -183316,6 +183322,12 @@
     "date": "2026-05-29",
     "tier": "M1",
     "category": "Assault"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-29",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "booked",
@@ -197953,66 +197965,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T09:16:29Z",
-    "inmate_number": "14166805",
-    "name": "BRADFORD ALEXANDER",
+    "date": "2026-06-08",
     "tier": "MM",
-    "category": "Expired operators license",
-    "note": "booked (date not reported)"
+    "category": "Expired operators license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T09:16:29Z",
-    "inmate_number": "1460339",
-    "name": "HILL MARK",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "booked 6/8/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-08T09:16:29Z",
-    "inmate_number": "14623330",
-    "name": "CADLE-BUTLER JACOB",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T09:16:29Z",
-    "inmate_number": "2012566",
-    "name": "TRICE JAMEL",
+    "date": "2026-06-08",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": "booked 6/8/26"
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-08T09:16:29Z",
-    "inmate_number": "14812872",
-    "name": "ENGLISH LAZIRE",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T11:01:54Z",
-    "inmate_number": "14061483",
-    "name": "BONNER TIMOTHY",
+    "date": "2026-06-08",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked 6/8/26"
+    "category": "Driving without a valid license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-08T11:01:54Z",
-    "inmate_number": "14166805",
-    "name": "BRADFORD ALEXANDER",
+    "date": "2026-06-08",
     "tier": "MM",
-    "category": "Expired operators license",
-    "note": ""
+    "category": "Expired operators license"
   },
   {
     "event": "released",
@@ -209605,5 +209596,32 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T11:21:37Z",
+    "inmate_number": "14339721",
+    "name": "ELLISON BRAXTON",
+    "tier": "F2",
+    "category": "Robbery",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T11:21:37Z",
+    "inmate_number": "14807275",
+    "name": "LOPEZ EDWIN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-15T11:21:37Z",
+    "inmate_number": "2835287",
+    "name": "KERSEY BRET",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": "booked 6/15/26"
   }
 ]
