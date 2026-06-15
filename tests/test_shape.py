@@ -15,6 +15,7 @@ import pytest
 
 from scraper.models import ChangeEvent, Charge, Inmate, Snapshot
 from web import shape
+from web.shape import court as shape_court
 
 # ---------------------------------------------------------------------------
 # helpers
@@ -39,19 +40,8 @@ def _bond_charge(*, code: str, desc: str, bond: str) -> Charge:
 
 
 def _freeze_now(monkeypatch: pytest.MonkeyPatch, frozen: datetime) -> None:
-    """Pin `datetime.now()` inside web.shape so bucketing is deterministic.
-
-    web/shape.py does `from datetime import datetime`, so the binding to
-    monkeypatch is `shape.datetime`. Subclassing avoids breaking other
-    constructor calls (timedelta arithmetic, .replace(), comparisons).
-    """
-
-    class _FrozenDateTime(datetime):
-        @classmethod
-        def now(cls, tz=None):  # noqa: D401 - mirrors stdlib signature
-            return frozen
-
-    monkeypatch.setattr(shape, "datetime", _FrozenDateTime)
+    """Pin now() used by court bucketing to keep tests deterministic."""
+    monkeypatch.setattr(shape_court, "_now_naive_est", lambda: frozen)
 
 
 # ---------------------------------------------------------------------------
@@ -365,4 +355,3 @@ def test_warn_about_unmapped_orcs(caplog):
     with caplog.at_level(logging.INFO):
         shape._warn_about_unmapped_orcs([inm], offenses={})
     assert any("ORC titles missing" in r.message for r in caplog.records)
-

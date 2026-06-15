@@ -102,28 +102,19 @@ def parse_detail_page(html: str, inmate_number: str) -> tuple[Inmate, bytes | No
     if not bio and not name and not charges:
         log.info("detail page produced no structured fields for id=%s", inmate_number)
     elif photo_url is None and photo_bytes is None:
-        img_count, nondata_count, data_count, has_placeholder = img_stats
-        if has_placeholder:
-            log.info(
-                "detail page id=%s parsed (bio=%d name=%s charges=%d) but no photo present (empty placeholder found)",
-                inmate_number,
-                len(bio),
-                bool(name),
-                len(charges),
-            )
-        else:
-            log.info(
-                "detail page id=%s parsed (bio=%d name=%s charges=%d) but no photo extracted "
-                "(imgs=%d non-data=%d data=%d). If HCSO has a photo here, the alt/class/274px "
-                "hooks and the size+extension fallback all missed it - investigate HTML drift.",
-                inmate_number,
-                len(bio),
-                bool(name),
-                len(charges),
-                img_count,
-                nondata_count,
-                data_count,
-            )
+        img_count, nondata_count, data_count = img_stats
+        log.info(
+            "detail page id=%s parsed (bio=%d name=%s charges=%d) but no photo extracted "
+            "(imgs=%d non-data=%d data=%d). If HCSO has a photo here, the alt/class/274px "
+            "hooks and the size+extension fallback all missed it - investigate HTML drift.",
+            inmate_number,
+            len(bio),
+            bool(name),
+            len(charges),
+            img_count,
+            nondata_count,
+            data_count,
+        )
 
     return (
         Inmate(
@@ -368,8 +359,6 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
             continue
         if {"Last Name", "First Name", "Admit Date"}.issubset(cells.keys()):
             continue  # list-page row pattern, not a charge
-        if not any(v.strip() for v in cells.values()):
-            continue
         description = cells.get("Description", "").strip()
         orc = cells.get("ORC Code", "").strip()
         if not description and not orc:
@@ -377,7 +366,7 @@ def _parse_charges(tree: HTMLParser) -> list[Charge]:
             # - if HCSO renames either label we'd drop every charge silently.
             skipped_with_cells += 1
             continue
-        seen_charge_labels.update(cells.keys())
+        seen_charge_labels.update(k for k, v in cells.items() if v and v.strip())
         charges.append(
             Charge(
                 common_pleas_case=cells.get("Common Pleas Case #", "").strip(),
@@ -459,14 +448,14 @@ def _looks_like_ui_chrome(img) -> bool:
     return 0 < w < 80 or 0 < h < 80
 
 
-def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[int, int, int, bool]]:
+def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[int, int, int]]:
     """Single-pass photo extraction and image inventory.
 
     Walks ``tree.css("img")`` once, combining the URL-extraction tiers,
     inline-base64 decoding, and image counting that previously required up
     to five separate traversals.
 
-    Returns ``(photo_url, photo_bytes, (img_count, nondata_count, data_count, has_placeholder))``.
+    Returns ``(photo_url, photo_bytes, (img_count, nondata_count, data_count))``.
     ``photo_url`` is preferred over ``photo_bytes``; when a URL is found,
     inline base64 decoding is skipped for remaining images.
 
@@ -487,7 +476,6 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
     img_count = 0
     nondata_count = 0
     data_count = 0
-    has_placeholder = False
 
     for img in tree.css("img"):
         img_count += 1
@@ -515,8 +503,6 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
             if "image/svg" in header or "xml" in header:
                 continue
             data_count += 1
-            if "base64" in header and not payload:
-                has_placeholder = True
             if photo_url is not None or url_fallback is not None:
                 continue
             if "base64" not in header or not payload:
@@ -563,7 +549,7 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
             log.info("inline photo matched JPEG-SOI fallback, not the 274px hook")
             photo_bytes = soi_candidate
 
-    return photo_url, photo_bytes, (img_count, nondata_count, data_count, has_placeholder)
+    return photo_url, photo_bytes, (img_count, nondata_count, data_count)
 
 
 def _text(node: Node) -> str:

@@ -136,7 +136,7 @@ def test_query_retry_on_500_success(monkeypatch):
     # Minimize delays for testing
     monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda *args: None}))
 
-    res = co.query("test-dataset", client=MockClient())  # type: ignore[arg-type]
+    res = co.query("test-dataset", client=MockClient())
     assert res == [{"row": 1}]
     assert calls == 2
 
@@ -164,7 +164,7 @@ def test_query_retry_on_429_retry_after(monkeypatch):
     sleep_calls = []
     monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda s: sleep_calls.append(s)}))
 
-    res = co.query("test-dataset", client=MockClient())  # type: ignore[arg-type]
+    res = co.query("test-dataset", client=MockClient())
     assert res == [{"row": 1}]
     assert calls == 2
     assert len(sleep_calls) == 1
@@ -189,7 +189,7 @@ def test_query_retry_fails_after_max_retries(monkeypatch):
     monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda *args: None}))
 
     with pytest.raises(httpx.HTTPStatusError):
-        co.query("test-dataset", client=MockClient())  # type: ignore[arg-type]
+        co.query("test-dataset", client=MockClient())
     # 1 initial call + 3 retries = 4 total attempts
     assert calls == 4
 
@@ -211,6 +211,6 @@ def test_query_retry_on_network_error(monkeypatch):
 
     monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda *args: None}))
 
-    res = co.query("test-dataset", client=MockClient())  # type: ignore[arg-type]
+    res = co.query("test-dataset", client=MockClient())
     assert res == [{"row": 1}]
     assert calls == 2

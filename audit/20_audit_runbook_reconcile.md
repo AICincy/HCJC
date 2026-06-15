@@ -5,7 +5,7 @@
 - Date: 2026-05-22
 - Trigger: external "JCStream Audit Runbook" (dated 2026-05-21, audited HEAD `2aea083b`) proposing six scraper remediations plus a Datadog observability pass.
 - Method: grounded every runbook claim against the repo at HEAD `1cf4ab7`.
-- Outcome: the runbook is ~95% already shipped. All six remediations exist in code. Datadog monitoring is not used and has been removed from the repository. Only two test gaps and an issue template were genuinely missing (closed in PR #220).
+- Outcome: the runbook is ~95% already shipped. All six remediations exist in code, Datadog telemetry ships from `scraper/ddlog.py`, and `sweep.yml` already carries the `DD_*` env. Only two test gaps, a verify tool, and an issue template were genuinely missing (closed in PR #220).
 
 ## Reality check on the runbook
 
@@ -37,11 +37,11 @@ Because of this, PR #220 wrote fresh tests against the real surface rather than 
 | # | Runbook item | State |
 |---|--------------|-------|
 | 1 | Run pytest against patched tree | DONE — suite green |
-| 2 | Add `DD_API_KEY` secret | NOT USED — Datadog removed |
-| 3 | Wire `ddlog` into client/sweep | NOT USED — Datadog removed |
-| 4 | Verify Datadog ingest | NOT USED — Datadog removed |
-| 5 | Publish monitor 19947564 | NOT USED — Datadog removed |
-| 6 | Tune `>=8 events/6h` threshold | NOT USED — Datadog removed |
+| 2 | Add `DD_API_KEY` secret | Owner-side — referenced in `sweep.yml` |
+| 3 | Wire `ddlog` into client/sweep | DONE — `scraper/ddlog.py`; sweep emits `sweep_start`/`sweep_complete`/`waf_block` |
+| 4 | Verify Datadog ingest | Owner-side (needs `DD_APP_KEY`) — `tools/verify_ingest.py` added in #220 |
+| 5 | Publish monitor 19947564 | Owner-side — external Datadog |
+| 6 | Tune `>=8 events/6h` threshold | Owner-side — external, after live data |
 | 7 | Add 5 missing unit tests | DONE — repo had 4/6; #220 adds #1 and #5 |
 | 8 | Decide data-acquisition strategy | Owner decision (see HCSO feed finding below) |
 | 9 | Freshness banner on site | Already implemented — `index.html:13-22` renders a server-side `<aside role="status">` interruption banner driven by `roster_stale.blocked` (build.py `_roster_stale_context`), no JS required. The runbook's JS every-page version is not needed. |

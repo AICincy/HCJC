@@ -34,7 +34,7 @@ _MIN_MONTH_SIZE = 3
 _DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
 
 # Tier categories by degree (for CSS coloring and display grouping).
-_TIER_MAX_DEFAULT = {
+_TIER_MAX = {
     "F1": "F",
     "F2": "F",
     "F3": "F",
@@ -49,7 +49,7 @@ _TIER_MAX_DEFAULT = {
 
 # Primary offense categories by ORC chapter code (2903 = violence, 2925 = drugs, etc.)
 # Used for primary charge ranking and chapter-level offense grouping.
-_CHAPTER_LABEL_DEFAULT = {
+_CHAPTER_LABEL = {
     # Violence / sex
     "2903": "Violence / Sex",
     "2905": "Violence / Sex",
@@ -84,7 +84,7 @@ _CHAPTER_LABEL_DEFAULT = {
 
 # Offense category rankings for primary charge selection.
 # Lower rank = higher priority when multiple charges exist.
-_CLS_RANK_DEFAULT = {
+_CLS_RANK = {
     "2903": 0,  # Violence / homicide / kidnapping
     "2907": 2,  # Sexual assault
     "2911": 3,  # Robbery / burglary
@@ -101,7 +101,7 @@ _CLS_RANK_DEFAULT = {
 
 # Offense categorization: ORC code -> {label, cls} for display.
 # The 'cls' field is used for CSS color classes and statistical grouping.
-_OFFENSE_CATEGORY_DEFAULT = {
+_OFFENSE_CATEGORY = {
     # Violence / homicide (chapter 2903)
     "2903": {"label": "Violence / Homicide", "cls": "2903"},
     # Kidnapping / Abduction (chapter 2905)
@@ -140,7 +140,7 @@ _OFFENSE_CATEGORY_DEFAULT = {
 }
 
 # Race code expansions (HCSO uses single letters for race classification).
-_RACE_LABEL_DEFAULT = {
+_RACE_LABEL = {
     "W": "White",
     "B": "Black",
     "H": "Hispanic",
@@ -150,32 +150,10 @@ _RACE_LABEL_DEFAULT = {
 }
 
 # Sex code expansions (HCSO uses M/F for sex classification).
-_SEX_LABEL_DEFAULT = {
+_SEX_LABEL = {
     "M": "Male",
     "F": "Female",
 }
-
-
-def _load_classifications() -> dict:
-    """Load classifications from data/orc_classifications.json."""
-    path = Path("data/orc_classifications.json")
-    if not path.exists():
-        return {}
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError) as e:
-        log.warning("Failed to parse data/orc_classifications.json: %s", e)
-        return {}
-
-
-_classifications = _load_classifications()
-_TIER_MAX = _classifications.get("tier_max", _TIER_MAX_DEFAULT)
-_CHAPTER_LABEL = _classifications.get("chapter_label", _CHAPTER_LABEL_DEFAULT)
-_CLS_RANK = _classifications.get("cls_rank", _CLS_RANK_DEFAULT)
-_OFFENSE_CATEGORY = _classifications.get("offense_category", _OFFENSE_CATEGORY_DEFAULT)
-_RACE_LABEL = _classifications.get("race_label", _RACE_LABEL_DEFAULT)
-_SEX_LABEL = _classifications.get("sex_label", _SEX_LABEL_DEFAULT)
-
 
 # ============================================================================
 # Parsing / Conversion Functions
@@ -488,6 +466,28 @@ def _offense_for_code(code: str | None) -> dict | None:
         return _OFFENSE_CATEGORY.get("other")
     chap = m.group(1)[:4]  # Get up to first 4 digits.
     return _OFFENSE_CATEGORY.get(chap, _OFFENSE_CATEGORY.get("other"))
+
+
+def _primary_chapter(inmate) -> dict | None:
+    """Return the inmate's highest-severity offense category dict.
+
+    Selection is based on ``_CLS_RANK`` (lower rank = more severe). Returns
+    ``None`` when no charge yields a classifiable ORC chapter.
+    """
+    if not hasattr(inmate, "charges"):
+        return None
+    best: dict | None = None
+    best_rank = _CLS_RANK.get("other", 99)
+    for c in inmate.charges:
+        off = _offense_for_code(getattr(c, "orc_code", None))
+        if not off:
+            continue
+        cls = str(off.get("cls") or "other")
+        rank = _CLS_RANK.get(cls, _CLS_RANK.get("other", 99))
+        if best is None or rank < best_rank:
+            best = off
+            best_rank = rank
+    return best
 
 
 # Hamilton County case-number type tokens. Common Pleas uses a single-letter
