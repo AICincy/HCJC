@@ -199099,30 +199099,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T23:00:53Z",
-    "inmate_number": "14295283",
-    "name": "CRADDOCK SHAVON",
+    "date": "2026-06-08",
     "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": "booked 6/8/26"
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-08T23:00:53Z",
-    "inmate_number": "2279441",
-    "name": "BOWENS KATHLEEN",
+    "date": "2026-06-08",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/8/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-08T23:00:53Z",
-    "inmate_number": "14659035",
-    "name": "SICILIANO ANTHONY",
+    "date": "2026-06-08",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -217078,5 +217069,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-15T23:11:14Z",
+    "inmate_number": "14404140",
+    "name": "BENNETT JERMAINE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/15/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T23:11:14Z",
+    "inmate_number": "2198472",
+    "name": "HARRIS CALESHA",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-15T23:11:14Z",
+    "inmate_number": "808025",
+    "name": "JONES CLIFFORD",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
   }
 ]
