@@ -199465,48 +199465,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T10:43:47Z",
-    "inmate_number": "14637204",
-    "name": "TOMLIN SEANJAI",
+    "date": "2026-06-09",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T10:43:47Z",
-    "inmate_number": "2335874",
-    "name": "WENDLING NATHANIEL",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/9/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T10:43:47Z",
-    "inmate_number": "2458635",
-    "name": "JONES SEAN",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/9/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T11:48:54Z",
-    "inmate_number": "2335874",
-    "name": "WENDLING NATHANIEL",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T11:48:54Z",
-    "inmate_number": "2458635",
-    "name": "JONES SEAN",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-09",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-09",
+    "tier": "M1",
+    "category": "Theft"
   },
   {
     "event": "updated",
@@ -217912,5 +217909,41 @@
     "tier": "M1",
     "category": "Theft",
     "note": "booked 6/16/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-16T12:26:30Z",
+    "inmate_number": "2545851",
+    "name": "DICK ZACHARY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-16T12:26:30Z",
+    "inmate_number": "2477452",
+    "name": "GARNER SHAWNNIK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-16T12:26:30Z",
+    "inmate_number": "1582266",
+    "name": "GOODMAN ERIC",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-16T12:26:30Z",
+    "inmate_number": "1542486",
+    "name": "MULLINS CRAIG",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
