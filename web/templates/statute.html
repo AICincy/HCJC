@@ -102,7 +102,7 @@
             <h4 class="rb-name">{{ inm.full_name }}</h4>
             <p class="rb-charge">{{ ((inm.charges | selectattr('orc_code', 'defined') | first).description | lower) if inm.charges else ' - ' }}</p>
             <div class="rb-meta">
-              <span>{{ inm.booking_date or ' - ' }}</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
+              <span>{{ inm.booking_date or ' - ' }}</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
             </div>
           </div>
         </a>

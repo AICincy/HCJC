@@ -26,7 +26,7 @@
   var lbImg = document.getElementById('lb-img');
   var lbCap = document.getElementById('lb-cap');
   var lastFocus = null;
-  function openLB(src, caption) {
+  function openLB(src, caption, alt) {
     // src comes from a tainted [data-photo] DOM attribute. Extract just the
     // basename via a restricted regex ([\w.\-]+\.(jpe?g|png|webp|gif)), then
     // assign a URL built from constants + that capture, passed through encodeURI
@@ -39,7 +39,7 @@
     if (!m) return false;
     lastFocus = document.activeElement;
     lbImg.src = encodeURI(ROOT + '/photos/' + m[1]);
-    lbImg.alt = 'Booking photo';
+    lbImg.alt = alt || 'Booking photo';
     lbCap.textContent = caption || '';
     lb.hidden = false;
     // Confine focus to the dialog: mark all other body children inert and aria-hidden.
@@ -84,7 +84,7 @@
     if (!t) return;
     // Only swallow the click if the lightbox actually opened; otherwise let the
     // anchor navigate to its href (no-JS fallthrough preserved).
-    if (openLB(t.getAttribute('data-photo'), t.getAttribute('data-photo-cap'))) {
+    if (openLB(t.getAttribute('data-photo'), t.getAttribute('data-photo-cap'), t.getAttribute('data-photo-alt'))) {
       e.preventDefault();
     }
   });

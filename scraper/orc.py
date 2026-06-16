@@ -63,7 +63,7 @@ def _parse_hamco_offenses() -> dict[str, dict]:
                         title = desc_clean.capitalize() if desc_clean.isupper() else desc_clean
                         parsed_offenses[norm_code] = {"title": title, "degree": deg}
         except Exception as e:
-            log.warning(f"Failed to parse HAMCO file {file_path.name}: {e}")
+            log.warning("Failed to parse HAMCO file %s: %s", file_path.name, e)
 
     return parsed_offenses
 
@@ -81,7 +81,7 @@ def load_offenses(path: Path = LOOKUP_PATH) -> dict[str, dict]:
             raw = json.loads(path.read_text(encoding="utf-8"))
             offenses.update(raw.get("offenses", {}))
         except Exception as e:
-            log.warning(f"Failed to load orc_offenses.json: {e}")
+            log.warning("Failed to load orc_offenses.json: %s", e)
 
     # Dynamically enrich with HAMCO scraped listings
     try:
@@ -90,7 +90,7 @@ def load_offenses(path: Path = LOOKUP_PATH) -> dict[str, dict]:
             if code not in offenses or not offenses[code].get("title"):
                 offenses[code] = info
     except Exception as e:
-        log.warning(f"Failed to parse or merge HAMCO offenses: {e}")
+        log.warning("Failed to parse or merge HAMCO offenses: %s", e)
 
     return offenses
 

@@ -7,7 +7,7 @@
   <button type="button" class="tier tier-{{ tier.kind }} tier-{{ tier.label }} tier-corner" aria-label="{{ tier.label }}, charges detail" aria-describedby="tier-tip" data-tip="{{ card_tip(inm) }}">{{ tier.label }}</button>
   {% endif %}
   {% if inm.photo_filename %}
-  <a class="thumb" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/" tabindex="-1" aria-hidden="true" data-photo="{{ base_url }}/photos/{{ inm.photo_filename }}" data-photo-cap="{{ inm.full_name }} · booked {{ inm.booking_date }}">
+  <a class="thumb" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/" tabindex="-1" aria-hidden="true" data-photo="{{ base_url }}/photos/{{ inm.photo_filename }}" data-photo-cap="{{ inm.full_name }} · booked {{ inm.booking_date }}" data-photo-alt="HCSO booking photo of {{ inm.full_name }}">
     <img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="" width="48" height="60" loading="lazy" decoding="async">
   </a>
   {% else %}
