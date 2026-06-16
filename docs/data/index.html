@@ -144,7 +144,6 @@
     <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data - Pedestrian Stops Contact Cards (Socrata <code>swrz-ak2i</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
     <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data - Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
     <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data - Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed).</td></tr>
-    <tr><td><a href="dispatch_correlations.json">dispatch_correlations.json</a></td><td><strong>Phase 11.</strong> Researcher-mode candidate pairs joining current roster bookings to recent Cincinnati Open Data CFS rows. Schema: <code>{generated_utc, min_confidence, window_minutes, pairs: [{inmate_number, cfs_source, cfs_row_index, confidence, signals}]}</code>. <strong>Candidates only, not asserted matches.</strong> JCStream does not publish these joins on its own pages; this file is for journalists and researchers who want to cross-reference and verify before drawing conclusions. No names; both join keys are public IDs already in the other feeds.</td></tr>
     <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history.</td></tr>
   </tbody>
 </table>
@@ -184,17 +183,6 @@ snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commi
 </p>
 <p>
   <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">Open the case-data form &rarr;</a>
-</p>
-
-<h2 id="correlation" class="sect-h">Dispatch correlation (researcher mode)</h2>
-<p>
-  Cincinnati Open Data publishes calls-for-service rows with disposition codes (arrest, citation, offense report) but no inmate identifier. Hamilton County publishes the booking record but no link back to the originating dispatch. The two databases are public; the join is not.
-</p>
-<p>
-  <code>dispatch_correlations.json</code> attempts the join automatically and outputs candidate pairs by inmate_number and CFS row index, with a confidence score weighted 50/50 between temporal proximity (within a 60-minute window) and textual overlap between the booking's charge description and the CFS row's disposition/incident-type fields. Pairs below 0.35 confidence are dropped.
-</p>
-<p>
-  <strong>JCStream does not publish these joins on its own pages.</strong> The file is intentionally a raw data export. A high-confidence pair still requires human verification before any public claim is made that a specific dispatch led to a specific arrest. The defamation risk of automated false-positives is real; the researcher-mode export delegates that judgment to whoever's actually doing the reporting.
 </p>
 
 <h2 id="anon" class="sect-h">Anonymized event log (permanent)</h2>
@@ -262,11 +250,11 @@ on this site) is licensed <a href="https://creativecommons.org/licenses/by-nc/4.
 the underlying public records themselves remain governed by Ohio law and carry no JCStream license
 claim.</p>
 
-<p class="source">Generated 2026-06-16T14:18:53Z. This page is general information about the project, not legal advice.</p>
+<p class="source">Generated 2026-06-16T14:55:48Z. This page is general information about the project, not legal advice.</p>
     </div>
   </main>
   <footer class="site">
-    <span>Generated 2026-06-16T14:18:53Z</span>
+    <span>Generated 2026-06-16T14:55:48Z</span>
     <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
     <span class="footer-legal">Independent, non-governmental project - not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law, including the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC&nbsp;&sect;&nbsp;149.43</a>).</span>
   </footer>
