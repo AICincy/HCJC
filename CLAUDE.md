@@ -21,6 +21,34 @@ name (e.g. "have the jcstream-template-author …") or by describing the
 task ("update the FCRA disclaimer" routes to `legal-copy-author`). See
 `.claude/skills/README.md` for the index and the handoff topology.
 
+## Chain of Custody: Session IDs
+
+Court-evidence Claude Code session IDs. Filings under ORC 149.43 cite these
+sessions as the record of Claude-assisted work on this repository. Preserve
+verbatim. Do not abbreviate. Do not redact. Do not reformat.
+
+| Session ID | Date range [VERIFY] |
+| :-- | :-- |
+| session_01Hbc6p9EspF6RH9ajNNb8tB | [VERIFY] |
+| session_01MNnYgZMY5uFz9cHie3w6TY | [VERIFY] |
+| session_019fDevbfpgmnjJP7A343T95 | [VERIFY] |
+| session_01NGMSLESEepbgV8aSn4reVG | [VERIFY] |
+
+Authoritative storage location: [VERIFY]. This repository does not hold
+the transcripts. The 2026-06-16 code review flagged the absence as a
+Critical finding. See `docs/code-review/2026-06-16/00-summary.md`. Until
+this section records a confirmed storage location, a court submission
+citing these IDs cannot point to this repository as the location of
+record.
+
+Retrieval procedure:
+
+1. Sign in to the account that owns the session.
+2. Open https://claude.ai/code/<session_id>.
+3. Export the transcript.
+4. File it at the authoritative storage location above.
+5. Replace the [VERIFY] tags with the confirmed location and date range.
+
 ## Hard constraints (violations are accessibility failures, not style issues)
 
 The owner has AuDHD. These rules are medical accessibility accommodations.
