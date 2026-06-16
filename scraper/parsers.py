@@ -6,6 +6,7 @@ import base64
 import logging
 import re
 import threading as _threading
+from datetime import datetime, timezone
 from typing import Iterable
 
 from selectolax.parser import HTMLParser, Node
@@ -84,18 +85,69 @@ def _extract_inmate_id_from_row(tr: Node) -> str:
     return ""
 
 
-def parse_detail_page(html: str, inmate_number: str) -> tuple[Inmate, bytes | None, str | None]:
+def _record_empty_photo_event(inmate_id: str, field_path: str, payload_length: int) -> None:
+    """Emit one INFO log line plus one hash-chained ``empty_photo_observed``
+    entry for an HCSO inmate-detail page whose booking-photo ``<img>`` carried
+    an empty base64 payload.
+
+    These observations are HCSO conduct evidence. They are not a code defect
+    on this side: the parser correctly skips the empty payload. The durable
+    record exists so that, on litigation, the scraper can affirmatively show
+    that a specific inmate's photo was observed empty on a specific sweep.
+    """
+    log.info(
+        "empty photo payload skipped for id=%s field=%s payload_length=%d",
+        inmate_id,
+        field_path,
+        payload_length,
+    )
+    # Lazy import to avoid a parser -> store import cycle and to keep the
+    # parser usable in tests that don't touch the evidence log.
+    try:
+        from .store import append_block_evidence
+    except Exception as e:
+        log.warning("could not import append_block_evidence: %s", e)
+        return
+    record = {
+        "event": "empty_photo_observed",
+        "timestamp_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "inmate_id": inmate_id,
+        "photo_field_path": field_path,
+        "payload_length": payload_length,
+    }
+    try:
+        append_block_evidence(record)
+    except Exception as e:
+        log.warning("failed to append empty_photo_observed evidence: %s", e)
+
+
+def parse_detail_page(
+    html: str,
+    inmate_number: str,
+    *,
+    record_evidence: bool = False,
+) -> tuple[Inmate, bytes | None, str | None]:
     """Parse an inmate-detail page.
 
     Returns ``(Inmate, photo_bytes, photo_url)``. ``photo_url`` is a direct
     URL to the booking photo when the page provides one (preferred over base64).
     ``photo_bytes`` is the base64-decoded fallback. Either or both can be None.
+
+    When ``record_evidence`` is True, empty-payload booking-photo observations
+    are appended to the hash-chained evidence log via
+    ``_record_empty_photo_event``. Callers in test code default to False so
+    parser tests do not write into ``data/waf_block_log.json``. The sweep
+    orchestrator passes True.
     """
     tree = HTMLParser(html)
     bio = _parse_bio(tree)
     name = _parse_name(tree)
     charges = _parse_charges(tree)
-    photo_url, photo_bytes, img_stats = _extract_photo(tree)
+    photo_url, photo_bytes, img_stats = _extract_photo(
+        tree,
+        inmate_id=inmate_number,
+        record_evidence=record_evidence,
+    )
 
     last, first, middle = _split_name(name)
 
@@ -448,7 +500,12 @@ def _looks_like_ui_chrome(img) -> bool:
     return 0 < w < 80 or 0 < h < 80
 
 
-def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[int, int, int]]:
+def _extract_photo(
+    tree: HTMLParser,
+    *,
+    inmate_id: str = "",
+    record_evidence: bool = False,
+) -> tuple[str | None, bytes | None, tuple[int, int, int]]:
     """Single-pass photo extraction and image inventory.
 
     Walks ``tree.css("img")`` once, combining the URL-extraction tiers,
@@ -506,6 +563,15 @@ def _extract_photo(tree: HTMLParser) -> tuple[str | None, bytes | None, tuple[in
             if photo_url is not None or url_fallback is not None:
                 continue
             if "base64" not in header or not payload:
+                # HCSO sometimes embeds a booking-photo <img> whose base64
+                # payload is empty. The parser skips it correctly (there is
+                # no image to decode). The skip is HCSO conduct evidence.
+                if record_evidence and "base64" in header and not payload:
+                    _record_empty_photo_event(
+                        inmate_id=inmate_id,
+                        field_path=f"img[{img_count - 1}]@src {header}",
+                        payload_length=len(payload),
+                    )
                 continue
             try:
                 raw = base64.b64decode(payload, validate=False)
