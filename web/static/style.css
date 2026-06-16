@@ -7,7 +7,7 @@
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 700; font-display: swap; src: url("/static/fonts/plex-mono-700.woff2") format("woff2"); }
 
 :root {
-  --bg:           #F5F0EB;
+  --bg:           #fafafa;
   --bg-soft:      #FDF5EE;
   --surface:      #FDF5EE;
   --surface-hi:   #F5F0EB;
@@ -16,7 +16,7 @@
 
   --fg:           #1A1A1A;
   --fg-soft:      #333333;
-  --fg-muted:     #6c6c6c;
+  --fg-muted:     #5c5c5c;
   --fg-dim:       #858585;
 
   --accent:       #B33A2A;
@@ -839,7 +839,7 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   box-shadow: none;
 }
 .court-stat-primary {
-  background: linear-gradient(140deg, var(--accent) 0%, #2c41a8 100%);
+  background: var(--accent);
   border-color: transparent;
   color: #fff;
 }
@@ -1129,7 +1129,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   place-items: center;
   flex-shrink: 0;
 }
-.visit-card-primary { background: linear-gradient(155deg, var(--accent) 0%, #2c41a8 100%); border-color: transparent; color: #fff; }
+.visit-card-primary { background: var(--accent); border-color: transparent; color: #fff; }
 .visit-card-primary .visit-card-icon { background: rgba(255,255,255,0.16); color: #fff; }
 .visit-card-primary .visit-card-kicker { color: rgba(255,255,255,0.78); }
 .visit-card-primary .visit-card-title { color: #fff; }
