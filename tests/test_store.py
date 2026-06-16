@@ -139,6 +139,37 @@ def test_save_current_writes_schema_version(tmp_path: Path):
     assert raw["schema_version"] == 1
 
 
+def test_save_current_drops_sealed_inmate_numbers(tmp_path: Path):
+    # ORC 2953.32: a sealed inmate_number listed in data/takedowns.json must
+    # not persist into current.json at the write boundary (not only the render).
+    (tmp_path / "takedowns.json").write_text(json.dumps(["2"]), encoding="utf-8")
+    path = tmp_path / "current.json"
+    save_current(path, [_inm("1"), _inm("2", last="ROE")])
+    loaded = load_current(path)
+    assert set(loaded.keys()) == {"1"}
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    assert raw["inmate_count"] == 1
+
+
+def test_save_changelog_drops_sealed_events(tmp_path: Path):
+    # ORC 2953.32: events referencing a sealed inmate_number must be dropped
+    # from the rolling changelog on save.
+    from scraper.models import ChangeEvent
+    from scraper.store import save_changelog
+
+    (tmp_path / "takedowns.json").write_text(json.dumps(["2"]), encoding="utf-8")
+    path = tmp_path / "changelog.json"
+    save_changelog(
+        path,
+        [
+            ChangeEvent(event="booked", inmate_number="1", name="A", timestamp_utc="2026-05-14T01:00:00Z"),
+            ChangeEvent(event="released", inmate_number="2", name="B", timestamp_utc="2026-05-14T02:00:00Z"),
+        ],
+    )
+    rows = json.loads(path.read_text(encoding="utf-8"))
+    assert [r["inmate_number"] for r in rows] == ["1"]
+
+
 def test_load_current_or_raise_returns_empty_when_missing(tmp_path: Path):
     # File genuinely absent is the only path that bootstraps a roster.
     assert load_current_or_raise(tmp_path / "nope.json") == {}
