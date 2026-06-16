@@ -213,10 +213,33 @@ def _load_current_strict(path: Path) -> dict[str, Inmate]:
         raise SnapshotCorruptError(f"inmate deserialization failed: {e}") from e
 
 
+def _load_takedowns(data_dir: Path) -> set[str]:
+    """Inmate numbers sealed/expunged per ORC 2953.32, read from
+    ``<data_dir>/takedowns.json`` (a JSON array of inmate_number strings).
+
+    Returns an empty set when the file is absent or unreadable, so sealing is
+    opt-in and never blocks a write. Enforced at the write boundary so a sealed
+    number never persists into current.json or the changelog (and therefore not
+    into git history going forward), not only the rendered site.
+    """
+    path = data_dir / "takedowns.json"
+    if not path.exists():
+        return set()
+    try:
+        return {str(n) for n in json.loads(path.read_text(encoding="utf-8"))}
+    except (json.JSONDecodeError, TypeError, ValueError) as e:
+        log.warning("could not load %s (%s): no records sealed this cycle", path, e)
+        return set()
+
+
 def save_current(path: Path, inmates: Iterable[Inmate]) -> None:
     # Note: for rosters significantly larger than ~5k, consider streaming
     # serialization to avoid holding the full JSON string in memory.
-    materialized = sorted(inmates, key=lambda i: (i.last_name, i.first_name, i.inmate_number))
+    sealed = _load_takedowns(path.parent)
+    materialized = sorted(
+        (i for i in inmates if i.inmate_number not in sealed),
+        key=lambda i: (i.last_name, i.first_name, i.inmate_number),
+    )
     snapshot = Snapshot(
         generated_utc=utcnow_iso(),
         inmate_count=len(materialized),
@@ -241,6 +264,9 @@ def save_changelog(path: Path, events: list[ChangeEvent]) -> None:
     # non-monotonic wall clock (NTP slew, container restart) can't leave the
     # rolling feed out of order. Insertion-order is the tiebreaker, so the
     # diff() emission sequence within a single timestamp is preserved.
+    sealed = _load_takedowns(path.parent)
+    if sealed:
+        events = [e for e in events if e.inmate_number not in sealed]
     indexed = list(enumerate(events))
     indexed.sort(key=lambda iv: (iv[1].timestamp_utc, iv[0]))
     ordered = [e for _, e in indexed]

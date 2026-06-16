@@ -31,6 +31,14 @@ jobs:
         run: ruff check .
       - name: Type check (mypy)
         run: mypy scraper web
+      - name: Dependency CVE scan (pip-audit)
+        # Gate the pinned runtime deps against the Python advisory DB. Scoped to
+        # requirements.txt so a newly disclosed CVE in a shipped dependency
+        # fails CI until the pin is bumped. Dev-only tool, not added to
+        # requirements.txt itself.
+        run: |
+          pip install pip-audit
+          pip-audit -r requirements.txt
       - run: python -m pytest -v
       - name: Verify WAF-block evidence chain
         # Walk the prev_sha256 hash chain in data/waf_block_log.json. Exits 0

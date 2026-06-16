@@ -42,35 +42,35 @@
   <div class="v">Krista Ventre, Esq. <a href="tel:+15139465802">513-946-5802</a>.</div>
   <div class="k">Judges</div>
   <div class="v">
-    <div class="judge-directory" style="display: grid; gap: 8px; margin-top: 4px;">
+    <div class="judge-directory">
       {% for judge in common_pleas %}
-        <details id="judge-{{ judge.slug }}" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
-          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+        <details id="judge-{{ judge.slug }}" class="judge-card">
+          <summary>
             <span>Hon. {{ judge.name }}</span>
-            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">{{ judge.room }}</span>
+            <span class="judge-room">{{ judge.room }}</span>
           </summary>
-          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+          <div class="judge-body">
             {% if judge.image_url %}
-              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
-                <img src="{{ judge.image_url }}" alt="Hon. {{ judge.name }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <div class="judge-photo-wrap">
+                <img src="{{ judge.image_url }}" alt="Hon. {{ judge.name }}">
               </div>
             {% endif %}
-            <div style="flex: 1; min-width: 200px; font-size: 13px;">
-              {% if judge.room %}<div style="margin-bottom: 4px;"><strong>Location:</strong> {{ judge.room }}</div>{% endif %}
-              {% if judge.bailiff %}<div style="margin-bottom: 4px;"><strong>Bailiff:</strong> {{ judge.bailiff }}</div>{% endif %}
-              {% if judge.phone %}<div style="margin-bottom: 4px;"><strong>Phone:</strong> {{ judge.phone }}</div>{% endif %}
+            <div class="judge-meta">
+              {% if judge.room %}<div><strong>Location:</strong> {{ judge.room }}</div>{% endif %}
+              {% if judge.bailiff %}<div><strong>Bailiff:</strong> {{ judge.bailiff }}</div>{% endif %}
+              {% if judge.phone %}<div><strong>Phone:</strong> {{ judge.phone }}</div>{% endif %}
             </div>
           </div>
           {% if judge.bio %}
-            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
-              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge {{ judge.last_name }}</summary>
-              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">{{ judge.bio }}</div>
+            <details class="judge-sub">
+              <summary>About Judge {{ judge.last_name }}</summary>
+              <div class="judge-prose">{{ judge.bio }}</div>
             </details>
           {% endif %}
           {% if judge.procedures %}
-            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
-              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">Courtroom Procedures</summary>
-              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">{{ judge.procedures }}</div>
+            <details class="judge-sub">
+              <summary>Courtroom Procedures</summary>
+              <div class="judge-prose">{{ judge.procedures }}</div>
             </details>
           {% endif %}
         </details>
@@ -91,10 +91,10 @@
 <p class="page-lede">
   Mirrored verbatim from <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas</a>. The Judges have published this commitment to the public:
 </p>
-<blockquote class="banner" style="border-left-color: var(--ink); margin: 0 0 18px;">
-  <p style="margin: 0 0 8px;"><strong>Mission.</strong> As an equal and independent branch of government, the Judges of the Hamilton County Court of Common Pleas, acting with integrity, shall provide a safe, accessible, transparent, efficient, and impartial system of justice by fairly resolving disputes, respecting the public interest, and preserving individual rights while maintaining the rule of law.</p>
-  <p style="margin: 0 0 8px;"><strong>Pledge of Fairness.</strong> The fundamental mission of the Hamilton County Court of Common Pleas is to provide a fair and impartial forum for the resolution of disputes according to the rule of law. The Judges and staff therefore make this pledge to each litigant, defendant, victim, witness, juror, and person involved in a court proceeding:</p>
-  <p style="margin: 0;"><em>Fairness includes the opportunity to be heard, the chance to have the court process explained, and the right to be treated with respect.</em></p>
+<blockquote class="banner courts-mission">
+  <p><strong>Mission.</strong> As an equal and independent branch of government, the Judges of the Hamilton County Court of Common Pleas, acting with integrity, shall provide a safe, accessible, transparent, efficient, and impartial system of justice by fairly resolving disputes, respecting the public interest, and preserving individual rights while maintaining the rule of law.</p>
+  <p><strong>Pledge of Fairness.</strong> The fundamental mission of the Hamilton County Court of Common Pleas is to provide a fair and impartial forum for the resolution of disputes according to the rule of law. The Judges and staff therefore make this pledge to each litigant, defendant, victim, witness, juror, and person involved in a court proceeding:</p>
+  <p><em>Fairness includes the opportunity to be heard, the chance to have the court process explained, and the right to be treated with respect.</em></p>
 </blockquote>
 
 <h2 id="municipal" class="sect-h">Hamilton County Municipal Court</h2>
@@ -108,35 +108,35 @@
   <div class="v">Andrew Gillen. 1000 Main Street, Room 205. <a href="tel:+15139465200">513-946-5200</a>. Fax: 513-946-5223.</div>
   <div class="k">Judges</div>
   <div class="v">
-    <div class="judge-directory" style="display: grid; gap: 8px; margin-top: 4px;">
+    <div class="judge-directory">
       {% for judge in municipal %}
-        <details id="judge-{{ judge.slug }}" class="judge-card" style="border: 1px solid var(--border); padding: 8px 12px; background: var(--surface);">
-          <summary style="cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+        <details id="judge-{{ judge.slug }}" class="judge-card">
+          <summary>
             <span>Hon. {{ judge.name }}</span>
-            <span style="font-size: 12px; color: var(--fg-muted); font-weight: normal;">{{ judge.room }}</span>
+            <span class="judge-room">{{ judge.room }}</span>
           </summary>
-          <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; align-items: start;">
+          <div class="judge-body">
             {% if judge.image_url %}
-              <div style="width: 80px; height: 100px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; background: var(--bg-soft);">
-                <img src="{{ judge.image_url }}" alt="Hon. {{ judge.name }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <div class="judge-photo-wrap">
+                <img src="{{ judge.image_url }}" alt="Hon. {{ judge.name }}">
               </div>
             {% endif %}
-            <div style="flex: 1; min-width: 200px; font-size: 13px;">
-              {% if judge.room %}<div style="margin-bottom: 4px;"><strong>Location:</strong> {{ judge.room }}</div>{% endif %}
-              {% if judge.bailiff %}<div style="margin-bottom: 4px;"><strong>Bailiff:</strong> {{ judge.bailiff }}</div>{% endif %}
-              {% if judge.phone %}<div style="margin-bottom: 4px;"><strong>Phone:</strong> {{ judge.phone }}</div>{% endif %}
+            <div class="judge-meta">
+              {% if judge.room %}<div><strong>Location:</strong> {{ judge.room }}</div>{% endif %}
+              {% if judge.bailiff %}<div><strong>Bailiff:</strong> {{ judge.bailiff }}</div>{% endif %}
+              {% if judge.phone %}<div><strong>Phone:</strong> {{ judge.phone }}</div>{% endif %}
             </div>
           </div>
           {% if judge.bio %}
-            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
-              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">About Judge {{ judge.last_name }}</summary>
-              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">{{ judge.bio }}</div>
+            <details class="judge-sub">
+              <summary>About Judge {{ judge.last_name }}</summary>
+              <div class="judge-prose">{{ judge.bio }}</div>
             </details>
           {% endif %}
           {% if judge.procedures %}
-            <details style="margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px;">
-              <summary style="cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;">Courtroom Procedures</summary>
-              <div style="margin-top: 6px; font-size: 13px; white-space: pre-wrap; line-height: 1.5; color: var(--fg-soft);">{{ judge.procedures }}</div>
+            <details class="judge-sub">
+              <summary>Courtroom Procedures</summary>
+              <div class="judge-prose">{{ judge.procedures }}</div>
             </details>
           {% endif %}
         </details>

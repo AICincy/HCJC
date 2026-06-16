@@ -25,7 +25,6 @@
    "url": {{ ((site_url or "") ~ "/inmate/" ~ inmate.inmate_number ~ "/") | tojson }},
    {% set iso_booking = iso_booking_date(inmate) %}{% if iso_booking %}"dateCreated": {{ iso_booking | tojson }},{% endif %}
    "isAccessibleForFree":true,
-   "license":"https://creativecommons.org/licenses/by-nc/4.0/",
    "isBasedOn":{"@type":"WebPage",
      "name":"Hamilton County Justice Center booking record (HCSO source)",
      "url": {{ ("https://www.hcso.org/justice-center-services/inmate-search/inmate-detail/?id=" ~ inmate.inmate_number) | tojson }},
