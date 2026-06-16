@@ -46,7 +46,7 @@
 <section class="inmate-hero">
   {% if inmate.photo_filename %}
   <figure class="record-photo">
-    <a href="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo-cap="{{ inmate.full_name }} · booked {{ display_date(inmate.booking_date) or 'date not reported' }}" aria-label="Enlarge booking photo">
+    <a href="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo-cap="{{ inmate.full_name }} · booked {{ display_date(inmate.booking_date) or 'date not reported' }}" data-photo-alt="HCSO booking photo of {{ inmate.full_name }}" aria-label="Enlarge booking photo">
       <img src="{{ base_url }}/photos/{{ inmate.photo_filename }}" alt="HCSO booking photo of {{ inmate.full_name }}" width="240" height="300" decoding="async">
     </a>
     <figcaption>Booking photo &middot; ORC &sect; 149.43</figcaption>
@@ -113,7 +113,7 @@
         {% if orc_t %}<br><small class="orc-title">{{ orc_t }}</small>{% endif %}
       </td>
       <td>{{ c.description or ' - ' }}</td>
-      <td>{% if ch_tier %}<span class="tier tier-{{ ch_tier.kind }}">{{ ch_tier.label }}</span>{% else %}<span class="muted"> - </span>{% endif %}</td>
+      <td>{% if ch_tier %}<span class="tier tier-{{ ch_tier.label if (ch_tier.label|length >= 2 and ch_tier.label[0] in ('F','M')) else ch_tier.kind }}">{{ ch_tier.label }}</span>{% else %}<span class="muted"> - </span>{% endif %}</td>
       <td>{{ c.court_date or ' - ' }}</td>
       <td>{{ (c.bond_type ~ ' ' ~ c.bond_amount) | trim or ' - ' }}</td>
       <td>{{ c.disposition or ' - ' }}</td>
@@ -362,7 +362,7 @@
         <h4 class="rb-name">{{ inm.full_name }}</h4>
         <p class="rb-charge">{{ (top_charge.description | lower) if top_charge and top_charge.description else ' - ' }}</p>
         <div class="rb-meta">
-          <span>{{ inm.booking_date or ' - ' }}</span><span class="rb-meta-sep">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
+          <span>{{ inm.booking_date or ' - ' }}</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
         </div>
       </div>
     </a>

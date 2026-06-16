@@ -614,6 +614,11 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
    Felony (any F-grade) → ALL-CAPS bold, accented border-top.
    Misdemeanor (any M-grade) → sentence-case regular, no border.
    Other / unknown → muted. All on transparent background — single-accent spec. */
+/* Two badge vocabularies share these base styles on purpose: the kind-level
+   classes (.tier-felony / .tier-misdemeanor) for 2-tier badges (hero counts,
+   legend) and the degree-level classes (.tier-F1..MM) for per-charge badges.
+   The granular color ladder is applied only when combined with .tier-corner
+   (cards), below; everywhere else both families render the same base color. */
 .tier-felony,
 .tier-F1, .tier-F2, .tier-F3, .tier-F4, .tier-F5 {
   color: var(--fg);
