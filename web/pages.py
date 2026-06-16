@@ -6,7 +6,9 @@ them to the output directory. Extracted from web/build.py for modularity.
 
 from __future__ import annotations
 
+import hashlib
 import json
+import logging
 import os
 import shutil
 from concurrent.futures import ThreadPoolExecutor
@@ -16,7 +18,9 @@ from pathlib import Path
 
 from jinja2 import Environment
 
+from scraper.client import DEFAULT_UA
 from scraper.models import ChangeEvent, Inmate, Snapshot
+from scraper.photos import downscale_and_save
 from web.classify import (
     _expand_race,
     _expand_sex,
@@ -407,7 +411,43 @@ def _render_help_page(env: Environment, out_dir: Path) -> None:
     target.write_text(page, encoding="utf-8")
 
 
-def _parse_judges() -> tuple[list[dict], list[dict]]:
+log = logging.getLogger(__name__)
+
+_JUDGES_PHOTO_DIR = Path(__file__).parent / "static" / "judges"
+
+
+def _mirror_judge_photo(image_url: str, base_url: str) -> str:
+    """Mirror a remote judge headshot to a same-origin /static/judges/ asset.
+
+    Returns a base_url-prefixed local path. Returns "" on a missing URL or any
+    fetch/decode failure so the template omits the <img> rather than hot-linking
+    a third-party government host (an FCRA third-party-embed and CSP img-src
+    violation). Idempotent: a mirrored file is reused, never refetched.
+    """
+    if not image_url or not image_url.startswith(("http://", "https://")):
+        return ""
+    name = hashlib.sha1(image_url.encode("utf-8")).hexdigest()[:16] + ".jpg"
+    dest = _JUDGES_PHOTO_DIR / name
+    if not dest.exists():
+        try:
+            import httpx
+
+            resp = httpx.get(
+                image_url,
+                timeout=15.0,
+                follow_redirects=True,
+                headers={"User-Agent": DEFAULT_UA},
+            )
+            resp.raise_for_status()
+        except Exception as e:
+            log.warning("judge photo fetch failed for %s: %s", image_url, e)
+            return ""
+        if not downscale_and_save(resp.content, dest):
+            return ""
+    return f"{base_url}/static/judges/{name}"
+
+
+def _parse_judges(base_url: str = "") -> tuple[list[dict], list[dict]]:
     """Parse Common Pleas and Municipal judge profile JSON files in HAMCO/.
     Returns (common_pleas_list, municipal_list) sorted by judge's last name or clean name.
     """
@@ -471,7 +511,7 @@ def _parse_judges() -> tuple[list[dict], list[dict]]:
         image_url = ""
         img_match = re.search(r"!\[.*?\]\((.*?)\)", markdown)
         if img_match:
-            image_url = img_match.group(1)
+            image_url = _mirror_judge_photo(img_match.group(1), base_url)
 
         room = ""
         bailiff = ""
@@ -546,7 +586,7 @@ def _render_courts_page(env: Environment, out_dir: Path) -> None:
     and jurisdictional info from hamiltoncountycourts.org (Municipal +
     Common Pleas), probatect.org, and the Clerk of Courts. Distinct from
     /court/ which is the operational calendar of upcoming hearings."""
-    common_pleas, municipal = _parse_judges()
+    common_pleas, municipal = _parse_judges(env.globals.get("base_url", ""))
     page = env.get_template("courts.html").render(
         common_pleas=common_pleas,
         municipal=municipal,

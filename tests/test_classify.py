@@ -9,11 +9,15 @@ ordinals, initials, slugs) that templates depend on.
 from datetime import datetime, timezone
 from types import SimpleNamespace
 
+import pytest
+
 from web.classify import (
+    _DEGREE_RE,
     _approx_age,
     _avatar_initials,
     _booking_seq,
     _chap_slug,
+    _charge_tier,
     _codes_ohio_url,
     _display_date,
     _expand_race,
@@ -35,6 +39,45 @@ def test_parse_book_date_two_and_four_digit_years():
     assert _parse_book_date("") is None
     assert _parse_book_date(None) is None
     assert _parse_book_date("not a date") is None
+
+
+@pytest.mark.parametrize(
+    "description, degree, kind",
+    [
+        ("ASSAULT F1", "F1", "felony"),
+        ("BURGLARY F2", "F2", "felony"),
+        ("THEFT F3", "F3", "felony"),
+        ("ASSAULT F4", "F4", "felony"),
+        ("DRUG POSSESSION F5", "F5", "felony"),
+        ("ASSAULT M1", "M1", "misdemeanor"),
+        ("CRIMINAL DAMAGING M2", "M2", "misdemeanor"),
+        ("DISORDERLY CONDUCT M3", "M3", "misdemeanor"),
+        ("PERSISTENT DISORDERLY M4", "M4", "misdemeanor"),
+        ("MARIJUANA MM", "MM", "misdemeanor"),
+    ],
+)
+def test_degree_re_positive_matches(description, degree, kind):
+    """Every ORC-defined degree at end-of-string resolves to its tier."""
+    assert _DEGREE_RE.search(description).group(1) == degree
+    tier = _charge_tier(SimpleNamespace(description=description))
+    assert tier == {"label": degree, "kind": kind}
+
+
+@pytest.mark.parametrize(
+    "description",
+    [
+        "ASSAULT F6",   # F6 is not a real Ohio felony degree
+        "THEFT M5",     # M5 is not a real Ohio misdemeanor degree
+        "MYSTERY X9",   # not a degree token at all
+        "ASSAULT F4 EXTRA",  # degree not at end of string
+        "FELONY ASSAULT",    # no degree suffix
+    ],
+)
+def test_degree_re_rejects_non_degrees(description):
+    """Parsing artifacts and out-of-range pairs must not match (the 2026-05-19
+    de-anchoring/allowlist regression class)."""
+    assert _DEGREE_RE.search(description) is None
+    assert _charge_tier(SimpleNamespace(description=description)) is None
 
 
 def test_parse_bond_amount():

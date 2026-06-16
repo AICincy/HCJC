@@ -27,15 +27,17 @@
   var lbCap = document.getElementById('lb-cap');
   var lastFocus = null;
   function openLB(src, caption) {
-    lastFocus = document.activeElement;
     // src comes from a tainted [data-photo] DOM attribute. Extract just the
-    // basename via a restricted regex ([\w.\-]+\.jpg), then assign a URL
-    // built from constants + that capture, passed through encodeURI - the
-    // canonical CodeQL js/xss-through-dom sanitizer. encodeURI is a no-op
+    // basename via a restricted regex ([\w.\-]+\.(jpe?g|png|webp|gif)), then
+    // assign a URL built from constants + that capture, passed through encodeURI
+    // - the canonical CodeQL js/xss-through-dom sanitizer. encodeURI is a no-op
     // for safe inputs (the regex already restricted the char class) and
     // explicitly signals "this is a URL, not HTML" to the static analyzer.
-    var m = typeof src === 'string' && src.match(/([\w.\-]+\.jpg)$/i);
-    if (!m) return;
+    // Returns false on no match so the caller can fall through to the href
+    // (preserves the no-JS contract if the photo pipeline ever emits non-jpg).
+    var m = typeof src === 'string' && src.match(/([\w.\-]+\.(?:jpe?g|png|webp|gif))$/i);
+    if (!m) return false;
+    lastFocus = document.activeElement;
     lbImg.src = encodeURI(ROOT + '/photos/' + m[1]);
     lbImg.alt = 'Booking photo';
     lbCap.textContent = caption || '';
@@ -49,6 +51,7 @@
       }
     });
     lb.querySelector('.lightbox-close').focus();
+    return true;
   }
   function closeLB() {
     lb.hidden = true; lbImg.src = '';
@@ -79,8 +82,11 @@
   document.addEventListener('click', function (e) {
     var t = e.target.closest('[data-photo]');
     if (!t) return;
-    e.preventDefault();
-    openLB(t.getAttribute('data-photo'), t.getAttribute('data-photo-cap'));
+    // Only swallow the click if the lightbox actually opened; otherwise let the
+    // anchor navigate to its href (no-JS fallthrough preserved).
+    if (openLB(t.getAttribute('data-photo'), t.getAttribute('data-photo-cap'))) {
+      e.preventDefault();
+    }
   });
 
   // (2b) Shared tier-badge tooltip - content lives in [data-tip], JS positions it.
@@ -161,9 +167,10 @@
     syncToggle();
   }
 
-  // (3) Filter bar.
+  // (3) Filter bar. Scoped to its own block so a page without #filters still
+  //     reaches the (4) search dropdown below, which is an independent feature.
   var bar = document.getElementById('filters');
-  if (!bar) return;
+  if (bar) {
   bar.hidden = false;
   var inputs = bar.querySelectorAll('[data-filter]');
   var countEl = bar.querySelector('.filter-count');
@@ -232,6 +239,7 @@
       bar.scrollIntoView({ block: 'start', behavior: scrollBehavior });
     });
   }
+  } // end (3) filter bar
 
   // (4) Search-results dropdown - lazy-loads search.json on first keystroke,
   //     shows a type-ahead list of matching people. Uses DOM APIs (not innerHTML)
