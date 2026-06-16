@@ -586,7 +586,7 @@ def _render_courts_page(env: Environment, out_dir: Path) -> None:
     and jurisdictional info from hamiltoncountycourts.org (Municipal +
     Common Pleas), probatect.org, and the Clerk of Courts. Distinct from
     /court/ which is the operational calendar of upcoming hearings."""
-    common_pleas, municipal = _parse_judges(env.globals.get("base_url", ""))
+    common_pleas, municipal = _parse_judges(str(env.globals.get("base_url", "")))
     page = env.get_template("courts.html").render(
         common_pleas=common_pleas,
         municipal=municipal,
