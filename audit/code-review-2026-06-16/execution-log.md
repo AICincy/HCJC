@@ -4,7 +4,7 @@ Date: 2026-06-16
 Operator: jaredcincy@gmail.com
 Agent: Claude Code (claude-opus-4-7)
 Source plan: `audit/code-review-2026-06-16/00-summary.md` (originally
-authored at `audit/code-review-2026-06-16/00-summary.md` on branch
+authored at `docs/code-review/2026-06-16/00-summary.md` on branch
 `docs/code-review-2026-06-16`; relocated under `audit/` because the
 next sweep wiped the `docs/` copy as a build artifact)
 
@@ -52,7 +52,7 @@ merged each PR after review.
 ### 4.1 Discrepancy
 
 The remediation plan instructed reading
-`audit/code-review-2026-06-16/00-summary.md` and five lane reports before any
+`docs/code-review/2026-06-16/00-summary.md` and five lane reports before any
 code change. Neither the directory nor the files existed in the working tree
 or in any git ref. The operator supplied the canonical synthesis text inline
 and authorized creating the file on a new branch.
@@ -62,7 +62,7 @@ and authorized creating the file on a new branch.
 | Step | Detail |
 | :-- | :-- |
 | Branch | `docs/code-review-2026-06-16` from `origin/main` |
-| Write | `audit/code-review-2026-06-16/00-summary.md`, 84 lines |
+| Write | `docs/code-review/2026-06-16/00-summary.md`, 84 lines (later relocated under `audit/` after the next sweep wiped the `docs/` copy as a build artifact) |
 | Commit | `10b5e0d224` |
 | Push | `git push -u origin docs/code-review-2026-06-16` |
 | PR | not opened initially per instruction; operator opened #337 and merged it |
