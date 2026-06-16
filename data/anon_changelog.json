@@ -200335,84 +200335,57 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T22:33:24Z",
-    "inmate_number": "1405266",
-    "name": "MUSTAFA DAWUD",
+    "date": "2026-06-09",
     "tier": "F5",
-    "category": "Forgery",
-    "note": ""
+    "category": "Forgery"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T22:33:24Z",
-    "inmate_number": "14370487",
-    "name": "BLACKMON JYMARTIA",
+    "date": "2026-06-09",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 6/9/26"
+    "category": "Resisting arrest"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T22:33:24Z",
-    "inmate_number": "1440813",
-    "name": "COLLINS CHRISTOPHER",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T22:33:24Z",
-    "inmate_number": "14466521",
-    "name": "WISDOM SETH",
+    "date": "2026-06-09",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 6/9/26"
+    "category": "Felonious assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T22:33:24Z",
-    "inmate_number": "1811575",
-    "name": "WILSON DOROTHY",
+    "date": "2026-06-09",
     "tier": "M4",
-    "category": "Menacing",
-    "note": ""
+    "category": "Menacing"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-09T22:33:24Z",
-    "inmate_number": "14208372",
-    "name": "CONLEY DONALD",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-09T22:33:24Z",
-    "inmate_number": "14809819",
-    "name": "KNAPMEYER KAEDEN",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-09T22:33:24Z",
-    "inmate_number": "14534850",
-    "name": "NDIAYE FALOU",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-09T22:33:24Z",
-    "inmate_number": "2199339",
-    "name": "SCARPINSKI JOSEPH",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -219583,5 +219556,59 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T23:03:33Z",
+    "inmate_number": "14166395",
+    "name": "BELL EDWARD",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T23:03:33Z",
+    "inmate_number": "14307744",
+    "name": "JACKSON TAMRAN",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T23:03:33Z",
+    "inmate_number": "14509900",
+    "name": "BURCHFIELD CHANIYA",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 6/16/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-16T23:03:33Z",
+    "inmate_number": "14813997",
+    "name": "MIZELL DAMAREA",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-16T23:03:33Z",
+    "inmate_number": "14814005",
+    "name": "ANDE ERICA",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-16T23:03:33Z",
+    "inmate_number": "2823701",
+    "name": "SPAW RYAN",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": ""
   }
 ]
