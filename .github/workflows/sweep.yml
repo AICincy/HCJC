@@ -1,5 +1,22 @@
 name: sweep
 
+# Workflow permissions, scoped to the minimum each active step requires:
+#   contents: write -- the "Commit data + built site" step pushes new sweep
+#                      data and the regenerated docs/ tree back to the branch.
+#   issues:   write -- the "Roster freeze alarm" step opens (and dedupes) a
+#                      GitHub issue when the roster freeze passes
+#                      ROSTER_STALE_ALARM_HOURS (scraper/freeze_alert.py).
+#
+# Permissions deliberately NOT requested:
+#   pages:    write -- the deploy-pages path is commented out (see the
+#                      "upload-pages-artifact" / "deploy-pages" steps further
+#                      down). Pages now serves directly from docs/ on the
+#                      working branch via Settings > Pages > Source = branch.
+#   id-token: write -- only deploy-pages@v4 needed an OIDC token; that step
+#                      is no longer active.
+# If the deploy-pages path is ever re-enabled, restore pages: write and
+# id-token: write together; do not re-grant either without the other.
+
 on:
   schedule:
     # Every 15 minutes. GH Actions cron is best-effort (actual cadence is
@@ -20,8 +37,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
   # Lets the roster-freeze alarm open a GitHub issue when the roster has been
   # frozen past the alarm window (scraper.freeze_alert).
   issues: write
