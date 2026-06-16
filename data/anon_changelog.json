@@ -199255,57 +199255,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T02:20:16Z",
-    "inmate_number": "14231107",
-    "name": "DICKEY CHRISTOPHER",
+    "date": "2026-06-09",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 6/8/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T02:20:16Z",
-    "inmate_number": "14281130",
-    "name": "JONES JAHRE",
+    "date": "2026-06-09",
     "tier": "MM",
-    "category": "Code not found in Ohio Revised Code (HCSO data artifact)",
-    "note": "booked 6/8/26"
+    "category": "Code not found in Ohio Revised Code (HCSO data artifact)"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T02:20:16Z",
-    "inmate_number": "14417222",
-    "name": "JONES KALUB",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Driving under FRA suspension",
-    "note": "booked 6/8/26"
+    "category": "Driving under FRA suspension"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T02:20:16Z",
-    "inmate_number": "14669001",
-    "name": "BELL DEVANTE",
+    "date": "2026-06-09",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 6/8/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T02:20:16Z",
-    "inmate_number": "2575959",
-    "name": "EVANS KRISTIN",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": ""
+    "category": "Driving without a valid license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T02:20:16Z",
-    "inmate_number": "2812722",
-    "name": "HUBER ERIC",
+    "date": "2026-06-09",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 6/8/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
@@ -217486,5 +217468,68 @@
     "tier": "MM",
     "category": "Illegal use or possession of drug paraphernalia",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T03:09:30Z",
+    "inmate_number": "14223615",
+    "name": "MAPP DARIAN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T03:09:30Z",
+    "inmate_number": "14396376",
+    "name": "JACKSON GENERO",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 6/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T03:09:30Z",
+    "inmate_number": "14539409",
+    "name": "WATKINS SANTONIO",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T03:09:30Z",
+    "inmate_number": "2158286",
+    "name": "NEWTON JOSEPH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T03:09:30Z",
+    "inmate_number": "2379900",
+    "name": "GIBSON RYAN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T03:09:30Z",
+    "inmate_number": "2659345",
+    "name": "HOLT JANELL",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": "booked 6/15/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-16T03:09:30Z",
+    "inmate_number": "1756760",
+    "name": "PENMAN GEORGE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
