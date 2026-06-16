@@ -10,6 +10,11 @@ venv/
 .cache/
 # NOTE: docs/ is intentionally NOT gitignored — Pages serves from there.
 
+# Non-published scraper outputs. Anything written under private/ stays out
+# of git and out of the served docs/ directory. One-source principle:
+# publish nothing HCSO does not publish.
+private/
+
 # Ephemeral
 *.log
 .DS_Store

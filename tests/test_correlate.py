@@ -12,6 +12,7 @@ from pathlib import Path
 from scraper.correlate import (
     ARREST_BOOST,
     MIN_CONFIDENCE,
+    OUT_PATH,
     _category_overlap,
     _parse_cfs_dt,
     correlate,
@@ -213,6 +214,6 @@ def test_run_with_matching_data_writes_output(tmp_path: Path, monkeypatch):
 
     count = run(write=True)
     assert count >= 1
-    out = json.loads((data_dir / "dispatch_correlations.json").read_text(encoding="utf-8"))
+    out = json.loads((tmp_path / OUT_PATH).read_text(encoding="utf-8"))
     assert out["count"] >= 1
     assert out["pairs"][0]["inmate_number"] == "200"
