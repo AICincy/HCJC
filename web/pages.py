@@ -426,7 +426,7 @@ def _mirror_judge_photo(image_url: str, base_url: str) -> str:
     """
     if not image_url or not image_url.startswith(("http://", "https://")):
         return ""
-    name = hashlib.sha1(image_url.encode("utf-8")).hexdigest()[:16] + ".jpg"
+    name = hashlib.sha1(image_url.encode("utf-8"), usedforsecurity=False).hexdigest()[:16] + ".jpg"
     dest = _JUDGES_PHOTO_DIR / name
     if not dest.exists():
         try:
