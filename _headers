@@ -1,26 +1,33 @@
-# Cloudflare Pages headers stub - inert on GitHub Pages.
+# Cloudflare Pages headers stub - INERT on GitHub Pages (the current host).
 #
-# GitHub Pages ignores this file. It is shipped now so that a future migration
-# to Cloudflare Pages (or fronting the apex with a Cloudflare Worker) lands
-# the full Zero-Trust HTTP-header set without a second source change.
+# NOT THE LIVE POLICY. GitHub Pages ignores this file and does not copy it into
+# docs/, so none of the headers below are enforced on the live site. The single
+# live, canonical security policy is the <meta http-equiv="Content-Security-
+# Policy"> tag in web/templates/base.html. Edit that tag to change the live CSP;
+# this file is aspirational only.
 #
-# Background: audit/11_spa_structural_audit.md spa-S2 / S4 / S5 cannot be
-# expressed as <meta http-equiv> tags (X-Content-Type-Options is partial,
-# frame-ancestors and Permissions-Policy are HTTP-only). Once headers can
-# be set at the boundary, the meta CSP in web/templates/base.html should be
-# removed in favor of the policy below (one source of truth).
+# The live GitHub Pages response carries just Strict-Transport-Security
+# (1 year). The HTTP-only headers below (X-Content-Type-Options, frame-ancestors
+# via X-Frame-Options, Permissions-Policy, COOP/CORP) cannot be expressed as
+# <meta> tags and are therefore simply absent live. See
+# audit/11_spa_structural_audit.md spa-S2 / S4 / S5.
+#
+# This file is kept so that IF the apex is ever moved to Cloudflare Pages (or
+# fronted by a Cloudflare Worker) the full header set lands without a second
+# source change. While on GitHub Pages, do NOT remove the base.html meta CSP:
+# it is the only thing enforcing a policy at all.
 #
 # References:
 #   audit/11_spa_structural_audit.md
 #   https://developers.cloudflare.com/pages/configuration/headers/
 #
-# To activate:
+# To activate (only after migrating the apex off GitHub Pages):
 #   1. Configure Cloudflare Pages with publish directory = docs/
 #   2. Either move this file to docs/_headers, or update web/build.py to
-#      copy it there as part of the build (suggested: alongside the
-#      shutil.copytree(STATIC_DIR, ...) call at build.py:1728).
-#   3. Drop the <meta http-equiv="Content-Security-Policy"> from base.html
-#      and the <meta name="referrer"> tag (both are now HTTP-side).
+#      copy it there as part of the build (alongside the _copy_static
+#      shutil.copytree call).
+#   3. Only THEN reconcile with base.html: once these HTTP headers are live,
+#      the meta CSP can defer to the policy below as the single source.
 
 /*
   Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
