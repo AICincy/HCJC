@@ -199417,30 +199417,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T08:14:29Z",
-    "inmate_number": "14450817",
-    "name": "FOSTER ARIAH",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 6/9/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-09T08:14:29Z",
-    "inmate_number": "14669001",
-    "name": "BELL DEVANTE",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-09T08:14:29Z",
-    "inmate_number": "14281130",
-    "name": "JONES JAHRE",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -217861,6 +217852,42 @@
     "timestamp_utc": "2026-06-16T06:49:53Z",
     "inmate_number": "14150455",
     "name": "STRINGFELLOW ERIC",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-16T08:57:35Z",
+    "inmate_number": "1349264",
+    "name": "MANN CHARLES",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-16T08:57:35Z",
+    "inmate_number": "14290409",
+    "name": "DAVIS ROBERT",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-16T08:57:35Z",
+    "inmate_number": "14742550",
+    "name": "BAILEY MAZEN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-16T08:57:35Z",
+    "inmate_number": "1908140",
+    "name": "FORD QUINCY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
