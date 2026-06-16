@@ -150,6 +150,43 @@ def _record_block_evidence(obs: _BlockObservation, paths: SweepPaths | None = No
     )
 
 
+def _record_detail_page_block(
+    inmate_id: str,
+    http_status: int | None,
+    html: str,
+    waf_block_log_path: Path | None = None,
+) -> None:
+    """Append one ``detail_page_waf_block`` record to the hash-chained
+    evidence log when an HCSO inmate-detail fetch comes back blocked on
+    both attempts.
+
+    The list-page block format (``event="blocked"``) is unchanged. This is
+    a separate event type with fields that identify the specific inmate
+    page that was denied: ``inmate_id``, ``url``, ``http_status``, and a
+    short ``response_signature`` so identical block templates across
+    inmates collate without storing the full body.
+    """
+    if waf_block_log_path is None:
+        waf_block_log_path = WAF_BLOCK_LOG_PATH
+    response_signature = (
+        hashlib.sha256(html.encode("utf-8", errors="replace")).hexdigest()[:16]
+        if html
+        else None
+    )
+    append_block_evidence(
+        {
+            "timestamp_utc": utcnow_iso(),
+            "event": "detail_page_waf_block",
+            "inmate_id": inmate_id,
+            "url": f"{DETAIL_PATH}?id={inmate_id}",
+            "http_status": http_status,
+            "response_signature": response_signature,
+            "response_length": len(html) if html else 0,
+        },
+        waf_block_log_path,
+    )
+
+
 def _record_recovery_if_blocked(seen_count: int, waf_block_log_path: Path | None = None) -> None:
     """If the last evidence entry was 'blocked', append a single 'recovered'
     record so each denial period has a clean end-timestamp. No-op otherwise."""
@@ -829,13 +866,24 @@ def _fetch_detail_with_retry(
     photo_bytes = None
     photo_url = None
     html = ""
+    http_status: int | None = None
+    # Prefer get_response so the detail_page_waf_block event can record the
+    # HTTP status. Fall back to plain get() for clients (notably the test
+    # fakes) that only implement the text-returning method.
+    get_response = getattr(client, "get_response", None)
     for attempt in range(2):
         try:
-            html = client.get(DETAIL_PATH, params={"id": inmate_id})
+            if get_response is not None:
+                response = get_response(DETAIL_PATH, params={"id": inmate_id})
+                html = response.text
+                http_status = response.status_code
+            else:
+                html = client.get(DETAIL_PATH, params={"id": inmate_id})
+                http_status = None
         except Exception as e:
             log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
             return None, None, None
-        inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id)
+        inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id, record_evidence=True)
         if not looks_like_waf_block(html, inm, photo_bytes, photo_url):
             waf_tracker.clear()
             break
@@ -860,6 +908,11 @@ def _fetch_detail_with_retry(
             inmate_id,
             len(html),
             streak,
+        )
+        _record_detail_page_block(
+            inmate_id=inmate_id,
+            http_status=http_status,
+            html=html,
         )
         time.sleep(backoff)
         if inmate_id in previous:
