@@ -23,10 +23,9 @@ task ("update the FCRA disclaimer" routes to `legal-copy-author`). See
 
 ## Chain of Custody: Session IDs
 
-Court-evidence Claude Code session IDs. These sessions are cited or may be
-cited in litigation under ORC 149.43 and related filings as the record of
-Claude-assisted work on this repository. Preserve verbatim. Do not
-abbreviate, redact, or reformat.
+Court-evidence Claude Code session IDs. Filings under ORC 149.43 cite these
+sessions as the record of Claude-assisted work on this repository. Preserve
+verbatim. Do not abbreviate. Do not redact. Do not reformat.
 
 | Session ID | Date range [VERIFY] |
 | :-- | :-- |
@@ -35,17 +34,20 @@ abbreviate, redact, or reformat.
 | session_019fDevbfpgmnjJP7A343T95 | [VERIFY] |
 | session_01NGMSLESEepbgV8aSn4reVG | [VERIFY] |
 
-Authoritative storage location: [VERIFY]. The transcripts are not held in
-this repository. The 2026-06-16 code review (Critical finding in
-`docs/code-review/2026-06-16/00-summary.md`) flagged the absence: any court
-submission citing these IDs as evidence of Claude-assisted work cannot
-point to this repository as the location of record until the storage
-location is confirmed and recorded here.
+Authoritative storage location: [VERIFY]. This repository does not hold
+the transcripts. The 2026-06-16 code review flagged the absence as a
+Critical finding. See `docs/code-review/2026-06-16/00-summary.md`. Until
+this section records a confirmed storage location, a court submission
+citing these IDs cannot point to this repository as the location of
+record.
 
-Retrieval procedure: open https://claude.ai/code/<session_id> while signed
-in to the account that owns the session, export the transcript, and file
-it at the authoritative storage location above. Replace the [VERIFY] tags
-with the confirmed location and date range when known.
+Retrieval procedure:
+
+1. Sign in to the account that owns the session.
+2. Open https://claude.ai/code/<session_id>.
+3. Export the transcript.
+4. File it at the authoritative storage location above.
+5. Replace the [VERIFY] tags with the confirmed location and date range.
 
 ## Hard constraints (violations are accessibility failures, not style issues)
 
