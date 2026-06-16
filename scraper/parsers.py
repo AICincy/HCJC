@@ -533,11 +533,9 @@ def _extract_photo(
     img_count = 0
     nondata_count = 0
     data_count = 0
-    img_index = -1
 
     for img in tree.css("img"):
         img_count += 1
-        img_index += 1
         src = _attr(img, "src")
 
         # Fallback to lazy-loaded source if src is absent or a tiny/SVG placeholder
@@ -571,7 +569,7 @@ def _extract_photo(
                 if record_evidence and "base64" in header and not payload:
                     _record_empty_photo_event(
                         inmate_id=inmate_id,
-                        field_path=f"img[{img_index}]@src {header}",
+                        field_path=f"img[{img_count - 1}]@src {header}",
                         payload_length=len(payload),
                     )
                 continue

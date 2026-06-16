@@ -867,11 +867,19 @@ def _fetch_detail_with_retry(
     photo_url = None
     html = ""
     http_status: int | None = None
+    # Prefer get_response so the detail_page_waf_block event can record the
+    # HTTP status. Fall back to plain get() for clients (notably the test
+    # fakes) that only implement the text-returning method.
+    get_response = getattr(client, "get_response", None)
     for attempt in range(2):
         try:
-            response = client.get_response(DETAIL_PATH, params={"id": inmate_id})
-            html = response.text
-            http_status = response.status_code
+            if get_response is not None:
+                response = get_response(DETAIL_PATH, params={"id": inmate_id})
+                html = response.text
+                http_status = response.status_code
+            else:
+                html = client.get(DETAIL_PATH, params={"id": inmate_id})
+                http_status = None
         except Exception as e:
             log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
             return None, None, None
