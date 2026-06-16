@@ -213,6 +213,6 @@ def test_run_with_matching_data_writes_output(tmp_path: Path, monkeypatch):
 
     count = run(write=True)
     assert count >= 1
-    out = json.loads((data_dir / "dispatch_correlations.json").read_text(encoding="utf-8"))
+    out = json.loads((tmp_path / "private" / "dispatch_correlations.json").read_text(encoding="utf-8"))
     assert out["count"] >= 1
     assert out["pairs"][0]["inmate_number"] == "200"

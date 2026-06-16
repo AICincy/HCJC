@@ -1,3 +1,25 @@
+# =============================================================================
+# One-source principle
+# -----------------------------------------------------------------------------
+# This module produces a cross-source join between the HCSO inmate roster and
+# Cincinnati Open Data calls-for-service rows. HCSO does not publish that
+# join. Neither does CPD. The join is an inference produced by this
+# repository.
+#
+# The 2026-06-16 code review (legal-evidentiary lane, elevated to High)
+# flagged that publishing the output violates the one-source principle:
+# the public site must publish nothing HCSO does not publish.
+#
+# Output now writes to private/dispatch_correlations.json. The private/
+# directory is gitignored and is not copied into the served docs/
+# directory by web/build.py. The correlation logic stays available for
+# local researcher-mode runs. The output never reaches the public site or
+# the public git repository.
+#
+# Do not move the output back under data/, docs/, or any other tree that
+# the build copies to the served site.
+# =============================================================================
+
 """Phase 11: Researcher-mode dispatch correlation.
 
 For each booking on the current roster, find candidate Cincinnati Open Data
@@ -6,7 +28,8 @@ on: same day (UTC), within +/- 30 minutes of the booking_date if known, AND
 a strong textual overlap between the CFS row's charge/disposition and the
 inmate's primary charge category.
 
-Output is a pure-data ``data/dispatch_correlations.json`` file. It contains:
+Output is a pure-data ``private/dispatch_correlations.json`` file
+(gitignored, not served by the public site). It contains:
 
   - inmate_number (key already public on the inmate's own page)
   - cfs_row_index (key already public in the cfs_recent.json + cfs_pdi_recent.json
@@ -43,7 +66,10 @@ from pathlib import Path
 log = logging.getLogger(__name__)
 
 DATA_DIR = Path("data")
-OUT_PATH = DATA_DIR / "dispatch_correlations.json"
+# Output directory is deliberately outside data/ and outside docs/. See the
+# one-source comment block at the top of this module.
+PRIVATE_DIR = Path("private")
+OUT_PATH = PRIVATE_DIR / "dispatch_correlations.json"
 
 # Match window: a booking on roster X often happens within an hour of the
 # dispatch CFS row. Sweep cadence is 30 min, so the booking timestamp on
@@ -242,7 +268,7 @@ def correlate(
 
 
 def run(write: bool = True) -> int:
-    """Build and (optionally) write data/dispatch_correlations.json.
+    """Build and (optionally) write private/dispatch_correlations.json.
     Returns count of correlation pairs found."""
     current = _load_json(DATA_DIR / "current.json")
     if not isinstance(current, dict) or not current.get("inmates"):
@@ -298,6 +324,7 @@ def run(write: bool = True) -> int:
                 for c in all_candidates
             ],
         }
+        OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
         OUT_PATH.write_text(json.dumps(out_payload, indent=2), encoding="utf-8")
         log.info("wrote %s (%d pairs)", OUT_PATH, len(all_candidates))
     return len(all_candidates)
