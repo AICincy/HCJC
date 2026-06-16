@@ -93,7 +93,7 @@
         {% set deg = primary_degree(inm) %}
         <a class="rb-card" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/">
           {% if inm.photo_filename %}
-          <span class="rb-photo"><img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="HCSO booking photo of {{ inm.full_name }}" loading="lazy" decoding="async"></span>
+          <span class="rb-photo"><img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="" loading="lazy" decoding="async"></span>
           {% else %}
           <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(inm.full_name) }}"></span>
           {% endif %}
