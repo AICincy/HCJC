@@ -171,74 +171,74 @@
   //     reaches the (4) search dropdown below, which is an independent feature.
   var bar = document.getElementById('filters');
   if (bar) {
-  bar.hidden = false;
-  var inputs = bar.querySelectorAll('[data-filter]');
-  var countEl = bar.querySelector('.filter-count');
-  var noMatch = bar.parentNode.querySelector('#filter-empty');
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.cards .card-inmate'));
-  var months = Array.prototype.slice.call(document.querySelectorAll('details.month'));
-  function currentFilters() {
-    var f = {};
-    inputs.forEach(function (i) { f[i.getAttribute('data-filter')] = (i.value || '').trim().toLowerCase(); });
-    return f;
-  }
-  function apply() {
-    var f = currentFilters();
-    var active = !!(f.tier || f.chap || f.search);
-    var shown = 0;
-    cards.forEach(function (c) {
-      var ok = true;
-      if (f.tier && c.getAttribute('data-tier') !== f.tier) ok = false;
-      if (ok && f.chap && c.getAttribute('data-chap') !== f.chap) ok = false;
-      if (ok && f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) ok = false;
-      c.classList.toggle('is-filtered-out', !ok);
-      if (ok) shown++;
-    });
-    months.forEach(function (m) {
-      var anyVisible = m.querySelector('.card-inmate:not(.is-filtered-out)');
-      m.classList.toggle('is-empty', !anyVisible && active);
-      if (active && anyVisible) m.open = true;
-    });
-    if (noMatch) noMatch.hidden = !(active && shown === 0);
-    countEl.textContent = active ? (shown + ' of ' + cards.length + ' shown') : '';
-  }
-  inputs.forEach(function (i) {
-    i.addEventListener('input', apply);
-    i.addEventListener('change', apply);
-  });
-  // Deep-link: ?chap=... / ?tier=... (e.g. from the stats offense-category
-  // links) pre-applies the matching filter so the link lands on a filtered
-  // roster. Only sets a value the corresponding <select> actually offers.
-  try {
-    var params = new URLSearchParams(location.search);
+    bar.hidden = false;
+    var inputs = bar.querySelectorAll('[data-filter]');
+    var countEl = bar.querySelector('.filter-count');
+    var noMatch = bar.parentNode.querySelector('#filter-empty');
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.cards .card-inmate'));
+    var months = Array.prototype.slice.call(document.querySelectorAll('details.month'));
+    function currentFilters() {
+      var f = {};
+      inputs.forEach(function (i) { f[i.getAttribute('data-filter')] = (i.value || '').trim().toLowerCase(); });
+      return f;
+    }
+    function apply() {
+      var f = currentFilters();
+      var active = !!(f.tier || f.chap || f.search);
+      var shown = 0;
+      cards.forEach(function (c) {
+        var ok = true;
+        if (f.tier && c.getAttribute('data-tier') !== f.tier) ok = false;
+        if (ok && f.chap && c.getAttribute('data-chap') !== f.chap) ok = false;
+        if (ok && f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) ok = false;
+        c.classList.toggle('is-filtered-out', !ok);
+        if (ok) shown++;
+      });
+      months.forEach(function (m) {
+        var anyVisible = m.querySelector('.card-inmate:not(.is-filtered-out)');
+        m.classList.toggle('is-empty', !anyVisible && active);
+        if (active && anyVisible) m.open = true;
+      });
+      if (noMatch) noMatch.hidden = !(active && shown === 0);
+      countEl.textContent = active ? (shown + ' of ' + cards.length + ' shown') : '';
+    }
     inputs.forEach(function (i) {
-      var key = i.getAttribute('data-filter');
-      var val = (params.get(key) || '').trim().toLowerCase();
-      if (!val) return;
-      if (i.tagName === 'SELECT') {
-        var ok = Array.prototype.some.call(i.options, function (o) { return o.value === val; });
-        if (!ok) return;
-      }
-      i.value = val;
+      i.addEventListener('input', apply);
+      i.addEventListener('change', apply);
     });
-  } catch (e) {}
-  apply();
+    // Deep-link: ?chap=... / ?tier=... (e.g. from the stats offense-category
+    // links) pre-applies the matching filter so the link lands on a filtered
+    // roster. Only sets a value the corresponding <select> actually offers.
+    try {
+      var params = new URLSearchParams(location.search);
+      inputs.forEach(function (i) {
+        var key = i.getAttribute('data-filter');
+        var val = (params.get(key) || '').trim().toLowerCase();
+        if (!val) return;
+        if (i.tagName === 'SELECT') {
+          var ok = Array.prototype.some.call(i.options, function (o) { return o.value === val; });
+          if (!ok) return;
+        }
+        i.value = val;
+      });
+    } catch (e) {}
+    apply();
 
-  // (3b) Crime-of-month pills: click to filter roster by that chapter.
-  var chapSelect = document.getElementById('filter-chap');
-  if (chapSelect) {
-    document.addEventListener('click', function (e) {
-      var pill = e.target.closest('.coms .chap');
-      if (!pill) return;
-      var cls = '';
-      pill.classList.forEach(function (c) { if (c.indexOf('chap-') === 0) cls = c.replace('chap-', ''); });
-      if (!cls) return;
-      chapSelect.value = cls;
-      chapSelect.dispatchEvent(new Event('change'));
-      var scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-      bar.scrollIntoView({ block: 'start', behavior: scrollBehavior });
-    });
-  }
+    // (3b) Crime-of-month pills: click to filter roster by that chapter.
+    var chapSelect = document.getElementById('filter-chap');
+    if (chapSelect) {
+      document.addEventListener('click', function (e) {
+        var pill = e.target.closest('.coms .chap');
+        if (!pill) return;
+        var cls = '';
+        pill.classList.forEach(function (c) { if (c.indexOf('chap-') === 0) cls = c.replace('chap-', ''); });
+        if (!cls) return;
+        chapSelect.value = cls;
+        chapSelect.dispatchEvent(new Event('change'));
+        var scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        bar.scrollIntoView({ block: 'start', behavior: scrollBehavior });
+      });
+    }
   } // end (3) filter bar
 
   // (4) Search-results dropdown - lazy-loads search.json on first keystroke,

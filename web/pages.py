@@ -434,7 +434,7 @@ def _mirror_judge_photo(image_url: str, base_url: str) -> str:
 
             resp = httpx.get(
                 image_url,
-                timeout=15.0,
+                timeout=5.0,
                 follow_redirects=True,
                 headers={"User-Agent": DEFAULT_UA},
             )
