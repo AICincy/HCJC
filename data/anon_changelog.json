@@ -200389,111 +200389,87 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T23:11:56Z",
-    "inmate_number": "14078352",
-    "name": "REED MICHAEL",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T23:11:56Z",
-    "inmate_number": "14339733",
-    "name": "CATE JACQUELINE",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T23:11:56Z",
-    "inmate_number": "1440813",
-    "name": "COLLINS CHRISTOPHER",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T23:11:56Z",
-    "inmate_number": "1853499",
-    "name": "BARTON TIMOTHY",
+    "date": "2026-06-09",
     "tier": "M2",
-    "category": "Possessing drug abuse instruments",
-    "note": ""
+    "category": "Possessing drug abuse instruments"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T23:11:56Z",
-    "inmate_number": "2011998",
-    "name": "EVANS ANTONIO",
+    "date": "2026-06-09",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T23:11:56Z",
-    "inmate_number": "2493439",
-    "name": "HEALION JOSHUA",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-09T23:11:56Z",
-    "inmate_number": "1942386",
-    "name": "JOHNSON MICHAEL",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T23:45:57Z",
-    "inmate_number": "14078352",
-    "name": "REED MICHAEL",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": ""
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T23:45:57Z",
-    "inmate_number": "14150455",
-    "name": "STRINGFELLOW ERIC",
+    "date": "2026-06-09",
     "tier": null,
-    "category": null,
-    "note": "booked 6/9/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-09T23:45:57Z",
-    "inmate_number": "1811575",
-    "name": "WILSON DOROTHY",
+    "date": "2026-06-09",
     "tier": "M4",
-    "category": "Menacing",
-    "note": ""
+    "category": "Menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T23:45:57Z",
-    "inmate_number": "14661795",
-    "name": "HARDY ALAN",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "booked 6/9/26"
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-09T23:45:57Z",
-    "inmate_number": "2486277",
-    "name": "LINDSEY KRISTIN",
+    "date": "2026-06-09",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/9/26"
+    "category": "Aggravated menacing"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-09",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-09",
+    "tier": "MM",
+    "category": "Illegal use/possession of marihuana drug paraphernalia"
   },
   {
     "event": "updated",
@@ -219609,6 +219585,33 @@
     "name": "SPAW RYAN",
     "tier": "M4",
     "category": "Menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T00:14:55Z",
+    "inmate_number": "14307744",
+    "name": "JACKSON TAMRAN",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T00:14:55Z",
+    "inmate_number": "14346890",
+    "name": "SEATON LARICUS",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/16/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T00:14:55Z",
+    "inmate_number": "14509900",
+    "name": "BURCHFIELD CHANIYA",
+    "tier": "M2",
+    "category": "Criminal damaging",
     "note": ""
   }
 ]
