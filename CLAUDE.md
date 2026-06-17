@@ -36,7 +36,7 @@ verbatim. Do not abbreviate. Do not redact. Do not reformat.
 
 Authoritative storage location: [VERIFY]. This repository does not hold
 the transcripts. The 2026-06-16 code review flagged the absence as a
-Critical finding. See `docs/code-review/2026-06-16/00-summary.md`. Until
+Critical finding. See `audit/code-review-2026-06-16/00-summary.md`. Until
 this section records a confirmed storage location, a court submission
 citing these IDs cannot point to this repository as the location of
 record.
