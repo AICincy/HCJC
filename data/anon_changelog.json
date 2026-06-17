@@ -200917,48 +200917,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T10:09:29Z",
-    "inmate_number": "14397188",
-    "name": "LESTER MARIAH",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/10/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T10:09:29Z",
-    "inmate_number": "14561712",
-    "name": "TILLER GABERIEL",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/10/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T10:09:29Z",
-    "inmate_number": "14594898",
-    "name": "TILLER GABERIELLE",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/10/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T10:09:29Z",
-    "inmate_number": "1602672",
-    "name": "IVORY NATHAN",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T10:09:29Z",
-    "inmate_number": "2439204",
-    "name": "RICHARDSON MICHAEL",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/10/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
@@ -219832,5 +219817,41 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T11:23:13Z",
+    "inmate_number": "1588127",
+    "name": "KILLINGS MARTIN",
+    "tier": "M3",
+    "category": "Unlawful restraint",
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T11:23:13Z",
+    "inmate_number": "1943909",
+    "name": "TORO RAUL",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T11:23:13Z",
+    "inmate_number": "2088371",
+    "name": "GARDNER STEPHANIE",
+    "tier": "M1",
+    "category": "Having physical control of vehicle while under influence",
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-17T11:23:13Z",
+    "inmate_number": "14339721",
+    "name": "ELLISON BRAXTON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
