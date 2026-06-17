@@ -200989,21 +200989,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T13:56:56Z",
-    "inmate_number": "14370166",
-    "name": "DAVIS BRANDEE",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/10/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T13:56:56Z",
-    "inmate_number": "2432828",
-    "name": "MAY JONATHAN",
+    "date": "2026-06-10",
     "tier": "F2",
-    "category": "Illegal use of minor in nudity-oriented material",
-    "note": ""
+    "category": "Illegal use of minor in nudity-oriented material"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-10",
+    "tier": "F2",
+    "category": "Illegal use of minor in nudity-oriented material"
   },
   {
     "event": "booked",
@@ -219919,6 +219919,96 @@
     "timestamp_utc": "2026-06-17T12:48:51Z",
     "inmate_number": "14675130",
     "name": "WILLIAMS DERRYCK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "1454021",
+    "name": "BENNETT CHAD",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "14813319",
+    "name": "MCCANTS ANDREA",
+    "tier": "F2",
+    "category": "Robbery",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "14814056",
+    "name": "MAYS JAIDYN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "2664965",
+    "name": "FARMER DOMINIQUE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "2695619",
+    "name": "POPE CORTEZ",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "790356",
+    "name": "MASON ROBERT",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "1770053",
+    "name": "FERRELL JIMMY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "14124472",
+    "name": "LEE DEANDRE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "14696430",
+    "name": "MENDEZ HENDRICK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-17T14:13:55Z",
+    "inmate_number": "14149603",
+    "name": "MOORE JULIAN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
