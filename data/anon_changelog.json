@@ -201835,57 +201835,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T22:19:26Z",
-    "inmate_number": "14244981",
-    "name": "WILLIAMS ADAMU",
+    "date": "2026-06-10",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T22:19:26Z",
-    "inmate_number": "14619593",
-    "name": "PEMBERTON BEVERLY",
+    "date": "2026-06-10",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T22:19:26Z",
-    "inmate_number": "14784514",
-    "name": "HUBBARD JERMAUD",
+    "date": "2026-06-10",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T22:19:26Z",
-    "inmate_number": "1970955",
-    "name": "WILLIAMS MICHAEL",
+    "date": "2026-06-10",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 6/10/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T22:19:26Z",
-    "inmate_number": "2500477",
-    "name": "THOMAS-GRAYSON AARON",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/10/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-10T22:19:26Z",
-    "inmate_number": "14794967",
-    "name": "ANENIES GABRIEL",
+    "date": "2026-06-10",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -220759,5 +220741,50 @@
     "tier": "M4",
     "category": "Criminal trespass",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T22:52:26Z",
+    "inmate_number": "14369163",
+    "name": "MESSERSCHMITT DENNIS",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T22:52:26Z",
+    "inmate_number": "14569129",
+    "name": "NEAL JAHMIR",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T22:52:26Z",
+    "inmate_number": "14751557",
+    "name": "HAIRE MICHAEL",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T22:52:26Z",
+    "inmate_number": "2416170",
+    "name": "HOLLOWAY CHRYSTOPHER",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-17T22:52:26Z",
+    "inmate_number": "14261331",
+    "name": "HARVEY LASHELLE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
