@@ -200473,57 +200473,69 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T00:16:31Z",
-    "inmate_number": "14370487",
-    "name": "BLACKMON JYMARTIA",
+    "date": "2026-06-10",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T00:16:31Z",
-    "inmate_number": "14466521",
-    "name": "WISDOM SETH",
+    "date": "2026-06-10",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": ""
+    "category": "Felonious assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T00:16:31Z",
-    "inmate_number": "1440813",
-    "name": "COLLINS CHRISTOPHER",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T00:16:31Z",
-    "inmate_number": "1910852",
-    "name": "DOUGLAS WILLIAM",
+    "date": "2026-06-10",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": "booked 6/9/26"
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T00:16:31Z",
-    "inmate_number": "1930302",
-    "name": "CRUTCHFIELD JERMONE",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Telecommunications harassment",
-    "note": "booked (date not reported)"
+    "category": "Telecommunications harassment"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-10T00:16:31Z",
-    "inmate_number": "14637204",
-    "name": "TOMLIN SEANJAI",
+    "date": "2026-06-10",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-10",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-10",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-10",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-10",
+    "tier": "M1",
+    "category": "Telecommunications harassment"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-10",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -219610,6 +219622,24 @@
     "timestamp_utc": "2026-06-17T00:14:55Z",
     "inmate_number": "14509900",
     "name": "BURCHFIELD CHANIYA",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T00:46:10Z",
+    "inmate_number": "14067354",
+    "name": "MCCURDY LASHANTI",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/16/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T00:46:10Z",
+    "inmate_number": "14677474",
+    "name": "HAYES JAYLEN",
     "tier": "M2",
     "category": "Criminal damaging",
     "note": ""
