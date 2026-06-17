@@ -200887,39 +200887,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T08:34:41Z",
-    "inmate_number": "14809070",
-    "name": "ADKINS BRETT",
+    "date": "2026-06-10",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": ""
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T08:34:41Z",
-    "inmate_number": "1602672",
-    "name": "IVORY NATHAN",
+    "date": "2026-06-10",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T08:34:41Z",
-    "inmate_number": "2741832",
-    "name": "SINGLETON BRIANNA",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-10T08:34:41Z",
-    "inmate_number": "14813203",
-    "name": "MODRESKI JADE",
+    "date": "2026-06-10",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-10",
+    "tier": "M1",
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
@@ -219802,5 +219796,41 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T09:38:34Z",
+    "inmate_number": "14365106",
+    "name": "BLEVINS ARIUS",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T09:38:34Z",
+    "inmate_number": "1562313",
+    "name": "WHALEY DANNY",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T09:38:34Z",
+    "inmate_number": "2310309",
+    "name": "HAFFEY KYLE",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T09:38:34Z",
+    "inmate_number": "2664965",
+    "name": "FARMER DOMINIQUE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
   }
 ]
