@@ -200539,75 +200539,63 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T01:24:37Z",
-    "inmate_number": "14078352",
-    "name": "REED MICHAEL",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": ""
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T01:24:37Z",
-    "inmate_number": "14145583",
-    "name": "WRIGHT ANTONIO",
+    "date": "2026-06-10",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 6/9/26"
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T01:24:37Z",
-    "inmate_number": "14308068",
-    "name": "MILLER RAVON",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 6/9/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T01:24:37Z",
-    "inmate_number": "1930302",
-    "name": "CRUTCHFIELD JERMONE",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Telecommunications harassment",
-    "note": ""
+    "category": "Telecommunications harassment"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T01:24:37Z",
-    "inmate_number": "2152001",
-    "name": "LAWES BRIANNA",
+    "date": "2026-06-10",
     "tier": null,
-    "category": null,
-    "note": "booked 6/9/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T01:24:37Z",
-    "inmate_number": "2328257",
-    "name": "TUNNEY ROBERT",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Violation of community control / probation",
-    "note": "booked 6/9/26"
+    "category": "Violation of community control / probation"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-10T01:24:37Z",
-    "inmate_number": "2486277",
-    "name": "LINDSEY KRISTIN",
+    "date": "2026-06-10",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-10T01:24:37Z",
-    "inmate_number": "445158",
-    "name": "PUCK BRYAN",
+    "date": "2026-06-10",
     "tier": "F2",
-    "category": "Burglary",
-    "note": "booked 6/9/26"
+    "category": "Burglary"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-10",
+    "tier": "F2",
+    "category": "Strangulation"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-10",
+    "tier": "M1",
+    "category": "Telecommunications harassment"
   },
   {
     "event": "updated",
@@ -219643,5 +219631,23 @@
     "tier": "M2",
     "category": "Criminal damaging",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-17T01:40:56Z",
+    "inmate_number": "14067354",
+    "name": "MCCURDY LASHANTI",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-17T01:40:56Z",
+    "inmate_number": "2370396",
+    "name": "CHAIRA MICHAEL",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 6/16/26"
   }
 ]
