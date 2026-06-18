@@ -193200,6 +193200,12 @@
     "category": "Theft"
   },
   {
+    "event": "released",
+    "date": "2026-06-03",
+    "tier": "M1",
+    "category": "Receiving stolen property"
+  },
+  {
     "event": "updated",
     "date": "2026-06-04",
     "tier": "M3",
@@ -202159,102 +202165,75 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "14634420",
-    "name": "BRAVO JOSE",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Menacing by stalking",
-    "note": ""
+    "category": "Menacing by stalking"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "14639571",
-    "name": "WALKER SEAN",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "14773610",
-    "name": "WILLIS AGIGAIL",
+    "date": "2026-06-11",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "14800674",
-    "name": "SORRELLS HEATHER",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": ""
+    "category": "Violating protection order"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "2209322",
-    "name": "MURPHY RYAN",
+    "date": "2026-06-11",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "2244371",
-    "name": "ROBINSON JOHN",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "booked 6/10/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "2357969",
-    "name": "WILSON KHADJAH",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Falsification",
-    "note": ""
+    "category": "Falsification"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "2385588",
-    "name": "LANG ALEXANDER",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "2486149",
-    "name": "ANDERSON JESSICA",
+    "date": "2026-06-11",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "2568433",
-    "name": "BAKKA DRISS",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T02:41:23Z",
-    "inmate_number": "2630730",
-    "name": "CAMPBELL ROBERT",
+    "date": "2026-06-11",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": ""
+    "category": "Felonious assault"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-11",
+    "tier": "F2",
+    "category": "Felonious assault"
   },
   {
     "event": "updated",
@@ -220902,6 +220881,96 @@
     "name": "LEWIS BRUCE",
     "tier": "M1",
     "category": "Assault",
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "1308114",
+    "name": "REESE TERENCE",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "14138164",
+    "name": "MILLER REMYA",
+    "tier": "M1",
+    "category": "Endangering children",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "14814158",
+    "name": "JACKMAN HAYDEN",
+    "tier": "M1",
+    "category": "Carrying concealed weapons",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "14814160",
+    "name": "SANFORD-LEWIS JAIMON",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "14814165",
+    "name": "CATE KRISTEN",
+    "tier": "M1",
+    "category": "Distribution of nonconsensual intimate images",
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "1914577",
+    "name": "GORDON DEFAZIO",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "2303404",
+    "name": "GREEN RAYSHAWN",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "2401769",
+    "name": "LEWIS BRUCE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "2683939",
+    "name": "WATSON DEMONTE",
+    "tier": "M1",
+    "category": "Carrying concealed weapons",
+    "note": "booked 6/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T03:47:20Z",
+    "inmate_number": "2755801",
+    "name": "VOLL EMILY",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
     "note": "booked 6/17/26"
   }
 ]
