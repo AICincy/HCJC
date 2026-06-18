@@ -202447,30 +202447,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T09:11:03Z",
-    "inmate_number": "14348733",
-    "name": "JAMISON CHINA",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T09:11:03Z",
-    "inmate_number": "14484974",
-    "name": "GEORGE NICKE",
+    "date": "2026-06-11",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked (date not reported)"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T09:11:03Z",
-    "inmate_number": "2756690",
-    "name": "JACKSON-BOYD JOSHUA",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: vicious dogs",
-    "note": ""
+    "category": "Cincinnati Municipal Code: vicious dogs"
   },
   {
     "event": "booked",
@@ -220993,5 +220984,50 @@
     "tier": "M4",
     "category": "Cincinnati Municipal Code: animals",
     "note": "booked 6/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T10:47:56Z",
+    "inmate_number": "14634315",
+    "name": "PERSON TIARA",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T10:47:56Z",
+    "inmate_number": "14551882",
+    "name": "AYERS KAYLA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T10:47:56Z",
+    "inmate_number": "14795287",
+    "name": "MUNOZ CESAR",
+    "tier": "MM",
+    "category": "Lights when needed",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T10:47:56Z",
+    "inmate_number": "14814180",
+    "name": "NAJEM BECKHAM",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-18T10:47:56Z",
+    "inmate_number": "2572858",
+    "name": "MASON PARIS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
