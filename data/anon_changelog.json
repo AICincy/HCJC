@@ -202465,21 +202465,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T10:53:07Z",
-    "inmate_number": "14535161",
-    "name": "COLWELL TRENT",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/11/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T10:53:07Z",
-    "inmate_number": "14718888",
-    "name": "KING NECARDO",
+    "date": "2026-06-11",
     "tier": "MM",
-    "category": "Turn and stop signals",
-    "note": ""
+    "category": "Turn and stop signals"
   },
   {
     "event": "updated",
@@ -221026,6 +221020,96 @@
     "timestamp_utc": "2026-06-18T10:47:56Z",
     "inmate_number": "2572858",
     "name": "MASON PARIS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "14529347",
+    "name": "WATKINS MARY",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": "booked 6/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "14814180",
+    "name": "NAJEM BECKHAM",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "2281829",
+    "name": "CALDWELL DAVID",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": "booked 6/18/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "2338675",
+    "name": "BURDINE JOHN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "1568396",
+    "name": "BYRD SHAWN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "2740923",
+    "name": "CRUTCHER KWAHSHEE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "2399845",
+    "name": "ELAHEE DOMYNIC",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "1985665",
+    "name": "GODFREY TEANCE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "14500529",
+    "name": "MINK REECE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-18T12:10:29Z",
+    "inmate_number": "14508627",
+    "name": "TIRADO JOSHUA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
