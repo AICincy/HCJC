@@ -184404,6 +184404,24 @@
     "category": "Theft"
   },
   {
+    "event": "booked",
+    "date": "2026-05-30",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-30",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-30",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
     "event": "updated",
     "date": "2026-05-31",
     "tier": null,
@@ -203287,93 +203305,69 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "14240981",
-    "name": "CROCKETT BROOKS",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/11/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "14554072",
-    "name": "CAMPBELL DAYLEN",
+    "date": "2026-06-11",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 6/11/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "14652791",
-    "name": "WILLIAMS DESHAYLA",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/11/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "2233022",
-    "name": "HENDRICKS BRIAN",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/11/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "2403343",
-    "name": "ROSE TIMOTHY",
+    "date": "2026-06-11",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 6/11/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "1955027",
-    "name": "RAMSEY STEVON",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "1573063",
-    "name": "STAUN MARK",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "2328257",
-    "name": "TUNNEY ROBERT",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "14305997",
-    "name": "WALLS THERESA",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-11T19:57:23Z",
-    "inmate_number": "14623646",
-    "name": "WRIGHT JAHLANI",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-11",
+    "tier": "F5",
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
@@ -224442,6 +224436,42 @@
     "name": "MASON ROBERT",
     "tier": null,
     "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T19:59:42Z",
+    "inmate_number": "14468458",
+    "name": "THACKER TONYA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T19:59:42Z",
+    "inmate_number": "14472616",
+    "name": "RICHARDSON ERIC",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 6/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-18T19:59:42Z",
+    "inmate_number": "14692781",
+    "name": "ELDER ZACHARY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-18T19:59:42Z",
+    "inmate_number": "2808506",
+    "name": "RITCHIE ANTHONY",
+    "tier": "M2",
+    "category": "Resisting arrest",
     "note": ""
   }
 ]
