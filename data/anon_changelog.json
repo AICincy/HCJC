@@ -203503,84 +203503,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T23:05:03Z",
-    "inmate_number": "14317567",
-    "name": "DARDEN SHAWNTE",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/11/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T23:05:03Z",
-    "inmate_number": "14413264",
-    "name": "MARSH AUSTIN",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "booked 6/11/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T23:05:03Z",
-    "inmate_number": "1851883",
-    "name": "SMITH TIMOTHY",
+    "date": "2026-06-11",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 6/11/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-11T23:05:03Z",
-    "inmate_number": "1974246",
-    "name": "HUNTER MARCO",
+    "date": "2026-06-11",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": ""
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T23:05:03Z",
-    "inmate_number": "2010209",
-    "name": "FOX ROBERT",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 6/11/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T23:05:03Z",
-    "inmate_number": "2292099",
-    "name": "FIFE JEFFREY",
+    "date": "2026-06-11",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 6/11/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-11T23:05:03Z",
-    "inmate_number": "1984181",
-    "name": "EVANS ANTOINE",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-11T23:05:03Z",
-    "inmate_number": "14807948",
-    "name": "MORALES-DIAZ OFNI",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-11T23:05:03Z",
-    "inmate_number": "1704267",
-    "name": "ROHRER MICHAEL",
+    "date": "2026-06-11",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -224728,6 +224701,15 @@
     "timestamp_utc": "2026-06-18T22:40:16Z",
     "inmate_number": "14706499",
     "name": "MARCUM BRENDAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-18T23:22:18Z",
+    "inmate_number": "14072887",
+    "name": "FEARS ASHLEY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
