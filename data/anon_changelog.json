@@ -203557,30 +203557,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T23:50:55Z",
-    "inmate_number": "2148132",
-    "name": "OVERSTREET DEMETRIUS",
+    "date": "2026-06-11",
     "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": "booked 6/11/26"
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T23:50:55Z",
-    "inmate_number": "2157430",
-    "name": "STEELE ANTONIO",
+    "date": "2026-06-11",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": "booked 6/11/26"
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-11T23:50:55Z",
-    "inmate_number": "2367054",
-    "name": "SMITH BRANDON",
+    "date": "2026-06-11",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": "booked 6/11/26"
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
@@ -224713,5 +224704,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-19T00:05:02Z",
+    "inmate_number": "1473919",
+    "name": "PIERSON JAMES",
+    "tier": "MM",
+    "category": "Vehicular vandalism",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-19T00:05:02Z",
+    "inmate_number": "14814287",
+    "name": "ARAYA YOHANNES",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
   }
 ]
