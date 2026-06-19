@@ -205045,39 +205045,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T23:11:31Z",
-    "inmate_number": "14688613",
-    "name": "WILLIAMS MALIK",
+    "date": "2026-06-12",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T23:11:31Z",
-    "inmate_number": "2384393",
-    "name": "WIMMER JAMES",
+    "date": "2026-06-12",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T23:11:31Z",
-    "inmate_number": "2774649",
-    "name": "SUTHERLAND KAYLA",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T23:11:31Z",
-    "inmate_number": "14146667",
-    "name": "JOHANNES TRISTA",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -225058,5 +225046,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T23:23:52Z",
+    "inmate_number": "1535499",
+    "name": "HARRIS ARTEZ",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-19T23:23:52Z",
+    "inmate_number": "2606017",
+    "name": "JONES KENNETH",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
   }
 ]
