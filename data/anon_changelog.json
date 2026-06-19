@@ -204793,48 +204793,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T19:27:11Z",
-    "inmate_number": "2335874",
-    "name": "WENDLING NATHANIEL",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T19:27:11Z",
-    "inmate_number": "2419241",
-    "name": "WHEELER ROMELLO",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T19:27:11Z",
-    "inmate_number": "2681882",
-    "name": "HAWKINS-TERRELL RECARDO",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T19:27:11Z",
-    "inmate_number": "2192969",
-    "name": "BRYANT-THOMAS SEQUE",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T19:27:11Z",
-    "inmate_number": "14125051",
-    "name": "GUINN MAURICIA",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -224905,5 +224890,32 @@
     "tier": "M1",
     "category": "Theft",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T19:34:23Z",
+    "inmate_number": "14382179",
+    "name": "ALCORN CHEYANNE",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-19T19:34:23Z",
+    "inmate_number": "14450403",
+    "name": "ROBINSON EMANI",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T19:34:23Z",
+    "inmate_number": "2186184",
+    "name": "CAMPBELL WILLIAM",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
