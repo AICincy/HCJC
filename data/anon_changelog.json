@@ -205009,57 +205009,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T22:32:40Z",
-    "inmate_number": "2384393",
-    "name": "WIMMER JAMES",
+    "date": "2026-06-12",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T22:32:40Z",
-    "inmate_number": "14751043",
-    "name": "EUSTACHE MATHIAS",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T22:32:40Z",
-    "inmate_number": "1455805",
-    "name": "HOLLOWAY BRYANT",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T22:32:40Z",
-    "inmate_number": "1974246",
-    "name": "HUNTER MARCO",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T22:32:40Z",
-    "inmate_number": "14080757",
-    "name": "TSIGHE HAWAZ",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T22:32:40Z",
-    "inmate_number": "14803395",
-    "name": "VENTURA ADAM",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -225049,5 +225031,32 @@
     "tier": null,
     "category": null,
     "note": "booked 6/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T22:48:17Z",
+    "inmate_number": "14814363",
+    "name": "MCCRAY KEVIN",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-19T22:48:17Z",
+    "inmate_number": "2253677",
+    "name": "HALL KEITH",
+    "tier": "MM",
+    "category": "Parking - prohibited acts",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-19T22:48:17Z",
+    "inmate_number": "14812484",
+    "name": "CISSOKO JIMELA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
