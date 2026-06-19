@@ -203689,102 +203689,75 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "14080757",
-    "name": "TSIGHE HAWAZ",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/11/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "14187946",
-    "name": "WALLS STEVEN",
+    "date": "2026-06-12",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 6/11/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "14396801",
-    "name": "WILSON LANISHA",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/11/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "14763244",
-    "name": "CHAPMAN ZYAIRE",
+    "date": "2026-06-12",
     "tier": "F2",
-    "category": "Robbery",
-    "note": "booked 6/11/26"
+    "category": "Robbery"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "14807918",
-    "name": "MCGHEE KEZYIAN",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/11/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "14813489",
-    "name": "VERBITSKI MICHAEL",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked 6/11/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "1851883",
-    "name": "SMITH TIMOTHY",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "2010209",
-    "name": "FOX ROBERT",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "2322337",
-    "name": "HAYES EDWARD",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "2398397",
-    "name": "MCSWAIN CANDICE",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/11/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T03:08:56Z",
-    "inmate_number": "323234",
-    "name": "BELL CLARENCE",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/11/26"
+    "category": "Aggravated menacing"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-12",
+    "tier": "M1",
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
@@ -224854,5 +224827,50 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T04:11:14Z",
+    "inmate_number": "14638984",
+    "name": "JONES LANASIA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T04:11:14Z",
+    "inmate_number": "14799212",
+    "name": "HARRIS MALIK",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T04:11:14Z",
+    "inmate_number": "14666891",
+    "name": "RODRIGUEZ ALEXANDRO",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-19T04:11:14Z",
+    "inmate_number": "2144200",
+    "name": "STERWERF JAMIE",
+    "tier": "M1",
+    "category": "Driving under FRA suspension",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T04:11:14Z",
+    "inmate_number": "2341881",
+    "name": "BUCHANAN AKEEM",
+    "tier": "M1",
+    "category": "Failure to reinstate a license",
+    "note": "booked 6/18/26"
   }
 ]
