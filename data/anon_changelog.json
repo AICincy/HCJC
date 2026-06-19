@@ -204181,84 +204181,57 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T14:41:52Z",
-    "inmate_number": "14037891",
-    "name": "WILLIAMS MALCOLM",
+    "date": "2026-06-12",
     "tier": "M3",
-    "category": "Voyeurism",
-    "note": ""
+    "category": "Voyeurism"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T14:41:52Z",
-    "inmate_number": "14172406",
-    "name": "DORSEY JAMICA",
+    "date": "2026-06-12",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 6/12/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T14:41:52Z",
-    "inmate_number": "1465577",
-    "name": "LOVE PRIEST",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T14:41:52Z",
-    "inmate_number": "14662320",
-    "name": "JOHNSON JEREMIAH",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T14:41:52Z",
-    "inmate_number": "14784134",
-    "name": "GARDNER REGINALD",
+    "date": "2026-06-12",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T14:41:52Z",
-    "inmate_number": "14802687",
-    "name": "COATNEY JASON",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T14:41:52Z",
-    "inmate_number": "1833907",
-    "name": "PROFFITT QUENTESIA",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T14:41:52Z",
-    "inmate_number": "2382979",
-    "name": "COOK ALVIN",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T14:41:52Z",
-    "inmate_number": "2425935",
-    "name": "STEBBINS ALICIA",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "updated",
@@ -225085,5 +225058,14 @@
     "tier": "M1",
     "category": "Assault",
     "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-19T15:24:03Z",
+    "inmate_number": "1529884",
+    "name": "BROOKS CHRISTOPHER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
