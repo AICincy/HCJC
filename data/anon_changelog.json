@@ -204103,12 +204103,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T11:08:32Z",
-    "inmate_number": "1741347",
-    "name": "ROBERTS MARCUS",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -224989,5 +224986,50 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T11:33:21Z",
+    "inmate_number": "14670622",
+    "name": "POP-QUIB JAIRON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T11:33:21Z",
+    "inmate_number": "14778691",
+    "name": "MEINERS JAMES",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-19T11:33:21Z",
+    "inmate_number": "1544289",
+    "name": "BROWN ANTONIO",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T11:33:21Z",
+    "inmate_number": "2032407",
+    "name": "LEE ANDRE",
+    "tier": "M1",
+    "category": "Probation violation",
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-19T11:33:21Z",
+    "inmate_number": "2413081",
+    "name": "LARKIN AARON",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
   }
 ]
