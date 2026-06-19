@@ -204109,30 +204109,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T12:23:54Z",
-    "inmate_number": "14058394",
-    "name": "LATIMER DONTE",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T12:23:54Z",
-    "inmate_number": "14102246",
-    "name": "HUGHES WANDA",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T12:23:54Z",
-    "inmate_number": "964879",
-    "name": "STACEY SCOTT",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-12",
+    "tier": "M1",
+    "category": "Theft"
   },
   {
     "event": "booked",
@@ -225031,5 +225028,59 @@
     "tier": "M2",
     "category": "Criminal damaging",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T12:57:06Z",
+    "inmate_number": "2500893",
+    "name": "PARRISH DANTE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T12:57:06Z",
+    "inmate_number": "2712956",
+    "name": "BERRY EMILY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-19T12:57:06Z",
+    "inmate_number": "2517061",
+    "name": "FISSE DONALD",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-19T12:57:06Z",
+    "inmate_number": "2391399",
+    "name": "MCCOY JOSEPH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-19T12:57:06Z",
+    "inmate_number": "2193229",
+    "name": "MILLER ROBERTA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-19T12:57:06Z",
+    "inmate_number": "2599027",
+    "name": "PATTON GREGORY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
