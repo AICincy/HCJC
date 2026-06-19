@@ -204133,57 +204133,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T13:41:28Z",
-    "inmate_number": "14037891",
-    "name": "WILLIAMS MALCOLM",
+    "date": "2026-06-12",
     "tier": "M3",
-    "category": "Voyeurism",
-    "note": "booked 6/12/26"
+    "category": "Voyeurism"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T13:41:28Z",
-    "inmate_number": "14058394",
-    "name": "LATIMER DONTE",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T13:41:28Z",
-    "inmate_number": "14784134",
-    "name": "GARDNER REGINALD",
+    "date": "2026-06-12",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T13:41:28Z",
-    "inmate_number": "2259746",
-    "name": "MOORE JOHN",
+    "date": "2026-06-12",
     "tier": "F1",
-    "category": "Rape",
-    "note": ""
+    "category": "Rape"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T13:41:28Z",
-    "inmate_number": "2498698",
-    "name": "FRANKLIN REGINALD",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T13:41:28Z",
-    "inmate_number": "14413264",
-    "name": "MARSH AUSTIN",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-12",
+    "tier": "F1",
+    "category": "Rape"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-12",
+    "tier": "F4",
+    "category": "Attempt to commit an offense"
   },
   {
     "event": "updated",
@@ -225082,5 +225076,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-19T14:06:11Z",
+    "inmate_number": "2712956",
+    "name": "BERRY EMILY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
   }
 ]
