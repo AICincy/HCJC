@@ -205069,30 +205069,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-12T23:48:13Z",
-    "inmate_number": "1562544",
-    "name": "SMITH JERRELL",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-12T23:48:13Z",
-    "inmate_number": "1912124",
-    "name": "WAGNER AMBER",
+    "date": "2026-06-12",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-12T23:48:13Z",
-    "inmate_number": "2552816",
-    "name": "PEEPLES KHAMISI",
+    "date": "2026-06-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -225064,5 +225055,23 @@
     "tier": "M4",
     "category": "Criminal trespass",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T23:52:54Z",
+    "inmate_number": "14140305",
+    "name": "SAKHO DAOUDA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-19T23:52:54Z",
+    "inmate_number": "2059692",
+    "name": "GARITY STEPHANIE",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 6/19/26"
   }
 ]
