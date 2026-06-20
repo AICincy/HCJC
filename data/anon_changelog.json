@@ -205243,48 +205243,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T04:09:16Z",
-    "inmate_number": "14124472",
-    "name": "LEE DEANDRE",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T04:09:16Z",
-    "inmate_number": "1891476",
-    "name": "BAILEY JAMES",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T04:09:16Z",
-    "inmate_number": "2172368",
-    "name": "GLENN ARTIST",
+    "date": "2026-06-13",
     "tier": "MM",
-    "category": "Obstructing justice",
-    "note": "booked 6/12/26"
+    "category": "Obstructing justice"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T04:09:16Z",
-    "inmate_number": "717498",
-    "name": "NEIL KENNETH",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T04:09:16Z",
-    "inmate_number": "1617035",
-    "name": "HAWKINS KATHLEEN",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-13",
+    "tier": "MM",
+    "category": "Obstructing justice"
   },
   {
     "event": "booked",
@@ -225280,6 +225271,87 @@
     "timestamp_utc": "2026-06-20T03:48:26Z",
     "inmate_number": "14666891",
     "name": "RODRIGUEZ ALEXANDRO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T05:31:13Z",
+    "inmate_number": "14344226",
+    "name": "MOSLEY KARISSA",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T05:31:13Z",
+    "inmate_number": "14686520",
+    "name": "PRICE CORDEL",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/20/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T05:31:13Z",
+    "inmate_number": "14732640",
+    "name": "ROSCOE ANGELA",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T05:31:13Z",
+    "inmate_number": "2293761",
+    "name": "COLVIN IVAN",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T05:31:13Z",
+    "inmate_number": "2298018",
+    "name": "MCGEORGE BRIAN",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T05:31:13Z",
+    "inmate_number": "2301347",
+    "name": "JANSON JOHN",
+    "tier": "M1",
+    "category": "Unauthorized use of a vehicle",
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T05:31:13Z",
+    "inmate_number": "2637916",
+    "name": "HASSEN AWAIL",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T05:31:13Z",
+    "inmate_number": "2771130",
+    "name": "FAIRBANKS KHARIYAH",
+    "tier": "MM",
+    "category": "Turn and stop signals",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T05:31:13Z",
+    "inmate_number": "14814363",
+    "name": "MCCRAY KEVIN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
