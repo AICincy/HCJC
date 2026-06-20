@@ -205849,66 +205849,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T20:11:25Z",
-    "inmate_number": "14813646",
-    "name": "ROUNDTREE DEVIN",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/13/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T20:11:25Z",
-    "inmate_number": "2249981",
-    "name": "MITCHELL KEITH",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/13/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T20:11:25Z",
-    "inmate_number": "2326735",
-    "name": "HAYSBERT DARIELLE",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T20:11:25Z",
-    "inmate_number": "14813597",
-    "name": "ZHAO HAISHENG",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T20:43:59Z",
-    "inmate_number": "14783541",
-    "name": "LESLIE EDWARD",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T20:43:59Z",
-    "inmate_number": "2015960",
-    "name": "TERRELL DEZI",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/13/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T20:43:59Z",
-    "inmate_number": "2742992",
-    "name": "CRAWFORD TIARA",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-13",
+    "tier": "F5",
+    "category": "Breaking and entering"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-13",
+    "tier": "F5",
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -225934,5 +225925,50 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T20:44:30Z",
+    "inmate_number": "14432633",
+    "name": "CLEMENTS GABRIELLE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T20:44:30Z",
+    "inmate_number": "2625192",
+    "name": "MCGUIRE ANDREW",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T20:44:30Z",
+    "inmate_number": "2631379",
+    "name": "BARRETT ANTHONY",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T20:44:30Z",
+    "inmate_number": "2712956",
+    "name": "BERRY EMILY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T20:44:30Z",
+    "inmate_number": "2755801",
+    "name": "VOLL EMILY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
