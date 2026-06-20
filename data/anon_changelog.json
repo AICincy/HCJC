@@ -205435,66 +205435,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T09:47:11Z",
-    "inmate_number": "1430359",
-    "name": "BRITTEN GERMALE",
+    "date": "2026-06-13",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T09:47:11Z",
-    "inmate_number": "14778729",
-    "name": "WILLIAMS MARKEVION",
+    "date": "2026-06-13",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor",
-    "note": "booked 6/13/26"
+    "category": "Open container of beer or intoxicating liquor"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T09:47:11Z",
-    "inmate_number": "2304157",
-    "name": "WALKER KEYONA",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T09:47:11Z",
-    "inmate_number": "14048684",
-    "name": "GEROSKI DIORA",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T09:47:11Z",
-    "inmate_number": "2681882",
-    "name": "HAWKINS-TERRELL RECARDO",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T09:47:11Z",
-    "inmate_number": "2237031",
-    "name": "YOUNG DEMARKUS",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T10:49:15Z",
-    "inmate_number": "14750680",
-    "name": "DILLINGHAM ETHAN",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/13/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -225484,5 +225463,14 @@
     "tier": "MM",
     "category": "Obedience to traffic control devices",
     "note": "booked 6/20/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T11:17:15Z",
+    "inmate_number": "2470416",
+    "name": "WALKER DEMARIS",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
