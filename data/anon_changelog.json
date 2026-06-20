@@ -205477,39 +205477,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T11:37:53Z",
-    "inmate_number": "2723704",
-    "name": "LACKEY DOMINICK",
+    "date": "2026-06-13",
     "tier": "M4",
-    "category": "Misconduct at an emergency",
-    "note": "booked 6/13/26"
+    "category": "Misconduct at an emergency"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T11:37:53Z",
-    "inmate_number": "2523404",
-    "name": "COOK-MAYS CANDY",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T11:37:53Z",
-    "inmate_number": "2828589",
-    "name": "PERSON RAYMOND",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T11:37:53Z",
-    "inmate_number": "14768687",
-    "name": "WILLIAMS MICHELE",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -225472,5 +225460,32 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T12:09:44Z",
+    "inmate_number": "2470416",
+    "name": "WALKER DEMARIS",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T12:09:44Z",
+    "inmate_number": "14812225",
+    "name": "LOPEZ-MEJIA ESVIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T12:09:44Z",
+    "inmate_number": "2436567",
+    "name": "SERVIZI ANTHONY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
