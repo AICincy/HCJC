@@ -188202,6 +188202,12 @@
     "category": "Possession of drugs"
   },
   {
+    "event": "released",
+    "date": "2026-06-02",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
     "event": "booked",
     "date": "2026-06-03",
     "tier": null,
@@ -195028,6 +195034,18 @@
     "date": "2026-06-04",
     "tier": "F4",
     "category": "Attempt to commit an offense"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-04",
+    "tier": "M4",
+    "category": "Public indecency"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-04",
+    "tier": "M4",
+    "category": "Public indecency"
   },
   {
     "event": "updated",
@@ -205129,75 +205147,69 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T01:36:04Z",
-    "inmate_number": "1889086",
-    "name": "ROBERTS ERICA",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T01:36:04Z",
-    "inmate_number": "2199719",
-    "name": "GAMBLE JOHNITA",
+    "date": "2026-06-13",
     "tier": "F5",
-    "category": "Identity fraud",
-    "note": ""
+    "category": "Identity fraud"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T01:36:04Z",
-    "inmate_number": "2396985",
-    "name": "JACKSON JORDAN",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T01:36:04Z",
-    "inmate_number": "14207016",
-    "name": "HOLMES ANDRINA",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T01:36:04Z",
-    "inmate_number": "1254115",
-    "name": "HUGHES ERIC",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T01:36:04Z",
-    "inmate_number": "14727725",
-    "name": "MACK NKAYLA",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T01:36:04Z",
-    "inmate_number": "14783665",
-    "name": "NIMAGA MADOU",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T01:36:04Z",
-    "inmate_number": "14443460",
-    "name": "TURNER RICKALE",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-13",
+    "tier": "F5",
+    "category": "Identity fraud"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-13",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-06-13",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -225169,5 +225181,59 @@
     "tier": "MM",
     "category": "Fail to follow police officer's signals",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T02:27:37Z",
+    "inmate_number": "1885117",
+    "name": "MCFARLAND BRIDGETT",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T02:27:37Z",
+    "inmate_number": "2138618",
+    "name": "SMITH DONALD",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T02:27:37Z",
+    "inmate_number": "2318344",
+    "name": "TUTTLE DYLAN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T02:27:37Z",
+    "inmate_number": "2330547",
+    "name": "GENTRY ALICIA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T02:27:37Z",
+    "inmate_number": "370509",
+    "name": "PATTERSON HARRY",
+    "tier": "M4",
+    "category": "Public indecency",
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T02:27:37Z",
+    "inmate_number": "14450244",
+    "name": "MINOR DERYKA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
