@@ -205279,57 +205279,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T05:47:06Z",
-    "inmate_number": "14661538",
-    "name": "READ ANDREW",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/13/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T05:47:06Z",
-    "inmate_number": "14812817",
-    "name": "DEPAZ-CETO JUAN",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked 6/13/26"
+    "category": "Driving without a valid license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T05:47:06Z",
-    "inmate_number": "2256695",
-    "name": "WALKER ALICIA",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/13/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T05:47:06Z",
-    "inmate_number": "2364711",
-    "name": "MCKINNEY JEROME",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/13/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T05:47:06Z",
-    "inmate_number": "310513",
-    "name": "MCDONALD DANIEL",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/13/26"
+    "category": "Assault"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T05:47:06Z",
-    "inmate_number": "2278656",
-    "name": "HILL ANTOWAN",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-13",
+    "tier": "M1",
+    "category": "Driving without a valid license"
   },
   {
     "event": "updated",
@@ -225355,5 +225343,59 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T06:55:56Z",
+    "inmate_number": "14372863",
+    "name": "MILLER JOHNATHAN",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "booked 6/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T06:55:56Z",
+    "inmate_number": "14686520",
+    "name": "PRICE CORDEL",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T06:55:56Z",
+    "inmate_number": "14814377",
+    "name": "HERD JIREAH",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T06:55:56Z",
+    "inmate_number": "2301347",
+    "name": "JANSON JOHN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T06:55:56Z",
+    "inmate_number": "2704546",
+    "name": "JARMAN SEAN",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T06:55:56Z",
+    "inmate_number": "2771130",
+    "name": "FAIRBANKS KHARIYAH",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": ""
   }
 ]
