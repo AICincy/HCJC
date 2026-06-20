@@ -177618,6 +177618,12 @@
     "category": "Violating protection order"
   },
   {
+    "event": "released",
+    "date": "2026-05-26",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
     "event": "booked",
     "date": "2026-05-27",
     "tier": null,
@@ -205597,66 +205603,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T16:00:38Z",
-    "inmate_number": "14790057",
-    "name": "TAYLOR CHRISTIAN",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T16:00:38Z",
-    "inmate_number": "2282208",
-    "name": "TURNER HANK",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T16:00:38Z",
-    "inmate_number": "2681882",
-    "name": "HAWKINS-TERRELL RECARDO",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T16:00:38Z",
-    "inmate_number": "14373718",
-    "name": "CORNWELL MAIYA",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T16:00:38Z",
-    "inmate_number": "2396985",
-    "name": "JACKSON JORDAN",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T16:00:38Z",
-    "inmate_number": "2763277",
-    "name": "JACKSON SAMSON",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T16:00:38Z",
-    "inmate_number": "2558151",
-    "name": "MORGAN NINO",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -225526,6 +225511,60 @@
     "timestamp_utc": "2026-06-20T15:23:12Z",
     "inmate_number": "14437237",
     "name": "PUGH DEONTA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T16:00:40Z",
+    "inmate_number": "1535499",
+    "name": "HARRIS ARTEZ",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T16:00:40Z",
+    "inmate_number": "2044231",
+    "name": "ZIEGELMEIER DAVID",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 6/20/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T16:00:40Z",
+    "inmate_number": "1544289",
+    "name": "BROWN ANTONIO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T16:00:40Z",
+    "inmate_number": "14768064",
+    "name": "ENGLISH JAGUR",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T16:00:40Z",
+    "inmate_number": "14672137",
+    "name": "SMITH KIRK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T16:00:40Z",
+    "inmate_number": "2636316",
+    "name": "WILLIAMS WENDY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
