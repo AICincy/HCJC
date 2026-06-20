@@ -205507,12 +205507,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T13:03:03Z",
-    "inmate_number": "1549201",
-    "name": "HIGGINS JOSEPH",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/13/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -225488,6 +225485,24 @@
   {
     "event": "updated",
     "timestamp_utc": "2026-06-20T12:53:43Z",
+    "inmate_number": "2470416",
+    "name": "WALKER DEMARIS",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T13:35:07Z",
+    "inmate_number": "1050137",
+    "name": "TURNER DARRYL",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T13:35:07Z",
     "inmate_number": "2470416",
     "name": "WALKER DEMARIS",
     "tier": null,
