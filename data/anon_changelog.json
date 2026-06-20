@@ -205087,39 +205087,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T00:45:22Z",
-    "inmate_number": "1562544",
-    "name": "SMITH JERRELL",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T00:45:22Z",
-    "inmate_number": "1889086",
-    "name": "ROBERTS ERICA",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T00:45:22Z",
-    "inmate_number": "2199719",
-    "name": "GAMBLE JOHNITA",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T00:45:22Z",
-    "inmate_number": "2396985",
-    "name": "JACKSON JORDAN",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/12/26"
+    "category": "Domestic violence"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-13",
+    "tier": "M1",
+    "category": "Aggravated menacing"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-13",
+    "tier": "F5",
+    "category": "Identity fraud"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-13",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -225145,5 +225151,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T01:31:15Z",
+    "inmate_number": "1885117",
+    "name": "MCFARLAND BRIDGETT",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T01:31:15Z",
+    "inmate_number": "2636316",
+    "name": "WILLIAMS WENDY",
+    "tier": "MM",
+    "category": "Fail to follow police officer's signals",
+    "note": ""
   }
 ]
