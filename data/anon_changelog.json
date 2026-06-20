@@ -205801,66 +205801,51 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T19:39:05Z",
-    "inmate_number": "1021217",
-    "name": "MONTGOMERY DEZI",
+    "date": "2026-06-13",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T19:39:05Z",
-    "inmate_number": "14536881",
-    "name": "SALL DIEYNABA",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T19:39:05Z",
-    "inmate_number": "14770754",
-    "name": "JOHNSON WALTER",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/13/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T19:39:05Z",
-    "inmate_number": "2326735",
-    "name": "HAYSBERT DARIELLE",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T19:39:05Z",
-    "inmate_number": "2415503",
-    "name": "THOMAS DEMONTA",
+    "date": "2026-06-13",
     "tier": "M4",
-    "category": "Cincinnati Municipal Code: dangerous dogs",
-    "note": "booked 6/13/26"
+    "category": "Cincinnati Municipal Code: dangerous dogs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T19:39:05Z",
-    "inmate_number": "2533504",
-    "name": "HART JUSTIN",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/13/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T19:39:05Z",
-    "inmate_number": "14778729",
-    "name": "WILLIAMS MARKEVION",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-13",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: dangerous dogs"
   },
   {
     "event": "booked",
@@ -225856,6 +225841,87 @@
     "timestamp_utc": "2026-06-20T19:00:59Z",
     "inmate_number": "14529347",
     "name": "WATKINS MARY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T19:39:25Z",
+    "inmate_number": "14432633",
+    "name": "CLEMENTS GABRIELLE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T19:39:25Z",
+    "inmate_number": "14447221",
+    "name": "SMITH LONDON",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T19:39:25Z",
+    "inmate_number": "2625192",
+    "name": "MCGUIRE ANDREW",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 6/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T19:39:25Z",
+    "inmate_number": "2792052",
+    "name": "HUDDLESTON JACOB",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T19:39:25Z",
+    "inmate_number": "14347260",
+    "name": "AMBROCIO-AMBROCIO RUBEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T19:39:25Z",
+    "inmate_number": "2293761",
+    "name": "COLVIN IVAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T19:39:25Z",
+    "inmate_number": "2059692",
+    "name": "GARITY STEPHANIE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T19:39:25Z",
+    "inmate_number": "14216815",
+    "name": "HAYNES ADRION",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T19:39:25Z",
+    "inmate_number": "14732640",
+    "name": "ROSCOE ANGELA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
