@@ -205501,12 +205501,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T12:16:30Z",
-    "inmate_number": "2763277",
-    "name": "JACKSON SAMSON",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/13/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -225487,5 +225484,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T12:53:43Z",
+    "inmate_number": "2470416",
+    "name": "WALKER DEMARIS",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
