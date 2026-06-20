@@ -205411,30 +205411,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T08:34:56Z",
-    "inmate_number": "1430359",
-    "name": "BRITTEN GERMALE",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T08:34:56Z",
-    "inmate_number": "2094825",
-    "name": "SHEPARD JASON",
+    "date": "2026-06-13",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T08:34:56Z",
-    "inmate_number": "2558151",
-    "name": "MORGAN NINO",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
+    "category": "Driving on a suspended/revoked license"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-13",
+    "tier": "M2",
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
@@ -225451,5 +225448,41 @@
     "tier": "M2",
     "category": "Obstructing official business",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T09:23:45Z",
+    "inmate_number": "14450817",
+    "name": "FOSTER ARIAH",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T09:23:45Z",
+    "inmate_number": "14774475",
+    "name": "MCCUBBINS NOLAN",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T09:23:45Z",
+    "inmate_number": "14802069",
+    "name": "ALLGEYER JAYDA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 6/20/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T09:23:45Z",
+    "inmate_number": "2508434",
+    "name": "ROARK ELIZABETH",
+    "tier": "MM",
+    "category": "Obedience to traffic control devices",
+    "note": "booked 6/20/26"
   }
 ]
