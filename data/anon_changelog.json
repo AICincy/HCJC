@@ -205213,48 +205213,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T02:40:43Z",
-    "inmate_number": "1562544",
-    "name": "SMITH JERRELL",
+    "date": "2026-06-13",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T02:40:43Z",
-    "inmate_number": "1889086",
-    "name": "ROBERTS ERICA",
+    "date": "2026-06-13",
     "tier": "F5",
-    "category": "Identity fraud",
-    "note": ""
+    "category": "Identity fraud"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-13T02:40:43Z",
-    "inmate_number": "2065485",
-    "name": "MORRISON ERIC",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "booked 6/12/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-13T02:40:43Z",
-    "inmate_number": "2199719",
-    "name": "GAMBLE JOHNITA",
+    "date": "2026-06-13",
     "tier": "F5",
-    "category": "Identity fraud",
-    "note": ""
+    "category": "Identity fraud"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-13T02:40:43Z",
-    "inmate_number": "14142369",
-    "name": "WATKINS KARL",
+    "date": "2026-06-13",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -225232,6 +225217,69 @@
     "timestamp_utc": "2026-06-20T02:27:37Z",
     "inmate_number": "14450244",
     "name": "MINOR DERYKA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T03:48:26Z",
+    "inmate_number": "2293761",
+    "name": "COLVIN IVAN",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked 7/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T03:48:26Z",
+    "inmate_number": "2298018",
+    "name": "MCGEORGE BRIAN",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T03:48:26Z",
+    "inmate_number": "2330547",
+    "name": "GENTRY ALICIA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-20T03:48:26Z",
+    "inmate_number": "2318344",
+    "name": "TUTTLE DYLAN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-20T03:48:26Z",
+    "inmate_number": "2771130",
+    "name": "FAIRBANKS KHARIYAH",
+    "tier": "MM",
+    "category": "Turn and stop signals",
+    "note": "booked 6/19/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T03:48:26Z",
+    "inmate_number": "2588517",
+    "name": "BURKHART RACHEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-20T03:48:26Z",
+    "inmate_number": "14666891",
+    "name": "RODRIGUEZ ALEXANDRO",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
