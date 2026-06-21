@@ -206329,12 +206329,9 @@
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-14T15:03:54Z",
-    "inmate_number": "2322109",
-    "name": "PHILLIPS DAJA",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -226603,5 +226600,14 @@
     "tier": null,
     "category": null,
     "note": "booked 6/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T15:53:58Z",
+    "inmate_number": "14759313",
+    "name": "HERNANDEZ ANGEL",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": "booked (date not reported)"
   }
 ]
