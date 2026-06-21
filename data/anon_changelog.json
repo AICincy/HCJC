@@ -206341,30 +206341,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-14T17:11:13Z",
-    "inmate_number": "14225477",
-    "name": "LANZA DEAVONIA",
+    "date": "2026-06-14",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T17:11:13Z",
-    "inmate_number": "1458110",
-    "name": "STEVENSON ALFONZO",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/14/26"
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-14T17:11:13Z",
-    "inmate_number": "14667305",
-    "name": "SANDERS ASA",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-14",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)"
   },
   {
     "event": "updated",
@@ -226615,5 +226612,14 @@
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T17:13:30Z",
+    "inmate_number": "14596979",
+    "name": "SCOTT EDRYA",
+    "tier": "MM",
+    "category": "Traffic-control signal indications",
+    "note": "booked 6/21/26"
   }
 ]
