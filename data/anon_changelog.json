@@ -206485,12 +206485,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T21:46:52Z",
-    "inmate_number": "14546741",
-    "name": "PARHAM JASON",
+    "date": "2026-06-14",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked (date not reported)"
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
@@ -226741,5 +226738,23 @@
     "tier": null,
     "category": null,
     "note": "booked 6/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T22:15:15Z",
+    "inmate_number": "14774586",
+    "name": "ROWLAND GREGORY",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T22:15:15Z",
+    "inmate_number": "2499041",
+    "name": "WALLS MICHAEL",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": ""
   }
 ]
