@@ -206419,30 +206419,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T19:39:45Z",
-    "inmate_number": "2032212",
-    "name": "LONGMIRE ROBERT",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/14/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-14T19:39:45Z",
-    "inmate_number": "14257521",
-    "name": "BROCK CODY",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-14T19:39:45Z",
-    "inmate_number": "2533504",
-    "name": "HART JUSTIN",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -226666,5 +226657,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T19:53:57Z",
+    "inmate_number": "14314970",
+    "name": "QUINN MARK",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T19:53:57Z",
+    "inmate_number": "14635834",
+    "name": "RAYFORD BRIONNA",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/21/26"
   }
 ]
