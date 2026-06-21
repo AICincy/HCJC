@@ -206251,30 +206251,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T09:59:32Z",
-    "inmate_number": "14312185",
-    "name": "SOUMARE DJIBRIL",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/14/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T09:59:32Z",
-    "inmate_number": "14813678",
-    "name": "MENDIETA ALEXIS",
+    "date": "2026-06-14",
     "tier": "MM",
-    "category": "Operating a motor vehicle without reasonable control",
-    "note": "booked 6/14/26"
+    "category": "Operating a motor vehicle without reasonable control"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-14T09:59:32Z",
-    "inmate_number": "2025008",
-    "name": "ROSS DONNIE",
+    "date": "2026-06-14",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
@@ -226477,6 +226468,69 @@
     "timestamp_utc": "2026-06-21T09:02:43Z",
     "inmate_number": "14719310",
     "name": "HARRELL TAYESHAWN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T10:25:53Z",
+    "inmate_number": "1453069",
+    "name": "OWENS JASON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T10:25:53Z",
+    "inmate_number": "14814408",
+    "name": "MARTINEZ ESCOBAR JOSE",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T10:25:53Z",
+    "inmate_number": "1551481",
+    "name": "MOATS DONTA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T10:25:53Z",
+    "inmate_number": "1740903",
+    "name": "JONES KELLY",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T10:25:53Z",
+    "inmate_number": "2718210",
+    "name": "JACKSON DONTE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-21T10:25:53Z",
+    "inmate_number": "14315507",
+    "name": "DUFFY MAIKAH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-21T10:25:53Z",
+    "inmate_number": "14131192",
+    "name": "THOMAS CALLIA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
