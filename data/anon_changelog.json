@@ -164472,6 +164472,12 @@
     "category": "Assault"
   },
   {
+    "event": "booked",
+    "date": "2026-05-20",
+    "tier": "M1",
+    "category": "Assault"
+  },
+  {
     "event": "updated",
     "date": "2026-05-21",
     "tier": null,
@@ -170176,6 +170182,12 @@
     "date": "2026-05-21",
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-21",
+    "tier": "M1",
+    "category": "Assault"
   },
   {
     "event": "booked",
@@ -206455,12 +206467,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T20:44:26Z",
-    "inmate_number": "2103124",
-    "name": "TAYLOR NYAMEKYE",
+    "date": "2026-06-14",
     "tier": "MM",
-    "category": "Flse alrm to law enfor agncym",
-    "note": "booked 6/14/26"
+    "category": "Flse alrm to law enfor agncym"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-14",
+    "tier": "MM",
+    "category": "Flse alrm to law enfor agncym"
   },
   {
     "event": "released",
@@ -226675,5 +226690,50 @@
     "tier": "M2",
     "category": "Resisting arrest",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T21:10:24Z",
+    "inmate_number": "14314970",
+    "name": "QUINN MARK",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T21:10:24Z",
+    "inmate_number": "14408117",
+    "name": "ALLEN RANAYZIA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T21:10:24Z",
+    "inmate_number": "2632437",
+    "name": "COMPTON DAVID",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T21:10:24Z",
+    "inmate_number": "2727064",
+    "name": "BROWN DEANDRA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-21T21:10:24Z",
+    "inmate_number": "14814402",
+    "name": "JUAN DAVID",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
