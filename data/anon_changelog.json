@@ -206365,12 +206365,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-14T17:47:41Z",
-    "inmate_number": "1458110",
-    "name": "STEVENSON ALFONZO",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-14",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)"
   },
   {
     "event": "booked",
@@ -226621,5 +226624,14 @@
     "tier": "MM",
     "category": "Traffic-control signal indications",
     "note": "booked 6/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T17:51:38Z",
+    "inmate_number": "14759313",
+    "name": "HERNANDEZ ANGEL",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
   }
 ]
