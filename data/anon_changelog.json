@@ -206407,21 +206407,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-14T19:00:14Z",
-    "inmate_number": "14813696",
-    "name": "SAUNDERS RICHARD",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T19:00:14Z",
-    "inmate_number": "2736309",
-    "name": "PHILLIPS EMONI",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked (date not reported)"
+    "category": "Assault"
   },
   {
     "event": "booked",
@@ -226627,5 +226621,50 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T19:11:40Z",
+    "inmate_number": "2727064",
+    "name": "BROWN DEANDRA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-21T19:11:40Z",
+    "inmate_number": "850642",
+    "name": "CAVANAUGH MARK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-21T19:11:40Z",
+    "inmate_number": "2718210",
+    "name": "JACKSON DONTE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-21T19:11:40Z",
+    "inmate_number": "14688046",
+    "name": "JENKINS KEMARION",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-21T19:11:40Z",
+    "inmate_number": "14391435",
+    "name": "KERSHAW LEVONTE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
