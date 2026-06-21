@@ -206377,48 +206377,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T18:30:28Z",
-    "inmate_number": "14218328",
-    "name": "ROBINSON JULIA",
+    "date": "2026-06-14",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 6/14/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T18:30:28Z",
-    "inmate_number": "14536995",
-    "name": "WASHINGTON CALVIN",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": "booked 6/14/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T18:30:28Z",
-    "inmate_number": "14813696",
-    "name": "SAUNDERS RICHARD",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-14T18:30:28Z",
-    "inmate_number": "14763976",
-    "name": "HUBBARD DESTANEY",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-14T18:30:28Z",
-    "inmate_number": "14813665",
-    "name": "ROBINSON JULIA",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -226633,5 +226618,14 @@
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T18:32:18Z",
+    "inmate_number": "2727064",
+    "name": "BROWN DEANDRA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
