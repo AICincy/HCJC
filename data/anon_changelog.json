@@ -37044,6 +37044,12 @@
     "category": "Falsification"
   },
   {
+    "event": "released",
+    "date": "2026-05-13",
+    "tier": "M1",
+    "category": "Violation of community control / probation"
+  },
+  {
     "event": "booked",
     "date": "2026-05-14",
     "tier": null,
@@ -206089,57 +206095,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T05:35:32Z",
-    "inmate_number": "14443442",
-    "name": "JAMISON SHIANA",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/14/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T05:35:32Z",
-    "inmate_number": "1777439",
-    "name": "AARON KEVIN",
+    "date": "2026-06-14",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 6/13/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T05:35:32Z",
-    "inmate_number": "1949983",
-    "name": "ODOMS NIAMBI",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 6/14/26"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-14T05:35:32Z",
-    "inmate_number": "2031343",
-    "name": "BURNETT PEGGY",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-14T05:35:32Z",
-    "inmate_number": "2808506",
-    "name": "RITCHIE ANTHONY",
+    "date": "2026-06-14",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-14T05:35:32Z",
-    "inmate_number": "2415040",
-    "name": "PORTIS JEFFERY",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-14",
+    "tier": "M2",
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
@@ -226300,5 +226294,68 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T05:55:54Z",
+    "inmate_number": "1212912",
+    "name": "JACKSON DANIEL",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T05:55:54Z",
+    "inmate_number": "14226064",
+    "name": "GIERYN JOSEPH",
+    "tier": "M1",
+    "category": "Violation of community control / probation",
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T05:55:54Z",
+    "inmate_number": "14781168",
+    "name": "SY ABDELLAHI",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T05:55:54Z",
+    "inmate_number": "14814402",
+    "name": "JUAN DAVID",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T05:55:54Z",
+    "inmate_number": "1551481",
+    "name": "MOATS DONTA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T05:55:54Z",
+    "inmate_number": "1588857",
+    "name": "CHATMAN MAURICE",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": "booked 6/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T05:55:54Z",
+    "inmate_number": "2192137",
+    "name": "SIMPSON NORRIS",
+    "tier": "MM",
+    "category": "Occupant restraining devices (seat belts)",
+    "note": "booked 6/21/26"
   }
 ]
