@@ -206437,30 +206437,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T20:13:06Z",
-    "inmate_number": "1310124",
-    "name": "HANSFORD ERIC",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/14/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T20:13:06Z",
-    "inmate_number": "14406417",
-    "name": "TOUSET KENNETH",
+    "date": "2026-06-14",
     "tier": "M4",
-    "category": "Cincinnati Municipal Code: dangerous dogs",
-    "note": "booked 6/14/26"
+    "category": "Cincinnati Municipal Code: dangerous dogs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T20:13:06Z",
-    "inmate_number": "14619452",
-    "name": "WHEELER KATLYN",
+    "date": "2026-06-14",
     "tier": null,
-    "category": null,
-    "note": "booked 6/14/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -226675,5 +226666,14 @@
     "tier": null,
     "category": null,
     "note": "booked 6/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T20:32:38Z",
+    "inmate_number": "14635834",
+    "name": "RAYFORD BRIONNA",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
   }
 ]
