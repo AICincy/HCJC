@@ -206335,12 +206335,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T15:54:00Z",
-    "inmate_number": "14566727",
-    "name": "TURNER CAMRON",
+    "date": "2026-06-14",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked (date not reported)"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
@@ -226609,5 +226606,14 @@
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-21T16:34:06Z",
+    "inmate_number": "14759313",
+    "name": "HERNANDEZ ANGEL",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
   }
 ]
