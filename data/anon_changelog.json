@@ -206515,30 +206515,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T23:29:50Z",
-    "inmate_number": "1627102",
-    "name": "MATTHEWS EDDIE",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/14/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-14T23:29:50Z",
-    "inmate_number": "2103124",
-    "name": "TAYLOR NYAMEKYE",
+    "date": "2026-06-14",
     "tier": "MM",
-    "category": "Flse alrm to law enfor agncym",
-    "note": ""
+    "category": "Flse alrm to law enfor agncym"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-14T23:29:50Z",
-    "inmate_number": "943611",
-    "name": "WHITE MARKITA",
+    "date": "2026-06-14",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/14/26"
+    "category": "Theft"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-14",
+    "tier": "MM",
+    "category": "Flse alrm to law enfor agncym"
   },
   {
     "event": "booked",
@@ -226825,5 +226822,14 @@
     "tier": "M1",
     "category": "Driving under suspension",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-21T23:48:51Z",
+    "inmate_number": "14814443",
+    "name": "HOPE RHANE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/21/26"
   }
 ]
