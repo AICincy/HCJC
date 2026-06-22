@@ -212347,93 +212347,69 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "14528541",
-    "name": "FRATER DONAVANN",
+    "date": "2026-06-15",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "14542204",
-    "name": "BLACKMON JAMELA",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": ""
+    "category": "Violating protection order"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "14697051",
-    "name": "BOOKER JAHJUAN",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "14813592",
-    "name": "GONZALEZ-JIJIN KENIA",
+    "date": "2026-06-15",
     "tier": "F5",
-    "category": "Identity fraud",
-    "note": ""
+    "category": "Identity fraud"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "14813863",
-    "name": "PUGH DEON",
+    "date": "2026-06-15",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 6/15/26"
+    "category": "Strangulation"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "1987882",
-    "name": "LEICHMAN TICO",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "2373290",
-    "name": "CRENSHAW DAVID",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": "booked 6/15/26"
+    "category": "Driving under suspension"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "2472607",
-    "name": "GLASPER ROBERT",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Violation of community control / probation",
-    "note": ""
+    "category": "Violation of community control / probation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "808025",
-    "name": "JONES CLIFFORD",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/15/26"
+    "category": "Theft"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-15T22:17:57Z",
-    "inmate_number": "2681882",
-    "name": "HAWKINS-TERRELL RECARDO",
+    "date": "2026-06-15",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-15",
+    "tier": "F2",
+    "category": "Strangulation"
   },
   {
     "event": "booked",
@@ -226465,5 +226441,59 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-22T22:54:11Z",
+    "inmate_number": "14159354",
+    "name": "GRAY ROBERT",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-22T22:54:11Z",
+    "inmate_number": "14184817",
+    "name": "PHELPS CAMARON",
+    "tier": "F3",
+    "category": "Abduction",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-22T22:54:11Z",
+    "inmate_number": "14814562",
+    "name": "ROWE DAKOTA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-22T22:54:11Z",
+    "inmate_number": "2137561",
+    "name": "LEAR LAMONT",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": "booked 6/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-22T22:54:11Z",
+    "inmate_number": "2110181",
+    "name": "TRIBBLE LULA",
+    "tier": "F4",
+    "category": "Disrupting public services",
+    "note": "booked 6/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-22T22:54:11Z",
+    "inmate_number": "2378547",
+    "name": "NAPIER CIMERICA",
+    "tier": "M1",
+    "category": "Violation of community control / probation",
+    "note": "booked 6/22/26"
   }
 ]
