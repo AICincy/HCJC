@@ -206803,57 +206803,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T09:08:14Z",
-    "inmate_number": "14178183",
-    "name": "SAMS DEVON",
+    "date": "2026-06-15",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T09:08:14Z",
-    "inmate_number": "14288529",
-    "name": "GEE ERIC",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-15T09:08:14Z",
-    "inmate_number": "14339721",
-    "name": "ELLISON BRAXTON",
+    "date": "2026-06-15",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T09:08:14Z",
-    "inmate_number": "14740934",
-    "name": "ZAYAS HECTOR",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-15T09:08:14Z",
-    "inmate_number": "14807275",
-    "name": "LOPEZ EDWIN",
+    "date": "2026-06-15",
     "tier": null,
-    "category": null,
-    "note": "booked 6/15/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T09:08:14Z",
-    "inmate_number": "2481050",
-    "name": "HARVEY JOSHUA",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
@@ -227257,5 +227239,59 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-22T10:29:33Z",
+    "inmate_number": "14082403",
+    "name": "DEAN NATHAN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-22T10:29:33Z",
+    "inmate_number": "14146322",
+    "name": "MILLER KENNA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-22T10:29:33Z",
+    "inmate_number": "14344327",
+    "name": "ADAMS MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-22T10:29:33Z",
+    "inmate_number": "14362485",
+    "name": "BELL PAIGE",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-22T10:29:33Z",
+    "inmate_number": "14768577",
+    "name": "MORALES JEFRI",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-22T10:29:33Z",
+    "inmate_number": "14774313",
+    "name": "SMITH MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/22/26"
   }
 ]
