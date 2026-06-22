@@ -206839,30 +206839,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T11:21:37Z",
-    "inmate_number": "14339721",
-    "name": "ELLISON BRAXTON",
+    "date": "2026-06-15",
     "tier": "F2",
-    "category": "Robbery",
-    "note": ""
+    "category": "Robbery"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-15T11:21:37Z",
-    "inmate_number": "14807275",
-    "name": "LOPEZ EDWIN",
+    "date": "2026-06-15",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-15T11:21:37Z",
-    "inmate_number": "2835287",
-    "name": "KERSEY BRET",
+    "date": "2026-06-15",
     "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": "booked 6/15/26"
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "booked",
@@ -227293,5 +227284,41 @@
     "tier": null,
     "category": null,
     "note": "booked 6/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-22T12:35:56Z",
+    "inmate_number": "14049414",
+    "name": "FARRIER JEREMIAH",
+    "tier": "MM",
+    "category": "Failure to display license",
+    "note": "booked 6/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-22T12:35:56Z",
+    "inmate_number": "14138164",
+    "name": "MILLER REMYA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-22T12:35:56Z",
+    "inmate_number": "14344327",
+    "name": "ADAMS MICHAEL",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-22T12:35:56Z",
+    "inmate_number": "14768577",
+    "name": "MORALES JEFRI",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
   }
 ]
