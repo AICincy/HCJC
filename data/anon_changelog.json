@@ -164484,6 +164484,12 @@
     "category": "Breaking and entering"
   },
   {
+    "event": "booked",
+    "date": "2026-05-20",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
     "event": "updated",
     "date": "2026-05-21",
     "tier": null,
@@ -170194,6 +170200,12 @@
     "date": "2026-05-21",
     "tier": "M1",
     "category": "Assault"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-21",
+    "tier": "M1",
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -226849,5 +226861,77 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-23T06:24:19Z",
+    "inmate_number": "14642412",
+    "name": "STURDIVANT-CLAY COURTNEY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-23T06:24:19Z",
+    "inmate_number": "14759770",
+    "name": "ROSE JALEN",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-23T06:24:19Z",
+    "inmate_number": "14814583",
+    "name": "PARK MICHAEL",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-23T06:24:19Z",
+    "inmate_number": "1633225",
+    "name": "CLARK CLARENCE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-23T06:24:19Z",
+    "inmate_number": "2677854",
+    "name": "STALLWORTH DORIAN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/23/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-23T06:24:19Z",
+    "inmate_number": "2791104",
+    "name": "DECKARD HEATHER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-23T06:24:19Z",
+    "inmate_number": "14316136",
+    "name": "DUPREE AMEISHA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-23T06:24:19Z",
+    "inmate_number": "14502267",
+    "name": "EBERHART RIKKIAH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
