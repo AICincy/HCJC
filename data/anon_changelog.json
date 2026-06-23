@@ -83730,6 +83730,12 @@
     "category": "Driving on a suspended/revoked license"
   },
   {
+    "event": "released",
+    "date": "2026-05-14",
+    "tier": "M2",
+    "category": "Obstructing official business"
+  },
+  {
     "event": "booked",
     "date": "2026-05-15",
     "tier": null,
@@ -227494,5 +227500,41 @@
     "tier": "M1",
     "category": "Driving without a valid license",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-23T23:52:59Z",
+    "inmate_number": "1030082",
+    "name": "SCRUGGS JAMES",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-23T23:52:59Z",
+    "inmate_number": "14492621",
+    "name": "WHITNEY MIKAYLA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-23T23:52:59Z",
+    "inmate_number": "14763994",
+    "name": "MALOTT DANIEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-23T23:52:59Z",
+    "inmate_number": "2455758",
+    "name": "SMITH TAARIQ",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 6/23/26"
   }
 ]
