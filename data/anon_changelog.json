@@ -215035,84 +215035,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T12:48:51Z",
-    "inmate_number": "14813319",
-    "name": "MCCANTS ANDREA",
+    "date": "2026-06-17",
     "tier": "F2",
-    "category": "Robbery",
-    "note": "booked 6/17/26"
+    "category": "Robbery"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T12:48:51Z",
-    "inmate_number": "1588127",
-    "name": "KILLINGS MARTIN",
+    "date": "2026-06-17",
     "tier": "M3",
-    "category": "Unlawful restraint",
-    "note": ""
+    "category": "Unlawful restraint"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T12:48:51Z",
-    "inmate_number": "1770053",
-    "name": "FERRELL JIMMY",
+    "date": "2026-06-17",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T12:48:51Z",
-    "inmate_number": "1943909",
-    "name": "TORO RAUL",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T12:48:51Z",
-    "inmate_number": "14685750",
-    "name": "DUNN FAITH",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T12:48:51Z",
-    "inmate_number": "1948460",
-    "name": "HARPER MICHAEL",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T12:48:51Z",
-    "inmate_number": "1741347",
-    "name": "ROBERTS MARCUS",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T12:48:51Z",
-    "inmate_number": "14417070",
-    "name": "TUBBS KEJOHN",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T12:48:51Z",
-    "inmate_number": "14675130",
-    "name": "WILLIAMS DERRYCK",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -227875,5 +227848,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T13:23:33Z",
+    "inmate_number": "2744440",
+    "name": "CURRY TOBIAS",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
   }
 ]
