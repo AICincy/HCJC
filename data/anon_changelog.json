@@ -214981,75 +214981,57 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T09:38:34Z",
-    "inmate_number": "14365106",
-    "name": "BLEVINS ARIUS",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T09:38:34Z",
-    "inmate_number": "1562313",
-    "name": "WHALEY DANNY",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T09:38:34Z",
-    "inmate_number": "2310309",
-    "name": "HAFFEY KYLE",
+    "date": "2026-06-17",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T09:38:34Z",
-    "inmate_number": "2664965",
-    "name": "FARMER DOMINIQUE",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T11:23:13Z",
-    "inmate_number": "1588127",
-    "name": "KILLINGS MARTIN",
+    "date": "2026-06-17",
     "tier": "M3",
-    "category": "Unlawful restraint",
-    "note": "booked 6/17/26"
+    "category": "Unlawful restraint"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T11:23:13Z",
-    "inmate_number": "1943909",
-    "name": "TORO RAUL",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked 6/17/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T11:23:13Z",
-    "inmate_number": "2088371",
-    "name": "GARDNER STEPHANIE",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Having physical control of vehicle while under influence",
-    "note": "booked 6/17/26"
+    "category": "Having physical control of vehicle while under influence"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T11:23:13Z",
-    "inmate_number": "14339721",
-    "name": "ELLISON BRAXTON",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-17",
+    "tier": "M1",
+    "category": "Receiving stolen property"
   },
   {
     "event": "booked",
@@ -227848,5 +227830,32 @@
     "tier": "M2",
     "category": "Possessing drug abuse instruments",
     "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T11:40:59Z",
+    "inmate_number": "2617526",
+    "name": "DEAN CHARLEMAGNE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T11:40:59Z",
+    "inmate_number": "1858470",
+    "name": "MEATCHEM STANLEY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T11:40:59Z",
+    "inmate_number": "1465713",
+    "name": "STRICKLAND REGINALD",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
