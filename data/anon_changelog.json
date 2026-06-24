@@ -214765,21 +214765,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T02:41:34Z",
-    "inmate_number": "14688338",
-    "name": "DAVIS KAYLEE",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/16/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T02:41:34Z",
-    "inmate_number": "2370396",
-    "name": "CHAIRA MICHAEL",
+    "date": "2026-06-17",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
@@ -227632,5 +227626,77 @@
     "tier": "M1",
     "category": "Theft",
     "note": "booked 6/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T03:46:37Z",
+    "inmate_number": "14112727",
+    "name": "DUCKWORTH DASHANNON",
+    "tier": "M1",
+    "category": "Operating a motor vehicle without lawful registration",
+    "note": "booked 6/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T03:46:37Z",
+    "inmate_number": "14650013",
+    "name": "COBB DEANDRE",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T03:46:37Z",
+    "inmate_number": "1853028",
+    "name": "SCHMITT ROBERT",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T03:46:37Z",
+    "inmate_number": "2429200",
+    "name": "COTTON KIARAH",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T03:46:37Z",
+    "inmate_number": "14341131",
+    "name": "LOTT ARIANA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T03:46:37Z",
+    "inmate_number": "2057831",
+    "name": "MORRIS SAKEENA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T03:46:37Z",
+    "inmate_number": "14589504",
+    "name": "PLAIR MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T03:46:37Z",
+    "inmate_number": "14326743",
+    "name": "STCLAIR MAKYRA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
