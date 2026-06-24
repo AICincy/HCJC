@@ -214747,21 +214747,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T01:40:56Z",
-    "inmate_number": "14067354",
-    "name": "MCCURDY LASHANTI",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T01:40:56Z",
-    "inmate_number": "2370396",
-    "name": "CHAIRA MICHAEL",
+    "date": "2026-06-17",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 6/16/26"
+    "category": "Criminal damaging"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-17",
+    "tier": "M2",
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
@@ -227605,5 +227605,32 @@
     "tier": "F5",
     "category": "Trafficking in drugs",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T02:20:47Z",
+    "inmate_number": "14579248",
+    "name": "GREGGS DINAYA",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "booked 6/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T02:20:47Z",
+    "inmate_number": "14650013",
+    "name": "COBB DEANDRE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T02:20:47Z",
+    "inmate_number": "2429200",
+    "name": "COTTON KIARAH",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/23/26"
   }
 ]
