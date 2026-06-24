@@ -215863,48 +215863,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T22:13:02Z",
-    "inmate_number": "14569129",
-    "name": "NEAL JAHMIR",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T22:13:02Z",
-    "inmate_number": "14638873",
-    "name": "KILLINGS KRISSHAD",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 6/17/26"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T22:13:02Z",
-    "inmate_number": "14751557",
-    "name": "HAIRE MICHAEL",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T22:13:02Z",
-    "inmate_number": "2147843",
-    "name": "CHARLES TOMMY",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T22:13:02Z",
-    "inmate_number": "2549166",
-    "name": "CRADDOCK ISREAL",
+    "date": "2026-06-17",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-17",
+    "tier": "F2",
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
@@ -228487,5 +228478,41 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T22:43:39Z",
+    "inmate_number": "1023478",
+    "name": "LEWIS JAMES",
+    "tier": "F1",
+    "category": "Murder",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T22:43:39Z",
+    "inmate_number": "14677672",
+    "name": "RIDDLE JILL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T22:43:39Z",
+    "inmate_number": "2591553",
+    "name": "CANADA MARCUS",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T22:43:39Z",
+    "inmate_number": "14590989",
+    "name": "GENEREUX DMITRI",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
