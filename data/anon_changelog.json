@@ -215935,21 +215935,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T23:34:33Z",
-    "inmate_number": "14751557",
-    "name": "HAIRE MICHAEL",
+    "date": "2026-06-17",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T23:34:33Z",
-    "inmate_number": "2018505",
-    "name": "DIRR ANDREA",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked 6/17/26"
+    "category": null
   },
   {
     "event": "updated",
@@ -228541,5 +228535,32 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T23:41:01Z",
+    "inmate_number": "14814826",
+    "name": "GARCIA JEREMIAS",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T23:41:01Z",
+    "inmate_number": "2525214",
+    "name": "ELLIOTT DONALD",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T23:41:01Z",
+    "inmate_number": "2778658",
+    "name": "BESS RASENOCH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/24/26"
   }
 ]
