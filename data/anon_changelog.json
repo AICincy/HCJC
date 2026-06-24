@@ -214705,30 +214705,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T00:14:55Z",
-    "inmate_number": "14307744",
-    "name": "JACKSON TAMRAN",
+    "date": "2026-06-17",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T00:14:55Z",
-    "inmate_number": "14346890",
-    "name": "SEATON LARICUS",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked 6/16/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T00:14:55Z",
-    "inmate_number": "14509900",
-    "name": "BURCHFIELD CHANIYA",
+    "date": "2026-06-17",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-17",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-17",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)"
   },
   {
     "event": "booked",
@@ -227536,5 +227539,32 @@
     "tier": "M1",
     "category": "Violating protection order",
     "note": "booked 6/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T00:36:19Z",
+    "inmate_number": "14654300",
+    "name": "HUTCHERSON JACOBE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T00:36:19Z",
+    "inmate_number": "2455758",
+    "name": "SMITH TAARIQ",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T00:36:19Z",
+    "inmate_number": "2440048",
+    "name": "PIZZO MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
