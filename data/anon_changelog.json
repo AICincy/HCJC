@@ -215827,57 +215827,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T21:26:58Z",
-    "inmate_number": "14261331",
-    "name": "HARVEY LASHELLE",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": ""
+    "category": "Driving under suspension"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T21:26:58Z",
-    "inmate_number": "1826362",
-    "name": "HORTON ANTHONY",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T21:26:58Z",
-    "inmate_number": "1948458",
-    "name": "DUKES DARNELL",
+    "date": "2026-06-17",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T21:26:58Z",
-    "inmate_number": "2416170",
-    "name": "HOLLOWAY CHRYSTOPHER",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/17/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T21:26:58Z",
-    "inmate_number": "2549166",
-    "name": "CRADDOCK ISREAL",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked 6/17/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T21:26:58Z",
-    "inmate_number": "2252733",
-    "name": "MCCONNELL KENNETH",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -228367,6 +228349,87 @@
     "timestamp_utc": "2026-06-24T20:53:05Z",
     "inmate_number": "2248907",
     "name": "NEAL MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T21:32:02Z",
+    "inmate_number": "1023478",
+    "name": "LEWIS JAMES",
+    "tier": "F1",
+    "category": "Murder",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T21:32:02Z",
+    "inmate_number": "14378366",
+    "name": "SCOTT SARAH",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T21:32:02Z",
+    "inmate_number": "1764426",
+    "name": "THOMPSON SEAN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T21:32:02Z",
+    "inmate_number": "2075462",
+    "name": "WHATLEY DEMETRIUS",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T21:32:02Z",
+    "inmate_number": "2362887",
+    "name": "CARTER GILBERT",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T21:32:02Z",
+    "inmate_number": "2467779",
+    "name": "CARTER RALLAN",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T21:32:02Z",
+    "inmate_number": "14814158",
+    "name": "JACKMAN HAYDEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T21:32:02Z",
+    "inmate_number": "14716141",
+    "name": "NUNEZ-RIVERA AMNER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T21:32:02Z",
+    "inmate_number": "14556460",
+    "name": "WHITFIELD ILANA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
