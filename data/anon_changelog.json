@@ -215755,102 +215755,75 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "14558408",
-    "name": "ATTINGER CHASE",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked 6/17/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "14784134",
-    "name": "GARDNER REGINALD",
+    "date": "2026-06-17",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "1826362",
-    "name": "HORTON ANTHONY",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "1914577",
-    "name": "GORDON DEFAZIO",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "1960625",
-    "name": "JOHNS DAVONTE",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Violation of community control / probation",
-    "note": ""
+    "category": "Violation of community control / probation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "2147843",
-    "name": "CHARLES TOMMY",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/17/26"
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "2348841",
-    "name": "WORLU TAMMARA",
+    "date": "2026-06-17",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": ""
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "2663064",
-    "name": "BROWN BOBBY",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "14745026",
-    "name": "CHAPA JONATHAN",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "2271408",
-    "name": "MATTHEWS MICHAEL",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T20:32:03Z",
-    "inmate_number": "14485250",
-    "name": "PORTS EMMA",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-17",
+    "tier": "M1",
+    "category": "Violation of community control / probation"
   },
   {
     "event": "updated",
@@ -228352,5 +228325,50 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": "booked 6/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T20:53:05Z",
+    "inmate_number": "14556460",
+    "name": "WHITFIELD ILANA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T20:53:05Z",
+    "inmate_number": "14714707",
+    "name": "SEXTON TIFFANY",
+    "tier": "M3",
+    "category": "Soliciting",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T20:53:05Z",
+    "inmate_number": "711381",
+    "name": "BOYLAN RICHARD",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T20:53:05Z",
+    "inmate_number": "14082403",
+    "name": "DEAN NATHAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-24T20:53:05Z",
+    "inmate_number": "2248907",
+    "name": "NEAL MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
