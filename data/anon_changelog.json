@@ -215899,48 +215899,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T22:52:26Z",
-    "inmate_number": "14369163",
-    "name": "MESSERSCHMITT DENNIS",
+    "date": "2026-06-17",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked (date not reported)"
+    "category": "Strangulation"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T22:52:26Z",
-    "inmate_number": "14569129",
-    "name": "NEAL JAHMIR",
+    "date": "2026-06-17",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": ""
+    "category": "Felonious assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T22:52:26Z",
-    "inmate_number": "14751557",
-    "name": "HAIRE MICHAEL",
+    "date": "2026-06-17",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T22:52:26Z",
-    "inmate_number": "2416170",
-    "name": "HOLLOWAY CHRYSTOPHER",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-17T22:52:26Z",
-    "inmate_number": "14261331",
-    "name": "HARVEY LASHELLE",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-17",
+    "tier": "F2",
+    "category": "Felonious assault"
   },
   {
     "event": "updated",
@@ -228514,5 +228505,41 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T23:11:45Z",
+    "inmate_number": "14102453",
+    "name": "SMITH MYKEZ",
+    "tier": "F3",
+    "category": "Having weapons while under disability",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T23:11:45Z",
+    "inmate_number": "14556460",
+    "name": "WHITFIELD ILANA",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T23:11:45Z",
+    "inmate_number": "1764426",
+    "name": "THOMPSON SEAN",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T23:11:45Z",
+    "inmate_number": "14814826",
+    "name": "GARCIA JEREMIAS",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
