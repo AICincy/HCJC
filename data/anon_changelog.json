@@ -193332,6 +193332,12 @@
     "category": "Receiving stolen property"
   },
   {
+    "event": "booked",
+    "date": "2026-06-03",
+    "tier": "M2",
+    "category": "Resisting arrest"
+  },
+  {
     "event": "updated",
     "date": "2026-06-04",
     "tier": "M3",
@@ -195142,6 +195148,12 @@
     "date": "2026-06-04",
     "tier": "M1",
     "category": "Receiving stolen property"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-04",
+    "tier": "M2",
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
@@ -214819,84 +214831,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "inmate_number": "14278285",
-    "name": "RICE KAMERON",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 6/17/26"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "inmate_number": "14502724",
-    "name": "WILSON JOEL",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked 6/17/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "inmate_number": "14547537",
-    "name": "DEVAUGHN KIYON",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "inmate_number": "14673745",
-    "name": "CANADY NAUTIKA",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Violation of community control / probation",
-    "note": "booked 6/17/26"
+    "category": "Violation of community control / probation"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "inmate_number": "14814034",
-    "name": "MISNIK JADON",
+    "date": "2026-06-17",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "inmate_number": "1970071",
-    "name": "CRAWFORD TIAH",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "inmate_number": "2112667",
-    "name": "WEBB ANTONIO",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "inmate_number": "2369978",
-    "name": "ABDUR-RAHMAN JAMILA",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "inmate_number": "2663064",
-    "name": "BROWN BOBBY",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -227722,5 +227707,86 @@
     "tier": "M1",
     "category": "Assault",
     "note": "booked 6/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T06:47:27Z",
+    "inmate_number": "1420170",
+    "name": "SAMUELS WASH",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T06:47:27Z",
+    "inmate_number": "14219641",
+    "name": "WARREN DAALANTE",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: parks and recreation",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T06:47:27Z",
+    "inmate_number": "14273708",
+    "name": "JENNINGS CHELSEA",
+    "tier": "M1",
+    "category": "Endangering children",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T06:47:27Z",
+    "inmate_number": "14365311",
+    "name": "JACKSON LOUIS",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T06:47:27Z",
+    "inmate_number": "14444085",
+    "name": "BLASINGAME DIAMOND",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T06:47:27Z",
+    "inmate_number": "14652498",
+    "name": "BRAVO-ORTIZ DIEGO",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T06:47:27Z",
+    "inmate_number": "14716141",
+    "name": "NUNEZ-RIVERA AMNER",
+    "tier": "MM",
+    "category": "Speed limits",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T06:47:27Z",
+    "inmate_number": "1861951",
+    "name": "KEITH ZACHARY",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-24T06:47:27Z",
+    "inmate_number": "2429200",
+    "name": "COTTON KIARAH",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
   }
 ]
