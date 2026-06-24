@@ -162582,6 +162582,12 @@
     "category": "Aggravated burglary"
   },
   {
+    "event": "booked",
+    "date": "2026-05-19",
+    "tier": "M1",
+    "category": "Assault"
+  },
+  {
     "event": "updated",
     "date": "2026-05-20",
     "tier": null,
@@ -214777,57 +214783,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T04:10:23Z",
-    "inmate_number": "14291443",
-    "name": "ROGERS AMBER",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/16/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T04:10:23Z",
-    "inmate_number": "14814034",
-    "name": "MISNIK JADON",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked 6/16/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T04:10:23Z",
-    "inmate_number": "1970071",
-    "name": "CRAWFORD TIAH",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/16/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T04:10:23Z",
-    "inmate_number": "2112667",
-    "name": "WEBB ANTONIO",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/16/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T04:10:23Z",
-    "inmate_number": "2369978",
-    "name": "ABDUR-RAHMAN JAMILA",
+    "date": "2026-06-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/16/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-17T04:10:23Z",
-    "inmate_number": "2663064",
-    "name": "BROWN BOBBY",
+    "date": "2026-06-17",
     "tier": null,
-    "category": null,
-    "note": "booked 6/16/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -227698,5 +227686,41 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T05:21:22Z",
+    "inmate_number": "14273708",
+    "name": "JENNINGS CHELSEA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T05:21:22Z",
+    "inmate_number": "14365311",
+    "name": "JACKSON LOUIS",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T05:21:22Z",
+    "inmate_number": "14652498",
+    "name": "BRAVO-ORTIZ DIEGO",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-24T05:21:22Z",
+    "inmate_number": "2771005",
+    "name": "EVANS BIRDIE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/23/26"
   }
 ]
