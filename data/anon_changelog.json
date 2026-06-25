@@ -215947,48 +215947,63 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T00:10:48Z",
-    "inmate_number": "14369163",
-    "name": "MESSERSCHMITT DENNIS",
+    "date": "2026-06-18",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T00:10:48Z",
-    "inmate_number": "14561747",
-    "name": "RAMSEY TYNESHA",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/17/26"
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T00:10:48Z",
-    "inmate_number": "2018505",
-    "name": "DIRR ANDREA",
+    "date": "2026-06-18",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T00:10:48Z",
-    "inmate_number": "2144200",
-    "name": "STERWERF JAMIE",
+    "date": "2026-06-18",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T00:10:48Z",
-    "inmate_number": "2346493",
-    "name": "KANZ GREGORY",
+    "date": "2026-06-18",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-18",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-18",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-18",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-18",
+    "tier": "MM",
+    "category": "Juvenile hold (no ORC code on file)"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-18",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -228615,6 +228630,51 @@
     "name": "CANADA MARCUS",
     "tier": "F2",
     "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T01:19:05Z",
+    "inmate_number": "14413749",
+    "name": "JOHNSON TARRENCE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T01:19:05Z",
+    "inmate_number": "14814828",
+    "name": "ANDERSON BRADLEY",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T01:19:05Z",
+    "inmate_number": "14814826",
+    "name": "GARCIA JEREMIAS",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T01:19:05Z",
+    "inmate_number": "2193782",
+    "name": "WORTHINGTON MATTHEW",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T01:19:05Z",
+    "inmate_number": "2778658",
+    "name": "BESS RASENOCH",
+    "tier": "M1",
+    "category": "Domestic violence",
     "note": ""
   }
 ]
