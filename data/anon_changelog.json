@@ -216217,12 +216217,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T07:19:23Z",
-    "inmate_number": "1632994",
-    "name": "WILLINGHAM MARCUS",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/18/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
@@ -228796,5 +228793,59 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T08:09:36Z",
+    "inmate_number": "14090460",
+    "name": "KENNEY JEFFREY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T08:09:36Z",
+    "inmate_number": "14777761",
+    "name": "LUZ EDUARDO",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T08:09:36Z",
+    "inmate_number": "14814842",
+    "name": "HERNANDEZ-RIOS FELIPE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T08:09:36Z",
+    "inmate_number": "14814843",
+    "name": "MELIAN-SEGURA ALEXANDER",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T08:09:36Z",
+    "inmate_number": "1740082",
+    "name": "BURRELL DAVID",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T08:09:36Z",
+    "inmate_number": "2529136",
+    "name": "SILER MICHAEL",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
   }
 ]
