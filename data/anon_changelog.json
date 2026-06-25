@@ -216181,57 +216181,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T05:36:42Z",
-    "inmate_number": "14138164",
-    "name": "MILLER REMYA",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Endangering children",
-    "note": ""
+    "category": "Endangering children"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T05:36:42Z",
-    "inmate_number": "14814158",
-    "name": "JACKMAN HAYDEN",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T05:36:42Z",
-    "inmate_number": "14814165",
-    "name": "CATE KRISTEN",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Distribution of nonconsensual intimate images",
-    "note": ""
+    "category": "Distribution of nonconsensual intimate images"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T05:36:42Z",
-    "inmate_number": "1914577",
-    "name": "GORDON DEFAZIO",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T05:36:42Z",
-    "inmate_number": "2683939",
-    "name": "WATSON DEMONTE",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T05:36:42Z",
-    "inmate_number": "2755801",
-    "name": "VOLL EMILY",
+    "date": "2026-06-18",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": ""
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "booked",
@@ -228742,5 +228724,77 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T06:47:14Z",
+    "inmate_number": "14090460",
+    "name": "KENNEY JEFFREY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T06:47:14Z",
+    "inmate_number": "14198475",
+    "name": "SPAMPINATO ANDREW",
+    "tier": "MM",
+    "category": "Abandon dog/animal",
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T06:47:14Z",
+    "inmate_number": "14777761",
+    "name": "LUZ EDUARDO",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T06:47:14Z",
+    "inmate_number": "2408522",
+    "name": "BICKEL WAYNE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T06:47:14Z",
+    "inmate_number": "2495558",
+    "name": "MOORE SEAN",
+    "tier": "M3",
+    "category": "Unlawful restraint",
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T06:47:14Z",
+    "inmate_number": "2529136",
+    "name": "SILER MICHAEL",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T06:47:14Z",
+    "inmate_number": "2574158",
+    "name": "ROEDIG JOSEPH",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-25T06:47:14Z",
+    "inmate_number": "14652498",
+    "name": "BRAVO-ORTIZ DIEGO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
