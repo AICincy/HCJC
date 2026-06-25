@@ -216253,48 +216253,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T10:47:56Z",
-    "inmate_number": "14634315",
-    "name": "PERSON TIARA",
+    "date": "2026-06-18",
     "tier": null,
-    "category": null,
-    "note": "booked 6/18/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T10:47:56Z",
-    "inmate_number": "14551882",
-    "name": "AYERS KAYLA",
+    "date": "2026-06-18",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T10:47:56Z",
-    "inmate_number": "14795287",
-    "name": "MUNOZ CESAR",
+    "date": "2026-06-18",
     "tier": "MM",
-    "category": "Lights when needed",
-    "note": ""
+    "category": "Lights when needed"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T10:47:56Z",
-    "inmate_number": "14814180",
-    "name": "NAJEM BECKHAM",
+    "date": "2026-06-18",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-18T10:47:56Z",
-    "inmate_number": "2572858",
-    "name": "MASON PARIS",
+    "date": "2026-06-18",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -228868,5 +228853,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T11:25:41Z",
+    "inmate_number": "14735384",
+    "name": "PEREZ LEONDAN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/25/26"
   }
 ]
