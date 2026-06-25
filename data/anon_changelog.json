@@ -206017,6 +206017,18 @@
   },
   {
     "event": "booked",
+    "date": "2026-06-13",
+    "tier": "M1",
+    "category": "Violating protection order"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-13",
+    "tier": "M1",
+    "category": "Violating protection order"
+  },
+  {
+    "event": "booked",
     "date": "2026-06-14",
     "tier": "M1",
     "category": "Aggravated menacing"
@@ -216103,93 +216115,69 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "1308114",
-    "name": "REESE TERENCE",
+    "date": "2026-06-18",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "14138164",
-    "name": "MILLER REMYA",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Endangering children",
-    "note": ""
+    "category": "Endangering children"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "14814158",
-    "name": "JACKMAN HAYDEN",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "14814160",
-    "name": "SANFORD-LEWIS JAIMON",
+    "date": "2026-06-18",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "14814165",
-    "name": "CATE KRISTEN",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Distribution of nonconsensual intimate images",
-    "note": "booked 6/17/26"
+    "category": "Distribution of nonconsensual intimate images"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "1914577",
-    "name": "GORDON DEFAZIO",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "2303404",
-    "name": "GREEN RAYSHAWN",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 6/17/26"
+    "category": "Violating protection order"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "2401769",
-    "name": "LEWIS BRUCE",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "2683939",
-    "name": "WATSON DEMONTE",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": "booked 6/17/26"
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T03:47:20Z",
-    "inmate_number": "2755801",
-    "name": "VOLL EMILY",
+    "date": "2026-06-18",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": "booked 6/17/26"
+    "category": "Failure to disclose personal information"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-18",
+    "tier": "M1",
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
@@ -228700,5 +228688,59 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 6/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T05:22:26Z",
+    "inmate_number": "14814825",
+    "name": "HERRERA FERNANDO",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T05:22:26Z",
+    "inmate_number": "14814831",
+    "name": "SIDNEY TEKII",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T05:22:26Z",
+    "inmate_number": "14814837",
+    "name": "NYAMUNGUSHA PLAMEDI",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T05:22:26Z",
+    "inmate_number": "1530561",
+    "name": "CARTER TIGE",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 6/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T05:22:26Z",
+    "inmate_number": "2364711",
+    "name": "MCKINNEY JEROME",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-25T05:22:26Z",
+    "inmate_number": "2408522",
+    "name": "BICKEL WAYNE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked (date not reported)"
   }
 ]
