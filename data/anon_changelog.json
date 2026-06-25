@@ -122143,6 +122143,18 @@
   },
   {
     "event": "booked",
+    "date": "2026-05-15",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-15",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
+    "event": "booked",
     "date": "2026-05-16",
     "tier": null,
     "category": null
@@ -216223,30 +216235,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T09:02:51Z",
-    "inmate_number": "14551882",
-    "name": "AYERS KAYLA",
+    "date": "2026-06-18",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked (date not reported)"
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T09:02:51Z",
-    "inmate_number": "14744286",
-    "name": "WYNN MIKELL",
+    "date": "2026-06-18",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/18/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-18T09:02:51Z",
-    "inmate_number": "14795287",
-    "name": "MUNOZ CESAR",
+    "date": "2026-06-18",
     "tier": "M4",
-    "category": "Cincinnati Municipal Code: animals",
-    "note": "booked 6/18/26"
+    "category": "Cincinnati Municipal Code: animals"
   },
   {
     "event": "booked",
@@ -228847,5 +228850,23 @@
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-25T09:24:10Z",
+    "inmate_number": "1740082",
+    "name": "BURRELL DAVID",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-25T09:24:10Z",
+    "inmate_number": "2415029",
+    "name": "MONHOLLEN RYAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
