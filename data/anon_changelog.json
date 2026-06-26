@@ -219829,12 +219829,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T14:06:11Z",
-    "inmate_number": "2712956",
-    "name": "BERRY EMILY",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "released",
@@ -229714,6 +229711,87 @@
     "timestamp_utc": "2026-06-26T13:28:42Z",
     "inmate_number": "1413402",
     "name": "SUD VIJAY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-26T14:21:18Z",
+    "inmate_number": "14381716",
+    "name": "HOLLOWAY NAOMI",
+    "tier": "M1",
+    "category": "Endangering children",
+    "note": "booked 6/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-26T14:21:18Z",
+    "inmate_number": "14593602",
+    "name": "EAKINS KAMERON",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T14:21:18Z",
+    "inmate_number": "14597847",
+    "name": "JONES DEVONTA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-26T14:21:18Z",
+    "inmate_number": "2285367",
+    "name": "ESTEPP ARLISS",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T14:21:18Z",
+    "inmate_number": "2259746",
+    "name": "MOORE JOHN",
+    "tier": "F1",
+    "category": "Rape",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T14:21:18Z",
+    "inmate_number": "2498698",
+    "name": "FRANKLIN REGINALD",
+    "tier": "F4",
+    "category": "Attempt to commit an offense",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T14:21:18Z",
+    "inmate_number": "2808506",
+    "name": "RITCHIE ANTHONY",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-26T14:21:18Z",
+    "inmate_number": "2199719",
+    "name": "GAMBLE JOHNITA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-26T14:21:18Z",
+    "inmate_number": "14346890",
+    "name": "SEATON LARICUS",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
