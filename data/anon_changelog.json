@@ -219385,21 +219385,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T00:05:02Z",
-    "inmate_number": "1473919",
-    "name": "PIERSON JAMES",
+    "date": "2026-06-19",
     "tier": "MM",
-    "category": "Vehicular vandalism",
-    "note": ""
+    "category": "Vehicular vandalism"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T00:05:02Z",
-    "inmate_number": "14814287",
-    "name": "ARAYA YOHANNES",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-19",
+    "tier": "MM",
+    "category": "Vehicular vandalism"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-19",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -229084,5 +229090,50 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T00:42:37Z",
+    "inmate_number": "14155377",
+    "name": "HARRIS JEFFERY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-26T00:42:37Z",
+    "inmate_number": "14336824",
+    "name": "KING MICAH",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T00:42:37Z",
+    "inmate_number": "14651429",
+    "name": "ABDALLE MOHAMUD",
+    "tier": "F5",
+    "category": "Vandalism",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T00:42:37Z",
+    "inmate_number": "14814947",
+    "name": "ESCOBAR EDUARDO",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-26T00:42:37Z",
+    "inmate_number": "926253",
+    "name": "SMITH LEROY",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/25/26"
   }
 ]
