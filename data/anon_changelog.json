@@ -219997,75 +219997,51 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T20:56:19Z",
-    "inmate_number": "14382179",
-    "name": "ALCORN CHEYANNE",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T20:56:19Z",
-    "inmate_number": "14537519",
-    "name": "HAUNGS NATHANIEL",
+    "date": "2026-06-19",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T20:56:19Z",
-    "inmate_number": "2186927",
-    "name": "HAWKINS MARCUS",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/19/26"
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T20:56:19Z",
-    "inmate_number": "2186184",
-    "name": "CAMPBELL WILLIAM",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T20:56:19Z",
-    "inmate_number": "2588517",
-    "name": "BURKHART RACHEL",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Misuse of credit cards",
-    "note": ""
+    "category": "Misuse of credit cards"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T21:26:30Z",
-    "inmate_number": "2068864",
-    "name": "MEECE KARI",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": "booked 6/19/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T21:26:30Z",
-    "inmate_number": "2186927",
-    "name": "HAWKINS MARCUS",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T21:26:30Z",
-    "inmate_number": "2588517",
-    "name": "BURKHART RACHEL",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Misuse of credit cards",
-    "note": ""
+    "category": "Misuse of credit cards"
   },
   {
     "event": "booked",
@@ -230452,5 +230428,32 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T21:30:27Z",
+    "inmate_number": "14815060",
+    "name": "GRAY MARTASIAH",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-26T21:30:27Z",
+    "inmate_number": "2441336",
+    "name": "SKINNER CHRISTOPHER",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/26/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-26T21:30:27Z",
+    "inmate_number": "14344327",
+    "name": "ADAMS MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
