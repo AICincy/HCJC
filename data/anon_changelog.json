@@ -219925,30 +219925,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T19:34:23Z",
-    "inmate_number": "14382179",
-    "name": "ALCORN CHEYANNE",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 6/19/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T19:34:23Z",
-    "inmate_number": "14450403",
-    "name": "ROBINSON EMANI",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T19:34:23Z",
-    "inmate_number": "2186184",
-    "name": "CAMPBELL WILLIAM",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
@@ -230425,5 +230416,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T20:09:36Z",
+    "inmate_number": "1821555",
+    "name": "LEE RICKY",
+    "tier": "M1",
+    "category": "Using weapons while intoxicated",
+    "note": ""
   }
 ]

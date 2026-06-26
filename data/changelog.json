@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "2263556",
-    "name": "WARREN HEATHER",
-    "timestamp_utc": "2026-05-15T06:40:42Z",
-    "note": "booked 5/15/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "2238193",
     "name": "HORTON RAECHELLE",
     "timestamp_utc": "2026-05-15T06:40:42Z",
@@ -69998,5 +69991,12 @@
     "name": "SMITH DON",
     "timestamp_utc": "2026-06-26T19:21:50Z",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "1821555",
+    "name": "LEE RICKY",
+    "timestamp_utc": "2026-06-26T20:09:36Z",
+    "note": ""
   }
 ]
