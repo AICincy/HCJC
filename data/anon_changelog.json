@@ -219793,57 +219793,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T12:57:06Z",
-    "inmate_number": "2500893",
-    "name": "PARRISH DANTE",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T12:57:06Z",
-    "inmate_number": "2712956",
-    "name": "BERRY EMILY",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked (date not reported)"
+    "category": "Assault"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-19T12:57:06Z",
-    "inmate_number": "2517061",
-    "name": "FISSE DONALD",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-19T12:57:06Z",
-    "inmate_number": "2391399",
-    "name": "MCCOY JOSEPH",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-19T12:57:06Z",
-    "inmate_number": "2193229",
-    "name": "MILLER ROBERTA",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-19T12:57:06Z",
-    "inmate_number": "2599027",
-    "name": "PATTON GREGORY",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -229660,6 +229642,78 @@
     "timestamp_utc": "2026-06-26T12:43:41Z",
     "inmate_number": "2390211",
     "name": "WINBUSH TORRENCE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T13:28:42Z",
+    "inmate_number": "14597847",
+    "name": "JONES DEVONTA",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T13:28:42Z",
+    "inmate_number": "14784134",
+    "name": "GARDNER REGINALD",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T13:28:42Z",
+    "inmate_number": "2148132",
+    "name": "OVERSTREET DEMETRIUS",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T13:28:42Z",
+    "inmate_number": "2335874",
+    "name": "WENDLING NATHANIEL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T13:28:42Z",
+    "inmate_number": "2384414",
+    "name": "FOWLER AMERALD",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T13:28:42Z",
+    "inmate_number": "2459860",
+    "name": "VORNBERG ANDREW",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T13:28:42Z",
+    "inmate_number": "2808506",
+    "name": "RITCHIE ANTHONY",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-26T13:28:42Z",
+    "inmate_number": "1413402",
+    "name": "SUD VIJAY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
