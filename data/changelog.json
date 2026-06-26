@@ -1,20 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14810461",
-    "name": "VASQUEZ FRANCISCO",
-    "timestamp_utc": "2026-05-15T09:31:06Z",
-    "note": "booked 5/15/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14200005",
-    "name": "MILNER SHAKEEM",
-    "timestamp_utc": "2026-05-15T09:31:06Z",
-    "note": "booked 5/15/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "1249423",
     "name": "MCNEIL DELICIA",
     "timestamp_utc": "2026-05-15T09:31:06Z",
@@ -69997,6 +69983,20 @@
     "inmate_number": "14344327",
     "name": "ADAMS MICHAEL",
     "timestamp_utc": "2026-06-26T21:30:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2441336",
+    "name": "SKINNER CHRISTOPHER",
+    "timestamp_utc": "2026-06-26T21:56:56Z",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "inmate_number": "2179190",
+    "name": "TENSLEY ANTONIO",
+    "timestamp_utc": "2026-06-26T21:56:56Z",
     "note": "no longer on HCSO public roster"
   }
 ]

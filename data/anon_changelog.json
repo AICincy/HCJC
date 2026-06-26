@@ -220045,39 +220045,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T21:53:04Z",
-    "inmate_number": "14450244",
-    "name": "MINOR DERYKA",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked 6/19/26"
+    "category": "Driving without a valid license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T21:53:04Z",
-    "inmate_number": "14528541",
-    "name": "FRATER DONAVANN",
+    "date": "2026-06-19",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T21:53:04Z",
-    "inmate_number": "14570025",
-    "name": "GOODEN LADANTE",
+    "date": "2026-06-19",
     "tier": "F3",
-    "category": "Having weapons while under disability",
-    "note": "booked 6/19/26"
+    "category": "Having weapons while under disability"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T21:53:04Z",
-    "inmate_number": "2068864",
-    "name": "MEECE KARI",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-19",
+    "tier": "F3",
+    "category": "Having weapons while under disability"
   },
   {
     "event": "updated",
@@ -230452,6 +230446,24 @@
     "timestamp_utc": "2026-06-26T21:30:27Z",
     "inmate_number": "14344327",
     "name": "ADAMS MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T21:56:56Z",
+    "inmate_number": "2441336",
+    "name": "SKINNER CHRISTOPHER",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-26T21:56:56Z",
+    "inmate_number": "2179190",
+    "name": "TENSLEY ANTONIO",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
