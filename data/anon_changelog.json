@@ -219481,66 +219481,51 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T02:41:53Z",
-    "inmate_number": "14437237",
-    "name": "PUGH DEONTA",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T02:41:53Z",
-    "inmate_number": "14488914",
-    "name": "HUGHES KENNETH",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": "booked 6/18/26"
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T02:41:53Z",
-    "inmate_number": "1473919",
-    "name": "PIERSON JAMES",
+    "date": "2026-06-19",
     "tier": "MM",
-    "category": "Vehicular vandalism",
-    "note": ""
+    "category": "Vehicular vandalism"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-19T02:41:53Z",
-    "inmate_number": "14814299",
-    "name": "JONES NIYRIANNA",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T02:41:53Z",
-    "inmate_number": "1883122",
-    "name": "EDWARDS DARIUS",
+    "date": "2026-06-19",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 6/18/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T02:41:53Z",
-    "inmate_number": "1914801",
-    "name": "WHISENANT BRIAN",
+    "date": "2026-06-19",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/18/26"
+    "category": "Theft"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-19T02:41:53Z",
-    "inmate_number": "14254097",
-    "name": "BROWN KERON",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-06-19",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -229170,6 +229155,33 @@
     "name": "WHITE KERTSON",
     "tier": "F4",
     "category": "Attempt to commit an offense",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-26T04:08:33Z",
+    "inmate_number": "1887783",
+    "name": "COSTELLO MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-26T04:08:33Z",
+    "inmate_number": "2274971",
+    "name": "LEWIS PAULETT",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/25/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-26T04:08:33Z",
+    "inmate_number": "2622554",
+    "name": "BAUMANN CHRISTIAN",
+    "tier": null,
+    "category": null,
     "note": ""
   }
 ]
