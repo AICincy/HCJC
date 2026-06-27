@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "2095995",
-    "name": "SPICER BERNICE",
-    "timestamp_utc": "2026-05-16T03:06:22Z",
-    "note": "booked 1/1/70"
-  },
-  {
-    "event": "booked",
     "inmate_number": "1702641",
     "name": "JOHNSON BILLY",
     "timestamp_utc": "2026-05-16T04:38:34Z",
@@ -69997,6 +69990,13 @@
     "inmate_number": "2767993",
     "name": "IRVIN BENJAMIN",
     "timestamp_utc": "2026-06-27T20:48:41Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "666770",
+    "name": "HALL ARTHUR",
+    "timestamp_utc": "2026-06-27T21:24:52Z",
     "note": ""
   }
 ]
