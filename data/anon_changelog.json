@@ -220783,75 +220783,51 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T18:30:53Z",
-    "inmate_number": "14244981",
-    "name": "WILLIAMS ADAMU",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T18:30:53Z",
-    "inmate_number": "2712956",
-    "name": "BERRY EMILY",
+    "date": "2026-06-20",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-20T18:30:53Z",
-    "inmate_number": "14802069",
-    "name": "ALLGEYER JAYDA",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-20T18:30:53Z",
-    "inmate_number": "14814287",
-    "name": "ARAYA YOHANNES",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-20T18:30:53Z",
-    "inmate_number": "14516440",
-    "name": "FREEMAN DEQUAN",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-20T18:30:53Z",
-    "inmate_number": "14372863",
-    "name": "MILLER JOHNATHAN",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-20T18:30:53Z",
-    "inmate_number": "2646087",
-    "name": "MOLER SAMANTHA",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-20T18:30:53Z",
-    "inmate_number": "1878755",
-    "name": "THOMAS MARK",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -231130,5 +231106,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T18:41:28Z",
+    "inmate_number": "2767993",
+    "name": "IRVIN BENJAMIN",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/27/26"
   }
 ]
