@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14160181",
-    "name": "WALLACE MONTREL",
-    "timestamp_utc": "2026-05-15T19:33:00Z",
-    "note": "booked 5/15/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "2195826",
     "name": "RIVERA MIGUEL",
     "timestamp_utc": "2026-05-15T19:33:00Z",
@@ -69997,6 +69990,13 @@
     "inmate_number": "2312381",
     "name": "OSUME SHOMBAY",
     "timestamp_utc": "2026-06-27T12:56:40Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14814947",
+    "name": "ESCOBAR EDUARDO",
+    "timestamp_utc": "2026-06-27T13:34:30Z",
     "note": "no longer on HCSO public roster"
   }
 ]
