@@ -220531,21 +220531,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T13:35:07Z",
-    "inmate_number": "1050137",
-    "name": "TURNER DARRYL",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T13:35:07Z",
-    "inmate_number": "2470416",
-    "name": "WALKER DEMARIS",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -230884,6 +230878,24 @@
     "timestamp_utc": "2026-06-27T13:34:30Z",
     "inmate_number": "14814947",
     "name": "ESCOBAR EDUARDO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T14:17:54Z",
+    "inmate_number": "2834498",
+    "name": "BATTLE SASHA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-27T14:17:54Z",
+    "inmate_number": "14435257",
+    "name": "FARRIS STEVEN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
