@@ -220141,21 +220141,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T23:52:54Z",
-    "inmate_number": "14140305",
-    "name": "SAKHO DAOUDA",
+    "date": "2026-06-19",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-19T23:52:54Z",
-    "inmate_number": "2059692",
-    "name": "GARITY STEPHANIE",
+    "date": "2026-06-19",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 6/19/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
@@ -230479,5 +230473,32 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T00:40:11Z",
+    "inmate_number": "14243769",
+    "name": "WILSON LOGAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T00:40:11Z",
+    "inmate_number": "2539057",
+    "name": "MILLER LASHONDA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T00:40:11Z",
+    "inmate_number": "2701275",
+    "name": "JOHNSON TIYAHNNA",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
   }
 ]
