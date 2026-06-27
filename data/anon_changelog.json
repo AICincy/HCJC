@@ -220153,75 +220153,75 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T00:41:38Z",
-    "inmate_number": "14814363",
-    "name": "MCCRAY KEVIN",
+    "date": "2026-06-20",
     "tier": "M1",
-    "category": "Falsification",
-    "note": ""
+    "category": "Falsification"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T00:41:38Z",
-    "inmate_number": "1535499",
-    "name": "HARRIS ARTEZ",
+    "date": "2026-06-20",
     "tier": "F3",
-    "category": "Tampering with evidence",
-    "note": ""
+    "category": "Tampering with evidence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-20T00:41:38Z",
-    "inmate_number": "1878755",
-    "name": "THOMAS MARK",
+    "date": "2026-06-20",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 6/19/26"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T00:41:38Z",
-    "inmate_number": "2059692",
-    "name": "GARITY STEPHANIE",
+    "date": "2026-06-20",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-20T00:41:38Z",
-    "inmate_number": "2138618",
-    "name": "SMITH DONALD",
+    "date": "2026-06-20",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "booked 6/19/26"
+    "category": "Trafficking in drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T00:41:38Z",
-    "inmate_number": "2253677",
-    "name": "HALL KEITH",
+    "date": "2026-06-20",
     "tier": "MM",
-    "category": "Parking - prohibited acts",
-    "note": ""
+    "category": "Parking - prohibited acts"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-20T00:41:38Z",
-    "inmate_number": "2636316",
-    "name": "WILLIAMS WENDY",
+    "date": "2026-06-20",
     "tier": "MM",
-    "category": "Fail to follow police officer's signals",
-    "note": "booked 6/19/26"
+    "category": "Fail to follow police officer's signals"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-20T00:41:38Z",
-    "inmate_number": "14528541",
-    "name": "FRATER DONAVANN",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-20",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-20",
+    "tier": "F3",
+    "category": "Tampering with evidence"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-20",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-06-20",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -230499,6 +230499,24 @@
     "name": "JOHNSON TIYAHNNA",
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T01:27:17Z",
+    "inmate_number": "14815069",
+    "name": "MITCHELL HONESTY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T01:27:17Z",
+    "inmate_number": "2539057",
+    "name": "MILLER LASHONDA",
+    "tier": "M1",
+    "category": "Domestic violence",
     "note": ""
   }
 ]
