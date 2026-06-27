@@ -221029,30 +221029,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T23:14:11Z",
-    "inmate_number": "14766447",
-    "name": "WHITE ARIANNA",
+    "date": "2026-06-20",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-20T23:14:11Z",
-    "inmate_number": "2434790",
-    "name": "BALSLY BRYCE",
+    "date": "2026-06-20",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 6/20/26"
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-20T23:14:11Z",
-    "inmate_number": "2600044",
-    "name": "NOBLE AARON",
+    "date": "2026-06-20",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked (date not reported)"
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
@@ -231250,5 +231241,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T23:23:50Z",
+    "inmate_number": "14153992",
+    "name": "ROONEY JAMAN",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "booked 6/27/26"
   }
 ]
