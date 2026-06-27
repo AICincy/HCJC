@@ -220501,12 +220501,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-20T11:17:15Z",
-    "inmate_number": "2470416",
-    "name": "WALKER DEMARIS",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
@@ -230848,5 +230845,41 @@
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
     "note": "booked 6/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T11:46:49Z",
+    "inmate_number": "1581702",
+    "name": "KENNEDY LESLIE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/27/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-27T11:46:49Z",
+    "inmate_number": "2523404",
+    "name": "COOK-MAYS CANDY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-27T11:46:49Z",
+    "inmate_number": "2555844",
+    "name": "HOWELL BRENDA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-27T11:46:49Z",
+    "inmate_number": "1607736",
+    "name": "WRIGHT JOHN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
