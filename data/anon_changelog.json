@@ -220225,21 +220225,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-20T01:31:15Z",
-    "inmate_number": "1885117",
-    "name": "MCFARLAND BRIDGETT",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T01:31:15Z",
-    "inmate_number": "2636316",
-    "name": "WILLIAMS WENDY",
+    "date": "2026-06-20",
     "tier": "MM",
-    "category": "Fail to follow police officer's signals",
-    "note": ""
+    "category": "Fail to follow police officer's signals"
   },
   {
     "event": "updated",
@@ -230518,5 +230512,68 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T02:21:55Z",
+    "inmate_number": "14243769",
+    "name": "WILSON LOGAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T02:21:55Z",
+    "inmate_number": "14472444",
+    "name": "NEWTON TIASIA",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 6/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T02:21:55Z",
+    "inmate_number": "14815069",
+    "name": "MITCHELL HONESTY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T02:21:55Z",
+    "inmate_number": "1923951",
+    "name": "HUGGINS TELECIA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T02:21:55Z",
+    "inmate_number": "2373293",
+    "name": "NEWKIRK MEGAN",
+    "tier": "F2",
+    "category": "Robbery",
+    "note": "booked 6/26/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-27T02:21:55Z",
+    "inmate_number": "2545465",
+    "name": "HALL DEMETRIS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-27T02:21:55Z",
+    "inmate_number": "14762531",
+    "name": "HEIGHT TYMIR",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
