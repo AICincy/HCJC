@@ -220543,12 +220543,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-20T14:31:39Z",
-    "inmate_number": "2277194",
-    "name": "HAGGA MILLER",
+    "date": "2026-06-20",
     "tier": "M1",
-    "category": "Menacing by stalking",
-    "note": "booked 6/20/26"
+    "category": "Menacing by stalking"
   },
   {
     "event": "updated",
@@ -230899,5 +230896,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T15:02:16Z",
+    "inmate_number": "2539057",
+    "name": "MILLER LASHONDA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
   }
 ]
