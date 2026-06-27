@@ -220831,39 +220831,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-20T19:00:59Z",
-    "inmate_number": "14447221",
-    "name": "SMITH LONDON",
+    "date": "2026-06-20",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/20/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T19:00:59Z",
-    "inmate_number": "2144200",
-    "name": "STERWERF JAMIE",
+    "date": "2026-06-20",
     "tier": "M1",
-    "category": "Driving under FRA suspension",
-    "note": ""
+    "category": "Driving under FRA suspension"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-20T19:00:59Z",
-    "inmate_number": "14799212",
-    "name": "HARRIS MALIK",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-20T19:00:59Z",
-    "inmate_number": "14529347",
-    "name": "WATKINS MARY",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -231115,5 +231103,41 @@
     "tier": "M1",
     "category": "Assault",
     "note": "booked 6/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T19:10:46Z",
+    "inmate_number": "1218494",
+    "name": "HILL DARRYL",
+    "tier": "MM",
+    "category": "Right-of-way of pedestrian within crosswalk",
+    "note": "booked 6/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T19:10:46Z",
+    "inmate_number": "14614920",
+    "name": "COLEMAN CAMAIRA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T19:10:46Z",
+    "inmate_number": "2051980",
+    "name": "EBERHARDT ALEASHA",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T19:10:46Z",
+    "inmate_number": "2181339",
+    "name": "THORPE JONATHAN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
   }
 ]
