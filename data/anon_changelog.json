@@ -220909,12 +220909,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-20T20:11:19Z",
-    "inmate_number": "14244981",
-    "name": "WILLIAMS ADAMU",
+    "date": "2026-06-20",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
@@ -231139,5 +231136,41 @@
     "tier": "M1",
     "category": "Assault",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T20:24:41Z",
+    "inmate_number": "14185389",
+    "name": "GOODWIN TRAYON",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T20:24:41Z",
+    "inmate_number": "14614920",
+    "name": "COLEMAN CAMAIRA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-27T20:24:41Z",
+    "inmate_number": "1726792",
+    "name": "ARNOLD TREVA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-27T20:24:41Z",
+    "inmate_number": "666770",
+    "name": "HALL ARTHUR",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 6/27/26"
   }
 ]
