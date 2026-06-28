@@ -144895,6 +144895,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-05-16",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
+    "event": "booked",
     "date": "2026-05-17",
     "tier": null,
     "category": null
@@ -182026,6 +182032,12 @@
     "date": "2026-05-28",
     "tier": "MM",
     "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
+    "event": "released",
+    "date": "2026-05-28",
+    "tier": "F5",
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -221167,75 +221179,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T04:10:00Z",
-    "inmate_number": "1119881",
-    "name": "TAYLOR DELBERT",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: vicious dogs",
-    "note": "booked 6/20/26"
+    "category": "Cincinnati Municipal Code: vicious dogs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T04:10:00Z",
-    "inmate_number": "14131192",
-    "name": "THOMAS CALLIA",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T04:10:00Z",
-    "inmate_number": "14315507",
-    "name": "DUFFY MAIKAH",
+    "date": "2026-06-21",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 6/20/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T04:10:00Z",
-    "inmate_number": "14814402",
-    "name": "JUAN DAVID",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T04:10:00Z",
-    "inmate_number": "14814400",
-    "name": "TURNEY MARISA",
+    "date": "2026-06-21",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 6/20/26"
+    "category": "Resisting arrest"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T04:10:00Z",
-    "inmate_number": "14814401",
-    "name": "ALEXANDER BRANDON",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "booked 6/20/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T04:10:00Z",
-    "inmate_number": "14184867",
-    "name": "DAVAR MARINA",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T04:10:00Z",
-    "inmate_number": "2088791",
-    "name": "PICKENS DASHAYE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-06-21",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -231421,6 +231415,105 @@
     "timestamp_utc": "2026-06-28T03:48:39Z",
     "inmate_number": "14597847",
     "name": "JONES DEVONTA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "14450366",
+    "name": "DEAN CODY",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: vicious dogs",
+    "note": "booked 6/27/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "14544954",
+    "name": "BROWN TIMOTHY",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "14815105",
+    "name": "HUFF KEYAIRRA",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "1703061",
+    "name": "HALBERT BENJAMIN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "1813996",
+    "name": "HUGHES TED",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "1965604",
+    "name": "WELLS JAMES",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "2232308",
+    "name": "DUBOSE ADRIAN",
+    "tier": "M3",
+    "category": "Unlawful restraint",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "2799797",
+    "name": "SMITH MATTHEW",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "14791066",
+    "name": "AGUILAR FREDY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "2703749",
+    "name": "BALL JESSE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-28T05:33:13Z",
+    "inmate_number": "14416570",
+    "name": "HUDSON DARRIEN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
