@@ -221545,12 +221545,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T17:13:30Z",
-    "inmate_number": "14596979",
-    "name": "SCOTT EDRYA",
+    "date": "2026-06-21",
     "tier": "MM",
-    "category": "Traffic-control signal indications",
-    "note": "booked 6/21/26"
+    "category": "Traffic-control signal indications"
   },
   {
     "event": "updated",
@@ -231846,6 +231843,24 @@
     "name": "JOSEPH RANDALL",
     "tier": null,
     "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T17:41:26Z",
+    "inmate_number": "14346186",
+    "name": "GEORGE FLOYD",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T17:41:26Z",
+    "inmate_number": "14768084",
+    "name": "OBERRY KAAMIL",
+    "tier": "M1",
+    "category": "Receiving stolen property",
     "note": ""
   }
 ]
