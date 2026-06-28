@@ -221071,21 +221071,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T00:13:33Z",
-    "inmate_number": "14814394",
-    "name": "ROCHE MALACHI",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T00:13:33Z",
-    "inmate_number": "2434790",
-    "name": "BALSLY BRYCE",
+    "date": "2026-06-21",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": ""
+    "category": "Felonious assault"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-21",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-21",
+    "tier": "F2",
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
@@ -231256,5 +231262,50 @@
     "tier": "F5",
     "category": "Trafficking in drugs",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T00:40:44Z",
+    "inmate_number": "1052131",
+    "name": "DAWSON MARCUS",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T00:40:44Z",
+    "inmate_number": "14138033",
+    "name": "STRICKLAND KOURTNEY",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 6/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T00:40:44Z",
+    "inmate_number": "14313473",
+    "name": "OLAGBEMIRO JACOB",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T00:40:44Z",
+    "inmate_number": "14815103",
+    "name": "CARTER KYMAREE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T00:40:44Z",
+    "inmate_number": "1793128",
+    "name": "ELLIS JEFFERY",
+    "tier": "M1",
+    "category": "Menacing by stalking",
+    "note": "booked 6/27/26"
   }
 ]
