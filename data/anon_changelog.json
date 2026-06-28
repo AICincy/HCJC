@@ -221533,12 +221533,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T16:34:06Z",
-    "inmate_number": "14759313",
-    "name": "HERNANDEZ ANGEL",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": ""
+    "category": "Failure to comply with order or signal of police officer"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-21",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "booked",
@@ -231808,5 +231811,41 @@
     "tier": null,
     "category": null,
     "note": "booked 6/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T17:09:45Z",
+    "inmate_number": "1176828",
+    "name": "NOLAN MICHAEL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T17:09:45Z",
+    "inmate_number": "14346186",
+    "name": "GEORGE FLOYD",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T17:09:45Z",
+    "inmate_number": "14768084",
+    "name": "OBERRY KAAMIL",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T17:09:45Z",
+    "inmate_number": "14815125",
+    "name": "JOSEPH RANDALL",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
