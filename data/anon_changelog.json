@@ -221413,66 +221413,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T10:25:53Z",
-    "inmate_number": "1453069",
-    "name": "OWENS JASON",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/21/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T10:25:53Z",
-    "inmate_number": "14814408",
-    "name": "MARTINEZ ESCOBAR JOSE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T10:25:53Z",
-    "inmate_number": "1551481",
-    "name": "MOATS DONTA",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T10:25:53Z",
-    "inmate_number": "1740903",
-    "name": "JONES KELLY",
+    "date": "2026-06-21",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": "booked 6/21/26"
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T10:25:53Z",
-    "inmate_number": "2718210",
-    "name": "JACKSON DONTE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T10:25:53Z",
-    "inmate_number": "14315507",
-    "name": "DUFFY MAIKAH",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T10:25:53Z",
-    "inmate_number": "14131192",
-    "name": "THOMAS CALLIA",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-21",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
@@ -231715,5 +231700,50 @@
     "tier": "M1",
     "category": "Theft",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T10:33:51Z",
+    "inmate_number": "14274579",
+    "name": "MATTHEWS JAYVAUGHN",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T10:33:51Z",
+    "inmate_number": "14282866",
+    "name": "BROWN DAVENO",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T10:33:51Z",
+    "inmate_number": "14287807",
+    "name": "ROPER EDWARD",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T10:33:51Z",
+    "inmate_number": "14328674",
+    "name": "WURZELBACHER NICHOLAS",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T10:33:51Z",
+    "inmate_number": "1575621",
+    "name": "WILLIAMS ANTOINETTE",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked (date not reported)"
   }
 ]
