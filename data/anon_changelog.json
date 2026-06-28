@@ -203802,6 +203802,12 @@
     "category": "Illegal use or possession of drug paraphernalia"
   },
   {
+    "event": "released",
+    "date": "2026-06-11",
+    "tier": "F5",
+    "category": "Trafficking in drugs"
+  },
+  {
     "event": "booked",
     "date": "2026-06-12",
     "tier": "M1",
@@ -221725,39 +221731,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T23:14:57Z",
-    "inmate_number": "14774586",
-    "name": "ROWLAND GREGORY",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T23:14:57Z",
-    "inmate_number": "2327403",
-    "name": "BISHOP DION",
+    "date": "2026-06-21",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "booked 6/21/26"
+    "category": "Trafficking in drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T23:14:57Z",
-    "inmate_number": "2780229",
-    "name": "GRAHAM DONYELL",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": ""
+    "category": "Driving under suspension"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T23:48:51Z",
-    "inmate_number": "14814443",
-    "name": "HOPE RHANE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "booked 6/21/26"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-21",
+    "tier": "M1",
+    "category": "Driving under suspension"
   },
   {
     "event": "updated",
@@ -231982,5 +231982,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T23:52:29Z",
+    "inmate_number": "1506780",
+    "name": "JOHNSON WILLIAM",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T23:52:29Z",
+    "inmate_number": "2204586",
+    "name": "TIEMANN GREGORY",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "booked 6/28/26"
   }
 ]
