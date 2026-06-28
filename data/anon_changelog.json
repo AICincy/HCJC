@@ -221665,21 +221665,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T22:15:15Z",
-    "inmate_number": "14774586",
-    "name": "ROWLAND GREGORY",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "booked 6/21/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T22:15:15Z",
-    "inmate_number": "2499041",
-    "name": "WALLS MICHAEL",
+    "date": "2026-06-21",
     "tier": "M2",
-    "category": "Possessing drug abuse instruments",
-    "note": ""
+    "category": "Possessing drug abuse instruments"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-21",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments"
   },
   {
     "event": "booked",
@@ -231913,5 +231913,50 @@
     "tier": "F2",
     "category": "Felonious assault",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T22:23:25Z",
+    "inmate_number": "14547978",
+    "name": "BRENTS MASHAYA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T22:23:25Z",
+    "inmate_number": "14556366",
+    "name": "WEATHERS NASHON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T22:23:25Z",
+    "inmate_number": "1709043",
+    "name": "BARFIELD KATRINA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T22:23:25Z",
+    "inmate_number": "2152591",
+    "name": "HOOVEN BENJAMIN",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T22:23:25Z",
+    "inmate_number": "2562795",
+    "name": "WALTERS VERONICA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
