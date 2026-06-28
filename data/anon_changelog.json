@@ -221623,48 +221623,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T21:10:24Z",
-    "inmate_number": "14314970",
-    "name": "QUINN MARK",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T21:10:24Z",
-    "inmate_number": "14408117",
-    "name": "ALLEN RANAYZIA",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/21/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T21:10:24Z",
-    "inmate_number": "2632437",
-    "name": "COMPTON DAVID",
+    "date": "2026-06-21",
     "tier": "M2",
-    "category": "Possessing drug abuse instruments",
-    "note": "booked 6/21/26"
+    "category": "Possessing drug abuse instruments"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T21:10:24Z",
-    "inmate_number": "2727064",
-    "name": "BROWN DEANDRA",
+    "date": "2026-06-21",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T21:10:24Z",
-    "inmate_number": "14814402",
-    "name": "JUAN DAVID",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-21",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments"
   },
   {
     "event": "booked",
@@ -231870,6 +231861,24 @@
     "name": "CHANEY KIYANA",
     "tier": "F2",
     "category": "Felonious assault",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T21:24:48Z",
+    "inmate_number": "1709043",
+    "name": "BARFIELD KATRINA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T21:24:48Z",
+    "inmate_number": "2152591",
+    "name": "HOOVEN BENJAMIN",
+    "tier": null,
+    "category": null,
     "note": "booked 6/28/26"
   }
 ]
