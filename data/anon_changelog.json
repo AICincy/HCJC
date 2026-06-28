@@ -221617,12 +221617,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T20:32:38Z",
-    "inmate_number": "14635834",
-    "name": "RAYFORD BRIONNA",
+    "date": "2026-06-21",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
@@ -231864,6 +231861,15 @@
     "name": "GARITY STEPHANIE",
     "tier": "M4",
     "category": "Criminal trespass",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T20:50:20Z",
+    "inmate_number": "2605250",
+    "name": "CHANEY KIYANA",
+    "tier": "F2",
+    "category": "Felonious assault",
     "note": "booked 6/28/26"
   }
 ]
