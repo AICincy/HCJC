@@ -221521,12 +221521,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T15:53:58Z",
-    "inmate_number": "14759313",
-    "name": "HERNANDEZ ANGEL",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": "booked (date not reported)"
+    "category": "Failure to comply with order or signal of police officer"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-21",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "updated",
@@ -231787,5 +231790,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T15:58:09Z",
+    "inmate_number": "1176828",
+    "name": "NOLAN MICHAEL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 6/28/26"
   }
 ]
