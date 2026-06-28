@@ -221515,12 +221515,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T15:03:05Z",
-    "inmate_number": "2318811",
-    "name": "MILLER JAMES",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "booked 6/21/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -231772,5 +231769,23 @@
     "tier": null,
     "category": null,
     "note": "booked 6/28/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-28T15:29:12Z",
+    "inmate_number": "1503101",
+    "name": "LEE KELVIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-28T15:29:12Z",
+    "inmate_number": "14328674",
+    "name": "WURZELBACHER NICHOLAS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
