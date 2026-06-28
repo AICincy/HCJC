@@ -144900,6 +144900,12 @@
     "category": "Possession of drugs"
   },
   {
+    "event": "released",
+    "date": "2026-05-16",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
     "event": "booked",
     "date": "2026-05-17",
     "tier": null,
@@ -200718,6 +200724,12 @@
     "category": "Driving on a suspended/revoked license"
   },
   {
+    "event": "released",
+    "date": "2026-06-09",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
     "event": "updated",
     "date": "2026-06-10",
     "tier": "M2",
@@ -214824,6 +214836,12 @@
     "category": "Assault"
   },
   {
+    "event": "released",
+    "date": "2026-06-16",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
     "event": "updated",
     "date": "2026-06-17",
     "tier": "M2",
@@ -221233,66 +221251,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T05:55:54Z",
-    "inmate_number": "1212912",
-    "name": "JACKSON DANIEL",
+    "date": "2026-06-21",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 6/21/26"
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T05:55:54Z",
-    "inmate_number": "14226064",
-    "name": "GIERYN JOSEPH",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Violation of community control / probation",
-    "note": "booked 6/21/26"
+    "category": "Violation of community control / probation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T05:55:54Z",
-    "inmate_number": "14781168",
-    "name": "SY ABDELLAHI",
+    "date": "2026-06-21",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 6/21/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T05:55:54Z",
-    "inmate_number": "14814402",
-    "name": "JUAN DAVID",
+    "date": "2026-06-21",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": ""
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T05:55:54Z",
-    "inmate_number": "1551481",
-    "name": "MOATS DONTA",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T05:55:54Z",
-    "inmate_number": "1588857",
-    "name": "CHATMAN MAURICE",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "booked 6/21/26"
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T05:55:54Z",
-    "inmate_number": "2192137",
-    "name": "SIMPSON NORRIS",
+    "date": "2026-06-21",
     "tier": "MM",
-    "category": "Occupant restraining devices (seat belts)",
-    "note": "booked 6/21/26"
+    "category": "Occupant restraining devices (seat belts)"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-21",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "updated",
@@ -231517,5 +231520,131 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "14125061",
+    "name": "SABATO MARIA",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "14193155",
+    "name": "JONES JADA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "14221395",
+    "name": "ELMER TIESHA",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "14282866",
+    "name": "BROWN DAVENO",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "14746354",
+    "name": "CANTRELL JAMIE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "14815106",
+    "name": "TAMANG LAKPA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "14815108",
+    "name": "LUCAS ALEXANDER",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "1703061",
+    "name": "HALBERT BENJAMIN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "1813996",
+    "name": "HUGHES TED",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "1910992",
+    "name": "WILLIAMS SANANTONIO",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "1965604",
+    "name": "WELLS JAMES",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "2609699",
+    "name": "WALKER PAUL",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "2707499",
+    "name": "BEAM AARON",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T07:07:57Z",
+    "inmate_number": "2799797",
+    "name": "SMITH MATTHEW",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
   }
 ]
