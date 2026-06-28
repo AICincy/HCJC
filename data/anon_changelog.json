@@ -221125,66 +221125,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T02:41:13Z",
-    "inmate_number": "14131192",
-    "name": "THOMAS CALLIA",
+    "date": "2026-06-21",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 6/20/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T02:41:13Z",
-    "inmate_number": "14248593",
-    "name": "WATSON RASHONTAE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T02:41:13Z",
-    "inmate_number": "14355126",
-    "name": "MILLER NYRAILL",
+    "date": "2026-06-21",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T02:41:13Z",
-    "inmate_number": "14455482",
-    "name": "BRADFORD BRYAN",
+    "date": "2026-06-21",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 6/20/26"
+    "category": "Resisting arrest"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T02:41:13Z",
-    "inmate_number": "2385034",
-    "name": "ARCHULETA JESSIE",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/20/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T02:41:13Z",
-    "inmate_number": "2465219",
-    "name": "KAISER JUSTIN",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 6/20/26"
+    "category": "Violating protection order"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T02:41:13Z",
-    "inmate_number": "2600044",
-    "name": "NOBLE AARON",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -231409,5 +231388,41 @@
     "tier": "M1",
     "category": "Menacing by stalking",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T03:48:39Z",
+    "inmate_number": "14815107",
+    "name": "QUINTEROS JOVANNI",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 6/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T03:48:39Z",
+    "inmate_number": "14815108",
+    "name": "LUCAS ALEXANDER",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T03:48:39Z",
+    "inmate_number": "1503101",
+    "name": "LEE KELVIN",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/27/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-28T03:48:39Z",
+    "inmate_number": "14597847",
+    "name": "JONES DEVONTA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
