@@ -221551,66 +221551,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T17:51:38Z",
-    "inmate_number": "14759313",
-    "name": "HERNANDEZ ANGEL",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": ""
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T18:32:18Z",
-    "inmate_number": "2727064",
-    "name": "BROWN DEANDRA",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T19:11:40Z",
-    "inmate_number": "2727064",
-    "name": "BROWN DEANDRA",
+    "date": "2026-06-21",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T19:11:40Z",
-    "inmate_number": "850642",
-    "name": "CAVANAUGH MARK",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T19:11:40Z",
-    "inmate_number": "2718210",
-    "name": "JACKSON DONTE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T19:11:40Z",
-    "inmate_number": "14688046",
-    "name": "JENKINS KEMARION",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T19:11:40Z",
-    "inmate_number": "14391435",
-    "name": "KERSHAW LEVONTE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -231862,5 +231841,14 @@
     "tier": "M1",
     "category": "Receiving stolen property",
     "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-28T19:46:48Z",
+    "inmate_number": "14152647",
+    "name": "HIX KEITH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]

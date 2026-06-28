@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14810625",
-    "name": "MORALES-PEREZ KATHERINE",
-    "timestamp_utc": "2026-05-17T09:11:38Z",
-    "note": "booked 5/17/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "14810627",
     "name": "SOLANO HITLER",
     "timestamp_utc": "2026-05-17T10:03:44Z",
@@ -69998,5 +69991,12 @@
     "name": "OBERRY KAAMIL",
     "timestamp_utc": "2026-06-28T17:41:26Z",
     "note": ""
+  },
+  {
+    "event": "released",
+    "inmate_number": "14152647",
+    "name": "HIX KEITH",
+    "timestamp_utc": "2026-06-28T19:46:48Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
