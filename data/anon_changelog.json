@@ -221659,12 +221659,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T21:45:03Z",
-    "inmate_number": "2499041",
-    "name": "WALLS MICHAEL",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "booked 6/21/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -231880,5 +231877,41 @@
     "tier": null,
     "category": null,
     "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T21:50:08Z",
+    "inmate_number": "14596602",
+    "name": "THOMPKINS ZYAN",
+    "tier": "M1",
+    "category": "Stopping after accident on public roads",
+    "note": "booked 6/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T21:50:08Z",
+    "inmate_number": "2059692",
+    "name": "GARITY STEPHANIE",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T21:50:08Z",
+    "inmate_number": "2152591",
+    "name": "HOOVEN BENJAMIN",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-28T21:50:08Z",
+    "inmate_number": "2605250",
+    "name": "CHANEY KIYANA",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": ""
   }
 ]
