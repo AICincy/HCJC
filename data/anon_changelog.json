@@ -221461,84 +221461,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-21T11:31:24Z",
-    "inmate_number": "14502267",
-    "name": "EBERHART RIKKIAH",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/21/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T11:31:24Z",
-    "inmate_number": "14814400",
-    "name": "TURNEY MARISA",
+    "date": "2026-06-21",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T11:31:24Z",
-    "inmate_number": "14814408",
-    "name": "MARTINEZ-ESCOBAR JOSE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T11:31:24Z",
-    "inmate_number": "2718210",
-    "name": "JACKSON DONTE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T11:31:24Z",
-    "inmate_number": "2192137",
-    "name": "SIMPSON NORRIS",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T11:31:24Z",
-    "inmate_number": "1119881",
-    "name": "TAYLOR DELBERT",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-21T11:31:24Z",
-    "inmate_number": "14248593",
-    "name": "WATSON RASHONTAE",
+    "date": "2026-06-21",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T12:25:07Z",
-    "inmate_number": "14502267",
-    "name": "EBERHART RIKKIAH",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-21T12:25:07Z",
-    "inmate_number": "1453069",
-    "name": "OWENS JASON",
+    "date": "2026-06-21",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -231763,5 +231736,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-28T12:45:19Z",
+    "inmate_number": "2614462",
+    "name": "CHALK SINEAD",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/28/26"
   }
 ]
