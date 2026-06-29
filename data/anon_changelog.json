@@ -223105,57 +223105,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T22:54:11Z",
-    "inmate_number": "14159354",
-    "name": "GRAY ROBERT",
+    "date": "2026-06-22",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T22:54:11Z",
-    "inmate_number": "14184817",
-    "name": "PHELPS CAMARON",
+    "date": "2026-06-22",
     "tier": "F3",
-    "category": "Abduction",
-    "note": ""
+    "category": "Abduction"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T22:54:11Z",
-    "inmate_number": "14814562",
-    "name": "ROWE DAKOTA",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T22:54:11Z",
-    "inmate_number": "2137561",
-    "name": "LEAR LAMONT",
+    "date": "2026-06-22",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": "booked 6/22/26"
+    "category": "Driving under suspension"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T22:54:11Z",
-    "inmate_number": "2110181",
-    "name": "TRIBBLE LULA",
+    "date": "2026-06-22",
     "tier": "F4",
-    "category": "Disrupting public services",
-    "note": "booked 6/22/26"
+    "category": "Disrupting public services"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T22:54:11Z",
-    "inmate_number": "2378547",
-    "name": "NAPIER CIMERICA",
+    "date": "2026-06-22",
     "tier": "M1",
-    "category": "Violation of community control / probation",
-    "note": "booked 6/22/26"
+    "category": "Violation of community control / probation"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-22",
+    "tier": "F1",
+    "category": "Kidnapping"
   },
   {
     "event": "booked",
@@ -233136,6 +233124,33 @@
     "name": "SMARTT DAESHA",
     "tier": "F4",
     "category": "Arson",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-29T23:08:24Z",
+    "inmate_number": "14695856",
+    "name": "MASHORE FREDDIE",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-29T23:08:24Z",
+    "inmate_number": "1576122",
+    "name": "AMISON TREMAYNE",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/29/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-29T23:08:24Z",
+    "inmate_number": "2393925",
+    "name": "LAWSON PATRICK",
+    "tier": null,
+    "category": null,
     "note": ""
   }
 ]
