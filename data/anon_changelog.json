@@ -221959,48 +221959,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T04:10:10Z",
-    "inmate_number": "14320465",
-    "name": "WRIGHT ALIZA",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T04:10:10Z",
-    "inmate_number": "14355250",
-    "name": "WILSON BRODY",
+    "date": "2026-06-22",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/21/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T04:10:10Z",
-    "inmate_number": "14518803",
-    "name": "CARTER SHARVEZZ",
+    "date": "2026-06-22",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/21/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T04:10:10Z",
-    "inmate_number": "14780072",
-    "name": "MORA MELANYE",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": "booked 6/21/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T04:10:10Z",
-    "inmate_number": "2720221",
-    "name": "HUNTER RICHARD",
+    "date": "2026-06-22",
     "tier": "M1",
-    "category": "Violation of community control / probation",
-    "note": "booked 6/21/26"
+    "category": "Violation of community control / probation"
   },
   {
     "event": "booked",
@@ -232135,5 +232120,59 @@
     "tier": "MM",
     "category": "Speed limits",
     "note": "booked 6/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-29T05:53:46Z",
+    "inmate_number": "1311373",
+    "name": "WILKINS JOHN",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 6/29/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-29T05:53:46Z",
+    "inmate_number": "14078352",
+    "name": "REED MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 6/29/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-29T05:53:46Z",
+    "inmate_number": "14737688",
+    "name": "JACINTO-CARDONA JOSE",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-29T05:53:46Z",
+    "inmate_number": "1857091",
+    "name": "BALDWIN DARYLL",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/29/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-29T05:53:46Z",
+    "inmate_number": "2263659",
+    "name": "FISHER BRIAN",
+    "tier": "F5",
+    "category": "Breaking and entering",
+    "note": "booked 6/29/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-29T05:53:46Z",
+    "inmate_number": "2810592",
+    "name": "DENNIS DEMETRIUS",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": "booked 6/29/26"
   }
 ]
