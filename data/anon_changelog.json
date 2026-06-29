@@ -223147,57 +223147,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T23:32:25Z",
-    "inmate_number": "14162924",
-    "name": "JAMES DOMIINIQUE",
+    "date": "2026-06-22",
     "tier": "F5",
-    "category": "Breaking and entering",
-    "note": "booked 6/22/26"
+    "category": "Breaking and entering"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T23:32:25Z",
-    "inmate_number": "14184817",
-    "name": "PHELPS CAMARON",
+    "date": "2026-06-22",
     "tier": "F1",
-    "category": "Kidnapping",
-    "note": ""
+    "category": "Kidnapping"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T23:32:25Z",
-    "inmate_number": "14341131",
-    "name": "LOTT ARIANA",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": "booked 6/22/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T23:32:25Z",
-    "inmate_number": "14806937",
-    "name": "FIELDS AVERYUNN",
+    "date": "2026-06-22",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T23:32:25Z",
-    "inmate_number": "14809070",
-    "name": "ADKINS BRETT",
+    "date": "2026-06-22",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 6/22/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T23:32:25Z",
-    "inmate_number": "2100308",
-    "name": "HENDERSON LAWRENCE",
+    "date": "2026-06-22",
     "tier": "M4",
-    "category": "Menacing",
-    "note": "booked 6/22/26"
+    "category": "Menacing"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-22",
+    "tier": "F5",
+    "category": "Breaking and entering"
   },
   {
     "event": "booked",
@@ -233152,5 +233140,14 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-29T23:38:22Z",
+    "inmate_number": "2355480",
+    "name": "ELMS KURT",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 6/29/26"
   }
 ]
