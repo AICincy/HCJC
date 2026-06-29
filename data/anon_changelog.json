@@ -222907,102 +222907,81 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "14809719",
-    "name": "JONES DONALD",
+    "date": "2026-06-22",
     "tier": "MM",
-    "category": "Upsetting public or private receptacles",
-    "note": ""
+    "category": "Upsetting public or private receptacles"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "14814551",
-    "name": "ESTADA-PINEDA DAVID",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "1551481",
-    "name": "MOATS DONTA",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "1773361",
-    "name": "CAMPBELL GLENN",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "1851883",
-    "name": "SMITH TIMOTHY",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "2215752",
-    "name": "LOVELL BRITTANY",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": "booked 6/22/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "2583283",
-    "name": "HEARD RYAN",
+    "date": "2026-06-22",
     "tier": "M1",
-    "category": "Improperly handling firearms in a motor vehicle",
-    "note": ""
+    "category": "Improperly handling firearms in a motor vehicle"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "2841386",
-    "name": "GURTON ALLEN",
+    "date": "2026-06-22",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "1960443",
-    "name": "ADAMS EUGENE",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "1217811",
-    "name": "BARROW GEOFFERY",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-22T20:23:34Z",
-    "inmate_number": "2631562",
-    "name": "JOHNSON ASHLEE",
+    "date": "2026-06-22",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-22",
+    "tier": "MM",
+    "category": "Operating a motor vehicle without reasonable control"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-22",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle"
   },
   {
     "event": "booked",
@@ -232876,5 +232855,41 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-29T20:24:46Z",
+    "inmate_number": "14736411",
+    "name": "MARALES-GARCIA WILFER",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-29T20:24:46Z",
+    "inmate_number": "2478981",
+    "name": "DUNCAN DOMINIC",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-29T20:24:46Z",
+    "inmate_number": "2653085",
+    "name": "ACOFF MARKIESHA",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 6/29/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-29T20:24:46Z",
+    "inmate_number": "14809070",
+    "name": "ADKINS BRETT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
