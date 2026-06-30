@@ -224203,93 +224203,63 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "1402609",
-    "name": "BECK MARCUS",
+    "date": "2026-06-23",
     "tier": null,
-    "category": null,
-    "note": "booked 6/23/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "14076436",
-    "name": "MORRIS RAMON",
+    "date": "2026-06-23",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "14326743",
-    "name": "STCLAIR MAKYRA",
+    "date": "2026-06-23",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/23/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "14589504",
-    "name": "PLAIR MICHAEL",
+    "date": "2026-06-23",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 6/23/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "14813696",
-    "name": "SAUNDERS RICHARD",
+    "date": "2026-06-23",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "14809719",
-    "name": "JONES DONALD",
+    "date": "2026-06-23",
     "tier": "MM",
-    "category": "Upsetting public or private receptacles",
-    "note": ""
+    "category": "Upsetting public or private receptacles"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "2203990",
-    "name": "HEDGES KRISTINA",
+    "date": "2026-06-23",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "2744440",
-    "name": "CURRY TOBIAS",
+    "date": "2026-06-23",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "2740321",
-    "name": "JONES NICOLE",
+    "date": "2026-06-23",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-23T19:43:30Z",
-    "inmate_number": "2304157",
-    "name": "WALKER KEYONA",
+    "date": "2026-06-23",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -234484,6 +234454,33 @@
     "timestamp_utc": "2026-06-30T19:08:57Z",
     "inmate_number": "14611834",
     "name": "WATSON TEION",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-06-30T19:54:44Z",
+    "inmate_number": "14656427",
+    "name": "NORMAN NIGEL",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-30T19:54:44Z",
+    "inmate_number": "2419772",
+    "name": "HINKLE CHAD",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-06-30T19:54:44Z",
+    "inmate_number": "1963778",
+    "name": "WOODS TIMOTHY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
