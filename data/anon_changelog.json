@@ -223585,21 +223585,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-23T13:40:34Z",
-    "inmate_number": "2222876",
-    "name": "HARPER DANNIKA",
+    "date": "2026-06-23",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-23T13:40:34Z",
-    "inmate_number": "2572559",
-    "name": "CURRIE TROY",
+    "date": "2026-06-23",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": ""
+    "category": "Driving without a valid license"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-23",
+    "tier": "M1",
+    "category": "Driving without a valid license"
   },
   {
     "event": "updated",
@@ -233788,5 +233788,41 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-30T14:01:37Z",
+    "inmate_number": "14196212",
+    "name": "WILLIAMS WILIESHIA",
+    "tier": "F5",
+    "category": "Breaking and entering",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-30T14:01:37Z",
+    "inmate_number": "14476048",
+    "name": "EVANS JHYAIRE",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-30T14:01:37Z",
+    "inmate_number": "14775958",
+    "name": "THOMPSON GARY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-06-30T14:01:37Z",
+    "inmate_number": "2546528",
+    "name": "HOPKINS MELVIN",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
