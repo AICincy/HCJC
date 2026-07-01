@@ -224425,48 +224425,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-23T23:26:34Z",
-    "inmate_number": "1030082",
-    "name": "SCRUGGS JAMES",
+    "date": "2026-06-23",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked (date not reported)"
+    "category": "Driving without a valid license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-23T23:52:59Z",
-    "inmate_number": "1030082",
-    "name": "SCRUGGS JAMES",
+    "date": "2026-06-23",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": ""
+    "category": "Driving without a valid license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-23T23:52:59Z",
-    "inmate_number": "14492621",
-    "name": "WHITNEY MIKAYLA",
+    "date": "2026-06-23",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 6/23/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-23T23:52:59Z",
-    "inmate_number": "14763994",
-    "name": "MALOTT DANIEL",
+    "date": "2026-06-23",
     "tier": null,
-    "category": null,
-    "note": "booked 6/23/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-23T23:52:59Z",
-    "inmate_number": "2455758",
-    "name": "SMITH TAARIQ",
+    "date": "2026-06-23",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 6/23/26"
+    "category": "Violating protection order"
   },
   {
     "event": "booked",
@@ -234661,6 +234646,69 @@
     "timestamp_utc": "2026-06-30T22:50:33Z",
     "inmate_number": "2526491",
     "name": "LANG DAIRIUS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-01T00:03:34Z",
+    "inmate_number": "1146820",
+    "name": "COFFEE EUGENE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 6/30/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-01T00:03:34Z",
+    "inmate_number": "14157054",
+    "name": "HENKE BRIAN",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-01T00:03:34Z",
+    "inmate_number": "14315943",
+    "name": "HINTON KENNETH",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-01T00:03:34Z",
+    "inmate_number": "14294490",
+    "name": "RAY SYMONE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-01T00:03:34Z",
+    "inmate_number": "14699719",
+    "name": "SCHOLZ ETHAN",
+    "tier": "F3",
+    "category": "Complicity",
+    "note": "booked 6/30/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-01T00:03:34Z",
+    "inmate_number": "14789221",
+    "name": "BELL JAEDON",
+    "tier": "M1",
+    "category": "Carrying concealed weapons",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-01T00:03:34Z",
+    "inmate_number": "2129837",
+    "name": "FORD DAMIEN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
