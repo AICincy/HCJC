@@ -71,7 +71,7 @@
     <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data - Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
     <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data - Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed).</td></tr>
     {% if courtclerk_cases_available %}<tr><td><a href="courtclerk_cases.json">courtclerk_cases.json</a></td><td>Crowdsourced case data submitted via the <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">case-data issue form</a> by people who looked the case up themselves at courtclerk.org. May be empty.</td></tr>{% endif %}
-    <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history. Verify downloads by running <code>sha256sum -c SHA256SUMS</code> in the directory you downloaded the files to (<code>shasum -a 256 -c</code> on macOS).</td></tr>
+    <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history. Verify downloads by running <code>sha256sum -c SHA256SUMS</code> in the directory you downloaded the files to (<code>shasum -a 256 -c SHA256SUMS</code> on macOS).</td></tr>
   </tbody>
 </table>
 

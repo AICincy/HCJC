@@ -40,7 +40,8 @@ def _documented_fields(filename: str) -> set[str]:
     """Field names documented in the Published Files row for ``filename``.
 
     Scans the row's ``<code>`` blocks (only those that look like schema, i.e.
-    contain a brace or bracket), drops quoted literal values and ``key: value``
+    contain a brace, bracket, or comma-separated field list), drops quoted
+    literal values and ``key: value``
     descriptions, and returns the remaining identifiers with any optional
     marker (``?``) stripped.
     """
@@ -49,7 +50,7 @@ def _documented_fields(filename: str) -> set[str]:
     row = html.unescape(m.group(0))
     fields: set[str] = set()
     for code in re.findall(r"<code>(.*?)</code>", row, re.S):
-        if "{" not in code and "[" not in code:
+        if "{" not in code and "[" not in code and "," not in code:
             continue  # a command or inline literal, not a schema block
         code = re.sub(r'"[^"]*"', "", code)  # literal values like "booked"
         code = re.sub(r":\s*[^,}]*", ":", code)  # value-position descriptions
