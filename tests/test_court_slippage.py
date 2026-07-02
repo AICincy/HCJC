@@ -79,6 +79,17 @@ def test_untiered_inmate_grouped_as_other():
     assert s["tiers"] == [{"label": "other", "count": 1}]
 
 
+def test_fallback_venue_tier():
+    inm = Inmate(
+        inmate_number="1",
+        last_name="DOE",
+        first_name="JOHN",
+        charges=[Charge(court_date="06/01/26", description="HOLD", common_pleas_case="B 2601234")],
+    )
+    s = _court_slippage([inm], now=NOW)
+    assert s["tiers"] == [{"label": "F", "count": 1}]
+
+
 def test_venue_fallback_tiers_group_under_f_and_m():
     # No degree suffix and no ORC mapping: the tier comes from the case
     # venue (Common Pleas -> F, Municipal -> M), not the ladder.
