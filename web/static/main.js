@@ -182,7 +182,7 @@
       inputs.forEach(function (i) { f[i.getAttribute('data-filter')] = (i.value || '').trim().toLowerCase(); });
       return f;
     }
-    function apply() {
+    function apply(trigger) {
       var f = currentFilters();
       var active = !!(f.tier || f.chap || f.search);
       var shown = 0;
@@ -201,10 +201,24 @@
       });
       if (noMatch) noMatch.hidden = !(active && shown === 0);
       countEl.textContent = active ? (shown + ' of ' + cards.length + ' shown') : '';
+      // Single-announcer rule: select changes announce the card count here;
+      // search keystrokes are announced by the dropdown's own result count
+      // (section 4), never both for one event.
+      var status = document.getElementById('search-status');
+      if (status && trigger !== 'search') {
+        status.textContent = active ? (shown + ' of ' + cards.length + ' shown') : '';
+      }
     }
+    var applyDebounce = null;
     inputs.forEach(function (i) {
-      i.addEventListener('input', apply);
-      i.addEventListener('change', apply);
+      var key = i.getAttribute('data-filter');
+      function run() { apply(key); }
+      i.addEventListener('input', key === 'search' ? function () {
+        // Debounce typing so 1268 cards aren't re-filtered per keystroke.
+        clearTimeout(applyDebounce);
+        applyDebounce = setTimeout(run, 200);
+      } : run);
+      i.addEventListener('change', run);
     });
     // Deep-link: ?chap=... / ?tier=... (e.g. from the stats offense-category
     // links) pre-applies the matching filter so the link lands on a filtered
@@ -304,11 +318,20 @@
           : 'No results';
       }
     }
+    function dismiss() {
+      sresults.hidden = true;
+      if (sstatus) sstatus.textContent = '';
+    }
+    var renderDebounce = null;
     sbox.addEventListener('focus', loadIdx);
-    sbox.addEventListener('input', function () { loadIdx(); render(); });
-    sbox.addEventListener('keydown', function (e) { if (e.key === 'Escape') { sresults.hidden = true; } });
+    sbox.addEventListener('input', function () {
+      loadIdx();
+      clearTimeout(renderDebounce);
+      renderDebounce = setTimeout(render, 200);
+    });
+    sbox.addEventListener('keydown', function (e) { if (e.key === 'Escape') dismiss(); });
     document.addEventListener('click', function (e) {
-      if (!sresults.contains(e.target) && e.target !== sbox) { sresults.hidden = true; }
+      if (!sresults.contains(e.target) && e.target !== sbox) dismiss();
     });
   }
 })();

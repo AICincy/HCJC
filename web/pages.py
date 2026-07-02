@@ -261,6 +261,7 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     for name in (
         "current.json",
         "changelog.json",
+        "anon_changelog.json",
         "history.json",
         "cfs_recent.json",
         "shootings_recent.json",

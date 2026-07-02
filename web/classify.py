@@ -176,7 +176,10 @@ def _parse_book_date(date_str: str | None) -> datetime | None:
             parsed = datetime.strptime(date_str, fmt)
         except ValueError:
             continue
-        if parsed.year <= 1971:  # epoch sentinel, not a real booking date
+        # HCSO's no-date sentinel is exactly 1/1/70 (Unix epoch 0). Only that
+        # date is discarded; real 1969-1971 dates (e.g. DOBs of people in
+        # their mid-50s) must survive.
+        if parsed.year == 1970 and parsed.month == 1 and parsed.day == 1:
             return None
         return parsed
     return None
@@ -533,11 +536,12 @@ def case_year(case_number: str | None) -> int | None:
         return None
     max_year = datetime.now(timezone.utc).year + 1
     for rx in (_CASE_CP_YEAR_RE, _CASE_MUNI_YEAR_RE, _CASE_ANY_YEAR_RE):
-        m = rx.search(s)
-        if m:
+        # Take the first plausible match from the highest-priority pattern
+        # rather than falling through to a broader pattern the moment one
+        # token fails the clamp (e.g. "99" is not 2099, but a later token in
+        # the same format might be the real year).
+        for m in rx.finditer(s):
             year = 2000 + int(m.group(1))
-            # Plausibility clamp: a bare 2-digit token that maps past next
-            # year is not a filing year (e.g. "99" is not 2099).
             if year <= max_year:
                 return year
     return None
