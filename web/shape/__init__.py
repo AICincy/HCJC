@@ -17,8 +17,10 @@ from web.classify import (
 
 # --- bond helpers -------------------------------------------------------------
 from .bond import (
+    BOND_DISPARITY_MIN_N,
     _bond_by_tier,
     _bond_context,
+    _bond_disparity,
     _bond_peer_amounts,
     _bond_primary_code_and_bond,
     _bond_total,
@@ -98,6 +100,8 @@ __all__ = [
     "_bond_by_tier",
     "_bond_context",
     "_bond_peer_amounts",
+    "BOND_DISPARITY_MIN_N",
+    "_bond_disparity",
     "_bond_primary_code_and_bond",
     "_bond_total",
     "_sorted_pct",
