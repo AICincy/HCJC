@@ -812,3 +812,32 @@ def test_sweep_uses_custom_paths_from_dataclass(tmp_path, monkeypatch):
     assert rc == 0
     # Roster should be healthy, check that custom current path was read and updated
     assert custom_current.exists()
+
+
+def test_wallclock_cap_carries_forward_unfetched_inmates(tmp_path, monkeypatch):
+    # When the wall-clock cap fires mid-pool, the never-fetched remainder of
+    # to_fetch must be carried forward from previous instead of vanishing from
+    # current (which would make diff() emit synthetic release events).
+    monkeypatch.setattr(sweep, "SWEEP_WALLCLOCK_HARD_CAP_S", -1)
+    monkeypatch.setattr(
+        sweep, "_fetch_one", lambda *a, **k: (None, False, False)
+    )
+    previous = {
+        str(i): Inmate(inmate_number=str(i), last_name="DOE", first_name="J", booking_date="5/1/26")
+        for i in range(1, 6)
+    }
+    current: dict[str, Inmate] = {}
+    sweep._fetch_details(
+        client=cast(Any, object()),
+        to_fetch=list(previous),
+        previous=previous,
+        current=current,
+        row_by_id={},
+        dry_run=True,
+        waf_tracker=WafBackoffTracker(),
+        current_path=tmp_path / "current.json",
+        photos_dir=tmp_path,
+    )
+    assert set(current) == set(previous)
+    for inm in current.values():
+        assert inm.last_name == "DOE"

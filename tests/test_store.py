@@ -170,6 +170,37 @@ def test_save_changelog_drops_sealed_events(tmp_path: Path):
     assert [r["inmate_number"] for r in rows] == ["1"]
 
 
+def test_save_current_fails_closed_on_malformed_takedowns(tmp_path: Path):
+    # ORC 2953.32: a takedowns.json that exists but cannot be parsed must abort
+    # the write (fail closed), not silently proceed with an empty seal set and
+    # republish sealed records for the cycle.
+    import pytest
+
+    from scraper.store import SnapshotCorruptError
+
+    (tmp_path / "takedowns.json").write_text("{not json", encoding="utf-8")
+    path = tmp_path / "current.json"
+    with pytest.raises(SnapshotCorruptError):
+        save_current(path, [_inm("1")])
+    assert not path.exists()
+
+
+def test_save_changelog_fails_closed_on_malformed_takedowns(tmp_path: Path):
+    import pytest
+
+    from scraper.models import ChangeEvent
+    from scraper.store import SnapshotCorruptError, save_changelog
+
+    (tmp_path / "takedowns.json").write_text("[1,", encoding="utf-8")
+    path = tmp_path / "changelog.json"
+    with pytest.raises(SnapshotCorruptError):
+        save_changelog(
+            path,
+            [ChangeEvent(event="booked", inmate_number="1", name="A", timestamp_utc="2026-05-14T01:00:00Z")],
+        )
+    assert not path.exists()
+
+
 def test_load_current_or_raise_returns_empty_when_missing(tmp_path: Path):
     # File genuinely absent is the only path that bootstraps a roster.
     assert load_current_or_raise(tmp_path / "nope.json") == {}

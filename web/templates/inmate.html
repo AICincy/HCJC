@@ -115,7 +115,7 @@
       <td>{{ c.description or ' - ' }}</td>
       <td>{% if ch_tier %}<span class="tier tier-{{ ch_tier.label if (ch_tier.label|length >= 2 and ch_tier.label[0] in ('F','M')) else ch_tier.kind }}">{{ ch_tier.label }}</span>{% else %}<span class="muted"> - </span>{% endif %}</td>
       <td>{{ c.court_date or ' - ' }}</td>
-      <td>{{ (c.bond_type ~ ' ' ~ c.bond_amount) | trim or ' - ' }}</td>
+      <td>{{ ((c.bond_type or '') ~ ' ' ~ (c.bond_amount or '')) | trim or ' - ' }}</td>
       <td>{{ c.disposition or ' - ' }}</td>
       <td>{% if case %}<a class="case-link case-{{ case_category(case) }}" href="{{ cck_case_summary(case | case_fmt) }}" target="_blank" rel="noopener">{{ case | case_fmt }} ↗</a>{% else %} - {% endif %}</td>
     </tr>

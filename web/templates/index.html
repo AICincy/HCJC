@@ -15,7 +15,7 @@
   {% if waf_sheriff_available %}
   <img src="{{ base_url }}/static/img/sheriff-waf.png"
        alt="Illustration of the Hamilton County Sheriff with a speech bubble: &ldquo;Sorry about that, we&rsquo;re allegedly blocking access to keep inmates safe from county residents who believe public records should be accessible to the public.&rdquo;"
-       class="waf-sheriff" style="float:right;max-height:460px;max-width:45%;height:auto;margin:0 0 .5rem 1rem;">
+       class="waf-sheriff">
   {% endif %}
   <p><strong>Roster updates are currently interrupted.</strong> Since {{ roster_stale.since or '2026-05-19' }}, the Hamilton County Sheriff&rsquo;s Office public inmate-search portal has been returning blocked or empty responses to this site&rsquo;s automated public-records retrieval. The figures below reflect the last successful update on {{ roster_stale.last_updated }}; they are not current.</p>
   <p class="banner-fine">This interruption is logged per cycle as timestamped, tamper-evident evidence: <a href="{{ base_url }}/data/waf_block_log.json">waf_block_log.json</a>. JCStream does not attempt to circumvent the block; it documents it. Live tallies (block count, streaks, cumulative denied hours) are on the <a href="{{ base_url }}/transparency/">transparency scorecard</a>. See also <a href="{{ base_url }}/data/#access">access interruptions</a>.</p>
@@ -57,8 +57,8 @@
     </select>
   </label>
   <label class="search-wrap" for="search-box">Search
-    <input type="search" data-filter="search" id="search-box" placeholder="name, charge, ORC code, or #" autocomplete="off" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results">
-    <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
+    <input type="search" data-filter="search" id="search-box" placeholder="name, charge, ORC code, or #" autocomplete="off">
+    <div class="search-results" id="search-results" role="region" aria-label="Search results" aria-live="polite" hidden></div>
   </label>
   <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
     <span class="view-toggle-icon" aria-hidden="true">≡</span>
@@ -75,8 +75,8 @@
   <span class="swatch charge-2925"><span class="dot"></span> drugs</span>
   <span class="swatch charge-family"><span class="dot"></span> family / domestic</span>
   <span class="swatch charge-traffic"><span class="dot"></span> traffic / other</span>
-  <span class="swatch"><span class="tier tier-felony" style="font-size:.55rem">F</span> felony</span>
-  <span class="swatch"><span class="tier tier-misdemeanor" style="font-size:.55rem">M</span> misdemeanor</span>
+  <span class="swatch"><span class="tier tier-felony legend-tier">F</span> felony</span>
+  <span class="swatch"><span class="tier tier-misdemeanor legend-tier">M</span> misdemeanor</span>
 </p>
 
 {% for month, group in by_month %}

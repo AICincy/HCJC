@@ -3,6 +3,7 @@ similar inmates, roster staleness, and the full prepare_render_data pipeline."""
 
 from __future__ import annotations
 
+import logging
 from collections import defaultdict
 from datetime import datetime
 
@@ -194,7 +195,6 @@ def _card_data_attrs(inmate: Inmate) -> dict:
     return {
         "tier": tier["kind"] if tier else "unknown",
         "chap": _chap_slug(chap["label"]) if chap else "unknown",
-        "name": (inmate.full_name or "").lower(),
         "search": f"{inmate.full_name} {charges_txt} {orc_codes} #{inmate.inmate_number}".lower(),
     }
 
@@ -341,7 +341,6 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
 
 
 def _warn_about_unmapped_orcs(inmates: list[Inmate], offenses: dict[str, dict]) -> None:
-    import logging
     logger = logging.getLogger("jcstream.site")
     codes = [c.orc_code for inm in inmates for c in inm.charges if c.orc_code]
     missing = orc_mod.codes_without_titles(codes, offenses)

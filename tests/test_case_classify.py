@@ -43,6 +43,10 @@ def test_case_category(number, category):
         ("A 2401234", 2024),
         ("", None),
         (None, None),
+        # Plausibility clamp: bare 2-digit tokens past next year are not
+        # filing years (regression for the unbounded 2000+n fallback).
+        ("99 12345", None),
+        ("SOMETHING 88 OTHER", None),
     ],
 )
 def test_case_year(number, year):

@@ -217,9 +217,11 @@ def _load_takedowns(data_dir: Path) -> set[str]:
     """Inmate numbers sealed/expunged per ORC 2953.32, read from
     ``<data_dir>/takedowns.json`` (a JSON array of inmate_number strings).
 
-    Returns an empty set when the file is absent or unreadable, so sealing is
-    opt-in and never blocks a write. Enforced at the write boundary so a sealed
-    number never persists into current.json or the changelog (and therefore not
+    Returns an empty set when the file is absent (sealing is opt-in). A file
+    that exists but cannot be parsed raises: writing with an empty seal set
+    would silently republish sealed records for the cycle, so the write must
+    fail closed instead. Enforced at the write boundary so a sealed number
+    never persists into current.json or the changelog (and therefore not
     into git history going forward), not only the rendered site.
     """
     path = data_dir / "takedowns.json"
@@ -228,8 +230,8 @@ def _load_takedowns(data_dir: Path) -> set[str]:
     try:
         return {str(n) for n in json.loads(path.read_text(encoding="utf-8"))}
     except (json.JSONDecodeError, TypeError, ValueError) as e:
-        log.warning("could not load %s (%s): no records sealed this cycle", path, e)
-        return set()
+        log.error("could not load %s (%s): refusing to write with an empty seal set", path, e)
+        raise SnapshotCorruptError(f"takedowns.json unreadable: {e}") from e
 
 
 def save_current(path: Path, inmates: Iterable[Inmate]) -> None:

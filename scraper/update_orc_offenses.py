@@ -55,14 +55,14 @@ def clean_description(desc: str) -> str:
 def update_orc_offenses() -> None:
     """Read HAMCO listings and current.json, merge new mappings into data/orc_offenses.json."""
     if not OFFENSES_PATH.exists():
-        log.warning(f"{OFFENSES_PATH} does not exist. Cannot update.")
+        log.warning("%s does not exist. Cannot update.", OFFENSES_PATH)
         return
 
     # Load existing offenses
     try:
         data = json.loads(OFFENSES_PATH.read_text(encoding="utf-8"))
     except Exception as e:
-        log.error(f"Failed to read {OFFENSES_PATH}: {e}")
+        log.error("Failed to read %s: %s", OFFENSES_PATH, e)
         return
 
     offenses = data.setdefault("offenses", {})
@@ -120,7 +120,7 @@ def update_orc_offenses() -> None:
 
                     first_code = next_code
         except Exception as e:
-            log.warning(f"Error parsing HAMCO file {file_path.name}: {e}")
+            log.warning("Error parsing HAMCO file %s: %s", file_path.name, e)
 
     # 2. Parse current.json
     if CURRENT_PATH.exists():
@@ -139,7 +139,7 @@ def update_orc_offenses() -> None:
                             if title and norm_code not in extracted:
                                 extracted[norm_code] = {"title": title, "degree": deg}
         except Exception as e:
-            log.warning(f"Error parsing current.json: {e}")
+            log.warning("Error parsing current.json: %s", e)
 
     # 3. Merge extracted offenses into existing offenses
     merged_count = 0
@@ -159,9 +159,9 @@ def update_orc_offenses() -> None:
                 json.dumps(data, indent=2, ensure_ascii=False) + "\n",
                 encoding="utf-8"
             )
-            log.info(f"Auto-populated {merged_count} missing ORC offenses in {OFFENSES_PATH}")
+            log.info("Auto-populated %d missing ORC offenses in %s", merged_count, OFFENSES_PATH)
         except Exception as e:
-            log.error(f"Failed to write to {OFFENSES_PATH}: {e}")
+            log.error("Failed to write to %s: %s", OFFENSES_PATH, e)
 
 
 if __name__ == "__main__":
