@@ -701,3 +701,13 @@ def test_takedowns_filtering(tmp_path, monkeypatch):
     assert evs[0].inmate_number == "11111"
 
 
+
+
+def test_approx_age_keeps_real_late_1960s_dob():
+    # Regression: the epoch-sentinel check discarded every year <= 1971,
+    # blanking real DOBs of people in their mid-50s. Only exactly 1/1/70
+    # (Unix epoch 0, HCSO's no-date sentinel) is discarded.
+    today = datetime.now()
+    expected = today.year - 1970 - ((today.month, today.day) < (6, 15))
+    assert build._approx_age("6/15/70") == expected
+    assert build._approx_age("1/1/70") is None

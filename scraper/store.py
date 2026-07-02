@@ -400,6 +400,10 @@ def save_anon_changelog(
     losing the aggregate signal.
     """
     enrichment = enrichment or {}
+    # ORC 2953.32: sealed inmate numbers are anonymized immediately, both in
+    # incoming events and retroactively in rows already on disk (a takedown
+    # added after a row was written must not leave PII in the 7-day window).
+    sealed = _load_takedowns(path.parent)
     # Read existing anon entries
     existing: list[dict] = []
     if path.exists():
@@ -430,7 +434,7 @@ def save_anon_changelog(
         d.setdefault("primary_tier", enr.get("tier"))
         d.setdefault("primary_category", enr.get("category"))
 
-        if (d.get("timestamp_utc") or "") < cutoff:
+        if (d.get("timestamp_utc") or "") < cutoff or str(d.get("inmate_number") or "") in sealed:
             row = _anonymize_event(d)
         else:
             row = {
@@ -448,9 +452,11 @@ def save_anon_changelog(
         seen_keys.add(key)
         out.append(row)
 
-    # Re-anonymize any retained rows that have crossed the expiry boundary.
+    # Re-anonymize any retained rows that have crossed the expiry boundary,
+    # plus any row naming a sealed inmate (retro-purge on every write).
     for i, row in enumerate(out):
-        if "timestamp_utc" in row and row["timestamp_utc"] and row["timestamp_utc"] < cutoff:
+        expired = "timestamp_utc" in row and row["timestamp_utc"] and row["timestamp_utc"] < cutoff
+        if expired or (str(row.get("inmate_number") or "") in sealed):
             out[i] = _anonymize_event(
                 {
                     "event": row.get("event"),

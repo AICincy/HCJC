@@ -70,7 +70,9 @@
     <span class="view-toggle-icon" aria-hidden="true">≡</span>
     <span class="view-toggle-text">Table view</span>
   </button>
-  <span class="filter-count" aria-live="polite"></span>
+  {# Visible only; announcements go through the single #search-status node
+     so one keystroke can't fire multiple polite live regions at once. #}
+  <span class="filter-count"></span>
 </div>
 <p class="empty" id="filter-empty" role="status" hidden>No one in custody matches that filter.</p>
 <p class="legend" aria-hidden="true">

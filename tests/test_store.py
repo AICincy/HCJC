@@ -352,3 +352,38 @@ def test_compact_anon_entries_merges_existing_summaries():
     summaries = [r for r in out if r.get("event_summary")]
     assert len(summaries) == 1
     assert summaries[0]["count"] == 8
+
+
+def test_anon_changelog_anonymizes_sealed_inmates(tmp_path: Path):
+    # ORC 2953.32: a sealed inmate_number must not keep name/number in the
+    # anon changelog, either for incoming events or rows already on disk.
+    from datetime import datetime, timezone
+
+    from scraper.models import ChangeEvent
+    from scraper.store import save_anon_changelog
+
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    ev = ChangeEvent(event="booked", inmate_number="7", name="ROE, JANE", timestamp_utc=now)
+    path = tmp_path / "anon_changelog.json"
+    enr = {"7": {"tier": "M1", "category": "other"}}
+
+    # First write: not sealed; PII row lands on disk.
+    save_anon_changelog(path, [ev], enrichment=enr)
+    rows = json.loads(path.read_text(encoding="utf-8"))
+    assert rows[0]["inmate_number"] == "7"
+
+    # Takedown added afterwards: next write must retro-purge the on-disk row.
+    (tmp_path / "takedowns.json").write_text(json.dumps(["7"]), encoding="utf-8")
+    save_anon_changelog(path, [], enrichment=enr)
+    rows = json.loads(path.read_text(encoding="utf-8"))
+    for row in rows:
+        assert row.get("inmate_number") != "7"
+        assert "ROE" not in json.dumps(row)
+
+    # And a fresh sealed event never lands with PII in the first place.
+    ev2 = ChangeEvent(event="released", inmate_number="7", name="ROE, JANE", timestamp_utc=now)
+    save_anon_changelog(path, [ev2], enrichment=enr)
+    rows = json.loads(path.read_text(encoding="utf-8"))
+    for row in rows:
+        assert row.get("inmate_number") != "7"
+        assert "ROE" not in json.dumps(row)

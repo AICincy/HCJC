@@ -117,12 +117,12 @@ def _load_inputs():
         events = []
 
     takedowns_path = Path("data/takedowns.json")
-    takedowns = set()
+    takedowns: set[str] = set()
     if takedowns_path.exists():
-        try:
-            takedowns = set(json.loads(takedowns_path.read_text(encoding="utf-8")))
-        except Exception as e:
-            log.warning("Failed to load data/takedowns.json: %s", e)
+        # Fail closed like the store write boundary: rendering with an empty
+        # seal set would republish sealed records (ORC 2953.32). str() matches
+        # the coercion in scraper/store.py so int entries still seal.
+        takedowns = {str(n) for n in json.loads(takedowns_path.read_text(encoding="utf-8"))}
 
     if takedowns:
         filtered_inmates = [i for i in snapshot.inmates if i.inmate_number not in takedowns]

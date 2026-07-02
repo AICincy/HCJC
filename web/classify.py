@@ -176,7 +176,10 @@ def _parse_book_date(date_str: str | None) -> datetime | None:
             parsed = datetime.strptime(date_str, fmt)
         except ValueError:
             continue
-        if parsed.year <= 1971:  # epoch sentinel, not a real booking date
+        # HCSO's no-date sentinel is exactly 1/1/70 (Unix epoch 0). Only that
+        # date is discarded; real 1969-1971 dates (e.g. DOBs of people in
+        # their mid-50s) must survive.
+        if parsed.year == 1970 and parsed.month == 1 and parsed.day == 1:
             return None
         return parsed
     return None

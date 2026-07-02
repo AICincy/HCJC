@@ -99,7 +99,7 @@
           {% endif %}
           <div class="rb-body">
             {% if deg %}<span class="tier tier-{{ deg }}">{{ deg }}</span>{% endif %}
-            <h4 class="rb-name">{{ inm.full_name }}</h4>
+            <h3 class="rb-name">{{ inm.full_name }}</h3>
             <p class="rb-charge">{{ ((inm.charges | selectattr('orc_code', 'defined') | first).description | lower) if inm.charges else ' - ' }}</p>
             <div class="rb-meta">
               <span>{{ inm.booking_date or ' - ' }}</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;{{ inm.inmate_number }}</span>
