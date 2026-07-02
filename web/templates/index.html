@@ -56,11 +56,16 @@
       {% for slug, label in all_chapters %}<option value="{{ slug }}">{{ label }}</option>{% endfor %}
     </select>
   </label>
-  <label class="search-wrap" for="search-box">Search
-    <input type="search" data-filter="search" id="search-box" placeholder="name, charge, ORC code, or #" autocomplete="off">
+  {# Results panel and status announcer live OUTSIDE the label: label
+     subtree content feeds the input's computed accessible name, and
+     interactive content inside a label is nonconforming HTML. #}
+  <div class="search-wrap">
+    <label for="search-box">Search
+      <input type="search" data-filter="search" id="search-box" placeholder="name, charge, ORC code, or #" autocomplete="off" aria-controls="search-results">
+    </label>
     <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
     <span class="sr-only" id="search-status" role="status"></span>
-  </label>
+  </div>
   <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
     <span class="view-toggle-icon" aria-hidden="true">≡</span>
     <span class="view-toggle-text">Table view</span>
