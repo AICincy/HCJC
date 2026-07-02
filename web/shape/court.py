@@ -7,7 +7,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 
 from scraper.models import Inmate, Snapshot
-from web.classify import _parse_book_date, _parse_md_yy, _primary_tier, case_category, case_year
+from web.classify import _charge_tier, _parse_book_date, _parse_md_yy, _primary_tier, case_category, case_year
 
 from .common import _now_naive_est
 
@@ -73,7 +73,16 @@ def _court_slippage(inmates: list[Inmate], now: datetime | None = None) -> dict:
             continue
         days_past.append((today - earliest).days)
         t = _primary_tier(inm)
-        by_tier[t["label"] if t else "other"] += 1
+        if t:
+            label = t["label"]
+        else:
+            # _primary_tier only ranks ladder degrees (F1..MM); charges whose
+            # tier is the bare venue fallback ("F" from a Common Pleas case,
+            # "M" from a Municipal case) come back None. Group those under
+            # their venue letter, felony first, instead of "other".
+            labels = {(ct or {}).get("label") for ct in (_charge_tier(c) for c in inm.charges)}
+            label = "F" if "F" in labels else ("M" if "M" in labels else "other")
+        by_tier[label] += 1
     tiers = [{"label": lbl, "count": by_tier[lbl]} for lbl in _SLIPPAGE_TIER_ORDER if lbl in by_tier]
     tiers += [{"label": lbl, "count": n} for lbl, n in sorted(by_tier.items()) if lbl not in _SLIPPAGE_TIER_ORDER]
     return {
