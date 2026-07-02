@@ -170,6 +170,22 @@
 </details>
 {% endif %}
 
+{# Court-date slippage - people still in custody past their earliest listed court date. Aggregate only. #}
+{% if s.slippage and s.slippage.total %}
+<div class="section-h"><h2>Held past a scheduled court date</h2><span class="grow"></span><span class="meta">{{ s.slippage.total }} {{ 'person' if s.slippage.total == 1 else 'people' }} &middot; median {{ s.slippage.median_days }} day{{ '' if s.slippage.median_days == 1 else 's' }} past</span></div>
+<div class="statbars" role="list">
+  {% set smax = s.slippage.tiers | map(attribute='count') | max %}
+  {% for t in s.slippage.tiers %}
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">{{ t.label }}</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: {{ '%.1f' % (100.0 * t.count / smax) }}%"></span></span>
+    <span class="statbar-val">{{ t.count }}</span>
+  </div>
+  {% endfor %}
+</div>
+<p class="muted note-paragraph">Counts people currently on the roster whose earliest listed court date is before today (Eastern time), grouped by their most severe charge. A passed court date can reflect a continuance, a capias, or a lag in HCSO&rsquo;s data - the roster does not distinguish them, so this measures slippage of the listed date, not confirmed missed hearings. Placeholder dates are excluded. Aggregate only; no individual list.</p>
+{% endif %}
+
 <div class="section-h"><h2>Offense categories (rolled up)</h2></div>
 <div class="statbars" role="list">
   {% set top = s.offenses[0].count if s.offenses else 1 %}

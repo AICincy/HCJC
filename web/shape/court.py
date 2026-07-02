@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+import statistics
 from collections import defaultdict
 from datetime import datetime, timedelta
 
 from scraper.models import Inmate, Snapshot
-from web.classify import _parse_book_date, _parse_md_yy, case_category, case_year
+from web.classify import _parse_book_date, _parse_md_yy, _primary_tier, case_category, case_year
 
 from .common import _now_naive_est
 
@@ -40,6 +41,46 @@ def _upcoming_courts(snapshot: Snapshot, days_ahead: int = 14) -> list[dict]:
             }
         )
     return out
+
+
+_SLIPPAGE_TIER_ORDER = ["F1", "F2", "F3", "F4", "F5", "F", "M1", "M2", "M3", "M4", "MM", "M"]
+
+
+def _court_slippage(inmates: list[Inmate], now: datetime | None = None) -> dict:
+    """Aggregate count of people still on the roster whose earliest listed
+    court date has already passed.
+
+    Aggregate-only by design: totals, a severity-tier breakdown, and the
+    median days past, never a per-person list. The today boundary is
+    midnight Eastern via ``_now_naive_est`` (injectable for tests); epoch
+    sentinel dates ("1/1/70") are excluded by ``_parse_md_yy``. A passed
+    court date can reflect a continuance, a capias, or HCSO data lag - the
+    roster does not distinguish them, so this measures slippage of the
+    listed date, not confirmed missed hearings.
+    """
+    if now is None:
+        now = _now_naive_est()
+    today = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    days_past: list[int] = []
+    by_tier: dict[str, int] = defaultdict(int)
+    for inm in inmates:
+        earliest: datetime | None = None
+        for c in inm.charges:
+            dt = _parse_md_yy((c.court_date or "").strip())
+            if dt is not None and (earliest is None or dt < earliest):
+                earliest = dt
+        if earliest is None or earliest >= today:
+            continue
+        days_past.append((today - earliest).days)
+        t = _primary_tier(inm)
+        by_tier[t["label"] if t else "other"] += 1
+    tiers = [{"label": lbl, "count": by_tier[lbl]} for lbl in _SLIPPAGE_TIER_ORDER if lbl in by_tier]
+    tiers += [{"label": lbl, "count": n} for lbl, n in sorted(by_tier.items()) if lbl not in _SLIPPAGE_TIER_ORDER]
+    return {
+        "total": len(days_past),
+        "median_days": round(statistics.median(days_past)) if days_past else 0,
+        "tiers": tiers,
+    }
 
 
 def _next_court_date(inmate: Inmate) -> str:
