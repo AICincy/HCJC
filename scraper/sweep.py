@@ -85,7 +85,8 @@ class SweepPaths:
     waf_block_log_path: Path = field(default_factory=lambda: WAF_BLOCK_LOG_PATH)
 
 # sweep-F6: orchestrator-side wall-clock cap. The detail-fetch loop bails
-# when this many seconds have elapsed since make_client(); the finally
+# when this many seconds have elapsed since the detail phase started (the
+# clock starts at the top of _fetch_details, after the list sweep); the finally
 # block then writes the partial roster (clean_finish=True). The GitHub
 # Actions workflow has timeout-minutes: 50, so 22 minutes leaves time for
 # the build + commit + Pages deploy that follow this script. Without the
@@ -333,6 +334,7 @@ def _fetch_details(
     waf_tracker: WafBackoffTracker,
     current_path: Path,
     photos_dir: Path,
+    waf_block_log_path: Path | None = None,
 ) -> tuple[int, int, int]:
     """Run the detail-page worker pool and merge successful or fallback rows."""
     done = 0
@@ -340,7 +342,6 @@ def _fetch_details(
     n_detail_named = 0
     n_detail_with_photo = 0
     t0 = time.monotonic()
-    sweep_started = time.monotonic()
     with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
         futures = {
             pool.submit(
@@ -351,6 +352,7 @@ def _fetch_details(
                 row_by_id.get(iid),
                 waf_tracker=waf_tracker,
                 photos_dir=photos_dir,
+                waf_block_log_path=waf_block_log_path,
             ): iid
             for iid in to_fetch
         }
@@ -358,7 +360,7 @@ def _fetch_details(
             # sweep-F6: bail out cleanly when we've burned the wall-clock
             # budget. The finally block still writes the partial roster
             # (clean_finish=True because we exited the try-body naturally).
-            if time.monotonic() - sweep_started > SWEEP_WALLCLOCK_HARD_CAP_S:
+            if time.monotonic() - t0 > SWEEP_WALLCLOCK_HARD_CAP_S:
                 log.warning(
                     "sweep wall-clock cap reached at %d/%d details; finalizing",
                     done,
@@ -630,6 +632,7 @@ def run(
                 waf_tracker=waf_tracker,
                 current_path=paths.current_path,
                 photos_dir=paths.photos_dir,
+                waf_block_log_path=paths.waf_block_log_path,
             )
             watchdog_ok = check_detail_watchdog(n_detail_attempts, n_detail_named, n_detail_with_photo)
             # Watchdog already logs WARN to stdout via check_detail_watchdog;
@@ -832,6 +835,7 @@ def _fetch_one(
     *,
     waf_tracker: WafBackoffTracker,
     photos_dir: Path | None = None,
+    waf_block_log_path: Path | None = None,
 ) -> tuple[Inmate | None, bool, bool]:
     """Fetch and parse one detail page.
 
@@ -846,7 +850,9 @@ def _fetch_one(
     """
     if photos_dir is None:
         photos_dir = PHOTOS_DIR
-    inm, photo_bytes, photo_url = _fetch_detail_with_retry(client, inmate_id, previous, waf_tracker)
+    inm, photo_bytes, photo_url = _fetch_detail_with_retry(
+        client, inmate_id, previous, waf_tracker, waf_block_log_path=waf_block_log_path
+    )
     if inm is None:
         return None, False, False
     detail_named = bool(inm.last_name or inm.first_name)
@@ -864,6 +870,8 @@ def _fetch_detail_with_retry(
     inmate_id: str,
     previous: dict[str, Inmate],
     waf_tracker: WafBackoffTracker,
+    *,
+    waf_block_log_path: Path | None = None,
 ) -> tuple[Inmate | None, bytes | None, str | None]:
     # WAF / geo-block tolerant fetch. Per the 2026-05-19 Claude.ai HCSO
     # verification, valid inmate-detail pages from HCSO are 91-230 KB.
@@ -924,6 +932,7 @@ def _fetch_detail_with_retry(
             inmate_id=inmate_id,
             http_status=http_status,
             html=html,
+            waf_block_log_path=waf_block_log_path,
         )
         time.sleep(backoff)
         if inmate_id in previous:
