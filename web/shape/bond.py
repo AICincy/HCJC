@@ -29,7 +29,9 @@ def _bond_disparity(indexes: RosterIndexes, offenses: dict, min_n: int = BOND_DI
     """
     rows: list[dict] = []
     for code, vals in indexes.bonds_by_code.items():
-        if len(vals) < min_n:
+        # max(min_n, 2): quantiles needs two points, and a floor below 2
+        # would defeat the suppression purpose anyway.
+        if len(vals) < max(min_n, 2):
             continue
         q1, med, q3 = statistics.quantiles(vals, n=4)
         rows.append(

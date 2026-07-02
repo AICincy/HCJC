@@ -34,14 +34,14 @@
     {% for r in rows %}
     <tr>
       <td><a href="{{ base_url }}/statute/#orc-{{ r.code | replace('.', '-') }}">{{ r.code }}</a></td>
-      <td>{{ (r.title or 'unmapped') | lower }}{% if r.degree in ('F1','F2','F3','F4','F5','M1','M2','M3','M4','MM') %} <span class="tier tier-{{ r.degree }}">{{ r.degree }}</span>{% endif %}</td>
+      <td>{{ (r.title or 'unmapped') | lower }}{% if r.degree in tier_ladder %} <span class="tier tier-{{ r.degree }}">{{ r.degree }}</span>{% endif %}</td>
       <td>{{ r.n }}</td>
       <td>${{ "{:,}".format(r.min) }}</td>
       <td>${{ "{:,}".format(r.q1) }}</td>
       <td>${{ "{:,}".format(r.median) }}</td>
       <td>${{ "{:,}".format(r.q3) }}</td>
       <td>${{ "{:,}".format(r.max) }}</td>
-      <td>{{ r.spread if r.spread is not none else 'n/a' }}&times;</td>
+      <td>{% if r.spread is not none %}{{ r.spread }}&times;{% else %}n/a{% endif %}</td>
     </tr>
     {% endfor %}
   </tbody>
