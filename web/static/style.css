@@ -37,14 +37,18 @@
 
   /* Charge-category coding (legend dots + card charge text + chap pills).
      All seven pass WCAG AA as text on both --bg (#fafafa) and --surface
-     (#FDF5EE); verified 2026-07-02 (worst case: green 4.8:1 on surface). */
-  --cat-violence: #B33A2A;  /* 2903, 2905, 2907 */
-  --cat-weapons:  #8A5A00;  /* 2923 */
-  --cat-property: #2F5E8C;  /* 2911, 2909 */
-  --cat-theft:    #1F6F6F;  /* 2913, 2914, 2915 */
-  --cat-drugs:    #4d7838;  /* 2925 */
-  --cat-family:   #6B4E8E;  /* 2919 */
-  --cat-other:    #5c5c5c;  /* 2917, 2921, traffic, other */
+     (#FDF5EE); verified 2026-07-02 (worst case: green 4.8:1 on surface).
+     The ORC chapters noted per token are collapsed to a single cls value in
+     web/classify.py BEFORE the class name is built (2905 -> cls 2903,
+     2914/2915 -> cls 2913), so only the cls-named classes exist in output;
+     do not add .charge-2905 / .chap-2914 style selectors, they'd be dead. */
+  --cat-violence: #B33A2A;  /* ORC ch. 2903, 2905, 2907 (cls: 2903, 2907) */
+  --cat-weapons:  #8A5A00;  /* ORC ch. 2923 (cls: 2923) */
+  --cat-property: #2F5E8C;  /* ORC ch. 2911, 2909 (cls: 2911, 2909) */
+  --cat-theft:    #1F6F6F;  /* ORC ch. 2913, 2914, 2915 (cls: 2913) */
+  --cat-drugs:    #4d7838;  /* ORC ch. 2925 (cls: 2925) */
+  --cat-family:   #6B4E8E;  /* ORC ch. 2919 (cls: 2919) */
+  --cat-other:    #5c5c5c;  /* ORC ch. 2917, 2921 + traffic, other (neutral) */
 
   /* Tier color layer (design-system handoff; additive: weight, case, and
      left-to-right position remain the primary severity signal). Felony fills
