@@ -34,6 +34,13 @@ jobs:
     name: Send daily PRA requests
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      # The secrets context is not allowed in step `if:` expressions
+      # (GitHub rejects the whole file: "Unrecognized named-value:
+      # 'secrets'", which killed this workflow's registration and its
+      # daily cron). Map the send-gate secret through env so the commit
+      # step's guard can test it legally.
+      JCSTREAM_PRA_SMTP_HOST: ${{ secrets.JCSTREAM_PRA_SMTP_HOST }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6.3.0
@@ -68,7 +75,7 @@ jobs:
         # host, the PRA send steps run dry-run only and never modify
         # data/pra_requests.json, so there is nothing to commit and the
         # contents: write token stays unexercised.
-        if: ${{ secrets.JCSTREAM_PRA_SMTP_HOST != '' }}
+        if: ${{ env.JCSTREAM_PRA_SMTP_HOST != '' }}
         run: |
           git config user.name "jcstream-bot"
           git config user.email "noreply@github.com"
