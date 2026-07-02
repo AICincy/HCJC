@@ -14,10 +14,12 @@ import pytest
 
 @pytest.fixture(autouse=True)
 def _isolate_evidence_logs(tmp_path, monkeypatch):
-    from scraper import pra, pra_capias, pra_log, store, sweep
+    from scraper import pra, pra_capias, pra_log, sweep
 
     monkeypatch.setattr(sweep, "WAF_BLOCK_LOG_PATH", tmp_path / "waf_block_log.json")
-    monkeypatch.setattr(store, "WAF_BLOCK_LOG_PATH", tmp_path / "waf_block_log.json")
+    # Note: store.WAF_BLOCK_LOG_PATH is NOT patched here on purpose. Its
+    # consumers bind it as a def-time default, so an attribute patch does not
+    # reach them and only desynchronizes tests that isolate via chdir.
 
     # append_pra_record's default path is bound at import time, so patching
     # the PRA_LOG_PATH constant is not enough; wrap the call in the modules
