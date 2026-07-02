@@ -34,8 +34,8 @@ For each pair: target **4.5:1 (body text)** or **3.0:1 (large text ≥18px regul
 | Active severity-ladder cell | `aria-current="true"` | `inmate.html`, `statute.html` |
 | Card/Table view toggle | `aria-pressed` | `index.html` (button) + `base.html` JS sets it |
 | Lightbox dialog | `role="dialog" aria-modal="true" aria-label="Booking photo"` | `base.html` |
-| Search results combobox | `aria-autocomplete="list" aria-expanded aria-controls` | `index.html`, `base.html` JS |
-| Search-results panel | `role="region" aria-label="Search results"` | `index.html` |
+| Search-results panel | `role="region" aria-label="Search results"` (no combobox ARIA; the old static `aria-expanded`/`aria-controls` was removed 2026-07-02 as a 4.1.2 defect) | `index.html` |
+| Search-results count announcer | sr-only `role="status"` node (`#search-status`), text set by `main.js` | `index.html` |
 | Empty-filter state | `role="status"` | `index.html` |
 | Tier tooltip | `role="tooltip"` | `base.html` |
 | Tier badge → tooltip wiring | `aria-describedby="tier-tip"` on `.tier-corner` | `_card.html` |

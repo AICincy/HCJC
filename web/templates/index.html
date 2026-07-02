@@ -37,7 +37,7 @@
 
 {% if snapshot.inmate_count == 0 %}
 <div class="empty">
-  <h3>No roster data yet</h3>
+  <h2>No roster data yet</h2>
   <p>JCStream's first sweep hasn't completed. Trigger a manual run from the <a href="https://github.com/AICincy/JCStream/actions/workflows/sweep.yml">sweep workflow</a> or wait for the next 30-minute cron.</p>
 </div>
 {% else %}
@@ -58,7 +58,8 @@
   </label>
   <label class="search-wrap" for="search-box">Search
     <input type="search" data-filter="search" id="search-box" placeholder="name, charge, ORC code, or #" autocomplete="off">
-    <div class="search-results" id="search-results" role="region" aria-label="Search results" aria-live="polite" hidden></div>
+    <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
+    <span class="sr-only" id="search-status" role="status"></span>
   </label>
   <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
     <span class="view-toggle-icon" aria-hidden="true">≡</span>

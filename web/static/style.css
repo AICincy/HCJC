@@ -1892,7 +1892,7 @@ a.orc-code:hover { border-bottom-style: solid; }
   border-radius: var(--radius);
   background: var(--surface);
 }
-.empty h3 { color: var(--fg); margin: 0 0 0.3rem; font-size: 16px; font-weight: 600; }
+.empty h2, .empty h3 { color: var(--fg); margin: 0 0 0.3rem; font-size: 16px; font-weight: 600; }
 
 /* ===== Stats page ===== */
 

@@ -87,7 +87,7 @@
         </div>
       </div>
 
-      <h3 class="ladder-h">People currently held under &sect; {{ s.code }}</h3>
+      <h2 class="ladder-h">People currently held under &sect; {{ s.code }}</h2>
       <div class="rb-grid">
         {% for inm in s.held %}
         {% set deg = primary_degree(inm) %}
@@ -136,7 +136,7 @@
 </div>
 {% else %}
 <div class="empty">
-  <h3>No statute data yet</h3>
+  <h2>No statute data yet</h2>
   <p>The current snapshot doesn't include any mapped ORC sections.</p>
 </div>
 {% endif %}
