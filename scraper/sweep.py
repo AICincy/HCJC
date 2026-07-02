@@ -364,6 +364,9 @@ def _fetch_details(
                     done,
                     len(to_fetch),
                 )
+                # Drop queued fetches so the with-block exit doesn't run the
+                # whole remaining queue after the cap fired.
+                pool.shutdown(wait=False, cancel_futures=True)
                 break
             done += 1
             n_detail_attempts += 1

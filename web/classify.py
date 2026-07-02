@@ -531,10 +531,15 @@ def case_year(case_number: str | None) -> int | None:
     s = (case_number or "").strip().upper()
     if not s:
         return None
+    max_year = datetime.now(timezone.utc).year + 1
     for rx in (_CASE_CP_YEAR_RE, _CASE_MUNI_YEAR_RE, _CASE_ANY_YEAR_RE):
         m = rx.search(s)
         if m:
-            return 2000 + int(m.group(1))
+            year = 2000 + int(m.group(1))
+            # Plausibility clamp: a bare 2-digit token that maps past next
+            # year is not a filing year (e.g. "99" is not 2099).
+            if year <= max_year:
+                return year
     return None
 
 
