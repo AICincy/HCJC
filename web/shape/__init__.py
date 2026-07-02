@@ -40,6 +40,7 @@ from .court import (
     _charge_status_summary,
     _clean_case_number,
     _court_calendar,
+    _court_slippage,
     _next_court_date,
     _upcoming_courts,
 )
@@ -106,6 +107,7 @@ __all__ = [
     "_charge_status_summary",
     "_clean_case_number",
     "_court_calendar",
+    "_court_slippage",
     "_next_court_date",
     "_upcoming_courts",
     # stats

@@ -33,6 +33,7 @@ from web.classify import (
 )
 from web.shape import (
     _court_calendar,
+    _court_slippage,
     _crimes_of_month,
     _days_in_custody,
     _statute_held_inmates,
@@ -379,6 +380,7 @@ def _compute_stats(snapshot: Snapshot, by_month) -> dict:
         "tier_breakdown": _tier_breakdown(snapshot),
         "top_offenses": _top_offenses_with_orc(snapshot, top_n=12),
         "court_calendar": _upcoming_courts(snapshot, days_ahead=14),
+        "slippage": _court_slippage(inmates),
     }
 
 
