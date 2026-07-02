@@ -15,7 +15,7 @@
   </div>
 </header>
 
-<p class="page-lede">JCStream is generated exclusively from public records maintained by the Hamilton County Sheriff's Office (HCSO) and published through HCSO's public inmate-search portal at <a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">hcso.org</a>. Everything the site is built from is published here as plain JSON, rebuilt about every 30 minutes by GitHub Actions. We mirror the <em>current</em> roster: when HCSO removes a person, the next sweep removes them here too. There is no historical archive of released individuals.</p>
+<p class="page-lede">JCStream is generated exclusively from public records maintained by the Hamilton County Sheriff's Office (HCSO) and published through HCSO's public inmate-search portal at <a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">hcso.org</a>. Everything the site is built from is published here as plain JSON, rebuilt about every 30 minutes by GitHub Actions. That cadence is best-effort cron, not a guarantee: effective refresh is 20-45 minutes and can slip further during incidents, and each supplemental feed's row below states its own refresh window. We mirror the <em>current</em> roster: when HCSO removes a person, the next sweep removes them here too. There is no historical archive of released individuals.</p>
 
 <h2 class="sect-h">Authoritative Sources</h2>
 <div class="fields">
@@ -71,7 +71,7 @@
     <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data - Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
     <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data - Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed).</td></tr>
     {% if courtclerk_cases_available %}<tr><td><a href="courtclerk_cases.json">courtclerk_cases.json</a></td><td>Crowdsourced case data submitted via the <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">case-data issue form</a> by people who looked the case up themselves at courtclerk.org. May be empty.</td></tr>{% endif %}
-    <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history.</td></tr>
+    <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history. Verify downloads by running <code>sha256sum -c SHA256SUMS</code> in the directory you downloaded the files to (<code>shasum -a 256 -c</code> on macOS).</td></tr>
   </tbody>
 </table>
 
@@ -121,6 +121,11 @@ snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commi
 <p>
   But aggregate counts shouldn't disappear too. <code>anon_changelog.json</code> is a parallel feed that retains every booking and release event forever, with all identifying fields (name, inmate_number, booking_number) stripped after 7 days. What survives the strip is the event type, the date (day-precision, not minute), the offense tier (F1-MM), and the primary charge category. That's enough to answer institutional-pattern questions ("how does Friday booking volume compare to Tuesday over the last year?", "what was the F1 share of the roster during summer 2025?") without keeping anyone individually visible after they've left custody.
 </p>
+
+<h2 id="cite" class="sect-h">Citing this data</h2>
+<p class="muted">There is no historical archive here: the roster mirror reflects only the current HCSO snapshot, so a citation should capture the snapshot it used (the <code>generated_utc</code> field, or the SHA256SUMS line for the file). Suggested format:</p>
+<p class="muted"><code>JCStream, Hamilton County Justice Center roster mirror, snapshot {{ snapshot.generated_utc if snapshot is defined and snapshot.generated_utc else 'YYYY-MM-DDTHH:MM:SSZ' }}, https://www.aretheyinjail.com/data/. Underlying records: Hamilton County Sheriff's Office public inmate roster (ORC &sect; 149.43). Data arrangement licensed CC BY-NC 4.0.</code></p>
+<p class="muted">For journalism and research use, note the caveats above: snapshot-in-time data, best-effort refresh cadence, no archive of released individuals, and the FCRA prohibition in the legal notices below.</p>
 
 <h2 id="legal" class="legal-anchor">Legal notices</h2>
 
