@@ -35,6 +35,17 @@
   --case-civil:    #2F5E8C;
   --case-other:    #777777;
 
+  /* Charge-category coding (legend dots + card charge text + chap pills).
+     All seven pass WCAG AA as text on both --bg (#fafafa) and --surface
+     (#FDF5EE); verified 2026-07-02 (worst case: green 4.8:1 on surface). */
+  --cat-violence: #B33A2A;  /* 2903, 2905, 2907 */
+  --cat-weapons:  #8A5A00;  /* 2923 */
+  --cat-property: #2F5E8C;  /* 2911, 2909 */
+  --cat-theft:    #1F6F6F;  /* 2913, 2914, 2915 */
+  --cat-drugs:    #4d7838;  /* 2925 */
+  --cat-family:   #6B4E8E;  /* 2919 */
+  --cat-other:    #5c5c5c;  /* 2917, 2921, traffic, other */
+
   /* Tier color layer (design-system handoff; additive: weight, case, and
      left-to-right position remain the primary severity signal). Felony fills
      ramp dark-red to amber; misdemeanor is a blue outline (alias of
@@ -568,6 +579,14 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* Charge text carries the category hue (same 7-bucket palette as the legend
+   dots); 2917/2921/traffic/other stay the neutral --fg-soft base. */
+.card-inmate .charge.charge-2903, .card-inmate .charge.charge-2907 { color: var(--cat-violence); }
+.card-inmate .charge.charge-2923 { color: var(--cat-weapons); }
+.card-inmate .charge.charge-2911, .card-inmate .charge.charge-2909 { color: var(--cat-property); }
+.card-inmate .charge.charge-2913 { color: var(--cat-theft); }
+.card-inmate .charge.charge-2925 { color: var(--cat-drugs); }
+.card-inmate .charge.charge-2919 { color: var(--cat-family); }
 .card-inmate .charge .ct-count {
   color: var(--fg-muted);
   font-size: 11px;
@@ -740,12 +759,15 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   border: 0;
   border-top: 1px solid var(--border);
 }
-/* Category color layer: top-border + text hue per ORC chapter, collapsed onto
-   five buckets. "Other" keeps the neutral base (gray) so its text clears AA. */
-.chap-2903, .chap-2907, .chap-2919, .chap-2917 { color: var(--case-criminal); border-top-color: var(--case-criminal); }  /* violence / sex */
-.chap-2923                                      { color: var(--case-traffic);  border-top-color: var(--case-traffic); }   /* weapons */
-.chap-2911, .chap-2913, .chap-2909              { color: var(--case-civil);    border-top-color: var(--case-civil); }     /* property */
-.chap-2925                                      { color: var(--ok);            border-top-color: var(--ok); }             /* drugs */
+/* Category color layer: top-border + text hue per ORC chapter, aligned with
+   the 7-bucket legend / --cat-* tokens. "Other" (2917, 2921, traffic) keeps
+   the neutral base so its text clears AA. */
+.chap-2903, .chap-2907 { color: var(--cat-violence); border-top-color: var(--cat-violence); }  /* violence / sex */
+.chap-2923             { color: var(--cat-weapons);  border-top-color: var(--cat-weapons); }   /* weapons */
+.chap-2911, .chap-2909 { color: var(--cat-property); border-top-color: var(--cat-property); }  /* burglary / property */
+.chap-2913             { color: var(--cat-theft);    border-top-color: var(--cat-theft); }     /* theft / fraud */
+.chap-2925             { color: var(--cat-drugs);    border-top-color: var(--cat-drugs); }     /* drugs */
+.chap-2919             { color: var(--cat-family);   border-top-color: var(--cat-family); }    /* family / domestic */
 
 @media (max-width: 1080px) { .rb-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 540px) { .rb-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1319,7 +1341,38 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 /* Page-level helpers used by /stats/ and /statute/ headers. */
 /* .doc-h page titles are h1 for heading structure but keep the plain
    header-stack rendering they had as divs. */
-.doc-h h1.title { font-size: inherit; font-weight: inherit; margin: 0; line-height: inherit; }
+/* Doc-page header hierarchy: display-size title, muted sub, small stamp.
+   (The h1s were previously normalized to body size; promoted 2026-07-02.) */
+.doc-h {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 0 0 18px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--fg);
+}
+.doc-h .title {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 4px;
+}
+.doc-h .sub {
+  font-size: 13px;
+  color: var(--fg-muted);
+  max-width: 70ch;
+}
+.doc-h .stamp {
+  font-size: 11px;
+  color: var(--fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 .note-paragraph        { margin: 0.6rem 0 0; }
 .note-paragraph-tight  { margin: 0.4rem 0 0; }
 .note-paragraph-loose  { margin: 1.5rem 0 0.6rem; }
@@ -2416,6 +2469,14 @@ h2.legal-anchor {
   background: var(--fg-muted);
   flex: 0 0 auto;
 }
+/* Legend dots carry the same 7-bucket palette the cards and pills use. */
+.legend .charge-2903 .dot   { background: var(--cat-violence); }
+.legend .charge-2923 .dot   { background: var(--cat-weapons); }
+.legend .charge-2911 .dot   { background: var(--cat-property); }
+.legend .charge-2913 .dot   { background: var(--cat-theft); }
+.legend .charge-2925 .dot   { background: var(--cat-drugs); }
+.legend .charge-2919 .dot   { background: var(--cat-family); }
+.legend .charge-traffic .dot { background: var(--cat-other); }
 
 /* --- About JCStream block --- */
 .about-jcstream {
