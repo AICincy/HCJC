@@ -82,13 +82,16 @@
           </article>
         </xsl:for-each>
 
+        <!-- Derive link targets from the channel's own <link> so a subpath
+             deploy doesn't break the footer (the channel link is templated). -->
+        <xsl:variable name="site" select="/rss/channel/link"/>
         <footer>
           &#169; JCStream &#183;
-          <a href="/">homepage</a> &#183;
-          <a href="/data/">data &amp; methodology</a> &#183;
-          <a href="/feed.xml">all changes feed</a> &#183;
-          <a href="/booked.xml">bookings only</a> &#183;
-          <a href="/released.xml">releases only</a>
+          <a href="{$site}">homepage</a> &#183;
+          <a href="{concat($site, 'data/')}">data &amp; methodology</a> &#183;
+          <a href="{concat($site, 'feed.xml')}">all changes feed</a> &#183;
+          <a href="{concat($site, 'booked.xml')}">bookings only</a> &#183;
+          <a href="{concat($site, 'released.xml')}">releases only</a>
         </footer>
       </body>
     </html>
