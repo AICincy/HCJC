@@ -226123,30 +226123,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-25T09:24:10Z",
-    "inmate_number": "1740082",
-    "name": "BURRELL DAVID",
+    "date": "2026-06-25",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-25T09:24:10Z",
-    "inmate_number": "2415029",
-    "name": "MONHOLLEN RYAN",
+    "date": "2026-06-25",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-25T11:25:41Z",
-    "inmate_number": "14735384",
-    "name": "PEREZ LEONDAN",
+    "date": "2026-06-25",
     "tier": null,
-    "category": null,
-    "note": "booked 6/25/26"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-25",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-25",
+    "tier": "F4",
+    "category": "Attempt to commit an offense"
   },
   {
     "event": "booked",
@@ -236479,5 +236482,50 @@
     "tier": "MM",
     "category": "Illegal use or possession of drug paraphernalia",
     "note": "booked 7/2/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-02T11:30:29Z",
+    "inmate_number": "1228442",
+    "name": "BAZEL JOSEPH",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 7/2/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-02T11:30:29Z",
+    "inmate_number": "1712538",
+    "name": "STEVENS GARY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-02T11:30:29Z",
+    "inmate_number": "2011786",
+    "name": "LANDIN MICHAEL",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-02T11:30:29Z",
+    "inmate_number": "2059450",
+    "name": "SAVELL JAMIE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 7/2/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-02T11:30:29Z",
+    "inmate_number": "2232308",
+    "name": "DUBOSE ADRIAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
