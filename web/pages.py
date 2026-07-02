@@ -21,6 +21,7 @@ from jinja2 import Environment
 from scraper.client import DEFAULT_UA
 from scraper.models import ChangeEvent, Inmate, Snapshot
 from scraper.photos import downscale_and_save
+from scraper.store import load_block_log
 from web.classify import (
     _expand_race,
     _expand_sex,
@@ -39,6 +40,7 @@ from web.shape import (
     _top_offenses_with_orc,
     _upcoming_courts,
 )
+from web.transparency import compute_transparency_metrics
 
 
 def _extract_row_dt(row: dict, field_candidates: tuple[str, ...]) -> datetime | None:
@@ -273,6 +275,20 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
         courtclerk_cases_available=(Path("data") / "courtclerk_cases.json").exists(),
     )
     (data_out / "index.html").write_text(page, encoding="utf-8")
+
+
+def _render_transparency_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> None:
+    """Public accountability scorecard computed from the WAF-block evidence
+    ledger, plus a JSON mirror of the metrics under /data/ so exhibit numbers
+    for public-records filings regenerate on every build."""
+    metrics = compute_transparency_metrics(load_block_log(), snapshot.generated_utc)
+    page = env.get_template("transparency.html").render(metrics=metrics)
+    target = out_dir / "transparency" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+    data_out = out_dir / "data"
+    data_out.mkdir(parents=True, exist_ok=True)
+    (data_out / "transparency_metrics.json").write_text(json.dumps(metrics, indent=2) + "\n", encoding="utf-8")
 
 
 def _tally_attribute(inmates: list[Inmate], attr: str, expand) -> list[tuple[str, int]]:
