@@ -10,7 +10,6 @@
   --bg:           #fafafa;
   --bg-soft:      #FDF5EE;
   --surface:      #FDF5EE;
-  --surface-hi:   #F5F0EB;
   --border:       #CCCCCC;
   --border-hi:    #DDDDDD;
 
@@ -19,15 +18,14 @@
   --fg-muted:     #5c5c5c;
   --fg-dim:       #858585;
 
+  /* #B33A2A and #FDF5EE repeat literally across semantic tokens on purpose:
+     the print :root overrides --accent and --surface independently, so
+     var()-aliasing (e.g. --warn: var(--accent)) would recolor warn/criminal
+     chips in print. Retune by find-replacing the hex, not by aliasing. */
   --accent:       #B33A2A;
   --accent-hi:    #8C2E21;
   --accent-bg:    #FDF5EE;
   --accent-bg-2:  #F5F0EB;
-  --border-red:   #B33A2A;
-  --bg-disclaimer:#FDF5EE;
-  --bg-header:    #1A1A1A;
-  --text-header:  #F5F0EB;
-  --danger:       #B33A2A;
   --warn:         #B33A2A;
   --warn-bg:      #FDF5EE;
   --ok:           #4d7838;
@@ -63,7 +61,6 @@
 
   --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-sans:    var(--font-mono);
-  --font-serif:   var(--font-mono);
 
   color-scheme: light;
 }
@@ -493,6 +490,8 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   border-radius: var(--radius);
   font-family: var(--font-mono);
 }
+/* Variant classes are built dynamically in main.js ('sr-' + tier); they do
+   not appear literally anywhere, so a grep for the class name misses them. */
 .sr-tier.sr-felony      { background: transparent; color: var(--fg); font-weight: 700; }
 .sr-tier.sr-misdemeanor { background: transparent; color: var(--fg-soft); font-weight: 400; text-transform: none; }
 .sr-tier.sr-x           { background: transparent; color: var(--fg-muted); font-weight: 400; }
@@ -725,9 +724,7 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 
 /* Chapter / category pill — categorical encoding via text + position only.
    The .chap-{category} class stays for filter JS to read, but no longer
-   paints color. --cat custom property still set in .chap-* / .charge-* /
-   .cat-* rules but no longer consumed visually (dead-variable cleanup
-   belongs in a follow-up). */
+   paints color. */
 .chap {
   display: inline-flex;
   align-items: center;
@@ -742,10 +739,6 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   background: transparent;
   border: 0;
   border-top: 1px solid var(--border);
-}
-.chap[data-active="true"], .chap.is-active {
-  color: var(--fg);
-  border-top-color: var(--accent);
 }
 /* Category color layer: top-border + text hue per ORC chapter, collapsed onto
    five buckets. "Other" keeps the neutral base (gray) so its text clears AA. */
@@ -798,30 +791,6 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   box-shadow: none;
-}
-.court-hero-eyebrow {
-  display: block;
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 14px;
-}
-.court-hero-title {
-  font-size: clamp(22px, 3vw, 30px);
-  line-height: 1.05;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: var(--fg);
-  margin: 0 0 14px;
-}
-.court-hero-sub {
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--fg-soft);
-  margin: 0;
-  max-width: 50ch;
 }
 .court-hero-stats {
   display: grid;
@@ -1167,69 +1136,6 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   margin-top: 4px;
 }
 
-.visit-scope, .visit-removal {
-  padding: 14px 18px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  margin: 0 0 14px;
-  box-shadow: none;
-}
-.visit-section-h {
-  font-size: clamp(22px, 2.8vw, 30px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin: 0 0 8px;
-  color: var(--fg);
-}
-.visit-section-sub {
-  font-size: 14px;
-  color: var(--fg-muted);
-  margin: 0 0 22px;
-  line-height: 1.55;
-  max-width: 65ch;
-}
-.visit-bullets {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 28px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--fg-soft);
-}
-.visit-bullets li {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--border);
-}
-.visit-bullets li:last-child, .visit-bullets li:nth-last-child(2) { border-bottom: 0; }
-.visit-bullet-mark {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: var(--radius-lg);
-  background: var(--warn-bg);
-  color: var(--warn);
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-@media (max-width: 720px) {
-  .visit-bullets { grid-template-columns: 1fr; gap: 8px; }
-  .visit-bullets li:nth-last-child(2) { border-bottom: 1px solid var(--border); }
-  .visit-scope, .visit-removal { padding: 22px 20px; }
-}
-
-.visit-removal p { font-size: 14.5px; line-height: 1.6; color: var(--fg-soft); margin: 0 0 14px; max-width: 70ch; }
 .visit-no-fee {
   font-size: 15px !important;
   color: var(--fg) !important;
@@ -1285,6 +1191,10 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 /* Compact legend below the filter bar. */
 
 .legend .tier { line-height: 1; height: 16px; padding: 0 6px; font-size: 9.5px; }
+.legend .legend-tier { font-size: .55rem; }
+
+/* Sheriff illustration inside the WAF-interruption banner. */
+.waf-sheriff { float: right; max-height: 460px; max-width: 45%; height: auto; margin: 0 0 .5rem 1rem; }
 
 /* ===== Inmate detail page ===== */
 .breadcrumb {
@@ -1407,7 +1317,9 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 }
 
 /* Page-level helpers used by /stats/ and /statute/ headers. */
-.page-title { font-size: 36px; margin: 0 0 14px; letter-spacing: -0.025em; }
+/* .doc-h page titles are h1 for heading structure but keep the plain
+   header-stack rendering they had as divs. */
+.doc-h h1.title { font-size: inherit; font-weight: inherit; margin: 0; line-height: inherit; }
 .note-paragraph        { margin: 0.6rem 0 0; }
 .note-paragraph-tight  { margin: 0.4rem 0 0; }
 .note-paragraph-loose  { margin: 1.5rem 0 0.6rem; }
@@ -1765,7 +1677,10 @@ a.orc-code:hover { border-bottom-style: solid; }
 .ladder-M1, .ladder-M2, .ladder-M3, .ladder-M4, .ladder-MM {
   background: var(--surface); border: 1px solid var(--tier-misdemeanor);
 }
-/* Felony cell text: light on F1 to F3, near-black on the warm F4/F5. */
+/* Felony cell text: light on F1 to F3, near-black on the warm F4/F5.
+   The color rules (tier+max+tag, split by ink) and the weight rule (tier
+   only, all five) cover different element sets; merging them duplicates
+   declarations rather than saving any. Left split on purpose. */
 .ladder-F1 .ladder-tier, .ladder-F2 .ladder-tier, .ladder-F3 .ladder-tier,
 .ladder-F1 .ladder-max,  .ladder-F2 .ladder-max,  .ladder-F3 .ladder-max,
 .ladder-F1 .ladder-tag,  .ladder-F2 .ladder-tag,  .ladder-F3 .ladder-tag { color: var(--tier-felony-ink); }
@@ -1984,7 +1899,7 @@ a.orc-code:hover { border-bottom-style: solid; }
   border-radius: var(--radius);
   background: var(--surface);
 }
-.empty h3 { color: var(--fg); margin: 0 0 0.3rem; font-size: 16px; font-weight: 600; }
+.empty h2, .empty h3 { color: var(--fg); margin: 0 0 0.3rem; font-size: 16px; font-weight: 600; }
 
 /* ===== Stats page ===== */
 
@@ -2129,7 +2044,7 @@ h2.legal-anchor {
 
 /* ===== Print ===== */
 @media print {
-  :root { --bg: #fff; --bg-soft: #fff; --surface: #fff; --surface-hi: #f4f4f4;
+  :root { --bg: #fff; --bg-soft: #fff; --surface: #fff;
           --border: #ccc; --border-hi: #bbb; --fg: #111; --fg-soft: #333;
           --fg-muted: #555; --fg-dim: #777; --accent: #2a3f9f; }
   html, body { background: #fff; color: #111; }
@@ -2564,17 +2479,6 @@ footer.site .footer-legal strong { color: var(--fg); }
    Display-size eyebrow + h1, KPI cards with accent treatment,
    stat bars with proper depth, modern statute item cards.
    ============================================================ */
-
-/* Cross-page hero typography (.hero-eyebrow + .record-name.page-title
-   are used on stats/statute/data/inmate; tune them globally). */
-.page-title, .record-name.page-title {
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-  color: var(--fg);
-  margin: 0 0 16px;
-}
 
 /* KPI cards */
 .kpis {

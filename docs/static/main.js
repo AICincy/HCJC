@@ -246,6 +246,7 @@
   //     to satisfy CodeQL DOM-text-reinterpreted-as-HTML checks.
   var sbox = document.getElementById('search-box');
   var sresults = document.getElementById('search-results');
+  var sstatus = document.getElementById('search-status');
   if (sbox && sresults) {
     var idx = null, loading = false;
     function loadIdx() {
@@ -258,7 +259,11 @@
     function clearEl(el) { while (el.firstChild) el.removeChild(el.firstChild); }
     function render() {
       var q = (sbox.value || '').trim().toLowerCase();
-      if (!q || q.length < 2 || !idx) { sresults.hidden = true; sbox.setAttribute('aria-expanded', 'false'); return; }
+      if (!q || q.length < 2 || !idx) {
+        sresults.hidden = true;
+        if (sstatus) sstatus.textContent = '';
+        return;
+      }
       var hits = [];
       for (var i = 0; i < idx.length && hits.length < 20; i++) {
         var r = idx[i];
@@ -291,13 +296,19 @@
         });
       }
       sresults.hidden = false;
-      sbox.setAttribute('aria-expanded', 'true');
+      // Announce a count via the sr-only status node instead of making the
+      // whole re-rendered list a live region (verbose in some screen readers).
+      if (sstatus) {
+        sstatus.textContent = hits.length
+          ? hits.length + (hits.length === 1 ? ' result' : ' results')
+          : 'No results';
+      }
     }
     sbox.addEventListener('focus', loadIdx);
     sbox.addEventListener('input', function () { loadIdx(); render(); });
-    sbox.addEventListener('keydown', function (e) { if (e.key === 'Escape') { sresults.hidden = true; sbox.setAttribute('aria-expanded', 'false'); } });
+    sbox.addEventListener('keydown', function (e) { if (e.key === 'Escape') { sresults.hidden = true; } });
     document.addEventListener('click', function (e) {
-      if (!sresults.contains(e.target) && e.target !== sbox) { sresults.hidden = true; sbox.setAttribute('aria-expanded', 'false'); }
+      if (!sresults.contains(e.target) && e.target !== sbox) { sresults.hidden = true; }
     });
   }
 })();
