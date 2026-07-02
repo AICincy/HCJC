@@ -14,7 +14,10 @@ For each session below:
 1. Open the URL.
 2. Export the transcript (Share / Export in the session menu). Prefer the
    fullest format offered; Markdown if given a choice.
-3. Save the file unmodified into `audit/sessions/` with the exact name shown.
+3. Save the file into `audit/sessions/`, renaming it to the exact filename
+   shown in the table; do not modify its content. Record the original
+   export filename alongside the new path in the README ledger row so the
+   rename itself is part of the chain-of-custody record (ORC 149.43).
 4. Note the first and last message dates from the transcript.
 
 | # | Open this URL | Save as |
@@ -26,10 +29,12 @@ For each session below:
 
 ## After all four files are saved
 
-5. Update the ledger table in `audit/sessions/README.md`: transcript
-   filename, date range (from step 4), export date (today).
-6. Update the matching table in `CLAUDE.md` ("Chain of Custody"): replace
-   each date-range `[VERIFY]` with the confirmed range.
+5. Update `audit/sessions/README.md`: change the status line ("designated,
+   not yet populated") to filed, and fill the ledger table (transcript
+   filename, original export filename, date range from step 4, export date).
+6. Update `CLAUDE.md` ("Chain of Custody"): change the "not yet filed"
+   status text to filed, and replace each date-range `[VERIFY]` in the
+   table with the confirmed range.
 7. Commit everything in one commit:
    `evidence: file chain-of-custody transcripts (4 sessions)`
 8. Push to main (or hand the commit to a Claude session to push and PR).
