@@ -20,6 +20,7 @@ from jinja2 import Environment
 
 from scraper.client import DEFAULT_UA
 from scraper.models import ChangeEvent, Inmate, Snapshot
+from scraper.open_data_feeds import FEEDS
 from scraper.photos import downscale_and_save
 from scraper.store import load_block_log
 from web.classify import (
@@ -256,8 +257,6 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     """Documentation + download index for the raw JSON the site is built from."""
     data_out = out_dir / "data"
     data_out.mkdir(parents=True, exist_ok=True)
-    from scraper.open_data_feeds import FEEDS
-
     supplemental = [f.filename for f in FEEDS]
     for name in (
         "current.json",

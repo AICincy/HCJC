@@ -367,6 +367,14 @@ def _fetch_details(
                 # Drop queued fetches so the with-block exit doesn't run the
                 # whole remaining queue after the cap fired.
                 pool.shutdown(wait=False, cancel_futures=True)
+                # Carry the never-fetched remainder forward from previous;
+                # without this they vanish from current and the diff emits
+                # synthetic release events for people still in custody.
+                for pending_iid in to_fetch:
+                    if pending_iid not in current and pending_iid in previous:
+                        current[pending_iid] = previous[pending_iid].model_copy(
+                            update={"last_seen_utc": utcnow_iso()}
+                        )
                 break
             done += 1
             n_detail_attempts += 1

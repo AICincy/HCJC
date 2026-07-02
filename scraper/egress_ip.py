@@ -16,12 +16,15 @@ from __future__ import annotations
 import argparse
 import ipaddress
 import json
+import logging
 import sys
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
 
 from .models import utcnow_iso
+
+log = logging.getLogger(__name__)
 
 META_URL = "https://api.github.com/meta"
 IPIFY_URL = "https://api.ipify.org?format=json"
@@ -46,7 +49,8 @@ def runner_public_ip() -> str | None:
     """Best-effort public IP of the current host; None on lookup failure."""
     try:
         return _get_json(IPIFY_URL).get("ip")
-    except Exception:
+    except Exception as e:
+        log.debug("public-IP lookup via %s failed: %s", IPIFY_URL, e)
         return None
 
 

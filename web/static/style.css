@@ -486,6 +486,11 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   border-radius: var(--radius);
   font-family: var(--font-mono);
 }
+/* Variant classes are built dynamically in main.js ('sr-' + tier); they do
+   not appear literally anywhere, so a grep for the class name misses them. */
+.sr-tier.sr-felony      { background: transparent; color: var(--fg); font-weight: 700; }
+.sr-tier.sr-misdemeanor { background: transparent; color: var(--fg-soft); font-weight: 400; text-transform: none; }
+.sr-tier.sr-x           { background: transparent; color: var(--fg-muted); font-weight: 400; }
 .sr-item .sr-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sr-item .sr-charge { font-size: 11px; color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; letter-spacing: 0.02em; }
 
@@ -1182,6 +1187,10 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 /* Compact legend below the filter bar. */
 
 .legend .tier { line-height: 1; height: 16px; padding: 0 6px; font-size: 9.5px; }
+.legend .legend-tier { font-size: .55rem; }
+
+/* Sheriff illustration inside the WAF-interruption banner. */
+.waf-sheriff { float: right; max-height: 460px; max-width: 45%; height: auto; margin: 0 0 .5rem 1rem; }
 
 /* ===== Inmate detail page ===== */
 .breadcrumb {
