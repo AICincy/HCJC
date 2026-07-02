@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import statistics
+
 from scraper import orc as orc_mod
 from scraper.models import Inmate
 from web.classify import _DEGREE_RE, _charge_tier, _parse_bond_amount
@@ -9,6 +11,45 @@ from web.classify import _DEGREE_RE, _charge_tier, _parse_bond_amount
 from .common import RosterIndexes, _cached_offenses
 
 _BOND_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
+
+# Suppression floor for the bond-disparity page: statutes with fewer current
+# bookings than this are omitted entirely, so no row can describe a single
+# person's bond.
+BOND_DISPARITY_MIN_N = 5
+
+
+def _bond_disparity(indexes: RosterIndexes, offenses: dict, min_n: int = BOND_DISPARITY_MIN_N) -> list[dict]:
+    """Per-statute bond dispersion rows for the /bond-disparity/ page.
+
+    Consumes the pre-built ``bonds_by_code`` arrays (sorted, positive bond
+    amounts of each inmate's first-listed charge). Statutes below ``min_n``
+    are suppressed. Spread is Q3/Q1 (interquartile ratio); quartiles come
+    from ``statistics.quantiles(n=4)``. Rows sort by spread descending,
+    ties by sample size.
+    """
+    rows: list[dict] = []
+    for code, vals in indexes.bonds_by_code.items():
+        # max(min_n, 2): quantiles needs two points, and a floor below 2
+        # would defeat the suppression purpose anyway.
+        if len(vals) < max(min_n, 2):
+            continue
+        q1, med, q3 = statistics.quantiles(vals, n=4)
+        rows.append(
+            {
+                "code": code,
+                "title": orc_mod.title_for(code, offenses),
+                "degree": orc_mod.degree_for(code, offenses),
+                "n": len(vals),
+                "min": vals[0],
+                "q1": round(q1),
+                "median": round(med),
+                "q3": round(q3),
+                "max": vals[-1],
+                "spread": round(q3 / q1, 1) if q1 > 0 else None,
+            }
+        )
+    rows.sort(key=lambda r: (-(r["spread"] or 0.0), -r["n"]))
+    return rows
 
 
 def _bond_primary_code_and_bond(target: Inmate, offenses: dict) -> tuple[str, int | None]:

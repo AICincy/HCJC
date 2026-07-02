@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Bond Disparity Index &middot; JCStream{% endblock %}
+{% block body_class %}detail{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Bond disparity</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Bond Disparity Index</div>
+    <div class="sub">Per-statute bond spread on the current roster &middot; snapshot {{ snapshot.generated_utc[:16] }}Z</div>
+  </div>
+</header>
+
+<p class="page-lede">For each Ohio Revised Code section with at least {{ min_n }} people currently booked under it who carry a posted bond amount, this table shows how widely those bond amounts vary. Spread is the interquartile ratio (Q3 divided by Q1): a spread of 1.0 means the middle half of bonds are identical; a spread of 10 means the 75th-percentile bond is ten times the 25th-percentile bond for the same statute. Ranked widest spread first.</p>
+
+{% if rows %}
+<table class="charges">
+  <caption class="sr-only">Bond dispersion by ORC section, ranked by spread</caption>
+  <thead><tr>
+    <th scope="col">Statute</th>
+    <th scope="col">Offense</th>
+    <th scope="col">n</th>
+    <th scope="col">Min</th>
+    <th scope="col">Q1</th>
+    <th scope="col">Median</th>
+    <th scope="col">Q3</th>
+    <th scope="col">Max</th>
+    <th scope="col">Spread</th>
+  </tr></thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td><a href="{{ base_url }}/statute/#orc-{{ r.code | replace('.', '-') }}">{{ r.code }}</a></td>
+      <td>{{ (r.title or 'unmapped') | lower }}{% if r.degree in tier_ladder %} <span class="tier tier-{{ r.degree }}">{{ r.degree }}</span>{% endif %}</td>
+      <td>{{ r.n }}</td>
+      <td>${{ "{:,}".format(r.min) }}</td>
+      <td>${{ "{:,}".format(r.q1) }}</td>
+      <td>${{ "{:,}".format(r.median) }}</td>
+      <td>${{ "{:,}".format(r.q3) }}</td>
+      <td>${{ "{:,}".format(r.max) }}</td>
+      <td>{% if r.spread is not none %}{{ r.spread }}&times;{% else %}n/a{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">No statute currently has {{ min_n }} or more bookings with a posted bond amount, so no rows are shown. The suppression floor exists so that no row can describe a single person's bond.</p>
+{% endif %}
+
+<h2 class="sect-h">Methodology</h2>
+<p class="muted">Source: bond amounts printed on the HCSO public inmate roster, mirrored by this site (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC &sect; 149.43</a>). Each person contributes one amount: the posted bond of their first-listed charge, attributed to that charge's ORC section. People with no parseable bond amount, or a $0 amount, are excluded. This is a snapshot in time of the current roster, not a longitudinal study; it changes with every update cycle.</p>
+<p class="muted">Statutes with fewer than {{ min_n }} qualifying people are suppressed entirely, so no row can identify an individual's bond. Quartiles are computed with Python's <code>statistics.quantiles</code> (n=4, exclusive method); spread is Q3/Q1.</p>
+<p class="muted">Read this page carefully: bond amounts reflect judicial decisions made on individual facts (criminal history, flight risk, specific conduct charged) that are not visible in this data. A wide spread shows dispersion, not misconduct. Charges under the same ORC section can differ by degree and subsection, and everyone listed is presumed innocent unless and until proven guilty in a court of law.</p>
+{% endblock %}

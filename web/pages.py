@@ -32,6 +32,9 @@ from web.classify import (
     _tier_max,
 )
 from web.shape import (
+    BOND_DISPARITY_MIN_N,
+    RosterIndexes,
+    _bond_disparity,
     _court_calendar,
     _court_slippage,
     _crimes_of_month,
@@ -388,6 +391,21 @@ def _render_stats_page(env: Environment, snapshot: Snapshot, by_month, trend: di
     stats = _compute_stats(snapshot, by_month)
     page = env.get_template("stats.html").render(snapshot=snapshot, s=stats, trend=trend)
     target = out_dir / "stats" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
+def _render_bond_disparity_page(env: Environment, snapshot: Snapshot, offenses: dict, out_dir: Path) -> None:
+    """Flagship analytics: per-statute bond dispersion with the n >= 5
+    suppression floor. Aggregate only; no individual bonds are shown."""
+    idx = RosterIndexes(snapshot.inmates, offenses)
+    rows = _bond_disparity(idx, offenses)
+    page = env.get_template("bond-disparity.html").render(
+        snapshot=snapshot,
+        rows=rows,
+        min_n=BOND_DISPARITY_MIN_N,
+    )
+    target = out_dir / "bond-disparity" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
 

@@ -310,6 +310,7 @@ def build(out_dir: Path) -> int:
     _render_transparency_page(env, snapshot, out_dir)
     _render_stats_page(env, snapshot, rd["by_month"], rd["trend"], out_dir)
     _render_statute_page(env, snapshot, offenses, out_dir)
+    _render_bond_disparity_page(env, snapshot, offenses, out_dir)
     _render_court_page(env, snapshot, out_dir)
     _render_visit_page(env, out_dir)
     _render_help_page(env, out_dir)
@@ -395,6 +396,7 @@ from web.outputs import (  # noqa: E402
 )
 from web.pages import (  # noqa: E402
     IndexContext,
+    _render_bond_disparity_page,
     _render_court_page,
     _render_courts_page,
     _render_data_page,
