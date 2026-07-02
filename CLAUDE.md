@@ -187,6 +187,16 @@ run and keeping last-good data. This is the guard working, not a bug.
    complete, which is worse than stale data. Tuning `crawl_delay` / `concurrency`
    in `client.py` only helps if errors are borderline (≈3/26), not a hard block.
 
+### Pages deploy stuck in deployment_queued
+
+The "pages build and deployment" run occasionally sits in
+`deployment_queued` for many minutes while githubstatus.com says Pages is
+operational. This is GitHub-side queueing. Do not chase it: the artifact
+is already built, the site keeps serving the previous deploy, and the next
+sweep (~20-45 min) triggers a fresh deploy that supersedes the stuck one.
+Only investigate if the live `Generated` timestamp lags main by more than
+two sweep cycles.
+
 ### Optional features (owner-side setup, not something I can do from here)
 
 - **Giscus comments** on inmate pages (`web/templates/inmate.html` renders the

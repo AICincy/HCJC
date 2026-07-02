@@ -18,6 +18,10 @@
   --fg-muted:     #5c5c5c;
   --fg-dim:       #858585;
 
+  /* #B33A2A and #FDF5EE repeat literally across semantic tokens on purpose:
+     the print :root overrides --accent and --surface independently, so
+     var()-aliasing (e.g. --warn: var(--accent)) would recolor warn/criminal
+     chips in print. Retune by find-replacing the hex, not by aliasing. */
   --accent:       #B33A2A;
   --accent-hi:    #8C2E21;
   --accent-bg:    #FDF5EE;
@@ -1673,7 +1677,10 @@ a.orc-code:hover { border-bottom-style: solid; }
 .ladder-M1, .ladder-M2, .ladder-M3, .ladder-M4, .ladder-MM {
   background: var(--surface); border: 1px solid var(--tier-misdemeanor);
 }
-/* Felony cell text: light on F1 to F3, near-black on the warm F4/F5. */
+/* Felony cell text: light on F1 to F3, near-black on the warm F4/F5.
+   The color rules (tier+max+tag, split by ink) and the weight rule (tier
+   only, all five) cover different element sets; merging them duplicates
+   declarations rather than saving any. Left split on purpose. */
 .ladder-F1 .ladder-tier, .ladder-F2 .ladder-tier, .ladder-F3 .ladder-tier,
 .ladder-F1 .ladder-max,  .ladder-F2 .ladder-max,  .ladder-F3 .ladder-max,
 .ladder-F1 .ladder-tag,  .ladder-F2 .ladder-tag,  .ladder-F3 .ladder-tag { color: var(--tier-felony-ink); }
