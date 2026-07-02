@@ -34,20 +34,22 @@ verbatim. Do not abbreviate. Do not redact. Do not reformat.
 | session_019fDevbfpgmnjJP7A343T95 | [VERIFY] |
 | session_01NGMSLESEepbgV8aSn4reVG | [VERIFY] |
 
-Authoritative storage location: [VERIFY]. This repository does not hold
-the transcripts. The 2026-06-16 code review flagged the absence as a
-Critical finding. See `audit/code-review-2026-06-16/00-summary.md`. Until
-this section records a confirmed storage location, a court submission
-citing these IDs cannot point to this repository as the location of
-record.
+Authoritative storage location: `audit/sessions/` in this repository
+(designated 2026-07-02; ledger and filing procedure in
+`audit/sessions/README.md`). Transcripts are **not yet filed**; until they
+are, they exist only in the owner's claude.ai session history, and a court
+submission citing these IDs must say so. The 2026-06-16 code review
+flagged the undocumented location as a Critical finding. See
+`audit/code-review-2026-06-16/00-summary.md`.
 
 Retrieval procedure:
 
 1. Sign in to the account that owns the session.
 2. Open https://claude.ai/code/<session_id>.
 3. Export the transcript.
-4. File it at the authoritative storage location above.
-5. Replace the [VERIFY] tags with the confirmed location and date range.
+4. File it in `audit/sessions/` as `<session_id>.md`.
+5. Replace the date-range [VERIFY] tags here and in the
+   `audit/sessions/README.md` ledger with the confirmed dates.
 
 ## Hard constraints (violations are accessibility failures, not style issues)
 
