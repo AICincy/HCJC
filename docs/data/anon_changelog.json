@@ -228247,66 +228247,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-26T20:51:36Z",
-    "inmate_number": "14072887",
-    "name": "FEARS ASHLEY",
+    "date": "2026-06-26",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-26T20:51:36Z",
-    "inmate_number": "14599787",
-    "name": "ARMFIELD JHON",
+    "date": "2026-06-26",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-26T20:51:36Z",
-    "inmate_number": "14715212",
-    "name": "JOHNSON DANIELLE",
+    "date": "2026-06-26",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/26/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-26T20:51:36Z",
-    "inmate_number": "14815060",
-    "name": "GRAY MARTASIAH",
+    "date": "2026-06-26",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-26T21:30:27Z",
-    "inmate_number": "14815060",
-    "name": "GRAY MARTASIAH",
+    "date": "2026-06-26",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-26T21:30:27Z",
-    "inmate_number": "2441336",
-    "name": "SKINNER CHRISTOPHER",
+    "date": "2026-06-26",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/26/26"
+    "category": "Assault"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-26T21:30:27Z",
-    "inmate_number": "14344327",
-    "name": "ADAMS MICHAEL",
+    "date": "2026-06-26",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -237721,5 +237700,68 @@
     "tier": null,
     "category": null,
     "note": "booked 7/3/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-03T21:45:03Z",
+    "inmate_number": "1293576",
+    "name": "LEWIS LARRY",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-03T21:45:03Z",
+    "inmate_number": "14355166",
+    "name": "JOINER TONY",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-03T21:45:03Z",
+    "inmate_number": "14649280",
+    "name": "WHITFIELD JOURNY",
+    "tier": "M1",
+    "category": "Endangering children",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-03T21:45:03Z",
+    "inmate_number": "14690026",
+    "name": "SESSIONS TERRANCE",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-03T21:45:03Z",
+    "inmate_number": "1774343",
+    "name": "WALKER MARK",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-03T21:45:03Z",
+    "inmate_number": "2552483",
+    "name": "LINSKEY JOSHUA",
+    "tier": "M1",
+    "category": "Menacing by stalking",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-03T21:45:03Z",
+    "inmate_number": "1551787",
+    "name": "WILLIAMS ERNEST",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
