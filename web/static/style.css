@@ -1,17 +1,22 @@
 /* JCStream — public-records mirror.
-   Blending neutrals: warm off-white, IBM Plex Mono, muted-red accent. */
+   Civic-modern light: Public Sans UI type, mono reserved for data (numbers,
+   ORC codes, case numbers), white surfaces with soft depth, red as signal. */
 
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("/static/fonts/plex-mono-400.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("/static/fonts/plex-mono-500.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 600; font-display: swap; src: url("/static/fonts/plex-mono-600.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 700; font-display: swap; src: url("/static/fonts/plex-mono-700.woff2") format("woff2"); }
+@font-face { font-family: "Public Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("/static/fonts/public-sans-400.woff2") format("woff2"); }
+@font-face { font-family: "Public Sans"; font-style: normal; font-weight: 500; font-display: swap; src: url("/static/fonts/public-sans-500.woff2") format("woff2"); }
+@font-face { font-family: "Public Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("/static/fonts/public-sans-600.woff2") format("woff2"); }
+@font-face { font-family: "Public Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url("/static/fonts/public-sans-700.woff2") format("woff2"); }
 
 :root {
-  --bg:           #fafafa;
-  --bg-soft:      #FDF5EE;
-  --surface:      #FDF5EE;
-  --border:       #CCCCCC;
-  --border-hi:    #DDDDDD;
+  --bg:           #F6F5F3;
+  --bg-soft:      #FBFAF9;
+  --surface:      #FFFFFF;
+  --border:       #E2DFDA;
+  --border-hi:    #D4D0C9;
 
   --fg:           #1A1A1A;
   --fg-soft:      #333333;
@@ -64,18 +69,18 @@
   --tier-felony-ink-lo: #1A1A1A;  /* near-black text on the warm F4/F5 cells */
   --tier-misdemeanor:   #2F5E8C;  /* misdemeanor outline + text */
 
-  --radius:       0;
-  --radius-sm:    0;
-  --radius-lg:    0;
-  --radius-xl:    0;
+  --radius:       6px;
+  --radius-sm:    4px;
+  --radius-lg:    10px;
+  --radius-xl:    14px;
 
-  --shadow-card:  none;
-  --shadow-hover: none;
+  --shadow-card:  0 1px 2px rgba(26, 22, 16, 0.05), 0 3px 10px rgba(26, 22, 16, 0.05);
+  --shadow-hover: 0 2px 4px rgba(26, 22, 16, 0.07), 0 10px 26px rgba(26, 22, 16, 0.10);
 
   --masthead-h:   56px;
 
   --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-sans:    var(--font-mono);
+  --font-sans:    "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   color-scheme: light;
 }
@@ -111,10 +116,10 @@ html { background: var(--bg); }
 
 body {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.7;
-  letter-spacing: 0.01em;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  letter-spacing: 0;
   background: var(--bg);
   color: var(--fg);
   overflow-wrap: break-word;
@@ -538,9 +543,10 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   contain-intrinsic-size: 0 90px;
   border-left: 3px solid transparent;
 }
+.card-inmate { box-shadow: var(--shadow-card); transition: border-color 120ms, box-shadow 120ms; }
 .card-inmate:hover {
-  border-color: var(--accent);
-  border-left-color: var(--accent);
+  border-color: var(--border-hi);
+  box-shadow: var(--shadow-hover);
 }
 .thumb {
   display: block;
