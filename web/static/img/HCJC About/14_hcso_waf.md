@@ -106,7 +106,7 @@ Given the 2026-05-19 local-sweep diagnostic from a non-GHA IP showed the parser 
 ### Infrastructure options (in order of preference, all zero ongoing cost)
 
 1. **Self-hosted GitHub Actions runner on always-on residential hardware.**
-   - Raspberry Pi, old laptop, desktop that stays on; runs `actions-runner` from `github.com/AICincy/JCStream/settings/actions/runners/new`.
+   - Raspberry Pi, old laptop, desktop that stays on; runs `actions-runner` from `github.com/AICincy/HCJC/settings/actions/runners/new`.
    - sweep.yml change: `runs-on: [self-hosted, hcso-fetch]` instead of `ubuntu-latest`.
    - Consumer ISP IP is indistinguishable from any other home internet user fetching HCSO in a browser. High probability the WAF stops blocking immediately.
    - Downside: dependency on operator's network and hardware uptime.

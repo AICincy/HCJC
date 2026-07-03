@@ -70,7 +70,7 @@
     <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data - Pedestrian Stops Contact Cards (Socrata <code>swrz-ak2i</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
     <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data - Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
     <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data - Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed).</td></tr>
-    {% if courtclerk_cases_available %}<tr><td><a href="courtclerk_cases.json">courtclerk_cases.json</a></td><td>Crowdsourced case data submitted via the <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">case-data issue form</a> by people who looked the case up themselves at courtclerk.org. May be empty.</td></tr>{% endif %}
+    {% if courtclerk_cases_available %}<tr><td><a href="courtclerk_cases.json">courtclerk_cases.json</a></td><td>Crowdsourced case data submitted via the <a href="https://github.com/AICincy/HCJC/issues/new?template=case-data.yml">case-data issue form</a> by people who looked the case up themselves at courtclerk.org. May be empty.</td></tr>{% endif %}
     <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history. Verify downloads by running <code>sha256sum -c SHA256SUMS</code> in the directory you downloaded the files to (<code>shasum -a 256 -c SHA256SUMS</code> on macOS).</td></tr>
   </tbody>
 </table>
@@ -98,7 +98,7 @@ the inmate leaves the public roster.</p>
 inmate search (substring match on last name - the 26 single letters cover the whole
 roster with dedup), parses each detail page, downscales the photo, diffs against the prior
 snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commits. Source:
-<a href="https://github.com/AICincy/JCStream">github.com/AICincy/JCStream</a>.</p>
+<a href="https://github.com/AICincy/HCJC">github.com/AICincy/HCJC</a>.</p>
 
 <h2 id="crowdsource" class="sect-h">Crowdsourced courtclerk.org data</h2>
 <p>
@@ -111,7 +111,7 @@ snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commi
   This is a deliberate trade: coverage will always be patchy, because only what someone bothers to submit appears. The upside: every entry was looked up by a real person, so the data quality on what does come in is higher than any scraper would manage.
 </p>
 <p>
-  <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">Open the case-data form &rarr;</a>
+  <a href="https://github.com/AICincy/HCJC/issues/new?template=case-data.yml">Open the case-data form &rarr;</a>
 </p>
 
 <h2 id="anon" class="sect-h">Anonymized event log (permanent)</h2>
@@ -148,7 +148,7 @@ maintain a historical archive of removed records. For records subject to a court
 or expungement under <a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>
 (as amended - including changes by 135th&nbsp;G.A. HB&nbsp;234 and 136th&nbsp;G.A. HB&nbsp;96), this site
 will remove the record upon receiving notice of the order. To submit notice, or to report any error,
-open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
+open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a>.
 Removal and correction requests are processed at no cost - <strong>there is never a fee, and there
 never will be</strong>. This site&rsquo;s voluntary compliance with sealing and expungement orders reflects
 its respect for the rehabilitative purpose of Ohio&rsquo;s sealing and expungement statutes (ORC&nbsp;&sect;&sect;&nbsp;2953.31-2953.61).</p>
@@ -171,13 +171,13 @@ removal, and removes records when the source agency removes them.</p>
 <p class="muted">This site will never charge any person for the review, correction, or removal of their record. If
 you encounter any third party claiming to offer paid removal services for records on this site, that
 party is not affiliated with JCStream and cannot fulfill that promise. Removal requests are processed
-at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a> - <strong>there is never a fee, and there never will be</strong>.</p>
+at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> - <strong>there is never a fee, and there never will be</strong>.</p>
 
 <div class="section-h"><h2>Non-affiliation</h2></div>
 <p class="muted">JCStream is an independent, non-governmental project. It is not affiliated with, endorsed by, or
 operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, the State of Ohio, or any
 government entity. The site&rsquo;s source code is available under the MIT License at
-<a href="https://github.com/AICincy/JCStream">github.com/AICincy/JCStream</a>; that license governs the
+<a href="https://github.com/AICincy/HCJC">github.com/AICincy/HCJC</a>; that license governs the
 code only and does not (and cannot) license the underlying public-records data, which is governed by
 Ohio law. The JCStream-arranged record data (the curation and presentation of those public records
 on this site) is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>;

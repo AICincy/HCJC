@@ -37,7 +37,7 @@ freeze alarm has fired, or the latest `data/waf_block_log.json` entry is
    full response (headers + body), then hash the body:
 
    ```sh
-   UA='JCStream/0.1 (+https://github.com/AICincy/JCStream; off-platform capture)'
+   UA='JCStream/0.1 (+https://github.com/AICincy/HCJC; off-platform capture)'
    BASE='https://www.hcso.org/justice-center-services/inmate-search'
 
    curl -sS -A "$UA" -D list_headers.txt  -o list_body.html  "$BASE/?last=A"

@@ -87,7 +87,7 @@
       {% for c in bc %}<span class="chap chap-{{ c.cls }}">{{ c.label }} <strong>{{ c.count }}</strong></span>{% endfor %}
     </div>
     {% endif %}
-    <p class="record-legal muted">This is a public record under <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> and is removed automatically when the Hamilton County Sheriff&rsquo;s Office removes it. To request earlier removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a> - <strong>there is never a fee, and there never will be</strong>. <strong>Not a consumer reporting agency</strong>; do not use this page for any purpose governed by the FCRA.</p>
+    <p class="record-legal muted">This is a public record under <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> and is removed automatically when the Hamilton County Sheriff&rsquo;s Office removes it. To request earlier removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> - <strong>there is never a fee, and there never will be</strong>. <strong>Not a consumer reporting agency</strong>; do not use this page for any purpose governed by the FCRA.</p>
   </div>
 </section>
 
@@ -198,7 +198,7 @@
                        (inmate.charges | selectattr('municipal_case')   | map(attribute='municipal_case')   | first) or
                        (inmate.charges | selectattr('other_case')       | map(attribute='other_case')       | first) or '' %}
   <a class="case-cta-btn" target="_blank" rel="noopener"
-     href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml&title=%5Bcase%5D+{{ inmate.full_name | urlencode }}&case_number={{ primary_case | urlencode }}&defendant_name={{ inmate.full_name | urlencode }}">
+     href="https://github.com/AICincy/HCJC/issues/new?template=case-data.yml&title=%5Bcase%5D+{{ inmate.full_name | urlencode }}&case_number={{ primary_case | urlencode }}&defendant_name={{ inmate.full_name | urlencode }}">
     Add case info for this inmate &rarr;
   </a>
 </aside>
@@ -439,7 +439,7 @@
 <p class="muted attribution">
   Record data licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a> &middot;
   <a href="{{ base_url }}/data/#legal">licensing &amp; takedown protocol</a> &middot;
-  <a href="https://github.com/AICincy/JCStream/issues">report an error or request removal - there is never a fee, and there never will be</a>
+  <a href="https://github.com/AICincy/HCJC/issues">report an error or request removal - there is never a fee, and there never will be</a>
 </p>
 
 <section class="comments">
@@ -457,7 +457,7 @@
       harm. Discussion threads are closed and removed when this record is removed from the HCSO
       public roster. This site does not adopt, endorse, or assume liability for any user-submitted
       content. To report a comment or this record, open an issue at
-      <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
+      <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a>.
     </p>
   </details>
   {% if giscus.repo_id %}
