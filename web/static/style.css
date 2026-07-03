@@ -583,6 +583,17 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* Category edge: a 3px left border in the category color makes the coding
+   readable at a glance (the tinted 12px charge text alone was too subtle).
+   :has() piggybacks on the charge-<cls> child classes; browsers without
+   :has() (pre-2023) just keep the neutral border. */
+.card-inmate { border-left: 3px solid var(--border); }
+.card-inmate:has(.charge-2903), .card-inmate:has(.charge-2907) { border-left-color: var(--cat-violence); }
+.card-inmate:has(.charge-2923) { border-left-color: var(--cat-weapons); }
+.card-inmate:has(.charge-2911), .card-inmate:has(.charge-2909) { border-left-color: var(--cat-property); }
+.card-inmate:has(.charge-2913) { border-left-color: var(--cat-theft); }
+.card-inmate:has(.charge-2925) { border-left-color: var(--cat-drugs); }
+.card-inmate:has(.charge-2919) { border-left-color: var(--cat-family); }
 /* Charge text carries the category hue (same 7-bucket palette as the legend
    dots); 2917/2921/traffic/other stay the neutral --fg-soft base. */
 .card-inmate .charge.charge-2903, .card-inmate .charge.charge-2907 { color: var(--cat-violence); }
