@@ -16,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=a285569fac">
+  <link rel="stylesheet" href="/static/style.css?v=f95c6764d3">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream - all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream - new bookings" href="/booked.xml">
@@ -71,7 +71,7 @@
           <a class="nav-link" href="/transparency/">Access <span class="nav-hint">scorecard</span></a>
           <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
           <a class="nav-link" href="/feed.xml">RSS</a>
-          <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+          <a class="nav-link" href="https://github.com/AICincy/HCJC">GitHub</a>
         </div>
       </details>
     </div>
@@ -87,7 +87,7 @@
     <h1 class="title">Access Transparency Scorecard</h1>
     <div class="sub">HCSO public-records access interruptions, measured from the tamper-evident evidence ledger &middot; ORC &sect; 149.43</div>
   </div>
-  <div class="stamp">Computed 2026-07-03T00:01Z</div>
+  <div class="stamp">Computed 2026-07-03T03:52Z</div>
 </header>
 
 <aside class="banner" aria-label="Current access status" role="status">
@@ -117,7 +117,7 @@
 <h2 class="sect-h">Verify Independently</h2>
 <ol>
   <li>Download the evidence ledger: <a href="/data/waf_block_log.json">waf_block_log.json</a>. Every record carries <code>prev_sha256</code>, the SHA-256 of the previous record&rsquo;s canonical JSON, forming an append-only hash chain.</li>
-  <li>Clone <a href="https://github.com/AICincy/JCStream">the repository</a> and run <code>python -m scraper.verify_block_log data/waf_block_log.json</code>. Exit code 0 means the chain is intact; any in-place edit or removed record breaks a link and the tool reports it.</li>
+  <li>Clone <a href="https://github.com/AICincy/HCJC">the repository</a> and run <code>python -m scraper.verify_block_log data/waf_block_log.json</code>. Exit code 0 means the chain is intact; any in-place edit or removed record breaks a link and the tool reports it.</li>
   <li>Cross-check published file integrity against <a href="/data/SHA256SUMS">SHA256SUMS</a> and the repository&rsquo;s authenticated git commit history.</li>
 </ol>
 <p class="muted">Full schema documentation for the ledger and every other published file lives on the <a href="/data/">Data page</a>.</p>
@@ -125,7 +125,7 @@
   </main>
   <footer class="site">
     <span>Generated  - </span>
-    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
     <span class="footer-legal">Independent, non-governmental project - not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law, including the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC&nbsp;&sect;&nbsp;149.43</a>).</span>
   </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
@@ -141,6 +141,6 @@
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=89de762605" defer></script>
+  <script src="/static/main.js?v=765634fc58" defer></script>
 </body>
 </html>

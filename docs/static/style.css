@@ -1,17 +1,22 @@
 /* JCStream — public-records mirror.
-   Blending neutrals: warm off-white, IBM Plex Mono, muted-red accent. */
+   Civic-modern light: Public Sans UI type, mono reserved for data (numbers,
+   ORC codes, case numbers), white surfaces with soft depth, red as signal. */
 
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("/static/fonts/plex-mono-400.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("/static/fonts/plex-mono-500.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 600; font-display: swap; src: url("/static/fonts/plex-mono-600.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 700; font-display: swap; src: url("/static/fonts/plex-mono-700.woff2") format("woff2"); }
+@font-face { font-family: "Public Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("/static/fonts/public-sans-400.woff2") format("woff2"); }
+@font-face { font-family: "Public Sans"; font-style: normal; font-weight: 500; font-display: swap; src: url("/static/fonts/public-sans-500.woff2") format("woff2"); }
+@font-face { font-family: "Public Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("/static/fonts/public-sans-600.woff2") format("woff2"); }
+@font-face { font-family: "Public Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url("/static/fonts/public-sans-700.woff2") format("woff2"); }
 
 :root {
-  --bg:           #fafafa;
-  --bg-soft:      #FDF5EE;
-  --surface:      #FDF5EE;
-  --border:       #CCCCCC;
-  --border-hi:    #DDDDDD;
+  --bg:           #F6F5F3;
+  --bg-soft:      #FBFAF9;
+  --surface:      #FFFFFF;
+  --border:       #E2DFDA;
+  --border-hi:    #D4D0C9;
 
   --fg:           #1A1A1A;
   --fg-soft:      #333333;
@@ -64,18 +69,18 @@
   --tier-felony-ink-lo: #1A1A1A;  /* near-black text on the warm F4/F5 cells */
   --tier-misdemeanor:   #2F5E8C;  /* misdemeanor outline + text */
 
-  --radius:       0;
-  --radius-sm:    0;
-  --radius-lg:    0;
-  --radius-xl:    0;
+  --radius:       6px;
+  --radius-sm:    4px;
+  --radius-lg:    10px;
+  --radius-xl:    14px;
 
-  --shadow-card:  none;
-  --shadow-hover: none;
+  --shadow-card:  0 1px 2px rgba(26, 22, 16, 0.05), 0 3px 10px rgba(26, 22, 16, 0.05);
+  --shadow-hover: 0 2px 4px rgba(26, 22, 16, 0.07), 0 10px 26px rgba(26, 22, 16, 0.10);
 
   --masthead-h:   56px;
 
   --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-sans:    var(--font-mono);
+  --font-sans:    "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   color-scheme: light;
 }
@@ -111,10 +116,10 @@ html { background: var(--bg); }
 
 body {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.7;
-  letter-spacing: 0.01em;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  letter-spacing: 0;
   background: var(--bg);
   color: var(--fg);
   overflow-wrap: break-word;
@@ -449,7 +454,7 @@ body.is-table .month .card-inmate {
   align-items: center;
   padding: 10px 12px;
   border: 0;
-  border-left: 0;
+  border-left: 3px solid var(--card-cat, transparent);
   border-bottom: 1px solid var(--border);
   border-radius: 0;
   transform: none !important;
@@ -538,9 +543,10 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   contain-intrinsic-size: 0 90px;
   border-left: 3px solid transparent;
 }
+.card-inmate { box-shadow: var(--shadow-card); transition: border-color 120ms, box-shadow 120ms; }
 .card-inmate:hover {
-  border-color: var(--accent);
-  border-left-color: var(--accent);
+  border-color: var(--border-hi);
+  box-shadow: var(--shadow-hover);
 }
 .thumb {
   display: block;
@@ -583,6 +589,19 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* Category edge: a 3px left border in the category color makes the coding
+   readable at a glance (the tinted 12px charge text alone was too subtle).
+   :has() piggybacks on the charge-<cls> child classes; browsers without
+   :has() (pre-2023) just keep the neutral border. The color rides the
+   --card-cat custom property so it survives the higher-specificity
+   body.is-table row rule (table mode keeps the edge). */
+.card-inmate { border-left: 3px solid var(--card-cat, var(--border)); }
+.card-inmate:has(.charge-2903), .card-inmate:has(.charge-2907) { --card-cat: var(--cat-violence); }
+.card-inmate:has(.charge-2923) { --card-cat: var(--cat-weapons); }
+.card-inmate:has(.charge-2911), .card-inmate:has(.charge-2909) { --card-cat: var(--cat-property); }
+.card-inmate:has(.charge-2913) { --card-cat: var(--cat-theft); }
+.card-inmate:has(.charge-2925) { --card-cat: var(--cat-drugs); }
+.card-inmate:has(.charge-2919) { --card-cat: var(--cat-family); }
 /* Charge text carries the category hue (same 7-bucket palette as the legend
    dots); 2917/2921/traffic/other stay the neutral --fg-soft base. */
 .card-inmate .charge.charge-2903, .card-inmate .charge.charge-2907 { color: var(--cat-violence); }
@@ -948,6 +967,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   padding: 14px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
+  border-left: 3px solid var(--card-cat, var(--border));
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   text-decoration: none;
@@ -1511,6 +1531,16 @@ table.charges tbody td {
 }
 table.charges tbody tr:last-child td { border-bottom: 0; }
 table.charges tbody tr:hover { background: var(--accent-bg); }
+/* Per-charge category edge on the first cell, matching the roster cards.
+   Color rides --card-cat (set via .charge-row-<cls>, usable on any element)
+   so selector specificity is moot. Court cards reuse the same classes. */
+table.charges tbody tr[class*="charge-row-"] td:first-child { border-left: 3px solid var(--card-cat, var(--border)); }
+.charge-row-2903, .charge-row-2907 { --card-cat: var(--cat-violence); }
+.charge-row-2923 { --card-cat: var(--cat-weapons); }
+.charge-row-2911, .charge-row-2909 { --card-cat: var(--cat-property); }
+.charge-row-2913 { --card-cat: var(--cat-theft); }
+.charge-row-2925 { --card-cat: var(--cat-drugs); }
+.charge-row-2919 { --card-cat: var(--cat-family); }
 .orc-code {
   font-family: var(--font-mono);
   color: var(--accent);
@@ -2473,6 +2503,35 @@ h2.legal-anchor {
   background: var(--fg-muted);
   flex: 0 0 auto;
 }
+/* Masthead sparkline: 60-day roster-count trend beside the custody total. */
+.running .spark { color: var(--accent); vertical-align: middle; margin-left: 10px; }
+
+/* Tier strip: stacked most-serious-degree distribution above the roster.
+   Reuses the .ladder-* palette; segments are non-text so no AA constraint. */
+.tier-strip-wrap { margin: 0 0 14px; }
+.tier-strip {
+  display: flex;
+  height: 8px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.tier-strip-seg { display: block; height: 100%; border: 0 !important; }
+/* Misdemeanor ladder cells are outline-styled (transparent bg); the strip
+   needs solid fills, so give the M segments the misdemeanor blue. */
+.tier-strip .ladder-M1, .tier-strip .ladder-M2, .tier-strip .ladder-M3,
+.tier-strip .ladder-M4, .tier-strip .ladder-MM { background: var(--tier-misdemeanor); }
+.tier-strip .ladder-M2, .tier-strip .ladder-M4 { opacity: 0.82; }
+.tier-strip .ladder-M3, .tier-strip .ladder-MM { opacity: 0.64; }
+.tier-strip-cap {
+  display: block;
+  margin-top: 4px;
+  font-size: 10.5px;
+  color: var(--fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 /* Legend dots carry the same 7-bucket palette the cards and pills use. */
 .legend .charge-2903 .dot   { background: var(--cat-violence); }
 .legend .charge-2923 .dot   { background: var(--cat-weapons); }
@@ -2640,9 +2699,17 @@ a.statbar:hover { border-color: var(--accent); }
   border-radius: var(--radius-lg);
   transition: width 400ms ease;
 }
+/* Offense bars carry the same 7-bucket palette as the roster cards;
+   categories outside the seven stay the neutral base. */
 .statbar-fill[class*="cat-"] {
   background: var(--fg-soft);
 }
+.statbar-fill.cat-2903, .statbar-fill.cat-2907 { background: var(--cat-violence); }
+.statbar-fill.cat-2923 { background: var(--cat-weapons); }
+.statbar-fill.cat-2911, .statbar-fill.cat-2909 { background: var(--cat-property); }
+.statbar-fill.cat-2913 { background: var(--cat-theft); }
+.statbar-fill.cat-2925 { background: var(--cat-drugs); }
+.statbar-fill.cat-2919 { background: var(--cat-family); }
 .statbar-val {
   font-variant-numeric: tabular-nums;
   color: var(--fg);
@@ -2864,3 +2931,182 @@ a.statbar:hover { border-color: var(--accent); }
 .page-courts .courts-mission { margin: 0 0 18px; }
 .page-courts .courts-mission p { margin: 0 0 8px; }
 .page-courts .courts-mission p:last-child { margin: 0; }
+
+/* --- Homepage task-first roster search pass --- */
+.roster-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 18px;
+  align-items: stretch;
+  margin: 0 0 14px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+.roster-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+.roster-hero .eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.roster-hero h1 {
+  margin: 0;
+  max-width: 14ch;
+  color: var(--fg);
+  font-size: clamp(30px, 5vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+.roster-hero p:not(.eyebrow) {
+  margin: 0;
+  max-width: 58ch;
+  color: var(--fg-soft);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.roster-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+.button-primary,
+.button-secondary,
+.quick-actions a,
+.filter-reset {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  text-decoration: none;
+}
+.button-primary {
+  padding: 0 16px;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent-hi);
+}
+.button-primary:hover,
+.button-primary:focus-visible { background: var(--accent-hi); color: #fff; text-decoration: none; }
+.button-secondary {
+  padding: 0 16px;
+  background: var(--bg-soft);
+  color: var(--fg);
+  border: 1px solid var(--border-hi);
+}
+.button-secondary:hover,
+.button-secondary:focus-visible { color: var(--accent); text-decoration: none; }
+.roster-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.roster-hero-stats div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.roster-hero-stats dt {
+  color: var(--fg-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.roster-hero-stats dd {
+  margin: 8px 0 0;
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 700;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+.legal-disclosure {
+  display: block;
+}
+.legal-disclosure > summary {
+  cursor: pointer;
+  list-style: none;
+}
+.legal-disclosure > summary::-webkit-details-marker { display: none; }
+.legal-disclosure > summary::before {
+  content: "▸";
+  margin-right: 0.4rem;
+  color: var(--fg-muted);
+}
+.legal-disclosure[open] > summary::before { content: "▾"; }
+.legal-disclosure-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.45rem;
+}
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 16px;
+}
+.quick-actions a {
+  padding: 8px 10px;
+  color: var(--fg-soft);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  font-size: 12px;
+  text-align: center;
+}
+.quick-actions a:hover,
+.quick-actions a:focus-visible {
+  color: var(--accent);
+  border-color: var(--border-hi);
+  text-decoration: none;
+}
+.filter-reset {
+  padding: 0 12px;
+  color: var(--fg-soft);
+  background: var(--bg-soft);
+  border: 1px solid var(--border-hi);
+  cursor: pointer;
+}
+.filter-reset:hover,
+.filter-reset:focus-visible { color: var(--accent); }
+.filter-empty {
+  margin: 0 0 16px;
+  text-align: left;
+}
+.filter-empty p {
+  max-width: 76ch;
+  margin: 0.45rem auto 0;
+}
+@media (max-width: 900px) {
+  .roster-hero { grid-template-columns: 1fr; }
+  .quick-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .roster-hero { padding: 16px; }
+  .roster-hero h1 { max-width: 12ch; }
+  .roster-hero-stats,
+  .quick-actions { grid-template-columns: 1fr 1fr; }
+  .roster-hero-actions > a { width: 100%; }
+}

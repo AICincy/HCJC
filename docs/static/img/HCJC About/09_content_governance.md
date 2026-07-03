@@ -13,7 +13,7 @@
 - The JSON-LD block in inmate.html (lines 18-29) declares `"license":"https://codes.ohio.gov/ohio-revised-code/section-149.43"`. The human-readable footer on the same page (line 181) declares the JCStream-published record under CC BY-NC 4.0. The two fields are talking past each other: the JSON-LD license is the source-record authority, not the JCStream republication license.
 - JSON-LD `"dateCreated":"{{ inmate.booking_date }}"` is unguarded. `booking_date` is a parser string; when it is absent the rendered tag becomes `"dateCreated":""`, which is not valid Schema.org and reads as a malformed Person record to crawlers that do honor JSON-LD despite noindex.
 - "There is never a fee" appears on index.html banner, data.html "no fees" section, and the About-JCStream collapsed block on index.html. inmate.html attribution line says "no fee" (lowercase, terser) and the hero alert says "at no cost". The promise is present everywhere it should be; the wording varies.
-- Removal-request channel: every template that mentions removal links to `https://github.com/AICincy/JCStream/issues`. Display text varies: index banner shows `github.com/AICincy/JCStream` (no /issues suffix in visible text); inmate hero shows the same; data.html shows the same; the About-JCStream block on index.html shows `github.com/AICincy/JCStream/issues`. The link target is consistent; only the visible label drifts.
+- Removal-request channel: every template that mentions removal links to `https://github.com/AICincy/HCJC/issues`. Display text varies: index banner shows `github.com/AICincy/HCJC` (no /issues suffix in visible text); inmate hero shows the same; data.html shows the same; the About-JCStream block on index.html shows `github.com/AICincy/HCJC/issues`. The link target is consistent; only the visible label drifts.
 - CC BY-NC 4.0 is asserted on inmate.html (footer line 181) and README.md only. base.html footer says "the underlying public-records data is governed by Ohio law" and does not name the CC BY-NC 4.0 license. data.html non-affiliation section names MIT but is silent on CC BY-NC 4.0. The data-license posture is not visible on the homepage at all.
 - The `/data/#legal` anchor exists in data.html (line 57, `<h2 id="legal" class="legal-anchor">Legal notices</h2>`). The section that follows covers all five required statements plus purpose, no-fees, and non-affiliation. The "Full legal notices ->" promise on the homepage is met.
 - Comment policy on inmate.html (lines 186-201) is rendered unconditionally and lists the four categories from the skill brief. It matches wiki/Legal.md's "public commentary" section closely. No drift here.
@@ -80,7 +80,7 @@ The charges below are accusations only and are not evidence of guilt.</p>
 <!-- inmate.html, line 39: "at no cost". Compare to index.html line 8
      "there is never a fee", data.html lines 79-80 "there is never a fee,
      and there never will be", and inmate.html line 183 "no fee". -->
-open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream</a>
+open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC</a>
 &mdash; at no cost.
 ```
 
@@ -154,7 +154,7 @@ Record data licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" r
 - Why it matters: someone hitting /stats/ as their first page gets the disclaimer but no path to the legal section or to a removal request.
 
 ### gov-F7. Removal-link visible label drifts (target is consistent) - severity low, confidence high
-- Templates: index.html line 8 ("github.com/AICincy/JCStream"); inmate.html line 39 ("github.com/AICincy/JCStream"); index.html line 210 ("github.com/AICincy/JCStream/issues"); inmate.html line 183 ("report an error or request removal").
+- Templates: index.html line 8 ("github.com/AICincy/HCJC"); inmate.html line 39 ("github.com/AICincy/HCJC"); index.html line 210 ("github.com/AICincy/HCJC/issues"); inmate.html line 183 ("report an error or request removal").
 - Why it matters: cosmetic only. The href targets are all `/issues`. Visible label could be the same everywhere for trust.
 
 ### gov-F8. ORC 2953.32 "as amended" hedge is strong on data.html but plainer elsewhere - severity low, confidence medium
@@ -207,14 +207,14 @@ for the current roster.</p>
 R3 - canonical "never a fee" promise: use the data.html line 79 form everywhere. Inmate.html line 39 becomes:
 
 ```
-... open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
+... open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a>.
 <strong>There is never a fee, and there never will be.</strong>
 ```
 
 Inmate.html line 183 becomes:
 
 ```
-<a href="https://github.com/AICincy/JCStream/issues">report an error or request removal &mdash; there is never a fee</a>
+<a href="https://github.com/AICincy/HCJC/issues">report an error or request removal &mdash; there is never a fee</a>
 ```
 
 R4 - CC BY-NC 4.0 alignment: either drop the inmate.html footer claim, or add the same claim to base.html footer and data.html non-affiliation section. Recommended: add. base.html line 60 becomes:
@@ -240,11 +240,11 @@ R5 - stats.html legal footer block: append a short paragraph after line 103 with
 <p class="muted">These counts derive from public records published by HCSO under
 the Ohio Public Records Act, <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC &sect; 149.43</a>.
 To request correction or removal of any record reflected here, open an issue at
-<a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
+<a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a>.
 There is never a fee. <a href="{{ base_url }}/data/#legal">Full legal notices &rarr;</a></p>
 ```
 
-R6 - removal-link label consistency: every visible link label for the removal channel should read `github.com/AICincy/JCStream/issues` (matching href). This is a one-line edit in index.html line 8 and inmate.html line 39.
+R6 - removal-link label consistency: every visible link label for the removal channel should read `github.com/AICincy/HCJC/issues` (matching href). This is a one-line edit in index.html line 8 and inmate.html line 39.
 
 ## Remediation plan
 

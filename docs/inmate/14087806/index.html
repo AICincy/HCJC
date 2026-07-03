@@ -16,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=a285569fac">
+  <link rel="stylesheet" href="/static/style.css?v=f95c6764d3">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream - all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream - new bookings" href="/booked.xml">
@@ -51,7 +51,7 @@
              alt="City of Cincinnati seal"
              width="36" height="36" decoding="async">
       </a>
-      <span class="running desktop-only"><strong>1,239</strong> in custody</span>
+      <span class="running desktop-only"><strong>1,245</strong> in custody</span>
       <span class="spacer"></span>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
@@ -62,7 +62,7 @@
           </svg>
         </summary>
         <div class="nav-drawer">
-          <span class="running mobile-only"><strong>1,239</strong> in custody</span>
+          <span class="running mobile-only"><strong>1,245</strong> in custody</span>
           <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
           <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who's due</span></a>
           <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
@@ -73,7 +73,7 @@
           <a class="nav-link" href="/transparency/">Access <span class="nav-hint">scorecard</span></a>
           <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
           <a class="nav-link" href="/feed.xml">RSS</a>
-          <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+          <a class="nav-link" href="https://github.com/AICincy/HCJC">GitHub</a>
         </div>
       </details>
     </div>
@@ -137,7 +137,7 @@
     <div class="chapter-mix">
       <span class="muted">Charges by category:</span>
 <span class="chap chap-2911">Robbery / Burglary <strong>7</strong></span><span class="chap chap-2921">Obstruction <strong>2</strong></span><span class="chap chap-other">Other <strong>1</strong></span><span class="chap chap-traffic">Traffic / License <strong>1</strong></span><span class="chap chap-traffic">Traffic / Registration <strong>1</strong></span>    </div>
-    <p class="record-legal muted">This is a public record under <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> and is removed automatically when the Hamilton County Sheriff&rsquo;s Office removes it. To request earlier removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a> - <strong>there is never a fee, and there never will be</strong>. <strong>Not a consumer reporting agency</strong>; do not use this page for any purpose governed by the FCRA.</p>
+    <p class="record-legal muted">This is a public record under <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> and is removed automatically when the Hamilton County Sheriff&rsquo;s Office removes it. To request earlier removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> - <strong>there is never a fee, and there never will be</strong>. <strong>Not a consumer reporting agency</strong>; do not use this page for any purpose governed by the FCRA.</p>
   </div>
 </section>
 
@@ -151,7 +151,7 @@
     <th scope="col">ORC</th><th scope="col">Description</th><th scope="col">Tier</th><th scope="col">Court date</th><th scope="col">Bond</th><th scope="col">Disposition</th><th scope="col">Case #</th>
   </tr></thead>
   <tbody>
-    <tr>
+    <tr class="charge-row-traffic">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-4503.11" target="_blank" rel="noopener">4503.11 ↗</a><br><small class="orc-title">License or registration violation</small>      </td>
       <td>FILE REGISTRATION</td>
@@ -161,7 +161,7 @@
       <td>DISMISSED</td>
       <td><a class="case-link case-traffic" href="https://www.courtclerk.org/data/case_summary.php?casenumber=C%2F24%2FTRD%2F20657%2FB" target="_blank" rel="noopener">C/24/TRD/20657/B ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-traffic">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-4510.16" target="_blank" rel="noopener">4510.16 ↗</a><br><small class="orc-title">Driving on a suspended/revoked license</small>      </td>
       <td>DRIVING UNDER FRA SUSPENSION</td>
@@ -171,7 +171,7 @@
       <td>COMPLETED SENTENCE</td>
       <td><a class="case-link case-traffic" href="https://www.courtclerk.org/data/case_summary.php?casenumber=C%2F24%2FTRD%2F20657%2FA" target="_blank" rel="noopener">C/24/TRD/20657/A ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-other">
       <td>
 <span class="orc-code">OTHER</span>      </td>
       <td>Unsupported Type</td>
@@ -181,7 +181,7 @@
       <td> - </td>
       <td><a class="case-link case-other" href="https://www.courtclerk.org/data/case_summary.php?casenumber=F%2F24%2F1837" target="_blank" rel="noopener">F/24/1837 ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-2911">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2911.011" target="_blank" rel="noopener">2911.01A1 ↗</a><br><small class="orc-title">Aggravated robbery</small>      </td>
       <td>AGG ROBBERY-ARMED</td>
@@ -191,7 +191,7 @@
       <td>INDICTED UNDER B</td>
       <td><a class="case-link case-criminal" href="https://www.courtclerk.org/data/case_summary.php?casenumber=25%2FCRA%2F827%2FA" target="_blank" rel="noopener">25/CRA/827/A ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-2911">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2911.011" target="_blank" rel="noopener">2911.01A1 ↗</a><br><small class="orc-title">Aggravated robbery</small>      </td>
       <td>AGG ROBBERY-ARMED</td>
@@ -201,7 +201,7 @@
       <td>INDICTED UNDER B</td>
       <td><a class="case-link case-criminal" href="https://www.courtclerk.org/data/case_summary.php?casenumber=25%2FCRA%2F716%2FC" target="_blank" rel="noopener">25/CRA/716/C ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-2911">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2911.011" target="_blank" rel="noopener">2911.01A1 ↗</a><br><small class="orc-title">Aggravated robbery</small>      </td>
       <td>AGG ROBBERY-ARMED</td>
@@ -211,7 +211,7 @@
       <td>INDICTED UNDER B</td>
       <td><a class="case-link case-criminal" href="https://www.courtclerk.org/data/case_summary.php?casenumber=25%2FCRA%2F827%2FB" target="_blank" rel="noopener">25/CRA/827/B ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-2921">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2921.331" target="_blank" rel="noopener">2921.331B ↗</a><br><small class="orc-title">Failure to comply with order or signal of police officer</small>      </td>
       <td>FLEE OR ELUDE PO - TRAFFIC</td>
@@ -221,7 +221,7 @@
       <td>INDICTED UNDER B</td>
       <td><a class="case-link case-criminal" href="https://www.courtclerk.org/data/case_summary.php?casenumber=25%2FCRA%2F826" target="_blank" rel="noopener">25/CRA/826 ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-2911">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2911.011" target="_blank" rel="noopener">2911.01A1 ↗</a><br><small class="orc-title">Aggravated robbery</small>      </td>
       <td>AGG ROBBERY-ARMED</td>
@@ -231,7 +231,7 @@
       <td>INDICTED UNDER B</td>
       <td><a class="case-link case-criminal" href="https://www.courtclerk.org/data/case_summary.php?casenumber=25%2FCRA%2F716%2FB" target="_blank" rel="noopener">25/CRA/716/B ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-2911">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2911.011" target="_blank" rel="noopener">2911.01A1 ↗</a><br><small class="orc-title">Aggravated robbery</small>      </td>
       <td>AGG ROBBERY-ARMED</td>
@@ -241,7 +241,7 @@
       <td>INDICTED UNDER B</td>
       <td><a class="case-link case-criminal" href="https://www.courtclerk.org/data/case_summary.php?casenumber=25%2FCRA%2F716%2FA" target="_blank" rel="noopener">25/CRA/716/A ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-2911">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2911.011" target="_blank" rel="noopener">2911.01A1 ↗</a><br><small class="orc-title">Aggravated robbery</small>      </td>
       <td>AGG ROBBERY-ARMED</td>
@@ -251,7 +251,7 @@
       <td> - </td>
       <td><a class="case-link case-criminal" href="https://www.courtclerk.org/data/case_summary.php?casenumber=B%202500263" target="_blank" rel="noopener">B 2500263 ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-2911">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2911.011" target="_blank" rel="noopener">2911.01A1 ↗</a><br><small class="orc-title">Aggravated robbery</small>      </td>
       <td>AGG ROBBERY-ARMED</td>
@@ -261,7 +261,7 @@
       <td>INDICTED UNDER B</td>
       <td><a class="case-link case-criminal" href="https://www.courtclerk.org/data/case_summary.php?casenumber=25%2FCRA%2F715%2FA" target="_blank" rel="noopener">25/CRA/715/A ↗</a></td>
     </tr>
-    <tr>
+    <tr class="charge-row-2921">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2921.31" target="_blank" rel="noopener">2921.31 ↗</a><br><small class="orc-title">Obstructing official business</small>      </td>
       <td>OBSTRUCT OFFICIAL BUSINESS</td>
@@ -322,7 +322,7 @@
     JCStream can't scrape courtclerk.org because their <code>robots.txt</code> disallows it. If you pass the bot check on your own browser, you can paste the docket info into a one-minute form and it will appear here for everyone. <a href="/data/#crowdsource">How crowdsourcing works &rarr;</a>
   </div>
   <a class="case-cta-btn" target="_blank" rel="noopener"
-     href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml&title=%5Bcase%5D+RELIFORD%20TYWON&case_number=B%202500263&defendant_name=RELIFORD%20TYWON">
+     href="https://github.com/AICincy/HCJC/issues/new?template=case-data.yml&title=%5Bcase%5D+RELIFORD%20TYWON&case_number=B%202500263&defendant_name=RELIFORD%20TYWON">
     Add case info for this inmate &rarr;
   </a>
 </aside>
@@ -449,7 +449,7 @@
 </details>
 
 <details class="section-details">
-  <summary><span class="section-summary-h">Statute context</span> <span class="muted">&middot; 6 statutes from this record &middot; frequency across 1,239 in custody</span></summary>
+  <summary><span class="section-summary-h">Statute context</span> <span class="muted">&middot; 6 statutes from this record &middot; frequency across 1,245 in custody</span></summary>
   <div class="statute-context">
         <div class="statute">
           <div class="statute-head">
@@ -457,7 +457,7 @@
 <span class="statute-title">License or registration violation</span>          </div>
 <p class="statute-plain">Failure to register a motor vehicle. Operating or parking an unregistered vehicle on a public road.</p>          <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <a href="/statute/#orc-4503-11"><strong>7</strong> <span class="muted">of 1,239</span> &rarr;</a>
+            <a href="/statute/#orc-4503-11"><strong>7</strong> <span class="muted">of 1,245</span> &rarr;</a>
 <a class="statute-srclink" href="https://codes.ohio.gov/ohio-revised-code/section-4503.11" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -466,7 +466,7 @@
 <span class="statute-title">Driving on a suspended/revoked license</span>          </div>
 <p class="statute-plain">Driving on a suspended/revoked license. Operating a motor vehicle while one&#39;s driving privileges are suspended or revoked, knowing of the suspension/revocation.</p>          <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <a href="/statute/#orc-4510-16"><strong>59</strong> <span class="muted">of 1,239</span> &rarr;</a>
+            <a href="/statute/#orc-4510-16"><strong>59</strong> <span class="muted">of 1,245</span> &rarr;</a>
 <a class="statute-srclink" href="https://codes.ohio.gov/ohio-revised-code/section-4510.16" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -475,7 +475,7 @@
           </div>
           <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <a href="/statute/#orc-"><strong>56</strong> <span class="muted">of 1,239</span> &rarr;</a>
+            <a href="/statute/#orc-"><strong>56</strong> <span class="muted">of 1,245</span> &rarr;</a>
           </div>
         </div>
         <div class="statute">
@@ -484,7 +484,7 @@
 <span class="statute-title">Aggravated robbery</span>          </div>
 <p class="statute-plain">Aggravated robbery. Robbery (theft by force/fear) committed while having a deadly weapon, dangerous ordnance, or while inflicting/attempting serious physical harm.</p>          <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <a href="/statute/#orc-2911-01"><strong>76</strong> <span class="muted">of 1,239</span> &rarr;</a>
+            <a href="/statute/#orc-2911-01"><strong>76</strong> <span class="muted">of 1,245</span> &rarr;</a>
 <a class="statute-srclink" href="https://codes.ohio.gov/ohio-revised-code/section-2911.011" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -493,7 +493,7 @@
 <span class="statute-title">Failure to comply with order or signal of police officer</span>          </div>
 <p class="statute-plain">Failure to comply with order/signal of police officer. Operating a motor vehicle so as to wilfully elude or flee a police officer after receiving visible/audible signal to stop. Pursuits.</p>          <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <a href="/statute/#orc-2921-331"><strong>93</strong> <span class="muted">of 1,239</span> &rarr;</a>
+            <a href="/statute/#orc-2921-331"><strong>92</strong> <span class="muted">of 1,245</span> &rarr;</a>
 <a class="statute-srclink" href="https://codes.ohio.gov/ohio-revised-code/section-2921.331" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
         <div class="statute">
@@ -502,7 +502,7 @@
 <span class="statute-title">Obstructing official business</span>          </div>
 <p class="statute-plain">Obstructing official business. Without privilege, doing any act that hampers or impedes a public official in performance of lawful duties. Refusing to identify, fleeing a stop, blocking arrest of another.</p>          <div class="statute-meta">
             <span class="muted">currently in custody under this section:</span>
-            <a href="/statute/#orc-2921-31"><strong>178</strong> <span class="muted">of 1,239</span> &rarr;</a>
+            <a href="/statute/#orc-2921-31"><strong>176</strong> <span class="muted">of 1,245</span> &rarr;</a>
 <a class="statute-srclink" href="https://codes.ohio.gov/ohio-revised-code/section-2921.31" target="_blank" rel="noopener">read statute ↗</a>          </div>
         </div>
   </div>
@@ -598,7 +598,7 @@
 <p class="muted attribution">
   Record data licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a> &middot;
   <a href="/data/#legal">licensing &amp; takedown protocol</a> &middot;
-  <a href="https://github.com/AICincy/JCStream/issues">report an error or request removal - there is never a fee, and there never will be</a>
+  <a href="https://github.com/AICincy/HCJC/issues">report an error or request removal - there is never a fee, and there never will be</a>
 </p>
 
 <section class="comments">
@@ -616,7 +616,7 @@
       harm. Discussion threads are closed and removed when this record is removed from the HCSO
       public roster. This site does not adopt, endorse, or assume liability for any user-submitted
       content. To report a comment or this record, open an issue at
-      <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
+      <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a>.
     </p>
   </details>
   <p class="muted">Commentary isn't enabled yet. (When it is, it runs on GitHub Discussions via
@@ -627,8 +627,8 @@
     </div>
   </main>
   <footer class="site">
-    <span>Generated 2026-07-03T00:01:29Z</span>
-    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+    <span>Generated 2026-07-03T03:52:19Z</span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
     <span class="footer-legal">Independent, non-governmental project - not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law, including the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC&nbsp;&sect;&nbsp;149.43</a>).</span>
   </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
@@ -644,6 +644,6 @@
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=89de762605" defer></script>
+  <script src="/static/main.js?v=765634fc58" defer></script>
 </body>
 </html>

@@ -16,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=a285569fac">
+  <link rel="stylesheet" href="/static/style.css?v=f95c6764d3">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream - all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream - new bookings" href="/booked.xml">
@@ -51,7 +51,7 @@
              alt="City of Cincinnati seal"
              width="36" height="36" decoding="async">
       </a>
-      <span class="running desktop-only"><strong>1,239</strong> in custody</span>
+      <span class="running desktop-only"><strong>1,245</strong> in custody</span>
       <span class="spacer"></span>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
@@ -62,7 +62,7 @@
           </svg>
         </summary>
         <div class="nav-drawer">
-          <span class="running mobile-only"><strong>1,239</strong> in custody</span>
+          <span class="running mobile-only"><strong>1,245</strong> in custody</span>
           <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
           <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who's due</span></a>
           <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
@@ -73,7 +73,7 @@
           <a class="nav-link" href="/transparency/">Access <span class="nav-hint">scorecard</span></a>
           <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
           <a class="nav-link" href="/feed.xml">RSS</a>
-          <a class="nav-link" href="https://github.com/AICincy/JCStream">GitHub</a>
+          <a class="nav-link" href="https://github.com/AICincy/HCJC">GitHub</a>
         </div>
       </details>
     </div>
@@ -172,7 +172,7 @@ the inmate leaves the public roster.</p>
 inmate search (substring match on last name - the 26 single letters cover the whole
 roster with dedup), parses each detail page, downscales the photo, diffs against the prior
 snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commits. Source:
-<a href="https://github.com/AICincy/JCStream">github.com/AICincy/JCStream</a>.</p>
+<a href="https://github.com/AICincy/HCJC">github.com/AICincy/HCJC</a>.</p>
 
 <h2 id="crowdsource" class="sect-h">Crowdsourced courtclerk.org data</h2>
 <p>
@@ -185,7 +185,7 @@ snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commi
   This is a deliberate trade: coverage will always be patchy, because only what someone bothers to submit appears. The upside: every entry was looked up by a real person, so the data quality on what does come in is higher than any scraper would manage.
 </p>
 <p>
-  <a href="https://github.com/AICincy/JCStream/issues/new?template=case-data.yml">Open the case-data form &rarr;</a>
+  <a href="https://github.com/AICincy/HCJC/issues/new?template=case-data.yml">Open the case-data form &rarr;</a>
 </p>
 
 <h2 id="anon" class="sect-h">Anonymized event log (permanent)</h2>
@@ -198,7 +198,7 @@ snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commi
 
 <h2 id="cite" class="sect-h">Citing this data</h2>
 <p class="muted">There is no historical archive here: the roster mirror reflects only the current HCSO snapshot, so a citation should capture the snapshot it used (the <code>generated_utc</code> field, or the SHA256SUMS line for the file). Suggested format:</p>
-<p class="muted"><code>JCStream, Hamilton County Justice Center roster mirror, snapshot 2026-07-03T00:01:29Z, https://www.aretheyinjail.com/data/. Underlying records: Hamilton County Sheriff's Office public inmate roster (ORC &sect; 149.43). Data arrangement licensed CC BY-NC 4.0.</code></p>
+<p class="muted"><code>JCStream, Hamilton County Justice Center roster mirror, snapshot 2026-07-03T03:52:19Z, https://www.aretheyinjail.com/data/. Underlying records: Hamilton County Sheriff's Office public inmate roster (ORC &sect; 149.43). Data arrangement licensed CC BY-NC 4.0.</code></p>
 <p class="muted">For journalism and research use, note the caveats above: snapshot-in-time data, best-effort refresh cadence, no archive of released individuals, and the FCRA prohibition in the legal notices below.</p>
 
 <h2 id="legal" class="legal-anchor">Legal notices</h2>
@@ -222,7 +222,7 @@ maintain a historical archive of removed records. For records subject to a court
 or expungement under <a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>
 (as amended - including changes by 135th&nbsp;G.A. HB&nbsp;234 and 136th&nbsp;G.A. HB&nbsp;96), this site
 will remove the record upon receiving notice of the order. To submit notice, or to report any error,
-open an issue at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a>.
+open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a>.
 Removal and correction requests are processed at no cost - <strong>there is never a fee, and there
 never will be</strong>. This site&rsquo;s voluntary compliance with sealing and expungement orders reflects
 its respect for the rehabilitative purpose of Ohio&rsquo;s sealing and expungement statutes (ORC&nbsp;&sect;&sect;&nbsp;2953.31-2953.61).</p>
@@ -245,25 +245,25 @@ removal, and removes records when the source agency removes them.</p>
 <p class="muted">This site will never charge any person for the review, correction, or removal of their record. If
 you encounter any third party claiming to offer paid removal services for records on this site, that
 party is not affiliated with JCStream and cannot fulfill that promise. Removal requests are processed
-at <a href="https://github.com/AICincy/JCStream/issues">github.com/AICincy/JCStream/issues</a> - <strong>there is never a fee, and there never will be</strong>.</p>
+at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> - <strong>there is never a fee, and there never will be</strong>.</p>
 
 <div class="section-h"><h2>Non-affiliation</h2></div>
 <p class="muted">JCStream is an independent, non-governmental project. It is not affiliated with, endorsed by, or
 operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, the State of Ohio, or any
 government entity. The site&rsquo;s source code is available under the MIT License at
-<a href="https://github.com/AICincy/JCStream">github.com/AICincy/JCStream</a>; that license governs the
+<a href="https://github.com/AICincy/HCJC">github.com/AICincy/HCJC</a>; that license governs the
 code only and does not (and cannot) license the underlying public-records data, which is governed by
 Ohio law. The JCStream-arranged record data (the curation and presentation of those public records
 on this site) is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>;
 the underlying public records themselves remain governed by Ohio law and carry no JCStream license
 claim.</p>
 
-<p class="source">Generated 2026-07-03T00:01:29Z. This page is general information about the project, not legal advice.</p>
+<p class="source">Generated 2026-07-03T03:52:19Z. This page is general information about the project, not legal advice.</p>
     </div>
   </main>
   <footer class="site">
-    <span>Generated 2026-07-03T00:01:29Z</span>
-    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/JCStream">source (MIT)</a></span>
+    <span>Generated 2026-07-03T03:52:19Z</span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
     <span class="footer-legal">Independent, non-governmental project - not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law, including the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC&nbsp;&sect;&nbsp;149.43</a>).</span>
   </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
@@ -279,6 +279,6 @@ claim.</p>
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=89de762605" defer></script>
+  <script src="/static/main.js?v=765634fc58" defer></script>
 </body>
 </html>
