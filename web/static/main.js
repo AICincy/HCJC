@@ -230,7 +230,7 @@
           window.history.replaceState({}, '', window.location.pathname);
         }
         apply('reset');
-        months.forEach(function (m, idx) { 
+        months.forEach(function (m, idx) {
           m.open = (idx === 0);
         });
         var searchResults = document.getElementById('search-results');
