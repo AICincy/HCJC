@@ -175,6 +175,7 @@
     var inputs = bar.querySelectorAll('[data-filter]');
     var countEl = bar.querySelector('.filter-count');
     var noMatch = bar.parentNode.querySelector('#filter-empty');
+    var resetBtn = document.getElementById('filter-reset');
     var cards = Array.prototype.slice.call(document.querySelectorAll('.cards .card-inmate'));
     var months = Array.prototype.slice.call(document.querySelectorAll('details.month'));
     function currentFilters() {
@@ -201,6 +202,7 @@
       });
       if (noMatch) noMatch.hidden = !(active && shown === 0);
       countEl.textContent = active ? (shown + ' of ' + cards.length + ' shown') : '';
+      if (resetBtn) resetBtn.hidden = !active;
       // Single-announcer rule: select changes announce the card count here;
       // search keystrokes are announced by the dropdown's own result count
       // (section 4), never both for one event.
@@ -220,6 +222,17 @@
       } : run);
       i.addEventListener('change', run);
     });
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        inputs.forEach(function (i) { i.value = ''; });
+        apply('reset');
+        var status = document.getElementById('search-status');
+        if (status) status.textContent = 'Filters reset';
+        var search = document.getElementById('search-box');
+        if (search && search.focus) search.focus();
+      });
+    }
+
     // Deep-link: ?chap=... / ?tier=... (e.g. from the stats offense-category
     // links) pre-applies the matching filter so the link lands on a filtered
     // roster. Only sets a value the corresponding <select> actually offers.
