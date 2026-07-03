@@ -107,7 +107,8 @@
     {% set orc_t = orc_title(c.orc_code) %}
     {% set ch_tier = charge_tier(c) %}
     {% set ch_url = codes_ohio_url(c.orc_code) %}
-    <tr>
+    {% set ch_chap = charge_chapter(c.orc_code) %}
+    <tr{% if ch_chap %} class="charge-row-{{ ch_chap.cls }}"{% endif %}>
       <td>
         {% if ch_url %}<a class="orc-code" href="{{ ch_url }}" target="_blank" rel="noopener">{{ c.orc_code }} ↗</a>{% else %}<span class="orc-code">{{ c.orc_code or ' - ' }}</span>{% endif %}
         {% if orc_t %}<br><small class="orc-title">{{ orc_t }}</small>{% endif %}

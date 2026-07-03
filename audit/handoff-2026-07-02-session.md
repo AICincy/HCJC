@@ -25,6 +25,26 @@ Seven PRs merged: #356-#362.
 | #361 | Recovery of those 3 commits (cherry-picked) + review Lows. Contents: anon_changelog takedown filter + retro-purge (ORC 2953.32 gap), build.py fail-closed takedowns, anon_changelog.json published (source of record stays `data/anon_changelog.json`; the build now copies it to `docs/data/anon_changelog.json` each cycle, it is not moved), DOB epoch-sentinel narrowed to exactly 1/1/70 (1969-71 DOBs were blanked), `#search-status`/`#search-results` moved out of the `<label>` (accname pollution), single-announcer rule + 200ms debounce, rb-name h4→h3, conftest hardening (parsers evidence path via append_block_evidence wrapper, sweep data-path defaults, egress env), waf path threaded through the detail-fetch chain, no-op `.tag-booked` deleted, case_year finditer hardening. |
 | #362 | UI pass (owner approved "fix the broken color layer" + "typography emphasis"): `--cat-*` 7-token palette (AA-verified on both surfaces, worst 4.8:1) wired to legend dots, card charge text, chap pills; legend `charge-family` → `charge-2919`; `.doc-h` header hierarchy (display-size title incl. homepage `div.title`, sub, stamp, ruled border) replacing the h1 normalizing rule. Gemini's "missing 2905/2914/2915 selectors" comments were WRONG — classify.py collapses those to cls 2903/2913 before class names are built; rebutted on-thread, token comments clarified. |
 
+## Late-session UI additions (post-#362, owner-driven)
+
+The owner found #362's tinted text too subtle ("Your pictures dont have
+color"). Follow-ups, all screenshot-verified in headless Chromium:
+
+| PR | Change |
+| :-- | :-- |
+| #364 | Handoff doc + 3px category edge on every roster card via `.card-inmate:has(.charge-<cls>)` setting `--card-cat`; base rule `border-left: 3px solid var(--card-cat, var(--border))`. |
+| #365 | Parity: `body.is-table` rows keep the edge (row rule previously zeroed border-left; the custom property survives specificity), and stats offense bars (`.statbar-fill.cat-<cls>`) use the same 7-bucket palette instead of uniform gray. |
+| (next) | Inmate charge table: per-charge category edge on the first cell. New Jinja global `charge_chapter` = `_offense_for_code`; rows get `charge-row-<cls>`; the `--card-cat` trick again (direct border-left-color rules lost the specificity fight against `table.charges tbody tr[class*=…] td:first-child`). |
+
+The `--card-cat` custom-property pattern is now the standard way to thread
+category color past higher-specificity structural rules; prefer it over
+raising selector specificity.
+
+One live-deploy note: a sweep deploy failed GitHub-side at `syncing_files`
+("Deployment failed, try again later", run at 2026-07-03T01:29Z) after the
+earlier `deployment_queued` stall. Both are platform flakiness; the next
+sweep retries. Investigate only if failures repeat consecutively.
+
 ## Verification state
 
 - Four-domain re-review on merged main: all 10 original Mediums resolved,

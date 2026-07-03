@@ -34,6 +34,7 @@ from web.classify import (
     _expand_race,
     _expand_sex,
     _load_explainers,
+    _offense_for_code,
     _orc_chapters,
     _orc_frequency,
     _pct_ordinal,
@@ -229,6 +230,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     )
     env.globals["tier_counts"] = _tier_counts
     env.globals["charge_tier"] = _charge_tier
+    env.globals["charge_chapter"] = _offense_for_code
     env.globals["avatar_initials"] = _avatar_initials
     env.globals["card_data"] = _card_data_attrs
     env.globals["card_tip"] = lambda inm: _card_tip(inm, offenses)
