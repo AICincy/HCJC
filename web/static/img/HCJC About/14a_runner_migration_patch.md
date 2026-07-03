@@ -166,7 +166,7 @@ tar xzf actions-runner-linux-x64.tar.gz
 # Configure the runner with the JCStream repo, the registration token from
 # GitHub, and the label that the workflow YAML expects.
 ./config.sh \
-  --url https://github.com/AICincy/JCStream \
+  --url https://github.com/AICincy/HCJC \
   --token <REGISTRATION_TOKEN_FROM_GITHUB> \
   --labels hcso-fetch \
   --unattended \
@@ -193,7 +193,7 @@ If for some reason the operator wants to use a fine-grained personal access toke
 ```yaml
 - name: Configure git with PAT
   run: |
-    git remote set-url origin https://${{ secrets.JCSTREAM_PUSH_PAT }}@github.com/AICincy/JCStream.git
+    git remote set-url origin https://${{ secrets.JCSTREAM_PUSH_PAT }}@github.com/AICincy/HCJC.git
 ```
 
 The PAT lives in repo Secrets as `JCSTREAM_PUSH_PAT`, scoped to `contents: write` on the JCStream repo only. The token is never written to disk on the runner; it is interpolated into the remote URL at step time and the URL is reset on each workflow run.

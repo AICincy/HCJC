@@ -48,7 +48,7 @@
 <h2 class="sect-h">Verify Independently</h2>
 <ol>
   <li>Download the evidence ledger: <a href="{{ base_url }}/data/waf_block_log.json">waf_block_log.json</a>. Every record carries <code>prev_sha256</code>, the SHA-256 of the previous record&rsquo;s canonical JSON, forming an append-only hash chain.</li>
-  <li>Clone <a href="https://github.com/AICincy/JCStream">the repository</a> and run <code>python -m scraper.verify_block_log data/waf_block_log.json</code>. Exit code 0 means the chain is intact; any in-place edit or removed record breaks a link and the tool reports it.</li>
+  <li>Clone <a href="https://github.com/AICincy/HCJC">the repository</a> and run <code>python -m scraper.verify_block_log data/waf_block_log.json</code>. Exit code 0 means the chain is intact; any in-place edit or removed record breaks a link and the tool reports it.</li>
   <li>Cross-check published file integrity against <a href="{{ base_url }}/data/SHA256SUMS">SHA256SUMS</a> and the repository&rsquo;s authenticated git commit history.</li>
 </ol>
 <p class="muted">Full schema documentation for the ledger and every other published file lives on the <a href="{{ base_url }}/data/">Data page</a>.</p>

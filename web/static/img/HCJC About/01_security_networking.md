@@ -32,7 +32,7 @@
 7. The recipient address comes from env (`JCSTREAM_PRA_TO_CAPIAS_EMAIL`, `JCSTREAM_PRA_TO_PHOTOS_EMAIL`, `JCSTREAM_PRA_TO_JMS_EMAIL`) and is sourced from GitHub Actions secrets in `.github/workflows/pra_daily.yml:33,44`. No PRA module accepts a recipient from a scraped record or issue body.
 8. `scraper/sweep.py:129` and `scraper/sweep.py:226` both create `ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY)` (32) and share a single `HcsoClient` instance. `client.py:58-59` sizes the pool as `max_connections=concurrency*2`, `max_keepalive_connections=concurrency`, matching the executor.
 9. `scraper/incidents.py:32-40` and `scraper/shootings.py:32-40` catch broad `Exception` inside a `for` loop, swallowing arbitrary errors (including transient `httpx` errors) and falling through to an unfiltered query if every filter raises. The unfiltered fallback can pull up to 5000 / 1000 rows.
-10. `.github/workflows/sweep.yml:50-52` sets `JCSTREAM_USER_AGENT` to a string that does not match the in-code `DEFAULT_UA`. The workflow sends `"JCStream/0.1 (+https://github.com/AICincy/JCStream)"` while `client.py:20-23` defines `"JCStream/0.1 (+https://github.com/AICincy/JCStream; Hamilton County OH public-records mirror; honors robots.txt)"`. The workflow value wins at runtime.
+10. `.github/workflows/sweep.yml:50-52` sets `JCSTREAM_USER_AGENT` to a string that does not match the in-code `DEFAULT_UA`. The workflow sends `"JCStream/0.1 (+https://github.com/AICincy/HCJC)"` while `client.py:20-23` defines `"JCStream/0.1 (+https://github.com/AICincy/HCJC; Hamilton County OH public-records mirror; honors robots.txt)"`. The workflow value wins at runtime.
 
 ## Analysis
 
@@ -108,7 +108,7 @@ return query(DATASET_ID, limit=limit)  # up to 5000 rows
 # .github/workflows/sweep.yml:50-52
 # UA from workflow does NOT match DEFAULT_UA in client.py.
 JCSTREAM_USER_AGENT: >-
-  JCStream/0.1 (+https://github.com/AICincy/JCStream)
+  JCStream/0.1 (+https://github.com/AICincy/HCJC)
 ```
 
 ```python

@@ -2931,3 +2931,182 @@ a.statbar:hover { border-color: var(--accent); }
 .page-courts .courts-mission { margin: 0 0 18px; }
 .page-courts .courts-mission p { margin: 0 0 8px; }
 .page-courts .courts-mission p:last-child { margin: 0; }
+
+/* --- Homepage task-first roster search pass --- */
+.roster-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 18px;
+  align-items: stretch;
+  margin: 0 0 14px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+.roster-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+.roster-hero .eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.roster-hero h1 {
+  margin: 0;
+  max-width: 14ch;
+  color: var(--fg);
+  font-size: clamp(30px, 5vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+.roster-hero p:not(.eyebrow) {
+  margin: 0;
+  max-width: 58ch;
+  color: var(--fg-soft);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.roster-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+.button-primary,
+.button-secondary,
+.quick-actions a,
+.filter-reset {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  text-decoration: none;
+}
+.button-primary {
+  padding: 0 16px;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent-hi);
+}
+.button-primary:hover,
+.button-primary:focus-visible { background: var(--accent-hi); color: #fff; text-decoration: none; }
+.button-secondary {
+  padding: 0 16px;
+  background: var(--bg-soft);
+  color: var(--fg);
+  border: 1px solid var(--border-hi);
+}
+.button-secondary:hover,
+.button-secondary:focus-visible { color: var(--accent); text-decoration: none; }
+.roster-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.roster-hero-stats div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.roster-hero-stats dt {
+  color: var(--fg-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.roster-hero-stats dd {
+  margin: 8px 0 0;
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 700;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+.legal-disclosure {
+  display: block;
+}
+.legal-disclosure > summary {
+  cursor: pointer;
+  list-style: none;
+}
+.legal-disclosure > summary::-webkit-details-marker { display: none; }
+.legal-disclosure > summary::before {
+  content: "▸";
+  margin-right: 0.4rem;
+  color: var(--fg-muted);
+}
+.legal-disclosure[open] > summary::before { content: "▾"; }
+.legal-disclosure-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.45rem;
+}
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 16px;
+}
+.quick-actions a {
+  padding: 8px 10px;
+  color: var(--fg-soft);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  font-size: 12px;
+  text-align: center;
+}
+.quick-actions a:hover,
+.quick-actions a:focus-visible {
+  color: var(--accent);
+  border-color: var(--border-hi);
+  text-decoration: none;
+}
+.filter-reset {
+  padding: 0 12px;
+  color: var(--fg-soft);
+  background: var(--bg-soft);
+  border: 1px solid var(--border-hi);
+  cursor: pointer;
+}
+.filter-reset:hover,
+.filter-reset:focus-visible { color: var(--accent); }
+.filter-empty {
+  margin: 0 0 16px;
+  text-align: left;
+}
+.filter-empty p {
+  max-width: 76ch;
+  margin: 0.45rem auto 0;
+}
+@media (max-width: 900px) {
+  .roster-hero { grid-template-columns: 1fr; }
+  .quick-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .roster-hero { padding: 16px; }
+  .roster-hero h1 { max-width: 12ch; }
+  .roster-hero-stats,
+  .quick-actions { grid-template-columns: 1fr 1fr; }
+  .roster-hero-actions > a { width: 100%; }
+}

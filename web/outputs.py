@@ -128,7 +128,7 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
         "/* PROJECT */\n"
         "  JCStream -- mirror of the Hamilton County, OH Justice Center inmate roster\n"
         f"  Site: {site_url or 'https://www.aretheyinjail.com'}\n"
-        "  Source: https://github.com/AICincy/JCStream (MIT)\n"
+        "  Source: https://github.com/AICincy/HCJC (MIT)\n"
         f"  Corrections / sealing / removal: {issues} -- no fee, ever\n"
         "\n/* DATA */\n"
         "  HCSO public inmate roster (ORC \u00a7149.43) + Cincinnati Open Data feeds\n"
