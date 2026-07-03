@@ -961,6 +961,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   padding: 14px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
+  border-left: 3px solid var(--card-cat, var(--border));
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   text-decoration: none;
@@ -1525,14 +1526,15 @@ table.charges tbody td {
 table.charges tbody tr:last-child td { border-bottom: 0; }
 table.charges tbody tr:hover { background: var(--accent-bg); }
 /* Per-charge category edge on the first cell, matching the roster cards.
-   Color rides --card-cat (set on the row) so selector specificity is moot. */
+   Color rides --card-cat (set via .charge-row-<cls>, usable on any element)
+   so selector specificity is moot. Court cards reuse the same classes. */
 table.charges tbody tr[class*="charge-row-"] td:first-child { border-left: 3px solid var(--card-cat, var(--border)); }
-tr.charge-row-2903, tr.charge-row-2907 { --card-cat: var(--cat-violence); }
-tr.charge-row-2923 { --card-cat: var(--cat-weapons); }
-tr.charge-row-2911, tr.charge-row-2909 { --card-cat: var(--cat-property); }
-tr.charge-row-2913 { --card-cat: var(--cat-theft); }
-tr.charge-row-2925 { --card-cat: var(--cat-drugs); }
-tr.charge-row-2919 { --card-cat: var(--cat-family); }
+.charge-row-2903, .charge-row-2907 { --card-cat: var(--cat-violence); }
+.charge-row-2923 { --card-cat: var(--cat-weapons); }
+.charge-row-2911, .charge-row-2909 { --card-cat: var(--cat-property); }
+.charge-row-2913 { --card-cat: var(--cat-theft); }
+.charge-row-2925 { --card-cat: var(--cat-drugs); }
+.charge-row-2919 { --card-cat: var(--cat-family); }
 .orc-code {
   font-family: var(--font-mono);
   color: var(--accent);
@@ -2495,6 +2497,35 @@ h2.legal-anchor {
   background: var(--fg-muted);
   flex: 0 0 auto;
 }
+/* Masthead sparkline: 60-day roster-count trend beside the custody total. */
+.running .spark { color: var(--accent); vertical-align: middle; margin-left: 10px; }
+
+/* Tier strip: stacked most-serious-degree distribution above the roster.
+   Reuses the .ladder-* palette; segments are non-text so no AA constraint. */
+.tier-strip-wrap { margin: 0 0 14px; }
+.tier-strip {
+  display: flex;
+  height: 8px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.tier-strip-seg { display: block; height: 100%; border: 0 !important; }
+/* Misdemeanor ladder cells are outline-styled (transparent bg); the strip
+   needs solid fills, so give the M segments the misdemeanor blue. */
+.tier-strip .ladder-M1, .tier-strip .ladder-M2, .tier-strip .ladder-M3,
+.tier-strip .ladder-M4, .tier-strip .ladder-MM { background: var(--tier-misdemeanor); }
+.tier-strip .ladder-M2, .tier-strip .ladder-M4 { opacity: 0.82; }
+.tier-strip .ladder-M3, .tier-strip .ladder-MM { opacity: 0.64; }
+.tier-strip-cap {
+  display: block;
+  margin-top: 4px;
+  font-size: 10.5px;
+  color: var(--fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 /* Legend dots carry the same 7-bucket palette the cards and pills use. */
 .legend .charge-2903 .dot   { background: var(--cat-violence); }
 .legend .charge-2923 .dot   { background: var(--cat-weapons); }
