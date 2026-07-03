@@ -36,6 +36,7 @@ from web.classify import (
     _load_explainers,
     _offense_for_code,
     _orc_chapters,
+    _spark_points,
     _orc_frequency,
     _pct_ordinal,
     _primary_degree,
@@ -63,6 +64,7 @@ from web.shape import (
     _crimes_of_month,
     _days_in_custody,
     _distinct_chapters,
+    _tier_breakdown,
     _events_for_recent,
     _feed_description,
     _iso_booking_date,
@@ -231,6 +233,8 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     env.globals["tier_counts"] = _tier_counts
     env.globals["charge_tier"] = _charge_tier
     env.globals["charge_chapter"] = _offense_for_code
+    env.globals["spark_points"] = _spark_points
+    env.globals["roster_tiers"] = _tier_breakdown(snapshot)
     env.globals["avatar_initials"] = _avatar_initials
     env.globals["card_data"] = _card_data_attrs
     env.globals["card_tip"] = lambda inm: _card_tip(inm, offenses)

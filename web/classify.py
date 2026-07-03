@@ -390,6 +390,27 @@ def _chap_slug(chapter_label: str) -> str:
     return s.strip("-")
 
 
+def _spark_points(counts: list[int] | None, width: int = 120, height: int = 26, pad: int = 2) -> str:
+    """SVG polyline points for a sparkline of roster counts.
+
+    Returns "" for fewer than 2 points. Y is normalized to the series
+    min/max (flat series draws a midline) so day-to-day motion is visible
+    even when the roster only moves by a few dozen.
+    """
+    counts = [c for c in (counts or []) if isinstance(c, (int, float))]
+    if len(counts) < 2:
+        return ""
+    lo, hi = min(counts), max(counts)
+    span = (hi - lo) or 1
+    n = len(counts)
+    pts = []
+    for i, c in enumerate(counts):
+        x = pad + i * (width - 2 * pad) / (n - 1)
+        y = pad + (height - 2 * pad) * (1 - (c - lo) / span)
+        pts.append(f"{x:.1f},{y:.1f}")
+    return " ".join(pts)
+
+
 def _codes_ohio_url(code: str) -> str:
     """Generate a link to the Ohio Revised Code online (codes.ohio.gov).
 

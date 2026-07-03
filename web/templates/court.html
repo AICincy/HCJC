@@ -78,7 +78,8 @@
 {% macro court_card(e) %}
   {% set deg = primary_degree(e.inmate) %}
   {% set top_charge = e.inmate.charges[0] if e.inmate.charges else None %}
-  <a class="court-card" href="{{ base_url }}/inmate/{{ e.inmate.inmate_number }}/">
+  {% set ch_chap = charge_chapter(top_charge.orc_code) if top_charge else None %}
+  <a class="court-card{% if ch_chap %} charge-row-{{ ch_chap.cls }}{% endif %}" href="{{ base_url }}/inmate/{{ e.inmate.inmate_number }}/">
     {% if e.inmate.photo_filename %}
     <span class="court-card-photo">
       <img src="{{ base_url }}/photos/{{ e.inmate.photo_filename }}" alt="" loading="lazy" decoding="async">

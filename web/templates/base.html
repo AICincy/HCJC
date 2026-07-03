@@ -62,7 +62,7 @@
              width="36" height="36" decoding="async">
       </a>
       {% if snapshot is defined and snapshot.inmate_count %}
-      <span class="running desktop-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody</span>
+      <span class="running desktop-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody{% if trend is defined and trend.spark and trend.spark | length > 1 %}<svg class="spark" viewBox="0 0 120 26" width="120" height="26" role="img" aria-label="Roster size trend, last {{ trend.spark | length }} days"><polyline points="{{ spark_points(trend.spark) }}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>{% endif %}</span>
       {% endif %}
       <span class="spacer"></span>
       <details class="nav-menu" open>

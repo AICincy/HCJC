@@ -75,6 +75,16 @@
   <span class="filter-count"></span>
 </div>
 <p class="empty" id="filter-empty" role="status" hidden>No one in custody matches that filter.</p>
+{% set tb = roster_tiers %}
+{% set tb_known = (tb.values() | sum) - tb.get('UNK', 0) %}
+{% if tb_known > 0 %}
+<div class="tier-strip-wrap">
+  <div class="tier-strip" role="img" aria-label="Roster by most serious degree: {% for t in tier_ladder %}{% if tb.get(t) %}{{ t }} {{ tb[t] }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}">
+    {% for t in tier_ladder %}{% if tb.get(t) %}<span class="tier-strip-seg ladder-{{ t }}" style="width: {{ '%.2f' % (100.0 * tb[t] / tb_known) }}%" title="{{ t }}: {{ tb[t] }}"></span>{% endif %}{% endfor %}
+  </div>
+  <span class="tier-strip-cap" aria-hidden="true">most serious degree per person &middot; F1 &rarr; MM</span>
+</div>
+{% endif %}
 <p class="legend" aria-hidden="true">
   <span class="swatch charge-2903"><span class="dot"></span> violence / sex</span>
   <span class="swatch charge-2923"><span class="dot"></span> weapons</span>
