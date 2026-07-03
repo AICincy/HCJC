@@ -230,9 +230,11 @@
           window.history.replaceState({}, '', window.location.pathname);
         }
         apply('reset');
-        months.forEach(function (m, idx) {
+        months.forEach(function (m, idx) { 
           m.open = (idx === 0);
         });
+        var searchResults = document.getElementById('search-results');
+        if (searchResults) searchResults.hidden = true;
         var status = document.getElementById('search-status');
         if (status) status.textContent = 'Filters reset';
         var search = document.getElementById('search-box');
