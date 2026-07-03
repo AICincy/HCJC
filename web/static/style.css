@@ -1524,6 +1524,15 @@ table.charges tbody td {
 }
 table.charges tbody tr:last-child td { border-bottom: 0; }
 table.charges tbody tr:hover { background: var(--accent-bg); }
+/* Per-charge category edge on the first cell, matching the roster cards.
+   Color rides --card-cat (set on the row) so selector specificity is moot. */
+table.charges tbody tr[class*="charge-row-"] td:first-child { border-left: 3px solid var(--card-cat, var(--border)); }
+tr.charge-row-2903, tr.charge-row-2907 { --card-cat: var(--cat-violence); }
+tr.charge-row-2923 { --card-cat: var(--cat-weapons); }
+tr.charge-row-2911, tr.charge-row-2909 { --card-cat: var(--cat-property); }
+tr.charge-row-2913 { --card-cat: var(--cat-theft); }
+tr.charge-row-2925 { --card-cat: var(--cat-drugs); }
+tr.charge-row-2919 { --card-cat: var(--cat-family); }
 .orc-code {
   font-family: var(--font-mono);
   color: var(--accent);
