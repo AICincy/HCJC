@@ -228187,75 +228187,63 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-26T19:21:50Z",
-    "inmate_number": "14314555",
-    "name": "FANT ANTWYON",
+    "date": "2026-06-26",
     "tier": null,
-    "category": null,
-    "note": "booked 6/26/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-26T19:21:50Z",
-    "inmate_number": "14599787",
-    "name": "ARMFIELD JHON",
+    "date": "2026-06-26",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-26T19:21:50Z",
-    "inmate_number": "14777251",
-    "name": "BURKE TRESHON",
+    "date": "2026-06-26",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": ""
+    "category": "Driving under suspension"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-26T19:21:50Z",
-    "inmate_number": "2545465",
-    "name": "HALL DEMETRIS",
+    "date": "2026-06-26",
     "tier": "M4",
-    "category": "Menacing",
-    "note": ""
+    "category": "Menacing"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-26T19:21:50Z",
-    "inmate_number": "14593602",
-    "name": "EAKINS KAMERON",
+    "date": "2026-06-26",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-26T19:21:50Z",
-    "inmate_number": "2285367",
-    "name": "ESTEPP ARLISS",
+    "date": "2026-06-26",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-26T19:21:50Z",
-    "inmate_number": "2356892",
-    "name": "SMITH DON",
+    "date": "2026-06-26",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-26T20:09:36Z",
-    "inmate_number": "1821555",
-    "name": "LEE RICKY",
+    "date": "2026-06-26",
     "tier": "M1",
-    "category": "Using weapons while intoxicated",
-    "note": ""
+    "category": "Using weapons while intoxicated"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-26",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-26",
+    "tier": "M1",
+    "category": "Using weapons while intoxicated"
   },
   {
     "event": "updated",
@@ -237697,5 +237685,41 @@
     "tier": "M1",
     "category": "Receiving stolen property",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-03T20:33:12Z",
+    "inmate_number": "1293576",
+    "name": "LEWIS LARRY",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-03T20:33:12Z",
+    "inmate_number": "14649280",
+    "name": "WHITFIELD JOURNY",
+    "tier": "M1",
+    "category": "Endangering children",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-03T20:33:12Z",
+    "inmate_number": "1774343",
+    "name": "WALKER MARK",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-03T20:33:12Z",
+    "inmate_number": "2652620",
+    "name": "HAYES LAMONT",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/3/26"
   }
 ]
