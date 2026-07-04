@@ -194,7 +194,10 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
   text-decoration: none;
   transition: all 120ms;
 }
-.masthead .nav-link:hover { color: var(--accent); background: var(--bg-soft); text-decoration: none; }
+.masthead .nav-link:hover,
+.masthead .nav-link:focus-visible { color: var(--accent); background: var(--bg-soft); text-decoration: none; }
+.masthead .nav-link:focus-visible,
+.nav-toggle:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 .masthead .nav-hint {
   display: inline;
   margin-left: 6px;
@@ -1150,7 +1153,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 .visit-card-primary .visit-card-title { color: #fff; }
 .visit-card-primary .visit-card-desc { color: rgba(255,255,255,0.86); }
 .visit-card-primary .visit-card-cta { color: #fff; }
-.visit-card-body { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.visit-card-body { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; flex: 1; }
 .visit-card-kicker {
   font-size: 11px;
   font-weight: 600;
@@ -1175,12 +1178,20 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 }
 .visit-card-desc a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; }
 .visit-card-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 2px;
+  border-radius: var(--radius-sm);
   font-size: 13px;
   font-weight: 600;
   color: var(--accent);
   letter-spacing: -0.01em;
   margin-top: 4px;
 }
+.visit-card-cta + .visit-card-cta { margin-top: 0; }
+.visit-card-cta:hover,
+.visit-card-cta:focus-visible { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
 .visit-no-fee {
   font-size: 15px !important;
@@ -1951,7 +1962,9 @@ a.orc-code:hover { border-bottom-style: solid; }
   font-size: 1.4rem; line-height: 1; cursor: pointer;
   box-shadow: 0 4px 12px -4px rgba(0,0,0,0.3);
 }
-.lightbox-close:hover { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+.lightbox-close:hover,
+.lightbox-close:focus-visible { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+.lightbox-close:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 
 /* ===== Back-to-top ===== */
 .back-to-top {
@@ -2398,9 +2411,18 @@ h2.legal-anchor {
 .month > summary::-webkit-details-marker {
   display: none;
 }
-.month > summary:hover {
+.month > summary:hover,
+.month > summary:focus-visible {
   background: var(--bg-soft);
   border-color: var(--accent);
+}
+.month > summary:focus-visible,
+.month-nav .chip:focus-visible,
+.coms > summary:focus-visible,
+.statute-item > summary:focus-visible,
+.statute-caselaw > summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
 }
 .month[open] > summary { border-color: var(--accent); background: var(--surface); box-shadow: var(--shadow-card); }
 .month > summary h2 {
@@ -2434,7 +2456,8 @@ h2.legal-anchor {
   text-decoration: none;
   transition: all 120ms;
 }
-.month-nav .chip:hover {
+.month-nav .chip:hover,
+.month-nav .chip:focus-visible {
   background: var(--accent-bg);
   color: var(--accent);
   text-decoration: none;
@@ -2756,7 +2779,8 @@ a.statbar:hover { border-color: var(--accent); }
 .statute-item > summary::-webkit-details-marker {
   display: none;
 }
-.statute-item > summary:hover {
+.statute-item > summary:hover,
+.statute-item > summary:focus-visible {
   background: var(--bg-soft);
 }
 .statute-item-title {
@@ -2854,7 +2878,8 @@ a.statbar:hover { border-color: var(--accent); }
   color: var(--accent);
 }
 .statute-caselaw > summary::-webkit-details-marker { display: none; }
-.statute-caselaw > summary:hover {
+.statute-caselaw > summary:hover,
+.statute-caselaw > summary:focus-visible {
   background: var(--accent-bg-2);
 }
 .caselaw-list {
@@ -2908,6 +2933,12 @@ a.statbar:hover { border-color: var(--accent); }
 .page-courts .judge-card > summary {
   cursor: pointer; font-weight: 600; display: flex;
   align-items: center; justify-content: space-between; user-select: none;
+  border-radius: var(--radius-sm);
+}
+.page-courts .judge-card > summary:focus-visible,
+.page-courts .judge-sub > summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
 }
 .page-courts .judge-room { font-size: 12px; color: var(--fg-muted); font-weight: normal; }
 .page-courts .judge-body {
@@ -2923,6 +2954,7 @@ a.statbar:hover { border-color: var(--accent); }
 .page-courts .judge-sub { margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 8px; }
 .page-courts .judge-sub > summary {
   cursor: pointer; font-size: 12.5px; color: var(--accent); user-select: none;
+  border-radius: var(--radius-sm);
 }
 .page-courts .judge-prose {
   margin-top: 6px; font-size: 13px; white-space: pre-wrap;
@@ -3001,6 +3033,14 @@ a.statbar:hover { border-color: var(--accent); }
 }
 .button-primary:hover,
 .button-primary:focus-visible { background: var(--accent-hi); color: #fff; text-decoration: none; }
+.button-primary:focus-visible,
+.button-secondary:focus-visible,
+.quick-actions a:focus-visible,
+.filter-reset:focus-visible,
+.legal-disclosure > summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
 .button-secondary {
   padding: 0 16px;
   background: var(--bg-soft);
@@ -3047,6 +3087,7 @@ a.statbar:hover { border-color: var(--accent); }
 .legal-disclosure > summary {
   cursor: pointer;
   list-style: none;
+  border-radius: var(--radius-sm);
 }
 .legal-disclosure > summary::-webkit-details-marker { display: none; }
 .legal-disclosure > summary::before {
