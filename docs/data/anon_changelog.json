@@ -229063,57 +229063,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-27T21:49:41Z",
-    "inmate_number": "1585147",
-    "name": "ISOM DARRYL",
+    "date": "2026-06-27",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-27T21:49:41Z",
-    "inmate_number": "2046655",
-    "name": "THOMPSON BRANDEN",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/27/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T21:49:41Z",
-    "inmate_number": "2491047",
-    "name": "WARREN ALLEN",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-27T22:23:27Z",
-    "inmate_number": "14138033",
-    "name": "STRICKLAND KOURTNEY",
+    "date": "2026-06-27",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T22:23:27Z",
-    "inmate_number": "1585147",
-    "name": "ISOM DARRYL",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T22:23:27Z",
-    "inmate_number": "2046655",
-    "name": "THOMPSON BRANDEN",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
@@ -238444,6 +238426,60 @@
     "timestamp_utc": "2026-07-04T21:40:08Z",
     "inmate_number": "14678666",
     "name": "TRAVIS MONTRELLE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T22:42:30Z",
+    "inmate_number": "14112804",
+    "name": "SHAFER SARAH",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 7/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T22:42:30Z",
+    "inmate_number": "14419752",
+    "name": "COTTRELL TONY",
+    "tier": "M4",
+    "category": "Public indecency",
+    "note": "booked 7/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T22:42:30Z",
+    "inmate_number": "1776030",
+    "name": "CURTIS MELVIN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 7/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-04T22:42:30Z",
+    "inmate_number": "2515596",
+    "name": "HUDDLESTON SEAN",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-04T22:42:30Z",
+    "inmate_number": "2496554",
+    "name": "GIBSON DONTE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-04T22:42:30Z",
+    "inmate_number": "1839764",
+    "name": "MATHIS ANSUOINE",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
