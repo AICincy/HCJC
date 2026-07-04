@@ -2,7 +2,7 @@
 
 This module provides reference data (degree regex, chapter/offense mappings,
 tier/race/sex label expansions) and parsing/formatting functions consumed by
-shape.py and web/build.py. No circular dependencies: shape/build import from
+the web/shape/ package and web/build.py. No circular dependencies: shape/build import from
 classify, never the reverse.
 """
 

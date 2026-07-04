@@ -1,5 +1,13 @@
 # Audit runbook reconcile — what is already shipped vs still open
 
+> **NOT IMPLEMENTED (2026-07-04).** JCStream does not use Datadog. The Datadog
+> observability referenced below (`scraper/ddlog.py`, the `DD_*` env vars,
+> `tools/verify_ingest.py`, and the `sweep.yml` `DD_*` env) was never built and
+> is not present in the repo. Treat this document as a historical proposal only;
+> no Datadog monitoring is live. Active monitoring is `scraper.freeze_alert`
+> (roster freeze) and `scraper.deploy_alert` (stuck Pages deploy), both of which
+> open deduped GitHub issues.
+
 ## Audit metadata
 
 - Date: 2026-05-22

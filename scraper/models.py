@@ -62,7 +62,7 @@ class Inmate(BaseModel):
     def _inmate_number_shape(cls, v: str) -> str:
         # HCSO inmate numbers are 7-8 digits; both list-side regex (\d+) and
         # the live data agree. Enforce digits-only at the model layer so a
-        # parser-drift edge case (e.g. bio table override at parsers.py:77)
+        # parser-drift edge case (e.g. the bio-table override in parsers.py)
         # cannot leak `..` or `/` into photo_filename and template URLs.
         stripped = (v or "").strip()
         if not stripped:

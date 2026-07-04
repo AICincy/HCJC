@@ -1,5 +1,12 @@
 # WAF freeze monitor: detect sustained HCSO WAF block via roster staleness
 
+> **NOT IMPLEMENTED (2026-07-04).** JCStream does not use Datadog. The Datadog
+> monitor described below (and the `scraper/ddlog.py` / `DD_*` env it assumes,
+> including any claim that `DD_API_KEY` is set in `sweep.yml`) was never built
+> and is not present in the repo. Treat this as a historical proposal only. The
+> live roster-freeze alarm is `scraper.freeze_alert` (GitHub Issues), and
+> stuck-deploy detection is `scraper.deploy_alert`.
+
 ## Audit metadata
 
 - Date: 2026-05-28
