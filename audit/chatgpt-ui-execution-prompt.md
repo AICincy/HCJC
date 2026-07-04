@@ -37,8 +37,8 @@ code or data behavior.
   `court.html`, `courts.html`, `help.html`, `visit.html`, `transparency.html`,
   `feed.xml`.
 - Assets: `web/static/` — `style.css` (~3100 lines, the single stylesheet),
-  `main.js` (~360 lines, progressive enhancement), `map.js` (Leaflet map),
-  `feed.xsl`, plus `fonts/`, `img/`, `judges/`, `vendor/`.
+  `main.js` (~360 lines, progressive enhancement), `feed.xsl`, plus `fonts/`,
+  `img/`, `judges/`, `vendor/` (the map is drawn with vendored Leaflet assets).
 - Build the site locally to preview: `JCSTREAM_SITE_BASE_URL="" python -m web.build`,
   then serve and screenshot (see Screenshot flow). Never open `docs/` over
   `file://` — root-absolute `/static/...` links load unstyled. Always serve over
@@ -52,7 +52,7 @@ code or data behavior.
 | :-- | :-- |
 | `web/templates/*.html` | `scraper/**` (all of it) |
 | `web/static/style.css` | `web/build.py` Python logic, page-render functions, `env.globals` registrations |
-| `web/static/main.js`, `map.js` | `web/classify.py`, `web/shape/**` (data shaping / tier / category logic) |
+| `web/static/main.js` | `web/classify.py`, `web/shape/**` (data shaping / tier / category logic) |
 | `web/static/` assets you add (inline SVG, CSS) | `data/**`, the sweep, JSON schemas |
 | CSS/JS/markup, ARIA, copy layout | `tests/**` (only touch if markup you changed is asserted) |
 
