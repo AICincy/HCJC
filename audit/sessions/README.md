@@ -32,7 +32,9 @@ claude.ai session history pending export.
 | session_01NGMSLESEepbgV8aSn4reVG | not yet filed | [VERIFY] | [VERIFY] |
 | session_01DCTmLdgUma5GYA1JBrywGp | not yet filed | 2026-07-03 [VERIFY] | [VERIFY] |
 
-Note: none of these four session IDs appears in any commit trailer in this
-repository (checked 2026-07-02 with `git log --all --grep`), so date ranges
-cannot be reconstructed from git history and must come from the claude.ai
-export.
+Note: the first four session IDs do not appear in any commit trailer in this
+repository (checked 2026-07-02 with `git log --all --grep`), so their date
+ranges cannot be reconstructed from git history and must come from the
+claude.ai export. session_01DCTmLdgUma5GYA1JBrywGp does appear in commit
+trailers (the #372 and #373 commits, dated 2026-07-03/04); its transcript
+still requires export to confirm the full range.
