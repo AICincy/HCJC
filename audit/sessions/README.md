@@ -24,14 +24,14 @@ claude.ai session history pending export.
 
 ## Ledger
 
-| Session ID | Transcript file | Date range | Exported on |
-| :-- | :-- | :-- | :-- |
-| session_01Hbc6p9EspF6RH9ajNNb8tB | not yet filed | [VERIFY] | [VERIFY] |
-| session_01MNnYgZMY5uFz9cHie3w6TY | not yet filed | [VERIFY] | [VERIFY] |
-| session_019fDevbfpgmnjJP7A343T95 | not yet filed | [VERIFY] | [VERIFY] |
-| session_01NGMSLESEepbgV8aSn4reVG | not yet filed | [VERIFY] | [VERIFY] |
-| session_019qfYLXARs48orCHaQdM8cA | not yet filed | 2026-07-02 [VERIFY] | [VERIFY] |
-| session_01DCTmLdgUma5GYA1JBrywGp | not yet filed | 2026-07-03 [VERIFY] | [VERIFY] |
+| Session ID | Transcript file | Original export filename | Date range | Exported on |
+| :-- | :-- | :-- | :-- | :-- |
+| session_01Hbc6p9EspF6RH9ajNNb8tB | not yet filed | not yet filed | [VERIFY] | [VERIFY] |
+| session_01MNnYgZMY5uFz9cHie3w6TY | not yet filed | not yet filed | [VERIFY] | [VERIFY] |
+| session_019fDevbfpgmnjJP7A343T95 | not yet filed | not yet filed | [VERIFY] | [VERIFY] |
+| session_01NGMSLESEepbgV8aSn4reVG | not yet filed | not yet filed | [VERIFY] | [VERIFY] |
+| session_019qfYLXARs48orCHaQdM8cA | not yet filed | not yet filed | 2026-07-02 [VERIFY] | [VERIFY] |
+| session_01DCTmLdgUma5GYA1JBrywGp | not yet filed | not yet filed | 2026-07-03 [VERIFY] | [VERIFY] |
 
 Note: the four original session IDs do not appear in any commit trailer in
 this repository (checked 2026-07-02 with `git log --all --grep`), so their
