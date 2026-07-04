@@ -8,12 +8,14 @@ name: sweep
 #                      ROSTER_STALE_ALARM_HOURS (scraper/freeze_alert.py).
 #
 # Permissions deliberately NOT requested:
-#   pages:    write -- the sweep does not deploy. It builds docs/, commits it,
-#                      and pushes to main; the separate .github/workflows/pages.yml
-#                      workflow deploys the docs/ artifact to Pages on that push
-#                      (Settings > Pages > Source = GitHub Actions). pages: write
-#                      and id-token: write live on pages.yml, not here.
-#   id-token: write -- same: only the pages.yml deploy step needs the OIDC token.
+#   pages:    write -- the deploy-pages path is commented out (see the
+#                      "upload-pages-artifact" / "deploy-pages" steps further
+#                      down). Pages now serves directly from docs/ on the
+#                      working branch via Settings > Pages > Source = branch.
+#   id-token: write -- only deploy-pages@v4 needed an OIDC token; that step
+#                      is no longer active.
+# If the deploy-pages path is ever re-enabled, restore pages: write and
+# id-token: write together; do not re-grant either without the other.
 
 on:
   schedule:
@@ -161,8 +163,28 @@ jobs:
             echo "no changes"
           fi
 
-      # The built site lives in docs/ on main. Deployment is handled by the
-      # separate .github/workflows/pages.yml workflow, which fires on every
-      # docs/** push (this commit) and deploys the docs/ artifact to Pages under
-      # a concurrency group. The sweep only builds and commits; it does not
-      # deploy. Source = "GitHub Actions" in Settings > Pages.
+      # The built site now lives in docs/ on the working branch and gets served
+      # directly by Pages when Source = "Deploy from a branch" -> <branch> -> /docs.
+      # No artifact upload, no environment binding, no gh-pages branch needed.
+      # - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
+      #   with:
+      #     path: docs
+      # - id: deploy
+      #   uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128  # v5.0.0
+      #
+      # - name: Deploy health check
+      #   if: steps.deploy.outcome == 'success'
+      #   run: |
+      #     SITE_URL="${{ steps.deploy.outputs.page_url }}"
+      #     if [ -z "$SITE_URL" ]; then
+      #       echo "::warning::No page_url output from deploy step; skipping health check"
+      #       exit 0
+      #     fi
+      #     echo "Checking $SITE_URL ..."
+      #     STATUS=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 15 "$SITE_URL" || echo "000")
+      #     if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+      #       echo "Health check passed (HTTP $STATUS)"
+      #     else
+      #       echo "::error::Deploy health check failed (HTTP $STATUS for $SITE_URL)"
+      #       exit 1
+      #     fi

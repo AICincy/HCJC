@@ -77,10 +77,9 @@ tooltip payload, bond/age/court-date / snapshot-shape helpers), then renders:
 
 ## Hosting
 
-GitHub Pages, Source = "GitHub Actions". The build runs with
-`JCSTREAM_SITE_BASE_URL=""` (so links are root-relative). The sweep commits `docs/` and
-pushes; `.github/workflows/pages.yml` then deploys the `docs/` artifact under a concurrency
-group, and the repository's Pages custom-domain setting points the site at
-`www.aretheyinjail.com`. A `docs/` push goes live within a minute or two. `JCSTREAM_SITE_URL`
-(or, by default, the live site origin) is the absolute origin used in the RSS feeds, the OG
-tags and `security.txt`.
+GitHub Pages, Source = "Deploy from a branch → /docs". The build runs with
+`JCSTREAM_SITE_BASE_URL=""` (so links are root-relative). GitHub Pages serves `docs/`, and
+the repository's Pages custom-domain setting points the site at `www.aretheyinjail.com`.
+Pushing `docs/` makes the change live within a minute or two — no Actions deploy step is on
+the critical path. `JCSTREAM_SITE_URL` (or, by default, the live site origin) is the absolute
+origin used in the RSS feeds, the OG tags and `security.txt`.
