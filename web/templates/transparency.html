@@ -17,11 +17,11 @@
 
 <aside class="banner" aria-label="Current access status" role="status">
   {% if metrics.status == 'BLOCKED' %}
-  <p><strong>Current status: BLOCKED.</strong> The roster snapshot is {{ metrics.freshness_hours }} hours old and the evidence ledger's most recent denial period is still open. HCSO&rsquo;s public inmate-search portal is returning blocked or empty responses to this site&rsquo;s automated public-records retrieval; the site is holding the last-good roster rather than publishing a partial one.</p>
+  <p><span class="status-pill status-pill-blocked">Blocked</span> The roster snapshot is {{ metrics.freshness_hours }} hours old and the evidence ledger's most recent denial period is still open. HCSO&rsquo;s public inmate-search portal is returning blocked or empty responses to this site&rsquo;s automated public-records retrieval; the site is holding the last-good roster rather than publishing a partial one.</p>
   {% elif metrics.status == 'STALE' %}
-  <p><strong>Current status: STALE.</strong> The roster snapshot is {{ metrics.freshness_hours }} hours old, past the {{ metrics.stale_alarm_hours }}-hour alarm threshold, but the evidence ledger does not show an open denial period. The delay may reflect an incident in the update pipeline rather than a block.</p>
+  <p><span class="status-pill status-pill-stale">Stale</span> The roster snapshot is {{ metrics.freshness_hours }} hours old, past the {{ metrics.stale_alarm_hours }}-hour alarm threshold, but the evidence ledger does not show an open denial period. The delay may reflect an incident in the update pipeline rather than a block.</p>
   {% else %}
-  <p><strong>Current status: FRESH.</strong> The roster snapshot is {{ metrics.freshness_hours if metrics.freshness_hours is not none else '?' }} hours old, within the {{ metrics.stale_alarm_hours }}-hour alarm threshold. Retrieval is working.</p>
+  <p><span class="status-pill status-pill-fresh">Fresh</span> The roster snapshot is {{ metrics.freshness_hours if metrics.freshness_hours is not none else '?' }} hours old, within the {{ metrics.stale_alarm_hours }}-hour alarm threshold. Retrieval is working.</p>
   {% endif %}
 </aside>
 

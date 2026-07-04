@@ -166,7 +166,7 @@ def test_build_renders_transparency_page_and_mirror(tmp_path, monkeypatch):
     html = (out / "transparency" / "index.html").read_text(encoding="utf-8")
     assert "Access Transparency Scorecard" in html
     # Snapshot generated_utc is far in the past and the block is unrecovered.
-    assert "Current status: BLOCKED." in html
+    assert 'class="status-pill status-pill-blocked">Blocked</span>' in html
     assert "2026-05-30T00:00:00Z" in html
     assert 'content="noindex, noarchive"' in html
 
