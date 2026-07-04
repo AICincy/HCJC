@@ -198,19 +198,25 @@ sweep (~20-45 min) triggers a fresh deploy that supersedes the stuck one.
 Only investigate if the live `Generated` timestamp lags main by more than
 two sweep cycles.
 
-### Pages deploy: Actions-based, concurrency-guarded (2026-07-04)
+### Pages deploy: branch-serving, and the failed Actions experiment (2026-07-04)
 
-Pages deploys via `.github/workflows/pages.yml` (Source = GitHub Actions),
-not the old branch-serving flow. The workflow fires only on `docs/**` pushes
-and runs under `concurrency: group pages`, so deploys serialize instead of
-colliding. This replaced branch-serving, where every push to main (sweeps
-plus doc-only merges) triggered an unconfigurable built-in deploy; bursts
-collided and the losers failed with `##[error]Deployment failed, try again
-later` (10+ in a day on 2026-07-03/04). Doc-only merges (CLAUDE.md, `audit/`)
-no longer deploy at all. If one deploy still fails GitHub-side, re-run the
-failed job (`rerun_failed_jobs`); the next `docs/**` push supersedes it
-either way. The one-time Source toggle to "GitHub Actions" is owner-side
-(Settings > Pages), done 2026-07-04.
+Pages serves `docs/` directly via Settings > Pages > Source = "Deploy from a
+branch". Every push to main (sweep commits, PR merges) triggers GitHub's
+built-in `pages-build-deployment`; the push is the deploy. That built-in flow
+intermittently fails with `##[error]Deployment failed, try again later`, a
+GitHub Pages backend rejection (~10 on 2026-07-03/04). Those failures are
+transient and self-heal: the next sweep's push supersedes the failed deploy,
+so the live site stays current. If one blocks something urgent, re-run the
+failed job (`rerun_failed_jobs`).
+
+Do NOT migrate to an Actions-based deploy (`.github/workflows/pages.yml` +
+Source = "GitHub Actions") to "fix" this. It was tried and reverted the same
+day (2026-07-04): `upload-pages-artifact` succeeded but `actions/deploy-pages`
+failed with the identical "Deployment failed, try again later" on isolated,
+collision-free deploys, twice in a row, leaving the site unable to publish at
+all. Branch-serving's self-healing intermittent failure is more reliable than
+the Actions path was. The failure is GitHub-side, not a repo defect;
+concurrency control does not address it.
 
 ### Optional features (owner-side setup, not something I can do from here)
 
