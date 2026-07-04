@@ -198,6 +198,20 @@ sweep (~20-45 min) triggers a fresh deploy that supersedes the stuck one.
 Only investigate if the live `Generated` timestamp lags main by more than
 two sweep cycles.
 
+### Pages deploy: Actions-based, concurrency-guarded (2026-07-04)
+
+Pages deploys via `.github/workflows/pages.yml` (Source = GitHub Actions),
+not the old branch-serving flow. The workflow fires only on `docs/**` pushes
+and runs under `concurrency: group pages`, so deploys serialize instead of
+colliding. This replaced branch-serving, where every push to main (sweeps
+plus doc-only merges) triggered an unconfigurable built-in deploy; bursts
+collided and the losers failed with `##[error]Deployment failed, try again
+later` (10+ in a day on 2026-07-03/04). Doc-only merges (CLAUDE.md, `audit/`)
+no longer deploy at all. If one deploy still fails GitHub-side, re-run the
+failed job (`rerun_failed_jobs`); the next `docs/**` push supersedes it
+either way. The one-time Source toggle to "GitHub Actions" is owner-side
+(Settings > Pages), done 2026-07-04.
+
 ### Optional features (owner-side setup, not something I can do from here)
 
 - **Giscus comments** on inmate pages (`web/templates/inmate.html` renders the
@@ -300,5 +314,14 @@ two sweep cycles.
 
 - Reviews every PR, usually 1-2 comments. Track record: sometimes right
   (cap carry-forward, breakpoint documentation, checklist wording),
-  sometimes wrong (cls collapse selectors). Verify every comment
-  against source before applying. Reply on-thread only when declining.
+  sometimes wrong (cls collapse selectors, `git clean` over the
+  untracked-file check, `git fetch --prune` over `git update-ref`).
+  Verify every comment against source before applying.
+- Reply on-thread to EVERY Gemini comment (owner rule, 2026-07-03),
+  accept or decline. Note where an accepted fix landed, or the reason for
+  declining.
+- The owner merges doc PRs within a minute, faster than the review lands,
+  so a nit usually arrives after merge. Carry each accepted nit as a
+  follow-up on a branch restarted from origin/main; do not reopen the
+  merged PR. Trivial formatting-only nits may be batched into the next
+  follow-up rather than spawning a PR each.
