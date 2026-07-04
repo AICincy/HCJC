@@ -163,6 +163,18 @@ jobs:
             echo "no changes"
           fi
 
+      # Alert when the deployed site lags the committed roster: current.json
+      # keeps advancing on main but the GitHub Pages deploy is stuck, so the
+      # live site serves stale content (the failure mode that went unnoticed
+      # for ~12h on 2026-07-04). scraper.deploy_alert compares the live
+      # /data/current.json generated_utc against the committed one and opens a
+      # deduped issue past DEPLOY_STALE_ALARM_MINUTES. Never fails the job.
+      - name: Deploy staleness alarm
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m scraper.deploy_alert
+
       # The built site now lives in docs/ on the working branch and gets served
       # directly by Pages when Source = "Deploy from a branch" -> <branch> -> /docs.
       # No artifact upload, no environment binding, no gh-pages branch needed.
