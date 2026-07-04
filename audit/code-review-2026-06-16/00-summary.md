@@ -11,7 +11,7 @@ All five reviewers confirmed the following:
 | 107 empty booking photos altered or "fixed" | Not altered. Parser skips empty-payload base64 correctly. No downstream code fills them. |
 | One-source principle (inmate records) | Adhered for public pages. One question item below (dispatch_correlations.json). |
 | Fabricated citations | None found. ORC and FCRA citations verified accurate. Mandamus draft uses [VERIFY] tags. |
-| Session IDs present in repo | Not found in this repo. See Critical finding below. |
+| Session IDs present in repo | Resolved: now documented in the CLAUDE.md Chain-of-Custody table and the `audit/sessions/` ledger (transcripts still unfiled). See Critical finding below. |
 
 ## Finding distribution
 
@@ -27,6 +27,12 @@ All five reviewers confirmed the following:
 ## Critical
 
 ### [legal-evidentiary] Court-evidence session IDs not in this repository
+
+**Status (updated 2026-07-04): RESOLVED for the IDs, PARTIAL for transcripts.**
+The session IDs are now recorded in the CLAUDE.md Chain-of-Custody table and the
+`audit/sessions/` ledger, so the repository documents the location of record.
+The residual open item is that the transcripts themselves are not yet filed in
+`audit/sessions/` (see `audit/sessions/README.md`).
 
 The four session IDs designated as court evidence (session_01Hbc6p9EspF6RH9ajNNb8tB, session_01MNnYgZMY5uFz9cHie3w6TY, session_019fDevbfpgmnjJP7A343T95, session_01NGMSLESEepbgV8aSn4reVG) do not appear anywhere in this repository, including CLAUDE.md. They may be held in claude.ai session history or an external transcript archive. If so, that storage location is not documented in the repo.
 

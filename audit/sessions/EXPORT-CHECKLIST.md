@@ -26,8 +26,10 @@ For each session below:
 | 2 | https://claude.ai/code/session_01MNnYgZMY5uFz9cHie3w6TY | `session_01MNnYgZMY5uFz9cHie3w6TY.md` |
 | 3 | https://claude.ai/code/session_019fDevbfpgmnjJP7A343T95 | `session_019fDevbfpgmnjJP7A343T95.md` |
 | 4 | https://claude.ai/code/session_01NGMSLESEepbgV8aSn4reVG | `session_01NGMSLESEepbgV8aSn4reVG.md` |
+| 5 | https://claude.ai/code/session_019qfYLXARs48orCHaQdM8cA | `session_019qfYLXARs48orCHaQdM8cA.md` |
+| 6 | https://claude.ai/code/session_01DCTmLdgUma5GYA1JBrywGp | `session_01DCTmLdgUma5GYA1JBrywGp.md` |
 
-## After all four files are saved
+## After all six files are saved
 
 5. Update `audit/sessions/README.md`: change the status line ("designated,
    not yet populated") to filed, and fill the ledger table (transcript
@@ -36,11 +38,11 @@ For each session below:
    status text to filed, and replace each date-range `[VERIFY]` in the
    table with the confirmed range.
 7. Commit everything in one commit:
-   `evidence: file chain-of-custody transcripts (4 sessions)`
+   `evidence: file chain-of-custody transcripts (6 sessions)`
 8. Push to main (or hand the commit to a Claude session to push and PR).
 
 Done. This closes the 2026-06-16 Critical finding entirely; the repository
-becomes the attestable location of record for all four sessions.
+becomes the attestable location of record for all six sessions.
 
 If a session URL 404s: the session may belong to a different claude.ai
 account or workspace. Check the account switcher before concluding the

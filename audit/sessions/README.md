@@ -30,11 +30,13 @@ claude.ai session history pending export.
 | session_01MNnYgZMY5uFz9cHie3w6TY | not yet filed | [VERIFY] | [VERIFY] |
 | session_019fDevbfpgmnjJP7A343T95 | not yet filed | [VERIFY] | [VERIFY] |
 | session_01NGMSLESEepbgV8aSn4reVG | not yet filed | [VERIFY] | [VERIFY] |
+| session_019qfYLXARs48orCHaQdM8cA | not yet filed | 2026-07-02 [VERIFY] | [VERIFY] |
 | session_01DCTmLdgUma5GYA1JBrywGp | not yet filed | 2026-07-03 [VERIFY] | [VERIFY] |
 
-Note: the first four session IDs do not appear in any commit trailer in this
-repository (checked 2026-07-02 with `git log --all --grep`), so their date
-ranges cannot be reconstructed from git history and must come from the
-claude.ai export. `session_01DCTmLdgUma5GYA1JBrywGp` does appear in commit
-trailers (the #372 and #373 commits, dated 2026-07-03/04); its transcript
-still requires export to confirm the full range.
+Note: the four original session IDs do not appear in any commit trailer in
+this repository (checked 2026-07-02 with `git log --all --grep`), so their
+date ranges cannot be reconstructed from git history and must come from the
+claude.ai export. `session_019qfYLXARs48orCHaQdM8cA` and
+`session_01DCTmLdgUma5GYA1JBrywGp` do appear in commit trailers (dated
+2026-07-02 through 2026-07-04); their transcripts still require export to
+confirm the full range.
