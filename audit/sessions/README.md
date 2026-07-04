@@ -30,6 +30,7 @@ claude.ai session history pending export.
 | session_01MNnYgZMY5uFz9cHie3w6TY | not yet filed | [VERIFY] | [VERIFY] |
 | session_019fDevbfpgmnjJP7A343T95 | not yet filed | [VERIFY] | [VERIFY] |
 | session_01NGMSLESEepbgV8aSn4reVG | not yet filed | [VERIFY] | [VERIFY] |
+| session_01DCTmLdgUma5GYA1JBrywGp | not yet filed | 2026-07-03 [VERIFY] | [VERIFY] |
 
 Note: none of these four session IDs appears in any commit trailer in this
 repository (checked 2026-07-02 with `git log --all --grep`), so date ranges

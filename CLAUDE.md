@@ -283,8 +283,8 @@ two sweep cycles.
 
 ### Runbook: local screenshot flow
 
-- `cd docs && python3 -m http.server 8899 &`, then playwright with
-  `executable_path='/opt/pw-browsers/chromium'`.
+- `cd docs && python3 -m http.server 8899 --bind 127.0.0.1 &`, then
+  playwright with `executable_path='/opt/pw-browsers/chromium'`.
 - `pip install playwright` only; do NOT run `playwright install`.
 - Never render over file:// (root-absolute /static links load
   unstyled). Always serve over HTTP.
