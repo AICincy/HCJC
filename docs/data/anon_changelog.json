@@ -228631,48 +228631,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-27T08:38:52Z",
-    "inmate_number": "14243515",
-    "name": "COLLINS CHLOE",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/27/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T08:38:52Z",
-    "inmate_number": "14278689",
-    "name": "GRIFFIN SAMONE",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T08:38:52Z",
-    "inmate_number": "14815077",
-    "name": "DIALLO AMADOU",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T08:38:52Z",
-    "inmate_number": "2452481",
-    "name": "MASON RANDY",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Using weapons while intoxicated",
-    "note": ""
+    "category": "Using weapons while intoxicated"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T09:34:41Z",
-    "inmate_number": "14243515",
-    "name": "COLLINS CHLOE",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-27",
+    "tier": "M1",
+    "category": "Receiving stolen property"
   },
   {
     "event": "released",
@@ -238066,6 +238057,51 @@
     "timestamp_utc": "2026-07-04T08:05:06Z",
     "inmate_number": "14814562",
     "name": "ROWE DAKOTA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T10:25:27Z",
+    "inmate_number": "14323700",
+    "name": "FULLER KAILON",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 7/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-04T10:25:27Z",
+    "inmate_number": "14629711",
+    "name": "GRIFFIN KING",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T10:25:27Z",
+    "inmate_number": "14815775",
+    "name": "JAMES KEYMANI",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T10:25:27Z",
+    "inmate_number": "2537624",
+    "name": "CLARK YAKITA",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/4/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-04T10:25:27Z",
+    "inmate_number": "14815772",
+    "name": "KEEGAN DAVID",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
