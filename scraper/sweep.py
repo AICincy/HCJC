@@ -673,7 +673,7 @@ def run(
                 # Interrupted (or otherwise short-circuited) sweep: do not diff.
                 # `current` is a partial subset of `previous`, so every unreached
                 # id would synthesize a bogus `released` event and evict real
-                # events from the rolling CHANGELOG_LIMIT=500 window.
+                # events from the rolling CHANGELOG_LIMIT=10000 window.
                 log.warning("skipping diff/changelog append: sweep did not finish cleanly")
             # sweep-F5: only prune photos when save_current succeeded for this
             # cycle. A failed save leaves seen_ids ungrounded against any

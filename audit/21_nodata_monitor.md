@@ -1,5 +1,12 @@
 # No-data monitor: detect a missed sweep (absence of sweep_start)
 
+> **NOT IMPLEMENTED (2026-07-04).** JCStream does not use Datadog. The Datadog
+> monitor described below (and the `scraper/ddlog.py` / `DD_*` env it assumes)
+> was never built and is not present in the repo. Treat this as a historical
+> proposal only. The active missed-sweep / freeze detection is
+> `scraper.freeze_alert`, and stuck-deploy detection is `scraper.deploy_alert`;
+> both open deduped GitHub issues.
+
 ## Audit metadata
 
 - Date: 2026-05-22

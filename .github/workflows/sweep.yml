@@ -100,18 +100,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python -m scraper.freeze_alert
 
-      # All four open-data feeds: 30-day window, each module skips its API
-      # pull if the existing JSON is < 24h old. Sweep cron is every 30 min;
-      # this gates Socrata traffic to once per dataset per day.
-      - name: Pull Cincinnati Open Data calls-for-service (last 30 days, 24h cache)
+      # Cincinnati open-data feeds: 30-day window. Each module skips its API
+      # pull if the existing JSON is fresh, but the windows differ: cfs and
+      # cfs_pdi cache 1h, shootings 6h, and the supplemental feeds below cache
+      # 12-24h per feed. Sweep cron is */15 (~20-45 min effective).
+      - name: Pull Cincinnati Open Data calls-for-service (last 30 days, 1h cache)
         run: python -m scraper.cfs --hours 720
         continue-on-error: true
 
-      - name: Pull Cincinnati Open Data shootings (last 30 days, 24h cache)
+      - name: Pull Cincinnati Open Data shootings (last 30 days, 6h cache)
         run: python -m scraper.shootings --days 30
         continue-on-error: true
 
-      - name: Pull PDI Police CFS (last 30 days, 24h cache, arrest/citation dispositions)
+      - name: Pull PDI Police CFS (last 30 days, 1h cache, arrest/citation dispositions)
         run: python -m scraper.cfs_pdi --hours 720
         continue-on-error: true
 

@@ -55,10 +55,10 @@ no_implicit_optional = true
 check_untyped_defs = true
 warn_redundant_casts = true
 explicit_package_bases = true
-# Run mypy only on package source directories used by the runtime and CI.
-# Exclude `scripts/` (utility scripts) and `tests/` from mypy so local
-# development and GitHub Actions perform consistent checks without requiring
-# test-suite typing changes.
+# mypy scope lives in `files` below (scraper, web, scripts, tests). The CI
+# step invokes `mypy scraper web` explicitly, and explicit CLI paths override
+# `files`, so CI type-checks only scraper/ and web/; a bare local `mypy` uses
+# the full `files` list.
 files = ["scraper", "web", "scripts", "tests"]
 # Allow mypy to check scripts/tests too. Keep explicit_package_bases enabled
 # to avoid duplicate-module mapping errors when packages and scripts overlap.

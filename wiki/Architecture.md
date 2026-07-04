@@ -4,14 +4,14 @@ JCStream is deliberately boring: a Python script turns a JSON snapshot into a fo
 of HTML, and GitHub Pages serves the folder. No runtime backend, no database.
 
 ```
-GitHub Actions cron (*/30)         .github/workflows/sweep.yml
+GitHub Actions cron (*/15, 20-min gate)   .github/workflows/sweep.yml
    │
    ├─ scraper.sweep ───────────────▶ data/current.json   (the roster)
    │                                 data/changelog.json (booked/released/updated events)
    │                                 data/photos/<id>.jpg (downscaled booking photos)
    │
    ├─ scraper.cfs / cfs_pdi /───────▶ data/cfs_recent.json, data/cfs_pdi_recent.json
-   │  shootings / incidents          data/shootings_recent.json, data/incidents_recent.json
+   │  shootings / open_data_feeds     data/shootings_recent.json + supplemental feeds
    │
    ├─ web.build ───────────────────▶ docs/  (index.html, inmate/<id>/, stats/, data/,
    │                                          feed.xml + booked.xml + released.xml,
@@ -36,8 +36,8 @@ GitHub Actions cron (*/30)         .github/workflows/sweep.yml
     roster (which would churn the changelog with a spurious wave of releases then re-bookings).
 - **`parsers.py`** — selectolax-based HTML parsing of the list and detail pages.
 - **`photos.py`** — Pillow; re-encodes HCSO's inline image to a 250×312 JPEG.
-- **`cfs.py` / `cfs_pdi.py` / `shootings.py` / `incidents.py`** — pull the four Cincinnati
-  Open Data (Socrata) feeds. See **[[Data]]**.
+- **`cfs.py` / `cfs_pdi.py` / `shootings.py` / `open_data_feeds.py`** — pull the Cincinnati
+  Open Data (Socrata) feeds (three dedicated parsers plus a six-feed generic registry). See **[[Data]]**.
 - **`match.py`** — probabilistic time-window match between an inmate's booking and nearby CPD
   arrest/citation dispatch calls. It is **not** identity matching — it's surfaced on inmate
   pages as "candidate dispatch calls".
@@ -51,12 +51,12 @@ GitHub Actions cron (*/30)         .github/workflows/sweep.yml
 - **`models.py`** — pydantic models (`Inmate`, `Charge` (nested), `ChangeEvent`, `Snapshot`, `ListRow`).
 - **`client.py`** — the HCSO HTTP client (httpx; respects a polite User-Agent; 0 s crawl-delay per robots.txt).
 
-## The site builder (`web/build.py`, `web/classify.py`, `web/shape.py`)
+## The site builder (`web/build.py`, `web/classify.py`, `web/shape/`)
 
 `build(out_dir)` (in `web/build.py`) loads `data/current.json` + `data/changelog.json` + the cfs
 feeds, attaches dispatch candidates, builds a Jinja2 environment with a pile of template globals
 imported from `web/classify.py` (offense categorisation, tier classification, regex helpers,
-bond/date parsing) and `web/shape.py` (per-inmate display, the card data attributes, the per-card
+bond/date parsing) and the `web/shape/` package (per-inmate display, the card data attributes, the per-card
 tooltip payload, bond/age/court-date / snapshot-shape helpers), then renders:
 
 - `index.html` — the roster: a legal banner, the headline count + sparkline, recent-activity
@@ -70,6 +70,9 @@ tooltip payload, bond/age/court-date / snapshot-shape helpers), then renders:
 - `stats/index.html` — point-in-time aggregates of the current roster, plus a roster-size
   sparkline and last-N-days booked/released churn from `history.json`.
 - `data/index.html` — the data & methodology page, including the full **[[Legal]]** notices.
+- Plus the statute pages, the transparency scorecard, the Bond Disparity Index, the
+  court and courts pages, and the help and visit pages (rendered from the matching
+  `web/templates/*.html`).
 - `feed.xml` / `booked.xml` / `released.xml` — RSS 2.0 (all changes / new bookings / releases).
 - `search.json`, `dispatches.json`, `history.json` — see **[[Data]]**.
 - `manifest.webmanifest` (display: browser, no PWA), `robots.txt`, `.well-known/security.txt`,

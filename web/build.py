@@ -164,7 +164,7 @@ def _rss_guid(event: ChangeEvent) -> str:
 def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, site_url: str) -> Environment:
     """Construct the Jinja Environment and register every template global and
     filter. The registered names ARE the template contract: a helper added in
-    web/shape.py or web/classify.py must be registered here under the same name
+    the `web/shape/` package or `web/classify.py` must be registered here under the same name
     to be visible to templates."""
     env = Environment(
         loader=FileSystemLoader(TEMPLATE_DIR),

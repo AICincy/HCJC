@@ -3,14 +3,13 @@ name: pra-daily
 # Workflow permissions, scoped to the minimum each active step requires:
 #   contents: write -- the "Commit PRA requests log" step pushes
 #                      data/pra_requests.json back to the branch, but only
-#                      when SMTP is configured. The two PRA send steps
-#                      above it run in dry-run / log-only mode when
-#                      JCSTREAM_PRA_SMTP_HOST is unset, so no new rows
-#                      land in pra_requests.json and the commit step's
-#                      own `if:` guard short-circuits. The write
-#                      permission is therefore idle on unconfigured
-#                      deployments and exercised only when the send
-#                      loop is real.
+#                      when SMTP is configured. When JCSTREAM_PRA_SMTP_HOST is
+#                      unset the two PRA send steps above still write a
+#                      `status: dry_run` row to pra_requests.json locally, but
+#                      the commit step's own `if:` guard skips the commit, so
+#                      nothing is persisted to the branch. The write permission
+#                      is therefore idle on unconfigured deployments and
+#                      exercised only when the send loop is real.
 #
 # If the workflow ever stops committing anything (e.g. PRA loop moves
 # entirely to a separate audit log), drop contents: write to read.
@@ -71,10 +70,10 @@ jobs:
         run: python -m scraper.pra
 
       - name: Commit PRA requests log
-        # Skip on deployments where SMTP is not configured. With no SMTP
-        # host, the PRA send steps run dry-run only and never modify
-        # data/pra_requests.json, so there is nothing to commit and the
-        # contents: write token stays unexercised.
+        # Skip on deployments where SMTP is not configured. With no SMTP host
+        # the PRA send steps still write a dry_run row to data/pra_requests.json
+        # locally, but this guard skips the whole commit step so nothing is
+        # persisted and the contents: write token stays unexercised.
         if: ${{ env.JCSTREAM_PRA_SMTP_HOST != '' }}
         run: |
           git config user.name "jcstream-bot"
