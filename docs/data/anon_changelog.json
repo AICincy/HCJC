@@ -229099,39 +229099,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T22:49:08Z",
-    "inmate_number": "1585147",
-    "name": "ISOM DARRYL",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-27T22:49:08Z",
-    "inmate_number": "2834259",
-    "name": "WORTHY JAZMINE",
+    "date": "2026-06-27",
     "tier": null,
-    "category": null,
-    "note": "booked 6/27/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-27T22:49:08Z",
-    "inmate_number": "14138033",
-    "name": "STRICKLAND KOURTNEY",
+    "date": "2026-06-27",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-27T23:23:50Z",
-    "inmate_number": "14153992",
-    "name": "ROONEY JAMAN",
+    "date": "2026-06-27",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "booked 6/27/26"
+    "category": "Trafficking in drugs"
   },
   {
     "event": "updated",
@@ -238483,5 +238471,41 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-04T23:43:57Z",
+    "inmate_number": "14112804",
+    "name": "SHAFER SARAH",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T23:43:57Z",
+    "inmate_number": "14815767",
+    "name": "WINTERS JAMIE",
+    "tier": "M1",
+    "category": "Cruelty to companion animals",
+    "note": "booked 7/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T23:43:57Z",
+    "inmate_number": "14785688",
+    "name": "SMITH JOSEPH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 7/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-04T23:43:57Z",
+    "inmate_number": "1776030",
+    "name": "CURTIS MELVIN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
   }
 ]
