@@ -228307,48 +228307,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-26T23:51:51Z",
-    "inmate_number": "2540025",
-    "name": "CLARK DOMINIQUE",
+    "date": "2026-06-26",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "booked 6/26/26"
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-26T23:51:51Z",
-    "inmate_number": "2701275",
-    "name": "JOHNSON TIYAHNNA",
+    "date": "2026-06-26",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-27T00:40:11Z",
-    "inmate_number": "14243769",
-    "name": "WILSON LOGAN",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/26/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-27T00:40:11Z",
-    "inmate_number": "2539057",
-    "name": "MILLER LASHONDA",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/26/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T00:40:11Z",
-    "inmate_number": "2701275",
-    "name": "JOHNSON TIYAHNNA",
+    "date": "2026-06-27",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
+    "category": "Driving on a suspended/revoked license"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-27",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-27",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-27",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -237823,6 +237826,87 @@
     "timestamp_utc": "2026-07-03T23:44:43Z",
     "inmate_number": "14699960",
     "name": "GIVENS KEVIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T01:18:31Z",
+    "inmate_number": "14235249",
+    "name": "WILLIAMS KEIVEN",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T01:18:31Z",
+    "inmate_number": "14272006",
+    "name": "HUDGINS-TRUSTY JAYMECA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-04T01:18:31Z",
+    "inmate_number": "14425354",
+    "name": "NEWHOUSE TREVOR",
+    "tier": "MM",
+    "category": "Expired operators license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T01:18:31Z",
+    "inmate_number": "14656429",
+    "name": "HUDSON NEHEMIAH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T01:18:31Z",
+    "inmate_number": "1473826",
+    "name": "JOHNSON THERESA",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-04T01:18:31Z",
+    "inmate_number": "14815763",
+    "name": "LOPEZ MAMIN",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T01:18:31Z",
+    "inmate_number": "1582235",
+    "name": "SMITH WILLIAM",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-04T01:18:31Z",
+    "inmate_number": "1712800",
+    "name": "JONES SCHAKA",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": "booked 7/3/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-04T01:18:31Z",
+    "inmate_number": "14690026",
+    "name": "SESSIONS TERRANCE",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
