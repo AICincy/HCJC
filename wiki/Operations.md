@@ -26,9 +26,10 @@ python -m scraper.cfs --hours 168          # Cincinnati Open Data calls-for-serv
 (the sweep no-ops if `current.json` is less than 20 minutes old), plus `workflow_dispatch`.
 Effective cadence is ~20-45 minutes. Each run: sweep → pull the four Cincinnati feeds →
 `python -m web.build` (with `JCSTREAM_SITE_BASE_URL=""`)
-→ commit `data/ docs/` → push. GitHub Pages serves
-`docs/` from the branch and the custom domain points at `www.aretheyinjail.com`, so the push
-*is* the deploy. Other workflows: `ci.yml` (tests on PR),
+→ commit `data/ docs/` → push. The push to
+`docs/` triggers `.github/workflows/pages.yml`, which deploys the `docs/` artifact to GitHub
+Pages (Source = GitHub Actions) under a concurrency group; the custom domain points at
+`www.aretheyinjail.com`. Other workflows: `ci.yml` (tests on PR),
 `pra_daily.yml` (the optional PRA email loop), `ingest_case_data.yml` (the case-data issue form).
 
 GH Actions cron is best-effort — expect 30–50 min cadence under load. The sweep step has a
