@@ -33,6 +33,7 @@ verbatim. Do not abbreviate. Do not redact. Do not reformat.
 | session_01MNnYgZMY5uFz9cHie3w6TY | [VERIFY] |
 | session_019fDevbfpgmnjJP7A343T95 | [VERIFY] |
 | session_01NGMSLESEepbgV8aSn4reVG | [VERIFY] |
+| session_01DCTmLdgUma5GYA1JBrywGp | 2026-07-03 [VERIFY] |
 
 Authoritative storage location: `audit/sessions/` in this repository
 (designated 2026-07-02; ledger and filing procedure in
@@ -222,3 +223,82 @@ two sweep cycles.
   for `scraper/pra.py` and `JCSTREAM_PRA_TO_CAPIAS_EMAIL` for `scraper/pra_capias.py`;
   With `JCSTREAM_PRA_SMTP_HOST` + `JCSTREAM_PRA_FROM_EMAIL` present it sends for real.
   To enable the daily booking photos fallback loop (`scraper/pra.py`), set the repository variable `JCSTREAM_PRA_PHOTOS_ENABLED` to `1` in Actions Variables.
+
+## Git workflow
+
+### Merge discipline
+
+- One logical change per PR. The owner merges draft PRs within minutes;
+  never queue commits on a PR expecting time to update it.
+- BEFORE pushing additional commits to a PR branch, check whether the PR
+  already merged (the GitHub PR tools; `gh pr view <n> --json state` where
+  gh is available). A merged-while-pushing race (PR #360) silently dropped
+  three commits from main; PR #361 was the recovery.
+- After every merge the remote branch is deleted. `--force-with-lease`
+  then fails with "stale info". Fix:
+  `git update-ref -d refs/remotes/origin/<branch>` then plain push.
+  Always restart the branch from origin/main, same branch name.
+
+### Build artifacts
+
+- `git checkout -- docs/ data/` does NOT remove newly created untracked
+  files. After any local build, check `git status` for `??` entries
+  before `git add -A`. A 237k-line generated JSON was once committed
+  this way and had to be amended out.
+
+## Testing
+
+### Evidence-log isolation (conftest.py)
+
+- `waf_block_log.json` and `pra_requests.json` are ORC 149.43 evidence
+  artifacts. The test suite must never write to them. Verified clean
+  2026-07-02 at 447 passing tests.
+- Isolation pattern: wrap `store.append_block_evidence` in conftest.
+  Do NOT patch `store.WAF_BLOCK_LOG_PATH`; module paths bind at def
+  time and patching desyncs the chdir-isolated
+  `test_roster_stale_context` (this broke once and shipped).
+- Any NEW production writer with a `data/`-relative default path
+  requires a matching conftest wrap before merge.
+
+## Frontend / CSS conventions
+
+### Class and token rules
+
+- classify.py collapses cls 2905→2903 and 2914/2915→2913 BEFORE template
+  class names are built. Selectors targeting raw chapters 2905/2914/2915
+  are dead code. Review bots flag their absence as a bug; it is not.
+  The token comment in style.css explains this; rebut on-thread.
+- Token aliasing is prohibited. The print `:root` overrides `--accent`
+  and `--surface` independently, so `--warn: var(--accent)` style
+  aliasing recolors print output. See the note at the top of the token
+  block.
+- main.js constructs class names dynamically (`'sr-' + tier` yields
+  sr-felony/sr-misdemeanor/sr-x). Grep for the prefix AND the
+  construction site before deleting any "unused" class. A purge round
+  once deleted these wrongly.
+- Card category hook is `data-chap="<slug>"` emitted by _card.html from
+  `_chap_slug` (web/shape/inmates.py). Cards carry no per-category
+  class. Verify the slug list against `_chap_slug` before writing any
+  `[data-chap=...]` selector.
+
+### Runbook: local screenshot flow
+
+- `cd docs && python3 -m http.server 8899 &`, then playwright with
+  `executable_path='/opt/pw-browsers/chromium'`.
+- `pip install playwright` only; do NOT run `playwright install`.
+- Never render over file:// (root-absolute /static links load
+  unstyled). Always serve over HTTP.
+- The site is single light theme (dark-mode media query removed per spec
+  §1). Screenshot the light theme; a mobile-width capture replaces the
+  old dark pair.
+- Any user-visible visual change requires screenshots sent to the owner
+  BEFORE the PR merges.
+
+## Review process
+
+### Gemini bot reviews
+
+- Reviews every PR, usually 1-2 comments. Track record: sometimes right
+  (cap carry-forward, breakpoint documentation, checklist wording),
+  sometimes wrong (cls collapse selectors). Verify every comment
+  against source before applying. Reply on-thread only when declining.
