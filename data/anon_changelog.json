@@ -229615,12 +229615,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T12:45:19Z",
-    "inmate_number": "2614462",
-    "name": "CHALK SINEAD",
+    "date": "2026-06-28",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/28/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
@@ -238852,6 +238849,15 @@
     "timestamp_utc": "2026-07-05T12:12:02Z",
     "inmate_number": "2020361",
     "name": "CONNER KEVIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-05T12:50:46Z",
+    "inmate_number": "2827838",
+    "name": "WARREN CHAD",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
