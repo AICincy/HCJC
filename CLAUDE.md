@@ -36,6 +36,7 @@ verbatim. Do not abbreviate. Do not redact. Do not reformat.
 | session_01NGMSLESEepbgV8aSn4reVG | [VERIFY] |
 | session_019qfYLXARs48orCHaQdM8cA | 2026-07-02 [VERIFY] |
 | session_01DCTmLdgUma5GYA1JBrywGp | 2026-07-03 [VERIFY] |
+| db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e (local Claude Code session) | 2026-07-05 [VERIFY] |
 
 Authoritative storage location: `audit/sessions/` in this repository
 (designated 2026-07-02; ledger and filing procedure in
