@@ -134,7 +134,7 @@ def _bond_context(
     peers = _bond_peer_amounts(target, all_inmates, primary_code, indexes=indexes)
     if len(peers) < 5:
         return None
-    p10, p25, p50, p75, p90 = (_sorted_pct(peers, x) for x in (0.10, 0.25, 0.50, 0.75, 0.90))
+    p25, p50, p75, p90 = (_sorted_pct(peers, x) for x in (0.25, 0.50, 0.75, 0.90))
     my_percentile = None
     if my_bond is not None and my_bond > 0:
         below = sum(1 for v in peers if v < my_bond)
@@ -144,7 +144,6 @@ def _bond_context(
         "title": orc_mod.title_for(primary_code, offenses),
         "min": peers[0],
         "max": peers[-1],
-        "p10": p10,
         "p25": p25,
         "p50": p50,
         "p75": p75,

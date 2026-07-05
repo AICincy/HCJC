@@ -298,7 +298,6 @@ def _roster_stale_context(snapshot: Snapshot) -> dict:
             since = ts[:10] if ts else None
             break
     return {
-        "hours": round(hours, 1) if hours is not None else None,
         "blocked": hours is not None and hours >= ROSTER_STALE_ALARM_HOURS,
         "since": since,
         "ever_blocked": any(r.get("event") == "blocked" for r in log),
@@ -327,7 +326,6 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
     recent_24h = _events_for_recent(events, hours=24)
     recent_booked = sum(1 for e in recent_24h if e.event == "booked")
     recent_released = sum(1 for e in recent_24h if e.event == "released")
-    events_recent = list(reversed(_events_for_recent(events, hours=8)))[:12]
     trend = _update_history(snapshot, recent_booked, recent_released)
     return {
         "by_month": by_month,
@@ -335,7 +333,6 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
         "expanded_months": expanded_months,
         "recent_booked": recent_booked,
         "recent_released": recent_released,
-        "events_recent": events_recent,
         "trend": trend,
     }
 

@@ -16,7 +16,6 @@ The full, canonical list with field-by-field descriptions is on the live site:
 | `cfs_recent.json` | Cincinnati Open Data — CPD/CFD Calls For Service (Socrata `qiik-bpks`), last ~7 days, arrest/citation/offense-report dispositions only. |
 | `cfs_pdi_recent.json` | Cincinnati Open Data — PDI Police CFS / CAD (Socrata `gexm-h6bt`), last ~7 days, arrest/citation/offense-report dispositions. |
 | `shootings_recent.json` | Cincinnati Open Data — CPD Reported Shootings (Socrata `sfea-4ksu`), last ~14 days. |
-| `incidents_recent.json` | Cincinnati Open Data — PDI Crime Incidents (Socrata `k59e-2pvf`), last ~7 days. |
 | `courtclerk_cases.json` | Crowdsourced case data submitted via the [case-data issue form](https://github.com/AICincy/JCStream/issues/new?template=case-data.yml). May be empty. |
 | `SHA256SUMS` | SHA-256 of every file in `/data/`, regenerated each build — cheap tamper-evidence on top of the authenticated git history. |
 
