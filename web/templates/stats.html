@@ -13,13 +13,13 @@
     <h1 class="title">Roster Statistics</h1>
     <div class="sub">A snapshot of the {{ "{:,}".format(s.n) }} people currently in custody &middot; Hamilton County Justice Center</div>
   </div>
-  <div class="stamp">Sweep {{ snapshot.generated_utc[:16] }}Z</div>
+  <div class="stamp">Sweep {{ human_utc(snapshot.generated_utc) }}</div>
 </header>
 
 <div class="alert inline-alert"><strong>Arrest is not conviction.</strong> Every person reflected in these counts is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. All charges are accusations only; these are point-in-time figures for the current roster.</div>
 
 <p class="page-lede">
-  Computed from the same data the roster is built from. The Hamilton County Justice Center holds people awaiting court proceedings or serving shorter sentences. Felony cases are prosecuted in the <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">Court of Common Pleas, General Division</a>; misdemeanors in <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">Hamilton County Municipal Court</a>. Last sweep <code>{{ snapshot.generated_utc or 'pending' }}</code>.
+  Computed from the same data the roster is built from. The Hamilton County Justice Center holds people awaiting court proceedings or serving shorter sentences. Felony cases are prosecuted in the <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">Court of Common Pleas, General Division</a>; misdemeanors in <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">Hamilton County Municipal Court</a>. Last sweep {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}.
 </p>
 
 {% macro bars(rows, total, accent='') %}
@@ -102,12 +102,12 @@
 <div class="section-h"><h2>Severity composition</h2><span class="grow"></span><span class="meta">most-severe charge per person, F1 &rarr; MM</span></div>
 <div class="stacked">
   <div class="stacked-bar">
-    {% for k, w in tb_segs %}{% if w %}<div class="stacked-seg stacked-seg-{{ 'f' if k.startswith('F') else 'm' }}" style="flex:{{ w }}" title="{{ k }}: {{ w }} ({{ '%.1f' % (100.0 * w / tb_tot) }}%)"></div>{% endif %}{% endfor %}
+    {% for k, w in tb_segs %}{% if w %}<div class="stacked-seg stacked-seg-{{ 'f' if k.startswith('F') else 'm' }} stacked-seg-{{ k | lower }}" style="flex:{{ w }}" title="{{ k }}: {{ w }} ({{ '%.1f' % (100.0 * w / tb_tot) }}%)"></div>{% endif %}{% endfor %}
   </div>
   <ul class="stacked-leg">
     {% for k, w in tb_segs %}{% if w %}
     <li>
-      <span class="stacked-sw stacked-sw-{{ 'f' if k.startswith('F') else 'm' }}"></span>
+      <span class="stacked-sw stacked-sw-{{ 'f' if k.startswith('F') else 'm' }} stacked-sw-{{ k | lower }}"></span>
       <span class="stacked-k">{{ k }} &middot; {{ tier_max(k) }}</span>
       <span class="stacked-v">{{ "{:,}".format(w) }} <em>({{ '%.1f' % (100.0 * w / tb_tot) }}%)</em></span>
     </li>

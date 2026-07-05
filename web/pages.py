@@ -304,9 +304,12 @@ def _tally_attribute(inmates: list[Inmate], attr: str, expand) -> list[tuple[str
 
 def _tier_summary(inmates: list[Inmate]) -> dict[str, int]:
     """Count inmates by primary tier kind (felony/misdemeanor/other)."""
+    from web.shape.common import _cached_offenses
+
+    offenses = _cached_offenses()
     tiers: dict[str, int] = {"felony": 0, "misdemeanor": 0, "other": 0}
     for inm in inmates:
-        t = _primary_tier(inm)
+        t = _primary_tier(inm, offenses)
         tiers[t["kind"] if t else "other"] += 1
     return tiers
 
@@ -335,8 +338,8 @@ def _bond_stats(inmates: list[Inmate]) -> dict:
                 zero_bond += 1
     bond_vals.sort()
     return {
-        "bond_total": sum(bond_vals),
-        "bond_median": bond_vals[len(bond_vals) // 2] if bond_vals else 0,
+        "bond_total": int(sum(bond_vals)),
+        "bond_median": int(bond_vals[len(bond_vals) // 2]) if bond_vals else 0,
         "bond_zero": zero_bond,
         "bond_known": len(bond_vals),
     }

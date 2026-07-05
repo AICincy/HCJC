@@ -27,6 +27,34 @@ def _strftime_nopad(dt, fmt: str) -> str:
     return dt.strftime(fmt)
 
 
+def _human_utc(ts: str | None) -> str:
+    """Display form of an ISO-8601 UTC stamp: "Jul 5, 2026, 8:50 AM ET".
+    Eastern time because the audience is Hamilton County. Falls back to a
+    UTC label when the IANA tz database is unavailable (Windows dev boxes
+    without tzdata) and to the raw string when the stamp does not parse."""
+    if not ts:
+        return ""
+    s = str(ts).strip()
+    dt = None
+    for fmt in ("%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%MZ"):
+        try:
+            dt = datetime.strptime(s, fmt)
+            break
+        except ValueError:
+            continue
+    if dt is None:
+        return s
+    dt = dt.replace(tzinfo=timezone.utc)
+    label = "ET"
+    try:
+        from zoneinfo import ZoneInfo
+
+        dt = dt.astimezone(ZoneInfo("America/New_York"))
+    except Exception:
+        label = "UTC"
+    return _strftime_nopad(dt, "%b %-d, %Y, %-I:%M %p ") + label
+
+
 def _now_naive_est() -> datetime:
     """Return current wall-clock time in America/New_York (EST/EDT) as a naive datetime.
     Used to generate consistent relative labels (e.g. '3 hours ago') during site build

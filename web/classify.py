@@ -31,7 +31,7 @@ _DEGREE_RE = re.compile(r"\b(F[1-5]|M[1-4]|MM)\b\s*$")
 _MIN_MONTH_SIZE = 3
 
 # Degree order (severity): lower index = more serious. Used for ranking charges.
-_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
+_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "F", "M1", "M2", "M3", "M4", "MM", "M")
 
 # Tier categories by degree (for CSS coloring and display grouping).
 _TIER_MAX = {

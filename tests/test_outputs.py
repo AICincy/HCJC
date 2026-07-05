@@ -15,10 +15,10 @@ def test_write_well_known_defaults(tmp_path: Path):
         
         # Verify default repo issues link is written
         security_txt = (tmp_path / ".well-known" / "security.txt").read_text(encoding="utf-8")
-        assert "Contact: https://github.com/AICincy/JCStream/issues" in security_txt
-        
+        assert "Contact: https://github.com/AICincy/HCJC/issues" in security_txt
+
         humans_txt = (tmp_path / "humans.txt").read_text(encoding="utf-8")
-        assert "https://github.com/AICincy/JCStream/issues" in humans_txt
+        assert "https://github.com/AICincy/HCJC/issues" in humans_txt
     finally:
         if orig_repo is not None:
             os.environ["GITHUB_REPOSITORY"] = orig_repo

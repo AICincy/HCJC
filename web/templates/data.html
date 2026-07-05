@@ -184,5 +184,5 @@ on this site) is licensed <a href="https://creativecommons.org/licenses/by-nc/4.
 the underlying public records themselves remain governed by Ohio law and carry no JCStream license
 claim.</p>
 
-<p class="source">Generated {{ snapshot.generated_utc if snapshot is defined and snapshot.generated_utc else " - " }}. This page is general information about the project, not legal advice.</p>
+<p class="source">Generated {{ human_utc(snapshot.generated_utc) if snapshot is defined and snapshot.generated_utc else " - " }}. This page is general information about the project, not legal advice.</p>
 {% endblock %}

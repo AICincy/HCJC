@@ -8,7 +8,7 @@
     <div class="title">Inmate Roster</div>
     <div class="sub">Hamilton County Justice Center · Cincinnati, Ohio · ORC § 149.43</div>
   </div>
-  <div class="stamp">Sweep {{ snapshot.generated_utc[:16] }}Z</div>
+  <div class="stamp">Sweep {{ human_utc(snapshot.generated_utc) }}</div>
 </header>
 
 <section class="roster-hero" aria-labelledby="roster-hero-title">
@@ -36,7 +36,7 @@
     </div>
     <div>
       <dt>Last checked</dt>
-      <dd>{{ snapshot.generated_utc[:16] ~ 'Z' if snapshot.generated_utc else 'pending' }}</dd>
+      <dd>{{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}</dd>
     </div>
   </dl>
 </section>
@@ -64,7 +64,7 @@
 
 <p class="roster-meta">
   <strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> {{ 'person' if snapshot.inmate_count == 1 else 'people' }} in custody.
-  Sweep <code>{{ snapshot.generated_utc or 'pending' }}</code>.
+  Sweep {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}.
   {{ recent_booked }} booked, {{ recent_released }} released in the last 24h.
   <a href="{{ base_url }}/stats/">Statistics &rarr;</a>
 </p>

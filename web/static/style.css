@@ -68,6 +68,11 @@
   --tier-felony-ink:    #FDF5EE;  /* warm-white text on the dark felony cells */
   --tier-felony-ink-lo: #1A1A1A;  /* near-black text on the warm F4/F5 cells */
   --tier-misdemeanor:   #2F5E8C;  /* misdemeanor outline + text */
+  --tier-misd-dark:     #24486B;  /* M1, most severe misdemeanor */
+  --tier-misd-mid:      #2F5E8C;  /* M2 (= misdemeanor) */
+  --tier-misd-base:     #3F74A8;  /* M3 */
+  --tier-misd-soft:     #5E8DB8;  /* M4 */
+  --tier-misd-pale:     #7FA6C9;  /* MM, least severe */
 
   --radius:       6px;
   --radius-sm:    4px;
@@ -1734,6 +1739,23 @@ a.orc-code:hover { border-bottom-style: solid; }
 .ladder-details > summary:hover,
 .section-details > summary:hover { border-color: var(--accent); }
 
+/* Courts-page table of contents: pill links to each folded section. */
+.courts-toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 22px; }
+.courts-toc a {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--fg-soft);
+  font-size: 12.5px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.courts-toc a:hover,
+.courts-toc a:focus-visible { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+
 /* Collapsible section-h: same visual rhythm as <div class="section-h"> so a
    <details> wrapping a section reads as a peer of the other H2 sections,
    not as a separate card-style toggle. Used on stats.html for the court
@@ -2059,9 +2081,21 @@ a.orc-code:hover { border-bottom-style: solid; }
 .stacked-bar { display: flex; height: 16px; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 14px; background: var(--bg-soft); }
 .stacked-seg { cursor: help; min-width: 1px; border-right: 1px solid var(--bg); }
 .stacked-seg:last-child { border-right: 0; }
-.stacked-seg-f { background: var(--fg); }
-.stacked-seg-m { background: var(--fg-muted); }
-.stacked-seg:hover { background: var(--accent); }
+/* Base fallback colors by kind; per-degree classes below win when present. */
+.stacked-seg-f, .stacked-sw-f { background: var(--tier-felony-base); }
+.stacked-seg-m, .stacked-sw-m { background: var(--tier-misd-mid); }
+/* Degree ladder: F1 darkest red through MM palest blue. */
+.stacked-seg-f1, .stacked-sw-f1 { background: var(--tier-felony-dark); }
+.stacked-seg-f2, .stacked-sw-f2 { background: var(--tier-felony-mid); }
+.stacked-seg-f3, .stacked-sw-f3 { background: var(--tier-felony-base); }
+.stacked-seg-f4, .stacked-sw-f4 { background: var(--tier-felony-warm); }
+.stacked-seg-f5, .stacked-sw-f5 { background: var(--tier-felony-amber); }
+.stacked-seg-m1, .stacked-sw-m1 { background: var(--tier-misd-dark); }
+.stacked-seg-m2, .stacked-sw-m2 { background: var(--tier-misd-mid); }
+.stacked-seg-m3, .stacked-sw-m3 { background: var(--tier-misd-base); }
+.stacked-seg-m4, .stacked-sw-m4 { background: var(--tier-misd-soft); }
+.stacked-seg-mm, .stacked-sw-mm { background: var(--tier-misd-pale); }
+.stacked-seg:hover { filter: brightness(1.18); }
 .stacked-leg {
   list-style: none; padding: 0; margin: 0;
   display: grid; grid-template-columns: 1fr 1fr;
@@ -2069,8 +2103,6 @@ a.orc-code:hover { border-bottom-style: solid; }
 }
 .stacked-leg li { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
 .stacked-sw { width: 10px; height: 10px; border-radius: var(--radius-sm); flex-shrink: 0; border: 1px solid var(--border); }
-.stacked-sw-f { background: var(--fg); }
-.stacked-sw-m { background: var(--fg-muted); }
 .stacked-k { flex: 1; color: var(--fg-soft); }
 .stacked-v { color: var(--fg-muted); font-variant-numeric: tabular-nums; }
 .stacked-v em { color: var(--fg-muted); font-style: normal; }
@@ -2241,7 +2273,8 @@ h2.legal-anchor {
   .bio { grid-template-columns: 1fr; }
   .bio-field:nth-child(-n/**/+3) { border-top: 1px solid var(--border); }
   .bio-field:first-child { border-top: none; }
-  .kpis { grid-template-columns: 1fr; }
+  .kpis { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi { padding: 14px 16px; }
   .toplist-row { grid-template-columns: 1fr auto auto; }
   .toplist-row .toplist-rank { display: none; }
   .court-hero-stats { grid-template-columns: 1fr; }

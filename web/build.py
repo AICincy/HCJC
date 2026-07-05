@@ -66,6 +66,7 @@ from web.shape import (
     _distinct_chapters,
     _events_for_recent,
     _feed_description,
+    _human_utc,
     _iso_booking_date,
     _next_court_date,
     _prepare_render_data,
@@ -190,7 +191,7 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, sit
     # Activated only when JCSTREAM_GISCUS_REPO_ID is set as a secret/var; the
     # comment-policy section renders either way.
     env.globals["giscus"] = {
-        "repo": os.environ.get("JCSTREAM_GISCUS_REPO", "AICincy/JCStream"),
+        "repo": os.environ.get("JCSTREAM_GISCUS_REPO", "AICincy/HCJC"),
         "repo_id": os.environ.get("JCSTREAM_GISCUS_REPO_ID", ""),
         "category": os.environ.get("JCSTREAM_GISCUS_CATEGORY", "Announcements"),
         "category_id": os.environ.get("JCSTREAM_GISCUS_CATEGORY_ID", ""),
@@ -226,6 +227,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     env.globals["recent_booked_inmates"] = _recent_booked_inmates(snapshot, n=6)
     env.globals["timeline_markers"] = _timeline_markers
     env.globals["display_date"] = _display_date
+    env.globals["human_utc"] = _human_utc
     env.globals["iso_booking_date"] = _iso_booking_date
     env.globals["similar_by_statute"] = lambda inm: _similar_by_statute(
         inm, snapshot.inmates, offenses, limit=6, indexes=idx
@@ -369,7 +371,7 @@ def _resolve_site_url() -> str:
     1. ``JCSTREAM_SITE_URL`` env var (explicit, e.g. ``https://www.aretheyinjail.com``)
     2. ``https://<JCSTREAM_CNAME>`` if a custom domain is configured
     3. Derived from GitHub Actions: ``https://<owner>.github.io/<repo>``
-    4. Fallback: ``https://aicincy.github.io/JCStream``
+    4. Fallback: ``https://www.aretheyinjail.com`` (the live custom domain)
     """
     explicit = os.environ.get("JCSTREAM_SITE_URL", "").strip()
     if explicit:
@@ -381,7 +383,7 @@ def _resolve_site_url() -> str:
     if "/" in repo:
         owner, name = repo.split("/", 1)
         return f"https://{owner.lower()}.github.io/{name}"
-    return "https://aicincy.github.io/JCStream"
+    return "https://www.aretheyinjail.com"
 
 
 # Dispatch geocoding extracted to web/dispatch.py.

@@ -57,7 +57,7 @@ def test_build_case_record_populates_all_fields():
     record = build_case_record(
         parse_issue_body(SAMPLE_BODY),
         issue_number=42,
-        issue_url="https://github.com/AICincy/JCStream/issues/42",
+        issue_url="https://github.com/AICincy/HCJC/issues/42",
         submitter="someuser",
     )
     assert record["case_number"] == "B 24 1234"

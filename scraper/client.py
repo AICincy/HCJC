@@ -24,7 +24,7 @@ log = logging.getLogger(__name__)
 
 DEFAULT_BASE = "https://www.hcso.org"
 DEFAULT_UA = (
-    "JCStream/0.1 (+https://github.com/AICincy/JCStream; Hamilton County OH public-records mirror; parallelism-limited)"
+    "JCStream/0.1 (+https://github.com/AICincy/HCJC; Hamilton County OH public-records mirror; parallelism-limited)"
 )
 DEFAULT_CRAWL_DELAY = 0.5  # seconds between requests per worker; gates the
 # minimum spacing the WAF sees from a single IP. Raised from 0.0 on 2026-05-19

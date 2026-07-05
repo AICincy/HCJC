@@ -13,7 +13,7 @@
     <h1 class="title">Who's Due in Court</h1>
     <div class="sub">Hamilton County Justice Center &middot; Cincinnati, Ohio &middot; ORC § 149.43</div>
   </div>
-  <div class="stamp">Cycle {{ snapshot.generated_utc[:16] }}Z</div>
+  <div class="stamp">Cycle {{ human_utc(snapshot.generated_utc) }}</div>
 </header>
 
 {% set total = (cal.today | length) + (cal.tomorrow | length) + (cal.this_week | length) + (cal.this_month | length) %}

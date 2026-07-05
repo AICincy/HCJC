@@ -31,6 +31,7 @@ from .bond import (
 from .common import (
     RosterIndexes,
     _cached_offenses,
+    _human_utc,
     _now_naive_est,
     _strftime_nopad,
 )
@@ -94,6 +95,7 @@ __all__ = [
     # common
     "RosterIndexes",
     "_cached_offenses",
+    "_human_utc",
     "_now_naive_est",
     "_strftime_nopad",
     # bond
