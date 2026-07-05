@@ -229705,39 +229705,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T20:27:17Z",
-    "inmate_number": "2059692",
-    "name": "GARITY STEPHANIE",
+    "date": "2026-06-28",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 6/28/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T20:50:20Z",
-    "inmate_number": "2605250",
-    "name": "CHANEY KIYANA",
+    "date": "2026-06-28",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 6/28/26"
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T21:24:48Z",
-    "inmate_number": "1709043",
-    "name": "BARFIELD KATRINA",
+    "date": "2026-06-28",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 6/28/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T21:24:48Z",
-    "inmate_number": "2152591",
-    "name": "HOOVEN BENJAMIN",
+    "date": "2026-06-28",
     "tier": null,
-    "category": null,
-    "note": "booked 6/28/26"
+    "category": null
   },
   {
     "event": "booked",
@@ -238969,6 +238957,60 @@
     "timestamp_utc": "2026-07-05T20:22:08Z",
     "inmate_number": "2501194",
     "name": "DAVIS TABATHA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-05T21:33:47Z",
+    "inmate_number": "14592810",
+    "name": "WARREN TEONTA",
+    "tier": "F3",
+    "category": "Having weapons while under disability",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-05T21:33:47Z",
+    "inmate_number": "14619159",
+    "name": "LEE MCKENZIE",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-05T21:33:47Z",
+    "inmate_number": "14756324",
+    "name": "WAKEFIELD KEVIN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-05T21:33:47Z",
+    "inmate_number": "14815819",
+    "name": "MEANS JACOB",
+    "tier": "MM",
+    "category": "Operating a motor vehicle without reasonable control",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-05T21:33:47Z",
+    "inmate_number": "1807167",
+    "name": "ISHAM BRIAN",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: licensing",
+    "note": "booked 7/5/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-05T21:33:47Z",
+    "inmate_number": "2679380",
+    "name": "JONES EVAN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
