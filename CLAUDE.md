@@ -7,7 +7,8 @@ Center inmate roster. A Python script (`web/build.py`) regenerates `docs/` from
 sweep no-ops if `current.json` is less than 20 minutes old). Effective cadence
 is roughly 20-45 minutes; during incidents the next-run can slip past the hour.
 The sweep also runs the HCSO scraper
-(`scraper/`) and pulls four Cincinnati Open Data feeds.
+(`scraper/`) and pulls the Cincinnati Open Data feeds (nine as of 2026-07:
+three dedicated parsers plus the six-feed registry in `open_data_feeds.py`).
 Live at https://www.aretheyinjail.com (GitHub Pages, custom domain; build uses
 `JCSTREAM_SITE_BASE_URL=""` and the Pages custom-domain setting).
 
