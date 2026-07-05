@@ -709,6 +709,34 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
 .tier-lg.tier-felony      { background: var(--tier-felony-base); color: var(--tier-felony-ink); border: 0; }
 .tier-lg.tier-misdemeanor { background: var(--fg); color: var(--bg); border: 0; }
 
+/* ----- Scorecard status pill -----
+   The transparency scorecard's access state (FRESH / STALE / BLOCKED) is the
+   single most important signal on that page. It was previously bold body text
+   with no visual weight. This pill gives each state a semantic fill, reusing
+   the existing --ok / --case-civil / --warn tokens; no new color is introduced.
+   Filled (not outlined) so BLOCKED reads at a glance, matching the way the WAF
+   banner already treats an active denial. */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: var(--radius);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  line-height: 1.2;
+  white-space: nowrap;
+  border: 0;
+  margin-right: 8px;
+  vertical-align: 1px;
+}
+.status-pill-fresh   { background: var(--ok);        color: #fff; }
+.status-pill-stale   { background: var(--case-civil); color: #fff; }
+.status-pill-blocked { background: var(--warn);      color: #fff; }
+
 /* Tier badge pinned to the top-right corner of each card. */
 .card-inmate > .tier.tier-corner {
   position: absolute;

@@ -229123,57 +229123,51 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-27T23:48:59Z",
-    "inmate_number": "14153992",
-    "name": "ROONEY JAMAN",
+    "date": "2026-06-27",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": ""
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T00:40:44Z",
-    "inmate_number": "1052131",
-    "name": "DAWSON MARCUS",
+    "date": "2026-06-28",
     "tier": null,
-    "category": null,
-    "note": "booked 6/27/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T00:40:44Z",
-    "inmate_number": "14138033",
-    "name": "STRICKLAND KOURTNEY",
+    "date": "2026-06-28",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 6/27/26"
+    "category": "Violating protection order"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T00:40:44Z",
-    "inmate_number": "14313473",
-    "name": "OLAGBEMIRO JACOB",
+    "date": "2026-06-28",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/27/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T00:40:44Z",
-    "inmate_number": "14815103",
-    "name": "CARTER KYMAREE",
+    "date": "2026-06-28",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T00:40:44Z",
-    "inmate_number": "1793128",
-    "name": "ELLIS JEFFERY",
+    "date": "2026-06-28",
     "tier": "M1",
-    "category": "Menacing by stalking",
-    "note": "booked 6/27/26"
+    "category": "Menacing by stalking"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-28",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-28",
+    "tier": "M1",
+    "category": "Menacing by stalking"
   },
   {
     "event": "updated",
@@ -238507,5 +238501,41 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-05T01:25:32Z",
+    "inmate_number": "14785688",
+    "name": "SMITH JOSEPH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-05T01:25:32Z",
+    "inmate_number": "14815767",
+    "name": "WINTERS JAMIE",
+    "tier": "M1",
+    "category": "Cruelty to companion animals",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-05T01:25:32Z",
+    "inmate_number": "14338741",
+    "name": "RASHID AHMAD",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-05T01:25:32Z",
+    "inmate_number": "14815768",
+    "name": "SPEAKES KAITLYN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
