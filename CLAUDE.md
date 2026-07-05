@@ -130,6 +130,12 @@ Violating them imposes cognitive cost the owner cannot afford.
 - `data/surnames.txt` is A-Z single letters on purpose (HCSO's last-name search is a
   substring match, so 26 letters cover the whole roster with dedup). Don't revert.
 - Build locally: `JCSTREAM_SITE_BASE_URL="" python -m web.build`
+- Force a sweep now instead of waiting for the cron: dispatch `sweep.yml`.
+  `POST https://api.github.com/repos/AICincy/HCJC/actions/workflows/sweep.yml/dispatches`
+  with body `{"ref":"main"}` and the token from `git credential fill` (gh CLI
+  is not installed on the owner's machine; expect HTTP 204). The 20-minute
+  skip-gate still applies: the run no-ops if `current.json` is younger than
+  20 minutes. Verified working 2026-07-05.
 - Tests: `python -m pytest -q` (must stay green; ≥193 tests as of this writing, suite grows).
 - The stylesheet is cache-busted by content hash (`css_version` in build.py); don't
   key it off the data timestamp again.
