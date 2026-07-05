@@ -84,6 +84,10 @@ def produced_fields() -> dict[str, set[str]]:
         out[py.name] = keys
     return out
 
+def _strip_jinja_comments(text: str) -> str:
+    """Drop {# ... #} blocks so commented-out references don't count as consumers."""
+    return re.sub(r'\{#.*?#\}', '', text, flags=re.S)
+
 def template_vars() -> set[str]:
     """Every identifier referenced inside {{ }} or {% %} across all template
     files (any extension, so RSS/XML templates count as consumers)."""
@@ -91,7 +95,7 @@ def template_vars() -> set[str]:
     for tpl in TEMPLATES.glob("*"):
         if not tpl.is_file():
             continue
-        text = tpl.read_text(encoding="utf-8", errors="replace")
+        text = _strip_jinja_comments(tpl.read_text(encoding="utf-8", errors="replace"))
         for m in re.findall(r'\{\{(.*?)\}\}|\{%(.*?)%\}', text, re.S):
             chunk = (m[0] or "") + (m[1] or "")
             # attribute access r.spread, inm.full_name, metrics.status -> capture the leaf too
@@ -106,8 +110,8 @@ def declared_files() -> set[str]:
     for tpl in TEMPLATES.glob("*"):
         if not tpl.is_file():
             continue
-        text = tpl.read_text(encoding="utf-8", errors="replace")
-        names.update(re.findall(r'\b(\w+\.json)\b', text))
+        text = _strip_jinja_comments(tpl.read_text(encoding="utf-8", errors="replace"))
+        names.update(re.findall(r'\b([\w-]+\.json)\b', text))
     return names
 
 def published_files() -> tuple[set[str], set[str]]:
@@ -117,7 +121,7 @@ def published_files() -> tuple[set[str], set[str]]:
 
 def classify_field(field: str, tvars: set[str]) -> tuple[str, str]:
     for key, reason in WITHHOLD_RULES.items():
-        if key == field or key in field:
+        if key in field:
             return "WITHHELD_BY_DESIGN", reason
     if field in INTERNAL_KEYS:
         return "INTERNAL_KEY", INTERNAL_KEYS[field]
