@@ -21,6 +21,18 @@
     if (a && a.getAttribute('href').length > 1) openDetailsFor(a.getAttribute('href'));
   });
 
+  // (1b) Site nav drawer. Markup ships with [open] so the no-JS fallback is
+  // an expanded (usable) list; with JS, small screens start closed and the
+  // drawer dismisses on outside click. Desktop hides the toggle entirely.
+  var navMenu = document.querySelector('.nav-menu');
+  if (navMenu && window.matchMedia) {
+    var navMQ = window.matchMedia('(max-width: 720px)');
+    if (navMQ.matches) navMenu.removeAttribute('open');
+    document.addEventListener('click', function (e) {
+      if (navMQ.matches && navMenu.open && !navMenu.contains(e.target)) navMenu.removeAttribute('open');
+    });
+  }
+
   // (2) Shared lightbox.
   var lb = document.getElementById('lb');
   var lbImg = document.getElementById('lb-img');
