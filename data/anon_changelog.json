@@ -229627,39 +229627,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T14:12:15Z",
-    "inmate_number": "14125643",
-    "name": "NELSON MAIHE",
+    "date": "2026-06-28",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/28/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T14:12:15Z",
-    "inmate_number": "14815125",
-    "name": "JOSEPH RANDALL",
+    "date": "2026-06-28",
     "tier": null,
-    "category": null,
-    "note": "booked 6/28/26"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-28T15:29:12Z",
-    "inmate_number": "1503101",
-    "name": "LEE KELVIN",
+    "date": "2026-06-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-28T15:29:12Z",
-    "inmate_number": "14328674",
-    "name": "WURZELBACHER NICHOLAS",
+    "date": "2026-06-28",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -238876,5 +238864,23 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-05T15:38:07Z",
+    "inmate_number": "14209829",
+    "name": "ROBBINS BOBBY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-05T15:38:07Z",
+    "inmate_number": "2089626",
+    "name": "LINKER GRETCHEN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
   }
 ]
