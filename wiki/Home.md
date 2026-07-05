@@ -7,8 +7,8 @@ in a structured, searchable, linkable form — under the Ohio Public Records Act
 [ORC § 149.43](https://codes.ohio.gov/ohio-revised-code/section-149.43).
 
 - **Live site:** https://www.aretheyinjail.com
-- **Source:** https://github.com/AICincy/JCStream (MIT)
-- **Corrections / sealing / removal:** open an [issue](https://github.com/AICincy/JCStream/issues) — there is never a fee.
+- **Source:** https://github.com/AICincy/HCJC (MIT)
+- **Corrections / sealing / removal:** open an [issue](https://github.com/AICincy/HCJC/issues) — there is never a fee.
 
 > **Arrest is not conviction.** Everyone listed is legally presumed innocent until
 > proven guilty in a court of law. The charges shown are accusations only.
@@ -28,8 +28,8 @@ in a structured, searchable, linkable form — under the Ohio Public Records Act
 
 ## How it works in one paragraph
 
-A GitHub Actions cron (every ~30 min) runs the HCSO scraper (`scraper/`), pulls four
-Cincinnati Open Data feeds, diffs against the previous snapshot, then `web/build.py`
+A GitHub Actions cron (every ~30 min) runs the HCSO scraper (`scraper/`), pulls the
+Cincinnati Open Data feeds (nine at present), diffs against the previous snapshot, then `web/build.py`
 regenerates the static site into `docs/`, and the workflow commits `data/` + `docs/`.
 GitHub Pages serves `docs/` from the branch at the custom domain. There is no server,
 no database, and no service worker — a stale cached jail roster would be misleading.
@@ -37,5 +37,5 @@ no database, and no service worker — a stale cached jail roster would be misle
 ---
 
 *This `wiki/` directory in the main repo is the source of truth for the
-[GitHub wiki](https://github.com/AICincy/JCStream/wiki); see [[Operations]] for how
+[GitHub wiki](https://github.com/AICincy/HCJC/wiki); see [[Operations]] for how
 to publish it.*

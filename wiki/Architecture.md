@@ -29,7 +29,8 @@ GitHub Actions cron (*/15, 20-min gate)   .github/workflows/sweep.yml
   letters cover the whole roster, deduped), it GETs the list page, parses rows, fetches
   the detail page for anyone new (or for everyone with `--refresh-known`), extracts and
   downscales the inline base64 booking photo, then diffs against the previous snapshot to
-  produce `booked` / `released` / `updated` events. Runs ~32 workers in parallel.
+  produce `booked` / `released` / `updated` events. Runs 16 workers in parallel by default
+  (`DEFAULT_CONCURRENCY` in `client.py`).
   - **Sweep health guard:** `_sweep_looks_healthy(prev, seen, n_surnames, n_failed)` — if
     >10 % of surname fetches errored, or the roster collapsed below half of last cycle, the
     sweep keeps the last-good `current.json` and exits cleanly instead of writing a partial
@@ -49,7 +50,8 @@ GitHub Actions cron (*/15, 20-min gate)   .github/workflows/sweep.yml
 - **`ingest_issue.py`** — parses the crowdsourced "case data" GitHub issue form → `data/courtclerk_cases.json`.
 - **`store.py`** — load/save `current.json` and `changelog.json`; `diff()` produces the change events.
 - **`models.py`** — pydantic models (`Inmate`, `Charge` (nested), `ChangeEvent`, `Snapshot`, `ListRow`).
-- **`client.py`** — the HCSO HTTP client (httpx; respects a polite User-Agent; 0 s crawl-delay per robots.txt).
+- **`client.py`** — the HCSO HTTP client (httpx; polite User-Agent; a self-imposed 0.5 s
+  crawl delay between requests, `DEFAULT_CRAWL_DELAY` — HCSO's robots.txt sets none).
 
 ## The site builder (`web/build.py`, `web/classify.py`, `web/shape/`)
 

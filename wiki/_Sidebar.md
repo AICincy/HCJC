@@ -12,5 +12,5 @@
 
 - [Live site](https://www.aretheyinjail.com)
 - [Data & methodology](https://www.aretheyinjail.com/data/)
-- [Source (MIT)](https://github.com/AICincy/JCStream)
-- [Report a correction](https://github.com/AICincy/JCStream/issues)
+- [Source (MIT)](https://github.com/AICincy/HCJC)
+- [Report a correction](https://github.com/AICincy/HCJC/issues)

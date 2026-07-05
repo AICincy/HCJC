@@ -3,7 +3,7 @@
 ## Corrections, sealing, expungement, removal — no fee, ever
 
 If something about a record is wrong, or a court has ordered it sealed or expunged, or you
-want it removed: **open a [GitHub issue](https://github.com/AICincy/JCStream/issues).** There
+want it removed: **open a [GitHub issue](https://github.com/AICincy/HCJC/issues).** There
 is no fee for review, correction, or removal, and there never will be. A record also drops off
 automatically on the next update once HCSO removes it from its public roster — the issue just
 lets us act sooner if needed. See **[[Legal]]** for the policy in full.
@@ -12,14 +12,14 @@ lets us act sooner if needed. See **[[Legal]]** for the policy in full.
 
 courtclerk.org's `robots.txt` disallows scraping its data, so JCStream **links** to case
 records but doesn't pull them. If you've looked a case up yourself, you can add what you found
-via the **["case data" issue form](https://github.com/AICincy/JCStream/issues/new?template=case-data.yml)** —
+via the **["case data" issue form](https://github.com/AICincy/HCJC/issues/new?template=case-data.yml)** —
 `scraper/ingest_issue.py` parses it into `data/courtclerk_cases.json`.
 
 ## Code contributions
 
 ```bash
-git clone https://github.com/AICincy/JCStream.git
-cd JCStream
+git clone https://github.com/AICincy/HCJC.git
+cd HCJC
 pip install -r requirements.txt
 python -m pytest -q                                          # must stay green
 JCSTREAM_SITE_BASE_URL="" python -m web.build
@@ -39,7 +39,8 @@ JCSTREAM_SITE_BASE_URL="" python -m web.build
 
 ## Style
 
-Editorial dark theme; serif headlines; restrained palette where saturated red/amber means
+Editorial light theme (the site is single-theme; the dark-mode media query was removed
+deliberately); serif headlines; restrained palette where saturated red/amber means
 "severity", not decoration. The site does not editorialise about guilt — language stays
 factual ("charges", "accusations", "presumed innocent"), never "criminal" / "offender".
 
