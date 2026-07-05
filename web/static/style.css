@@ -208,11 +208,28 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
 }
 .masthead .nav-link:hover .nav-hint { color: var(--accent); }
 
-/* --- Hamburger menu (details/summary) --- */
-.nav-menu { display: contents; grid-column: 1 / -1; }
-.nav-drawer { display: contents; }
+/* --- Site nav: horizontal rail on desktop, hamburger drawer on mobile.
+   The <details> keeps the `open` attribute in markup so the rail renders
+   without JS; on <=720px main.js closes it on load and it behaves as a
+   drawer. Desktop hides the summary, so it cannot be toggled shut. --- */
+.nav-menu { display: block; grid-column: 1 / -1; grid-row: 3; }
+.nav-drawer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0 2px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+  padding-top: 4px;
+}
 .nav-toggle { display: none; }
+.nav-toggle svg { pointer-events: none; }
 .running.mobile-only { display: none; }
+.masthead-seal-coc  { grid-column: 1; grid-row: 1; justify-self: end; }
+.masthead-seal-hcjc { grid-column: 3; grid-row: 1; justify-self: start; }
+.masthead .running.desktop-only { grid-column: 2; grid-row: 2; justify-self: center; }
+.masthead .spacer { display: none; }
 
 @media (max-width: 720px) {
   .masthead .nav-hint { display: none; }
@@ -232,9 +249,13 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--ok);
   }
+  .masthead-seal-coc, .masthead-seal-hcjc { display: none; }
   .nav-menu {
     display: block;
     position: relative;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
   }
   .nav-toggle {
     display: grid;
