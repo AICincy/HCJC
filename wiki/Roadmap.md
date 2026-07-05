@@ -18,7 +18,9 @@ were considered and **deliberately rejected** — keeping the reasoning so we do
   statute-frequency context, related inmates, candidate dispatch calls, comment-policy block
   (+ Giscus widget when configured).
 - **Cincinnati Open Data** — CPD/CFD CFS (`qiik-bpks`), PDI Police CFS/CAD (`gexm-h6bt`), CPD
-  Reported Shootings (`sfea-4ksu`), PDI Crime Incidents (`k59e-2pvf`); a probabilistic
+  Reported Shootings (`sfea-4ksu`), PDI Crime Incidents (`k59e-2pvf`, retired 2026-05), plus the
+  six-feed supplemental registry (use of force ×2, traffic/pedestrian stops, STARS reported
+  crime, CCA complaints); a probabilistic
   booking↔dispatch matcher (surfaced as "candidates", not identity); a homepage **map** of
   recent arrest/citation/report dispatches + reported shootings (Leaflet loaded lazily from a
   CDN with SRI + graceful fallback; points grid-clustered, no extra runtime dep).

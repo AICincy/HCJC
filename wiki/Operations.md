@@ -24,12 +24,13 @@ python -m scraper.cfs --hours 168          # Cincinnati Open Data calls-for-serv
 
 `.github/workflows/sweep.yml` fires on a `*/15 * * * *` cron with a 20-minute skip-gate
 (the sweep no-ops if `current.json` is less than 20 minutes old), plus `workflow_dispatch`.
-Effective cadence is ~20-45 minutes. Each run: sweep → pull the four Cincinnati feeds →
+Effective cadence is ~20-45 minutes. Each run: sweep → pull the Cincinnati Open Data feeds →
 `python -m web.build` (with `JCSTREAM_SITE_BASE_URL=""`)
 → commit `data/ docs/` → push. GitHub Pages serves
 `docs/` from the branch and the custom domain points at `www.aretheyinjail.com`, so the push
-*is* the deploy. Other workflows: `ci.yml` (tests on PR),
-`pra_daily.yml` (the optional PRA email loop), `ingest_case_data.yml` (the case-data issue form).
+*is* the deploy. Other workflows: `ci.yml` (lint + type check + tests on PR),
+`pra_daily.yml` (the optional PRA email loop), `ingest_case_data.yml` (the case-data issue form),
+`codeql.yml` (code scanning), `refresh_caselaw.yml` (statute-page caselaw refresh).
 
 GH Actions cron is best-effort — expect 30–50 min cadence under load. The sweep step has a
 50-minute timeout; `concurrency` prevents two sweeps overlapping.
@@ -60,7 +61,7 @@ These render their "policy" / "dry-run" form until you configure them:
 1. Repo → Settings → General → Features → enable **Discussions**.
 2. Pick (or create) a Discussions **category** for the threads.
 3. Install the **Giscus GitHub App** (https://github.com/apps/giscus) on the account/repo.
-4. Go to https://giscus.app, enter `AICincy/JCStream`, pick the category → it prints `data-repo-id` and `data-category-id`.
+4. Go to https://giscus.app, enter `AICincy/HCJC`, pick the category → it prints `data-repo-id` and `data-category-id`.
 5. Repo → Settings → Secrets and variables → Actions → **Variables**: add `JCSTREAM_GISCUS_REPO_ID`, `JCSTREAM_GISCUS_CATEGORY_ID` (optionally `JCSTREAM_GISCUS_REPO`, `JCSTREAM_GISCUS_CATEGORY` to override the defaults).
 6. The next sweep renders the comment widget on every inmate page. Clear the variables to turn it off.
 
@@ -76,13 +77,13 @@ it sends for real.
 
 ## Publishing this wiki
 
-The GitHub wiki is its own git repo (`https://github.com/AICincy/JCStream.wiki.git`). To push
+The GitHub wiki is its own git repo (`https://github.com/AICincy/HCJC.wiki.git`). To push
 these pages to it:
 
 ```bash
-git clone https://github.com/AICincy/JCStream.wiki.git
-cp /path/to/JCStream/wiki/*.md JCStream.wiki/
-cd JCStream.wiki
+git clone https://github.com/AICincy/HCJC.wiki.git
+cp /path/to/HCJC/wiki/*.md HCJC.wiki/
+cd HCJC.wiki
 git add -A && git commit -m "Sync wiki from main repo" && git push
 ```
 
