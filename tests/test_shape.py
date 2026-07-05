@@ -248,7 +248,6 @@ def test_bond_context_returns_percentiles_and_my_percentile():
         "title": "Theft",
         "min": 100,
         "max": 500,
-        "p10": 100,
         "p25": 200,
         "p50": 300,
         "p75": 400,

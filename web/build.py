@@ -301,7 +301,6 @@ def build(out_dir: Path) -> int:
         by_month=rd["by_month"],
         nav_months=rd["nav_months"],
         expanded_months=rd["expanded_months"],
-        events_recent=rd["events_recent"],
         recent_booked=rd["recent_booked"],
         recent_released=rd["recent_released"],
         trend=rd["trend"],
