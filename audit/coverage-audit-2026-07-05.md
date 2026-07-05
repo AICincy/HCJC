@@ -1,10 +1,11 @@
 ﻿# Coverage audit record - 2026-07-05
 
-Run of `audit/coverage_audit.py` against the repository at the state of PR #387
-(dead data paths removed, retired-feed rationales encoded). Method: AST
-dict-key extraction over `web/shape/*.py`, Jinja identifier scan over
-`web/templates/*`, `data/` vs `docs/data/` publication diff, declared-feed
-list parsed from the templates. Locked by `tests/test_coverage_audit.py`.
+Run of `audit/coverage_audit.py` against merged main (post PR #387-#391:
+dead data paths removed, retired-feed rationales encoded, stray static
+docs removed). Method: AST dict-key extraction over `web/shape/*.py`,
+Jinja identifier scan over `web/templates/*` with `{# #}` comments
+stripped, `data/` vs `docs/data/` publication diff, declared-feed list
+parsed from the templates. Locked by `tests/test_coverage_audit.py`.
 
 ```
 ======================================================================

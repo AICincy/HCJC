@@ -32,6 +32,7 @@ claude.ai session history pending export.
 | session_01NGMSLESEepbgV8aSn4reVG | not yet filed | not yet filed | [VERIFY] | [VERIFY] |
 | session_019qfYLXARs48orCHaQdM8cA | not yet filed | not yet filed | 2026-07-02 [VERIFY] | [VERIFY] |
 | session_01DCTmLdgUma5GYA1JBrywGp | not yet filed | not yet filed | 2026-07-03 [VERIFY] | [VERIFY] |
+| db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e | not yet filed | not yet filed | 2026-07-05 [VERIFY] | [VERIFY] |
 
 Note: the four original session IDs do not appear in any commit trailer in
 this repository (checked 2026-07-02 with `git log --all --grep`), so their
@@ -40,3 +41,11 @@ claude.ai export. `session_019qfYLXARs48orCHaQdM8cA` and
 `session_01DCTmLdgUma5GYA1JBrywGp` do appear in commit trailers (dated
 2026-07-02 through 2026-07-04); their transcripts still require export to
 confirm the full range.
+
+`db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e` is a local Claude Code desktop
+session (UUID format, not a claude.ai `session_` ID). Its transcript lives
+in the owner's local Claude Code session storage
+(`~/.claude/projects/C--Users-jared-Documents-GitHub-HCJC/`), not on
+claude.ai; the filing step is a local export, not a web export. Work
+product: PRs #387-#391 (coverage audit + cleanup, wiki sync, stray-static-
+docs removal, CLAUDE.md corrections, manual-sweep runbook), 2026-07-05.
