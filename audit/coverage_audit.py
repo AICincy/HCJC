@@ -26,7 +26,10 @@ Verified against source 2026-07-05: the original regex version flagged 19
 items; 15 were extraction noise fixed by this revision.
 """
 from __future__ import annotations
-import ast, re, sys
+
+import ast
+import re
+import sys
 from pathlib import Path
 
 ROOT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(".")
@@ -187,7 +190,8 @@ def main():
     print("=" * 70)
     print("SUMMARY")
     print("=" * 70)
-    fb = field_buckets; xb = file_buckets
+    fb = field_buckets
+    xb = file_buckets
     print(f"Fields  : {len(fb['SURFACED'])} surfaced, "
           f"{len(fb['WITHHELD_BY_DESIGN'])} withheld-by-design, "
           f"{len(fb['INTERNAL_KEY'])} internal-key, "
