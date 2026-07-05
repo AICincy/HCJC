@@ -105,7 +105,6 @@ class IndexContext:
     by_month: list[tuple[str, list[Inmate]]]
     nav_months: list[dict]
     expanded_months: set
-    events_recent: list[ChangeEvent]
     recent_booked: int
     recent_released: int
     trend: dict
@@ -130,7 +129,6 @@ def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
         by_month=ctx.by_month,
         nav_months=ctx.nav_months,
         expanded_months=ctx.expanded_months,
-        events_recent=ctx.events_recent,
         recent_booked=ctx.recent_booked,
         recent_released=ctx.recent_released,
         trend=ctx.trend,
