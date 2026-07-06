@@ -172452,6 +172452,12 @@
     "category": "Stopping after accident on public roads"
   },
   {
+    "event": "booked",
+    "date": "2026-05-23",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
     "event": "updated",
     "date": "2026-05-24",
     "tier": null,
@@ -202410,6 +202416,24 @@
     "category": "Restrictions on light transmittance (tinted windows)"
   },
   {
+    "event": "booked",
+    "date": "2026-06-10",
+    "tier": "F5",
+    "category": "Harassment with a bodily substance"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-10",
+    "tier": "F5",
+    "category": "Harassment with a bodily substance"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-10",
+    "tier": "F5",
+    "category": "Harassment with a bodily substance"
+  },
+  {
     "event": "updated",
     "date": "2026-06-11",
     "tier": "M1",
@@ -216288,6 +216312,12 @@
     "category": null
   },
   {
+    "event": "released",
+    "date": "2026-06-17",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
     "event": "updated",
     "date": "2026-06-18",
     "tier": null,
@@ -223483,6 +223513,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-06-22",
+    "tier": "F5",
+    "category": "Harassment with a bodily substance"
+  },
+  {
+    "event": "booked",
     "date": "2026-06-23",
     "tier": "F3",
     "category": "Complicity"
@@ -229963,120 +229999,105 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T05:53:46Z",
-    "inmate_number": "1311373",
-    "name": "WILKINS JOHN",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/29/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T05:53:46Z",
-    "inmate_number": "14078352",
-    "name": "REED MICHAEL",
+    "date": "2026-06-29",
     "tier": null,
-    "category": null,
-    "note": "booked 6/29/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T05:53:46Z",
-    "inmate_number": "14737688",
-    "name": "JACINTO-CARDONA JOSE",
+    "date": "2026-06-29",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T05:53:46Z",
-    "inmate_number": "1857091",
-    "name": "BALDWIN DARYLL",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/29/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T05:53:46Z",
-    "inmate_number": "2263659",
-    "name": "FISHER BRIAN",
+    "date": "2026-06-29",
     "tier": "F5",
-    "category": "Breaking and entering",
-    "note": "booked 6/29/26"
+    "category": "Breaking and entering"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T05:53:46Z",
-    "inmate_number": "2810592",
-    "name": "DENNIS DEMETRIUS",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": "booked 6/29/26"
+    "category": "Driving under suspension"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T07:42:31Z",
-    "inmate_number": "1311373",
-    "name": "WILKINS JOHN",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T07:42:31Z",
-    "inmate_number": "14078352",
-    "name": "REED MICHAEL",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Violation of community control / probation",
-    "note": ""
+    "category": "Violation of community control / probation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T07:42:31Z",
-    "inmate_number": "1601341",
-    "name": "RHODES KRISTINA",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Failure to reinstate a license",
-    "note": "booked 6/29/26"
+    "category": "Failure to reinstate a license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T07:42:31Z",
-    "inmate_number": "1945501",
-    "name": "WATSON MISTY",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/29/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T07:42:31Z",
-    "inmate_number": "2263659",
-    "name": "FISHER BRIAN",
+    "date": "2026-06-29",
     "tier": "F5",
-    "category": "Breaking and entering",
-    "note": ""
+    "category": "Breaking and entering"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T07:42:31Z",
-    "inmate_number": "2464485",
-    "name": "OYEDIRAN TABITHA",
+    "date": "2026-06-29",
     "tier": null,
-    "category": null,
-    "note": "booked 6/29/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T09:19:13Z",
-    "inmate_number": "14078352",
-    "name": "REED MICHAEL",
+    "date": "2026-06-29",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-29",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-29",
+    "tier": "F5",
+    "category": "Breaking and entering"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-29",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-29",
+    "tier": "F5",
+    "category": "Breaking and entering"
   },
   {
     "event": "booked",
@@ -239266,5 +239287,122 @@
     "tier": "MM",
     "category": "Hitchhiking - soliciting employment, business, or contributions from occupant of vehicle",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "1005084",
+    "name": "ADER RAYMOND",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "1300111",
+    "name": "MARTIN ROBERT",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "14042432",
+    "name": "MONDARY JONATHAN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 7/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "14222843",
+    "name": "BARNES TYLEISHA",
+    "tier": "M1",
+    "category": "Stopping after accident on public roads",
+    "note": "booked 7/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "14621485",
+    "name": "JAMISON ASIA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "14809070",
+    "name": "ADKINS BRETT",
+    "tier": "F5",
+    "category": "Harassment with a bodily substance",
+    "note": "booked 7/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "1488411",
+    "name": "BROWNER DEMICO",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 7/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "14815830",
+    "name": "VASQUEZ-GOMEZ KEVIN",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "booked 7/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "1781226",
+    "name": "NEWTON MARK",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "1812632",
+    "name": "HOELLE DAVID",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "booked 7/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "2469369",
+    "name": "ARBINO DUSTIN",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 7/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "2475989",
+    "name": "DAUGHERTY LATRICE",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 7/6/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-06T10:05:42Z",
+    "inmate_number": "14255869",
+    "name": "SMITH MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
