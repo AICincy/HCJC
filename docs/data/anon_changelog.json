@@ -229819,93 +229819,81 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T23:52:29Z",
-    "inmate_number": "1506780",
-    "name": "JOHNSON WILLIAM",
+    "date": "2026-06-28",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 6/28/26"
+    "category": "Violating protection order"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-28T23:52:29Z",
-    "inmate_number": "2204586",
-    "name": "TIEMANN GREGORY",
+    "date": "2026-06-28",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "booked 6/28/26"
+    "category": "Trafficking in drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T00:42:08Z",
-    "inmate_number": "14210477",
-    "name": "GOLSBY QUAJON",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T00:42:08Z",
-    "inmate_number": "14437700",
-    "name": "PAUDEL YAM",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 6/28/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T00:42:08Z",
-    "inmate_number": "14547978",
-    "name": "BRENTS MASHAYA",
+    "date": "2026-06-29",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T00:42:08Z",
-    "inmate_number": "14774716",
-    "name": "HUNTER SARAH",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T00:42:08Z",
-    "inmate_number": "1506780",
-    "name": "JOHNSON WILLIAM",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": ""
+    "category": "Violating protection order"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-29T00:42:08Z",
-    "inmate_number": "1892463",
-    "name": "ROLAND FERNANDO",
+    "date": "2026-06-29",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/28/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-29T00:42:08Z",
-    "inmate_number": "2204586",
-    "name": "TIEMANN GREGORY",
+    "date": "2026-06-29",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": ""
+    "category": "Trafficking in drugs"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-29T00:42:08Z",
-    "inmate_number": "666770",
-    "name": "HALL ARTHUR",
+    "date": "2026-06-29",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-29",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-06-29",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-06-29",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -239140,5 +239128,68 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-06T01:25:02Z",
+    "inmate_number": "1317234",
+    "name": "MAUPIN WAYNE",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-06T01:25:02Z",
+    "inmate_number": "14140677",
+    "name": "WALKER ANTOINE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-06T01:25:02Z",
+    "inmate_number": "14692597",
+    "name": "SCHULTE STEVEN",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-06T01:25:02Z",
+    "inmate_number": "1756666",
+    "name": "BLUNT JASON",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T01:25:02Z",
+    "inmate_number": "2201827",
+    "name": "MCINERNEY CRISTI",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 7/5/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-06T01:25:02Z",
+    "inmate_number": "2256705",
+    "name": "FOLZENLOGEN DONALD",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-06T01:25:02Z",
+    "inmate_number": "845820",
+    "name": "JENT DANNY",
+    "tier": "MM",
+    "category": "Hitchhiking - soliciting employment, business, or contributions from occupant of vehicle",
+    "note": "booked 7/5/26"
   }
 ]
