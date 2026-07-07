@@ -231547,93 +231547,63 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-30T09:28:05Z",
-    "inmate_number": "1302762",
-    "name": "BARNETT DAWN",
+    "date": "2026-06-30",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 6/30/26"
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-30T09:28:05Z",
-    "inmate_number": "1736841",
-    "name": "HURT TAMMY",
+    "date": "2026-06-30",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-30T09:28:05Z",
-    "inmate_number": "2678179",
-    "name": "BRIGGS DION",
+    "date": "2026-06-30",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-06-30T11:40:57Z",
-    "inmate_number": "14811046",
-    "name": "LOFTON KENT",
+    "date": "2026-06-30",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-30T11:40:57Z",
-    "inmate_number": "14815311",
-    "name": "GILES KENIYAH",
+    "date": "2026-06-30",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-30T11:40:57Z",
-    "inmate_number": "2343225",
-    "name": "PRICE AARON",
+    "date": "2026-06-30",
     "tier": "F2",
-    "category": "Robbery",
-    "note": "booked 6/30/26"
+    "category": "Robbery"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-06-30T11:40:57Z",
-    "inmate_number": "2546528",
-    "name": "HOPKINS MELVIN",
+    "date": "2026-06-30",
     "tier": "F2",
-    "category": "Robbery",
-    "note": "booked 6/30/26"
+    "category": "Robbery"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-30T11:40:57Z",
-    "inmate_number": "14211050",
-    "name": "BRADLEY JASON",
+    "date": "2026-06-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-30T11:40:57Z",
-    "inmate_number": "2262899",
-    "name": "HUTCHINSON STANLEY",
+    "date": "2026-06-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-06-30T11:40:57Z",
-    "inmate_number": "14453449",
-    "name": "JACOBS ISAIAH",
+    "date": "2026-06-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -240391,5 +240361,23 @@
     "tier": "M4",
     "category": "Failure to disclose personal information",
     "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-07T11:43:19Z",
+    "inmate_number": "2552356",
+    "name": "DONOHUE MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-07T11:43:19Z",
+    "inmate_number": "14295890",
+    "name": "ENNIS MARCO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
