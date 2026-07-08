@@ -21,6 +21,24 @@ def test_pull_one_swallows_transport_errors(monkeypatch):
     assert rows is None
 
 
+def test_frozen_contact_card_feeds_have_no_date_filter():
+    """Traffic + pedestrian Contact Card sources froze in 2024-2025; a date
+    filter zeroes them out, so they must pull most-recent rows unfiltered
+    (like the paused PDI use-of-force feed). Regression guard for the
+    2026-07 zero-row fix."""
+    frozen = {"w2kv-5pdg", "swrz-ak2i"}
+    seen = set()
+    for spec in open_data_feeds.FEEDS:
+        if spec.dataset_id in frozen:
+            seen.add(spec.dataset_id)
+            assert spec.where_candidates == (), (
+                f"{spec.label} ({spec.dataset_id}) must not date-filter; "
+                "the source is frozen and a filter zeroes it out"
+            )
+            assert spec.order == "interview_date DESC"
+    assert seen == frozen, f"missing frozen feed specs: {frozen - seen}"
+
+
 def test_pull_all_skips_save_on_error(monkeypatch, tmp_path):
     # Setup data directory inside temporary directory
     monkeypatch.setattr(open_data_feeds, "DATA_DIR", tmp_path)
