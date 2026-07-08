@@ -96,19 +96,24 @@ FEEDS: tuple[FeedSpec, ...] = (
         dataset_id="w2kv-5pdg",
         filename="traffic_stops_drivers_recent.json",
         label="Traffic Stops - Contact Cards",
-        days=30,
-        where_candidates=("interview_date > '{since}'",),
+        days=365,
+        # No filter. The Contact Card source froze in 2025 (latest
+        # interview_date 2025-02-07 as of 2026-07), so the old 30-day
+        # window zeroed the feed out. Pull the most-recent 5000 rows by
+        # interview_date instead, matching the paused 8us8-wi2w feed above.
         order="interview_date DESC",
-        cache_hours=12,  # source updates daily; 12h catches AM and PM batches
+        cache_hours=24,  # source frozen; sub-daily polling is waste
     ),
     FeedSpec(
         dataset_id="swrz-ak2i",
         filename="pedestrian_stops_recent.json",
         label="Pedestrian Stops - Contact Cards",
-        days=30,
-        where_candidates=("interview_date > '{since}'",),
+        days=365,
+        # No filter. This source froze earlier than the driver feed (latest
+        # interview_date 2024-09-27 as of 2026-07); the 30-day window zeroed
+        # it out. Pull the most-recent 5000 rows by interview_date.
         order="interview_date DESC",
-        cache_hours=12,  # source updates daily; 12h catches AM and PM batches
+        cache_hours=24,  # source frozen; sub-daily polling is waste
     ),
     FeedSpec(
         dataset_id="7aqy-xrv9",
