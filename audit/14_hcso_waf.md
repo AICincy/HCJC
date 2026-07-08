@@ -207,8 +207,9 @@ record, or if a residential egress (not DO) becomes available.
 ### Evidence file schema (`data/waf_block_log.json`)
 
 The log is a JSON array, append-only, never truncated. It is created on the
-first blocked cycle and is absent until then. Three record types
-(`blocked`, `recovered`, and `empty_photo_observed`):
+first blocked cycle and is absent until then. Four record types
+(`blocked`, `recovered`, `empty_photo_observed`, and
+`detail_page_waf_block`):
 
 | `blocked` field | Meaning |
 |---|---|
@@ -248,6 +249,23 @@ and writes this entry so that, on litigation, the scraper can affirmatively show
 HCSO served a booking-photo `<img>` with an empty base64 payload. It shares the
 same hash chain as the block and recovery records. These entries dominate the
 log by count (tens of thousands) because each empty-photo detail page emits one.
+
+| `detail_page_waf_block` field | Meaning |
+|---|---|
+| `timestamp_utc` | When the inmate-detail fetch was denied on both attempts (ISO 8601 UTC). |
+| `event` | `"detail_page_waf_block"`. |
+| `inmate_id` | HCSO inmate ID whose detail page was blocked. |
+| `url` | The denied detail-page URL (`<detail path>?id=<inmate_id>`). |
+| `http_status` | HTTP status of the block (e.g. 403), or `null`. |
+| `response_signature` | First 16 hex chars of the response-body SHA-256, so identical block templates across inmates collate without storing the full body, or `null`. |
+| `response_length` | Response body length in characters. |
+| `prev_sha256` | Hash-chain link (see below). |
+
+`detail_page_waf_block` records a per-inmate detail-page denial, written by
+`scraper.sweep._record_detail_page_block` after both fetch attempts fail. It is
+distinct from the list-page `blocked` record. The live log holds zero of these
+so far; the type is documented for completeness, like `blocked` and `recovered`
+before the first block cycle.
 
 `block_sample` sub-object (one representative blocked response is kept; the WAF
 serves identical pages, so the first failure is captured):

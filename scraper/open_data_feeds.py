@@ -182,10 +182,11 @@ def _pull_one(spec: FeedSpec, *, client: httpx.Client | None = None) -> list[dic
 
 def pull_all(force: bool = False) -> int:
     """Refresh every feed whose local file exceeds its configured cache window.
-    Each FeedSpec carries its own ``cache_hours`` so rare-event feeds
-    (officer-involved shootings, CCA complaints) stay on 24h while feeds
-    that update sub-daily at the source (crime_stars, traffic / pedestrian
-    stops) refresh as often as 12h. Returns count refreshed.
+    Each FeedSpec carries its own ``cache_hours`` so rare-event and frozen
+    feeds (officer-involved shootings, CCA complaints, and the now-frozen
+    traffic / pedestrian Contact Card feeds) stay on 24h, while feeds that
+    still update sub-daily at the source (crime_stars) refresh as often as
+    12h. Returns count refreshed.
 
     A single ``httpx.Client`` is shared across all feeds so the TLS session
     and TCP connection pool to ``data.cincinnati-oh.gov`` are reused.
