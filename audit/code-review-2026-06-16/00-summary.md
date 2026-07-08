@@ -24,6 +24,28 @@ All five reviewers confirmed the following:
 | repo-hygiene | 0 | 2 | 3 | 3 | 4 | 12 |
 | **Total** | **1** | **10** | **19** | **14** | **26** | **70** |
 
+## Resolution status (updated 2026-07-08)
+
+Verified against current source during the 2026-07-08 status sweep. The original
+review tracked no per-finding resolution; this table closes that gap. It covers
+the Critical and all 10 High findings plus the Medium the lead elevated.
+
+| Finding | Sev | Status |
+| :-- | :-- | :-- |
+| Court-evidence session transcripts unfiled | Crit | Partial. IDs documented (CLAUDE.md + `audit/sessions/`), git-corroboration spans added (PR #399). Transcripts still require the owner's claude.ai export. |
+| FCRA: no monitoring below the 6h freeze window | High | Addressed. Removal-SLA `::warning` tier at 1-6h (PR #402); best-effort posture documented (`audit/23`). A true accelerator is structurally not viable (WAF posture + fetch cost). |
+| a11y `--fg-muted` contrast (#6c6c6c) | High | Fixed. Now `#5c5c5c`. |
+| a11y `.court-stat-primary` label + cobalt gradient | High | Gradient fixed (flattened to `var(--accent)`). Label still FAILS: 4.20:1 at 12px/500 (needs 4.5:1). Minimal fix `rgba(255,255,255,0.85)` = 4.70:1, pending CSS authorization. |
+| a11y `alt=""` on booking photos | High | Not a failure. The photo is decorative inside a card link whose accessible name is the inmate's visible name; empty alt is WCAG 1.1.1-correct. No-photo branches use `aria-hidden`. |
+| Federal Docket palette: `--bg`/`--fg`/`--accent` + gradient off-spec | High (x4) | Gradient fixed; `--bg` moved to `#F6F5F3`. `--fg` (#1A1A1A) and `--accent` (#B33A2A) are deliberate owner palette values, not defects; CLAUDE.md protects them from unauthorized change. |
+| CI perms: `sweep.yml` pages/id-token write | High | Fixed. Block is now `contents` + `issues` only. |
+| CI perms: `pra_daily.yml` contents:write | High | Not a defect. The commit step uses it when SMTP is configured; removing it breaks that path. |
+| `dispatch_correlations` public cross-source join | Med (lead: High) | Fixed. Moved to `private/dispatch_correlations.json`; absent from `data/` and `docs/`. |
+
+Net: the one clearly-open item needing action is the `.court-stat-primary` label
+contrast (a CSS change awaiting authorization). The rest are fixed, addressed,
+deliberate palette choices, a not-a-defect, or a false positive.
+
 ## Critical
 
 ### [legal-evidentiary] Court-evidence session IDs not in this repository
