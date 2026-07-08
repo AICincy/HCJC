@@ -4,12 +4,30 @@ monkeypatched, so only the staleness gating and the send-gate are exercised."""
 import pytest
 
 from scraper import freeze_alert
-from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS
+from scraper.sweep_guards import REMOVAL_SLA_HOURS, ROSTER_STALE_ALARM_HOURS
 
 
 def test_alert_ok_when_fresh(caplog):
     assert freeze_alert.alert(1.0) == "ok"
     assert freeze_alert.alert(None) == "ok"
+
+
+def test_removal_sla_warn_ok_below_window():
+    assert freeze_alert.removal_sla_warn(None) == "ok"
+    assert freeze_alert.removal_sla_warn(REMOVAL_SLA_HOURS - 0.1) == "ok"
+
+
+def test_removal_sla_warn_fires_in_window(capsys):
+    mid = (REMOVAL_SLA_HOURS + ROSTER_STALE_ALARM_HOURS) / 2
+    assert freeze_alert.removal_sla_warn(mid) == "warn"
+    assert "::warning title=Roster stale past removal SLA::" in capsys.readouterr().out
+
+
+def test_removal_sla_warn_silent_at_freeze_threshold(capsys):
+    # At/after the freeze alarm the ::error tier owns it; no ::warning.
+    assert freeze_alert.removal_sla_warn(ROSTER_STALE_ALARM_HOURS) == "ok"
+    assert freeze_alert.removal_sla_warn(ROSTER_STALE_ALARM_HOURS + 2) == "ok"
+    assert "::warning" not in capsys.readouterr().out
 
 
 def test_alert_dry_run_without_token(monkeypatch, capsys):

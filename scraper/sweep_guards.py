@@ -27,6 +27,15 @@ log = logging.getLogger("jcstream.sweep")
 # greppable alarm so a multi-hour freeze surfaces instead of hiding.
 ROSTER_STALE_ALARM_HOURS = 6.0
 
+# Removal-SLA warning window. The FCRA-style target is to drop a released
+# inmate within ~30 min, but normal effective sweep cadence tops out around
+# 45 min, so a 30-min warning would fire on ordinary slightly-slow cycles.
+# Past this many hours the roster is stale beyond what normal cadence explains
+# (a slipped cron or an early WAF block), so the sweep emits a ::warning
+# annotation: earlier, quieter visibility below the 6h freeze issue. It never
+# opens an issue, so it cannot spam during a multi-day WAF block.
+REMOVAL_SLA_HOURS = 1.0
+
 
 def roster_stale_hours(generated_utc: str | None) -> float | None:
     """Hours since a roster snapshot's ``generated_utc``, or None when the

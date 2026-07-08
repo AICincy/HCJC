@@ -7,6 +7,15 @@ into an active notification: run after the sweep step, it emits a GitHub
 Actions ``::error`` annotation and opens a GitHub issue so subscribers are
 notified.
 
+Two tiers. :func:`removal_sla_warn` emits a quieter ``::warning`` annotation
+(no issue) once the roster is stale past ``REMOVAL_SLA_HOURS`` (~1h), covering
+the sub-6h window the freeze issue misses. :func:`alert` escalates to the
+``::error`` annotation and the GitHub issue at ``ROSTER_STALE_ALARM_HOURS``
+(6h). The warning tier gives earlier, spam-free visibility into a slipped cron
+or a developing WAF block; the FCRA context is that a released inmate is
+dropped on the next successful sweep, and the warning flags when that has
+slipped past normal cadence.
+
 Send-gate (mirrors the PRA loop): it dry-runs (logs only) unless both
 ``GITHUB_TOKEN`` and ``GITHUB_REPOSITORY`` are set. Dedupe: if an open issue
 with the marker title already exists it does nothing, so a cron firing every
@@ -23,7 +32,7 @@ import urllib.parse
 import urllib.request
 
 from .sweep import CURRENT_PATH, _prev_generated_utc
-from .sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
+from .sweep_guards import REMOVAL_SLA_HOURS, ROSTER_STALE_ALARM_HOURS, roster_stale_hours
 
 log = logging.getLogger("jcstream.sweep")
 
@@ -111,9 +120,39 @@ def alert(stale_h: float | None) -> str:
         return "dry-run"
 
 
+def removal_sla_warn(stale_h: float | None) -> str:
+    """Emit a GitHub Actions ``::warning`` when the roster is stale past the
+    removal-SLA window but below the freeze alarm.
+
+    This surfaces the sub-6h window the freeze issue does not cover, so a
+    slipped cron or an early WAF block gets visibility before the 6h issue
+    fires. It is a log annotation only (no issue), so it cannot spam during a
+    multi-day WAF block; the FCRA context is that a released inmate is removed
+    on the next successful sweep, and this flags when that has been delayed
+    past normal cadence. Returns ``"warn"`` when the annotation fired, ``"ok"``
+    otherwise (fresh, unknown, or already at the freeze threshold)."""
+    if stale_h is None or stale_h < REMOVAL_SLA_HOURS or stale_h >= ROSTER_STALE_ALARM_HOURS:
+        return "ok"
+    print(
+        f"::warning title=Roster stale past removal SLA::current.json is "
+        f"{stale_h:.1f}h old (>= {REMOVAL_SLA_HOURS:.1f}h removal-SLA window, "
+        f"< {ROSTER_STALE_ALARM_HOURS:.0f}h freeze alarm). A released inmate may "
+        f"still be listed until the next successful sweep. See the CLAUDE.md runbook."
+    )
+    log.warning(
+        "roster stale %.1fh: past the %.1fh removal-SLA window (< %.0fh freeze)",
+        stale_h,
+        REMOVAL_SLA_HOURS,
+        ROSTER_STALE_ALARM_HOURS,
+    )
+    return "warn"
+
+
 def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
-    alert(roster_stale_hours(_prev_generated_utc(CURRENT_PATH)))
+    stale_h = roster_stale_hours(_prev_generated_utc(CURRENT_PATH))
+    removal_sla_warn(stale_h)
+    alert(stale_h)
     return 0
 
 
