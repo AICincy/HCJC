@@ -171618,6 +171618,12 @@
     "category": "Assault"
   },
   {
+    "event": "updated",
+    "date": "2026-05-22",
+    "tier": "M2",
+    "category": "Criminal damaging"
+  },
+  {
     "event": "booked",
     "date": "2026-05-23",
     "tier": null,
@@ -173188,6 +173194,12 @@
     "date": "2026-05-24",
     "tier": "M1",
     "category": "Assault"
+  },
+  {
+    "event": "updated",
+    "date": "2026-05-24",
+    "tier": "M2",
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
@@ -232579,66 +232591,69 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-01T00:03:34Z",
-    "inmate_number": "1146820",
-    "name": "COFFEE EUGENE",
+    "date": "2026-07-01",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 6/30/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-01T00:03:34Z",
-    "inmate_number": "14157054",
-    "name": "HENKE BRIAN",
+    "date": "2026-07-01",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-01T00:03:34Z",
-    "inmate_number": "14315943",
-    "name": "HINTON KENNETH",
+    "date": "2026-07-01",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": ""
+    "category": "Trafficking in drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-01T00:03:34Z",
-    "inmate_number": "14294490",
-    "name": "RAY SYMONE",
+    "date": "2026-07-01",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-01T00:03:34Z",
-    "inmate_number": "14699719",
-    "name": "SCHOLZ ETHAN",
+    "date": "2026-07-01",
     "tier": "F3",
-    "category": "Complicity",
-    "note": "booked 6/30/26"
+    "category": "Complicity"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-01T00:03:34Z",
-    "inmate_number": "14789221",
-    "name": "BELL JAEDON",
+    "date": "2026-07-01",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-07-01T00:03:34Z",
-    "inmate_number": "2129837",
-    "name": "FORD DAMIEN",
+    "date": "2026-07-01",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-07-01",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-01",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-07-01",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-07-01",
+    "tier": "M1",
+    "category": "Theft"
   },
   {
     "event": "updated",
@@ -241233,6 +241248,123 @@
     "name": "LOWE DEVAUGHN",
     "tier": "F5",
     "category": "Possession of drugs",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "14280222",
+    "name": "CHOW MIGUEL",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "14443249",
+    "name": "ZANDERS RAHMONE",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "14657344",
+    "name": "ERKINS JAYDEN",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "14749004",
+    "name": "YERO HAROUNA",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "14802082",
+    "name": "GOODMAN ZANE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "14816144",
+    "name": "VELAZQUEZ-OLASCOAGA BRENDA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "14816142",
+    "name": "OROPEZA-ARELLANO GREGORIO",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "14816145",
+    "name": "THOMPSON EBONY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "14816147",
+    "name": "CAMPBELL DELRON",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "1746110",
+    "name": "LOGAN HARLAND",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "2382115",
+    "name": "WILLIAMS DAVID",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/7/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "2246187",
+    "name": "DOWDELL MANCHEZ",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-08T02:07:45Z",
+    "inmate_number": "982115",
+    "name": "MCFARLAND HERBERT",
+    "tier": "F2",
+    "category": "Strangulation",
     "note": "booked 7/7/26"
   }
 ]
