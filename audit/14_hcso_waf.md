@@ -207,7 +207,8 @@ record, or if a residential egress (not DO) becomes available.
 ### Evidence file schema (`data/waf_block_log.json`)
 
 The log is a JSON array, append-only, never truncated. It is created on the
-first blocked cycle and is absent until then. Two record types:
+first blocked cycle and is absent until then. Three record types
+(`blocked`, `recovered`, and `empty_photo_observed`):
 
 | `blocked` field | Meaning |
 |---|---|
@@ -231,6 +232,22 @@ first blocked cycle and is absent until then. Two record types:
 | `seen_count` | Unique inmate IDs the recovered sweep parsed. |
 | `note` | Fixed human-readable description. |
 | `prev_sha256` | Hash-chain link (see below). |
+
+| `empty_photo_observed` field | Meaning |
+|---|---|
+| `timestamp_utc` | When the empty booking-photo payload was parsed (ISO 8601 UTC). |
+| `event` | `"empty_photo_observed"`. |
+| `inmate_id` | HCSO inmate ID whose detail page served an empty booking-photo payload. |
+| `photo_field_path` | The `<img>` field the empty payload came from, e.g. `img[2]@src data:image/png;base64`. |
+| `payload_length` | Length of the base64 payload (`0` for an empty photo). |
+| `prev_sha256` | Hash-chain link (see below). |
+
+`empty_photo_observed` records HCSO conduct, not a code defect: the parser
+(`scraper.parsers._record_empty_photo_event`) correctly skips the empty payload
+and writes this entry so that, on litigation, the scraper can affirmatively show
+HCSO served a booking-photo `<img>` with an empty base64 payload. It shares the
+same hash chain as the block and recovery records. These entries dominate the
+log by count (tens of thousands) because each empty-photo detail page emits one.
 
 `block_sample` sub-object (one representative blocked response is kept; the WAF
 serves identical pages, so the first failure is captured):
