@@ -40,7 +40,7 @@ the Critical and all 10 High findings plus the Medium the lead elevated.
 | Federal Docket palette: `--bg`/`--fg`/`--accent` + gradient off-spec | High (x4) | Gradient fixed; `--bg` moved to `#F6F5F3`. `--fg` (#1A1A1A) and `--accent` (#B33A2A) are deliberate owner palette values, not defects; CLAUDE.md protects them from unauthorized change. |
 | CI perms: `sweep.yml` pages/id-token write | High | Fixed. Block is now `contents` + `issues` only. |
 | CI perms: `pra_daily.yml` contents:write | High | Not a defect. The commit step uses it when SMTP is configured; removing it breaks that path. |
-| `dispatch_correlations` public cross-source join | Med (lead: High) | Fixed. Moved to `private/dispatch_correlations.json`; absent from `data/` and `docs/`. |
+| `dispatch_correlations` public cross-source join | Med (lead: High) | Fixed. Moved from `data/dispatch_correlations.json` to `private/dispatch_correlations.json`; absent from `data/` and `docs/`. |
 
 Net: the one clearly-open item needing action is the `.court-stat-primary` label
 contrast (a CSS change awaiting authorization). The rest are fixed, addressed,
