@@ -49,3 +49,29 @@ in the owner's local Claude Code session storage
 claude.ai; the filing step is a local export, not a web export. Work
 product: PRs #387-#391 (coverage audit + cleanup, wiki sync, stray-static-
 docs removal, CLAUDE.md corrections, manual-sweep runbook), 2026-07-05.
+
+## Git corroboration (measured 2026-07-08)
+
+Committer-date span of commits carrying each session ID in a trailer
+(`git log --all --grep=<id>`). This is a lower bound on when the session's
+work landed, not the authoritative session date range, which still comes from
+the export. Four sessions left no trailer, so git offers no corroboration for
+them; their date ranges depend entirely on the claude.ai export.
+
+| Session ID | Commits in git | Commit span |
+| :-- | :-- | :-- |
+| session_01Hbc6p9EspF6RH9ajNNb8tB | 0 | none in git |
+| session_01MNnYgZMY5uFz9cHie3w6TY | 0 | none in git |
+| session_019fDevbfpgmnjJP7A343T95 | 0 | none in git |
+| session_01NGMSLESEepbgV8aSn4reVG | 0 | none in git |
+| session_019qfYLXARs48orCHaQdM8cA | 23 | 2026-07-02 to 2026-07-04 |
+| session_01DCTmLdgUma5GYA1JBrywGp | 13 | 2026-07-04 |
+| db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e | 1 | 2026-07-05 |
+
+Two date-tag discrepancies to resolve on export:
+
+- `session_019qfYLXARs48orCHaQdM8cA` is tagged `2026-07-02` in the ledger and
+  CLAUDE.md, but its commits span through 2026-07-04. The session likely ran
+  longer than one day.
+- `session_01DCTmLdgUma5GYA1JBrywGp` is tagged `2026-07-03`, but its commits
+  landed 2026-07-04. Confirm the session date from the export.
