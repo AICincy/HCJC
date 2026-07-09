@@ -75,3 +75,37 @@ def test_build_failure_preserves_last_good(tmp_path, monkeypatch):
     # Last-good site is untouched: still present and byte-identical.
     assert (out / "index.html").exists()
     assert (out / "index.html").read_text(encoding="utf-8") == good
+
+
+def test_build_swap_failure_restores_last_good(tmp_path, monkeypatch):
+    """If the final promote (build_dir -> out_dir) fails after out_dir was
+    moved aside, the last-good site must be restored, not left missing."""
+    import pathlib
+
+    _make_minimal_snapshot(tmp_path)
+    monkeypatch.chdir(tmp_path)
+
+    from web import build as build_mod
+
+    out = tmp_path / "docs"
+    try:
+        build_mod.build(out)
+    except FileNotFoundError:
+        pytest.skip("templates/data not available in this env")
+    good = (out / "index.html").read_text(encoding="utf-8")
+
+    real_replace = pathlib.Path.replace
+
+    def flaky_replace(self, target):
+        # Fail only the promote; build_dir is the ".build-tmp" sibling.
+        if self.name.endswith(".build-tmp"):
+            raise OSError("promote boom")
+        return real_replace(self, target)
+
+    monkeypatch.setattr(pathlib.Path, "replace", flaky_replace)
+    with pytest.raises(OSError):
+        build_mod.build(out)
+
+    # The promote failed, but the last-good site was restored, not left blank.
+    assert (out / "index.html").exists()
+    assert (out / "index.html").read_text(encoding="utf-8") == good
