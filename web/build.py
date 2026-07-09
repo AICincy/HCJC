@@ -341,9 +341,16 @@ def build(out_dir: Path) -> int:
 
     # Promote the freshly built site with a rename-based swap. Everything above
     # wrote only to build_dir, so a mid-render failure never touched out_dir.
+    # If the promote itself fails after out_dir was moved aside, restore the
+    # last-good site so out_dir is never left missing (a blank live site).
     if out_dir.exists():
         out_dir.replace(old_dir)
-    build_dir.replace(out_dir)
+    try:
+        build_dir.replace(out_dir)
+    except OSError:
+        if old_dir.exists() and not out_dir.exists():
+            old_dir.replace(out_dir)
+        raise
     if old_dir.exists():
         shutil.rmtree(old_dir)
 
