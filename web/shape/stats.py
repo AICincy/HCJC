@@ -59,12 +59,16 @@ def _all_top_offenses(snapshot: Snapshot, offenses: dict | None = None) -> list[
     return _top_offenses_with_orc(snapshot, top_n=10_000, offenses=offenses)
 
 
-def _distinct_chapters(inmates: list[Inmate]) -> list[tuple[str, str]]:
-    """Distinct (slug, label) ORC chapters present on the roster, sorted by
-    label, for the homepage filter dropdown."""
+def _distinct_chapters(inmates: list[Inmate]) -> list[tuple[str, str, int]]:
+    """Distinct (slug, label, count) ORC chapters present on the roster,
+    sorted by label, for the homepage filter dropdown. Count is people whose
+    primary chapter is this one, matching what the data-chap filter shows."""
     chap: dict[str, str] = {}
+    counts: dict[str, int] = {}
     for inm in inmates:
         ch = _primary_chapter(inm)
         if ch:
-            chap[_chap_slug(ch["label"])] = ch["label"]
-    return sorted(chap.items(), key=lambda kv: kv[1])
+            slug = _chap_slug(ch["label"])
+            chap[slug] = ch["label"]
+            counts[slug] = counts.get(slug, 0) + 1
+    return sorted(((s, lbl, counts[s]) for s, lbl in chap.items()), key=lambda t: t[1])

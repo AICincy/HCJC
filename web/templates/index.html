@@ -95,7 +95,7 @@
   <label for="filter-chap">Offense
     <select id="filter-chap" data-filter="chap">
       <option value="">all offenses</option>
-      {% for slug, label in all_chapters %}<option value="{{ slug }}">{{ label }}</option>{% endfor %}
+      {% for slug, label, count in all_chapters %}<option value="{{ slug }}">{{ label }} ({{ count }})</option>{% endfor %}
     </select>
   </label>
   {# Results panel and status announcer live OUTSIDE the label: label

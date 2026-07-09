@@ -458,6 +458,9 @@ details.coms > summary::-webkit-details-marker { display: none; }
 }
 .filter-bar input[type="search"] { min-width: 14rem; }
 .filter-bar .filter-count { color: var(--fg-muted); margin-left: auto; font-variant-numeric: tabular-nums; font-size: 12px; }
+/* Search-match emphasis on card text (main.js wraps matches in mark.hl).
+   Warm straw, literal hex on purpose: no token aliasing (print :root rule). */
+.card-inmate mark.hl { background: #F2E29B; color: inherit; padding: 0 1px; border-radius: 2px; }
 .view-toggle {
   display: inline-flex; align-items: center; gap: 6px;
   height: 44px; padding: 0 12px;
