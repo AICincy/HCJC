@@ -195,10 +195,56 @@
       inputs.forEach(function (i) { f[i.getAttribute('data-filter')] = (i.value || '').trim().toLowerCase(); });
       return f;
     }
+    // Search-match emphasis: wrap each occurrence of the term in the card's
+    // visible text in <mark class="hl">. Text-node splitting via DOM APIs
+    // only - no innerHTML (same CodeQL js/xss-through-dom discipline as the
+    // dropdown below). Skipped for 1-char terms: single-letter searches match
+    // most of the roster and marking every letter is noise, not signal.
+    function clearAllMarks() {
+      // One global query instead of per-card queries: only cards that
+      // actually contain marks (bounded by the previous match count) pay
+      // for cleanup and normalize().
+      var marks = document.querySelectorAll('.cards mark.hl');
+      var touched = [];
+      for (var i = 0; i < marks.length; i++) {
+        var m = marks[i];
+        var card = m.closest('.card-inmate');
+        m.parentNode.replaceChild(document.createTextNode(m.textContent), m);
+        if (card && touched.indexOf(card) === -1) touched.push(card);
+      }
+      for (var j = 0; j < touched.length; j++) touched[j].normalize();
+    }
+    function markTerm(card, term) {
+      var roots = card.querySelectorAll('.name a, .charge, .id-chip');
+      for (var i = 0; i < roots.length; i++) {
+        var walker = document.createTreeWalker(roots[i], NodeFilter.SHOW_TEXT);
+        var textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        textNodes.forEach(function (tn) {
+          var text = tn.nodeValue;
+          var at = text.toLowerCase().indexOf(term);
+          if (at === -1) return;
+          var frag = document.createDocumentFragment();
+          var pos = 0;
+          while (at !== -1) {
+            if (at > pos) frag.appendChild(document.createTextNode(text.slice(pos, at)));
+            var mk = document.createElement('mark');
+            mk.className = 'hl';
+            mk.textContent = text.slice(at, at + term.length);
+            frag.appendChild(mk);
+            pos = at + term.length;
+            at = text.toLowerCase().indexOf(term, pos);
+          }
+          if (pos < text.length) frag.appendChild(document.createTextNode(text.slice(pos)));
+          tn.parentNode.replaceChild(frag, tn);
+        });
+      }
+    }
     function apply(trigger) {
       var f = currentFilters();
       var active = !!(f.tier || f.chap || f.search);
       var shown = 0;
+      clearAllMarks();
       cards.forEach(function (c) {
         var ok = true;
         if (f.tier && c.getAttribute('data-tier') !== f.tier) ok = false;
@@ -206,6 +252,7 @@
         if (ok && f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) ok = false;
         c.classList.toggle('is-filtered-out', !ok);
         if (ok) shown++;
+        if (ok && f.search && f.search.length >= 2) markTerm(c, f.search);
       });
       months.forEach(function (m) {
         var anyVisible = m.querySelector('.card-inmate:not(.is-filtered-out)');
@@ -213,14 +260,25 @@
         if (active && anyVisible) m.open = true;
       });
       if (noMatch) noMatch.hidden = !(active && shown === 0);
-      countEl.textContent = active ? (shown + ' of ' + cards.length + ' shown') : '';
+      // Restate the active filters next to the count so the user never has
+      // to reconstruct "what did I click" from three separate controls.
+      var pieces = [];
+      if (f.search) pieces.push('matching "' + f.search + '"');
+      if (f.chap) {
+        var chapOptSel = bar.querySelector('[data-filter="chap"]');
+        var chapOpt = chapOptSel && chapOptSel.options[chapOptSel.selectedIndex];
+        if (chapOpt) pieces.push('offense: ' + chapOpt.textContent.replace(/\s*\(\d+\)$/, ''));
+      }
+      if (f.tier) pieces.push('tier: ' + f.tier);
+      var summary = shown + ' of ' + cards.length + ' shown' + (pieces.length ? ' · ' + pieces.join(' · ') : '');
+      countEl.textContent = active ? summary : '';
       if (resetBtn) resetBtn.hidden = !active;
       // Single-announcer rule: select changes announce the card count here;
       // search keystrokes are announced by the dropdown's own result count
       // (section 4), never both for one event.
       var status = document.getElementById('search-status');
       if (status && trigger !== 'search') {
-        status.textContent = active ? (shown + ' of ' + cards.length + ' shown') : '';
+        status.textContent = active ? summary : '';
       }
     }
     var applyDebounce = null;
@@ -356,6 +414,15 @@
       sresults.hidden = true;
       if (sstatus) sstatus.textContent = '';
     }
+    // (4b) "/" focuses the roster search from anywhere on the page, unless
+    //      the user is already typing in a form control.
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+      var t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+      e.preventDefault();
+      sbox.focus();
+    });
     var renderDebounce = null;
     sbox.addEventListener('focus', loadIdx);
     sbox.addEventListener('input', function () {

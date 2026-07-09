@@ -234061,75 +234061,63 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-02T08:49:00Z",
-    "inmate_number": "14815576",
-    "name": "VASQUEZ-VELAQUEZ AUNOR",
+    "date": "2026-07-02",
     "tier": "M1",
-    "category": "Stopping after accident on public roads",
-    "note": "booked 7/2/26"
+    "category": "Stopping after accident on public roads"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-02T08:49:00Z",
-    "inmate_number": "14815577",
-    "name": "HOWARD DEMARIO",
+    "date": "2026-07-02",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 7/2/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-02T08:49:00Z",
-    "inmate_number": "1712538",
-    "name": "STEVENS GARY",
+    "date": "2026-07-02",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 7/2/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-02T08:49:00Z",
-    "inmate_number": "2011786",
-    "name": "LANDIN MICHAEL",
+    "date": "2026-07-02",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 7/2/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-02T08:49:00Z",
-    "inmate_number": "2249778",
-    "name": "CRAWFORD JUMARKUS",
+    "date": "2026-07-02",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-02T08:49:00Z",
-    "inmate_number": "2742060",
-    "name": "LANDIN JOYCE",
+    "date": "2026-07-02",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/2/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-02T08:49:00Z",
-    "inmate_number": "2765169",
-    "name": "JACKSON DONALD",
+    "date": "2026-07-02",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 7/2/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-02T08:49:00Z",
-    "inmate_number": "2823754",
-    "name": "ANDERSON JESSICA",
+    "date": "2026-07-02",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": "booked 7/2/26"
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
+    "event": "booked",
+    "date": "2026-07-02",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
+    "event": "booked",
+    "date": "2026-07-02",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
@@ -243157,5 +243145,59 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-09T11:00:04Z",
+    "inmate_number": "14778820",
+    "name": "VELAZQUEZ DAYLILLEYMS",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/9/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-09T11:00:04Z",
+    "inmate_number": "14816300",
+    "name": "MCCURDY BRADY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-09T11:00:04Z",
+    "inmate_number": "1927949",
+    "name": "THOMAS DARNELL",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-09T11:00:04Z",
+    "inmate_number": "1977638",
+    "name": "CASH MAIA",
+    "tier": "F5",
+    "category": "Breaking and entering",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-09T11:00:04Z",
+    "inmate_number": "2370590",
+    "name": "STEINMANN SAMANTHA",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 7/9/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-09T11:00:04Z",
+    "inmate_number": "2483710",
+    "name": "NEELEY PAUL",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
   }
 ]
