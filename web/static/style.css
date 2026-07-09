@@ -462,6 +462,32 @@ details.coms > summary::-webkit-details-marker { display: none; }
 }
 .filter-bar input[type="search"] { min-width: 14rem; }
 .filter-bar .filter-count { color: var(--fg-muted); margin-left: auto; font-variant-numeric: tabular-nums; font-size: 12px; }
+/* Search-match emphasis on card text (main.js wraps matches in mark.hl).
+   Warm straw, literal hex on purpose: no token aliasing (print :root rule). */
+/* Ink text inside marks, not inherited category color: the drugs green
+   (#4d7838) is 3.97:1 on this yellow, under AA 4.5 at charge-line size;
+   ink is 13.4:1. Measured 2026-07-09. */
+.card-inmate mark.hl { background: #F2E29B; color: var(--fg); padding: 0 1px; border-radius: 2px; }
+
+/* Tier-strip segments double as degree-filter targets (main.js 3b2). */
+.tier-strip-seg { cursor: pointer; }
+.tier-strip-seg:hover { outline: 2px solid var(--fg); outline-offset: 1px; }
+
+/* Released-in-24h list (server-rendered, collapsible). */
+.released-24h {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+.released-24h summary { cursor: pointer; font-weight: 600; }
+.released-24h .count { color: var(--fg-muted); font-variant-numeric: tabular-nums; margin-left: 4px; }
+.released-24h .released-note { color: var(--fg-muted); font-size: 12px; margin: 8px 0 4px; }
+.released-24h .released-flow { margin: 6px 0 2px; font-size: 12.5px; line-height: 1.9; color: var(--fg-soft); }
+.released-24h .released-flow span { white-space: nowrap; }
+.released-24h .released-flow .sep { color: var(--border-hi); }
 .view-toggle {
   display: inline-flex; align-items: center; gap: 6px;
   height: 44px; padding: 0 12px;
@@ -2103,7 +2129,10 @@ a.orc-code:hover { border-bottom-style: solid; }
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 4px 18px; font-size: 12px;
 }
-.stacked-leg li { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+.stacked-leg li { display: flex; align-items: center; padding: 0; }
+.stacked-row-link { display: flex; flex: 1; align-items: center; gap: 8px; padding: 4px 0; color: inherit; text-decoration: none; border-radius: var(--radius-sm); }
+.stacked-row-link:hover { background: var(--accent-bg); }
+.stacked-row-link:hover .stacked-k { color: var(--accent); text-decoration: underline; }
 .stacked-sw { width: 10px; height: 10px; border-radius: var(--radius-sm); flex-shrink: 0; border: 1px solid var(--border); }
 .stacked-k { flex: 1; color: var(--fg-soft); }
 .stacked-v { color: var(--fg-muted); font-variant-numeric: tabular-nums; }

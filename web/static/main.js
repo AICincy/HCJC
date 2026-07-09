@@ -194,22 +194,79 @@
     var resetBtn = document.getElementById('filter-reset');
     var cards = Array.prototype.slice.call(document.querySelectorAll('.cards .card-inmate'));
     var months = Array.prototype.slice.call(document.querySelectorAll('details.month'));
+    var DEG_VALUES = { f1: 1, f2: 1, f3: 1, f4: 1, f5: 1, m1: 1, m2: 1, m3: 1, m4: 1, mm: 1 };
     function currentFilters() {
       var f = {};
       inputs.forEach(function (i) { f[i.getAttribute('data-filter')] = (i.value || '').trim().toLowerCase(); });
       return f;
     }
+    // Search-match emphasis: wrap each occurrence of the term in the card's
+    // visible text in <mark class="hl">. Text-node splitting via DOM APIs
+    // only - no innerHTML (same CodeQL js/xss-through-dom discipline as the
+    // dropdown below). Skipped for 1-char terms: single-letter searches match
+    // most of the roster and marking every letter is noise, not signal.
+    function clearAllMarks() {
+      // One global query instead of per-card queries: only cards that
+      // actually contain marks (bounded by the previous match count) pay
+      // for cleanup and normalize().
+      var marks = document.querySelectorAll('.cards mark.hl');
+      var touched = [];
+      for (var i = 0; i < marks.length; i++) {
+        var m = marks[i];
+        var card = m.closest('.card-inmate');
+        m.parentNode.replaceChild(document.createTextNode(m.textContent), m);
+        if (card && touched.indexOf(card) === -1) touched.push(card);
+      }
+      for (var j = 0; j < touched.length; j++) touched[j].normalize();
+    }
+    function markTerm(card, term) {
+      var roots = card.querySelectorAll('.name a, .charge, .id-chip');
+      for (var i = 0; i < roots.length; i++) {
+        var walker = document.createTreeWalker(roots[i], NodeFilter.SHOW_TEXT);
+        var textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        textNodes.forEach(function (tn) {
+          var text = tn.nodeValue;
+          var at = text.toLowerCase().indexOf(term);
+          if (at === -1) return;
+          var frag = document.createDocumentFragment();
+          var pos = 0;
+          while (at !== -1) {
+            if (at > pos) frag.appendChild(document.createTextNode(text.slice(pos, at)));
+            var mk = document.createElement('mark');
+            mk.className = 'hl';
+            mk.textContent = text.slice(at, at + term.length);
+            frag.appendChild(mk);
+            pos = at + term.length;
+            at = text.toLowerCase().indexOf(term, pos);
+          }
+          if (pos < text.length) frag.appendChild(document.createTextNode(text.slice(pos)));
+          tn.parentNode.replaceChild(frag, tn);
+        });
+      }
+    }
     function apply(trigger) {
       var f = currentFilters();
-      var active = !!(f.tier || f.chap || f.search);
+      var active = !!(f.tier || f.chap || f.search || f.recent);
       var shown = 0;
+      clearAllMarks();
       cards.forEach(function (c) {
         var ok = true;
-        if (f.tier && c.getAttribute('data-tier') !== f.tier) ok = false;
+        if (f.tier) {
+          // The tier select mixes kinds (felony/misdemeanor -> data-tier)
+          // and degrees (F1..MM -> data-degree, currentFilters lowercases).
+          if (DEG_VALUES[f.tier]) {
+            if (c.getAttribute('data-degree') !== f.tier.toUpperCase()) ok = false;
+          } else if (c.getAttribute('data-tier') !== f.tier) {
+            ok = false;
+          }
+        }
         if (ok && f.chap && c.getAttribute('data-chap') !== f.chap) ok = false;
+        if (ok && f.recent && c.getAttribute('data-recent') !== f.recent) ok = false;
         if (ok && f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) ok = false;
         c.classList.toggle('is-filtered-out', !ok);
         if (ok) shown++;
+        if (ok && f.search && f.search.length >= 2) markTerm(c, f.search);
       });
       months.forEach(function (m) {
         var anyVisible = m.querySelector('.card-inmate:not(.is-filtered-out)');
@@ -217,14 +274,26 @@
         if (active && anyVisible) m.open = true;
       });
       if (noMatch) noMatch.hidden = !(active && shown === 0);
-      countEl.textContent = active ? (shown + ' of ' + cards.length + ' shown') : '';
+      // Restate the active filters next to the count so the user never has
+      // to reconstruct "what did I click" from three separate controls.
+      var pieces = [];
+      if (f.search) pieces.push('matching "' + f.search + '"');
+      if (f.chap) {
+        var chapOptSel = bar.querySelector('[data-filter="chap"]');
+        var chapOpt = chapOptSel && chapOptSel.options[chapOptSel.selectedIndex];
+        if (chapOpt) pieces.push('offense: ' + chapOpt.textContent.replace(/\s*\(\d+\)$/, ''));
+      }
+      if (f.tier) pieces.push(DEG_VALUES[f.tier] ? 'degree: ' + f.tier.toUpperCase() : 'tier: ' + f.tier);
+      if (f.recent) pieces.push('booked in last 24h');
+      var summary = shown + ' of ' + cards.length + ' shown' + (pieces.length ? ' · ' + pieces.join(' · ') : '');
+      countEl.textContent = active ? summary : '';
       if (resetBtn) resetBtn.hidden = !active;
       // Single-announcer rule: select changes announce the card count here;
       // search keystrokes are announced by the dropdown's own result count
       // (section 4), never both for one event.
       var status = document.getElementById('search-status');
       if (status && trigger !== 'search') {
-        status.textContent = active ? (shown + ' of ' + cards.length + ' shown') : '';
+        status.textContent = active ? summary : '';
       }
     }
     var applyDebounce = null;
@@ -289,6 +358,64 @@
         chapSelect.dispatchEvent(new Event('change'));
         var scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
         bar.scrollIntoView({ block: 'start', behavior: scrollBehavior });
+      });
+    }
+    // (3b2) Tier-strip segments filter by degree on click. Pointer-only
+    //       enhancement: the tier select is the accessible equivalent.
+    var tierSelect = document.getElementById('filter-tier');
+    if (tierSelect) {
+      document.addEventListener('click', function (e) {
+        var seg = e.target.closest && e.target.closest('.tier-strip-seg');
+        if (!seg) return;
+        var deg = '';
+        seg.classList.forEach(function (c) { if (c.indexOf('ladder-') === 0) deg = c.replace('ladder-', ''); });
+        if (!deg) return;
+        tierSelect.value = deg.toLowerCase();
+        tierSelect.dispatchEvent(new Event('change'));
+        var segScroll = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        bar.scrollIntoView({ block: 'start', behavior: segScroll });
+      });
+    }
+
+    // (3c) Sort modes - non-default modes move every card into the flat
+    //      #sort-bin in sorted order and hide the month sections; "recent"
+    //      moves each card back to its original month container (appending
+    //      in original global order preserves within-month order). Filters
+    //      keep working either way: they only toggle is-filtered-out.
+    var sortSel = document.getElementById('filter-sort');
+    var sortBin = document.getElementById('sort-bin');
+    if (sortSel && sortBin) {
+      var binCards = sortBin.querySelector('.cards');
+      var origins = cards.map(function (c) { return c.parentNode; });
+      // Bare F / M come from venue inference (no numbered degree); rank them
+      // below their numbered ladder so unknown-degree felonies sort after F5.
+      var degRank = { F1: 1, F2: 2, F3: 3, F4: 4, F5: 5, F: 6, M1: 7, M2: 8, M3: 9, M4: 10, MM: 11, M: 12 };
+      sortSel.addEventListener('change', function () {
+        var mode = sortSel.value;
+        if (mode === 'recent') {
+          cards.forEach(function (c, i) { origins[i].appendChild(c); });
+          sortBin.hidden = true;
+          months.forEach(function (m) { m.hidden = false; });
+          // Recompute month is-empty/open states - they went stale while the
+          // months were empty (any apply() during sorted mode saw no cards).
+          apply('sort');
+          return;
+        }
+        var order = cards.slice().sort(function (a, b) {
+          if (mode === 'custody') {
+            return Number(b.getAttribute('data-custody') || -1) - Number(a.getAttribute('data-custody') || -1);
+          }
+          if (mode === 'degree') {
+            return (degRank[a.getAttribute('data-degree')] || 99) - (degRank[b.getAttribute('data-degree')] || 99);
+          }
+          // name: data-search starts with the lowercased full name.
+          return (a.getAttribute('data-search') || '').localeCompare(b.getAttribute('data-search') || '');
+        });
+        var frag = document.createDocumentFragment();
+        order.forEach(function (c) { frag.appendChild(c); });
+        binCards.appendChild(frag);
+        months.forEach(function (m) { m.hidden = true; });
+        sortBin.hidden = false;
       });
     }
   } // end (3) filter bar
@@ -360,6 +487,15 @@
       sresults.hidden = true;
       if (sstatus) sstatus.textContent = '';
     }
+    // (4b) "/" focuses the roster search from anywhere on the page, unless
+    //      the user is already typing in a form control.
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+      var t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+      e.preventDefault();
+      sbox.focus();
+    });
     var renderDebounce = null;
     sbox.addEventListener('focus', loadIdx);
     sbox.addEventListener('input', function () {

@@ -107,9 +107,11 @@
   <ul class="stacked-leg">
     {% for k, w in tb_segs %}{% if w %}
     <li>
-      <span class="stacked-sw stacked-sw-{{ 'f' if k.startswith('F') else 'm' }} stacked-sw-{{ k | lower }}"></span>
-      <span class="stacked-k">{{ k }} &middot; {{ tier_max(k) }}</span>
-      <span class="stacked-v">{{ "{:,}".format(w) }} <em>({{ '%.1f' % (100.0 * w / tb_tot) }}%)</em></span>
+      <a class="stacked-row-link" href="{{ base_url }}/?tier={{ k | lower }}" aria-label="Show the {{ w }} people whose most serious charge is {{ k }} on the roster">
+        <span class="stacked-sw stacked-sw-{{ 'f' if k.startswith('F') else 'm' }} stacked-sw-{{ k | lower }}"></span>
+        <span class="stacked-k">{{ k }} &middot; {{ tier_max(k) }}</span>
+        <span class="stacked-v">{{ "{:,}".format(w) }} <em>({{ '%.1f' % (100.0 * w / tb_tot) }}%)</em></span>
+      </a>
     </li>
     {% endif %}{% endfor %}
   </ul>

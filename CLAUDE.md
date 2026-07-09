@@ -137,7 +137,7 @@ Violating them imposes cognitive cost the owner cannot afford.
   is not installed on the owner's machine; expect HTTP 204). The 20-minute
   skip-gate still applies: the run no-ops if `current.json` is younger than
   20 minutes. Verified working 2026-07-05.
-- Tests: `python -m pytest -q` (must stay green; ≥463 tests as of 2026-07-08, suite grows).
+- Tests: `python -m pytest -q` (must stay green; ≥464 tests as of 2026-07-09, suite grows).
 - The stylesheet is cache-busted by content hash (`css_version` in build.py); don't
   key it off the data timestamp again.
 - The sweep refuses to write a degraded roster (`_sweep_looks_healthy` in
@@ -309,6 +309,29 @@ concurrency control does not address it.
   `_chap_slug` (web/shape/inmates.py). Cards carry no per-category
   class. Verify the slug list against `_chap_slug` before writing any
   `[data-chap=...]` selector.
+- Card data-* contract (2026-07-09), all from `_card_data_attrs` unless noted:
+
+  | attr | value | note |
+  | :-- | :-- | :-- |
+  | data-tier | felony / misdemeanor / unknown | description+venue based |
+  | data-degree | F1..MM or UNK | ORC-resolved like the tier strip; deliberately MORE precise than the corner badge |
+  | data-custody | days int or "" | "" sorts last |
+  | data-recent | "booked" or absent | changelog 24h window; template reads the `recent_booked_ids` env global |
+  | data-search | lowercased name+charges+ORC+#id | name sort key uses its prefix |
+
+- The tier select mixes kinds (felony/misdemeanor -> data-tier) and degrees
+  (F1..MM -> data-degree); `DEG_VALUES` in main.js routes them. Do not
+  "simplify" the select to one attribute.
+- `#sort-bin` is a server-rendered empty `section.month`. JS sort modes
+  reparent every card into it; "newest first" restores original parents.
+  Its `class="month"` is load-bearing (`.month > .cards` grid padding and
+  `body.is-table` row rules are scoped to `.month`).
+- `mark.hl` is the search-match highlight. Its background is a literal hex
+  (#F2E29B) on purpose; see the token-aliasing rule above.
+- `recent_booked_ids` / `recent_released_24h` env globals are registered in
+  `build()` (not `_register_template_helpers`) because they derive from
+  changelog events, with empty defaults registered in the helpers for
+  env-only renders.
 
 ### Runbook: local screenshot flow
 
