@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="light">
   <title>Access transparency scorecard &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#F5F0EB">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
@@ -16,7 +16,7 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, refreshed about every 30 minutes. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=495609a59e">
+  <link rel="stylesheet" href="/static/style.css?v=2f336ce3b3">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="JCStream - all changes" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="JCStream - new bookings" href="/booked.xml">
@@ -51,7 +51,6 @@
              alt="City of Cincinnati seal"
              width="36" height="36" decoding="async">
       </a>
-      <span class="spacer"></span>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
           <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -87,11 +86,11 @@
     <h1 class="title">Access Transparency Scorecard</h1>
     <div class="sub">HCSO public-records access interruptions, measured from the tamper-evident evidence ledger &middot; ORC &sect; 149.43</div>
   </div>
-  <div class="stamp">Computed 2026-07-09T16:17Z</div>
+  <div class="stamp">Computed 2026-07-09T18:18Z</div>
 </header>
 
 <aside class="banner" aria-label="Current access status" role="status">
-  <p><span class="status-pill status-pill-fresh">Fresh</span> The roster snapshot is 0.2 hours old, within the 6.0-hour alarm threshold. Retrieval is working.</p>
+  <p><span class="status-pill status-pill-fresh">Fresh</span> The roster snapshot is 0.0 hours old, within the 6.0-hour alarm threshold. Retrieval is working.</p>
 </aside>
 
 <h2 class="sect-h">Denial Metrics</h2>
@@ -106,7 +105,7 @@
     <tr><td>Longest consecutive blocked run</td><td>1</td></tr>
     <tr><td>Cumulative denied access</td><td>2.4 hours</td></tr>
     <tr><td>Days since last block</td><td>27</td></tr>
-    <tr><td>Roster snapshot age</td><td>0.2 hours</td></tr>
+    <tr><td>Roster snapshot age</td><td>0.0 hours</td></tr>
   </tbody>
 </table>
 <p class="muted">How to read this: the sweep appends one <code>blocked</code> record to the ledger for each cycle in which HCSO&rsquo;s portal returned blocked or empty responses, and one <code>recovered</code> record when a healthy sweep closes the denial period. Cumulative denied access sums each period from its first blocked cycle to its recovery; a period still open at build time accrues up to the build timestamp. These figures regenerate every build and are mirrored as JSON at <a href="/data/transparency_metrics.json">transparency_metrics.json</a>.</p>
@@ -141,6 +140,6 @@
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=264e9a1f86" defer></script>
+  <script src="/static/main.js?v=b98bff0c54" defer></script>
 </body>
 </html>
