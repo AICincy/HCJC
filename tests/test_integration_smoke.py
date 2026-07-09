@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from scraper.models import Charge, Inmate, Snapshot
 
 
@@ -44,3 +46,32 @@ def test_build_produces_index(tmp_path, monkeypatch):
     except FileNotFoundError:
         # Template files not available in test env -- still validates imports work
         pass
+
+
+def test_build_failure_preserves_last_good(tmp_path, monkeypatch):
+    """A render exception must leave the last-good docs/ intact, not a blank
+    or half-written site. Guards the atomic swap in web.build.build."""
+    _make_minimal_snapshot(tmp_path)
+    monkeypatch.chdir(tmp_path)
+
+    from web import build as build_mod
+
+    out = tmp_path / "docs"
+    try:
+        build_mod.build(out)
+    except FileNotFoundError:
+        pytest.skip("templates/data not available in this env")
+    assert (out / "index.html").exists()
+    good = (out / "index.html").read_text(encoding="utf-8")
+
+    def _boom(*a, **k):
+        raise RuntimeError("render boom")
+
+    # Fail a late write step; the swap into out_dir must never run.
+    monkeypatch.setattr(build_mod, "_write_checksums", _boom)
+    with pytest.raises(RuntimeError):
+        build_mod.build(out)
+
+    # Last-good site is untouched: still present and byte-identical.
+    assert (out / "index.html").exists()
+    assert (out / "index.html").read_text(encoding="utf-8") == good

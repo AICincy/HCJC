@@ -294,9 +294,15 @@ def build(out_dir: Path) -> int:
     _warn_about_unmapped_orcs(snapshot.inmates, offenses)
     rd = _prepare_render_data(snapshot, events)
 
-    if out_dir.exists():
-        shutil.rmtree(out_dir)
-    out_dir.mkdir(parents=True)
+    # Render into a temp sibling dir, then swap it into place. A render
+    # exception then leaves the last-good out_dir intact instead of blanking
+    # the site: out_dir is only wiped after a full, successful build.
+    build_dir = out_dir.parent / f".{out_dir.name}.build-tmp"
+    old_dir = out_dir.parent / f".{out_dir.name}.build-old"
+    for d in (build_dir, old_dir):
+        if d.exists():
+            shutil.rmtree(d)
+    build_dir.mkdir(parents=True)
 
     idx_ctx = IndexContext(
         snapshot=snapshot,
@@ -310,28 +316,36 @@ def build(out_dir: Path) -> int:
         shooting_rows=shooting_rows,
         map_points=len(dispatch_points),
     )
-    _render_index(env, idx_ctx, out_dir)
-    _render_inmates(env, snapshot, matches, events, out_dir)
-    _render_feeds(env, events, out_dir)
-    _render_data_page(env, snapshot, out_dir)
-    _render_transparency_page(env, snapshot, out_dir)
-    _render_stats_page(env, snapshot, rd["by_month"], rd["trend"], out_dir)
-    _render_statute_page(env, snapshot, offenses, out_dir)
-    _render_bond_disparity_page(env, snapshot, offenses, out_dir)
-    _render_court_page(env, snapshot, out_dir)
-    _render_visit_page(env, out_dir)
-    _render_help_page(env, out_dir)
-    _render_courts_page(env, out_dir)
-    _copy_static(out_dir)
-    _copy_photos(out_dir)
-    _write_manifest(out_dir, base_url)
-    _write_search_json(out_dir, snapshot)
-    _write_dispatches(out_dir, dispatch_points)
-    _write_cname(out_dir)
-    _write_well_known(out_dir, site_url, snapshot.generated_utc)
-    _write_checksums(out_dir)
+    _render_index(env, idx_ctx, build_dir)
+    _render_inmates(env, snapshot, matches, events, build_dir)
+    _render_feeds(env, events, build_dir)
+    _render_data_page(env, snapshot, build_dir)
+    _render_transparency_page(env, snapshot, build_dir)
+    _render_stats_page(env, snapshot, rd["by_month"], rd["trend"], build_dir)
+    _render_statute_page(env, snapshot, offenses, build_dir)
+    _render_bond_disparity_page(env, snapshot, offenses, build_dir)
+    _render_court_page(env, snapshot, build_dir)
+    _render_visit_page(env, build_dir)
+    _render_help_page(env, build_dir)
+    _render_courts_page(env, build_dir)
+    _copy_static(build_dir)
+    _copy_photos(build_dir)
+    _write_manifest(build_dir, base_url)
+    _write_search_json(build_dir, snapshot)
+    _write_dispatches(build_dir, dispatch_points)
+    _write_cname(build_dir)
+    _write_well_known(build_dir, site_url, snapshot.generated_utc)
+    _write_checksums(build_dir)
     # Tell GitHub Pages NOT to Jekyll-process the built site.
-    (out_dir / ".nojekyll").write_text("", encoding="utf-8")
+    (build_dir / ".nojekyll").write_text("", encoding="utf-8")
+
+    # Promote the freshly built site with a rename-based swap. Everything above
+    # wrote only to build_dir, so a mid-render failure never touched out_dir.
+    if out_dir.exists():
+        out_dir.replace(old_dir)
+    build_dir.replace(out_dir)
+    if old_dir.exists():
+        shutil.rmtree(old_dir)
 
     log.info(
         "site built: %d inmates, %d recent events -> %s",

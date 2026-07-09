@@ -9,6 +9,10 @@ venv/
 # Build outputs
 .cache/
 # NOTE: docs/ is intentionally NOT gitignored — Pages serves from there.
+# Transient atomic-swap dirs (web/build.py). Present only mid-build or after
+# a failed build; the next build cleans them. Never committed.
+/.docs.build-tmp/
+/.docs.build-old/
 
 # Non-published scraper outputs. Anything written under private/ stays out
 # of git and out of the served docs/ directory. One-source principle:
