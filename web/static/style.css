@@ -67,6 +67,12 @@
   --tier-felony-amber:  #D98840;  /* F5, least severe felony, dark text */
   --tier-felony-ink:    #FDF5EE;  /* warm-white text on the dark felony cells */
   --tier-felony-ink-lo: #1A1A1A;  /* near-black text on the warm F4/F5 cells */
+  /* One-off felony cell/chip border hexes, tokenized so the chip (.tier-corner)
+     and cell (.ladder) palettes share one source. Literal hexes, not aliases:
+     the print :root retune find-replaces the hex, it does not var()-alias. */
+  --tier-felony-dark-border:  #551810;  /* F1 border */
+  --tier-felony-warm-border:  #A8501C;  /* F4 border */
+  --tier-felony-amber-border: #B36B28;  /* F5 border */
   --tier-misdemeanor:   #2F5E8C;  /* misdemeanor outline + text */
   --tier-misd-dark:     #24486B;  /* M1, most severe misdemeanor */
   --tier-misd-mid:      #2F5E8C;  /* M2 (= misdemeanor) */
@@ -186,7 +192,6 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
   width: 7px; height: 7px; border-radius: 50%;
   background: var(--ok);
 }
-.masthead .spacer { flex: 1; }
 .masthead .nav-link {
   display: inline-flex;
   align-items: center;
@@ -202,7 +207,7 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
 .masthead .nav-link:hover,
 .masthead .nav-link:focus-visible { color: var(--accent); background: var(--bg-soft); text-decoration: none; }
 .masthead .nav-link:focus-visible,
-.nav-toggle:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.nav-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .masthead .nav-hint {
   display: inline;
   margin-left: 6px;
@@ -234,7 +239,6 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
 .masthead-seal-coc  { grid-column: 1; grid-row: 1; justify-self: end; }
 .masthead-seal-hcjc { grid-column: 3; grid-row: 1; justify-self: start; }
 .masthead .running.desktop-only { grid-column: 2; grid-row: 2; justify-self: center; }
-.masthead .spacer { display: none; }
 
 @media (max-width: 720px) {
   .masthead .nav-hint { display: none; }
@@ -564,13 +568,11 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  transition: border-color 120ms;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
   content-visibility: auto;
   contain-intrinsic-size: 0 90px;
-  border-left: 3px solid transparent;
 }
 .card-inmate { box-shadow: var(--shadow-card); transition: border-color 120ms, box-shadow 120ms; }
 .card-inmate:hover {
@@ -721,11 +723,11 @@ body.is-table .month .card-inmate .id-chip { font-size: 10.5px; order: 5; justif
    hero summary). The bare .tier in the charges table keeps the typography-only
    treatment above. Color is additive: weight, case, and position still carry
    severity. */
-.tier-corner.tier-F1 { background: var(--tier-felony-dark);  border: 1px solid #551810;                 color: var(--tier-felony-ink); }
+.tier-corner.tier-F1 { background: var(--tier-felony-dark);  border: 1px solid var(--tier-felony-dark-border);                 color: var(--tier-felony-ink); }
 .tier-corner.tier-F2 { background: var(--tier-felony-mid);   border: 1px solid var(--tier-felony-dark); color: var(--tier-felony-ink); }
 .tier-corner.tier-F3 { background: var(--tier-felony-base);  border: 1px solid var(--tier-felony-mid);  color: var(--tier-felony-ink); }
-.tier-corner.tier-F4 { background: var(--tier-felony-warm);  border: 1px solid #A8501C;                 color: var(--tier-felony-ink-lo); }
-.tier-corner.tier-F5 { background: var(--tier-felony-amber); border: 1px solid #B36B28;                 color: var(--tier-felony-ink-lo); }
+.tier-corner.tier-F4 { background: var(--tier-felony-warm);  border: 1px solid var(--tier-felony-warm-border);                 color: var(--tier-felony-ink-lo); }
+.tier-corner.tier-F5 { background: var(--tier-felony-amber); border: 1px solid var(--tier-felony-amber-border);                 color: var(--tier-felony-ink-lo); }
 .tier-corner.tier-M1, .tier-corner.tier-M2, .tier-corner.tier-M3,
 .tier-corner.tier-M4, .tier-corner.tier-MM {
   background: var(--surface); color: var(--fg-soft);
@@ -1249,7 +1251,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 
 .visit-no-fee {
   font-size: 15px !important;
-  color: var(--fg) !important;
+  color: var(--fg);
   padding: 12px 16px;
   background: var(--accent-bg);
   border-left: 3px solid var(--accent);
@@ -1838,11 +1840,11 @@ a.orc-code:hover { border-bottom-style: solid; }
 /* Severity color layer: felony cells use the F1 to F5 red-to-amber ramp (light
    text on the dark reds, near-black on the warm F4/F5); misdemeanor cells use a
    blue outline. Position and the .is-current ring remain primary signals. */
-.ladder-F1 { background: var(--tier-felony-dark);  border: 1px solid #551810; }
+.ladder-F1 { background: var(--tier-felony-dark);  border: 1px solid var(--tier-felony-dark-border); }
 .ladder-F2 { background: var(--tier-felony-mid);   border: 1px solid var(--tier-felony-dark); }
 .ladder-F3 { background: var(--tier-felony-base);  border: 1px solid var(--tier-felony-mid); }
-.ladder-F4 { background: var(--tier-felony-warm);  border: 1px solid #A8501C; }
-.ladder-F5 { background: var(--tier-felony-amber); border: 1px solid #B36B28; }
+.ladder-F4 { background: var(--tier-felony-warm);  border: 1px solid var(--tier-felony-warm-border); }
+.ladder-F5 { background: var(--tier-felony-amber); border: 1px solid var(--tier-felony-amber-border); }
 .ladder-M1, .ladder-M2, .ladder-M3, .ladder-M4, .ladder-MM {
   background: var(--surface); border: 1px solid var(--tier-misdemeanor);
 }
@@ -2035,7 +2037,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 }
 .lightbox-close:hover,
 .lightbox-close:focus-visible { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
-.lightbox-close:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.lightbox-close:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
 /* ===== Back-to-top ===== */
 .back-to-top {
@@ -2238,7 +2240,7 @@ h2.legal-anchor {
   details:not([open]) > * { display: revert !important; }
   a { color: #111; text-decoration: underline; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.7em; color: #555; }
-  .card-inmate, section.card, .statute, table.charges, .ladder { break-inside: avoid; border-color: #ccc; }
+  .card-inmate, section.card, .statute, table.charges, .ladder, .kpi, .statbar { break-inside: avoid; border-color: #ccc; }
   .cards { display: block; }
   .card-inmate { display: flex; margin: 0 0 0.25rem; padding: 0.3rem 0; border: 0; border-bottom: 1px solid #ddd; box-shadow: none; transform: none; }
   .thumb { display: none; }
@@ -2503,7 +2505,7 @@ h2.legal-anchor {
 .coms > summary:focus-visible,
 .statute-item > summary:focus-visible,
 .statute-caselaw > summary:focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 .month[open] > summary { border-color: var(--accent); background: var(--surface); box-shadow: var(--shadow-card); }
@@ -3019,7 +3021,7 @@ a.statbar:hover { border-color: var(--accent); }
 }
 .page-courts .judge-card > summary:focus-visible,
 .page-courts .judge-sub > summary:focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 .page-courts .judge-room { font-size: 12px; color: var(--fg-muted); font-weight: normal; }
@@ -3120,7 +3122,7 @@ a.statbar:hover { border-color: var(--accent); }
 .quick-actions a:focus-visible,
 .filter-reset:focus-visible,
 .legal-disclosure > summary:focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 .button-secondary {
@@ -3222,11 +3224,11 @@ a.statbar:hover { border-color: var(--accent); }
   max-width: 76ch;
   margin: 0.45rem auto 0;
 }
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .roster-hero { grid-template-columns: 1fr; }
   .quick-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-@media (max-width: 560px) {
+@media (max-width: 540px) {
   .roster-hero { padding: 16px; }
   .roster-hero h1 { max-width: 12ch; }
   .roster-hero-stats,
