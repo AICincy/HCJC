@@ -200,12 +200,19 @@
     // only - no innerHTML (same CodeQL js/xss-through-dom discipline as the
     // dropdown below). Skipped for 1-char terms: single-letter searches match
     // most of the roster and marking every letter is noise, not signal.
-    function clearMarks(card) {
-      var marks = card.querySelectorAll('mark.hl');
+    function clearAllMarks() {
+      // One global query instead of per-card queries: only cards that
+      // actually contain marks (bounded by the previous match count) pay
+      // for cleanup and normalize().
+      var marks = document.querySelectorAll('.cards mark.hl');
+      var touched = [];
       for (var i = 0; i < marks.length; i++) {
-        marks[i].parentNode.replaceChild(document.createTextNode(marks[i].textContent), marks[i]);
+        var m = marks[i];
+        var card = m.closest('.card-inmate');
+        m.parentNode.replaceChild(document.createTextNode(m.textContent), m);
+        if (card && touched.indexOf(card) === -1) touched.push(card);
       }
-      if (marks.length) card.normalize();
+      for (var j = 0; j < touched.length; j++) touched[j].normalize();
     }
     function markTerm(card, term) {
       var roots = card.querySelectorAll('.name a, .charge, .id-chip');
@@ -237,8 +244,8 @@
       var f = currentFilters();
       var active = !!(f.tier || f.chap || f.search);
       var shown = 0;
+      clearAllMarks();
       cards.forEach(function (c) {
-        clearMarks(c);
         var ok = true;
         if (f.tier && c.getAttribute('data-tier') !== f.tier) ok = false;
         if (ok && f.chap && c.getAttribute('data-chap') !== f.chap) ok = false;
@@ -259,7 +266,7 @@
       if (f.search) pieces.push('matching "' + f.search + '"');
       if (f.chap) {
         var chapOptSel = bar.querySelector('[data-filter="chap"]');
-        var chapOpt = chapOptSel && chapOptSel.selectedOptions && chapOptSel.selectedOptions[0];
+        var chapOpt = chapOptSel && chapOptSel.options[chapOptSel.selectedIndex];
         if (chapOpt) pieces.push('offense: ' + chapOpt.textContent.replace(/\s*\(\d+\)$/, ''));
       }
       if (f.tier) pieces.push('tier: ' + f.tier);
