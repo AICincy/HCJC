@@ -461,6 +461,22 @@ details.coms > summary::-webkit-details-marker { display: none; }
 /* Search-match emphasis on card text (main.js wraps matches in mark.hl).
    Warm straw, literal hex on purpose: no token aliasing (print :root rule). */
 .card-inmate mark.hl { background: #F2E29B; color: inherit; padding: 0 1px; border-radius: 2px; }
+
+/* Released-in-24h list (server-rendered, collapsible). */
+.released-24h {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+.released-24h summary { cursor: pointer; font-weight: 600; }
+.released-24h .count { color: var(--fg-muted); font-variant-numeric: tabular-nums; margin-left: 4px; }
+.released-24h .released-note { color: var(--fg-muted); font-size: 12px; margin: 8px 0 4px; }
+.released-24h .released-flow { margin: 6px 0 2px; font-size: 12.5px; line-height: 1.9; color: var(--fg-soft); }
+.released-24h .released-flow span { white-space: nowrap; }
+.released-24h .released-flow .sep { color: var(--border-hi); }
 .view-toggle {
   display: inline-flex; align-items: center; gap: 6px;
   height: 44px; padding: 0 12px;

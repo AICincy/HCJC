@@ -359,6 +359,29 @@ def test_prepare_render_data(monkeypatch):
 
     rd = shape._prepare_render_data(snapshot, events)
     assert rd["recent_booked"] == 0
+    assert rd["recent_booked_ids"] == set()
+    assert rd["recent_released_24h"] == []
+
+    now = datetime.now(timezone.utc)
+    events = [
+        ChangeEvent(
+            event="booked",
+            inmate_number="7",
+            name="DOE JOHN",
+            timestamp_utc=now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            note="booked " + now.strftime("%-m/%-d/%y"),
+        ),
+        ChangeEvent(
+            event="released",
+            inmate_number="8",
+            name="ROE JANE",
+            timestamp_utc=now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            note="released",
+        ),
+    ]
+    rd = shape._prepare_render_data(snapshot, events)
+    assert rd["recent_booked_ids"] == {"7"}
+    assert [e.inmate_number for e in rd["recent_released_24h"]] == ["8"]
 
 
 def test_warn_about_unmapped_orcs(caplog):

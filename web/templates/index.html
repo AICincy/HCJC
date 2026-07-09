@@ -108,6 +108,12 @@
     <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
     <span class="sr-only" id="search-status" role="status"></span>
   </div>
+  <label for="filter-recent">Activity
+    <select id="filter-recent" data-filter="recent">
+      <option value="">any time</option>
+      <option value="booked">booked 24h</option>
+    </select>
+  </label>
   <label for="filter-sort">Sort
     <select id="filter-sort">
       <option value="recent">newest first</option>
@@ -151,6 +157,15 @@
   <span class="swatch"><span class="tier tier-felony legend-tier">F</span> felony</span>
   <span class="swatch"><span class="tier tier-misdemeanor legend-tier">M</span> misdemeanor</span>
 </p>
+
+{% if recent_released_24h %}
+<details class="released-24h">
+  <summary>Released in the last 24 hours <span class="count">{{ recent_released_24h | length }}</span></summary>
+  <p class="released-note">From the public <a href="{{ base_url }}/data/">changelog</a>. Release events record leaving the Justice Center; this site does not track court outcomes.</p>
+  {% set rel_recent = recent_released_24h[-12:] | reverse | list %}
+  <p class="released-flow">{% for e in rel_recent %}<span>{{ e.name }}</span> <span class="sep" aria-hidden="true">·</span> {% endfor %}<a href="{{ base_url }}/data/">{% if recent_released_24h | length > 12 %}+{{ recent_released_24h | length - 12 }} more in the changelog{% else %}full changelog{% endif %}</a></p>
+</details>
+{% endif %}
 
 {# Empty landing bin for JS sort modes (main.js 3c). Ships hidden and empty:
    with JS off the sort control never appears and this section is inert.

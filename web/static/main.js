@@ -242,13 +242,14 @@
     }
     function apply(trigger) {
       var f = currentFilters();
-      var active = !!(f.tier || f.chap || f.search);
+      var active = !!(f.tier || f.chap || f.search || f.recent);
       var shown = 0;
       clearAllMarks();
       cards.forEach(function (c) {
         var ok = true;
         if (f.tier && c.getAttribute('data-tier') !== f.tier) ok = false;
         if (ok && f.chap && c.getAttribute('data-chap') !== f.chap) ok = false;
+        if (ok && f.recent && c.getAttribute('data-recent') !== f.recent) ok = false;
         if (ok && f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) ok = false;
         c.classList.toggle('is-filtered-out', !ok);
         if (ok) shown++;
@@ -270,6 +271,7 @@
         if (chapOpt) pieces.push('offense: ' + chapOpt.textContent.replace(/\s*\(\d+\)$/, ''));
       }
       if (f.tier) pieces.push('tier: ' + f.tier);
+      if (f.recent) pieces.push('booked in last 24h');
       var summary = shown + ' of ' + cards.length + ' shown' + (pieces.length ? ' · ' + pieces.join(' · ') : '');
       countEl.textContent = active ? summary : '';
       if (resetBtn) resetBtn.hidden = !active;

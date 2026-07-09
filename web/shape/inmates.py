@@ -341,6 +341,11 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
         "expanded_months": expanded_months,
         "recent_booked": recent_booked,
         "recent_released": recent_released,
+        # Activity-mode inputs: ids mark still-in-custody cards as recently
+        # booked (data-recent); released events render as their own list
+        # since released people no longer have cards.
+        "recent_booked_ids": {e.inmate_number for e in recent_24h if e.event == "booked"},
+        "recent_released_24h": [e for e in recent_24h if e.event == "released"],
         "trend": trend,
     }
 
