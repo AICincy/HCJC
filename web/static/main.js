@@ -364,6 +364,9 @@
           cards.forEach(function (c, i) { origins[i].appendChild(c); });
           sortBin.hidden = true;
           months.forEach(function (m) { m.hidden = false; });
+          // Recompute month is-empty/open states - they went stale while the
+          // months were empty (any apply() during sorted mode saw no cards).
+          apply('sort');
           return;
         }
         var order = cards.slice().sort(function (a, b) {
@@ -376,7 +379,9 @@
           // name: data-search starts with the lowercased full name.
           return (a.getAttribute('data-search') || '').localeCompare(b.getAttribute('data-search') || '');
         });
-        order.forEach(function (c) { binCards.appendChild(c); });
+        var frag = document.createDocumentFragment();
+        order.forEach(function (c) { frag.appendChild(c); });
+        binCards.appendChild(frag);
         months.forEach(function (m) { m.hidden = true; });
         sortBin.hidden = false;
       });

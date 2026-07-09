@@ -7,7 +7,7 @@ silently corrupts rendered pages.
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Literal
 
@@ -311,9 +311,9 @@ def test_card_data_attrs_sort_keys():
     assert d["degree"] == "F4"
     assert d["custody"] == ""  # no booking date -> unsortable, empty attr
 
-    inm.booking_date = (datetime.now() - timedelta(days=3)).strftime("%-m/%-d/%y")
+    inm.booking_date = (datetime.now(timezone.utc) - timedelta(days=3)).strftime("%-m/%-d/%y")
     d = shape._card_data_attrs(inm)
-    assert d["custody"] in (2, 3)  # tz offset can straddle a day boundary
+    assert d["custody"] == 3  # _days_in_custody compares in UTC, so this is exact
 
     no_tier = _inm("2", "ROE", "JANE", charges=[Charge(orc_code="", description="")])
     assert shape._card_data_attrs(no_tier)["degree"] == "UNK"
