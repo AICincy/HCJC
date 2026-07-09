@@ -190,6 +190,7 @@
     var resetBtn = document.getElementById('filter-reset');
     var cards = Array.prototype.slice.call(document.querySelectorAll('.cards .card-inmate'));
     var months = Array.prototype.slice.call(document.querySelectorAll('details.month'));
+    var DEG_VALUES = { f1: 1, f2: 1, f3: 1, f4: 1, f5: 1, m1: 1, m2: 1, m3: 1, m4: 1, mm: 1 };
     function currentFilters() {
       var f = {};
       inputs.forEach(function (i) { f[i.getAttribute('data-filter')] = (i.value || '').trim().toLowerCase(); });
@@ -247,7 +248,15 @@
       clearAllMarks();
       cards.forEach(function (c) {
         var ok = true;
-        if (f.tier && c.getAttribute('data-tier') !== f.tier) ok = false;
+        if (f.tier) {
+          // The tier select mixes kinds (felony/misdemeanor -> data-tier)
+          // and degrees (F1..MM -> data-degree, currentFilters lowercases).
+          if (DEG_VALUES[f.tier]) {
+            if (c.getAttribute('data-degree') !== f.tier.toUpperCase()) ok = false;
+          } else if (c.getAttribute('data-tier') !== f.tier) {
+            ok = false;
+          }
+        }
         if (ok && f.chap && c.getAttribute('data-chap') !== f.chap) ok = false;
         if (ok && f.recent && c.getAttribute('data-recent') !== f.recent) ok = false;
         if (ok && f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) ok = false;
@@ -270,7 +279,7 @@
         var chapOpt = chapOptSel && chapOptSel.options[chapOptSel.selectedIndex];
         if (chapOpt) pieces.push('offense: ' + chapOpt.textContent.replace(/\s*\(\d+\)$/, ''));
       }
-      if (f.tier) pieces.push('tier: ' + f.tier);
+      if (f.tier) pieces.push(DEG_VALUES[f.tier] ? 'degree: ' + f.tier.toUpperCase() : 'tier: ' + f.tier);
       if (f.recent) pieces.push('booked in last 24h');
       var summary = shown + ' of ' + cards.length + ' shown' + (pieces.length ? ' · ' + pieces.join(' · ') : '');
       countEl.textContent = active ? summary : '';
@@ -347,6 +356,23 @@
         bar.scrollIntoView({ block: 'start', behavior: scrollBehavior });
       });
     }
+    // (3b2) Tier-strip segments filter by degree on click. Pointer-only
+    //       enhancement: the tier select is the accessible equivalent.
+    var tierSelect = document.getElementById('filter-tier');
+    if (tierSelect) {
+      document.addEventListener('click', function (e) {
+        var seg = e.target.closest && e.target.closest('.tier-strip-seg');
+        if (!seg) return;
+        var deg = '';
+        seg.classList.forEach(function (c) { if (c.indexOf('ladder-') === 0) deg = c.replace('ladder-', ''); });
+        if (!deg) return;
+        tierSelect.value = deg;
+        tierSelect.dispatchEvent(new Event('change'));
+        var segScroll = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        bar.scrollIntoView({ block: 'start', behavior: segScroll });
+      });
+    }
+
     // (3c) Sort modes - non-default modes move every card into the flat
     //      #sort-bin in sorted order and hide the month sections; "recent"
     //      moves each card back to its original month container (appending

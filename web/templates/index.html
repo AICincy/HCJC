@@ -90,6 +90,9 @@
       <option value="">all</option>
       <option value="felony">felony</option>
       <option value="misdemeanor">misdemeanor</option>
+      <optgroup label="degree">
+        {% for t in tier_ladder %}<option value="{{ t }}">{{ t }}{% if roster_tiers.get(t) %} ({{ roster_tiers[t] }}){% endif %}</option>{% endfor %}
+      </optgroup>
     </select>
   </label>
   <label for="filter-chap">Offense

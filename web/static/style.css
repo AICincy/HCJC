@@ -462,6 +462,10 @@ details.coms > summary::-webkit-details-marker { display: none; }
    Warm straw, literal hex on purpose: no token aliasing (print :root rule). */
 .card-inmate mark.hl { background: #F2E29B; color: inherit; padding: 0 1px; border-radius: 2px; }
 
+/* Tier-strip segments double as degree-filter targets (main.js 3b2). */
+.tier-strip-seg { cursor: pointer; }
+.tier-strip-seg:hover { outline: 2px solid var(--fg); outline-offset: 1px; }
+
 /* Released-in-24h list (server-rendered, collapsible). */
 .released-24h {
   background: var(--surface);
