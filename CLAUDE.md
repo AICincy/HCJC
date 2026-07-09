@@ -137,7 +137,7 @@ Violating them imposes cognitive cost the owner cannot afford.
   is not installed on the owner's machine; expect HTTP 204). The 20-minute
   skip-gate still applies: the run no-ops if `current.json` is younger than
   20 minutes. Verified working 2026-07-05.
-- Tests: `python -m pytest -q` (must stay green; ≥193 tests as of this writing, suite grows).
+- Tests: `python -m pytest -q` (must stay green; ≥463 tests as of 2026-07-08, suite grows).
 - The stylesheet is cache-busted by content hash (`css_version` in build.py); don't
   key it off the data timestamp again.
 - The sweep refuses to write a degraded roster (`_sweep_looks_healthy` in
