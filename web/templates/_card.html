@@ -2,7 +2,7 @@
 {% set chap = primary_chapter(inm) %}
 {% set tier = primary_tier(inm) %}
 {% set d = card_data(inm) %}
-<article class="card-inmate" aria-labelledby="card-{{ inm.inmate_number }}-name" data-tier="{{ d.tier }}" data-chap="{{ d.chap }}" data-search="{{ d.search }}">
+<article class="card-inmate" aria-labelledby="card-{{ inm.inmate_number }}-name" data-tier="{{ d.tier }}" data-degree="{{ d.degree }}" data-custody="{{ d.custody }}" data-chap="{{ d.chap }}" data-search="{{ d.search }}">
   {% if tier %}
   <button type="button" class="tier tier-{{ tier.kind }} tier-{{ tier.label }} tier-corner" aria-label="{{ tier.label }}, charges detail" aria-describedby="tier-tip" data-tip="{{ card_tip(inm) }}">{{ tier.label }}</button>
   {% endif %}

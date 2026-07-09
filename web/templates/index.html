@@ -108,6 +108,14 @@
     <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
     <span class="sr-only" id="search-status" role="status"></span>
   </div>
+  <label for="filter-sort">Sort
+    <select id="filter-sort">
+      <option value="recent">newest first</option>
+      <option value="custody">longest held</option>
+      <option value="degree">most serious</option>
+      <option value="name">name A-Z</option>
+    </select>
+  </label>
   <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
     <span class="view-toggle-icon" aria-hidden="true">≡</span>
     <span class="view-toggle-text">Table view</span>
@@ -143,6 +151,12 @@
   <span class="swatch"><span class="tier tier-felony legend-tier">F</span> felony</span>
   <span class="swatch"><span class="tier tier-misdemeanor legend-tier">M</span> misdemeanor</span>
 </p>
+
+{# Empty landing bin for JS sort modes (main.js 3c). Ships hidden and empty:
+   with JS off the sort control never appears and this section is inert.
+   class="month" is load-bearing - the .month > .cards grid padding and the
+   body.is-table row rules are scoped to .month. #}
+<section class="month sort-bin" id="sort-bin" aria-label="Sorted roster" hidden><div class="cards"></div></section>
 
 {% for month, group in by_month %}
 {% set month_slug = month | replace(' ', '-') | lower %}

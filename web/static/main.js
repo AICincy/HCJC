@@ -345,6 +345,42 @@
         bar.scrollIntoView({ block: 'start', behavior: scrollBehavior });
       });
     }
+    // (3c) Sort modes - non-default modes move every card into the flat
+    //      #sort-bin in sorted order and hide the month sections; "recent"
+    //      moves each card back to its original month container (appending
+    //      in original global order preserves within-month order). Filters
+    //      keep working either way: they only toggle is-filtered-out.
+    var sortSel = document.getElementById('filter-sort');
+    var sortBin = document.getElementById('sort-bin');
+    if (sortSel && sortBin) {
+      var binCards = sortBin.querySelector('.cards');
+      var origins = cards.map(function (c) { return c.parentNode; });
+      // Bare F / M come from venue inference (no numbered degree); rank them
+      // below their numbered ladder so unknown-degree felonies sort after F5.
+      var degRank = { F1: 1, F2: 2, F3: 3, F4: 4, F5: 5, F: 6, M1: 7, M2: 8, M3: 9, M4: 10, MM: 11, M: 12 };
+      sortSel.addEventListener('change', function () {
+        var mode = sortSel.value;
+        if (mode === 'recent') {
+          cards.forEach(function (c, i) { origins[i].appendChild(c); });
+          sortBin.hidden = true;
+          months.forEach(function (m) { m.hidden = false; });
+          return;
+        }
+        var order = cards.slice().sort(function (a, b) {
+          if (mode === 'custody') {
+            return Number(b.getAttribute('data-custody') || -1) - Number(a.getAttribute('data-custody') || -1);
+          }
+          if (mode === 'degree') {
+            return (degRank[a.getAttribute('data-degree')] || 99) - (degRank[b.getAttribute('data-degree')] || 99);
+          }
+          // name: data-search starts with the lowercased full name.
+          return (a.getAttribute('data-search') || '').localeCompare(b.getAttribute('data-search') || '');
+        });
+        order.forEach(function (c) { binCards.appendChild(c); });
+        months.forEach(function (m) { m.hidden = true; });
+        sortBin.hidden = false;
+      });
+    }
   } // end (3) filter bar
 
   // (4) Search-results dropdown - lazy-loads search.json on first keystroke,

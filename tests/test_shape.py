@@ -305,6 +305,20 @@ def test_iso_booking_date():
     assert shape._iso_booking_date(inm) is None
 
 
+def test_card_data_attrs_sort_keys():
+    inm = _inm("1", "DOE", "JOHN", charges=[Charge(orc_code="2903.13", description="ASSAULT F4")])
+    d = shape._card_data_attrs(inm)
+    assert d["degree"] == "F4"
+    assert d["custody"] == ""  # no booking date -> unsortable, empty attr
+
+    inm.booking_date = (datetime.now() - timedelta(days=3)).strftime("%-m/%-d/%y")
+    d = shape._card_data_attrs(inm)
+    assert d["custody"] in (2, 3)  # tz offset can straddle a day boundary
+
+    no_tier = _inm("2", "ROE", "JANE", charges=[Charge(orc_code="", description="")])
+    assert shape._card_data_attrs(no_tier)["degree"] == "UNK"
+
+
 def test_distinct_chapters():
     inm1 = _inm("1", "DOE", "JOHN", charges=[Charge(orc_code="2903.13", description="ASSAULT")])
     inm2 = _inm("2", "SMITH", "JANE", charges=[Charge(orc_code="2925.11", description="DRUGS")])
