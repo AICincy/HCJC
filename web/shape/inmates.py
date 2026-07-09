@@ -24,6 +24,7 @@ from web.classify import (
 )
 
 from .common import RosterIndexes, _cached_offenses
+from .timeline import _days_in_custody
 
 
 def _related_inmates(
@@ -187,13 +188,20 @@ def _charges_by_chapter(inmate: Inmate) -> list[dict]:
 
 
 def _card_data_attrs(inmate: Inmate) -> dict:
-    """Return data-* values for client-side filtering / search on the cards."""
+    """Return data-* values for client-side filtering / search / sort on the cards."""
     tier = _primary_tier(inmate)
     chap = _primary_chapter(inmate)
     orc_codes = " ".join((c.orc_code or "") for c in inmate.charges)
     charges_txt = " ".join((c.description or "") for c in inmate.charges)
+    dic = _days_in_custody(inmate)
+    # Degree resolves with the offenses dict (like the tier strip) so the
+    # sort sees F1..MM where the ORC code carries it; the bare tier badge
+    # deliberately stays description/venue-based.
+    deg_tier = _primary_tier(inmate, _cached_offenses())
     return {
         "tier": tier["kind"] if tier else "unknown",
+        "degree": deg_tier["label"] if deg_tier else "UNK",
+        "custody": dic if dic is not None else "",
         "chap": _chap_slug(chap["label"]) if chap else "unknown",
         "search": f"{inmate.full_name} {charges_txt} {orc_codes} #{inmate.inmate_number}".lower(),
     }
@@ -333,6 +341,11 @@ def _prepare_render_data(snapshot: Snapshot, events: list[ChangeEvent]) -> dict:
         "expanded_months": expanded_months,
         "recent_booked": recent_booked,
         "recent_released": recent_released,
+        # Activity-mode inputs: ids mark still-in-custody cards as recently
+        # booked (data-recent); released events render as their own list
+        # since released people no longer have cards.
+        "recent_booked_ids": {e.inmate_number for e in recent_24h if e.event == "booked"},
+        "recent_released_24h": [e for e in recent_24h if e.event == "released"],
         "trend": trend,
     }
 

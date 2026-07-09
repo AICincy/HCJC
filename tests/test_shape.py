@@ -7,7 +7,7 @@ silently corrupts rendered pages.
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Literal
 
@@ -305,6 +305,20 @@ def test_iso_booking_date():
     assert shape._iso_booking_date(inm) is None
 
 
+def test_card_data_attrs_sort_keys():
+    inm = _inm("1", "DOE", "JOHN", charges=[Charge(orc_code="2903.13", description="ASSAULT F4")])
+    d = shape._card_data_attrs(inm)
+    assert d["degree"] == "F4"
+    assert d["custody"] == ""  # no booking date -> unsortable, empty attr
+
+    inm.booking_date = (datetime.now(timezone.utc) - timedelta(days=3)).strftime("%-m/%-d/%y")
+    d = shape._card_data_attrs(inm)
+    assert d["custody"] == 3  # _days_in_custody compares in UTC, so this is exact
+
+    no_tier = _inm("2", "ROE", "JANE", charges=[Charge(orc_code="", description="")])
+    assert shape._card_data_attrs(no_tier)["degree"] == "UNK"
+
+
 def test_distinct_chapters():
     inm1 = _inm("1", "DOE", "JOHN", charges=[Charge(orc_code="2903.13", description="ASSAULT")])
     inm2 = _inm("2", "SMITH", "JANE", charges=[Charge(orc_code="2925.11", description="DRUGS")])
@@ -345,6 +359,29 @@ def test_prepare_render_data(monkeypatch):
 
     rd = shape._prepare_render_data(snapshot, events)
     assert rd["recent_booked"] == 0
+    assert rd["recent_booked_ids"] == set()
+    assert rd["recent_released_24h"] == []
+
+    now = datetime.now(timezone.utc)
+    events = [
+        ChangeEvent(
+            event="booked",
+            inmate_number="7",
+            name="DOE JOHN",
+            timestamp_utc=now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            note="booked " + now.strftime("%-m/%-d/%y"),
+        ),
+        ChangeEvent(
+            event="released",
+            inmate_number="8",
+            name="ROE JANE",
+            timestamp_utc=now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            note="released",
+        ),
+    ]
+    rd = shape._prepare_render_data(snapshot, events)
+    assert rd["recent_booked_ids"] == {"7"}
+    assert [e.inmate_number for e in rd["recent_released_24h"]] == ["8"]
 
 
 def test_warn_about_unmapped_orcs(caplog):

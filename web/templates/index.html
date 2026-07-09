@@ -90,6 +90,11 @@
       <option value="">all</option>
       <option value="felony">felony</option>
       <option value="misdemeanor">misdemeanor</option>
+      <optgroup label="degree">
+        {# Lowercase values: the ?tier= deep-link loop in main.js lowercases
+           params before matching option values. #}
+        {% for t in tier_ladder %}<option value="{{ t | lower }}">{{ t }}{% if roster_tiers.get(t) %} ({{ roster_tiers[t] }}){% endif %}</option>{% endfor %}
+      </optgroup>
     </select>
   </label>
   <label for="filter-chap">Offense
@@ -108,6 +113,20 @@
     <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
     <span class="sr-only" id="search-status" role="status"></span>
   </div>
+  <label for="filter-recent">Activity
+    <select id="filter-recent" data-filter="recent">
+      <option value="">any time</option>
+      <option value="booked">booked 24h</option>
+    </select>
+  </label>
+  <label for="filter-sort">Sort
+    <select id="filter-sort">
+      <option value="recent">newest first</option>
+      <option value="custody">longest held</option>
+      <option value="degree">most serious</option>
+      <option value="name">name A-Z</option>
+    </select>
+  </label>
   <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
     <span class="view-toggle-icon" aria-hidden="true">≡</span>
     <span class="view-toggle-text">Table view</span>
@@ -143,6 +162,21 @@
   <span class="swatch"><span class="tier tier-felony legend-tier">F</span> felony</span>
   <span class="swatch"><span class="tier tier-misdemeanor legend-tier">M</span> misdemeanor</span>
 </p>
+
+{% if recent_released_24h %}
+<details class="released-24h">
+  <summary>Released in the last 24 hours <span class="count">{{ recent_released_24h | length }}</span></summary>
+  <p class="released-note">From the public <a href="{{ base_url }}/data/">changelog</a>. Release events record leaving the Justice Center; this site does not track court outcomes.</p>
+  {% set rel_recent = recent_released_24h[-12:] | reverse | list %}
+  <p class="released-flow">{% for e in rel_recent %}<span>{{ e.name }}</span> <span class="sep" aria-hidden="true">·</span> {% endfor %}<a href="{{ base_url }}/data/">{% if recent_released_24h | length > 12 %}+{{ recent_released_24h | length - 12 }} more in the changelog{% else %}full changelog{% endif %}</a></p>
+</details>
+{% endif %}
+
+{# Empty landing bin for JS sort modes (main.js 3c). Ships hidden and empty:
+   with JS off the sort control never appears and this section is inert.
+   class="month" is load-bearing - the .month > .cards grid padding and the
+   body.is-table row rules are scoped to .month. #}
+<section class="month sort-bin" id="sort-bin" aria-label="Sorted roster" hidden><div class="cards"></div></section>
 
 {% for month, group in by_month %}
 {% set month_slug = month | replace(' ', '-') | lower %}

@@ -227,6 +227,9 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     idx = RosterIndexes(snapshot.inmates, offenses)
     env.globals["bond_context"] = lambda inm: _bond_context(inm, snapshot.inmates, offenses, indexes=idx)
     env.globals["recent_booked_inmates"] = _recent_booked_inmates(snapshot, n=6)
+    # Changelog-derived defaults; build() overwrites them once events load.
+    env.globals["recent_booked_ids"] = set()
+    env.globals["recent_released_24h"] = []
     env.globals["timeline_markers"] = _timeline_markers
     env.globals["display_date"] = _display_date
     env.globals["human_utc"] = _human_utc
@@ -295,6 +298,10 @@ def build(out_dir: Path) -> int:
     env = _build_env(snapshot, offenses, base_url, site_url)
     _warn_about_unmapped_orcs(snapshot.inmates, offenses)
     rd = _prepare_render_data(snapshot, events)
+    # Registered here rather than in _register_template_helpers because they
+    # derive from the changelog events, which _build_env never sees.
+    env.globals["recent_booked_ids"] = rd["recent_booked_ids"]
+    env.globals["recent_released_24h"] = rd["recent_released_24h"]
 
     # Render into a temp sibling dir, then swap it into place. A render
     # exception then leaves the last-good out_dir intact instead of blanking
