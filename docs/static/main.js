@@ -190,6 +190,7 @@
     var resetBtn = document.getElementById('filter-reset');
     var cards = Array.prototype.slice.call(document.querySelectorAll('.cards .card-inmate'));
     var months = Array.prototype.slice.call(document.querySelectorAll('details.month'));
+    var DEG_VALUES = { f1: 1, f2: 1, f3: 1, f4: 1, f5: 1, m1: 1, m2: 1, m3: 1, m4: 1, mm: 1 };
     function currentFilters() {
       var f = {};
       inputs.forEach(function (i) { f[i.getAttribute('data-filter')] = (i.value || '').trim().toLowerCase(); });
@@ -242,13 +243,22 @@
     }
     function apply(trigger) {
       var f = currentFilters();
-      var active = !!(f.tier || f.chap || f.search);
+      var active = !!(f.tier || f.chap || f.search || f.recent);
       var shown = 0;
       clearAllMarks();
       cards.forEach(function (c) {
         var ok = true;
-        if (f.tier && c.getAttribute('data-tier') !== f.tier) ok = false;
+        if (f.tier) {
+          // The tier select mixes kinds (felony/misdemeanor -> data-tier)
+          // and degrees (F1..MM -> data-degree, currentFilters lowercases).
+          if (DEG_VALUES[f.tier]) {
+            if (c.getAttribute('data-degree') !== f.tier.toUpperCase()) ok = false;
+          } else if (c.getAttribute('data-tier') !== f.tier) {
+            ok = false;
+          }
+        }
         if (ok && f.chap && c.getAttribute('data-chap') !== f.chap) ok = false;
+        if (ok && f.recent && c.getAttribute('data-recent') !== f.recent) ok = false;
         if (ok && f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) ok = false;
         c.classList.toggle('is-filtered-out', !ok);
         if (ok) shown++;
@@ -269,7 +279,8 @@
         var chapOpt = chapOptSel && chapOptSel.options[chapOptSel.selectedIndex];
         if (chapOpt) pieces.push('offense: ' + chapOpt.textContent.replace(/\s*\(\d+\)$/, ''));
       }
-      if (f.tier) pieces.push('tier: ' + f.tier);
+      if (f.tier) pieces.push(DEG_VALUES[f.tier] ? 'degree: ' + f.tier.toUpperCase() : 'tier: ' + f.tier);
+      if (f.recent) pieces.push('booked in last 24h');
       var summary = shown + ' of ' + cards.length + ' shown' + (pieces.length ? ' · ' + pieces.join(' · ') : '');
       countEl.textContent = active ? summary : '';
       if (resetBtn) resetBtn.hidden = !active;
@@ -343,6 +354,64 @@
         chapSelect.dispatchEvent(new Event('change'));
         var scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
         bar.scrollIntoView({ block: 'start', behavior: scrollBehavior });
+      });
+    }
+    // (3b2) Tier-strip segments filter by degree on click. Pointer-only
+    //       enhancement: the tier select is the accessible equivalent.
+    var tierSelect = document.getElementById('filter-tier');
+    if (tierSelect) {
+      document.addEventListener('click', function (e) {
+        var seg = e.target.closest && e.target.closest('.tier-strip-seg');
+        if (!seg) return;
+        var deg = '';
+        seg.classList.forEach(function (c) { if (c.indexOf('ladder-') === 0) deg = c.replace('ladder-', ''); });
+        if (!deg) return;
+        tierSelect.value = deg.toLowerCase();
+        tierSelect.dispatchEvent(new Event('change'));
+        var segScroll = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        bar.scrollIntoView({ block: 'start', behavior: segScroll });
+      });
+    }
+
+    // (3c) Sort modes - non-default modes move every card into the flat
+    //      #sort-bin in sorted order and hide the month sections; "recent"
+    //      moves each card back to its original month container (appending
+    //      in original global order preserves within-month order). Filters
+    //      keep working either way: they only toggle is-filtered-out.
+    var sortSel = document.getElementById('filter-sort');
+    var sortBin = document.getElementById('sort-bin');
+    if (sortSel && sortBin) {
+      var binCards = sortBin.querySelector('.cards');
+      var origins = cards.map(function (c) { return c.parentNode; });
+      // Bare F / M come from venue inference (no numbered degree); rank them
+      // below their numbered ladder so unknown-degree felonies sort after F5.
+      var degRank = { F1: 1, F2: 2, F3: 3, F4: 4, F5: 5, F: 6, M1: 7, M2: 8, M3: 9, M4: 10, MM: 11, M: 12 };
+      sortSel.addEventListener('change', function () {
+        var mode = sortSel.value;
+        if (mode === 'recent') {
+          cards.forEach(function (c, i) { origins[i].appendChild(c); });
+          sortBin.hidden = true;
+          months.forEach(function (m) { m.hidden = false; });
+          // Recompute month is-empty/open states - they went stale while the
+          // months were empty (any apply() during sorted mode saw no cards).
+          apply('sort');
+          return;
+        }
+        var order = cards.slice().sort(function (a, b) {
+          if (mode === 'custody') {
+            return Number(b.getAttribute('data-custody') || -1) - Number(a.getAttribute('data-custody') || -1);
+          }
+          if (mode === 'degree') {
+            return (degRank[a.getAttribute('data-degree')] || 99) - (degRank[b.getAttribute('data-degree')] || 99);
+          }
+          // name: data-search starts with the lowercased full name.
+          return (a.getAttribute('data-search') || '').localeCompare(b.getAttribute('data-search') || '');
+        });
+        var frag = document.createDocumentFragment();
+        order.forEach(function (c) { frag.appendChild(c); });
+        binCards.appendChild(frag);
+        months.forEach(function (m) { m.hidden = true; });
+        sortBin.hidden = false;
       });
     }
   } // end (3) filter bar
