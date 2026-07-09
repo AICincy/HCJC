@@ -504,7 +504,8 @@ def _parse_judges(base_url: str = "") -> tuple[list[dict], list[dict]]:
 
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
+        except Exception as e:
+            log.warning("skipping unreadable HAMCO judge profile %s: %s", path.name, e)
             continue
 
         # Skip error pages (like 404)
