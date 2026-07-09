@@ -266,6 +266,51 @@ def test_anon_changelog_dedupes_recent_rows_across_sweeps(tmp_path: Path):
     assert len(second) == 1  # not duplicated on the second sweep
 
 
+def test_anon_changelog_no_double_count_at_expiry_boundary(tmp_path: Path):
+    # Regression: when an event crosses the ANON_EXPIRY_DAYS boundary, the
+    # prior write left a FULL row on disk (keyed by inmate + timestamp) while
+    # this write re-emits the same event from the full changelog, now expired,
+    # keyed by day + tier + category. seen_keys held only the full key, so the
+    # anonymized twin was appended; the re-anonymization pass then rewrote the
+    # carried-over full row to the same anon shape, leaving TWO rows for one
+    # event until 365-day compaction. The post-re-anon re-dedup collapses them.
+    import json
+    from datetime import datetime, timedelta, timezone
+
+    from scraper.models import ChangeEvent
+    from scraper.store import save_anon_changelog
+
+    # Older than ANON_EXPIRY_DAYS (7): expired at this write.
+    old = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    path = tmp_path / "anon_changelog.json"
+
+    # Simulate the prior write's output: the event stored as a FULL (recent) row.
+    path.write_text(
+        json.dumps(
+            [
+                {
+                    "event": "booked",
+                    "timestamp_utc": old,
+                    "inmate_number": "42",
+                    "name": "DOE, JOHN",
+                    "tier": "F1",
+                    "category": "violent",
+                }
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    # This write re-emits the same event (now expired) from the full changelog.
+    ev = ChangeEvent(event="booked", inmate_number="42", name="DOE, JOHN", timestamp_utc=old)
+    save_anon_changelog(path, [ev], enrichment={"42": {"tier": "F1", "category": "violent"}})
+
+    out = json.loads(path.read_text(encoding="utf-8"))
+    assert len(out) == 1  # collapsed, not double-counted
+    assert out[0].get("inmate_number") is None  # anonymized (PII stripped)
+    assert out[0]["event"] == "booked"
+
+
 def test_block_log_round_trips(tmp_path: Path):
     p = tmp_path / "waf_block_log.json"
     assert load_block_log(p) == []  # missing file -> empty

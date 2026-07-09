@@ -206,7 +206,7 @@ def _parse_bond_amount(bond_str: str | None) -> int | None:
         return None
 
 
-def _display_date(date) -> str:
+def _display_date(date: datetime | str | None) -> str:
     """Format a date for display (e.g., 'May 14, 2026').
 
     Accepts either a ``datetime`` or an HCSO ``MM/DD/YY`` / ``MM/DD/YYYY``
@@ -478,8 +478,8 @@ def _offense_for_code(code: str | None) -> dict | None:
     """Return offense dict {label, cls} for an ORC code.
 
     Extracts the chapter (first 4 chars, e.g., '2903' from '2903.02') and
-    looks up in _OFFENSE_CATEGORY. Falls back to generic 'traffic' for
-    unknowns to ensure templates never see a missing color class.
+    looks up in _OFFENSE_CATEGORY. Falls back to the generic 'other' bucket
+    for unknowns to ensure templates never see a missing color class.
     """
     if not code:
         return None
@@ -740,7 +740,6 @@ def judge_link(judge_name: str | None, all_judges: list[dict] | None = None) -> 
     if not judge_name:
         return None
 
-    import re
     cleaned = judge_name.lower().strip()
     cleaned = re.sub(r"^(hon\.?|honorable|judge|presiding|chief magistrate|magistrate)\s+", "", cleaned)
     cleaned = re.sub(r"[.,]", " ", cleaned)

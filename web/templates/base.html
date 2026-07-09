@@ -12,7 +12,7 @@
   {# Security headers asserted in HTML because GitHub Pages does not let us
      set HTTP response headers. frame-ancestors and X-Content-Type-Options
      cannot be asserted via <meta>. #}
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.tile.openstreetmap.org https://server.arcgisonline.com; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#F5F0EB">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
@@ -64,7 +64,6 @@
       {% if snapshot is defined and snapshot.inmate_count %}
       <span class="running desktop-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody{% if trend is defined and trend.spark and trend.spark | length > 1 %}<svg class="spark" viewBox="0 0 120 26" width="120" height="26" role="img" aria-label="Roster size trend, last {{ trend.spark | length }} days"><polyline points="{{ spark_points(trend.spark) }}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>{% endif %}</span>
       {% endif %}
-      <span class="spacer"></span>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
           <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -102,10 +101,11 @@
     {% endif %}
   </header>
   <main id="main" class="page">
-    {# sr-only h1 only on the homepage; detail/stats/data pages declare their
-       own visible h1 so headings are linear and screen readers don't get a
-       generic title before the page-specific one. #}
-    {% block sr_h1 %}<h1 class="sr-only">JCStream - Hamilton County, Ohio Justice Center inmate roster</h1>{% endblock %}
+    {# Optional sr-only h1 hook. Every current page declares its own visible
+       <h1>, so all children override this block to empty and the default
+       never renders; kept as an extension point for any future page that
+       needs a screen-reader-only heading ahead of its content. #}
+    {% block sr_h1 %}{% endblock %}
     <div class="doc-wrap">
       {% block content %}{% endblock %}
     </div>

@@ -466,6 +466,23 @@ def save_anon_changelog(
                 }
             )
 
+    # Re-dedup after re-anonymization. The insert loop above dedups on
+    # _anon_dedup_key, but a row that crossed the expiry boundary THIS write
+    # was carried in from `existing` under its "full" key while its freshly
+    # re-emitted twin was appended under the "anon" key, so the two did not
+    # match then. Now that both are anonymized they collide, so collapse by
+    # anon key (keep first). Distinct same-bucket events are already collapsed
+    # at insert time by the same key, so this drops only the boundary twin.
+    seen_final: set[tuple] = set()
+    deduped: list[dict] = []
+    for row in out:
+        key = _anon_dedup_key(row)
+        if key in seen_final:
+            continue
+        seen_final.add(key)
+        deduped.append(row)
+    out = deduped
+
     # Stable sort by date/timestamp, oldest first for append-only feel
     out.sort(key=lambda r: r.get("timestamp_utc") or r.get("date") or "")
     out = _compact_anon_entries(out)
