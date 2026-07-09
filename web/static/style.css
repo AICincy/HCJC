@@ -460,7 +460,10 @@ details.coms > summary::-webkit-details-marker { display: none; }
 .filter-bar .filter-count { color: var(--fg-muted); margin-left: auto; font-variant-numeric: tabular-nums; font-size: 12px; }
 /* Search-match emphasis on card text (main.js wraps matches in mark.hl).
    Warm straw, literal hex on purpose: no token aliasing (print :root rule). */
-.card-inmate mark.hl { background: #F2E29B; color: inherit; padding: 0 1px; border-radius: 2px; }
+/* Ink text inside marks, not inherited category color: the drugs green
+   (#4d7838) is 3.97:1 on this yellow, under AA 4.5 at charge-line size;
+   ink is 13.4:1. Measured 2026-07-09. */
+.card-inmate mark.hl { background: #F2E29B; color: var(--fg); padding: 0 1px; border-radius: 2px; }
 
 /* Tier-strip segments double as degree-filter targets (main.js 3b2). */
 .tier-strip-seg { cursor: pointer; }
