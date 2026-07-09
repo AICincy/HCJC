@@ -366,7 +366,7 @@
         var deg = '';
         seg.classList.forEach(function (c) { if (c.indexOf('ladder-') === 0) deg = c.replace('ladder-', ''); });
         if (!deg) return;
-        tierSelect.value = deg;
+        tierSelect.value = deg.toLowerCase();
         tierSelect.dispatchEvent(new Event('change'));
         var segScroll = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
         bar.scrollIntoView({ block: 'start', behavior: segScroll });
