@@ -311,7 +311,9 @@ def test_card_data_attrs_sort_keys():
     assert d["degree"] == "F4"
     assert d["custody"] == ""  # no booking date -> unsortable, empty attr
 
-    inm.booking_date = (datetime.now(timezone.utc) - timedelta(days=3)).strftime("%-m/%-d/%y")
+    # %-m/%-d is glibc-only (ValueError on Windows); build the unpadded HCSO date manually.
+    bd = datetime.now(timezone.utc) - timedelta(days=3)
+    inm.booking_date = f"{bd.month}/{bd.day}/{bd.year % 100:02d}"
     d = shape._card_data_attrs(inm)
     assert d["custody"] == 3  # _days_in_custody compares in UTC, so this is exact
 
@@ -369,7 +371,7 @@ def test_prepare_render_data(monkeypatch):
             inmate_number="7",
             name="DOE JOHN",
             timestamp_utc=now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            note="booked " + now.strftime("%-m/%-d/%y"),
+            note=f"booked {now.month}/{now.day}/{now.year % 100:02d}",
         ),
         ChangeEvent(
             event="released",
