@@ -152,6 +152,10 @@
   //       URL hash, which the openDetailsFor handler at (1) auto-opens.
   var statSel = document.getElementById('statute-jump');
   if (statSel) {
+    // Reveal the jump bar only once JS can wire it; without JS the <select>
+    // does nothing, so it ships hidden (sections stay reachable by scroll).
+    var statBar = document.getElementById('statute-jump-bar');
+    if (statBar) statBar.hidden = false;
     statSel.addEventListener('change', function () {
       var v = statSel.value;
       if (v) location.hash = '#' + v;
