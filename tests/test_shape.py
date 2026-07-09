@@ -309,7 +309,7 @@ def test_distinct_chapters():
     inm1 = _inm("1", "DOE", "JOHN", charges=[Charge(orc_code="2903.13", description="ASSAULT")])
     inm2 = _inm("2", "SMITH", "JANE", charges=[Charge(orc_code="2925.11", description="DRUGS")])
     res = shape._distinct_chapters([inm1, inm2])
-    assert res == [("drugs", "Drugs"), ("violence-homicide", "Violence / Homicide")]
+    assert res == [("drugs", "Drugs", 1), ("violence-homicide", "Violence / Homicide", 1)]
 
 
 def test_roster_stale_context(monkeypatch, tmp_path):
