@@ -2496,6 +2496,12 @@
     "category": "Failure to reinstate a license"
   },
   {
+    "event": "updated",
+    "date": "2026-05-26",
+    "tier": "MM",
+    "category": "Weapon in courthouse"
+  },
+  {
     "event": "booked",
     "date": "2026-05-27",
     "tier": null,
@@ -4858,6 +4864,12 @@
     "date": "2026-06-03",
     "tier": "M1",
     "category": "Telecommunications harassment"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-03",
+    "tier": "MM",
+    "category": "Weapon in courthouse"
   },
   {
     "event": "updated",
@@ -10531,6 +10543,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-06-18",
+    "tier": "MM",
+    "category": "Weapon in courthouse"
+  },
+  {
+    "event": "updated",
     "date": "2026-06-19",
     "tier": "MM",
     "category": "Vehicular vandalism"
@@ -13962,6 +13980,12 @@
     "category": "Aggravated menacing"
   },
   {
+    "event": "released",
+    "date": "2026-06-30",
+    "tier": "MM",
+    "category": "Weapon in courthouse"
+  },
+  {
     "event": "booked",
     "date": "2026-07-01",
     "tier": "M1",
@@ -14785,30 +14809,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-03T22:44:14Z",
-    "inmate_number": "14355166",
-    "name": "JOINER TONY",
-    "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-03T22:44:14Z",
-    "inmate_number": "1666123",
-    "name": "JONES MICHAEL",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/3/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-03T22:44:14Z",
-    "inmate_number": "2552483",
-    "name": "LINSKEY JOSHUA",
+    "date": "2026-07-03",
     "tier": "M1",
-    "category": "Menacing by stalking",
-    "note": ""
+    "category": "Menacing by stalking"
   },
   {
     "event": "booked",
@@ -26101,6 +26104,42 @@
     "timestamp_utc": "2026-07-10T22:41:16Z",
     "inmate_number": "14721483",
     "name": "SCHMITT MATTHEW",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-10T23:39:13Z",
+    "inmate_number": "14140644",
+    "name": "HOWARD SHANISE",
+    "tier": "MM",
+    "category": "Weapon in courthouse",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-10T23:39:13Z",
+    "inmate_number": "14689157",
+    "name": "BURDEN TROY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-10T23:39:13Z",
+    "inmate_number": "1768318",
+    "name": "DUNSEN ANDRE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-10T23:39:13Z",
+    "inmate_number": "14556007",
+    "name": "MONGAR BIKASH",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
