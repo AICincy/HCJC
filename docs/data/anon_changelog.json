@@ -14815,48 +14815,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-03T23:44:43Z",
-    "inmate_number": "14425354",
-    "name": "NEWHOUSE TREVOR",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-03T23:44:43Z",
-    "inmate_number": "14815763",
-    "name": "LOPEZ MAMIN",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/3/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-03T23:44:43Z",
-    "inmate_number": "2552483",
-    "name": "LINSKEY JOSHUA",
-    "tier": "M1",
-    "category": "Menacing by stalking",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-03T23:44:43Z",
-    "inmate_number": "1857091",
-    "name": "BALDWIN DARYLL",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-03T23:44:43Z",
-    "inmate_number": "14699960",
-    "name": "GIVENS KEVIN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "date": "2026-07-03",
+    "tier": "F2",
+    "category": "Strangulation"
   },
   {
     "event": "booked",
@@ -26143,5 +26104,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-11T01:08:10Z",
+    "inmate_number": "14659009",
+    "name": "THOMAS WILL",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-11T01:08:10Z",
+    "inmate_number": "14713582",
+    "name": "TAYORO YVAN",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
