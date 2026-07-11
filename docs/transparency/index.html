@@ -86,11 +86,11 @@
     <h1 class="title">Access Transparency Scorecard</h1>
     <div class="sub">HCSO public-records access interruptions, measured from the tamper-evident evidence ledger &middot; ORC &sect; 149.43</div>
   </div>
-  <div class="stamp">Computed 2026-07-11T06:35Z</div>
+  <div class="stamp">Computed 2026-07-11T08:27Z</div>
 </header>
 
 <aside class="banner" aria-label="Current access status" role="status">
-  <p><span class="status-pill status-pill-fresh">Fresh</span> The roster snapshot is 0.0 hours old, within the 6.0-hour alarm threshold. Retrieval is working.</p>
+  <p><span class="status-pill status-pill-fresh">Fresh</span> The roster snapshot is 1.9 hours old, within the 6.0-hour alarm threshold. Retrieval is working.</p>
 </aside>
 
 <h2 class="sect-h">Denial Metrics</h2>
@@ -98,14 +98,14 @@
   <caption class="sr-only">Metrics computed from the WAF block evidence ledger</caption>
   <thead><tr><th scope="col">Metric</th><th scope="col">Value</th></tr></thead>
   <tbody>
-    <tr><td>Blocked sweep cycles (total)</td><td>4</td></tr>
+    <tr><td>Blocked sweep cycles (total)</td><td>5</td></tr>
     <tr><td>First recorded block (UTC)</td><td>2026-05-30T23:07:48Z</td></tr>
-    <tr><td>Most recent block (UTC)</td><td>2026-06-11T22:23:52Z</td></tr>
-    <tr><td>Current consecutive blocked cycles</td><td>0</td></tr>
+    <tr><td>Most recent block (UTC)</td><td>2026-07-11T08:26:53Z</td></tr>
+    <tr><td>Current consecutive blocked cycles</td><td>1</td></tr>
     <tr><td>Longest consecutive blocked run</td><td>1</td></tr>
     <tr><td>Cumulative denied access</td><td>2.4 hours</td></tr>
-    <tr><td>Days since last block</td><td>29</td></tr>
-    <tr><td>Roster snapshot age</td><td>0.0 hours</td></tr>
+    <tr><td>Days since last block</td><td>0</td></tr>
+    <tr><td>Roster snapshot age</td><td>1.9 hours</td></tr>
   </tbody>
 </table>
 <p class="muted">How to read this: the sweep appends one <code>blocked</code> record to the ledger for each cycle in which HCSO&rsquo;s portal returned blocked or empty responses, and one <code>recovered</code> record when a healthy sweep closes the denial period. Cumulative denied access sums each period from its first blocked cycle to its recovery; a period still open at build time accrues up to the build timestamp. These figures regenerate every build and are mirrored as JSON at <a href="/data/transparency_metrics.json">transparency_metrics.json</a>.</p>
