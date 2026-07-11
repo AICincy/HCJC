@@ -15019,33 +15019,6 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-04T18:02:39Z",
-    "inmate_number": "2532320",
-    "name": "IVORY BRENEE",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-04T18:02:39Z",
-    "inmate_number": "14649280",
-    "name": "WHITFIELD JOURNY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-04T18:02:39Z",
-    "inmate_number": "14235249",
-    "name": "WILLIAMS KEIVEN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "updated",
     "timestamp_utc": "2026-07-04T19:36:16Z",
     "inmate_number": "14255567",
     "name": "WARREN NICHOLAS",
@@ -26247,6 +26220,24 @@
     "name": "BOOKER ANTHONY",
     "tier": "M1",
     "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-11T18:53:36Z",
+    "inmate_number": "1925783",
+    "name": "PITTS YOSIAH",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/11/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-11T18:53:36Z",
+    "inmate_number": "2253859",
+    "name": "RANKIN ABDUL",
+    "tier": "M1",
+    "category": "Domestic violence",
     "note": ""
   }
 ]
