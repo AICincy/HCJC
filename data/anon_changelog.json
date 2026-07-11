@@ -14821,84 +14821,63 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-04T01:18:31Z",
-    "inmate_number": "14235249",
-    "name": "WILLIAMS KEIVEN",
+    "date": "2026-07-04",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 7/3/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-04T01:18:31Z",
-    "inmate_number": "14272006",
-    "name": "HUDGINS-TRUSTY JAYMECA",
+    "date": "2026-07-04",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/3/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-04T01:18:31Z",
-    "inmate_number": "14425354",
-    "name": "NEWHOUSE TREVOR",
+    "date": "2026-07-04",
     "tier": "MM",
-    "category": "Expired operators license",
-    "note": ""
+    "category": "Expired operators license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-04T01:18:31Z",
-    "inmate_number": "14656429",
-    "name": "HUDSON NEHEMIAH",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/3/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-04T01:18:31Z",
-    "inmate_number": "1473826",
-    "name": "JOHNSON THERESA",
+    "date": "2026-07-04",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": "booked 7/3/26"
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-04T01:18:31Z",
-    "inmate_number": "14815763",
-    "name": "LOPEZ MAMIN",
+    "date": "2026-07-04",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-04T01:18:31Z",
-    "inmate_number": "1582235",
-    "name": "SMITH WILLIAM",
+    "date": "2026-07-04",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-04T01:18:31Z",
-    "inmate_number": "1712800",
-    "name": "JONES SCHAKA",
+    "date": "2026-07-04",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 7/3/26"
+    "category": "Resisting arrest"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-07-04T01:18:31Z",
-    "inmate_number": "14690026",
-    "name": "SESSIONS TERRANCE",
+    "date": "2026-07-04",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-04",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-07-04",
+    "tier": "MM",
+    "category": "Operating a motor vehicle without reasonable control"
   },
   {
     "event": "updated",
@@ -26122,5 +26101,68 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-11T04:27:22Z",
+    "inmate_number": "14211644",
+    "name": "PARKS LADERRICK",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 7/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-11T04:27:22Z",
+    "inmate_number": "14704639",
+    "name": "CROSSTY TYIYANA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 7/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-11T04:27:22Z",
+    "inmate_number": "1681741",
+    "name": "LOWERY MARVIN",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 7/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-11T04:27:22Z",
+    "inmate_number": "2144081",
+    "name": "GREENE ERIK",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 7/10/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-11T04:27:22Z",
+    "inmate_number": "14816415",
+    "name": "GABRIEL-AGUILON ISAIAS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-11T04:27:22Z",
+    "inmate_number": "14177708",
+    "name": "PAYNE DESHON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-11T04:27:22Z",
+    "inmate_number": "2657633",
+    "name": "PRINGLE KAYLA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
