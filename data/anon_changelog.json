@@ -15229,39 +15229,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-05T12:12:02Z",
-    "inmate_number": "14443383",
-    "name": "YEAGER ANDREW",
+    "date": "2026-07-05",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-05T12:12:02Z",
-    "inmate_number": "1783092",
-    "name": "DUNSON LAMAR",
-    "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-05T12:12:02Z",
-    "inmate_number": "14592053",
-    "name": "BOSWELL CHARLES",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-05T12:12:02Z",
-    "inmate_number": "2020361",
-    "name": "CONNER KEVIN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Aggravated menacing"
   },
   {
     "event": "released",
@@ -26323,5 +26293,41 @@
     "tier": "M1",
     "category": "Improperly handling firearms in a motor vehicle",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T12:37:06Z",
+    "inmate_number": "2436681",
+    "name": "RICHARDSON ORLANDO",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 7/12/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-12T12:37:06Z",
+    "inmate_number": "1579187",
+    "name": "GAMBREL ANTHONY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-12T12:37:06Z",
+    "inmate_number": "1300111",
+    "name": "MARTIN ROBERT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-12T12:37:06Z",
+    "inmate_number": "14477197",
+    "name": "SOUMARE MOUSSA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
