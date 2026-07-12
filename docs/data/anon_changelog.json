@@ -13987,6 +13987,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-06-30",
+    "tier": "M2",
+    "category": "Criminal damaging"
+  },
+  {
+    "event": "booked",
     "date": "2026-07-01",
     "tier": "M1",
     "category": "Domestic violence"
@@ -14290,6 +14296,12 @@
     "date": "2026-07-01",
     "tier": "M4",
     "category": "Menacing"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-01",
+    "tier": "M2",
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
@@ -15246,67 +15258,16 @@
     "category": "Possession of drugs"
   },
   {
-    "event": "updated",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "inmate_number": "14310629",
-    "name": "BESS TERRELL",
-    "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
-  },
-  {
     "event": "booked",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "inmate_number": "14592810",
-    "name": "WARREN TEONTA",
+    "date": "2026-07-05",
     "tier": "F3",
-    "category": "Having weapons while under disability",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "inmate_number": "14619159",
-    "name": "LEE MCKENZIE",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "inmate_number": "14815819",
-    "name": "MEANS JACOB",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked 7/5/26"
+    "category": "Having weapons while under disability"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "inmate_number": "1800804",
-    "name": "BROWN PHILLIP",
+    "date": "2026-07-05",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "inmate_number": "2149865",
-    "name": "PEYTON KIMBERLY",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "inmate_number": "2501194",
-    "name": "DAVIS TABATHA",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Assault"
   },
   {
     "event": "updated",
@@ -26323,5 +26284,50 @@
     "tier": null,
     "category": null,
     "note": "booked 7/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T20:38:54Z",
+    "inmate_number": "14066961",
+    "name": "ALLEN NICHOLAS",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 7/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T20:38:54Z",
+    "inmate_number": "14234139",
+    "name": "THOMAS SHAQUIL",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-12T20:38:54Z",
+    "inmate_number": "14580636",
+    "name": "MCCALLEY NAMARAY",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-12T20:38:54Z",
+    "inmate_number": "14766455",
+    "name": "MOORE UREKUS",
+    "tier": "F4",
+    "category": "Unlawful sexual conduct with a minor",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-12T20:38:54Z",
+    "inmate_number": "14816571",
+    "name": "FUENTES-AREVALO GUSTAVO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
