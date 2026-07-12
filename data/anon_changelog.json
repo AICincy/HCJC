@@ -15241,21 +15241,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-05T15:38:07Z",
-    "inmate_number": "14209829",
-    "name": "ROBBINS BOBBY",
+    "date": "2026-07-05",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-05T15:38:07Z",
-    "inmate_number": "2089626",
-    "name": "LINKER GRETCHEN",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -26335,5 +26323,23 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-12T16:27:08Z",
+    "inmate_number": "14232739",
+    "name": "GILL DEERIC",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-12T16:27:08Z",
+    "inmate_number": "1897419",
+    "name": "CALVIN ANTHONY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
