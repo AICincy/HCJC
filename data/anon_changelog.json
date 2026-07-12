@@ -15181,165 +15181,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14102860",
-    "name": "SANCHEZ ANTONIO",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/5/26"
+    "date": "2026-07-05",
+    "tier": "M1",
+    "category": "Driving under suspension"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14397527",
-    "name": "STACKHOUSE PRESTON",
+    "date": "2026-07-05",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14428870",
-    "name": "GUTIERREZ MARLIN",
-    "tier": "M1",
-    "category": "Driving under suspension",
-    "note": "booked 7/5/26"
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14435983",
-    "name": "CARTER KARONN",
-    "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14493773",
-    "name": "ELRAMAL AHMED",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14494626",
-    "name": "BRYANT SIDNEY",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14550065",
-    "name": "MASON BLAKE",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14631253",
-    "name": "MCCLAIN TORYE",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14773601",
-    "name": "CENDEJAS-BRAVO GUILLERMO",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14792377",
-    "name": "FLETCHER DIONA",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14815795",
-    "name": "YABAR MARKO",
+    "date": "2026-07-05",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14815796",
-    "name": "ALESSI ZACHARY",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14815799",
-    "name": "BELSER SHAVON",
+    "date": "2026-07-05",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 7/5/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "14815802",
-    "name": "MANCULICH PHILLIP",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "1625281",
-    "name": "FIELDS JOEL",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "2552356",
-    "name": "DONOHUE MICHAEL",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "2674883",
-    "name": "SAHLIN HEATHER",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-05T08:31:34Z",
-    "inmate_number": "2626579",
-    "name": "DAVIS MARVIN",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "date": "2026-07-05",
+    "tier": "F2",
+    "category": "Burglary"
   },
   {
     "event": "booked",
@@ -26382,6 +26250,96 @@
     "name": "GARDNER GREGORY",
     "tier": null,
     "category": null,
+    "note": "booked 7/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "14151180",
+    "name": "SPIVEY ALICIA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "14245577",
+    "name": "HORTON LANDON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "14751868",
+    "name": "REYES MERCEDES",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "14816571",
+    "name": "FUENTES-AREVALO GUSTAVO",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "14816569",
+    "name": "MARTINEZ ABEL",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "14816572",
+    "name": "CUMMINGS CHLOE",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "14816573",
+    "name": "WILLIAMS JUSTIN",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 7/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "1897419",
+    "name": "CALVIN ANTHONY",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "2332305",
+    "name": "GARDNER GREGORY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-12T08:39:43Z",
+    "inmate_number": "2509652",
+    "name": "EDWARDS SARAH",
+    "tier": "F5",
+    "category": "Possession of drugs",
     "note": "booked 7/12/26"
   }
 ]
