@@ -15709,93 +15709,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "1125518",
-    "name": "HOLMES LEE",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/7/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "1198733",
-    "name": "PETERS MICHAEL",
+    "date": "2026-07-07",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": "booked 7/7/26"
+    "category": "License or registration violation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "14437730",
-    "name": "HUFF-LEE RASHAY",
-    "tier": "MM",
-    "category": "License or registration violation",
-    "note": "booked 7/7/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "14598471",
-    "name": "LOWE DAVID",
+    "date": "2026-07-07",
     "tier": "F5",
-    "category": "Forgery",
-    "note": "booked 7/7/26"
+    "category": "Forgery"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "14770198",
-    "name": "COTTON SENCERE",
+    "date": "2026-07-07",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 7/7/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "14815971",
-    "name": "GODBY NATASHA",
+    "date": "2026-07-07",
     "tier": "F2",
-    "category": "Burglary",
-    "note": "booked 7/7/26"
+    "category": "Burglary"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "1522046",
-    "name": "SMITH WILLIAM",
+    "date": "2026-07-07",
     "tier": "M1",
-    "category": "Unauthorized use of a vehicle",
-    "note": "booked 7/7/26"
+    "category": "Unauthorized use of a vehicle"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "1867909",
-    "name": "MCCLOUD ANTONIO",
+    "date": "2026-07-07",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 7/7/26"
+    "category": "Violating protection order"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "2728386",
-    "name": "PIERCE BILLY",
+    "date": "2026-07-07",
     "tier": "M2",
-    "category": "Possessing drug abuse instruments",
-    "note": "booked 7/7/26"
+    "category": "Possessing drug abuse instruments"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-07T08:54:39Z",
-    "inmate_number": "2817004",
-    "name": "FERGUSON DESHAWN",
+    "date": "2026-07-07",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": ""
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "released",
@@ -26764,6 +26722,78 @@
     "timestamp_utc": "2026-07-14T07:08:33Z",
     "inmate_number": "14091258",
     "name": "WILLIAMS TYLER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-14T09:17:02Z",
+    "inmate_number": "14782548",
+    "name": "JIGUAN RAMIRO",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-14T09:17:02Z",
+    "inmate_number": "14816776",
+    "name": "FREEMAN KEMONTAY",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": "booked 7/14/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-14T09:17:02Z",
+    "inmate_number": "1663538",
+    "name": "WALLACE THEODORE",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/14/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-14T09:17:02Z",
+    "inmate_number": "1932576",
+    "name": "CONYERS LATOYA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-14T09:17:02Z",
+    "inmate_number": "2207396",
+    "name": "JONES DESIREE",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": "booked 7/14/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-14T09:17:02Z",
+    "inmate_number": "1282917",
+    "name": "GAMBLE AUBURY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-14T09:17:02Z",
+    "inmate_number": "1457569",
+    "name": "ODOMS SHAUN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-14T09:17:02Z",
+    "inmate_number": "2663974",
+    "name": "OUTLAW JAYMES",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
