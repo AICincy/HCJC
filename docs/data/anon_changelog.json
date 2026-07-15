@@ -5370,6 +5370,12 @@
     "category": "Stopping after accident on public roads"
   },
   {
+    "event": "released",
+    "date": "2026-06-04",
+    "tier": "M1",
+    "category": "Violating protection order"
+  },
+  {
     "event": "updated",
     "date": "2026-06-05",
     "tier": "M1",
@@ -15978,6 +15984,12 @@
     "category": "Menacing"
   },
   {
+    "event": "released",
+    "date": "2026-07-07",
+    "tier": "M2",
+    "category": "Resisting arrest"
+  },
+  {
     "event": "booked",
     "date": "2026-07-08",
     "tier": "MM",
@@ -16039,120 +16051,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "14112870",
-    "name": "LEE MARQUIS",
+    "date": "2026-07-08",
     "tier": "F3",
-    "category": "Having weapons while under disability",
-    "note": "booked 7/7/26"
+    "category": "Having weapons while under disability"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "14231236",
-    "name": "BAKER SHAMELL",
+    "date": "2026-07-08",
     "tier": "MM",
-    "category": "Lights when needed",
-    "note": "booked 7/7/26"
+    "category": "Lights when needed"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "14280222",
-    "name": "CHOW MIGUEL",
+    "date": "2026-07-08",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "14425920",
-    "name": "YEAGER MEGAN",
+    "date": "2026-07-08",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 7/7/26"
+    "category": "Violating protection order"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "14443249",
-    "name": "ZANDERS RAHMONE",
+    "date": "2026-07-08",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "14542911",
-    "name": "BRYANT DESHAWN",
-    "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 7/7/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "14753966",
-    "name": "DEHNER JERZIE",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/7/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "2414096",
-    "name": "TIDWELL HOWARD",
-    "tier": "F3",
-    "category": "Having weapons while under disability",
-    "note": "booked 7/7/26"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "982115",
-    "name": "MCFARLAND HERBERT",
+    "date": "2026-07-08",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "14590042",
-    "name": "ANDREWS ADAM",
+    "date": "2026-07-08",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "14288625",
-    "name": "BARNES KAMAREN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "1488411",
-    "name": "BROWNER DEMICO",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-08T05:31:40Z",
-    "inmate_number": "2249755",
-    "name": "TAYLOR ROBERT",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -27031,6 +26968,105 @@
     "timestamp_utc": "2026-07-15T04:47:57Z",
     "inmate_number": "1640892",
     "name": "WISDOM ROBERT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "14042973",
+    "name": "MINOR JASON",
+    "tier": "MM",
+    "category": "Lights when needed",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "14416138",
+    "name": "DAVIS-LOVE PRECIOUS",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "14523766",
+    "name": "ROPER WILLIAM",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "1455130",
+    "name": "RISER DARRIN",
+    "tier": "M1",
+    "category": "Interference with custody",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "2006662",
+    "name": "SMITH RAYDALE",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "2079774",
+    "name": "CHALK ALFONSO",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 7/15/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "2215582",
+    "name": "OSBORNE SHANNON",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "2448923",
+    "name": "DRUMMOND LESLIE",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 7/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "2681832",
+    "name": "MINNIFIELD RAYNISE",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/15/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "14766300",
+    "name": "HUMPHREY NASIR",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-15T07:11:37Z",
+    "inmate_number": "1577558",
+    "name": "PRICE DANTE",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
