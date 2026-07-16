@@ -16447,120 +16447,75 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "14212096",
-    "name": "CLEMENS KANAYA",
+    "date": "2026-07-09",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 7/9/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "14296414",
-    "name": "WAYNICK OLIVIA",
+    "date": "2026-07-09",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 7/9/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "14525437",
-    "name": "HERZNER BLAKE",
+    "date": "2026-07-09",
     "tier": "MM",
-    "category": "License or registration violation",
-    "note": "booked 7/9/26"
+    "category": "License or registration violation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "14730613",
-    "name": "JOHNSON JAMES",
+    "date": "2026-07-09",
     "tier": "MM",
-    "category": "Weaving",
-    "note": "booked 7/9/26"
+    "category": "Weaving"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "14816300",
-    "name": "MCCURDY BRADY",
+    "date": "2026-07-09",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 7/9/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "1977638",
-    "name": "CASH MAIA",
+    "date": "2026-07-09",
     "tier": "F5",
-    "category": "Breaking and entering",
-    "note": "booked 7/9/26"
+    "category": "Breaking and entering"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "1927949",
-    "name": "THOMAS DARNELL",
+    "date": "2026-07-09",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": "booked 7/9/26"
+    "category": "Driving under suspension"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "2483710",
-    "name": "NEELEY PAUL",
+    "date": "2026-07-09",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 7/9/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "2501245",
-    "name": "MYERS DOMINIQUE",
+    "date": "2026-07-09",
     "tier": "MM",
-    "category": "Restrictions on light transmittance (tinted windows)",
-    "note": "booked 7/9/26"
+    "category": "Restrictions on light transmittance (tinted windows)"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "2640392",
-    "name": "JUSTICE ROBERT",
+    "date": "2026-07-09",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "869454",
-    "name": "TORREY VERNON",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/9/26"
+    "date": "2026-07-09",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license"
   },
   {
-    "event": "released",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "14358321",
-    "name": "BROWN JAYLAN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-09T07:57:10Z",
-    "inmate_number": "14291733",
-    "name": "COOPER LEASHA",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "event": "booked",
+    "date": "2026-07-09",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)"
   },
   {
     "event": "booked",
@@ -27181,5 +27136,50 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-16T09:49:23Z",
+    "inmate_number": "1033173",
+    "name": "GIBBS DERRICK",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-16T09:49:23Z",
+    "inmate_number": "14085221",
+    "name": "MIDDLEBROOK EMONTE",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-16T09:49:23Z",
+    "inmate_number": "14292576",
+    "name": "ROBINSON CHANDLER",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 7/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-16T09:49:23Z",
+    "inmate_number": "14603651",
+    "name": "NYAGA DEAUNTRE",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked 7/16/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-16T09:49:23Z",
+    "inmate_number": "2207643",
+    "name": "ABEL JOSHUA",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
