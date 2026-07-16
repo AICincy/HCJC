@@ -9678,6 +9678,12 @@
     "category": "Having weapons while under disability"
   },
   {
+    "event": "released",
+    "date": "2026-06-16",
+    "tier": "F2",
+    "category": "Robbery"
+  },
+  {
     "event": "updated",
     "date": "2026-06-17",
     "tier": "M2",
@@ -16518,58 +16524,28 @@
     "category": "Booking hold (no ORC code on file)"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-07-09T11:00:04Z",
-    "inmate_number": "14778820",
-    "name": "VELAZQUEZ DAYLILLEYMS",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/9/26"
-  },
-  {
     "event": "updated",
-    "timestamp_utc": "2026-07-09T11:00:04Z",
-    "inmate_number": "14816300",
-    "name": "MCCURDY BRADY",
+    "date": "2026-07-09",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-09T11:00:04Z",
-    "inmate_number": "1927949",
-    "name": "THOMAS DARNELL",
-    "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-09T11:00:04Z",
-    "inmate_number": "1977638",
-    "name": "CASH MAIA",
+    "date": "2026-07-09",
     "tier": "F5",
-    "category": "Breaking and entering",
-    "note": ""
+    "category": "Breaking and entering"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-09T11:00:04Z",
-    "inmate_number": "2370590",
-    "name": "STEINMANN SAMANTHA",
+    "date": "2026-07-09",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 7/9/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-09T11:00:04Z",
-    "inmate_number": "2483710",
-    "name": "NEELEY PAUL",
+    "date": "2026-07-09",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -27181,5 +27157,95 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "14292576",
+    "name": "ROBINSON CHANDLER",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "14684118",
+    "name": "NEUBACHER ALEXANDER",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked 7/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "14817143",
+    "name": "RICHARDS TORI",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "booked 7/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "14817140",
+    "name": "CHILEL-VELASQUEZ YEISON",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "2128471",
+    "name": "ISAAC IVAN",
+    "tier": "F2",
+    "category": "Robbery",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "2523404",
+    "name": "COOK CANDY",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/16/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "864867",
+    "name": "ALEXANDER YVONNE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "2592917",
+    "name": "ASHCRAFT STEVIE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "14765496",
+    "name": "MAURICIO JUANITO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-16T13:01:40Z",
+    "inmate_number": "1442393",
+    "name": "MINK TIMOTHY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
