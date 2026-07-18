@@ -17299,33 +17299,6 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-11T20:03:21Z",
-    "inmate_number": "1493445",
-    "name": "FIELDS PHILLIP",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/11/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-11T20:03:21Z",
-    "inmate_number": "1628013",
-    "name": "GOODWIN SEAN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-11T20:03:21Z",
-    "inmate_number": "1544905",
-    "name": "RYAN MCNEIL",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "booked",
     "timestamp_utc": "2026-07-11T21:04:39Z",
     "inmate_number": "1914340",
     "name": "EDWARDS MELVIN",
@@ -27295,5 +27268,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-18T20:41:12Z",
+    "inmate_number": "1201270",
+    "name": "CHALK JAMES",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": ""
   }
 ]
