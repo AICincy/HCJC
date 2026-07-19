@@ -17508,49 +17508,16 @@
     "category": "Unlawful sexual conduct with a minor"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T20:38:54Z",
-    "inmate_number": "14066961",
-    "name": "ALLEN NICHOLAS",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/12/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T20:38:54Z",
-    "inmate_number": "14234139",
-    "name": "THOMAS SHAQUIL",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
     "event": "updated",
-    "timestamp_utc": "2026-07-12T20:38:54Z",
-    "inmate_number": "14580636",
-    "name": "MCCALLEY NAMARAY",
+    "date": "2026-07-12",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
-    "event": "updated",
-    "timestamp_utc": "2026-07-12T20:38:54Z",
-    "inmate_number": "14766455",
-    "name": "MOORE UREKUS",
-    "tier": "F4",
-    "category": "Unlawful sexual conduct with a minor",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-12T20:38:54Z",
-    "inmate_number": "14816571",
-    "name": "FUENTES-AREVALO GUSTAVO",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "event": "booked",
+    "date": "2026-07-12",
+    "tier": "MM",
+    "category": "Upsetting public or private receptacles"
   },
   {
     "event": "updated",
@@ -27451,5 +27418,32 @@
     "tier": "F3",
     "category": "Escape",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-19T20:40:43Z",
+    "inmate_number": "1772841",
+    "name": "ANDERSON CHRISTOPHER",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T20:40:43Z",
+    "inmate_number": "2325832",
+    "name": "WISE JOSHUA",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/19/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-19T20:40:43Z",
+    "inmate_number": "14673426",
+    "name": "OLAGBEMIRO JADDEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
