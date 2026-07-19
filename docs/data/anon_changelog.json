@@ -17442,58 +17442,22 @@
     "category": "Possession of drugs"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T10:14:36Z",
-    "inmate_number": "14103236",
-    "name": "SADDLER JAVONNA",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/12/26"
-  },
-  {
     "event": "updated",
-    "timestamp_utc": "2026-07-12T10:14:36Z",
-    "inmate_number": "14151180",
-    "name": "SPIVEY ALICIA",
+    "date": "2026-07-12",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-12T10:14:36Z",
-    "inmate_number": "14751868",
-    "name": "REYES MERCEDES",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-12T10:14:36Z",
-    "inmate_number": "14816574",
-    "name": "COGAR DAVID",
+    "date": "2026-07-12",
     "tier": "M1",
-    "category": "Improperly handling firearms in a motor vehicle",
-    "note": "booked 7/12/26"
+    "category": "Improperly handling firearms in a motor vehicle"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-12T10:14:36Z",
-    "inmate_number": "2509652",
-    "name": "EDWARDS SARAH",
+    "date": "2026-07-12",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-12T10:14:36Z",
-    "inmate_number": "14712606",
-    "name": "WELLER DAVID",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
@@ -27277,5 +27241,50 @@
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T10:51:32Z",
+    "inmate_number": "14477134",
+    "name": "MULLETT PATRICK",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "booked 7/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T10:51:32Z",
+    "inmate_number": "14788290",
+    "name": "DAY DONALD",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "booked 7/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T10:51:32Z",
+    "inmate_number": "14817391",
+    "name": "NOE ROGELIO",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-19T10:51:32Z",
+    "inmate_number": "2255751",
+    "name": "CROSSTY ANTWAN",
+    "tier": "MM",
+    "category": "Rules for driving in marked lanes",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-19T10:51:32Z",
+    "inmate_number": "1996331",
+    "name": "WILLIS LAMORIS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
