@@ -3960,6 +3960,12 @@
     "category": "Theft"
   },
   {
+    "event": "booked",
+    "date": "2026-06-01",
+    "tier": "M1",
+    "category": "Possessing criminal tools"
+  },
+  {
     "event": "updated",
     "date": "2026-06-02",
     "tier": null,
@@ -4903,6 +4909,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-06-03",
+    "tier": "M1",
+    "category": "Possessing criminal tools"
+  },
+  {
+    "event": "updated",
     "date": "2026-06-04",
     "tier": "M3",
     "category": "Criminal mischief"
@@ -5404,6 +5416,12 @@
     "date": "2026-06-04",
     "tier": "M4",
     "category": "Criminal trespass"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-04",
+    "tier": "M1",
+    "category": "Possessing criminal tools"
   },
   {
     "event": "updated",
@@ -17461,21 +17479,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-12T11:32:46Z",
-    "inmate_number": "14103236",
-    "name": "SADDLER JAVONNA",
+    "date": "2026-07-12",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-12T11:32:46Z",
-    "inmate_number": "14816574",
-    "name": "COGAR DAVID",
-    "tier": "M1",
-    "category": "Improperly handling firearms in a motor vehicle",
-    "note": ""
+    "category": "Improperly handling firearms in a motor vehicle"
   },
   {
     "event": "booked",
@@ -27283,6 +27289,42 @@
     "timestamp_utc": "2026-07-19T10:51:32Z",
     "inmate_number": "1996331",
     "name": "WILLIS LAMORIS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-19T11:52:29Z",
+    "inmate_number": "14817391",
+    "name": "NOE ROGELIO",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T11:52:29Z",
+    "inmate_number": "1874548",
+    "name": "TODD KEVIN",
+    "tier": "M1",
+    "category": "Possessing criminal tools",
+    "note": "booked 7/19/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-19T11:52:29Z",
+    "inmate_number": "1670199",
+    "name": "GOODEN MARTINE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-19T11:52:29Z",
+    "inmate_number": "14354371",
+    "name": "WOOTEN MARK",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
