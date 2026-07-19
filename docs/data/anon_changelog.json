@@ -17485,42 +17485,6 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-12T12:37:06Z",
-    "inmate_number": "2436681",
-    "name": "RICHARDSON ORLANDO",
-    "tier": "M1",
-    "category": "Theft",
-    "note": "booked 7/12/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-12T12:37:06Z",
-    "inmate_number": "1579187",
-    "name": "GAMBREL ANTHONY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-12T12:37:06Z",
-    "inmate_number": "1300111",
-    "name": "MARTIN ROBERT",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-12T12:37:06Z",
-    "inmate_number": "14477197",
-    "name": "SOUMARE MOUSSA",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "booked",
     "timestamp_utc": "2026-07-12T14:14:09Z",
     "inmate_number": "2810832",
     "name": "SINCLAIR NOLAN",
@@ -27328,5 +27292,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-19T13:03:58Z",
+    "inmate_number": "14477134",
+    "name": "MULLETT PATRICK",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-19T13:03:58Z",
+    "inmate_number": "14788290",
+    "name": "DAY DONALD",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
