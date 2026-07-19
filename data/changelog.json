@@ -1,20 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14812027",
-    "name": "PARSONS JAYDIN",
-    "timestamp_utc": "2026-05-31T07:05:24Z",
-    "note": "booked 5/31/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14812031",
-    "name": "AVALOS-POLANCO NORA",
-    "timestamp_utc": "2026-05-31T07:05:24Z",
-    "note": "booked 5/31/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "14812028",
     "name": "AVALOS-POLANCO JOSUE",
     "timestamp_utc": "2026-05-31T07:05:24Z",
@@ -69998,5 +69984,19 @@
     "name": "OLAGBEMIRO JADDEN",
     "timestamp_utc": "2026-07-19T20:40:43Z",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2325832",
+    "name": "WISE JOSHUA",
+    "timestamp_utc": "2026-07-19T22:34:18Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2509705",
+    "name": "PENN ASHLEY",
+    "timestamp_utc": "2026-07-19T22:34:18Z",
+    "note": "booked 7/19/26"
   }
 ]

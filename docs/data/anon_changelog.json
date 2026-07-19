@@ -17521,39 +17521,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-12T21:32:45Z",
-    "inmate_number": "14234139",
-    "name": "THOMAS SHAQUIL",
+    "date": "2026-07-12",
     "tier": "MM",
-    "category": "Upsetting public or private receptacles",
-    "note": ""
+    "category": "Upsetting public or private receptacles"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-12T22:31:14Z",
-    "inmate_number": "14812986",
-    "name": "BEKELE CHANTE",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/12/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T22:31:14Z",
-    "inmate_number": "14815880",
-    "name": "THOMAS MIKEL",
-    "tier": "M1",
-    "category": "Driving under FRA suspension",
-    "note": "booked 7/12/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T22:31:14Z",
-    "inmate_number": "2500853",
-    "name": "HENDERSON DERRICK",
+    "date": "2026-07-12",
     "tier": "M4",
-    "category": "Menacing",
-    "note": "booked (date not reported)"
+    "category": "Menacing"
   },
   {
     "event": "booked",
@@ -27445,5 +27421,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-19T22:34:18Z",
+    "inmate_number": "2325832",
+    "name": "WISE JOSHUA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T22:34:18Z",
+    "inmate_number": "2509705",
+    "name": "PENN ASHLEY",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 7/19/26"
   }
 ]
