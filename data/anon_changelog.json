@@ -17431,93 +17431,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "14151180",
-    "name": "SPIVEY ALICIA",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "14245577",
-    "name": "HORTON LANDON",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "14751868",
-    "name": "REYES MERCEDES",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "14816571",
-    "name": "FUENTES-AREVALO GUSTAVO",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/12/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "14816569",
-    "name": "MARTINEZ ABEL",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "14816572",
-    "name": "CUMMINGS CHLOE",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/12/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "14816573",
-    "name": "WILLIAMS JUSTIN",
+    "date": "2026-07-12",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 7/12/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "1897419",
-    "name": "CALVIN ANTHONY",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/12/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "2332305",
-    "name": "GARDNER GREGORY",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-12T08:39:43Z",
-    "inmate_number": "2509652",
-    "name": "EDWARDS SARAH",
+    "date": "2026-07-12",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 7/12/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -27328,5 +27250,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T09:18:08Z",
+    "inmate_number": "14817390",
+    "name": "PEREZ MARFIL",
+    "tier": "M1",
+    "category": "Having physical control of vehicle while under influence",
+    "note": "booked 7/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T09:18:08Z",
+    "inmate_number": "2255751",
+    "name": "CROSSTY ANTWAN",
+    "tier": "MM",
+    "category": "Rules for driving in marked lanes",
+    "note": "booked 7/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-19T09:18:08Z",
+    "inmate_number": "2362973",
+    "name": "FOSTER VATON",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
   }
 ]
