@@ -17503,15 +17503,6 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-12T18:37:12Z",
-    "inmate_number": "14766455",
-    "name": "MOORE UREKUS",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
     "timestamp_utc": "2026-07-12T19:50:04Z",
     "inmate_number": "14580636",
     "name": "MCCALLEY NAMARAY",
@@ -27426,6 +27417,33 @@
     "name": "SWEETEN LINDSEY",
     "tier": null,
     "category": null,
+    "note": "booked 7/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T18:38:02Z",
+    "inmate_number": "1340901",
+    "name": "HARRIS JOHN",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 7/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-19T18:38:02Z",
+    "inmate_number": "14817407",
+    "name": "KIRBY ANTHONY",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-19T18:38:02Z",
+    "inmate_number": "2564966",
+    "name": "LANGDON DANIEL",
+    "tier": "F3",
+    "category": "Escape",
     "note": "booked 7/19/26"
   }
 ]
