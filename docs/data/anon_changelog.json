@@ -17797,102 +17797,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "14444605",
-    "name": "WILLIAMS TYRA",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "1995018",
-    "name": "DIXON DOMINIC",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/13/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "215790",
-    "name": "CARLOSS FRANCIS",
+    "date": "2026-07-13",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 7/13/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "2259358",
-    "name": "COULTER WILLIAM",
+    "date": "2026-07-13",
     "tier": "F2",
-    "category": "Burglary",
-    "note": "booked 7/13/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "289392",
-    "name": "CROCKER TROY",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked 7/13/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "1520710",
-    "name": "BRADLEY THOMAS",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "14704639",
-    "name": "CROSSTY TYIYANA",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "1914340",
-    "name": "EDWARDS MELVIN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "14625005",
-    "name": "ERNEST COLIN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "14227305",
-    "name": "MASON NICOLE",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-13T20:53:49Z",
-    "inmate_number": "14151180",
-    "name": "SPIVEY ALICIA",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Burglary"
   },
   {
     "event": "booked",
@@ -27991,5 +27904,68 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-20T21:33:23Z",
+    "inmate_number": "14369682",
+    "name": "CHANDLER DEAN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 7/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-20T21:33:23Z",
+    "inmate_number": "14615873",
+    "name": "BOOTH SHANE",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-20T21:33:23Z",
+    "inmate_number": "14627921",
+    "name": "HIGGINS GIOVONNI",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-20T21:33:23Z",
+    "inmate_number": "14817527",
+    "name": "DUMMITT SYDNI",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 7/20/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-20T21:33:23Z",
+    "inmate_number": "1996331",
+    "name": "WILLIS LAMORIS",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 7/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-20T21:33:23Z",
+    "inmate_number": "2069940",
+    "name": "JOHNSON RODNEY",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-20T21:33:23Z",
+    "inmate_number": "2359732",
+    "name": "WYNN MARCUS",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 7/20/26"
   }
 ]
