@@ -18397,75 +18397,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-15T11:08:24Z",
-    "inmate_number": "1087236",
-    "name": "COLEMAN LEROY",
+    "date": "2026-07-15",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 7/15/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-15T11:08:24Z",
-    "inmate_number": "14752297",
-    "name": "MCCOLLUM DERONN",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/15/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-15T11:08:24Z",
-    "inmate_number": "14692781",
-    "name": "ELDER ZACHARY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-15T11:08:24Z",
-    "inmate_number": "14360268",
-    "name": "MCCLINTON DEMONTE",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-15T11:08:24Z",
-    "inmate_number": "14577093",
-    "name": "NAPIER JACOB",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-15T11:08:24Z",
-    "inmate_number": "14566029",
-    "name": "STURGEON DAVID",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-15T11:08:24Z",
-    "inmate_number": "14815880",
-    "name": "THOMAS MIKEL",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-15T11:08:24Z",
-    "inmate_number": "14815767",
-    "name": "WINTERS JAMIE",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
@@ -28645,5 +28579,68 @@
     "tier": "M1",
     "category": "Improperly handling firearms in a motor vehicle",
     "note": "booked 7/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T11:45:49Z",
+    "inmate_number": "14541813",
+    "name": "JARRETT QURON",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-22T11:45:49Z",
+    "inmate_number": "1496446",
+    "name": "CLIFTON LAMARK",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-22T11:45:49Z",
+    "inmate_number": "2554527",
+    "name": "STARKEY KENNETH",
+    "tier": "MM",
+    "category": "Slow speed (impeding traffic)",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T11:45:49Z",
+    "inmate_number": "2597828",
+    "name": "PEGUES KEVIN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T11:45:49Z",
+    "inmate_number": "2601247",
+    "name": "WOGENSTAHL TYLER",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T11:45:49Z",
+    "inmate_number": "2816429",
+    "name": "HAYES JELANI",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T11:45:49Z",
+    "inmate_number": "1551481",
+    "name": "MOATS DONTA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
