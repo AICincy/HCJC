@@ -18373,48 +18373,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-15T09:21:36Z",
-    "inmate_number": "14434693",
-    "name": "SPEARS KENYHLA",
+    "date": "2026-07-15",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": "booked 7/15/26"
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-15T09:21:36Z",
-    "inmate_number": "14816981",
-    "name": "HAWK TAMEKA",
+    "date": "2026-07-15",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 7/15/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-15T09:21:36Z",
-    "inmate_number": "2079774",
-    "name": "CHALK ALFONSO",
+    "date": "2026-07-15",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-15T09:21:36Z",
-    "inmate_number": "2448923",
-    "name": "DRUMMOND LESLIE",
+    "date": "2026-07-15",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-15T09:21:36Z",
-    "inmate_number": "2681832",
-    "name": "MINNIFIELD RAYNISE",
-    "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Violating protection order"
   },
   {
     "event": "booked",
@@ -28612,5 +28591,59 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-22T09:57:04Z",
+    "inmate_number": "14541813",
+    "name": "JARRETT QURON",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-22T09:57:04Z",
+    "inmate_number": "14791269",
+    "name": "TIEMANN-AYERS JADIN",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T09:57:04Z",
+    "inmate_number": "14817730",
+    "name": "BEAUDIN MARC",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-22T09:57:04Z",
+    "inmate_number": "2024063",
+    "name": "WOOMBLES PRESTON",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-22T09:57:04Z",
+    "inmate_number": "2110594",
+    "name": "MILES RAHVAE",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-22T09:57:04Z",
+    "inmate_number": "2601247",
+    "name": "WOGENSTAHL TYLER",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle",
+    "note": "booked 7/22/26"
   }
 ]
