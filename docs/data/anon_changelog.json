@@ -11580,6 +11580,12 @@
     "category": "Booking hold (no ORC code on file)"
   },
   {
+    "event": "booked",
+    "date": "2026-06-21",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
     "event": "updated",
     "date": "2026-06-22",
     "tier": null,
@@ -11950,6 +11956,12 @@
     "date": "2026-06-22",
     "tier": "F5",
     "category": "Harassment with a bodily substance"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-22",
+    "tier": "F5",
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -18406,42 +18418,6 @@
     "date": "2026-07-15",
     "tier": "M1",
     "category": "Domestic violence"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-15T14:27:09Z",
-    "inmate_number": "14503254",
-    "name": "HOWARD ANTOINE",
-    "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-15T14:27:09Z",
-    "inmate_number": "14556203",
-    "name": "NEAL JONATHAN",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/15/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-15T14:27:09Z",
-    "inmate_number": "2039562",
-    "name": "BATTLE JAMES",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/15/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-07-15T14:27:09Z",
-    "inmate_number": "2622554",
-    "name": "BAUMANN CHRISTIAN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
   },
   {
     "event": "booked",
@@ -28636,6 +28612,150 @@
     "timestamp_utc": "2026-07-22T13:12:01Z",
     "inmate_number": "14815763",
     "name": "LOPEZ MAMIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14125643",
+    "name": "NELSON MAIHE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14198201",
+    "name": "LANIER JAMEELA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14226064",
+    "name": "GIERYN JOSEPH",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14230110",
+    "name": "CAMPBELL THOMAS",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14335064",
+    "name": "JAMISON LORENZO",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14804867",
+    "name": "SUTTLES KEVIN",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "1496446",
+    "name": "CLIFTON LAMARK",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14814551",
+    "name": "ESTRADA-PINEDA DAVID",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14157110",
+    "name": "BEE JUSTIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "2121710",
+    "name": "CLARK HAVEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14442656",
+    "name": "COLEMAN THOMAS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14769520",
+    "name": "PEOPLES CHARLOTTE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14043142",
+    "name": "SHABAZZ HARUN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "2253820",
+    "name": "SWEENEY SARA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14791269",
+    "name": "TIEMANN-AYERS JADIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-22T15:17:48Z",
+    "inmate_number": "14817577",
+    "name": "WILLIAMS MEKHI",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
