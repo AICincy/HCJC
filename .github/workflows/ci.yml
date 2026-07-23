@@ -26,7 +26,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - run: pip install -r requirements.txt
-      - run: pip install ruff==0.15.20 mypy==2.1.0
+      - run: pip install ruff==0.15.22 mypy==2.3.0
       - name: Lint (ruff)
         run: ruff check .
       - name: Type check (mypy)
