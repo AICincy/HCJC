@@ -354,6 +354,9 @@ concurrency control does not address it.
 
 ### Gemini bot reviews
 
+- **Retired (owner, 2026-07-23).** The Gemini bot is no longer active and
+  its review is no longer part of the PR process. The rules below are
+  historical; do not wait for or poll for Gemini comments on new PRs.
 - Reviews every PR, usually 1-2 comments. Track record: sometimes right
   (cap carry-forward, breakpoint documentation, checklist wording),
   sometimes wrong (cls collapse selectors, `git clean` over the

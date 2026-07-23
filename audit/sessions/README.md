@@ -59,6 +59,21 @@ claude.ai; the filing step is a local export, not a web export. Work
 product: PRs #387-#391 (coverage audit + cleanup, wiki sync, stray-static-
 docs removal, CLAUDE.md corrections, manual-sweep runbook), 2026-07-05.
 
+## Supplemental local transcripts (filed 2026-07-23)
+
+Local Claude Code sessions on this repository that are NOT cited in the
+CLAUDE.md chain-of-custody table. Filed for completeness of the local
+record; not required by any court citation. All copied byte-identical
+from `~/.claude/projects/C--Users-jared-Documents-GitHub-HCJC/` and
+secret-scanned before public filing (no literal credentials; token
+fetches appear only as the credential-fill pattern).
+
+| Session ID | Transcript file | Date range | sha256 |
+| :-- | :-- | :-- | :-- |
+| 45ea9c5f-bd0c-4897-a1e8-3c12b24a673a | `45ea9c5f-bd0c-4897-a1e8-3c12b24a673a.jsonl` | 2026-07-09 (06:43Z to 16:36Z) | `ad1be37179cbb63b20569f629bb1ea19975876a1e86f07ec6d6ff075a09588d7` |
+| a0e62bc2-30d0-4eb5-8a8b-90af64fb7451 | `a0e62bc2-30d0-4eb5-8a8b-90af64fb7451.jsonl` | 2026-07-09 (22:50Z to 23:09Z) | `8b1da1a27064a74982c833f240071116269cd22fb2164423230e9be5e29b3477` |
+| d0cce9c4-c22c-4ba8-bd18-989ce2d2b759 | `d0cce9c4-c22c-4ba8-bd18-989ce2d2b759.jsonl` | 2026-07-08T15:50Z to 2026-07-09T06:42Z | `1e9548c50256ce289bab46f57018ff184c06502fb6779255defc8ad3485e045d` |
+
 ## Git corroboration (measured 2026-07-08)
 
 Committer-date span of commits carrying each session ID in a trailer
