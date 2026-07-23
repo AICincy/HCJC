@@ -129,9 +129,11 @@ Violating them imposes cognitive cost the owner cannot afford.
 
 ## Repo facts
 
-- Push target / dev branch: the per-task branch assigned by the agent harness
-  (e.g. `claude/<slug>-<id>`). Push there only; I cannot push to `main`, that's
-  on the owner.
+- Push target / dev branch: a per-task `claude/<slug>` branch. Claude runs
+  the PR process end to end (owner directive, 2026-07-23): branch, push,
+  open the PR, merge it via the REST API, delete the branch. The owner does
+  not merge. Direct pushes to `main` stay off-limits; land everything
+  through a PR merge.
 - `data/surnames.txt` is A-Z single letters on purpose (HCSO's last-name search is a
   substring match, so 26 letters cover the whole roster with dedup). Don't revert.
 - Build locally: `JCSTREAM_SITE_BASE_URL="" python -m web.build`
@@ -261,8 +263,9 @@ concurrency control does not address it.
 
 ### Merge discipline
 
-- One logical change per PR. The owner merges draft PRs within minutes;
-  never queue commits on a PR expecting time to update it.
+- One logical change per PR. Claude merges its own PRs via the REST API
+  once verification passes (owner directive, 2026-07-23); the owner does
+  not merge. Never queue commits on a PR after merging it.
 - BEFORE pushing additional commits to a PR branch, check whether the PR
   already merged (the GitHub PR tools; `gh pr view <n> --json state` where
   gh is available). A merged-while-pushing race (PR #360) silently dropped
