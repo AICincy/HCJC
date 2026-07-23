@@ -483231,5 +483231,788 @@
     "roster_stale_hours": 1.6,
     "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
     "prev_sha256": "e8774303543262b95d3b601f80937e5ea0ece0fc5dc4db710e9bb96750cafa5f"
+  },
+  {
+    "timestamp_utc": "2026-07-23T15:06:00Z",
+    "event": "recovered",
+    "seen_count": 1300,
+    "note": "HCSO list sweep succeeded; automated access restored.",
+    "prev_sha256": "a8d320afa172f5d1b0be3babce58aa76f647dac732baacd14b94d3ca96298911"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:09Z",
+    "inmate_id": "14053325",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "99fd744910e173a7e4883bc11825e54734fec59af18b1fb98471dd91dad38067"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:09Z",
+    "inmate_id": "1128741",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "e7aef2c3d7caa36de0dd7963392b5b9978c5e70b8b04308be1a779c5bc2a78f6"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:10Z",
+    "inmate_id": "14072887",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "15d311262f996be79dc6711779cec4c49fe96e32757e0c9137fc478ee2be2cc6"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:11Z",
+    "inmate_id": "1161024",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "925923cafbf5d04647288e423fe445c82f42431d7d99f332b0eb5f49b39706d1"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:13Z",
+    "inmate_id": "14085830",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "905b688e0027ebfaff626d2d470a5a035d1a1ef8a3a11c86c22ce9ecf7d59e5d"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:13Z",
+    "inmate_id": "14125643",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "f85a4462b8e1d7a189043917a4e7fab2974023ca1031a5f4a67a6019d3f48f2c"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:14Z",
+    "inmate_id": "14245577",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "10ee5b1aeb5070dfab87b121e22a0902a9900d2ce81156d2778cbf49e4ac5062"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:14Z",
+    "inmate_id": "14234139",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "5d19230ae828ee2e950adc4048aeda4cae49dcc485e38a1d4e303c998d8ea8c4"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:15Z",
+    "inmate_id": "14160171",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "c98321a596edb14bc78aa0228acf35b7ff02fbbea8834224e06f65402757b9c5"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:15Z",
+    "inmate_id": "14140677",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "c111fd162268a141721dc6beb7cd984ca03aabaa46e852cc2c828a1e2374d050"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:16Z",
+    "inmate_id": "14244981",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "3099fdae408505d0794fc5e49ff32a0d36e956630af15a69ed7829f54ec9e219"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:17Z",
+    "inmate_id": "14274579",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "ca95014a6001285bbd7edf7f191ef70a101f739a9b4794f4577b3f94017e19c3"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:17Z",
+    "inmate_id": "14250004",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "ba93187d718b00719c80a7c908869dea7c238c9d1c02f9f3f3f1ab26d03580d2"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:18Z",
+    "inmate_id": "14335064",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "a85a3ed8c34ecfee4b405fa94fd041bc1b56bc353679b3193f5a8579969f0d69"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:19Z",
+    "inmate_id": "14363989",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "12539c216e9f23b9c6e86a2b45dfc52000dadb084c7a512af2f56b11b0e3f966"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:20Z",
+    "inmate_id": "14371271",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "7e5969d67d861f06316d3bc26eca2b0c8d5eab2dfaf354fcb52faa6c5c36891a"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:21Z",
+    "inmate_id": "14365410",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "d07b4f9506b466bb48a4f2dd02d81cc29a8c62509592dbc3d43738f18a48adf0"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:22Z",
+    "inmate_id": "14378226",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "a0a87f562f7acf3489ff2c088d3e23c0e2fd78c304dd1b37a75527799386f266"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:22Z",
+    "inmate_id": "14466411",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "8d0bcaf1a1f2707a09275d1c521188c3f5056508c922604fc014caf76443eade"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:24Z",
+    "inmate_id": "14416138",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "aec41502555a8712cd764a6e94043452b72049ec07a5df0671a7f5a0a55d8c1d"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:24Z",
+    "inmate_id": "14431717",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "922e5c6c3a645129a9ec6f2572642c58089a1580d653fb914ef7097f65ddc440"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:25Z",
+    "inmate_id": "14502724",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "00e718e18b6c2e42ebe9727c90fe08f04a3339ba1417046462bb17fa3f730775"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:26Z",
+    "inmate_id": "14637836",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "25322d487af6524b800b262ae0ac19c45ec434958b80603b0570fb201384048c"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:27Z",
+    "inmate_id": "14512246",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "e8aaa8fcc58c220ea421c947f3fb71c18df5351e6a181035f1cb895a921f3997"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:27Z",
+    "inmate_id": "14558727",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "79a99bb43df06026a611a85a69aae96e5b48790a49965509ddb9de56b212e205"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:27Z",
+    "inmate_id": "14696152",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "e92aa7eafb358c8bd8caa3313e0f85099b7d13d24b1279f8679c6bc2aeefdc63"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:27Z",
+    "inmate_id": "14640288",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "6523a4d156dfea8185ebc8f613326b5c343371b6cf2f0c272992c8b04124ce3b"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:28Z",
+    "inmate_id": "14735012",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "392e106f772288d248078010f9155a5728f50d966a7089d31ec15e8ceee1046d"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:29Z",
+    "inmate_id": "14735206",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "47260ee74296ba86e830e9a3de7b454f2b5523dba77ea1e6a38d9a4a80a38744"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:30Z",
+    "inmate_id": "14767633",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "bdd614193bc59295c928e1ee58615a4e65872c82b4794d2f8d3607f0f1f9d174"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:31Z",
+    "inmate_id": "14756324",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "2d07a17926bb6f1bbc817b12a8496a8df5997e2ecc3b3a95ac2a96fb25712aa2"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:32Z",
+    "inmate_id": "14769126",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "c0ea44c23875230ff35cea9cb7df5abe09a20cf606c8bb393b953fda8f32f221"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:32Z",
+    "inmate_id": "14793896",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "0cdd51c3bca62148cfc5bc40a3470010423242860ed5e440fbbb5004731a79ec"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:34Z",
+    "inmate_id": "14784134",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "36f05e19742934df57f20798d508a201a1372e9771e02936226f6ac8feb99007"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:34Z",
+    "inmate_id": "14796214",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "c8695de49c4537d7f2fd51dd8e330f2131a266247c3b17bdbadde3dc71b732ba"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:35Z",
+    "inmate_id": "14813696",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "ab942c9a13051083cd67cd27165606b2f4cc61749048687dc48785ac830729b8"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:36Z",
+    "inmate_id": "14801131",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "96d11befcf059117ea85d41310267135c5385e4c31723651570a310a6b17a2c9"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:36Z",
+    "inmate_id": "14809070",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "81a2f3fda609a5ebedf4e4793a7e303bfe7f2a7e92301d169b885271b90e94a6"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:37Z",
+    "inmate_id": "14817477",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "909b9aa11830451462abc2c49ad5e46cf1248993359dca8d86d225985b7990c7"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:38Z",
+    "inmate_id": "1496493",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "fe200c9b48cedfe006b119747de264002d49852c947092758f889d9901ef277d"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:39Z",
+    "inmate_id": "14817143",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "1e309b14779971faa74a78e07f8e248e920cffb14caf4d3c15375b2b2657e96f"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:40Z",
+    "inmate_id": "1562544",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "958244c5e3cd1a9d22e7893ae1acdeb05442ccf974962caceca8d0b2bd5f2878"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:42Z",
+    "inmate_id": "1793128",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "3e845c24ff5ede34963cde541302181aae91085f4e5050d8ee792dfd0cae8c5a"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:42Z",
+    "inmate_id": "1582343",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "5e9b03f1a117f2412170f65d216032e225a2ce6d64627651181167577730fa1a"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:43Z",
+    "inmate_id": "1619795",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "a096de9983bb9c418a682758ab1dff53e546c872e79693f2fcf92b6c31567564"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:44Z",
+    "inmate_id": "1788178",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "5041a60297ca20739946313c04202fee34865ce48d3da1dfe6f7bd5922e04787"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:44Z",
+    "inmate_id": "1910992",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "71de77d3c552556033c027ee5a396cbfa65e1deb5eec5b075e3c2143263ffccb"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:45Z",
+    "inmate_id": "1914577",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "e731b80aca74a9ea335935351fc4086d754e506e120999099621b860b2c8048e"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:45Z",
+    "inmate_id": "2051933",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "5ffd4a66af36f516be01ec554f8da0d2b3051e509bdbafbb96178e6eabcbcb54"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:47Z",
+    "inmate_id": "2126893",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "6e258afee732bf853d2d64952b25158069f96888be224a6b8e8e6de2c7ec8187"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:48Z",
+    "inmate_id": "2144200",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "feac96c9e404c9d500088fdf8fe95adb7a7b799a601ba412bedd20020b310148"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:49Z",
+    "inmate_id": "1802638",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "8245b1ea30048d16778ffe2acc14c090262b56b43b9981415060b4ce68f801ee"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:49Z",
+    "inmate_id": "2148132",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "14c59fca66fa4adae37124b586f03ca43b197551e097bce73de9553f79aab172"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:50Z",
+    "inmate_id": "2259746",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "cdd69dba61873b0e89267b517a6c0c09bebf7acbaadbdbb484c02c117e8f37cb"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:50Z",
+    "inmate_id": "2201150",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "3e65eb1635c44e00452992092931eedd754599e82a5c0e761602846ffc030064"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:51Z",
+    "inmate_id": "2334448",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "cf4e34f6e02c4ae9cee118c0de1f249c0cddfba398a106ac3d43279b637ce4ec"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:52Z",
+    "inmate_id": "2201410",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "0ffe0433f87ad524fffd94c0a4ae21937f0afa8a2fe727384c4542ed6d7c6484"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:53Z",
+    "inmate_id": "2282261",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "ef805a58de615ad9480ce5d098976f859e85bc93f404a4775ecff7b3e9f42224"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:53Z",
+    "inmate_id": "2348841",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "75a2663eb2792e99982bb6e81c4948f89a1d5e9fb0dd724a08ba48ad668216e6"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:54Z",
+    "inmate_id": "2335874",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "2ae7e535e2c836b6df9fe5583b4f47b668bebb431cd97bd4a84016c17c014fd4"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:54Z",
+    "inmate_id": "2350730",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "af442ea0ccb6576b2000dbac2eddeb38e674c4a1376feea857d33fc79c75c1ea"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:55Z",
+    "inmate_id": "2346573",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "6c3d9a063d0414f0c3e04397c12a143fe613c1ea35fe324b150045f478197036"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:57Z",
+    "inmate_id": "2362973",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "ed21bc4ac8e29bc65b646375e0f2ad43a989023e0c88beac7455cc022c595a08"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:58Z",
+    "inmate_id": "2374240",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "5d159afe26defa13bec7cc582f43219f36f1cf7b4fe566ea69bde02fae7a66ad"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:58Z",
+    "inmate_id": "2400591",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "aac505fef0b5112b50b057ae588b6e318234d324f79a91e1c61b772c93865afd"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:59Z",
+    "inmate_id": "2412901",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "b263832498d74f32d8fea4b89c063ff3709764a788c752de7fbb5484a3f41639"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:06:59Z",
+    "inmate_id": "2447252",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "ccd71d13d83f9011c0ab1b3f719979d6bd86630b7976ce5c9c8c0e11bbd915b1"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:00Z",
+    "inmate_id": "2452509",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "375336bbf00bd8879816a4d1a484d6cfc857aca828936f1d99c5118e329312b8"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:01Z",
+    "inmate_id": "2423479",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "d567e806b870c54b6a0d2f2d1b518b61ff32b4f8b6a94f8e82bfb3d3d3b17785"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:01Z",
+    "inmate_id": "2459860",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "6f17952986a4d250ef895d6d9f1b90ceddb5227ae1671cc93574c52c86e5a227"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:03Z",
+    "inmate_id": "2470416",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "3b9b41e2d34972ff4749743ff063b2017061325eb3f5ea578c2e7509aa7794fb"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:03Z",
+    "inmate_id": "2473904",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "43ecbac6382c81ac33ead3d283c09843ac13fe0d17cd883ce62df099029e3170"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:04Z",
+    "inmate_id": "2498698",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "324ea42cf362f4d2a1165bf30c5671c74ad14202b3a717f1ac15c0e0cc166eed"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:05Z",
+    "inmate_id": "2509705",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "e6f6d8410726b0bdaa011e5a77bb41d06a4479ff7e0eed9949c6ecab900fec49"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:05Z",
+    "inmate_id": "2509652",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "24e8439850a8e4667b6b66aa7fa24c75a1ec8706d1eea3a35e25aa8b3443ea2b"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:06Z",
+    "inmate_id": "2535490",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "829ffccdc92ec63456273c01aabf6eb4cbc7242b5d3c56321c4994dc624c6b8b"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:08Z",
+    "inmate_id": "2532320",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "d8debccdb1aa240ea18bd788d75bb4876a8d4a0f68412439069c3716d2c73667"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:08Z",
+    "inmate_id": "2569562",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "5bc2601127b2fcfca39a3ea3aa573daa464161aab13c600ac422c8a175ab17cd"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:08Z",
+    "inmate_id": "2546528",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "70022b4b891c63eafeefc8b29d447184e47cbe1ab6cd4fcf0276343d087e8df2"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:09Z",
+    "inmate_id": "2572559",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "f468876ad655903b29a935bc4f10b30b363afe7f1f3665ad530a8ee6652b586e"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:09Z",
+    "inmate_id": "2558886",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "411a4dd8dc5b511a4ac83907a6a77f6b87899da9606086ebf03c66fdb14f5ff9"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:10Z",
+    "inmate_id": "2578354",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "6975b89acc5f87a07e5056433d115f4cd0509fb082cf338bf8c3cda4dcf6b908"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:10Z",
+    "inmate_id": "2597828",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "dd84e4d6161e26df9422b297d2724496993c7f4dc4961368a3b2ebe623aefb77"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:10Z",
+    "inmate_id": "2637916",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "f32db7307b236c92d7ad6df04dd98f80f4be64389cb74000bc13445ab3c948d2"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:11Z",
+    "inmate_id": "2619233",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "42498a121fb002283ba430a560f1b06c88e3c1551900cacc3a3a7ce5416725e1"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:11Z",
+    "inmate_id": "2644604",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "b2041d9bc23a47b53ee5b02de6ad841b2e31c319d69b57ff1ed6ffdb08d8afe1"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:12Z",
+    "inmate_id": "2638339",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "045b4d3b953533a2c2ddf00b7481f9fc167f6fc7f1e86aefc91d46e61de1a4ca"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:16Z",
+    "inmate_id": "2780422",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "0b8f7de1b08307608ae3ff0f6c60ae670ee669265b936b38856310dd093d0624"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:17Z",
+    "inmate_id": "2829611",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "29ea224b9e96f9e8f901e928267c56885127abaee55e5ae664ae7b1ced685ad2"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:17Z",
+    "inmate_id": "682957",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "deb7271aa94a76b61f58b490d6748131ed8648da890a6dbf6720e949586f8d75"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:17Z",
+    "inmate_id": "2784901",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "b065cb2943e86b24871f3856e8bafefe706ee62016588011e10da2ad5554f849"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:17Z",
+    "inmate_id": "2683700",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "5ff7b0d6992da3cd2b8018f2fd9ae1ec0537d0ae69e7a6ff4aa7da162477cd6c"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:17Z",
+    "inmate_id": "2663197",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "c59114fec453af3ab3565db1f88ced0dc9e1af23bd729a168ad314a083c22158"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:17Z",
+    "inmate_id": "869454",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "250d634928211061c5a0589aa541aa8f579fe62a3520f3303296fdd6b1074619"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:17Z",
+    "inmate_id": "658780",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "c8709404498070d407c4876d49d3617b737c319b88011d428aecfbdb8cd748e4"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:17Z",
+    "inmate_id": "2761213",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "83e80a618f6ea6501bb0e6c228aa5815bea16870baecd27b8c11aa2731b93e5a"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-07-23T15:07:18Z",
+    "inmate_id": "2776903",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "936639972c2fddad1221efa85a233b9c3280bc9f2d4836bb47fbeedbfb95d6bc"
   }
 ]
