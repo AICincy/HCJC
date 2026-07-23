@@ -36,14 +36,18 @@ verbatim. Do not abbreviate. Do not redact. Do not reformat.
 | session_01NGMSLESEepbgV8aSn4reVG | [VERIFY] |
 | session_019qfYLXARs48orCHaQdM8cA | 2026-07-02 [VERIFY] |
 | session_01DCTmLdgUma5GYA1JBrywGp | 2026-07-03 [VERIFY] |
-| db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e (local Claude Code session) | 2026-07-05 [VERIFY] |
+| db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e (local Claude Code session) | 2026-07-05 (confirmed from filed transcript) |
 
 Authoritative storage location: `audit/sessions/` in this repository
 (designated 2026-07-02; ledger and filing procedure in
-`audit/sessions/README.md`). Transcripts are **not yet filed**; until they
-are, they exist only in the owner's claude.ai session history, and a court
-submission citing these IDs must say so. The 2026-06-16 code review
-flagged the undocumented location as a Critical finding. See
+`audit/sessions/README.md`). The local session transcript (db5bf8bb) was
+filed 2026-07-23. The six claude.ai session transcripts are **not yet
+filed**; until they are, they exist only in the owner's claude.ai session
+history, and a court submission citing those IDs must say so. Note: the
+claude.ai account data export does NOT contain claude.ai/code session
+transcripts (verified against both accounts' exports 2026-07-23); each must
+be exported from inside the session UI. The 2026-06-16 code review flagged
+the undocumented location as a Critical finding. See
 `audit/code-review-2026-06-16/00-summary.md`.
 
 Retrieval procedure:
@@ -350,6 +354,9 @@ concurrency control does not address it.
 
 ### Gemini bot reviews
 
+- **Retired (owner, 2026-07-23).** The Gemini bot is no longer active and
+  its review is no longer part of the PR process. The rules below are
+  historical; do not wait for or poll for Gemini comments on new PRs.
 - Reviews every PR, usually 1-2 comments. Track record: sometimes right
   (cap carry-forward, breakpoint documentation, checklist wording),
   sometimes wrong (cls collapse selectors, `git clean` over the

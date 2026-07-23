@@ -6,10 +6,19 @@ CLAUDE.md ("Chain of Custody: Session IDs"). The 2026-06-16 code review
 flagged the absence of a documented storage location as a Critical finding
 (`audit/code-review-2026-06-16/00-summary.md`).
 
-Status: **designated, not yet populated.** No transcript has been filed.
-Until every transcript below is filed, court submissions citing these
-session IDs must state that the transcripts are held in the owner's
+Status: **partially populated.** The local session transcript
+(`db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e`) was filed 2026-07-23. The six
+claude.ai sessions remain unfiled; until they are, court submissions citing
+those session IDs must state that the transcripts are held in the owner's
 claude.ai session history pending export.
+
+**Export-path finding (2026-07-23):** the standard claude.ai account data
+export (Settings > Privacy > Export data) does NOT include claude.ai/code
+session transcripts. Both accounts' exports were checked; every occurrence
+of the six session IDs in them is a text mention inside ordinary chat
+conversations, not a session record. The six transcripts must be retrieved
+from inside each session at `https://claude.ai/code/<session_id>` (open the
+session and export/copy its transcript), not via the account data export.
 
 ## Filing procedure (owner account required)
 
@@ -32,7 +41,7 @@ claude.ai session history pending export.
 | session_01NGMSLESEepbgV8aSn4reVG | not yet filed | not yet filed | [VERIFY] | [VERIFY] |
 | session_019qfYLXARs48orCHaQdM8cA | not yet filed | not yet filed | 2026-07-02 [VERIFY] | [VERIFY] |
 | session_01DCTmLdgUma5GYA1JBrywGp | not yet filed | not yet filed | 2026-07-03 [VERIFY] | [VERIFY] |
-| db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e | not yet filed | not yet filed | 2026-07-05 [VERIFY] | [VERIFY] |
+| db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e | `db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e.jsonl` | `db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e.jsonl` (copied byte-identical from `~/.claude/projects/C--Users-jared-Documents-GitHub-HCJC/`; sha256 `2e829076c29ed6b9d82cdc5e909426a0b117433b7764f3a84d2cbd2251a98590`) | 2026-07-05 (00:23Z to 22:57Z) | 2026-07-23 |
 
 Note: the four original session IDs do not appear in any commit trailer in
 this repository (checked 2026-07-02 with `git log --all --grep`), so their
@@ -49,6 +58,21 @@ in the owner's local Claude Code session storage
 claude.ai; the filing step is a local export, not a web export. Work
 product: PRs #387-#391 (coverage audit + cleanup, wiki sync, stray-static-
 docs removal, CLAUDE.md corrections, manual-sweep runbook), 2026-07-05.
+
+## Supplemental local transcripts (filed 2026-07-23)
+
+Local Claude Code sessions on this repository that are NOT cited in the
+CLAUDE.md chain-of-custody table. Filed for completeness of the local
+record; not required by any court citation. All copied byte-identical
+from `~/.claude/projects/C--Users-jared-Documents-GitHub-HCJC/` and
+secret-scanned before public filing (no literal credentials; token
+fetches appear only as the credential-fill pattern).
+
+| Session ID | Transcript file | Date range | sha256 |
+| :-- | :-- | :-- | :-- |
+| 45ea9c5f-bd0c-4897-a1e8-3c12b24a673a | `45ea9c5f-bd0c-4897-a1e8-3c12b24a673a.jsonl` | 2026-07-09 (06:43Z to 16:36Z) | `ad1be37179cbb63b20569f629bb1ea19975876a1e86f07ec6d6ff075a09588d7` |
+| a0e62bc2-30d0-4eb5-8a8b-90af64fb7451 | `a0e62bc2-30d0-4eb5-8a8b-90af64fb7451.jsonl` | 2026-07-09 (22:50Z to 23:09Z) | `8b1da1a27064a74982c833f240071116269cd22fb2164423230e9be5e29b3477` |
+| d0cce9c4-c22c-4ba8-bd18-989ce2d2b759 | `d0cce9c4-c22c-4ba8-bd18-989ce2d2b759.jsonl` | 2026-07-08T15:50Z to 2026-07-09T06:42Z | `1e9548c50256ce289bab46f57018ff184c06502fb6779255defc8ad3485e045d` |
 
 ## Git corroboration (measured 2026-07-08)
 
