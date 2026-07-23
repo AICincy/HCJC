@@ -21,7 +21,7 @@
   --fg:           #1A1A1A;
   --fg-soft:      #333333;
   --fg-muted:     #5c5c5c;
-  --fg-dim:       #858585;
+  --fg-dim:       #6E6E6E;  /* 4.7:1 on --bg: AA for the 10-11px stamp/caption sites (css-F1) */
 
   /* #B33A2A and #FDF5EE repeat literally across semantic tokens on purpose:
      the print :root overrides --accent and --surface independently, so

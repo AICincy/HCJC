@@ -423,7 +423,7 @@
        inmate.booking_date so every record carries at least one history row. #}
     <li class="status-row">
       <span class="tag tag-booked">booked</span>
-      <time datetime="{{ inmate.booking_date or '' }}">{{ display_date(inmate.booking_date) or 'date unknown' }}</time>
+      <time{% if inmate.booking_date %} datetime="{{ inmate.booking_date }}"{% endif %}>{{ display_date(inmate.booking_date) or 'date unknown' }}</time>
       <span class="muted">&middot; still in custody &middot; events older than the 10,000-event window are not retained</span>
     </li>
   {% endif %}
@@ -460,6 +460,9 @@
       <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a>.
     </p>
   </details>
+  {# giscus.* values are build-time env vars (JCSTREAM_GISCUS_*), set by the
+     repo owner in Actions Variables. They are never URL-, request-, or
+     user-derived; keep it that way (tpl-sec-F4). #}
   {% if giscus.repo_id %}
   <script src="https://giscus.app/client.js"
           data-repo="{{ giscus.repo }}"
