@@ -12307,6 +12307,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-06-23",
+    "tier": "F3",
+    "category": "Tampering with evidence"
+  },
+  {
+    "event": "booked",
     "date": "2026-06-24",
     "tier": null,
     "category": null
@@ -14218,6 +14224,12 @@
     "date": "2026-06-30",
     "tier": "M1",
     "category": "Domestic violence"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-30",
+    "tier": "F3",
+    "category": "Tampering with evidence"
   },
   {
     "event": "booked",
@@ -18559,111 +18571,75 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "14283669",
-    "name": "SHELTON ALEXANDER",
+    "date": "2026-07-16",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "14588934",
-    "name": "SHAVERS MIQUEL",
+    "date": "2026-07-16",
     "tier": "M1",
-    "category": "Endangering children",
-    "note": "booked 7/15/26"
+    "category": "Endangering children"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "14643522",
-    "name": "CATTERTON DANE",
+    "date": "2026-07-16",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "14777039",
-    "name": "PHARO LILY",
+    "date": "2026-07-16",
     "tier": "F3",
-    "category": "Aggravated vehicular assault",
-    "note": "booked (date not reported)"
+    "category": "Aggravated vehicular assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "14798673",
-    "name": "HIXON MARQUIL",
+    "date": "2026-07-16",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "14817118",
-    "name": "SIMON BRIAN",
+    "date": "2026-07-16",
     "tier": "M1",
-    "category": "Using weapons while intoxicated",
-    "note": "booked 7/15/26"
+    "category": "Using weapons while intoxicated"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "1893558",
-    "name": "TERP STEPHANIE",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "1936341",
-    "name": "BAILEY CECIL",
+    "date": "2026-07-16",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "2519126",
-    "name": "HARDY DOMINQUE",
+    "date": "2026-07-16",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 7/15/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "2592917",
-    "name": "ASHCRAFT STEVIE",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "2796948",
-    "name": "BORDERS-HUFFMAN NICHOLAS",
+    "date": "2026-07-16",
     "tier": "M4",
-    "category": "Cincinnati Municipal Code: dangerous dogs",
-    "note": ""
+    "category": "Cincinnati Municipal Code: dangerous dogs"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-07-16T02:03:15Z",
-    "inmate_number": "2448923",
-    "name": "DRUMMOND LESLIE",
+    "date": "2026-07-16",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-16",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-07-16",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -28912,6 +28888,150 @@
     "timestamp_utc": "2026-07-23T00:13:48Z",
     "inmate_number": "2479763",
     "name": "WILSON ROY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "1400849",
+    "name": "HOWARD LEON",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "14204484",
+    "name": "GUYTON DVONTE",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "14459525",
+    "name": "WALKER NIALIZJHA",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "14590732",
+    "name": "SIMS ANASTASIA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "1662736",
+    "name": "WERNING JOSEPHINE",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "1724105",
+    "name": "BURKE TYRONE",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "2247411",
+    "name": "GRIFFIN SADE",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "2436691",
+    "name": "FLEMING DEANDRE",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "2529116",
+    "name": "FRANKLIN DERRICK",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": "booked 7/22/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "1665833",
+    "name": "FERGUSON JAMES",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "14815909",
+    "name": "HOUSE TROY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "1097030",
+    "name": "MCFARLAND NATHAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "14633415",
+    "name": "SOUARE KAHSSIM",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "2601247",
+    "name": "WOGENSTAHL TYLER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "1737232",
+    "name": "WRIGHT JESSIE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T03:45:27Z",
+    "inmate_number": "14817423",
+    "name": "ZAPOTECO-RODRIGUEZ SANTIAGO",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
