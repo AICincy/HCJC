@@ -6,10 +6,19 @@ CLAUDE.md ("Chain of Custody: Session IDs"). The 2026-06-16 code review
 flagged the absence of a documented storage location as a Critical finding
 (`audit/code-review-2026-06-16/00-summary.md`).
 
-Status: **designated, not yet populated.** No transcript has been filed.
-Until every transcript below is filed, court submissions citing these
-session IDs must state that the transcripts are held in the owner's
+Status: **partially populated.** The local session transcript
+(`db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e`) was filed 2026-07-23. The six
+claude.ai sessions remain unfiled; until they are, court submissions citing
+those session IDs must state that the transcripts are held in the owner's
 claude.ai session history pending export.
+
+**Export-path finding (2026-07-23):** the standard claude.ai account data
+export (Settings > Privacy > Export data) does NOT include claude.ai/code
+session transcripts. Both accounts' exports were checked; every occurrence
+of the six session IDs in them is a text mention inside ordinary chat
+conversations, not a session record. The six transcripts must be retrieved
+from inside each session at `https://claude.ai/code/<session_id>` (open the
+session and export/copy its transcript), not via the account data export.
 
 ## Filing procedure (owner account required)
 
@@ -32,7 +41,7 @@ claude.ai session history pending export.
 | session_01NGMSLESEepbgV8aSn4reVG | not yet filed | not yet filed | [VERIFY] | [VERIFY] |
 | session_019qfYLXARs48orCHaQdM8cA | not yet filed | not yet filed | 2026-07-02 [VERIFY] | [VERIFY] |
 | session_01DCTmLdgUma5GYA1JBrywGp | not yet filed | not yet filed | 2026-07-03 [VERIFY] | [VERIFY] |
-| db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e | not yet filed | not yet filed | 2026-07-05 [VERIFY] | [VERIFY] |
+| db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e | `db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e.jsonl` | `db5bf8bb-9850-49f0-8f3d-1c6abfa5a05e.jsonl` (copied byte-identical from `~/.claude/projects/C--Users-jared-Documents-GitHub-HCJC/`; sha256 `2e829076c29ed6b9d82cdc5e909426a0b117433b7764f3a84d2cbd2251a98590`) | 2026-07-05 (00:23Z to 22:57Z) | 2026-07-23 |
 
 Note: the four original session IDs do not appear in any commit trailer in
 this repository (checked 2026-07-02 with `git log --all --grep`), so their
