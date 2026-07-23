@@ -335,5 +335,7 @@ Each item links to its source finding and a reason.
 
 - [22: WAF freeze monitor](./22_waf_freeze_monitor.md) - Datadog log monitor config for roster staleness (warning 3h, critical 6h)
 - [22a: ORC offenses currency audit](./22a_orc_offenses_currency_audit.md) - authority-currency audit of 20 new ORC entries added in PR #276
+- [23: FCRA removal SLA](./23_fcra_removal_sla.md) - best-effort removal target and the removal-SLA warning tier
+- [24: Pages deploy staleness incidents](./24_pages_deploy_stale_incidents.md) - deploy_alert incident log (first entry: issue #424, 2026-07-20) and the latched-dedupe lesson
 
 End of index.
