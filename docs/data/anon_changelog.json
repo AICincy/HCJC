@@ -19177,75 +19177,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-07-16T23:24:49Z",
-    "inmate_number": "14319750",
-    "name": "DOWDY ERIN",
+    "date": "2026-07-16",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": "booked 7/16/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-16T23:24:49Z",
-    "inmate_number": "14570269",
-    "name": "STERNBERG STEVEN",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 7/16/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-16T23:24:49Z",
-    "inmate_number": "14672245",
-    "name": "DAILY-JOHNSON JAYDEN",
-    "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-16T23:24:49Z",
-    "inmate_number": "14653427",
-    "name": "OBRIEN THOMAS",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked 7/16/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-16T23:24:49Z",
-    "inmate_number": "14759085",
-    "name": "HALL JESSICA",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-16T23:24:49Z",
-    "inmate_number": "14763266",
-    "name": "MARTIN JAMEER",
-    "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 7/16/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-16T23:24:49Z",
-    "inmate_number": "2150669",
-    "name": "COOK BRANDYN",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 7/16/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-16T23:24:49Z",
-    "inmate_number": "659416",
-    "name": "WHALEY FLOYD",
-    "tier": "M1",
-    "category": "Theft",
-    "note": "booked 7/16/26"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
@@ -36280,6 +36214,87 @@
     "timestamp_utc": "2026-07-23T22:40:06Z",
     "inmate_number": "1774343",
     "name": "WALKER MARK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T23:38:51Z",
+    "inmate_number": "14079312",
+    "name": "BYRD MARTEZ",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 7/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T23:38:51Z",
+    "inmate_number": "14786914",
+    "name": "WOSTER TRISTIN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 7/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-23T23:38:51Z",
+    "inmate_number": "14817976",
+    "name": "FITTS JOHN",
+    "tier": "M1",
+    "category": "Using weapons while intoxicated",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-07-23T23:38:51Z",
+    "inmate_number": "14817978",
+    "name": "TURNER CALEB",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-23T23:38:51Z",
+    "inmate_number": "14817972",
+    "name": "BARNES ROBERT",
+    "tier": null,
+    "category": null,
+    "note": "booked 7/23/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T23:38:51Z",
+    "inmate_number": "14156098",
+    "name": "BORDEN JAMARTA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T23:38:51Z",
+    "inmate_number": "2387825",
+    "name": "JOHNSON MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T23:38:51Z",
+    "inmate_number": "1589639",
+    "name": "SCOTT MARCUS",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-07-23T23:38:51Z",
+    "inmate_number": "2000579",
+    "name": "SMITH RICK",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
