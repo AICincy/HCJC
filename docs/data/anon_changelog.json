@@ -6282,6 +6282,18 @@
     "category": "Resisting arrest"
   },
   {
+    "event": "booked",
+    "date": "2026-06-07",
+    "tier": "F2",
+    "category": "Strangulation"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-07",
+    "tier": "F2",
+    "category": "Strangulation"
+  },
+  {
     "event": "updated",
     "date": "2026-06-08",
     "tier": "M1",
@@ -8155,6 +8167,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-06-12",
+    "tier": "F2",
+    "category": "Strangulation"
+  },
+  {
+    "event": "updated",
     "date": "2026-06-13",
     "tier": "M1",
     "category": "Aggravated menacing"
@@ -9814,6 +9832,12 @@
     "date": "2026-06-16",
     "tier": "F2",
     "category": "Robbery"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-16",
+    "tier": "F2",
+    "category": "Strangulation"
   },
   {
     "event": "updated",
@@ -19372,60 +19396,6 @@
     "date": "2026-07-17",
     "tier": "M2",
     "category": "Criminal damaging"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-17T08:34:14Z",
-    "inmate_number": "14081923",
-    "name": "RASHID JAMILAH",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 7/17/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-17T08:34:14Z",
-    "inmate_number": "14765917",
-    "name": "FINNELL ERIC",
-    "tier": null,
-    "category": null,
-    "note": "booked 7/17/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-17T08:34:14Z",
-    "inmate_number": "14757396",
-    "name": "HERRERA-PALACIOS JAMIE",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 7/17/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-17T08:34:14Z",
-    "inmate_number": "2704766",
-    "name": "HERRON RAVEN",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-07-17T10:26:20Z",
-    "inmate_number": "2119772",
-    "name": "WILKINS TERRELL",
-    "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 7/17/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-07-17T10:26:20Z",
-    "inmate_number": "2704766",
-    "name": "HERRON RAVEN",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
   },
   {
     "event": "updated",
@@ -36499,5 +36469,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-07-24T11:25:55Z",
+    "inmate_number": "1465577",
+    "name": "LOVE PRIEST",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "booked 7/24/26"
   }
 ]
