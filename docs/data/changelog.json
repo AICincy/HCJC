@@ -1,20 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "1462307",
-    "name": "BROCKS LADON",
-    "timestamp_utc": "2026-06-10T17:40:33Z",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14813276",
-    "name": "CAMPBELL MICHAEL",
-    "timestamp_utc": "2026-06-10T17:40:33Z",
-    "note": "booked 6/10/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "1777215",
     "name": "ANDERSON RODNEY",
     "timestamp_utc": "2026-06-10T17:40:33Z",
@@ -69998,5 +69984,19 @@
     "name": "CUNDIFF MICHAEL",
     "timestamp_utc": "2026-08-08T18:13:51Z",
     "note": "booked 8/8/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2202617",
+    "name": "TURNER MATTHEW",
+    "timestamp_utc": "2026-08-08T18:59:17Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2543952",
+    "name": "CUNDIFF MICHAEL",
+    "timestamp_utc": "2026-08-08T18:59:17Z",
+    "note": ""
   }
 ]
