@@ -10891,6 +10891,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-06-18",
+    "tier": "MM",
+    "category": "Pedestrians on right half of crosswalk"
+  },
+  {
+    "event": "updated",
     "date": "2026-06-19",
     "tier": "MM",
     "category": "Vehicular vandalism"
@@ -14200,6 +14206,12 @@
     "date": "2026-06-29",
     "tier": "M4",
     "category": "Operation in willful or wanton disregard of safety"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-29",
+    "tier": "MM",
+    "category": "Pedestrians on right half of crosswalk"
   },
   {
     "event": "booked",
@@ -28954,5 +28966,23 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-08T22:22:43Z",
+    "inmate_number": "14121020",
+    "name": "SMITH MAURIYE",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-08T22:22:43Z",
+    "inmate_number": "14227420",
+    "name": "FROMEYER STEVEN",
+    "tier": "MM",
+    "category": "Pedestrians on right half of crosswalk",
+    "note": "booked 8/8/26"
   }
 ]
