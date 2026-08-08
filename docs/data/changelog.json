@@ -1,27 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "1777215",
-    "name": "ANDERSON RODNEY",
-    "timestamp_utc": "2026-06-10T17:40:33Z",
-    "note": "booked 6/10/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "1811575",
-    "name": "WILSON DOROTHY",
-    "timestamp_utc": "2026-06-10T17:40:33Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2148132",
-    "name": "OVERSTREET DEMETRIUS",
-    "timestamp_utc": "2026-06-10T17:40:33Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
     "inmate_number": "2267304",
     "name": "ALEXANDER ANTONIO",
     "timestamp_utc": "2026-06-10T17:40:33Z",
@@ -69998,5 +69977,26 @@
     "name": "CUNDIFF MICHAEL",
     "timestamp_utc": "2026-08-08T18:59:17Z",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "1665833",
+    "name": "FERGUSON JAMES",
+    "timestamp_utc": "2026-08-08T19:31:47Z",
+    "note": "booked 8/8/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14171757",
+    "name": "BREWSTER SHANNON",
+    "timestamp_utc": "2026-08-08T19:31:47Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2294624",
+    "name": "DOBBS JOSEPH",
+    "timestamp_utc": "2026-08-08T19:31:47Z",
+    "note": "no longer on HCSO public roster"
   }
 ]

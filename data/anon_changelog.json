@@ -9438,6 +9438,12 @@
     "category": "Tampering with evidence"
   },
   {
+    "event": "released",
+    "date": "2026-06-15",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses"
+  },
+  {
     "event": "updated",
     "date": "2026-06-16",
     "tier": "M1",
@@ -17820,6 +17826,18 @@
     "category": "Failure to comply with order or signal of police officer"
   },
   {
+    "event": "booked",
+    "date": "2026-07-10",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses"
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-10",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses"
+  },
+  {
     "event": "updated",
     "date": "2026-07-11",
     "tier": "M1",
@@ -19566,6 +19584,12 @@
     "category": "Theft"
   },
   {
+    "event": "updated",
+    "date": "2026-07-16",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses"
+  },
+  {
     "event": "booked",
     "date": "2026-07-17",
     "tier": "M1",
@@ -21229,6 +21253,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-07-22",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses"
+  },
+  {
+    "event": "updated",
     "date": "2026-07-23",
     "tier": "M4",
     "category": "Failure to disclose personal information"
@@ -21946,6 +21976,12 @@
     "date": "2026-07-23",
     "tier": "M2",
     "category": "Resisting arrest"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-23",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "updated",
@@ -28855,5 +28891,32 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-08T19:31:47Z",
+    "inmate_number": "1665833",
+    "name": "FERGUSON JAMES",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": "booked 8/8/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-08T19:31:47Z",
+    "inmate_number": "14171757",
+    "name": "BREWSTER SHANNON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-08T19:31:47Z",
+    "inmate_number": "2294624",
+    "name": "DOBBS JOSEPH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
