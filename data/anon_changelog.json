@@ -13693,6 +13693,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-06-27",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "booked",
     "date": "2026-06-28",
     "tier": null,
     "category": null
@@ -14212,6 +14218,12 @@
     "date": "2026-06-29",
     "tier": "MM",
     "category": "Pedestrians on right half of crosswalk"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-29",
+    "tier": "M4",
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
@@ -29002,5 +29014,14 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-08T23:54:37Z",
+    "inmate_number": "2606017",
+    "name": "JONES KENNETH",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
   }
 ]
