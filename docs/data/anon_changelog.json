@@ -18546,6 +18546,12 @@
     "category": "Booking hold (no ORC code on file)"
   },
   {
+    "event": "released",
+    "date": "2026-07-13",
+    "tier": "M2",
+    "category": "Criminal damaging"
+  },
+  {
     "event": "booked",
     "date": "2026-07-14",
     "tier": "F2",
@@ -22300,6 +22306,12 @@
     "date": "2026-07-24",
     "tier": "M1",
     "category": "Telecommunications harassment"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-24",
+    "tier": "M1",
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -29365,5 +29377,77 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-09T07:33:31Z",
+    "inmate_number": "14142181",
+    "name": "JACKSON BRANDON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/9/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-09T07:33:31Z",
+    "inmate_number": "14488924",
+    "name": "JONES SHAWN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/9/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-09T07:33:31Z",
+    "inmate_number": "14502085",
+    "name": "MITCHELL JARIAH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/9/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-09T07:33:31Z",
+    "inmate_number": "14616861",
+    "name": "POUNCY JOVAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-09T07:33:31Z",
+    "inmate_number": "14687351",
+    "name": "MCINTIRE CIERRA",
+    "tier": "F5",
+    "category": "Breaking and entering",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-09T07:33:31Z",
+    "inmate_number": "14793896",
+    "name": "LONG DAMONTRE",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-09T07:33:31Z",
+    "inmate_number": "14819534",
+    "name": "ROUSSEAU RAYMONE",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/9/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-09T07:33:31Z",
+    "inmate_number": "2837287",
+    "name": "MURPHY JERRY",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
   }
 ]
