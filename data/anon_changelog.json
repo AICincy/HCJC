@@ -8244,6 +8244,18 @@
     "category": "Booking hold (no ORC code on file)"
   },
   {
+    "event": "booked",
+    "date": "2026-06-12",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-12",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
+  },
+  {
     "event": "updated",
     "date": "2026-06-13",
     "tier": "M1",
@@ -8464,6 +8476,18 @@
     "date": "2026-06-13",
     "tier": "M1",
     "category": "Aggravated menacing"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-13",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-13",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "booked",
@@ -31783,6 +31807,51 @@
     "timestamp_utc": "2026-08-10T21:51:05Z",
     "inmate_number": "14716968",
     "name": "VANDERVEEN DIEGO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-10T22:31:41Z",
+    "inmate_number": "1901747",
+    "name": "BOLES GEORGE",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-10T22:31:41Z",
+    "inmate_number": "2792604",
+    "name": "HARRIS KEVIN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-10T22:31:41Z",
+    "inmate_number": "14656429",
+    "name": "HUDSON NEHEMIAH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-10T22:31:41Z",
+    "inmate_number": "14091285",
+    "name": "POSTON BOBBY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-10T22:31:41Z",
+    "inmate_number": "2282261",
+    "name": "WILLIS ARTRELL",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
