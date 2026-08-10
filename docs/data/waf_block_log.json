@@ -554646,5 +554646,19 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "d1b7a5eb41f8ae43494f8ae8f246a3b101d75f681e4b95bae58e0a2975c26285"
+  },
+  {
+    "timestamp_utc": "2026-08-10T14:43:35Z",
+    "event": "blocked",
+    "prev_count": 1275,
+    "seen_count": 1272,
+    "surnames_total": 26,
+    "surnames_failed": 9,
+    "failed_fraction": 0.3462,
+    "http_status_counts": {},
+    "block_sample": null,
+    "roster_stale_hours": 1.0,
+    "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+    "prev_sha256": "3f98e943ead089e26184c1c34b4bbf3fb65d51769a473769ba26be59fb74d532"
   }
 ]
