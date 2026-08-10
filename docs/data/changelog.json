@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14813360",
-    "name": "KUSHTOV AMIRAN",
-    "timestamp_utc": "2026-06-11T07:41:13Z",
-    "note": "booked 6/11/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "2641135",
     "name": "THARP RYAN",
     "timestamp_utc": "2026-06-11T07:41:13Z",
@@ -69998,5 +69991,12 @@
     "name": "HOPKINS JAMES",
     "timestamp_utc": "2026-08-10T10:13:20Z",
     "note": "booked 8/10/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2666120",
+    "name": "HOPKINS JAMES",
+    "timestamp_utc": "2026-08-10T11:21:30Z",
+    "note": ""
   }
 ]
