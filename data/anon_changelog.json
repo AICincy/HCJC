@@ -14958,6 +14958,18 @@
     "category": "Violating protection order"
   },
   {
+    "event": "booked",
+    "date": "2026-07-01",
+    "tier": "MM",
+    "category": "Possession of marijuana"
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-01",
+    "tier": "MM",
+    "category": "Possession of marijuana"
+  },
+  {
     "event": "updated",
     "date": "2026-07-02",
     "tier": "M1",
@@ -15310,6 +15322,12 @@
     "date": "2026-07-02",
     "tier": "M1",
     "category": "Driving on a suspended/revoked license"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-02",
+    "tier": "MM",
+    "category": "Possession of marijuana"
   },
   {
     "event": "booked",
@@ -21036,6 +21054,12 @@
     "category": "Assault"
   },
   {
+    "event": "booked",
+    "date": "2026-07-21",
+    "tier": "MM",
+    "category": "Possession of marijuana"
+  },
+  {
     "event": "updated",
     "date": "2026-07-22",
     "tier": "M1",
@@ -21340,6 +21364,24 @@
     "date": "2026-07-22",
     "tier": "M1",
     "category": "Cincinnati Municipal Code: general offenses"
+  },
+  {
+    "event": "booked",
+    "date": "2026-07-22",
+    "tier": "M1",
+    "category": "Violation of community control / probation"
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-22",
+    "tier": "M1",
+    "category": "Violation of community control / probation"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-22",
+    "tier": "MM",
+    "category": "Possession of marijuana"
   },
   {
     "event": "updated",
@@ -22066,6 +22108,12 @@
     "date": "2026-07-23",
     "tier": "M1",
     "category": "Cincinnati Municipal Code: general offenses"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-23",
+    "tier": "M1",
+    "category": "Violation of community control / probation"
   },
   {
     "event": "updated",
@@ -34504,6 +34552,150 @@
     "timestamp_utc": "2026-08-12T14:52:49Z",
     "inmate_number": "2556271",
     "name": "HOWARD NACEA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "1145740",
+    "name": "SMITH ELIZABETH",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "14273725",
+    "name": "SHELTON JOHNNY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 8/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "14291372",
+    "name": "CURTIS DONSHAE",
+    "tier": "MM",
+    "category": "Possession of marijuana",
+    "note": "booked 8/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "14294230",
+    "name": "JOHNSON AUSTIN",
+    "tier": "M1",
+    "category": "Violation of community control / probation",
+    "note": "booked 8/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "1844289",
+    "name": "STAFFORD RONALD",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "1890027",
+    "name": "EADY ANDREI",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "2282611",
+    "name": "GRAFINREED QUINTIN",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "2415040",
+    "name": "PORTIS JEFFERY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "2381992",
+    "name": "WALKER LONDON",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 8/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "2509705",
+    "name": "PENN ASHLEY",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "14274042",
+    "name": "KAUR RARJOT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "14444252",
+    "name": "LIMA EFREM",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "14415227",
+    "name": "REED AUSTEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "14305526",
+    "name": "THORN DERRICK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "14819838",
+    "name": "TORAN CHRISTOPHER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-12T15:55:04Z",
+    "inmate_number": "14818115",
+    "name": "TRUMBULL BRIAN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
