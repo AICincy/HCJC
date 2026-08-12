@@ -13518,6 +13518,12 @@
     "category": "Possession of drugs"
   },
   {
+    "event": "released",
+    "date": "2026-06-26",
+    "tier": "MM",
+    "category": "Disorderly conduct"
+  },
+  {
     "event": "booked",
     "date": "2026-06-27",
     "tier": "M1",
@@ -20202,6 +20208,12 @@
     "category": "Aggravated burglary"
   },
   {
+    "event": "released",
+    "date": "2026-07-18",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
     "event": "booked",
     "date": "2026-07-19",
     "tier": "M1",
@@ -22504,6 +22516,12 @@
     "date": "2026-07-25",
     "tier": "M2",
     "category": "Criminal damaging"
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-25",
+    "tier": "MM",
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
@@ -35092,6 +35110,78 @@
     "timestamp_utc": "2026-08-12T19:59:21Z",
     "inmate_number": "2220493",
     "name": "WILLIAMSON BRIAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-12T20:47:38Z",
+    "inmate_number": "14102845",
+    "name": "NORMAN JORDAN",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-12T20:47:38Z",
+    "inmate_number": "14541840",
+    "name": "WELLS RYAN",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 8/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-12T20:47:38Z",
+    "inmate_number": "2489415",
+    "name": "GREEN BRANDON",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-12T20:47:38Z",
+    "inmate_number": "2544163",
+    "name": "BLANCHETT DEMETRIC",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 8/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-12T20:47:38Z",
+    "inmate_number": "2742146",
+    "name": "COPELAND BOHANAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-12T20:47:38Z",
+    "inmate_number": "2792052",
+    "name": "HUDDLESTON JACOB",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 8/12/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-12T20:47:38Z",
+    "inmate_number": "2842548",
+    "name": "COLEMAN SHARA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-12T20:47:38Z",
+    "inmate_number": "14689196",
+    "name": "KAYATA KATHY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
