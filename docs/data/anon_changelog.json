@@ -9475,6 +9475,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-06-15",
+    "tier": "M3",
+    "category": "Sexual imposition"
+  },
+  {
+    "event": "updated",
     "date": "2026-06-16",
     "tier": "M1",
     "category": "Domestic violence"
@@ -10252,6 +10258,12 @@
     "date": "2026-06-17",
     "tier": "M1",
     "category": "Theft"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-17",
+    "tier": "M3",
+    "category": "Sexual imposition"
   },
   {
     "event": "updated",
@@ -37039,5 +37051,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-14T06:53:10Z",
+    "inmate_number": "1901755",
+    "name": "HOUSTON DION",
+    "tier": "M3",
+    "category": "Sexual imposition",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-14T06:53:10Z",
+    "inmate_number": "2079993",
+    "name": "NIXSON JULIAN",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: vicious dogs",
+    "note": "booked 8/14/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-14T06:53:10Z",
+    "inmate_number": "2336756",
+    "name": "TERRELL DARYNEL",
+    "tier": "F3",
+    "category": "Having weapons while under disability",
+    "note": "booked (date not reported)"
   }
 ]
