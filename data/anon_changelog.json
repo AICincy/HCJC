@@ -15583,6 +15583,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-07-03",
+    "tier": "M1",
+    "category": "Assault"
+  },
+  {
+    "event": "booked",
     "date": "2026-07-04",
     "tier": "M2",
     "category": "Criminal damaging"
@@ -19726,6 +19732,12 @@
     "date": "2026-07-16",
     "tier": "M1",
     "category": "Violating protection order"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-16",
+    "tier": "M1",
+    "category": "Assault"
   },
   {
     "event": "booked",
@@ -37654,6 +37666,96 @@
     "timestamp_utc": "2026-08-14T15:32:12Z",
     "inmate_number": "1602578",
     "name": "HILL ROBERT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "14513968",
+    "name": "BOYLE MAXWELL",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 8/14/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "14682949",
+    "name": "HAYNES ISAIAH",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "14779324",
+    "name": "HALL DAVION",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "14808479",
+    "name": "MOHAMOUD LIBAN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "1497490",
+    "name": "BEACH JERRY",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "1692976",
+    "name": "HARPER GREGORY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 8/14/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "2079981",
+    "name": "SESTER JONATHAN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "1538264",
+    "name": "BURTON JOEY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "14557845",
+    "name": "HARVEY JOSEPH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-14T16:32:12Z",
+    "inmate_number": "2079993",
+    "name": "NIXSON JULIAN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
