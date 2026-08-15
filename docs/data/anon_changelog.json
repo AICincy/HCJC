@@ -21456,6 +21456,12 @@
     "category": "Possession of marijuana"
   },
   {
+    "event": "released",
+    "date": "2026-07-22",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
     "event": "updated",
     "date": "2026-07-23",
     "tier": "M4",
@@ -23158,15 +23164,6 @@
     "date": "2026-08-08",
     "tier": "MM",
     "category": "Pedestrians on right half of crosswalk"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-08T22:57:14Z",
-    "inmate_number": "14121020",
-    "name": "SMITH MAURIYE",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
   },
   {
     "event": "booked",
@@ -33535,5 +33532,23 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 8/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-15T23:20:47Z",
+    "inmate_number": "1551481",
+    "name": "MOATS DONTA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 8/15/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-15T23:20:47Z",
+    "inmate_number": "14763334",
+    "name": "YOUNG MARIA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]

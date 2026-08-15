@@ -1,20 +1,6 @@
 [
   {
     "event": "updated",
-    "inmate_number": "14691784",
-    "name": "JOHNSON ETHAN",
-    "timestamp_utc": "2026-06-15T19:13:50Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14694504",
-    "name": "WALLS ZACHARY",
-    "timestamp_utc": "2026-06-15T19:13:50Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
     "inmate_number": "14695502",
     "name": "BOWERS ROY",
     "timestamp_utc": "2026-06-15T19:13:50Z",
@@ -69998,5 +69984,19 @@
     "name": "YOUNG MARIA",
     "timestamp_utc": "2026-08-15T22:39:54Z",
     "note": "booked 8/15/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "1551481",
+    "name": "MOATS DONTA",
+    "timestamp_utc": "2026-08-15T23:20:47Z",
+    "note": "booked 8/15/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14763334",
+    "name": "YOUNG MARIA",
+    "timestamp_utc": "2026-08-15T23:20:47Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
