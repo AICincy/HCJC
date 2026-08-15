@@ -23124,15 +23124,6 @@
     "category": "Violating protection order"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-08-08T12:01:48Z",
-    "inmate_number": "2805779",
-    "name": "MATHEWS WILLIAM",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked (date not reported)"
-  },
-  {
     "event": "updated",
     "timestamp_utc": "2026-08-08T13:11:34Z",
     "inmate_number": "14065529",
@@ -33616,5 +33607,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-15T12:26:14Z",
+    "inmate_number": "2478058",
+    "name": "HOWARD CHARLES",
+    "tier": "M1",
+    "category": "Carrying concealed weapons",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-15T12:26:14Z",
+    "inmate_number": "2761385",
+    "name": "FIGUEROA ALEXIS",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
