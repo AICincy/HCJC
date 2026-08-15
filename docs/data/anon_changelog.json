@@ -22188,6 +22188,12 @@
     "category": "Violation of community control / probation"
   },
   {
+    "event": "released",
+    "date": "2026-07-23",
+    "tier": "F4",
+    "category": "Attempt to commit an offense"
+  },
+  {
     "event": "updated",
     "date": "2026-07-24",
     "tier": "M1",
@@ -23146,15 +23152,6 @@
     "date": "2026-08-08",
     "tier": "M1",
     "category": "Cincinnati Municipal Code: general offenses"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-08T21:55:18Z",
-    "inmate_number": "14121020",
-    "name": "SMITH MAURIYE",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
   },
   {
     "event": "updated",
@@ -33531,6 +33528,15 @@
     "name": "HALL KIRA",
     "tier": "MM",
     "category": "Obedience to traffic control devices",
+    "note": "booked 8/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-15T22:14:48Z",
+    "inmate_number": "1313320",
+    "name": "BENNIE DEVAIL",
+    "tier": "F4",
+    "category": "Attempt to commit an offense",
     "note": "booked 8/15/26"
   }
 ]
