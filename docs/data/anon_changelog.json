@@ -23137,24 +23137,6 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-08T14:58:32Z",
-    "inmate_number": "14397258",
-    "name": "CAMPBELL AARON",
-    "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-08T14:58:32Z",
-    "inmate_number": "2536909",
-    "name": "TAYLOR GLEN",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/8/26"
-  },
-  {
-    "event": "updated",
     "timestamp_utc": "2026-08-08T15:28:52Z",
     "inmate_number": "14237973",
     "name": "CARTER JEROME",
@@ -33628,5 +33610,41 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-15T15:14:58Z",
+    "inmate_number": "1497490",
+    "name": "BEACH JERRY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-15T15:14:58Z",
+    "inmate_number": "1774585",
+    "name": "BOYD MANUEL",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-15T15:14:58Z",
+    "inmate_number": "2498077",
+    "name": "WILLIAMS FLOYD",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 8/15/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-15T15:14:58Z",
+    "inmate_number": "14555762",
+    "name": "JONES DONTONIO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
