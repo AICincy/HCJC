@@ -23143,12 +23143,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-08T20:47:35Z",
-    "inmate_number": "1665833",
-    "name": "FERGUSON JAMES",
+    "date": "2026-08-08",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": ""
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "updated",
@@ -33489,6 +33486,33 @@
     "name": "MAZION TIANNA",
     "tier": null,
     "category": null,
+    "note": "booked 8/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-15T21:15:56Z",
+    "inmate_number": "14190570",
+    "name": "ROGERS QIJUAN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-15T21:15:56Z",
+    "inmate_number": "14791507",
+    "name": "GRIMES TEYANNA",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 8/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-15T21:15:56Z",
+    "inmate_number": "2553962",
+    "name": "RUFFIN JAQUINCY",
+    "tier": "M1",
+    "category": "Domestic violence",
     "note": "booked 8/15/26"
   }
 ]
