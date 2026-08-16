@@ -434,6 +434,7 @@ from web.outputs import (  # noqa: E402
 )
 from web.pages import (  # noqa: E402
     IndexContext,
+    _render_404_page,
     _render_bond_disparity_page,
     _render_court_page,
     _render_courts_page,
@@ -441,7 +442,6 @@ from web.pages import (  # noqa: E402
     _render_feeds,
     _render_help_page,
     _render_index,
-    _render_404_page,
     _render_inmates,
     _render_stats_page,
     _render_statute_page,

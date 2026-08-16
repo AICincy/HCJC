@@ -1,7 +1,8 @@
+import json
 import os
 from pathlib import Path
 
-from web.outputs import _write_well_known
+from web.outputs import _copy_static, _write_manifest, _write_well_known
 
 
 def test_write_well_known_defaults(tmp_path: Path):
@@ -45,8 +46,6 @@ def test_write_well_known_from_env(tmp_path: Path):
 
 
 def test_copy_static_writes_favicon(tmp_path: Path):
-    from web.outputs import _copy_static
-
     _copy_static(tmp_path)
     fav = tmp_path / "favicon.ico"
     apple = tmp_path / "apple-touch-icon.png"
@@ -54,15 +53,8 @@ def test_copy_static_writes_favicon(tmp_path: Path):
     assert apple.is_file() and apple.stat().st_size > 0
 
 
-def test_manifest_includes_icon():
-    from web.outputs import _write_manifest
-    from pathlib import Path as P
-    import json
-    import tempfile
-
-    with tempfile.TemporaryDirectory() as td:
-        out = P(td)
-        _write_manifest(out, "")
-        manifest = json.loads((out / "manifest.webmanifest").read_text(encoding="utf-8"))
-        assert manifest["icons"], "manifest must list at least one icon"
-        assert manifest["icons"][0]["src"].endswith("/static/img/hcjc-seal-2x.png")
+def test_manifest_includes_icon(tmp_path: Path):
+    _write_manifest(tmp_path, "")
+    manifest = json.loads((tmp_path / "manifest.webmanifest").read_text(encoding="utf-8"))
+    assert manifest["icons"], "manifest must list at least one icon"
+    assert manifest["icons"][0]["src"].endswith("/static/img/hcjc-seal-2x.png")

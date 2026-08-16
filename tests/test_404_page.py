@@ -2,8 +2,8 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from web.pages import _render_404_page, _render_data_page
 from scraper.models import Snapshot
+from web.pages import _render_404_page, _render_data_page
 
 
 def _env() -> Environment:
