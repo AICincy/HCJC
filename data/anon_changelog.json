@@ -23173,30 +23173,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-09T01:13:27Z",
-    "inmate_number": "14755375",
-    "name": "RAILSBACK BRIHANNA",
+    "date": "2026-08-09",
     "tier": null,
-    "category": null,
-    "note": "booked 8/8/26"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-09T01:13:27Z",
-    "inmate_number": "2606017",
-    "name": "JONES KENNETH",
+    "date": "2026-08-09",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-08-09T01:13:27Z",
-    "inmate_number": "2728612",
-    "name": "VERNE LINDSEY",
+    "date": "2026-08-09",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-08-09",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -33652,6 +33649,24 @@
     "timestamp_utc": "2026-08-16T01:12:09Z",
     "inmate_number": "2493391",
     "name": "COLE TYSHAWN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-16T02:35:35Z",
+    "inmate_number": "14763334",
+    "name": "YOUNG MARIA",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-16T02:35:35Z",
+    "inmate_number": "14190570",
+    "name": "ROGERS QIJUAN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
