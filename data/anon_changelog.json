@@ -23323,21 +23323,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-09T14:40:40Z",
-    "inmate_number": "2364757",
-    "name": "SULLIVAN COREY",
+    "date": "2026-08-09",
     "tier": "M1",
-    "category": "Stopping after accident on public roads",
-    "note": "booked 8/9/26"
+    "category": "Stopping after accident on public roads"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-09T14:40:40Z",
-    "inmate_number": "2607838",
-    "name": "WEST SEARRA",
+    "date": "2026-08-09",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": "booked 8/9/26"
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "updated",
@@ -33498,6 +33492,15 @@
     "name": "FREDERICK DANIEL",
     "tier": "M1",
     "category": "Possessing criminal tools",
+    "note": "booked 8/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-16T14:51:37Z",
+    "inmate_number": "14820365",
+    "name": "MORALES YESLY",
+    "tier": null,
+    "category": null,
     "note": "booked 8/16/26"
   }
 ]
