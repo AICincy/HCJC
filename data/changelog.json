@@ -1,20 +1,6 @@
 [
   {
     "event": "updated",
-    "inmate_number": "14768134",
-    "name": "KATSHAK KEVIN",
-    "timestamp_utc": "2026-06-15T19:13:50Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14770014",
-    "name": "ADAMS CARNEY",
-    "timestamp_utc": "2026-06-15T19:13:50Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
     "inmate_number": "14769126",
     "name": "ATKINS MARIO",
     "timestamp_utc": "2026-06-15T19:13:50Z",
@@ -69998,5 +69984,19 @@
     "name": "BURNS RICHARD",
     "timestamp_utc": "2026-08-16T04:59:37Z",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14820353",
+    "name": "JONES AARON",
+    "timestamp_utc": "2026-08-16T06:01:06Z",
+    "note": "booked 8/16/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "1895696",
+    "name": "SPROLES WESLEY",
+    "timestamp_utc": "2026-08-16T06:01:06Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
