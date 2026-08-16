@@ -272,6 +272,11 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
         src = Path("data") / name
         if src.exists():
             shutil.copy2(src, data_out / name)
+    # Crowdsourced ingest is optional; still publish an empty file so the
+    # documented /data/courtclerk_cases.json URL is not a GitHub Pages 404.
+    cases_out = data_out / "courtclerk_cases.json"
+    if not cases_out.exists():
+        cases_out.write_text('{"cases": []}\n', encoding="utf-8")
     page = env.get_template("data.html").render(
         snapshot=snapshot,
         courtclerk_cases_available=(Path("data") / "courtclerk_cases.json").exists(),
@@ -658,3 +663,9 @@ def _render_statute_page(env: Environment, snapshot: Snapshot, offenses: dict, o
     target = out_dir / "statute" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
+
+
+def _render_404_page(env: Environment, out_dir: Path) -> None:
+    """Branded GitHub Pages 404. Pages serves /404.html for any missing path."""
+    page = env.get_template("404.html").render()
+    (out_dir / "404.html").write_text(page, encoding="utf-8")
