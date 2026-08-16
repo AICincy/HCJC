@@ -29,6 +29,13 @@ PHOTOS_DIR = Path("data/photos")
 def _copy_static(out_dir: Path) -> None:
     if STATIC_DIR.exists():
         shutil.copytree(STATIC_DIR, out_dir / "static", dirs_exist_ok=True)
+    # Browsers always request /favicon.ico; GitHub Pages 404s without a root file.
+    # The seal is a PNG; modern browsers accept it at this path, and <link rel=icon>
+    # also points at the PNG under /static/img/.
+    fav = STATIC_DIR / "img" / "hcjc-seal.png"
+    if fav.exists():
+        shutil.copy2(fav, out_dir / "favicon.ico")
+        shutil.copy2(fav, out_dir / "apple-touch-icon.png")
 
 
 def _copy_photos(out_dir: Path) -> None:
@@ -49,7 +56,14 @@ def _write_manifest(out_dir: Path, base_url: str) -> None:
         "display": "browser",
         "background_color": "#14181f",
         "theme_color": "#14181f",
-        "icons": [],
+        "icons": [
+            {
+                "src": (base_url or "") + "/static/img/hcjc-seal-2x.png",
+                "sizes": "72x72",
+                "type": "image/png",
+                "purpose": "any",
+            }
+        ],
     }
     (out_dir / "manifest.webmanifest").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
