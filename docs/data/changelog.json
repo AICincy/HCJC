@@ -1,27 +1,6 @@
 [
   {
     "event": "updated",
-    "inmate_number": "14799642",
-    "name": "NEWMAN DESTINY",
-    "timestamp_utc": "2026-06-15T19:13:50Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14799958",
-    "name": "STEELE JEFFREY",
-    "timestamp_utc": "2026-06-15T19:13:50Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14800160",
-    "name": "LOPEZ-MARROQUIN ALVARO",
-    "timestamp_utc": "2026-06-15T19:13:50Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
     "inmate_number": "14800994",
     "name": "SMITH JAYDEN",
     "timestamp_utc": "2026-06-15T19:13:50Z",
@@ -69998,5 +69977,26 @@
     "name": "SULLIVAN COREY",
     "timestamp_utc": "2026-08-16T19:43:33Z",
     "note": "booked 8/16/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14771084",
+    "name": "QUARLES CLYDE",
+    "timestamp_utc": "2026-08-16T20:15:40Z",
+    "note": "booked 8/16/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2504846",
+    "name": "BAST CHRISTOPHER",
+    "timestamp_utc": "2026-08-16T20:15:40Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14725297",
+    "name": "MALLORY RAYQUAN",
+    "timestamp_utc": "2026-08-16T20:15:40Z",
+    "note": "no longer on HCSO public roster"
   }
 ]

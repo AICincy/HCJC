@@ -23389,12 +23389,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-09T19:56:46Z",
-    "inmate_number": "2274613",
-    "name": "RAINS JERRY",
+    "date": "2026-08-09",
     "tier": "MM",
-    "category": "Pedestrians on right half of crosswalk",
-    "note": "booked 8/9/26"
+    "category": "Pedestrians on right half of crosswalk"
   },
   {
     "event": "updated",
@@ -33394,5 +33391,32 @@
     "tier": "M1",
     "category": "Assault",
     "note": "booked 8/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-16T20:15:40Z",
+    "inmate_number": "14771084",
+    "name": "QUARLES CLYDE",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/16/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-16T20:15:40Z",
+    "inmate_number": "2504846",
+    "name": "BAST CHRISTOPHER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-16T20:15:40Z",
+    "inmate_number": "14725297",
+    "name": "MALLORY RAYQUAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
