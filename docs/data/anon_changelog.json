@@ -10266,6 +10266,12 @@
     "category": "Sexual imposition"
   },
   {
+    "event": "released",
+    "date": "2026-06-17",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
     "event": "updated",
     "date": "2026-06-18",
     "tier": null,
@@ -23347,39 +23353,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-09T16:55:37Z",
-    "inmate_number": "1020463",
-    "name": "BRYANT KEITH",
+    "date": "2026-08-09",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-09T16:55:37Z",
-    "inmate_number": "14255502",
-    "name": "WILLIAMS MICHAEL",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-09T17:25:53Z",
-    "inmate_number": "14255502",
-    "name": "WILLIAMS MICHAEL",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-09T17:25:53Z",
-    "inmate_number": "14339117",
-    "name": "VAUGHN LUCION",
-    "tier": null,
-    "category": null,
-    "note": ""
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
@@ -33442,5 +33418,14 @@
     "tier": "M1",
     "category": "Possessing criminal tools",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-16T17:56:04Z",
+    "inmate_number": "14551147",
+    "name": "GOODWIN JAYLEN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/16/26"
   }
 ]
