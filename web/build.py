@@ -344,6 +344,7 @@ def build(out_dir: Path) -> int:
     _write_dispatches(build_dir, dispatch_points)
     _write_cname(build_dir)
     _write_well_known(build_dir, site_url, snapshot.generated_utc)
+    _render_404_page(env, build_dir)
     _write_checksums(build_dir)
     # Tell GitHub Pages NOT to Jekyll-process the built site.
     (build_dir / ".nojekyll").write_text("", encoding="utf-8")
@@ -440,6 +441,7 @@ from web.pages import (  # noqa: E402
     _render_feeds,
     _render_help_page,
     _render_index,
+    _render_404_page,
     _render_inmates,
     _render_stats_page,
     _render_statute_page,
