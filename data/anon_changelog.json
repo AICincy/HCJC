@@ -23419,21 +23419,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-10T00:05:36Z",
-    "inmate_number": "14656429",
-    "name": "HUDSON NEHEMIAH",
+    "date": "2026-08-10",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/9/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-10T00:05:36Z",
-    "inmate_number": "2432480",
-    "name": "MARTIN DONTE",
+    "date": "2026-08-10",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 8/9/26"
+    "category": "Theft"
+  },
+  {
+    "event": "booked",
+    "date": "2026-08-10",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -33433,5 +33433,14 @@
     "tier": "M1",
     "category": "Violating protection order",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-17T01:00:12Z",
+    "inmate_number": "14791507",
+    "name": "GRIMES TEYANNA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
