@@ -10272,6 +10272,18 @@
     "category": "Domestic violence"
   },
   {
+    "event": "booked",
+    "date": "2026-06-17",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-17",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
+  },
+  {
     "event": "updated",
     "date": "2026-06-18",
     "tier": null,
@@ -12574,6 +12586,12 @@
     "date": "2026-06-23",
     "tier": "M1",
     "category": "Theft"
+  },
+  {
+    "event": "released",
+    "date": "2026-06-23",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "booked",
@@ -33631,6 +33649,60 @@
     "timestamp_utc": "2026-08-17T21:20:59Z",
     "inmate_number": "1793128",
     "name": "ELLIS JEFFERY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-17T21:49:43Z",
+    "inmate_number": "14535186",
+    "name": "RASHID KASHAD",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 8/17/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-17T21:49:43Z",
+    "inmate_number": "14818063",
+    "name": "QURAN OBIEDALLAH",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-17T21:49:43Z",
+    "inmate_number": "1768187",
+    "name": "RIGGS FELISCHRA",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-17T21:49:43Z",
+    "inmate_number": "1948458",
+    "name": "DUKES DARNELL",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 8/17/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-17T21:49:43Z",
+    "inmate_number": "14174002",
+    "name": "BROWNING JOSEPH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-17T21:49:43Z",
+    "inmate_number": "2120801",
+    "name": "DUKES DARNELL",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
