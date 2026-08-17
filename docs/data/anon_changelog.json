@@ -23713,12 +23713,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-10T21:01:39Z",
-    "inmate_number": "1917167",
-    "name": "CUNNINGHAM DELMICO",
+    "date": "2026-08-10",
     "tier": "MM",
-    "category": "Traffic-control signal indications",
-    "note": "booked 8/10/26"
+    "category": "Traffic-control signal indications"
   },
   {
     "event": "updated",
@@ -33580,6 +33577,60 @@
     "timestamp_utc": "2026-08-17T20:55:46Z",
     "inmate_number": "2492782",
     "name": "HALL KIRA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-17T21:20:59Z",
+    "inmate_number": "14820482",
+    "name": "HORTON ARMAUNEY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-17T21:20:59Z",
+    "inmate_number": "2249778",
+    "name": "CRAWFORD JUMARKUS",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-17T21:20:59Z",
+    "inmate_number": "2485501",
+    "name": "FREDERICK CHRISTIAN",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 8/17/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-17T21:20:59Z",
+    "inmate_number": "14820374",
+    "name": "BLANKENSHIP RUSSELL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-17T21:20:59Z",
+    "inmate_number": "2796689",
+    "name": "COLLIER DESHAUN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-17T21:20:59Z",
+    "inmate_number": "1793128",
+    "name": "ELLIS JEFFERY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
