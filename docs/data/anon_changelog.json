@@ -23839,102 +23839,45 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "14245583",
-    "name": "POUNCY DELEONE",
+    "date": "2026-08-11",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "14356952",
-    "name": "ROSS JAMIEKA",
+    "date": "2026-08-11",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": "booked 8/10/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "14546489",
-    "name": "HOLDER JAYQUAN",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Driving under suspension"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "14767692",
-    "name": "RUSH DEMANCE",
+    "date": "2026-08-11",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "booked 8/10/26"
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "1676900",
-    "name": "PERSLEY DANTE",
+    "date": "2026-08-11",
     "tier": "M3",
-    "category": "False identifying information",
-    "note": "booked 8/10/26"
+    "category": "False identifying information"
   },
   {
-    "event": "updated",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "1570818",
-    "name": "WILLIAMS STACIE",
+    "event": "booked",
+    "date": "2026-08-11",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "1844289",
-    "name": "STAFFORD RONALD",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "2187204",
-    "name": "BOWEN CLIFFTON",
-    "tier": null,
-    "category": null,
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "2150643",
-    "name": "DICKS JASMINE",
-    "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "booked 8/11/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "2303294",
-    "name": "MADDOX AMBER",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 8/11/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-11T04:40:05Z",
-    "inmate_number": "2721880",
-    "name": "SANDERS TIONA",
+    "date": "2026-08-11",
     "tier": "F2",
-    "category": "Robbery",
-    "note": "booked 8/10/26"
+    "category": "Robbery"
+  },
+  {
+    "event": "booked",
+    "date": "2026-08-11",
+    "tier": "M1",
+    "category": "Falsification"
   },
   {
     "event": "booked",
@@ -33943,5 +33886,50 @@
     "tier": "MM",
     "category": "Headlights",
     "note": "booked 8/17/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T04:50:39Z",
+    "inmate_number": "1458110",
+    "name": "STEVENSON ALFONZO",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T04:50:39Z",
+    "inmate_number": "14759280",
+    "name": "WENHOLD TIMOTHY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-18T04:50:39Z",
+    "inmate_number": "14820506",
+    "name": "HODGE SOPHIA",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-18T04:50:39Z",
+    "inmate_number": "2431325",
+    "name": "PARKER DAVID",
+    "tier": "MM",
+    "category": "Reg of adult oriented buss",
+    "note": "booked 8/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T04:50:39Z",
+    "inmate_number": "2841068",
+    "name": "RAINES NATHAN",
+    "tier": "MM",
+    "category": "Headlights",
+    "note": ""
   }
 ]
