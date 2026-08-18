@@ -24001,120 +24001,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14339740",
-    "name": "KING ASHLEY",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/11/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14492621",
-    "name": "WHITNEY MIKAYLA",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14561969",
-    "name": "ERKINS TIMARION",
+    "date": "2026-08-11",
     "tier": "M1",
-    "category": "Telecommunications harassment",
-    "note": "booked (date not reported)"
+    "category": "Telecommunications harassment"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14583803",
-    "name": "BARTLETT LAURA",
-    "tier": "F5",
-    "category": "Breaking and entering",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14623646",
-    "name": "WRIGHT JAHLANI",
+    "date": "2026-08-11",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 8/11/26"
+    "category": "Violating protection order"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14819776",
-    "name": "LOATMAN DARNELL",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/11/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14819787",
-    "name": "DIEHL CARTER",
-    "tier": "F5",
-    "category": "Breaking and entering",
-    "note": "booked 8/11/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "2415503",
-    "name": "THOMAS DEMONTA",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "2796689",
-    "name": "COLLIER DESHAUN",
-    "tier": "M1",
-    "category": "Violating protection order",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14809404",
-    "name": "CARSON CARLA",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14597911",
-    "name": "EVANS SAANTE",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "1738403",
-    "name": "IRBY TIWAN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-11T14:53:29Z",
-    "inmate_number": "14713739",
-    "name": "JONES NASHAWN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "date": "2026-08-11",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)"
   },
   {
     "event": "updated",
@@ -34168,5 +34069,59 @@
     "tier": null,
     "category": null,
     "note": "booked 8/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-18T15:25:41Z",
+    "inmate_number": "14087141",
+    "name": "CARTER ANTHONY",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T15:25:41Z",
+    "inmate_number": "14546632",
+    "name": "PAYNE DYLAN",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-18T15:25:41Z",
+    "inmate_number": "1830873",
+    "name": "UNGERBUHLER JOHN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 8/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T15:25:41Z",
+    "inmate_number": "2202617",
+    "name": "TURNER MATTHEW",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T15:25:41Z",
+    "inmate_number": "2414685",
+    "name": "UPSHAW VAUGHNDEL",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-18T15:25:41Z",
+    "inmate_number": "14426450",
+    "name": "JONES DAEMON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
