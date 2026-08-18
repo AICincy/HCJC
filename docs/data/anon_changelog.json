@@ -19783,6 +19783,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-07-16",
+    "tier": "M1",
+    "category": "Violating protection order"
+  },
+  {
+    "event": "booked",
     "date": "2026-07-17",
     "tier": "M1",
     "category": "Violating protection order"
@@ -34183,5 +34189,77 @@
     "tier": null,
     "category": null,
     "note": "booked 8/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T21:18:10Z",
+    "inmate_number": "14538279",
+    "name": "SOLOMON EMANUEL",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-18T21:18:10Z",
+    "inmate_number": "14521987",
+    "name": "GAYE MAMADOU",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 8/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-18T21:18:10Z",
+    "inmate_number": "14772407",
+    "name": "CRUMP KALEAH",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 8/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-18T21:18:10Z",
+    "inmate_number": "1675970",
+    "name": "ANDERSON KIMBERLY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 8/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T21:18:10Z",
+    "inmate_number": "2427747",
+    "name": "POTTS YENTLE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T21:18:10Z",
+    "inmate_number": "2477173",
+    "name": "HOLLOWAY TASHARA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-18T21:18:10Z",
+    "inmate_number": "2744303",
+    "name": "HARRIS DOUGLAS",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-18T21:18:10Z",
+    "inmate_number": "65599",
+    "name": "MARTIN GARY",
+    "tier": "M4",
+    "category": "Public indecency",
+    "note": ""
   }
 ]
