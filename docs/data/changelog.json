@@ -1,19 +1,5 @@
 [
   {
-    "event": "booked",
-    "inmate_number": "2379900",
-    "name": "GIBSON RYAN",
-    "timestamp_utc": "2026-06-16T03:09:30Z",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2659345",
-    "name": "HOLT JANELL",
-    "timestamp_utc": "2026-06-16T03:09:30Z",
-    "note": "booked 6/15/26"
-  },
-  {
     "event": "released",
     "inmate_number": "1756760",
     "name": "PENMAN GEORGE",
@@ -69998,5 +69984,19 @@
     "name": "BRONAUGH AUNGELIQUE",
     "timestamp_utc": "2026-08-19T09:27:39Z",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "1082964",
+    "name": "ROSS MARILYN",
+    "timestamp_utc": "2026-08-19T09:58:59Z",
+    "note": "booked 8/19/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2395481",
+    "name": "BRONAUGH AUNGELIQUE",
+    "timestamp_utc": "2026-08-19T09:58:59Z",
+    "note": ""
   }
 ]
