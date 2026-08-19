@@ -24241,48 +24241,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-12T13:55:37Z",
-    "inmate_number": "14450817",
-    "name": "FOSTER ARIAH",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-12T13:55:37Z",
-    "inmate_number": "2157770",
-    "name": "TURNER DAMEON",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-12T13:55:37Z",
-    "inmate_number": "2202617",
-    "name": "TURNER MATTHEW",
+    "date": "2026-08-12",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-12T13:55:37Z",
-    "inmate_number": "2480595",
-    "name": "EDWARDS COURTNEY",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-12T13:55:37Z",
-    "inmate_number": "1880923",
-    "name": "TURNER DANTE",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
@@ -34579,5 +34540,50 @@
     "tier": "M1",
     "category": "Endangering children",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-19T14:09:05Z",
+    "inmate_number": "14319983",
+    "name": "CUNNINGHAM CARISSA",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-19T14:09:05Z",
+    "inmate_number": "2415040",
+    "name": "PORTIS JEFFERY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-19T14:09:05Z",
+    "inmate_number": "2419434",
+    "name": "BAKKEN FELICIA",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-19T14:09:05Z",
+    "inmate_number": "14328465",
+    "name": "BELL TERRELL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-19T14:09:05Z",
+    "inmate_number": "932156",
+    "name": "ELLIOT JAMES",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
