@@ -24121,75 +24121,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-12T01:58:51Z",
-    "inmate_number": "1145740",
-    "name": "SMITH ELIZABETH",
+    "date": "2026-08-12",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 8/11/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-12T01:58:51Z",
-    "inmate_number": "14100981",
-    "name": "HARRISON TAYLER",
+    "date": "2026-08-12",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": ""
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-12T01:58:51Z",
-    "inmate_number": "14819873",
-    "name": "VELASQUEZ ELMER",
+    "date": "2026-08-12",
     "tier": null,
-    "category": null,
-    "note": "booked 8/11/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-12T01:58:51Z",
-    "inmate_number": "1571560",
-    "name": "PALMER LAWRENCE",
+    "date": "2026-08-12",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 8/11/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-12T01:58:51Z",
-    "inmate_number": "2590208",
-    "name": "BOYD GABRIELLE",
+    "date": "2026-08-12",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/11/26"
+    "category": "Domestic violence"
+  },
+  {
+    "event": "released",
+    "date": "2026-08-12",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-12T01:58:51Z",
-    "inmate_number": "2749209",
-    "name": "KENDALL THOMAS",
-    "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-12T01:58:51Z",
-    "inmate_number": "1922897",
-    "name": "DUBOSE MICHAEL",
+    "date": "2026-08-12",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-12T01:58:51Z",
-    "inmate_number": "1539420",
-    "name": "TAYLOR ZACHARY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "updated",
@@ -34411,6 +34381,60 @@
     "timestamp_utc": "2026-08-19T01:27:59Z",
     "inmate_number": "14058316",
     "name": "WHITE JACQUELINE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-19T02:38:50Z",
+    "inmate_number": "14209894",
+    "name": "MCNAMARA JUSTEEN",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 8/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-19T02:38:50Z",
+    "inmate_number": "14376356",
+    "name": "TERRY JESSICA",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-19T02:38:50Z",
+    "inmate_number": "14818807",
+    "name": "HEIST ADAM",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-19T02:38:50Z",
+    "inmate_number": "1498710",
+    "name": "VINEGAR ERIC",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 8/18/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-19T02:38:50Z",
+    "inmate_number": "2792535",
+    "name": "LOFTON CORNELL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-19T02:38:50Z",
+    "inmate_number": "65599",
+    "name": "MARTIN GARY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
