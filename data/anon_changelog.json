@@ -24475,57 +24475,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-13T05:30:21Z",
-    "inmate_number": "14142336",
-    "name": "JONES WILLIE",
+    "date": "2026-08-13",
     "tier": "M1",
-    "category": "Unauthorized use of a vehicle",
-    "note": "booked 8/12/26"
+    "category": "Unauthorized use of a vehicle"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-13T05:30:21Z",
-    "inmate_number": "14502987",
-    "name": "SIMES KENNEDY",
+    "date": "2026-08-13",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 8/13/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-13T05:30:21Z",
-    "inmate_number": "14820045",
-    "name": "ANDREOLI MICHEAL",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-13T05:30:21Z",
-    "inmate_number": "2129334",
-    "name": "NASH ANDRE",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-13T05:30:21Z",
-    "inmate_number": "2778623",
-    "name": "RANSOM CONSTANCE",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-13T05:30:21Z",
-    "inmate_number": "14820032",
-    "name": "ELAM ROBERT",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
@@ -35055,6 +35013,24 @@
     "name": "MORTON BRANDON",
     "tier": null,
     "category": null,
+    "note": "booked 8/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-20T05:56:14Z",
+    "inmate_number": "1052564",
+    "name": "MCCLAIN AARON",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-20T05:56:14Z",
+    "inmate_number": "2463215",
+    "name": "TAYLOR DANIEL",
+    "tier": "M1",
+    "category": "Violating protection order",
     "note": "booked 8/20/26"
   }
 ]
