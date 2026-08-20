@@ -24499,39 +24499,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-13T09:39:55Z",
-    "inmate_number": "1199056",
-    "name": "WALKER PATRICIA",
+    "date": "2026-08-13",
     "tier": "M4",
-    "category": "Menacing",
-    "note": "booked 8/13/26"
+    "category": "Menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-13T09:39:55Z",
-    "inmate_number": "14820054",
-    "name": "SUBEDI BINAM",
+    "date": "2026-08-13",
     "tier": "M1",
-    "category": "Making false alarms",
-    "note": "booked 8/13/26"
+    "category": "Making false alarms"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-13T09:39:55Z",
-    "inmate_number": "1497490",
-    "name": "BEACH JERRY",
+    "date": "2026-08-13",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 8/13/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-13T09:39:55Z",
-    "inmate_number": "2488032",
-    "name": "HIGGINS BRANDON",
+    "date": "2026-08-13",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": "booked 8/13/26"
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "updated",
@@ -35107,5 +35095,14 @@
     "tier": "M1",
     "category": "Assault",
     "note": "booked 8/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-20T10:00:32Z",
+    "inmate_number": "2751423",
+    "name": "BEATTY MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
