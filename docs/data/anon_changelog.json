@@ -24397,84 +24397,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-12T23:57:30Z",
-    "inmate_number": "14555762",
-    "name": "JONES DONTONIO",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-13T01:41:55Z",
-    "inmate_number": "1170933",
-    "name": "VALENTINE ANDRE",
+    "date": "2026-08-13",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/12/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-13T01:41:55Z",
-    "inmate_number": "14253428",
-    "name": "CAUDILL ALEX",
+    "date": "2026-08-13",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-13T01:41:55Z",
-    "inmate_number": "14355491",
-    "name": "LEE QUINSHAWNTAY",
+    "date": "2026-08-13",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-13T01:41:55Z",
-    "inmate_number": "14555762",
-    "name": "JONES DONTONIO",
+    "date": "2026-08-13",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-13T01:41:55Z",
-    "inmate_number": "14820030",
-    "name": "WALKER TAYVION",
+    "date": "2026-08-13",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
+  },
+  {
+    "event": "updated",
+    "date": "2026-08-13",
+    "tier": "M4",
+    "category": "Misconduct at an emergency"
+  },
+  {
+    "event": "updated",
+    "date": "2026-08-13",
+    "tier": "M1",
+    "category": "Violating protection order"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-13T01:41:55Z",
-    "inmate_number": "14820042",
-    "name": "BARNES CARL",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/12/26"
+    "date": "2026-08-13",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-13T01:41:55Z",
-    "inmate_number": "14820032",
-    "name": "ELAM ROBERT",
-    "tier": "M4",
-    "category": "Misconduct at an emergency",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-13T01:41:55Z",
-    "inmate_number": "2512398",
-    "name": "BEARD BRETT",
-    "tier": "M1",
-    "category": "Violating protection order",
-    "note": ""
+    "date": "2026-08-13",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -34942,5 +34915,59 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-20T01:43:27Z",
+    "inmate_number": "1207105",
+    "name": "MOORE KEVIN",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 8/19/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-20T01:43:27Z",
+    "inmate_number": "14323372",
+    "name": "KINCAID KYLA",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-20T01:43:27Z",
+    "inmate_number": "14390730",
+    "name": "WOOD JADEN",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked 8/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-20T01:43:27Z",
+    "inmate_number": "14751016",
+    "name": "RIQUIAC SEBASTIAN",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "booked 8/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-20T01:43:27Z",
+    "inmate_number": "1528914",
+    "name": "DANIELS ARNOLD",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 8/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-20T01:43:27Z",
+    "inmate_number": "1623786",
+    "name": "HUGHLEY MARTY",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 8/19/26"
   }
 ]
