@@ -1,12 +1,5 @@
 [
   {
-    "event": "booked",
-    "inmate_number": "14673745",
-    "name": "CANADY NAUTIKA",
-    "timestamp_utc": "2026-06-17T05:56:47Z",
-    "note": "booked 6/17/26"
-  },
-  {
     "event": "updated",
     "inmate_number": "14814034",
     "name": "MISNIK JADON",
@@ -69997,6 +69990,13 @@
     "inmate_number": "14763334",
     "name": "YOUNG MARIA",
     "timestamp_utc": "2026-08-20T19:31:22Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2415503",
+    "name": "THOMAS DEMONTA",
+    "timestamp_utc": "2026-08-20T20:26:56Z",
     "note": "no longer on HCSO public roster"
   }
 ]
