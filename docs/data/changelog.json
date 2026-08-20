@@ -1,12 +1,5 @@
 [
   {
-    "event": "updated",
-    "inmate_number": "2025008",
-    "name": "ROSS DONNIE",
-    "timestamp_utc": "2026-06-16T17:56:41Z",
-    "note": ""
-  },
-  {
     "event": "booked",
     "inmate_number": "2252733",
     "name": "MCCONNELL KENNETH",
@@ -69998,5 +69991,12 @@
     "name": "TAYLOR DANIEL",
     "timestamp_utc": "2026-08-20T05:56:14Z",
     "note": "booked 8/20/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2767993",
+    "name": "IRVIN BENJAMIN",
+    "timestamp_utc": "2026-08-20T06:36:00Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
