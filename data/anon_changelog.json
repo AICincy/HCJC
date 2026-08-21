@@ -11598,6 +11598,12 @@
     "category": "Criminal trespass"
   },
   {
+    "event": "released",
+    "date": "2026-06-20",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
     "event": "updated",
     "date": "2026-06-21",
     "tier": "M1",
@@ -18432,6 +18438,12 @@
     "category": "Booking hold (no ORC code on file)"
   },
   {
+    "event": "booked",
+    "date": "2026-07-12",
+    "tier": "M1",
+    "category": "Violation of community control / probation"
+  },
+  {
     "event": "updated",
     "date": "2026-07-13",
     "tier": "M1",
@@ -18760,6 +18772,12 @@
     "date": "2026-07-13",
     "tier": "M2",
     "category": "Criminal damaging"
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-13",
+    "tier": "M1",
+    "category": "Violation of community control / probation"
   },
   {
     "event": "booked",
@@ -23556,6 +23574,12 @@
     "category": "Theft"
   },
   {
+    "event": "released",
+    "date": "2026-08-09",
+    "tier": "M1",
+    "category": "Violation of community control / probation"
+  },
+  {
     "event": "booked",
     "date": "2026-08-10",
     "tier": "M1",
@@ -24943,93 +24967,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "14513968",
-    "name": "BOYLE MAXWELL",
+    "date": "2026-08-14",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 8/14/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "14682949",
-    "name": "HAYNES ISAIAH",
-    "tier": "M1",
-    "category": "Assault",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "14779324",
-    "name": "HALL DAVION",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "14808479",
-    "name": "MOHAMOUD LIBAN",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "1497490",
-    "name": "BEACH JERRY",
+    "date": "2026-08-14",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "1692976",
-    "name": "HARPER GREGORY",
+    "date": "2026-08-14",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments"
+  },
+  {
+    "event": "released",
+    "date": "2026-08-14",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 8/14/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "2079981",
-    "name": "SESTER JONATHAN",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "1538264",
-    "name": "BURTON JOEY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "14557845",
-    "name": "HARVEY JOSEPH",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-14T16:32:12Z",
-    "inmate_number": "2079993",
-    "name": "NIXSON JULIAN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Theft"
   },
   {
     "event": "updated",
@@ -36541,5 +36499,77 @@
     "tier": null,
     "category": null,
     "note": "booked 8/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T17:00:58Z",
+    "inmate_number": "14128671",
+    "name": "JOHNSON FREDERICK",
+    "tier": "M1",
+    "category": "Violation of community control / probation",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T17:00:58Z",
+    "inmate_number": "14529347",
+    "name": "WATKINS MARY",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T17:00:58Z",
+    "inmate_number": "14546814",
+    "name": "WRIGHT RYAN",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T17:00:58Z",
+    "inmate_number": "1553706",
+    "name": "HUNSCHE BRIAN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T17:00:58Z",
+    "inmate_number": "1926704",
+    "name": "DUNN PAUL",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T17:00:58Z",
+    "inmate_number": "1976808",
+    "name": "HUFF CLEAVON",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T17:00:58Z",
+    "inmate_number": "2256066",
+    "name": "ALLEN BRANDON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T17:00:58Z",
+    "inmate_number": "14476874",
+    "name": "YOUNGER ELIYAH",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
