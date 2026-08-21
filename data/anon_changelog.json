@@ -14052,6 +14052,18 @@
     "category": "Aggravated trespassing"
   },
   {
+    "event": "booked",
+    "date": "2026-06-28",
+    "tier": "M4",
+    "category": "Public indecency"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-28",
+    "tier": "M4",
+    "category": "Public indecency"
+  },
+  {
     "event": "updated",
     "date": "2026-06-29",
     "tier": "M1",
@@ -14362,6 +14374,12 @@
     "date": "2026-06-29",
     "tier": "M1",
     "category": "Receiving stolen property"
+  },
+  {
+    "event": "updated",
+    "date": "2026-06-29",
+    "tier": "M4",
+    "category": "Public indecency"
   },
   {
     "event": "booked",
@@ -16858,6 +16876,12 @@
     "date": "2026-07-07",
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer"
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-07",
+    "tier": "M4",
+    "category": "Public indecency"
   },
   {
     "event": "booked",
@@ -23352,6 +23376,12 @@
     "category": "Failure to disclose personal information"
   },
   {
+    "event": "updated",
+    "date": "2026-08-08",
+    "tier": "M4",
+    "category": "Public indecency"
+  },
+  {
     "event": "booked",
     "date": "2026-08-09",
     "tier": null,
@@ -25078,33 +25108,6 @@
     "date": "2026-08-14",
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-14T21:20:14Z",
-    "inmate_number": "14696152",
-    "name": "HALCOMB-BENSON MYA",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-14T21:20:14Z",
-    "inmate_number": "2638050",
-    "name": "KRAEMER SCOTT",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-14T21:20:14Z",
-    "inmate_number": "2555839",
-    "name": "STRUNK TIMOTHY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
   },
   {
     "event": "booked",
@@ -36679,5 +36682,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T21:48:04Z",
+    "inmate_number": "1793128",
+    "name": "ELLIS JEFFERY",
+    "tier": "M4",
+    "category": "Public indecency",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T21:48:04Z",
+    "inmate_number": "2093894",
+    "name": "CURTIS-GASKINS DONNA",
+    "tier": "MM",
+    "category": "Abusing dog",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T21:48:04Z",
+    "inmate_number": "2621395",
+    "name": "TROST MATTHEW",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
   }
 ]
