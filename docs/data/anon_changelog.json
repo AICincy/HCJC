@@ -24775,30 +24775,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T06:53:10Z",
-    "inmate_number": "1901755",
-    "name": "HOUSTON DION",
+    "date": "2026-08-14",
     "tier": "M3",
-    "category": "Sexual imposition",
-    "note": "booked (date not reported)"
+    "category": "Sexual imposition"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T06:53:10Z",
-    "inmate_number": "2079993",
-    "name": "NIXSON JULIAN",
+    "date": "2026-08-14",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: vicious dogs",
-    "note": "booked 8/14/26"
+    "category": "Cincinnati Municipal Code: vicious dogs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T06:53:10Z",
-    "inmate_number": "2336756",
-    "name": "TERRELL DARYNEL",
+    "date": "2026-08-14",
     "tier": "F3",
-    "category": "Having weapons while under disability",
-    "note": "booked (date not reported)"
+    "category": "Having weapons while under disability"
   },
   {
     "event": "booked",
@@ -36001,6 +35992,42 @@
     "timestamp_utc": "2026-08-21T06:46:07Z",
     "inmate_number": "2087233",
     "name": "WEST CHRISTOPHER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T07:31:00Z",
+    "inmate_number": "14431190",
+    "name": "TODD CRAISHAUN",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T07:31:00Z",
+    "inmate_number": "14382657",
+    "name": "WALKER AMEDA",
+    "tier": "MM",
+    "category": "Child restraint / safety seat",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T07:31:00Z",
+    "inmate_number": "14546814",
+    "name": "WRIGHT RYAN",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T07:31:00Z",
+    "inmate_number": "2428458",
+    "name": "STEPHENS EZZARD",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
