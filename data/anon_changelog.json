@@ -24661,66 +24661,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T01:23:21Z",
-    "inmate_number": "14193141",
-    "name": "BROWN CHANCIE",
+    "date": "2026-08-14",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 8/13/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-14T01:23:21Z",
-    "inmate_number": "14590502",
-    "name": "LEATHERS KEMONTA",
+    "date": "2026-08-14",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-14T01:23:21Z",
-    "inmate_number": "14796906",
-    "name": "PRICE BRANDON",
-    "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T01:23:21Z",
-    "inmate_number": "1844910",
-    "name": "PRYOR DAMIEN",
+    "date": "2026-08-14",
     "tier": "M1",
-    "category": "Making false alarms",
-    "note": "booked 8/13/26"
+    "category": "Making false alarms"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T01:23:21Z",
-    "inmate_number": "2461957",
-    "name": "NIXON KATRENIA",
+    "date": "2026-08-14",
     "tier": "F5",
-    "category": "Harassment with a bodily substance",
-    "note": "booked 8/13/26"
+    "category": "Harassment with a bodily substance"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T01:23:21Z",
-    "inmate_number": "831771",
-    "name": "RUNYON WILLIAM",
+    "date": "2026-08-14",
     "tier": "F5",
-    "category": "Breaking and entering",
-    "note": "booked 8/13/26"
+    "category": "Breaking and entering"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-08-14T01:23:21Z",
-    "inmate_number": "1988499",
-    "name": "EARLS JAMES",
+    "date": "2026-08-14",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-08-14",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-08-14",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -35176,6 +35161,51 @@
     "timestamp_utc": "2026-08-21T00:57:43Z",
     "inmate_number": "14348829",
     "name": "ARRINGTON DEMARIO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T02:22:45Z",
+    "inmate_number": "14244327",
+    "name": "DUBOSE LADD",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T02:22:45Z",
+    "inmate_number": "14802152",
+    "name": "GAYLOR WILLIAM",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/20/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T02:22:45Z",
+    "inmate_number": "1568456",
+    "name": "ADAMS THEODORE",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/20/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T02:22:45Z",
+    "inmate_number": "2051943",
+    "name": "PRITCHETT CORNELL",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/20/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T02:22:45Z",
+    "inmate_number": "2280428",
+    "name": "BREWER JAMES",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
