@@ -16458,6 +16458,12 @@
     "category": "Domestic violence"
   },
   {
+    "event": "booked",
+    "date": "2026-07-06",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer"
+  },
+  {
     "event": "updated",
     "date": "2026-07-07",
     "tier": null,
@@ -16822,6 +16828,12 @@
     "date": "2026-07-07",
     "tier": "M4",
     "category": "Cincinnati Municipal Code: public order (interference with traffic)"
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-07",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "booked",
@@ -17206,6 +17218,12 @@
     "date": "2026-07-08",
     "tier": "F5",
     "category": "Trafficking in drugs"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-08",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer"
   },
   {
     "event": "updated",
@@ -24744,40 +24762,16 @@
     "category": "Domestic violence"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-08-14T05:20:20Z",
-    "inmate_number": "1602578",
-    "name": "HILL ROBERT",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/13/26"
-  },
-  {
     "event": "updated",
-    "timestamp_utc": "2026-08-14T05:20:20Z",
-    "inmate_number": "1892463",
-    "name": "ROLAND FERNANDO",
+    "date": "2026-08-14",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-14T05:20:20Z",
-    "inmate_number": "2263431",
-    "name": "HAYES DONTE",
+    "date": "2026-08-14",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-14T05:20:20Z",
-    "inmate_number": "2339286",
-    "name": "SPRAWL BEVERLY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
@@ -35764,6 +35758,123 @@
     "timestamp_utc": "2026-08-21T04:53:59Z",
     "inmate_number": "14257881",
     "name": "STRICKLAND JONATHAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "14116663",
+    "name": "BEACHEM LATASHA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "14369042",
+    "name": "WILLIS KEILAN",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "14500563",
+    "name": "ASBURY CHRISTOPHER",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "1553706",
+    "name": "HUNSCHE BRIAN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "2371289",
+    "name": "SIMMS TYRONE",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "2506718",
+    "name": "DAVIS SYRELL",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "2589262",
+    "name": "FERGUSON DIONDRE",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "1313320",
+    "name": "BENNIE DEVAIL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "1528914",
+    "name": "DANIELS ARNOLD",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "14161536",
+    "name": "DAY MARKEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "14552280",
+    "name": "HILL RENYLA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "2773780",
+    "name": "MCCLELLAN LANDER",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T05:28:00Z",
+    "inmate_number": "14820816",
+    "name": "MURPHY LIONEL",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
