@@ -24199,6 +24199,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-08-11",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: animals"
+  },
+  {
+    "event": "booked",
     "date": "2026-08-12",
     "tier": "M1",
     "category": "Receiving stolen property"
@@ -24448,6 +24454,18 @@
     "date": "2026-08-12",
     "tier": "M1",
     "category": "Violating protection order"
+  },
+  {
+    "event": "updated",
+    "date": "2026-08-12",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: animals"
+  },
+  {
+    "event": "released",
+    "date": "2026-08-12",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: animals"
   },
   {
     "event": "booked",
@@ -24811,48 +24829,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-14T08:10:14Z",
-    "inmate_number": "1156506",
-    "name": "HARRIS CHARLIE",
+    "date": "2026-08-14",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-14T08:10:14Z",
-    "inmate_number": "14596292",
-    "name": "SMITH LILTONIO",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/14/26"
+    "category": "Felonious assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-14T08:10:14Z",
-    "inmate_number": "1901755",
-    "name": "HOUSTON DION",
+    "date": "2026-08-14",
     "tier": "M3",
-    "category": "Sexual imposition",
-    "note": ""
+    "category": "Sexual imposition"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-14T08:10:14Z",
-    "inmate_number": "2079993",
-    "name": "NIXSON JULIAN",
+    "date": "2026-08-14",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: vicious dogs",
-    "note": ""
+    "category": "Cincinnati Municipal Code: vicious dogs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-14T08:10:14Z",
-    "inmate_number": "2336756",
-    "name": "TERRELL DARYNEL",
+    "date": "2026-08-14",
     "tier": "F3",
-    "category": "Having weapons while under disability",
-    "note": ""
+    "category": "Having weapons while under disability"
   },
   {
     "event": "updated",
@@ -36100,6 +36097,51 @@
     "timestamp_utc": "2026-08-21T08:08:10Z",
     "inmate_number": "2088962",
     "name": "WEATHERS ANTONIO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T08:57:24Z",
+    "inmate_number": "14100981",
+    "name": "HARRISON TAYLER",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: animals",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T08:57:24Z",
+    "inmate_number": "14431190",
+    "name": "TODD CRAISHAUN",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-21T08:57:24Z",
+    "inmate_number": "14546814",
+    "name": "WRIGHT RYAN",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-21T08:57:24Z",
+    "inmate_number": "14575993",
+    "name": "HURLEY CAMERON",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-21T08:57:24Z",
+    "inmate_number": "14472047",
+    "name": "STEINMETZ BRANSON",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
