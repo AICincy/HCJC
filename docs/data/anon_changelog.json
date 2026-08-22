@@ -25338,15 +25338,6 @@
     "category": "Domestic violence"
   },
   {
-    "event": "updated",
-    "timestamp_utc": "2026-08-15T19:17:41Z",
-    "inmate_number": "14619954",
-    "name": "BROWN MARY",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
     "event": "booked",
     "timestamp_utc": "2026-08-15T20:46:33Z",
     "inmate_number": "14448551",
@@ -37198,5 +37189,50 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T19:23:24Z",
+    "inmate_number": "14284197",
+    "name": "CASTON QUAYLA",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T19:23:24Z",
+    "inmate_number": "14532543",
+    "name": "SCHWALLER KARMA",
+    "tier": "M1",
+    "category": "Probation violation",
+    "note": "booked 8/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T19:23:24Z",
+    "inmate_number": "2592059",
+    "name": "LOPEZ-PEREZ FELIX",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-22T19:23:24Z",
+    "inmate_number": "14802152",
+    "name": "GAYLOR WILLIAM",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-22T19:23:24Z",
+    "inmate_number": "1370407",
+    "name": "HENRY PATRICK",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
