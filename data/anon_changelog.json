@@ -25225,39 +25225,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-15T04:55:50Z",
-    "inmate_number": "14098056",
-    "name": "HARRIS DESTINEE",
+    "date": "2026-08-15",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-15T04:55:50Z",
-    "inmate_number": "14132141",
-    "name": "DYKES CHRISTIAN",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Driving without a valid license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-15T04:55:50Z",
-    "inmate_number": "14763119",
-    "name": "BOYINGTON MEKHI",
+    "date": "2026-08-15",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 8/15/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-15T04:55:50Z",
-    "inmate_number": "2276341",
-    "name": "WHITE RICHARD",
+    "date": "2026-08-15",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "booked 8/15/26"
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "updated",
@@ -36784,6 +36766,42 @@
     "timestamp_utc": "2026-08-22T04:27:26Z",
     "inmate_number": "14821064",
     "name": "FLAUGHER MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T05:00:20Z",
+    "inmate_number": "14821066",
+    "name": "BRINKER BEN",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T05:00:20Z",
+    "inmate_number": "2508071",
+    "name": "BOLDEN NICHOLAS",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-22T05:00:20Z",
+    "inmate_number": "2093894",
+    "name": "CURTIS-GASKINS DONNA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-22T05:00:20Z",
+    "inmate_number": "14211451",
+    "name": "SOUDER DONNA",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
