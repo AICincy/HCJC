@@ -25213,39 +25213,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-15T04:23:45Z",
-    "inmate_number": "1768537",
-    "name": "BISHOP BRANDON",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "date": "2026-08-15",
+    "tier": "M1",
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-15T04:23:45Z",
-    "inmate_number": "2718315",
-    "name": "KING DEMARCUS",
+    "date": "2026-08-15",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-15T04:23:45Z",
-    "inmate_number": "14265379",
-    "name": "HAMMONS TAMMY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-15T04:23:45Z",
-    "inmate_number": "2323260",
-    "name": "PELFREY RONALD",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
@@ -36748,5 +36724,68 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T04:27:26Z",
+    "inmate_number": "14057105",
+    "name": "COUCH ETHAN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T04:27:26Z",
+    "inmate_number": "14127369",
+    "name": "FLAUGHER MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T04:27:26Z",
+    "inmate_number": "1455115",
+    "name": "DAVIS SHAWN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T04:27:26Z",
+    "inmate_number": "14821066",
+    "name": "BRINKER BEN",
+    "tier": "M1",
+    "category": "Operating a motor vehicle without lawful registration",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T04:27:26Z",
+    "inmate_number": "14818148",
+    "name": "GUITIERREZ ROSMARCK",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T04:27:26Z",
+    "inmate_number": "2599353",
+    "name": "BORYCZKA STEVEN",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-22T04:27:26Z",
+    "inmate_number": "14821064",
+    "name": "FLAUGHER MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
