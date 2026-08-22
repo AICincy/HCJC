@@ -25255,12 +25255,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-15T07:07:21Z",
-    "inmate_number": "14820316",
-    "name": "NYAKUNDI JARED",
+    "date": "2026-08-15",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked (date not reported)"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
@@ -36862,5 +36859,50 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": "booked 8/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T07:26:52Z",
+    "inmate_number": "14566558",
+    "name": "WITHAM DAYVON",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T07:26:52Z",
+    "inmate_number": "14809081",
+    "name": "PEREZ HILBERT",
+    "tier": "M1",
+    "category": "Driving under OVI suspension",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T07:26:52Z",
+    "inmate_number": "1754660",
+    "name": "PURSELL ANNA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T07:26:52Z",
+    "inmate_number": "2426859",
+    "name": "MURNAHAN KRISTA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-22T07:26:52Z",
+    "inmate_number": "2589262",
+    "name": "FERGUSON DIONDRE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
