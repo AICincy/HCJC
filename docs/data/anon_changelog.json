@@ -25362,24 +25362,6 @@
     "category": "Attempt to commit an offense"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-08-15T23:20:47Z",
-    "inmate_number": "1551481",
-    "name": "MOATS DONTA",
-    "tier": "M1",
-    "category": "Theft",
-    "note": "booked 8/15/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-15T23:20:47Z",
-    "inmate_number": "14763334",
-    "name": "YOUNG MARIA",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
     "event": "updated",
     "timestamp_utc": "2026-08-15T23:43:38Z",
     "inmate_number": "14791507",
@@ -37285,5 +37267,14 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T23:37:54Z",
+    "inmate_number": "2473034",
+    "name": "TUCKER DAVID",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
   }
 ]
