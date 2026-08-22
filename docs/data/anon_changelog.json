@@ -25117,39 +25117,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-15T00:53:47Z",
-    "inmate_number": "14318069",
-    "name": "WILLIAMS SAMUEL",
+    "date": "2026-08-15",
     "tier": "M1",
-    "category": "Improperly handling firearms in a motor vehicle",
-    "note": "booked 8/14/26"
+    "category": "Improperly handling firearms in a motor vehicle"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-15T00:53:47Z",
-    "inmate_number": "1768537",
-    "name": "BISHOP BRANDON",
+    "date": "2026-08-15",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-15T00:53:47Z",
-    "inmate_number": "1895696",
-    "name": "SPROLES WESLEY",
+    "date": "2026-08-15",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 8/14/26"
+    "category": "Theft"
+  },
+  {
+    "event": "booked",
+    "date": "2026-08-15",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-15T00:53:47Z",
-    "inmate_number": "2666120",
-    "name": "HOPKINS JAMES",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "date": "2026-08-15",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -36688,5 +36682,32 @@
     "tier": "F1",
     "category": "Aggravated robbery",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T00:54:05Z",
+    "inmate_number": "1554200",
+    "name": "PABST TOMMI",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T00:54:05Z",
+    "inmate_number": "2516496",
+    "name": "BEAMON TYRON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-22T00:54:05Z",
+    "inmate_number": "2778095",
+    "name": "CUNNINGHAM KENDELL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
