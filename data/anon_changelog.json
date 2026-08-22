@@ -25333,12 +25333,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-15T18:55:37Z",
-    "inmate_number": "2647811",
-    "name": "FLOWERS TAYANA",
+    "date": "2026-08-15",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/15/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
@@ -37183,5 +37180,23 @@
     "tier": null,
     "category": null,
     "note": "booked 8/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T18:59:03Z",
+    "inmate_number": "2372143",
+    "name": "SWAFFORD JAMES",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T18:59:03Z",
+    "inmate_number": "2592059",
+    "name": "LOPEZ-PEREZ FELIX",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
