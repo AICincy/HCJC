@@ -20443,6 +20443,18 @@
   },
   {
     "event": "booked",
+    "date": "2026-07-18",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "updated",
+    "date": "2026-07-18",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "booked",
     "date": "2026-07-19",
     "tier": "M1",
     "category": "Domestic violence"
@@ -36867,6 +36879,42 @@
     "name": "HALL ROBERT",
     "tier": "M1",
     "category": "Misuse of credit cards",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T10:17:40Z",
+    "inmate_number": "1201270",
+    "name": "CHALK JAMES",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T10:17:40Z",
+    "inmate_number": "2032491",
+    "name": "HALL ROBERT",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T10:17:40Z",
+    "inmate_number": "2148562",
+    "name": "IRBY-MILLER AVIANCE",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": "booked 8/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T10:17:40Z",
+    "inmate_number": "2760460",
+    "name": "SHIELDS PARADISE",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: dangerous weapons and fireworks (discharging firearms)",
     "note": ""
   }
 ]
