@@ -25327,30 +25327,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-15T17:38:01Z",
-    "inmate_number": "14619954",
-    "name": "BROWN MARY",
-    "tier": "M1",
-    "category": "Theft",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-15T17:38:01Z",
-    "inmate_number": "2801135",
-    "name": "CURTIS RAYMOND",
+    "date": "2026-08-15",
     "tier": "MM",
-    "category": "Bike regulatons",
-    "note": "booked 8/15/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-15T17:38:01Z",
-    "inmate_number": "14640538",
-    "name": "PATTERSON MIA",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Bike regulatons"
   },
   {
     "event": "released",
@@ -37159,5 +37138,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T17:38:49Z",
+    "inmate_number": "1734554",
+    "name": "DIXON DESMOND",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T17:38:49Z",
+    "inmate_number": "2484788",
+    "name": "EARLS JASON",
+    "tier": "F4",
+    "category": "Attempt to commit an offense",
+    "note": "booked 8/22/26"
   }
 ]
