@@ -25254,24 +25254,6 @@
     "category": "Cincinnati Municipal Code: general offenses"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-08-15T05:49:57Z",
-    "inmate_number": "14820310",
-    "name": "NEWMAN CHRISTOPHER",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 8/15/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-15T05:49:57Z",
-    "inmate_number": "2718315",
-    "name": "KING DEMARCUS",
-    "tier": "M1",
-    "category": "Assault",
-    "note": ""
-  },
-  {
     "event": "updated",
     "timestamp_utc": "2026-08-15T06:27:17Z",
     "inmate_number": "14820310",
@@ -36808,5 +36790,50 @@
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T06:01:03Z",
+    "inmate_number": "1423701",
+    "name": "THAXTON PAMELA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 8/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T06:01:03Z",
+    "inmate_number": "1754660",
+    "name": "PURSELL ANNA",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T06:01:03Z",
+    "inmate_number": "2240502",
+    "name": "BRINKER BEN",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "booked 8/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T06:01:03Z",
+    "inmate_number": "2426859",
+    "name": "MURNAHAN KRISTA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-22T06:01:03Z",
+    "inmate_number": "14821066",
+    "name": "BRINKER BEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
