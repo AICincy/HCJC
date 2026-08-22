@@ -23964,6 +23964,12 @@
     "category": "Theft"
   },
   {
+    "event": "released",
+    "date": "2026-08-10",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
     "event": "updated",
     "date": "2026-08-11",
     "tier": null,
@@ -25315,30 +25321,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-15T15:56:24Z",
-    "inmate_number": "1535499",
-    "name": "HARRIS ARTEZ",
+    "date": "2026-08-15",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-15T15:56:24Z",
-    "inmate_number": "2440402",
-    "name": "ROBERTSON RICKY",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/15/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-15T15:56:24Z",
-    "inmate_number": "968565",
-    "name": "STEVENS OTIS",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 8/15/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "released",
@@ -37183,5 +37168,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-22T16:25:25Z",
+    "inmate_number": "1121421",
+    "name": "RAINES LARRY",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 8/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T16:25:25Z",
+    "inmate_number": "2426859",
+    "name": "MURNAHAN KRISTA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-22T16:25:25Z",
+    "inmate_number": "2687549",
+    "name": "HARRIS SHANEAL",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": ""
   }
 ]
