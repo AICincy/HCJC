@@ -25525,12 +25525,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T19:17:24Z",
-    "inmate_number": "1506997",
-    "name": "DEATON SHAWN",
+    "date": "2026-08-16",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 8/16/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -37554,6 +37551,24 @@
     "name": "HERNANDEZ OSWALDO",
     "tier": "M1",
     "category": "Domestic violence",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-23T19:19:37Z",
+    "inmate_number": "14795711",
+    "name": "HERNANDEZ OSWALDO",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-23T19:19:37Z",
+    "inmate_number": "1969097",
+    "name": "BAUER DAWN",
+    "tier": null,
+    "category": null,
     "note": "booked 8/23/26"
   }
 ]
