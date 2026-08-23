@@ -13002,6 +13002,12 @@
     "category": "Failure to disclose personal information"
   },
   {
+    "event": "released",
+    "date": "2026-06-24",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
     "event": "updated",
     "date": "2026-06-25",
     "tier": "F3",
@@ -25519,42 +25525,6 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T17:56:04Z",
-    "inmate_number": "14551147",
-    "name": "GOODWIN JAYLEN",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/16/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-16T18:19:45Z",
-    "inmate_number": "14334395",
-    "name": "WILBURN ERIC",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-16T18:19:45Z",
-    "inmate_number": "14551147",
-    "name": "GOODWIN JAYLEN",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-16T18:55:04Z",
-    "inmate_number": "14334395",
-    "name": "WILBURN ERIC",
-    "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
-  },
-  {
-    "event": "booked",
     "timestamp_utc": "2026-08-16T19:17:24Z",
     "inmate_number": "1506997",
     "name": "DEATON SHAWN",
@@ -37576,5 +37546,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-23T18:56:41Z",
+    "inmate_number": "14795711",
+    "name": "HERNANDEZ OSWALDO",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/23/26"
   }
 ]
