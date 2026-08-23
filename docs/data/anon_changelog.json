@@ -25501,15 +25501,6 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T09:50:31Z",
-    "inmate_number": "14820358",
-    "name": "JIMENEZ-SALES JOSE",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
     "timestamp_utc": "2026-08-16T11:56:41Z",
     "inmate_number": "1839821",
     "name": "LYNCH STEVEN",
@@ -37522,5 +37513,50 @@
     "tier": "M2",
     "category": "Resisting arrest",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-23T11:16:38Z",
+    "inmate_number": "14286143",
+    "name": "GOINS GERALD",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-23T11:16:38Z",
+    "inmate_number": "14487577",
+    "name": "MOORE ALLAHNA",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-23T11:16:38Z",
+    "inmate_number": "14309805",
+    "name": "DAVIS DARRELL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-23T11:16:38Z",
+    "inmate_number": "14216222",
+    "name": "MCEACHIN OSANNA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-23T11:16:38Z",
+    "inmate_number": "14821115",
+    "name": "PEREZ RAMIRO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
