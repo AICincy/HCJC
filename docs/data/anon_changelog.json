@@ -25501,21 +25501,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T13:45:38Z",
-    "inmate_number": "2121692",
-    "name": "DELANEY KING",
+    "date": "2026-08-16",
     "tier": "M1",
-    "category": "Driving under OVI suspension",
-    "note": "booked 8/16/26"
+    "category": "Driving under OVI suspension"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T13:45:38Z",
-    "inmate_number": "2523915",
-    "name": "FREDERICK DANIEL",
+    "date": "2026-08-16",
     "tier": "M1",
-    "category": "Possessing criminal tools",
-    "note": "booked 8/16/26"
+    "category": "Possessing criminal tools"
   },
   {
     "event": "booked",
@@ -37558,5 +37552,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-23T14:48:06Z",
+    "inmate_number": "14469046",
+    "name": "LITTLE JONATHAN",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": "booked 8/23/26"
   }
 ]
