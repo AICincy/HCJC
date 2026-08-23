@@ -25513,12 +25513,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-16T16:21:04Z",
-    "inmate_number": "2523915",
-    "name": "FREDERICK DANIEL",
+    "date": "2026-08-16",
     "tier": "M1",
-    "category": "Possessing criminal tools",
-    "note": ""
+    "category": "Possessing criminal tools"
   },
   {
     "event": "booked",
@@ -37561,5 +37558,23 @@
     "tier": "M2",
     "category": "Resisting arrest",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-23T16:33:00Z",
+    "inmate_number": "14821133",
+    "name": "MCWHORTER RONNY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-23T16:33:00Z",
+    "inmate_number": "14559387",
+    "name": "ABU ALI",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
