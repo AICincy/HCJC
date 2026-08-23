@@ -20460,6 +20460,12 @@
     "category": "Criminal trespass"
   },
   {
+    "event": "released",
+    "date": "2026-07-18",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
     "event": "booked",
     "date": "2026-07-19",
     "tier": "M1",
@@ -25534,42 +25540,6 @@
     "date": "2026-08-16",
     "tier": "F5",
     "category": "Possession of drugs"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-16T22:45:15Z",
-    "inmate_number": "14771084",
-    "name": "QUARLES CLYDE",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-16T22:45:15Z",
-    "inmate_number": "1802492",
-    "name": "SMITH ANGELA",
-    "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-16T22:45:15Z",
-    "inmate_number": "2364757",
-    "name": "SULLIVAN COREY",
-    "tier": "M1",
-    "category": "Assault",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-16T22:45:15Z",
-    "inmate_number": "2684893",
-    "name": "DAVIS STEPHANIE",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/16/26"
   },
   {
     "event": "booked",
@@ -37630,5 +37600,59 @@
     "tier": "M3",
     "category": "Criminal mischief",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-23T22:48:02Z",
+    "inmate_number": "14239924",
+    "name": "GAY JAMIE",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-23T22:48:02Z",
+    "inmate_number": "14316414",
+    "name": "HARRIS STEVEN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-23T22:48:02Z",
+    "inmate_number": "14321830",
+    "name": "SHIPMON DALESHAH",
+    "tier": "M1",
+    "category": "Driving under FRA suspension",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-23T22:48:02Z",
+    "inmate_number": "14814928",
+    "name": "GREEN JEREMIAH",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-23T22:48:02Z",
+    "inmate_number": "14821151",
+    "name": "LEAHY AMY",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-23T22:48:02Z",
+    "inmate_number": "2661948",
+    "name": "BRYANT DANIEL",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "booked 8/23/26"
   }
 ]
