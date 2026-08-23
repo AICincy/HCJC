@@ -25441,75 +25441,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T03:32:38Z",
-    "inmate_number": "14077339",
-    "name": "MANIRAKIZA SEVERINE",
+    "date": "2026-08-16",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 8/15/26"
+    "category": "Theft"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T03:32:38Z",
-    "inmate_number": "1689165",
-    "name": "BAKER BEVERLY",
+    "date": "2026-08-16",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/15/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T03:32:38Z",
-    "inmate_number": "2819441",
-    "name": "MOCK JESSICA",
+    "date": "2026-08-16",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 8/15/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-16T03:32:38Z",
-    "inmate_number": "884820",
-    "name": "BURNS RICHARD",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/15/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-16T03:32:38Z",
-    "inmate_number": "2761385",
-    "name": "FIGUEROA ALEXIS",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-16T03:32:38Z",
-    "inmate_number": "14387427",
-    "name": "PAYTON PATRICK",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-16T03:32:38Z",
-    "inmate_number": "1988341",
-    "name": "THOMAS RANDY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-16T04:21:22Z",
-    "inmate_number": "14077339",
-    "name": "MANIRAKIZA SEVERINE",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
@@ -37345,5 +37291,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-23T04:22:59Z",
+    "inmate_number": "14508088",
+    "name": "HARRIS COURTANEY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-23T04:22:59Z",
+    "inmate_number": "2765352",
+    "name": "CRITES LESLEY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
   }
 ]
