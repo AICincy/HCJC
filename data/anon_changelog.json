@@ -25489,30 +25489,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T07:26:18Z",
-    "inmate_number": "14292208",
-    "name": "CORNETT KAREEM",
+    "date": "2026-08-16",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 8/16/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-16T07:26:18Z",
-    "inmate_number": "14820355",
-    "name": "WOFFORD MALCHIELAH",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-16T07:26:18Z",
-    "inmate_number": "2474141",
-    "name": "GOFF VINCENT",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/16/26"
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
@@ -37537,5 +37516,23 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 8/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-23T07:37:11Z",
+    "inmate_number": "1451774",
+    "name": "BROWN MICHAEL",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-23T07:37:11Z",
+    "inmate_number": "2702297",
+    "name": "WRIGHT DUSTIN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
   }
 ]
