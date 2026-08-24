@@ -25555,21 +25555,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-17T02:21:27Z",
-    "inmate_number": "1549926",
-    "name": "SUMMERS RODNEY",
+    "date": "2026-08-17",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-17T02:21:27Z",
-    "inmate_number": "1761815",
-    "name": "SMITH SIMIKO",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/16/26"
+    "category": null
   },
   {
     "event": "updated",
@@ -37711,5 +37699,86 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T02:38:03Z",
+    "inmate_number": "14164124",
+    "name": "FREUDEMANN ABIGAIL",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T02:38:03Z",
+    "inmate_number": "14821153",
+    "name": "VOSS CIARA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T02:38:03Z",
+    "inmate_number": "14821156",
+    "name": "JOHNSON ASHAWNTIS",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T02:38:03Z",
+    "inmate_number": "14821161",
+    "name": "WINKLER JONATHAN",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T02:38:03Z",
+    "inmate_number": "14821162",
+    "name": "WRIGHT DALTON",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-24T02:38:03Z",
+    "inmate_number": "14709449",
+    "name": "BARBER HERBERT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-24T02:38:03Z",
+    "inmate_number": "2752163",
+    "name": "DONALD CLIFTON",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-24T02:38:03Z",
+    "inmate_number": "1570061",
+    "name": "HUGHES MBOYO",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-24T02:38:03Z",
+    "inmate_number": "14487577",
+    "name": "MOORE ALLAHNA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
