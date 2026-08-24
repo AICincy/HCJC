@@ -15126,6 +15126,12 @@
     "category": "Menacing"
   },
   {
+    "event": "released",
+    "date": "2026-07-01",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
     "event": "updated",
     "date": "2026-07-02",
     "tier": "M1",
@@ -25843,57 +25849,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-17T21:49:43Z",
-    "inmate_number": "14535186",
-    "name": "RASHID KASHAD",
+    "date": "2026-08-17",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 8/17/26"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-17T21:49:43Z",
-    "inmate_number": "14818063",
-    "name": "QURAN OBIEDALLAH",
+    "date": "2026-08-17",
     "tier": "F2",
-    "category": "Burglary",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-17T21:49:43Z",
-    "inmate_number": "1768187",
-    "name": "RIGGS FELISCHRA",
-    "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-17T21:49:43Z",
-    "inmate_number": "1948458",
-    "name": "DUKES DARNELL",
-    "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": "booked 8/17/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-17T21:49:43Z",
-    "inmate_number": "14174002",
-    "name": "BROWNING JOSEPH",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-17T21:49:43Z",
-    "inmate_number": "2120801",
-    "name": "DUKES DARNELL",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Burglary"
   },
   {
     "event": "booked",
@@ -38374,6 +38338,60 @@
     "timestamp_utc": "2026-08-24T21:23:36Z",
     "inmate_number": "14821181",
     "name": "DOVE KEION",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T21:53:43Z",
+    "inmate_number": "14047670",
+    "name": "LATTIMORE BILLY",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T21:53:43Z",
+    "inmate_number": "14541825",
+    "name": "MILLER DEANGELO",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T21:53:43Z",
+    "inmate_number": "1878043",
+    "name": "GARDNER RODNEY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T21:53:43Z",
+    "inmate_number": "2052148",
+    "name": "JENNINGS JAMES",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 8/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T21:53:43Z",
+    "inmate_number": "2110869",
+    "name": "KIRCHGESSNER MICHELE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/24/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-24T21:53:43Z",
+    "inmate_number": "14821151",
+    "name": "LEAHY AMY",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
