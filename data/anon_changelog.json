@@ -25609,39 +25609,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-17T05:32:43Z",
-    "inmate_number": "1374489",
-    "name": "HENSON JOHN",
+    "date": "2026-08-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 8/17/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-17T05:32:43Z",
-    "inmate_number": "14814409",
-    "name": "GARCIA KENIA",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-17T05:32:43Z",
-    "inmate_number": "2664190",
-    "name": "BELFON AKIEL",
+    "date": "2026-08-17",
     "tier": "MM",
-    "category": "Headlights required",
-    "note": ""
+    "category": "Headlights required"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-17T05:32:43Z",
-    "inmate_number": "2817325",
-    "name": "GORDON JERRY",
+    "date": "2026-08-17",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
@@ -37908,6 +37890,51 @@
     "name": "CUSTARD SHAMAINE",
     "tier": "M1",
     "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T05:53:47Z",
+    "inmate_number": "14422238",
+    "name": "JETER DWANDA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T05:53:47Z",
+    "inmate_number": "14509268",
+    "name": "SUBEDI CEEPI",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T05:53:47Z",
+    "inmate_number": "14762094",
+    "name": "PEREZ ERNESTO",
+    "tier": "MM",
+    "category": "Improper turn",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T05:53:47Z",
+    "inmate_number": "14810800",
+    "name": "HOFFROGGE MERCEDES",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T05:53:47Z",
+    "inmate_number": "14821171",
+    "name": "GALVEZ HILARY",
+    "tier": null,
+    "category": null,
     "note": ""
   }
 ]
