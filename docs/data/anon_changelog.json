@@ -25543,30 +25543,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-16T23:22:51Z",
-    "inmate_number": "1883120",
-    "name": "DURR TAMARA",
+    "date": "2026-08-16",
     "tier": "M1",
-    "category": "Endangering children",
-    "note": "booked 8/16/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-16T23:57:35Z",
-    "inmate_number": "14436190",
-    "name": "ELLIS DERIC",
-    "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked (date not reported)"
+    "category": "Endangering children"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-08-17T01:00:12Z",
-    "inmate_number": "14791507",
-    "name": "GRIMES TEYANNA",
+    "date": "2026-08-17",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
@@ -37672,5 +37657,59 @@
     "tier": null,
     "category": null,
     "note": "booked 8/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T01:02:03Z",
+    "inmate_number": "14316414",
+    "name": "HARRIS STEVEN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T01:02:03Z",
+    "inmate_number": "14672319",
+    "name": "ESPINOZA-CHACON JONNY",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T01:02:03Z",
+    "inmate_number": "14821153",
+    "name": "VOSS CIARA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T01:02:03Z",
+    "inmate_number": "1570061",
+    "name": "HUGHES MBOYO",
+    "tier": "M3",
+    "category": "Criminal mischief",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T01:02:03Z",
+    "inmate_number": "2528482",
+    "name": "DEVELVIS CHRISTINA",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T01:02:03Z",
+    "inmate_number": "2661948",
+    "name": "BRYANT DANIEL",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]
