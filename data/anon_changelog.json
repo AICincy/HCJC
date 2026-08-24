@@ -25873,39 +25873,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-17T23:18:57Z",
-    "inmate_number": "14756791",
-    "name": "KING MICHAEL",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-17T23:18:57Z",
-    "inmate_number": "1551701",
-    "name": "HODGES LYNN",
+    "date": "2026-08-17",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 8/17/26"
+    "category": "Violating protection order"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-17T23:18:57Z",
-    "inmate_number": "1751545",
-    "name": "ANDRIACCO JOSEPH",
+    "date": "2026-08-17",
     "tier": "M1",
-    "category": "Inducing panic",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-17T23:18:57Z",
-    "inmate_number": "1682773",
-    "name": "CRUSE PHILLIP",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": "Inducing panic"
   },
   {
     "event": "updated",
@@ -38479,5 +38455,14 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T23:46:19Z",
+    "inmate_number": "14566727",
+    "name": "TURNER CAMRON",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 8/24/26"
   }
 ]
