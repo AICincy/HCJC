@@ -25603,12 +25603,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-17T04:57:21Z",
-    "inmate_number": "1682663",
-    "name": "MCCOY MARQUEZ",
+    "date": "2026-08-17",
     "tier": "F1",
-    "category": "Aggravated burglary",
-    "note": "booked 8/16/26"
+    "category": "Aggravated burglary"
   },
   {
     "event": "booked",
@@ -37867,5 +37864,50 @@
     "tier": "M1",
     "category": "Assault",
     "note": "booked 8/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T05:12:41Z",
+    "inmate_number": "14422238",
+    "name": "JETER DWANDA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T05:12:41Z",
+    "inmate_number": "14810800",
+    "name": "HOFFROGGE MERCEDES",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 8/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T05:12:41Z",
+    "inmate_number": "14821171",
+    "name": "GALVEZ HILARY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T05:12:41Z",
+    "inmate_number": "2201410",
+    "name": "COLEMAN SIMEON",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T05:12:41Z",
+    "inmate_number": "2745124",
+    "name": "CUSTARD SHAMAINE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
   }
 ]
