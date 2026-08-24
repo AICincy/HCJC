@@ -25585,30 +25585,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-17T04:11:49Z",
-    "inmate_number": "2278920",
-    "name": "DIXON TAKISHA",
+    "date": "2026-08-17",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": ""
+    "category": "Driving without a valid license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-17T04:11:49Z",
-    "inmate_number": "2664190",
-    "name": "BELFON AKIEL",
+    "date": "2026-08-17",
     "tier": "MM",
-    "category": "Headlights required",
-    "note": "booked 8/16/26"
+    "category": "Headlights required"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-17T04:11:49Z",
-    "inmate_number": "2817325",
-    "name": "GORDON JERRY",
+    "date": "2026-08-17",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 8/16/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
@@ -37831,5 +37822,50 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T04:28:34Z",
+    "inmate_number": "14526404",
+    "name": "SHEPHARD JONTE",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-24T04:28:34Z",
+    "inmate_number": "14672319",
+    "name": "ESPINOZA-CHACON JONNY",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T04:28:34Z",
+    "inmate_number": "14762094",
+    "name": "PEREZ ERNESTO",
+    "tier": "MM",
+    "category": "Improper turn",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T04:28:34Z",
+    "inmate_number": "14821171",
+    "name": "GALVEZ HILARY",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 8/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-24T04:28:34Z",
+    "inmate_number": "2745124",
+    "name": "CUSTARD SHAMAINE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 8/23/26"
   }
 ]
