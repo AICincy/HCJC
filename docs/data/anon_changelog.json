@@ -26077,21 +26077,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-18T08:53:07Z",
-    "inmate_number": "14820517",
-    "name": "KOTARO ANTHONY",
+    "date": "2026-08-18",
     "tier": "M1",
-    "category": "Using weapons while intoxicated",
-    "note": ""
+    "category": "Using weapons while intoxicated"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-18T08:53:07Z",
-    "inmate_number": "2516997",
-    "name": "WHITAKER TREVOR",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/18/26"
+    "date": "2026-08-18",
+    "tier": "F3",
+    "category": "Tampering with evidence"
   },
   {
     "event": "updated",
@@ -38170,5 +38164,14 @@
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-25T08:59:37Z",
+    "inmate_number": "1631505",
+    "name": "WOODS JAMIE",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked (date not reported)"
   }
 ]
