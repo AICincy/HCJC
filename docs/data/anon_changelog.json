@@ -26071,21 +26071,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-18T08:02:44Z",
-    "inmate_number": "14820517",
-    "name": "KOTARO ANTHONY",
+    "date": "2026-08-18",
     "tier": "M1",
-    "category": "Using weapons while intoxicated",
-    "note": "booked 8/18/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-18T08:02:44Z",
-    "inmate_number": "1896196",
-    "name": "JACKSON BEVERLY",
-    "tier": null,
-    "category": null,
-    "note": ""
+    "category": "Using weapons while intoxicated"
   },
   {
     "event": "updated",
@@ -38173,5 +38161,14 @@
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
     "note": "booked 8/25/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-25T08:09:48Z",
+    "inmate_number": "2700431",
+    "name": "LYKINS TIMOTHY",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
   }
 ]
