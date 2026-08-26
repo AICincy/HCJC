@@ -13026,6 +13026,12 @@
     "category": "Illegal use or possession of drug paraphernalia"
   },
   {
+    "event": "released",
+    "date": "2026-06-24",
+    "tier": "M1",
+    "category": "Driving under suspension"
+  },
+  {
     "event": "updated",
     "date": "2026-06-25",
     "tier": "F3",
@@ -26443,21 +26449,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-19T07:25:05Z",
-    "inmate_number": "14370836",
-    "name": "MENEFIELD MEKYELL",
+    "date": "2026-08-19",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": "booked 8/19/26"
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-19T07:25:05Z",
-    "inmate_number": "843784",
-    "name": "HOLLEY DARRELL",
+    "date": "2026-08-19",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 8/19/26"
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
@@ -38383,5 +38383,23 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-26T07:32:03Z",
+    "inmate_number": "14082403",
+    "name": "DEAN NATHAN",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-26T07:32:03Z",
+    "inmate_number": "1561482",
+    "name": "LUMPKIN JODISHA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
