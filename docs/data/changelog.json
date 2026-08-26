@@ -1,12 +1,5 @@
 [
   {
-    "event": "updated",
-    "inmate_number": "2312094",
-    "name": "FISHER GREGORY",
-    "timestamp_utc": "2026-06-22T02:41:19Z",
-    "note": ""
-  },
-  {
     "event": "booked",
     "inmate_number": "2685454",
     "name": "SALAZAR NATHAN",
@@ -69998,5 +69991,12 @@
     "name": "MCCRAY ANTONIO",
     "timestamp_utc": "2026-08-26T08:23:59Z",
     "note": ""
+  },
+  {
+    "event": "released",
+    "inmate_number": "1612241",
+    "name": "JONES JONATHAN",
+    "timestamp_utc": "2026-08-26T09:10:27Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
