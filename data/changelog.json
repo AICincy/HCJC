@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14355250",
-    "name": "WILSON BRODY",
-    "timestamp_utc": "2026-06-22T04:10:10Z",
-    "note": "booked 6/21/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "14518803",
     "name": "CARTER SHARVEZZ",
     "timestamp_utc": "2026-06-22T04:10:10Z",
@@ -69998,5 +69991,12 @@
     "name": "GREGORY WESLEY",
     "timestamp_utc": "2026-08-26T11:03:28Z",
     "note": "booked 8/26/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14408410",
+    "name": "FRYMAN JONATHAN",
+    "timestamp_utc": "2026-08-26T11:44:08Z",
+    "note": "no longer on HCSO public roster"
   }
 ]

@@ -26473,12 +26473,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-19T11:21:21Z",
-    "inmate_number": "2434816",
-    "name": "STEPHENS BRITTANY",
+    "date": "2026-08-19",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 8/19/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "released",
@@ -38422,5 +38419,14 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 8/26/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-26T11:44:08Z",
+    "inmate_number": "14408410",
+    "name": "FRYMAN JONATHAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
