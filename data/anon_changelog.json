@@ -26461,21 +26461,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-19T08:02:32Z",
-    "inmate_number": "14302708",
-    "name": "MOSES CHOLLY",
+    "date": "2026-08-19",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/19/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-19T08:02:32Z",
-    "inmate_number": "14370836",
-    "name": "MENEFIELD MEKYELL",
+    "date": "2026-08-19",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "updated",
@@ -38401,5 +38395,59 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-26T08:23:59Z",
+    "inmate_number": "14051473",
+    "name": "BANKS SHERMEKA",
+    "tier": "M4",
+    "category": "Operation in willful or wanton disregard of safety",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-26T08:23:59Z",
+    "inmate_number": "14082403",
+    "name": "DEAN NATHAN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-26T08:23:59Z",
+    "inmate_number": "14741929",
+    "name": "POWELL OSBORNE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-26T08:23:59Z",
+    "inmate_number": "1561482",
+    "name": "LUMPKIN JODISHA",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-26T08:23:59Z",
+    "inmate_number": "2469881",
+    "name": "MUTH JAMES",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-26T08:23:59Z",
+    "inmate_number": "2784208",
+    "name": "MCCRAY ANTONIO",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
   }
 ]
