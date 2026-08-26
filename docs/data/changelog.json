@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "2685454",
-    "name": "SALAZAR NATHAN",
-    "timestamp_utc": "2026-06-22T02:41:19Z",
-    "note": "booked 6/21/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "14320465",
     "name": "WRIGHT ALIZA",
     "timestamp_utc": "2026-06-22T04:10:10Z",
@@ -69997,6 +69990,13 @@
     "inmate_number": "1612241",
     "name": "JONES JONATHAN",
     "timestamp_utc": "2026-08-26T09:10:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2600017",
+    "name": "HERRERA ANA",
+    "timestamp_utc": "2026-08-26T10:29:48Z",
     "note": "no longer on HCSO public roster"
   }
 ]
