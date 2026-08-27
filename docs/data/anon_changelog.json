@@ -14100,6 +14100,12 @@
     "category": "Public indecency"
   },
   {
+    "event": "booked",
+    "date": "2026-06-28",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license"
+  },
+  {
     "event": "updated",
     "date": "2026-06-29",
     "tier": "M1",
@@ -15166,6 +15172,12 @@
     "date": "2026-07-01",
     "tier": "M4",
     "category": "Criminal trespass"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-01",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
@@ -19552,6 +19564,12 @@
     "date": "2026-07-15",
     "tier": "F3",
     "category": "Having weapons while under disability"
+  },
+  {
+    "event": "released",
+    "date": "2026-07-15",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
@@ -26647,255 +26665,105 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T01:43:27Z",
-    "inmate_number": "1207105",
-    "name": "MOORE KEVIN",
+    "date": "2026-08-20",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 8/19/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-20T01:43:27Z",
-    "inmate_number": "14323372",
-    "name": "KINCAID KYLA",
+    "date": "2026-08-20",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": ""
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T01:43:27Z",
-    "inmate_number": "14390730",
-    "name": "WOOD JADEN",
+    "date": "2026-08-20",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 8/19/26"
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T01:43:27Z",
-    "inmate_number": "14751016",
-    "name": "RIQUIAC SEBASTIAN",
+    "date": "2026-08-20",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked 8/19/26"
+    "category": "Driving without a valid license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T01:43:27Z",
-    "inmate_number": "1528914",
-    "name": "DANIELS ARNOLD",
+    "date": "2026-08-20",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 8/19/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T01:43:27Z",
-    "inmate_number": "1623786",
-    "name": "HUGHLEY MARTY",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 8/19/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-20T02:44:06Z",
-    "inmate_number": "14217740",
-    "name": "DUFFY JOSEPH",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 8/19/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-20T02:44:06Z",
-    "inmate_number": "14820816",
-    "name": "MURPHY LIONEL",
+    "date": "2026-08-20",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-20T02:44:06Z",
-    "inmate_number": "1528914",
-    "name": "DANIELS ARNOLD",
+    "date": "2026-08-20",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-20T03:30:53Z",
-    "inmate_number": "14217740",
-    "name": "DUFFY JOSEPH",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-20T03:30:53Z",
-    "inmate_number": "14820816",
-    "name": "MURPHY LIONEL",
+    "date": "2026-08-20",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T04:11:04Z",
-    "inmate_number": "14543730",
-    "name": "MCALLISTER YOUNGKQUIA",
+    "date": "2026-08-20",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/19/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T04:11:04Z",
-    "inmate_number": "14552280",
-    "name": "HILL RENYLA",
+    "date": "2026-08-20",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 8/19/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-20T04:11:04Z",
-    "inmate_number": "14820816",
-    "name": "MURPHY LIONEL",
-    "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
+    "category": "Receiving stolen property"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T04:52:30Z",
-    "inmate_number": "14074577",
-    "name": "EVANS COURTNEY",
+    "date": "2026-08-20",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 8/20/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T04:52:30Z",
-    "inmate_number": "14638873",
-    "name": "KILLINGS KRISSHAD",
+    "date": "2026-08-20",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/20/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-20T04:52:30Z",
-    "inmate_number": "2327644",
-    "name": "WARREN ZIDKIJAH",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 8/19/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-20T05:25:22Z",
-    "inmate_number": "1052564",
-    "name": "MCCLAIN AARON",
-    "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 8/20/26"
+    "category": "Violating protection order"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-20T05:25:22Z",
-    "inmate_number": "14074577",
-    "name": "EVANS COURTNEY",
+    "date": "2026-08-20",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-20T05:25:22Z",
-    "inmate_number": "14638873",
-    "name": "KILLINGS KRISSHAD",
+    "date": "2026-08-20",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-20T05:25:22Z",
-    "inmate_number": "14777483",
-    "name": "PICKELHEIMER KAYLEE",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/20/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-20T05:25:22Z",
-    "inmate_number": "2137521",
-    "name": "MORTON BRANDON",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/20/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-20T05:56:14Z",
-    "inmate_number": "1052564",
-    "name": "MCCLAIN AARON",
+    "date": "2026-08-20",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-20T05:56:14Z",
-    "inmate_number": "2463215",
-    "name": "TAYLOR DANIEL",
-    "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 8/20/26"
+    "category": "Violating protection order"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-08-20T06:36:00Z",
-    "inmate_number": "2767993",
-    "name": "IRVIN BENJAMIN",
+    "date": "2026-08-20",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-20T07:27:59Z",
-    "inmate_number": "14711058",
-    "name": "COLLINS CHANDLER",
+    "date": "2026-08-20",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 8/20/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-20T07:27:59Z",
-    "inmate_number": "14688613",
-    "name": "WILLIAMS MALIK",
-    "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked 8/20/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-20T07:27:59Z",
-    "inmate_number": "2463215",
-    "name": "TAYLOR DANIEL",
-    "tier": "M1",
-    "category": "Violating protection order",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
@@ -39025,6 +38893,213 @@
     "timestamp_utc": "2026-08-26T23:59:50Z",
     "inmate_number": "14489285",
     "name": "HUGHES JOSHUA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14115919",
+    "name": "DUDLEY CHARLES",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14117051",
+    "name": "GARLAND JAHNIYAH",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14152705",
+    "name": "SANDLIN SAMANTHA",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/27/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14190027",
+    "name": "HARRIS ANTONIO",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14248754",
+    "name": "SHAW JADIN",
+    "tier": "MM",
+    "category": "Restrictions on light transmittance (tinted windows)",
+    "note": "booked 8/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14299312",
+    "name": "MINCY KAYHLA",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14426779",
+    "name": "JOHNSON KEMYRA",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14450366",
+    "name": "DEAN CODY",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 8/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14496883",
+    "name": "BRANDON JENWAH",
+    "tier": "M1",
+    "category": "Stopping after accident on public roads",
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14631573",
+    "name": "LONG JESUS",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14647809",
+    "name": "ROBINSON DALAONE",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14667547",
+    "name": "LYLE-CRAYTON ROBERT",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 8/27/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14707104",
+    "name": "MAYE AUNG-AUNG",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14734926",
+    "name": "SANTIAGO-MATIAS JUAN",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14769520",
+    "name": "PEOPLES CHARLOTTE",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14821651",
+    "name": "LECKERLING EDWARD",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "1493678",
+    "name": "MATTHEWS JOHNNY",
+    "tier": "F5",
+    "category": "Vandalism",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "1524193",
+    "name": "DUDLEY WILLIAM",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "1777895",
+    "name": "PICKENS SHAMSUD",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "2471258",
+    "name": "LEWIS-WILLIAMS GEMONTE",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "2483706",
+    "name": "HARRISON JAMES",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "2736405",
+    "name": "HINTON NAJEE",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-27T07:45:47Z",
+    "inmate_number": "14442288",
+    "name": "HUBBARD KELLEN",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
