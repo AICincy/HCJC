@@ -15792,6 +15792,12 @@
     "category": "Assault"
   },
   {
+    "event": "released",
+    "date": "2026-07-03",
+    "tier": "M2",
+    "category": "Criminal damaging"
+  },
+  {
     "event": "booked",
     "date": "2026-07-04",
     "tier": "M2",
@@ -27726,24 +27732,6 @@
     "category": "Transportation of marijuana"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-08-22T22:47:44Z",
-    "inmate_number": "14202666",
-    "name": "COWANS JASMINE",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked 8/22/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-22T22:47:44Z",
-    "inmate_number": "2473034",
-    "name": "TUCKER DAVID",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
     "event": "updated",
     "timestamp_utc": "2026-08-22T23:37:54Z",
     "inmate_number": "2473034",
@@ -38200,5 +38188,68 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-29T23:33:10Z",
+    "inmate_number": "14279954",
+    "name": "FLOYD FREDERICK",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-29T23:33:10Z",
+    "inmate_number": "14656099",
+    "name": "MASENGALE MEGAN",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-29T23:33:10Z",
+    "inmate_number": "14809719",
+    "name": "JONES DONALD",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 8/29/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-29T23:33:10Z",
+    "inmate_number": "1857091",
+    "name": "BALDWIN DARYLL",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 8/29/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-29T23:33:10Z",
+    "inmate_number": "1992353",
+    "name": "DAWSON MICHAEL",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 8/29/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-29T23:33:10Z",
+    "inmate_number": "2066102",
+    "name": "WRIGHT ROBERT",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-29T23:33:10Z",
+    "inmate_number": "2368160",
+    "name": "PICKETT CASANOVA",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
   }
 ]
