@@ -27889,57 +27889,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-23T13:20:46Z",
-    "inmate_number": "1180591",
-    "name": "BARBER GREGORY",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-23T13:20:46Z",
-    "inmate_number": "14819776",
-    "name": "LOATMAN DARNELL",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T14:48:06Z",
-    "inmate_number": "14469046",
-    "name": "LITTLE JONATHAN",
-    "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-23T15:16:56Z",
-    "inmate_number": "14469046",
-    "name": "LITTLE JONATHAN",
-    "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T16:33:00Z",
-    "inmate_number": "14821133",
-    "name": "MCWHORTER RONNY",
+    "date": "2026-08-23",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-08-23T16:33:00Z",
-    "inmate_number": "14559387",
-    "name": "ABU ALI",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Assault"
   },
   {
     "event": "booked",
@@ -38227,5 +38179,77 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T17:29:49Z",
+    "inmate_number": "14409393",
+    "name": "WILLIAMS JAMAL",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T17:29:49Z",
+    "inmate_number": "14821977",
+    "name": "WILSON SAMUEL",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T17:29:49Z",
+    "inmate_number": "14821978",
+    "name": "PHILLIPS MIESHAWN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T17:29:49Z",
+    "inmate_number": "1860899",
+    "name": "SMITH ELITE",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T17:29:49Z",
+    "inmate_number": "2091123",
+    "name": "JONES REGINALD",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T17:29:49Z",
+    "inmate_number": "2324452",
+    "name": "LANTON FERRIAL",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-30T17:29:49Z",
+    "inmate_number": "2426859",
+    "name": "MURNAHAN KRISTA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-30T17:29:49Z",
+    "inmate_number": "2447252",
+    "name": "SMITH JOHN",
+    "tier": "M1",
+    "category": "Using weapons while intoxicated",
+    "note": ""
   }
 ]
