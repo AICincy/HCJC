@@ -23598,6 +23598,12 @@
     "category": "Violation of community control / probation"
   },
   {
+    "event": "released",
+    "date": "2026-08-08",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
     "event": "booked",
     "date": "2026-08-09",
     "tier": null,
@@ -26784,6 +26790,12 @@
     "category": "Failure to reinstate a license"
   },
   {
+    "event": "released",
+    "date": "2026-08-19",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
+  },
+  {
     "event": "booked",
     "date": "2026-08-20",
     "tier": "M4",
@@ -27895,111 +27907,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-23T20:21:39Z",
-    "inmate_number": "14814928",
-    "name": "GREEN JEREMIAH",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T20:21:39Z",
-    "inmate_number": "1546870",
-    "name": "KYLES RONNY",
+    "date": "2026-08-23",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 8/23/26"
+    "category": "Driving under FRA suspension"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-23T20:47:27Z",
-    "inmate_number": "14321830",
-    "name": "SHIPMON DALESHAH",
-    "tier": "M1",
-    "category": "Driving under FRA suspension",
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T20:47:27Z",
-    "inmate_number": "14821145",
-    "name": "SIMMONS LAMIYA",
+    "date": "2026-08-23",
     "tier": "F2",
-    "category": "Burglary",
-    "note": "booked 8/23/26"
+    "category": "Burglary"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-23T20:47:27Z",
-    "inmate_number": "1546870",
-    "name": "KYLES RONNY",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T20:47:27Z",
-    "inmate_number": "1570061",
-    "name": "HUGHES MBOYO",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-23T21:16:39Z",
-    "inmate_number": "14814928",
-    "name": "GREEN JEREMIAH",
-    "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-23T21:16:39Z",
-    "inmate_number": "14821145",
-    "name": "SIMMONS LAMIYA",
+    "date": "2026-08-23",
     "tier": "F2",
-    "category": "Burglary",
-    "note": ""
+    "category": "Burglary"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-23T21:16:39Z",
-    "inmate_number": "1570061",
-    "name": "HUGHES MBOYO",
+    "date": "2026-08-23",
     "tier": "M3",
-    "category": "Criminal mischief",
-    "note": ""
+    "category": "Criminal mischief"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-23T21:45:04Z",
-    "inmate_number": "14239924",
-    "name": "GAY JAMIE",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T21:45:04Z",
-    "inmate_number": "14821151",
-    "name": "LEAHY AMY",
+    "date": "2026-08-23",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-23T21:45:04Z",
-    "inmate_number": "1570061",
-    "name": "HUGHES MBOYO",
-    "tier": "M3",
-    "category": "Criminal mischief",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
@@ -38296,5 +38230,158 @@
     "tier": "M1",
     "category": "Falsification",
     "note": "booked 8/30/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "1324134",
+    "name": "BLACK ISAAC",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "14257425",
+    "name": "BROWN JANEE",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "14369583",
+    "name": "RISER DREW",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "14468966",
+    "name": "PHILLIPS JALEN",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "14569236",
+    "name": "WILLIS SETH",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "14732193",
+    "name": "CHILDRESS JASMINE",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "14818807",
+    "name": "HEIST ADAM",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "14822000",
+    "name": "RYAN JAMES",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "14822002",
+    "name": "IANNELLO ELIZABETH",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "1601094",
+    "name": "TODD JEFFREY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "1732812",
+    "name": "COSTON TOMMY",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "1890793",
+    "name": "LOCKETT SHEENA",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "2312214",
+    "name": "TAFARI RAS",
+    "tier": "M1",
+    "category": "Carrying concealed weapons",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "2303958",
+    "name": "LOWE ANTOINETTE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "2600134",
+    "name": "JACKSON JOHN",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "1860899",
+    "name": "SMITH ELITE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-30T22:27:55Z",
+    "inmate_number": "14821977",
+    "name": "WILSON SAMUEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
