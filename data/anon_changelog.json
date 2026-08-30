@@ -27733,84 +27733,51 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-22T23:37:54Z",
-    "inmate_number": "2473034",
-    "name": "TUCKER DAVID",
+    "date": "2026-08-23",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-23T01:03:30Z",
-    "inmate_number": "14084661",
-    "name": "WARD NATASHIA",
+    "date": "2026-08-23",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-23T01:03:30Z",
-    "inmate_number": "14202666",
-    "name": "COWANS JASMINE",
-    "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-23T01:03:30Z",
-    "inmate_number": "2318811",
-    "name": "MILLER JAMES",
+    "date": "2026-08-23",
     "tier": null,
-    "category": null,
-    "note": "booked 8/22/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-23T01:03:30Z",
-    "inmate_number": "2407520",
-    "name": "HALL TORRENCE",
+    "date": "2026-08-23",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 8/22/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-23T01:03:30Z",
-    "inmate_number": "2473034",
-    "name": "TUCKER DAVID",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-23T01:03:30Z",
-    "inmate_number": "2678021",
-    "name": "BALLARD DANNY",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/22/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T01:03:30Z",
-    "inmate_number": "2765352",
-    "name": "CRITES LESLEY",
+    "date": "2026-08-23",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 8/22/26"
+    "category": "Theft"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-08-23T01:03:30Z",
-    "inmate_number": "1734554",
-    "name": "DIXON DESMOND",
+    "date": "2026-08-23",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-08-23",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-08-23",
+    "tier": "MM",
+    "category": "Juvenile hold (no ORC code on file)"
   },
   {
     "event": "booked",
@@ -38251,5 +38218,59 @@
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T01:40:39Z",
+    "inmate_number": "14821958",
+    "name": "POLSTON CODY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 8/29/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T01:40:39Z",
+    "inmate_number": "14821959",
+    "name": "MATHEWS DAKOTA",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle",
+    "note": "booked 8/29/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-30T01:40:39Z",
+    "inmate_number": "1992353",
+    "name": "DAWSON MICHAEL",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T01:40:39Z",
+    "inmate_number": "2673496",
+    "name": "MOERMOND JASMINE",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "booked 8/29/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-30T01:40:39Z",
+    "inmate_number": "2747842",
+    "name": "NEGRON-LEON JOSE",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": "booked 8/29/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-30T01:40:39Z",
+    "inmate_number": "2607651",
+    "name": "RAY DEDRA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
