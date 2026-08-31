@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Page not found · JCStream{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <div class="title">Page not found</div>
+    <div class="sub">This address is not on JCStream.</div>
+  </div>
+</header>
+<h1>We don&rsquo;t have that page.</h1>
+<p>The inmate roster is on the home page. Search by name, charge, ORC code, or booking number. Everyone listed is presumed innocent until proven guilty.</p>
+<p class="roster-hero-actions">
+  <a class="button-primary" href="{{ base_url }}/">Search the roster</a>
+  <a class="button-secondary" href="{{ base_url }}/help/">Free help resources</a>
+</p>
+{% endblock %}

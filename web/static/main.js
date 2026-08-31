@@ -12,7 +12,14 @@
     if (!el) return;
     var d = el.closest('details');
     if (d && !d.open) d.open = true;
-    setTimeout(function () { el.scrollIntoView({ block: 'start', behavior: 'auto' }); }, 0);
+    // Sticky masthead + month chips eat ~8rem; wait for <details> reflow
+    // or the hash lands ~1000px short of the section heading.
+    el.style.scrollMarginTop = el.style.scrollMarginTop || '8rem';
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        el.scrollIntoView({ block: 'start', behavior: 'auto' });
+      });
+    });
   }
   window.addEventListener('hashchange', function () { openDetailsFor(location.hash); });
   if (location.hash) openDetailsFor(location.hash);
@@ -66,7 +73,7 @@
     return true;
   }
   function closeLB() {
-    lb.hidden = true; lbImg.src = '';
+    lb.hidden = true; lbImg.removeAttribute('src');
     Array.prototype.forEach.call(document.body.children, function (n) {
       n.inert = false;
       n.removeAttribute('aria-hidden');
@@ -200,6 +207,52 @@
       inputs.forEach(function (i) { f[i.getAttribute('data-filter')] = (i.value || '').trim().toLowerCase(); });
       return f;
     }
+    function matchesCard(c, f) {
+      if (f.tier) {
+        if (DEG_VALUES[f.tier]) {
+          if (c.getAttribute('data-degree') !== f.tier.toUpperCase()) return false;
+        } else if (c.getAttribute('data-tier') !== f.tier) {
+          return false;
+        }
+      }
+      if (f.chap && c.getAttribute('data-chap') !== f.chap) return false;
+      if (f.recent && c.getAttribute('data-recent') !== f.recent) return false;
+      if (f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) return false;
+      return true;
+    }
+    function syncUrl(f) {
+      if (!window.history || !window.history.replaceState) return;
+      var sp = new URLSearchParams();
+      if (f.search) sp.set('q', f.search);
+      if (f.tier) sp.set('tier', f.tier);
+      if (f.chap) sp.set('chap', f.chap);
+      if (f.recent) sp.set('recent', f.recent);
+      var qs = sp.toString();
+      var hash = window.location.hash || '';
+      var next = window.location.pathname + (qs ? '?' + qs : '') + hash;
+      var cur = window.location.pathname + window.location.search + window.location.hash;
+      if (next !== cur) window.history.replaceState({}, '', next);
+    }
+    function recountFilterOptions(f) {
+      function recount(sel, skipKey) {
+        if (!sel) return;
+        Array.prototype.forEach.call(sel.options, function (opt) {
+          if (!opt.value) return;
+          if (!opt.dataset.label) {
+            opt.dataset.label = opt.textContent.replace(/\s*\(\d+\)\s*$/, '');
+          }
+          var f2 = { tier: f.tier, chap: f.chap, recent: f.recent, search: f.search };
+          f2[skipKey] = opt.value;
+          var n = 0;
+          for (var i = 0; i < cards.length; i++) {
+            if (matchesCard(cards[i], f2)) n++;
+          }
+          opt.textContent = opt.dataset.label + ' (' + n + ')';
+        });
+      }
+      recount(bar.querySelector('[data-filter="chap"]'), 'chap');
+      recount(bar.querySelector('[data-filter="tier"]'), 'tier');
+    }
     // Search-match emphasis: wrap each occurrence of the term in the card's
     // visible text in <mark class="hl">. Text-node splitting via DOM APIs
     // only - no innerHTML (same CodeQL js/xss-through-dom discipline as the
@@ -251,19 +304,7 @@
       var shown = 0;
       clearAllMarks();
       cards.forEach(function (c) {
-        var ok = true;
-        if (f.tier) {
-          // The tier select mixes kinds (felony/misdemeanor -> data-tier)
-          // and degrees (F1..MM -> data-degree, currentFilters lowercases).
-          if (DEG_VALUES[f.tier]) {
-            if (c.getAttribute('data-degree') !== f.tier.toUpperCase()) ok = false;
-          } else if (c.getAttribute('data-tier') !== f.tier) {
-            ok = false;
-          }
-        }
-        if (ok && f.chap && c.getAttribute('data-chap') !== f.chap) ok = false;
-        if (ok && f.recent && c.getAttribute('data-recent') !== f.recent) ok = false;
-        if (ok && f.search && (c.getAttribute('data-search') || '').indexOf(f.search) === -1) ok = false;
+        var ok = matchesCard(c, f);
         c.classList.toggle('is-filtered-out', !ok);
         if (ok) shown++;
         if (ok && f.search && f.search.length >= 2) markTerm(c, f.search);
@@ -295,6 +336,8 @@
       if (status && trigger !== 'search') {
         status.textContent = active ? summary : '';
       }
+      recountFilterOptions(f);
+      if (trigger !== 'init') syncUrl(f);
     }
     var applyDebounce = null;
     inputs.forEach(function (i) {
@@ -334,7 +377,9 @@
       var params = new URLSearchParams(location.search);
       inputs.forEach(function (i) {
         var key = i.getAttribute('data-filter');
-        var val = (params.get(key) || '').trim().toLowerCase();
+        var val = (params.get(key) || '').trim();
+        if (key === 'search' && !val) val = (params.get('q') || '').trim();
+        val = val.toLowerCase();
         if (!val) return;
         if (i.tagName === 'SELECT') {
           var ok = Array.prototype.some.call(i.options, function (o) { return o.value === val; });
@@ -343,7 +388,8 @@
         i.value = val;
       });
     } catch (e) {}
-    apply();
+    apply('init');
+    syncUrl(currentFilters());
 
     // (3b) Crime-of-month pills: click to filter roster by that chapter.
     var chapSelect = document.getElementById('filter-chap');
