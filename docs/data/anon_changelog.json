@@ -27937,75 +27937,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-23T22:48:02Z",
-    "inmate_number": "14239924",
-    "name": "GAY JAMIE",
+    "date": "2026-08-23",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-23T22:48:02Z",
-    "inmate_number": "14316414",
-    "name": "HARRIS STEVEN",
+    "date": "2026-08-23",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 8/23/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-23T22:48:02Z",
-    "inmate_number": "14321830",
-    "name": "SHIPMON DALESHAH",
+    "date": "2026-08-23",
     "tier": "M1",
-    "category": "Driving under FRA suspension",
-    "note": ""
+    "category": "Driving under FRA suspension"
+  },
+  {
+    "event": "booked",
+    "date": "2026-08-23",
+    "tier": "M2",
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-23T22:48:02Z",
-    "inmate_number": "14814928",
-    "name": "GREEN JEREMIAH",
-    "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-23T22:48:02Z",
-    "inmate_number": "14821151",
-    "name": "LEAHY AMY",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T22:48:02Z",
-    "inmate_number": "2661948",
-    "name": "BRYANT DANIEL",
-    "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T23:16:14Z",
-    "inmate_number": "14426680",
-    "name": "ARMSTRONG JASON",
-    "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 8/23/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-23T23:16:14Z",
-    "inmate_number": "14672319",
-    "name": "ESPINOZA-CHACON JONNY",
-    "tier": null,
-    "category": null,
-    "note": "booked 8/23/26"
+    "date": "2026-08-23",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "updated",
@@ -38380,6 +38338,78 @@
     "timestamp_utc": "2026-08-30T22:27:55Z",
     "inmate_number": "14821977",
     "name": "WILSON SAMUEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-31T00:46:12Z",
+    "inmate_number": "14084661",
+    "name": "WARD NATASHIA",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-31T00:46:12Z",
+    "inmate_number": "14695994",
+    "name": "SANCHEZ-YAT ALBINO",
+    "tier": null,
+    "category": null,
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-31T00:46:12Z",
+    "inmate_number": "14732193",
+    "name": "CHILDRESS JASMINE",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-31T00:46:12Z",
+    "inmate_number": "14818807",
+    "name": "HEIST ADAM",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-31T00:46:12Z",
+    "inmate_number": "14822002",
+    "name": "IANNELLO ELIZABETH",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-08-31T00:46:12Z",
+    "inmate_number": "1890793",
+    "name": "LOCKETT SHEENA",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-08-31T00:46:12Z",
+    "inmate_number": "2836234",
+    "name": "STAGGS ZACHARY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 8/30/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-08-31T00:46:12Z",
+    "inmate_number": "2747842",
+    "name": "NEGRON-LEON JOSE",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
