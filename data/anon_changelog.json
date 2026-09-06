@@ -30091,75 +30091,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-30T19:59:13Z",
-    "inmate_number": "1324134",
-    "name": "BLACK ISAAC",
+    "date": "2026-08-30",
     "tier": "M4",
-    "category": "Menacing",
-    "note": "booked 8/30/26"
+    "category": "Menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-30T19:59:13Z",
-    "inmate_number": "14257425",
-    "name": "BROWN JANEE",
+    "date": "2026-08-30",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": "booked 8/30/26"
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-30T19:59:13Z",
-    "inmate_number": "14468966",
-    "name": "PHILLIPS JALEN",
-    "tier": "M4",
-    "category": "Menacing",
-    "note": "booked 8/30/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-30T19:59:13Z",
-    "inmate_number": "14569236",
-    "name": "WILLIS SETH",
+    "date": "2026-08-30",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 8/30/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-08-30T19:59:13Z",
-    "inmate_number": "14821972",
-    "name": "VILCHIS-FLOREZ ERNESTO",
-    "tier": null,
-    "category": null,
-    "note": ""
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-30T19:59:13Z",
-    "inmate_number": "1732812",
-    "name": "COSTON TOMMY",
-    "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "booked 8/30/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-30T19:59:13Z",
-    "inmate_number": "2600134",
-    "name": "JACKSON JOHN",
+    "date": "2026-08-30",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 8/30/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-08-30T19:59:13Z",
-    "inmate_number": "900797",
-    "name": "BOOKER WINETTA",
-    "tier": "M1",
-    "category": "Falsification",
-    "note": "booked 8/30/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
@@ -39934,5 +39886,32 @@
     "tier": null,
     "category": null,
     "note": "booked 9/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T21:58:42Z",
+    "inmate_number": "14201215",
+    "name": "MANGHAM JAYMON",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-06T21:58:42Z",
+    "inmate_number": "14822713",
+    "name": "SKINNER DYLAN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-06T21:58:42Z",
+    "inmate_number": "14657832",
+    "name": "WILLIAMS-STEELE AXLE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
