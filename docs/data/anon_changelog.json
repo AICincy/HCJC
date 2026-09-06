@@ -25632,6 +25632,12 @@
     "category": "Failure to comply with order or signal of police officer"
   },
   {
+    "event": "released",
+    "date": "2026-08-14",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
+  },
+  {
     "event": "booked",
     "date": "2026-08-15",
     "tier": "M1",
@@ -29941,57 +29947,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-30T01:40:39Z",
-    "inmate_number": "14821958",
-    "name": "POLSTON CODY",
+    "date": "2026-08-30",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 8/29/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-30T01:40:39Z",
-    "inmate_number": "14821959",
-    "name": "MATHEWS DAKOTA",
+    "date": "2026-08-30",
     "tier": "M1",
-    "category": "Improperly handling firearms in a motor vehicle",
-    "note": "booked 8/29/26"
+    "category": "Improperly handling firearms in a motor vehicle"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-08-30T01:40:39Z",
-    "inmate_number": "1992353",
-    "name": "DAWSON MICHAEL",
+    "date": "2026-08-30",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-30T01:40:39Z",
-    "inmate_number": "2673496",
-    "name": "MOERMOND JASMINE",
+    "date": "2026-08-30",
     "tier": "M2",
-    "category": "Possessing drug abuse instruments",
-    "note": "booked 8/29/26"
+    "category": "Possessing drug abuse instruments"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-08-30T01:40:39Z",
-    "inmate_number": "2747842",
-    "name": "NEGRON-LEON JOSE",
+    "date": "2026-08-30",
     "tier": "M1",
-    "category": "Falsification",
-    "note": "booked 8/29/26"
+    "category": "Falsification"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-08-30T01:40:39Z",
-    "inmate_number": "2607651",
-    "name": "RAY DEDRA",
+    "date": "2026-08-30",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-08-30",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-08-30",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -39568,5 +39568,212 @@
     "tier": null,
     "category": null,
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "1058037",
+    "name": "PHILLIPS WILLIE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "14174758",
+    "name": "COFFMAN BRANDON",
+    "tier": "MM",
+    "category": "Rules for driving in marked lanes",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "14226104",
+    "name": "TURNBOW AMBER",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "14815106",
+    "name": "TAMANG LAKPA",
+    "tier": null,
+    "category": null,
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "14822713",
+    "name": "SKINNER DYLAN",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "1582886",
+    "name": "IRBY WILLIE",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "1774939",
+    "name": "PENDLETON SHADRICK",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "1901747",
+    "name": "BOLES GEORGE",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2113781",
+    "name": "STROBL JOSHUA",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2127253",
+    "name": "FALLWIND CHET",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2215613",
+    "name": "ROHE BRYAN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2549585",
+    "name": "BLADES KRISTINA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2595770",
+    "name": "DAVIS KRISTEN",
+    "tier": null,
+    "category": null,
+    "note": "booked 9/5/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2724917",
+    "name": "BAILEY ELMO",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2733322",
+    "name": "HOPKINS CHAZE",
+    "tier": "F5",
+    "category": "Vandalism",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2761213",
+    "name": "SMARTT DAESHA",
+    "tier": "F4",
+    "category": "Arson",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2760811",
+    "name": "ALLEN ALEXIS",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2784901",
+    "name": "GRIFFITH BRITTANY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2796689",
+    "name": "COLLIER DESHAUN",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2829611",
+    "name": "NASH RODNEY",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "658780",
+    "name": "HARRELL MICHAEL",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "420795",
+    "name": "BURNETT GEORGE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-06T04:36:13Z",
+    "inmate_number": "2744732",
+    "name": "JONES KIMBERLY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
