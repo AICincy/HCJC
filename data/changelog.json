@@ -1,433 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "2089626",
-    "name": "EVERHART GRETCHEN",
-    "timestamp_utc": "2026-07-05T14:09:13Z",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14209829",
-    "name": "ROBBINS BOBBY",
-    "timestamp_utc": "2026-07-05T15:38:07Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2089626",
-    "name": "LINKER GRETCHEN",
-    "timestamp_utc": "2026-07-05T15:38:07Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1564560",
-    "name": "GEROSKI DIORO",
-    "timestamp_utc": "2026-07-05T17:46:36Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14310629",
-    "name": "BESS TERRELL",
-    "timestamp_utc": "2026-07-05T19:08:36Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14756324",
-    "name": "WAKEFIELD KEVIN",
-    "timestamp_utc": "2026-07-05T19:08:36Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "1564560",
-    "name": "GEROSKI DIORO",
-    "timestamp_utc": "2026-07-05T19:08:36Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1800804",
-    "name": "BROWN PHILLIP",
-    "timestamp_utc": "2026-07-05T19:08:36Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "released",
-    "inmate_number": "14278852",
-    "name": "WHISENANT BRANDON",
-    "timestamp_utc": "2026-07-05T19:08:36Z",
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14310629",
-    "name": "BESS TERRELL",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14592810",
-    "name": "WARREN TEONTA",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14619159",
-    "name": "LEE MCKENZIE",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14815819",
-    "name": "MEANS JACOB",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "1800804",
-    "name": "BROWN PHILLIP",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2149865",
-    "name": "PEYTON KIMBERLY",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "released",
-    "inmate_number": "2501194",
-    "name": "DAVIS TABATHA",
-    "timestamp_utc": "2026-07-05T20:22:08Z",
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14592810",
-    "name": "WARREN TEONTA",
-    "timestamp_utc": "2026-07-05T21:33:47Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14619159",
-    "name": "LEE MCKENZIE",
-    "timestamp_utc": "2026-07-05T21:33:47Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14756324",
-    "name": "WAKEFIELD KEVIN",
-    "timestamp_utc": "2026-07-05T21:33:47Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14815819",
-    "name": "MEANS JACOB",
-    "timestamp_utc": "2026-07-05T21:33:47Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1807167",
-    "name": "ISHAM BRIAN",
-    "timestamp_utc": "2026-07-05T21:33:47Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "released",
-    "inmate_number": "2679380",
-    "name": "JONES EVAN",
-    "timestamp_utc": "2026-07-05T21:33:47Z",
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14140677",
-    "name": "WALKER ANTOINE",
-    "timestamp_utc": "2026-07-05T22:39:52Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14301334",
-    "name": "MATHES BLAKE",
-    "timestamp_utc": "2026-07-05T22:39:52Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14419457",
-    "name": "GADSON JUSTIN",
-    "timestamp_utc": "2026-07-05T22:39:52Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14815819",
-    "name": "MEANS JACOB",
-    "timestamp_utc": "2026-07-05T22:39:52Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1503312",
-    "name": "BRYANT DAVID",
-    "timestamp_utc": "2026-07-05T22:39:52Z",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2280230",
-    "name": "JOHNSON TANGIE",
-    "timestamp_utc": "2026-07-05T22:39:52Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "1807167",
-    "name": "ISHAM BRIAN",
-    "timestamp_utc": "2026-07-05T22:39:52Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2557154",
-    "name": "HAMMONS JOHN",
-    "timestamp_utc": "2026-07-05T22:39:52Z",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1317234",
-    "name": "MAUPIN WAYNE",
-    "timestamp_utc": "2026-07-05T23:45:04Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14140677",
-    "name": "WALKER ANTOINE",
-    "timestamp_utc": "2026-07-05T23:45:04Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14301334",
-    "name": "MATHES BLAKE",
-    "timestamp_utc": "2026-07-05T23:45:04Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14692597",
-    "name": "SCHULTE STEVEN",
-    "timestamp_utc": "2026-07-05T23:45:04Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "1503312",
-    "name": "BRYANT DAVID",
-    "timestamp_utc": "2026-07-05T23:45:04Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1756666",
-    "name": "BLUNT JASON",
-    "timestamp_utc": "2026-07-05T23:45:04Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2256705",
-    "name": "FOLZENLOGEN DONALD",
-    "timestamp_utc": "2026-07-05T23:45:04Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2280230",
-    "name": "JOHNSON TANGIE",
-    "timestamp_utc": "2026-07-05T23:45:04Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2557154",
-    "name": "HAMMONS JOHN",
-    "timestamp_utc": "2026-07-05T23:45:04Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "1317234",
-    "name": "MAUPIN WAYNE",
-    "timestamp_utc": "2026-07-06T01:25:02Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14140677",
-    "name": "WALKER ANTOINE",
-    "timestamp_utc": "2026-07-06T01:25:02Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14692597",
-    "name": "SCHULTE STEVEN",
-    "timestamp_utc": "2026-07-06T01:25:02Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "1756666",
-    "name": "BLUNT JASON",
-    "timestamp_utc": "2026-07-06T01:25:02Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2201827",
-    "name": "MCINERNEY CRISTI",
-    "timestamp_utc": "2026-07-06T01:25:02Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2256705",
-    "name": "FOLZENLOGEN DONALD",
-    "timestamp_utc": "2026-07-06T01:25:02Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "845820",
-    "name": "JENT DANNY",
-    "timestamp_utc": "2026-07-06T01:25:02Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1005084",
-    "name": "ADER RAYMOND",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14255869",
-    "name": "SMITH MICHAEL",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": "booked 7/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14468393",
-    "name": "HALL MARVIN",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14621485",
-    "name": "JAMISON ASIA",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": "booked 7/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14754161",
-    "name": "BYBEE BRADEN",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": "booked 7/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1781226",
-    "name": "NEWTON MARK",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": "booked 7/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2176239",
-    "name": "WRIGHT ANGEL",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2264877",
-    "name": "BOOKER DEANDRE",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": "booked 7/5/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2740997",
-    "name": "CAMPBELL CARL",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": "booked 7/6/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "845820",
-    "name": "JENT DANNY",
-    "timestamp_utc": "2026-07-06T05:51:18Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "1005084",
-    "name": "ADER RAYMOND",
-    "timestamp_utc": "2026-07-06T10:05:42Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1300111",
-    "name": "MARTIN ROBERT",
-    "timestamp_utc": "2026-07-06T10:05:42Z",
-    "note": "booked 7/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14042432",
-    "name": "MONDARY JONATHAN",
-    "timestamp_utc": "2026-07-06T10:05:42Z",
-    "note": "booked 7/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14222843",
-    "name": "BARNES TYLEISHA",
-    "timestamp_utc": "2026-07-06T10:05:42Z",
-    "note": "booked 7/6/26"
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14621485",
-    "name": "JAMISON ASIA",
-    "timestamp_utc": "2026-07-06T10:05:42Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
     "inmate_number": "14809070",
     "name": "ADKINS BRETT",
     "timestamp_utc": "2026-07-06T10:05:42Z",
@@ -69997,6 +69570,433 @@
     "inmate_number": "2644604",
     "name": "SCHAUB ELIZABETH",
     "timestamp_utc": "2026-09-09T15:18:21Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14072887",
+    "name": "FEARS ASHLEY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14138898",
+    "name": "RIGGS JAMES",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14214643",
+    "name": "BEST MIRACLE",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14282375",
+    "name": "GIBSON KLAIN",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14332714",
+    "name": "FRANKLIN ROBERT",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14335764",
+    "name": "GOSS JAMES",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14557845",
+    "name": "HARVEY JOSEPH",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14558727",
+    "name": "TANNER CALEB",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14767247",
+    "name": "CLARK JASONNIE",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14784134",
+    "name": "GARDNER REGINALD",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14793896",
+    "name": "LONG DAMONTRE",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14814583",
+    "name": "PARK MICHAEL",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14822143",
+    "name": "CAMPER JAESHAUN",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14823075",
+    "name": "CRUZ-SANCHEZ DIANA",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "1516943",
+    "name": "JOHNSON MICHAEL",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "1548917",
+    "name": "SMITH CALVIN",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "1699592",
+    "name": "ABRAMS LEROY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2067279",
+    "name": "HAMPTON RONRICO",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2198472",
+    "name": "HARRIS CALESHA",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2167792",
+    "name": "GREEN BELINDA",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2245228",
+    "name": "ACOFF KEMIKO",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2249755",
+    "name": "TAYLOR ROBERT",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2256359",
+    "name": "SCHMITZ JAMIE",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2333257",
+    "name": "MOORE ROBERT",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2405876",
+    "name": "COBB KENNETH",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2450517",
+    "name": "JOHNSON JABRAIL",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2485501",
+    "name": "FREDERICK CHRISTIAN",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2738281",
+    "name": "TUCKER JAYMESIA",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "booked 9/9/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2834774",
+    "name": "MERCER CODY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2829611",
+    "name": "NASH RODNEY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "inmate_number": "2762005",
+    "name": "ADAMS DERIS",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14451522",
+    "name": "ALLEN QINIYAH",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14417137",
+    "name": "APPLETON JESSE",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2539714",
+    "name": "BASTIN CARLY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2296326",
+    "name": "BENTON ANGELO",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2324716",
+    "name": "BODENSTEIN CHRISTY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "1020463",
+    "name": "BRYANT KEITH",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "821472",
+    "name": "BULLOCK TYRONE",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14811919",
+    "name": "CHAPMAN MARCUS",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2625806",
+    "name": "COMBS CHASITY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14524131",
+    "name": "COOK TYRONE",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2327828",
+    "name": "DESTANI BESIM",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2092797",
+    "name": "DEVAUGHN LASANA",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14641596",
+    "name": "DRAGOO KIMBERLY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2313386",
+    "name": "DUNCAN JACOB",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2072897",
+    "name": "HITCH JEREMY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14822586",
+    "name": "JOHNSON GENESIS",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14047670",
+    "name": "LATTIMORE BILLY",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "864026",
+    "name": "MATHESON TERESA",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14762295",
+    "name": "MORGAN WISE",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14822900",
+    "name": "MOSS ERIANNAH",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "1774939",
+    "name": "PENDLETON SHADRICK",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2171834",
+    "name": "PRICE BRANDON",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14822950",
+    "name": "PRIMO ROSENDO",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14637710",
+    "name": "QUALLS ARMONI",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14431819",
+    "name": "SCOTT NICHOLAS",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14822555",
+    "name": "SHEPPARD ORLANDO",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "1726205",
+    "name": "SMITH BRANDON",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14301582",
+    "name": "SMITH SEANTEZ",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14822928",
+    "name": "WILLIAMS MARLON",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14500304",
+    "name": "WILSON MOLLEE",
+    "timestamp_utc": "2026-09-09T18:46:27Z",
     "note": "no longer on HCSO public roster"
   }
 ]
