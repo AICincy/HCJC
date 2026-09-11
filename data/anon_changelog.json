@@ -29124,6 +29124,12 @@
     "category": "Aggravated burglary"
   },
   {
+    "event": "released",
+    "date": "2026-08-25",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
     "event": "booked",
     "date": "2026-08-26",
     "tier": "M1",
@@ -31567,57 +31573,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-04T00:17:45Z",
-    "inmate_number": "14398874",
-    "name": "NIANE PAPA",
+    "date": "2026-09-04",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "booked 9/3/26"
+    "category": "Trafficking in drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-04T00:17:45Z",
-    "inmate_number": "14596996",
-    "name": "FALINGS TAVIR",
+    "date": "2026-09-04",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-04T00:17:45Z",
-    "inmate_number": "14788924",
-    "name": "MCCANTS RONNAE",
+    "date": "2026-09-04",
     "tier": null,
-    "category": null,
-    "note": "booked 9/3/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-04T00:17:45Z",
-    "inmate_number": "2130259",
-    "name": "KEENEY BLAKE",
+    "date": "2026-09-04",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 9/3/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-04T00:17:45Z",
-    "inmate_number": "2601182",
-    "name": "OWENS QUINCY",
+    "date": "2026-09-04",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": ""
+    "category": "Trafficking in drugs"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-09-04T00:17:45Z",
-    "inmate_number": "2678229",
-    "name": "ANDERSON JESSE",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 9/3/26"
+    "event": "updated",
+    "date": "2026-09-04",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -40093,6 +40081,60 @@
     "timestamp_utc": "2026-09-10T23:10:21Z",
     "inmate_number": "2330390",
     "name": "WILLIS GARREN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-11T01:04:29Z",
+    "inmate_number": "14124472",
+    "name": "LEE DEANDRE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 9/10/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-11T01:04:29Z",
+    "inmate_number": "14535272",
+    "name": "GRAYSON BRIYONNA",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-11T01:04:29Z",
+    "inmate_number": "14785033",
+    "name": "ALVAREZ JAMIE",
+    "tier": null,
+    "category": null,
+    "note": "booked 9/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-11T01:04:29Z",
+    "inmate_number": "2052148",
+    "name": "JENNINGS JAMES",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 9/10/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-11T01:04:29Z",
+    "inmate_number": "2123064",
+    "name": "MOSLEY DARRYL",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-11T01:04:29Z",
+    "inmate_number": "14449777",
+    "name": "DUNSON MYKAILAH",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
