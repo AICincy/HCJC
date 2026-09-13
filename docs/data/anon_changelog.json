@@ -24612,6 +24612,12 @@
     "category": "Vandalism"
   },
   {
+    "event": "released",
+    "date": "2026-08-10",
+    "tier": "M1",
+    "category": "Aggravated menacing"
+  },
+  {
     "event": "updated",
     "date": "2026-08-11",
     "tier": null,
@@ -25258,6 +25264,12 @@
     "date": "2026-08-12",
     "tier": "M4",
     "category": "Cincinnati Municipal Code: animals"
+  },
+  {
+    "event": "released",
+    "date": "2026-08-12",
+    "tier": "M1",
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
@@ -32341,48 +32353,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-06T19:58:16Z",
-    "inmate_number": "14201215",
-    "name": "MANGHAM JAYMON",
+    "date": "2026-09-06",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 9/6/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-06T19:58:16Z",
-    "inmate_number": "2296326",
-    "name": "BENTON ANGELO",
-    "tier": null,
-    "category": null,
-    "note": "booked 9/6/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-09-06T21:58:42Z",
-    "inmate_number": "14201215",
-    "name": "MANGHAM JAYMON",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-09-06T21:58:42Z",
-    "inmate_number": "14822713",
-    "name": "SKINNER DYLAN",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-09-06T21:58:42Z",
-    "inmate_number": "14657832",
-    "name": "WILLIAMS-STEELE AXLE",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Strangulation"
   },
   {
     "event": "released",
@@ -40753,5 +40726,86 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-13T22:01:21Z",
+    "inmate_number": "14204959",
+    "name": "EDMERSON TALIA",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T22:01:21Z",
+    "inmate_number": "14327308",
+    "name": "ALBRIGHT ORLANDO",
+    "tier": null,
+    "category": null,
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T22:01:21Z",
+    "inmate_number": "14395190",
+    "name": "DUNCAN MALIK",
+    "tier": "M1",
+    "category": "Violation of community control / probation",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T22:01:21Z",
+    "inmate_number": "14419079",
+    "name": "SOW MOUSSA",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T22:01:21Z",
+    "inmate_number": "14605194",
+    "name": "MILLER BRANEISHA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T22:01:21Z",
+    "inmate_number": "14787122",
+    "name": "GARDNER ASHLEE",
+    "tier": null,
+    "category": null,
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T22:01:21Z",
+    "inmate_number": "14807707",
+    "name": "BEYE SOULEYMANE",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T22:01:21Z",
+    "inmate_number": "2291599",
+    "name": "HILBERT RICKIE",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-13T22:01:21Z",
+    "inmate_number": "2660554",
+    "name": "HEATH VERDELE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
   }
 ]
