@@ -32323,57 +32323,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-06T17:57:23Z",
-    "inmate_number": "14167494",
-    "name": "OLLIS JEFFREY",
+    "date": "2026-09-06",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-06T17:57:23Z",
-    "inmate_number": "14625730",
-    "name": "RUMPH KEYONTAE",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-06T17:57:23Z",
-    "inmate_number": "14767633",
-    "name": "THOMAS MARQUISE",
-    "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 9/6/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-09-06T17:57:23Z",
-    "inmate_number": "2359666",
-    "name": "ROBERTS JONATHAN",
+    "date": "2026-09-06",
     "tier": "M4",
-    "category": "Menacing",
-    "note": ""
+    "category": "Menacing"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-06T17:57:23Z",
-    "inmate_number": "2839751",
-    "name": "FREEMAN ELIJAH",
+    "date": "2026-09-06",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-06T17:57:23Z",
-    "inmate_number": "964018",
-    "name": "WILLIAMS DERRICK",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -40726,5 +40690,68 @@
     "tier": "M4",
     "category": "Failure to disclose personal information",
     "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T19:48:01Z",
+    "inmate_number": "14204959",
+    "name": "EDMERSON TALIA",
+    "tier": null,
+    "category": null,
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T19:48:01Z",
+    "inmate_number": "14687503",
+    "name": "SANDERS DAVID",
+    "tier": "MM",
+    "category": "License or registration violation",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-13T19:48:01Z",
+    "inmate_number": "2660554",
+    "name": "HEATH VERDELE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-13T19:48:01Z",
+    "inmate_number": "2725338",
+    "name": "LUESSEN MICHAEL",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-13T19:48:01Z",
+    "inmate_number": "1567603",
+    "name": "ALLEN FONTEZ",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-13T19:48:01Z",
+    "inmate_number": "1540743",
+    "name": "WELLS MIA",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-13T19:48:01Z",
+    "inmate_number": "14198308",
+    "name": "WILLIAMS MICKEL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
