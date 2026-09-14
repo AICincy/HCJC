@@ -18397,6 +18397,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-07-10",
+    "tier": "M1",
+    "category": "Falsification"
+  },
+  {
+    "event": "updated",
     "date": "2026-07-11",
     "tier": "M1",
     "category": "Aggravated menacing"
@@ -25000,6 +25006,12 @@
     "date": "2026-08-11",
     "tier": "M2",
     "category": "Criminal damaging"
+  },
+  {
+    "event": "released",
+    "date": "2026-08-11",
+    "tier": "M1",
+    "category": "Falsification"
   },
   {
     "event": "booked",
@@ -32356,15 +32368,6 @@
     "date": "2026-09-06",
     "tier": "F2",
     "category": "Strangulation"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-09-06T23:32:57Z",
-    "inmate_number": "14684612",
-    "name": "MCPHERSON LASHEY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
   },
   {
     "event": "booked",
@@ -40807,5 +40810,68 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-14T00:03:56Z",
+    "inmate_number": "14327308",
+    "name": "ALBRIGHT ORLANDO",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-14T00:03:56Z",
+    "inmate_number": "14359531",
+    "name": "COLLINS BRIYONNA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-14T00:03:56Z",
+    "inmate_number": "14365070",
+    "name": "HATCHER ANTHONY",
+    "tier": "F1",
+    "category": "Aggravated burglary",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-14T00:03:56Z",
+    "inmate_number": "14575236",
+    "name": "BURKE ERNEST",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-14T00:03:56Z",
+    "inmate_number": "14605194",
+    "name": "MILLER BRANEISHA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-14T00:03:56Z",
+    "inmate_number": "1963778",
+    "name": "WOODS TIMOTHY",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": "booked 9/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-14T00:03:56Z",
+    "inmate_number": "2817280",
+    "name": "JEFFRIES SEAN",
+    "tier": "M3",
+    "category": "Sexual imposition",
+    "note": "booked 9/13/26"
   }
 ]
