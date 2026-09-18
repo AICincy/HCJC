@@ -33673,57 +33673,51 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-11T01:04:29Z",
-    "inmate_number": "14124472",
-    "name": "LEE DEANDRE",
+    "date": "2026-09-11",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 9/10/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-11T01:04:29Z",
-    "inmate_number": "14535272",
-    "name": "GRAYSON BRIYONNA",
+    "date": "2026-09-11",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-11T01:04:29Z",
-    "inmate_number": "14785033",
-    "name": "ALVAREZ JAMIE",
+    "date": "2026-09-11",
     "tier": null,
-    "category": null,
-    "note": "booked 9/10/26"
+    "category": null
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-11T01:04:29Z",
-    "inmate_number": "2052148",
-    "name": "JENNINGS JAMES",
+    "date": "2026-09-11",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 9/10/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-11T01:04:29Z",
-    "inmate_number": "2123064",
-    "name": "MOSLEY DARRYL",
+    "date": "2026-09-11",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": ""
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-11T01:04:29Z",
-    "inmate_number": "14449777",
-    "name": "DUNSON MYKAILAH",
+    "date": "2026-09-11",
     "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-11",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "booked",
+    "date": "2026-09-11",
+    "tier": "M1",
+    "category": "Aggravated menacing"
   },
   {
     "event": "updated",
@@ -43417,5 +43411,50 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-18T01:31:36Z",
+    "inmate_number": "14728468",
+    "name": "SEILER STERLING",
+    "tier": "MM",
+    "category": "Occupant restraining devices (seat belts)",
+    "note": "booked 9/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-18T01:31:36Z",
+    "inmate_number": "2054968",
+    "name": "MILLER STARLIA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 9/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-18T01:31:36Z",
+    "inmate_number": "2122267",
+    "name": "COSMAH CHRISTOPHER",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 9/17/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-18T01:31:36Z",
+    "inmate_number": "2465245",
+    "name": "COFFEY RYAN",
+    "tier": "M3",
+    "category": "Criminal mischief",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-18T01:31:36Z",
+    "inmate_number": "2677808",
+    "name": "BENTON BRUCE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
   }
 ]
