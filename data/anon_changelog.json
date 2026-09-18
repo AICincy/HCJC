@@ -32154,6 +32154,12 @@
     "category": "Possessing criminal tools"
   },
   {
+    "event": "released",
+    "date": "2026-09-04",
+    "tier": "M1",
+    "category": "Falsification"
+  },
+  {
     "event": "booked",
     "date": "2026-09-05",
     "tier": "M1",
@@ -33769,84 +33775,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-11T10:41:05Z",
-    "inmate_number": "14098056",
-    "name": "HARRIS DESTINEE",
+    "date": "2026-09-11",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-11T10:41:05Z",
-    "inmate_number": "14396535",
-    "name": "CORNETT ANDRE",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 9/11/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-11T10:41:05Z",
-    "inmate_number": "14502981",
-    "name": "WHITE ANTONIO",
+    "date": "2026-09-11",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 9/11/26"
+    "category": "Felonious assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-11T10:41:05Z",
-    "inmate_number": "14823299",
-    "name": "PEREZ-GONZALEZ ANGEL",
+    "date": "2026-09-11",
     "tier": "M1",
-    "category": "Having physical control of vehicle while under influence",
-    "note": "booked 9/11/26"
+    "category": "Having physical control of vehicle while under influence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-11T10:41:05Z",
-    "inmate_number": "14823300",
-    "name": "CENTERS CASSANDRA",
+    "date": "2026-09-11",
     "tier": "MM",
-    "category": "Speed limits",
-    "note": "booked 9/11/26"
+    "category": "Speed limits"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-11T10:41:05Z",
-    "inmate_number": "2227821",
-    "name": "FLADUNG JUSTIN",
-    "tier": null,
-    "category": null,
-    "note": "booked 9/11/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-11T10:41:05Z",
-    "inmate_number": "2289087",
-    "name": "RUDISELL JOSHUA",
+    "date": "2026-09-11",
     "tier": "M2",
-    "category": "Possessing drug abuse instruments",
-    "note": "booked 9/11/26"
+    "category": "Possessing drug abuse instruments"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-11T10:41:05Z",
-    "inmate_number": "2464736",
-    "name": "CUNNINGHAM DAVID",
+    "date": "2026-09-11",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-09-11T10:41:05Z",
-    "inmate_number": "14191062",
-    "name": "STANFORD ARTAZ",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
@@ -43591,6 +43552,114 @@
     "timestamp_utc": "2026-09-18T06:40:12Z",
     "inmate_number": "949056",
     "name": "WILLIS JERRY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "1027921",
+    "name": "ROBINSON REUBEN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 9/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "14297570",
+    "name": "COLEMAN DAVID",
+    "tier": null,
+    "category": null,
+    "note": "booked 9/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "14307629",
+    "name": "MEYER CODI",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "booked 9/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "14713857",
+    "name": "ISRAEL NETHANIAH",
+    "tier": "MM",
+    "category": "Headlights",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "14824148",
+    "name": "CLEMENTS NATASHA",
+    "tier": null,
+    "category": null,
+    "note": "booked 9/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "14824149",
+    "name": "ERIS NECATI",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 9/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "2215765",
+    "name": "CORDELL MELISSA",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": "booked 9/18/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "1311960",
+    "name": "ANDERSON ANDY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "2363606",
+    "name": "EDMONDSON CRYSTAL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "2517083",
+    "name": "REED CORTNEY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "778031",
+    "name": "ROBINSON EDDIE",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-18T11:50:10Z",
+    "inmate_number": "1803674",
+    "name": "SANDERS REGGIE",
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
