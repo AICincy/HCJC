@@ -306,12 +306,17 @@ def run(write: bool = True) -> int:
                 "specific arrest. JCStream does not publish these joins on its own "
                 "pages. Joining keys are inmate_number (vs current.json) and "
                 "cfs_row_index (vs the cfs_recent.json or cfs_pdi_recent.json "
-                "feed identified by cfs_source). Confidence weights: 50% temporal "
-                "proximity within a +/- 60 minute window, 50% textual overlap "
-                "between the charge description and the CFS row's disposition/"
-                "incident-type fields. Purely temporal matches (textual "
-                "overlap = 0) are excluded. Confirmed-arrest dispositions "
-                "(ARR: ARREST) receive a +0.15 confidence boost."
+                "feed identified by cfs_source). Confidence weights: 50% "
+                "temporal proximity, decaying linearly to zero at 4 hours "
+                "after booking (pairs beyond an 8-hour outer bound are "
+                "dropped when the CFS row carries a real time-of-day), plus "
+                "50% textual overlap between the charge description and the "
+                "CFS row's disposition/incident-type fields. A perfect "
+                "textual-overlap match can clear the 0.45 confidence floor "
+                "on its own, so pairs with large time gaps are possible. "
+                "Purely temporal matches (textual overlap = 0) are excluded. "
+                "Confirmed-arrest dispositions (ARR: ARREST) receive a +0.15 "
+                "confidence boost."
             ),
             "pairs": [
                 {

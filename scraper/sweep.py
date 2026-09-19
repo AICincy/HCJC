@@ -40,6 +40,7 @@ from .photos import downscale_and_save
 from .store import (
     WAF_BLOCK_LOG_PATH,
     SnapshotCorruptError,
+    _load_takedowns,
     append_block_evidence,
     diff,
     load_block_log,
@@ -232,6 +233,12 @@ _sweep_looks_healthy = sweep_looks_healthy
 
 
 MIN_SWEEP_INTERVAL_S = 20 * 60  # 20 minutes
+# Conventional exit status for SIGINT. run() returns this (rather than
+# re-raising KeyboardInterrupt) so callers can observe an interrupted sweep
+# as a return code; the process exit status is identical either way (Python
+# exits 130 on an uncaught KeyboardInterrupt), and the finally block still
+# persists the partial snapshot before the return.
+INTERRUPTED_EXIT_CODE = 130
 
 
 @dataclass
@@ -526,18 +533,16 @@ def run(
         return 1
     log.info("loaded %d previously-known inmates", len(previous))
 
-    # Read expunged inmate IDs from data/takedowns.json
-    takedowns_path = paths.takedowns_path
-    takedowns_set = set()
-    if takedowns_path.exists():
-        try:
-            t_data = json.loads(takedowns_path.read_text(encoding="utf-8"))
-            if isinstance(t_data, list):
-                takedowns_set = {str(x) for x in t_data}
-            elif isinstance(t_data, dict):
-                takedowns_set = {str(x) for x in t_data.keys()}
-        except (json.JSONDecodeError, OSError) as e:
-            log.warning("failed to load data/takedowns.json (non-fatal): %s", e)
+    # Read expunged inmate IDs from data/takedowns.json. Fail closed: a
+    # malformed seal file must refuse loudly here, never silently build
+    # without seals. store._load_takedowns enforces the same contract at the
+    # save_current write boundary; loading it here too keeps the
+    # previous/rows pre-filter consistent with the persisted snapshot.
+    try:
+        takedowns_set = _load_takedowns(paths.takedowns_path.parent)
+    except SnapshotCorruptError as e:
+        log.error("refusing sweep: %s", e)
+        return 1
 
     if takedowns_set:
         original_prev_len = len(previous)
@@ -644,7 +649,11 @@ def run(
         clean_finish = True
     except KeyboardInterrupt:
         log.warning("interrupted; persisting %d partial inmates", len(current))
-        raise
+        # Return the conventional SIGINT status instead of re-raising: the
+        # finally block above already persisted the partial snapshot, and a
+        # return code keeps the interruption observable (and testable) for
+        # callers. sweep.yml marks the step failed either way.
+        return INTERRUPTED_EXIT_CODE
     except Exception:
         # Anything else escaping the sweep body is unexpected: log and re-raise.
         # `roster_ok` stays True only if we already cleared the list-sweep

@@ -1,3 +1,13 @@
+# SUPERSEDED — historical reference only
+
+> **Status (2026-09-19):** This spec no longer describes the shipped site and is kept
+> for historical reference only. The shipped UI uses Public Sans / IBM Plex Mono,
+> pill navigation and tier badges, and JCStream masthead branding, all of which this
+> document hard-excludes. Do not treat anything below as a requirement. See the
+> review finding D5 (design/aretheyinjail-v2-system.md stale spec).
+
+---
+
 # AreTheyInJail v2 — locked visual system
 
 ## Direction

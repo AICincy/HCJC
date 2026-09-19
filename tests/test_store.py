@@ -65,8 +65,6 @@ def test_save_changelog_sorts_by_timestamp_with_stable_tiebreak(tmp_path: Path):
     # data-F6: changelog must be persisted sorted by timestamp_utc so an NTP
     # slew or container restart doesn't leave the rolling feed out of order.
     # Insertion order is the tiebreaker for events sharing a timestamp.
-    import json
-
     from scraper.models import ChangeEvent
     from scraper.store import save_changelog
 
@@ -131,8 +129,6 @@ def test_save_current_writes_atomically_and_round_trips(tmp_path: Path):
 def test_save_current_writes_schema_version(tmp_path: Path):
     # data-F1: every snapshot we write should carry schema_version so a
     # future reader can detect a too-new file.
-    import json
-
     path = tmp_path / "current.json"
     save_current(path, [_inm("1")])
     raw = json.loads(path.read_text(encoding="utf-8"))
@@ -174,9 +170,6 @@ def test_save_current_fails_closed_on_malformed_takedowns(tmp_path: Path):
     # ORC 2953.32: a takedowns.json that exists but cannot be parsed must abort
     # the write (fail closed), not silently proceed with an empty seal set and
     # republish sealed records for the cycle.
-    import pytest
-
-    from scraper.store import SnapshotCorruptError
 
     (tmp_path / "takedowns.json").write_text("{not json", encoding="utf-8")
     path = tmp_path / "current.json"
@@ -186,7 +179,6 @@ def test_save_current_fails_closed_on_malformed_takedowns(tmp_path: Path):
 
 
 def test_save_changelog_fails_closed_on_malformed_takedowns(tmp_path: Path):
-    import pytest
 
     from scraper.models import ChangeEvent
     from scraper.store import SnapshotCorruptError, save_changelog
@@ -274,7 +266,6 @@ def test_anon_changelog_no_double_count_at_expiry_boundary(tmp_path: Path):
     # anonymized twin was appended; the re-anonymization pass then rewrote the
     # carried-over full row to the same anon shape, leaving TWO rows for one
     # event until 365-day compaction. The post-re-anon re-dedup collapses them.
-    import json
     from datetime import datetime, timedelta, timezone
 
     from scraper.models import ChangeEvent

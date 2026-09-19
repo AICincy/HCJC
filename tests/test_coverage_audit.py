@@ -10,12 +10,16 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 def test_coverage_audit_reports_no_unsurfaced_items():
-    out = subprocess.run(
+    proc = subprocess.run(
         [sys.executable, str(REPO / "audit" / "coverage_audit.py"), str(REPO)],
         capture_output=True,
         text=True,
-        check=True,
-    ).stdout
+        check=False,
+    )
+    assert proc.returncode == 0, (
+        f"coverage_audit.py exited {proc.returncode}\n--- stdout ---\n{proc.stdout}\n--- stderr ---\n{proc.stderr}"
+    )
+    out = proc.stdout
     assert "0 UNSURFACED-NO-REASON" in out
     assert "0 STORED-BUT-UNPUBLISHED" in out
     assert "Hidden  : 0 published files" in out

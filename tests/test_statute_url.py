@@ -35,7 +35,7 @@ def test_placeholder_hold_codes_get_no_orc_link():
 
 def test_untitled_code_in_known_orc_chapter_links():
     # 2925.99 has no title entry, but chapter 2925 is a known ORC chapter
-    # (2903.13/959.131 etc. seed the whitelist via _statute_url's caller; here
+    # (2903.13/959.131 etc. seed the whitelist via statute_url's caller; here
     # we pass the precomputed set explicitly).
     chaps = _orc_chapters(_OFFENSES)
     assert statute_url("2903.99", _OFFENSES, chaps).endswith("section-2903.99")

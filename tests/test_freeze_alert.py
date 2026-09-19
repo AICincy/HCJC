@@ -7,7 +7,7 @@ from scraper import freeze_alert
 from scraper.sweep_guards import REMOVAL_SLA_HOURS, ROSTER_STALE_ALARM_HOURS
 
 
-def test_alert_ok_when_fresh(caplog):
+def test_alert_ok_when_fresh():
     assert freeze_alert.alert(1.0) == "ok"
     assert freeze_alert.alert(None) == "ok"
 

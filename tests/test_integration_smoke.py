@@ -1,4 +1,7 @@
-"""End-to-end smoke test: sweep (mocked HTTP) -> build -> verify output structure."""
+"""End-to-end build smoke tests: fixture data -> build -> verify output structure.
+
+Exercises the real web.build.build() against minimal fixture snapshots,
+including the last-good atomic-swap behavior on render/promote failures."""
 
 from __future__ import annotations
 
@@ -7,6 +10,15 @@ from pathlib import Path
 import pytest
 
 from scraper.models import Charge, Inmate, Snapshot
+
+
+@pytest.fixture(autouse=True)
+def _no_orc_offenses_rewrite(monkeypatch):
+    """Hermeticity: web.build.build() calls update_orc_offenses(), which reads
+    the real repo's data/current.json and conditionally rewrites the committed
+    data/orc_offenses.json via absolute ROOT_DIR paths. Neutralize it; the
+    fixture snapshots written by these tests are complete on their own."""
+    monkeypatch.setattr("scraper.update_orc_offenses.update_orc_offenses", lambda: None)
 
 
 def _make_minimal_snapshot(tmp_path: Path) -> None:
@@ -38,14 +50,10 @@ def test_build_produces_index(tmp_path, monkeypatch):
     from web.build import build
 
     out = tmp_path / "docs"
-    # If build raises due to missing templates/data, that's an acceptable
-    # failure mode for a smoke test -- the point is to catch import/wiring errors.
-    try:
-        build(out)
-        assert (out / "index.html").exists()
-    except FileNotFoundError:
-        # Template files not available in test env -- still validates imports work
-        pass
+    # A missing template or data file is a real failure: let it raise loudly
+    # rather than passing vacuously.
+    build(out)
+    assert (out / "index.html").exists()
 
 
 def test_build_failure_preserves_last_good(tmp_path, monkeypatch):

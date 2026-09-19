@@ -128,14 +128,14 @@ def test_prune_photos_removes_only_inactive(tmp_path: Path, monkeypatch):
 def test_watchdog_silent_below_min_sample(caplog):
     # tests-F1: with too few attempts the watchdog is silent regardless of
     # rates, so a tiny cycle doesn't trigger noisy false positives.
-    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    caplog.set_level(logging.WARNING, logger="jcstream.sweep")
     _check_detail_watchdog(attempts=5, named=0, with_photo=0)
     assert not any("detail watchdog" in r.message for r in caplog.records)
 
 
 def test_watchdog_warns_on_low_name_rate(caplog):
     # tests-F1: at or above the min sample, a name-rate under the floor warns.
-    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    caplog.set_level(logging.WARNING, logger="jcstream.sweep")
     _check_detail_watchdog(attempts=20, named=5, with_photo=20)
     messages = [r.message for r in caplog.records]
     assert any("parsed a name" in m for m in messages), messages
@@ -145,7 +145,7 @@ def test_watchdog_warns_on_low_name_rate(caplog):
 
 def test_watchdog_warns_on_low_photo_rate(caplog):
     # tests-F1: at or above the min sample, a photo-rate under the floor warns.
-    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    caplog.set_level(logging.WARNING, logger="jcstream.sweep")
     _check_detail_watchdog(attempts=20, named=20, with_photo=5)
     messages = [r.message for r in caplog.records]
     assert any("yielded a photo" in m for m in messages), messages
@@ -155,14 +155,14 @@ def test_watchdog_warns_on_low_photo_rate(caplog):
 def test_watchdog_returns_true_for_warn_only_thresholds(caplog):
     # sweep-F4: WARN-only floors do NOT block writes. Below the BLOCK sample
     # the watchdog must still return True even when the WARN floors trip.
-    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    caplog.set_level(logging.WARNING, logger="jcstream.sweep")
     assert _check_detail_watchdog(attempts=20, named=5, with_photo=20) is True
 
 
 def test_watchdog_blocks_when_large_sample_and_name_rate_collapsed(caplog):
     # sweep-F4: with at least DETAIL_WATCHDOG_BLOCK_MIN_SAMPLE attempts and
     # a name rate under DETAIL_WATCHDOG_BLOCK_NAME_FLOOR, refuse the write.
-    caplog.set_level(logging.WARNING, logger="scraper.sweep")
+    caplog.set_level(logging.WARNING, logger="jcstream.sweep")
     # 100 attempts, 30 named (30% < 60% block floor) -> block.
     assert _check_detail_watchdog(attempts=100, named=30, with_photo=100) is False
     assert any("BLOCK" in r.message for r in caplog.records)
@@ -188,6 +188,9 @@ def test_fetch_one_uses_list_row_name_when_detail_heading_missing(tmp_path, monk
     # tests-F2: a detail page whose heading drifted (no comma + all-caps,
     # no og:title, no <title>) must fall back to the list-row Last/First.
     monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
+    # The interstitial HTML below is WAF-block-shaped, so _fetch_one would
+    # sleep the 2s + 4s backoff before falling through; stub the sleep.
+    monkeypatch.setattr(sweep.time, "sleep", lambda _s: None)
     html = "<html><body><h1>Some interstitial</h1></body></html>"
     client = _FakeClient(html)
     list_row = ListRow(inmate_number="9876543", last_name="ROE", first_name="JANE", admit_date="5/10/26")
@@ -356,7 +359,9 @@ def test_read_surnames_handles_comments_and_blanks(tmp_path: Path):
 def test_interrupted_sweep_does_not_append_released_events(tmp_path: Path, monkeypatch):
     """sweep-F2: a KeyboardInterrupt mid-sweep must persist the partial
     snapshot but MUST NOT diff and emit synthetic 'released' events for
-    every id the sweep never reached."""
+    every id the sweep never reached. The interruption surfaces as run()'s
+    INTERRUPTED_EXIT_CODE (130, the conventional SIGINT status), not as a
+    re-raised exception."""
     import json
 
     from scraper.models import Inmate
@@ -379,6 +384,10 @@ def test_interrupted_sweep_does_not_append_released_events(tmp_path: Path, monke
     monkeypatch.setattr(sweep, "CURRENT_PATH", current_path)
     monkeypatch.setattr(sweep, "CHANGELOG_PATH", changelog_path)
     monkeypatch.setattr(sweep, "PHOTOS_DIR", photos)
+    # Disable the fresh-data skip-gate: save_current just wrote a fresh
+    # snapshot, so without this run() returns 0 before _sweep_list is ever
+    # called and the KeyboardInterrupt fake below would be dead code.
+    monkeypatch.setattr(sweep, "MIN_SWEEP_INTERVAL_S", 0)
 
     # Stub HTTP layer so no network is touched. _sweep_list raising
     # KeyboardInterrupt simulates a runner cancellation mid-orchestration.
@@ -396,7 +405,7 @@ def test_interrupted_sweep_does_not_append_released_events(tmp_path: Path, monke
     monkeypatch.setattr(sweep, "make_client", lambda: FakeClient())
 
     rc = sweep.run(surnames=["A"], max_surnames=None, refresh_known=False, dry_run=False)
-    assert rc == 0
+    assert rc == sweep.INTERRUPTED_EXIT_CODE == 130
 
     # The roster database must remain intact and not be overwritten/blanked out.
     assert current_path.exists()

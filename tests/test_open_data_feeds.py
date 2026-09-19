@@ -53,6 +53,18 @@ def test_pull_all_skips_save_on_error(monkeypatch, tmp_path):
     # Mock _pull_one to return None (failure)
     monkeypatch.setattr(open_data_feeds, "_pull_one", lambda *a, **k: None)
 
+    # pull_all() constructs a real httpx.Client via make_socrata_client()
+    # even when _pull_one is mocked. Construction performs no network I/O,
+    # but stub it anyway so the test never touches client setup.
+    class _DummyClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    monkeypatch.setattr(open_data_feeds, "make_socrata_client", lambda: _DummyClient())
+
     # Track if _save is called
     save_called = False
 

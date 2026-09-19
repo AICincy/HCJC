@@ -162,11 +162,14 @@ def _pull_one(spec: FeedSpec, *, client: httpx.Client | None = None) -> list[dic
                 order = where.split()[0] + " DESC"
             try:
                 rows = query(spec.dataset_id, where=where, order=order, limit=spec.limit, client=client)
-                log.info("%s: %d rows (filter=%s)", spec.label, len(rows), where)
-                return rows
             except httpx.HTTPError as e:
                 log.debug("%s where %r rejected: %s", spec.label, where, e)
-        log.warning("%s: all column-name filters rejected; falling back to unfiltered", spec.label)
+                continue
+            log.info("%s: %d rows (filter=%s)", spec.label, len(rows), where)
+            if rows:
+                return rows
+            log.info("%s: filter %r returned 0 rows; trying next candidate", spec.label, where)
+        log.warning("%s: no column-name filter returned rows; falling back to unfiltered", spec.label)
         try:
             return query(spec.dataset_id, order=spec.order, limit=spec.limit, client=client)
         except httpx.HTTPError as e:

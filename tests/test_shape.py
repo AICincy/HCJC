@@ -305,17 +305,24 @@ def test_iso_booking_date():
     assert shape._iso_booking_date(inm) is None
 
 
-def test_card_data_attrs_sort_keys():
+def test_card_data_attrs_sort_keys(monkeypatch):
     inm = _inm("1", "DOE", "JOHN", charges=[Charge(orc_code="2903.13", description="ASSAULT F4")])
     d = shape._card_data_attrs(inm)
     assert d["degree"] == "F4"
     assert d["custody"] == ""  # no booking date -> unsortable, empty attr
 
+    # Freeze the clock the production code reads: _days_in_custody compares
+    # booking midnight against _now_naive_est() (naive Eastern). Freezing that
+    # single seam kills the midnight race where the test's now() and
+    # production's now() straddle midnight and disagree by a day.
+    fixed_naive = datetime(2026, 5, 14, 12, 0, 0)
+    monkeypatch.setattr("web.shape.timeline._now_naive_est", lambda: fixed_naive)
+
     # %-m/%-d is glibc-only (ValueError on Windows); build the unpadded HCSO date manually.
-    bd = datetime.now(timezone.utc) - timedelta(days=3)
+    bd = fixed_naive - timedelta(days=3)
     inm.booking_date = f"{bd.month}/{bd.day}/{bd.year % 100:02d}"
     d = shape._card_data_attrs(inm)
-    assert d["custody"] == 3  # _days_in_custody compares in UTC, so this is exact
+    assert d["custody"] == 3
 
     no_tier = _inm("2", "ROE", "JANE", charges=[Charge(orc_code="", description="")])
     assert shape._card_data_attrs(no_tier)["degree"] == "UNK"
