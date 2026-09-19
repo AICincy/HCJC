@@ -58,7 +58,9 @@ def test_parse_book_date_two_and_four_digit_years():
 )
 def test_degree_re_positive_matches(description, degree, kind):
     """Every ORC-defined degree at end-of-string resolves to its tier."""
-    assert _DEGREE_RE.search(description).group(1) == degree
+    m = _DEGREE_RE.search(description)
+    assert m is not None, f"degree regex failed on {description!r}"
+    assert m.group(1) == degree
     tier = _charge_tier(SimpleNamespace(description=description))
     assert tier == {"label": degree, "kind": kind}
 
@@ -66,11 +68,11 @@ def test_degree_re_positive_matches(description, degree, kind):
 @pytest.mark.parametrize(
     "description",
     [
-        "ASSAULT F6",   # F6 is not a real Ohio felony degree
-        "THEFT M5",     # M5 is not a real Ohio misdemeanor degree
-        "MYSTERY X9",   # not a degree token at all
+        "ASSAULT F6",  # F6 is not a real Ohio felony degree
+        "THEFT M5",  # M5 is not a real Ohio misdemeanor degree
+        "MYSTERY X9",  # not a degree token at all
         "ASSAULT F4 EXTRA",  # degree not at end of string
-        "FELONY ASSAULT",    # no degree suffix
+        "FELONY ASSAULT",  # no degree suffix
     ],
 )
 def test_degree_re_rejects_non_degrees(description):
