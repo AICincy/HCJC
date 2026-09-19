@@ -14,7 +14,7 @@ You are the orchestrator. You do not review code yourself — you **dispatch** t
 | `jcstream-python-reviewer` | `scraper/*.py`, `web/build.py`, `web/classify.py`, `web/shape.py`, `tests/*.py` (55.6%) | Read, Bash, Grep, Glob |
 | `jcstream-template-reviewer` | `web/templates/*.html`, `web/templates/feed.xml`, `web/static/feed.xsl`, `web/static/main.js` (29.3%) | Read, Bash, Grep, Glob, WebFetch |
 | `jcstream-css-reviewer` | `web/static/style.css` (15.1%) | Read, Bash, Grep, Glob |
-| `jcstream-security-reviewer` | Cross-cutting compliance (FCRA, ORC §§ 149.43 + 2953.32, `_headers`, no-fee, presumed-innocent, JCSTREAM_* secrets, dependency CVE) | Read, Bash, Grep, Glob, WebFetch |
+| `jcstream-security-reviewer` | Cross-cutting compliance (FCRA, ORC §§ 149.43 + 2953.32, CSP meta, no-fee, presumed-innocent, JCSTREAM_* secrets, dependency CVE) | Read, Bash, Grep, Glob, WebFetch |
 
 These four together cover the entire codebase plus the JCStream-specific compliance surface.
 
