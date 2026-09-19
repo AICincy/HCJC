@@ -6,6 +6,8 @@ updates:
   # intact while the action advances.
   - package-ecosystem: github-actions
     directory: /
+    cooldown:
+      default-days: 7
     schedule:
       interval: weekly
       day: monday
@@ -23,6 +25,8 @@ updates:
   # package at a time so a broken wheel doesn't block unrelated updates.
   - package-ecosystem: pip
     directory: /
+    cooldown:
+      default-days: 7
     schedule:
       interval: weekly
       day: monday

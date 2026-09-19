@@ -81,10 +81,18 @@ jobs:
           JCSTREAM_CAPTURE_EGRESS: "1"
           WORKFLOW_RUN_ID: ${{ github.run_id }}
           COMMIT_SHA: ${{ github.sha }}
+          # workflow_dispatch inputs via env (never interpolate ${{ }} in run:).
+          SWEEP_MAX_SURNAMES: ${{ inputs.max_surnames }}
+          SWEEP_REFRESH_KNOWN: ${{ inputs.refresh_known }}
         run: |
-          python -m scraper.sweep \
-            ${{ inputs.max_surnames && format('--max-surnames {0}', inputs.max_surnames) || '' }} \
-            ${{ inputs.refresh_known && '--refresh-known' || '' }}
+          sweep_args=()
+          if [ -n "$SWEEP_MAX_SURNAMES" ]; then
+            sweep_args+=(--max-surnames "$SWEEP_MAX_SURNAMES")
+          fi
+          if [ "$SWEEP_REFRESH_KNOWN" = "true" ]; then
+            sweep_args+=(--refresh-known)
+          fi
+          python -m scraper.sweep "${sweep_args[@]}"
         continue-on-error: true
 
       # Surface a prolonged roster freeze: emit a GitHub Actions ::error::
