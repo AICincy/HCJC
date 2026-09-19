@@ -1,6 +1,6 @@
 ---
 name: jcstream-security-reviewer
-description: Use when conducting a security review of the JCStream project — cross-cutting audit that extends the built-in `/security-review` with JCStream-specific compliance: FCRA (no employment / credit / housing screening signals), ORC § 149.43 (Ohio public records attribution), ORC § 2953.32 (expungement-removal protocol enforcement), the `_headers` CSP / Strict-Transport-Security / Permissions-Policy review, no-fee guarantee enforcement, presumed-innocent banner presence per page, JCSTREAM_* secret hygiene in workflows, third-party-script hygiene (only Giscus is allowed and only when opted in via env), comment-policy moderation enforcement, dependency CVE scan. **Read-only** — produces a findings report and hands fixes off to `jcstream-legal-copy-author` (compliance copy), `jcstream-scraper-author` (workflows / secrets), `jcstream-template-author` (presence checks), `jcstream-stylesheet-author` (`_headers` syntax). Trigger phrases: "security review", "FCRA compliance check", "audit for vulnerabilities", "review for PII leaks", "secrets scan", "CSP review", "audit _headers", "review CSP/HSTS", "expungement protocol audit", "dependency CVE scan", "JCStream security audit".
+description: Use when conducting a security review of the JCStream project — cross-cutting audit that extends the built-in `/security-review` with JCStream-specific compliance: FCRA (no employment / credit / housing screening signals), ORC § 149.43 (Ohio public records attribution), ORC § 2953.32 (expungement-removal protocol enforcement), the CSP meta-element review (GitHub Pages: meta-deliverable policy vs header-only controls), no-fee guarantee enforcement, presumed-innocent banner presence per page, JCSTREAM_* secret hygiene in workflows, third-party-script hygiene (only Giscus is allowed and only when opted in via env), comment-policy moderation enforcement, dependency CVE scan. **Read-only** — produces a findings report and hands fixes off to `jcstream-legal-copy-author` (compliance copy), `jcstream-scraper-author` (workflows / secrets), `jcstream-template-author` (presence checks, CSP meta). Trigger phrases: "security review", "FCRA compliance check", "audit for vulnerabilities", "review for PII leaks", "secrets scan", "CSP review", "audit CSP meta", "review CSP", "expungement protocol audit", "dependency CVE scan", "JCStream security audit".
 ---
 
 # JCStream security reviewer
@@ -12,7 +12,7 @@ You conduct a security audit and produce a findings report. **You do not edit co
 | `jcstream-security-reviewer` (this skill) | built-in `/security-review` |
 |---|---|
 | FCRA non-CRA boundary, ORC § 149.43 / § 2953.32, no-fee guarantee, presumed-innocent banner, comment-policy presence, JCSTREAM_* secret hygiene | XSS / SQLi / SSRF / IDOR / auth / generic injection on diff |
-| `_headers` CSP / HSTS / Permissions-Policy | Generic header check on framework output |
+| CSP meta element in `web/templates/base.html`; header-only controls (HSTS, frame-ancestors, COOP/COEP) documented as not per-repo-expressible on GitHub Pages | Generic header check on framework output |
 | Third-party hygiene specific to the JCStream contract (only Giscus, only opt-in) | Generic third-party-script detection |
 | Static-site / no-backend assumption — no DB queries, no user input persisted server-side | Assumes a typical app surface |
 
@@ -62,26 +62,37 @@ grep -rnE 'removal[_-]list|blocklist|takedown' web/ scraper/
 
 If no programmatic removal path exists, flag as **High** — the only mitigation is rebuilding from a sanitized `data/current.json`, which requires manual operator intervention each time.
 
-### `_headers` (Cloudflare Pages) — CSP / HSTS / Permissions-Policy review
+### Content-Security-Policy (meta element, GitHub Pages)
 
-The `_headers` file at repo root is the source of truth for HTTP response headers under Cloudflare Pages. Verify:
+JCStream is hosted on GitHub Pages, which serves `docs/` from `main`. GitHub Pages offers no per-repo response-header configuration: the `_headers` file was a Cloudflare Pages artifact and has been deleted. The Content-Security-Policy is therefore delivered via the `<meta http-equiv="Content-Security-Policy">` element in `web/templates/base.html`. That element is the source of truth for CSP. Current baseline (verify it has not drifted):
 
-| Header | Required value | Why |
-|---|---|---|
-| `Content-Security-Policy` | `default-src 'self'`; allow `https://giscus.app` only if Giscus opt-in is active; no `unsafe-inline` for scripts (the project has zero inline scripts other than JSON-LD); allow `'unsafe-inline'` for styles only if absolutely required (current project does not need it) | Prevents XSS injection from a hypothetical compromised dependency |
-| `Strict-Transport-Security` | `max-age=63072000; includeSubDomains` (or `preload` if HSTS-preloaded) | Force HTTPS for 2 years |
-| `X-Frame-Options` | `DENY` (or use `frame-ancestors 'none'` in CSP) | Prevent clickjacking |
-| `X-Content-Type-Options` | `nosniff` (Pages adds this by default; the explicit declaration is harmless redundancy) | Prevent MIME-sniffing attacks |
-| `Referrer-Policy` | `strict-origin-when-cross-origin` (Pages default; explicit declaration is redundancy) | Limit referrer leakage |
-| `Permissions-Policy` | Deny camera, microphone, geolocation, payment, USB, accelerometer, gyroscope, autoplay, fullscreen if not used. JCStream uses none of these. | Reduce attack surface |
-| `Cross-Origin-Opener-Policy` | `same-origin` (currently set) | Process isolation |
-| `Cross-Origin-Resource-Policy` | `same-origin` for HTML pages; `cross-origin` only on `/photos/*` if photos need to be hotlinked | Resource isolation |
+`default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests`
+
+Review rules:
+
+- Any weakening of the baseline is a finding: added hosts in `script-src`, `'unsafe-inline'` / `'unsafe-eval'` in `script-src`, `*` or `data:` in `script-src`, `frame-src` beyond `https://giscus.app`. (`style-src 'unsafe-inline'` is currently required and accepted.)
+- The `giscus.app` allowances may stay in the policy statically, but the Giscus widget itself must remain gated on `JCSTREAM_GISCUS_*` being set (see third-party hygiene). Policy allow-list without a rendered widget is fine; widget without config is a finding.
+- The meta element must survive the build: grep the published `docs/` HTML for the `http-equiv` tag. A template change that drops it from a page is a finding.
+
+What a meta element CANNOT express (do not flag as fixable findings; record as known platform limits):
+
+| Control | Why unavailable |
+|---|---|
+| `frame-ancestors` | Ignored inside `<meta>` elements by spec. No per-repo clickjacking header exists on GitHub Pages. |
+| `Strict-Transport-Security` | Response-header-only; Pages-controlled. |
+| `X-Frame-Options`, `X-Content-Type-Options` | Response-header-only; Pages-controlled. |
+| `Cross-Origin-Opener-Policy`, `Cross-Origin-Embedder-Policy`, `Cross-Origin-Resource-Policy` | Response-header-only; Pages-controlled. |
+| `Permissions-Policy` | Response-header-only; Pages-controlled. |
+
+(`Referrer-Policy` is covered via `<meta name="referrer" content="strict-origin-when-cross-origin">` in `base.html`; verify it is present.)
 
 ```sh
-cat _headers
+grep -n 'Content-Security-Policy' web/templates/base.html
+grep -rln 'http-equiv="Content-Security-Policy"' docs/ | head
+curl -sI https://www.aretheyinjail.com/   # observe actual Pages response headers (informational)
 ```
 
-Flag any missing header, any too-permissive value (`script-src *`, `'unsafe-eval'`, etc.), and any redundant header that contradicts another rule.
+Expect `curl -sI` to show NO `content-security-policy` response header. The policy is meta-delivered. Do not flag its absence.
 
 ### No-fee guarantee
 
@@ -189,7 +200,7 @@ Top-of-report summary + per-area finding tables:
 | Severity | Area | Finding | Fix owner |
 |---|---|---|---|
 | High | ORC § 2953.32 | No programmatic removal-list mechanism in web/build.py; takedowns require manual data/current.json edit | jcstream-build-helper-author |
-| Med  | _headers CSP  | script-src lacks 'self'; uses default-src fallback which is acceptable but explicit is clearer | jcstream-stylesheet-author (owns the file) |
+| Med  | CSP meta  | script-src allow-lists a new third-party host with no corresponding gated-widget check | jcstream-template-author (owns web/templates) |
 | Low  | Secrets       | JCSTREAM_GISCUS_REPO is a "var", not a "secret" — labeled correctly | (no action) |
 ```
 
@@ -200,7 +211,7 @@ End with a "Top 3 actionable" list ordered by compliance risk.
 | Finding area | Hand off to |
 |---|---|
 | Legal copy (presumed-innocent, FCRA, ORC attribution, no-fee, removal protocol text) | `jcstream-legal-copy-author` |
-| `_headers` syntax / values | The maintainer (`_headers` lives at repo root, no current author skill owns it) |
+| CSP meta policy values | `jcstream-template-author` (owns `web/templates/base.html`) |
 | Workflow secret hygiene | `jcstream-scraper-author` |
 | Template presence checks / Giscus gating / comment-policy block | `jcstream-template-author` |
 | Removal-list mechanism in build (if missing) | `jcstream-build-helper-author` |
@@ -214,7 +225,8 @@ After fixes:
 ```sh
 python -m pytest -q                                       # full suite stays green
 pip-audit -r requirements.txt --strict                    # zero CVEs
-curl -sI https://www.aretheyinjail.com/ | grep -iE 'content-security|strict-transport|x-frame|permissions-policy|referrer'
+grep -c 'http-equiv="Content-Security-Policy"' docs/index.html       # meta survives the build
+curl -sI https://www.aretheyinjail.com/ | head -30  # Pages response headers (informational; CSP is meta-delivered, expect no CSP header)
 # Confirm a sampled inmate page has noindex meta:
 curl -s https://www.aretheyinjail.com/inmate/SOME-ID/ | grep -i 'noindex'
 ```
