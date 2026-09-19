@@ -1,6 +1,6 @@
 ---
 name: jcstream-security-reviewer
-description: Use when conducting a security review of the JCStream project — cross-cutting audit that extends the built-in `/security-review` with JCStream-specific compliance: FCRA (no employment / credit / housing screening signals), ORC § 149.43 (Ohio public records attribution), ORC § 2953.32 (expungement-removal protocol enforcement), the `_headers` CSP / Strict-Transport-Security / Permissions-Policy review, no-fee guarantee enforcement, presumed-innocent banner presence per page, JCSTREAM_* secret hygiene in workflows, third-party-script hygiene (only Giscus is allowed and only when opted in via env), comment-policy moderation enforcement, dependency CVE scan. **Read-only** — produces a findings report and hands fixes off to `jcstream-legal-copy-author` (compliance copy), `jcstream-scraper-author` (workflows / secrets / PRA loop), `jcstream-template-author` (presence checks), `jcstream-stylesheet-author` (`_headers` syntax). Trigger phrases: "security review", "FCRA compliance check", "audit for vulnerabilities", "review for PII leaks", "secrets scan", "CSP review", "audit _headers", "review CSP/HSTS", "expungement protocol audit", "dependency CVE scan", "JCStream security audit".
+description: Use when conducting a security review of the JCStream project — cross-cutting audit that extends the built-in `/security-review` with JCStream-specific compliance: FCRA (no employment / credit / housing screening signals), ORC § 149.43 (Ohio public records attribution), ORC § 2953.32 (expungement-removal protocol enforcement), the `_headers` CSP / Strict-Transport-Security / Permissions-Policy review, no-fee guarantee enforcement, presumed-innocent banner presence per page, JCSTREAM_* secret hygiene in workflows, third-party-script hygiene (only Giscus is allowed and only when opted in via env), comment-policy moderation enforcement, dependency CVE scan. **Read-only** — produces a findings report and hands fixes off to `jcstream-legal-copy-author` (compliance copy), `jcstream-scraper-author` (workflows / secrets), `jcstream-template-author` (presence checks), `jcstream-stylesheet-author` (`_headers` syntax). Trigger phrases: "security review", "FCRA compliance check", "audit for vulnerabilities", "review for PII leaks", "secrets scan", "CSP review", "audit _headers", "review CSP/HSTS", "expungement protocol audit", "dependency CVE scan", "JCStream security audit".
 ---
 
 # JCStream security reviewer
@@ -53,7 +53,6 @@ grep -rn 'CC BY-NC\|Creative Commons' web/templates/
 When a record is sealed or expunged under Ohio law, JCStream removes it. The protocol must be documented and enforceable:
 
 - `data.html` must describe the removal process (who to email, what to include, expected timeline).
-- The `scraper/pra.py` (capias / mugshot fallback) and `scraper/pra_capias.py` loops must NOT re-add records that have been manually removed.
 - A manual takedown path exists outside the sweep (a static list of removed inmate numbers that the build excludes — verify by grepping `web/build.py` for a removal-list / blocklist mechanism).
 
 ```sh
@@ -111,7 +110,6 @@ If the count of pages-with-inmate-data exceeds the count of presumed-innocent-ba
 All secrets must be `JCSTREAM_*` env vars sourced from GitHub Actions repository secrets, never inline:
 
 - `JCSTREAM_GISCUS_REPO_ID`, `JCSTREAM_GISCUS_CATEGORY_ID` (vars, not secrets — these are public IDs)
-- `JCSTREAM_PRA_SMTP_*`, `JCSTREAM_PRA_FROM_EMAIL`, `JCSTREAM_PRA_TO_*` (secrets — credentials)
 - `JCSTREAM_SENTRY_DSN` (secret — DSN includes token)
 - `JCSTREAM_SITE_BASE_URL`, `JCSTREAM_CNAME` (vars — public URLs)
 
@@ -203,7 +201,7 @@ End with a "Top 3 actionable" list ordered by compliance risk.
 |---|---|
 | Legal copy (presumed-innocent, FCRA, ORC attribution, no-fee, removal protocol text) | `jcstream-legal-copy-author` |
 | `_headers` syntax / values | The maintainer (`_headers` lives at repo root, no current author skill owns it) |
-| Workflow secret hygiene / PRA loop | `jcstream-scraper-author` |
+| Workflow secret hygiene | `jcstream-scraper-author` |
 | Template presence checks / Giscus gating / comment-policy block | `jcstream-template-author` |
 | Removal-list mechanism in build (if missing) | `jcstream-build-helper-author` |
 | Dependency CVE bumps | `jcstream-scraper-author` (owns requirements.txt) |
