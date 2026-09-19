@@ -78,7 +78,6 @@ All Markdown files directly beneath `audit/` were inventoried as non-authoritati
 | `.github/workflows/ci.yml` | Test, lint, type, dependency, ledger, build, domain checks | `V1-100`, `V1-107` to `V1-112` | Retained as implementation evidence | Verified |
 | `.github/workflows/codeql.yml` | Static security analysis | `V1-100` | Retained as implementation evidence | Verified |
 | `.github/workflows/ingest_case_data.yml` | Reviewed case-data ingestion | `V1-93` | Retained as implementation evidence | Verified |
-| `.github/workflows/pra_daily.yml` | Records-request operations | `V1-99` | Retained as implementation evidence | Verified |
 | `.github/workflows/refresh_caselaw.yml` | Case-law reference refresh | `V1-20`, `V1-64` | Retained as implementation evidence | Verified |
 | `.github/ISSUE_TEMPLATE/bug_report.yml` | Defect and correction intake | `V1-89` | Retained as implementation evidence | Verified |
 | `.github/ISSUE_TEMPLATE/case-data.yml` | Case-data contribution | `V1-93` | Retained as implementation evidence | Verified |

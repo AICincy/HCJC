@@ -53,14 +53,6 @@ The HCSO transport records selected source-access conditions in a hash-linked le
 
 **Implementation and verification references:** `scraper/client.py`, `scraper/verify_block_log.py`, `data/waf_block_log.json`, `tests/test_client.py`.
 
-## V1-99 PRA Evidence Ledger
-
-**Shared concept:** [A-23 Retained Evidence](https://github.com/AICincy/HCJC2/blob/reference-v1.0.0/docs/reference/HCJC-CANONICAL-REFERENCE.md#a-23-retained-evidence).
-
-Public-records-request tooling can prepare and send configured requests and record them in a hash-linked ledger. A dedicated verifier checks predecessor digests independently of the ordinary roster publication process.
-
-**Implementation and verification references:** `scraper/pra.py`, `scraper/pra_log.py`, `scraper/verify_pra_log.py`, `tests/test_pra_log.py`.
-
 ## V1-100 Security and Dependency Checks
 
 Continuous integration runs dependency advisory scanning, Ruff, Mypy, Pytest, evidence-chain verification, build smoke tests, and custom-domain checks. A separate CodeQL workflow performs static security analysis.
@@ -93,9 +85,9 @@ Publication commits use the `jcstream-bot` identity, stage `data/` and `docs/`, 
 
 ## V1-105 Operator Command Surface
 
-The repository exposes Python module entry points for sweep, feed retrieval, correlation, build, monitoring, ledger verification, and selected records-request functions. README and wiki operations guidance provide local setup and command examples.
+The repository exposes Python module entry points for sweep, feed retrieval, correlation, build, monitoring, and ledger verification. README operations guidance provides local setup and command examples.
 
-**Implementation and verification references:** `README.md`, `wiki/Operations.md`, `scraper/sweep.py`, `web/build.py`.
+**Implementation and verification references:** `README.md`, `scraper/sweep.py`, `web/build.py`.
 
 ## V1-106 Incident, Audit, and Runbook Records
 
