@@ -2,7 +2,7 @@
 the hand-rolled scrapers (cfs.py, cfs_pdi.py, shootings.py).
 
 Each entry in :data:`FEEDS` describes a Socrata dataset to pull on the same
-sweep cron (~20-45 min effective), gated to refresh at most once every
+sweep cron (*/15, best-effort), gated to refresh at most once every
 ``cache_hours`` (12-24h, per feed) via
 :func:`scraper.cincy_open.recently_refreshed`. The output JSON shape
 matches what the dedicated scrapers emit: ``{generated_utc, dataset_id,

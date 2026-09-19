@@ -33,7 +33,8 @@ from .sweep import CURRENT_PATH, _prev_generated_utc
 
 log = logging.getLogger("jcstream.sweep")
 
-# Sweep cadence is ~20-45 min, so 90 minutes is roughly two to three cycles.
+# Sweep cadence is best-effort (cron */15; observed gaps 2-5h), so a 90-minute
+# alarm window is roughly one missed cycle at worst observed spacing.
 # The deploy for the current push has not landed when this runs, so the live
 # site is always ~1 cycle behind; the threshold sits above that to fire only on
 # a genuinely stuck deploy, not the normal one-cycle lag.

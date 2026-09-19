@@ -19,9 +19,9 @@ name: sweep
 
 on:
   schedule:
-    # Every 15 minutes. GH Actions cron is best-effort (actual cadence is
-    # 20-45 min). The sweep skips if current.json is < 20 min old, so
-    # back-to-back runs during low-load don't double-scrape.
+    # Every 15 minutes. GH Actions cron is best-effort: observed delivery
+    # gaps have reached 2-5 hours. The sweep skips if current.json is
+    # < 20 min old, so back-to-back runs during low-load don't double-scrape.
     - cron: '*/15 * * * *'
   workflow_dispatch:
     inputs:
@@ -103,7 +103,7 @@ jobs:
       # Cincinnati open-data feeds: 30-day window. Each module skips its API
       # pull if the existing JSON is fresh, but the windows differ: cfs and
       # cfs_pdi cache 1h, shootings 6h, and the supplemental feeds below cache
-      # 12-24h per feed. Sweep cron is */15 (~20-45 min effective).
+      # 12-24h per feed. Sweep cron is */15, best-effort (observed gaps 2-5h).
       - name: Pull Cincinnati Open Data calls-for-service (last 30 days, 1h cache)
         run: python -m scraper.cfs --hours 720
         continue-on-error: true

@@ -11,8 +11,8 @@ Each invocation:
   5. Removes photos belonging to released inmates.
 
 Designed to fit a ~25-minute budget at Crawl-delay: 10s, so it can run on the
-`*/15 * * * *` GitHub Actions cron (with a 20-minute skip-gate to keep effective
-cadence at ~20-45 min).
+`*/15 * * * *` GitHub Actions cron (with a 20-minute skip-gate to avoid
+back-to-back runs; actual delivery is best-effort).
 """
 
 from __future__ import annotations
@@ -413,7 +413,7 @@ def _fetch_details(
                 # otherwise the in-memory size must still clear the
                 # 50% guard. A real catastrophic mid-sweep crash with
                 # a huge to_fetch list now keeps the previous-good
-                # snapshot until the next ~20-45 minute retry, rather
+                # snapshot until the next best-effort retry, rather
                 # than persisting a degraded baseline.
                 _maybe_checkpoint_partial(previous, current, done, len(to_fetch), current_path)
     elapsed_s = round(time.monotonic() - t0, 2)
