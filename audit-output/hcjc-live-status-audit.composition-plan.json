@@ -1,0 +1,60 @@
+{
+  "host": "codex-local",
+  "human_gate": null,
+  "mode": "spawn-agents",
+  "objective": "Independently grade the supplied HCJC technical status report against the current repository, live site, and public source evidence; classify unsupported claims; and provide evidence-bound recommendations for the first agentic auditor.",
+  "plan_id": "hcjc-live-status-audit-2026-09-19",
+  "skills": [
+    {
+      "name": "aai-cognitive-interface",
+      "order": 1,
+      "terminate_when": "The requested report is verified and persisted, or one exact external blocker remains.",
+      "why": "Owns task scope, evidence labels, artifact custody, and the instruction-versus-evidence boundary."
+    },
+    {
+      "name": "claim-source-auditor",
+      "order": 2,
+      "terminate_when": "Every material factual claim has one evidence status and a source locator or stated evidence gap.",
+      "why": "Decomposes the supplied report into atomic claims and reconciles each to authoritative evidence."
+    },
+    {
+      "name": "code-verification",
+      "order": 3,
+      "terminate_when": "Repository scope, viable checks, failures, and residual runtime gaps are classified.",
+      "why": "Separates static source evidence, executable checks, and live deployment claims without modifying the project."
+    },
+    {
+      "name": "research-execution-briefs",
+      "order": 4,
+      "terminate_when": "Public deployment and repository facts are independently retrieved or explicitly inaccessible.",
+      "why": "Coordinates current public-source research with primary-source preference and explicit uncertainty."
+    },
+    {
+      "name": "firecrawl-search",
+      "order": 5,
+      "terminate_when": "The site evidence route returns usable content or a recorded retrieval failure.",
+      "why": "Provides an independent retrieval route for live-site evidence and page extraction."
+    },
+    {
+      "name": "exa-search",
+      "order": 6,
+      "terminate_when": "Relevant authoritative pages are found or the search route is exhausted.",
+      "why": "Provides high-recall independent discovery for public repository and deployment evidence."
+    },
+    {
+      "name": "computer-use",
+      "order": 7,
+      "terminate_when": "A bounded live-browser pass records observable page state and any access limitation.",
+      "why": "Checks rendered public behavior that source files and crawlers cannot establish."
+    },
+    {
+      "name": "agent-churn-control",
+      "order": 8,
+      "terminate_when": "No equivalent local action is rerun without a valid decision or typed invalidation.",
+      "why": "Gates duplicate retries and distinguishes accepted local evidence from pending tool attempts."
+    }
+  ],
+  "spawn_tool_present": true,
+  "terminate_when": "All material report claims are graded from current-run evidence, the report artifact is validated and persisted, and first-auditor recommendations are bounded by the evidence.",
+  "written_at": "2026-09-19T00:00:00Z"
+}
