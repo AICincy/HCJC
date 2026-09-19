@@ -71,10 +71,18 @@ def _fetch_live_generated(site_url: str) -> str | None:
     """Fetch ``generated_utc`` from the live site's ``/data/current.json``.
     Returns None on any network/parse error (treated as inconclusive)."""
     url = site_url.rstrip("/") + "/data/current.json"
+    if urllib.parse.urlsplit(url).scheme not in ("http", "https"):
+        log.warning("deploy-alert: refusing to fetch non-http(s) site URL")
+        return None
     try:
         req = urllib.request.Request(
             url, headers={"Accept": "application/json", "User-Agent": "jcstream-deploy-alert"}
         )
+        # Reviewed: the http/https scheme allowlist above rejects file://
+        # and other non-http(s) schemes, which is the arbitrary-file-read
+        # vector this audit rule guards against. site_url is
+        # env-or-constant controlled (JCSTREAM_SITE_URL / DEFAULT_SITE_URL).
+        # nosemgrep: dynamic-urllib-use-detected
         with urllib.request.urlopen(req, timeout=30) as resp:
             data = json.loads(resp.read().decode())
     except (urllib.error.URLError, TimeoutError, OSError, ValueError) as e:
