@@ -10,10 +10,15 @@ from .common import _cached_offenses
 
 
 def _tier_breakdown(snapshot: Snapshot, offenses: dict | None = None) -> dict[str, int]:
-    """Per-tier (F1..MM, UNK) counts: each inmate's most-severe degree."""
+    """Per-tier counts: each inmate's most-severe degree.
+
+    Bare "F"/"M" (venue-inferred via the Common Pleas/Municipal fallback)
+    get their own buckets instead of inflating UNK, matching how
+    ``_court_slippage`` breaks the same population out as F/M.
+    """
     if offenses is None:
         offenses = _cached_offenses()
-    counts: dict[str, int] = {t: 0 for t in ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"]}
+    counts: dict[str, int] = {t: 0 for t in ["F1", "F2", "F3", "F4", "F5", "F", "M1", "M2", "M3", "M4", "MM", "M"]}
     counts["UNK"] = 0
     for inm in snapshot.inmates:
         deg = _primary_degree(inm, offenses)
@@ -52,11 +57,6 @@ def _top_offenses_with_orc(snapshot: Snapshot, top_n: int = 12, offenses: dict |
             }
         )
     return rows
-
-
-def _all_top_offenses(snapshot: Snapshot, offenses: dict | None = None) -> list[dict]:
-    """Like _top_offenses_with_orc but unbounded - used for the statute page."""
-    return _top_offenses_with_orc(snapshot, top_n=10_000, offenses=offenses)
 
 
 def _distinct_chapters(inmates: list[Inmate]) -> list[tuple[str, str, int]]:

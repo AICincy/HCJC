@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 
 from scraper.models import Inmate
 from web.classify import _parse_book_date
@@ -55,7 +55,7 @@ def _timeline_markers(inmate: Inmate) -> dict | None:
             {
                 "x": _pct(d),
                 "label": "Court",
-                "date": _strftime_nopad(d, "%-m/%-d/%y") if hasattr(d, "strftime") else "",
+                "date": _strftime_nopad(d, "%-m/%-d/%y"),
                 "kind": "court",
                 "sub": sub,
             }
@@ -96,7 +96,9 @@ def _days_in_custody(inmate: Inmate) -> int | None:
     bd = _parse_book_date(inmate.booking_date or "")
     if bd is None:
         return None
-    days = (datetime.now(timezone.utc) - bd.replace(tzinfo=timezone.utc)).days
+    # Booking dates are naive local (Eastern) midnights, like the rest of this
+    # module; compare against the naive Eastern now, not UTC.
+    days = (_now_naive_est() - bd).days
     # Reject sentinel dates from upstream (e.g. epoch-era "1/1/70") that yield
     # tens of thousands of days. Nobody is in pretrial custody for 15+ years;
     # show no days-ago count rather than a nonsense one.

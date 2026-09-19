@@ -7,6 +7,28 @@ from datetime import datetime, timedelta, timezone
 from scraper.models import ChangeEvent
 
 
+def _parse_event_ts(ts: str | None) -> datetime | None:
+    """Parse a changelog timestamp, honoring the true instant.
+
+    Strips a single trailing "Z" (UTC designator) instead of rstrip("Z"),
+    which would eat repeated Zs, and keeps any numeric offset intact instead
+    of relabeling it as UTC. Returns None when missing or unparseable; naive
+    values are taken as UTC.
+    """
+    if not isinstance(ts, str):
+        return None
+    s = ts.strip()
+    if s.endswith("Z"):
+        s = s[:-1] + "+00:00"
+    try:
+        dt = datetime.fromisoformat(s)
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt
+
+
 def _events_for_inmate(events: list[ChangeEvent], inmate_number: str) -> list[ChangeEvent]:
     """Return the chronological list of changelog events for one inmate,
     oldest first. Empty list if the inmate has no events on file.
@@ -22,9 +44,8 @@ def _events_in_window(events: list[ChangeEvent], hours: int) -> list[ChangeEvent
     cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
     keep: list[ChangeEvent] = []
     for e in events:
-        try:
-            ts = datetime.fromisoformat(e.timestamp_utc.rstrip("Z")).replace(tzinfo=timezone.utc)
-        except (ValueError, AttributeError):
+        ts = _parse_event_ts(e.timestamp_utc)
+        if ts is None:
             continue
         if ts >= cutoff:
             keep.append(e)
@@ -42,13 +63,12 @@ def _events_for_recent(events: list[ChangeEvent], hours: int = 8) -> list[Change
     cutoff_date = cutoff_ts.date()
     out: list[ChangeEvent] = []
     for e in events:
-        try:
-            ts = datetime.fromisoformat(e.timestamp_utc.rstrip("Z")).replace(tzinfo=timezone.utc)
-        except (ValueError, AttributeError):
+        ts = _parse_event_ts(e.timestamp_utc)
+        if ts is None:
             continue
         if ts < cutoff_ts:
             continue
-        if e.event == "booked" and e.note.startswith("booked "):
+        if e.event == "booked" and (e.note or "").startswith("booked "):
             bd_str = e.note[len("booked ") :].strip()
             bd = None
             for fmt in ("%m/%d/%y", "%m/%d/%Y"):

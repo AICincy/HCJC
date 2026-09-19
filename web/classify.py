@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import logging
 import re
+import threading
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -733,6 +734,7 @@ def statute_url(code: str, offenses: dict, orc_chapters_set: frozenset[str] | No
 
 
 _ALL_JUDGES_CACHE: list[dict] | None = None
+_ALL_JUDGES_LOCK = threading.Lock()
 
 
 def judge_link(judge_name: str | None, all_judges: list[dict] | None = None) -> str | None:
@@ -753,10 +755,15 @@ def judge_link(judge_name: str | None, all_judges: list[dict] | None = None) -> 
 
     global _ALL_JUDGES_CACHE
     if all_judges is None:
+        # Double-checked locking: _render_inmates renders under a
+        # ThreadPoolExecutor and templates call judge_link concurrently.
         if _ALL_JUDGES_CACHE is None:
-            from web.pages import _parse_judges
-            common_pleas, municipal = _parse_judges()
-            _ALL_JUDGES_CACHE = common_pleas + municipal
+            with _ALL_JUDGES_LOCK:
+                if _ALL_JUDGES_CACHE is None:
+                    from web.pages import _parse_judges
+
+                    common_pleas, municipal = _parse_judges()
+                    _ALL_JUDGES_CACHE = common_pleas + municipal
         all_judges = _ALL_JUDGES_CACHE
 
     # Winkler check first because of collision between CP and Probate

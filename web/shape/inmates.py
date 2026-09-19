@@ -218,9 +218,13 @@ def _card_tip(inmate: Inmate, offenses: dict | None = None, max_rows: int = 12) 
     """
     if offenses is None:
         offenses = _cached_offenses()
-    t = _primary_tier(inmate)
+    # Header tier uses the same offenses dict as the per-row degrees below so
+    # the badge label cannot disagree with the row degrees.
+    t = _primary_tier(inmate, offenses)
     lines = [t["label"] if t else "-"]
-    rows = 0
+    # Pre-filter renderable charges so the "+N more" count reflects charges
+    # actually shown, not ones skipped as empty.
+    renderable = []
     for c in inmate.charges:
         code = (c.orc_code or "").strip()
         if code.upper() == "NONE":
@@ -228,13 +232,16 @@ def _card_tip(inmate: Inmate, offenses: dict | None = None, max_rows: int = 12) 
         desc = (c.description or "").strip()
         if desc.upper() == "NONE":
             desc = ""
-        if not code and not desc and not (c.common_pleas_case or "").strip() and not (c.municipal_case or "").strip():
+        if (
+            not code
+            and not desc
+            and not (c.common_pleas_case or "").strip()
+            and not (c.municipal_case or "").strip()
+            and not (c.other_case or "").strip()
+        ):
             continue
-        if rows >= max_rows:
-            extra = len(inmate.charges) - rows
-            if extra > 0:
-                lines.append(f"+{extra} more charge{'' if extra == 1 else 's'}")
-            break
+        renderable.append((code, desc, c))
+    for code, desc, c in renderable[:max_rows]:
         ct = _charge_tier(c, offenses)
         title = orc_mod.title_for(code, offenses) if code else ""
         last = title or desc
@@ -242,7 +249,9 @@ def _card_tip(inmate: Inmate, offenses: dict | None = None, max_rows: int = 12) 
             last = last[:55].rstrip() + "…"
         bits = [b for b in (code or "-", (ct["label"] if ct else ""), last) if b]
         lines.append(" · ".join(bits) if bits else "-")
-        rows += 1
+    extra = len(renderable) - max_rows
+    if extra > 0:
+        lines.append(f"+{extra} more charge{'' if extra == 1 else 's'}")
     return "\n".join(lines)
 
 
@@ -283,7 +292,9 @@ def _group_by_month(inmates: list[Inmate]) -> list[tuple[str, list[Inmate]]]:
         y, m = k
         out.append((datetime(y, m, 1).strftime("%B %Y"), _sort_in_group(big[k])))
     if tail:
-        out.append((f"Earlier bookings ({len(tail)})", _sort_in_group(tail)))
+        # Paren-free label: it doubles as the nav/section slug
+        # ("earlier-bookings-12"), and parens don't belong in an id/anchor.
+        out.append((f"Earlier bookings {len(tail)}", _sort_in_group(tail)))
     return out
 
 
