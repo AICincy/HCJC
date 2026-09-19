@@ -149,7 +149,7 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
         "  No historical archive -- records drop off when HCSO removes them\n"
         f"  Rebuilt on a best-effort schedule via GitHub Actions -- last build {generated_utc or chr(8212)}\n"
         "\n/* BUILT WITH */\n"
-        "  Python -- Jinja2 -- httpx -- selectolax -- Pillow -- Vercel\n",
+        "  Python -- Jinja2 -- httpx -- selectolax -- Pillow -- GitHub Pages\n",
         encoding="utf-8",
     )
 
