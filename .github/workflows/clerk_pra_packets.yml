@@ -1,0 +1,47 @@
+name: clerk-pra-packets
+
+# Manual only: builds a dated folder of per-inmate draft ORC 149.43 request
+# letters to the Hamilton County Clerk of Courts (scraper/clerk_pra.py) and
+# uploads it as a workflow artifact. The letters are drafts; a human fills
+# in the sender block and sends them. Nothing is committed.
+#
+# Permissions deliberately NOT requested:
+#   contents: write -- output goes to the artifact, never the repo.
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Packet folder date (YYYY-MM-DD; default: today UTC)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  build-packets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Generate PRA packets
+        run: |
+          if [ -n "${{ inputs.date }}" ]; then
+            python -m scraper.clerk_pra --date "${{ inputs.date }}"
+          else
+            python -m scraper.clerk_pra
+          fi
+
+      - name: Upload packet artifact
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4  # v5.0.0
+        with:
+          name: clerk-pra-packets
+          path: pra_requests/
+          retention-days: 90

@@ -167,6 +167,7 @@
     <span class="crowdsource-kicker">Submitted by readers</span>
     <strong>Court records contributed for this inmate</strong>
   </header>
+  <p class="muted note-paragraph">These entries were looked up at courtclerk.org by individual readers and submitted through the case-data form - they are a point-in-time snapshot, not the official docket. <strong>Charges are accusations, not convictions.</strong> Verify anything that matters at the source link on each entry.</p>
   <ul class="crowdsource-list">
     {% for entry in crowdsourced_for_inmate %}
     <li>
@@ -182,7 +183,8 @@
         {% endif %}
       {% endif %}
       {% if entry.disposition %} &middot; <em>{{ entry.disposition }}</em>{% endif %}
-      <span class="crowdsource-attrib muted">submitted by <a href="{{ entry.issue_url }}" target="_blank" rel="noopener">@{{ entry.submitter }}</a> on {{ entry.submitted[:10] }}</span>
+      {% if entry.charges_raw %}<br><span class="crowdsource-charges muted">{{ entry.charges_raw }}</span>{% endif %}
+      <span class="crowdsource-attrib muted">submitted by <a href="{{ entry.issue_url }}" target="_blank" rel="noopener">@{{ entry.submitter }}</a> on {{ entry.submitted }}{% if not entry.dob_verified %} (name match only - DOB not verified){% endif %}{% if entry.source_url %} &middot; <a href="{{ entry.source_url }}" target="_blank" rel="noopener">verify at courtclerk.org ↗</a>{% endif %}</span>
     </li>
     {% endfor %}
   </ul>

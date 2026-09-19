@@ -141,11 +141,19 @@ def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
     (out_dir / "index.html").write_text(page, encoding="utf-8")
 
 
-def _load_crowdsourced_cases() -> dict[str, list[dict]]:
+def _load_crowdsourced_cases(
+    inmates: list[Inmate],
+) -> dict[str, list[dict]]:
     """Read data/courtclerk_cases.json (populated via the case-data issue
-    workflow) and index entries by inmate_number. Each inmate gets a list of
-    submitted case records they're named on; the inmate.html template can
-    then render them under a 'Submitted by readers' aside."""
+    workflow) and index entries by matched inmate_number.
+
+    Matching is by normalized defendant name plus date of birth
+    (scraper.case_match); entries that match no current inmate are dropped,
+    which is correct for a current-mirror: a submitted case for a released
+    person must not linger on a page that no longer exists.
+    """
+    from scraper.case_match import match_cases_to_inmates
+
     path = Path("data/courtclerk_cases.json")
     if not path.exists():
         return {}
@@ -153,15 +161,30 @@ def _load_crowdsourced_cases() -> dict[str, list[dict]]:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return {}
-    entries = raw.get("cases", []) if isinstance(raw, dict) else (raw if isinstance(raw, list) else [])
-    by_inmate: dict[str, list[dict]] = {}
-    for entry in entries:
-        if not isinstance(entry, dict):
-            continue
-        key = entry.get("inmate_number") or entry.get("inmate")
-        if key:
-            by_inmate.setdefault(str(key), []).append(entry)
-    return by_inmate
+    entries = raw if isinstance(raw, list) else []
+    matched = match_cases_to_inmates([e for e in entries if isinstance(e, dict)], inmates)
+    # Adapt stored records to the fields web/templates/inmate.html renders.
+    adapted: dict[str, list[dict]] = {}
+    for inmate_number, records in matched.items():
+        adapted[inmate_number] = [
+            {
+                "case_number": r.get("case_number", ""),
+                "case_number_key": r.get("case_number_key", ""),
+                "judge": r.get("judge", ""),
+                "disposition": r.get("disposition", ""),
+                "next_hearing": r.get("next_hearing", ""),
+                "charges_raw": r.get("charges_raw", ""),
+                "notes": r.get("notes", ""),
+                "source_url": r.get("source_url", ""),
+                "issue_url": r.get("issue_url", ""),
+                "submitter": r.get("submitter", ""),
+                "submitted": (r.get("ingested_utc") or "")[:10],
+                "dob_verified": r.get("dob_verified", False),
+                "case_on_booking": r.get("case_on_booking", False),
+            }
+            for r in records
+        ]
+    return adapted
 
 
 def _render_inmates(
@@ -177,7 +200,7 @@ def _render_inmates(
         events_by_inmate.setdefault(e.inmate_number, []).append(e)
     for ev_list in events_by_inmate.values():
         ev_list.sort(key=lambda e: e.timestamp_utc or "")
-    crowdsourced = _load_crowdsourced_cases()
+    crowdsourced = _load_crowdsourced_cases(snapshot.inmates)
 
     def _render_one(inm: Inmate) -> None:
         page = template.render(
@@ -596,8 +619,8 @@ def _parse_judges(base_url: str = "") -> tuple[list[dict], list[dict]]:
         last_name = name_parts[-1] if name_parts else clean_name
 
         slug = clean_name.lower()
-        slug = re.sub(r'[^a-z0-9]+', '-', slug)
-        slug = slug.strip('-')
+        slug = re.sub(r"[^a-z0-9]+", "-", slug)
+        slug = slug.strip("-")
 
         judge_dict = {
             "name": clean_name,

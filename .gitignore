@@ -36,3 +36,7 @@ HCJC.zip
 .claude/skills/All skills.zip
 .claude/agents/md skills.zip
 hcjc-agentic-audit-prompt.md
+# Generated clerk PRA packets are build output, not source: 1,100+ letters
+# per run. Regenerate on demand; never commit the output folders.
+pra_requests/
+

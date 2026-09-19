@@ -67,6 +67,22 @@ body:
     validations:
       required: false
   - type: input
+    id: next_hearing
+    attributes:
+      label: Next hearing (MM/DD/YYYY)
+      description: Next scheduled hearing date shown on the docket, if any.
+      placeholder: 06/02/2026
+    validations:
+      required: false
+  - type: input
+    id: disposition
+    attributes:
+      label: Disposition
+      description: Current disposition as shown on the docket (e.g. "Bound over to grand jury", "Plea of guilty entered"). Leave blank if the case is still pending with no disposition.
+      placeholder: Bound over to grand jury
+    validations:
+      required: false
+  - type: input
     id: source_url
     attributes:
       label: Source URL (the courtclerk.org case_summary.php link)
