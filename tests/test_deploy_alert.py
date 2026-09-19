@@ -93,3 +93,44 @@ def test_fetch_live_generated_none_on_error(monkeypatch):
 
     monkeypatch.setattr(deploy_alert.urllib.request, "urlopen", _boom)
     assert deploy_alert._fetch_live_generated("https://example.com") is None
+
+
+@pytest.mark.parametrize("site_url", ["https://example.com", "http://example.com/"])
+def test_fetch_live_generated_accepts_http_schemes(monkeypatch, site_url):
+    seen = {}
+
+    class _Resp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            return b'{"generated_utc": "2026-07-04T12:00:00Z"}'
+
+    def _ok(req, timeout=None):
+        seen["url"] = req.full_url
+        return _Resp()
+
+    monkeypatch.setattr(deploy_alert.urllib.request, "urlopen", _ok)
+    assert deploy_alert._fetch_live_generated(site_url) == FRESH
+    assert seen["url"] == site_url.rstrip("/") + "/data/current.json"
+
+
+@pytest.mark.parametrize(
+    "site_url",
+    [
+        "file:///etc/passwd",
+        "ftp://example.com",
+        "gopher://example.com",
+        "javascript:alert(1)",
+        "data:text/plain,hello",
+    ],
+)
+def test_fetch_live_generated_rejects_non_http_schemes(monkeypatch, site_url):
+    def _boom(*a, **k):
+        raise AssertionError("urlopen must not be called for non-http(s) URLs")
+
+    monkeypatch.setattr(deploy_alert.urllib.request, "urlopen", _boom)
+    assert deploy_alert._fetch_live_generated(site_url) is None
