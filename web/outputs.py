@@ -147,7 +147,7 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
         "\n/* DATA */\n"
         "  HCSO public inmate roster (ORC \u00a7149.43) + Cincinnati Open Data feeds\n"
         "  No historical archive -- records drop off when HCSO removes them\n"
-        f"  Rebuilt every ~20-45 minutes via GitHub Actions -- last build {generated_utc or chr(8212)}\n"
+        f"  Rebuilt on a best-effort schedule via GitHub Actions -- last build {generated_utc or chr(8212)}\n"
         "\n/* BUILT WITH */\n"
         "  Python -- Jinja2 -- httpx -- selectolax -- Pillow -- GitHub Pages\n",
         encoding="utf-8",

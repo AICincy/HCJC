@@ -46,7 +46,7 @@ Diagram: Automation Orchestration
 
 ### **Project Purpose and Legal Basis**
 
-JCStream functions as a technical implementation designed to provide a structured, searchable interface to data already published by the Hamilton County Sheriff's Office. Automated workflows rebuild the static layout every 30 minutes, republishing only the information currently accessible on the official public roster.
+JCStream functions as a technical implementation designed to provide a structured, searchable interface to data already published by the Hamilton County Sheriff's Office. Automated workflows rebuild the static layout on a best-effort schedule (cron every 15 minutes; actual refresh spacing varies), republishing only the information currently accessible on the official public roster.
 
 #### **Legal Authority and Mandate**
 
@@ -349,7 +349,7 @@ Specific health guards evaluate data states before writing to disk:
 
 * **Global Volume Guard**: Rejects sweeps if roster counts drop by more than half or if alphabet query errors cross 10%.  
 * **Detail Quality Check**: Monitors parsing extraction values, it blocks storage updates if layout drift clears text names from large samples.  
-* **Cache Protection**: Halts file deletions if cleanup loops attempt to purge more than 20% of the image cache in a single cycle.
+* **Cache Protection**: Halts file deletions if cleanup loops attempt to purge more than 50% of the image cache in a single cycle.
 
 ### **HTML Parsers and Data Models**
 
@@ -476,7 +476,7 @@ The watchdog checks text properties across individual pages. If name extraction 
 
 ##### **Image Cache Guard**
 
-Pruning utilities evaluate image cache adjustments, blocking asset deletions if the routine attempts to clear more than 20% of the photo folder in a single execution pass.
+Pruning utilities evaluate image cache adjustments, blocking asset deletions if the routine attempts to clear more than 50% of the photo folder in a single execution pass.
 
 #### **WAF Block Evidence Chain**
 

@@ -228,10 +228,18 @@ def _load_takedowns(data_dir: Path) -> set[str]:
     if not path.exists():
         return set()
     try:
-        return {str(n) for n in json.loads(path.read_text(encoding="utf-8"))}
+        parsed = json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, TypeError, ValueError) as e:
         log.error("could not load %s (%s): refusing to write with an empty seal set", path, e)
         raise SnapshotCorruptError(f"takedowns.json unreadable: {e}") from e
+    # Shape validation (F-A4-1): the file documents a JSON array of
+    # inmate_number strings. Parseable non-array JSON (a bare string, an
+    # object, a number) must fail closed like unparseable content does --
+    # silently coercing it would publish records the operator meant to seal.
+    if not isinstance(parsed, list) or not all(isinstance(n, str) for n in parsed):
+        log.error("could not load %s (expected a JSON array of strings): refusing to write with an empty seal set", path)
+        raise SnapshotCorruptError("takedowns.json must be a JSON array of inmate_number strings")
+    return set(parsed)
 
 
 def save_current(path: Path, inmates: Iterable[Inmate]) -> None:
