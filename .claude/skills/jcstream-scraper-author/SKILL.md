@@ -1,6 +1,6 @@
 ---
 name: jcstream-scraper-author
-description: Use when modifying or extending data pullers in scraper/ — HCSO inmate roster (sweep.py), Cincinnati Open Data feeds (cfs.py, cfs_pdi.py, shootings.py, open_data_feeds.py), the courtclerk URL helpers, PRA email loop. Covers rate-limit budget, sweep health guards (sweep_guards.py: 50% floor, 10% error ceiling, detail watchdog, photo prune), atomic write to data/current.json, and the 30-min cron in .github/workflows/sweep.yml. Trigger phrases: "add a new data feed", "add an Open Data feed", "Socrata pull", "fix the HCSO scraper", "fix the sweep cron", "tune the sweep guard", "tune detail watchdog", "raise/lower roster guard", "PRA email loop", "courtclerk link helper", "photo prune skipped", "rate-limit", "sweep wall-clock".
+description: Use when modifying or extending data pullers in scraper/ — HCSO inmate roster (sweep.py), Cincinnati Open Data feeds (cfs.py, cfs_pdi.py, shootings.py, open_data_feeds.py), the courtclerk URL helpers. Covers rate-limit budget, sweep health guards (sweep_guards.py: 50% floor, 10% error ceiling, detail watchdog, photo prune), atomic write to data/current.json, and the 30-min cron in .github/workflows/sweep.yml. Trigger phrases: "add a new data feed", "add an Open Data feed", "Socrata pull", "fix the HCSO scraper", "fix the sweep cron", "tune the sweep guard", "tune detail watchdog", "raise/lower roster guard", "courtclerk link helper", "photo prune skipped", "rate-limit", "sweep wall-clock".
 ---
 
 # JCStream scraper author
@@ -52,9 +52,6 @@ When adding a feed, follow the pattern in `cfs.py` (or `shootings.py`): typed ro
 `.github/workflows/sweep.yml` runs every 30 min with `timeout-minutes: 50`. It checks out the dev branch, runs the HCSO sweep, pulls the three Cincinnati Open Data feeds, runs `web.build`, commits + pushes the changes, then runs `actions/upload-pages-artifact@v3` and `actions/deploy-pages@v4` (`sweep.yml`) bound to the `github-pages` environment (`sweep.yml`). Don't add steps that re-create venvs (cold-start cost). Don't push to `main` from CI.
 
 Issue-form ingest: `scraper/ingest_issue.py` + `.github/workflows/ingest_case_data.yml` parses owner-filed GitHub issues into `data/courtclerk_cases.json`; this is a separate pipeline from the sweep cron.
-
-## PRA email loop
-`scraper/pra.py` (mugshot-fallback), `scraper/pra_capias.py` (capias requests), `scraper/pra_jms_vendor.py` (JMS-vendor requests), shared SMTP transport in `scraper/pra_base.py`, daily cron in `.github/workflows/pra_daily.yml`. Dry-runs (log-only) until `JCSTREAM_PRA_SMTP_HOST` + `JCSTREAM_PRA_FROM_EMAIL` are set as repo secrets. Don't hard-code SMTP credentials.
 
 ## Anti-patterns
 - Bypassing `sweep_looks_healthy` because "the roster looks fine".
