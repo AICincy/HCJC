@@ -1,0 +1,46 @@
+{
+  "plan_id": "hcjc-public-only-audit-launch-2026-09-19",
+  "objective": "Launch A0, A1, A2, A3, and A4 as a public-only HCJC audit wave while deferring private configuration and official-source comparison gates.",
+  "spawn_tool_present": true,
+  "mode": "spawn-agents",
+  "skills": [
+    {
+      "name": "aai-cognitive-interface",
+      "order": 1,
+      "why": "Governs custody, source authority, human gates, state, and evidence limits for the live audit wave.",
+      "terminate_when": "The public-only wave has a frozen baseline, bounded reports, explicit limits, and a preserved evidence register."
+    },
+    {
+      "name": "claim-source-auditor",
+      "order": 2,
+      "why": "Requires atomic claim rows, one claim status, stable locators, and explicit searched scope for provenance work.",
+      "terminate_when": "A3 and all cross-report factual claims use the required source status taxonomy."
+    },
+    {
+      "name": "code-verification",
+      "order": 3,
+      "why": "Supplies isolated test design, reproducibility, failure classification, and safe parallel review practices for A2 and A4.",
+      "terminate_when": "Technical reports distinguish code defects from test and environment limitations."
+    },
+    {
+      "name": "research-execution-briefs",
+      "order": 4,
+      "why": "Supplies current public-source research, source hierarchy, and uncertainty reporting for A1 and A3.",
+      "terminate_when": "Public evidence is current, sourced, and conflicts remain explicit."
+    },
+    {
+      "name": "firecrawl",
+      "order": 5,
+      "why": "Provides isolated retrieval of the public site and published artifacts for A1 without relying on repository prose.",
+      "terminate_when": "Public retrieval outputs are bounded, inspected, and reduced to non-identifying evidence."
+    },
+    {
+      "name": "agent-churn-control",
+      "order": 6,
+      "why": "Controls repeated local checks and requires recorded reasons for any retry or alternate route.",
+      "terminate_when": "Equivalent checks reuse accepted evidence and every permitted retry has a typed change or failure reason."
+    }
+  ],
+  "terminate_when": "A0 baseline custody, A1, A2, A3, and A4 provisional reports, and an A0 evidence register are persisted without private-state access or production mutation.",
+  "human_gate": "Private Actions, Pages, Giscus, PRA configuration, and official-source person-linked comparison remain deferred pending separate owner authorization and a privacy protocol."
+}

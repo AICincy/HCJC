@@ -1,0 +1,30 @@
+{
+  "host": "codex-local",
+  "human_gate": "None for public-only A4; current private configuration and live resilience remain explicitly unknown.",
+  "mode": "compose-skills",
+  "objective": "Execute A4-EVIDENCE-RESILIENCE-001 against the frozen HCJC baseline with aggregate-only evidence and synthetic fixtures outside tracked source paths.",
+  "plan_id": "hcjc-public-a4-evidence-resilience-2026-09-19",
+  "skills": [
+    {
+      "name": "aai-cognitive-interface",
+      "order": 1,
+      "terminate_when": "The validated A4 report and compact execution evidence are persisted.",
+      "why": "Governs custody, evidence boundaries, artifact completion, and the audit trail."
+    },
+    {
+      "name": "code-verification",
+      "order": 2,
+      "terminate_when": "Verifier, targeted-test, fixture, environment, and post-run status evidence are recorded.",
+      "why": "Defines independent, reproducible executable verification and failure classification."
+    },
+    {
+      "name": "agent-churn-control",
+      "order": 3,
+      "terminate_when": "The changed command is accepted or blocked with its exact outcome recorded.",
+      "why": "Gates the one corrected aggregate command after its initial syntax-only failure."
+    }
+  ],
+  "spawn_tool_present": false,
+  "terminate_when": "A4 work-card acceptance criteria are met without modifying tracked source, source data, configuration, workflows, external systems, or the active checkout.",
+  "written_at": "2026-09-19T19:57:47.694989+00:00"
+}

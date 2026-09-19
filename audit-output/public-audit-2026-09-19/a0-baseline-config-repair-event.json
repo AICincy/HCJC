@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "event_id": "hcjc-a0-baseline-config-repair-20260919",
+  "task_id": "hcjc-public-only-audit",
+  "attempt_id": "a0-baseline-config-repair-1",
+  "action_kind": "retry",
+  "action_scope_digest": "sha256:aa5f6886c8e5e960b1f8d31d0505176fddc837b49658e8905bdd3bc8bbb8c4a3",
+  "requirements_digest": "sha256:308ebe67cf68d524986193e1c9538ba9866381d03dded4e421c4ce0c09fe007e",
+  "candidate_digest": "sha256:954e3d7d77eec3a54c6676bec9e5a08430d2a667d89b92069f20600de7a9136e",
+  "dependency_digest": "sha256:81b6753e44d661a579268a129a9ccc01f131862546aae750f7fca93d8aac662d",
+  "policy_digest": "sha256:fe1fd764135a92b738e8d2049f8726ed7eeda032fadacf2f1b79c8814c3933f7",
+  "evaluator_digest": "sha256:a172a0ac9a353a184f3d340b688d8288a711aed6cc0d2dcf9815f689399b620b",
+  "environment_digest": "sha256:4a1c35daa8217955a96b4cc0b1b7f5fd23cd4cae45a1aae4e5a445e334edeba5",
+  "material_progress": {
+    "status": "unknown",
+    "evidence_digest": null
+  },
+  "rate_telemetry": {
+    "state": "missing",
+    "effect": "advisory"
+  },
+  "metrics": []
+}

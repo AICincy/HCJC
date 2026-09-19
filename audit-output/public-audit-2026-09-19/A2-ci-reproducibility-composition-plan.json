@@ -1,0 +1,30 @@
+{
+  "host": "codex-local",
+  "human_gate": "None for isolated reproduction. The absence of another supported interpreter is reported as unavailable, not inferred.",
+  "mode": "compose-skills",
+  "objective": "Independently reproduce the frozen HCJC commit's declared CI checks in an isolated worktree and classify evidence without modifying source or claiming production health.",
+  "plan_id": "hcjc-public-a2-ci-repro-2026-09-19",
+  "skills": [
+    {
+      "name": "aai-cognitive-interface",
+      "order": 1,
+      "terminate_when": "The A2 report is validated, persisted, and returned to A0 with one exact gate or blocker if needed.",
+      "why": "Controls custody, artifact validation, evidence boundaries, and the execution trail."
+    },
+    {
+      "name": "code-verification",
+      "order": 2,
+      "terminate_when": "Each declared check is passed, failed, or blocked with exact environment and command evidence.",
+      "why": "Supplies an independent CI-reproduction method, failure taxonomy, and evidence matrix."
+    },
+    {
+      "name": "agent-churn-control",
+      "order": 3,
+      "terminate_when": "Every repeated local check is either reused, invalidated for a named reason, or recorded as a distinct attempt.",
+      "why": "Gates any equivalent retry so a result is not repeated until green."
+    }
+  ],
+  "spawn_tool_present": true,
+  "terminate_when": "The bounded A2 work card is complete and only its report and non-sensitive audit trail are persisted.",
+  "written_at": "2026-09-19T19:42:02.252303+00:00"
+}

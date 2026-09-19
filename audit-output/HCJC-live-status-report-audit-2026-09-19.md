@@ -16,7 +16,7 @@ It is nevertheless **not reliable as a current technical-verification report**. 
 |---|---:|---|
 | Current technical-verification report | **D** | **3/10** | Direct source and live-site checks were expressly missing, yet the report used `VERIFIED`, `DEFECT-CONFIRMED`, and `HALLUCINATION-CONFIRMED` for claims those sources cannot prove. |
 | Audit-triage hypothesis register | **B-** | **7/10** | It names useful files, workflow numbers, issue numbers, inconsistencies, and testable theories. |
-| Remediation plan as an implementation authority | **Fail pending rework** | **2/10** | It repeats unverified premises and includes at least one non-failing CI guard, an invalid CSS custom-property alias, an unreviewed legal citation, and a privacy-overbroad calendar proposal. |
+| Remediation plan as an implementation authority | **Fail pending rework** | **2/10** | It repeats unverified private-state premises and includes an invalid CSS custom-property alias, a misapplied legal citation, and a privacy-overbroad calendar proposal. The earlier CI-guard defect assertion is withdrawn below. |
 
 The correct conclusion is: **use the report as a lead list, not as evidence or an authorization to change production.**
 
@@ -131,12 +131,13 @@ Source review shows `scraper/store.py` treats unreadable `data/takedowns.json` a
 
 ## Remediation-plan gate
 
-Do not adopt the companion plan unchanged. Before any implementation work, correct these design defects:
+Do not adopt the companion plan unchanged. The subsequent [A3 public-only provenance audit](public-audit-2026-09-19/A3-provenance-and-documentation-report.md) corrected one earlier finding: the proposed guard ending `&& exit 1 || true` **does fail** on a matching untracked-file line in an isolated Git-for-Windows Bash reproduction. The `exit 1` terminates the shell before `|| true` can run. That guard is not a confirmed design defect on the asserted basis.
 
-1. Its proposed CI guard ending `&& exit 1 || true` cannot fail the workflow as intended.
-2. Its CSS example `--released: --muted` is not a custom-property alias. It needs `var(--muted)` if that is the intended value.
-3. Its citation of ORC § 149.43 for a presumption-of-innocence statement needs primary-law review before public use.
-4. “No PII beyond what is already public” is not a valid privacy conclusion for a person-linked calendar feed.
+Before any implementation work, resolve these remaining design defects:
+
+1. Its CSS example `--released: --muted` is not a custom-property alias. It needs `var(--muted)` if that is the intended value, subject to the project's separate CSS-token rules.
+2. Its citation of ORC § 149.43 for a presumption-of-innocence statement does not supply that proposition and must not be used for it.
+3. “No PII beyond what is already public” is not a valid privacy conclusion for a person-linked calendar feed.
 
 The first auditor should preserve this plan as a hypothesis source, then rebuild recommendations only from verified findings.
 
