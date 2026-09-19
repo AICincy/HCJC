@@ -37,7 +37,7 @@ from pathlib import Path
 log = logging.getLogger(__name__)
 
 CLERK_NAME = "Hamilton County Clerk of Courts"
-CLERK_ATTN = "Attn: Public Records - Criminal Division"
+CLERK_ATTN = "Attn: Criminal Division"
 CLERK_STREET = "1000 Main Street, Room 315"
 CLERK_CITY = "Cincinnati, OH 45202"
 
