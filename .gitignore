@@ -21,6 +21,9 @@ private/
 
 # Ephemeral
 *.log
+*.lock
+desktop.ini
+Thumbs.db
 .DS_Store
 .pytest_cache/
 # .claude/ — local agent-worktree harness state stays ignored, but durable
