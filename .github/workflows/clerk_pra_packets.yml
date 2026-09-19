@@ -32,9 +32,11 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: Generate PRA packets
+        env:
+          PACKET_DATE: ${{ inputs.date }}
         run: |
-          if [ -n "${{ inputs.date }}" ]; then
-            python -m scraper.clerk_pra --date "${{ inputs.date }}"
+          if [ -n "$PACKET_DATE" ]; then
+            python -m scraper.clerk_pra --date "$PACKET_DATE"
           else
             python -m scraper.clerk_pra
           fi
