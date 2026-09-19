@@ -40,3 +40,20 @@ def _isolate_evidence_logs(tmp_path, monkeypatch):
     # Egress evidence capture makes a live network call and writes
     # data/egress_evidence.json; never allow it under test.
     monkeypatch.delenv("JCSTREAM_CAPTURE_EGRESS", raising=False)
+
+    # httpx.Client() parses proxy env vars at construction (trust_env=True).
+    # A sandbox proxy URL with URL-hostile credential characters makes
+    # construction raise httpx.InvalidURL before any request is issued, which
+    # breaks tests that build real clients (even with mocked transports).
+    # The suite is offline by design, so strip proxy config for every test.
+    for _proxy_var in (
+        "HTTP_PROXY",
+        "HTTPS_PROXY",
+        "ALL_PROXY",
+        "http_proxy",
+        "https_proxy",
+        "all_proxy",
+        "NO_PROXY",
+        "no_proxy",
+    ):
+        monkeypatch.delenv(_proxy_var, raising=False)
