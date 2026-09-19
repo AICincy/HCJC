@@ -249,16 +249,6 @@ concurrency control does not address it.
      `JCSTREAM_GISCUS_REPO`, `JCSTREAM_GISCUS_CATEGORY` to override the defaults).
   6. Next sweep rebuilds with the widget live. To turn it off, clear the vars.
 
-- **PRA email loop**: capias / mugshot-fallback public-records requests
-  (`scraper/pra.py`, `scraper/pra_capias.py`, `.github/workflows/pra_daily.yml`):
-  it dry-runs (logs only) until SMTP is configured. Repo → Settings → Secrets and
-  variables → Actions → **Secrets**: `JCSTREAM_PRA_SMTP_HOST`, `JCSTREAM_PRA_SMTP_PORT`,
-  `JCSTREAM_PRA_SMTP_USER`, `JCSTREAM_PRA_SMTP_PASS`, `JCSTREAM_PRA_FROM_EMAIL`
-  (and optionally per-loop recipient overrides `JCSTREAM_PRA_TO_PHOTOS_EMAIL`
-  for `scraper/pra.py` and `JCSTREAM_PRA_TO_CAPIAS_EMAIL` for `scraper/pra_capias.py`;
-  With `JCSTREAM_PRA_SMTP_HOST` + `JCSTREAM_PRA_FROM_EMAIL` present it sends for real.
-  To enable the daily booking photos fallback loop (`scraper/pra.py`), set the repository variable `JCSTREAM_PRA_PHOTOS_ENABLED` to `1` in Actions Variables.
-
 ## Git workflow
 
 ### Merge discipline
@@ -286,7 +276,7 @@ concurrency control does not address it.
 
 ### Evidence-log isolation (conftest.py)
 
-- `waf_block_log.json` and `pra_requests.json` are ORC 149.43 evidence
+- `waf_block_log.json` is an ORC 149.43 evidence
   artifacts. The test suite must never write to them. Verified clean
   2026-07-02 at 447 passing tests.
 - Isolation pattern: wrap `store.append_block_evidence` in conftest.
