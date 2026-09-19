@@ -57,9 +57,9 @@ CI executes the static builder with the production root-relative base setting af
 
 **Shared concept:** [A-45 Evidence Record](https://github.com/AICincy/HCJC2/blob/reference-v1.0.0/docs/reference/HCJC-CANONICAL-REFERENCE.md#a-45-evidence-record).
 
-CI invokes both WAF and PRA ledger verification modules. Each verifier exits unsuccessfully when predecessor hashes do not form the expected chain, making integrity verification an automated quality gate.
+CI invokes the WAF ledger verification module. The verifier exits unsuccessfully when predecessor hashes do not form the expected chain, making integrity verification an automated quality gate.
 
-**Implementation and verification references:** `.github/workflows/ci.yml`, `scraper/verify_block_log.py`, `scraper/verify_pra_log.py`, `tests/test_pra_log.py`.
+**Implementation and verification references:** `.github/workflows/ci.yml`, `scraper/verify_block_log.py`.
 
 ## V1-112 Custom Domain Verification
 
