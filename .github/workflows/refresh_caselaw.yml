@@ -51,6 +51,9 @@ jobs:
           python3 scripts/refresh_caselaw.py
 
       - name: Commit if changed
+        env:
+          # Never interpolate ${{ }} directly in run: (shell injection).
+          REF_NAME: ${{ github.ref_name }}
         run: |
           if [[ -n $(git status --porcelain data/orc_caselaw.json) ]]; then
             git config user.name 'jcstream-caselaw-bot'
@@ -58,8 +61,8 @@ jobs:
             git add data/orc_caselaw.json
             git commit -m "data: weekly refresh of orc_caselaw.json from CourtListener"
             git fetch origin
-            git rebase origin/${{ github.ref_name }}
-            git push origin HEAD:${{ github.ref_name }}
+            git rebase "origin/$REF_NAME"
+            git push origin "HEAD:$REF_NAME"
           else
             echo "no changes to commit"
           fi
