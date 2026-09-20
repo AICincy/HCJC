@@ -10,6 +10,7 @@ safety.html so template errors surface here instead of at build time.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -40,6 +41,8 @@ def fixture_dir(tmp_path: Path) -> Path:
              "address_x": "2XX MAIN ST", "cpd_neighborhood": "DOWNTOWN"},
             {"stars_category": "Part 2", "type": "Part 2", "datereported": "2026-09-17",
              "address_x": "3XX ELM ST", "sna_neighborhood": "OTR"},
+            {"stars_category": "Burglary/BE", "type": "Part 1 Property", "datereported": "2026-09-16T10:00:00.000",
+             "address_x": "4XX VINE ST", "cpd_neighborhood": "DOWNTOWN"},
         ],
     )
     _write_feed(
@@ -50,6 +53,10 @@ def fixture_dir(tmp_path: Path) -> Path:
             {"race": "BLACK", "sex": "FEMALE", "action_taken_cid": "CITATION TRAFFIC"},
             {"race": "WHITE", "sex": "MALE", "action_taken_cid": "WARNING"},
             {"race": "UNKNOWN", "sex": "MALE", "action_taken_cid": "NONE"},
+            # Edge values seen in the real pulls: unlisted race -> "Other",
+            # blank race -> "Unknown", unlisted sex -> "Unknown".
+            {"race": "HISPANIC", "sex": "X", "action_taken_cid": "NONE"},
+            {"race": "", "sex": "MALE", "action_taken_cid": "NONE"},
         ],
     )
     _write_feed(tmp_path, "pedestrian_stops_recent.json", [])
@@ -86,15 +93,15 @@ def fixture_dir(tmp_path: Path) -> Path:
 def test_stop_aggregation_counts(fixture_dir: Path):
     stops = feeds_mod.summarize_stops(fixture_dir)
     drivers = stops["drivers"]
-    assert drivers["total"] == 4
-    assert dict(drivers["by_race"]) == {"Black": 2, "White": 1, "Unknown": 1}
-    assert dict(drivers["by_sex"]) == {"Male": 3, "Female": 1}
+    assert drivers["total"] == 6
+    assert dict(drivers["by_race"]) == {"Black": 2, "Unknown": 2, "White": 1, "Other": 1}
+    assert dict(drivers["by_sex"]) == {"Male": 4, "Female": 1, "Unknown": 1}
     assert dict(drivers["by_action"]) == {
+        "No action taken": 3,
         "Warning, no citation": 2,
         "Traffic citation": 1,
-        "No action taken": 1,
     }
-    # Race shares sum to 100%.
+    # Race counts partition the total.
     total = sum(c for _, c in drivers["by_race"])
     assert total == drivers["total"]
 
@@ -108,6 +115,9 @@ def test_race_action_table_consistent(fixture_dir: Path):
     assert sum(r["total"] for r in table) == drivers["total"]
     warning = next(r for r in table if r["action"] == "Warning, no citation")
     assert warning["counts"] == [1, 1, 0, 0]
+    no_action = next(r for r in table if r["action"] == "No action taken")
+    # UNKNOWN + blank race -> Unknown bucket; HISPANIC -> Other bucket.
+    assert no_action["counts"] == [0, 0, 2, 1]
 
 
 def test_blank_and_other_actions_do_not_duplicate_rows(tmp_path: Path):
@@ -138,16 +148,56 @@ def test_blank_and_other_actions_do_not_duplicate_rows(tmp_path: Path):
 
 def test_stars_summary(fixture_dir: Path):
     stars = feeds_mod.summarize_crime_stars(fixture_dir)
-    assert stars["total"] == 3
-    assert dict(stars["by_category"]) == {"Aggravated assault": 2, "Part 2": 1}
+    assert stars["total"] == 4
+    assert dict(stars["by_category"]) == {
+        "Aggravated assault": 2,
+        "Part 2": 1,
+        "Burglary / breaking and entering": 1,
+    }
+    assert dict(stars["by_type"]) == {
+        "Part 1 — violent": 2,
+        "Part 2": 1,
+        "Part 1 — property": 1,
+    }
     assert stars["vintage"] == "2026-09-20T12:00:00Z"
     assert not stars["empty"]
 
 
+def test_unknown_stars_type_is_unclassified_not_part2(tmp_path: Path):
+    """Regression: an unknown STARS type must not silently inflate Part 2."""
+    _write_feed(
+        tmp_path,
+        "crime_stars_recent.json",
+        [
+            {"stars_category": "Part 2", "type": "Part 9", "datereported": "2026-09-19T10:00:00.000",
+             "address_x": "1XX MAIN ST", "cpd_neighborhood": "DOWNTOWN"},
+        ],
+    )
+    stars = feeds_mod.summarize_crime_stars(tmp_path)
+    assert dict(stars["by_type"]) == {"Unclassified": 1}
+
+
+def test_incidents_without_event_number_are_not_deduped(tmp_path: Path):
+    """Regression (blocker): rows with no event number must never collapse
+    into a single incident."""
+    _write_feed(
+        tmp_path,
+        "cfs_recent.json",
+        [
+            {"incident_type_id": "TSTOP", "create_time_incident": "2026-09-19T08:00:00.000",
+             "address_x": "1XX MAIN ST", "cpd_neighborhood": "AVONDALE"},
+            {"incident_type_id": "THEFTR", "create_time_incident": "2026-09-19T07:00:00.000",
+             "address_x": "2XX ELM ST", "cpd_neighborhood": "AVONDALE"},
+        ],
+    )
+    items = feeds_mod.latest_incidents(tmp_path)
+    assert len(items) == 2
+
+
 def test_latest_incidents_sorted_and_deduped(fixture_dir: Path):
     items = feeds_mod.latest_incidents(fixture_dir, n=30)
-    # 3 STARS + 1 deduped CFS + 1 shooting = 5
-    assert len(items) == 5
+    # 4 STARS + 1 deduped CFS + 1 shooting = 6
+    assert len(items) == 6
     keys = [i["sort_key"] for i in items]
     assert keys == sorted(keys, reverse=True)
     assert items[0]["when_display"] == "Sep 19, 10:00 AM"
@@ -155,6 +205,9 @@ def test_latest_incidents_sorted_and_deduped(fixture_dir: Path):
     assert cfs["when_display"] == "Sep 19, 8:00 AM"
     shooting = next(i for i in items if i["what"].startswith("Shooting"))
     assert shooting["when_display"] == "Sep 18, 11:15 PM"
+    # Date-only STARS rows take the date branch of the display formatter.
+    part2 = next(i for i in items if i["what"] == "Reported crime — Part 2")
+    assert part2["when_display"] == "Sep 17, 2026"
 
 
 # ---------------------------------------------------------------------------
@@ -174,6 +227,19 @@ def _all_keys(obj) -> set[str]:
     return keys
 
 
+def _all_values(obj) -> list[str]:
+    vals: list[str] = []
+    if isinstance(obj, dict):
+        for v in obj.values():
+            vals += _all_values(v)
+    elif isinstance(obj, (list, tuple)):
+        for v in obj:
+            vals += _all_values(v)
+    elif isinstance(obj, str):
+        vals.append(obj)
+    return vals
+
+
 def test_no_forbidden_columns_in_context(fixture_dir: Path):
     ctx = feeds_mod.safety_context(fixture_dir)
     keys = _all_keys(ctx)
@@ -181,13 +247,36 @@ def test_no_forbidden_columns_in_context(fixture_dir: Path):
     assert not leaked, f"forbidden columns in template context: {leaked}"
 
 
+_FORBIDDEN_VALUE_SOURCES = {
+    "traffic_stops_drivers_recent.json": ("citizen_id", "unique_case_number", "license_plate_state"),
+    "pedestrian_stops_recent.json": ("citizen_id", "unique_case_number", "license_plate_state"),
+    "cfs_recent.json": ("event_number",),
+    "cfs_pdi_recent.json": ("event_number",),
+    "crime_stars_recent.json": ("rms_no",),
+    "shootings_recent.json": ("shootid",),
+}
+
+
 def test_no_forbidden_columns_against_real_data():
     """Belt and braces on the real pulls: the module selects only the columns
-    it needs, so even the full-size feeds must not leak identifiers."""
+    it needs, so even the full-size feeds must not leak identifiers. Checks
+    keys AND string values (an identifier inside a rendered string would
+    also be a leak)."""
     ctx = feeds_mod.safety_context(DATA)
     keys = _all_keys(ctx)
     leaked = feeds_mod.FORBIDDEN_COLUMNS & keys
     assert not leaked, f"forbidden columns in template context: {leaked}"
+    forbidden_values: set[str] = set()
+    for filename, columns in _FORBIDDEN_VALUE_SOURCES.items():
+        payload = json.loads((DATA / filename).read_text(encoding="utf-8"))
+        for r in payload.get("rows", []):
+            for col in columns:
+                v = r.get(col)
+                if isinstance(v, str) and v.strip():
+                    forbidden_values.add(v.strip())
+    blob = "\n".join(_all_values(ctx))
+    leaked_values = [v for v in forbidden_values if v in blob]
+    assert not leaked_values, f"identifier values leaked into context strings: {leaked_values[:5]}"
     assert ctx["stops"]["drivers"]["total"] > 0
 
 
@@ -211,6 +300,47 @@ def test_corrupt_feed_file_treated_as_empty(tmp_path: Path, caplog):
         items = feeds_mod.latest_incidents(tmp_path)
     assert items == []
     assert any("unreadable" in r.message for r in caplog.records)
+
+
+def test_load_feed_edge_cases_never_raise(tmp_path: Path):
+    (tmp_path / "cfs_recent.json").write_text("[1, 2]", encoding="utf-8")
+    assert feeds_mod._load_feed(tmp_path, "cfs_recent.json")["rows"] == []
+    (tmp_path / "cfs_recent.json").write_text(json.dumps({"rows": "nope"}), encoding="utf-8")
+    assert feeds_mod._load_feed(tmp_path, "cfs_recent.json")["rows"] == []
+    (tmp_path / "cfs_recent.json").write_text(json.dumps({}), encoding="utf-8")
+    feed = feeds_mod._load_feed(tmp_path, "cfs_recent.json")
+    assert feed["generated_utc"] == "" and feed["rows"] == []
+    # Non-numeric row_count must not raise (the "never an exception" contract).
+    payload = {"generated_utc": "2026-09-20T12:00:00Z", "row_count": "abc", "rows": [], "dataset_id": "t"}
+    (tmp_path / "cfs_recent.json").write_text(json.dumps(payload), encoding="utf-8")
+    assert feeds_mod._load_feed(tmp_path, "cfs_recent.json")["row_count"] == 0
+    (tmp_path / "cfs_recent.json").write_text("{bad", encoding="utf-8")
+    assert feeds_mod.vintage_of(tmp_path, "cfs_recent.json") == ""
+
+
+def test_fatal_shooting_and_date_fallback(tmp_path: Path):
+    _write_feed(
+        tmp_path,
+        "shootings_recent.json",
+        [
+            {"type": "FATAL", "dateoccurred": "09/18/2026",
+             "streetblock": "X", "sna_neighborhood": "Y"},
+        ],
+    )
+    items = feeds_mod.latest_incidents(tmp_path)
+    assert items[0]["what"] == "Shooting — fatal"
+    assert items[0]["when_display"] == "Sep 18, 2026"
+
+
+def test_neighborhood_priority_and_casing():
+    row = {
+        "cpd_neighborhood": "  downtown  ",
+        "community_council_neighborhood": "OTHER",
+        "sna_neighborhood": "OTR",
+    }
+    assert feeds_mod._neighborhood_en(row) == "Downtown"
+    assert feeds_mod._neighborhood_en({"sna_neighborhood": "college hill"}) == "College Hill"
+    assert feeds_mod._neighborhood_en({}) == ""
 
 
 def test_unparseable_timestamp_sorts_last_and_displays_raw(tmp_path: Path):
@@ -280,8 +410,6 @@ def test_incident_type_normalization_properties():
     enumerated: every distinct raw value in today's pulls must come out as
     readable text with no CAD suffixes, no caller prefixes, and no all-caps
     codes. Spot-checks pin the important translations."""
-    import re
-
     paren_re = re.compile(r"\([^)]*\)")
     for filename in ("cfs_recent.json", "cfs_pdi_recent.json"):
         for raw in _distinct_raw_values(filename, "incident_type_id"):
@@ -300,6 +428,42 @@ def test_incident_type_normalization_properties():
     assert feeds_mod._incident_type_en("") == "Incident"
 
 
+def test_compound_and_unknown_dispositions():
+    assert feeds_mod._disposition_en("ARR: ARREST,SOW: SENT ON WAY") == "Arrest made; Sent on way"
+    assert feeds_mod._disposition_en("XYZ: FOO") == "Xyz: Foo"
+    assert feeds_mod._disposition_en("OH: OH") == "On hold"
+
+
+@pytest.mark.parametrize("code, expected", sorted(feeds_mod._INCIDENT_ABBREV_EN.items()))
+def test_incident_abbreviation_map_spot_checks(code: str, expected: str):
+    """Every abbreviation entry is pinned: deleting one degrades the output
+    to 'Other police call', which the property test cannot catch."""
+    assert feeds_mod._incident_type_en(code) == expected
+
+
+@pytest.mark.parametrize("word", sorted(feeds_mod._INCIDENT_ENGLISH_WORDS))
+def test_incident_english_words_title_cased(word: str):
+    assert feeds_mod._incident_type_en(word) == word.title()
+
+
+def test_stars_category_mapping_covers_current_pulls():
+    """Every STARS category in today's pulls has an explicit translation."""
+    uncovered = {
+        v for v in _distinct_raw_values("crime_stars_recent.json", "stars_category")
+        if v not in feeds_mod._STARS_CATEGORY_EN
+    }
+    assert not uncovered, f"untranslated STARS categories: {sorted(uncovered)}"
+
+
+def test_stars_type_mapping_covers_current_pulls():
+    """Every STARS type in today's pulls has an explicit classification."""
+    uncovered = {
+        v for v in _distinct_raw_values("crime_stars_recent.json", "type")
+        if v not in feeds_mod._STARS_TYPE_EN
+    }
+    assert not uncovered, f"untranslated STARS types: {sorted(uncovered)}"
+
+
 def test_action_taken_mapping_covers_current_pulls():
     uncovered: set[str] = set()
     for filename in ("traffic_stops_drivers_recent.json", "pedestrian_stops_recent.json"):
@@ -311,8 +475,6 @@ def test_action_taken_mapping_covers_current_pulls():
 
 def test_no_raw_code_leaks_into_incident_text():
     """Translated incident rows must not contain SCREAMING_SNAKE codes."""
-    import re
-
     code_re = re.compile(r"\b[A-Z]{2,}:[A-Z ]+\b")
     for item in feeds_mod.latest_incidents(DATA, n=60):
         assert not code_re.search(item["what"]), f"raw code leaked: {item['what']}"
@@ -351,18 +513,36 @@ def test_safety_template_renders_strict(fixture_dir: Path):
     ctx = feeds_mod.safety_context(fixture_dir)
     stamps = [feeds_mod.vintage_of(fixture_dir, f) for f in (
         "cfs_recent.json", "cfs_pdi_recent.json", "shootings_recent.json", "crime_stars_recent.json")]
+    # Mirror production's expression exactly (web/pages.py): same contract.
     html = env.get_template("safety.html").render(
         snapshot=_strict_snapshot(),
         incidents=ctx["incidents"],
         stars=ctx["stars"],
         stops=ctx["stops"],
-        newest_vintage=max(s for s in stamps if s),
+        newest_vintage=max(stamps) if stamps else "",
     )
     assert "Community safety" in html
     assert "Source frozen." in html  # frozen banner rendered
     assert "Warning, no citation" in html
     assert "Aggravated assault" in html
     assert "301:" not in html  # no raw disposition codes
+
+
+def test_live_feed_renders_no_frozen_banner(fixture_dir: Path, monkeypatch):
+    for name in ("traffic_stops_drivers_recent.json", "pedestrian_stops_recent.json"):
+        meta = dict(feeds_mod.FEED_META[name])
+        meta["status"] = "live"
+        monkeypatch.setitem(feeds_mod.FEED_META, name, meta)
+    env = _strict_env()
+    ctx = feeds_mod.safety_context(fixture_dir)
+    html = env.get_template("safety.html").render(
+        snapshot=_strict_snapshot(),
+        incidents=ctx["incidents"],
+        stars=ctx["stars"],
+        stops=ctx["stops"],
+        newest_vintage="2026-09-20T12:00:00Z",
+    )
+    assert "Source frozen." not in html
 
 
 def test_safety_template_renders_empty_gracefully(tmp_path: Path):
@@ -376,4 +556,5 @@ def test_safety_template_renders_empty_gracefully(tmp_path: Path):
         newest_vintage="",
     )
     assert "No incident data in this pull." in html
+    assert "No reported-crime data in this pull." in html
     assert "No stop data in this pull." in html

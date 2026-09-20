@@ -54,14 +54,14 @@
 <p class="muted">
   From the city's STARS offense feed ({{ "{:,}".format(stars.total) }} reports).
   <strong>Part 1</strong> is the FBI's set of eight serious index offenses
-  (homicide, rape, robbery, aggravated assault, burglary, auto theft, theft from
-  auto, and related property crime); <strong>Part 2</strong> is everything else
-  departments report. These are crimes <em>reported</em> to police, not cases
+  (homicide, rape, robbery, aggravated assault, burglary, larceny-theft,
+  motor vehicle theft, and arson); <strong>Part 2</strong> is everything
+  else departments report. These are crimes <em>reported</em> to police, not cases
   solved or people convicted.
 </p>
 {% if not stars.empty %}
 {{ bars(stars.by_category, stars.total) }}
-<div class="section-h"><h2>By FBI category</h2></div>
+<div class="section-h"><h3>By FBI category</h3></div>
 {{ bars(stars.by_type, stars.total) }}
 {% else %}
 <p class="muted">No reported-crime data in this pull.</p>
@@ -78,20 +78,21 @@
   Race and sex are as recorded by the officer, not self-reported.
 </p>
 {% if not feed.empty %}
-<div class="section-h"><h2>{{ 'Stopped drivers' if key == 'drivers' else 'Stopped pedestrians' }} by race</h2></div>
+<div class="section-h"><h3>{{ 'Stopped drivers' if key == 'drivers' else 'Stopped pedestrians' }} by race</h3></div>
 {{ bars(feed.by_race, feed.total) }}
-<div class="section-h"><h2>By sex</h2></div>
+<p class="muted">Recorded race values other than Black, White, and Unknown are combined into Other.</p>
+<div class="section-h"><h3>By sex</h3></div>
 {{ bars(feed.by_sex, feed.total) }}
-<div class="section-h"><h2>Outcome of the stop</h2></div>
+<div class="section-h"><h3>Outcome of the stop</h3></div>
 {{ bars(feed.by_action, feed.total) }}
-<div class="section-h"><h2>Outcome by race</h2></div>
+<div class="section-h"><h3>Outcome by race</h3></div>
 <p class="muted">Counts of stops by recorded race, for each outcome.</p>
 <table class="charges">
   <caption class="sr-only">Stop outcomes by recorded race</caption>
   <thead><tr><th scope="col">Outcome</th>{% for col in feed.race_columns %}<th scope="col">{{ col }}</th>{% endfor %}<th scope="col">Total</th></tr></thead>
   <tbody>
     {% for row in feed.race_action_table %}
-    <tr><td>{{ row.action }}</td>{% for c in row.counts %}<td>{{ "{:,}".format(c) }}</td>{% endfor %}<td><strong>{{ "{:,}".format(row.total) }}</strong></td></tr>
+    <tr><th scope="row">{{ row.action }}</th>{% for c in row.counts %}<td>{{ "{:,}".format(c) }}</td>{% endfor %}<td><strong>{{ "{:,}".format(row.total) }}</strong></td></tr>
     {% endfor %}
   </tbody>
 </table>

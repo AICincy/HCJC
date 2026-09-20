@@ -2502,7 +2502,7 @@ h2.legal-anchor {
   padding: 0 4px 8px;
   border-bottom: 1px solid var(--border);
 }
-.section-h h2 {
+.section-h h2, .section-h h3 {
   margin: 0;
   font-size: clamp(16px, 2vw, 20px);
   font-weight: 700;

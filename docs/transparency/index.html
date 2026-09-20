@@ -17,7 +17,7 @@
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
   <script src="/static/theme-init.js?v=1fb7517bcf"></script>
-  <link rel="stylesheet" href="/static/style.css?v=670596fd12">
+  <link rel="stylesheet" href="/static/style.css?v=02393e09a3">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
@@ -96,11 +96,11 @@
     <h1 class="title">Access Transparency Scorecard</h1>
     <div class="sub">HCSO public-records access interruptions, measured from the tamper-evident evidence ledger &middot; ORC &sect; 149.43</div>
   </div>
-  <div class="stamp">Computed 2026-09-20T13:51Z</div>
+  <div class="stamp">Computed 2026-09-20T13:59Z</div>
 </header>
 
 <aside class="banner" aria-label="Current access status" role="status">
-  <p><span class="status-pill status-pill-stale">Stale</span> The roster snapshot is 12.2 hours old, past the 6.0-hour alarm threshold, but the evidence ledger does not show an open denial period. The delay may reflect an incident in the update pipeline rather than a block.</p>
+  <p><span class="status-pill status-pill-stale">Stale</span> The roster snapshot is 12.3 hours old, past the 6.0-hour alarm threshold, but the evidence ledger does not show an open denial period. The delay may reflect an incident in the update pipeline rather than a block.</p>
 </aside>
 
 <h2 class="sect-h">Denial Metrics</h2>
@@ -115,7 +115,7 @@
     <tr><td>Longest consecutive blocked run</td><td>3</td></tr>
     <tr><td>Cumulative denied access</td><td>9.4 hours</td></tr>
     <tr><td>Days since last block</td><td>31</td></tr>
-    <tr><td>Roster snapshot age</td><td>12.2 hours</td></tr>
+    <tr><td>Roster snapshot age</td><td>12.3 hours</td></tr>
   </tbody>
 </table>
 <p class="muted">How to read this: the sweep appends one <code>blocked</code> record to the ledger for each cycle in which HCSO&rsquo;s portal returned blocked or empty responses, and one <code>recovered</code> record when a healthy sweep closes the denial period. Cumulative denied access sums each period from its first blocked cycle to its recovery; a period still open at build time accrues up to the build timestamp. These figures regenerate every build and are mirrored as JSON at <a href="/data/transparency_metrics.json">transparency_metrics.json</a>.</p>

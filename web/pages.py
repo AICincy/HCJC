@@ -142,7 +142,7 @@ def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
         cfs_by_district=_group_by_district(cfs_30d),
         shoot_by_district=_group_by_district(shoot_30d),
         map_points=ctx.map_points,
-        safety_teaser=feeds_mod.latest_incidents(Path("data"), n=3),
+        safety_teaser=feeds_mod.latest_incidents(feeds_mod.DATA_DIR, n=3),
     )
     (out_dir / "index.html").write_text(page, encoding="utf-8")
 
@@ -491,7 +491,7 @@ def _render_safety_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> 
     """Plain-English Cincinnati Open Data summaries (Phase 1: latest incidents
     + reported crime; Phase 2: traffic and pedestrian stops). Aggregates are
     computed at build time by web.feeds from whatever the sweep pulled."""
-    data_dir = Path("data")
+    data_dir = feeds_mod.DATA_DIR
     ctx = feeds_mod.safety_context(data_dir)
     incident_files = (
         "cfs_recent.json",

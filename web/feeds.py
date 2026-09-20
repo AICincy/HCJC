@@ -26,7 +26,7 @@ from pathlib import Path
 
 log = logging.getLogger(__name__)
 
-DATA_DIR = Path("data")
+DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 
 # Columns that must never appear in a rendered context. The aggregation
 # functions below select only the columns they need; this set is asserted
@@ -77,7 +77,7 @@ FEED_META: dict[str, dict[str, str]] = {
         "dataset_id": "w2kv-5pdg",
         "status": "frozen",
         "status_note": (
-            "Cincinnati stopped publishing new contact cards in 2025. "
+            "No new contact cards have been published since 2025. "
             "This is the most recent ~5,000 on file, not current activity."
         ),
     },
@@ -86,7 +86,7 @@ FEED_META: dict[str, dict[str, str]] = {
         "dataset_id": "swrz-ak2i",
         "status": "frozen",
         "status_note": (
-            "Cincinnati stopped publishing new contact cards in 2024. "
+            "No new contact cards have been published since 2024. "
             "This is the most recent ~5,000 on file, not current activity."
         ),
     },
@@ -158,18 +158,29 @@ def _load_feed(data_dir: Path, filename: str) -> dict:
     if not isinstance(payload, dict):
         return empty
     rows = payload.get("rows")
+    try:
+        row_count = int(payload.get("row_count") or 0)
+    except (TypeError, ValueError):
+        row_count = 0
     return {
         "generated_utc": str(payload.get("generated_utc") or ""),
-        "row_count": int(payload.get("row_count") or 0),
+        "row_count": row_count,
         "rows": rows if isinstance(rows, list) else [],
         "dataset_id": str(payload.get("dataset_id") or ""),
     }
 
 
 # ---------------------------------------------------------------------------
-# Plain-English mappings. Raw codes never reach a template untranslated; the
-# mapping test fails loudly when the city introduces a new code so it gets a
-# translation instead of leaking raw.
+# Plain-English mappings. Raw codes never reach a template untranslated.
+#
+# Two deliberate, different philosophies live here:
+# - Fail loud: dispositions (_DISPOSITION_EN), STARS categories
+#   (_STARS_CATEGORY_EN), and STARS types (_STARS_TYPE_EN) have a coverage
+#   test that breaks the suite when the city introduces a new code, so it
+#   gets a real translation instead of leaking raw.
+# - Graceful: incident types and stop actions degrade via normalization
+#   ("Other police call") or title-casing. A wrong-but-plausible label is
+#   possible there; the property tests guard structure, not semantics.
 # ---------------------------------------------------------------------------
 
 _DISPOSITION_EN = {
@@ -177,7 +188,7 @@ _DISPOSITION_EN = {
     "CIT: CITED": "Citation issued",
     "ARR: ARREST": "Arrest made",
     "SOW: SENT ON WAY": "Sent on way",
-    "OH: OH": "Outstanding warrant hold",
+    "OH: OH": "On hold",
     "ADV:ADVISED": "Advised",
     "CAN:CANCEL": "Cancelled",
     "INV: INV": "Investigation",
@@ -222,7 +233,7 @@ _INCIDENT_ABBREV_EN = {
     "AUTO": "Vehicle incident",
     "PHONE": "Phone report",
     "CHILD": "Child-related call",
-    "MEET": "Meet with caller",
+    "MEET": "Meet",
     "WANTED": "Wanted person",
 }
 
@@ -249,9 +260,29 @@ _ACTION_TAKEN_EN = {
     "OTHER": "Other",
 }
 
+# Every STARS category on record, mapped explicitly (the coverage test fails
+# loudly on a new one). Values are already readable English; the map exists
+# to pin the presentation wording and to catch new codes.
 _STARS_CATEGORY_EN = {
-    "Burglary/BE": "Burglary / breaking and entering",
     "Agg Assault": "Aggravated assault",
+    "Auto Theft": "Auto theft",
+    "Burglary/BE": "Burglary / breaking and entering",
+    "Homicide": "Homicide",
+    "Part 2": "Part 2",
+    "Personal/Other Theft": "Personal/other theft",
+    "Rape": "Rape",
+    "Robbery": "Robbery",
+    "Strangulation": "Strangulation",
+    "Theft from Auto": "Theft from auto",
+}
+
+# Every STARS type on record. Unknown values are NOT silently folded into
+# "Part 2": they render as "Unclassified" so a new type is visible, and the
+# coverage test fails loudly so it gets classified properly.
+_STARS_TYPE_EN = {
+    "Part 1 Violent": "Part 1 — violent",
+    "Part 1 Property": "Part 1 — property",
+    "Part 2": "Part 2",
 }
 
 # Fixed presentation order for stop outcomes (most common first), keyed on
@@ -401,12 +432,15 @@ def latest_incidents(data_dir: Path = DATA_DIR, n: int = 30) -> list[dict]:
             disp = _disposition_en(r.get("disposition_text"))
             if disp:
                 what = f"{what} — {disp.lower()}"
+            # Dedup only on a real identifier: rows with no event number are
+            # always kept (an empty key would collapse distinct incidents).
+            ev = str(r.get("event_number") or "").strip()
             add(
                 r.get("create_time_incident"),
                 what,
                 str(r.get("address_x") or "").strip().title(),
                 _neighborhood_en(r),
-                dedup="cfs:" + str(r.get("event_number") or ""),
+                dedup=("cfs:" + ev) if ev else "",
             )
 
     shootings = _load_feed(data_dir, "shootings_recent.json")
@@ -447,9 +481,8 @@ def summarize_crime_stars(data_dir: Path = DATA_DIR) -> dict:
         "total": len(rows),
         "by_category": _count_by(rows, lambda r: _stars_category_en(r.get("stars_category"))),
         "by_type": _count_by(
-            rows, lambda r: {"Part 1 Violent": "Part 1 — violent", "Part 1 Property": "Part 1 — property"}.get(
-                str(r.get("type") or "").strip(), "Part 2"
-            ),
+            rows,
+            lambda r: _STARS_TYPE_EN.get(str(r.get("type") or "").strip(), "Unclassified"),
         ),
         "empty": not rows,
     }
@@ -506,11 +539,10 @@ def summarize_stops(data_dir: Path = DATA_DIR) -> dict[str, dict]:
 
 
 def safety_context(data_dir: Path = DATA_DIR) -> dict:
-    """Full template context for the /safety/ page and homepage teaser."""
+    """Full template context for the /safety/ page."""
     incidents = latest_incidents(data_dir)
     return {
         "incidents": incidents,
-        "teaser": incidents[:3],
         "stars": summarize_crime_stars(data_dir),
         "stops": summarize_stops(data_dir),
     }
