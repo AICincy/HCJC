@@ -307,11 +307,19 @@ def _roster_stale_context(snapshot: Snapshot) -> dict:
     automated public-records retrieval. ``since`` is the first recorded block
     date from the durable evidence log; ``ever_blocked`` keeps the Data-page
     documentation present after recovery."""
-    from scraper.store import load_block_log
+    from scraper.store import BlockLogCorruptError, load_block_log
     from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
 
     hours = roster_stale_hours(snapshot.generated_utc)
-    log = load_block_log()
+    try:
+        log = load_block_log()
+    except BlockLogCorruptError as e:
+        # C-1: loud error, then render as if no blocks were recorded rather
+        # than taking the site build down.
+        logging.getLogger(__name__).error(
+            "roster staleness context: WAF-block log unreadable (%s); treating as no blocks", e
+        )
+        log = []
     since = None
     for rec in log:
         if rec.get("event") == "blocked":

@@ -856,3 +856,19 @@ def test_wallclock_cap_carries_forward_unfetched_inmates(tmp_path, monkeypatch):
     assert set(current) == set(previous)
     for inm in current.values():
         assert inm.last_name == "DOE"
+
+
+def test_save_changelog_and_anon_refuses_corrupt_changelog(tmp_path):
+    # C-2: a corrupt changelog must not be truncated to one cycle's events.
+    # The file is left untouched for investigation; the cycle continues.
+    from scraper.sweep import SweepPaths, _save_changelog_and_anon
+
+    changelog = tmp_path / "changelog.json"
+    changelog.write_text("[corrupt", encoding="utf-8")
+    anon = tmp_path / "anon.json"
+    paths = SweepPaths(changelog_path=changelog, anon_changelog_path=anon)
+    prev: dict = {}
+    cur = {"1": Inmate(inmate_number="1", last_name="DOE", first_name="J", booking_date="5/10/26")}
+    _save_changelog_and_anon(prev, cur, paths)
+    assert changelog.read_text(encoding="utf-8") == "[corrupt"
+    assert not anon.exists()

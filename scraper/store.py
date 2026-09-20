@@ -40,6 +40,17 @@ class SnapshotCorruptError(Exception):
     """
 
 
+class BlockLogCorruptError(Exception):
+    """Raised when the WAF-block evidence log exists but cannot be deserialized.
+
+    Distinct from "file missing" (``load_block_log`` returns ``[]`` for that
+    case so a real first run still bootstraps). Silently treating a corrupt
+    log as empty would let the next append atomically replace 137k records
+    of append-only evidence with one record (C-1), so callers must decide
+    explicitly: refuse the write and leave the file untouched, or fail loudly.
+    """
+
+
 log = logging.getLogger(__name__)
 
 # Phase 9: raised from 500 to 10000. The old 500 cap was a 2024 instinct to
@@ -73,15 +84,29 @@ WAF_BLOCK_LOG_PATH = Path("data/waf_block_log.json")
 
 
 def load_block_log(path: Path = WAF_BLOCK_LOG_PATH) -> list[dict]:
-    """Load the append-only WAF-block evidence log. Returns [] when the file is
-    missing or unreadable, so a first run or a corrupt file still proceeds."""
+    """Load the append-only WAF-block evidence log.
+
+    Returns ``[]`` when the file is missing or empty, so a real first run
+    still bootstraps. Raises :class:`BlockLogCorruptError` when the file
+    exists and is non-empty but cannot be parsed as a JSON list -- silently
+    degrading to ``[]`` here would let the next append atomically overwrite
+    the whole evidence log with a single record (C-1), so the caller must
+    handle corruption explicitly instead.
+    """
     if not path.exists():
         return []
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-        return data if isinstance(data, list) else []
-    except (json.JSONDecodeError, OSError):
-        return []
+        text = path.read_text(encoding="utf-8")
+        if not text.strip():
+            return []
+        data = json.loads(text)
+    except (json.JSONDecodeError, OSError) as e:
+        raise BlockLogCorruptError(f"cannot deserialize {path}: {e}") from e
+    if not isinstance(data, list):
+        raise BlockLogCorruptError(
+            f"top-level JSON of {path} is {type(data).__name__}, expected a list of records"
+        )
+    return data
 
 
 def _record_sha256(record: dict) -> str:
@@ -127,9 +152,11 @@ def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None
     Verify-before-append: the existing chain is verified over the loaded
     entries first. If it is broken, the append is refused (loud error log,
     file left untouched) rather than extending the corruption -- a broken
-    chain must never gain new links. Refusal is non-fatal by design: the
-    evidence log must not take down the roster sweep, and CI gates on
-    ``scraper/verify_block_log.py`` independently.
+    chain must never gain new links. The same refusal applies when the
+    existing file is present but unreadable (C-1): a corrupt log is never
+    "recovered" by overwriting it with a single record. Refusal is non-fatal
+    by design: the evidence log must not take down the roster sweep, and CI
+    gates on ``scraper/verify_block_log.py`` independently.
 
     Uses both a threading lock and an advisory file lock to prevent TOCTOU
     races from concurrent callers (threads or processes).
@@ -141,7 +168,17 @@ def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None
         with open(lock_path, "r") as lock_fh:
             _flock_exclusive(lock_fh)
             try:
-                entries = load_block_log(path)
+                try:
+                    entries = load_block_log(path)
+                except BlockLogCorruptError as e:
+                    log.error(
+                        "refusing to append WAF-block evidence to %s: "
+                        "existing log is unreadable (%s); "
+                        "leaving file untouched for investigation",
+                        path,
+                        e,
+                    )
+                    return
                 problems = verify_block_chain(entries)
                 if problems:
                     log.error(
@@ -386,14 +423,20 @@ def save_current(path: Path, inmates: Iterable[Inmate]) -> None:
 
 
 def load_changelog(path: Path) -> list[ChangeEvent]:
+    """Load the rolling changelog. Returns ``[]`` when the file is missing.
+
+    Raises :class:`SnapshotCorruptError` when the file exists but cannot be
+    deserialized -- silently treating a corrupt changelog as empty would let
+    one cycle's events overwrite the full history (C-2), mirroring the
+    fail-closed contract of ``load_current_or_raise``.
+    """
     if not path.exists():
         return []
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
         return [ChangeEvent(**e) for e in raw]
     except (json.JSONDecodeError, ValidationError, KeyError, TypeError, AttributeError) as e:
-        log.error("could not deserialize %s (%s): treating as empty", path, e)
-        return []
+        raise SnapshotCorruptError(f"cannot deserialize {path}: {e}") from e
 
 
 def save_changelog(path: Path, events: list[ChangeEvent]) -> None:

@@ -28,6 +28,7 @@ from scraper.sweep import (
     _fetch_one,
     _plan_detail_fetch,
     _record_detail_degraded,
+    _record_detail_page_block,
 )
 from scraper.sweep_guards import (
     DETAIL_DEGRADED_MAX_FAILURE_FRACTION,
@@ -692,3 +693,29 @@ def test_record_empty_photo_event_dedups_via_parsers(tmp_path):
     assert records[0]["event"] == "empty_photo_observed"
     assert records[0]["inmate_id"] == "42"
     assert verify_block_chain(records) == []
+
+
+def test_record_detail_page_block_dedupes_within_24h(tmp_path):
+    # M-1: a stale inmate is refetched every cycle until its detail succeeds,
+    # so repeated per-inmate failures within 24h collapse to one hash-chained
+    # record. The per-cycle detail_degraded summary keeps the systemic signal.
+    log_path = tmp_path / "waf_block_log.json"
+    _record_detail_page_block(
+        "1234567", 403, "<html>blocked</html>", DetailFailureMode.WAF_BLOCK, log_path
+    )
+    _record_detail_page_block(
+        "1234567", 403, "<html>blocked</html>", DetailFailureMode.WAF_BLOCK, log_path
+    )
+    records = load_block_log(log_path)
+    assert len(records) == 1
+    assert records[0]["event"] == "detail_page_waf_block"
+    assert records[0]["inmate_id"] == "1234567"
+    assert verify_block_chain(records) == []
+    # A different inmate or a different failure mode is a distinct observation.
+    _record_detail_page_block(
+        "7654321", 403, "<html>blocked</html>", DetailFailureMode.WAF_BLOCK, log_path
+    )
+    _record_detail_page_block(
+        "1234567", 503, "<html>err</html>", DetailFailureMode.HTTP_5XX, log_path
+    )
+    assert len(load_block_log(log_path)) == 3

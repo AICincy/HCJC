@@ -42,9 +42,11 @@ from .parsers import parse_detail_page, parse_list_page
 from .photos import downscale_and_save
 from .store import (
     WAF_BLOCK_LOG_PATH,
+    BlockLogCorruptError,
     SnapshotCorruptError,
     _load_takedowns,
     append_block_evidence,
+    append_block_evidence_deduped,
     diff,
     load_block_log,
     load_changelog,
@@ -176,11 +178,19 @@ def _record_detail_page_block(
     stays ``detail_page_waf_block`` for continuity with the existing log
     schema. ``response_signature`` (first 16 hex of the body SHA-256) lets
     identical block templates collate without storing the full body.
+
+    Deduplicated per (inmate_id, failure_mode) over 24 h (M-1): a stale
+    inmate is refetched every cycle until its detail succeeds, so without
+    dedup a weeks-long detail-only outage would append one record per
+    inmate per cycle (each an O(n) full-chain verify + full-file rewrite)
+    and grow the evidence log without bound. The per-cycle
+    ``detail_degraded`` summary record preserves the systemic signal, so
+    repeated per-inmate observations add no information.
     """
     if waf_block_log_path is None:
         waf_block_log_path = WAF_BLOCK_LOG_PATH
     response_signature = hashlib.sha256(html.encode("utf-8", errors="replace")).hexdigest()[:16] if html else None
-    append_block_evidence(
+    append_block_evidence_deduped(
         {
             "timestamp_utc": utcnow_iso(),
             "event": "detail_page_waf_block",
@@ -192,6 +202,9 @@ def _record_detail_page_block(
             "response_length": len(html) if html else 0,
         },
         waf_block_log_path,
+        dedupe_event="detail_page_waf_block",
+        dedupe_keys=("inmate_id", "failure_mode"),
+        dedupe_hours=24.0,
     )
 
 
@@ -227,7 +240,13 @@ def _record_recovery_if_blocked(seen_count: int, waf_block_log_path: Path | None
     record so each denial period has a clean end-timestamp. No-op otherwise."""
     if waf_block_log_path is None:
         waf_block_log_path = WAF_BLOCK_LOG_PATH
-    entries = load_block_log(waf_block_log_path)
+    try:
+        entries = load_block_log(waf_block_log_path)
+    except BlockLogCorruptError as e:
+        # C-1: the log is unreadable; the append path refuses writes against
+        # it, so there is no recovery record to add. Loud log, no crash.
+        log.error("recovery check skipped: WAF-block log unreadable (%s)", e)
+        return
     if entries and entries[-1].get("event") == "blocked":
         append_block_evidence(
             {
@@ -564,7 +583,19 @@ def _save_changelog_and_anon(
         sum(1 for e in events if e.event == "released"),
         sum(1 for e in events if e.event == "updated"),
     )
-    changelog = load_changelog(paths.changelog_path)
+    changelog = None
+    try:
+        changelog = load_changelog(paths.changelog_path)
+    except SnapshotCorruptError as e:
+        # C-2: the changelog is unreadable; extending it would truncate the
+        # full history to this cycle's events. Leave the file untouched for
+        # investigation and skip the changelog + anon-feed update this cycle.
+        log.error(
+            "refusing to update changelog: %s is corrupt (%s); leaving file untouched",
+            paths.changelog_path,
+            e,
+        )
+        return
     changelog.extend(events)
     save_changelog(paths.changelog_path, changelog)
     # Phase 11: maintain the PII-expiring append-only feed.

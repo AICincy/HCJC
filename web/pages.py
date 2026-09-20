@@ -25,7 +25,7 @@ from scraper.client import DEFAULT_UA
 from scraper.models import ChangeEvent, Inmate, Snapshot
 from scraper.open_data_feeds import FEEDS
 from scraper.photos import downscale_and_save
-from scraper.store import load_block_log
+from scraper.store import BlockLogCorruptError, load_block_log
 from web import feeds as feeds_mod
 from web.classify import (
     _expand_race,
@@ -353,6 +353,14 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     ):
         src = data_dir / name
         if src.exists():
+            if name == "waf_block_log.json":
+                # C-1: never publish an unreadable evidence file as the public
+                # mirror; the last-good copy stays in git history.
+                try:
+                    load_block_log(src)
+                except BlockLogCorruptError as e:
+                    log.error("data page: skipping corrupt WAF-block log copy (%s)", e)
+                    continue
             shutil.copy2(src, data_out / name)
     # Crowdsourced ingest is optional; still publish an empty file so the
     # documented /data/courtclerk_cases.json URL is not a GitHub Pages 404.
@@ -371,7 +379,17 @@ def _render_transparency_page(env: Environment, snapshot: Snapshot, out_dir: Pat
     """Public accountability scorecard computed from the WAF-block evidence
     ledger, plus a JSON mirror of the metrics under /data/ so exhibit numbers
     for public-records filings regenerate on every build."""
-    metrics = compute_transparency_metrics(load_block_log(), snapshot.generated_utc)
+    try:
+        block_log = load_block_log()
+    except BlockLogCorruptError as e:
+        # C-1: a corrupt evidence log must not take the site build down, but
+        # it must not be silently rendered as "no blocks" either: loud error
+        # in CI logs, metrics rendered from an empty log this cycle.
+        log.error(
+            "transparency page: WAF-block evidence log unreadable (%s); rendering metrics as unavailable", e
+        )
+        block_log = []
+    metrics = compute_transparency_metrics(block_log, snapshot.generated_utc)
     page = env.get_template("transparency.html").render(metrics=metrics)
     target = out_dir / "transparency" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)

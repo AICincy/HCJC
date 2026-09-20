@@ -6,6 +6,7 @@ import pytest
 
 from scraper.models import Charge, Inmate
 from scraper.store import (
+    BlockLogCorruptError,
     SnapshotCorruptError,
     _record_sha256,
     append_block_evidence,
@@ -111,10 +112,15 @@ def test_load_current_returns_empty_on_schema_mismatch(tmp_path: Path):
     assert load_current(bad) == {}
 
 
-def test_load_changelog_returns_empty_on_corrupt_json(tmp_path: Path):
+def test_load_changelog_raises_on_corrupt_json(tmp_path: Path):
+    # C-2: a corrupt changelog must raise, never degrade to empty -- treating
+    # it as empty would let one cycle's events overwrite the full history.
     bad = tmp_path / "changelog.json"
     bad.write_text("[corrupt", encoding="utf-8")
-    assert load_changelog(bad) == []
+    with pytest.raises(SnapshotCorruptError):
+        load_changelog(bad)
+    # Missing file still bootstraps to [].
+    assert load_changelog(tmp_path / "absent.json") == []
 
 
 def test_save_current_writes_atomically_and_round_trips(tmp_path: Path):
@@ -312,16 +318,52 @@ def test_block_log_round_trips(tmp_path: Path):
     assert [r["event"] for r in log] == ["blocked", "recovered"]
 
 
-def test_load_block_log_tolerates_corrupt(tmp_path: Path):
+def test_load_block_log_raises_on_corrupt(tmp_path: Path):
+    # C-1: a corrupt evidence log must raise, never degrade to [] -- degrading
+    # would let the next append atomically replace the whole log with one record.
     p = tmp_path / "waf_block_log.json"
     p.write_text("{not json", encoding="utf-8")
-    assert load_block_log(p) == []
-    # A valid-JSON-but-not-a-list payload also degrades to [].
+    with pytest.raises(BlockLogCorruptError):
+        load_block_log(p)
+    # A valid-JSON-but-not-a-list payload is corruption too, not an empty log.
     p.write_text('{"event": "blocked"}', encoding="utf-8")
+    with pytest.raises(BlockLogCorruptError):
+        load_block_log(p)
+    # Empty and missing files still bootstrap to [].
+    p.write_text("  \n", encoding="utf-8")
     assert load_block_log(p) == []
-    # append_block_evidence recovers by starting a fresh list.
-    append_block_evidence({"event": "blocked"}, p)
-    assert load_block_log(p) == [{"event": "blocked", "prev_sha256": None}]
+    p.unlink()
+    assert load_block_log(p) == []
+
+
+def test_append_refuses_to_replace_corrupt_log(tmp_path: Path, caplog: pytest.LogCaptureFixture):
+    # C-1: the append must be refused (loud error log, file left untouched)
+    # instead of "recovering" by overwriting the evidence log with one record.
+    p = tmp_path / "waf_block_log.json"
+    p.write_text("{not json", encoding="utf-8")
+    with caplog.at_level(logging.ERROR, logger="scraper.store"):
+        append_block_evidence({"event": "blocked", "seen_count": 1}, p)
+    assert p.read_text(encoding="utf-8") == "{not json"
+    assert "refusing to append" in caplog.text
+
+
+def test_verify_block_log_exit_codes(tmp_path: Path, capsys: pytest.CaptureFixture):
+    # C-1: the integrity tool must fail loudly on a corrupt file, not exit 0
+    # as "nothing to verify".
+    from scraper.verify_block_log import main
+
+    missing = tmp_path / "nope.json"
+    assert main([str(missing)]) == 0
+    empty = tmp_path / "empty.json"
+    empty.write_text("", encoding="utf-8")
+    assert main([str(empty)]) == 0
+    corrupt = tmp_path / "corrupt.json"
+    corrupt.write_text("{not json", encoding="utf-8")
+    assert main([str(corrupt)]) == 1
+    assert "CORRUPT" in capsys.readouterr().out
+    good = tmp_path / "good.json"
+    append_block_evidence({"event": "blocked"}, good)
+    assert main([str(good)]) == 0
 
 
 def test_block_log_hash_chains(tmp_path: Path):

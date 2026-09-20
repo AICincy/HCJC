@@ -159,13 +159,17 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
             git fetch origin main
+            # M-3: on rebase conflict, abort and fail loudly instead of a
+            # `git merge -X ours` fallback. Ours-wins on a conflict in the
+            # append-only evidence log (data/waf_block_log.json) would silently
+            # drop the other side's records, and the hash chain stays valid
+            # afterward, so no automated check would ever catch the loss. The
+            # lost cycle re-sweeps from the last committed state next cycle,
+            # so the cost is one delayed commit, not lost data.
             git rebase origin/main || {
-              echo "::warning::Rebase conflict detected; attempting merge"
+              echo "::error::Rebase conflict detected; refusing merge fallback (M-3). Aborting push; next cycle retries from a fresh sweep."
               git rebase --abort
-              git merge -X ours origin/main --no-edit || {
-                echo "::error::Both rebase and merge failed"
-                exit 1
-              }
+              exit 1
             }
             git push
           else

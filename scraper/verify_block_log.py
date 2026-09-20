@@ -6,7 +6,9 @@ integrity proof for counsel: a clean run shows the committed evidence file has
 not been edited or had records removed out of band. Wholesale file deletion is
 caught by git history, not by the chain.
 
-Exits 0 when the chain is intact (or the log is empty), 1 when a link is broken.
+Exits 0 when the chain is intact (or the log is missing/empty), 1 when a link
+is broken or the file exists but is unreadable -- a corrupt evidence file must
+fail CI loudly rather than pass as "nothing to verify" (C-1).
 
 Run: ``python -m scraper.verify_block_log`` (optionally a path argument).
 """
@@ -16,7 +18,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from .store import WAF_BLOCK_LOG_PATH, load_block_log, verify_block_chain
+from .store import WAF_BLOCK_LOG_PATH, BlockLogCorruptError, load_block_log, verify_block_chain
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -30,9 +32,16 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     path = Path(args.path)
 
-    entries = load_block_log(path)
+    if not path.exists():
+        print(f"{path}: no records (file missing); nothing to verify.")
+        return 0
+    try:
+        entries = load_block_log(path)
+    except BlockLogCorruptError as e:
+        print(f"{path}: CORRUPT ({e}); the evidence log is unreadable.")
+        return 1
     if not entries:
-        print(f"{path}: no records (file missing or empty); nothing to verify.")
+        print(f"{path}: no records (file empty); nothing to verify.")
         return 0
     problems = verify_block_chain(entries)
     if problems:
