@@ -1,4 +1,5 @@
 import json
+import logging
 from pathlib import Path
 
 import pytest
@@ -330,6 +331,31 @@ def test_block_log_hash_chains(tmp_path: Path):
     log = load_block_log(p)
     assert log[0]["prev_sha256"] is None
     assert log[1]["prev_sha256"] == _record_sha256(log[0])
+
+
+def test_append_refuses_to_extend_corrupt_chain(tmp_path: Path, caplog: pytest.LogCaptureFixture):
+    p = tmp_path / "waf_block_log.json"
+    append_block_evidence({"event": "blocked", "seen_count": 0}, p)
+    append_block_evidence({"event": "recovered", "seen_count": 5}, p)
+    # Tamper with the first record on disk: the stored chain is now broken.
+    entries = load_block_log(p)
+    entries[0]["seen_count"] = 999
+    p.write_text(json.dumps(entries, indent=2) + "\n", encoding="utf-8")
+    before = p.read_text(encoding="utf-8")
+    assert verify_block_chain(load_block_log(p)) != []
+    # The append must be refused: loud error log, file left untouched, so the
+    # broken chain gains no new links.
+    with caplog.at_level(logging.ERROR, logger="scraper.store"):
+        append_block_evidence({"event": "blocked", "seen_count": 1}, p)
+    assert p.read_text(encoding="utf-8") == before
+    assert [r["event"] for r in load_block_log(p)] == ["blocked", "recovered"]
+    assert "refusing to append" in caplog.text
+    # And a still-intact chain keeps appending normally.
+    p2 = tmp_path / "waf_block_log2.json"
+    append_block_evidence({"event": "blocked"}, p2)
+    append_block_evidence({"event": "recovered"}, p2)
+    assert [r["event"] for r in load_block_log(p2)] == ["blocked", "recovered"]
+    assert verify_block_chain(load_block_log(p2)) == []
 
 
 def test_verify_block_chain_detects_intact_and_tampered(tmp_path: Path):
