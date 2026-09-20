@@ -73,3 +73,33 @@ def _isolate_evidence_logs(tmp_path, monkeypatch):
         "no_proxy",
     ):
         monkeypatch.delenv(_proxy_var, raising=False)
+
+
+@pytest.fixture(autouse=True)
+def _no_repo_history_write(monkeypatch):
+    """Hermeticity: web.build.build() reaches web.history._update_history()
+    via _prepare_render_data(), which appends today's record to the
+    repo-anchored data/history.json (V5-F2 anchor: repo root regardless of
+    CWD). Any test exercising the real build (smoke tests,
+    test_consolidated_remediation's end-to-end build test) would otherwise
+    overwrite the real history entry with fixture counts (once observed:
+    2026-09-20 entry 1167 -> 1). Stub it globally; _prepare_render_data
+    imports the name lazily (from web.history, inside the function body),
+    so patching the module attribute intercepts every call. Returns a
+    full-shape trend dict so templates render normally."""
+    import web.history
+
+    def _stub_history(*args, **kwargs):
+        return {
+            "today": 0,
+            "yesterday": None,
+            "delta": None,
+            "spark": [],
+            "spark_dates": [],
+            "days_tracked": 0,
+            "booked_7d": 0,
+            "released_7d": 0,
+            "churn_days": 0,
+        }
+
+    monkeypatch.setattr(web.history, "_update_history", _stub_history)
