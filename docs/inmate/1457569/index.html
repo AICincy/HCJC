@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
   <script src="/static/theme-init.js?v=1fb7517bcf"></script>
-  <link rel="stylesheet" href="/static/style.css?v=28def51269">
+  <link rel="stylesheet" href="/static/style.css?v=7019249a14">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
@@ -88,7 +88,11 @@
       </details>
     </div>
   </header>
-  <main id="main" class="page">
+<aside class="source-banner" role="status" aria-label="Inmate detail retrieval status">
+  <p><strong>Detail retrieval blocked.</strong>
+  Since 2026-09-20, HCSO&rsquo;s inmate detail pages have been returning blocked or error responses to this site&rsquo;s automated public-records retrieval. Charges, bonds, and photos on this page reflect the last successfully retrieved data, not necessarily the current roster.</p>
+  <p class="muted">Each failed retrieval is logged as evidence; see <a href="/data/#access">access interruptions</a> and the <a href="/transparency/">transparency scorecard</a>.</p>
+</aside>  <main id="main" class="page">
     <div class="doc-wrap">
 
 
@@ -177,7 +181,7 @@
 <span class="muted">&middot; booked 8/19/26</span>    </li>
 </ul>
 <p class="muted note-paragraph">
-  The events above are the booking, release, and material-change records JCStream observed on its own ~30-minute sweeps. They are <strong>not</strong> court-docket entries and they may lag the source record by up to one sweep cycle. The full feed for the entire roster is at <a href="/feed.xml">/feed.xml</a>; booking-only and release-only feeds are at <a href="/booked.xml">/booked.xml</a> and <a href="/released.xml">/released.xml</a>.
+  The events above are the booking, release, and material-change records JCStream observed on its own ~15-minute sweeps. They are <strong>not</strong> court-docket entries and they may lag the source record by up to one sweep cycle. The full feed for the entire roster is at <a href="/feed.xml">/feed.xml</a>; booking-only and release-only feeds are at <a href="/booked.xml">/booked.xml</a> and <a href="/released.xml">/released.xml</a>.
 </p>
 
 <p class="source">

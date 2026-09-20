@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
   <script src="/static/theme-init.js?v=1fb7517bcf"></script>
-  <link rel="stylesheet" href="/static/style.css?v=28def51269">
+  <link rel="stylesheet" href="/static/style.css?v=7019249a14">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
@@ -86,7 +86,11 @@
       </details>
     </div>
   </header>
-  <main id="main" class="page">
+<aside class="source-banner" role="status" aria-label="Inmate detail retrieval status">
+  <p><strong>Detail retrieval blocked.</strong>
+  Since 2026-09-20, HCSO&rsquo;s inmate detail pages have been returning blocked or error responses to this site&rsquo;s automated public-records retrieval. Charges, bonds, and photos on this page reflect the last successfully retrieved data, not necessarily the current roster.</p>
+  <p class="muted">Each failed retrieval is logged as evidence; see <a href="/data/#access">access interruptions</a> and the <a href="/transparency/">transparency scorecard</a>.</p>
+</aside>  <main id="main" class="page">
     <div class="doc-wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Help</span>
@@ -152,6 +156,8 @@
   <div class="v">Through approved kiosks, phone, or online vendors. Cash cannot be handed to jail staff. Funds go to a commissary trust account in the inmate's name.</div>
   <div class="k">Send mail</div>
   <div class="v">Inmate Name &amp; Booking #, Hamilton County Justice Center, 1000 Sycamore Street, Cincinnati, OH 45202. See <a href="https://www.hcso.org/inmate-information/" target="_blank" rel="noopener">hcso.org/inmate-information</a> for current rules on what can be sent.</div>
+  <div class="k">Pretrial services</div>
+  <div class="v">The Department of Pretrial and Community Transition Services has provided bail investigations and pretrial supervision to the Hamilton County courts since 1973: jail intake, bail investigations, electronic monitoring, court-ordered supervision. Open 24 hours a day, 7 days a week. <a href="https://hamiltoncountycourts.org/index.php/pretrial-services/" target="_blank" rel="noopener">hamiltoncountycourts.org/pretrial-services &rarr;</a></div>
 </div>
 
 <h2 class="sect-h">I Want a Record Sealed or Expunged</h2>
@@ -207,6 +213,14 @@
     </div>
   </div>
 </div>
+<div class="fields">
+  <div class="k">Self-representation guide</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/wp-content/uploads/2024/08/Self-Representation-Page-Final.pdf" target="_blank" rel="noopener">The Law Library's self-representation guide (PDF) &rarr;</a> - help for people going to court without a lawyer, from the Hamilton County Law Library (1000 Main Street, 6th floor, Mon-Fri 8 AM-4 PM).</div>
+  <div class="k">Language Access Plan</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/07/Language-Access-Plan.pdf" target="_blank" rel="noopener">The court's Language Access Plan (July 2026, PDF) &rarr;</a> - the court's plan for language services in court proceedings.</div>
+  <div class="k">Legal terms glossary</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/wp-content/uploads/2024/10/Glossary-of-Terms-10-28-24.pdf" target="_blank" rel="noopener">Glossary of legal terms (PDF) &rarr;</a> - plain definitions of court terms (abeyance, affidavit, bailiff, bench trial, and more).</div>
+</div>
 
 <h2 class="sect-h">Specialty Courts &amp; Dockets</h2>
 <div class="fields">
@@ -238,6 +252,12 @@
   <div class="v"><a href="https://probation.hamiltoncountycourts.org/Payments/" target="_blank" rel="noopener">probation.hamiltoncountycourts.org/Payments &rarr;</a></div>
   <div class="k">Adult Parole Authority (state)</div>
   <div class="v">7710 Reading Road, Suite 210, Cincinnati, OH 45237. <a href="tel:+15138214804">513-821-4804</a>. (Distinct from county probation.)</div>
+  <div class="k">Probation FAQs</div>
+  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/probation-faqs/" target="_blank" rel="noopener">Common questions &rarr;</a> - hours (Monday-Friday 8 AM-4 PM), drug testing, reporting, and the department's move to centralized reporting with expanded field services.</div>
+  <div class="k">Probation substations</div>
+  <div class="v">Walnut Hills, 3501 Burnet Ave &middot; Madisonville, 3990 Red Bank Road &middot; Over-the-Rhine, 1715 Vine Street &middot; Price Hill, 4013 St. Lawrence Ave. The department is centralizing reporting at the main office; check the FAQs before you go. <a href="https://hamiltoncountycourts.org/index.php/Probation-Substations/" target="_blank" rel="noopener">Substation list &rarr;</a></div>
+  <div class="k">Victims' Services Unit</div>
+  <div class="v">800 Broadway, Cincinnati, OH 45202. Victim Impact Statements on felony and misdemeanor convictions; case-status line <a href="tel:+15139469634">513-946-9634</a>; Ohio Victims of Crime Compensation Program applications.</div>
 </div>
 
 <h2 class="sect-h">Crisis &amp; Community Help</h2>
@@ -265,7 +285,7 @@
     </div>
   </main>
   <footer class="site">
-    <span>Generated  - </span>
+    <span>Generated Sep 20, 2026, 8:23 AM ET</span>
     <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
     <span class="footer-legal">Independent, non-governmental project - not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law, including the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC&nbsp;&sect;&nbsp;149.43</a>).</span>
   </footer>
