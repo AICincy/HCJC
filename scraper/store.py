@@ -123,6 +123,13 @@ def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None
     JSON, ``None`` for the first), forming a hash chain so the append-only log
     self-verifies independent of git history.
 
+    Verify-before-append: the existing chain is verified over the loaded
+    entries first. If it is broken, the append is refused (loud error log,
+    file left untouched) rather than extending the corruption -- a broken
+    chain must never gain new links. Refusal is non-fatal by design: the
+    evidence log must not take down the roster sweep, and CI gates on
+    ``scraper/verify_block_log.py`` independently.
+
     Uses both a threading lock and an advisory file lock to prevent TOCTOU
     races from concurrent callers (threads or processes).
     """
@@ -134,6 +141,17 @@ def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None
             _flock_exclusive(lock_fh)
             try:
                 entries = load_block_log(path)
+                problems = verify_block_chain(entries)
+                if problems:
+                    log.error(
+                        "refusing to append WAF-block evidence to %s: "
+                        "existing hash chain is corrupt (%d problem(s); first: %s); "
+                        "leaving file untouched for investigation",
+                        path,
+                        len(problems),
+                        problems[0],
+                    )
+                    return
                 record["prev_sha256"] = _record_sha256(entries[-1]) if entries else None
                 entries.append(record)
                 _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
