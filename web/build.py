@@ -94,9 +94,6 @@ PHOTOS_DIR = Path("data/photos")
 DEFAULT_OUT = Path("docs")
 
 
-
-
-
 def _load_inputs():
     """Load the snapshot + changelog + dispatch feeds. Dedupe the two CFS
     feeds on event_number (qiik-bpks often lags past its pull window and comes
@@ -156,9 +153,6 @@ def _load_inputs():
     matches = attach_candidates(snapshot.inmates, all_cfs)
     dispatch_points = _dispatch_points(all_cfs, shooting_rows)
     return snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points
-
-
-
 
 
 def _rss_guid(event: ChangeEvent) -> str:
@@ -287,11 +281,9 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     env.globals["judge_link"] = judge_link
 
 
-
-
-
 def build(out_dir: Path) -> int:
     from scraper.update_orc_offenses import update_orc_offenses
+
     update_orc_offenses()
 
     snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points = _load_inputs()
@@ -374,9 +366,6 @@ def build(out_dir: Path) -> int:
         out_dir,
     )
     return 0
-
-
-
 
 
 def _resolve_base_url() -> str:

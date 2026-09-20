@@ -258,8 +258,8 @@ def _short_month_label(month_str: str) -> str:
 def _approx_age(dob_str: str | None) -> int | None:
     """Estimate age from date-of-birth string (MM/DD/YY or MM/DD/YYYY format).
 
-    Handles two-digit years using the project's fixed pivot rule (70+ -> 19XX, <70 -> 20XX)
-    via _parse_book_date. Returns None if the string is unparseable or represents
+    Handles two-digit years via _parse_book_date (Python %y: 69-99 -> 19XX,
+    0-68 -> 20XX). Returns None if the string is unparseable or represents
     an invalid date.
     """
     if not dob_str:
@@ -520,10 +520,14 @@ def _primary_chapter(inmate) -> dict | None:
 # the 2-digit year: CR[AB] criminal, TR* traffic, CV* civil. Anything else
 # (domestic relations DR, juvenile, probate, unrecognized) stays "other" rather
 # than risk mislabeling on a presumed-innocent records page. See court.html.
-_CASE_TYPE_RE = re.compile(r"\b(CR[AB]|TR[A-Z]|CV[A-Z]|DR|J[CV])\b")
+# Handles both separated ("25/CRA/12345", "25 CRA 12345") and concatenated
+# ("25CRA12345") formats. The 2-letter CV token (municipal civil, e.g.
+# "26CV001234") is matched before CV[A-Z] to avoid partial-match issues.
+_CASE_TYPE_RE = re.compile(r"(?:^|\b|\d)(CR[AB]|TR[A-Z]|CV[A-Z]|CV|DR|J[CV])(?:\b|$|\d)")
 _CASE_CP_RE = re.compile(r"^([A-Z])\s*\d")
 _CASE_CP_YEAR_RE = re.compile(r"^[A-Z]\s*(\d{2})\d{4,}$")
-_CASE_MUNI_YEAR_RE = re.compile(r"(?:^|[/ ])(\d{2})/(?:CR[AB]|TR[A-Z]|CV[A-Z]|DR|J[CV])\b")
+_CASE_MUNI_YEAR_RE = re.compile(r"(?:^|[/ ])(\d{2})/(?:CR[AB]|TR[A-Z]|CV[A-Z]|CV|DR|J[CV])\b")
+_CASE_CONCAT_YEAR_RE = re.compile(r"^(\d{2})(?:CR[AB]|TR[A-Z]|CV[A-Z]|CV|DR|J[CV])\d")
 _CASE_ANY_YEAR_RE = re.compile(r"(?:^|[/ ])(\d{2})(?=[/ ])")
 
 
@@ -557,7 +561,7 @@ def case_year(case_number: str | None) -> int | None:
     if not s:
         return None
     max_year = datetime.now(timezone.utc).year + 1
-    for rx in (_CASE_CP_YEAR_RE, _CASE_MUNI_YEAR_RE, _CASE_ANY_YEAR_RE):
+    for rx in (_CASE_CP_YEAR_RE, _CASE_MUNI_YEAR_RE, _CASE_CONCAT_YEAR_RE, _CASE_ANY_YEAR_RE):
         # Take the first plausible match from the highest-priority pattern
         # rather than falling through to a broader pattern the moment one
         # token fails the clamp (e.g. "99" is not 2099, but a later token in
