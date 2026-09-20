@@ -518,6 +518,25 @@ body.detail .page { max-width: 1080px; }
 .banner-fine { font-size: 12px; color: var(--fg-muted); }
 .banner-fine a { color: var(--fg-muted); text-decoration: underline; }
 
+/* ===== Source-denial banner (site-wide, rendered from base.html) ===== */
+/* Existing tokens only: --warn is the established severity-red token (there
+   is no --danger token in this stylesheet; red is reserved for severity),
+   --fg-soft for secondary text, --link for links. */
+.source-banner {
+  border-left: 4px solid var(--warn);
+  background: var(--bg-soft);
+  padding: .75rem 1rem;
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--fg-soft);
+}
+.source-banner p { margin: 0; }
+.source-banner p + p { margin-top: .3rem; }
+.source-banner strong { color: var(--fg); font-weight: 700; }
+.source-banner a { color: var(--link); }
+.source-banner .muted { color: var(--fg-soft); font-size: 12px; }
+
 /* Legacy stat-card kept for stats page */
 .stat-card {
   background: var(--surface);

@@ -406,7 +406,24 @@ def _load_takedowns(data_dir: Path) -> set[str]:
     return set(parsed)
 
 
-def save_current(path: Path, inmates: Iterable[Inmate]) -> None:
+def _read_last_healthy_sweep_utc(path: Path) -> str:
+    """Previous ``last_healthy_sweep_utc`` for clock preservation (A2).
+
+    Fail-soft to ``""`` on a missing or unreadable file: a sweep that was
+    not fully healthy must not advance the freshness clock, and it must not
+    fail the write either.
+    """
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return ""
+    if isinstance(raw, dict):
+        v = raw.get("last_healthy_sweep_utc")
+        return v if isinstance(v, str) else ""
+    return ""
+
+
+def save_current(path: Path, inmates: Iterable[Inmate], *, last_healthy_sweep_utc: str | None = None) -> None:
     # Note: for rosters significantly larger than ~5k, consider streaming
     # serialization to avoid holding the full JSON string in memory.
     sealed = _load_takedowns(path.parent)
@@ -414,8 +431,15 @@ def save_current(path: Path, inmates: Iterable[Inmate]) -> None:
         (i for i in inmates if i.inmate_number not in sealed),
         key=lambda i: (i.last_name, i.first_name, i.inmate_number),
     )
+    if last_healthy_sweep_utc is None:
+        # Not a fully healthy sweep (degraded detail phase, interruption,
+        # dry-run short-circuit): preserve the previous clock value rather
+        # than stamping now, so freshness_hours keeps measuring the last
+        # fully successful retrieval.
+        last_healthy_sweep_utc = _read_last_healthy_sweep_utc(path)
     snapshot = Snapshot(
         generated_utc=utcnow_iso(),
+        last_healthy_sweep_utc=last_healthy_sweep_utc,
         inmate_count=len(materialized),
         inmates=materialized,
     )

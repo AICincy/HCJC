@@ -76,7 +76,11 @@
               {% if judge.room %}<div><strong>Location:</strong> {{ judge.room }}</div>{% endif %}
               {% if judge.bailiff %}<div><strong>Bailiff:</strong> {{ judge.bailiff }}</div>{% endif %}
               {% if judge.phone %}<div><strong>Phone:</strong> {{ judge.phone }}</div>{% endif %}
+              {% if judge.fax %}<div><strong>Fax:</strong> {% if judge.fax_href %}<a href="tel:+1{{ judge.fax_href | replace("-", "") }}">{{ judge.fax }}</a>{% else %}{{ judge.fax }}{% endif %}</div>{% endif %}
+              {% if judge.email %}<div><strong>Chambers contact:</strong> {% if judge.email_href %}<a href="mailto:{{ judge.email_href }}">{{ judge.email }}</a>{% else %}{{ judge.email }}{% endif %}</div>{% endif %}
+              {% if judge.law_clerk %}<div><strong>Law clerk:</strong> {{ judge.law_clerk }}</div>{% endif %}
             </div>
+            {% if judge.source_url %}<p class="judge-source"><a href="{{ judge.source_url }}" target="_blank" rel="noopener">Official profile &rarr;</a></p>{% endif %}
           </div>
           {% if judge.bio %}
             <details class="judge-sub">
@@ -99,7 +103,7 @@
   <div class="k">Magistrate referrals</div>
   <div class="v">Foreclosure, administrative appeals, civil forfeiture, certificates for qualification of employment, and car-title requests are heard by magistrates by General Order of Reference.</div>
   <div class="k">Mediation &amp; ADR</div>
-  <div class="v">John J. Cruze, Director. Room 450. <a href="tel:+15139465470">513-946-5470</a>. Cases referred by the court; parties may also request mediation.</div>
+  <div class="v">John J. Cruze, Director. Room 450. <a href="tel:+15139465470">513-946-5470</a>. Fax: 513-946-5477. <a href="mailto:jcruze@cms.hamilton-co.org">jcruze@cms.hamilton-co.org</a>. Cases referred by the court; parties may also request mediation.</div>
   <div class="k">Local Rules</div>
   <div class="v"><a href="https://hamiltoncountycourts.org/index.php/local-rules/" target="_blank" rel="noopener">hamiltoncountycourts.org/local-rules &rarr;</a></div>
 </div>
@@ -146,7 +150,11 @@
               {% if judge.room %}<div><strong>Location:</strong> {{ judge.room }}</div>{% endif %}
               {% if judge.bailiff %}<div><strong>Bailiff:</strong> {{ judge.bailiff }}</div>{% endif %}
               {% if judge.phone %}<div><strong>Phone:</strong> {{ judge.phone }}</div>{% endif %}
+              {% if judge.fax %}<div><strong>Fax:</strong> {% if judge.fax_href %}<a href="tel:+1{{ judge.fax_href | replace("-", "") }}">{{ judge.fax }}</a>{% else %}{{ judge.fax }}{% endif %}</div>{% endif %}
+              {% if judge.email %}<div><strong>Chambers contact:</strong> {% if judge.email_href %}<a href="mailto:{{ judge.email_href }}">{{ judge.email }}</a>{% else %}{{ judge.email }}{% endif %}</div>{% endif %}
+              {% if judge.law_clerk %}<div><strong>Law clerk:</strong> {{ judge.law_clerk }}</div>{% endif %}
             </div>
+            {% if judge.source_url %}<p class="judge-source"><a href="{{ judge.source_url }}" target="_blank" rel="noopener">Official profile &rarr;</a></p>{% endif %}
           </div>
           {% if judge.bio %}
             <details class="judge-sub">
@@ -277,9 +285,9 @@
 </p>
 <div class="fields">
   <div class="k">Drug Treatment &amp; Recovery Court</div>
-  <div class="v">Hon. Nicole L. Sanders, presiding. Room 500, Hamilton County Courthouse. Felony 4 and 5 level offenses. First drug court established in Ohio and the only full-time drug court in the state. Bailiff: Doris Vincent, <a href="tel:+15139465770">513-946-5770</a>. Director: Keshia Jones, <a href="tel:+15139465773">513-946-5773</a>.</div>
+  <div class="v">Hon. Nicole L. Sanders, presiding. Room 500, Hamilton County Courthouse. Felony 4 and 5 level offenses. First drug court established in Ohio and the only full-time drug court in the state. Bailiff: Doris Vincent, <a href="tel:+15139465770">513-946-5770</a>. Director: Keshia Jones, <a href="tel:+15139465773">513-946-5773</a>. Certification Coordinator: Ashley Autry, <a href="tel:+15139465777">513-946-5777</a>.</div>
   <div class="k">Felony Veterans' Treatment Court</div>
-  <div class="v">Hon. Christopher A. Wagner, presiding. Room 330, Hamilton County Courthouse. Court-supervised treatment for veterans whose service-connected issues led to criminal justice contact. Five-phase program: orientation, treatment plan, ongoing treatment, stabilization, transition. Director: Gary Yuratovac, Esq., <a href="tel:+15136184215">513-618-4215</a>. Coordinator: Greg Street, <a href="tel:+15139463371">513-946-3371</a>.</div>
+  <div class="v">Hon. Christopher A. Wagner, presiding. Room 330, Hamilton County Courthouse. Court-supervised treatment for veterans whose service-connected issues led to criminal justice contact. Five-phase program: orientation, treatment plan, ongoing treatment, stabilization, transition. Director: Gary Yuratovac, Esq., <a href="tel:+15136184215">513-618-4215</a>, <a href="mailto:yuratogm@ucmail.uc.edu">yuratogm@ucmail.uc.edu</a>. Coordinator: Greg Street, <a href="tel:+15139463371">513-946-3371</a>.</div>
   <div class="k">Reentry Docket ("Welcome Home")</div>
   <div class="v">Hon. Wende C. Cross, presiding. Room 380, Hamilton County Courthouse. Judicial release program for low-level, non-violent offenders transitioning from state prison. Operated in partnership with the Hamilton County Office of Reentry (Director: Trina Jackson, <a href="tel:+15139464304">513-946-4304</a>). Specialist: Sheryl Miles, <a href="tel:+15139465556">513-946-5556</a>.</div>
 </div>

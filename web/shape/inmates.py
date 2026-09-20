@@ -306,9 +306,14 @@ def _roster_stale_context(snapshot: Snapshot) -> dict:
     (verified 2026-05-19 onward) means HCSO's WAF is denying this site's
     automated public-records retrieval. ``since`` is the first recorded block
     date from the durable evidence log; ``ever_blocked`` keeps the Data-page
-    documentation present after recovery."""
+    documentation present after recovery. ``detail_*`` mirrors the same ledger
+    at detail-page granularity (see web.transparency.detail_denial_context):
+    ``detail_denial_open`` drives the site-wide banner while detail retrieval
+    is denied, ``detail_since`` is the first detail failure date of the open
+    period."""
     from scraper.store import BlockLogCorruptError, load_block_log
     from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
+    from web.transparency import detail_denial_context
 
     hours = roster_stale_hours(snapshot.generated_utc)
     try:
@@ -326,11 +331,17 @@ def _roster_stale_context(snapshot: Snapshot) -> dict:
             ts = rec.get("timestamp_utc") or ""
             since = ts[:10] if ts else None
             break
+    # A1/A4: detail-level denial from the same ledger, shared derivation
+    # with the transparency scorecard (web.transparency.detail_denial_context).
+    detail = detail_denial_context(log)
     return {
         "blocked": hours is not None and hours >= ROSTER_STALE_ALARM_HOURS,
         "since": since,
         "ever_blocked": any(r.get("event") == "blocked" for r in log),
         "last_updated": (snapshot.generated_utc or "")[:10],
+        "detail_status": detail["status"],
+        "detail_denial_open": detail["open"],
+        "detail_since": (detail["since_utc"] or "")[:10] or None,
     }
 
 

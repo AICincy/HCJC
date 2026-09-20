@@ -1,0 +1,554 @@
+{
+  "_provenance": {
+    "schema_version": "1.0",
+    "source": "judges.json (Hamilton County court judge profiles, hamiltoncountycourts.org, via Firecrawl)",
+    "crawl_date": "2026-09-20",
+    "ingested_utc": "2026-09-20T15:56:13.917512+00:00",
+    "ingested_by": "track-c-worker",
+    "counts": {
+      "total": 30,
+      "common_pleas": 16,
+      "municipal": 14,
+      "auxiliary_excluded": 0,
+      "bio_clean": 16,
+      "bio_needs_review": 4,
+      "bio_omitted": 10
+    },
+    "max_age_days": 365
+  },
+  "judges": [
+    {
+      "name": "Alan C. Triggs",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "485",
+      "bailiff": "Lyndsey Spatafora",
+      "law_clerk": "",
+      "phone": "513-946-5841",
+      "phones": [
+        "513-946-5841",
+        "513-946-5840"
+      ],
+      "fax": "513-946-5844",
+      "email": "AHarrison@cms.hamilton-co.org",
+      "bio": "Judge Alan C. Triggs was elected to the Hamilton County Municipal Court for the term beginning January 3, 2018. Alan served as an assistant City of Cincinnati Prosecutor for 3 years and as a Hamilton County Municipal Court Magistrate for 11 years prior to being elected judge.",
+      "bio_status": "needs_review",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-alan-c-triggs/"
+    },
+    {
+      "name": "Alison Hatheway",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "300",
+      "bailiff": "Tara Eggleston",
+      "law_clerk": "",
+      "phone": "513-946-5760",
+      "phones": [
+        "513-946-5760",
+        "513-946-5759"
+      ],
+      "fax": "513-946-5757",
+      "email": "HathewayLawClerk@cms.hamilton-co.org",
+      "bio": "\\*\\* ALL CASE MANAGEMENT CONFERENCES (CMC), STATUS CONFERENCES, AND CASE REPORTS, WILL BE HELD VIA TELEPHONE CONFERENCE. PLEASE CONTACT OPPOSING COUNSEL PRIOR TO THE CMC AND INITIATE A CONFERENCE CALL -- THEN CALL THE COURT AT 513-946-5759",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-alison-hatheway/"
+    },
+    {
+      "name": "Christian A. Jenkins",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "540",
+      "bailiff": "Adam Eiser",
+      "law_clerk": "",
+      "phone": "513-946-5961",
+      "phones": [
+        "513-946-5961",
+        "513-946-5962",
+        "513-946-5855"
+      ],
+      "fax": "513-946-5964",
+      "email": "AEiser@cms.hamilton-co.org",
+      "bio": "Click Here to join Judge Jenkins' Zoom Meeting. Please note, any party appearing via Zoom should enable their camera and ensure their full name is displayed.",
+      "bio_status": "needs_review",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-christian-a-jenkins/"
+    },
+    {
+      "name": "Christopher A. Wagner",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "330",
+      "bailiff": "Kayla Curtin",
+      "law_clerk": "",
+      "phone": "513-946-5890",
+      "phones": [
+        "513-946-5890",
+        "513-946-5891"
+      ],
+      "fax": "513-946-5894",
+      "email": "kcurtin@cms.hamilton-co.org",
+      "bio": "- Guilty Plea Misdemeanor - Guilty Plea Reagan Tokes - Guilty Plea No Reagan Tokes - No Contest Plea No Reagan Tokes - [No Contest Plea Reagan Tokes",
+      "bio_status": "needs_review",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-christopher-a-wagner/"
+    },
+    {
+      "name": "Christopher R. McDowell",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "595",
+      "bailiff": "Dan Blanton",
+      "law_clerk": "",
+      "phone": "513-946-5785",
+      "phones": [
+        "513-946-5785",
+        "513-946-5786"
+      ],
+      "fax": "513-946-5784",
+      "email": "EDorfner@cms.hamilton-co.org",
+      "bio": "Judge McDowell was appointed by Governor Mike DeWine to the Hamilton County Court of Common Pleas in August 2025. Before stepping into his role in September 2025, he enjoyed a fulfilling career as a partner at Strauss Troy in Cincinnati and also served as the prosecutor for the Village of Newtown and the City of Wyoming. Prior to joining Strauss Troy in 2015, he was an equity partner at Dinsmore & Shol’s Cincinnati office, where he practiced both civil and criminal law. Judge McDowell joined Dinsmore in 2000 after concluding active military service in the United States Army Judge Advocate Gene",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-christopher-r-mcdowell/"
+    },
+    {
+      "name": "Jennifer L. Branch",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "320",
+      "bailiff": "Robin T. Jenkins",
+      "law_clerk": "",
+      "phone": "513-946-5117",
+      "phones": [
+        "513-946-5117",
+        "513-946-5118",
+        "513-946-5855",
+        "513-946-5893"
+      ],
+      "fax": "",
+      "email": "BranchBailiff@hamiltoncountycourtsoh.gov",
+      "bio": "**Civility**. Please remain civil and professional at all times. The Court expects all litigants and participants to respect courtroom staff, all counsel, and all participants at all times. The Court notices that counsel who are prepared, professional, and ethical make the best advocates.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-jennifer-l-branch/"
+    },
+    {
+      "name": "Jody M. Luebbers",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "340",
+      "bailiff": "Stacey Murphy",
+      "law_clerk": "",
+      "phone": "513-946-5755",
+      "phones": [
+        "513-946-5755",
+        "513-946-5754"
+      ],
+      "fax": "513-946-5752",
+      "email": "SMurphy@hamiltoncountycourtsoh.gov",
+      "bio": "To set a hearing on a civil case, contact the law clerk. To set a hearing on a criminal case, contact the bailiff. A file stamped courtesy copy of the motion should be provided to the court. We handle criminal motions in the morning and civil motions in the afternoon.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-jody-m-luebbers/"
+    },
+    {
+      "name": "Katie Casch",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "510",
+      "bailiff": "Tim Noel",
+      "law_clerk": "",
+      "phone": "513-946-5790",
+      "phones": [
+        "513-946-5790",
+        "513-946-5791"
+      ],
+      "fax": "513-946-5792",
+      "email": "ljohnson@hamiltoncountycourtsoh.gov",
+      "bio": "Katie Casch serves as a judge on the Hamilton County Common Pleas Court, presiding over criminal and civil cases. Her criminal docket includes serious felonies such as aggravated murder, felonious assault, robbery, and rape, while her civil docket involves lawsuits seeking at least $15,000.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-katie-casch/"
+    },
+    {
+      "name": "Leah Dinkelacker",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "560",
+      "bailiff": "Mitch Gillen",
+      "law_clerk": "",
+      "phone": "513-946-5750",
+      "phones": [
+        "513-946-5750",
+        "513-946-5749"
+      ],
+      "fax": "513-946-5751",
+      "email": "",
+      "bio": "Case Management Conferences are handled by the staff attorney. The Case Management Conferences may be held via telephone. Please contact the staff attorney in advance if you need to reschedule the initial Case Management Conference.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-leah-dinkelacker/"
+    },
+    {
+      "name": "Melba D. Marsh",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "310",
+      "bailiff": "John P. Henges",
+      "law_clerk": "Gabby Givens",
+      "phone": "513-946-5866",
+      "phones": [
+        "513-946-5866",
+        "513-946-5867"
+      ],
+      "fax": "513-946-5868",
+      "email": "ggivens@hamiltoncountycourtsoh.gov",
+      "bio": "Contact the law clerk after the civil motion is filed and schedule a date for hearing with opposing counsel. Civil motions are generally scheduled in the afternoon, but are subject to cancellation or postponement if a trial is in progress. Occasionally, days are set aside for hearing civil motions. On those days, motions may be scheduled in the morning also. Criminal motions are scheduled in the mornings. Contact the bailiff to set the date and time.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-melba-d-marsh/"
+    },
+    {
+      "name": "Nicole L. Sanders",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "500",
+      "bailiff": "Doris Vincent",
+      "law_clerk": "",
+      "phone": "513-946-5770",
+      "phones": [
+        "513-946-5770",
+        "513-946-5773",
+        "513-946-5777",
+        "513-946-5775",
+        "513-946-5780",
+        "513-946-5776"
+      ],
+      "fax": "513-946-5779",
+      "email": "",
+      "bio": "- Attorneys are expected to be prompt, professional, courteous and respectful at all times. - Counsel is expected to behave professionally and to act civilized toward each other, parties, witnesses and courtroom staff. - Attorneys should stand when addressing the court, questioning witnesses and when objecting. - Counsel must ask permission before approaching a witness or the bench. - If a case is in progress, attorneys should quietly wait until the bailiff becomes available. - If an attorney is going to be late, please contact the court bailiff as soon as possible.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-nicole-l-sanders/"
+    },
+    {
+      "name": "Patrick T. Dinkelacker",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "360",
+      "bailiff": "Christopher Collini",
+      "law_clerk": "",
+      "phone": "513-946-5851",
+      "phones": [
+        "513-946-5851",
+        "513-946-5850"
+      ],
+      "fax": "513-946-5854",
+      "email": "",
+      "bio": "After filing the motion, take a copy of the motion to the courtroom and meet with Chris or Kari to get a hearing date. All Civil Motions are heard on Tuesdays or Thursdays at 1:00 p.m. Any motion can be set for an oral argument. I try to rule on all motions within two (2) weeks of arguments.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-patrick-t-dinkelacker/"
+    },
+    {
+      "name": "Robert A. Goering",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "520",
+      "bailiff": "Kristie Cornelius",
+      "law_clerk": "",
+      "phone": "513-946-5102",
+      "phones": [
+        "513-946-5102",
+        "513-946-5744"
+      ],
+      "fax": "513-946-5104",
+      "email": "SWertz@hamiltoncountycourtsoh.gov",
+      "bio": "Case management conferences will be held by telephone. The parties are encouraged to submit a 26(F) report, and a template can be found **here**. In their 26(F) report or during the CMC, the parties may request a settlement conference or telephone conference with the Judge (usually within 30-90 days after the CMC conference).",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-robert-a-goering/"
+    },
+    {
+      "name": "Robert C. Winkler",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "530",
+      "bailiff": "Lois Gorrasi",
+      "law_clerk": "",
+      "phone": "513-946-5112",
+      "phones": [
+        "513-946-5112",
+        "513-946-5106"
+      ],
+      "fax": "513-946-5114",
+      "email": "TCremeans@cms.hamilton-co.org",
+      "bio": "- Guilty Plea Misdemeanor - Guilty Plea Reagan Tokes - Guilty Plea No Reagan Tokes - Guilty Plea w/ Agreed Sentence No Reagan Tokes - Guilty Plea w/ Agreed Sentence Reagan Tokes - [No Contest Plea Reagan Tokes]",
+      "bio_status": "needs_review",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-robert-c-winkler/"
+    },
+    {
+      "name": "Virginia Tallent",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "495",
+      "bailiff": "Rob Bryan",
+      "law_clerk": "",
+      "phone": "513-946-5830",
+      "phones": [
+        "513-946-5830",
+        "513-946-5831"
+      ],
+      "fax": "513-946-5833",
+      "email": "CHoward@cms.hamilton-co.org",
+      "bio": "These rules apply to all matters before Judge Tallent and will be updated as necessary. Questions about criminal matters should be directed to Bailiff Rob Bryan; civil matters and non-case-related inquiries should be sent to Staff Attorney Courtney Howard.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-virginia-tallent/"
+    },
+    {
+      "name": "Wende C. Cross",
+      "title": "Common Pleas Court Judge",
+      "court": "Common Pleas",
+      "courtroom": "",
+      "bailiff": "Lawrenceene Howard",
+      "law_clerk": "",
+      "phone": "513-946-5860",
+      "phones": [
+        "513-946-5860",
+        "513-946-5862"
+      ],
+      "fax": "513-946-5864",
+      "email": "LHoward@cms.hamilton-co.org",
+      "bio": "The courtroom is a place of respect. All individuals appearing in Court are to treat all other individuals in Court with respect without regard to race, gender, religion, national origin, disability, age, sexual orientation, gender identity, or socioeconomic status.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/common-pleas-court-judge-wende-c-cross/"
+    },
+    {
+      "name": "Janaya Trotter Bratton",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "124",
+      "bailiff": "Shawnise Lewis",
+      "law_clerk": "",
+      "phone": "513-946-5256",
+      "phones": [
+        "513-946-5256"
+      ],
+      "fax": "",
+      "email": "JTBpretrial@cms.hamilton-co.org",
+      "bio": "",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/https-hamiltoncountycourts-org-index-php-municipal-judges-municipal-court-judge-janaya-bratton/"
+    },
+    {
+      "name": "Athena Stefanou",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "154",
+      "bailiff": "John Wallace",
+      "law_clerk": "",
+      "phone": "513-946-5133",
+      "phones": [
+        "513-946-5133"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-athena-stefanou/"
+    },
+    {
+      "name": "Bernie Bouchard",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "160",
+      "bailiff": "Andy Poli",
+      "law_clerk": "",
+      "phone": "513-946-5175",
+      "phones": [
+        "513-946-5175"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "Judge Bernie Bouchard is a lifelong resident of Cincinnati. His parents, doctors who practiced in Western Hills for over 30 years, instilled in him the values of hard work, education, and high moral standards. Judge Bouchard was appointed to the Hamilton County Municipal Court in 2006. He represents District 6 which includes Colerain Township, Green Township, Cheviot, and Springdale Township. Through his experience as a lawyer and magistrate, Bouchard possesses the legal knowledge and integrity to ensure that each citizen is treated fairly and with respect.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-bernie-bouchard/"
+    },
+    {
+      "name": "Brad Greenberg",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "164",
+      "bailiff": "Julie McCoy",
+      "law_clerk": "",
+      "phone": "513-946-5215",
+      "phones": [
+        "513-946-5215"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "Judge Brad Greenberg has served in Municipal Court since 2006. Greenberg also presides over Hamilton County's Municipal Veterans Court. Veterans Treatment Court is a judge-supervised treatment program whose goal is to help United States Veterans address the issues that led to contact with the criminal justice system.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-brad-greenberg/"
+    },
+    {
+      "name": "Danielle Colliver",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "144",
+      "bailiff": "Tom Sauer",
+      "law_clerk": "",
+      "phone": "513-946-5149",
+      "phones": [
+        "513-946-5149"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-danielle-colliver/"
+    },
+    {
+      "name": "Donte Johnson",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "270",
+      "bailiff": "Amber Worthen",
+      "law_clerk": "",
+      "phone": "513-946-5165",
+      "phones": [
+        "513-946-5165"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-donte-johnson/"
+    },
+    {
+      "name": "Dwane Mallory",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "134",
+      "bailiff": "J'onae Wright",
+      "law_clerk": "",
+      "phone": "513-946-5122",
+      "phones": [
+        "513-946-5122"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-dwane-mallory/"
+    },
+    {
+      "name": "Gwen Bender",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "174",
+      "bailiff": "Scott Schiller",
+      "law_clerk": "",
+      "phone": "513-946-5143",
+      "phones": [
+        "513-946-5143"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "Judge Bender was appointed to the bench in February, 2017. Prior to taking the bench, Judge Bender served as a Chief Assistant Prosecutor at the Hamilton County Prosecutor’s Office, overseeing the Municipal Division. Over the course of her 23 years at the Hamilton County Prosecutor’s Office, Bender successfully prosecuted cases at the appellate, felony and municipal levels.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-gwen-bender/"
+    },
+    {
+      "name": "Jackie Ginocchio",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "140",
+      "bailiff": "Brian Greene",
+      "law_clerk": "",
+      "phone": "513-946-5148",
+      "phones": [
+        "513-946-5148"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "Jackie Ginocchio serves as Judge on Hamilton County Municipal Court, representing the 7th District. Jackie presides over misdemeanor criminal matters and civil matters involving disputes of $15,000 or less.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-jackie-ginocchio/"
+    },
+    {
+      "name": "Michael Peck",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "230",
+      "bailiff": "Jeff Baker",
+      "law_clerk": "",
+      "phone": "513-946-5108",
+      "phones": [
+        "513-946-5108"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-michael-peck/"
+    },
+    {
+      "name": "R. Bernard Mundy",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "220",
+      "bailiff": "LaTia Kemp",
+      "law_clerk": "",
+      "phone": "513-946-5127",
+      "phones": [
+        "513-946-5127"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-r-bernard-mundy/"
+    },
+    {
+      "name": "Rodney J. Harris",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "264",
+      "bailiff": "Tara Brown",
+      "law_clerk": "",
+      "phone": "513-946-5154",
+      "phones": [
+        "513-946-5154"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-rodney-j-harris/"
+    },
+    {
+      "name": "Samantha Silverstein",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "280",
+      "bailiff": "Ashley Harp",
+      "law_clerk": "",
+      "phone": "513-946-5138",
+      "phones": [
+        "513-946-5138"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "Judge Silverstein was elected to the Hamilton County Municipal Court bench on November 7, 2023. Judge Silverstein graduated from DePaul College of Law in 2013. During law school she clerked at the Cook County Public Defender's Office and was a student in the Center for Justice In Capital Cases. After graduation, she joined the public defender's office in West Palm Beach, Florida. In West Palm, she worked in the misdemeanor, juvenile, and felony divisions. She tried over 40 jury trials. In 2017, Judge Silverstein moved to Cincinnati to be closer to family. Before joining the public defender's o",
+      "bio_status": "omitted",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-samantha-silverstein/"
+    },
+    {
+      "name": "William Mallory",
+      "title": "Municipal Court Judge",
+      "court": "Municipal",
+      "courtroom": "240",
+      "bailiff": "Raymond Phoenix",
+      "law_clerk": "",
+      "phone": "513-946-5160",
+      "phones": [
+        "513-946-5160"
+      ],
+      "fax": "",
+      "email": "",
+      "bio": "Judge William Mallory graduated valedictorian from Taft High School of Cincinnnati in 1976. He graduated from the University of Cincinnati with a degree in Political Science in 1981. He earned his Juris Doctorate degree from Salmon P. Chase College of Law in 1986.",
+      "bio_status": "clean",
+      "source_url": "https://hamiltoncountycourts.org/index.php/municipal-judges/municipal-court-judge-william-mallory/"
+    }
+  ]
+}

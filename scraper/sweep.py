@@ -830,8 +830,17 @@ def run(
         # the site) - but never when the list sweep itself looked degraded.
         save_ok = False
         if not dry_run and roster_ok:
+            # A2: last_healthy_sweep_utc advances only on a fully healthy
+            # sweep: the roster wrote cleanly AND detail failures stayed
+            # below the degraded threshold. A degraded detail phase keeps
+            # the previous clock value so the freshness signal stays honest.
+            detail_healthy = not check_detail_degraded(n_detail_attempts, detail_failures)
             try:
-                save_current(paths.current_path, current.values())
+                save_current(
+                    paths.current_path,
+                    current.values(),
+                    last_healthy_sweep_utc=utcnow_iso() if (clean_finish and detail_healthy) else None,
+                )
                 save_ok = True
             except (OSError, SnapshotCorruptError) as e:
                 # Disk full, permission denied, atomic-rename failure, or a

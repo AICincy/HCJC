@@ -315,6 +315,12 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     orc_freq = _orc_frequency(snapshot.inmates)
     env.globals["orc_freq"] = lambda code: orc_freq.get(orc_mod.normalize_code(code), 0)
     env.globals["roster_stale"] = _roster_stale_context(snapshot)
+    # D1/A5: the footer in base.html renders snapshot.generated_utc, but the
+    # static pages (visit, help, courts, bond-schedule) render without a
+    # snapshot in context. This global gives their render calls (and the
+    # footer fallback) the build timestamp without changing any masthead
+    # branches that key on `snapshot is defined`.
+    env.globals["generated_utc"] = snapshot.generated_utc
     # The satirical Sheriff overlay renders on the blocked notice only when the
     # asset is present, so there is no broken image before it is added.
     env.globals["waf_sheriff_available"] = (STATIC_DIR / "img" / "sheriff-waf.png").exists()

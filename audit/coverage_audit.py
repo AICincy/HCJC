@@ -63,6 +63,7 @@ INTERNAL_ONLY = {
     "explainers.json":   "build input for statute explainer text; rendered into HTML",
     "court_bond_schedule.json": "build input for bond schedule page; rendered into HTML, not served raw",
     "court_bond_corrections.json": "build input for bond correction log; rendered into HTML, not served raw",
+    "court_judges.json": "build input for courts page judge cards; rendered into HTML, not served raw",
     "incidents_recent.json":    "retired feed, last written 2026-05-19 (scraper removed); kept in data/ as historical record, not served",
     "oi_shootings_recent.json": "retired feed, last written 2026-05-18; kept in data/ as historical record, not served",
 }

@@ -444,8 +444,10 @@ def _render_transparency_page(env: Environment, snapshot: Snapshot, out_dir: Pat
             "transparency page: WAF-block evidence log unreadable (%s); rendering metrics as unavailable", e
         )
         block_log = []
-    metrics = compute_transparency_metrics(block_log, snapshot.generated_utc)
-    page = env.get_template("transparency.html").render(metrics=metrics)
+    metrics = compute_transparency_metrics(
+        block_log, snapshot.generated_utc, last_healthy_sweep_utc=snapshot.last_healthy_sweep_utc
+    )
+    page = env.get_template("transparency.html").render(metrics=metrics, snapshot=snapshot)
     target = out_dir / "transparency" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
@@ -687,6 +689,7 @@ def _render_bond_schedule_page(env: Environment, out_dir: Path) -> None:
         felony_notes=raw.get("felony_notes", []),
         general_notes=raw.get("general_notes", []),
         bond_source_url=bond_source_url,
+        generated_utc=env.globals["generated_utc"],
     )
     target = out_dir / "bond-schedule" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -714,7 +717,7 @@ def _render_court_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> N
 def _render_visit_page(env: Environment, out_dir: Path) -> None:
     """Static visitation-policy info page. Links out to HCSO's authoritative
     policy; deliberately does NOT show visitation records (privacy creep)."""
-    page = env.get_template("visit.html").render()
+    page = env.get_template("visit.html").render(generated_utc=env.globals["generated_utc"])
     target = out_dir / "visit" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
@@ -724,7 +727,7 @@ def _render_help_page(env: Environment, out_dir: Path) -> None:
     """Static "Get help" resources page. Mirrors current contact info for the
     free Hamilton County legal and crisis resources most relevant to people
     who land on JCStream looking for help. No data dependencies."""
-    page = env.get_template("help.html").render()
+    page = env.get_template("help.html").render(generated_utc=env.globals["generated_utc"])
     target = out_dir / "help" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
@@ -775,7 +778,110 @@ def _mirror_judge_photo(image_url: str, base_url: str) -> str:
     return f"{base_url}/static/judges/{name}"
 
 
+def _judges_from_ingested_json() -> tuple[list[dict], list[dict]] | None:
+    """Read data/court_judges.json (Firecrawl corpus, written by
+    scraper/ingest_court_content.py).
+
+    Returns None when the file is missing or fails validation so the caller
+    falls back to the legacy HAMCO/ profiles loudly. The canonical JSON
+    carries fax/email/law-clerk/source_url fields HAMCO never had; slugs and
+    last names are derived with the same logic as the HAMCO parse so
+    judge-deeplink.js anchors and classify.py #judge-<slug> targets are
+    unchanged. Quarantined bios (bio_status != "clean") are not published.
+    """
+    import re
+
+    path = feeds_mod.DATA_DIR / "court_judges.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        log.warning("judge data: %s missing; falling back to HAMCO/ profiles", path)
+        return None
+    except (json.JSONDecodeError, OSError) as e:
+        log.warning("judge data: %s unreadable (%s); falling back to HAMCO/ profiles", path, e)
+        return None
+
+    judges = data.get("judges") if isinstance(data, dict) else None
+    if not isinstance(judges, list) or len(judges) != 30:
+        n = len(judges) if isinstance(judges, list) else "not-a-list"
+        log.warning(
+            "judge data: %s failed count band (%s records); falling back to HAMCO/ profiles",
+            path,
+            n,
+        )
+        return None
+
+    common_pleas: list[dict] = []
+    municipal: list[dict] = []
+
+    for rec in judges:
+        if not isinstance(rec, dict):
+            log.warning("judge data: %s has a non-object record; falling back to HAMCO/ profiles", path)
+            return None
+        name = str(rec.get("name") or "").strip()
+        court = str(rec.get("court") or "").strip()
+        if not name or court not in ("Common Pleas", "Municipal"):
+            log.warning(
+                "judge data: %s record missing name/court; falling back to HAMCO/ profiles", path
+            )
+            return None
+
+        courtroom = str(rec.get("courtroom") or "").strip()
+        bio = rec.get("bio") or ""
+        name_parts = name.split()
+        last_name = name_parts[-1] if name_parts else name
+        slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+        judge_dict = {
+            "name": name,
+            "title": "Municipal Court Judge" if court == "Municipal" else "Common Pleas Court Judge",
+            "room": f"Room {courtroom}" if courtroom else "",
+            "bailiff": str(rec.get("bailiff") or "").strip(),
+            "phone": str(rec.get("phone") or "").strip(),
+            "fax": str(rec.get("fax") or "").strip(),
+            "fax_href": sanitize_phone_href(rec.get("fax") or ""),
+            "email": str(rec.get("email") or "").strip(),
+            "email_href": sanitize_email_href(rec.get("email") or ""),
+            "law_clerk": str(rec.get("law_clerk") or "").strip(),
+            "source_url": sanitize_outbound_url(rec.get("source_url") or ""),
+            "image_url": "",  # filled from the HAMCO photo index by _parse_judges
+            "bio": bio if rec.get("bio_status") == "clean" else "",
+            "procedures": "",
+            "last_name": last_name,
+            "slug": slug,
+        }
+
+        if court == "Municipal":
+            municipal.append(judge_dict)
+        else:
+            common_pleas.append(judge_dict)
+
+    common_pleas.sort(key=lambda j: (j["last_name"].lower(), j["name"].lower()))
+    municipal.sort(key=lambda j: (j["last_name"].lower(), j["name"].lower()))
+
+    return common_pleas, municipal
+
+
 def _parse_judges(base_url: str = "") -> tuple[list[dict], list[dict]]:
+    """Parse judge profiles, preferring data/court_judges.json with HAMCO/ fallback.
+
+    The canonical JSON path keeps the already-mirrored headshots: HAMCO
+    remains the photo source of record (the corpus ships no images), so the
+    legacy parse runs as a photo index even on the JSON path. Missing or
+    corrupt JSON logs loudly and falls back to the legacy HAMCO/ profiles.
+    """
+    from_json = _judges_from_ingested_json()
+    hamco = _parse_judges_hamco(base_url)
+    if from_json is None:
+        return hamco
+    photos = {j["slug"]: j["image_url"] for j in hamco[0] + hamco[1]}
+    common_pleas, municipal = from_json
+    for j in common_pleas + municipal:
+        j["image_url"] = photos.get(j["slug"], "")
+    return common_pleas, municipal
+
+
+def _parse_judges_hamco(base_url: str = "") -> tuple[list[dict], list[dict]]:
     """Parse Common Pleas and Municipal judge profile JSON files in HAMCO/.
     Returns (common_pleas_list, municipal_list) sorted by judge's last name or clean name.
     """
@@ -893,6 +999,12 @@ def _parse_judges(base_url: str = "") -> tuple[list[dict], list[dict]]:
             "room": room,
             "bailiff": bailiff,
             "phone": phone,
+            "fax": "",
+            "fax_href": "",
+            "email": "",
+            "email_href": "",
+            "law_clerk": "",
+            "source_url": "",
             "image_url": image_url,
             "bio": bio,
             "procedures": procedures,
@@ -921,6 +1033,7 @@ def _render_courts_page(env: Environment, out_dir: Path) -> None:
     page = env.get_template("courts.html").render(
         common_pleas=common_pleas,
         municipal=municipal,
+        generated_utc=env.globals["generated_utc"],
     )
     target = out_dir / "courts" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)

@@ -141,12 +141,18 @@ class Snapshot(BaseModel):
     # schema_version is greater than the reader knows.
     schema_version: int = 1
     generated_utc: str
+    # A2 (2026-09-20): advances only when a sweep completes with detail
+    # failures below the degraded threshold, so the freshness clock reflects
+    # the last fully successful retrieval rather than the roster vintage.
+    # Optional-with-default: existing files load as-is, no data migration,
+    # schema_version stays 1.
+    last_healthy_sweep_utc: str = ""
     inmate_count: int
     inmates: list[Inmate]
 
-    @field_validator("generated_utc")
+    @field_validator("generated_utc", "last_healthy_sweep_utc")
     @classmethod
-    def _generated_utc_shape(cls, v: str) -> str:
+    def _utc_stamp_shape(cls, v: str) -> str:
         # Empty string is intentional at bootstrap (web/build.py builds an
         # empty Snapshot when no data file exists yet). For populated
         # snapshots, accept only the strict utcnow_iso() shape so a
@@ -155,7 +161,7 @@ class Snapshot(BaseModel):
         if v == "":
             return v
         if not _GENERATED_UTC_RE.match(v):
-            raise ValueError(f"generated_utc must be empty or YYYY-MM-DDTHH:MM:SSZ, got {v!r}")
+            raise ValueError(f"UTC stamp must be empty or YYYY-MM-DDTHH:MM:SSZ, got {v!r}")
         return v
 
     @model_validator(mode="after")
