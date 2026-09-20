@@ -12,7 +12,7 @@ import json
 import logging
 import re
 import threading
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 log = logging.getLogger(__name__)
@@ -182,6 +182,14 @@ def _parse_book_date(date_str: str | None) -> datetime | None:
         # their mid-50s) must survive.
         if parsed.year == 1970 and parsed.month == 1 and parsed.day == 1:
             return None
+        # C-5: reject implausible far-future dates. Python's %y pivot maps
+        # 69-99 to 19XX, so "9/20/69" is 1969 (fine), but "9/20/40" pivots to
+        # 2040 -- never a real booking date or DOB. Anything more than a year
+        # ahead of today is data-entry garbage; return None so downstream
+        # consumers uniformly show "unknown" instead of a wrong age or a
+        # negative days-in-custody.
+        if parsed > datetime.now() + timedelta(days=366):
+            return None
         return parsed
     return None
 
@@ -214,10 +222,12 @@ def _display_date(date: datetime | str | None) -> str:
     string. Templates pass ``inmate.booking_date``, which is a string, so
     the string path is the common case; passing a datetime still works.
 
-    Returns "" for empty, unparseable, or sentinel dates more than 15 years
-    old (e.g. epoch-era "1/1/70"), matching the sentinel handling in
+    Returns "" for empty, unparseable, or ancient sentinel dates more than 15
+    years old (e.g. epoch-era "1/1/70"), matching the sentinel handling in
     shape._days_in_custody so the formatted date and the "N days ago"
-    relative label stay consistent.
+    relative label stay consistent. Far-future dates are *not* blanked
+    (C-10/m-10): a data-entry far-future date is surfaced as-is so the error
+    is visible instead of silently hidden.
     """
     if not date:
         return ""
@@ -230,7 +240,7 @@ def _display_date(date: datetime | str | None) -> str:
         date_aware = date
         if date_aware.tzinfo is None:
             date_aware = date_aware.replace(tzinfo=timezone.utc)
-        if abs((now_utc - date_aware).days) > 5475:  # 15 * 365, sentinel guard
+        if (now_utc - date_aware).days > 5475:  # 15 * 365, ancient-sentinel guard
             return ""
         return date_aware.strftime("%b %d, %Y")
     except (ValueError, AttributeError, TypeError):

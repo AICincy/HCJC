@@ -107,3 +107,20 @@ def test_venue_fallback_tiers_group_under_f_and_m():
     )
     s = _court_slippage([felony, misd], now=NOW)
     assert s["tiers"] == [{"label": "F", "count": 1}, {"label": "M", "count": 1}]
+
+
+def test_next_court_date_is_past_flags_stale_labels():
+    # D-1: _next_court_date falls back to the most recent past date when no
+    # future date exists; the template uses this flag to relabel.
+    from web.shape import _next_court_date, _next_court_date_is_past
+
+    past = _inm("1001", ["01/05/20"])  # long past
+    assert _next_court_date(past) == "01/05/20"
+    assert _next_court_date_is_past(past) is True
+
+    future = _inm("1002", ["12/31/2099"])  # genuinely future
+    assert _next_court_date_is_past(future) is False
+
+    none = _inm("1003", [])
+    assert _next_court_date(none) == ""
+    assert _next_court_date_is_past(none) is False

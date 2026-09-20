@@ -27,9 +27,11 @@ from __future__ import annotations
 import json
 import logging
 import os
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from pathlib import Path
 
 from .sweep import CURRENT_PATH, _prev_generated_utc
 from .sweep_guards import REMOVAL_SLA_HOURS, ROSTER_STALE_ALARM_HOURS, roster_stale_hours
@@ -122,7 +124,35 @@ def alert(stale_h: float | None) -> str:
         return "dry-run"
 
 
-def removal_sla_warn(stale_h: float | None) -> str:
+# C-8: the ::warning annotation below fires once per sweep cycle while the
+# roster sits in the removal-SLA window. During a multi-day WAF block that is
+# one annotation per ~15-minute cycle with no change in state -- pure spam.
+# Throttle: at most one emission per window. State lives in a small JSON file
+# committed to the repo (the runner is ephemeral), so the throttle holds
+# across cycles; the file only changes when a warning actually fires, so the
+# sweep's commit step picks up at most one extra commit per throttle window.
+_WARN_THROTTLE_HOURS = 6.0
+_WARN_STATE_FILENAME = "freeze_alert_state.json"
+
+
+def _warn_state_path() -> Path:
+    override = os.environ.get("JCSTREAM_FREEZE_WARN_STATE")
+    if override:
+        return Path(override)
+    return CURRENT_PATH.parent / _WARN_STATE_FILENAME
+
+
+def _warn_throttled(state_path: Path) -> bool:
+    """True when a warning was already emitted within the throttle window."""
+    try:
+        raw = json.loads(state_path.read_text(encoding="utf-8"))
+        last = float(raw.get("last_warn_utc", 0) or 0)
+    except (OSError, ValueError, TypeError, AttributeError):
+        return False
+    return (time.time() - last) < _WARN_THROTTLE_HOURS * 3600
+
+
+def removal_sla_warn(stale_h: float | None, *, state_path: Path | None = None) -> str:
     """Emit a GitHub Actions ``::warning`` when the roster is stale past the
     removal-SLA window but below the freeze alarm.
 
@@ -132,9 +162,19 @@ def removal_sla_warn(stale_h: float | None) -> str:
     multi-day WAF block; the FCRA context is that a released inmate is removed
     on the next successful sweep, and this flags when that has been delayed
     past normal cadence. Returns ``"warn"`` when the annotation fired, ``"ok"``
-    otherwise (fresh, unknown, or already at the freeze threshold)."""
+    otherwise (fresh, unknown, or already at the freeze threshold), and
+    ``"throttled"`` when a warning was already emitted within the throttle
+    window (C-8)."""
     if stale_h is None or stale_h < REMOVAL_SLA_HOURS or stale_h >= ROSTER_STALE_ALARM_HOURS:
         return "ok"
+    # C-8: emit at most one warning per throttle window.
+    path = state_path if state_path is not None else _warn_state_path()
+    if _warn_throttled(path):
+        log.info(
+            "removal-SLA warning throttled (already emitted within the last %.0fh)",
+            _WARN_THROTTLE_HOURS,
+        )
+        return "throttled"
     print(
         f"::warning title=Roster stale past removal SLA::current.json is "
         f"{stale_h:.1f}h old (>= {REMOVAL_SLA_HOURS:.1f}h removal-SLA window, "
@@ -147,6 +187,15 @@ def removal_sla_warn(stale_h: float | None) -> str:
         REMOVAL_SLA_HOURS,
         ROSTER_STALE_ALARM_HOURS,
     )
+    # Best-effort: a state-write failure must never fail the workflow; the
+    # worst case is one extra warning next cycle.
+    try:
+        path.write_text(
+            json.dumps({"last_warn_utc": time.time(), "stale_hours": round(stale_h, 2)}),
+            encoding="utf-8",
+        )
+    except OSError as e:
+        log.warning("could not persist freeze-warn state (%s); warning still emitted", e)
     return "warn"
 
 

@@ -42,14 +42,15 @@ jobs:
           git add data/courtclerk_cases.json
           if ! git diff --cached --quiet; then
             git commit -m "case-data: ingest issue #$ISSUE_NUMBER"
-            git fetch origin main
+            # A-1: full fetch so origin/main is fresh for the rebase below.
+            git fetch origin
+            # M-3 (same class as sweep.yml): on rebase conflict, abort and fail
+            # loudly instead of `git merge -X ours`, which could silently drop
+            # the other side's evidence-log records, invisible to the hash chain.
             git rebase origin/main || {
-              echo "::warning::Rebase conflict detected; attempting merge"
+              echo "::error::Rebase conflict detected; refusing merge fallback (M-3). Aborting push."
               git rebase --abort
-              git merge -X ours origin/main --no-edit || {
-                echo "::error::Both rebase and merge failed"
-                exit 1
-              }
+              exit 1
             }
             git push
           else

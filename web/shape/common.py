@@ -43,8 +43,20 @@ def _human_utc(ts: str | None) -> str:
         except ValueError:
             continue
     if dt is None:
+        # C-6: Socrata sometimes emits offset-bearing or fractional-second
+        # stamps ("2026-09-20T12:00:00.000-04:00"). fromisoformat handles both;
+        # convert to UTC before the Eastern-time rendering below.
+        iso = s[:-1] + "+00:00" if s.endswith("Z") else s
+        try:
+            dt = datetime.fromisoformat(iso)
+        except ValueError:
+            dt = None
+    if dt is None:
         return s
-    dt = dt.replace(tzinfo=timezone.utc)
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    else:
+        dt = dt.astimezone(timezone.utc)
     label = "ET"
     try:
         from zoneinfo import ZoneInfo

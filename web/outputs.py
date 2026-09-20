@@ -117,9 +117,15 @@ def _write_search_json(out_dir: Path, snapshot: Snapshot, offenses: dict | None 
     (out_dir / "search.json").write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
 
 
-def _write_dispatches(out_dir: Path, points: list[dict]) -> None:
+def _write_dispatches(out_dir: Path, points: list[dict], generated_utc: str = "") -> None:
+    # C-3: pin generated_utc to the roster's vintage (passed by the caller)
+    # instead of wall-clock now(). During a sustained HCSO outage the roster
+    # is frozen, so a pure timestamp rewrite is pure commit churn -- a sweep
+    # commit every cycle with no data change, and SHA256SUMS rewriting itself.
+    # Falls back to now() when the caller passes nothing.
     payload = {
-        "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_utc": generated_utc
+        or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "count": len(points),
         "points": points,
     }
@@ -150,7 +156,15 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
         "Disallow: /\n",
         encoding="utf-8",
     )
-    expires = (datetime.now(timezone.utc) + timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    # C-3: base Expires on the passed-in generated_utc (roster vintage), not
+    # wall-clock now(). security.txt is informational here, not a security
+    # boundary; pinning it means a frozen roster produces a byte-stable file
+    # instead of timestamp churn on every build.
+    try:
+        base = datetime.strptime(generated_utc, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    except (TypeError, ValueError):
+        base = datetime.now(timezone.utc)
+    expires = (base + timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%SZ")
     wk = out_dir / ".well-known"
     wk.mkdir(parents=True, exist_ok=True)
     (wk / "security.txt").write_text(

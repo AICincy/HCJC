@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ inmate.full_name }} &middot; JCStream{% endblock %}
+{% block canonical_path %}/inmate/{{ inmate.inmate_number }}/{% endblock %}
 {% block body_class %}detail{% endblock %}
 {% block sr_h1 %}{% endblock %}
 {% block content %}
@@ -73,8 +74,13 @@
       <div class="bio-field"><dt>Inmate&nbsp;#</dt><dd><code>{{ inmate.inmate_number }}</code></dd></div>
       <div class="bio-field"><dt>Booking&nbsp;#</dt><dd><code>{{ inmate.booking_number or ' - ' }}</code>{% if seq %} <span class="muted">{{ seq }} <span class="seq-interpreted" title="The booking number is interpreted as a 2-digit year plus a sequence number (YY + sequence); this reading is unverified and may be wrong.">(interpreted)</span></span>{% endif %}</dd></div>
       <div class="bio-field"><dt>Booked</dt><dd>{{ display_date(inmate.booking_date) or ' - ' }}{% if days is not none %} <span class="muted">{{ days }} day{{ '' if days == 1 else 's' }} ago</span>{% endif %}</dd></div>
-      <div class="bio-field"><dt>Projected&nbsp;release</dt><dd>{{ inmate.projected_release_date or ' - ' }}</dd></div>
-      <div class="bio-field"><dt>Next&nbsp;court&nbsp;date</dt><dd>{{ nextc or ' - ' }}</dd></div>
+      {# D-4: HCSO emits "NA" for unknown projected release; normalize to the
+         site-wide " - " empty marker for consistency. #}
+      <div class="bio-field"><dt>Projected&nbsp;release</dt><dd>{{ inmate.projected_release_date if inmate.projected_release_date and inmate.projected_release_date != 'NA' else ' - ' }}</dd></div>
+      {# D-1: _next_court_date falls back to the most recent past date when no
+         future date exists; labeling a past date "Next court date" is wrong,
+         so use "Last known court date" in that case. #}
+      <div class="bio-field"><dt>{% if nextc and next_court_date_is_past(inmate) %}Last&nbsp;known&nbsp;court&nbsp;date{% else %}Next&nbsp;court&nbsp;date{% endif %}</dt><dd>{{ nextc or ' - ' }}</dd></div>
       <div class="bio-field"><dt>Charges</dt><dd>{{ inmate.charges | length }}{% if status %} <span class="muted">{{ status }}</span>{% endif %}</dd></div>
       <div class="bio-field"><dt>Total&nbsp;bond</dt><dd>{% if inmate.charges %}{{ bonds.total }}{% if bonds.felony != '$0' and bonds.misdemeanor != '$0' %} <span class="muted">felony {{ bonds.felony }} &middot; misd. {{ bonds.misdemeanor }}</span>{% endif %}{% else %} - {% endif %}</dd></div>
       <div class="bio-field"><dt>Case&nbsp;#s</dt><dd>{% if cases %}{{ cases | length }}{% else %} - {% endif %}</dd></div>
@@ -400,7 +406,10 @@
 <ul class="cfs">
   {% for r in cfs_matches %}
   <li>
-    <time datetime="{{ r.create_time_incident }}">{{ r.create_time_incident }}</time>
+    {# D-2: render the Socrata ISO stamp in the page's standard date format
+       instead of the raw "2026-09-19T14:23:00.000" string. human_utc handles
+       offset-bearing and fractional-second stamps (C-6). #}
+    <time datetime="{{ r.create_time_incident }}">{{ human_utc(r.create_time_incident) }}</time>
     <span class="cfs-disposition">{{ r.disposition_text }}</span>
     &middot; {{ r.address_x }}
     {% if r.cpd_neighborhood %}<span class="muted">({{ r.cpd_neighborhood }})</span>{% endif %}
@@ -486,8 +495,8 @@
           async></script>
   {% else %}
   <p class="muted">Commentary isn't enabled yet. (When it is, it runs on GitHub Discussions via
-    Giscus - set the <code>JCSTREAM_GISCUS_REPO_ID</code> / <code>JCSTREAM_GISCUS_CATEGORY_ID</code>
-    repo variables, enable Discussions on the repo, and install the Giscus app.)</p>
+    Giscus - the site owner enables it in the repo's Actions variables, turns on Discussions,
+    and installs the Giscus app.)</p>
   {% endif %}
 </section>
 

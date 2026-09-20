@@ -158,7 +158,9 @@ jobs:
           git add data/ docs/
           if ! git diff --cached --quiet; then
             git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
-            git fetch origin main
+            # A-1: full fetch so refs/remotes/origin/main is fresh for the
+            # rebase below (`git fetch origin main` only updates FETCH_HEAD).
+            git fetch origin
             # M-3: on rebase conflict, abort and fail loudly instead of a
             # `git merge -X ours` fallback. Ours-wins on a conflict in the
             # append-only evidence log (data/waf_block_log.json) would silently

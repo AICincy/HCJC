@@ -153,3 +153,23 @@ def test_build_preserves_non_generated_files(tmp_path, monkeypatch):
         target = out / rel
         assert target.is_file(), f"preserved file {rel} missing after rebuild"
         assert target.read_text(encoding="utf-8") == sentinel
+
+
+def test_build_cleans_tmp_dir_on_render_failure(tmp_path, monkeypatch):
+    """C-9: a render failure must not leave `.docs.build-tmp` litter beside
+    the last-good output tree."""
+    _make_minimal_snapshot(tmp_path)
+    monkeypatch.chdir(tmp_path)
+
+    from web import build as build_mod
+
+    out = tmp_path / "docs"
+    tmp_build_dir = out.parent / ".docs.build-tmp"
+
+    def _boom(*a, **k):
+        raise RuntimeError("simulated render failure")
+
+    monkeypatch.setattr(build_mod, "_render_build", _boom)
+    with pytest.raises(RuntimeError, match="simulated render failure"):
+        build_mod.build(out)
+    assert not tmp_build_dir.exists(), "failed build left .docs.build-tmp behind"

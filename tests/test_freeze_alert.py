@@ -1,6 +1,9 @@
 """Tests for the roster-freeze alert. No network: the GitHub API calls are
 monkeypatched, so only the staleness gating and the send-gate are exercised."""
 
+import json
+import time
+
 import pytest
 
 from scraper import freeze_alert
@@ -17,9 +20,32 @@ def test_removal_sla_warn_ok_below_window():
     assert freeze_alert.removal_sla_warn(REMOVAL_SLA_HOURS - 0.1) == "ok"
 
 
-def test_removal_sla_warn_fires_in_window(capsys):
+def test_removal_sla_warn_fires_in_window(tmp_path, capsys):
     mid = (REMOVAL_SLA_HOURS + ROSTER_STALE_ALARM_HOURS) / 2
-    assert freeze_alert.removal_sla_warn(mid) == "warn"
+    assert freeze_alert.removal_sla_warn(mid, state_path=tmp_path / "state.json") == "warn"
+    assert "::warning title=Roster stale past removal SLA::" in capsys.readouterr().out
+
+
+def test_removal_sla_warn_throttles_repeat_emissions(tmp_path, capsys):
+    # C-8: a second warning inside the throttle window is suppressed.
+    mid = (REMOVAL_SLA_HOURS + ROSTER_STALE_ALARM_HOURS) / 2
+    state = tmp_path / "state.json"
+    assert freeze_alert.removal_sla_warn(mid, state_path=state) == "warn"
+    capsys.readouterr()
+    assert freeze_alert.removal_sla_warn(mid, state_path=state) == "throttled"
+    assert "::warning" not in capsys.readouterr().out
+    # ...and fires again once the window has lapsed (backdate the state).
+    raw = json.loads(state.read_text(encoding="utf-8"))
+    raw["last_warn_utc"] = time.time() - (freeze_alert._WARN_THROTTLE_HOURS + 1) * 3600
+    state.write_text(json.dumps(raw), encoding="utf-8")
+    assert freeze_alert.removal_sla_warn(mid, state_path=state) == "warn"
+
+
+def test_removal_sla_warn_state_write_failure_still_warns(tmp_path, capsys, monkeypatch):
+    # A state-write failure must never fail the alerting path.
+    mid = (REMOVAL_SLA_HOURS + ROSTER_STALE_ALARM_HOURS) / 2
+    bad = tmp_path / "nope" / "state.json"  # parent dir does not exist
+    assert freeze_alert.removal_sla_warn(mid, state_path=bad) == "warn"
     assert "::warning title=Roster stale past removal SLA::" in capsys.readouterr().out
 
 

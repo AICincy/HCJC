@@ -53,3 +53,15 @@ def test_empty_courtclerk_cases_is_published(tmp_path: Path):
     cases = tmp_path / "data" / "courtclerk_cases.json"
     assert cases.is_file()
     assert '"cases"' in cases.read_text(encoding="utf-8")
+
+
+def test_human_utc_handles_offset_and_fractional_stamps():
+    # C-6/D-2: Socrata offset-bearing and fractional-second stamps must
+    # render in the page date format, not fall through as raw ISO.
+    assert _human_utc("2026-09-20T12:00:00-04:00").endswith("ET") or _human_utc(
+        "2026-09-20T12:00:00-04:00"
+    ).endswith("UTC")
+    assert "2026-09-20T" not in _human_utc("2026-09-20T14:23:00.000")
+    assert "Sep 20, 2026" in _human_utc("2026-09-20T14:23:00.000")
+    assert _human_utc("2026-09-20T14:23:00Z") == _human_utc("2026-09-20T14:23:00.000Z")
+    assert _human_utc("not a stamp") == "not a stamp"  # unparseable -> raw passthrough

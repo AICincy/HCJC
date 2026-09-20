@@ -123,6 +123,17 @@ def _next_court_date(inmate: Inmate) -> str:
     return sorted(dates, reverse=True)[0][1]
 
 
+def _next_court_date_is_past(inmate: Inmate) -> bool:
+    """D-1: True when _next_court_date returned a past date (no future dates
+    on any charge). Lets the template label it "Last known court date"
+    instead of the wrong "Next court date"."""
+    raw = _next_court_date(inmate)
+    if not raw:
+        return False
+    dt = _parse_md_yy(raw)
+    return dt is not None and dt < _now_naive_est()
+
+
 def _court_calendar(inmates: list[Inmate]) -> dict:
     """Group inmates by their next upcoming court date into today / tomorrow /
     this week / next 30 days buckets. Each bucket entry is

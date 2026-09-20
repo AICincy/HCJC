@@ -9,6 +9,11 @@
      record is purged here pursuant to ORC § 2953.32 sealing/expungement, a
      cached copy mustn't outlive it. #}
   <meta name="robots" content="noindex, noarchive">
+  {# D-7: canonical URL for every page. Pages override the canonical_path
+     block; the default is the site root. Low SEO impact given
+     noindex-everywhere, but correct hygiene for mirrors and copies that
+     ignore robots directives. #}
+  <link rel="canonical" href="{{ site_url }}{% block canonical_path %}/{% endblock %}">
   {# Security headers asserted in HTML because GitHub Pages does not let us
      set HTTP response headers. frame-ancestors and X-Content-Type-Options
      cannot be asserted via <meta>. #}

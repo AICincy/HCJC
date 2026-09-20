@@ -46,6 +46,30 @@ jobs:
         # file, so an out-of-band edit -- or a corrupt -- committed evidence
         # log fails CI (C-1).
         run: python -m scraper.verify_block_log
+      - name: WAF-block log presence + monotonicity guard
+        # A-2: the chain check above passes on a missing log, so assert the
+        # file exists, is non-empty, and never shrinks relative to main. A
+        # sweep bug deleting or truncating the evidence log must fail CI.
+        run: |
+          python - <<'EOF'
+          import json, subprocess, sys
+          from pathlib import Path
+          p = Path("data/waf_block_log.json")
+          if not p.exists() or p.stat().st_size == 0:
+              sys.exit("A-2: data/waf_block_log.json is missing or empty")
+          current = len(json.loads(p.read_text(encoding="utf-8")))
+          base = subprocess.run(
+              ["git", "show", "origin/main:data/waf_block_log.json"],
+              capture_output=True, text=True,
+          )
+          if base.returncode == 0 and base.stdout.strip():
+              prev = len(json.loads(base.stdout))
+              if current < prev:
+                  sys.exit(f"A-2: WAF evidence log shrank: {prev} -> {current} records")
+              print(f"WAF log OK: {current} records (main had {prev})")
+          else:
+              print(f"WAF log OK: {current} records (no main baseline to compare)")
+          EOF
       - name: Build site from empty data (smoke test)
         # Mirror the production sweep env so this smoke test catches any
         # deployment-config drift (root-relative paths).

@@ -215,3 +215,21 @@ def test_concatenated_case_numbers_classify(case_number, category, year):
     """Concatenated municipal formats (no slashes) must classify and year-parse."""
     assert case_category(case_number) == category
     assert case_year(case_number) == year
+
+
+def test_parse_book_date_rejects_far_future():
+    # C-5: a two-digit year pivoting past next year is data-entry garbage,
+    # not a real booking date/DOB.
+    assert _parse_book_date("9/20/40") is None  # pivots to 2040
+    assert _parse_book_date("9/20/99") == datetime(1999, 9, 20)  # 19XX pivot survives
+
+
+def test_display_date_surfaces_far_future_datetime():
+    # C-10/m-10: the ancient-sentinel guard must not blank far-future dates
+    # passed as datetimes; they are surfaced so the error is visible.
+    from datetime import timedelta, timezone
+
+    future = datetime.now(timezone.utc) + timedelta(days=365 * 30)
+    assert _display_date(future) == future.strftime("%b %d, %Y")
+    ancient = datetime(1970, 1, 2, tzinfo=timezone.utc)
+    assert _display_date(ancient) == ""

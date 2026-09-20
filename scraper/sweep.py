@@ -833,8 +833,9 @@ def run(
             try:
                 save_current(paths.current_path, current.values())
                 save_ok = True
-            except OSError as e:
-                # Disk full, permission denied, atomic-rename failure. The
+            except (OSError, SnapshotCorruptError) as e:
+                # Disk full, permission denied, atomic-rename failure, or a
+                # corrupt on-disk snapshot that C-1/C-2 fail-closed on. The
                 # snapshot is unchanged on disk; just skip the prune to avoid
                 # deleting photos for ids that never made it to current.json.
                 log.error("save_current failed (%s); skipping changelog and prune", e)

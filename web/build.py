@@ -70,6 +70,7 @@ from web.shape import (
     _human_utc,
     _iso_booking_date,
     _next_court_date,
+    _next_court_date_is_past,
     _prepare_render_data,
     _primary_chapter,
     _primary_charge,
@@ -295,6 +296,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     env.globals["feed_description"] = _feed_description
     env.globals["bond_by_tier"] = lambda inm: _bond_by_tier(inm, offenses)
     env.globals["next_court_date"] = _next_court_date
+    env.globals["next_court_date_is_past"] = _next_court_date_is_past
     env.globals["case_numbers"] = _case_numbers
     env.globals["cases_grouped"] = _cases_grouped
     env.globals["case_category"] = case_category
@@ -325,33 +327,22 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     env.globals["judge_link"] = judge_link
 
 
-def build(out_dir: Path) -> int:
-    from scraper.update_orc_offenses import update_orc_offenses
-
-    update_orc_offenses()
-
-    snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points = _load_inputs()
-    offenses = orc_mod.load_offenses()
-    base_url = _resolve_base_url()
-    site_url = _resolve_site_url()
-    env = _build_env(snapshot, offenses, base_url, site_url)
-    _warn_about_unmapped_orcs(snapshot.inmates, offenses)
-    rd = _prepare_render_data(snapshot, events)
-    # Registered here rather than in _register_template_helpers because they
-    # derive from the changelog events, which _build_env never sees.
-    env.globals["recent_booked_ids"] = rd["recent_booked_ids"]
-    env.globals["recent_released_24h"] = rd["recent_released_24h"]
-
-    # Render into a temp sibling dir, then swap it into place. A render
-    # exception then leaves the last-good out_dir intact instead of blanking
-    # the site: out_dir is only wiped after a full, successful build.
-    build_dir = out_dir.parent / f".{out_dir.name}.build-tmp"
-    old_dir = out_dir.parent / f".{out_dir.name}.build-old"
-    for d in (build_dir, old_dir):
-        if d.exists():
-            shutil.rmtree(d)
-    build_dir.mkdir(parents=True)
-
+def _render_build(
+    env: Environment,
+    snapshot: Snapshot,
+    offenses: dict[str, dict],
+    matches: dict[str, list[dict]],
+    events: list[ChangeEvent],
+    rd: dict,
+    cfs_rows: list[dict],
+    shooting_rows: list[dict],
+    dispatch_points: list[dict],
+    base_url: str,
+    site_url: str,
+    build_dir: Path,
+) -> None:
+    """Render every page and data file into build_dir. Extracted so the
+    caller can wrap the whole render phase in temp-dir cleanup (C-9)."""
     idx_ctx = IndexContext(
         snapshot=snapshot,
         by_month=rd["by_month"],
@@ -381,13 +372,52 @@ def build(out_dir: Path) -> int:
     _copy_photos(build_dir)
     _write_manifest(build_dir, base_url)
     _write_search_json(build_dir, snapshot)
-    _write_dispatches(build_dir, dispatch_points)
+    _write_dispatches(build_dir, dispatch_points, snapshot.generated_utc)
     _write_cname(build_dir)
     _write_well_known(build_dir, site_url, snapshot.generated_utc)
     _render_404_page(env, build_dir)
     _write_checksums(build_dir)
     # Tell GitHub Pages NOT to Jekyll-process the built site.
     (build_dir / ".nojekyll").write_text("", encoding="utf-8")
+
+
+def build(out_dir: Path) -> int:
+    from scraper.update_orc_offenses import update_orc_offenses
+
+    update_orc_offenses()
+
+    snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points = _load_inputs()
+    offenses = orc_mod.load_offenses()
+    base_url = _resolve_base_url()
+    site_url = _resolve_site_url()
+    env = _build_env(snapshot, offenses, base_url, site_url)
+    _warn_about_unmapped_orcs(snapshot.inmates, offenses)
+    rd = _prepare_render_data(snapshot, events)
+    # Registered here rather than in _register_template_helpers because they
+    # derive from the changelog events, which _build_env never sees.
+    env.globals["recent_booked_ids"] = rd["recent_booked_ids"]
+    env.globals["recent_released_24h"] = rd["recent_released_24h"]
+
+    # Render into a temp sibling dir, then swap it into place. A render
+    # exception then leaves the last-good out_dir intact instead of blanking
+    # the site: out_dir is only wiped after a full, successful build.
+    build_dir = out_dir.parent / f".{out_dir.name}.build-tmp"
+    old_dir = out_dir.parent / f".{out_dir.name}.build-old"
+    for d in (build_dir, old_dir):
+        if d.exists():
+            shutil.rmtree(d)
+    build_dir.mkdir(parents=True)
+
+    # C-9: clean up the temp build dir if rendering fails, so a failed build
+    # leaves no `.docs.build-tmp` litter beside the last-good tree. (The swap
+    # below only runs after a full successful render, so out_dir is untouched
+    # either way.)
+    try:
+        _render_build(env, snapshot, offenses, matches, events, rd, cfs_rows, shooting_rows,
+                      dispatch_points, base_url, site_url, build_dir)
+    except BaseException:
+        shutil.rmtree(build_dir, ignore_errors=True)
+        raise
 
     # Set aside non-generated files so they survive the wholesale swap below.
     # Entries in PRESERVED_FILES are copied out of the old tree now and written
