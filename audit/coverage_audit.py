@@ -61,6 +61,8 @@ INTERNAL_KEYS = {
 INTERNAL_ONLY = {
     "orc_caselaw.json":  "build input for statute pages; content is rendered into HTML, not served raw",
     "explainers.json":   "build input for statute explainer text; rendered into HTML",
+    "court_bond_schedule.json": "build input for bond schedule page; rendered into HTML, not served raw",
+    "court_bond_corrections.json": "build input for bond correction log; rendered into HTML, not served raw",
     "incidents_recent.json":    "retired feed, last written 2026-05-19 (scraper removed); kept in data/ as historical record, not served",
     "oi_shootings_recent.json": "retired feed, last written 2026-05-18; kept in data/ as historical record, not served",
 }

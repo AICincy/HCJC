@@ -155,14 +155,62 @@ def _safe_crowdsourced_url(value: object) -> str:
     ``data/courtclerk_cases.json`` predate that hardening, and Jinja
     autoescape does not stop ``javascript:`` URLs in href attributes.
     """
+    return sanitize_outbound_url(value)
+
+
+def sanitize_outbound_url(value: object) -> str:
+    """Allowlist corpus-derived URLs before they reach an href.
+
+    Only http and https are allowed. Leading control characters are stripped.
+    Fail closed by returning "" for anything invalid. Autoescape does not
+    neutralize ``javascript:`` URLs, so this gate is required before new
+    corpus-derived links ship.
+    """
     s = value if isinstance(value, str) else ""
-    if not s.strip():
+    # Strip leading control characters (including unicode bidi overrides)
+    s = s.lstrip("".join(chr(c) for c in range(0x20)) + "\u200e\u200f\u202a\u202b\u202c\u202d\u202e")
+    s = s.strip()
+    if not s:
         return ""
     try:
-        scheme = urllib.parse.urlsplit(s.strip()).scheme.lower()
+        scheme = urllib.parse.urlsplit(s).scheme.lower()
     except ValueError:
         return ""
     return s if scheme in ("http", "https") else ""
+
+
+def sanitize_phone_href(value: object) -> str:
+    """Validate phone charset before building tel: hrefs.
+
+    Allowed chars: + 0-9 ( ) . - whitespace. Invalid values return ""
+    and the caller must render plain text instead of a link.
+    """
+    import re
+    s = value if isinstance(value, str) else ""
+    s = s.strip()
+    if not s:
+        return ""
+    if not re.fullmatch(r"[+0-9().\-\s]+", s):
+        return ""
+    # Normalize to tel:+1... form for US numbers is left to the caller;
+    # here we just return the validated raw value for href construction.
+    return s
+
+
+def sanitize_email_href(value: object) -> str:
+    """Validate email charset before building mailto: hrefs.
+
+    Very small allowlist: local@domain with common email chars.
+    Invalid values return "" and the caller renders plain text.
+    """
+    import re
+    s = value if isinstance(value, str) else ""
+    s = s.strip()
+    if not s:
+        return ""
+    if not re.fullmatch(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}", s):
+        return ""
+    return s
 
 
 def _load_crowdsourced_cases(
@@ -551,6 +599,96 @@ def _render_bond_disparity_page(env: Environment, snapshot: Snapshot, offenses: 
         min_n=BOND_DISPARITY_MIN_N,
     )
     target = out_dir / "bond-disparity" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
+def _render_bond_schedule_page(env: Environment, out_dir: Path) -> None:
+    """Render the court's Standard Bond Schedule (rev. 3/5/2026).
+
+    Data source: data/court_bond_schedule.json (canonical, via ingest).
+    Deliberate restraint: no computed "you post $X" amounts. The 10% rule
+    is shown as published; whether it applies unconditionally is not
+    established.
+    """
+    from markupsafe import Markup
+
+    data_path = Path(__file__).resolve().parent.parent / "data" / "court_bond_schedule.json"
+    try:
+        raw = json.loads(data_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        raise RuntimeError(f"court_bond_schedule.json missing or corrupt: {e}") from e
+
+    # Hard-fail on schema violation (fail-closed on integrity)
+    if "_provenance" not in raw or "rows" not in raw:
+        raise RuntimeError("court_bond_schedule.json schema violation: missing _provenance or rows")
+    if len(raw["rows"]) != 19:
+        raise RuntimeError(f"court_bond_schedule.json count FAIL: expected 19 rows, got {len(raw['rows'])}")
+
+    def _tier_html(val: str) -> Markup:
+        # NO BOND gets the literal #C22525 chip (5.9:1 both themes), never var(--accent)
+        if val == "NO BOND":
+            return Markup('<span class="bond-chip-no">NO BOND</span>')
+        # Escape everything else; amounts are plain text in --fg
+        import html
+        # nosemgrep: explicit-unescape-with-markup
+        return Markup(html.escape(val))
+
+    def _orc_links(orc_field: str) -> list[dict]:
+        # Split on comma, strip * suffixes, build anchors like orc-4511-19
+        links = []
+        for part in orc_field.split(","):
+            code = part.strip().rstrip("*").strip()
+            if not code:
+                continue
+            # Normalize for anchor: 4511-19 stays, 4510-037 -> 4510-037
+            anchor = code.replace(".", "-")
+            links.append({"code": code, "anchor": anchor})
+        return links
+
+    bond_rows = []
+    for r in raw["rows"]:
+        offense = r.get("offense", "")
+        # SEXAUL typo: stored verbatim, corrected at render with [sic] provenance
+        offense_display = offense
+        if "SEXAUL" in offense:
+            offense_display = offense.replace("SEXAUL", "SEXUAL")
+        orc = r.get("orc", "")
+        bond_rows.append({
+            "section": r.get("section", ""),
+            "offense": offense,
+            "offense_display": offense_display,
+            "orc": orc,
+            "orc_links": _orc_links(orc),
+            "in_county_html": _tier_html(r.get("in_county", "")),
+            "out_of_county_html": _tier_html(r.get("out_of_county", "")),
+            "out_of_state_no_address_html": _tier_html(r.get("out_of_state_no_address", "")),
+        })
+
+    no_standard = []
+    for item in raw.get("no_standard_bond", []):
+        orc = item.get("orc", "")
+        # Take first code for anchor; the list shows single ORC per offense
+        anchor = orc.split(",")[0].strip().replace(".", "-") if orc else ""
+        no_standard.append({
+            "offense": item.get("offense", ""),
+            "orc": orc,
+            "orc_anchor": anchor,
+        })
+
+    # Bond source PDF URL: allowlisted
+    bond_source_url = sanitize_outbound_url(
+        "https://hamiltoncountycourts.org/wp-content/uploads/2026/03/bond_sched_latest.pdf"
+    )
+
+    page = env.get_template("bond-schedule.html").render(
+        bond_rows=bond_rows,
+        no_standard_bond=no_standard,
+        felony_notes=raw.get("felony_notes", []),
+        general_notes=raw.get("general_notes", []),
+        bond_source_url=bond_source_url,
+    )
+    target = out_dir / "bond-schedule" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
 

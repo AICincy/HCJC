@@ -1,0 +1,265 @@
+{
+  "_provenance": {
+    "schema_version": "1.0",
+    "source": "bond_sched_latest.pdf (Standard Bond Schedule rev. 3/5/2026, hamiltoncountycourts.org)",
+    "crawl_date": "2026-09-20",
+    "ingested_utc": "2026-09-20T15:33:27.003639+00:00",
+    "ingested_by": "Krass-authorized-2026-09-20",
+    "counts": {
+      "schedule_rows": 19,
+      "no_standard_bond": 14,
+      "felony_notes": 2,
+      "general_notes": 3
+    },
+    "schedule_revision": "3/5/2026",
+    "max_age_days": 365,
+    "conflicting_typical_bond_codes": [
+      "2903.06",
+      "2903.13",
+      "2903.21",
+      "2903.211",
+      "2907.09",
+      "2917.31",
+      "2919.22",
+      "2919.25",
+      "2919.27",
+      "2921.331",
+      "2923.12",
+      "4510.11"
+    ],
+    "conflicting_codes_status": "not_established_pending_reextraction"
+  },
+  "rows": [
+    {
+      "section": "criminal",
+      "offense": "MISDEMEANOR 1 & 2",
+      "orc": "",
+      "in_county": "$1,000 @ 10%",
+      "out_of_county": "$2,000 @ 10%",
+      "out_of_state_no_address": "$2,500 @ 10%"
+    },
+    {
+      "section": "criminal",
+      "offense": "MISDEMEANOR 3 & 4",
+      "orc": "",
+      "in_county": "$500 @ 10%",
+      "out_of_county": "$1,000 @ 10%",
+      "out_of_state_no_address": "$1,500 @ 10%"
+    },
+    {
+      "section": "criminal",
+      "offense": "MINOR MISDEMEANOR",
+      "orc": "",
+      "in_county": "O.R.",
+      "out_of_county": "O.R.",
+      "out_of_state_no_address": "O.R."
+    },
+    {
+      "section": "criminal",
+      "offense": "FAILURE TO COMPLY W/ PO",
+      "orc": "2921-331",
+      "in_county": "$5,000 @ 10%",
+      "out_of_county": "$5,000 @ 10%",
+      "out_of_state_no_address": "$10,000 @ 10%"
+    },
+    {
+      "section": "criminal",
+      "offense": "NEGLIGENT HOMICIDE",
+      "orc": "2903-05",
+      "in_county": "$5,000 + REVIEW",
+      "out_of_county": "$5,000 + REVIEW",
+      "out_of_state_no_address": "$10,000 + REVIEW"
+    },
+    {
+      "section": "criminal",
+      "offense": "VEHICULAR HOMICIDE",
+      "orc": "2903-06",
+      "in_county": "$5,000 + REVIEW",
+      "out_of_county": "$5,000 + REVIEW",
+      "out_of_state_no_address": "$10,000 + REVIEW"
+    },
+    {
+      "section": "criminal",
+      "offense": "VEHICULAR ASSAULT",
+      "orc": "2903-08A3",
+      "in_county": "$5,000 + REVIEW",
+      "out_of_county": "$5,000 + REVIEW",
+      "out_of_state_no_address": "$10,000 + REVIEW"
+    },
+    {
+      "section": "criminal",
+      "offense": "UNLAWFUL SEXUAL CONTACT WITH A MINOR",
+      "orc": "2907-04",
+      "in_county": "$5,000 + REVIEW",
+      "out_of_county": "$5,000 + REVIEW",
+      "out_of_state_no_address": "$10,000 + REVIEW"
+    },
+    {
+      "section": "criminal",
+      "offense": "SEXAUL IMPOSITION",
+      "orc": "2907-06",
+      "in_county": "$5,000 + REVIEW",
+      "out_of_county": "$5,000 + REVIEW",
+      "out_of_state_no_address": "$10,000 + REVIEW"
+    },
+    {
+      "section": "criminal",
+      "offense": "VOYEURISM",
+      "orc": "2907-08",
+      "in_county": "$5,000 + REVIEW",
+      "out_of_county": "$5,000 + REVIEW",
+      "out_of_state_no_address": "$10,000 + REVIEW"
+    },
+    {
+      "section": "criminal",
+      "offense": "PUBLIC INDECENCY",
+      "orc": "2907-09",
+      "in_county": "$5,000 + REVIEW",
+      "out_of_county": "$5,000 + REVIEW",
+      "out_of_state_no_address": "$10,000 + REVIEW"
+    },
+    {
+      "section": "traffic",
+      "offense": "OVI 1ST IN 10 YRS",
+      "orc": "",
+      "in_county": "$1,000 @ 10%",
+      "out_of_county": "$2,000 @ 10%",
+      "out_of_state_no_address": "$2,500 @ 10%"
+    },
+    {
+      "section": "traffic",
+      "offense": "OVI 2ND IN 10 YRS",
+      "orc": "",
+      "in_county": "$2,000 @ 10%",
+      "out_of_county": "$2,500 @ 10%",
+      "out_of_state_no_address": "$5,000 @ 10%"
+    },
+    {
+      "section": "traffic",
+      "offense": "OVI 3RD IN 10 YRS",
+      "orc": "",
+      "in_county": "$5,000 @ 10%",
+      "out_of_county": "$5,000 @ 10%",
+      "out_of_state_no_address": "$5,000 @ 10%"
+    },
+    {
+      "section": "traffic",
+      "offense": "OVI 4th/5th IN 10 YRS/6TH IN 20 YRS",
+      "orc": "",
+      "in_county": "NO BOND",
+      "out_of_county": "NO BOND",
+      "out_of_state_no_address": "NO BOND"
+    },
+    {
+      "section": "traffic",
+      "offense": "DRIVING UNDER SUSPENSION / OVI-PHYSICAL CONTROL",
+      "orc": "4510-11, 4510-14, 4510-037*, 4511-194",
+      "in_county": "$1,000 @ 10%",
+      "out_of_county": "$2,000 @ 10%",
+      "out_of_state_no_address": "$2,500 @ 10%"
+    },
+    {
+      "section": "traffic",
+      "offense": "LEAVING THE SCENE, STOPPING AFTER ACCIDENT",
+      "orc": "4549-02, 4549-03",
+      "in_county": "$1,000 @ 10%",
+      "out_of_county": "$2,000 @ 10%",
+      "out_of_state_no_address": "$2,500 @ 10%"
+    },
+    {
+      "section": "traffic",
+      "offense": "UNCLASSIFIED MISDEMEANORS**",
+      "orc": "4507-02, 4507-35, 4510-111, 4510-12, 4510-16, 4510-21, 4511-203",
+      "in_county": "O.R.",
+      "out_of_county": "O.R.",
+      "out_of_state_no_address": "O.R."
+    },
+    {
+      "section": "traffic",
+      "offense": "ALL OTHER TRAFFIC",
+      "orc": "",
+      "in_county": "O.R.",
+      "out_of_county": "O.R.",
+      "out_of_state_no_address": "O.R."
+    }
+  ],
+  "no_standard_bond": [
+    {
+      "offense": "PROBATION VIOLATION",
+      "orc": "2951-08/09"
+    },
+    {
+      "offense": "INDUCING PANIC",
+      "orc": "2917-31"
+    },
+    {
+      "offense": "AGGRAVATED MENACING",
+      "orc": "2903-21"
+    },
+    {
+      "offense": "DOMESTIC VIOLENCE",
+      "orc": "2919-25"
+    },
+    {
+      "offense": "MENACING BY STALKING",
+      "orc": "2903-211"
+    },
+    {
+      "offense": "TPO VIOLATION",
+      "orc": "2919-27"
+    },
+    {
+      "offense": "PATIENT ABUSE OR NEGLECT",
+      "orc": "2903-34"
+    },
+    {
+      "offense": "ASSAULT",
+      "orc": "2903-13"
+    },
+    {
+      "offense": "PATIENT ENDANGERMENT",
+      "orc": "2903-341"
+    },
+    {
+      "offense": "INTIMIDATION",
+      "orc": "2921-04"
+    },
+    {
+      "offense": "VIOLATIONS PROHIBITED (STAY AT HOME ORDER)",
+      "orc": "3701-352"
+    },
+    {
+      "offense": "CARRYING CONCEALED WEAPON",
+      "orc": "2923-12"
+    },
+    {
+      "offense": "EXPOSING OTHERS TO CONTAGION",
+      "orc": "3701-81"
+    },
+    {
+      "offense": "ENDANGERING CHILDREN",
+      "orc": "2919-22"
+    }
+  ],
+  "felony_notes": [
+    {
+      "offense": "HAVING WEAPONS UNDER DISABILITY CMCN",
+      "orc": "915-5"
+    },
+    {
+      "offense": "CHILD ENDANGERING CMCN",
+      "orc": "915-3"
+    }
+  ],
+  "general_notes": [
+    {
+      "note": "ANY ARRESTEE FOUND TO BE AN EMU VIOLATOR MAY NOT BE RELEASED ON BOND"
+    },
+    {
+      "note": "*THESE ARE THE MOST COMMONLY SEEN CHARGE CODES FOR THESE OFFENSES OTHER CHARGE CODES DESCRIBING THE SAME OR SIMILAR OFFENSE WOULD USE THE SAME BOND SCHEDULE."
+    },
+    {
+      "note": "** TREAT UNCLASSIFIED MISDEMEANORS AS M1 IF MARKED AS SUCH ON 527 OR TICKET"
+    }
+  ]
+}

@@ -364,6 +364,7 @@ def _render_build(
     _render_stats_page(env, snapshot, rd["by_month"], rd["trend"], build_dir)
     _render_statute_page(env, snapshot, offenses, build_dir)
     _render_bond_disparity_page(env, snapshot, offenses, build_dir)
+    _render_bond_schedule_page(env, build_dir)
     _render_court_page(env, snapshot, build_dir)
     _render_visit_page(env, build_dir)
     _render_help_page(env, build_dir)
@@ -527,6 +528,7 @@ from web.pages import (  # noqa: E402
     IndexContext,
     _render_404_page,
     _render_bond_disparity_page,
+    _render_bond_schedule_page,
     _render_court_page,
     _render_courts_page,
     _render_data_page,
