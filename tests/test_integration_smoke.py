@@ -21,6 +21,39 @@ def _no_orc_offenses_rewrite(monkeypatch):
     monkeypatch.setattr("scraper.update_orc_offenses.update_orc_offenses", lambda: None)
 
 
+@pytest.fixture(autouse=True)
+def _no_history_write(monkeypatch):
+    """Hermeticity: web.build.build() reaches web.history._update_history()
+    via _prepare_render_data(), which appends today's record to the
+    repo-anchored data/history.json (V5-F2 anchor: repo root regardless of
+    CWD). A smoke run once overwrote the real 2026-09-20 entry 1167 -> 1.
+    Stub it; _prepare_render_data imports the name lazily (from
+    web.shape.inmates, inside the function body), so patching the module
+    attribute intercepts every call. Returns a full-shape trend dict so
+    templates render normally.
+
+    Isolation approach: monkeypatch, not a JCSTREAM_DATA_DIR-style env
+    override, because _update_history's anchor is hardcoded and adding an
+    override would change production code (web/history.py) instead of test
+    code."""
+    import web.history
+
+    def _stub_history(*args, **kwargs):
+        return {
+            "today": 0,
+            "yesterday": None,
+            "delta": None,
+            "spark": [],
+            "spark_dates": [],
+            "days_tracked": 0,
+            "booked_7d": 0,
+            "released_7d": 0,
+            "churn_days": 0,
+        }
+
+    monkeypatch.setattr(web.history, "_update_history", _stub_history)
+
+
 def _make_minimal_snapshot(tmp_path: Path) -> None:
     """Write a minimal current.json + changelog.json for build to consume."""
     inmate = Inmate(
@@ -173,3 +206,30 @@ def test_build_cleans_tmp_dir_on_render_failure(tmp_path, monkeypatch):
     with pytest.raises(RuntimeError, match="simulated render failure"):
         build_mod.build(out)
     assert not tmp_build_dir.exists(), "failed build left .docs.build-tmp behind"
+
+
+def test_build_does_not_touch_repo_history(tmp_path, monkeypatch):
+    """Regression: a smoke build must never modify the repo-anchored
+    data/history.json. Guards the autouse _no_history_write fixture.
+
+    History: _update_history() anchors to the repo root (V5-F2) regardless of
+    CWD, so a smoke run once overwrote the real 2026-09-20 entry (1167 -> 1),
+    requiring a surgical working-tree repair."""
+    _make_minimal_snapshot(tmp_path)
+    monkeypatch.chdir(tmp_path)
+
+    from web import build as build_mod
+
+    hist_path = Path(build_mod.__file__).resolve().parent.parent / "data" / "history.json"
+    assert hist_path.is_file(), "repo-anchored data/history.json not found"
+    before = hist_path.read_bytes()
+
+    out = tmp_path / "docs"
+    try:
+        build_mod.build(out)
+    except FileNotFoundError:
+        pytest.skip("templates/data not available in this env")
+    assert (out / "index.html").exists()
+
+    after = hist_path.read_bytes()
+    assert after == before, "smoke build modified repo-anchored data/history.json"
