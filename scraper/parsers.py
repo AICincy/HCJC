@@ -93,6 +93,11 @@ def _record_empty_photo_event(inmate_id: str, field_path: str, payload_length: i
     on this side: the parser correctly skips the empty payload. The durable
     record exists so that, on litigation, the scraper can affirmatively show
     that a specific inmate's photo was observed empty on a specific sweep.
+
+    Deduplicated: the same inmate+field observed empty again within
+    ``EMPTY_PHOTO_DEDUPE_HOURS`` does not append another record; the first
+    record remains the provenance anchor. This keeps a permanently photo-less
+    inmate from adding ~96 duplicate records a day.
     """
     log.info(
         "empty photo payload skipped for id=%s field=%s payload_length=%d",
@@ -103,9 +108,9 @@ def _record_empty_photo_event(inmate_id: str, field_path: str, payload_length: i
     # Lazy import to avoid a parser -> store import cycle and to keep the
     # parser usable in tests that don't touch the evidence log.
     try:
-        from .store import append_block_evidence
+        from .store import append_block_evidence_deduped
     except Exception as e:
-        log.warning("could not import append_block_evidence: %s", e)
+        log.warning("could not import append_block_evidence_deduped: %s", e)
         return
     record = {
         "event": "empty_photo_observed",
@@ -115,7 +120,11 @@ def _record_empty_photo_event(inmate_id: str, field_path: str, payload_length: i
         "payload_length": payload_length,
     }
     try:
-        append_block_evidence(record)
+        append_block_evidence_deduped(
+            record,
+            dedupe_event="empty_photo_observed",
+            dedupe_keys=("inmate_id", "photo_field_path"),
+        )
     except Exception as e:
         log.warning("failed to append empty_photo_observed evidence: %s", e)
 

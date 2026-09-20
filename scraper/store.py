@@ -14,6 +14,7 @@ import logging
 import os
 import sys
 import threading
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
 
@@ -159,6 +160,110 @@ def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None
                 _flock_release(lock_fh)
 
 
+# Deduplication for repeated observations (e.g. the same inmate's empty
+# booking photo seen on every 15-minute cycle). The evidence log is
+# append-only and hash-chained, so "deduplication" means skipping a redundant
+# append, never editing history. The first record is the provenance anchor;
+# identical observations within the window are skipped with a log line.
+EMPTY_PHOTO_DEDUPE_HOURS = 24.0
+_DEDUPE_SCAN_LIMIT = 5000
+
+
+def _evidence_timestamp_utc(rec: dict) -> datetime | None:
+    """Parse a record's ``timestamp_utc``; None when missing or unparseable."""
+    ts = rec.get("timestamp_utc")
+    if not isinstance(ts, str) or not ts.strip():
+        return None
+    t = ts.strip()
+    if t.endswith("Z"):
+        t = t[:-1] + "+00:00"
+    try:
+        dt = datetime.fromisoformat(t)
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt
+
+
+def recent_evidence_has(
+    path: Path,
+    *,
+    event: str,
+    match: dict,
+    within_hours: float,
+    scan_limit: int = _DEDUPE_SCAN_LIMIT,
+    now: datetime | None = None,
+) -> dict | None:
+    """Return the most recent record with ``event`` whose fields all equal
+    ``match`` and whose timestamp is within ``within_hours`` of ``now``.
+
+    Scans backward from the tail, bounded by ``scan_limit`` records. Pure
+    read, no locks; callers that then append do so through
+    :func:`append_block_evidence`, which re-verifies the chain. A check/append
+    race can at worst produce one duplicate record, never corruption.
+    """
+    if now is None:
+        now = datetime.now(timezone.utc)
+    if not path.exists():
+        return None
+    try:
+        entries = load_block_log(path)
+    except Exception:
+        return None
+    for rec in reversed(entries[-scan_limit:]):
+        if rec.get("event") != event:
+            continue
+        if any(rec.get(k) != v for k, v in match.items()):
+            continue
+        ts = _evidence_timestamp_utc(rec)
+        if ts is None:
+            continue
+        if (now - ts).total_seconds() <= within_hours * 3600:
+            return rec
+        # Records are chronological; older matches are outside the window.
+        return None
+    return None
+
+
+def append_block_evidence_deduped(
+    record: dict,
+    path: Path | None = None,
+    *,
+    dedupe_event: str,
+    dedupe_keys: tuple[str, ...],
+    dedupe_hours: float = EMPTY_PHOTO_DEDUPE_HOURS,
+) -> bool:
+    """Append ``record`` unless the same observation was already recorded.
+
+    Skips the append when the log tail already holds a ``dedupe_event``
+    record whose ``dedupe_keys`` fields all match and whose timestamp is
+    within ``dedupe_hours``. Returns True when appended, False when skipped
+    as a duplicate. The skipped observation's provenance is the earlier
+    record, which stays in the hash chain untouched.
+
+    ``path=None`` selects the module default (the same default
+    :func:`append_block_evidence` uses); callers that omit it are redirected
+    by the test-suite's evidence isolation wrapper.
+    """
+    check_path = WAF_BLOCK_LOG_PATH if path is None else path
+    match = {k: record.get(k) for k in dedupe_keys}
+    existing = recent_evidence_has(check_path, event=dedupe_event, match=match, within_hours=dedupe_hours)
+    if existing is not None:
+        log.info(
+            "skipping duplicate %s evidence for %s (already recorded at %s)",
+            dedupe_event,
+            match,
+            existing.get("timestamp_utc"),
+        )
+        return False
+    if path is None:
+        append_block_evidence(record)
+    else:
+        append_block_evidence(record, path)
+    return True
+
+
 def verify_block_chain(entries: list[dict]) -> list[str]:
     """Verify the ``prev_sha256`` hash chain over an in-order list of WAF-block
     log records. Returns a list of human-readable problems; an empty list means
@@ -255,7 +360,9 @@ def _load_takedowns(data_dir: Path) -> set[str]:
     # object, a number) must fail closed like unparseable content does --
     # silently coercing it would publish records the operator meant to seal.
     if not isinstance(parsed, list) or not all(isinstance(n, str) for n in parsed):
-        log.error("could not load %s (expected a JSON array of strings): refusing to write with an empty seal set", path)
+        log.error(
+            "could not load %s (expected a JSON array of strings): refusing to write with an empty seal set", path
+        )
         raise SnapshotCorruptError("takedowns.json must be a JSON array of inmate_number strings")
     return set(parsed)
 
@@ -515,6 +622,3 @@ def save_anon_changelog(
     if len(out) > ANON_CHANGELOG_LIMIT:
         out = out[-ANON_CHANGELOG_LIMIT:]
     _atomic_write_text(path, json.dumps(out, indent=2))
-
-
-
