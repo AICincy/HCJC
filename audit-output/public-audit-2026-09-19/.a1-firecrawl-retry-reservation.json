@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "sha256:c46ed1a6f3ae1ba13765c2b44e3efa44f9b32f208a12d0eebfeaed2c6d0b061e",
+  "event_id": "sha256:3718d95c0d2e8f881fc34d16c11a17dd854016ac4c5b8520f4892a3eff53ecad",
+  "event_fingerprint": "sha256:ed3be91837128a8dd4669a0a55cf44b31d7d46e65df652bf06c31d9b62dbce58",
+  "task_id": "sha256:38f6eef80361e2bcda8cc59c3aa5c26bab311dc21be23037bcbf35289366af03",
+  "attempt_id": "sha256:58ac935e9d207aa13d2cf41c77006db32b102ba6ef37b67d707628b633253997",
+  "model_ref": null,
+  "action_kind": "tool_call",
+  "policy_digest": "sha256:fe1fd764135a92b738e8d2049f8726ed7eeda032fadacf2f1b79c8814c3933f7",
+  "requirements_digest": "sha256:e63d959c4874669378e008f2c9a5d296516b9e7ef196341222fd518343fac746",
+  "candidate_digest": "sha256:e1674d4dc6ac976cfd0b2168b89b8de9acf39312cd530596f2c4978f870f1651",
+  "dependency_digest": "sha256:186dfab00313282dcacd05896165c0520a0076baa4b1742bb383b3a0f0c28226",
+  "evaluator_digest": "sha256:f1b628c0d28503bba986d8dced3e3bc207b1e1c3ac57c8de65a1c7d450fd4514",
+  "environment_digest": null,
+  "environment_independent": true,
+  "action_key": "sha256:4280c57d530c815b8f6429aa050dd694064bb9306d85df3bee2d106a797a3d06",
+  "action_key_scope_digest": "sha256:a511676b0b7705991c5bd92e1d534fcd0cd2eb3590dd08e69dde2c9d09ec184d",
+  "work_key": "sha256:80c22959c747711d96272b559857f5f832ab631e50b3d76d1773e11d5f2cf3be",
+  "intervention_level": "bypass",
+  "decision": "allow",
+  "reason_code": "first_equivalent_action",
+  "outcome": "pending",
+  "evidence_digest": null,
+  "reservation_receipt_id": null,
+  "invalidation_id": null,
+  "invalidation_reason_code": null,
+  "invalidation_target_receipt_id": null,
+  "invalidation_transition_id": null,
+  "consumed_invalidation_ids": [],
+  "evidence_accepted": false,
+  "fanout": null,
+  "material_progress": {
+    "status": "unknown",
+    "evidence_digest": null
+  },
+  "rate_advisories": [
+    {
+      "state": "missing",
+      "effect": "advisory"
+    }
+  ],
+  "metrics": [],
+  "validator_version": "0.1.0",
+  "fixture_corpus_version": "1"
+}

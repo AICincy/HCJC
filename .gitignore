@@ -1,0 +1,45 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.local
+
+# Build outputs
+.cache/
+# NOTE: docs/ is intentionally NOT gitignored — Pages serves from there.
+# Transient atomic-swap dirs (web/build.py). Present only mid-build or after
+# a failed build; the next build cleans them. Never committed.
+/.docs.build-tmp/
+/.docs.build-old/
+
+# Non-published scraper outputs. Anything written under private/ stays out
+# of git and out of the served docs/ directory. One-source principle:
+# publish nothing HCSO does not publish.
+private/
+
+# Ephemeral
+*.log
+*.lock
+desktop.ini
+Thumbs.db
+.DS_Store
+.pytest_cache/
+# .claude/ — local agent-worktree harness state stays ignored, but durable
+# project skills + paired subagents are tracked so collaborators (and CI's
+# Claude jobs) get the same context. Use .claude/* (contents) rather than
+# .claude/ (the dir itself) so git can descend and pick up the un-ignored
+# children — git can't re-include a path whose parent dir is excluded.
+.claude/*
+!.claude/skills/
+!.claude/agents/
+.claude.zip
+HCJC.zip
+.claude/skills/All skills.zip
+.claude/agents/md skills.zip
+hcjc-agentic-audit-prompt.md
+# Generated clerk PRA packets are build output, not source: 1,100+ letters
+# per run. Regenerate on demand; never commit the output folders.
+pra_requests/
+

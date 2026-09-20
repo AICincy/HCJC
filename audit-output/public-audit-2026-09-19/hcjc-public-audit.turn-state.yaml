@@ -1,0 +1,21 @@
+objective: Launch the public-only HCJC audit wave for A0, A1, A2, A3, and A4 using a freshly frozen public baseline.
+request_class: CONTINUE
+authorized_scope: Create a fresh isolated public clone; inspect public endpoints and public repository evidence; run safe read-only and synthetic-fixture checks in isolated clones; write audit artifacts. Do not access private settings, secret values, person-linked official-source data, send mail, alter source, or alter external systems.
+constraints:
+  - A0 through A4 only. A5 and A6 private gates remain deferred.
+  - The existing C:\Users\jared\.codex\HCJC checkout remains untouched except for audit-output artifacts.
+  - Use a frozen remote SHA for each audit phase and record UTC observation windows.
+  - Reports contain aggregate and non-identifying evidence only.
+  - Static source, isolated execution, public live behavior, and private state remain separate evidence categories.
+  - A report may not enter final synthesis without later independent adversarial review.
+active_threads: []
+next_action: Present the completed A0 through A4 public-only packet. Keep A5 and A6 deferred and do not start AQ until separately requested.
+completion_evidence: Fresh baseline manifest plus A1, A2, A3, and A4 reports exist at the frozen SHA, passed A0 response-gate intake, retain unknown private state, and are ready for later independent adversarial review.
+human_gate: null
+takeover: false
+artifact_targets:
+  - C:\Users\jared\.codex\HCJC\audit-output\public-audit-2026-09-19
+status: COMPLETE
+missing_dependencies:
+  - Owner-authorized read-only metadata for private Actions, Pages, Giscus, and PRA configuration
+  - Approved aggregate-first privacy protocol for official-source comparison

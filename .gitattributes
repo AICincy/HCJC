@@ -1,0 +1,3 @@
+# Evidence transcripts are byte-exact artifacts; never apply EOL conversion.
+audit/sessions/*.jsonl -text
+audit/sessions/*.md text eol=lf

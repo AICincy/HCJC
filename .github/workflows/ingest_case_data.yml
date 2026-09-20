@@ -1,0 +1,68 @@
+name: ingest-case-data
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: jcstream-ingest-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  ingest:
+    if: ${{ contains(github.event.issue.labels.*.name, 'case-data') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Ingest issue body into data/courtclerk_cases.json
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_SUBMITTER: ${{ github.event.issue.user.login }}
+        run: python -m scraper.ingest_issue
+
+      - name: Commit case data
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "jcstream-bot"
+          git config user.email "noreply@github.com"
+          git add data/courtclerk_cases.json
+          if ! git diff --cached --quiet; then
+            git commit -m "case-data: ingest issue #$ISSUE_NUMBER"
+            git fetch origin main
+            git rebase origin/main || {
+              echo "::warning::Rebase conflict detected; attempting merge"
+              git rebase --abort
+              git merge -X ours origin/main --no-edit || {
+                echo "::error::Both rebase and merge failed"
+                exit 1
+              }
+            }
+            git push
+          else
+            echo "no changes"
+          fi
+
+      - name: Acknowledge on the issue
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "Ingested. Thank you. See `data/courtclerk_cases.json` for the canonical entry; this issue can be closed when you're done verifying.",
+            });

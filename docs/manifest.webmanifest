@@ -1,0 +1,18 @@
+{
+  "name": "JCStream -- Hamilton County, OH jail roster mirror",
+  "short_name": "JCStream",
+  "description": "Public-records mirror of the Hamilton County (Ohio) Justice Center inmate roster.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#14181f",
+  "theme_color": "#14181f",
+  "icons": [
+    {
+      "src": "/static/img/hcjc-seal-2x.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "plan_id": "hcjc-agentic-audit-team-2026-09-19",
+  "objective": "Construct a bounded, evidence-governed HCJC agentic audit team and its quality-assurance charter from the current live-status audit.",
+  "spawn_tool_present": true,
+  "mode": "spawn-agents",
+  "skills": [
+    {
+      "name": "aai-cognitive-interface",
+      "order": 1,
+      "why": "Governs custody, authorization boundaries, artifact completion, and evidence labels for every audit role.",
+      "terminate_when": "The team charter, state record, and quality gates are validated and saved."
+    },
+    {
+      "name": "claim-source-auditor",
+      "order": 2,
+      "why": "Defines atomic-claim mapping, one-status evidence rows, and source-locator requirements.",
+      "terminate_when": "Every factual finding has one permitted claim status and a cited source or stated search scope."
+    },
+    {
+      "name": "code-verification",
+      "order": 3,
+      "why": "Defines independent technical review, safe parallelism, fresh-test boundaries, and failure classification.",
+      "terminate_when": "Each technical report has a requirement-to-evidence matrix and environment limits are explicit."
+    },
+    {
+      "name": "agent-churn-control",
+      "order": 4,
+      "why": "Prevents equivalent re-runs from being treated as new evidence while allowing typed recovery after a real change or failure.",
+      "terminate_when": "Each audit action has a reproducible identity and duplicate local checks are gated."
+    }
+  ],
+  "terminate_when": "The audit team charter is persisted, validated, and ready for authorized audit dispatch without source or production changes.",
+  "human_gate": "Owner-authorized access is required only for private Actions configuration, secrets, or an official-source comparison protocol."
+}

@@ -1,0 +1,211 @@
+name: sweep
+
+# Workflow permissions, scoped to the minimum each active step requires:
+#   contents: write -- the "Commit data + built site" step pushes new sweep
+#                      data and the regenerated docs/ tree back to the branch.
+#   issues:   write -- the "Roster freeze alarm" step opens (and dedupes) a
+#                      GitHub issue when the roster freeze passes
+#                      ROSTER_STALE_ALARM_HOURS (scraper/freeze_alert.py).
+#
+# Permissions deliberately NOT requested:
+#   pages:    write -- the deploy-pages path is commented out (see the
+#                      "upload-pages-artifact" / "deploy-pages" steps further
+#                      down). Pages now serves directly from docs/ on the
+#                      working branch via Settings > Pages > Source = branch.
+#   id-token: write -- only deploy-pages@v4 needed an OIDC token; that step
+#                      is no longer active.
+# If the deploy-pages path is ever re-enabled, restore pages: write and
+# id-token: write together; do not re-grant either without the other.
+
+on:
+  schedule:
+    # Every 15 minutes. GH Actions cron is best-effort: observed delivery
+    # gaps have reached 2-5 hours. The sweep skips if current.json is
+    # < 20 min old, so back-to-back runs during low-load don't double-scrape.
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      max_surnames:
+        description: 'Cap the surname list (blank = use all)'
+        required: false
+        default: ''
+      refresh_known:
+        description: 'Re-fetch detail pages for already-known inmates'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+  # Lets the roster-freeze alarm open a GitHub issue when the roster has been
+  # frozen past the alarm window (scraper.freeze_alert).
+  issues: write
+
+concurrency:
+  # Never run two sweeps simultaneously; cancel-in-progress: false queues
+  # the newer run so they don't collide on the GitHub Pages deployment API.
+  group: jcstream-sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    name: Sweep + build + deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    # deploy-pages@v4 requires this environment to be bound to the job.
+    # GitHub auto-creates the "github-pages" environment when Settings > Pages > Source = "GitHub Actions".
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: HCSO inmate sweep
+        # JCSTREAM_USER_AGENT is intentionally not overridden here: the module
+        # default (scraper.client.DEFAULT_UA) carries the contact URL plus the
+        # parallelism-limited descriptor. Two sources of truth invite drift.
+        #
+        # JCSTREAM_HTTP_PROXY (optional secret): when HCSO's WAF blocks the
+        # Actions runner IP, set this repo secret to an egress proxy URL and
+        # the HCSO fetches route through it. Unset = direct connection (the
+        # secret resolves to "" which scraper.client treats as no proxy).
+        env:
+          JCSTREAM_HTTP_PROXY: ${{ secrets.JCSTREAM_HTTP_PROXY }}
+          # On a blocked cycle, snapshot the runner egress IP against GitHub's
+          # published Actions ranges (data/egress_evidence.json) for the record.
+          JCSTREAM_CAPTURE_EGRESS: "1"
+          WORKFLOW_RUN_ID: ${{ github.run_id }}
+          COMMIT_SHA: ${{ github.sha }}
+          # workflow_dispatch inputs via env (never interpolate ${{ }} in run:).
+          SWEEP_MAX_SURNAMES: ${{ inputs.max_surnames }}
+          SWEEP_REFRESH_KNOWN: ${{ inputs.refresh_known }}
+        run: |
+          sweep_args=()
+          if [ -n "$SWEEP_MAX_SURNAMES" ]; then
+            sweep_args+=(--max-surnames "$SWEEP_MAX_SURNAMES")
+          fi
+          if [ "$SWEEP_REFRESH_KNOWN" = "true" ]; then
+            sweep_args+=(--refresh-known)
+          fi
+          python -m scraper.sweep "${sweep_args[@]}"
+        continue-on-error: true
+
+      # Surface a prolonged roster freeze: emit a GitHub Actions ::error::
+      # annotation and open a (deduped) GitHub issue so it actively notifies.
+      # The degraded-roster guard correctly keeps last-good data and exits 0
+      # when HCSO's WAF blocks the runner, but a multi-hour freeze otherwise
+      # hides in the logs. This step never fails the job (the open-data feeds
+      # below must still commit); scraper.freeze_alert only acts when the
+      # last-good roster is older than ROSTER_STALE_ALARM_HOURS.
+      - name: Roster freeze alarm
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m scraper.freeze_alert
+
+      # Cincinnati open-data feeds: 30-day window. Each module skips its API
+      # pull if the existing JSON is fresh, but the windows differ: cfs and
+      # cfs_pdi cache 1h, shootings 6h, and the supplemental feeds below cache
+      # 12-24h per feed. Sweep cron is */15, best-effort (observed gaps 2-5h).
+      - name: Pull Cincinnati Open Data calls-for-service (last 30 days, 1h cache)
+        run: python -m scraper.cfs --hours 720
+        continue-on-error: true
+
+      - name: Pull Cincinnati Open Data shootings (last 30 days, 6h cache)
+        run: python -m scraper.shootings --days 30
+        continue-on-error: true
+
+      - name: Pull PDI Police CFS (last 30 days, 1h cache, arrest/citation dispositions)
+        run: python -m scraper.cfs_pdi --hours 720
+        continue-on-error: true
+
+      # Additional Cincinnati Open Data safety feeds (use-of-force, traffic
+      # stops, pedestrian stops, STARS crime, CCA complaints). All gated to
+      # per-feed cache windows; FeedSpec list lives in scraper/open_data_feeds.py.
+      - name: Pull supplemental Cincinnati Open Data safety feeds
+        run: python -m scraper.open_data_feeds
+        continue-on-error: true
+
+      # Phase 11: build dispatch-to-arrest candidate pairs (researcher mode).
+      # No names, no assertions; just (inmate_number, cfs_row_index, confidence)
+      # joined keys that a researcher can investigate. Heavy disclaimer baked
+      # into the output JSON.
+      - name: Build dispatch correlation candidates
+        run: python -m scraper.correlate
+        continue-on-error: true
+
+      - name: Build static site
+        env:
+          # Custom domain (aretheyinjail.com) serves at the ROOT, so links are
+          # root-relative -- base URL is empty. Also emit the CNAME file so GitHub
+          # Pages keeps the custom domain across rebuilds.
+          # (If you ever drop the custom domain and go back to the
+          #  <owner>.github.io/<repo>/ URL, set JCSTREAM_SITE_BASE_URL to
+          #  /${{ github.event.repository.name }} and clear JCSTREAM_CNAME.)
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: www.aretheyinjail.com
+        run: python -m web.build
+
+      - name: Commit data + built site
+        run: |
+          git config user.name "jcstream-bot"
+          git config user.email "noreply@github.com"
+          git add data/ docs/
+          if ! git diff --cached --quiet; then
+            git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
+            git fetch origin main
+            git rebase origin/main || {
+              echo "::warning::Rebase conflict detected; attempting merge"
+              git rebase --abort
+              git merge -X ours origin/main --no-edit || {
+                echo "::error::Both rebase and merge failed"
+                exit 1
+              }
+            }
+            git push
+          else
+            echo "no changes"
+          fi
+
+      # Alert when the deployed site lags the committed roster: current.json
+      # keeps advancing on main but the GitHub Pages deploy is stuck, so the
+      # live site serves stale content (the failure mode that went unnoticed
+      # for ~12h on 2026-07-04). scraper.deploy_alert compares the live
+      # /data/current.json generated_utc against the committed one and opens a
+      # deduped issue past DEPLOY_STALE_ALARM_MINUTES. Never fails the job.
+      - name: Deploy staleness alarm
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m scraper.deploy_alert
+
+      # The built site now lives in docs/ on the working branch and gets served
+      # directly by Pages when Source = "Deploy from a branch" -> <branch> -> /docs.
+      # No artifact upload, no environment binding, no gh-pages branch needed.
+      # - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
+      #   with:
+      #     path: docs
+      # - id: deploy
+      #   uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128  # v5.0.0
+      #
+      # - name: Deploy health check
+      #   if: steps.deploy.outcome == 'success'
+      #   run: |
+      #     SITE_URL="${{ steps.deploy.outputs.page_url }}"
+      #     if [ -z "$SITE_URL" ]; then
+      #       echo "::warning::No page_url output from deploy step; skipping health check"
+      #       exit 0
+      #     fi
+      #     echo "Checking $SITE_URL ..."
+      #     STATUS=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 15 "$SITE_URL" || echo "000")
+      #     if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+      #       echo "Health check passed (HTTP $STATUS)"
+      #     else
+      #       echo "::error::Deploy health check failed (HTTP $STATUS for $SITE_URL)"
+      #       exit 1
+      #     fi

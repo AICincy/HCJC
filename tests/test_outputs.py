@@ -1,0 +1,46 @@
+import json
+from pathlib import Path
+
+from web.outputs import _copy_static, _write_manifest, _write_well_known
+
+
+def test_write_well_known_defaults(tmp_path: Path, monkeypatch):
+    # Ensure environment is clean of GITHUB_REPOSITORY
+    monkeypatch.delenv("GITHUB_REPOSITORY", raising=False)
+
+    _write_well_known(tmp_path, "https://test.com", "2026-06-02T20:00:00Z")
+
+    # Verify default repo issues link is written
+    security_txt = (tmp_path / ".well-known" / "security.txt").read_text(encoding="utf-8")
+    assert "Contact: https://github.com/AICincy/HCJC/issues" in security_txt
+
+    humans_txt = (tmp_path / "humans.txt").read_text(encoding="utf-8")
+    assert "https://github.com/AICincy/HCJC/issues" in humans_txt
+
+
+def test_write_well_known_from_env(tmp_path: Path, monkeypatch):
+    monkeypatch.setenv("GITHUB_REPOSITORY", "custom-owner/custom-repo")
+
+    _write_well_known(tmp_path, "https://test.com", "2026-06-02T20:00:00Z")
+
+    # Verify custom repo issues link is written
+    security_txt = (tmp_path / ".well-known" / "security.txt").read_text(encoding="utf-8")
+    assert "Contact: https://github.com/custom-owner/custom-repo/issues" in security_txt
+
+    humans_txt = (tmp_path / "humans.txt").read_text(encoding="utf-8")
+    assert "https://github.com/custom-owner/custom-repo/issues" in humans_txt
+
+
+def test_copy_static_writes_favicon(tmp_path: Path):
+    _copy_static(tmp_path)
+    fav = tmp_path / "favicon.ico"
+    apple = tmp_path / "apple-touch-icon.png"
+    assert fav.is_file() and fav.stat().st_size > 0
+    assert apple.is_file() and apple.stat().st_size > 0
+
+
+def test_manifest_includes_icon(tmp_path: Path):
+    _write_manifest(tmp_path, "")
+    manifest = json.loads((tmp_path / "manifest.webmanifest").read_text(encoding="utf-8"))
+    assert manifest["icons"], "manifest must list at least one icon"
+    assert manifest["icons"][0]["src"].endswith("/static/img/hcjc-seal-2x.png")
