@@ -332,9 +332,16 @@ def test_bond_by_tier_zero_for_empty_amounts():
 # ----- _days_in_custody ----------------------------------------------------
 
 
-def test_days_in_custody_positive_for_past_booking():
-    d = datetime.now(timezone.utc) - timedelta(days=3)
-    three_days_ago = f"{d.month}/{d.day}/{d.year % 100:02d}"
+def test_days_in_custody_positive_for_past_booking(monkeypatch):
+    # Freeze the Eastern clock the production code reads: _days_in_custody
+    # compares booking midnight against _now_naive_est() (naive Eastern), so
+    # deriving the booking date from UTC now() races at the day boundary
+    # (e.g. 00:00 UTC is still the previous day in Eastern). Freezing the
+    # seam makes the assertion exact.
+    fixed_naive = datetime(2026, 5, 14, 12, 0, 0)
+    monkeypatch.setattr("web.shape.timeline._now_naive_est", lambda: fixed_naive)
+    bd = fixed_naive - timedelta(days=3)
+    three_days_ago = f"{bd.month}/{bd.day}/{bd.year % 100:02d}"
     days = build._days_in_custody(_inm(booking_date=three_days_ago))
     assert days == 3
 
