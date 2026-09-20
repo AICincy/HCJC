@@ -353,6 +353,7 @@ def test_roster_stale_context(monkeypatch, tmp_path):
 
 def test_prepare_render_data(monkeypatch):
     import web.history
+
     monkeypatch.setattr(web.history, "_update_history", lambda *args: {"trend": "up"})
 
     snapshot = Snapshot(generated_utc="2026-06-03T18:00:00Z", inmates=[], inmate_count=0)

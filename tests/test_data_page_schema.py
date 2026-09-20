@@ -74,7 +74,9 @@ def test_documented_fields_exist_in_models():
         actual = {name for model in models for name in model.model_fields}
         documented = _documented_fields(filename)
         unknown = documented - actual
-        assert not unknown, f"{filename} docs mention fields absent from {[m.__name__ for m in models]}: {sorted(unknown)}"
+        assert not unknown, (
+            f"{filename} docs mention fields absent from {[m.__name__ for m in models]}: {sorted(unknown)}"
+        )
         # Exact equality (minus the documented allowlist): a model field that
         # is neither documented nor allowlisted fails, so schema drift can't
         # slip through silently.
