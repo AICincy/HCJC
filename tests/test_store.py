@@ -449,3 +449,16 @@ def test_anon_changelog_anonymizes_sealed_inmates(tmp_path: Path):
     for row in rows:
         assert row.get("inmate_number") != "7"
         assert "ROE" not in json.dumps(row)
+
+
+def test_append_block_evidence_does_not_mutate_caller_dict(tmp_path: Path):
+    # append_block_evidence must copy the record before adding prev_sha256;
+    # mutating the caller's dict would be a surprising side effect.
+    path = tmp_path / "waf_block_log.json"
+    record = {"event": "blocked", "ip": "1.2.3.4"}
+    append_block_evidence(record, path)
+    assert record == {"event": "blocked", "ip": "1.2.3.4"}
+    assert "prev_sha256" not in record
+    log = load_block_log(path)
+    assert log[0]["prev_sha256"] is None
+    assert log[0]["ip"] == "1.2.3.4"

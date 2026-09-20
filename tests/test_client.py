@@ -262,3 +262,12 @@ def test_retry_updates_last_request_at(monkeypatch):
         assert c._last_request_at == current_time
     finally:
         c._client.close()
+
+
+def test_make_client_falls_back_on_invalid_crawl_delay(monkeypatch, caplog):
+    # A malformed JCSTREAM_CRAWL_DELAY must not crash; it falls back to default.
+    monkeypatch.setenv("JCSTREAM_CRAWL_DELAY", "not-a-number")
+    with caplog.at_level("WARNING"):
+        c = client_mod.make_client()
+    assert c.crawl_delay == client_mod.DEFAULT_CRAWL_DELAY
+    assert "Invalid JCSTREAM_CRAWL_DELAY" in caplog.text

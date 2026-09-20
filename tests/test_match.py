@@ -45,3 +45,24 @@ def test_candidates_sorted_by_proximity():
     near = _cfs("2026-05-10T01:00:00")
     cands = candidates_for(inm, [far, near])
     assert cands[0]["create_time_incident"] == near["create_time_incident"]
+
+
+def test_non_utc_aware_timestamp_converted_to_utc():
+    """A non-UTC offset must convert to UTC before tzinfo is stripped.
+
+    2026-05-10T01:00:00-04:00 is 05:00 UTC, inside the +36h window for a
+    5/10/26 booking. Naive stripping would have placed it at 01:00 local,
+    a 4-hour error in the represented instant.
+    """
+    inm = _inmate("5/10/26")
+    rows = [_cfs("2026-05-10T01:00:00-04:00")]
+    cands = candidates_for(inm, rows)
+    assert len(cands) == 1
+
+
+def test_utc_aware_timestamp_unchanged():
+    """UTC-marked timestamps keep the same wall time after normalization."""
+    inm = _inmate("5/10/26")
+    rows = [_cfs("2026-05-10T05:00:00+00:00")]
+    cands = candidates_for(inm, rows)
+    assert len(cands) == 1

@@ -30,6 +30,8 @@ from web.classify import (
     _rfc822,
     _short_month_label,
     _tier_max,
+    case_category,
+    case_year,
 )
 
 
@@ -196,3 +198,20 @@ def test_display_date_timezone_aware():
     # Pass timezone-aware UTC datetime and check it works
     dt_aware = datetime(2026, 5, 14, tzinfo=timezone.utc)
     assert _display_date(dt_aware) == "May 14, 2026"
+
+
+@pytest.mark.parametrize(
+    "case_number, category, year",
+    [
+        ("25CRA12345", "criminal", 2025),  # concatenated municipal criminal
+        ("25TRD12345", "traffic", 2025),  # concatenated municipal traffic
+        ("26CV001234", "civil", 2026),  # concatenated municipal civil
+        ("25/CRA/12345", "criminal", 2025),  # slashed form still works
+        ("B2501234", "criminal", 2025),  # common pleas criminal
+        ("A2501234", "civil", 2025),  # common pleas civil
+    ],
+)
+def test_concatenated_case_numbers_classify(case_number, category, year):
+    """Concatenated municipal formats (no slashes) must classify and year-parse."""
+    assert case_category(case_number) == category
+    assert case_year(case_number) == year

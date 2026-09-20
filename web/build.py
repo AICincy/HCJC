@@ -158,6 +158,10 @@ def _load_inputs():
 def _rss_guid(event: ChangeEvent) -> str:
     """Stable hash-based RSS GUID for a ChangeEvent."""
     content = f"{event.event}|{event.inmate_number}|{event.timestamp_utc}"
+    # Non-security use: GUIDs need stability and uniqueness, not collision
+    # resistance. Changing the algorithm would invalidate every existing
+    # subscriber's read state, so the stable SHA1 GUID contract is kept.
+    # nosemgrep: insecure-hash-algorithm-sha1
     return hashlib.sha1(content.encode("utf-8")).hexdigest()
 
 
@@ -166,6 +170,9 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, sit
     filter. The registered names ARE the template contract: a helper added in
     the `web/shape/` package or `web/classify.py` must be registered here under the same name
     to be visible to templates."""
+    # autoescape is explicitly enabled for html/xml below; this is not Flask
+    # (static site builder), so render_template() does not apply.
+    # nosemgrep: python.flask.security.xss.audit.direct-use-of-jinja2.direct-use-of-jinja2
     env = Environment(
         loader=FileSystemLoader(TEMPLATE_DIR),
         autoescape=select_autoescape(["html", "xml"]),

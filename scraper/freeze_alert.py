@@ -52,10 +52,10 @@ def _gh(method: str, url: str, token: str, payload: dict | None = None) -> list 
     req.add_header("X-GitHub-Api-Version", "2022-11-28")
     if data is not None:
         req.add_header("Content-Type", "application/json")
-    # nosemgrep: python.lang.security.audit.dynamic-urllib-use-detected
     # The URL is validated above (https-only, non-empty netloc) and callers
     # pass only the hardcoded API constant plus operator-controlled repo names.
     # This cannot be used for file:// arbitrary reads.
+    # nosemgrep: dynamic-urllib-use-detected
     with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode())
 

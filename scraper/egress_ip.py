@@ -36,6 +36,9 @@ def _get_json(url: str, timeout: float = 30.0) -> dict:
     if scheme not in {"https"}:
         raise ValueError(f"Unsupported URL scheme for JSON fetch: {scheme or '<none>'}")
     req = urllib.request.Request(url, headers={"Accept": "application/json"})
+    # The URL scheme is validated https-only above; callers pass only the
+    # hardcoded API constants. This cannot be used for file:// arbitrary reads.
+    # nosemgrep: dynamic-urllib-use-detected
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return json.loads(resp.read().decode())
 

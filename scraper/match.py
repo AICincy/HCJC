@@ -14,7 +14,7 @@ probabilistic; we surface candidates without claiming certainty.
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Iterable
 
 from .models import Inmate
@@ -32,10 +32,12 @@ def _parse_iso(s: str) -> datetime | None:
         return None
     try:
         dt = datetime.fromisoformat(str(s).rstrip("Z"))
-        # Normalize to naive: strip tzinfo to avoid TypeError when comparing
-        # against naive booking datetimes. Socrata timestamps are UTC.
+        # Normalize to naive UTC: convert aware timestamps to UTC first so the
+        # represented instant is preserved, then drop tzinfo for comparison
+        # against naive booking datetimes. Socrata timestamps are UTC, so the
+        # conversion is a no-op for them; it only corrects non-UTC offsets.
         if dt.tzinfo is not None:
-            dt = dt.replace(tzinfo=None)
+            dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
         return dt
     except ValueError:
         return None

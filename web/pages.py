@@ -224,6 +224,9 @@ def _render_inmates(
     crowdsourced = _load_crowdsourced_cases(snapshot.inmates)
 
     def _render_one(inm: Inmate) -> None:
+        # Templates come from the shared env with autoescape enabled (see
+        # web/build.py _build_env); not Flask, so render_template() N/A.
+        # nosemgrep: python.flask.security.xss.audit.direct-use-of-jinja2.direct-use-of-jinja2
         page = template.render(
             inmate=inm,
             snapshot=snapshot,
@@ -252,6 +255,9 @@ def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) ->
     tmpl = env.get_template("feed.xml")
 
     def _write(name: str, title: str, desc: str, evs: list[ChangeEvent]) -> None:
+        # feed.xml is rendered by the shared autoescape-enabled env; XML content
+        # is escaped, and this is a static builder, not a Flask request handler.
+        # nosemgrep: python.flask.security.xss.audit.direct-use-of-jinja2.direct-use-of-jinja2
         xml = tmpl.render(
             events=list(reversed(evs[-50:])),
             feed_title=title,
