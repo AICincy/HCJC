@@ -48,27 +48,59 @@ jobs:
         run: python -m scraper.verify_block_log
       - name: WAF-block log presence + monotonicity guard
         # A-2: the chain check above passes on a missing log, so assert the
-        # file exists, is non-empty, and never shrinks relative to main. A
-        # sweep bug deleting or truncating the evidence log must fail CI.
+        # file exists, is non-empty, and never shrinks. A sweep bug deleting
+        # or truncating the evidence log must fail CI.
+        #
+        # Baseline semantics: on push events (the dominant trigger, including
+        # every scheduled sweep) origin/main resolves to the pushed commit
+        # itself in the post-push checkout, so comparing against it would be
+        # vacuous. The meaningful baseline is the pre-push tip,
+        # github.event.before. On branch creation before is the all-zeros
+        # ref and on pull_request events it is not a main baseline, so both
+        # cases fall back to origin/main.
+        env:
+          A2_BASELINE_SHA: ${{ github.event_name == 'push' && github.event.before || '' }}
         run: |
+          ALL_ZEROS=0000000000000000000000000000000000000000
+          BASELINE_SHA="$A2_BASELINE_SHA"
+          if [ -n "$BASELINE_SHA" ] && [ "$BASELINE_SHA" != "$ALL_ZEROS" ]; then
+            # The default shallow checkout does not guarantee the pre-push
+            # tip is present, so fetch it explicitly. On a normal (non
+            # force) push it is an ancestor of origin/main and therefore
+            # fetchable by SHA. A failed fetch degrades to the origin/main
+            # fallback below rather than failing the build.
+            git fetch --no-tags --depth=1 origin "$BASELINE_SHA" || BASELINE_SHA=""
+          fi
+          export BASELINE_SHA
           python - <<'EOF'
-          import json, subprocess, sys
+          import json, os, subprocess, sys
           from pathlib import Path
           p = Path("data/waf_block_log.json")
           if not p.exists() or p.stat().st_size == 0:
               sys.exit("A-2: data/waf_block_log.json is missing or empty")
           current = len(json.loads(p.read_text(encoding="utf-8")))
-          base = subprocess.run(
-              ["git", "show", "origin/main:data/waf_block_log.json"],
-              capture_output=True, text=True,
-          )
-          if base.returncode == 0 and base.stdout.strip():
-              prev = len(json.loads(base.stdout))
-              if current < prev:
-                  sys.exit(f"A-2: WAF evidence log shrank: {prev} -> {current} records")
-              print(f"WAF log OK: {current} records (main had {prev})")
+          baseline = os.environ.get("BASELINE_SHA", "")
+          prev = None
+          baseline_name = None
+          for ref, name in ((baseline, "pre-push tip"), ("origin/main", "main")):
+              if not ref:
+                  continue
+              r = subprocess.run(
+                  ["git", "show", f"{ref}:data/waf_block_log.json"],
+                  capture_output=True, text=True,
+              )
+              if r.returncode == 0 and r.stdout.strip():
+                  prev = len(json.loads(r.stdout))
+                  baseline_name = name
+                  break
+          if prev is None:
+              print(f"WAF log OK: {current} records (no baseline to compare)")
           else:
-              print(f"WAF log OK: {current} records (no main baseline to compare)")
+              if current < prev:
+                  sys.exit(
+                      f"A-2: WAF evidence log shrank: {prev} -> {current} records"
+                  )
+              print(f"WAF log OK: {current} records ({baseline_name} had {prev})")
           EOF
       - name: Build site from empty data (smoke test)
         # Mirror the production sweep env so this smoke test catches any
