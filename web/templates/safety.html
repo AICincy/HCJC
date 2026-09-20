@@ -21,21 +21,7 @@
   not proven: a call, a stop, or a report is not a conviction, and none of it is
   matched to anyone on the roster.
 </p>
-
-{% macro bars(rows, total) %}
-<div class="statbars" role="list">
-  {% for label, count in rows %}
-  {% set pct = (100.0 * count / total) if total else 0 %}
-  <div class="statbar" role="listitem">
-    <span class="statbar-label">{{ label }}</span>
-    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: {{ '%.1f' % pct }}%"></span></span>
-    <span class="statbar-val">{{ "{:,}".format(count) }} <small>{{ '%.0f' % pct }}%</small></span>
-  </div>
-  {% endfor %}
-</div>
-{% endmacro %}
-
-{% macro vintage(stamp) %}<span class="meta">Data as of {{ human_utc(stamp) if stamp else 'pending' }}.</span>{% endmacro %}
+{% from 'macros.html' import bars, vintage %}
 
 <div class="section-h"><h2>Latest incidents</h2><span class="grow"></span>{{ vintage(newest_vintage) }}</div>
 <p class="muted">The most recent calls for service, reported shootings, and reported crimes, newest first. Locations are block-level, as published by the city.</p>
@@ -59,7 +45,11 @@
   else departments report. These are crimes <em>reported</em> to police, not cases
   solved or people convicted.
 </p>
+{% if stars.date_span %}
+<p class="muted">Pull date span: {{ stars.date_span }}.</p>
+{% endif %}
 {% if not stars.empty %}
+<div class="section-h"><h3>By FBI part</h3></div>
 {{ bars(stars.by_category, stars.total) }}
 <div class="section-h"><h3>By FBI category</h3></div>
 {{ bars(stars.by_type, stars.total) }}
@@ -103,7 +93,7 @@
 
 <div class="alert inline-alert"><strong>Reading these numbers.</strong> Shares of stops describe <em>who was stopped</em>, not <em>why</em>. They are not a finding of bias for or against any group: they do not account for who is on the road, driving patterns, deployment, or the reason for each stop. Use them as a starting point for questions, not as conclusions.</div>
 
-<p class="muted">Sources: <a href="https://data.cincinnati-oh.gov" target="_blank" rel="noopener">data.cincinnati-oh.gov</a> &middot; raw files and methodology on the <a href="{{ base_url }}/data/">data page</a>. Use-of-force and citizen-complaint summaries are planned for a later update.</p>
+<p class="muted">Sources: <a href="https://data.cincinnati-oh.gov" target="_blank" rel="noopener">data.cincinnati-oh.gov</a> &middot; raw files and methodology on the <a href="{{ base_url }}/data/">data page</a>. Use-of-force and citizen-complaint page summaries are planned for a later update; their raw files are already downloadable on the data page.</p>
 
 <p class="source">Generated {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else " - " }}. General information, not legal advice.</p>
 {% endblock %}

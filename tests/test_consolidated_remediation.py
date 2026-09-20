@@ -124,7 +124,12 @@ def test_case_groups_dark_link_override():
 
 def test_feed_vintage_reads_generated_utc(tmp_path, monkeypatch):
     """_feed_vintage maps each feed filename to its data/*.json generated_utc
-    stamp, and "" for missing/unreadable feeds (never an invented stamp)."""
+    stamp, and "" for missing/unreadable feeds (never an invented stamp).
+
+    The read is anchored to feeds.DATA_DIR, not the process working
+    directory: monkeypatching the anchor (not chdir) is how the test
+    isolates the feed source."""
+    from web import feeds as feeds_mod
     from web import pages as pages_mod
 
     data_dir = tmp_path / "data"
@@ -132,11 +137,25 @@ def test_feed_vintage_reads_generated_utc(tmp_path, monkeypatch):
     (data_dir / "cfs_recent.json").write_text(
         json.dumps({"generated_utc": "2026-09-20T01:41:01Z", "rows": []})
     )
-    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(feeds_mod, "DATA_DIR", data_dir)
     vintage = pages_mod._feed_vintage()
     assert vintage["cfs_recent.json"] == "2026-09-20T01:41:01Z"
     assert vintage["shootings_recent.json"] == ""
     assert set(vintage) == set(pages_mod._FEED_VINTAGE_FILES)
+
+
+def test_feed_vintage_ignores_working_directory(tmp_path, monkeypatch):
+    """Regression: _feed_vintage reads the anchored repo data dir even when
+    the build is invoked from a working directory with no data/ in it."""
+    from web import feeds as feeds_mod
+    from web import pages as pages_mod
+
+    monkeypatch.chdir(tmp_path)
+    vintage = pages_mod._feed_vintage()
+    real = json.loads(
+        (feeds_mod.DATA_DIR / "cfs_recent.json").read_text(encoding="utf-8")
+    )
+    assert vintage["cfs_recent.json"] == real.get("generated_utc", "")
 
 
 # ---------------------------------------------------------------------------

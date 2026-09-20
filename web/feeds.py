@@ -21,7 +21,7 @@ import json
 import logging
 import re
 from collections import Counter
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 log = logging.getLogger(__name__)
@@ -108,6 +108,7 @@ _WHEN_FORMATS = (
     "%Y-%m-%dT%H:%M:%S.%f",
     "%Y-%m-%dT%H:%M:%S",
     "%Y-%m-%d",
+    "%Y%m%d",
     "%m/%d/%Y %I:%M:%S %p",
     "%m/%d/%Y",
 )
@@ -115,10 +116,25 @@ _WHEN_FORMATS = (
 
 def _parse_when(raw: object) -> datetime | None:
     """Parse the feed datetime formats seen in the wild. Returns None (never
-    raises) so one malformed timestamp can't break a whole section."""
+    raises) so one malformed timestamp can't break a whole section.
+
+    Aware stamps (trailing Z or numeric offset) are normalized to naive UTC
+    before the format loop so a feed that starts emitting offsets doesn't
+    silently sort its rows to the bottom of "newest first"."""
     if not isinstance(raw, str) or not raw.strip():
         return None
     s = raw.strip()
+    if s.endswith(("Z", "z")):
+        s = s[:-1] + "+00:00"
+    if re.search(r"[+-]\d{2}:?\d{2}$", s):
+        try:
+            dt = datetime.fromisoformat(s)
+        except ValueError:
+            dt = None
+        if dt is not None:
+            if dt.tzinfo is not None:
+                dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
+            return dt
     for fmt in _WHEN_FORMATS:
         try:
             return datetime.strptime(s, fmt)
@@ -335,10 +351,36 @@ def _neighborhood_en(row: dict) -> str:
     return ""
 
 
+def _address_en(raw: object) -> str:
+    """Title-case a block-level address while preserving the city's XX
+    privacy masking: '1XX MAIN ST' renders '1XX Main St', not '1Xx Main St'."""
+    s = str(raw or "").strip()
+    if not s:
+        return ""
+    parts = []
+    for tok in s.split():
+        if re.fullmatch(r"\d*X{2,}", tok):
+            parts.append(tok)
+        else:
+            parts.append(tok.title())
+    return " ".join(parts)
+
+
 def _disposition_en(raw: object) -> str:
-    """Translate a compound disposition like 'ARR: ARREST,SOW: SENT ON WAY'."""
+    """Translate a compound disposition like 'ARR: ARREST,SOW: SENT ON WAY'.
+
+    Fail loud: an untranslated code raises KeyError so it gets a real
+    translation instead of leaking a title-cased raw code to readers.
+    """
     parts = [p.strip() for p in str(raw or "").split(",") if p.strip()]
-    out = [_DISPOSITION_EN.get(p, p.title()) for p in parts]
+    out = []
+    for p in parts:
+        try:
+            out.append(_DISPOSITION_EN[p])
+        except KeyError:
+            raise KeyError(
+                f"untranslated disposition code {p!r}; add it to _DISPOSITION_EN"
+            ) from None
     return "; ".join(out)
 
 
@@ -381,8 +423,19 @@ def _action_en(raw: object) -> str:
 
 
 def _stars_category_en(raw: object) -> str:
+    """Map a STARS category to its plain-English bucket.
+
+    Fail loud: an unmapped category raises KeyError so a new city code gets
+    classified instead of rendering raw on the page. (STARS *types* are the
+    deliberate contrast: they degrade to "Unclassified" by design.)
+    """
     s = str(raw or "").strip()
-    return _STARS_CATEGORY_EN.get(s, s)
+    try:
+        return _STARS_CATEGORY_EN[s]
+    except KeyError:
+        raise KeyError(
+            f"untranslated STARS category {s!r}; add it to _STARS_CATEGORY_EN"
+        ) from None
 
 
 # ---------------------------------------------------------------------------
@@ -438,7 +491,7 @@ def latest_incidents(data_dir: Path = DATA_DIR, n: int = 30) -> list[dict]:
             add(
                 r.get("create_time_incident"),
                 what,
-                str(r.get("address_x") or "").strip().title(),
+                _address_en(r.get("address_x")),
                 _neighborhood_en(r),
                 dedup=("cfs:" + ev) if ev else "",
             )
@@ -452,7 +505,7 @@ def latest_incidents(data_dir: Path = DATA_DIR, n: int = 30) -> list[dict]:
         add(
             r.get("datetimeoccured") or r.get("dateoccurred"),
             what,
-            str(r.get("streetblock") or "").strip().title(),
+            _address_en(r.get("streetblock")),
             _neighborhood_en(r),
         )
 
@@ -463,7 +516,7 @@ def latest_incidents(data_dir: Path = DATA_DIR, n: int = 30) -> list[dict]:
         add(
             r.get("datereported"),
             "Reported crime — " + _stars_category_en(r.get("stars_category")),
-            str(r.get("address_x") or "").strip().title(),
+            _address_en(r.get("address_x")),
             _neighborhood_en(r),
         )
 
@@ -475,10 +528,29 @@ def summarize_crime_stars(data_dir: Path = DATA_DIR) -> dict:
     """Reported-crime breakdown for the last ~30 days."""
     feed = _load_feed(data_dir, "crime_stars_recent.json")
     rows = [r for r in feed["rows"] if isinstance(r, dict)]
+    # Evidence for the "last 30 days" heading: the actual date span of the
+    # pull, so the claim goes stale visibly instead of silently if the sweep
+    # window ever changes.
+    dts = [
+        dt
+        for r in rows
+        if (dt := _parse_when(r.get("datereported"))) is not None
+    ]
+    date_span = ""
+    if dts:
+        lo, hi = min(dts), max(dts)
+        if lo.date() == hi.date():
+            date_span = f"{_MONTHS[lo.month - 1]} {lo.day}, {lo.year}"
+        else:
+            date_span = (
+                f"{_MONTHS[lo.month - 1]} {lo.day} to "
+                f"{_MONTHS[hi.month - 1]} {hi.day}, {hi.year}"
+            )
     return {
         "meta": FEED_META["crime_stars_recent.json"],
         "vintage": feed["generated_utc"],
         "total": len(rows),
+        "date_span": date_span,
         "by_category": _count_by(rows, lambda r: _stars_category_en(r.get("stars_category"))),
         "by_type": _count_by(
             rows,
@@ -493,10 +565,10 @@ def _summarize_one_stop_feed(data_dir: Path, filename: str) -> dict:
     rows = [r for r in feed["rows"] if isinstance(r, dict)]
     by_race = _count_by(rows, lambda r: _race_en(r.get("race")))
     by_sex = _count_by(rows, lambda r: _sex_en(r.get("sex")))
-    # Aggregate by translated outcome label (not raw code) so distinct raw
-    # values that read the same (e.g. "OTHER" vs a blank field) merge into
-    # one row instead of duplicating it. Outcomes-by-race is built in the
-    # same pass so the table can never disagree with the bars.
+    # Aggregate by translated outcome label (not raw code). Distinct raw
+    # values keep distinct rows ("OTHER" -> "Other", blank -> "Not
+    # recorded"); outcomes-by-race is built in the same pass so the table
+    # can never disagree with the bars.
     order = {label: i for i, label in enumerate(_ACTION_ORDER)}
     action_counts: Counter[str] = Counter()
     race_by_action: dict[str, Counter[str]] = {}

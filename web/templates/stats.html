@@ -21,19 +21,7 @@
 <p class="page-lede">
   Computed from the same data the roster is built from. The Hamilton County Justice Center holds people awaiting court proceedings or serving shorter sentences. Felony cases are prosecuted in the <a href="https://hamiltoncountycourts.org/index.php/common-pleas/" target="_blank" rel="noopener">Court of Common Pleas, General Division</a>; misdemeanors in <a href="https://hamiltoncountycourts.org" target="_blank" rel="noopener">Hamilton County Municipal Court</a>. Last sweep {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}.
 </p>
-
-{% macro bars(rows, total, accent='') %}
-<div class="statbars" role="list">
-  {% for label, count in rows %}
-  {% set pct = (100.0 * count / total) if total else 0 %}
-  <div class="statbar" role="listitem">
-    <span class="statbar-label">{{ label }}</span>
-    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill {{ accent }}" style="width: {{ '%.1f' % pct }}%"></span></span>
-    <span class="statbar-val">{{ "{:,}".format(count) }} <small>{{ '%.0f' % pct }}%</small></span>
-  </div>
-  {% endfor %}
-</div>
-{% endmacro %}
+{% from 'macros.html' import bars %}
 
 <div class="kpis">
   <div class="kpi">

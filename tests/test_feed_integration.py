@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import datetime
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -360,6 +361,25 @@ def test_unparseable_timestamp_sorts_last_and_displays_raw(tmp_path: Path):
     assert items[1]["when_display"] == "not-a-date"
 
 
+def test_parse_when_handles_zulu_offsets_and_compact_dates():
+    # Trailing Z normalizes to naive UTC.
+    assert feeds_mod._parse_when("2026-09-19T08:00:00Z") == datetime(2026, 9, 19, 8, 0, 0)
+    # Numeric offsets convert to UTC (14:00+02:00 == 12:00 UTC).
+    assert feeds_mod._parse_when("2026-09-19T14:00:00+02:00") == datetime(2026, 9, 19, 12, 0, 0)
+    # Compact YYYYMMDD (shootings dateoccurred fallback).
+    assert feeds_mod._parse_when("20260909") == datetime(2026, 9, 9)
+    # Existing formats still parse; garbage still returns None.
+    assert feeds_mod._parse_when("2026-09-19T08:00:00.000") == datetime(2026, 9, 19, 8, 0, 0)
+    assert feeds_mod._parse_when("not-a-date") is None
+
+
+def test_address_en_preserves_xx_privacy_masking():
+    assert feeds_mod._address_en("1XX MAIN ST") == "1XX Main St"
+    assert feeds_mod._address_en("24XX MONTANA AVE") == "24XX Montana Ave"
+    assert feeds_mod._address_en("XX W 7TH ST") == "XX W 7Th St"
+    assert feeds_mod._address_en("") == ""
+
+
 # ---------------------------------------------------------------------------
 # 4. Frozen / paused source labeling
 # ---------------------------------------------------------------------------
@@ -430,8 +450,17 @@ def test_incident_type_normalization_properties():
 
 def test_compound_and_unknown_dispositions():
     assert feeds_mod._disposition_en("ARR: ARREST,SOW: SENT ON WAY") == "Arrest made; Sent on way"
-    assert feeds_mod._disposition_en("XYZ: FOO") == "Xyz: Foo"
     assert feeds_mod._disposition_en("OH: OH") == "On hold"
+    # Fail loud: an untranslated disposition code raises instead of leaking
+    # a title-cased raw code to readers.
+    with pytest.raises(KeyError):
+        feeds_mod._disposition_en("XYZ: FOO")
+
+
+def test_unknown_stars_category_raises():
+    """Fail loud: an unmapped STARS category raises instead of rendering raw."""
+    with pytest.raises(KeyError):
+        feeds_mod._stars_category_en("CARJACKING")
 
 
 @pytest.mark.parametrize("code, expected", sorted(feeds_mod._INCIDENT_ABBREV_EN.items()))

@@ -1,0 +1,19 @@
+{# Shared Jinja macros. Import with {% from 'macros.html' import bars %}. #}
+
+{% macro bars(rows, total, accent='') %}
+<div class="statbars" role="list">
+  {% for label, count in rows %}
+  {% set pct = (100.0 * count / total) if total else 0 %}
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">{{ label }}</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill {{ accent }}" style="width: {{ '%.1f' % pct }}%"></span></span>
+    <span class="statbar-val">{{ "{:,}".format(count) }} <small>{{ '%.0f' % pct }}%</small></span>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{# Feed-data vintage: "Data as of <stamp>." Renders 'pending' when the
+   stamp is missing. (data.html has its own filename-keyed vintage macro
+   with a different contract; left alone.) #}
+{% macro vintage(stamp) %}<span class="meta">Data as of {{ human_utc(stamp) if stamp else 'pending' }}.</span>{% endmacro %}

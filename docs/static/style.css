@@ -514,7 +514,7 @@ body.detail .page { max-width: 1080px; }
 }
 .banner p { margin: 0; }
 .banner strong { color: var(--warn); font-weight: 700; }
-.banner a { color: var(--warn); }
+.banner a { color: var(--link); }
 .banner-fine { font-size: 12px; color: var(--fg-muted); }
 .banner-fine a { color: var(--fg-muted); text-decoration: underline; }
 
@@ -2527,6 +2527,40 @@ h2.legal-anchor {
   color: var(--fg-muted);
   font-size: 12px;
   letter-spacing: -0.005em;
+}
+
+/* --- Plain section headings (h2.sect-h) and key/value pairs
+   (.fields > .k/.v) used by the data/court/courts pages. These classes
+   previously had no rules: headings fell back to UA-default h2 and
+   keys/values rendered as unassociated stacked blocks. Matches the
+   .section-h rhythm; grid collapses to one column on mobile. --- */
+h2.sect-h {
+  margin: 20px 0 10px;
+  padding: 0 4px 8px;
+  border-bottom: 1px solid var(--border);
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  line-height: 1.15;
+  scroll-margin-top: 4.5rem;
+}
+.fields {
+  display: grid;
+  grid-template-columns: minmax(9rem, 13rem) 1fr;
+  gap: 8px 16px;
+  margin: 12px 0 28px;
+}
+.fields .k {
+  color: var(--fg-muted);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.fields .v { color: var(--fg); min-width: 0; }
+@media (max-width: 720px) {
+  .fields { grid-template-columns: 1fr; gap: 2px 0; }
+  .fields .v { margin-bottom: 10px; }
 }
 
 /* --- Recent bookings (.rb-grid / .rb-card) --- */

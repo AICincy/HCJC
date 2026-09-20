@@ -178,7 +178,7 @@ def _load_crowdsourced_cases(
     """
     from scraper.case_match import match_cases_to_inmates
 
-    path = Path("data/courtclerk_cases.json")
+    path = feeds_mod.DATA_DIR / "courtclerk_cases.json"
     if not path.exists():
         return {}
     try:
@@ -307,39 +307,36 @@ def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) ->
 # V9-L03: per-feed vintage for the data page. Each supplemental feed JSON carries
 # a generated_utc stamp; surfacing it keeps the "refresh attempts" rows from
 # reading as a freshness SLA by showing the actual data age instead.
+# The open-data pull specs (FEEDS) are the single source for the Socrata
+# feed filenames; the three non-FEEDS files are listed explicitly.
 _FEED_VINTAGE_FILES = (
     "cfs_recent.json",
     "cfs_pdi_recent.json",
     "shootings_recent.json",
-    "use_of_force_pdi_recent.json",
-    "use_of_force_incidents_recent.json",
-    "traffic_stops_drivers_recent.json",
-    "pedestrian_stops_recent.json",
-    "crime_stars_recent.json",
-    "cca_complaints_recent.json",
+    *[f.filename for f in FEEDS],
 )
 
 
 def _feed_vintage() -> dict[str, str]:
-    """Map feed filename -> generated_utc stamp ("" when missing/unreadable)."""
-    out: dict[str, str] = {}
-    for name in _FEED_VINTAGE_FILES:
-        src = Path("data") / name
-        stamp = ""
-        if src.exists():
-            try:
-                payload = json.loads(src.read_text(encoding="utf-8"))
-                stamp = str(payload.get("generated_utc") or "") if isinstance(payload, dict) else ""
-            except (json.JSONDecodeError, OSError):
-                stamp = ""
-        out[name] = stamp
-    return out
+    """Map feed filename -> generated_utc stamp ("" when missing/unreadable).
+
+    Delegates to feeds_mod.vintage_of on the anchored DATA_DIR: a build
+    invoked from any working directory still finds the feeds instead of
+    silently stamping every file "".
+    """
+    return {
+        name: feeds_mod.vintage_of(feeds_mod.DATA_DIR, name)
+        for name in _FEED_VINTAGE_FILES
+    }
 
 
 def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> None:
     """Documentation + download index for the raw JSON the site is built from."""
     data_out = out_dir / "data"
     data_out.mkdir(parents=True, exist_ok=True)
+    # Anchored to the repo source tree: a build invoked from any working
+    # directory publishes the real downloads instead of an empty /data/.
+    data_dir = feeds_mod.DATA_DIR
     supplemental = [f.filename for f in FEEDS]
     for name in (
         "current.json",
@@ -354,7 +351,7 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
         "orc_offenses.json",
         *supplemental,
     ):
-        src = Path("data") / name
+        src = data_dir / name
         if src.exists():
             shutil.copy2(src, data_out / name)
     # Crowdsourced ingest is optional; still publish an empty file so the
@@ -364,7 +361,7 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
         cases_out.write_text('{"cases": []}\n', encoding="utf-8")
     page = env.get_template("data.html").render(
         snapshot=snapshot,
-        courtclerk_cases_available=(Path("data") / "courtclerk_cases.json").exists(),
+        courtclerk_cases_available=(data_dir / "courtclerk_cases.json").exists(),
         feed_vintage=_feed_vintage(),
     )
     (data_out / "index.html").write_text(page, encoding="utf-8")
@@ -493,6 +490,12 @@ def _render_safety_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> 
     computed at build time by web.feeds from whatever the sweep pulled."""
     data_dir = feeds_mod.DATA_DIR
     ctx = feeds_mod.safety_context(data_dir)
+    try:
+        incidents, stars, stops = ctx["incidents"], ctx["stars"], ctx["stops"]
+    except KeyError as e:
+        raise RuntimeError(
+            f"web.feeds.safety_context() contract broken: missing key {e}"
+        ) from e
     incident_files = (
         "cfs_recent.json",
         "cfs_pdi_recent.json",
@@ -502,9 +505,9 @@ def _render_safety_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> 
     stamps = [s for s in (feeds_mod.vintage_of(data_dir, f) for f in incident_files) if s]
     page = env.get_template("safety.html").render(
         snapshot=snapshot,
-        incidents=ctx["incidents"],
-        stars=ctx["stars"],
-        stops=ctx["stops"],
+        incidents=incidents,
+        stars=stars,
+        stops=stops,
         newest_vintage=max(stamps) if stamps else "",
     )
     target = out_dir / "safety" / "index.html"
@@ -615,7 +618,9 @@ def _parse_judges(base_url: str = "") -> tuple[list[dict], list[dict]]:
     """
     import re
 
-    hamco_dir = Path("HAMCO")
+    # Anchored to the repo root: a build invoked from any working directory
+    # still finds the judge profile JSON instead of silently rendering none.
+    hamco_dir = Path(__file__).resolve().parent.parent / "HAMCO"
     if not hamco_dir.exists():
         return [], []
 
