@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <title>{% block title %}JCStream{% endblock %}</title>
   {# noarchive = no Google-cache snapshot. We mirror; we don't archive. If a
      record is purged here pursuant to ORC § 2953.32 sealing/expungement, a
@@ -14,7 +14,7 @@
      cannot be asserted via <meta>. #}
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#F5F0EB">
+  <meta name="theme-color" content="#141619">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
   {# Site-level social card only - per-page links deliberately unfurl as the
      generic project card rather than splashing an individual's name/photo into
@@ -26,7 +26,14 @@
   <meta property="og:url" content="{{ site_url }}/">
   <meta name="twitter:card" content="summary">
   {# IBM Plex Mono self-hosted under /static/fonts/ via @font-face in style.css. #}
+  {# Theme pre-paint init: synchronous so first paint uses the right tokens.
+     External file (not inline) per the script-src 'self' CSP. #}
+  <script src="{{ base_url }}/static/theme-init.js?v={{ theme_js_version | default('dev', true) }}"></script>
   <link rel="stylesheet" href="{{ base_url }}/static/style.css?v={{ css_version | default('dev', true) }}">
+  {# The theme toggle is JS-only (main.js binds the click). Without JS it is
+     a dead control, so hide it: style-src allows 'unsafe-inline', and this
+     is a <style> element, not an inline script (script-src 'self' unaffected). #}
+  <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="{{ base_url }}/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="{{ base_url }}/static/img/hcjc-seal.png">
   <link rel="apple-touch-icon" href="{{ base_url }}/apple-touch-icon.png">
@@ -67,6 +74,10 @@
       {% if snapshot is defined and snapshot.inmate_count %}
       <span class="running desktop-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody{% if trend is defined and trend.spark and trend.spark | length > 1 %}<svg class="spark" viewBox="0 0 120 26" width="120" height="26" role="img" aria-label="Roster size trend, last {{ trend.spark | length }} days"><polyline points="{{ spark_points(trend.spark) }}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>{% endif %}</span>
       {% endif %}
+      <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      </button>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
           <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">

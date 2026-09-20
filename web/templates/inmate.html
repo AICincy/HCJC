@@ -45,9 +45,11 @@
 
 <section class="inmate-hero">
   {% if inmate.photo_filename %}
-  <figure class="record-photo">
+  {# data-initials on the figure feeds the photo fallback in main.js: if the photo
+     404s, the handler rebuilds the same placeholder the no-photo branch renders. #}
+  <figure class="record-photo" data-initials="{{ avatar_initials(inmate.full_name) }}">
     <a href="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo-cap="{{ inmate.full_name }} · booked {{ display_date(inmate.booking_date) or 'date not reported' }}" data-photo-alt="HCSO booking photo of {{ inmate.full_name }}" aria-label="Enlarge booking photo">
-      <img src="{{ base_url }}/photos/{{ inmate.photo_filename }}" alt="HCSO booking photo of {{ inmate.full_name }}" width="240" height="300" decoding="async">
+      <img src="{{ base_url }}/photos/{{ inmate.photo_filename }}" alt="HCSO booking photo of {{ inmate.full_name }}" width="240" height="300" decoding="async" data-photo-fallback>
     </a>
     <figcaption>Booking photo &middot; ORC &sect; 149.43</figcaption>
   </figure>
@@ -69,7 +71,7 @@
     <p class="alert"><strong>Arrest is not conviction.</strong> This individual is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges below are accusations only and are not evidence of guilt.</p>
     <dl class="bio">
       <div class="bio-field"><dt>Inmate&nbsp;#</dt><dd><code>{{ inmate.inmate_number }}</code></dd></div>
-      <div class="bio-field"><dt>Booking&nbsp;#</dt><dd><code>{{ inmate.booking_number or ' - ' }}</code>{% if seq %} <span class="muted">{{ seq }}</span>{% endif %}</dd></div>
+      <div class="bio-field"><dt>Booking&nbsp;#</dt><dd><code>{{ inmate.booking_number or ' - ' }}</code>{% if seq %} <span class="muted">{{ seq }} <span class="seq-interpreted" title="The booking number is interpreted as a 2-digit year plus a sequence number (YY + sequence); this reading is unverified and may be wrong.">(interpreted)</span></span>{% endif %}</dd></div>
       <div class="bio-field"><dt>Booked</dt><dd>{{ display_date(inmate.booking_date) or ' - ' }}{% if days is not none %} <span class="muted">{{ days }} day{{ '' if days == 1 else 's' }} ago</span>{% endif %}</dd></div>
       <div class="bio-field"><dt>Projected&nbsp;release</dt><dd>{{ inmate.projected_release_date or ' - ' }}</dd></div>
       <div class="bio-field"><dt>Next&nbsp;court&nbsp;date</dt><dd>{{ nextc or ' - ' }}</dd></div>
@@ -96,6 +98,7 @@
   <span class="pill">{{ inmate.charges | length }}</span>
 </div>
 {% if inmate.charges %}
+<div class="table-scroll">
 <table class="charges">
   <caption class="sr-only">Charges against {{ inmate.full_name }}</caption>
   <thead><tr>
@@ -113,7 +116,7 @@
         {% if ch_url %}<a class="orc-code" href="{{ ch_url }}" target="_blank" rel="noopener">{{ c.orc_code }} ↗</a>{% else %}<span class="orc-code">{{ c.orc_code or ' - ' }}</span>{% endif %}
         {% if orc_t %}<br><small class="orc-title">{{ orc_t }}</small>{% endif %}
       </td>
-      <td>{{ c.description or ' - ' }}</td>
+      <td>{{ c.description or ' - ' }}{% if c.comments %}<br><small class="charge-comments muted">{{ c.comments }}</small>{% endif %}</td>
       <td>{% if ch_tier %}<span class="tier tier-{{ ch_tier.label if (ch_tier.label|length >= 2 and ch_tier.label[0] in ('F','M')) else ch_tier.kind }}">{{ ch_tier.label }}</span>{% else %}<span class="muted"> - </span>{% endif %}</td>
       <td>{{ c.court_date or ' - ' }}</td>
       <td>{{ ((c.bond_type or '') ~ ' ' ~ (c.bond_amount or '')) | trim or ' - ' }}</td>
@@ -123,8 +126,9 @@
   {% endfor %}
   </tbody>
 </table>
+</div>
 <p class="muted note-paragraph">
-  Case&nbsp;# links open Hamilton County Clerk of Courts records at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a> (you may encounter a one-time automated verification step there). The tier shown (e.g.&nbsp;F2, M1) is the <em>default degree classification</em> of the cited ORC section as published in statute - the degree actually charged in a given case can differ based on the subsection, prior offenses, or determinations made by the charging authority or the court. <strong>The tier is a statutory label, not a judicial determination of the offense level.</strong> ORC titles are static reference text.
+  Case&nbsp;# links open Hamilton County Clerk of Courts records at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a> (you may encounter a one-time automated verification step there). The tier shown (e.g.&nbsp;F2, M1) is the degree from the charge description or the <em>default degree classification</em> of the cited ORC section as published in statute; where neither gives a degree, the tier is inferred from the charging court (Common Pleas leads to felony, municipal leads to misdemeanor) - the degree actually charged in a given case can differ based on the subsection, prior offenses, or determinations made by the charging authority or the court. <strong>The tier is a statutory label, not a judicial determination of the offense level.</strong> ORC titles are static reference text.
 </p>
 <p class="muted">
   <a href="{{ cck_name_search(inmate.last_name, inmate.first_name, inmate.date_of_birth) }}" target="_blank" rel="noopener">Run a full name + DOB search on courtclerk.org ↗</a>
@@ -322,7 +326,7 @@
   <div class="statute-context">
     {% set seen = [] %}
     {% for c in inmate.charges %}
-      {% if c.orc_code and c.orc_code != 'NONE' and c.orc_code not in seen %}
+      {% if c.orc_code and c.orc_code != 'NONE' and orc_base(c.orc_code) and c.orc_code not in seen %}
         {% set _ = seen.append(c.orc_code) %}
         {% set t = orc_title(c.orc_code) %}
         {% set freq = orc_freq(c.orc_code) %}
@@ -356,7 +360,7 @@
     {% set top_charge = inm.charges[0] if inm.charges else None %}
     <a class="rb-card" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/">
       {% if inm.photo_filename %}
-      <span class="rb-photo"><img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="Booking photo of {{ inm.full_name }}" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="Booking photo of {{ inm.full_name }}" loading="lazy" decoding="async" data-photo-fallback data-initials="{{ avatar_initials(inm.full_name) }}"></span>
       {% else %}
       <span class="rb-photo is-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(inm.full_name) }}"></span>
       {% endif %}

@@ -30,6 +30,7 @@ import uuid
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
+from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -311,8 +312,53 @@ class WafBackoffTracker:
             return self._streak
 
 
-def _plan_detail_fetch(seen_ids: set[str], previous: dict[str, Inmate], refresh_known: bool) -> list[str]:
-    """Return the sorted inmate ids whose detail pages should be fetched."""
+def _parse_hcso_booking_day(s: str) -> date | None:
+    """Parse an HCSO ``M/D/YY`` / ``M/D/YYYY`` date to a ``date``.
+
+    Returns None when the value is missing or unparseable. Comparing parsed
+    dates (rather than raw strings) keeps zero-padding drift like
+    ``9/20/2026`` vs ``09/20/2026`` from looking like a new booking.
+    """
+    s = (s or "").strip()
+    for fmt in ("%m/%d/%Y", "%m/%d/%y"):
+        try:
+            return datetime.strptime(s, fmt).date()
+        except ValueError:
+            continue
+    return None
+
+
+def _rebooked(prev: Inmate, row: ListRow | None) -> bool:
+    """True when the list row's admit date differs from the stored booking date.
+
+    HCSO reuses inmate numbers across bookings, so a changed admit date for a
+    known inmate number means the person was booked again. Both sides must
+    parse as an HCSO date; anything missing or unparseable is treated as "no
+    change" so parser drift can never trigger a refetch storm.
+    """
+    if row is None:
+        return False
+    prev_day = _parse_hcso_booking_day(prev.booking_date)
+    cur_day = _parse_hcso_booking_day(row.admit_date)
+    return prev_day is not None and cur_day is not None and prev_day != cur_day
+
+
+def _plan_detail_fetch(
+    seen_ids: set[str],
+    previous: dict[str, Inmate],
+    refresh_known: bool,
+    row_by_id: dict[str, ListRow] | None = None,
+) -> list[str]:
+    """Return the sorted inmate ids whose detail pages should be fetched.
+
+    A known inmate is refetched when ``refresh_known`` is set, when they have
+    no photo yet, when their last detail attempt failed (``detail_stale``), or
+    when the list row's admit date differs from the stored booking date: that
+    is a rebooking under the same inmate number, and the detail page must be
+    refetched so the roster picks up the newest booking photo instead of the
+    prior booking's cached one.
+    """
+    rows = row_by_id or {}
     to_fetch: list[str] = []
     for inmate_id in sorted(seen_ids):
         if inmate_id not in previous:
@@ -326,6 +372,15 @@ def _plan_detail_fetch(seen_ids: set[str], previous: dict[str, Inmate], refresh_
             # record was carried forward marked stale). Retry it: transient
             # 503s and WAF windows clear, and without this the stale mark
             # would stick until an unrelated refresh reason fired.
+            to_fetch.append(inmate_id)
+        elif _rebooked(previous[inmate_id], rows.get(inmate_id)):
+            log.info(
+                "rebooking detected for id=%s (stored booking_date=%s list admit_date=%s); "
+                "refetching detail page for newest booking photo",
+                inmate_id,
+                previous[inmate_id].booking_date,
+                rows[inmate_id].admit_date,
+            )
             to_fetch.append(inmate_id)
     return to_fetch
 
@@ -675,17 +730,20 @@ def run(
             # period with a 'recovered' evidence record.
             _record_recovery_if_blocked(len(seen_ids), paths.waf_block_log_path)
 
+            # Map inmate_id -> list row for name fallback when the detail
+            # page heading is missing/unparseable, and for rebooking
+            # detection (a changed admit date forces a detail refetch so a
+            # rebooked inmate gets the newest booking photo).
+            row_by_id = {r.inmate_number: r for r in rows}
+
             # Decide which detail pages to fetch.
-            to_fetch = _plan_detail_fetch(seen_ids, previous, refresh_known)
+            to_fetch = _plan_detail_fetch(seen_ids, previous, refresh_known, row_by_id)
 
             log.info("will fetch %d detail pages (refresh_known=%s)", len(to_fetch), refresh_known)
 
             # Carry forward records we already know about and aren't re-fetching.
             _carry_forward_known(current, seen_ids, previous, to_fetch)
 
-            # Map inmate_id -> list row for name fallback when the detail
-            # page heading is missing/unparseable.
-            row_by_id = {r.inmate_number: r for r in rows}
             waf_tracker = WafBackoffTracker()
             n_detail_attempts, n_detail_named, n_detail_with_photo, detail_failures = _fetch_details(
                 client=client,

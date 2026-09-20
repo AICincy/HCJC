@@ -539,7 +539,7 @@ def test_run_watchdog_blocks_roster_write(tmp_path, monkeypatch):
             None,
         ),
     )
-    monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh: ["1000"])
+    monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh, row_by_id=None: ["1000"])
     monkeypatch.setattr(sweep, "_fetch_details", lambda **kwargs: (100, 0, 0, {}))
     monkeypatch.setattr(sweep, "check_detail_watchdog", lambda *args: False)
     monkeypatch.setattr(sweep, "prune_photos", lambda photos_dir, active_ids: None)
@@ -812,7 +812,7 @@ def test_sweep_uses_custom_paths_from_dataclass(tmp_path, monkeypatch):
             None,
         ),
     )
-    monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh: [])
+    monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh, row_by_id=None: [])
 
     class FakeClient:
         def __enter__(self):

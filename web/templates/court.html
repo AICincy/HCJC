@@ -82,7 +82,7 @@
   <a class="court-card{% if ch_chap %} charge-row-{{ ch_chap.cls }}{% endif %}" href="{{ base_url }}/inmate/{{ e.inmate.inmate_number }}/">
     {% if e.inmate.photo_filename %}
     <span class="court-card-photo">
-      <img src="{{ base_url }}/photos/{{ e.inmate.photo_filename }}" alt="" loading="lazy" decoding="async">
+      <img src="{{ base_url }}/photos/{{ e.inmate.photo_filename }}" alt="" loading="lazy" decoding="async" data-photo-fallback data-initials="{{ avatar_initials(e.inmate.full_name) }}">
     </span>
     {% else %}
     <span class="court-card-photo court-card-photo-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(e.inmate.full_name) }}"></span>

@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <title>CONYERS LONNIE &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#F5F0EB">
+  <meta name="theme-color" content="#141619">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
   <meta property="og:site_name" content="JCStream">
   <meta property="og:type" content="website">
@@ -16,7 +16,9 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, rebuilt on a best-effort schedule. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=aa66d293e6">
+  <script src="/static/theme-init.js?v=1fb7517bcf"></script>
+  <link rel="stylesheet" href="/static/style.css?v=670596fd12">
+  <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -55,6 +57,10 @@
              width="36" height="36" decoding="async">
       </a>
       <span class="running desktop-only"><strong>1,074</strong> in custody</span>
+      <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      </button>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
           <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -111,22 +117,22 @@
 </header>
 
 <section class="inmate-hero">
-  <figure class="record-photo">
+  <figure class="record-photo" data-initials="CL">
     <a href="/photos/2533584.jpg" data-photo="/photos/2533584.jpg" data-photo-cap="CONYERS LONNIE · booked Jun 11, 2026" data-photo-alt="HCSO booking photo of CONYERS LONNIE" aria-label="Enlarge booking photo">
-      <img src="/photos/2533584.jpg" alt="HCSO booking photo of CONYERS LONNIE" width="240" height="300" decoding="async">
+      <img src="/photos/2533584.jpg" alt="HCSO booking photo of CONYERS LONNIE" width="240" height="300" decoding="async" data-photo-fallback>
     </a>
     <figcaption>Booking photo &middot; ORC &sect; 149.43</figcaption>
   </figure>
   <div class="record-detail">
     <div class="tier-row">
-<span class="tier tier-felony tier-lg">FELONY</span><span class="tier tier-misdemeanor tier-lg">MISDEMEANOR &times;2</span><span class="tier tier-other tier-lg">OTHER &times;1</span><span class="chap chap-2925">Drugs</span>      <span class="hero-id">#&thinsp;2533584</span>
+<span class="tier tier-felony tier-lg">FELONY &times;2</span><span class="tier tier-misdemeanor tier-lg">MISDEMEANOR &times;2</span><span class="chap chap-2925">Drugs</span>      <span class="hero-id">#&thinsp;2533584</span>
     </div>
     <h1 class="record-name">CONYERS LONNIE</h1>
     <p class="alert"><strong>Arrest is not conviction.</strong> This individual is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges below are accusations only and are not evidence of guilt.</p>
     <dl class="bio">
       <div class="bio-field"><dt>Inmate&nbsp;#</dt><dd><code>2533584</code></dd></div>
-      <div class="bio-field"><dt>Booking&nbsp;#</dt><dd><code>26005183</code> <span class="muted">booking #5,183 of 2026</span></dd></div>
-      <div class="bio-field"><dt>Booked</dt><dd>Jun 11, 2026 <span class="muted">100 days ago</span></dd></div>
+      <div class="bio-field"><dt>Booking&nbsp;#</dt><dd><code>26005183</code> <span class="muted">booking #5,183 of 2026 <span class="seq-interpreted" title="The booking number is interpreted as a 2-digit year plus a sequence number (YY + sequence); this reading is unverified and may be wrong.">(interpreted)</span></span></dd></div>
+      <div class="bio-field"><dt>Booked</dt><dd>Jun 11, 2026 <span class="muted">101 days ago</span></dd></div>
       <div class="bio-field"><dt>Projected&nbsp;release</dt><dd>NA</dd></div>
       <div class="bio-field"><dt>Next&nbsp;court&nbsp;date</dt><dd>8/4/26</dd></div>
       <div class="bio-field"><dt>Charges</dt><dd>4 <span class="muted">2 pending · 2 disposed</span></dd></div>
@@ -147,6 +153,7 @@
   <h2>Charges</h2>
   <span class="pill">4</span>
 </div>
+<div class="table-scroll">
 <table class="charges">
   <caption class="sr-only">Charges against CONYERS LONNIE</caption>
   <thead><tr>
@@ -156,8 +163,8 @@
     <tr class="charge-row-2925">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2925.11" target="_blank" rel="noopener">2925.11 ↗</a><br><small class="orc-title">Possession of drugs</small>      </td>
-      <td>POSSESSION OF CONTROLLED SUBSTANCES</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td>POSSESSION OF CONTROLLED SUBSTANCES<br><small class="charge-comments muted">IND UNDER B 2603534</small></td>
+      <td><span class="tier tier-F5">F5</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $20,000</td>
       <td>INDICTED UNDER B</td>
@@ -167,7 +174,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2925.032" target="_blank" rel="noopener">2925.03A2 ↗</a><br><small class="orc-title">Trafficking in drugs</small>      </td>
       <td>AGGRAVATED TRAFFICKING IN DRUGS</td>
-      <td><span class="tier tier-felony">F</span></td>
+      <td><span class="tier tier-F5">F5</span></td>
       <td>8/4/26</td>
       <td>$41,000</td>
       <td> - </td>
@@ -176,8 +183,8 @@
     <tr class="charge-row-2921">
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2921.13" target="_blank" rel="noopener">2921.13 ↗</a><br><small class="orc-title">Falsification</small>      </td>
-      <td>FALSIFICATION</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td>FALSIFICATION<br><small class="charge-comments muted">IND UNDER B 2603534</small></td>
+      <td><span class="tier tier-M1">M1</span></td>
       <td> - </td>
       <td>IGNORED $1,000</td>
       <td>IGNORED</td>
@@ -187,7 +194,7 @@
       <td>
 <span class="orc-code">0000.00</span><br><small class="orc-title">Booking hold (no ORC code on file)</small>      </td>
       <td>FUGITIVE</td>
-      <td><span class="muted"> - </span></td>
+      <td><span class="tier tier-MM">MM</span></td>
       <td> - </td>
       <td>$0</td>
       <td> - </td>
@@ -195,8 +202,9 @@
     </tr>
   </tbody>
 </table>
+</div>
 <p class="muted note-paragraph">
-  Case&nbsp;# links open Hamilton County Clerk of Courts records at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a> (you may encounter a one-time automated verification step there). The tier shown (e.g.&nbsp;F2, M1) is the <em>default degree classification</em> of the cited ORC section as published in statute - the degree actually charged in a given case can differ based on the subsection, prior offenses, or determinations made by the charging authority or the court. <strong>The tier is a statutory label, not a judicial determination of the offense level.</strong> ORC titles are static reference text.
+  Case&nbsp;# links open Hamilton County Clerk of Courts records at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a> (you may encounter a one-time automated verification step there). The tier shown (e.g.&nbsp;F2, M1) is the degree from the charge description or the <em>default degree classification</em> of the cited ORC section as published in statute; where neither gives a degree, the tier is inferred from the charging court (Common Pleas leads to felony, municipal leads to misdemeanor) - the degree actually charged in a given case can differ based on the subsection, prior offenses, or determinations made by the charging authority or the court. <strong>The tier is a statutory label, not a judicial determination of the offense level.</strong> ORC titles are static reference text.
 </p>
 <p class="muted">
   <a href="https://www.courtclerk.org/data/crim_name_results.php?lname=CONYERS&amp;fname=LONNIE&amp;dob=10%2F3%2F84" target="_blank" rel="noopener">Run a full name + DOB search on courtclerk.org ↗</a>
@@ -241,7 +249,7 @@
 </aside>
 
 <p class="custody-summary">
-<strong>100 days</strong> in custody &middot; bond <strong>$62,000</strong> <span class="muted">(71st &deg;ile of 91 peers under &sect;&nbsp;2925.11)</span> &middot; top charge <strong>F</strong> <span class="muted">(UNK max)</span></p>
+<strong>101 days</strong> in custody &middot; bond <strong>$62,000</strong> <span class="muted">(71st &deg;ile of 91 peers under &sect;&nbsp;2925.11)</span> &middot; top charge <strong>F5</strong> <span class="muted">(F max)</span></p>
 
 <details class="ladder-details">
   <summary>Show custody timeline, bond distribution, severity ladder - <span class="muted">richer visualization of the stats above</span></summary>
@@ -251,7 +259,7 @@
   <div class="tl">
     <div class="tl-axis">
       <div class="tl-track"></div>
-      <div class="tl-fill" style="width: 77.1%"></div>
+      <div class="tl-fill" style="width: 77.2%"></div>
       <div class="tl-m tl-m-booked tl-side-below" style="left: 0.0%">
         <div class="tl-dot"></div>
         <div class="tl-cap">
@@ -259,25 +267,25 @@
           <div class="tl-date">6/11/26</div>
         </div>
       </div>
-      <div class="tl-m tl-m-court tl-side-below" style="left: 41.3%">
+      <div class="tl-m tl-m-court tl-side-below" style="left: 41.1%">
         <div class="tl-dot"></div>
         <div class="tl-cap">
           <div class="tl-lab">Court</div>
           <div class="tl-date">8/4/26</div>
 <div class="tl-sub">aggravated trafficking in drugs</div>        </div>
       </div>
-      <div class="tl-m tl-m-now tl-side-below" style="left: 77.1%">
+      <div class="tl-m tl-m-now tl-side-below" style="left: 77.2%">
         <div class="tl-dot"></div>
         <div class="tl-cap">
           <div class="tl-lab">Today</div>
-          <div class="tl-date">Sep 19, 2026</div>
+          <div class="tl-date">Sep 20, 2026</div>
         </div>
       </div>
     </div>
     <div class="tl-foot">
       <span>Jun 11, 2026</span>
-      <span class="muted">130-day window</span>
-      <span>Oct 19, 2026</span>
+      <span class="muted">131-day window</span>
+      <span>Oct 20, 2026</span>
     </div>
   </div>
 </div>
@@ -305,7 +313,7 @@
 </div>
 
 <div class="ladder">
-  <h3 class="ladder-h">Severity ladder &middot; most-severe charge is <strong>F</strong></h3>
+  <h3 class="ladder-h">Severity ladder &middot; most-severe charge is <strong>F5</strong></h3>
   <div class="ladder-head"><span>More severe</span><span>Less severe</span></div>
   <div class="ladder-grid">
     <div class="ladder-cell ladder-F1">
@@ -324,10 +332,10 @@
       <div class="ladder-tier">F4</div>
       <div class="ladder-max">F</div>
     </div>
-    <div class="ladder-cell ladder-F5">
+    <div class="ladder-cell ladder-F5 is-current" aria-current="true">
       <div class="ladder-tier">F5</div>
       <div class="ladder-max">F</div>
-    </div>
+<div class="ladder-tag">This case</div>    </div>
     <div class="ladder-cell ladder-M1">
       <div class="ladder-tier">M1</div>
       <div class="ladder-max">M</div>
@@ -400,9 +408,9 @@
   <summary><span class="section-summary-h">Similar inmates &middot; held under the same statute</span> <span class="pill">6</span> <span class="muted">&middot; peer match by primary ORC section, then chapter</span></summary>
   <div class="rb-grid">
     <a class="rb-card" href="/inmate/2613003/">
-      <span class="rb-photo"><img src="/photos/2613003.jpg" alt="Booking photo of ALSTON JORDAN" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/2613003.jpg" alt="Booking photo of ALSTON JORDAN" loading="lazy" decoding="async" data-photo-fallback data-initials="AJ"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">ALSTON JORDAN</h3>
+<span class="tier tier-F2">F2</span>        <h3 class="rb-name">ALSTON JORDAN</h3>
         <p class="rb-charge">obstruct official business</p>
         <div class="rb-meta">
           <span>5/22/25</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;2613003</span>
@@ -410,9 +418,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/2678229/">
-      <span class="rb-photo"><img src="/photos/2678229.jpg" alt="Booking photo of ANDERSON JESSE" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/2678229.jpg" alt="Booking photo of ANDERSON JESSE" loading="lazy" decoding="async" data-photo-fallback data-initials="AJ"></span>
       <div class="rb-body">
-<span class="tier tier-M">M</span>        <h3 class="rb-name">ANDERSON JESSE</h3>
+<span class="tier tier-F5">F5</span>        <h3 class="rb-name">ANDERSON JESSE</h3>
         <p class="rb-charge">possession of controlled substances</p>
         <div class="rb-meta">
           <span>9/3/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;2678229</span>
@@ -420,9 +428,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/2733328/">
-      <span class="rb-photo"><img src="/photos/2733328.jpg" alt="Booking photo of ARMSTRONG DWAYNE" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/2733328.jpg" alt="Booking photo of ARMSTRONG DWAYNE" loading="lazy" decoding="async" data-photo-fallback data-initials="AD"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">ARMSTRONG DWAYNE</h3>
+<span class="tier tier-F5">F5</span>        <h3 class="rb-name">ARMSTRONG DWAYNE</h3>
         <p class="rb-charge">possessing drug abuse instruments</p>
         <div class="rb-meta">
           <span>4/9/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;2733328</span>
@@ -430,9 +438,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/14423998/">
-      <span class="rb-photo"><img src="/photos/14423998.jpg" alt="Booking photo of BARBER DYLAN" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/14423998.jpg" alt="Booking photo of BARBER DYLAN" loading="lazy" decoding="async" data-photo-fallback data-initials="BD"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">BARBER DYLAN</h3>
+<span class="tier tier-F5">F5</span>        <h3 class="rb-name">BARBER DYLAN</h3>
         <p class="rb-charge">theft</p>
         <div class="rb-meta">
           <span>6/17/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;14423998</span>
@@ -440,9 +448,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/1324134/">
-      <span class="rb-photo"><img src="/photos/1324134.jpg" alt="Booking photo of BLACK ISAAC" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/1324134.jpg" alt="Booking photo of BLACK ISAAC" loading="lazy" decoding="async" data-photo-fallback data-initials="BI"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">BLACK ISAAC</h3>
+<span class="tier tier-F5">F5</span>        <h3 class="rb-name">BLACK ISAAC</h3>
         <p class="rb-charge">menacing</p>
         <div class="rb-meta">
           <span>8/30/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;1324134</span>
@@ -450,9 +458,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/2748696/">
-      <span class="rb-photo"><img src="/photos/2748696.jpg" alt="Booking photo of BOEHM MATTHEW" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/2748696.jpg" alt="Booking photo of BOEHM MATTHEW" loading="lazy" decoding="async" data-photo-fallback data-initials="BM"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">BOEHM MATTHEW</h3>
+<span class="tier tier-F5">F5</span>        <h3 class="rb-name">BOEHM MATTHEW</h3>
         <p class="rb-charge">possession of drugs</p>
         <div class="rb-meta">
           <span>7/14/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;2748696</span>
@@ -533,6 +541,6 @@
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=d2b3567891" defer></script>
+  <script src="/static/main.js?v=0692831785" defer></script>
 </body>
 </html>

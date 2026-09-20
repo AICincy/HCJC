@@ -8,7 +8,7 @@
   {% endif %}
   {% if inm.photo_filename %}
   <a class="thumb" href="{{ base_url }}/inmate/{{ inm.inmate_number }}/" tabindex="-1" aria-hidden="true" data-photo="{{ base_url }}/photos/{{ inm.photo_filename }}" data-photo-cap="{{ inm.full_name }} · booked {{ inm.booking_date }}" data-photo-alt="HCSO booking photo of {{ inm.full_name }}">
-    <img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="" width="48" height="60" loading="lazy" decoding="async">
+    <img src="{{ base_url }}/photos/{{ inm.photo_filename }}" alt="" width="48" height="60" loading="lazy" decoding="async" data-photo-fallback data-initials="{{ avatar_initials(inm.full_name) }}">
   </a>
   {% else %}
   <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="{{ avatar_initials(inm.full_name) }}"></span>

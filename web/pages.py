@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 
 from jinja2 import Environment
 
+from scraper import orc as orc_mod
 from scraper.client import DEFAULT_UA
 from scraper.models import ChangeEvent, Inmate, Snapshot
 from scraper.open_data_feeds import FEEDS
@@ -301,6 +302,38 @@ def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) ->
     )
 
 
+# V9-L03: per-feed vintage for the data page. Each supplemental feed JSON carries
+# a generated_utc stamp; surfacing it keeps the "refresh attempts" rows from
+# reading as a freshness SLA by showing the actual data age instead.
+_FEED_VINTAGE_FILES = (
+    "cfs_recent.json",
+    "cfs_pdi_recent.json",
+    "shootings_recent.json",
+    "use_of_force_pdi_recent.json",
+    "use_of_force_incidents_recent.json",
+    "traffic_stops_drivers_recent.json",
+    "pedestrian_stops_recent.json",
+    "crime_stars_recent.json",
+    "cca_complaints_recent.json",
+)
+
+
+def _feed_vintage() -> dict[str, str]:
+    """Map feed filename -> generated_utc stamp ("" when missing/unreadable)."""
+    out: dict[str, str] = {}
+    for name in _FEED_VINTAGE_FILES:
+        src = Path("data") / name
+        stamp = ""
+        if src.exists():
+            try:
+                payload = json.loads(src.read_text(encoding="utf-8"))
+                stamp = str(payload.get("generated_utc") or "") if isinstance(payload, dict) else ""
+            except (json.JSONDecodeError, OSError):
+                stamp = ""
+        out[name] = stamp
+    return out
+
+
 def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> None:
     """Documentation + download index for the raw JSON the site is built from."""
     data_out = out_dir / "data"
@@ -330,6 +363,7 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     page = env.get_template("data.html").render(
         snapshot=snapshot,
         courtclerk_cases_available=(Path("data") / "courtclerk_cases.json").exists(),
+        feed_vintage=_feed_vintage(),
     )
     (data_out / "index.html").write_text(page, encoding="utf-8")
 
@@ -518,13 +552,21 @@ def _mirror_judge_photo(image_url: str, base_url: str) -> str:
     """
     if not image_url or not image_url.startswith(("http://", "https://")):
         return ""
+    import httpx
+
+    try:
+        httpx.URL(image_url)
+    except Exception as e:
+        # Malformed URL in the source HAMCO profile data (e.g. httpx
+        # "Invalid port: ':1]'"). No network attempt is made; the template
+        # omits the <img> instead of hot-linking a broken URL.
+        log.warning("judge photo URL malformed, skipping: %s (%s)", image_url, e)
+        return ""
     # SHA256 for filename (not security); truncated to 16 hex chars for brevity
     name = hashlib.sha256(image_url.encode("utf-8"), usedforsecurity=False).hexdigest()[:16] + ".jpg"
     dest = _JUDGES_PHOTO_DIR / name
     if not dest.exists():
         try:
-            import httpx
-
             resp = httpx.get(
                 image_url,
                 timeout=5.0,
@@ -690,11 +732,35 @@ def _render_courts_page(env: Environment, out_dir: Path) -> None:
     target.write_text(page, encoding="utf-8")
 
 
+def _linked_statute_codes(snapshot: Snapshot) -> list[str]:
+    """Every normalized ORC code actually linked from a built page.
+
+    Inmate pages link ``/statute/#orc-<code>`` for each charge's normalized
+    code, and the stats toplist plus the bond-disparity rows link the same
+    normalized codes, so the union is every non-empty normalized charge code
+    on the roster. Ordered by roster frequency (desc), then code, matching
+    the ranking the statute page already uses.
+    """
+    counts: dict[str, int] = {}
+    for inm in snapshot.inmates:
+        for c in inm.charges:
+            code = orc_mod.normalize_code((c.orc_code or "").strip())
+            if code and code.upper() != "NONE":
+                counts[code] = counts.get(code, 0) + 1
+    return [code for code, _ in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))]
+
+
 def _render_statute_page(env: Environment, snapshot: Snapshot, offenses: dict, out_dir: Path) -> None:
     """Statute lookup -- one page with each ORC section currently on the roster."""
     explainers = _load_explainers()
     caselaw = _load_caselaw_cache()
-    rows = _top_offenses_with_orc(snapshot, top_n=60, offenses=offenses)
+    # A section for EVERY code linked from a built page, not just the top 60:
+    # anything fewer leaves dead #orc-<code> anchors on inmate, stats, and
+    # bond-disparity pages (V8-F2). The row set of _top_offenses_with_orc is
+    # exactly the linked-code set, so top_n >= len(linked) returns one row
+    # per code, still ranked by frequency with the old top 60 first.
+    linked = _linked_statute_codes(snapshot)
+    rows = _top_offenses_with_orc(snapshot, top_n=max(60, len(linked)), offenses=offenses)
     sections = []
     for r in rows:
         sections.append(

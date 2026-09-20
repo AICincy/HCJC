@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <title>Data &amp; legal notices &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#F5F0EB">
+  <meta name="theme-color" content="#141619">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
   <meta property="og:site_name" content="JCStream">
   <meta property="og:type" content="website">
@@ -16,7 +16,9 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, rebuilt on a best-effort schedule. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=aa66d293e6">
+  <script src="/static/theme-init.js?v=1fb7517bcf"></script>
+  <link rel="stylesheet" href="/static/style.css?v=670596fd12">
+  <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -55,6 +57,10 @@
              width="36" height="36" decoding="async">
       </a>
       <span class="running desktop-only"><strong>1,074</strong> in custody</span>
+      <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      </button>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
           <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -94,7 +100,7 @@
   </div>
 </header>
 
-<p class="page-lede">JCStream is generated exclusively from public records maintained by the Hamilton County Sheriff's Office (HCSO) and published through HCSO's public inmate-search portal at <a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">hcso.org</a>. Everything the site is built from is published here as plain JSON, rebuilt by GitHub Actions on a best-effort schedule (cron every 15 minutes). That cadence is not a guarantee: observed refresh gaps have reached several hours during incidents, and each supplemental feed's row below states its own refresh window. We mirror the <em>current</em> roster: when HCSO removes a person, the next sweep removes them here too. There is no historical archive of released individuals.</p>
+<p class="page-lede">JCStream is generated exclusively from public records maintained by the Hamilton County Sheriff's Office (HCSO) and published through HCSO's public inmate-search portal at <a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">hcso.org</a>. Everything the site is built from is published here as plain JSON, rebuilt by GitHub Actions on a best-effort schedule (cron every 15 minutes). That cadence is not a guarantee: observed refresh gaps have reached several hours during incidents, and each supplemental feed's row below states its own refresh-attempt cadence, not a freshness guarantee. We mirror the <em>current</em> roster: when HCSO removes a person, the next sweep removes them here too. There is no historical archive of released individuals.</p>
 
 <h2 class="sect-h">Authoritative Sources</h2>
 <div class="fields">
@@ -131,7 +137,7 @@
   <caption class="sr-only">Published data files</caption>
   <thead><tr><th scope="col">File</th><th scope="col">Contents</th></tr></thead>
   <tbody>
-    <tr><td><a href="current.json">current.json</a></td><td>Authoritative current-roster snapshot: <code>{generated_utc, inmate_count, inmates: [&hellip;]}</code>. Each inmate has <code>inmate_number, booking_number, last_name, first_name, middle_name, date_of_birth, sex, race, booking_date, projected_release_date, holder_status, charges: [&hellip;], photo_filename, first_seen_utc, last_seen_utc</code>. Each charge has <code>common_pleas_case, municipal_case, other_case, court_date, orc_code, description, bond_type, bond_amount, disposition, comments</code>.</td></tr>
+    <tr><td><a href="current.json">current.json</a></td><td>Authoritative current-roster snapshot: <code>{generated_utc, inmate_count, inmates: [&hellip;]}</code>. Each inmate has <code>inmate_number, booking_number, last_name, first_name, middle_name, date_of_birth, sex, race, booking_date, projected_release_date, holder_status, charges: [&hellip;], photo_filename, first_seen_utc, last_seen_utc, last_detail_fetch_utc, detail_stale</code>. Each charge has <code>common_pleas_case, municipal_case, other_case, court_date, orc_code, description, bond_type, bond_amount, disposition, comments</code>.</td></tr>
     <tr><td><a href="changelog.json">changelog.json</a></td><td>Last ~10,000 change events (~8 days of activity at 30-min sweep cadence): <code>{event: "booked"|"released"|"updated", inmate_number, name, timestamp_utc, note}</code>. Raised from 500 in Phase 9 so the RSS streams and the homepage feed actually see institutional behavior over time.</td></tr>
     <tr><td><a href="anon_changelog.json">anon_changelog.json</a></td><td><strong>Phase 11.</strong> PII-stripped append-only log of all change events, kept <strong>forever</strong>. Events older than 7 days lose name + inmate_number + booking_number; only event type, date (day-precision), tier (F1-MM), and primary charge category survive. The point: long-term institutional patterns (Friday vs Tuesday booking rates, felony share of roster over years) without keeping individual records visible after release. Schema: <code>{event, timestamp_utc|date, inmate_number?, name?, tier, category}</code>.</td></tr>
     <tr><td><a href="history.json">history.json</a></td><td>Daily roster-size series (counts only, no individuals): <code>[{date, count, booked_24h, released_24h}, &hellip;]</code>, last ~400 days. Drives the homepage and <a href="../stats/">stats-page</a> trend lines.</td></tr>
@@ -140,21 +146,21 @@
     <tr><td><a href="../search.json">search.json</a></td><td>Compact searchable index of the current roster: <code>{generated_utc, count, rows: [{n: name, c: primary offense category, t: tier, b: booking date, id}]}</code>.</td></tr>
     <tr><td><a href="../dispatches.json">dispatches.json</a></td><td>Geocoded recent-incident points: <code>{generated_utc, count, points: [{la, lo, k: "cfs"|"shooting", d: disposition/type, a: address/block, n: neighborhood, t: time}]}</code>. Cincinnati Open Data only - <strong>not</strong> matched to anyone on the roster.</td></tr>
     <tr><td><a href="orc_offenses.json">orc_offenses.json</a></td><td>Hand-curated lookup of common Ohio Revised Code criminal sections &rarr; <code>{title, degree}</code>. Degree (F1&hellip;MM) is the statute&rsquo;s default classification; the degree actually charged can vary by subsection.</td></tr>
-    <tr><td><a href="cfs_recent.json">cfs_recent.json</a></td><td>Cincinnati Open Data - CPD/CFD Calls For Service (Socrata <code>qiik-bpks</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions only. Refreshed at most every 1&nbsp;hour.</td></tr>
-    <tr><td><a href="cfs_pdi_recent.json">cfs_pdi_recent.json</a></td><td>Cincinnati Open Data - PDI Police CFS / CAD (Socrata <code>gexm-h6bt</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions. Refreshed at most every 1&nbsp;hour.</td></tr>
-    <tr><td><a href="shootings_recent.json">shootings_recent.json</a></td><td>Cincinnati Open Data - CPD Reported Shootings (Socrata <code>sfea-4ksu</code>), last ~30&nbsp;days. Refreshed at most every 6&nbsp;hours.</td></tr>
-    <tr><td><a href="use_of_force_pdi_recent.json">use_of_force_pdi_recent.json</a></td><td>Cincinnati Open Data - PDI Use of Force (Socrata <code>8us8-wi2w</code>), most recent ~5,000 incidents. Refreshed at most every 24&nbsp;hours (source dataset is paused).</td></tr>
-    <tr><td><a href="use_of_force_incidents_recent.json">use_of_force_incidents_recent.json</a></td><td>Cincinnati Open Data - Use of Force Incidents (Socrata <code>748b-sht4</code>), last ~365&nbsp;days. Refreshed at most every 24&nbsp;hours.</td></tr>
-    <tr><td><a href="traffic_stops_drivers_recent.json">traffic_stops_drivers_recent.json</a></td><td>Cincinnati Open Data - Traffic Stops Contact Cards (Socrata <code>w2kv-5pdg</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
-    <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data - Pedestrian Stops Contact Cards (Socrata <code>swrz-ak2i</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
-    <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data - Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refreshed at most every 12&nbsp;hours.</td></tr>
-    <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data - Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refreshed at most every 24&nbsp;hours (rare-event feed).</td></tr>
+    <tr><td><a href="cfs_recent.json">cfs_recent.json</a></td><td>Cincinnati Open Data - CPD/CFD Calls For Service (Socrata <code>qiik-bpks</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions only. Refresh attempts run at most every 1&nbsp;hour. Data as of Sep 19, 2026, 9:41 PM ET.</td></tr>
+    <tr><td><a href="cfs_pdi_recent.json">cfs_pdi_recent.json</a></td><td>Cincinnati Open Data - PDI Police CFS / CAD (Socrata <code>gexm-h6bt</code>), last ~30&nbsp;days, arrest/citation/offense-report dispositions. Refresh attempts run at most every 1&nbsp;hour. Data as of Sep 19, 2026, 9:41 PM ET.</td></tr>
+    <tr><td><a href="shootings_recent.json">shootings_recent.json</a></td><td>Cincinnati Open Data - CPD Reported Shootings (Socrata <code>sfea-4ksu</code>), last ~30&nbsp;days. Refresh attempts run at most every 6&nbsp;hours. Data as of Sep 19, 2026, 8:37 PM ET.</td></tr>
+    <tr><td><a href="use_of_force_pdi_recent.json">use_of_force_pdi_recent.json</a></td><td>Cincinnati Open Data - PDI Use of Force (Socrata <code>8us8-wi2w</code>), most recent ~5,000 incidents. Refresh attempts run at most every 24&nbsp;hours (source dataset is paused). Data as of Sep 19, 2026, 1:18 PM ET.</td></tr>
+    <tr><td><a href="use_of_force_incidents_recent.json">use_of_force_incidents_recent.json</a></td><td>Cincinnati Open Data - Use of Force Incidents (Socrata <code>748b-sht4</code>), last ~365&nbsp;days. Refresh attempts run at most every 24&nbsp;hours. Data as of Sep 19, 2026, 1:18 PM ET.</td></tr>
+    <tr><td><a href="traffic_stops_drivers_recent.json">traffic_stops_drivers_recent.json</a></td><td>Cincinnati Open Data - Traffic Stops Contact Cards (Socrata <code>w2kv-5pdg</code>), last ~30&nbsp;days. Refresh attempts run at most every 12&nbsp;hours. Data as of Sep 19, 2026, 1:18 PM ET.</td></tr>
+    <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data - Pedestrian Stops Contact Cards (Socrata <code>swrz-ak2i</code>), last ~30&nbsp;days. Refresh attempts run at most every 12&nbsp;hours. Data as of Sep 19, 2026, 1:18 PM ET.</td></tr>
+    <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data - Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refresh attempts run at most every 12&nbsp;hours. Data as of Sep 19, 2026, 8:37 PM ET.</td></tr>
+    <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data - Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refresh attempts run at most every 24&nbsp;hours (rare-event feed). Data as of Sep 19, 2026, 1:18 PM ET.</td></tr>
     <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history. Verify downloads by running <code>sha256sum -c SHA256SUMS</code> in the directory you downloaded the files to (<code>shasum -a 256 -c SHA256SUMS</code> on macOS).</td></tr>
   </tbody>
 </table>
 
 <div class="section-h"><h2 id="access">Access interruptions</h2></div>
-<p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal as authorized by the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>). Beginning 2026-05-30, that portal began returning blocked responses (HTTP&nbsp;403, and at times HTTP&nbsp;200 pages stripped of their results) to this site&rsquo;s automated retrieval. Retrieval has since resumed.</p>
+<p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal as authorized by the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>). Beginning 2026-05-30, that portal began returning blocked responses (HTTP&nbsp;403, and at times HTTP&nbsp;200 pages stripped of their results) to this site&rsquo;s automated retrieval. As of the last build, retrieval is still blocked and the roster shown reflects the last successful update on 2026-09-20.</p>
 <p class="muted">Every blocked cycle, and each recovery, is recorded with a UTC timestamp in <a href="waf_block_log.json">waf_block_log.json</a> (hash-chained, and mirrored in this repository&rsquo;s authenticated git history). JCStream does not attempt to circumvent the block: it preserves the last-known-good roster, declines to publish a partial one, and documents the interruption. The site does not route around HCSO&rsquo;s controls.</p>
 
 <div class="section-h"><h2>Feeds</h2></div>
@@ -281,6 +287,6 @@ claim.</p>
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=d2b3567891" defer></script>
+  <script src="/static/main.js?v=0692831785" defer></script>
 </body>
 </html>

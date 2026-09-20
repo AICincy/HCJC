@@ -88,10 +88,20 @@ log = logging.getLogger("jcstream.site")
 ROOT = Path(__file__).parent
 TEMPLATE_DIR = ROOT / "templates"
 STATIC_DIR = ROOT / "static"
-PHOTOS_DIR = Path("data/photos")
+PHOTOS_DIR = Path(__file__).resolve().parent.parent / "data" / "photos"
 # Pages serves from /docs at the repo root. Building straight there means the
 # workflow can commit the site alongside the data on every sweep.
 DEFAULT_OUT = Path("docs")
+
+# Non-generated files that must survive the output-directory swap. build()
+# renders into a temp dir and replaces the output dir wholesale, so anything
+# that is not a build output must be listed here: each entry is copied aside
+# before the swap and restored into the fresh tree after it. (Added 2026-09-20
+# after the swap silently deleted docs/FRAMEWORK-REVIEW-2026-09-20.md from the
+# working tree; CNAME added the same day after the swap silently deleted
+# docs/CNAME when JCSTREAM_CNAME was unset in the local environment.)
+# Paths are relative to the output directory.
+PRESERVED_FILES = ("FRAMEWORK-REVIEW-2026-09-20.md", "CNAME")
 
 
 def _load_inputs():
@@ -213,8 +223,30 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, sit
     env.globals["main_js_version"] = (
         hashlib.sha256(_main_js.read_bytes()).hexdigest()[:10] if _main_js.exists() else "dev"
     )
+    # Same pattern for the pre-paint theme init script (synchronous in <head>).
+    _theme_js = STATIC_DIR / "theme-init.js"
+    env.globals["theme_js_version"] = (
+        hashlib.sha256(_theme_js.read_bytes()).hexdigest()[:10] if _theme_js.exists() else "dev"
+    )
     _register_template_helpers(env, snapshot, offenses)
     return env
+
+
+def _compact_money(n: int | float | None) -> str:
+    """Compact currency for KPI cards: 243200000 -> $243.2M, 14500 -> $14.5K.
+
+    KPI numerals use nowrap+ellipsis, so full "$243,200,000" truncates; the
+    compact form keeps the figure legible at card width."""
+    if n is None:
+        return "$0"
+    v = float(n)
+    if v >= 1_000_000:
+        s = f"{v / 1_000_000:.1f}".rstrip("0").rstrip(".")
+        return f"${s}M"
+    if v >= 1_000:
+        s = f"{v / 1_000:.1f}".rstrip("0").rstrip(".")
+        return f"${s}K"
+    return f"${v:,.0f}"
 
 
 def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: dict[str, dict]) -> None:
@@ -224,8 +256,12 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     env.globals["orc_title"] = lambda code: orc_mod.title_for(code, offenses)
     env.globals["primary_charge"] = _primary_charge
     env.globals["primary_chapter"] = _primary_chapter
-    env.globals["primary_tier"] = _primary_tier
-    env.globals["primary_degree"] = _primary_degree
+    # Tier/degree globals are bound with the offenses dict so every template
+    # sees one degree basis: description suffix, then ORC lookup, then venue
+    # fallback. The raw functions stay venue-based when called without
+    # offenses; templates must never take that path (F-10-02/F-10-03).
+    env.globals["primary_tier"] = lambda inm: _primary_tier(inm, offenses)
+    env.globals["primary_degree"] = lambda inm: _primary_degree(inm, offenses)
     env.globals["tier_max"] = _tier_max
     env.globals["tier_ladder"] = ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"]
     idx = RosterIndexes(snapshot.inmates)
@@ -237,12 +273,13 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     env.globals["timeline_markers"] = _timeline_markers
     env.globals["display_date"] = _display_date
     env.globals["human_utc"] = _human_utc
+    env.globals["compact_money"] = _compact_money
     env.globals["iso_booking_date"] = _iso_booking_date
     env.globals["similar_by_statute"] = lambda inm: _similar_by_statute(
         inm, snapshot.inmates, offenses, limit=6, indexes=idx
     )
-    env.globals["tier_counts"] = _tier_counts
-    env.globals["charge_tier"] = _charge_tier
+    env.globals["tier_counts"] = lambda inm: _tier_counts(inm, offenses)
+    env.globals["charge_tier"] = lambda c: _charge_tier(c, offenses)
     env.globals["charge_chapter"] = _offense_for_code
     env.globals["spark_points"] = _spark_points
     env.globals["roster_tiers"] = _tier_breakdown(snapshot)
@@ -351,6 +388,18 @@ def build(out_dir: Path) -> int:
     # Tell GitHub Pages NOT to Jekyll-process the built site.
     (build_dir / ".nojekyll").write_text("", encoding="utf-8")
 
+    # Set aside non-generated files so they survive the wholesale swap below.
+    # Entries in PRESERVED_FILES are copied out of the old tree now and written
+    # back into the fresh tree after the promote.
+    preserved: dict[str, bytes] = {}
+    if out_dir.exists():
+        for rel in PRESERVED_FILES:
+            src = out_dir / rel
+            if src.is_file():
+                preserved[rel] = src.read_bytes()
+            else:
+                log.warning("preserved file %s not found under %s; skipping", rel, out_dir)
+
     # Promote the freshly built site with a rename-based swap. Everything above
     # wrote only to build_dir, so a mid-render failure never touched out_dir.
     # If the promote itself fails after out_dir was moved aside, restore the
@@ -365,6 +414,18 @@ def build(out_dir: Path) -> int:
         raise
     if old_dir.exists():
         shutil.rmtree(old_dir)
+
+    # Restore the non-generated files set aside above into the fresh tree.
+    for rel, data in preserved.items():
+        dest = out_dir / rel
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(data)
+    if preserved:
+        log.info(
+            "preserved %d non-generated file(s): %s",
+            len(preserved),
+            ", ".join(sorted(preserved)),
+        )
 
     log.info(
         "site built: %d inmates, %d recent events -> %s",

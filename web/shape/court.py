@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from scraper.models import Inmate, Snapshot
 from web.classify import _charge_tier, _parse_book_date, _parse_md_yy, _primary_tier, case_category, case_year
 
-from .common import _now_naive_est
+from .common import _cached_offenses, _now_naive_est
 
 
 def _upcoming_courts(snapshot: Snapshot, days_ahead: int = 14) -> list[dict]:
@@ -46,7 +46,9 @@ def _upcoming_courts(snapshot: Snapshot, days_ahead: int = 14) -> list[dict]:
 _SLIPPAGE_TIER_ORDER = ["F1", "F2", "F3", "F4", "F5", "F", "M1", "M2", "M3", "M4", "MM", "M"]
 
 
-def _court_slippage(inmates: list[Inmate], now: datetime | None = None) -> dict:
+def _court_slippage(
+    inmates: list[Inmate], now: datetime | None = None, offenses: dict | None = None
+) -> dict:
     """Aggregate count of people still on the roster whose earliest listed
     court date has already passed.
 
@@ -57,9 +59,16 @@ def _court_slippage(inmates: list[Inmate], now: datetime | None = None) -> dict:
     court date can reflect a continuance, a capias, or HCSO data lag - the
     roster does not distinguish them, so this measures slippage of the
     listed date, not confirmed missed hearings.
+
+    The tier breakdown is display-facing (stats page), so it resolves tiers
+    through the offenses dict like every other displayed tier (F-10-02);
+    the venue fallback only applies where no description suffix or ORC
+    degree exists.
     """
     if now is None:
         now = _now_naive_est()
+    if offenses is None:
+        offenses = _cached_offenses()
     today = now.replace(hour=0, minute=0, second=0, microsecond=0)
     days_past: list[int] = []
     by_tier: dict[str, int] = defaultdict(int)
@@ -72,7 +81,7 @@ def _court_slippage(inmates: list[Inmate], now: datetime | None = None) -> dict:
         if earliest is None or earliest >= today:
             continue
         days_past.append((today - earliest).days)
-        t = _primary_tier(inm)
+        t = _primary_tier(inm, offenses)
         if t:
             label = t["label"]
         else:
@@ -83,7 +92,7 @@ def _court_slippage(inmates: list[Inmate], now: datetime | None = None) -> dict:
             # "F"/"M" labels to find either, so the venue-letter arms below are
             # unreachable on real data and this always lands on "other".
             # They stay as a defensive fallback, not a live branch.
-            labels = {(ct or {}).get("label") for ct in (_charge_tier(c) for c in inm.charges)}
+            labels = {(ct or {}).get("label") for ct in (_charge_tier(c, offenses) for c in inm.charges)}
             label = "F" if "F" in labels else ("M" if "M" in labels else "other")
         by_tier[label] += 1
     tiers = [{"label": lbl, "count": by_tier[lbl]} for lbl in _SLIPPAGE_TIER_ORDER if lbl in by_tier]

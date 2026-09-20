@@ -22,7 +22,9 @@ def _update_history(snapshot: Snapshot, booked_24h: int, released_24h: int) -> d
     History is a series of *counts*, not of individuals — it doesn't archive
     anyone, so it's consistent with 'we mirror, we don't archive'.
     """
-    path = Path("data/history.json")
+    # V5-F2: anchor to the repo root, not the process CWD. A build/test run
+    # with CWD=web/ used to misdirect this into web/data/history.json.
+    path = Path(__file__).resolve().parent.parent / "data" / "history.json"
     # data-F7: validate each record on load via HistoryRecord. A structurally
     # valid but wrong-typed file (e.g. count as a string) would otherwise
     # crash _compute_stats or drive a bogus sparkline. Drop invalid records

@@ -554,4 +554,104 @@
       if (!sresults.contains(e.target) && e.target !== sbox) dismiss();
     });
   }
+
+  // (N) Theme toggle: theme-init.js sets the initial data-theme pre-paint;
+  //     this only handles clicks. Choice persists in localStorage.
+  var themeBtn = document.querySelector('.theme-toggle');
+  if (themeBtn) {
+    var metaTheme = document.querySelector('meta[name="theme-color"]');
+    var syncThemeMeta = function () {
+      if (metaTheme) metaTheme.setAttribute('content',
+        document.documentElement.getAttribute('data-theme') === 'light' ? '#F5F0EB' : '#141619');
+    };
+    /* aria-pressed mirrors the toggle state for assistive tech:
+       pressed = dark theme active. Synced here (deferred) and on click;
+       theme-init.js can't set it pre-paint because <body> isn't parsed yet. */
+    var syncThemePressed = function () {
+      themeBtn.setAttribute('aria-pressed',
+        document.documentElement.getAttribute('data-theme') === 'light' ? 'false' : 'true');
+    };
+    syncThemeMeta();
+    syncThemePressed();
+    themeBtn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('jcstream-theme', next); } catch (e) { /* ignore */ }
+      syncThemeMeta();
+      syncThemePressed();
+    });
+  }
+
+  // (O) Booking-photo graceful degradation (V8-F1/V9-L01). Inline onerror is
+  //     blocked by the CSP (script-src 'self', no 'unsafe-inline'), so failed
+  //     booking photos are handled here: a capture-phase error listener for
+  //     failures after this deferred bundle runs, plus a sweep for images
+  //     that already failed before it ran. Each context mirrors the
+  //     placeholder its template renders when no photo filename exists.
+  (function photoFallback() {
+    function initialsFor(img, fallbackEl) {
+      return img.getAttribute("data-initials")
+        || (fallbackEl && fallbackEl.getAttribute("data-initials"))
+        || "?";
+    }
+    function swapPhoto(img) {
+      if (!img || img.getAttribute("data-photo-fallback-done")) return;
+      img.setAttribute("data-photo-fallback-done", "1");
+      // Inmate hero figure: rebuild the no-photo placeholder.
+      var figure = img.closest("figure.record-photo");
+      if (figure) {
+        var link = img.closest("a");
+        if (link) link.remove();
+        var hero = document.createElement("span");
+        hero.className = "thumb thumb-placeholder thumb-hero";
+        hero.setAttribute("aria-hidden", "true");
+        hero.setAttribute("data-initials", figure.getAttribute("data-initials") || "?");
+        figure.insertBefore(hero, figure.firstChild);
+        var cap = figure.querySelector("figcaption");
+        if (cap) cap.textContent = "No booking photo on file";
+        return;
+      }
+      // Related-booking / statute held-inmate thumbnails.
+      var rb = img.closest(".rb-photo");
+      if (rb) {
+        rb.classList.add("is-placeholder");
+        rb.setAttribute("data-initials", initialsFor(img, rb));
+        img.remove();
+        return;
+      }
+      // Court page cards.
+      var cc = img.closest(".court-card-photo");
+      if (cc) {
+        cc.classList.add("court-card-photo-placeholder");
+        cc.setAttribute("data-initials", initialsFor(img, cc));
+        img.remove();
+        return;
+      }
+      // Homepage cards: the anchor itself is the .thumb; replace it with the
+      // placeholder span the no-photo branch renders.
+      var cardAnchor = img.closest("a.thumb");
+      if (cardAnchor) {
+        var s = document.createElement("span");
+        s.className = "thumb thumb-placeholder";
+        s.setAttribute("aria-hidden", "true");
+        s.setAttribute("data-initials", initialsFor(img, cardAnchor));
+        cardAnchor.replaceWith(s);
+        return;
+      }
+      img.style.display = "none";
+    }
+    document.addEventListener("error", function (e) {
+      var t = e.target;
+      if (t && t.tagName === "IMG" && t.hasAttribute("data-photo-fallback")) swapPhoto(t);
+    }, true);
+    function sweep() {
+      var imgs = document.querySelectorAll("img[data-photo-fallback]");
+      for (var i = 0; i < imgs.length; i++) {
+        var im = imgs[i];
+        if (im.complete && im.naturalWidth === 0) swapPhoto(im);
+      }
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", sweep);
+    else sweep();
+  })();
 })();

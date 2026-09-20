@@ -145,12 +145,15 @@ def _primary_charge_obj(inmate: Inmate):
     """
     best = None
     best_key = (99, 9)  # (category-rank, tier-rank)
+    # Offenses-backed tier so the "most serious" pick uses the same degree
+    # basis as the badge, tooltip, and counts (F-10-02).
+    offenses = _cached_offenses()
     for c in inmate.charges:
         off = _offense_for_code(c.orc_code)
         if not off:
             continue
         cat_rank = _CLS_RANK.get(off["cls"], 9)
-        ct = _charge_tier(c)
+        ct = _charge_tier(c, offenses)
         tier_rank = 0 if (ct and ct["kind"] == "felony") else (1 if ct else 2)
         key = (cat_rank, tier_rank)
         if key < best_key:
@@ -189,18 +192,17 @@ def _charges_by_chapter(inmate: Inmate) -> list[dict]:
 
 def _card_data_attrs(inmate: Inmate) -> dict:
     """Return data-* values for client-side filtering / search / sort on the cards."""
-    tier = _primary_tier(inmate)
+    # One degree basis everywhere: the offenses-backed tier feeds the badge
+    # kind, the degree sort key, the tooltip, and the counts, so filtering
+    # and display can never disagree about felony vs misdemeanor (F-10-03).
+    tier = _primary_tier(inmate, _cached_offenses())
     chap = _primary_chapter(inmate)
     orc_codes = " ".join((c.orc_code or "") for c in inmate.charges)
     charges_txt = " ".join((c.description or "") for c in inmate.charges)
     dic = _days_in_custody(inmate)
-    # Degree resolves with the offenses dict (like the tier strip) so the
-    # sort sees F1..MM where the ORC code carries it; the bare tier badge
-    # deliberately stays description/venue-based.
-    deg_tier = _primary_tier(inmate, _cached_offenses())
     return {
         "tier": tier["kind"] if tier else "unknown",
-        "degree": deg_tier["label"] if deg_tier else "UNK",
+        "degree": tier["label"] if tier else "UNK",
         "custody": dic if dic is not None else "",
         "chap": _chap_slug(chap["label"]) if chap else "unknown",
         "search": f"{inmate.full_name} {charges_txt} {orc_codes} #{inmate.inmate_number}".lower(),

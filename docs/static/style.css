@@ -31,6 +31,12 @@
   --accent-hi:    #8C2E21;
   --accent-bg:    #FDF5EE;
   --accent-bg-2:  #F5F0EB;
+  /* Default hyperlink color: the civil/misdemeanor blue, 6.8:1 on white.
+     Red (--accent) is reserved for severity, warning, focus, and primary-CTA
+     signal, so the felony ramp and warnings keep their contrast instead of
+     competing with red body links on every page. Literal hex, not an alias:
+     the print :root retune overrides it independently (see @media print). */
+  --link:         #2F5E8C;
   --warn:         #B33A2A;
   --warn-bg:      #FDF5EE;
   --ok:           #4d7838;
@@ -96,7 +102,162 @@
   color-scheme: light;
 }
 
-/* Dark-mode media query removed per spec §1 — single light theme only. */
+/* Manual dark theme (2026-09-20, per Krass): neutral dark default with a
+   masthead toggle. <html data-theme="dark"> activates it; theme-init.js sets
+   the attribute pre-paint from localStorage (default dark), main.js handles
+   the toggle click. No-JS falls back to the light theme. The felony ramp and
+   category palette are dark-calibrated (lightened) but keep their exact
+   severity encoding and ordering; the F3 ink switch moves from F3/F4 to F2/F3
+   so every cell still clears WCAG AA (verified 2026-09-20). */
+:root[data-theme="dark"] {
+  --bg:           #141619;
+  --bg-soft:      #191C21;
+  --surface:      #1F232A;
+  --border:       #2E343D;
+  --border-hi:    #3D444F;
+
+  --fg:           #EDEFF2;  /* 15.7:1 on --bg */
+  --fg-soft:      #C6CBD4;  /* 11.1:1 on --bg */
+  --fg-muted:     #A3ABB6;  /* 7.8:1 on --bg */
+  --fg-dim:       #98A1AD;  /* 6.9:1 on --bg */
+
+  --accent:       #F0433A;  /* 4.8:1 as text on --bg; true vivid red */
+  --accent-hi:    #F4645F;
+  --accent-bg:    #2B1D19;
+  --accent-bg-2:  #241915;
+  --link:         #8FBCE8;  /* 9.1:1 on --bg */
+  --warn:         #F0433A;
+  --warn-bg:      #2B1D19;
+  --ok:           #82B364;  /* 7.4:1 on --bg */
+
+  --case-criminal: #F0433A;
+  --case-traffic:  #FFB224;  /* 10.1:1 on --bg */
+  --case-civil:    #4C9AFF;  /* 6.4:1 on --bg */
+  --case-other:    #98A1AD;
+
+  --cat-violence: #F0433A;  /* 4.8:1 */
+  --cat-weapons:  #FFB224;  /* 10.1:1 */
+  --cat-property: #4C9AFF;  /* 6.4:1 */
+  --cat-theft:    #2DD4BF;  /* 9.7:1 */
+  --cat-drugs:    #4CC38A;  /* 8.2:1 */
+  --cat-family:   #A06BE8;  /* 5.0:1 */
+  --cat-other:    #98A1AD;
+
+  /* Vivid felony ramp v2 (2026-09-20): same red-to-amber severity encoding,
+     pushed to high saturation so the steps read as vivid color on dark,
+     not mud. Ink: F1 takes warm-white, F2-F5 take near-black. */
+  --tier-felony-dark:   #D92D20;  /* F1, light text 4.6:1 */
+  --tier-felony-mid:    #E04E1A;  /* F2, dark text 4.6:1 */
+  --tier-felony-base:   #F0761A;  /* F3, dark text 6.3:1 */
+  --tier-felony-warm:   #F5A524;  /* F4, dark text 8.9:1 */
+  --tier-felony-amber:  #FFC53D;  /* F5, dark text 11.5:1 */
+  --tier-felony-ink:    #FFF7EF;  /* warm-white text on the F1 cell */
+  --tier-felony-ink-lo: #141619;  /* near-black text on the F2-F5 cells */
+  --tier-felony-dark-border:  #8F1F16;  /* F1 border */
+  --tier-felony-warm-border:  #C77F1A;  /* F4 border */
+  --tier-felony-amber-border: #D99A26;  /* F5 border */
+  --tier-misdemeanor:   #4C9AFF;  /* misdemeanor outline + text */
+  --tier-misd-dark:     #3F8FF0;  /* M1, most severe misdemeanor */
+  --tier-misd-mid:      #4C9AFF;  /* M2 (= misdemeanor) */
+  --tier-misd-base:     #66AFFF;  /* M3 */
+  --tier-misd-soft:     #85C2FF;  /* M4 */
+  --tier-misd-pale:     #A8D4FF;  /* MM, least severe */
+
+  --shadow-card:  0 1px 2px rgba(0, 0, 0, 0.35), 0 3px 10px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.45), 0 10px 26px rgba(0, 0, 0, 0.45);
+
+  color-scheme: dark;
+}
+
+/* Ink switch is F1/F2 in dark (F1 takes light ink, F2-F5 take dark ink):
+   the base selectors group F1-F3 under --tier-felony-ink, so F2/F3 need
+   explicit dark overrides. */
+:root[data-theme="dark"] .tier-corner.tier-F2,
+:root[data-theme="dark"] .tier-corner.tier-F3 { color: var(--tier-felony-ink-lo); }
+:root[data-theme="dark"] .ladder-F2 .ladder-tag,
+:root[data-theme="dark"] .ladder-F3 .ladder-tag { color: var(--tier-felony-ink-lo); }
+:root[data-theme="dark"] .tier-lg.tier-felony { color: var(--tier-felony-ink-lo); }
+
+/* Solid-accent CTA: --accent is calibrated as text-on-dark (4.81:1), which is
+   too light to carry white button text (3.77:1), so the primary button gets
+   its own deeper vivid red. White on #C22525 = 5.86:1. */
+:root[data-theme="dark"] .button-primary {
+  background: #C22525;
+  border-color: #F0433A;
+}
+:root[data-theme="dark"] .button-primary:hover,
+:root[data-theme="dark"] .button-primary:focus-visible { background: #D92D20; }
+/* Same solid-CTA problem as .button-primary: white text on --accent (#F0433A
+   in dark) is 3.8:1, so every solid-accent element with light text gets the
+   deeper CTA red in dark (white on #C22525 = 5.9:1). */
+:root[data-theme="dark"] .skip-link,
+:root[data-theme="dark"] .visit-card-primary,
+:root[data-theme="dark"] .court-stat-primary,
+:root[data-theme="dark"] .status-pill-blocked { background: #C22525; }
+/* Dark: the fresh/stale pills also fail white-text contrast on their dark
+   tokens (fresh 2.5:1, stale 2.9:1 at 11px), so they get deeper fills in the
+   same hue families. White on #3E6B2E = 6.3:1; white on #2F66A8 = 5.9:1. */
+:root[data-theme="dark"] .status-pill-fresh { background: #3E6B2E; }
+:root[data-theme="dark"] .status-pill-stale { background: #2F66A8; }
+
+/* Dark variants of the few literal-hex rules outside the token system. */
+:root[data-theme="dark"] .comment-policy { color: var(--fg-muted); border-color: #5A3430; }
+:root[data-theme="dark"] .comment-policy strong { color: var(--fg); }
+:root[data-theme="dark"] .bondctx-mine span { border-color: #5A3430; color: var(--fg); }
+:root[data-theme="dark"] .card-inmate mark.hl { background: #7A6118; color: #FFF3D6; }
+/* Dark red-text legibility: red text under ~14px is hard to read on dark even
+   at AA ratios (chromatic bleed). So in dark, small red text becomes either a
+   solid chip with white ink (signals) or off-white text (data/captions). Red
+   remains for large/bold/structural uses: CTA, month counts, kicker, banner
+   lead line. */
+/* Dark legibility pass (2026-09-20): banner body text goes off-white in dark
+   (the red bold lead line keeps the alert signal); card charge labels go
+   neutral, with the 3px category edge carrying the color coding; banner links
+   use the link token instead of red. */
+:root[data-theme="dark"] .banner { color: var(--fg); }
+:root[data-theme="dark"] .banner a { color: var(--link); }
+:root[data-theme="dark"] .card-inmate .charge { color: var(--fg-soft); }
+/* In dark banners, only the alert lead line stays red; mid-paragraph
+   emphasis goes off-white bold. */
+:root[data-theme="dark"] .banner strong { color: var(--fg); }
+:root[data-theme="dark"] .banner > p:first-of-type > strong:first-child,
+:root[data-theme="dark"] .banner > summary strong:first-child { color: var(--warn); }
+:root[data-theme="dark"] .chap-2903, :root[data-theme="dark"] .chap-2907 {
+  background: #C22525; color: #fff; border-top-color: transparent; }
+:root[data-theme="dark"] .bio dd code { color: var(--fg); }
+:root[data-theme="dark"] .inmate-hero .record-photo figcaption { color: var(--fg-muted); }
+/* More small-red-text sites under the same legibility rule (off-white in dark;
+   emphasis kept via weight). */
+:root[data-theme="dark"] .statute-meta strong { color: var(--fg); }
+:root[data-theme="dark"] .tl-m-now .tl-lab { color: var(--fg); }
+:root[data-theme="dark"] .page-courts .judge-sub > summary { color: var(--fg-soft); }
+:root[data-theme="dark"] .statute-caselaw > summary { color: var(--fg-soft); }
+:root[data-theme="dark"] .section-h .pill { color: var(--fg-soft); }
+/* V3 remediation (2026-09-20): criminal case-number links in the charges table
+   are 13px --case-criminal (#F0433A) body links in dark, so they take the link
+   token instead (9.1:1). The CRIMINAL case-cat chip becomes a solid chip with
+   white ink (white on #C22525 = 5.86:1), matching the violence chap chips. */
+:root[data-theme="dark"] table.charges .case-link.case-criminal,
+:root[data-theme="dark"] .case-groups .case-link.case-criminal { color: var(--link); }
+:root[data-theme="dark"] .case-cat-criminal { background: #C22525; border-color: #C22525; color: #fff; }
+/* Pressed toggle keeps the red-tinted bg + border as the active signal, but
+   its label goes off-white: 12px red text on a red tint is unreadable. */
+:root[data-theme="dark"] .view-toggle[aria-pressed="true"] { color: var(--fg); }
+
+/* Theme toggle (masthead). Shows a moon in light mode, a sun in dark mode. */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; flex: none;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--fg-soft); cursor: pointer;
+  padding: 0;
+}
+.theme-toggle:hover { border-color: var(--border-hi); color: var(--fg); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.theme-toggle svg { width: 18px; height: 18px; display: block; }
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 * { box-sizing: border-box; }
 
@@ -138,7 +299,7 @@ body {
   text-rendering: optimizeLegibility;
   font-variant-numeric: tabular-nums;
 }
-a { color: var(--accent); text-decoration: none; }
+a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 a.plain, a.plain:hover { color: inherit; text-decoration: none; }
 
@@ -461,6 +622,9 @@ details.coms > summary::-webkit-details-marker { display: none; }
   border-color: var(--accent);
 }
 .filter-bar input[type="search"] { min-width: 14rem; }
+/* Explicit placeholder ink: without this the UA default applies, which is not
+   guaranteed against the dark --bg. --fg-muted is 7.8:1 on dark --bg. */
+.filter-bar input[type="search"]::placeholder { color: var(--fg-muted); opacity: 1; }
 .filter-bar .filter-count { color: var(--fg-muted); margin-left: auto; font-variant-numeric: tabular-nums; font-size: 12px; }
 /* Search-match emphasis on card text (main.js wraps matches in mark.hl).
    Warm straw, literal hex on purpose: no token aliasing (print :root rule). */
@@ -1267,7 +1431,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   border-radius: var(--radius-sm);
   font-size: 13px;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--link);
   letter-spacing: -0.01em;
   margin-top: 4px;
 }
@@ -1343,7 +1507,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   margin-bottom: 14px;
 }
 .breadcrumb a {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: none;
   padding: 4px 10px;
   border-radius: var(--radius-lg);
@@ -1548,7 +1712,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
   font-weight: 500;
   letter-spacing: -0.02em;
 }
-.bio dd a { color: var(--accent); font-family: var(--font-mono); border-bottom: 1px dashed var(--accent-hi); padding-bottom: 1px; text-decoration: none; }
+.bio dd a { color: var(--link); font-family: var(--font-mono); border-bottom: 1px dashed var(--link); padding-bottom: 1px; text-decoration: none; }
 .bio dd a:hover { border-bottom-style: solid; }
 .case-groups { display: grid; gap: 14px; margin: 8px 0 0; }
 .case-group-h { display: flex; align-items: baseline; gap: 8px; margin: 0 0 4px; font-size: 13px; font-weight: 600; }
@@ -1574,7 +1738,7 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 .case-earlier { margin-top: 2px; }
 .case-earlier > summary { font-size: 12px; color: var(--fg-muted); cursor: pointer; padding: 4px 0; }
 .case-earlier[open] > summary { color: var(--fg-soft); }
-.case-link { font-family: var(--font-mono); font-size: 13px; color: var(--accent); border-bottom: 1px dashed currentColor; padding-bottom: 1px; text-decoration: none; }
+.case-link { font-family: var(--font-mono); font-size: 13px; color: var(--link); border-bottom: 1px dashed currentColor; padding-bottom: 1px; text-decoration: none; }
 .case-link:hover { border-bottom-style: solid; }
 .case-link.case-criminal { color: var(--case-criminal); }
 .case-link.case-traffic  { color: var(--case-traffic); }
@@ -1597,6 +1761,13 @@ details.court-day-collapsible .court-grid { margin-top: 22px; }
 }
 
 /* ===== Charges table ===== */
+/* Wide tables scroll inside this container on narrow viewports instead of
+   pushing the whole page sideways (mobile audit M1/M2). `auto` only shows a
+   scrollbar when the content actually overflows, so desktop is unchanged. */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 table.charges {
   width: 100%;
   border-collapse: collapse;
@@ -1636,7 +1807,7 @@ table.charges tbody tr[class*="charge-row-"] td:first-child { border-left: 3px s
 .charge-row-2919 { --card-cat: var(--cat-family); }
 .orc-code {
   font-family: var(--font-mono);
-  color: var(--accent);
+  color: var(--link);
   font-weight: 500;
   letter-spacing: -0.02em;
 }
@@ -2212,7 +2383,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 /* ===== Legal notice footnotes ===== */
 .footer-legal { flex-basis: 100%; font-size: 11px; color: var(--fg-muted); line-height: 1.55; }
 .footer-legal strong { color: var(--fg-soft); }
-.footer-legal a { color: var(--accent); text-decoration: underline; }
+.footer-legal a { color: var(--link); text-decoration: underline; }
 .record-legal { font-size: 12px; color: var(--fg-muted); line-height: 1.5; margin: 0 0 14px; }
 .record-legal strong { color: var(--fg-soft); }
 h2.legal-anchor {
@@ -2256,9 +2427,12 @@ h2.legal-anchor {
 
 /* ===== Print ===== */
 @media print {
-  :root { --bg: #fff; --bg-soft: #fff; --surface: #fff;
+  /* Print stays light regardless of the active theme: the dark override
+     selector is more specific than bare :root, so it must be listed here. */
+  :root, :root[data-theme="dark"] { --bg: #fff; --bg-soft: #fff; --surface: #fff;
           --border: #ccc; --border-hi: #bbb; --fg: #111; --fg-soft: #333;
-          --fg-muted: #555; --fg-dim: #777; --accent: #2a3f9f; }
+          --fg-muted: #555; --fg-dim: #777; --accent: #2a3f9f; --link: #2a3f9f;
+          color-scheme: light; }
   html, body { background: #fff; color: #111; }
   /* Hide non-content interactive UI from print output. */
   .masthead, .month-nav, .back-to-top, .filter-bar, .legend, .lightbox,
@@ -2727,7 +2901,7 @@ footer.site {
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 footer.site a {
-  color: var(--accent);
+  color: var(--link);
 }
 footer.site a:hover { color: var(--fg); }
 footer.site .footer-legal { color: var(--fg-muted); line-height: 1.6; max-width: 90ch; }
@@ -2830,7 +3004,10 @@ a.statbar:hover { border-color: var(--accent); }
 .statbar-fill {
   display: block;
   height: 100%;
-  background: var(--accent);
+  /* Neutral default: magnitude bars stay quiet so the category palette and the
+     felony/misdemeanor severity ramps keep their contrast. Red is signal, not
+     the default. */
+  background: var(--fg-soft);
   min-width: 2px;
   border-radius: var(--radius-lg);
   transition: width 400ms ease;
@@ -3025,7 +3202,7 @@ a.statbar:hover { border-color: var(--accent); }
 }
 .caselaw-name {
   font-weight: 600;
-  color: var(--accent);
+  color: var(--link);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;

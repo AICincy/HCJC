@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <title>BRADLEY JOHN &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#F5F0EB">
+  <meta name="theme-color" content="#141619">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
   <meta property="og:site_name" content="JCStream">
   <meta property="og:type" content="website">
@@ -16,7 +16,9 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, rebuilt on a best-effort schedule. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=aa66d293e6">
+  <script src="/static/theme-init.js?v=1fb7517bcf"></script>
+  <link rel="stylesheet" href="/static/style.css?v=670596fd12">
+  <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -55,6 +57,10 @@
              width="36" height="36" decoding="async">
       </a>
       <span class="running desktop-only"><strong>1,074</strong> in custody</span>
+      <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      </button>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
           <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -111,22 +117,22 @@
 </header>
 
 <section class="inmate-hero">
-  <figure class="record-photo">
+  <figure class="record-photo" data-initials="BJ">
     <a href="/photos/14796032.jpg" data-photo="/photos/14796032.jpg" data-photo-cap="BRADLEY JOHN · booked Jan 05, 2026" data-photo-alt="HCSO booking photo of BRADLEY JOHN" aria-label="Enlarge booking photo">
-      <img src="/photos/14796032.jpg" alt="HCSO booking photo of BRADLEY JOHN" width="240" height="300" decoding="async">
+      <img src="/photos/14796032.jpg" alt="HCSO booking photo of BRADLEY JOHN" width="240" height="300" decoding="async" data-photo-fallback>
     </a>
     <figcaption>Booking photo &middot; ORC &sect; 149.43</figcaption>
   </figure>
   <div class="record-detail">
     <div class="tier-row">
-<span class="tier tier-felony tier-lg">FELONY &times;2</span><span class="tier tier-misdemeanor tier-lg">MISDEMEANOR &times;17</span><span class="chap chap-2903">Violence / Homicide</span>      <span class="hero-id">#&thinsp;14796032</span>
+<span class="tier tier-felony tier-lg">FELONY &times;12</span><span class="tier tier-misdemeanor tier-lg">MISDEMEANOR &times;7</span><span class="chap chap-2903">Violence / Homicide</span>      <span class="hero-id">#&thinsp;14796032</span>
     </div>
     <h1 class="record-name">BRADLEY JOHN</h1>
     <p class="alert"><strong>Arrest is not conviction.</strong> This individual is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges below are accusations only and are not evidence of guilt.</p>
     <dl class="bio">
       <div class="bio-field"><dt>Inmate&nbsp;#</dt><dd><code>14796032</code></dd></div>
       <div class="bio-field"><dt>Booking&nbsp;#</dt><dd><code>1817000</code></dd></div>
-      <div class="bio-field"><dt>Booked</dt><dd>Jan 05, 2026 <span class="muted">257 days ago</span></dd></div>
+      <div class="bio-field"><dt>Booked</dt><dd>Jan 05, 2026 <span class="muted">258 days ago</span></dd></div>
       <div class="bio-field"><dt>Projected&nbsp;release</dt><dd>NA</dd></div>
       <div class="bio-field"><dt>Next&nbsp;court&nbsp;date</dt><dd>7/29/26</dd></div>
       <div class="bio-field"><dt>Charges</dt><dd>19 <span class="muted">2 pending · 17 disposed</span></dd></div>
@@ -147,6 +153,7 @@
   <h2>Charges</h2>
   <span class="pill">19</span>
 </div>
+<div class="table-scroll">
 <table class="charges">
   <caption class="sr-only">Charges against BRADLEY JOHN</caption>
   <thead><tr>
@@ -157,7 +164,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2925.11" target="_blank" rel="noopener">2925.11 ↗</a><br><small class="orc-title">Possession of drugs</small>      </td>
       <td>POSSESSION OF DRUGS</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F5">F5</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $1,000</td>
       <td>INDICTED UNDER B</td>
@@ -167,7 +174,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2917.21" target="_blank" rel="noopener">2917.21 ↗</a><br><small class="orc-title">Telecommunications harassment</small>      </td>
       <td>TELECOMMUNICATIONS HARASSMENT</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-M1">M1</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $5,000</td>
       <td>INDICTED UNDER B</td>
@@ -177,7 +184,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2917.21" target="_blank" rel="noopener">2917.21 ↗</a><br><small class="orc-title">Telecommunications harassment</small>      </td>
       <td>TELECOMMUNICATIONS HARASSMENT</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-M1">M1</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $5,000</td>
       <td>INDICTED UNDER B</td>
@@ -187,7 +194,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2917.21" target="_blank" rel="noopener">2917.21 ↗</a><br><small class="orc-title">Telecommunications harassment</small>      </td>
       <td>TELECOMMUNICATIONS HARASSMENT</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-M1">M1</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $5,000</td>
       <td>INDICTED UNDER B</td>
@@ -197,7 +204,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2903.211" target="_blank" rel="noopener">2903.211 ↗</a><br><small class="orc-title">Menacing by stalking</small>      </td>
       <td>MENACING BY STALKING</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-M1">M1</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $10,000</td>
       <td>INDICTED UNDER B</td>
@@ -207,7 +214,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2917.21" target="_blank" rel="noopener">2917.21 ↗</a><br><small class="orc-title">Telecommunications harassment</small>      </td>
       <td>TELECOMMUNICATIONS HARASSMENT</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-M1">M1</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $5,000</td>
       <td>INDICTED UNDER B</td>
@@ -217,7 +224,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2917.21" target="_blank" rel="noopener">2917.21 ↗</a><br><small class="orc-title">Telecommunications harassment</small>      </td>
       <td>TELECOMMUNICATIONS HARASSMENT</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-M1">M1</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $5,000</td>
       <td>INDICTED UNDER B</td>
@@ -227,7 +234,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2917.21" target="_blank" rel="noopener">2917.21 ↗</a><br><small class="orc-title">Telecommunications harassment</small>      </td>
       <td>TELECOMMUNICATIONS HARASSMENT</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-M1">M1</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $5,000</td>
       <td>INDICTED UNDER B</td>
@@ -237,7 +244,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDERING SEXUALLY ORIENTED MATTER INVOLVING A MINOR</td>
-      <td><span class="tier tier-felony">F</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td>7/29/26</td>
       <td>$1,000,000</td>
       <td> - </td>
@@ -247,7 +254,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $10,000</td>
       <td>INDICTED UNDER B</td>
@@ -257,7 +264,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $10,000</td>
       <td>INDICTED UNDER B</td>
@@ -267,7 +274,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $10,000</td>
       <td>INDICTED UNDER B</td>
@@ -277,7 +284,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $10,000</td>
       <td>INDICTED UNDER B</td>
@@ -287,7 +294,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $10,000</td>
       <td>INDICTED UNDER B</td>
@@ -297,7 +304,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $10,000</td>
       <td>INDICTED UNDER B</td>
@@ -307,7 +314,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-felony">F</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td>7/29/26</td>
       <td>$100,000</td>
       <td> - </td>
@@ -317,7 +324,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $10,000</td>
       <td>INDICTED UNDER B</td>
@@ -327,7 +334,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td> - </td>
       <td>IGNORED $10,000</td>
       <td>IGNORED</td>
@@ -337,7 +344,7 @@
       <td>
 <a class="orc-code" href="https://codes.ohio.gov/ohio-revised-code/section-2907.322" target="_blank" rel="noopener">2907.322 ↗</a><br><small class="orc-title">Pandering sexually-oriented matter involving a minor</small>      </td>
       <td>PANDER SEX MAT INVOLV JUV</td>
-      <td><span class="tier tier-misdemeanor">M</span></td>
+      <td><span class="tier tier-F2">F2</span></td>
       <td> - </td>
       <td>INDICTED UNDER B $10,000</td>
       <td>INDICTED UNDER B</td>
@@ -345,8 +352,9 @@
     </tr>
   </tbody>
 </table>
+</div>
 <p class="muted note-paragraph">
-  Case&nbsp;# links open Hamilton County Clerk of Courts records at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a> (you may encounter a one-time automated verification step there). The tier shown (e.g.&nbsp;F2, M1) is the <em>default degree classification</em> of the cited ORC section as published in statute - the degree actually charged in a given case can differ based on the subsection, prior offenses, or determinations made by the charging authority or the court. <strong>The tier is a statutory label, not a judicial determination of the offense level.</strong> ORC titles are static reference text.
+  Case&nbsp;# links open Hamilton County Clerk of Courts records at <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a> (you may encounter a one-time automated verification step there). The tier shown (e.g.&nbsp;F2, M1) is the degree from the charge description or the <em>default degree classification</em> of the cited ORC section as published in statute; where neither gives a degree, the tier is inferred from the charging court (Common Pleas leads to felony, municipal leads to misdemeanor) - the degree actually charged in a given case can differ based on the subsection, prior offenses, or determinations made by the charging authority or the court. <strong>The tier is a statutory label, not a judicial determination of the offense level.</strong> ORC titles are static reference text.
 </p>
 <p class="muted">
   <a href="https://www.courtclerk.org/data/crim_name_results.php?lname=BRADLEY&amp;fname=JOHN&amp;dob=10%2F17%2F05" target="_blank" rel="noopener">Run a full name + DOB search on courtclerk.org ↗</a>
@@ -382,7 +390,7 @@
 </aside>
 
 <p class="custody-summary">
-<strong>257 days</strong> in custody &middot; bond <strong>$1,231,000</strong> <span class="muted">(82nd &deg;ile of 11 peers under &sect;&nbsp;2907.322)</span> &middot; top charge <strong>F</strong> <span class="muted">(UNK max)</span></p>
+<strong>258 days</strong> in custody &middot; bond <strong>$1,231,000</strong> <span class="muted">(82nd &deg;ile of 11 peers under &sect;&nbsp;2907.322)</span> &middot; top charge <strong>F2</strong> <span class="muted">(F max)</span></p>
 
 <details class="ladder-details">
   <summary>Show custody timeline, bond distribution, severity ladder - <span class="muted">richer visualization of the stats above</span></summary>
@@ -400,7 +408,7 @@
           <div class="tl-date">1/5/26</div>
         </div>
       </div>
-      <div class="tl-m tl-m-court tl-side-below" style="left: 71.2%">
+      <div class="tl-m tl-m-court tl-side-below" style="left: 71.1%">
         <div class="tl-dot"></div>
         <div class="tl-cap">
           <div class="tl-lab">Court</div>
@@ -411,14 +419,14 @@
         <div class="tl-dot"></div>
         <div class="tl-cap">
           <div class="tl-lab">Today</div>
-          <div class="tl-date">Sep 19, 2026</div>
+          <div class="tl-date">Sep 20, 2026</div>
         </div>
       </div>
     </div>
     <div class="tl-foot">
       <span>Jan 5, 2026</span>
-      <span class="muted">287-day window</span>
-      <span>Oct 19, 2026</span>
+      <span class="muted">288-day window</span>
+      <span>Oct 20, 2026</span>
     </div>
   </div>
 </div>
@@ -446,17 +454,17 @@
 </div>
 
 <div class="ladder">
-  <h3 class="ladder-h">Severity ladder &middot; most-severe charge is <strong>F</strong></h3>
+  <h3 class="ladder-h">Severity ladder &middot; most-severe charge is <strong>F2</strong></h3>
   <div class="ladder-head"><span>More severe</span><span>Less severe</span></div>
   <div class="ladder-grid">
     <div class="ladder-cell ladder-F1">
       <div class="ladder-tier">F1</div>
       <div class="ladder-max">F</div>
     </div>
-    <div class="ladder-cell ladder-F2">
+    <div class="ladder-cell ladder-F2 is-current" aria-current="true">
       <div class="ladder-tier">F2</div>
       <div class="ladder-max">F</div>
-    </div>
+<div class="ladder-tag">This case</div>    </div>
     <div class="ladder-cell ladder-F3">
       <div class="ladder-tier">F3</div>
       <div class="ladder-max">F</div>
@@ -541,9 +549,9 @@
   <summary><span class="section-summary-h">Similar inmates &middot; held under the same statute</span> <span class="pill">6</span> <span class="muted">&middot; peer match by primary ORC section, then chapter</span></summary>
   <div class="rb-grid">
     <a class="rb-card" href="/inmate/14333085/">
-      <span class="rb-photo"><img src="/photos/14333085.jpg" alt="Booking photo of BELLISSEMO DOMINIC" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/14333085.jpg" alt="Booking photo of BELLISSEMO DOMINIC" loading="lazy" decoding="async" data-photo-fallback data-initials="BD"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">BELLISSEMO DOMINIC</h3>
+<span class="tier tier-F2">F2</span>        <h3 class="rb-name">BELLISSEMO DOMINIC</h3>
         <p class="rb-charge">pandering sexually oriented matter involving a minor</p>
         <div class="rb-meta">
           <span>4/28/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;14333085</span>
@@ -551,9 +559,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/14816376/">
-      <span class="rb-photo"><img src="/photos/14816376.jpg" alt="Booking photo of DAVIS TROY" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/14816376.jpg" alt="Booking photo of DAVIS TROY" loading="lazy" decoding="async" data-photo-fallback data-initials="DT"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">DAVIS TROY</h3>
+<span class="tier tier-F2">F2</span>        <h3 class="rb-name">DAVIS TROY</h3>
         <p class="rb-charge">pandering sexually oriented matter involving a minor</p>
         <div class="rb-meta">
           <span>7/10/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;14816376</span>
@@ -561,9 +569,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/1336115/">
-      <span class="rb-photo"><img src="/photos/1336115.jpg" alt="Booking photo of DEREMER TODD" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/1336115.jpg" alt="Booking photo of DEREMER TODD" loading="lazy" decoding="async" data-photo-fallback data-initials="DT"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">DEREMER TODD</h3>
+<span class="tier tier-F2">F2</span>        <h3 class="rb-name">DEREMER TODD</h3>
         <p class="rb-charge">pandering sexually oriented matter involving a minor</p>
         <div class="rb-meta">
           <span>4/27/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;1336115</span>
@@ -571,9 +579,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/2653671/">
-      <span class="rb-photo"><img src="/photos/2653671.jpg" alt="Booking photo of DINOLFI CHARLES" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/2653671.jpg" alt="Booking photo of DINOLFI CHARLES" loading="lazy" decoding="async" data-photo-fallback data-initials="DC"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">DINOLFI CHARLES</h3>
+<span class="tier tier-F2">F2</span>        <h3 class="rb-name">DINOLFI CHARLES</h3>
         <p class="rb-charge">pandering sexually oriented matter involving a minor or impaired person</p>
         <div class="rb-meta">
           <span>6/18/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;2653671</span>
@@ -581,9 +589,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/14807286/">
-      <span class="rb-photo"><img src="/photos/14807286.jpg" alt="Booking photo of FLORES JESUS" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/14807286.jpg" alt="Booking photo of FLORES JESUS" loading="lazy" decoding="async" data-photo-fallback data-initials="FJ"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">FLORES JESUS</h3>
+<span class="tier tier-F2">F2</span>        <h3 class="rb-name">FLORES JESUS</h3>
         <p class="rb-charge">pandering sexually oriented matter involving a minor</p>
         <div class="rb-meta">
           <span>4/25/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;14807286</span>
@@ -591,9 +599,9 @@
       </div>
     </a>
     <a class="rb-card" href="/inmate/14466940/">
-      <span class="rb-photo"><img src="/photos/14466940.jpg" alt="Booking photo of GUY JUSTIN" loading="lazy" decoding="async"></span>
+      <span class="rb-photo"><img src="/photos/14466940.jpg" alt="Booking photo of GUY JUSTIN" loading="lazy" decoding="async" data-photo-fallback data-initials="GJ"></span>
       <div class="rb-body">
-<span class="tier tier-F">F</span>        <h3 class="rb-name">GUY JUSTIN</h3>
+<span class="tier tier-F2">F2</span>        <h3 class="rb-name">GUY JUSTIN</h3>
         <p class="rb-charge">pander sex mat involv juv</p>
         <div class="rb-meta">
           <span>1/13/26</span><span class="rb-meta-sep" aria-hidden="true">&middot;</span><span>#&thinsp;14466940</span>
@@ -674,6 +682,6 @@
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=d2b3567891" defer></script>
+  <script src="/static/main.js?v=0692831785" defer></script>
 </body>
 </html>

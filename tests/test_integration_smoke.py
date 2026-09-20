@@ -117,3 +117,39 @@ def test_build_swap_failure_restores_last_good(tmp_path, monkeypatch):
     # The promote failed, but the last-good site was restored, not left blank.
     assert (out / "index.html").exists()
     assert (out / "index.html").read_text(encoding="utf-8") == good
+
+
+def test_build_preserves_non_generated_files(tmp_path, monkeypatch):
+    """Every file listed in web.build.PRESERVED_FILES must survive the
+    wholesale output-dir swap with byte-identical content.
+
+    Regression: the build's temp-dir swap silently deleted
+    docs/FRAMEWORK-REVIEW-2026-09-20.md from the working tree because it is
+    not a build output; the same swap later deleted docs/CNAME when
+    JCSTREAM_CNAME was unset in the local environment."""
+    _make_minimal_snapshot(tmp_path)
+    monkeypatch.chdir(tmp_path)
+    # The CNAME-writing path is env-gated; make sure the test exercises the
+    # preserve/restore path instead of the env-gated write path.
+    monkeypatch.delenv("JCSTREAM_CNAME", raising=False)
+
+    from web import build as build_mod
+
+    out = tmp_path / "docs"
+    build_mod.build(out)
+    assert (out / "index.html").exists()
+
+    sentinels = {}
+    for rel in build_mod.PRESERVED_FILES:
+        sentinel = f"# preserved fixture: non-generated file ({rel})\n"
+        target = out / rel
+        target.write_text(sentinel, encoding="utf-8")
+        sentinels[rel] = sentinel
+
+    # A second full build must not wipe the preserved files.
+    build_mod.build(out)
+
+    for rel, sentinel in sentinels.items():
+        target = out / rel
+        assert target.is_file(), f"preserved file {rel} missing after rebuild"
+        assert target.read_text(encoding="utf-8") == sentinel

@@ -494,6 +494,110 @@ def test_plan_detail_fetch_retries_stale():
 
 
 # ---------------------------------------------------------------------------
+# _plan_detail_fetch: rebooking forces a detail refetch (newest photo)
+# ---------------------------------------------------------------------------
+
+
+def _known_inmate(inmate_id, booking_date, **kw):
+    base = dict(
+        inmate_number=inmate_id,
+        last_name="DOE",
+        first_name="J",
+        booking_date=booking_date,
+        photo_filename=f"{inmate_id}.jpg",
+        detail_stale=False,
+    )
+    base.update(kw)
+    return Inmate(**base)
+
+
+def _row(inmate_id, admit_date):
+    return ListRow(inmate_number=inmate_id, last_name="DOE", first_name="J", admit_date=admit_date)
+
+
+def test_plan_detail_fetch_refetches_on_rebooking():
+    # Same inmate number, new admit date on the list page: HCSO rebooked the
+    # person, so the detail page is refetched and the newest booking photo
+    # replaces the prior booking's cached file.
+    previous = {"1": _known_inmate("1", "5/1/26")}
+    rows = {"1": _row("1", "9/20/2026")}
+    assert _plan_detail_fetch({"1"}, previous, refresh_known=False, row_by_id=rows) == ["1"]
+
+
+def test_plan_detail_fetch_same_booking_not_refetched():
+    previous = {"1": _known_inmate("1", "9/20/2026")}
+    rows = {"1": _row("1", "9/20/2026")}
+    assert _plan_detail_fetch({"1"}, previous, refresh_known=False, row_by_id=rows) == []
+
+
+def test_plan_detail_fetch_format_drift_not_rebooking():
+    # Same day in different zero-padding must not look like a new booking.
+    previous = {"1": _known_inmate("1", "9/20/26")}
+    rows = {"1": _row("1", "09/20/2026")}
+    assert _plan_detail_fetch({"1"}, previous, refresh_known=False, row_by_id=rows) == []
+
+
+def test_plan_detail_fetch_unparseable_dates_fail_safe():
+    # Missing or unparseable dates never force a refetch: parser drift must
+    # not be able to trigger a refetch storm.
+    previous = {"1": _known_inmate("1", "")}
+    rows = {"1": _row("1", "9/20/2026")}
+    assert _plan_detail_fetch({"1"}, previous, refresh_known=False, row_by_id=rows) == []
+    previous = {"1": _known_inmate("1", "9/20/2026")}
+    rows = {"1": _row("1", "not-a-date")}
+    assert _plan_detail_fetch({"1"}, previous, refresh_known=False, row_by_id=rows) == []
+
+
+def test_plan_detail_fetch_missing_row_not_rebooking():
+    previous = {"1": _known_inmate("1", "5/1/26")}
+    assert _plan_detail_fetch({"1"}, previous, refresh_known=False, row_by_id={}) == []
+    assert _plan_detail_fetch({"1"}, previous, refresh_known=False) == []
+
+
+def _make_jpeg(color) -> bytes:
+    import io
+
+    from PIL import Image
+
+    buf = io.BytesIO()
+    Image.new("RGB", (800, 1000), color=color).save(buf, format="JPEG", quality=90)
+    return buf.getvalue()
+
+
+def test_rebooking_newest_photo_overwrites_cached(tmp_path):
+    # The newest successfully decoded photo replaces the prior booking's file.
+    photos_dir = tmp_path / "photos"
+    old = _make_jpeg((200, 30, 30))
+    from scraper.photos import downscale_and_save
+
+    assert downscale_and_save(old, photos_dir / "1.jpg") is True
+    before = (photos_dir / "1.jpg").read_bytes()
+
+    inm = _known_inmate("1", "5/1/26")
+    new = _make_jpeg((30, 30, 200))
+    sweep._attach_photo_filename(inm, new, photos_dir)
+    after = (photos_dir / "1.jpg").read_bytes()
+    assert inm.photo_filename == "1.jpg"
+    assert after != before  # newest photo replaced the cached one
+
+
+def test_rebooking_corrupt_new_bytes_keep_cached_photo(tmp_path):
+    # F-02 disposition lock-in: corrupt fresh bytes must not destroy a valid
+    # cached photo; the prior booking's photo is preserved.
+    photos_dir = tmp_path / "photos"
+    from scraper.photos import downscale_and_save
+
+    good = _make_jpeg((200, 30, 30))
+    assert downscale_and_save(good, photos_dir / "1.jpg") is True
+    before = (photos_dir / "1.jpg").read_bytes()
+
+    inm = _known_inmate("1", "5/1/26")
+    sweep._attach_photo_filename(inm, b"not an image", photos_dir)
+    assert inm.photo_filename == "1.jpg"
+    assert (photos_dir / "1.jpg").read_bytes() == before
+
+
+# ---------------------------------------------------------------------------
 # Empty-photo evidence dedup (append-only; history never rewritten)
 # ---------------------------------------------------------------------------
 

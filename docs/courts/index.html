@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <title>Hamilton County court system &middot; JCStream</title>
   <meta name="robots" content="noindex, noarchive">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#F5F0EB">
+  <meta name="theme-color" content="#141619">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
   <meta property="og:site_name" content="JCStream">
   <meta property="og:type" content="website">
@@ -16,7 +16,9 @@
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, rebuilt on a best-effort schedule. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/static/style.css?v=aa66d293e6">
+  <script src="/static/theme-init.js?v=1fb7517bcf"></script>
+  <link rel="stylesheet" href="/static/style.css?v=670596fd12">
+  <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -54,6 +56,10 @@
              alt="City of Cincinnati seal"
              width="36" height="36" decoding="async">
       </a>
+      <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      </button>
       <details class="nav-menu" open>
         <summary class="nav-toggle" aria-label="Menu">
           <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -142,9 +148,6 @@
             <span class="judge-room">Room 320</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/5e8c7e5390c1a726.jpg" alt="Hon. Jennifer L. Branch">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 320</div><div><strong>Bailiff:</strong> **Jury Trials**.  The Court sets multiple jury trials for the same day.  Criminal trials will take precedence over civil trials.  Defendants who are detained before trial will take priority over defendants who are not detained.  Please email the Court’s Bailiff (and copy all counsel) prior to the jury trial date to determine the status of your case on the docket.</div><div><strong>Phone:</strong> Phone: 513-946-5117</div>            </div>
           </div>
@@ -155,9 +158,6 @@
             <span class="judge-room">Room 510</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/ebde810baf92e2cf.jpg" alt="Hon. Katie Casch">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 510</div><div><strong>Bailiff:</strong> The Court will set hearings for motions on a case-by-case basis, either _sua sponte_ or at the request of a party.  Motion hearing exhibits must be provided to the opposing party and the Court.  To request the status of a pending motion or to alert the court of an urgent request, counsel should contact either the bailiff (criminal cases) or the staff attorney (civil cases).</div><div><strong>Phone:</strong> Phone Number: 513-946-5790</div>            </div>
           </div>
@@ -168,9 +168,6 @@
             <span class="judge-room"></span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/929f738f42de6ee0.jpg" alt="Hon. Wende C. Cross">
-              </div>
             <div class="judge-meta">
 <div><strong>Bailiff:</strong> Punctuality, professionalism and civility are required at all times in the courtroom. Attorneys should stand when addressing the Court, questioning witnesses, and when objecting. If a case is in progress, attorneys should quietly wait for the Bailiff or Staff Attorney to approach.</div><div><strong>Phone:</strong> Phone Number: 513-946-5860</div>            </div>
           </div>
@@ -181,9 +178,6 @@
             <span class="judge-room">Room 560</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/9f999675f0e314e5.jpg" alt="Hon. Leah Dinkelacker">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 560</div><div><strong>Bailiff:</strong> After filing a motion, please take a copy of the motion to the courtroom and meet with the bailiff to get a hearing date.</div><div><strong>Phone:</strong> Phone Number: 513-946-5750</div>            </div>
           </div>
@@ -194,9 +188,6 @@
             <span class="judge-room">Room 360</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/cb5945626d3105ac.jpg" alt="Hon. Patrick T. Dinkelacker">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 360</div><div><strong>Bailiff:</strong> Counsel in criminal cases should check in with the bailiff (Chris Collini).</div><div><strong>Phone:</strong> Phone Number: 513-946-5851</div>            </div>
           </div>
@@ -207,9 +198,6 @@
             <span class="judge-room">Room 520</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/fb8575a5141c9926.jpg" alt="Hon. Robert A. Goering">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 520</div><div><strong>Bailiff:</strong> Kristie Cornelius, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5102</div>            </div>
           </div>
@@ -220,9 +208,6 @@
             <span class="judge-room">Room 300</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/b5953c923a2e41d0.jpg" alt="Hon. Alison Hatheway">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 300</div><div><strong>Bailiff:</strong> Rule 40 of the Ohio Rules of Superintendence state the Court should issue its decision on a motion within 120 days from the date it was filed. However, to request the status of a pending motion or to alert the Court of an urgent request, counsel should contact either the bailiff (criminal cases) or the staff attorney (civil cases).</div><div><strong>Phone:</strong> Phone Number: 513-946-5760</div>            </div>
           </div>
@@ -233,9 +218,6 @@
             <span class="judge-room">Room 540</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/25e6cbfacead6710.jpg" alt="Hon. Christian A. Jenkins">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 540</div><div><strong>Bailiff:</strong> Contact bailiff Adam Eiser (513) 946-5961 [aeiser@cms.hamilton-co.org](mailto:aeiser@cms.hamilton-co.org)</div><div><strong>Phone:</strong> Phone Number: 513-946-5961</div>            </div>
           </div>
@@ -252,9 +234,6 @@ Judge Jenkins received his undergraduate degree from Penn State University.  He
             <span class="judge-room">Room 340</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/839a4ff4c3d5c392.jpg" alt="Hon. Jody M. Luebbers">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 340</div><div><strong>Bailiff:</strong> I expect attorneys to be prompt, courteous and respectful at all times. Attorneys should stand when addressing the court, questioning witnesses and when objecting. If a case is in progress, attorneys should quietly wait for the bailiff to approach.</div><div><strong>Phone:</strong> Phone Number: 513-946-5755</div>            </div>
           </div>
@@ -265,9 +244,6 @@ Judge Jenkins received his undergraduate degree from Penn State University.  He
             <span class="judge-room">Room 310</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/39ccde61f93efd38.jpg" alt="Hon. Melba D. Marsh">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 310</div><div><strong>Bailiff:</strong> Attorneys may stand wherever is comfortable for them. Attorneys may approach witnesses after asking the court’s permission to do so. When attorneys arrive in the courtroom, they should report to the law clerk for civil matters. For criminal matters, contact the room prosecutor before reporting to the bailiff. If a case is in progress, please wait to report until an appropriate time.</div><div><strong>Phone:</strong> Phone Number: 513-946-5866</div>            </div>
           </div>
@@ -278,9 +254,6 @@ Judge Jenkins received his undergraduate degree from Penn State University.  He
             <span class="judge-room">Room 595</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/003104db81a7bcde.jpg" alt="Hon. Christopher R. McDowell">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 595</div><div><strong>Bailiff:</strong> All attorneys and parties are expected to be familiar with, and follow, the Ohio Rules of Criminal Procedure, the Ohio Rules of Evidence, and the Ohio Rules of Professional Conduct. Defense attorneys and prosecutors are expected to appear in Court on time. If they have other matters to which they must attend, please call the Bailiff or check in with the Court as soon as possible.</div><div><strong>Phone:</strong> Phone Number: 513-946-5785</div>            </div>
           </div>
@@ -297,9 +270,6 @@ Judge McDowell and his wife have three children.</div>
             <span class="judge-room">Room 500</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/e09dc649d7284413.jpg" alt="Hon. Nicole L. Sanders">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 500</div><div><strong>Bailiff:</strong> - If an attorney is going to be late, please contact the court bailiff as soon as possible.</div><div><strong>Phone:</strong> Phone Number: 513-946-5770</div>            </div>
           </div>
@@ -310,9 +280,6 @@ Judge McDowell and his wife have three children.</div>
             <span class="judge-room">Room 495</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/5e1383fde0d2c60e.jpg" alt="Hon. Virginia Tallent">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 495</div><div><strong>Bailiff:</strong> Counsel must email the Bailiff (rbryan@cms.hamilton-co.org) and copy all parties no later than 7 days before trial to confirm the status of their case and whether it will proceed as scheduled.</div><div><strong>Phone:</strong> Phone Number: 513-946-5830</div>            </div>
           </div>
@@ -327,9 +294,6 @@ Judge McDowell and his wife have three children.</div>
             <span class="judge-room">Room 485</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/c80bc493c946a290.jpg" alt="Hon. Alan C. Triggs">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 485</div><div><strong>Bailiff:</strong> The Court will set hearings for motions on a case-by-case basis, either _sua sponte_ or at the request of a party.  Motion hearing exhibits must be provided to the opposing party and the Court.  To request the status of a pending motion or to alert the court of an urgent request, counsel should contact either the bailiff (criminal cases) or the law clerk (civil cases).</div><div><strong>Phone:</strong> Phone Number: 513-946-5841</div>            </div>
           </div>
@@ -346,9 +310,6 @@ Alan is a 1988 graduate of Walnut Hills High School; 1991 graduate of Memphis St
             <span class="judge-room">Room 330</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/b6fab2c382711637.jpg" alt="Hon. Christopher A. Wagner">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 330</div><div><strong>Bailiff:</strong> To set a hearing on a civil case, contact the Staff Attorney. To set a hearing on a criminal case, contact the Bailiff. A file stamped courtesy copy of the motion should be provided in advance to the court. Typically, we handle criminal motions in the morning and civil motions in the afternoon.</div><div><strong>Phone:</strong> Phone Number: 513-946-5890</div>            </div>
           </div>
@@ -426,9 +387,6 @@ There is no greater exercise of judicial power than sentencing.  Attorneys must
             <span class="judge-room">Room 530</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/6a62a433ea46157a.jpg" alt="Hon. Robert C. Winkler">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 530</div><div><strong>Bailiff:</strong> To set a hearing on a civil case, contact the Staff Attorney. To set a hearing on a criminal case, contact the Bailiff. A file stamped courtesy copy of the motion should be provided in advance to the court via US Mail, Email, or drop off Typically, we handle criminal motions in the morning and civil motions in the afternoon.</div><div><strong>Phone:</strong> Phone Number: 513-946-5112</div>            </div>
           </div>
@@ -540,9 +498,6 @@ The Court will attempt to handle all Criminal and Civil Pretrials preferably in 
             <span class="judge-room">Room 174</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/f40cc2ad77573837.jpg" alt="Hon. Gwen Bender">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 174</div><div><strong>Bailiff:</strong> Scott Schiller, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5143</div>            </div>
           </div>
@@ -563,9 +518,6 @@ Judge Bender represents District 7, which includes the communities of Addyston, 
             <span class="judge-room">Room 160</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/8406840673698347.jpg" alt="Hon. Bernie Bouchard">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 160</div><div><strong>Bailiff:</strong> Andy Poli, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5175</div>            </div>
           </div>
@@ -588,9 +540,6 @@ Judge Bouchard is actively involved in his community. He volunteered as a Green 
             <span class="judge-room">Room 124</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/78593113f320cd31.jpg" alt="Hon. Janaya Trotter Bratton">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 124</div><div><strong>Bailiff:</strong> Shawnise Lewis, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5256</div>            </div>
           </div>
@@ -601,9 +550,6 @@ Judge Bouchard is actively involved in his community. He volunteered as a Green 
             <span class="judge-room">Room 144</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/534d5d2556ecda44.jpg" alt="Hon. Danielle Colliver">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 144</div><div><strong>Bailiff:</strong> Tom Sauer, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5149</div>            </div>
           </div>
@@ -614,9 +560,6 @@ Judge Bouchard is actively involved in his community. He volunteered as a Green 
             <span class="judge-room">Room 140</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/74f0101611463cd4.jpg" alt="Hon. Jackie Ginocchio">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 140</div><div><strong>Bailiff:</strong> Brian Greene, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5148</div>            </div>
           </div>
@@ -635,9 +578,6 @@ Jackie is a lifelong Cincinnati resident. Jackie attended Indiana University for
             <span class="judge-room">Room 164</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/d310614560869105.jpg" alt="Hon. Brad Greenberg">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 164</div><div><strong>Bailiff:</strong> Julie McCoy, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5215</div>            </div>
           </div>
@@ -662,9 +602,6 @@ Greenberg served on Loveland City Council for nine years including two years as 
             <span class="judge-room">Room 264</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/1c50db9411d7585d.jpg" alt="Hon. Rodney J. Harris">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 264</div><div><strong>Bailiff:</strong> Tara Brown, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5154</div>            </div>
           </div>
@@ -675,9 +612,6 @@ Greenberg served on Loveland City Council for nine years including two years as 
             <span class="judge-room">Room 270</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/9fa20cd742ef8e4f.jpg" alt="Hon. Donte Johnson">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 270</div><div><strong>Bailiff:</strong> Amber Worthen, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5165</div>            </div>
           </div>
@@ -696,9 +630,6 @@ He is very active in the community and serves as a motivational speaker and ment
             <span class="judge-room">Room 134</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/d338a90f4db919a0.jpg" alt="Hon. Dwane Mallory">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 134</div><div><strong>Bailiff:</strong> J&#39;onae Wright, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5122</div>            </div>
           </div>
@@ -709,9 +640,6 @@ He is very active in the community and serves as a motivational speaker and ment
             <span class="judge-room">Room 240</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/d06ae2088177c906.jpg" alt="Hon. William Mallory">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 240</div><div><strong>Bailiff:</strong> Raymond Phoenix, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5160</div>            </div>
           </div>
@@ -734,9 +662,6 @@ He currently serves on the Board of Directors of the Dan Beard Council of the Bo
             <span class="judge-room">Room 220</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/b04ef89b1738488c.jpg" alt="Hon. R. Bernard Mundy">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 220</div><div><strong>Bailiff:</strong> LaTia Kemp, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5127</div>            </div>
           </div>
@@ -747,9 +672,6 @@ He currently serves on the Board of Directors of the Dan Beard Council of the Bo
             <span class="judge-room">Room 230</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/94641b2a483ad07a.jpg" alt="Hon. Michael Peck">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 230</div><div><strong>Bailiff:</strong> Jeff Baker, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5108</div>            </div>
           </div>
@@ -760,9 +682,6 @@ He currently serves on the Board of Directors of the Dan Beard Council of the Bo
             <span class="judge-room">Room 280</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/0cb081bd741bf922.jpg" alt="Hon. Samantha Silverstein">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 280</div><div><strong>Bailiff:</strong> Ashley Harp, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5138</div>            </div>
           </div>
@@ -785,9 +704,6 @@ Bar Admissions:
             <span class="judge-room">Room 154</span>
           </summary>
           <div class="judge-body">
-              <div class="judge-photo-wrap">
-                <img src="/static/judges/b51e8a6646fc87ef.jpg" alt="Hon. Athena Stefanou">
-              </div>
             <div class="judge-meta">
 <div><strong>Location:</strong> Room 154</div><div><strong>Bailiff:</strong> John Wallace, Bailiff</div><div><strong>Phone:</strong> Phone Number: 513-946-5133</div>            </div>
           </div>
@@ -1035,6 +951,6 @@ Bar Admissions:
 
   <div id="tier-tip" role="tooltip" hidden></div>
 
-  <script src="/static/main.js?v=d2b3567891" defer></script>
+  <script src="/static/main.js?v=0692831785" defer></script>
 </body>
 </html>

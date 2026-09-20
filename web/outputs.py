@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import os
 import shutil
 from datetime import datetime, timedelta, timezone
@@ -18,12 +19,15 @@ from web.classify import (
     _primary_tier,
 )
 from web.shape import (
+    _cached_offenses,
     _primary_chapter,
     _primary_charge,
 )
 
+log = logging.getLogger("jcstream.site")
+
 STATIC_DIR = Path(__file__).parent / "static"
-PHOTOS_DIR = Path("data/photos")
+PHOTOS_DIR = Path(__file__).resolve().parent.parent / "data" / "photos"
 
 
 def _copy_static(out_dir: Path) -> None:
@@ -39,8 +43,22 @@ def _copy_static(out_dir: Path) -> None:
 
 
 def _copy_photos(out_dir: Path) -> None:
-    if PHOTOS_DIR.exists() and any(PHOTOS_DIR.iterdir()):
-        shutil.copytree(PHOTOS_DIR, out_dir / "photos", dirs_exist_ok=True)
+    # V8-F1/V9-L01: never silently skip. A missing/empty photo source means
+    # every /photos/<n>.jpg reference 404s, so say so loudly at build time.
+    if not PHOTOS_DIR.exists():
+        log.warning(
+            "photo source %s missing: booking-photo <img> references will 404; "
+            "templates degrade via the main.js photo fallback",
+            PHOTOS_DIR,
+        )
+        return
+    if not any(PHOTOS_DIR.iterdir()):
+        log.warning(
+            "photo source %s is empty: booking-photo <img> references will 404",
+            PHOTOS_DIR,
+        )
+        return
+    shutil.copytree(PHOTOS_DIR, out_dir / "photos", dirs_exist_ok=True)
 
 
 def _write_manifest(out_dir: Path, base_url: str) -> None:
@@ -68,13 +86,19 @@ def _write_manifest(out_dir: Path, base_url: str) -> None:
     (out_dir / "manifest.webmanifest").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
 
-def _write_search_json(out_dir: Path, snapshot: Snapshot) -> None:
+def _write_search_json(out_dir: Path, snapshot: Snapshot, offenses: dict | None = None) -> None:
     """Compact searchable index of the current roster -- useful for API
     consumers and as a base for a future client-side search UI.
-    One row per inmate: n=name, c=primary offense category, t=tier, id."""
+    One row per inmate: n=name, c=primary offense category, t=tier, id.
+
+    The tier is user-facing data, so it resolves through the offenses dict
+    like every other displayed tier (F-10-02).
+    """
+    if offenses is None:
+        offenses = _cached_offenses()
     rows = []
     for inm in snapshot.inmates:
-        tier = _primary_tier(inm)
+        tier = _primary_tier(inm, offenses)
         chap = _primary_chapter(inm)
         rows.append(
             {
