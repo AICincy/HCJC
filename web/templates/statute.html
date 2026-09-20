@@ -68,7 +68,9 @@
             <div class="stat-row"><span class="stat-k">On roster</span><span class="stat-v">{{ s.count }} held</span></div>
             <div class="stat-row"><span class="stat-k">Share</span><span class="stat-v">{{ '%.2f' % s.pct }}%</span></div>
             <div class="stat-row"><span class="stat-k">Statutory max</span><span class="stat-v">{{ s.explainer.max_term if s.explainer and s.explainer.max_term else s.tier_max }}</span></div>
-            {% if s.explainer and s.explainer.typical_bond %}
+            {% if s.code in ["2903.06", "4510.11", "2907.09", "2903.13", "2903.21", "2919.25", "2919.27", "2923.12", "2919.22", "2921.331", "2917.31", "2903.211"] %}
+            <div class="stat-row"><span class="stat-k">Typical bond</span><span class="stat-v"><em>not established</em> <span class="muted">(pending re-extraction; see <a href="{{ base_url }}/bond-schedule/#bond-correction-log">correction log</a>)</span></span></div>
+            {% elif s.explainer and s.explainer.typical_bond %}
             <div class="stat-row"><span class="stat-k">Typical bond</span><span class="stat-v">{{ s.explainer.typical_bond }}</span></div>
             {% endif %}
           </div>

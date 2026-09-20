@@ -209,6 +209,7 @@
 
 <div class="section-h"><h2>Bond</h2></div>
 {{ bars([('No bond / $0 set', s.bond_zero), ('Bond amount set', s.bond_known - s.bond_zero), ('No bond info', s.n - s.bond_known)], s.n) }}
+<p class="muted">How do bonds vary for the same charge? See the <a href="{{ base_url }}/bond-disparity/">Bond Disparity Index</a> and the court's <a href="{{ base_url }}/bond-schedule/">Standard Bond Schedule</a>.</p>
 
 <div class="section-h"><h2>Booking photo on file</h2></div>
 {{ bars([('Photo published by HCSO', s.with_photo), ('No photo', s.no_photo)], s.n) }}
