@@ -221,9 +221,18 @@ def _retry_after_seconds(header_value: str | None) -> float:
 
 def make_client() -> HcsoClient:
     """Factory that respects env-var overrides (used by GH Actions)."""
+    try:
+        crawl_delay = float(os.environ.get("JCSTREAM_CRAWL_DELAY", DEFAULT_CRAWL_DELAY))
+    except ValueError:
+        log.warning(
+            "Invalid JCSTREAM_CRAWL_DELAY=%r; falling back to default %.1f",
+            os.environ.get("JCSTREAM_CRAWL_DELAY"),
+            DEFAULT_CRAWL_DELAY,
+        )
+        crawl_delay = DEFAULT_CRAWL_DELAY
     return HcsoClient(
         base_url=os.environ.get("JCSTREAM_BASE_URL", DEFAULT_BASE),
         user_agent=os.environ.get("JCSTREAM_USER_AGENT", DEFAULT_UA),
-        crawl_delay=float(os.environ.get("JCSTREAM_CRAWL_DELAY", DEFAULT_CRAWL_DELAY)),
+        crawl_delay=crawl_delay,
         proxy=os.environ.get("JCSTREAM_HTTP_PROXY") or None,
     )

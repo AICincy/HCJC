@@ -31,7 +31,12 @@ def _parse_iso(s: str) -> datetime | None:
     if not s:
         return None
     try:
-        return datetime.fromisoformat(str(s).rstrip("Z"))
+        dt = datetime.fromisoformat(str(s).rstrip("Z"))
+        # Normalize to naive: strip tzinfo to avoid TypeError when comparing
+        # against naive booking datetimes. Socrata timestamps are UTC.
+        if dt.tzinfo is not None:
+            dt = dt.replace(tzinfo=None)
+        return dt
     except ValueError:
         return None
 

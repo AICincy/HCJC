@@ -75,9 +75,7 @@ def _fetch_live_generated(site_url: str) -> str | None:
         log.warning("deploy-alert: refusing to fetch non-http(s) site URL")
         return None
     try:
-        req = urllib.request.Request(
-            url, headers={"Accept": "application/json", "User-Agent": "jcstream-deploy-alert"}
-        )
+        req = urllib.request.Request(url, headers={"Accept": "application/json", "User-Agent": "jcstream-deploy-alert"})
         # Reviewed: the http/https scheme allowlist above rejects file://
         # and other non-http(s) schemes, which is the arbitrary-file-read
         # vector this audit rule guards against. site_url is
@@ -128,9 +126,7 @@ def alert(local_generated: str | None, live_generated: str | None) -> str:
     ``"created"``."""
     lag = deploy_lag_minutes(local_generated, live_generated)
     if lag is None:
-        log.info(
-            "deploy staleness inconclusive (local=%s live=%s)", local_generated, live_generated
-        )
+        log.info("deploy staleness inconclusive (local=%s live=%s)", local_generated, live_generated)
         return "unknown"
     if lag <= DEPLOY_STALE_ALARM_MINUTES:
         log.info("deploy freshness OK (site %.0f min behind main)", max(lag, 0.0))

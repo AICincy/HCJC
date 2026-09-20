@@ -26,19 +26,21 @@ _DEGREE_RE = re.compile(r"\b(F[1-5]|M[1-4]|MM)\b\s*$", re.IGNORECASE)
 _DEGREE_CONCAT_RE = re.compile(r"(F[1-5]|M[1-4]|MM)$", re.IGNORECASE)
 
 
-def extract_degree(desc: str) -> tuple[str, str]:
+def extract_degree(desc: str, is_criminal: bool = False) -> tuple[str, str]:
     """Extract degree suffix (e.g. M1, F4, MM) from description if present.
 
-    Returns (cleaned_description, degree). Defaults to "MM" if not found.
+    Returns (cleaned_description, degree). Defaults to "?" for criminal offenses
+    (unknown severity is safer than assuming minor misdemeanor) and "MM" otherwise,
+    matching the runtime default in orc.py::_parse_hamco_offenses.
     """
     desc = desc.strip()
     m = _DEGREE_RE.search(desc)
     if m:
-        return desc[:m.start()].strip(), m.group(1).upper()
+        return desc[: m.start()].strip(), m.group(1).upper()
     m = _DEGREE_CONCAT_RE.search(desc)
     if m:
-        return desc[:m.start()].strip(), m.group(1).upper()
-    return desc, "MM"
+        return desc[: m.start()].strip(), m.group(1).upper()
+    return desc, "?" if is_criminal else "MM"
 
 
 def clean_description(desc: str) -> str:
@@ -76,6 +78,7 @@ def update_orc_offenses() -> None:
     for file_path in (criminal_file, traffic_file):
         if not file_path.exists():
             continue
+        is_criminal = file_path == criminal_file
         try:
             raw_data = json.loads(file_path.read_text(encoding="utf-8"))
             markdown = raw_data.get("markdown", "")
@@ -87,16 +90,16 @@ def update_orc_offenses() -> None:
 
                 for i in range(1, len(parts), 2):
                     jur = parts[i]
-                    desc_and_next_code = parts[i+1].strip() if i+1 < len(parts) else ""
+                    desc_and_next_code = parts[i + 1].strip() if i + 1 < len(parts) else ""
 
-                    if i+1 == len(parts) - 1:
+                    if i + 1 == len(parts) - 1:
                         desc = desc_and_next_code
                         next_code = ""
                     else:
                         m = _CODE_END_RE.search(desc_and_next_code)
                         if m:
                             next_code = m.group(1)
-                            desc = desc_and_next_code[:-len(next_code)].strip()
+                            desc = desc_and_next_code[: -len(next_code)].strip()
                         else:
                             words = desc_and_next_code.split()
                             if words:
@@ -110,7 +113,7 @@ def update_orc_offenses() -> None:
                     if norm_code:
                         clean_desc = clean_description(desc)
                         if clean_desc:
-                            title, deg = extract_degree(clean_desc)
+                            title, deg = extract_degree(clean_desc, is_criminal=is_criminal)
                             if jur == "CMCN":
                                 deg = "MM"
                             if title:
@@ -155,10 +158,7 @@ def update_orc_offenses() -> None:
 
         # Write back to file with clean formatting
         try:
-            OFFENSES_PATH.write_text(
-                json.dumps(data, indent=2, ensure_ascii=False) + "\n",
-                encoding="utf-8"
-            )
+            OFFENSES_PATH.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             log.info("Auto-populated %d missing ORC offenses in %s", merged_count, OFFENSES_PATH)
         except Exception as e:
             log.error("Failed to write to %s: %s", OFFENSES_PATH, e)

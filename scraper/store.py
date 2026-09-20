@@ -153,7 +153,9 @@ def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None
                         problems[0],
                     )
                     return
-                record["prev_sha256"] = _record_sha256(entries[-1]) if entries else None
+                # Copy the record before adding prev_sha256 to avoid mutating
+                # the caller's dict (surprising side effect for a function named "append").
+                record = {**record, "prev_sha256": _record_sha256(entries[-1]) if entries else None}
                 entries.append(record)
                 _atomic_write_text(path, json.dumps(entries, indent=2) + "\n")
             finally:

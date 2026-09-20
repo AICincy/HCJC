@@ -68,10 +68,13 @@ def split_defendant_name(name: str) -> tuple[str, str]:
 def normalize_dob(dob: str) -> str | None:
     """Normalize ``M/D/YY``, ``MM/DD/YYYY`` etc. to ISO ``YYYY-MM-DD``.
 
-    Two-digit years pivot at the current century boundary: ``00``-``26``
-    map to 2000-2026, ``27``-``99`` to 1927-1999. Returns None when the
-    value is empty or unparseable.
+    Two-digit years pivot at the current century boundary, computed from
+    the current year (e.g. in 2026, ``00``-``26`` map to 2000-2026,
+    ``27``-``99`` to 1927-1999). Returns None when the value is empty
+    or unparseable.
     """
+    from datetime import date as _date
+
     raw = (dob or "").strip()
     if not raw or raw.upper() == "NA":
         return None
@@ -80,7 +83,12 @@ def normalize_dob(dob: str) -> str | None:
         return None
     month, day, year = int(m.group(1)), int(m.group(2)), m.group(3)
     yy = int(year)
-    full_year = 2000 + yy if len(year) == 2 and yy <= 26 else (1900 + yy if len(year) == 2 else yy)
+    if len(year) == 2:
+        # Pivot at current 2-digit year: yy <= pivot -> 2000s, else 1900s
+        pivot = _date.today().year % 100
+        full_year = 2000 + yy if yy <= pivot else 1900 + yy
+    else:
+        full_year = yy
     try:
         return date(full_year, month, day).isoformat()
     except ValueError:
