@@ -40,13 +40,16 @@ def pull_recent(days: int = 30, limit: int = 5000) -> list[dict]:
     for where in where_candidates:
         try:
             rows = query(DATASET_ID, where=where, order=where.split()[0] + " DESC", limit=limit)
-            log.info("shootings pull returned %d rows (filter=%s)", len(rows), where)
-            return rows
         except httpx.HTTPStatusError as e:
             # Only swallow Socrata "bad column" rejections; let transport
             # errors out so the unfiltered fallback isn't masking a real outage.
             log.debug("shootings filter %r rejected by Socrata: %s", where, e)
-    log.warning("shootings pull failed all filters; falling back to unfiltered")
+            continue
+        log.info("shootings pull returned %d rows (filter=%s)", len(rows), where)
+        if rows:
+            return rows
+        log.info("shootings filter %r returned 0 rows; trying next candidate", where)
+    log.warning("shootings pull returned no rows on any filter; falling back to unfiltered")
     return query(DATASET_ID, limit=limit)
 
 

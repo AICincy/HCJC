@@ -231,6 +231,8 @@ def build_packet(
 def load_roster(path: Path) -> tuple[list[dict], str]:
     raw = json.loads(path.read_text(encoding="utf-8"))
     inmates = raw.get("inmates", []) if isinstance(raw, dict) else []
+    if not isinstance(inmates, list):
+        raise ValueError(f"{path}: 'inmates' must be a JSON array, got {type(inmates).__name__}")
     snapshot_date = ""
     generated = raw.get("generated_utc", "") if isinstance(raw, dict) else ""
     if generated:

@@ -76,10 +76,13 @@ def _court_slippage(inmates: list[Inmate], now: datetime | None = None) -> dict:
         if t:
             label = t["label"]
         else:
-            # _primary_tier only ranks ladder degrees (F1..MM); charges whose
-            # tier is the bare venue fallback ("F" from a Common Pleas case,
-            # "M" from a Municipal case) come back None. Group those under
-            # their venue letter, felony first, instead of "other".
+            # _primary_tier ranks every _charge_tier label: classify._DEGREE_ORDER
+            # includes the bare venue fallbacks ("F" from a Common Pleas case,
+            # "M" from a Municipal case), so it returns None only when no
+            # charge carries any tier signal at all. In that case there are no
+            # "F"/"M" labels to find either, so the venue-letter arms below are
+            # unreachable on real data and this always lands on "other".
+            # They stay as a defensive fallback, not a live branch.
             labels = {(ct or {}).get("label") for ct in (_charge_tier(c) for c in inm.charges)}
             label = "F" if "F" in labels else ("M" if "M" in labels else "other")
         by_tier[label] += 1
@@ -213,7 +216,7 @@ def _charge_status_summary(inmate: Inmate) -> str:
     pending = disposed = 0
     for c in inmate.charges:
         d = (c.disposition or "").strip()
-        if not d or d.upper() in ("PENDING", "OPEN", ""):
+        if not d or d.upper() in ("PENDING", "OPEN"):
             pending += 1
         else:
             disposed += 1

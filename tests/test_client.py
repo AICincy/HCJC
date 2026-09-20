@@ -19,10 +19,8 @@ def _make_client_with_responses(responses):
         return next(it)
 
     c = client_mod.HcsoClient(crawl_delay=0.0)
-    # Bypass __enter__ wiring up a real transport.
-    import threading
-
-    c._lock = threading.Lock()
+    # Inject a mock transport directly (bypassing __enter__'s real one).
+    # _lock needs no setup here: it already defaults via default_factory.
     c._client = httpx.Client(
         base_url=c.base_url,
         transport=httpx.MockTransport(handler),

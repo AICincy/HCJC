@@ -46,6 +46,8 @@ from .court import (
     _court_slippage,
     _next_court_date,
     _upcoming_courts,
+    case_category,
+    case_year,
 )
 
 # --- feeds / events -----------------------------------------------------------
@@ -78,7 +80,6 @@ from .inmates import (
 
 # --- statistics ---------------------------------------------------------------
 from .stats import (
-    _all_top_offenses,
     _distinct_chapters,
     _tier_breakdown,
     _top_offenses_with_orc,
@@ -116,8 +117,9 @@ __all__ = [
     "_court_slippage",
     "_next_court_date",
     "_upcoming_courts",
+    "case_category",
+    "case_year",
     # stats
-    "_all_top_offenses",
     "_distinct_chapters",
     "_tier_breakdown",
     "_top_offenses_with_orc",

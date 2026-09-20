@@ -1,5 +1,7 @@
-"""Coverage for the pure helpers in web/build.py.
+"""Coverage for the pure helpers behind web/build.py.
 
+build.py re-exports several helpers from web/classify and web/shape and
+registers them as Jinja globals, so this file pins those contracts too.
 This is the prerequisite test bed for the future build.py refactor: every
 helper that derives a card field, a tier label, a bond figure, or a stat
 should have a fixed-point regression here so a later reorg can't silently
@@ -20,7 +22,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from scraper.models import ChangeEvent, Charge, Inmate
 from web import build
 from web.classify import _load_caselaw_cache, _offense_for_code
-from web.shape import _events_in_window
+from web.shape import _events_for_recent, _events_in_window, _short_month_label
 
 
 def _inm(charges=None, dob="", booking_date="") -> Inmate:
@@ -291,18 +293,6 @@ def test_feed_template_emits_strict_xml(tmp_path):
     assert guid == "7b8035660b0a3c563197242ee5d2c81d4bc17765"
 
 
-def test_rss_guid_is_hash_stable():
-    from scraper.models import ChangeEvent
-    e = ChangeEvent(
-        event="released",
-        inmate_number="12345",
-        name="DOE JANE",
-        timestamp_utc="2026-05-14T17:16:37Z",
-        note="no longer on HCSO public roster",
-    )
-    assert build._rss_guid(e) == "7b8035660b0a3c563197242ee5d2c81d4bc17765"
-
-
 # ----- _booking_seq --------------------------------------------------------
 
 
@@ -342,9 +332,16 @@ def test_bond_by_tier_zero_for_empty_amounts():
 # ----- _days_in_custody ----------------------------------------------------
 
 
-def test_days_in_custody_positive_for_past_booking():
-    d = datetime.now(timezone.utc) - timedelta(days=3)
-    three_days_ago = f"{d.month}/{d.day}/{d.year % 100:02d}"
+def test_days_in_custody_positive_for_past_booking(monkeypatch):
+    # Freeze the Eastern clock the production code reads: _days_in_custody
+    # compares booking midnight against _now_naive_est() (naive Eastern), so
+    # deriving the booking date from UTC now() races at the day boundary
+    # (e.g. 00:00 UTC is still the previous day in Eastern). Freezing the
+    # seam makes the assertion exact.
+    fixed_naive = datetime(2026, 5, 14, 12, 0, 0)
+    monkeypatch.setattr("web.shape.timeline._now_naive_est", lambda: fixed_naive)
+    bd = fixed_naive - timedelta(days=3)
+    three_days_ago = f"{bd.month}/{bd.day}/{bd.year % 100:02d}"
     days = build._days_in_custody(_inm(booking_date=three_days_ago))
     assert days == 3
 
@@ -358,11 +355,11 @@ def test_days_in_custody_unparseable_returns_none():
 
 
 def test_short_month_label_formats_to_apostrophe_year():
-    assert build._short_month_label("May 2026") == "May '26"
+    assert _short_month_label("May 2026") == "May '26"
 
 
 def test_short_month_label_passes_through_unrecognized():
-    assert build._short_month_label("Unknown") == "Unknown"
+    assert _short_month_label("Unknown") == "Unknown"
 
 
 # ----- _chap_slug ----------------------------------------------------------
@@ -408,14 +405,14 @@ def test_events_for_recent_filters_booked_by_actual_booking_date():
         now - timedelta(hours=1),
         note=now.strftime("booked %m/%d/%y"),
     )
-    kept = build._events_for_recent([stale_booking, fresh_booking], hours=8)
+    kept = _events_for_recent([stale_booking, fresh_booking], hours=8)
     assert kept == [fresh_booking]
 
 
 def test_events_for_recent_keeps_releases_regardless_of_note():
     now = datetime.now(timezone.utc)
     rel = _evt("released", now - timedelta(hours=1))
-    assert build._events_for_recent([rel], hours=8) == [rel]
+    assert _events_for_recent([rel], hours=8) == [rel]
 
 
 # ----- _offense_for_code ---------------------------------------------------
@@ -526,8 +523,6 @@ def test_display_date_parses_hcso_short_year_string():
 
 
 def test_display_date_accepts_datetime_too():
-    from datetime import datetime
-
     assert build._display_date(datetime(2026, 5, 19)) == "May 19, 2026"
 
 
@@ -542,7 +537,7 @@ def test_display_date_suppresses_sentinel_and_empty():
 # ----- _judge_link ----------------------------------------------------------
 
 
-def test_judge_link_resolution():
+def test_judge_link_resolution(monkeypatch):
     mock_judges = [
         {"name": "Alison Hatheway", "last_name": "Hatheway", "slug": "alison-hatheway"},
         {"name": "Alan C. Triggs", "last_name": "Triggs", "slug": "alan-c-triggs"},
@@ -552,6 +547,9 @@ def test_judge_link_resolution():
         {"name": "William Mallory", "last_name": "Mallory", "slug": "william-mallory"},
         {"name": "Dwane Mallory", "last_name": "Mallory", "slug": "dwane-mallory"},
     ]
+    # Hermeticity: the no-arg call at the end must resolve through this
+    # injected list, not via a lazy CWD-relative HAMCO read in _parse_judges().
+    monkeypatch.setattr("web.classify._ALL_JUDGES_CACHE", mock_judges)
 
     # Full matches
     assert build.judge_link("Hon. Alison Hatheway", mock_judges) == "#judge-alison-hatheway"
@@ -591,7 +589,8 @@ def test_judge_link_resolution():
     assert build.judge_link(None, mock_judges) is None
     assert build.judge_link("  ", mock_judges) is None
 
-    # Verify cached loading from real files
+    # Verify the no-arg path resolves through the injected cache (above),
+    # not a CWD-relative read of the real judges files.
     assert build.judge_link("Hon. Alison Hatheway") == "#judge-alison-hatheway"
 
 

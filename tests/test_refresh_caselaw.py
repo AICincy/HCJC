@@ -1,9 +1,10 @@
 """Tests for the offline logic in scripts/refresh_caselaw.py.
 
-The script's network functions (`fetch_for_code`, `main`) hit the
-CourtListener REST API and are integration-only, so they're intentionally
-not covered here. The pure code-normalization and the roster-reading
-`top_codes` aggregation are covered.
+The script's network functions (`main`) hit the CourtListener REST API and
+are integration-only, so they're intentionally not covered here. The
+`fetch_for_code` retry/backoff behavior is covered via a stubbed transport
+(see the retry tests below); the pure code-normalization and the
+roster-reading `top_codes` aggregation are covered too.
 """
 
 import json

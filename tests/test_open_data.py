@@ -1,7 +1,7 @@
 """Round-trip + error-path coverage for the Cincinnati Open Data loaders.
 
 All three feeds (cfs, cfs_pdi, shootings) share the same persistence
-shape: ``{generated_utc, dataset_id, row_count, rows}`` (cfs omits dataset_id).
+shape: ``{generated_utc, dataset_id, row_count, rows}``.
 The ``query()`` shim in cincy_open is the only thing that touches the network;
 these tests stub it out so the suite never makes a real request.
 """
@@ -56,10 +56,11 @@ def test_save_load_round_trip(mod, save_name, load_name, tmp_path: Path):
     rows = [{"id": "1", "x": "a"}, {"id": "2", "x": "b"}]
     getattr(mod, save_name)(rows, path)
     assert getattr(mod, load_name)(path) == rows
-    # Persisted shape must keep generated_utc + row_count alongside rows.
+    # Persisted shape must keep generated_utc + dataset_id + row_count alongside rows.
     payload = json.loads(path.read_text(encoding="utf-8"))
     assert payload["row_count"] == 2
     assert "generated_utc" in payload
+    assert "dataset_id" in payload
 
 
 # ----- pull_recent uses the configured Socrata dataset --------------------

@@ -20,7 +20,7 @@ from __future__ import annotations
 import re
 from collections.abc import Sequence
 from datetime import date
-from typing import Protocol
+from typing import Any, Protocol
 
 
 class _InmateLike(Protocol):
@@ -108,13 +108,14 @@ def _roster_case_keys(inmate: _InmateLike) -> set[str]:
     return keys
 
 
-def match_cases_to_inmates(cases: list[dict], inmates: Sequence[_InmateLike]) -> dict[str, list[dict]]:
+def match_cases_to_inmates(cases: Sequence[Any], inmates: Sequence[_InmateLike]) -> dict[str, list[dict]]:
     """Index submitted case records by matched ``inmate_number``.
 
     Each returned entry is the original record dict plus two annotation
     keys: ``dob_verified`` (bool) and ``case_on_booking`` (bool, whether the
     submitted case number appears among the inmate's roster charges).
-    Unmatched records are omitted.
+    Unmatched records are omitted. Non-dict records are skipped, since
+    reader-submitted payloads may contain malformed entries.
     """
     roster: dict[tuple[str, str], list[_InmateLike]] = {}
     for inmate in inmates:

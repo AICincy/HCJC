@@ -108,3 +108,5 @@ def test_build_packet_limit(tmp_path):
     folder = build_packet([_inmate(), _inmate(number="2")], "2026-09-19", "2026-09-19", tmp_path, limit=1)
     manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
     assert len(manifest) == 1
+    # The surviving entry must be the first inmate, not an arbitrary one.
+    assert set(manifest) == {"2316160"}

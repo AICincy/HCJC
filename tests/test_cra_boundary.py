@@ -15,6 +15,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from web.outputs import _write_well_known
+
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent / "web" / "templates"
 
 
@@ -33,10 +35,12 @@ def test_base_template_has_noindex():
 # --- 2. robots.txt disallow -------------------------------------------------
 
 
-def test_robots_txt_disallow_all():
-    """The _write_well_known function must emit 'Disallow: /'."""
-    src = (TEMPLATE_DIR.parent / "outputs.py").read_text(encoding="utf-8")
-    assert "Disallow: /" in src, "outputs.py must generate robots.txt with Disallow: /"
+def test_robots_txt_disallow_all(tmp_path):
+    """The real _write_well_known generator must emit 'Disallow: /' in the
+    robots.txt it writes (not just contain the string somewhere in source)."""
+    _write_well_known(tmp_path, "https://www.aretheyinjail.com", "2026-06-15T12:00:00Z")
+    robots = (tmp_path / "robots.txt").read_text(encoding="utf-8")
+    assert "Disallow: /" in robots, "generated robots.txt must disallow all crawling"
 
 
 # --- 3. FCRA disclaimer -----------------------------------------------------

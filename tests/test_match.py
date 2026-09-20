@@ -21,7 +21,7 @@ def test_candidates_within_window_are_returned():
     rows = [
         _cfs("2026-05-09T22:00:00"),  # 2h before midnight booking — within window
         _cfs("2026-05-10T05:00:00"),  # 5h after midnight — within window
-        _cfs("2026-05-11T15:00:00"),  # +39h — outside 12h window
+        _cfs("2026-05-11T15:00:00"),  # +39h — outside the +36h after-window
         _cfs("2026-05-08T00:00:00"),  # -48h — outside
     ]
     cands = candidates_for(inm, rows)

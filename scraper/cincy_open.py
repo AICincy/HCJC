@@ -14,6 +14,7 @@ import time
 import urllib.parse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Protocol
 
 import httpx
 
@@ -22,6 +23,16 @@ from .client import DEFAULT_UA
 log = logging.getLogger(__name__)
 
 DOMAIN = "https://data.cincinnati-oh.gov"
+
+
+class SocrataHttpClient(Protocol):
+    """Structural HTTP client interface for query().
+
+    Only ``.get(url)`` is ever called, so callers (and tests) may pass any
+    object with a compatible ``get`` method instead of a full httpx.Client.
+    """
+
+    def get(self, url: str) -> httpx.Response: ...
 
 
 def resource_url(dataset_id: str) -> str:
@@ -149,7 +160,7 @@ def query(
     order: str | None = None,
     limit: int = 5000,
     select: str | None = None,
-    client: httpx.Client | None = None,
+    client: SocrataHttpClient | None = None,
 ) -> list[dict]:
     """Run a SODA query and return rows as a list of dicts.
 
@@ -174,7 +185,7 @@ def query(
         return resp.json()
 
 
-def _execute_with_retry(client: httpx.Client, url: str) -> httpx.Response:
+def _execute_with_retry(client: SocrataHttpClient, url: str) -> httpx.Response:
     """Execute a GET request on Socrata with retries, backoff, and jitter on transient errors (5xx, 429, or RequestError)."""
     import random
 
@@ -193,7 +204,7 @@ def _execute_with_retry(client: httpx.Client, url: str) -> httpx.Response:
                 if response.status_code == 429:
                     wait = _retry_after_seconds(response.headers.get("retry-after"))
                 else:
-                    delay = retry_base_delay * (2 ** attempt)
+                    delay = retry_base_delay * (2**attempt)
                     jitter = delay * retry_jitter_fraction * (2 * random.random() - 1)
                     wait = delay + jitter
                 log.info(
@@ -211,7 +222,7 @@ def _execute_with_retry(client: httpx.Client, url: str) -> httpx.Response:
         except httpx.RequestError as e:
             if attempt == max_retries:
                 raise
-            delay = retry_base_delay * (2 ** attempt)
+            delay = retry_base_delay * (2**attempt)
             jitter = delay * retry_jitter_fraction * (2 * random.random() - 1)
             wait = delay + jitter
             log.info(

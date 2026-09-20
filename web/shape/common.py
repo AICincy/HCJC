@@ -5,7 +5,7 @@ from __future__ import annotations
 import functools
 import sys
 from collections import defaultdict
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 from scraper import orc as orc_mod
 from scraper.models import Inmate
@@ -58,12 +58,12 @@ def _human_utc(ts: str | None) -> str:
 def _now_naive_est() -> datetime:
     """Return current wall-clock time in America/New_York (EST/EDT) as a naive datetime.
     Used to generate consistent relative labels (e.g. '3 hours ago') during site build
-    regardless of the runner timezone.
+    regardless of the runner timezone. The return stays naive because every
+    consumer compares it against naive local-midnight datetimes.
     """
-    utc_now = datetime.now(timezone.utc)
-    # Fixed -0400/-0500 offset arithmetic is sufficient for static site display.
-    # Ohio is Eastern Time; simple -5h offset works as a naive baseline.
-    return (utc_now - timedelta(hours=5)).replace(tzinfo=None)
+    from zoneinfo import ZoneInfo
+
+    return datetime.now(ZoneInfo("America/New_York")).replace(tzinfo=None)
 
 
 # Pre-computed indexes for O(1) lookup (C1: eliminate O(n²) per-inmate scans)
@@ -79,7 +79,7 @@ class RosterIndexes:
 
     __slots__ = ("by_chapter", "by_code", "bonds_by_code")
 
-    def __init__(self, inmates: list[Inmate], offenses: dict | None = None) -> None:
+    def __init__(self, inmates: list[Inmate]) -> None:
         by_chapter: dict[str, list[Inmate]] = defaultdict(list)
         by_code: dict[str, list[Inmate]] = defaultdict(list)
         bonds_by_code: dict[str, list[int]] = defaultdict(list)

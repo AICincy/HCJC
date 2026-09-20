@@ -3,6 +3,8 @@ from pathlib import Path
 
 from scraper.orc import codes_without_titles, normalize_code, title_for
 
+REPO = Path(__file__).resolve().parents[1]
+
 
 def test_normalize_code_strips_section_prefix():
     assert normalize_code("2903.11") == "2903.11"
@@ -33,14 +35,14 @@ def test_codes_without_titles_dedupes_and_filters():
 
 
 def test_offense_file_is_well_formed():
-    raw = json.loads(Path("data/orc_offenses.json").read_text(encoding="utf-8"))
+    raw = json.loads((REPO / "data" / "orc_offenses.json").read_text(encoding="utf-8"))
     assert "offenses" in raw
     assert isinstance(raw["offenses"], dict)
     assert len(raw["offenses"]) >= 50
 
 
 def test_all_offenses_have_valid_degree():
-    raw = json.loads(Path("data/orc_offenses.json").read_text(encoding="utf-8"))
+    raw = json.loads((REPO / "data" / "orc_offenses.json").read_text(encoding="utf-8"))
     valid_degrees = set(raw["_degree_order"])
     for code, entry in raw["offenses"].items():
         assert "title" in entry, f"{code} missing 'title'"

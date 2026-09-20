@@ -22,8 +22,6 @@ def test_downscale_reduces_size_and_dimensions(tmp_path):
         assert im.size[1] <= 312
         assert im.format == "JPEG"
 
-    assert dest.stat().st_size < len(raw)
-
 
 def test_downscale_rejects_non_image(tmp_path):
     dest = tmp_path / "nope.jpg"

@@ -6,7 +6,6 @@ GH Actions workflow can't silently regress.
 
 import json
 import logging
-import urllib.parse
 
 from scraper.cincy_open import (
     dumps_rows_per_line,
@@ -28,12 +27,27 @@ def test_since_iso_is_naive_utc_timestamp():
     assert len(s) == 19  # YYYY-MM-DDTHH:MM:SS
 
 
-def test_url_encoding_is_compatible_with_socrata():
-    # Socrata accepts colons unencoded in $where.
-    params = {"$where": "create_time_incident > '2026-05-10T00:00:00'", "$limit": "1"}
-    qs = urllib.parse.urlencode(params, safe=":")
-    assert "2026-05-10T00:00:00" in qs
-    assert "%3A" not in qs  # colons remain literal
+def test_query_builds_socrata_compatible_url():
+    import httpx
+
+    import scraper.cincy_open as co
+
+    captured = {}
+
+    class MockClient:
+        def get(self, url):
+            captured["url"] = url
+            return httpx.Response(200, json=[], request=httpx.Request("GET", url))
+
+    where = "create_time_incident > '2026-05-10T00:00:00'"
+    co.query("test-dataset", where=where, limit=1, client=MockClient())
+
+    url = captured["url"]
+    assert url.startswith("https://data.cincinnati-oh.gov/resource/test-dataset.json?")
+    assert "%24where=" in url  # the $where param is actually sent
+    assert "2026-05-10T00:00:00" in url  # colons stay literal: Socrata rejects %3A
+    assert "%3A" not in url
+    assert "%24limit=1" in url
 
 
 def _write_feed(path, row_count, rows=None):
@@ -134,7 +148,7 @@ def test_query_retry_on_500_success(monkeypatch):
             return httpx.Response(200, json=[{"row": 1}], request=httpx.Request("GET", url))
 
     # Minimize delays for testing
-    monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda *args: None}))
+    monkeypatch.setattr(co.time, "sleep", lambda *args: None)
 
     res = co.query("test-dataset", client=MockClient())
     assert res == [{"row": 1}]
@@ -162,7 +176,7 @@ def test_query_retry_on_429_retry_after(monkeypatch):
 
     # Mock time.sleep to verify it gets called or minimize wait
     sleep_calls = []
-    monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda s: sleep_calls.append(s)}))
+    monkeypatch.setattr(co.time, "sleep", lambda s: sleep_calls.append(s))
 
     res = co.query("test-dataset", client=MockClient())
     assert res == [{"row": 1}]
@@ -186,7 +200,7 @@ def test_query_retry_fails_after_max_retries(monkeypatch):
             calls += 1
             return httpx.Response(500, request=httpx.Request("GET", url))
 
-    monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda *args: None}))
+    monkeypatch.setattr(co.time, "sleep", lambda *args: None)
 
     with pytest.raises(httpx.HTTPStatusError):
         co.query("test-dataset", client=MockClient())
@@ -209,7 +223,7 @@ def test_query_retry_on_network_error(monkeypatch):
                 raise httpx.ConnectError("Connection timed out", request=httpx.Request("GET", url))
             return httpx.Response(200, json=[{"row": 1}], request=httpx.Request("GET", url))
 
-    monkeypatch.setattr(co, "time", type("MockTime", (object,), {"sleep": lambda *args: None}))
+    monkeypatch.setattr(co.time, "sleep", lambda *args: None)
 
     res = co.query("test-dataset", client=MockClient())
     assert res == [{"row": 1}]

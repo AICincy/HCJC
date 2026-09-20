@@ -34,35 +34,45 @@ def _dispatch_points(cfs_rows: list[dict], shooting_rows: list[dict], limit: int
             return None
         return (round(la, 5), round(lo, 5))
 
-    pts: list[dict] = []
+    cfs_pts: list[dict] = []
     for r in cfs_rows:
         c = _coord(r)
         if not c:
             continue
-        pts.append(
+        cfs_pts.append(
             {
                 "la": c[0],
                 "lo": c[1],
                 "k": "cfs",
-                "d": (r.get("disposition_text") or "").strip(),
-                "a": (r.get("address_x") or "").strip(),
-                "n": (r.get("cpd_neighborhood") or r.get("community_council_neighborhood") or "").strip(),
-                "t": (r.get("create_time_incident") or "").strip(),
+                "d": str(r.get("disposition_text") or "").strip(),
+                "a": str(r.get("address_x") or "").strip(),
+                "n": str(r.get("cpd_neighborhood") or r.get("community_council_neighborhood") or "").strip(),
+                "t": str(r.get("create_time_incident") or "").strip(),
             }
         )
+    shooting_pts: list[dict] = []
     for r in shooting_rows:
         c = _coord(r)
         if not c:
             continue
-        pts.append(
+        shooting_pts.append(
             {
                 "la": c[0],
                 "lo": c[1],
                 "k": "shooting",
-                "d": (r.get("type") or "SHOOTING").strip() or "SHOOTING",
-                "a": (r.get("streetblock") or "").strip(),
-                "n": (r.get("sna_neighborhood") or r.get("community_council_neighborhood") or "").strip(),
-                "t": (r.get("datetimeoccured") or r.get("dateoccurred") or "").strip(),
+                "d": str(r.get("type") or "SHOOTING").strip() or "SHOOTING",
+                "a": str(r.get("streetblock") or "").strip(),
+                "n": str(r.get("sna_neighborhood") or r.get("community_council_neighborhood") or "").strip(),
+                "t": str(r.get("datetimeoccured") or r.get("dateoccurred") or "").strip(),
             }
         )
+    # Interleave the feeds so the point cap cannot starve either one: a heavy
+    # CFS feed used to crowd every shooting point out of the map. Deterministic
+    # (CFS first in each pair); order within each feed is preserved.
+    pts: list[dict] = []
+    for i in range(max(len(cfs_pts), len(shooting_pts))):
+        if i < len(cfs_pts):
+            pts.append(cfs_pts[i])
+        if i < len(shooting_pts):
+            pts.append(shooting_pts[i])
     return pts[:limit]

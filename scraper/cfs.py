@@ -50,6 +50,7 @@ def save_recent(rows: list[dict], path: Path = CFS_PATH) -> None:
     warn_on_row_drop("CFS", prev_row_count(path), len(rows))
     payload = {
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "dataset_id": DATASET_ID,
         "row_count": len(rows),
         "rows": rows,
     }

@@ -11,10 +11,12 @@ import json
 import logging
 import os
 import shutil
+import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from jinja2 import Environment
 
@@ -65,7 +67,8 @@ def _filter_last_days(rows: list[dict], field_candidates: tuple[str, ...], days:
     """Return rows whose date in one of ``field_candidates`` is within the
     last ``days`` days. Rows with unparseable dates are kept (defensive: the
     Socrata feeds occasionally ship a row with a NULL date and we'd rather
-    surface it than silently drop it). Sorted newest-first.
+    surface it than silently drop it). Sorted newest-first; dateless rows
+    sort last.
     """
     cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).replace(tzinfo=None)
     parsed: list[tuple[datetime | None, dict]] = []
@@ -73,7 +76,7 @@ def _filter_last_days(rows: list[dict], field_candidates: tuple[str, ...], days:
         dt = _extract_row_dt(r, field_candidates)
         if dt is None or dt >= cutoff:
             parsed.append((dt, r))
-    parsed.sort(key=lambda t: (t[0] is None, t[0] or datetime.min), reverse=True)
+    parsed.sort(key=lambda t: (t[0] is not None, t[0] or datetime.min), reverse=True)
     return [r for _, r in parsed]
 
 
@@ -141,6 +144,24 @@ def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
     (out_dir / "index.html").write_text(page, encoding="utf-8")
 
 
+def _safe_crowdsourced_url(value: object) -> str:
+    """Blank crowdsourced URLs whose scheme is not http/https.
+
+    Defense-in-depth behind the ingest validation in
+    ``scraper/ingest_issue.py``: records already stored in
+    ``data/courtclerk_cases.json`` predate that hardening, and Jinja
+    autoescape does not stop ``javascript:`` URLs in href attributes.
+    """
+    s = value if isinstance(value, str) else ""
+    if not s.strip():
+        return ""
+    try:
+        scheme = urllib.parse.urlsplit(s.strip()).scheme.lower()
+    except ValueError:
+        return ""
+    return s if scheme in ("http", "https") else ""
+
+
 def _load_crowdsourced_cases(
     inmates: list[Inmate],
 ) -> dict[str, list[dict]]:
@@ -175,8 +196,8 @@ def _load_crowdsourced_cases(
                 "next_hearing": r.get("next_hearing", ""),
                 "charges_raw": r.get("charges_raw", ""),
                 "notes": r.get("notes", ""),
-                "source_url": r.get("source_url", ""),
-                "issue_url": r.get("issue_url", ""),
+                "source_url": _safe_crowdsourced_url(r.get("source_url", "")),
+                "issue_url": _safe_crowdsourced_url(r.get("issue_url", "")),
                 "submitter": r.get("submitter", ""),
                 "submitted": (r.get("ingested_utc") or "")[:10],
                 "dob_verified": r.get("dob_verified", False),
@@ -245,14 +266,14 @@ def _render_feeds(env: Environment, events: list[ChangeEvent], out_dir: Path) ->
         if e.event != "booked":
             return False
         if not (e.note or "").startswith("booked "):
-            return True
+            return False
         bd_str = e.note[len("booked ") :].strip()
         for fmt in ("%m/%d/%y", "%m/%d/%Y"):
             try:
                 return datetime.strptime(bd_str, fmt).date() >= cutoff
             except ValueError:
                 continue
-        return True
+        return False
 
     _write(
         "feed.xml",
@@ -427,7 +448,7 @@ def _render_stats_page(env: Environment, snapshot: Snapshot, by_month, trend: di
 def _render_bond_disparity_page(env: Environment, snapshot: Snapshot, offenses: dict, out_dir: Path) -> None:
     """Flagship analytics: per-statute bond dispersion with the n >= 5
     suppression floor. Aggregate only; no individual bonds are shown."""
-    idx = RosterIndexes(snapshot.inmates, offenses)
+    idx = RosterIndexes(snapshot.inmates)
     rows = _bond_disparity(idx, offenses)
     page = env.get_template("bond-disparity.html").render(
         snapshot=snapshot,
@@ -445,7 +466,7 @@ def _render_court_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> N
     get a docket view that the per-record pages cannot offer.
     """
     cal = _court_calendar(snapshot.inmates)
-    now_eastern = datetime.now()
+    now_eastern = datetime.now(ZoneInfo("America/New_York"))
     page = env.get_template("court.html").render(
         snapshot=snapshot,
         cal=cal,

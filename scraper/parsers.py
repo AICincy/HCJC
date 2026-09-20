@@ -7,7 +7,6 @@ import logging
 import re
 import threading as _threading
 from datetime import datetime, timezone
-from typing import Iterable
 
 from selectolax.parser import HTMLParser, Node
 
@@ -627,7 +626,3 @@ def _attr(node: Node, key: str) -> str:
     (a present-but-valueless attribute like ``disabled`` yields None); this
     normalizes to ``""`` so callers can string-handle without guarding."""
     return node.attributes.get(key) or ""
-
-
-def iter_inmate_ids(rows: Iterable[ListRow]) -> set[str]:
-    return {r.inmate_number for r in rows if r.inmate_number}

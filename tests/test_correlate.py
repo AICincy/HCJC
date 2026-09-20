@@ -170,9 +170,12 @@ def test_correlate_arrest_disposition_boost():
     cfs_arrest = [_make_cfs("2026-05-15T00:30:00", disposition="THEFT SHOPLIFTING ARR: ARREST")]
     result_no = correlate(current, cfs_no_arrest, "cfs_recent")
     result_yes = correlate(current, cfs_arrest, "cfs_recent")
-    if result_no and result_yes:
-        assert result_yes[0].confidence > result_no[0].confidence
-        assert result_yes[0].signals["arrest_disposition_boost"] is True
+    # Both fixtures must actually correlate: comparing an empty list would
+    # make the boost assertion vacuous.
+    assert result_no, "no-arrest fixture produced no correlation candidates"
+    assert result_yes, "arrest fixture produced no correlation candidates"
+    assert result_yes[0].confidence > result_no[0].confidence
+    assert result_yes[0].signals["arrest_disposition_boost"] is True
 
 
 def test_min_confidence_raised():

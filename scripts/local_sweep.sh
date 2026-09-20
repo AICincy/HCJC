@@ -39,6 +39,14 @@ git fetch origin main --quiet
 if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
     echo "rebasing local main onto origin/main..."
     git checkout main --quiet
+    # Never destroy committed-but-unpushed work: the clean-tree guard above
+    # does not protect it, and reset --hard would silently drop it.
+    unpushed="$(git rev-list --count origin/main..HEAD)"
+    if [[ "$unpushed" != "0" ]]; then
+        echo "error: local main has $unpushed commit(s) not on origin/main; refusing reset --hard."
+        echo "       push, rebase, or back up those commits before running local_sweep.sh."
+        exit 1
+    fi
     git reset --hard origin/main --quiet
 fi
 
@@ -53,7 +61,9 @@ fi
 # --- Sweep ---
 DRY_RUN=""
 REFRESH_KNOWN=""
-for arg in "$@"; do
+# ${1+"$@"} instead of "$@" so this loop is a no-op (not an unbound-variable
+# error) on bash 3.2 when the script is called with zero arguments.
+for arg in ${1+"$@"}; do
     case "$arg" in
         --dry-run)        DRY_RUN="--dry-run" ;;
         --refresh-known)  REFRESH_KNOWN="--refresh-known" ;;

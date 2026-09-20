@@ -35,6 +35,16 @@ MODEL_CASES = {
     "waf_block_log.json": (BlockLogEntry,),
 }
 
+# Model fields intentionally left out of the /data/ portal docs. Anything
+# else undocumented fails the test: new fields must be documented (or added
+# here with a reason) before they ship.
+DOCUMENTATION_ALLOWLIST = {
+    # schema_version is a machine envelope field, not user-facing schema.
+    "current.json": {"schema_version"},
+    # count/note are internal aggregation artifacts, not entry schema.
+    "anon_changelog.json": {"count", "note"},
+}
+
 
 def _documented_fields(filename: str) -> set[str]:
     """Field names documented in the Published Files row for ``filename``.
@@ -65,6 +75,14 @@ def test_documented_fields_exist_in_models():
         documented = _documented_fields(filename)
         unknown = documented - actual
         assert not unknown, f"{filename} docs mention fields absent from {[m.__name__ for m in models]}: {sorted(unknown)}"
+        # Exact equality (minus the documented allowlist): a model field that
+        # is neither documented nor allowlisted fails, so schema drift can't
+        # slip through silently.
+        undocumented = actual - documented - DOCUMENTATION_ALLOWLIST.get(filename, set())
+        assert not undocumented, (
+            f"{filename} has model fields missing from the portal docs: {sorted(undocumented)} "
+            f"(document them in web/templates/data.html or add to DOCUMENTATION_ALLOWLIST with a reason)"
+        )
 
 
 def test_transparency_metrics_docs_match_computed_keys():

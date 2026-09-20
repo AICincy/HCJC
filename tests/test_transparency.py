@@ -11,8 +11,20 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+import pytest
+
 from scraper.models import Charge, Inmate, Snapshot
 from web.transparency import compute_transparency_metrics
+
+
+@pytest.fixture(autouse=True)
+def _no_orc_offenses_rewrite(monkeypatch):
+    """Hermeticity: web.build.build() calls update_orc_offenses(), which reads
+    the real repo's data/current.json and conditionally rewrites the committed
+    data/orc_offenses.json via absolute ROOT_DIR paths. Neutralize it; the
+    fixture snapshots written by these tests are complete on their own."""
+    monkeypatch.setattr("scraper.update_orc_offenses.update_orc_offenses", lambda: None)
+
 
 NOW = datetime(2026, 6, 2, 5, 0, 0, tzinfo=timezone.utc)
 

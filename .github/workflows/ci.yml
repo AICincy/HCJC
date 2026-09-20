@@ -37,7 +37,7 @@ jobs:
         # fails CI until the pin is bumped. Dev-only tool, not added to
         # requirements.txt itself.
         run: |
-          pip install pip-audit
+          pip install pip-audit==2.10.1
           pip-audit -r requirements.txt
       - run: python -m pytest -v
       - name: Verify WAF-block evidence chain

@@ -24,7 +24,7 @@ fi
 
 BASE="https://www.hcso.org/justice-center-services/inmate-search/inmate-detail/"
 # Match the User-Agent the scraper uses so the WAF treats us identically.
-UA="JCStream/0.1 (+https://github.com/AICincy/JCStream; Hamilton County OH public-records mirror; peek)"
+UA="JCStream/0.1 (+https://github.com/AICincy/HCJC; Hamilton County OH public-records mirror; parallelism-limited)"
 
 OVERALL_RC=0
 for id in "$@"; do

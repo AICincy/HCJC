@@ -66,7 +66,6 @@ from web.shape import (
     _crimes_of_month,
     _days_in_custody,
     _distinct_chapters,
-    _events_for_recent,
     _feed_description,
     _human_utc,
     _iso_booking_date,
@@ -77,7 +76,6 @@ from web.shape import (
     _recent_booked_inmates,
     _related_inmates,
     _roster_stale_context,
-    _short_month_label,
     _similar_by_statute,
     _strftime_nopad,
     _tier_breakdown,
@@ -86,7 +84,6 @@ from web.shape import (
 )
 
 log = logging.getLogger("jcstream.site")
-_COMPAT_EXPORTS = (_short_month_label, _events_for_recent)
 
 ROOT = Path(__file__).parent
 TEMPLATE_DIR = ROOT / "templates"
@@ -128,7 +125,13 @@ def _load_inputs():
         # Fail closed like the store write boundary: rendering with an empty
         # seal set would republish sealed records (ORC 2953.32). str() matches
         # the coercion in scraper/store.py so int entries still seal.
-        takedowns = {str(n) for n in json.loads(takedowns_path.read_text(encoding="utf-8"))}
+        try:
+            takedowns = {str(n) for n in json.loads(takedowns_path.read_text(encoding="utf-8"))}
+        except (OSError, json.JSONDecodeError) as exc:
+            raise RuntimeError(
+                f"refusing to build: corrupt takedown seal file {takedowns_path} ({exc}); "
+                "a corrupt seal file must not silently build without seals"
+            ) from exc
 
     if takedowns:
         filtered_inmates = [i for i in snapshot.inmates if i.inmate_number not in takedowns]
@@ -224,7 +227,7 @@ def _register_template_helpers(env: Environment, snapshot: Snapshot, offenses: d
     env.globals["primary_degree"] = _primary_degree
     env.globals["tier_max"] = _tier_max
     env.globals["tier_ladder"] = ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM"]
-    idx = RosterIndexes(snapshot.inmates, offenses)
+    idx = RosterIndexes(snapshot.inmates)
     env.globals["bond_context"] = lambda inm: _bond_context(inm, snapshot.inmates, offenses, indexes=idx)
     env.globals["recent_booked_inmates"] = _recent_booked_inmates(snapshot, n=6)
     # Changelog-derived defaults; build() overwrites them once events load.

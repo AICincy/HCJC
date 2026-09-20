@@ -34,12 +34,14 @@ jobs:
         run: python -m scraper.ingest_issue
 
       - name: Commit case data
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           git config user.name "jcstream-bot"
           git config user.email "noreply@github.com"
           git add data/courtclerk_cases.json
           if ! git diff --cached --quiet; then
-            git commit -m "case-data: ingest issue #${{ github.event.issue.number }}"
+            git commit -m "case-data: ingest issue #$ISSUE_NUMBER"
             git fetch origin main
             git rebase origin/main || {
               echo "::warning::Rebase conflict detected; attempting merge"

@@ -23,7 +23,7 @@ def test_full_name_caps_each_part_and_total_length():
     huge = "X" * 5000
     inm = Inmate(inmate_number="1", last_name=huge, first_name=huge, middle_name=huge)
     # Per-part 80-char cap + " " join => 80 + 1 + 80 + 1 + 80 = 242 chars max.
-    assert len(inm.full_name) <= 256
+    assert len(inm.full_name) <= 242
     assert "X" * 80 in inm.full_name
     assert "X" * 81 not in inm.full_name
 

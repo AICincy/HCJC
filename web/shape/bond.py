@@ -10,7 +10,7 @@ from web.classify import _DEGREE_RE, _charge_tier, _parse_bond_amount
 
 from .common import RosterIndexes, _cached_offenses
 
-_BOND_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "MM")
+_BOND_DEGREE_ORDER = ("F1", "F2", "F3", "F4", "F5", "F", "M1", "M2", "M3", "M4", "MM", "M")
 
 # Suppression floor for the bond-disparity page: statutes with fewer current
 # bookings than this are omitted entirely, so no row can describe a single
@@ -79,28 +79,19 @@ def _bond_peer_amounts(
     primary_code: str,
     indexes: RosterIndexes | None = None,
 ) -> list[int]:
-    """Return sorted peer bond amounts for the given ORC code."""
+    """Return sorted peer bond amounts for the given ORC code.
+
+    Peers are inmates charged under the code in any charge position (one bond
+    per peer: the first matching charge's). The target is excluded by inmate
+    id, never by bond amount, so a peer whose bond happens to match the
+    target's is never dropped.
+    """
     if indexes is not None:
-        all_bonds = indexes.bonds_by_code.get(primary_code, [])
-        my_bond = _parse_bond_amount(
-            next(
-                (
-                    c.bond_amount
-                    for c in target.charges
-                    if orc_mod.normalize_code((c.orc_code or "").strip()) == primary_code
-                ),
-                None,
-            )
-        )
-        if my_bond is not None and my_bond > 0 and my_bond in all_bonds:
-            result = list(all_bonds)
-            result.remove(my_bond)
-            return result
-        return list(all_bonds)
+        candidates = [i for i in indexes.by_code.get(primary_code, []) if i.inmate_number != target.inmate_number]
+    else:
+        candidates = [i for i in all_inmates if i.inmate_number != target.inmate_number]
     peers: list[int] = []
-    for inm in all_inmates:
-        if inm.inmate_number == target.inmate_number:
-            continue
+    for inm in candidates:
         for c in inm.charges:
             if orc_mod.normalize_code((c.orc_code or "").strip()) != primary_code:
                 continue

@@ -9,8 +9,19 @@ from __future__ import annotations
 
 import statistics
 
+import pytest
+
 from scraper.models import Charge, Inmate
 from web.shape import BOND_DISPARITY_MIN_N, RosterIndexes, _bond_disparity
+
+
+@pytest.fixture(autouse=True)
+def _no_orc_offenses_rewrite(monkeypatch):
+    """Hermeticity: web.build.build() calls update_orc_offenses(), which reads
+    the real repo's data/current.json and conditionally rewrites the committed
+    data/orc_offenses.json via absolute ROOT_DIR paths. Neutralize it; the
+    fixture snapshot written by the render test is complete on its own."""
+    monkeypatch.setattr("scraper.update_orc_offenses.update_orc_offenses", lambda: None)
 
 
 def _inmates_with_bonds(code: str, amounts: list[int], start: int = 1) -> list[Inmate]:
@@ -28,7 +39,7 @@ def _inmates_with_bonds(code: str, amounts: list[int], start: int = 1) -> list[I
 def test_suppression_floor_enforced():
     below = _inmates_with_bonds("2913.02", [100, 200, 300, 400])  # n=4: suppressed
     at_floor = _inmates_with_bonds("2925.11", [100, 200, 300, 400, 500], start=10)  # n=5: shown
-    idx = RosterIndexes(below + at_floor, {})
+    idx = RosterIndexes(below + at_floor)
     rows = _bond_disparity(idx, {})
     assert [r["code"] for r in rows] == ["2925.11"]
     assert rows[0]["n"] == BOND_DISPARITY_MIN_N
@@ -36,7 +47,7 @@ def test_suppression_floor_enforced():
 
 def test_quartile_math_matches_statistics_quantiles():
     amounts = [100, 200, 300, 400, 500]
-    idx = RosterIndexes(_inmates_with_bonds("2913.02", amounts), {})
+    idx = RosterIndexes(_inmates_with_bonds("2913.02", amounts))
     (row,) = _bond_disparity(idx, {})
     q1, med, q3 = statistics.quantiles(sorted(amounts), n=4)
     assert row["q1"] == round(q1) == 150
@@ -50,14 +61,14 @@ def test_quartile_math_matches_statistics_quantiles():
 def test_ranked_by_spread_descending():
     tight = _inmates_with_bonds("2913.02", [1000, 1000, 1000, 1000, 1000])  # spread 1.0
     wide = _inmates_with_bonds("2925.11", [100, 200, 500, 2000, 10000], start=10)
-    idx = RosterIndexes(tight + wide, {})
+    idx = RosterIndexes(tight + wide)
     rows = _bond_disparity(idx, {})
     assert [r["code"] for r in rows] == ["2925.11", "2913.02"]
     assert rows[1]["spread"] == 1.0
 
 
 def test_zero_qualifying_statutes():
-    idx = RosterIndexes(_inmates_with_bonds("2913.02", [100]), {})
+    idx = RosterIndexes(_inmates_with_bonds("2913.02", [100]))
     assert _bond_disparity(idx, {}) == []
 
 
@@ -71,7 +82,7 @@ def test_zero_and_missing_bonds_do_not_count_toward_floor():
             charges=[Charge(orc_code="2913.02", description="THEFT F5", bond_amount="")],
         )
     )
-    idx = RosterIndexes(inmates, {})
+    idx = RosterIndexes(inmates)
     # 4 parseable bonds + 1 empty: still below the floor of 5.
     assert _bond_disparity(idx, {}) == []
 

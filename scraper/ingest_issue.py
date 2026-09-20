@@ -39,6 +39,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from scraper.case_match import normalize_case_number
+from scraper.store import _atomic_write_text
 
 log = logging.getLogger(__name__)
 
@@ -133,6 +134,18 @@ def valid_source_url(url: str) -> bool:
     )
 
 
+def _is_http_url(url: str) -> bool:
+    """True when *url* parses with an http or https scheme.
+
+    Guards URL fields that end up rendered into HTML (issue_url): a
+    javascript: or data: URL here would be a stored-XSS vector.
+    """
+    try:
+        return urllib.parse.urlparse(url.strip()).scheme in ("http", "https")
+    except ValueError:
+        return False
+
+
 def build_case_record(
     sections: dict[str, str],
     issue_number: int,
@@ -203,14 +216,22 @@ def load_cases() -> list[dict]:
         raw = json.loads(CASES_PATH.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError) as exc:
         raise CasesFileError(f"{CASES_PATH} is unreadable ({exc})") from exc
+    # Canonical envelope is {"cases": [...]} (matches the published
+    # docs/data/courtclerk_cases.json contract); a bare JSON list is still
+    # accepted for files written before the envelope was introduced.
+    if isinstance(raw, dict):
+        raw = raw.get("cases")
     if not isinstance(raw, list):
-        raise CasesFileError(f"{CASES_PATH} is not a JSON list")
+        raise CasesFileError(f'{CASES_PATH} is not a {{"cases": [...]}} object')
     return raw
 
 
 def save_cases(cases: list[dict]) -> None:
-    CASES_PATH.parent.mkdir(parents=True, exist_ok=True)
-    CASES_PATH.write_text(json.dumps(cases, indent=2), encoding="utf-8")
+    # Atomic write: a kill mid-write must not leave a truncated
+    # courtclerk_cases.json. Wrapped {"cases": [...]} envelope so the file
+    # keeps the published docs/data/courtclerk_cases.json contract
+    # (web/pages.py writes a {"cases": []} placeholder and copies verbatim).
+    _atomic_write_text(CASES_PATH, json.dumps({"cases": cases}, indent=2))
 
 
 def upsert(cases: list[dict], record: dict) -> list[dict]:
@@ -230,6 +251,8 @@ def validate_record(record: dict, sections: dict[str, str]) -> list[str]:
         problems.append("missing Source URL")
     elif not valid_source_url(record["source_url"]):
         problems.append("Source URL must be an https://www.courtclerk.org/data/case_summary.php link")
+    if record["issue_url"] and not _is_http_url(record["issue_url"]):
+        problems.append("Issue URL must use http:// or https://")
     if not confirmations_checked(sections):
         problems.append("both Confirmation checkboxes must be checked")
     return problems
@@ -244,7 +267,12 @@ def main() -> int:
     if not body.strip():
         log.error("no issue body provided (set ISSUE_BODY or pipe via stdin)")
         return 2
-    issue_number = int(os.environ.get("ISSUE_NUMBER", "0") or 0)
+    raw_issue_number = os.environ.get("ISSUE_NUMBER", "0") or "0"
+    try:
+        issue_number = int(raw_issue_number)
+    except ValueError:
+        log.error("invalid ISSUE_NUMBER=%r: expected an integer", raw_issue_number)
+        return 2
     issue_url = os.environ.get("ISSUE_URL", "")
     submitter = os.environ.get("ISSUE_SUBMITTER", "")
 

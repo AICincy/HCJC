@@ -1,3 +1,5 @@
+import json
+
 import pytest
 
 from scraper.case_match import normalize_case_number
@@ -6,7 +8,9 @@ from scraper.ingest_issue import (
     build_case_record,
     confirmations_checked,
     load_cases,
+    main,
     parse_issue_body,
+    save_cases,
     upsert,
     valid_source_url,
     validate_record,
@@ -202,3 +206,43 @@ def test_load_cases_non_list_raises(tmp_path, monkeypatch):
     (tmp_path / "data" / "courtclerk_cases.json").write_text('{"a": 1}', encoding="utf-8")
     with pytest.raises(CasesFileError):
         load_cases()
+
+
+def test_save_cases_writes_wrapped_envelope(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    save_cases([{"case_number_key": "B241234"}])
+    payload = json.loads((tmp_path / "data" / "courtclerk_cases.json").read_text(encoding="utf-8"))
+    assert payload == {"cases": [{"case_number_key": "B241234"}]}
+
+
+def test_load_cases_reads_wrapped_envelope(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "courtclerk_cases.json").write_text('{"cases": [{"a": 1}]}', encoding="utf-8")
+    assert load_cases() == [{"a": 1}]
+
+
+def test_load_cases_reads_legacy_bare_list(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "courtclerk_cases.json").write_text('[{"a": 1}]', encoding="utf-8")
+    assert load_cases() == [{"a": 1}]
+
+
+def test_validate_record_rejects_non_http_issue_url():
+    record = _record(issue_url="javascript:alert(document.domain)")
+    problems = validate_record(record, _sections())
+    assert any("Issue URL" in p for p in problems)
+
+
+def test_validate_record_rejects_data_issue_url():
+    record = _record(issue_url="data:text/html,<script>alert(1)</script>")
+    problems = validate_record(record, _sections())
+    assert any("Issue URL" in p for p in problems)
+
+
+def test_main_rejects_non_numeric_issue_number(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("ISSUE_BODY", SAMPLE_BODY)
+    monkeypatch.setenv("ISSUE_NUMBER", "not-a-number")
+    assert main() == 2

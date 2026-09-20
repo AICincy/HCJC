@@ -31,13 +31,24 @@ else
     BRANCH_FILTER=(--branch "$ARG")
 fi
 
+# Fail fast with a clear message: without gh (or without auth) the run list
+# below comes back empty and "no completed sweep runs found" would mislead.
+if ! command -v gh >/dev/null 2>&1; then
+    echo "error: the gh CLI is not installed (or not on PATH); install it, then run 'gh auth login'."
+    exit 1
+fi
+if ! gh auth status >/dev/null 2>&1; then
+    echo "error: gh is not authenticated against github.com; run 'gh auth login' first."
+    exit 1
+fi
+
 echo "fetching last $LIMIT sweep runs from $REPO (gh run list --workflow $WORKFLOW)..."
 mapfile -t RUN_IDS < <(
     gh run list \
         --repo "$REPO" \
         --workflow "$WORKFLOW" \
         --limit "$LIMIT" \
-        "${BRANCH_FILTER[@]}" \
+        ${BRANCH_FILTER[@]+"${BRANCH_FILTER[@]}"} \
         --json databaseId,status,conclusion,createdAt \
         --jq '.[] | select(.status=="completed") | .databaseId'
 )
@@ -109,8 +120,12 @@ grep -oE "\\([0-9]+ bytes" "$ALL_LINES" \
     | awk 'BEGIN{c=0;s=0;min=99999999;max=0}
            {c++; s+=$1; if($1<min)min=$1; if($1>max)max=$1; v[c]=$1}
            END{
-             printf "  count=%d  min=%d  max=%d  mean=%.0f\n", c, min, max, s/c;
-             if(c>0){printf "  median=%d\n", v[int(c/2)+1]}
+             if (c>0) {
+               printf "  count=%d  min=%d  max=%d  mean=%.0f\n", c, min, max, s/c;
+               printf "  median=%d\n", v[int(c/2)+1]
+             } else {
+               print "  (no byte-size samples)"
+             }
            }'
 echo
 

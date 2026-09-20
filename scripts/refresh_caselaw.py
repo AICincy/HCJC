@@ -55,7 +55,7 @@ def _normalize(code: str | None) -> str:
 def top_codes(limit: int = 30) -> list[str]:
     raw = json.loads((DATA / "current.json").read_text(encoding="utf-8"))
     counts: Counter[str] = Counter()
-    for inm in raw.get("inmates", []):
+    for inm in raw.get("inmates") or []:
         for ch in inm.get("charges", []):
             code = _normalize(ch.get("orc_code") or "")
             if code:
@@ -69,7 +69,7 @@ def fetch_for_code(code: str, max_results: int = 3, max_retries: int = 3) -> lis
         "type": "o",
         "q": f'"{code}"',
         "court": "ohio ohioctapp",
-        "stat_Published": "true",
+        "stat_Published": "on",
         "order_by": "dateFiled desc",
     }
     headers = {"User-Agent": DEFAULT_UA}
@@ -113,7 +113,14 @@ def fetch_for_code(code: str, max_results: int = 3, max_retries: int = 3) -> lis
 
 
 def main() -> int:
-    codes = top_codes(limit=30)
+    try:
+        codes = top_codes(limit=30)
+    except FileNotFoundError:
+        print(f"error: {DATA / 'current.json'} not found; run the roster sweep first", file=sys.stderr)
+        return 2
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        print(f"error: {DATA / 'current.json'} is not valid JSON ({e})", file=sys.stderr)
+        return 2
     print(f"refreshing case law for {len(codes)} ORC sections")
     by_code: dict[str, list[dict]] = {}
     for i, code in enumerate(codes, 1):

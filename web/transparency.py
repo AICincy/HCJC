@@ -1,6 +1,6 @@
 """Aggregate the WAF-block evidence ledger into public scorecard metrics.
 
-Drives the /transparency/ page and the ``data/transparency_metrics.json``
+Drives the /transparency/ page and the ``docs/data/transparency_metrics.json``
 mirror, so the numbers cited in public-records filings regenerate from the
 ledger on every build. Read-only over the hash-chained ledger
 (``data/waf_block_log.json``): the sweep appends one ``blocked`` record per
@@ -81,6 +81,10 @@ def compute_transparency_metrics(
 
     if freshness_hours is not None and freshness_hours >= ROSTER_STALE_ALARM_HOURS:
         status = "BLOCKED" if current_streak > 0 else "STALE"
+    elif freshness_hours is None and current_streak > 0:
+        # Snapshot timestamp missing/unparseable while a denial period is open:
+        # retrieval is currently denied, so never report FRESH.
+        status = "BLOCKED"
     else:
         status = "FRESH"
 

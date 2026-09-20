@@ -70,7 +70,7 @@ def test_even_count_median_rounds():
     ]
     s = _court_slippage(inmates, now=NOW)
     assert s["total"] == 2
-    assert s["median_days"] == round((14 + 5) / 2)
+    assert s["median_days"] == 10  # median of [14, 5] is 9.5, rounded
 
 
 def test_untiered_inmate_grouped_as_other():

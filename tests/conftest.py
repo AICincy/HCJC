@@ -25,8 +25,12 @@ def _isolate_evidence_logs(tmp_path, monkeypatch):
     # paths pass through untouched.
     _real_append = store.append_block_evidence
 
-    def _append_evidence_to_tmp(record, path=None):
-        _real_append(record, path if path is not None else tmp_path / "waf_block_log.json")
+    def _append_evidence_to_tmp(record, *args, **kwargs):
+        # Default the evidence-log path to tmp_path, but let explicit callers
+        # (positional or keyword) pass through untouched.
+        if not args and "path" not in kwargs:
+            kwargs["path"] = tmp_path / "waf_block_log.json"
+        _real_append(record, *args, **kwargs)
 
     monkeypatch.setattr(store, "append_block_evidence", _append_evidence_to_tmp)
 
