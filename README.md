@@ -14,8 +14,9 @@ fully static, searchable site. No database server, no backend, no tracking.
 
 - **1,167 people** listed in custody, data current as of **2026-09-20T12:23:01Z**
   (data/current.json, docs/search.json, and the live site all agree).
-- Deploy commit `a7dacf3b` (merge of origin/main, 2026-09-20). CI green,
-  GitHub Pages deploy green, live site verified HTTP 200.
+- Deploys from the tip of `main` via GitHub Pages. No commit hash is pinned
+  here by design; the live commit is always the current `origin/main` tip.
+  CI and the Pages build run green on every push to `main`.
 - **137,408-record** append-only SHA-256 hash-chained WAF evidence log
   (docs/data/waf_block_log.json), chain verified in CI. The log lives in
   both `data/` (the sweep's working copy) and `docs/data/` (the published
