@@ -12,7 +12,9 @@ against HCSO's real behavior. Do not change them lightly.
 from __future__ import annotations
 
 import logging
+from dataclasses import dataclass
 from datetime import datetime, timezone
+from enum import Enum
 from pathlib import Path
 
 from scraper.models import Inmate, ListRow
@@ -199,3 +201,118 @@ def list_response_looks_blocked(html: str, rows: list[ListRow]) -> bool:
     (``WAF_BLOCK_MAX_BYTES``) discriminates a block stub from a real empty
     result. This is the 200-mode sibling of the 403 path in ``_sweep_list``."""
     return not rows and len(html) < WAF_BLOCK_MAX_BYTES
+
+
+# ===== Detail-fetch failure taxonomy =====
+# Every detail-page fetch ends in exactly one of these modes. The taxonomy
+# exists so a degraded HCSO front-end is described precisely (in logs, in the
+# evidence record, and in the per-mode failure histogram) instead of collapsing
+# to a bare "fetch failed". Modes also drive the retry policy: only modes
+# where a retry can plausibly help (transient network, block-shaped bodies)
+# are retried, and then exactly once, with the same identity, IP, and crawl
+# delay. Nothing here rotates identity, changes headers, or otherwise evades
+# a WAF or rate limit.
+class DetailFailureMode(str, Enum):
+    OK = "ok"
+    WAF_BLOCK = "waf_block"  # tiny body + empty parse (false-200 block page)
+    ZERO_BYTE = "zero_byte"  # 2xx with an empty body
+    TRUNCATED = "truncated"  # 2xx with a suspiciously small non-empty body
+    REDIRECT = "redirect"  # landed on an unexpected page (not the detail URL)
+    HTTP_404 = "http_404"
+    HTTP_429 = "http_429"
+    HTTP_5XX = "http_5xx"
+    TIMEOUT = "timeout"
+    CONNECTION_ERROR = "connection_error"
+    ERROR = "error"  # unexpected exception; not retried
+
+
+@dataclass(frozen=True)
+class DetailOutcome:
+    """The classified result of one detail-page fetch (after any retries)."""
+
+    mode: DetailFailureMode
+    http_status: int | None = None
+    response_bytes: int = 0
+
+
+def classify_detail_html(
+    html: str,
+    inm: Inmate,
+    photo_bytes: bytes | None,
+    photo_url: str | None,
+    *,
+    final_path: str | None,
+    detail_path: str,
+) -> DetailFailureMode:
+    """Classify a completed (non-exception) detail fetch.
+
+    ``final_path`` is the path of the final response URL after redirects (None
+    when the client cannot report it, e.g. the legacy text-only path);
+    ``detail_path`` is the expected inmate-detail path. A 2xx is assumed: the
+    client raises on non-2xx before parsing, so non-2xx never reaches here.
+
+    Precedence is deliberate: a final-URL path mismatch is definitive
+    evidence we did not receive the detail page at all, so it outranks the
+    body-shape heuristics (which assume we are on the right page). A
+    redirect is not retried in-cycle — the same URL will redirect again —
+    but the record is marked stale and re-attempted on the next cycle.
+    """
+    if final_path is not None and final_path.rstrip("/") != detail_path.rstrip("/"):
+        return DetailFailureMode.REDIRECT
+    if len(html) == 0:
+        return DetailFailureMode.ZERO_BYTE
+    if looks_like_waf_block(html, inm, photo_bytes, photo_url):
+        return DetailFailureMode.WAF_BLOCK
+    if len(html) < WAF_BLOCK_MAX_BYTES:
+        # Tiny but parsed to something: not a block stub, but far below the
+        # 91-230 KB shape of a valid detail page. Suspicious enough for one
+        # bounded retry, not suspicious enough to call a block.
+        return DetailFailureMode.TRUNCATED
+    return DetailFailureMode.OK
+
+
+def classify_http_status_error(status_code: int | None) -> DetailFailureMode:
+    """Classify an httpx.HTTPStatusError by its status code."""
+    if status_code == 404:
+        return DetailFailureMode.HTTP_404
+    if status_code == 429:
+        return DetailFailureMode.HTTP_429
+    if status_code is not None and 500 <= status_code < 600:
+        return DetailFailureMode.HTTP_5XX
+    return DetailFailureMode.ERROR
+
+
+# ===== Systemic detail-failure guard =====
+# The list sweep can be fully green while detail fetches collapse (the
+# 2026-09-19 incident: 44/133 detail refreshes failed with 404s and 503s
+# while the sweep exited 0). Past this failure fraction over a
+# sample-meaningful number of attempts, the cycle is detail-degraded: the
+# roster still writes (carry-forward keeps it correct), but the degradation
+# is logged as an error, annotated on the workflow run, and recorded as
+# durable evidence instead of reporting plain success.
+DETAIL_DEGRADED_MIN_SAMPLE = 10
+DETAIL_DEGRADED_MAX_FAILURE_FRACTION = 0.25
+
+
+def check_detail_degraded(attempts: int, failure_counts: dict[str, int]) -> bool:
+    """True when detail-page failures look systemic rather than transient.
+
+    ``failure_counts`` maps failure-mode value -> count of fetches whose final
+    outcome was that mode (i.e. excluding ``ok``). Below the minimum sample
+    the guard stays silent; small refresh batches must not cry wolf.
+    """
+    n_failed = sum(failure_counts.values())
+    if attempts < DETAIL_DEGRADED_MIN_SAMPLE or n_failed == 0:
+        return False
+    fraction = n_failed / attempts
+    if fraction > DETAIL_DEGRADED_MAX_FAILURE_FRACTION:
+        log.error(
+            "detail degraded: %d/%d (%.0f%%) detail fetches failed %s; "
+            "roster kept via carry-forward but this cycle did not refresh",
+            n_failed,
+            attempts,
+            100 * fraction,
+            dict(sorted(failure_counts.items())),
+        )
+        return True
+    return False

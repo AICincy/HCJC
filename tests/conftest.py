@@ -34,6 +34,18 @@ def _isolate_evidence_logs(tmp_path, monkeypatch):
 
     monkeypatch.setattr(store, "append_block_evidence", _append_evidence_to_tmp)
 
+    # Same treatment for the deduped variant: parsers._record_empty_photo_event
+    # calls it without a path, so the dedup check and the append both land in
+    # tmp_path under test instead of reading the real 137k-record log.
+    _real_append_deduped = store.append_block_evidence_deduped
+
+    def _append_deduped_to_tmp(record, *args, **kwargs):
+        if not args and "path" not in kwargs:
+            kwargs["path"] = tmp_path / "waf_block_log.json"
+        return _real_append_deduped(record, *args, **kwargs)
+
+    monkeypatch.setattr(store, "append_block_evidence_deduped", _append_deduped_to_tmp)
+
     # Sweep data-file defaults: SweepPaths default_factory and the module-level
     # fallbacks resolve these globals at call time, so patching them removes
     # the reliance on every sweep.run() test remembering its own monkeypatch.

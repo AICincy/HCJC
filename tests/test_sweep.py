@@ -10,6 +10,8 @@ from scraper.models import Inmate, ListRow
 from scraper.sweep import WafBackoffTracker, _fetch_one
 from scraper.sweep_guards import (
     ROSTER_STALE_ALARM_HOURS,
+    DetailFailureMode,
+    DetailOutcome,
     check_detail_watchdog,
     list_response_looks_blocked,
     looks_like_waf_block,
@@ -194,7 +196,7 @@ def test_fetch_one_uses_list_row_name_when_detail_heading_missing(tmp_path, monk
     html = "<html><body><h1>Some interstitial</h1></body></html>"
     client = _FakeClient(html)
     list_row = ListRow(inmate_number="9876543", last_name="ROE", first_name="JANE", admit_date="5/10/26")
-    inm, named, had_photo = _fetch_one(
+    inm, named, had_photo, outcome = _fetch_one(
         cast(Any, client), "9876543", previous={}, list_row=list_row, waf_tracker=WafBackoffTracker()
     )
     # detail parser produced no name, so detail_named must be False.
@@ -214,9 +216,12 @@ def test_fetch_one_carries_existing_photo_when_no_inline_image(tmp_path, monkeyp
     monkeypatch.setattr(sweep, "PHOTOS_DIR", tmp_path)
     cached = tmp_path / "1234567.jpg"
     cached.write_bytes(b"\xff\xd8\xff\xe0cached-jpeg-bytes")
-    html = "<html><body><h1>DOE, JOHN</h1><ul><li>Inmate Number : 1234567</li></ul></body></html>"
+    # Padded past the <5 KB truncation heuristic: a real HCSO detail page is
+    # tens of KB, and a tiny named body is now classified TRUNCATED (a partial
+    # page must not overwrite good data with empty charges).
+    html = "<html><body><h1>DOE, JOHN</h1><ul><li>Inmate Number : 1234567</li></ul></body></html>" + (" " * 5500)
     client = _FakeClient(html)
-    inm, named, had_photo = _fetch_one(
+    inm, named, had_photo, outcome = _fetch_one(
         cast(Any, client), "1234567", previous={}, list_row=None, waf_tracker=WafBackoffTracker()
     )
     assert had_photo is False  # no inline image on the page
@@ -239,14 +244,16 @@ def test_fetch_one_falls_back_to_disk_when_pillow_rejects_bytes(tmp_path, monkey
         return False  # simulate Pillow UnidentifiedImageError
 
     monkeypatch.setattr(sweep, "downscale_and_save", _always_fail_downscale)
+    # Padded past the <5 KB truncation heuristic (see above): a tiny named
+    # body is TRUNCATED, not a success.
     html = (
         "<html><body><h1>DOE, JOHN</h1>"
         "<ul><li>Inmate Number : 5550000</li></ul>"
         '<img src="data:image/png;base64,UExBQ0VIT0xERVI=" style="width:274px;">'
-        "</body></html>"
+        "</body></html>" + (" " * 5500)
     )
     client = _FakeClient(html)
-    inm, _, had_photo = _fetch_one(
+    inm, _, had_photo, _outcome = _fetch_one(
         cast(Any, client), "5550000", previous={}, list_row=None, waf_tracker=WafBackoffTracker()
     )
     assert had_photo is True  # detail parser found inline bytes
@@ -271,7 +278,7 @@ def test_fetch_one_returns_none_on_waf_blocked_response_for_known_inmate(tmp_pat
 
     # Known inmate (in previous): WAF block triggers carry-forward path.
     prior = Inmate(inmate_number="7770000", last_name="DOE", first_name="JOHN", booking_date="5/1/26")
-    inm, named, had_photo = _fetch_one(
+    inm, named, had_photo, outcome = _fetch_one(
         cast(Any, client), "7770000", previous={"7770000": prior}, list_row=None, waf_tracker=tracker
     )
     assert inm is None  # signals run() to carry forward from previous
@@ -281,7 +288,7 @@ def test_fetch_one_returns_none_on_waf_blocked_response_for_known_inmate(tmp_pat
     # Unknown inmate (not in previous): list_row fallback still works.
     tracker = WafBackoffTracker()
     list_row = ListRow(inmate_number="8880000", last_name="ROE", first_name="JANE", admit_date="5/12/26")
-    inm, _, _ = _fetch_one(cast(Any, client), "8880000", previous={}, list_row=list_row, waf_tracker=tracker)
+    inm, _, _, _outcome = _fetch_one(cast(Any, client), "8880000", previous={}, list_row=list_row, waf_tracker=tracker)
     assert inm is not None  # falls through; list_row rescues the name
     assert inm.last_name == "ROE"
 
@@ -310,7 +317,7 @@ def test_fetch_one_retries_within_same_cycle_and_recovers_on_second_attempt(tmp_
             return tiny if self.calls == 1 else full
 
     client = _FlipClient()
-    inm, named, _ = _fetch_one(cast(Any, client), "6660000", previous={}, list_row=None, waf_tracker=tracker)
+    inm, named, _, _outcome = _fetch_one(cast(Any, client), "6660000", previous={}, list_row=None, waf_tracker=tracker)
     assert client.calls == 2  # retry actually ran
     assert inm is not None
     assert inm.last_name == "DOE"
@@ -533,7 +540,7 @@ def test_run_watchdog_blocks_roster_write(tmp_path, monkeypatch):
         ),
     )
     monkeypatch.setattr(sweep, "_plan_detail_fetch", lambda seen, previous, refresh: ["1000"])
-    monkeypatch.setattr(sweep, "_fetch_details", lambda **kwargs: (100, 0, 0))
+    monkeypatch.setattr(sweep, "_fetch_details", lambda **kwargs: (100, 0, 0, {}))
     monkeypatch.setattr(sweep, "check_detail_watchdog", lambda *args: False)
     monkeypatch.setattr(sweep, "prune_photos", lambda photos_dir, active_ids: None)
 
@@ -651,9 +658,7 @@ def test_list_response_looks_blocked_predicate():
     from scraper.models import ListRow
 
     assert (
-        list_response_looks_blocked(
-            "x" * 100, [ListRow(inmate_number="1", last_name="", first_name="", admit_date="")]
-        )
+        list_response_looks_blocked("x" * 100, [ListRow(inmate_number="1", last_name="", first_name="", admit_date="")])
         is False
     )
 
@@ -812,6 +817,7 @@ def test_sweep_uses_custom_paths_from_dataclass(tmp_path, monkeypatch):
     class FakeClient:
         def __enter__(self):
             return self
+
         def __exit__(self, *a):
             return False
 
@@ -829,7 +835,7 @@ def test_wallclock_cap_carries_forward_unfetched_inmates(tmp_path, monkeypatch):
     # current (which would make diff() emit synthetic release events).
     monkeypatch.setattr(sweep, "SWEEP_WALLCLOCK_HARD_CAP_S", -1)
     monkeypatch.setattr(
-        sweep, "_fetch_one", lambda *a, **k: (None, False, False)
+        sweep, "_fetch_one", lambda *a, **k: (None, False, False, DetailOutcome(DetailFailureMode.ERROR, None, 0))
     )
     previous = {
         str(i): Inmate(inmate_number=str(i), last_name="DOE", first_name="J", booking_date="5/1/26")

@@ -92,6 +92,16 @@ class Inmate(BaseModel):
     photo_filename: Optional[str] = None
     first_seen_utc: str = ""
     last_seen_utc: str = ""
+    # Detail-freshness tracking (HCSO detail-failure remediation). The list
+    # page is authoritative for presence; the detail page supplies bio/charges/
+    # photo. When a detail fetch fails, the previous-good record is carried
+    # forward (or a minimal list-row record is built for a new inmate) and
+    # marked stale so consumers can distinguish fresh detail data from
+    # carried-forward data. last_detail_fetch_utc is the UTC timestamp of the
+    # last successful detail fetch+parse; empty means never successfully
+    # fetched. Both default so pre-existing current.json files load unchanged.
+    last_detail_fetch_utc: str = ""
+    detail_stale: bool = False
 
     @property
     def full_name(self) -> str:
