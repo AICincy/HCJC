@@ -1,1 +1,111 @@
-LS0tCnRpdGxlOiBDbGVyayBEYXRhIEdvdmVybmFuY2UgQWRkZW5kdW0KcmVmZXJlbmNlX25hbWVzcGFjZTogVjEKc3RhdHVzOiBhcHByb3ZlZAphdXRob3JpdHk6IHYxLWdvdmVybmFuY2UKb3duZXJfcmVwb3NpdG9yeTogQUlDaW5jeS9IQ0pDCmRvY3VtZW50X2ZhbWlseTogZ292ZXJuYW5jZQplZmZlY3RpdmVfZGF0ZTogMjAyNi0wOS0yMApjYW5vbmljYWxfcmVmZXJlbmNlOgogIHZlcnNpb246IDEuMC4wCiAgdGFnOiBudWxsCiAgY29tbWl0OiBudWxsCnN1cGVyc2VkZXM6IFtdCnN1cGVyc2VkZWRfYnk6IG51bGwKcmVsYXRpb25zaGlwczoKLSBmcm9tOiBWMS05NQogIHJlbGF0aW9uOiBpbXBsZW1lbnRzCiAgdG86IEEtMzkKLSBmcm9tOiBWMS05NgogIHJlbGF0aW9uOiBpbXBsZW1lbnRzCiAgdG86IEEtMzkKLSBmcm9tOiBWMS05NwogIHJlbGF0aW9uOiBpbXBsZW1lbnRzCiAgdG86IEEtMzcKLSBmcm9tOiBWMS05OAogIHJlbGF0aW9uOiBpbXBsZW1lbnRzCiAgdG86IEEtNDAKLSBmcm9tOiBWMS05OQogIHJlbGF0aW9uOiBpbXBsZW1lbnRzCiAgdG86IEEtMzgKLS0tCgojIENsZXJrIERhdGEgR292ZXJuYW5jZSBBZGRlbmR1bQoKPiAqKlN0YXR1czoqKiBBcHByb3ZlZCAyMDI2LTA5LTIwLiBUaGlzIGRvY3VtZW50IGFkZHMgZ292ZXJuYW5jZSBpdGVtcyBWMS05NQo+IHRocm91Z2ggVjEtOTkgdG8gdGhlIFYxIHJlZmVyZW5jZSAoYGRvY3MtcmVmZXJlbmNlL2dvdmVybmFuY2UvUFJJVkFDWS1BTkQtTEVHQUwubWRgLAo+IHN0YXR1czogYXBwcm92ZWQsIGVmZmVjdGl2ZSAyMDI2LTA3LTIzKS4gU3RhdHV0b3J5IGNpdGF0aW9ucyB2ZXJpZmllZAo+IGFnYWluc3QgY29kZXMub2hpby5nb3Ygb24gMjAyNi0wOS0yMDogT1JDIDE0OS40MyAoZWZmZWN0aXZlIDIwMjYtMDktMDcsCj4gSEIgMzEsIDEzNnRoIEdBKSBjdXJyZW50OyBPUkMgMjk1My4zMiAoZWZmZWN0aXZlIDIwMjYtMDktMzAsIEhCIDk2LAo+IDEzNnRoIEdBKSBjdXJyZW50OyBmb3JtZXIgT1JDIDI5NTMuNTIgcmVudW1iZXJlZCB0byBPUkMgMjk1My4zMyBieQo+IFMuQi4gMjg4ICgxMzR0aCBHQSwgZWZmZWN0aXZlIDIwMjMtMDQtMDQpLgoKVGhpcyBhZGRlbmR1bSBjb3ZlcnMgdGhlIHR3byBsYXdmdWwgY2hhbm5lbHMgZm9yIEhhbWlsdG9uIENvdW50eSBDbGVyayBvZgpDb3VydHMgZGF0YTogKDEpIGh1bWFuIHJlYWRlciBzdWJtaXNzaW9ucyB0aHJvdWdoIHRoZSBzdHJ1Y3R1cmVkIGNhc2UtZGF0YQppc3N1ZSBmb3JtLCBhbmQgKDIpIGRyYWZ0IHB1YmxpYy1yZWNvcmRzIHJlcXVlc3QgbGV0dGVycyBnZW5lcmF0ZWQgZm9yCmh1bWFuIHNlbmRlcnMuIEpDU3RyZWFtIG9wZXJhdGVzIG5vIGF1dG9tYXRlZCBhY2Nlc3MgdG8gY291cnRjbGVyay5vcmcuCgojIyBWMS05NSBSZWFkZXItU3VibWl0dGVkIENhc2UtRGF0YSBQcm92ZW5hbmNlIExhYmVsaW5nCgpFdmVyeSByZWFkZXItc3VibWl0dGVkIGNhc2UgcmVjb3JkIGRpc3BsYXllZCBvbiBhbiBpbm1hdGUgcGFnZSBtdXN0IGNhcnJ5Cml0cyBwcm92ZW5hbmNlOiB0aGUgc3VibWl0dGluZyByZWFkZXIncyBoYW5kbGUsIHRoZSBpbmdlc3QgZGF0ZSwgYSBsaW5rIHRvCnRoZSBzdWJtaXR0aW5nIGlzc3VlLCBhbmQgYSBsaW5rIHRvIHRoZSBzb3VyY2UgZG9ja2V0IHBhZ2UgZm9yIGluZGVwZW5kZW50CnZlcmlmaWNhdGlvbi4gVGhlIGRpc3BsYXkgbXVzdCBzdGF0ZSB0aGF0IHRoZSBlbnRyeSBpcyBhIHJlYWRlci1zdXBwbGllZApwb2ludC1pbi10aW1lIHNuYXBzaG90LCBub3QgdGhlIG9mZmljaWFsIGRvY2tldC4KCioqSW1wbGVtZW50YXRpb24gYW5kIHZlcmlmaWNhdGlvbiByZWZlcmVuY2VzOioqIGB3ZWIvdGVtcGxhdGVzL2lubWF0ZS5odG1sYAooY3Jvd2Rzb3VyY2VkIGJsb2NrKSwgYHdlYi9wYWdlcy5weWAgKGBfbG9hZF9jcm93ZHNvdXJjZWRfY2FzZXNgKSwKYHNjcmFwZXIvaW5nZXN0X2lzc3VlLnB5YCAoYHNvdXJjZV91cmxgLCBgaXNzdWVfdXJsYCwgYHN1Ym1pdHRlcmAsCmBpbmdlc3RlZF91dGNgKSwgYHRlc3RzL3Rlc3RfaW5nZXN0X2lzc3VlLnB5YC4KCiMjIFYxLTk2IENhc2UtRGF0YSBDdXJyZW5jeQoKRG9ja2V0IGRhdGEgY2hhbmdlcyBhcyBjYXNlcyBwcm9jZWVkLiBTdWJtaXR0ZWQgcmVjb3JkcyBhcmUgc25hcHNob3RzIG9mCnRoZSBkb2NrZXQgYXMgc2VlbiBieSB0aGUgc3VibWl0dGVyIG9uIHRoZSBpbmdlc3QgZGF0ZS4gVGhlIGRpc3BsYXkgbXVzdApub3QgaW1wbHkgbGl2ZSBkb2NrZXQgc3RhdHVzLiBOZXh0LWhlYXJpbmcgZGF0ZXMgZnJvbSBzdWJtaXNzaW9ucyBnbyBzdGFsZQpmaXJzdCBhbmQgbXVzdCBiZSBwcmVzZW50ZWQgYXMgImFzIHN1Ym1pdHRlZCBvbiA8ZGF0ZT4iLgoKKipJbXBsZW1lbnRhdGlvbiBhbmQgdmVyaWZpY2F0aW9uIHJlZmVyZW5jZXM6KiogYHdlYi90ZW1wbGF0ZXMvaW5tYXRlLmh0bWxgLApgc2NyYXBlci9jYXNlX21hdGNoLnB5YCAoYW5ub3RhdGlvbiBwYXNzdGhyb3VnaCksIGAuZ2l0aHViL0lTU1VFX1RFTVBMQVRFL2Nhc2UtZGF0YS55bWxgLgoKIyMgVjEtOTcgU2VhbGVkIG9yIEV4cHVuZ2VkIFN1Ym1pdHRlZCBSZWNvcmRzCgpJZiBhIHN1Ym1pdHRlZCBjYXNlIHJlY29yZCBpcyBzZWFsZWQgb3IgZXhwdW5nZWQgdW5kZXIgT1JDIDI5NTMuMzIgLwoyOTUzLjMzIChmb3JtZXIgMjk1My41MiwgcmVudW1iZXJlZCBieSBTLkIuIDI4OCwgMTM0dGggR2VuZXJhbCBBc3NlbWJseSwKZWZmZWN0aXZlIDIwMjMtMDQtMDQpIChvciBvdGhlcndpc2UgcmVtb3ZlZCBmcm9tIHB1YmxpYyBhY2Nlc3MgYXQgdGhlCnNvdXJjZSksIHRoZSBzdWJtaXR0ZWQgY29weSBtdXN0IGJlIHJlbW92ZWQgZnJvbSBgZGF0YS9jb3VydGNsZXJrX2Nhc2VzLmpzb25gCmFuZCBmcm9tIHN1YnNlcXVlbnQgYnVpbGRzLiBUaGUgY29ycmVjdGlvbiBhbmQgcmVtb3ZhbCByb3V0ZXMgaW4gVjEtODkgYXBwbHkKdW5jaGFuZ2VkIHRvIHN1Ym1pdHRlZCBjYXNlIGRhdGE7IGEgcmVtb3ZhbCByZXF1ZXN0IGZvciBhIHN1Ym1pdHRlZCByZWNvcmQKaXMgaGFuZGxlZCB3aXRoIHRoZSBzYW1lIHByaW9yaXR5IGFzIGEgcm9zdGVyIGNvcnJlY3Rpb24uCgoqKkltcGxlbWVudGF0aW9uIGFuZCB2ZXJpZmljYXRpb24gcmVmZXJlbmNlczoqKiBgc2NyYXBlci9pbmdlc3RfaXNzdWUucHlgCihgdXBzZXJ0YCByZXBsYWNlbWVudCBzZW1hbnRpY3MpLCBgU0VDVVJJVFkubWRgLCBgd2lraS9MZWdhbC5tZGAuCgojIyBWMS05OCBBY2Nlc3MtQ29udHJvbC1SZXNwZWN0IFBvbGljeQoKSkNTdHJlYW0gZG9lcyBub3QgY2lyY3VtdmVudCBhY2Nlc3MgY29udHJvbHMgb24gZXh0ZXJuYWwgcHVibGljLXJlY29yZHMKc291cmNlcy4gQ29uY3JldGVseTogdGhlIHByb2plY3QgaG9ub3JzIGByb2JvdHMudHh0YCBkaXNhbGxvdyBkaXJlY3RpdmVzCihjb3VydGNsZXJrLm9yZyBkaXNhbGxvd3MgYC9kYXRhL2AgYW5kIGAvY2FzZS1zdW1tYXJ5L2AgZm9yIGFsbCB1c2VyCmFnZW50cyksIGRvZXMgbm90IGF1dG9tYXRlIENBUFRDSEEgb3IgYm90LWNoZWNrIGNoYWxsZW5nZXMsIGFuZCBjb2xsZWN0cwpDbGVyayBvZiBDb3VydHMgZGF0YSBvbmx5IHRocm91Z2ggKGEpIGh1bWFuIHJlYWRlciBzdWJtaXNzaW9ucyBpbiB3aGljaAp0aGUgc3VibWl0dGVyIHBhc3NlcyBhbnkgY2hhbGxlbmdlIGluIHRoZWlyIG93biBicm93c2VyLCBhbmQgKGIpIGZvcm1hbApwdWJsaWMtcmVjb3JkcyByZXF1ZXN0cyBzZW50IGJ5IGh1bWFucy4gQXV0b21hdGVkIHNjcmFwaW5nIG9mIHRoZSBjbGVyaydzCnNpdGUsIGFuZCBhdXRvbWF0ZWQgcGFzc2luZyBvZiBpdHMgY2hhbGxlbmdlcywgYXJlIG91dCBvZiBzY29wZSBieSBwb2xpY3ksCm5vdCBtZXJlbHkgYnkgY3VycmVudCBjYXBhYmlsaXR5LgoKKipJbXBsZW1lbnRhdGlvbiBhbmQgdmVyaWZpY2F0aW9uIHJlZmVyZW5jZXM6KiogYHNjcmFwZXIvY291cnRjbGVyay5weWAKKGRvY3N0cmluZyksIGBzY3JhcGVyL2luZ2VzdF9pc3N1ZS5weWAgKGB2YWxpZF9zb3VyY2VfdXJsYCwKYGNvbmZpcm1hdGlvbnNfY2hlY2tlZGApLCBgLmdpdGh1Yi9JU1NVRV9URU1QTEFURS9jYXNlLWRhdGEueW1sYCwKYHdlYi90ZW1wbGF0ZXMvZGF0YS5odG1sYCAoYCNjcm93ZHNvdXJjZWApLCBgc2NyYXBlci9jbGVya19wcmEucHlgLgoKIyMgVjEtOTkgTm8gTGVnYWwgQWR2aWNlOyBQcmVzdW1wdGlvbiBvZiBJbm5vY2VuY2UgZm9yIENsZXJrLVNvdXJjZWQgQ2hhcmdlcwoKU3VibWl0dGVkIGNhc2UgZGF0YSBpcyBwdWJsaWMtcmVjb3JkIGluZm9ybWF0aW9uLCBub3QgbGVnYWwgYWR2aWNlLCBhbmQKdGhlIHByb2plY3Qgb2ZmZXJzIG5vIGludGVycHJldGF0aW9uIG9mIHdoYXQgYSBkb2NrZXQgZW50cnkgbWVhbnMgZm9yIGFueQpwZXJzb24ncyBjYXNlLiBUaGUgVjEtODQgcHJlc3VtcHRpb24gb2YgaW5ub2NlbmNlIGFwcGxpZXMgdG8gY2xlcmstc291cmNlZApjaGFyZ2VzIHdpdGggdGhlIHNhbWUgZm9yY2UgYXMgdG8gcm9zdGVyIGNoYXJnZXM6IHRoZSBpbm1hdGUtcGFnZSBkaXNwbGF5Cm9mIHN1Ym1pdHRlZCByZWNvcmRzIHN0YXRlcyB0aGF0IGNoYXJnZXMgYXJlIGFjY3VzYXRpb25zLCBub3QgY29udmljdGlvbnMuCgoqKkltcGxlbWVudGF0aW9uIGFuZCB2ZXJpZmljYXRpb24gcmVmZXJlbmNlczoqKiBgd2ViL3RlbXBsYXRlcy9pbm1hdGUuaHRtbGAKKGNyb3dkc291cmNlZCBibG9jayBub3RpY2UpLCBgd2ViL3RlbXBsYXRlcy9iYXNlLmh0bWxgIChmb290ZXIpLApgdGVzdHMvdGVzdF9jcmFfYm91bmRhcnkucHlgLgo=
+---
+title: Clerk Data Governance Addendum
+reference_namespace: V1
+status: approved
+authority: v1-governance
+owner_repository: AICincy/HCJC
+document_family: governance
+effective_date: 2026-09-20
+canonical_reference:
+  version: 1.0.0
+  tag: null
+  commit: null
+supersedes: []
+superseded_by: null
+relationships:
+- from: V1-95
+  relation: implements
+  to: A-39
+- from: V1-96
+  relation: implements
+  to: A-39
+- from: V1-97
+  relation: implements
+  to: A-37
+- from: V1-98
+  relation: implements
+  to: A-40
+- from: V1-99
+  relation: implements
+  to: A-38
+---
+
+# Clerk Data Governance Addendum
+
+> **Status:** Approved 2026-09-20. This document adds governance items V1-95
+> through V1-99 to the V1 reference (`docs-reference/governance/PRIVACY-AND-LEGAL.md`,
+> status: approved, effective 2026-07-23). Statutory citations verified
+> against codes.ohio.gov on 2026-09-20: ORC 149.43 (effective 2026-09-07,
+> HB 31, 136th GA) current; ORC 2953.32 (effective 2026-09-30, HB 96,
+> 136th GA) current; former ORC 2953.52 renumbered to ORC 2953.33 by
+> S.B. 288 (134th GA, effective 2023-04-04).
+
+This addendum covers the two lawful channels for Hamilton County Clerk of
+Courts data: (1) human reader submissions through the structured case-data
+issue form, and (2) draft public-records request letters generated for
+human senders. JCStream operates no automated access to courtclerk.org.
+
+## V1-95 Reader-Submitted Case-Data Provenance Labeling
+
+Every reader-submitted case record displayed on an inmate page must carry
+its provenance: the submitting reader's handle, the ingest date, a link to
+the submitting issue, and a link to the source docket page for independent
+verification. The display must state that the entry is a reader-supplied
+point-in-time snapshot, not the official docket.
+
+**Implementation and verification references:** `web/templates/inmate.html`
+(crowdsourced block), `web/pages.py` (`_load_crowdsourced_cases`),
+`scraper/ingest_issue.py` (`source_url`, `issue_url`, `submitter`,
+`ingested_utc`), `tests/test_ingest_issue.py`.
+
+## V1-96 Case-Data Currency
+
+Docket data changes as cases proceed. Submitted records are snapshots of
+the docket as seen by the submitter on the ingest date. The display must
+not imply live docket status. Next-hearing dates from submissions go stale
+first and must be presented as "as submitted on <date>".
+
+**Implementation and verification references:** `web/templates/inmate.html`,
+`scraper/case_match.py` (annotation passthrough), `.github/ISSUE_TEMPLATE/case-data.yml`.
+
+## V1-97 Sealed or Expunged Submitted Records
+
+If a submitted case record is sealed or expunged under ORC 2953.32 /
+2953.33 (former 2953.52, renumbered by S.B. 288, 134th General Assembly,
+effective 2023-04-04) (or otherwise removed from public access at the
+source), the submitted copy must be removed from `data/courtclerk_cases.json`
+and from subsequent builds. The correction and removal routes in V1-89 apply
+unchanged to submitted case data; a removal request for a submitted record
+is handled with the same priority as a roster correction.
+
+**Implementation and verification references:** `scraper/ingest_issue.py`
+(`upsert` replacement semantics), `SECURITY.md`, `wiki/Legal.md`.
+
+## V1-98 Access-Control-Respect Policy
+
+JCStream does not circumvent access controls on external public-records
+sources. Concretely: the project honors `robots.txt` disallow directives
+(courtclerk.org disallows `/data/` and `/case-summary/` for all user
+agents), does not automate CAPTCHA or bot-check challenges, and collects
+Clerk of Courts data only through (a) human reader submissions in which
+the submitter passes any challenge in their own browser, and (b) formal
+public-records requests sent by humans. Automated scraping of the clerk's
+site, and automated passing of its challenges, are out of scope by policy,
+not merely by current capability.
+
+**Implementation and verification references:** `scraper/courtclerk.py`
+(docstring), `scraper/ingest_issue.py` (`valid_source_url`,
+`confirmations_checked`), `.github/ISSUE_TEMPLATE/case-data.yml`,
+`web/templates/data.html` (`#crowdsource`), `scraper/clerk_pra.py`.
+
+## V1-99 No Legal Advice; Presumption of Innocence for Clerk-Sourced Charges
+
+Submitted case data is public-record information, not legal advice, and
+the project offers no interpretation of what a docket entry means for any
+person's case. The V1-84 presumption of innocence applies to clerk-sourced
+charges with the same force as to roster charges: the inmate-page display
+of submitted records states that charges are accusations, not convictions.
+
+**Implementation and verification references:** `web/templates/inmate.html`
+(crowdsourced block notice), `web/templates/base.html` (footer),
+`tests/test_cra_boundary.py`.
