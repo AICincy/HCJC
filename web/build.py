@@ -368,6 +368,7 @@ def build(out_dir: Path) -> int:
     _render_inmates(env, snapshot, matches, events, build_dir)
     _render_feeds(env, events, build_dir)
     _render_data_page(env, snapshot, build_dir)
+    _render_safety_page(env, snapshot, build_dir)
     _render_transparency_page(env, snapshot, build_dir)
     _render_stats_page(env, snapshot, rd["by_month"], rd["trend"], build_dir)
     _render_statute_page(env, snapshot, offenses, build_dir)
@@ -503,6 +504,7 @@ from web.pages import (  # noqa: E402
     _render_help_page,
     _render_index,
     _render_inmates,
+    _render_safety_page,
     _render_stats_page,
     _render_statute_page,
     _render_transparency_page,

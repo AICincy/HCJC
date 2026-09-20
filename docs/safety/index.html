@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en" data-base-url="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Community safety &middot; JCStream</title>
+  <meta name="robots" content="noindex, noarchive">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#141619">
+  <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
+  <meta property="og:site_name" content="JCStream">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JCStream - Hamilton County, OH Justice Center roster mirror">
+  <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, rebuilt on a best-effort schedule. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
+  <meta property="og:url" content="https://www.aretheyinjail.com/">
+  <meta name="twitter:card" content="summary">
+  <script src="/static/theme-init.js?v=1fb7517bcf"></script>
+  <link rel="stylesheet" href="/static/style.css?v=670596fd12">
+  <noscript><style>.theme-toggle { display: none; }</style></noscript>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - all changes" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - new bookings" href="/booked.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - releases" href="/released.xml">
+  <link rel="author" href="/humans.txt">
+</head>
+<body id="top" class="detail">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="/">
+        <span class="brand-text">
+          <span class="brand-name">JCStream</span>
+          <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
+        </span>
+      </a>
+      <a class="masthead-seal masthead-seal-hcjc"
+         href="https://www.facebook.com/HCJCOH"
+         target="_blank" rel="noopener"
+         aria-label="Hamilton County Booking Photos on Facebook">
+        <img src="/static/img/hcjc-seal.png"
+             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
+             alt="Hamilton County Booking Photos seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <a class="masthead-seal masthead-seal-coc"
+         href="https://www.facebook.com/cityofcincinnati"
+         target="_blank" rel="noopener"
+         aria-label="City of Cincinnati on Facebook">
+        <img src="/static/img/coc-seal.png"
+             srcset="/static/img/coc-seal.png 1x, /static/img/coc-seal-2x.png 2x"
+             alt="City of Cincinnati seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <span class="running desktop-only"><strong>1,074</strong> in custody</span>
+      <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      </button>
+      <details class="nav-menu" open>
+        <summary class="nav-toggle" aria-label="Menu">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <div class="nav-drawer">
+          <span class="running mobile-only"><strong>1,074</strong> in custody</span>
+          <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
+          <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who's due</span></a>
+          <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
+          <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
+          <a class="nav-link" href="/bond-disparity/">Bonds <span class="nav-hint">disparity</span></a>
+          <a class="nav-link" href="/safety/">Safety <span class="nav-hint">incidents</span></a>
+          <a class="nav-link" href="/visit/">Visit <span class="nav-hint">policy</span></a>
+          <a class="nav-link" href="/help/">Help <span class="nav-hint">free aid</span></a>
+          <a class="nav-link" href="/transparency/">Access <span class="nav-hint">scorecard</span></a>
+          <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
+          <a class="nav-link" href="/feed.xml">RSS</a>
+          <a class="nav-link" href="https://github.com/AICincy/HCJC">GitHub</a>
+        </div>
+      </details>
+    </div>
+  </header>
+  <main id="main" class="page">
+    <div class="doc-wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Community safety</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <h1 class="title">Community safety</h1>
+    <div class="sub">Cincinnati Open Data, explained in plain English</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  Beyond the jail roster, the City of Cincinnati publishes public-safety data:
+  911 calls for service, reported crimes, police stops, and more. This page
+  translates those feeds into plain language. Everything here is <strong>reported</strong>,
+  not proven: a call, a stop, or a report is not a conviction, and none of it is
+  matched to anyone on the roster.
+</p>
+
+
+
+<div class="section-h"><h2>Latest incidents</h2><span class="grow"></span><span class="meta">Data as of Sep 19, 2026, 9:41 PM ET.</span></div>
+<p class="muted">The most recent calls for service, reported shootings, and reported crimes, newest first. Locations are block-level, as published by the city.</p>
+<div class="fields">
+  <div class="k">Sep 18, 5:22 AM</div>
+  <div class="v"><strong>Reported crime — Part 2</strong> &middot; 1Xx Mulberry St &middot; Mount Auburn</div>
+  <div class="k">Sep 18, 5:14 AM</div>
+  <div class="v"><strong>Reported crime — Personal/Other Theft</strong> &middot; 24Xx Montana Ave &middot; Westwood</div>
+  <div class="k">Sep 18, 5:13 AM</div>
+  <div class="v"><strong>Reported crime — Robbery</strong> &middot; East Price Hill</div>
+  <div class="k">Sep 18, 3:47 AM</div>
+  <div class="v"><strong>Reported crime — Auto Theft</strong> &middot; 6Xx State Ave &middot; Lower Price Hill</div>
+  <div class="k">Sep 18, 3:37 AM</div>
+  <div class="v"><strong>Reported crime — Rape</strong> &middot; 5Xx W Liberty St &middot; West End</div>
+  <div class="k">Sep 18, 3:08 AM</div>
+  <div class="v"><strong>Reported crime — Auto Theft</strong> &middot; 68Xx Steger Dr &middot; Bond Hill</div>
+  <div class="k">Sep 18, 2:58 AM</div>
+  <div class="v"><strong>Reported crime — Aggravated assault</strong> &middot; 29Xx Colerain Ave &middot; Camp Washington</div>
+  <div class="k">Sep 18, 2:45 AM</div>
+  <div class="v"><strong>Reported crime — Part 2</strong> &middot; 54Xx Hamilton Ave &middot; College Hill</div>
+  <div class="k">Sep 18, 2:40 AM</div>
+  <div class="v"><strong>Reported crime — Auto Theft</strong> &middot; 27Xx Morningridge Dr &middot; Westwood</div>
+  <div class="k">Sep 18, 2:27 AM</div>
+  <div class="v"><strong>Reported crime — Personal/Other Theft</strong> &middot; Xx W 7Th St &middot; Cbd/Riverfront</div>
+  <div class="k">Sep 18, 1:31 AM</div>
+  <div class="v"><strong>Reported crime — Part 2</strong> &middot; Winton Hills</div>
+  <div class="k">Sep 18, 1:27 AM</div>
+  <div class="v"><strong>Reported crime — Burglary / breaking and entering</strong> &middot; 25Xx Nottingham Rd &middot; Villages At Roll Hill</div>
+  <div class="k">Sep 18, 1:27 AM</div>
+  <div class="v"><strong>Reported crime — Part 2</strong> &middot; 25Xx Nottingham Rd &middot; Villages At Roll Hill</div>
+  <div class="k">Sep 18, 1:10 AM</div>
+  <div class="v"><strong>Reported crime — Part 2</strong> &middot; 27Xx Baker Ave &middot; South Fairmount</div>
+  <div class="k">Sep 18, 1:01 AM</div>
+  <div class="v"><strong>Assault — offense report filed</strong> &middot; Hamilton Av / Hillcrest Rd &middot; College  Hill</div>
+  <div class="k">Sep 18, 12:23 AM</div>
+  <div class="v"><strong>Criminal damage — offense report filed</strong> &middot; 27Xx Baker Av &middot; South  Fairmount</div>
+  <div class="k">Sep 18, 12:17 AM</div>
+  <div class="v"><strong>Traffic stop — arrest made</strong> &middot; 38Xx River Rd &middot; Riverside</div>
+  <div class="k">Sep 18, 12:04 AM</div>
+  <div class="v"><strong>Disorderly conduct — arrest made</strong> &middot; 25Xx Victory Pkwy &middot; Walnut Hills</div>
+  <div class="k">Sep 18, 12:04 AM</div>
+  <div class="v"><strong>Reported crime — Theft from Auto</strong> &middot; 21Xx Seymour Ave &middot; Bond Hill</div>
+  <div class="k">Sep 17, 11:46 PM</div>
+  <div class="v"><strong>Reported crime — Part 2</strong> &middot; 27Xx Lafeuille Cir &middot; Westwood</div>
+  <div class="k">Sep 17, 11:41 PM</div>
+  <div class="v"><strong>Burglary Residential — offense report filed</strong> &middot; 25Xx Nottingham Rd &middot; Fay Apartments</div>
+  <div class="k">Sep 17, 11:39 PM</div>
+  <div class="v"><strong>Reported crime — Part 2</strong> &middot; 14Xx Weigold Ave &middot; Northside</div>
+  <div class="k">Sep 17, 11:15 PM</div>
+  <div class="v"><strong>Parking Complaint — citation issued</strong> &middot; 13Xx William H Taft Rd &middot; East Walnut Hills</div>
+  <div class="k">Sep 17, 11:03 PM</div>
+  <div class="v"><strong>Parking Complaint — citation issued</strong> &middot; 12Xx Considine Av &middot; East Price Hill</div>
+  <div class="k">Sep 17, 11:00 PM</div>
+  <div class="v"><strong>Reported crime — Auto Theft</strong> &middot; Xx E 2Nd St &middot; Cbd/Riverfront</div>
+  <div class="k">Sep 17, 10:56 PM</div>
+  <div class="v"><strong>Other police call — offense report filed</strong> &middot; 14Xx Weigold Av &middot; Northside</div>
+  <div class="k">Sep 17, 10:49 PM</div>
+  <div class="v"><strong>Reported crime — Part 2</strong> &middot; 12Xx Manss Ave &middot; West Price Hill</div>
+  <div class="k">Sep 17, 10:45 PM</div>
+  <div class="v"><strong>Reported crime — Auto Theft</strong> &middot; 23Xx Maryland Ave &middot; East Price Hill</div>
+  <div class="k">Sep 17, 10:33 PM</div>
+  <div class="v"><strong>Vehicle Theft — offense report filed</strong> &middot; Xx E 2Nd St &middot; C. B. D. / Riverfront</div>
+  <div class="k">Sep 17, 9:58 PM</div>
+  <div class="v"><strong>Lost Property — offense report filed</strong> &middot; 24Xx Montana Av &middot; Westwood</div>
+</div>
+
+<div class="section-h"><h2>Reported crime, last 30 days</h2><span class="grow"></span><span class="meta">Data as of Sep 19, 2026, 8:37 PM ET.</span></div>
+<p class="muted">
+  From the city's STARS offense feed (2,067 reports).
+  <strong>Part 1</strong> is the FBI's set of eight serious index offenses
+  (homicide, rape, robbery, aggravated assault, burglary, auto theft, theft from
+  auto, and related property crime); <strong>Part 2</strong> is everything else
+  departments report. These are crimes <em>reported</em> to police, not cases
+  solved or people convicted.
+</p>
+<div class="statbars" role="list">
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Part 2</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 45.3%"></span></span>
+    <span class="statbar-val">936 <small>45%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Personal/Other Theft</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 20.7%"></span></span>
+    <span class="statbar-val">428 <small>21%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Theft from Auto</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 10.8%"></span></span>
+    <span class="statbar-val">224 <small>11%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Auto Theft</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 8.2%"></span></span>
+    <span class="statbar-val">169 <small>8%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Burglary / breaking and entering</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 5.2%"></span></span>
+    <span class="statbar-val">108 <small>5%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Aggravated assault</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 3.9%"></span></span>
+    <span class="statbar-val">80 <small>4%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Robbery</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 3.0%"></span></span>
+    <span class="statbar-val">61 <small>3%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Strangulation</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 2.0%"></span></span>
+    <span class="statbar-val">42 <small>2%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Rape</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 0.8%"></span></span>
+    <span class="statbar-val">16 <small>1%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Homicide</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 0.1%"></span></span>
+    <span class="statbar-val">3 <small>0%</small></span>
+  </div>
+</div>
+
+<div class="section-h"><h2>By FBI category</h2></div>
+<div class="statbars" role="list">
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Part 2</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 45.3%"></span></span>
+    <span class="statbar-val">936 <small>45%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Part 1 — property</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 44.9%"></span></span>
+    <span class="statbar-val">929 <small>45%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Part 1 — violent</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 9.8%"></span></span>
+    <span class="statbar-val">202 <small>10%</small></span>
+  </div>
+</div>
+
+
+<div class="section-h"><h2>Traffic stops</h2><span class="grow"></span><span class="meta">Data as of Sep 19, 2026, 1:18 PM ET.</span></div>
+<div class="alert inline-alert"><strong>Source frozen.</strong> Cincinnati stopped publishing new contact cards in 2025. This is the most recent ~5,000 on file, not current activity.</div>
+<p class="muted">
+  5,000 driver contact cards
+  (Traffic stops (contact cards), city dataset <code>w2kv-5pdg</code>).
+  Race and sex are as recorded by the officer, not self-reported.
+</p>
+<div class="section-h"><h2>Stopped drivers by race</h2></div>
+<div class="statbars" role="list">
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Black</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 73.6%"></span></span>
+    <span class="statbar-val">3,678 <small>74%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">White</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 21.9%"></span></span>
+    <span class="statbar-val">1,097 <small>22%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Unknown</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 4.3%"></span></span>
+    <span class="statbar-val">213 <small>4%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Other</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 0.2%"></span></span>
+    <span class="statbar-val">12 <small>0%</small></span>
+  </div>
+</div>
+
+<div class="section-h"><h2>By sex</h2></div>
+<div class="statbars" role="list">
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Male</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 66.9%"></span></span>
+    <span class="statbar-val">3,343 <small>67%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Female</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 33.1%"></span></span>
+    <span class="statbar-val">1,656 <small>33%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Unknown</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 0.0%"></span></span>
+    <span class="statbar-val">1 <small>0%</small></span>
+  </div>
+</div>
+
+<div class="section-h"><h2>Outcome of the stop</h2></div>
+<div class="statbars" role="list">
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Traffic citation</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 37.5%"></span></span>
+    <span class="statbar-val">1,873 <small>37%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Warning, no citation</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 23.9%"></span></span>
+    <span class="statbar-val">1,193 <small>24%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">No action taken</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 16.3%"></span></span>
+    <span class="statbar-val">816 <small>16%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Citation on outstanding warrant</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 6.0%"></span></span>
+    <span class="statbar-val">301 <small>6%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Arrest on outstanding warrant</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 3.5%"></span></span>
+    <span class="statbar-val">174 <small>3%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Misdemeanor arrest</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 2.8%"></span></span>
+    <span class="statbar-val">138 <small>3%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Misdemeanor citation</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 2.7%"></span></span>
+    <span class="statbar-val">137 <small>3%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Felony arrest</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 2.1%"></span></span>
+    <span class="statbar-val">105 <small>2%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Other</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 1.1%"></span></span>
+    <span class="statbar-val">53 <small>1%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Not recorded</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 4.2%"></span></span>
+    <span class="statbar-val">210 <small>4%</small></span>
+  </div>
+</div>
+
+<div class="section-h"><h2>Outcome by race</h2></div>
+<p class="muted">Counts of stops by recorded race, for each outcome.</p>
+<table class="charges">
+  <caption class="sr-only">Stop outcomes by recorded race</caption>
+  <thead><tr><th scope="col">Outcome</th><th scope="col">Black</th><th scope="col">White</th><th scope="col">Unknown</th><th scope="col">Other</th><th scope="col">Total</th></tr></thead>
+  <tbody>
+    <tr><td>Traffic citation</td><td>1,221</td><td>540</td><td>104</td><td>8</td><td><strong>1,873</strong></td></tr>
+    <tr><td>Warning, no citation</td><td>861</td><td>283</td><td>47</td><td>2</td><td><strong>1,193</strong></td></tr>
+    <tr><td>No action taken</td><td>667</td><td>115</td><td>34</td><td>0</td><td><strong>816</strong></td></tr>
+    <tr><td>Citation on outstanding warrant</td><td>266</td><td>35</td><td>0</td><td>0</td><td><strong>301</strong></td></tr>
+    <tr><td>Arrest on outstanding warrant</td><td>139</td><td>31</td><td>4</td><td>0</td><td><strong>174</strong></td></tr>
+    <tr><td>Misdemeanor arrest</td><td>107</td><td>19</td><td>12</td><td>0</td><td><strong>138</strong></td></tr>
+    <tr><td>Misdemeanor citation</td><td>108</td><td>25</td><td>4</td><td>0</td><td><strong>137</strong></td></tr>
+    <tr><td>Felony arrest</td><td>97</td><td>6</td><td>2</td><td>0</td><td><strong>105</strong></td></tr>
+    <tr><td>Other</td><td>35</td><td>16</td><td>0</td><td>2</td><td><strong>53</strong></td></tr>
+    <tr><td>Not recorded</td><td>177</td><td>27</td><td>6</td><td>0</td><td><strong>210</strong></td></tr>
+  </tbody>
+</table>
+<div class="section-h"><h2>Pedestrian stops</h2><span class="grow"></span><span class="meta">Data as of Sep 19, 2026, 1:18 PM ET.</span></div>
+<div class="alert inline-alert"><strong>Source frozen.</strong> Cincinnati stopped publishing new contact cards in 2024. This is the most recent ~5,000 on file, not current activity.</div>
+<p class="muted">
+  5,000 pedestrian contact cards
+  (Pedestrian stops (contact cards), city dataset <code>swrz-ak2i</code>).
+  Race and sex are as recorded by the officer, not self-reported.
+</p>
+<div class="section-h"><h2>Stopped pedestrians by race</h2></div>
+<div class="statbars" role="list">
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Black</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 82.1%"></span></span>
+    <span class="statbar-val">4,107 <small>82%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">White</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 15.7%"></span></span>
+    <span class="statbar-val">786 <small>16%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Unknown</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 2.1%"></span></span>
+    <span class="statbar-val">106 <small>2%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Other</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 0.0%"></span></span>
+    <span class="statbar-val">1 <small>0%</small></span>
+  </div>
+</div>
+
+<div class="section-h"><h2>By sex</h2></div>
+<div class="statbars" role="list">
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Male</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 84.0%"></span></span>
+    <span class="statbar-val">4,199 <small>84%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Female</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 16.0%"></span></span>
+    <span class="statbar-val">801 <small>16%</small></span>
+  </div>
+</div>
+
+<div class="section-h"><h2>Outcome of the stop</h2></div>
+<div class="statbars" role="list">
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Traffic citation</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 1.3%"></span></span>
+    <span class="statbar-val">66 <small>1%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Warning, no citation</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 32.6%"></span></span>
+    <span class="statbar-val">1,629 <small>33%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">No action taken</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 34.2%"></span></span>
+    <span class="statbar-val">1,708 <small>34%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Citation on outstanding warrant</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 4.7%"></span></span>
+    <span class="statbar-val">234 <small>5%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Arrest on outstanding warrant</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 4.0%"></span></span>
+    <span class="statbar-val">200 <small>4%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Misdemeanor arrest</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 3.8%"></span></span>
+    <span class="statbar-val">190 <small>4%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Misdemeanor citation</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 3.8%"></span></span>
+    <span class="statbar-val">192 <small>4%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Felony arrest</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 4.5%"></span></span>
+    <span class="statbar-val">224 <small>4%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Other</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 10.9%"></span></span>
+    <span class="statbar-val">545 <small>11%</small></span>
+  </div>
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">Not recorded</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: 0.2%"></span></span>
+    <span class="statbar-val">12 <small>0%</small></span>
+  </div>
+</div>
+
+<div class="section-h"><h2>Outcome by race</h2></div>
+<p class="muted">Counts of stops by recorded race, for each outcome.</p>
+<table class="charges">
+  <caption class="sr-only">Stop outcomes by recorded race</caption>
+  <thead><tr><th scope="col">Outcome</th><th scope="col">Black</th><th scope="col">White</th><th scope="col">Unknown</th><th scope="col">Other</th><th scope="col">Total</th></tr></thead>
+  <tbody>
+    <tr><td>Traffic citation</td><td>56</td><td>8</td><td>2</td><td>0</td><td><strong>66</strong></td></tr>
+    <tr><td>Warning, no citation</td><td>1,341</td><td>251</td><td>37</td><td>0</td><td><strong>1,629</strong></td></tr>
+    <tr><td>No action taken</td><td>1,334</td><td>311</td><td>63</td><td>0</td><td><strong>1,708</strong></td></tr>
+    <tr><td>Citation on outstanding warrant</td><td>183</td><td>51</td><td>0</td><td>0</td><td><strong>234</strong></td></tr>
+    <tr><td>Arrest on outstanding warrant</td><td>156</td><td>44</td><td>0</td><td>0</td><td><strong>200</strong></td></tr>
+    <tr><td>Misdemeanor arrest</td><td>171</td><td>17</td><td>2</td><td>0</td><td><strong>190</strong></td></tr>
+    <tr><td>Misdemeanor citation</td><td>163</td><td>29</td><td>0</td><td>0</td><td><strong>192</strong></td></tr>
+    <tr><td>Felony arrest</td><td>199</td><td>22</td><td>2</td><td>1</td><td><strong>224</strong></td></tr>
+    <tr><td>Other</td><td>500</td><td>45</td><td>0</td><td>0</td><td><strong>545</strong></td></tr>
+    <tr><td>Not recorded</td><td>4</td><td>8</td><td>0</td><td>0</td><td><strong>12</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="alert inline-alert"><strong>Reading these numbers.</strong> Shares of stops describe <em>who was stopped</em>, not <em>why</em>. They are not a finding of bias for or against any group: they do not account for who is on the road, driving patterns, deployment, or the reason for each stop. Use them as a starting point for questions, not as conclusions.</div>
+
+<p class="muted">Sources: <a href="https://data.cincinnati-oh.gov" target="_blank" rel="noopener">data.cincinnati-oh.gov</a> &middot; raw files and methodology on the <a href="/data/">data page</a>. Use-of-force and citizen-complaint summaries are planned for a later update.</p>
+
+<p class="source">Generated Sep 19, 2026, 9:40 PM ET. General information, not legal advice.</p>
+    </div>
+  </main>
+  <footer class="site">
+    <span>Generated Sep 19, 2026, 9:40 PM ET</span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
+    <span class="footer-legal">Independent, non-governmental project - not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law, including the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC&nbsp;&sect;&nbsp;149.43</a>).</span>
+  </footer>
+  <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+
+  <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
+    <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <figure class="lightbox-figure">
+      <img id="lb-img" alt="" decoding="async">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+  </div>
+
+  <div id="tier-tip" role="tooltip" hidden></div>
+
+  <script src="/static/main.js?v=0692831785" defer></script>
+</body>
+</html>

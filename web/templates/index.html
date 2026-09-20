@@ -72,10 +72,21 @@
   <a href="{{ base_url }}/court/">Find court date</a>
   <a href="{{ base_url }}/visit/">Visit or contact</a>
   <a href="{{ base_url }}/bond-disparity/">Understand bond</a>
+  <a href="{{ base_url }}/safety/">Community safety</a>
   <a href="{{ base_url }}/help/">Free help</a>
   <a href="{{ base_url }}/data/">Download data</a>
   <a href="{{ base_url }}/feed.xml">Subscribe RSS</a>
 </nav>
+
+{% if safety_teaser is defined and safety_teaser %}
+<div class="section-h"><h2>Latest community incidents</h2><span class="grow"></span><span class="meta"><a href="{{ base_url }}/safety/">Cincinnati Open Data, explained &rarr;</a></span></div>
+<div class="fields">
+  {% for i in safety_teaser %}
+  <div class="k">{{ i.when_display }}</div>
+  <div class="v"><strong>{{ i.what }}</strong>{% if i.where %} &middot; {{ i.where }}{% endif %}{% if i.neighborhood %} &middot; {{ i.neighborhood }}{% endif %}</div>
+  {% endfor %}
+</div>
+{% endif %}
 
 {% if snapshot.inmate_count == 0 %}
 <div class="empty">

@@ -26,6 +26,7 @@ from scraper.models import ChangeEvent, Inmate, Snapshot
 from scraper.open_data_feeds import FEEDS
 from scraper.photos import downscale_and_save
 from scraper.store import load_block_log
+from web import feeds as feeds_mod
 from web.classify import (
     _expand_race,
     _expand_sex,
@@ -141,6 +142,7 @@ def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
         cfs_by_district=_group_by_district(cfs_30d),
         shoot_by_district=_group_by_district(shoot_30d),
         map_points=ctx.map_points,
+        safety_teaser=feeds_mod.latest_incidents(Path("data"), n=3),
     )
     (out_dir / "index.html").write_text(page, encoding="utf-8")
 
@@ -481,6 +483,31 @@ def _render_stats_page(env: Environment, snapshot: Snapshot, by_month, trend: di
     stats = _compute_stats(snapshot, by_month)
     page = env.get_template("stats.html").render(snapshot=snapshot, s=stats, trend=trend)
     target = out_dir / "stats" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
+def _render_safety_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> None:
+    """Plain-English Cincinnati Open Data summaries (Phase 1: latest incidents
+    + reported crime; Phase 2: traffic and pedestrian stops). Aggregates are
+    computed at build time by web.feeds from whatever the sweep pulled."""
+    data_dir = Path("data")
+    ctx = feeds_mod.safety_context(data_dir)
+    incident_files = (
+        "cfs_recent.json",
+        "cfs_pdi_recent.json",
+        "shootings_recent.json",
+        "crime_stars_recent.json",
+    )
+    stamps = [s for s in (feeds_mod.vintage_of(data_dir, f) for f in incident_files) if s]
+    page = env.get_template("safety.html").render(
+        snapshot=snapshot,
+        incidents=ctx["incidents"],
+        stars=ctx["stars"],
+        stops=ctx["stops"],
+        newest_vintage=max(stamps) if stamps else "",
+    )
+    target = out_dir / "safety" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
 

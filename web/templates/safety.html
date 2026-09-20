@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Community safety &middot; JCStream{% endblock %}
+{% block body_class %}detail{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Community safety</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <h1 class="title">Community safety</h1>
+    <div class="sub">Cincinnati Open Data, explained in plain English</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  Beyond the jail roster, the City of Cincinnati publishes public-safety data:
+  911 calls for service, reported crimes, police stops, and more. This page
+  translates those feeds into plain language. Everything here is <strong>reported</strong>,
+  not proven: a call, a stop, or a report is not a conviction, and none of it is
+  matched to anyone on the roster.
+</p>
+
+{% macro bars(rows, total) %}
+<div class="statbars" role="list">
+  {% for label, count in rows %}
+  {% set pct = (100.0 * count / total) if total else 0 %}
+  <div class="statbar" role="listitem">
+    <span class="statbar-label">{{ label }}</span>
+    <span class="statbar-track" aria-hidden="true"><span class="statbar-fill" style="width: {{ '%.1f' % pct }}%"></span></span>
+    <span class="statbar-val">{{ "{:,}".format(count) }} <small>{{ '%.0f' % pct }}%</small></span>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro vintage(stamp) %}<span class="meta">Data as of {{ human_utc(stamp) if stamp else 'pending' }}.</span>{% endmacro %}
+
+<div class="section-h"><h2>Latest incidents</h2><span class="grow"></span>{{ vintage(newest_vintage) }}</div>
+<p class="muted">The most recent calls for service, reported shootings, and reported crimes, newest first. Locations are block-level, as published by the city.</p>
+{% if incidents %}
+<div class="fields">
+  {% for i in incidents %}
+  <div class="k">{{ i.when_display }}</div>
+  <div class="v"><strong>{{ i.what }}</strong>{% if i.where %} &middot; {{ i.where }}{% endif %}{% if i.neighborhood %} &middot; {{ i.neighborhood }}{% endif %}</div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="muted">No incident data in this pull.</p>
+{% endif %}
+
+<div class="section-h"><h2>Reported crime, last 30 days</h2><span class="grow"></span>{{ vintage(stars.vintage) }}</div>
+<p class="muted">
+  From the city's STARS offense feed ({{ "{:,}".format(stars.total) }} reports).
+  <strong>Part 1</strong> is the FBI's set of eight serious index offenses
+  (homicide, rape, robbery, aggravated assault, burglary, auto theft, theft from
+  auto, and related property crime); <strong>Part 2</strong> is everything else
+  departments report. These are crimes <em>reported</em> to police, not cases
+  solved or people convicted.
+</p>
+{% if not stars.empty %}
+{{ bars(stars.by_category, stars.total) }}
+<div class="section-h"><h2>By FBI category</h2></div>
+{{ bars(stars.by_type, stars.total) }}
+{% else %}
+<p class="muted">No reported-crime data in this pull.</p>
+{% endif %}
+
+{% for key, feed in stops.items() %}
+<div class="section-h"><h2>{{ 'Traffic stops' if key == 'drivers' else 'Pedestrian stops' }}</h2><span class="grow"></span>{{ vintage(feed.vintage) }}</div>
+{% if feed.meta.status == 'frozen' %}
+<div class="alert inline-alert"><strong>Source frozen.</strong> {{ feed.meta.status_note }}</div>
+{% endif %}
+<p class="muted">
+  {{ "{:,}".format(feed.total) }} {{ 'driver' if key == 'drivers' else 'pedestrian' }} contact cards
+  ({{ feed.meta.label }}, city dataset <code>{{ feed.meta.dataset_id }}</code>).
+  Race and sex are as recorded by the officer, not self-reported.
+</p>
+{% if not feed.empty %}
+<div class="section-h"><h2>{{ 'Stopped drivers' if key == 'drivers' else 'Stopped pedestrians' }} by race</h2></div>
+{{ bars(feed.by_race, feed.total) }}
+<div class="section-h"><h2>By sex</h2></div>
+{{ bars(feed.by_sex, feed.total) }}
+<div class="section-h"><h2>Outcome of the stop</h2></div>
+{{ bars(feed.by_action, feed.total) }}
+<div class="section-h"><h2>Outcome by race</h2></div>
+<p class="muted">Counts of stops by recorded race, for each outcome.</p>
+<table class="charges">
+  <caption class="sr-only">Stop outcomes by recorded race</caption>
+  <thead><tr><th scope="col">Outcome</th>{% for col in feed.race_columns %}<th scope="col">{{ col }}</th>{% endfor %}<th scope="col">Total</th></tr></thead>
+  <tbody>
+    {% for row in feed.race_action_table %}
+    <tr><td>{{ row.action }}</td>{% for c in row.counts %}<td>{{ "{:,}".format(c) }}</td>{% endfor %}<td><strong>{{ "{:,}".format(row.total) }}</strong></td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">No stop data in this pull.</p>
+{% endif %}
+{% endfor %}
+
+<div class="alert inline-alert"><strong>Reading these numbers.</strong> Shares of stops describe <em>who was stopped</em>, not <em>why</em>. They are not a finding of bias for or against any group: they do not account for who is on the road, driving patterns, deployment, or the reason for each stop. Use them as a starting point for questions, not as conclusions.</div>
+
+<p class="muted">Sources: <a href="https://data.cincinnati-oh.gov" target="_blank" rel="noopener">data.cincinnati-oh.gov</a> &middot; raw files and methodology on the <a href="{{ base_url }}/data/">data page</a>. Use-of-force and citizen-complaint summaries are planned for a later update.</p>
+
+<p class="source">Generated {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else " - " }}. General information, not legal advice.</p>
+{% endblock %}
