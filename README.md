@@ -10,18 +10,19 @@ fully static, searchable site. No database server, no backend, no tracking.
 - **Source:** https://github.com/AICincy/HCJC (MIT)
 - **Corrections, sealing, or removal:** https://github.com/AICincy/HCJC/issues - no fee, ever
 
-## Status as of 2026-09-20
+## Status as of 2026-09-21
 
-- **1,167 people** listed in custody, data current as of **2026-09-20T12:23:01Z**
-  (data/current.json, docs/search.json, and the live site all agree).
+- **1,191 people** listed in custody, data current as of **2026-09-21T22:14:44Z**
+  (data/current.json, docs/search.json, and docs/inmate/ all agree at 1,191;
+  live site verified HTTP 200).
 - Deploys from the tip of `main` via GitHub Pages. No commit hash is pinned
   here by design; the live commit is always the current `origin/main` tip.
   CI and the Pages build run green on every push to `main`.
-- **137,408-record** append-only SHA-256 hash-chained WAF evidence log
+- **137,797-record** append-only SHA-256 hash-chained WAF evidence log
   (docs/data/waf_block_log.json), chain verified in CI. The log lives in
   both `data/` (the sweep's working copy) and `docs/data/` (the published
   mirror); the two are byte-identical and CI asserts they stay that way.
-- 664 tests, ruff and mypy clean.
+- 702 tests, ruff and mypy clean (verified 2026-09-21).
 - Deep-audit wave (2026-09-20): the 2 critical and 3 major findings were
   fixed fail-closed (corrupt evidence/changelog can no longer be silently
   replaced; detail-page blocks are deduped; outage probes use 3 roster IDs
@@ -31,7 +32,7 @@ fully static, searchable site. No database server, no backend, no tracking.
   and timestamp fixes, canonical tags). See the audit report.
 - Dark theme is live with a header toggle (persists via localStorage).
   Felony F1-F5 red-to-amber severity scale unchanged.
-- 1,072 booking photos cached for 1,167 inmates; the gap is upstream
+- 1,104 booking photos cached for 1,191 inmates; the gap is upstream
   photo-fetch failures during HCSO blocks, not pruning.
 
 ## How it works
@@ -109,8 +110,8 @@ local build never deletes it.
 
 **About the sweep schedule:** the cron fires every 15 minutes, but GitHub
 Actions delivery is best-effort with observed gaps of 2-5 hours
-(noted in `sweep.yml` itself). Observed 2026-09-19/20: runs landed roughly
-every 1-5 hours (e.g. 23:32, 00:22, 01:38, 07:00, 12:19 UTC). The 20-minute
+(noted in `sweep.yml` itself). Observed 2026-09-21: runs landed at 06:17,
+13:05, 18:39, 22:13 UTC (gaps of roughly 3.5-7 hours). The 20-minute
 skip-gate means back-to-back runs never double-scrape. Treat "every 15
 minutes" as the *schedule*, not the *delivery*.
 
@@ -121,7 +122,7 @@ minutes" as the *schedule*, not the *delivery*.
   HTML parsing), `pydantic` 2 (record validation), `jinja2` 3 (templates),
   `Pillow` 12 (photo normalization)
 - `ruff` (lint/format), `mypy` (type checks on `scraper` and `web`),
-  `pytest` (664 tests as of 2026-09-20)
+  `pytest` (702 tests as of 2026-09-21)
 
 ## Local development
 
@@ -196,14 +197,14 @@ Hard rules for local work:
 
 | Path | What it is |
 |---|---|
-| `data/current.json` | Active roster snapshot (1,167 inmates at deploy) |
+| `data/current.json` | Active roster snapshot (1,191 inmates as of 2026-09-21) |
 | `data/changelog.json` | Booking/release/change events, capped at 10,000 |
 | `data/anon_changelog.json` | Anonymized long-term history (PII scrubbed after 7 days) |
-| `docs/data/waf_block_log.json` | Append-only SHA-256-chained block evidence (137,408 records) |
+| `docs/data/waf_block_log.json` | Append-only SHA-256-chained block evidence (137,797 records as of 2026-09-21) |
 | `docs/data/SHA256SUMS` | Build checksums for data files |
 | `docs/search.json` | Compressed client-side search index |
-| `docs/inmate/` | Per-profile static pages (1,167 at deploy) |
-| `docs/photos/` | Normalized booking photos (1,072 at deploy) |
+| `docs/inmate/` | Per-profile static pages (1,191 as of 2026-09-21) |
+| `docs/photos/` | Normalized booking photos (1,104 as of 2026-09-21) |
 | `scraper/sweep.py` | Sweep orchestrator |
 | `scraper/client.py` | HCSO HTTP client (16 workers, 0.5 s delay) |
 | `scraper/sweep_guards.py` | Health gates and WAF-stub detection |
