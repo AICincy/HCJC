@@ -10,9 +10,11 @@ Each invocation:
   4. Writes data/current.json and appends to data/changelog.json.
   5. Removes photos belonging to released inmates.
 
-Designed to fit a ~25-minute budget at Crawl-delay: 10s, so it can run on the
-`*/15 * * * *` GitHub Actions cron (with a 20-minute skip-gate to avoid
-back-to-back runs; actual delivery is best-effort).
+Designed to fit a ~25-minute budget at Crawl-delay: 0.5s per worker with
+16-way concurrency (scraper/client.py: DEFAULT_CRAWL_DELAY,
+DEFAULT_CONCURRENCY), so it can run on the `*/15 * * * *` GitHub Actions
+cron (with a 20-minute skip-gate to avoid back-to-back runs; actual
+delivery is best-effort).
 """
 
 from __future__ import annotations
@@ -850,7 +852,17 @@ def run(
                 log.error("save_current failed (%s); skipping changelog and prune", e)
 
             if save_ok and clean_finish:
-                _save_changelog_and_anon(previous, current, paths)
+                try:
+                    _save_changelog_and_anon(previous, current, paths)
+                except (OSError, SnapshotCorruptError) as e:
+                    # C-7: a corrupt takedowns.json (raised by save_changelog's
+                    # _load_takedowns) or an I/O failure must not escape the
+                    # finally block and crash the sweep. The roster is already
+                    # persisted above; leave the changelog and anon feed
+                    # untouched for investigation and skip the append this
+                    # cycle. The next healthy cycle diffs again, so no roster
+                    # data is lost, only this cycle's changelog events.
+                    log.error("skipping changelog/anon update: %s", e)
             elif save_ok:
                 # Interrupted (or otherwise short-circuited) sweep: do not diff.
                 # `current` is a partial subset of `previous`, so every unreached
