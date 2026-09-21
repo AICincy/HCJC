@@ -7,6 +7,7 @@ degradation guard, and append-only empty-photo evidence dedup.
 """
 
 from collections import Counter
+from datetime import datetime, timedelta, timezone
 from typing import Any, cast
 
 import httpx
@@ -636,12 +637,17 @@ def test_empty_photo_dedup_skips_repeat_within_window(tmp_path):
             dedupe_keys=("inmate_id", "photo_field_path"),
         )
 
-    assert _append(_empty_photo_record(ts="2026-09-20T02:00:00Z")) is True
-    # Same inmate+field 15 minutes later: skipped, provenance is the first record.
-    assert _append(_empty_photo_record(ts="2026-09-20T02:15:00Z")) is False
+    # Anchor to the clock: the dedup window is measured from now, so fixed
+    # calendar dates rot as time passes. Two observations 15 minutes apart,
+    # both well inside the 24h window whenever the test runs.
+    base = datetime.now(timezone.utc) - timedelta(hours=2)
+    ts1 = base.strftime("%Y-%m-%dT%H:%M:%SZ")
+    ts2 = (base + timedelta(minutes=15)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    assert _append(_empty_photo_record(ts=ts1)) is True
+    assert _append(_empty_photo_record(ts=ts2)) is False
     records = load_block_log(log_path)
     assert len(records) == 1
-    assert records[0]["timestamp_utc"] == "2026-09-20T02:00:00Z"
+    assert records[0]["timestamp_utc"] == ts1
     assert verify_block_chain(records) == []
 
 

@@ -204,6 +204,10 @@ def test_build_renders_comments_vintage_and_photo_markers(tmp_path, monkeypatch)
     fallback marker survives into built HTML."""
     _snapshot_with_comments_and_feed(tmp_path)
     monkeypatch.chdir(tmp_path)
+    # _feed_vintage() reads the anchored web.feeds.DATA_DIR, not the cwd:
+    # point it at the fixture tree so the build under test sees the fixture
+    # feed stamps instead of whatever the real repo's data files hold today.
+    monkeypatch.setattr("web.feeds.DATA_DIR", tmp_path / "data")
 
     from web.build import build
 
