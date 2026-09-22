@@ -7,6 +7,8 @@
   justify-self: end;
 }
 
+.masthead-seal { display: none; }
+
 @media (min-width: 721px) {
   .running.mobile-only { display: none; }
 
@@ -20,7 +22,6 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-  /* RSS / GitHub / Access stay in the mobile drawer and the footer. */
   .nav-drawer > .nav-group:last-of-type { display: none; }
 
   .month > .cards {
@@ -105,4 +106,30 @@
   letter-spacing: -0.02em;
   color: var(--fg);
   line-height: 1.15;
+}
+
+:root[data-theme="dark"] .masthead .nav-link[aria-current="page"],
+:root[data-theme="dark"] .month-nav .chip strong,
+:root[data-theme="dark"] .page-home .court-stat-primary .court-stat-num {
+  color: var(--fg);
+}
+:root[data-theme="dark"] .pager-num[aria-current="page"] {
+  color: var(--fg);
+  background: var(--surface);
+  border-color: var(--accent);
+}
+:root[data-theme="dark"] .masthead .brand:hover .brand-name {
+  color: var(--fg);
+}
+
+.tier-strip-seg { cursor: default; pointer-events: none; }
+.tier-strip-seg:hover { outline: none; }
+
+@media (max-width: 720px) {
+  .tab-toc {
+    position: relative;
+    mask-image: linear-gradient(to right, #000 78%, transparent);
+    -webkit-mask-image: linear-gradient(to right, #000 78%, transparent);
+    padding-right: 28px;
+  }
 }
