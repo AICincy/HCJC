@@ -36,13 +36,9 @@ on:
 
 permissions:
   contents: write
-  # Lets the roster-freeze alarm open a GitHub issue when the roster has been
-  # frozen past the alarm window (scraper.freeze_alert).
   issues: write
 
 concurrency:
-  # Never run two sweeps simultaneously; cancel-in-progress: false queues
-  # the newer run so they don't collide on the GitHub Pages deployment API.
   group: jcstream-sweep
   cancel-in-progress: false
 
@@ -53,6 +49,8 @@ jobs:
     timeout-minutes: 50
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
         with:
           python-version: '3.14'
@@ -60,14 +58,6 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: HCSO inmate sweep
-        # JCSTREAM_USER_AGENT is intentionally not overridden here: the module
-        # default (scraper.client.DEFAULT_UA) carries the contact URL plus the
-        # parallelism-limited descriptor. Two sources of truth invite drift.
-        #
-        # JCSTREAM_HTTP_PROXY (optional secret): when HCSO's WAF blocks the
-        # Actions runner IP, set this repo secret to an egress proxy URL and
-        # the HCSO fetches route through it. Unset = direct connection (the
-        # secret resolves to "" which scraper.client treats as no proxy).
         env:
           JCSTREAM_HTTP_PROXY: ${{ secrets.JCSTREAM_HTTP_PROXY }}
           JCSTREAM_CAPTURE_EGRESS: "1"
@@ -113,13 +103,16 @@ jobs:
           git add data/ docs/
           if ! git diff --cached --quiet; then
             git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
-            git fetch origin
+            # Fetch only main. `git fetch origin` on a shallow clone spent
+            # ~7m pulling every branch and left origin/main stale, so rebase
+            # was a no-op and push was rejected (#2586).
+            git fetch --no-tags origin main:refs/remotes/origin/main
             git rebase origin/main || {
               echo "::error::Rebase conflict detected; refusing merge fallback (M-3). Aborting push; next cycle retries from a fresh sweep."
               git rebase --abort
               exit 1
             }
-            git push
+            git push origin HEAD:main
           else
             echo "no changes"
           fi
