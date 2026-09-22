@@ -1,0 +1,11 @@
+PASS [
+  'Full-roster dropdown and Enter submission find a record outside the preview',
+  'Tier, sort, and page deep links survive navigation/reload, including combined sort/filter/page-size links and out-of-range clamping',
+  'Homepage month fragment forwards to the full archive and opens the matching month after reload',
+  'Keyboard disclosure and preview filter submit to the full roster',
+  'Tier tooltip works from focus and Escape',
+  'No-JavaScript archive exposes every current record',
+  '72 axe scans, reflow, input type size, tier target sizes, and responsive table bounds passed',
+  '320px long-identifier reflow passed',
+  'Home, bond, and record layout checks at 320/375/390/412/768/1024/1440 in both themes passed'
+]

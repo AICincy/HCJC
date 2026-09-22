@@ -28,17 +28,16 @@
     <h1 id="roster-tool-h">Search the roster</h1>
     <span class="meta">Last checked {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}.</span>
   </div>
+  <p class="roster-attribution">JCStream is an independent public-record mirror, not a government site.</p>
+  {% if roster_preview %}<p class="roster-preview-note">Browsing {{ homepage_bookings }} recent bookings from the current custody roster. Search covers the full roster. <a href="{{ base_url }}/archive/">Browse and filter all {{ snapshot.inmate_count }} records</a>.</p>{% endif %}
   {% include "_roster_tool.html" %}
 </section>
 
-{# Spec 1.3.6: the month window behind HOMEPAGE_FULL_ROSTER. Older months live
-   on the archive page; nothing is unpublished. The sticky month rail's
-   archive chip needs a base.html edit (Phase-A owned); this block is the
-   in-content route until then. #}
-{% if not homepage_full_roster and archive_months > 0 %}
+{# The bounded preview never unpublishes a record; the archive is the full current roster. #}
+{% if roster_preview and archive_bookings > 0 %}
 <section aria-labelledby="archive-link-h">
   <div class="section-h"><h2 id="archive-link-h">Earlier bookings</h2><span class="grow"></span><span class="meta"><a href="{{ base_url }}/archive/">open the archive &rarr;</a></span></div>
-  <p>{{ "{:,}".format(archive_bookings) }} more booking{{ '' if archive_bookings == 1 else 's' }} from {{ archive_months }} earlier {{ 'month' if archive_months == 1 else 'months' }} {{ 'is' if archive_bookings == 1 else 'are' }} on the <a href="{{ base_url }}/archive/">earlier bookings archive</a>, with the same search and filters.</p>
+  <p>{{ "{:,}".format(archive_bookings) }} more booking{{ '' if archive_bookings == 1 else 's' }} not shown above {{ 'is' if archive_bookings == 1 else 'are' }} on the <a href="{{ base_url }}/archive/">earlier bookings archive</a>, with the same search and filters.</p>
 </section>
 {% endif %}
 

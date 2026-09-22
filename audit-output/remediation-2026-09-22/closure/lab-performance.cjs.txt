@@ -1,0 +1,48 @@
+const fs = require('node:fs');
+const {chromium} = require('playwright');
+(async () => {
+  const browser = await chromium.launch({executablePath: process.env.CHROMIUM_EXECUTABLE, args:['--no-sandbox','--disable-gpu']});
+  const report = {capturedAt: new Date().toISOString(), browser:browser.version(),
+    scope:'Local lab only. Gzip HTTP, emulated network and CPU, not physical Android/iPhone or production measurements. Three cold-browser samples per build, no statistical significance claimed. Interaction timings are automation-observed completion times, not field INP/FID.',
+    settings:{viewport:{width:390,height:844},cpuSlowdown:4,latencyMs:150,downloadBytesPerSecond:200000,uploadBytesPerSecond:93750,cacheDisabled:true}, samples:[]};
+  try {
+    for (let i=0;i<3;i++) for(const [name,port] of [['baseline',8778],['remediation',8779]]) {
+      const ctx=await browser.newContext({viewport:report.settings.viewport});
+      const p=await ctx.newPage();
+      const cdp=await ctx.newCDPSession(p);
+      await cdp.send('Network.enable');
+      await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});
+      await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:150,downloadThroughput:200000,uploadThroughput:93750});
+      await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});
+      await p.addInitScript(() => {
+        window.labLCP=null;
+        new PerformanceObserver(list => {window.labLCP=list.getEntries().at(-1)?.startTime;}).observe({type:'largest-contentful-paint',buffered:true});
+      });
+      const base='http://127.0.0.1:'+port;
+      await p.goto(base+'/',{waitUntil:'networkidle'});
+      await p.waitForTimeout(1000);
+      const sample=await p.evaluate(()=>{
+        const n=performance.getEntriesByType('navigation')[0];
+        return {htmlEncodedBytes:n.encodedBodySize,htmlDecodedBytes:n.decodedBodySize,htmlTransferBytes:n.transferSize,ttfbMs:n.responseStart-n.requestStart,domInteractiveMs:n.domInteractive,domContentLoadedMs:n.domContentLoadedEventEnd,fcpMs:performance.getEntriesByName('first-contentful-paint')[0]?.startTime,lcpMs:window.labLCP};
+      });
+      // Stable record from this frozen snapshot, outside the 48-card preview.
+      const start=await p.evaluate(()=>performance.now());
+      await p.locator('#search-box').fill('#1491357');
+      await p.locator('#search-results a[href$="/inmate/1491357/"]').waitFor();
+      sample.coldSearchSuggestionMs=(await p.evaluate(()=>performance.now()))-start;
+      sample.searchIndex=await p.evaluate(()=>{const r=performance.getEntriesByType('resource').find(r=>r.name.endsWith('/search.json'));return r?{encodedBytes:r.encodedBodySize,decodedBytes:r.decodedBodySize,durationMs:r.duration}:null;});
+      await p.goto(base+'/archive/',{waitUntil:'networkidle'});
+      sample.archive=await p.evaluate(()=>{const n=performance.getEntriesByType('navigation')[0];return {encodedBytes:n.encodedBodySize,decodedBytes:n.decodedBodySize,domInteractiveMs:n.domInteractive,domContentLoadedMs:n.domContentLoadedEventEnd};});
+      await p.locator('.more-filters summary').click();
+      const filterStart=await p.evaluate(()=>performance.now());
+      await p.locator('#filter-tier').selectOption('f2');
+      await p.waitForFunction(()=>document.querySelector('.filter-count').textContent.includes('degree: F2'));
+      await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+      sample.archiveFilterCompletionMs=(await p.evaluate(()=>performance.now()))-filterStart;
+      report.samples.push({build:name,run:i+1,...sample});
+      fs.writeFileSync('audit-output/remediation-2026-09-22/closure/lab-performance.json',JSON.stringify(report,null,2)+'\n');
+      await ctx.close();
+    }
+    console.log(JSON.stringify(report,null,2));
+  }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1});

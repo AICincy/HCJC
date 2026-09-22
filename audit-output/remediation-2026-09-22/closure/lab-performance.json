@@ -1,0 +1,168 @@
+{
+  "capturedAt": "2026-09-22T21:54:04.580Z",
+  "browser": "153.0.8010.0",
+  "scope": "Local lab only. Gzip HTTP, emulated network and CPU, not physical Android/iPhone or production measurements. Three cold-browser samples per build, no statistical significance claimed. Interaction timings are automation-observed completion times, not field INP/FID.",
+  "settings": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "cpuSlowdown": 4,
+    "latencyMs": 150,
+    "downloadBytesPerSecond": 200000,
+    "uploadBytesPerSecond": 93750,
+    "cacheDisabled": true
+  },
+  "samples": [
+    {
+      "build": "baseline",
+      "run": 1,
+      "htmlEncodedBytes": 108704,
+      "htmlDecodedBytes": 974188,
+      "htmlTransferBytes": 109004,
+      "ttfbMs": 19.899999999906868,
+      "domInteractiveMs": 1363.9000000000233,
+      "domContentLoadedMs": 2488.5,
+      "fcpMs": 1296,
+      "lcpMs": 1296,
+      "coldSearchSuggestionMs": 515.9000000000233,
+      "searchIndex": {
+        "encodedBytes": 20096,
+        "decodedBytes": 105366,
+        "durationMs": 257.0999999999767
+      },
+      "archive": {
+        "encodedBytes": 186417,
+        "decodedBytes": 1673687,
+        "domInteractiveMs": 2440,
+        "domContentLoadedMs": 2687.399999999907
+      },
+      "archiveFilterCompletionMs": 398.0999999999767
+    },
+    {
+      "build": "remediation",
+      "run": 1,
+      "htmlEncodedBytes": 14331,
+      "htmlDecodedBytes": 82066,
+      "htmlTransferBytes": 14631,
+      "ttfbMs": 2.199999999953434,
+      "domInteractiveMs": 363.30000000004657,
+      "domContentLoadedMs": 779.4000000000233,
+      "fcpMs": 972,
+      "lcpMs": 972,
+      "coldSearchSuggestionMs": 909.5999999999767,
+      "searchIndex": {
+        "encodedBytes": 62970,
+        "decodedBytes": 295109,
+        "durationMs": 474.20000000006985
+      },
+      "archive": {
+        "encodedBytes": 186470,
+        "decodedBytes": 1673670,
+        "domInteractiveMs": 2095.1999999999534,
+        "domContentLoadedMs": 2372.899999999907
+      },
+      "archiveFilterCompletionMs": 561
+    },
+    {
+      "build": "baseline",
+      "run": 2,
+      "htmlEncodedBytes": 108704,
+      "htmlDecodedBytes": 974188,
+      "htmlTransferBytes": 109004,
+      "ttfbMs": 1.1000000000931323,
+      "domInteractiveMs": 1439.1000000000931,
+      "domContentLoadedMs": 2579.3000000000466,
+      "fcpMs": 1364,
+      "lcpMs": 1364,
+      "coldSearchSuggestionMs": 422.10000000009313,
+      "searchIndex": {
+        "encodedBytes": 20096,
+        "decodedBytes": 105366,
+        "durationMs": 257.10000000009313
+      },
+      "archive": {
+        "encodedBytes": 186417,
+        "decodedBytes": 1673687,
+        "domInteractiveMs": 2495,
+        "domContentLoadedMs": 2638.5999999999767
+      },
+      "archiveFilterCompletionMs": 561.3000000000466
+    },
+    {
+      "build": "remediation",
+      "run": 2,
+      "htmlEncodedBytes": 14331,
+      "htmlDecodedBytes": 82066,
+      "htmlTransferBytes": 14631,
+      "ttfbMs": 1.099999999976717,
+      "domInteractiveMs": 366.0999999999767,
+      "domContentLoadedMs": 780.8999999999069,
+      "fcpMs": 1040,
+      "lcpMs": 1040,
+      "coldSearchSuggestionMs": 911.6000000000931,
+      "searchIndex": {
+        "encodedBytes": 62970,
+        "decodedBytes": 295109,
+        "durationMs": 475.29999999993015
+      },
+      "archive": {
+        "encodedBytes": 186470,
+        "decodedBytes": 1673670,
+        "domInteractiveMs": 2076.5999999999767,
+        "domContentLoadedMs": 2354.8000000000466
+      },
+      "archiveFilterCompletionMs": 507.0999999999767
+    },
+    {
+      "build": "baseline",
+      "run": 3,
+      "htmlEncodedBytes": 108704,
+      "htmlDecodedBytes": 974188,
+      "htmlTransferBytes": 109004,
+      "ttfbMs": 1,
+      "domInteractiveMs": 1129.4000000000233,
+      "domContentLoadedMs": 1505.7000000000698,
+      "fcpMs": 1460,
+      "lcpMs": 1460,
+      "coldSearchSuggestionMs": 557.7000000000698,
+      "searchIndex": {
+        "encodedBytes": 20096,
+        "decodedBytes": 105366,
+        "durationMs": 253.20000000006985
+      },
+      "archive": {
+        "encodedBytes": 186417,
+        "decodedBytes": 1673687,
+        "domInteractiveMs": 2474,
+        "domContentLoadedMs": 2747.0999999999767
+      },
+      "archiveFilterCompletionMs": 483.0999999999767
+    },
+    {
+      "build": "remediation",
+      "run": 3,
+      "htmlEncodedBytes": 14331,
+      "htmlDecodedBytes": 82066,
+      "htmlTransferBytes": 14631,
+      "ttfbMs": 0.5999999999767169,
+      "domInteractiveMs": 389.5,
+      "domContentLoadedMs": 810.3999999999069,
+      "fcpMs": 1076,
+      "lcpMs": 1076,
+      "coldSearchSuggestionMs": 931.5999999999767,
+      "searchIndex": {
+        "encodedBytes": 62970,
+        "decodedBytes": 295109,
+        "durationMs": 470.5999999999767
+      },
+      "archive": {
+        "encodedBytes": 186470,
+        "decodedBytes": 1673670,
+        "domInteractiveMs": 2105.5,
+        "domContentLoadedMs": 2380
+      },
+      "archiveFilterCompletionMs": 529.0999999999767
+    }
+  ]
+}

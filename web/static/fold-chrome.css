@@ -1,5 +1,8 @@
-/* Homepage fold chrome. Loaded after style.css. Does not retune the felony scale.
-   Kept as a second sheet because style.css is too large to rewrite in-place here. */
+/* Homepage fold chrome + 2026-09-22 audit remediation layer. Loaded after
+   style.css on every page (base.html). Does not retune the felony scale.
+   Kept as a second sheet because style.css is too large to rewrite in-place.
+   Finding IDs reference audit-output/ui-ux-remediation-2026-09-22/report.md
+   (P0/P1/P2) and ui-aesthetic-remediation-report-2026-09-22.md (UI-xx). */
 
 /* C-1: light-theme muted/dim were ~4.7:1 on --bg. Dark theme tokens are untouched. */
 :root {
@@ -24,6 +27,9 @@
   justify-self: end;
 }
 
+/* UI-01: the external booking-photo seal no longer sits in the primary
+   masthead (moved to the footer source line, labeled as an external link).
+   Any residual .masthead-seal stays hidden. */
 .masthead-seal { display: none; }
 
 @media (min-width: 721px) {
@@ -105,7 +111,10 @@
   }
 }
 
-.tier-strip-cap { display: none; }
+/* P1-03 / UI-07: the degree strip is visualization only (pointer-events
+   already disabled below). The caption is RESTORED here (was display:none):
+   a 4px bar is not self-explanatory, and the caption states the relationship
+   to the Charge level select instead of inviting a click. */
 .roster-hero { display: none; }
 
 .thumb.thumb-placeholder {
@@ -139,41 +148,187 @@
   color: var(--fg);
 }
 
+/* P1-03 / UI-07: the strip is informational. No pointer affordance. */
 .tier-strip-seg { cursor: default; pointer-events: none; }
 .tier-strip-seg:hover { outline: none; }
 
+/* UI-08: wrap local navigation rather than fading out the final link. */
 @media (max-width: 720px) {
-  .tab-toc {
-    position: relative;
-    mask-image: linear-gradient(to right, #000 78%, transparent);
-    -webkit-mask-image: linear-gradient(to right, #000 78%, transparent);
-    padding-right: 28px;
-  }
+  .tab-toc { flex-wrap: wrap; overflow: visible; }
+  .tab-toc a { white-space: normal; }
 }
 
-/* Dark small-text on --accent/--warn was 4.18-4.31:1. Do not retune felony fills. */
+/* ===== P0-01 / UI-03: dark-theme small-text contrast state matrix.
+   Dark small text on --accent/--warn was 4.18-4.31:1 (axe color-contrast,
+   38 nodes across home/help/stats/courts/bond/visit). Fix: a dedicated
+   small-text token for dark, lightened category tokens, and per-selector
+   overrides where a vivid signal color carries normal-sized text. Do not
+   retune felony fills. Pairs and ratios pinned by tests/test_ui_remediation.py. */
 :root[data-theme="dark"] {
-  --accent-text: #FF7A6E;
-  --cat-family: #B58BEF;
+  --accent-text: #FF7A6E;   /* 6.20:1 on --surface, 6.39:1 on --warn-bg */
+  --cat-family: #B58BEF;    /* 5.93:1 on --surface (was #A06BE8, 4.33:1) */
+  --cat-violence: #FF6B5F;  /* 5.65:1 on --surface (was #F0433A, 4.18:1) */
 }
-:root[data-theme="dark"] .visit-card-kicker,
+:root[data-theme="dark"] .visit-card:not(.visit-card-primary) .visit-card-kicker,
 :root[data-theme="dark"] .alert.inline-alert > strong:first-child,
 :root[data-theme="dark"] .kpi:first-child .label {
   color: var(--accent-text);
 }
+/* Non-primary visit-card icon box: --accent glyph on --accent-bg was 4.31:1
+   (axe: .visit-card-icon, help + visit pages). */
+:root[data-theme="dark"] .visit-card:not(.visit-card-primary) .visit-card-icon {
+  color: var(--accent-text);
+}
+/* Bond-distribution "this case" marker: 10.5px --warn on --warn-bg was
+   4.31:1 (latent; the audited record did not render a plotted bond). */
+:root[data-theme="dark"] .bondctx-mine span {
+  color: var(--accent-text);
+}
 
-/* Prose links: non-color cue. Nav, chips, cards stay exception. */
+/* P0-02: non-color cue for links embedded in prose (WCAG 1.4.1).
+   Axe link-in-text-block, 158 nodes across 10 page types. Persistent
+   underline in prose contexts; navigation, tabs, cards, and compact data
+   controls keep their existing non-color affordances (layout, borders,
+   dashed rules, labels) and are excluded below. */
 .page p a,
 .page li a,
 .page dd a,
+.page td a,
+footer.site > span a,
+footer.site > p a,
+.page .fields .v a,
+.page .muted a,
+.page .record-legal a,
+.page .about-body a,
+.page .statute-plain a,
+.page .decision-aid a,
+.page .bondctx-cap a,
+.page .comment-policy a,
+.page .case-cta-text a,
+.page .crowdsource-block a,
 .footer-legal a,
 .banner-fine a,
 .source-banner a {
   text-decoration: underline;
   text-underline-offset: 0.12em;
 }
+/* Exception set: controls whose role is already conveyed without an
+   underline. Each must keep specificity at or above .page p a. */
+.page .card-inmate .name a { text-decoration: none; }
+.page .case-link { text-decoration: none; }        /* dashed rule is the cue */
+.page a.orc-code { text-decoration: none; }        /* dashed rule is the cue */
+.page .statute-srclink { text-decoration: none; }  /* dashed rule is the cue */
+.page .tab-toc a { text-decoration: none; }        /* pill layout is the cue */
+.page .courts-toc a { text-decoration: none; }
+.page .stacked-row-link { text-decoration: none; } /* swatch + count row */
 
+/* P1-07: the primary search control (and its select peers) compute to at
+   least 16px, the mobile form-control minimum (was 13-14px computed). */
 .filter-bar select,
 .filter-bar input[type="search"] {
   font-size: 16px;
+}
+.filter-bar .filter-bar-main input[type="search"],
+.filter-bar .filter-inline select { font-size: 16px; }
+
+/* P1-08: real hit boxes, not invisible pseudo-elements that overlap links. */
+.card-inmate > button.tier { min-width: 28px; height: 28px; }
+.card-inmate > .tier.tier-corner::before { content: none; }
+@media (min-width: 721px) {
+  .card-inmate > .tier.tier-corner { position: static; order: 3; flex: none; }
+}
+
+/* P2-09: kicker/status metadata is at least 12px. */
+.visit-card-kicker {
+  font-size: 12px;
+}
+/* Charge line on roster cards: 13px -> 14px (audit: raise charge text to
+   14px where space permits; the card keeps nowrap + ellipsis). */
+.card-inmate .charge {
+  font-size: 0.875rem;
+}
+
+/* UI-11: the record-level legal block gets a heading, 13px, 60-75ch, and
+   more leading. Copy stays in-flow (load-bearing); nothing is demoted. */
+.record-legal-h {
+  margin: 10px 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg);
+}
+.record-legal {
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 75ch;
+}
+
+/* UI-04: preview notices do not compete with the roster. */
+.roster-attribution, .roster-preview-note { font-size: 13px; color: var(--fg-muted); margin: 6px 0; }
+:root { --type-charge: 14px; --type-metadata: 12px; --type-legal: 13px; }
+.card-inmate .charge, body.is-table .month .card-inmate .charge { font-size: var(--type-charge); }
+.card-inmate .id-chip, body.is-table .month .card-inmate .id-chip,
+.card-inmate .ct-count, .tier-strip-cap { font-size: var(--type-metadata); }
+.record-legal, .inmate-hero .alert { font-size: var(--type-legal); line-height: 1.6; }
+footer.site .footer-legal { max-width: 75ch; }
+.visit-card-primary .visit-card-icon { background: transparent; color: #fff; }
+:root[data-theme="dark"] .banner > summary strong:first-child,
+:root[data-theme="dark"] .banner > p:first-of-type > strong:first-child,
+:root[data-theme="dark"] .more-filters[open] summary { color: var(--accent-text); }
+/* UI-06: neutral shared card edges without changing severity fills. */
+.judge-card, .court-listing, .visit-card { border-radius: var(--radius); }
+
+
+/* P1-05: opt-in responsive tables. Preserve native headers in the
+   accessibility tree; data-label adds a visible label alongside each value.
+   Explicit table roles preserve semantics when CSS changes display modes. */
+@media screen and (max-width: 720px) {
+  table.charges.stackable { display: block; border: 0; background: transparent; }
+  table.charges.stackable thead {
+    position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden;
+  }
+  table.charges.stackable tbody { display: block; }
+  table.charges.stackable tbody tr {
+    display: block; background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); margin-bottom: 10px; padding: 8px 12px;
+  }
+  table.charges.stackable tbody td {
+    display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: 10px; padding: 4px 0; border: 0; white-space: normal;
+  }
+  table.charges.stackable tbody td::before {
+    content: attr(data-label); font-size: 12px; font-weight: 600; color: var(--fg-muted);
+  }
+  table.charges.stackable .cell-value { min-width: 0; overflow-wrap: anywhere; }
+  table.charges.stackable tbody tr[class*="charge-row-"] td:first-child { border-left: 0; }
+  table.charges.stackable.schedule tbody th[scope="row"],
+  table.charges.stackable.schedule tbody th[scope="rowgroup"] {
+    display: block; position: static; box-shadow: none; background: transparent;
+    padding: 4px 0; font-size: 14px;
+  }
+}
+
+/* Narrow reference label/value lists must not force a second scroll axis. */
+@media screen and (max-width: 480px) {
+  .court-listing dl { grid-template-columns: minmax(0, 1fr); }
+  .court-listing dd { min-width: 0; overflow-wrap: anywhere; margin-bottom: 8px; }
+}
+
+/* Keep the bounded-preview form compact without hiding its submit route. */
+.tier-strip-cap { text-transform: none; letter-spacing: 0; }
+.more-filters[open] > .more-filters-body { grid-column: 1 / -1; }
+@media (min-width: 721px) {
+  [data-roster-preview] .filter-bar-main { grid-template-columns: minmax(0, 1fr) auto auto; }
+}
+@media (max-width: 720px) {
+  [data-roster-preview] .filter-bar-main {
+    grid-template-areas: "search search" "submit filters";
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .roster-submit { grid-area: submit; }
+  .inmate-hero > div.record-detail { grid-column: 1; }
+  .inmate-hero .record-photo { width: 120px; }
+}
+
+@media print {
+  .inmate-hero > div.record-detail { grid-column: 1; }
 }

@@ -1,0 +1,22 @@
+{
+  "recorded_at_utc": "2026-09-22T21:58:11.177820+00:00",
+  "branch": "arena/01a0cae3-hcjc",
+  "base_commit": "fd128705ce2dc44553f58b43b99e8f32d5bad05c",
+  "working_tree": "Uncommitted remediation. Base commit alone does NOT identify the tested changes.",
+  "tested_source_manifest_sha256": "d4ef9854b4267a5fe61452d5afeef61bc5c4adae9dfe4d13e191b00d30427107",
+  "build_manifest_sha256": "1732018ac810ac3d698c5505d5c7811916d0cbb002391b668f580b24e9ec245f",
+  "build_completed_utc": "2026-09-22T21:47:46.899Z",
+  "build_command": "JCSTREAM_SITE_BASE_URL='' JCSTREAM_CNAME=www.aretheyinjail.com .venv/bin/python -m web.build --out .cache/closure/site",
+  "artifact_policy": "All generated paths hashed. Only already-tracked docs artifacts copied back. Do not commit generated public-data mirrors or existing empty clerk fallback.",
+  "python": "3.11.2",
+  "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+  "node": "v22.22.3",
+  "chromium": "153.0.8010.0",
+  "playwright": "1.58.2",
+  "axe_core": "4.13.0",
+  "ruff": "0.16.7",
+  "mypy": "2.3.1",
+  "browser_run_started_utc": "2026-09-22T21:56:04.363Z",
+  "ci_python_versions": "3.13 and 3.14 NOT RUN; local 3.13 install failed TLS/certificate/download attempts.",
+  "production_probe": "curl exit 35. No production UI, assets, or performance verified. No remediation push/PR/merge/deployment performed."
+}
