@@ -2,120 +2,112 @@
    homepage and the /archive/ page (spec 1.3.5, 1.3.6). The filter bar ships
    visible in markup: JavaScript enhances (live filtering, dropdown results,
    table view), never gates. Expects `by_month` and `expanded_months` in
-   context; the filter options come from env globals. #}
-<style>
-  {# Scoped to this block only: on small viewports the severity strip and
-     legend collapse into a details; desktop keeps them visible (spec 1.3.5).
-     CSP allows 'unsafe-inline' styles (see base.html), and no shared CSS
-     file is touched. #}
-  .how-to-read-mobile { display: none; }
-  .how-to-read-mobile summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
-  @media (max-width: 720px) {
-    .how-to-read-desktop { display: none; }
-    .how-to-read-mobile { display: block; margin: 0 0 16px; }
-  }
-</style>
+   context; the filter options come from env globals.
 
+   v3 (2026-09-22, owner-directed): the roster list is the hero. The filter
+   apparatus collapses to ONE compact sticky toolbar (search + tier + sort in
+   a single row); offense, activity, table view, reset, and the legend live
+   behind a "Filters" disclosure; the F1-MM degree strip is a slim 4px bar;
+   the "Released in the last 24 hours" list moved below the roster. All JS
+   hooks (ids, data-filter attributes, .tier-strip-seg clicks) are unchanged:
+   this is a layout change, not a feature removal. #}
 <div class="filter-bar" id="filters">
-  <label for="filter-tier">Tier
-    <select id="filter-tier" data-filter="tier">
-      <option value="">all</option>
-      <option value="felony">felony</option>
-      <option value="misdemeanor">misdemeanor</option>
-      <optgroup label="degree">
-        {# Lowercase values: the ?tier= deep-link loop in main.js lowercases
-           params before matching option values. #}
-        {% for t in tier_ladder %}<option value="{{ t | lower }}">{{ t }}{% if roster_tiers.get(t) %} ({{ roster_tiers[t] }}){% endif %}</option>{% endfor %}
-      </optgroup>
-    </select>
-  </label>
-  <label for="filter-chap">Offense
-    <select id="filter-chap" data-filter="chap">
-      <option value="">all offenses</option>
-      {% for slug, label, count in all_chapters %}<option value="{{ slug }}">{{ label }} ({{ count }})</option>{% endfor %}
-    </select>
-  </label>
-  {# Results panel and status announcer live OUTSIDE the label: label
-     subtree content feeds the input's computed accessible name, and
-     interactive content inside a label is nonconforming HTML. #}
-  <div class="search-wrap">
-    <label for="search-box">Search
-      <input type="search" data-filter="search" id="search-box" placeholder="name, charge, ORC code, or #" autocomplete="off" aria-controls="search-results">
+  <div class="filter-bar-main">
+    {# Results panel and status announcer live OUTSIDE the label: label
+       subtree content feeds the input's computed accessible name, and
+       interactive content inside a label is nonconforming HTML. The visible
+       label is sr-only; the placeholder carries the sighted affordance. #}
+    <div class="search-wrap">
+      <label for="search-box" class="sr-only">Search the roster</label>
+      <input type="search" data-filter="search" id="search-box" placeholder="Name, charge, ORC code" autocomplete="off" aria-controls="search-results">
+      <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
+      <span class="sr-only" id="search-status" role="status"></span>
+    </div>
+    {# Citizen panel 2026-09-22 (quick win 4): "Tier" had no constituency;
+       nobody would touch a control they could not decode. Plain language:
+       "Charge level". The ?tier= URL param and option values are unchanged. #}
+    <label class="filter-inline" for="filter-tier">Charge level
+      <select id="filter-tier" data-filter="tier" aria-describedby="tier-explain">
+        <option value="">all</option>
+        <option value="felony">felony</option>
+        <option value="misdemeanor">misdemeanor</option>
+        <optgroup label="degree">
+          {# Lowercase values: the ?tier= deep-link loop in main.js lowercases
+             params before matching option values. #}
+          {% for t in tier_ladder %}<option value="{{ t | lower }}">{{ t }}{% if roster_tiers.get(t) %} ({{ roster_tiers[t] }}){% endif %}</option>{% endfor %}
+        </optgroup>
+      </select>
+      <span class="sr-only" id="tier-explain">Filter by how serious the most serious charge is: felony or misdemeanor, most serious first.</span>
     </label>
-    <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
-    <span class="sr-only" id="search-status" role="status"></span>
+    <label class="filter-inline" for="filter-sort">Sort
+      <select id="filter-sort">
+        <option value="recent">newest first</option>
+        <option value="custody">longest held</option>
+        <option value="degree">most serious</option>
+        <option value="name">name A-Z</option>
+      </select>
+    </label>
+    {# Secondary filters behind a native disclosure: no JS needed, works
+       with keyboard and AT out of the box. display:contents (CSS) keeps the
+       summary in the toolbar row while the body breaks to a full-width row. #}
+    <details class="more-filters">
+      <summary>Filters</summary>
+      <div class="more-filters-body">
+        <label class="filter-inline" for="filter-chap">Offense
+          <select id="filter-chap" data-filter="chap">
+            <option value="">all offenses</option>
+            {% for slug, label, count in all_chapters %}<option value="{{ slug }}">{{ label }} ({{ count }})</option>{% endfor %}
+          </select>
+        </label>
+        <label class="filter-inline" for="filter-recent">Activity
+          <select id="filter-recent" data-filter="recent">
+            <option value="">any time</option>
+            <option value="booked">booked 24h</option>
+          </select>
+        </label>
+        {# JS-only controls ship hidden; the bar itself is visible without JS. #}
+        <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
+          <span class="view-toggle-icon" aria-hidden="true">≡</span>
+          <span class="view-toggle-text">Table view</span>
+        </button>
+        <button type="button" class="filter-reset" id="filter-reset" hidden>Reset filters</button>
+        {# Visible only; announcements go through the single #search-status node
+           so one keystroke can't fire multiple polite live regions at once. #}
+        <span class="filter-count"></span>
+        <p class="legend" aria-hidden="true">
+          <span class="swatch charge-2903"><span class="dot"></span>violence / sex</span>
+          <span class="swatch charge-2923"><span class="dot"></span>weapons</span>
+          <span class="swatch charge-2911"><span class="dot"></span>burglary / property</span>
+          <span class="swatch charge-2913"><span class="dot"></span>theft / fraud</span>
+          <span class="swatch charge-2925"><span class="dot"></span>drugs</span>
+          <span class="swatch charge-2919"><span class="dot"></span>family / domestic</span>
+          <span class="swatch charge-traffic"><span class="dot"></span>traffic / other</span>
+          <span class="swatch"><span class="tier tier-felony legend-tier">F</span>felony</span>
+          <span class="swatch"><span class="tier tier-misdemeanor legend-tier">M</span>misdemeanor</span>
+        </p>
+      </div>
+    </details>
   </div>
-  <label for="filter-recent">Activity
-    <select id="filter-recent" data-filter="recent">
-      <option value="">any time</option>
-      <option value="booked">booked 24h</option>
-    </select>
-  </label>
-  <label for="filter-sort">Sort
-    <select id="filter-sort">
-      <option value="recent">newest first</option>
-      <option value="custody">longest held</option>
-      <option value="degree">most serious</option>
-      <option value="name">name A-Z</option>
-    </select>
-  </label>
-  {# JS-only controls ship hidden; the bar itself is visible without JS. #}
-  <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
-    <span class="view-toggle-icon" aria-hidden="true">≡</span>
-    <span class="view-toggle-text">Table view</span>
-  </button>
-  <button type="button" class="filter-reset" id="filter-reset" hidden>Reset filters</button>
-  {# Visible only; announcements go through the single #search-status node
-     so one keystroke can't fire multiple polite live regions at once. #}
-  <span class="filter-count"></span>
+  {# Slim degree strip: the most-serious-degree distribution as a 4px bar,
+     not a labeled section. Segments stay clickable degree filters
+     (main.js 3b2); the role="img" label carries the numbers for AT. #}
+  {% set tb = roster_tiers %}
+  {% set tb_known = (tb.values() | sum) - tb.get('UNK', 0) %}
+  {% if tb_known > 0 %}
+  <div class="tier-strip tier-strip-slim" role="img" aria-label="Roster by most serious degree: {% for t in tier_ladder %}{% if tb.get(t) %}{{ t }} {{ tb[t] }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}">
+    {% for t in tier_ladder %}{% if tb.get(t) %}<span class="tier-strip-seg ladder-{{ t }}" style="width: {{ '%.2f' % (100.0 * tb[t] / tb_known) }}%" title="{{ t }}: {{ tb[t] }}"></span>{% endif %}{% endfor %}
+  </div>
+  {# Citizen panel 2026-09-22 (quick win 7): the strip's colors get an honest
+     visible label. Felonies run F1 (most serious) to F5; misdemeanors M1 to
+     MM follow in blue. #}
+  <p class="tier-strip-cap">Roster share by most serious charge: felonies F1 (most serious) through F5, then misdemeanors M1 through MM. Select a color to filter.</p>
+  {% endif %}
 </div>
 <div class="empty filter-empty" id="filter-empty" role="status" hidden>
   <h2>No one in custody matches that filter.</h2>
   <p>Try a last name only, clear one filter, or check spelling. Recently arrested people may not appear immediately, and some people may be held by another county, city, state, or federal agency.</p>
   <p><a href="{{ base_url }}/help/">Get free help resources</a> &middot; <a href="https://www.hcso.org/justice-center-services/inmate-search/">Check the HCSO source</a></p>
 </div>
-
-{# Severity strip + legend, defined once, rendered twice: visible on desktop,
-   collapsed into a details on small viewports (spec 1.3.5). The legend is
-   aria-hidden and the strip is display:none in its hidden copy, so
-   assistive tech sees exactly one. #}
-{% macro how_to_read() %}
-{% set tb = roster_tiers %}
-{% set tb_known = (tb.values() | sum) - tb.get('UNK', 0) %}
-{% if tb_known > 0 %}
-<div class="tier-strip-wrap">
-  <div class="tier-strip" role="img" aria-label="Roster by most serious degree: {% for t in tier_ladder %}{% if tb.get(t) %}{{ t }} {{ tb[t] }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}">
-    {% for t in tier_ladder %}{% if tb.get(t) %}<span class="tier-strip-seg ladder-{{ t }}" style="width: {{ '%.2f' % (100.0 * tb[t] / tb_known) }}%" title="{{ t }}: {{ tb[t] }}"></span>{% endif %}{% endfor %}
-  </div>
-  <span class="tier-strip-cap" aria-hidden="true">most serious degree per person &middot; F1 &rarr; MM</span>
-</div>
-{% endif %}
-<p class="legend" aria-hidden="true">
-  <span class="swatch charge-2903"><span class="dot"></span> violence / sex</span>
-  <span class="swatch charge-2923"><span class="dot"></span> weapons</span>
-  <span class="swatch charge-2911"><span class="dot"></span> burglary / property</span>
-  <span class="swatch charge-2913"><span class="dot"></span> theft / fraud</span>
-  <span class="swatch charge-2925"><span class="dot"></span> drugs</span>
-  <span class="swatch charge-2919"><span class="dot"></span> family / domestic</span>
-  <span class="swatch charge-traffic"><span class="dot"></span> traffic / other</span>
-  <span class="swatch"><span class="tier tier-felony legend-tier">F</span> felony</span>
-  <span class="swatch"><span class="tier tier-misdemeanor legend-tier">M</span> misdemeanor</span>
-</p>
-{% endmacro %}
-<div class="how-to-read-desktop">{{ how_to_read() }}</div>
-<details class="how-to-read-mobile">
-  <summary>How to read severity and charge colors</summary>
-  {{ how_to_read() }}
-</details>
-
-{% if recent_released_24h %}
-<details class="released-24h">
-  <summary>Released in the last 24 hours <span class="count">{{ recent_released_24h | length }}</span> <span class="released-date">as of {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}</span></summary>
-  <p class="released-note">From the public <a href="{{ base_url }}/data/">changelog</a>. Release events record leaving the Justice Center; this site does not track court outcomes.</p>
-  {% set rel_recent = recent_released_24h[-12:] | reverse | list %}
-  <p class="released-flow">{% for e in rel_recent %}<span>{{ e.name }}</span> <span class="sep" aria-hidden="true">·</span> {% endfor %}<a href="{{ base_url }}/data/">{% if recent_released_24h | length > 12 %}+{{ recent_released_24h | length - 12 }} more in the changelog{% else %}full changelog{% endif %}</a></p>
-</details>
-{% endif %}
 
 {# Empty landing bin for JS sort modes (main.js 3c). Ships hidden and empty:
    with JS off the sort control never appears and this section is inert.
@@ -136,3 +128,14 @@
   </div>
 </details>
 {% endfor %}
+
+{# Owner-directed 2026-09-22: the 24h-release list stays on the page but must
+   not sit above the roster. It now closes the roster section. #}
+{% if recent_released_24h %}
+<details class="released-24h">
+  <summary>Released in the last 24 hours <span class="count">{{ recent_released_24h | length }}</span> <span class="released-date">as of {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}</span></summary>
+  <p class="released-note">From the public <a href="{{ base_url }}/data/">changelog</a>. Release events record leaving the Justice Center; this site does not track court outcomes.</p>
+  {% set rel_recent = recent_released_24h[-12:] | reverse | list %}
+  <p class="released-flow">{% for e in rel_recent %}<span>{{ e.name }}</span> <span class="sep" aria-hidden="true">·</span> {% endfor %}<a href="{{ base_url }}/data/">{% if recent_released_24h | length > 12 %}+{{ recent_released_24h | length - 12 }} more in the changelog{% else %}full changelog{% endif %}</a></p>
+</details>
+{% endif %}

@@ -8,6 +8,25 @@
 {% block canonical_path %}/jury/{% endblock %}
 {% block body_class %}detail page-jury{% endblock %}
 {% block sr_h1 %}{% endblock %}
+{# Citizen panel 2026-09-22 (quick win 2): the detail-denial notice
+   misleads on static reference pages, so base.html skips it here. #}
+{% set suppress_detail_banner = True %}
+{# Citizen panel 2026-09-22 (quick win 8): the provenance dict lives
+   at the top so the capture date can be stated plainly under the
+   lede, not buried in the About section. #}
+{% set provenance = {
+  "feed": "feeds/jury.json",
+  "captured": "2026-09-21",
+  "sources": [
+    {"label": "Jury Commission page (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/jury-commission/"},
+    {"label": "Jury reporting instructions (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/jury-reporting-instructions/"},
+    {"label": "Contact the Jury Commission (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/contact-the-jury-commission/"},
+    {"label": "Juror Q&A (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/juror-qa/"},
+    {"label": "July 2026 jury scam alert (PDF)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2026/07/SCAM-ALERT.pdf"},
+  ],
+  "note": "Corpus captured 2026-09-21. The court's reporting instructions page updates daily; link last verified 2026-09-21. Full texts of the July 2026 scam alert and the September 11, 2023 jury-scam press release are in the corpus.",
+} %}
+
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="{{ base_url }}/">Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Jury duty</span>
@@ -27,7 +46,9 @@
   today's instructions, never a cached copy.
 </p>
 
-<div class="decision-aid" aria-label="What to do with your jury summons">
+<p class="capture-line">Jury information captured {{ provenance.captured }}.</p>
+
+<div class="decision-aid" tabindex="-1">
   <p><strong>You got a jury summons. Three steps.</strong></p>
   <p>1. Find your group number on your summons: about an inch below the barcode, the word GROUP followed by a 3-digit number.</p>
   <p>2. Check the court's live reporting page the evening before your date, or call the Juror Hotline at <a href="tel:+15139465879">513-946-5879</a>, to learn whether your group must report.</p>
@@ -35,10 +56,10 @@
 </div>
 
 <section aria-labelledby="do-i-report-h">
-  <div class="visit-card visit-card-primary" id="do-i-report">
+  <div class="visit-card visit-card-primary" tabindex="-1" id="do-i-report">
     <div class="visit-card-body">
       <span class="visit-card-kicker">Reporting instructions</span>
-      <h2 class="visit-card-title" id="do-i-report-h">Do I report?</h2>
+      <h2 class="visit-card-title" tabindex="-1" id="do-i-report-h">Do I report?</h2>
       <p class="visit-card-desc">
         The court's reporting instructions change every day. This page never caches them:
         always check the court's live reporting page for the current instructions.
@@ -68,7 +89,7 @@
   </ul>
 </nav>
 
-<details class="sect-h" id="scam-details">
+<details class="sect-h" tabindex="-1" id="scam-details">
   <summary><h2>Scam details</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <p>
@@ -100,7 +121,7 @@
   </div>
 </details>
 
-<details class="sect-h" id="contact" open>
+<details class="sect-h" tabindex="-1" id="contact" open>
   <summary><h2>Contact the Jury Commission</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <dl>
@@ -119,7 +140,7 @@
   </div>
 </details>
 
-<section id="qa" aria-label="Juror questions and answers">
+<section tabindex="-1" id="qa" aria-label="Juror questions and answers">
   <h2 class="sect-h">Juror Q&amp;A <span class="count">({{ jury_qa | length }} questions)</span></h2>
   {% for question, answer in jury_qa %}
   <details>
@@ -129,7 +150,7 @@
   {% endfor %}
 </section>
 
-<details class="sect-h" id="excuses">
+<details class="sect-h" tabindex="-1" id="excuses">
   <summary><h2>Excuses and postponements</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <p>
@@ -161,7 +182,7 @@
   </div>
 </details>
 
-<details class="sect-h" id="amenities">
+<details class="sect-h" tabindex="-1" id="amenities">
   <summary><h2>Juror amenities</h2><span class="meta"><span class="count">{{ jury_amenities | length }}</span> items</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <p>The Jury Commission Office provides the following while you wait to be called for a trial:</p>
@@ -173,7 +194,7 @@
   </div>
 </details>
 
-<details class="sect-h" id="work">
+<details class="sect-h" tabindex="-1" id="work">
   <summary><h2>Work statements and check re-issue</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <div class="ref-row-list">
@@ -193,7 +214,7 @@
   </div>
 </details>
 
-<details class="sect-h" id="creed">
+<details class="sect-h" tabindex="-1" id="creed">
   <summary><h2>Juror Creed</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <blockquote class="juror-creed">
@@ -204,7 +225,7 @@
   </div>
 </details>
 
-<details class="sect-h" id="video">
+<details class="sect-h" tabindex="-1" id="video">
   <summary><h2>Orientation video</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <div class="visit-grid">
@@ -220,18 +241,7 @@
   </div>
 </details>
 
-{% set provenance = {
-  "feed": "feeds/jury.json",
-  "captured": "2026-09-21",
-  "sources": [
-    {"label": "Jury Commission page (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/jury-commission/"},
-    {"label": "Jury reporting instructions (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/jury-reporting-instructions/"},
-    {"label": "Contact the Jury Commission (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/contact-the-jury-commission/"},
-    {"label": "Juror Q&A (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/juror-qa/"},
-    {"label": "July 2026 jury scam alert (PDF)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2026/07/SCAM-ALERT.pdf"},
-  ],
-  "note": "Corpus captured 2026-09-21. The court's reporting instructions page updates daily; link last verified 2026-09-21. Full texts of the July 2026 scam alert and the September 11, 2023 jury-scam press release are in the corpus.",
-} %}
+
 {% include "_provenance.html" %}
 {% include "_disclaimer_strip.html" %}
 {% include "_more_reference.html" %}

@@ -3,6 +3,10 @@
 {% block canonical_path %}/safety/{% endblock %}
 {% block body_class %}detail{% endblock %}
 {% block sr_h1 %}{% endblock %}
+{# Citizen panel 2026-09-22 (quick win 2): the detail-denial notice
+   misleads on static reference pages, so base.html skips it here. #}
+{% set suppress_detail_banner = True %}
+
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Community safety</span>

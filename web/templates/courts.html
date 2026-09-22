@@ -9,6 +9,23 @@
 {% block canonical_path %}/courts/{% endblock %}
 {% block body_class %}detail page-courts{% endblock %}
 {% block sr_h1 %}{% endblock %}
+{# Citizen panel 2026-09-22 (quick win 2): the detail-denial notice
+   misleads on static reference pages, so base.html skips it here. #}
+{% set suppress_detail_banner = True %}
+{# Citizen panel 2026-09-22 (quick win 8): the provenance dict lives
+   at the top so the capture date can be stated plainly under the
+   lede, not buried in the About section. #}
+{% set provenance = {
+  "feed": "feeds/courts.json",
+  "captured": "2026-09-21",
+  "sources": [
+    {"label": "hamiltoncountycourts.org", "url": "https://hamiltoncountycourts.org/"},
+    {"label": "probatect.org", "url": "https://www.probatect.org/"},
+    {"label": "courtclerk.org", "url": "https://www.courtclerk.org/"}
+  ],
+  "note": "Corpus captured 2026-09-20/21. The 2026 Common Pleas holiday list is a scanned image in the court's published copy; its text is not recoverable. Mayor's Courts are not in the court corpus and have no block on this page."
+} %}
+
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="{{ base_url }}/">Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Courts</span>
@@ -25,6 +42,8 @@
   Which court handles your case, and how to reach it. Hamilton County has six courts with different jurisdictions, all in the same courthouse complex. This page mirrors the courts' own published directories so the distinctions are in one place.
 </p>
 
+<p class="capture-line">Court directory captured {{ provenance.captured }}.</p>
+
 {% set scam_variant = "general" %}{% include "_scam_alert.html" %}
 
 <nav class="tab-toc" aria-label="On this page">
@@ -37,8 +56,8 @@
   <a href="#clerk-offices">Clerk offices</a>
 </nav>
 
-<h2 class="sect-h" id="which-court">Which court is mine</h2>
-<div class="decision-aid" aria-label="Which court is mine">
+<h2 class="sect-h" tabindex="-1" id="which-court">Which court is mine</h2>
+<div class="decision-aid" tabindex="-1">
   <p><strong>Felony</strong> (prison time possible) &rarr; <a href="#court-common-pleas">Court of Common Pleas, General Division</a></p>
   <p><strong>Misdemeanor or traffic</strong> &rarr; <a href="#court-municipal">Hamilton County Municipal Court</a></p>
   <p><strong>Divorce, dissolution, or custody between parents</strong> &rarr; <a href="#court-domestic-relations">Domestic Relations Division</a></p>
@@ -48,9 +67,9 @@
   <p><strong>Looking for a specific judge?</strong> Judge profiles live on the <a href="{{ base_url }}/judges/">Judges tab</a>, or pick a courtroom below.</p>
 </div>
 
-<h2 class="sect-h" id="the-courts">The courts</h2>
+<h2 class="sect-h" tabindex="-1" id="the-courts">The courts</h2>
 
-<div class="court-listing" id="court-common-pleas">
+<div class="court-listing" tabindex="-1" id="court-common-pleas">
   <h3>Court of Common Pleas, General Division</h3>
   <p class="court-jurisdiction">The trial court of general jurisdiction: felony criminal cases and civil cases in which the amount in controversy is more than $15,000, including matters involving title to real estate. {{ common_pleas | length }} judges; cases are assigned by lot to a single judge at filing and stay with that judge through termination.</p>
   <blockquote class="banner courts-mission">
@@ -87,7 +106,7 @@
   </div>
 </div>
 
-<div class="court-listing" id="court-municipal">
+<div class="court-listing" tabindex="-1" id="court-municipal">
   <h3>Hamilton County Municipal Court</h3>
   <p class="court-jurisdiction">Misdemeanor criminal cases, traffic offenses, and civil cases in which the amount in controversy is less than $15,000, including small claims and landlord-tenant matters. Conducts preliminary hearings for felonies before they transfer to Common Pleas. {{ municipal | length }} judges.</p>
   <dl class="fields">
@@ -98,7 +117,7 @@
     <dt>Address</dt>
     <dd>Hamilton County Courthouse, 1000 Main Street, Room 205, Cincinnati, Ohio 45202</dd>
     <dt>Main phone</dt>
-    <dd><a href="tel:+15139465200">513-946-5200</a></dd>
+    <dd><a href="tel:+15139465200" aria-label="513-946-5200 (repeated)">513-946-5200</a></dd>
     <dt>Civil Clerk</dt>
     <dd>1000 Main Street, Room 115. Hours: 8 AM-4 PM, Monday-Friday. Small claims, landlord-tenant, civil under $15,000. <a href="tel:+15139465700">513-946-5700</a>.</dd>
     <dt>Criminal &amp; Traffic Clerk</dt>
@@ -122,7 +141,7 @@
   </div>
 </div>
 
-<div class="court-listing" id="court-domestic-relations">
+<div class="court-listing" tabindex="-1" id="court-domestic-relations">
   <h3>Court of Common Pleas, Domestic Relations Division</h3>
   <p class="court-jurisdiction">Divorce, dissolution of marriage, legal separation, annulment, custody between parents, spousal support, and parental rights. Cases are assigned by lot to a judge at filing and stay with that judge.</p>
   <dl class="fields">
@@ -141,7 +160,7 @@
   </dl>
 </div>
 
-<div class="court-listing" id="court-probate">
+<div class="court-listing" tabindex="-1" id="court-probate">
   <h3>Hamilton County Probate Court (Common Pleas, Probate Division)</h3>
   <p class="court-jurisdiction">Administers estates, provides guardianship for residents who cannot care for themselves, and handles marriages, adoptions, name changes, and mental-health civil-commitment cases. Over 80 services.</p>
   <dl class="fields">
@@ -162,7 +181,7 @@
   </dl>
 </div>
 
-<div class="court-listing" id="court-juvenile">
+<div class="court-listing" tabindex="-1" id="court-juvenile">
   <h3>Hamilton County Juvenile Court (Common Pleas, Juvenile Division)</h3>
   <p class="court-jurisdiction">Cases involving people under 18 (delinquency), plus custody disputes between parents or with a non-parent.</p>
   <dl class="fields">
@@ -179,7 +198,7 @@
   </dl>
 </div>
 
-<div class="court-listing" id="court-appeals">
+<div class="court-listing" tabindex="-1" id="court-appeals">
   <h3>First District Court of Appeals</h3>
   <p class="court-jurisdiction">The intermediate appellate court for Hamilton County, the only county in the First District. Reviews appeals from Common Pleas (all divisions) and Municipal Court. Three-judge panels hear each case; panel decisions can be appealed to the Ohio Supreme Court.</p>
   <dl class="fields">
@@ -194,7 +213,7 @@
   </dl>
 </div>
 
-<h2 class="sect-h" id="case-path">How a case moves through the system</h2>
+<h2 class="sect-h" tabindex="-1" id="case-path">How a case moves through the system</h2>
 <p>
   An adult felony arrest in Hamilton County typically follows this path. The path for a misdemeanor differs at step 2 onward (it stays in Municipal Court).
 </p>
@@ -210,7 +229,7 @@
 </ol>
 <p class="muted">Specialty courts and probation supervision are covered in full on the <a href="{{ base_url }}/services/">Services and Programs tab</a>; they are not duplicated here.</p>
 
-<h2 class="sect-h" id="visit">Visiting the courthouse</h2>
+<h2 class="sect-h" tabindex="-1" id="visit">Visiting the courthouse</h2>
 <p>
   The courthouse is at 1000 Main Street, Cincinnati, Ohio 45202. Anyone entering must pass through a Sheriff's Security Checkpoint. Between 8:30 AM and 9:30 AM, expect much longer lines and wait times. The courthouse opens daily at 8:00 AM. Enter the courthouse from Main Street.
 </p>
@@ -230,7 +249,7 @@
 </dl>
 <p class="muted">Parking details and rates mirrored from the court's parking page, corpus captured 2026-09-21; rates change, verify before you go. What to bring and how to behave on the day is on the <a href="{{ base_url }}/help/#appearing">Self-Help tab: Appearing in court</a>.</p>
 
-<h2 class="sect-h" id="phones">Phone directories</h2>
+<h2 class="sect-h" tabindex="-1" id="phones">Phone directories</h2>
 <p>
   The numbers below are the most-called lines, from the courts' own <em>Frequently Used Phone Numbers</em> sheet (PDF, January 2025 edition; area code 513). The full directories are linked as downloads.
 </p>
@@ -238,13 +257,13 @@
   <dt>Main Courthouse</dt>
   <dd><a href="tel:+15139466464">513-946-6464</a></dd>
   <dt>Criminal / Traffic Clerk counter</dt>
-  <dd><a href="tel:+15139466040">513-946-6040</a> (8 AM-4 PM) &middot; 24-hour line <a href="tel:+15139466010">513-946-6010</a></dd>
+  <dd><a href="tel:+15139466040" aria-label="513-946-6040 (repeated)">513-946-6040</a> (8 AM-4 PM) &middot; 24-hour line <a href="tel:+15139466010">513-946-6010</a></dd>
   <dt>Assignment Commissioner, Common Pleas</dt>
-  <dd><a href="tel:+15139465930">513-946-5930</a></dd>
+  <dd><a href="tel:+15139465930" aria-label="513-946-5930 (repeated)">513-946-5930</a></dd>
   <dt>Assignment Commissioner, Municipal</dt>
-  <dd><a href="tel:+15139465190">513-946-5190</a> (Courthouse) &middot; <a href="tel:+15139466250">513-946-6250</a> (Justice Center)</dd>
+  <dd><a href="tel:+15139465190" aria-label="513-946-5190 (repeated)">513-946-5190</a> (Courthouse) &middot; <a href="tel:+15139466250" aria-label="513-946-6250 (repeated)">513-946-6250</a> (Justice Center)</dd>
   <dt>Jury Commission</dt>
-  <dd><a href="tel:+15139465879">513-946-5879</a></dd>
+  <dd><a href="tel:+15139465879" aria-label="513-946-5879 (repeated)">513-946-5879</a></dd>
   <dt>Failure to Appear Program</dt>
   <dd><a href="tel:+15139466153">513-946-6153</a></dd>
   <dt>Pretrial Services</dt>
@@ -256,7 +275,7 @@
   <dt>Public Defender</dt>
   <dd><a href="tel:+15139463700">513-946-3700</a></dd>
   <dt>Legal Aid Society</dt>
-  <dd><a href="tel:+15132419400">513-241-9400</a></dd>
+  <dd><a href="tel:+15132419400" aria-label="513-241-9400 (repeated)">513-241-9400</a></dd>
   <dt>Lawyer Referral Service (Bar Association)</dt>
   <dd><a href="tel:+15133818359">513-381-8359</a></dd>
 </dl>
@@ -273,7 +292,7 @@
   <span class="muted">PDF, May 2026 &middot; officers, EMU, victims services</span>
 </a>
 
-<h2 class="sect-h" id="holidays">Holiday closings</h2>
+<h2 class="sect-h" tabindex="-1" id="holidays">Holiday closings</h2>
 <p>
   The courts publish closing lists ahead of each year. Always verify a date with the court before relying on it.
 </p>
@@ -334,16 +353,7 @@
   This page is a public-records mirror, not legal advice. Public records belong to the people; officials act as trustees. Court directories mirror the court-published corpus captured 2026-09-21 (feeds/courts.json); full judge profiles live on the <a href="{{ base_url }}/judges/">Judges tab</a>, appearing-in-court guidance on the <a href="{{ base_url }}/help/#appearing">Self-Help tab</a>, and probation and specialized dockets on the <a href="{{ base_url }}/services/">Services and Programs tab</a>. Phone numbers were verified from court publications on 2026-09-21. If you find a contact that has changed, please <a href="https://github.com/AICincy/HCJC/issues">open an issue</a>.
 </p>
 
-{% set provenance = {
-  "feed": "feeds/courts.json",
-  "captured": "2026-09-21",
-  "sources": [
-    {"label": "hamiltoncountycourts.org", "url": "https://hamiltoncountycourts.org/"},
-    {"label": "probatect.org", "url": "https://www.probatect.org/"},
-    {"label": "courtclerk.org", "url": "https://www.courtclerk.org/"}
-  ],
-  "note": "Corpus captured 2026-09-20/21. The 2026 Common Pleas holiday list is a scanned image in the court's published copy; its text is not recoverable. Mayor's Courts are not in the court corpus and have no block on this page."
-} %}
+
 {% include "_provenance.html" %}
 {% include "_disclaimer_strip.html" %}
 {% include "_more_reference.html" %}

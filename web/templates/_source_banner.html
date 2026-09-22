@@ -1,10 +1,7 @@
-{# Site-wide detail-retrieval denial banner, included from base.html while the
-   WAF-block ledger shows an open detail-level denial period. Severity comes
-   from roster_stale.detail_status. Colors use existing tokens only: --warn is
-   the established severity-red token (no --danger token exists in
-   style.css), --fg-soft for secondary text. #}
-<aside class="source-banner" role="status" aria-label="Inmate detail retrieval status">
-  <p><strong>Detail retrieval {% if roster_stale.detail_status == 'BLOCKED' %}blocked{% else %}degraded{% endif %}.</strong>
-  Since {{ roster_stale.detail_since or 'unknown date' }}, HCSO&rsquo;s inmate detail pages have been returning blocked or error responses to this site&rsquo;s automated public-records retrieval. Charges, bonds, and photos on this page reflect the last successfully retrieved data, not necessarily the current roster.</p>
-  <p class="muted">Each failed retrieval is logged as evidence; see <a href="{{ base_url }}/data/#access">access interruptions</a> and the <a href="{{ base_url }}/transparency/">transparency scorecard</a>.</p>
+{# Detail-retrieval freshness notice. One short sentence with two evidence
+   links. Rendered from base.html after the masthead on roster-derived pages
+   while the WAF-block ledger shows an open detail-level denial period.
+   Static court-reference pages set suppress_detail_banner. #}
+<aside class="source-banner" role="status" aria-label="Data freshness notice">
+  <p>Some inmate details may be out of date because automated detail updates have been blocked since {{ roster_stale.detail_since or 'an unknown date' }}; see <a href="{{ base_url }}/data/#access">access interruptions</a> and the <a href="{{ base_url }}/transparency/">transparency scorecard</a>.</p>
 </aside>

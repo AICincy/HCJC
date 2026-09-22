@@ -3,6 +3,10 @@
 {% block canonical_path %}/judges/{% endblock %}
 {% block body_class %}detail page-judges{% endblock %}
 {% block sr_h1 %}{% endblock %}
+{# Citizen panel 2026-09-22 (quick win 2): the detail-denial notice
+   misleads on static reference pages, so base.html skips it here. #}
+{% set suppress_detail_banner = True %}
+
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   {# "Court reference" is the drawer group name (spec 3.1.2); there is no
@@ -20,6 +24,8 @@
 <p class="page-lede">
   Find your judge's courtroom, chambers contact, and standing orders. Start with the court.
 </p>
+
+<p class="capture-line">Judge profiles captured {{ provenance.captured }}.</p>
 
 <nav aria-label="On this page">
   <ul class="tab-toc">
@@ -44,7 +50,7 @@
 {% macro judge_cards(judges, court_key) %}
 <div class="ref-grid">
   {% for judge in judges %}
-  <section class="judge-card" id="judge-{{ judge.slug }}" data-court="{{ court_key }}" data-search="{{ judge.search_text }}">
+  <section class="judge-card" tabindex="-1" id="judge-{{ judge.slug }}" data-court="{{ court_key }}" data-search="{{ judge.search_text }}">
     <div class="judge-card-top">
       <img class="judge-photo" src="{{ base_url }}{{ judge.photo_src }}" alt="" width="96" height="96" loading="lazy">
       <div>
@@ -83,14 +89,14 @@
 </div>
 {% endmacro %}
 
-<details class="sect-h judges-section" id="common-pleas" open>
+<details class="sect-h judges-section" tabindex="-1" id="common-pleas" open>
   <summary><h2>Common Pleas, General Division</h2><span class="sect-h-marker" aria-hidden="true"></span><span class="count">{{ common_pleas | length }} judges</span></summary>
   <div class="sect-h-body">
     {{ judge_cards(common_pleas, "common-pleas") }}
   </div>
 </details>
 
-<details class="sect-h judges-section" id="municipal" open>
+<details class="sect-h judges-section" tabindex="-1" id="municipal" open>
   <summary><h2>Hamilton County Municipal Court</h2><span class="sect-h-marker" aria-hidden="true"></span><span class="count">{{ municipal | length }} judges</span></summary>
   <div class="sect-h-body">
     {{ judge_cards(municipal, "municipal") }}

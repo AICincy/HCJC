@@ -8,6 +8,23 @@
 {% block canonical_path %}/rules/{% endblock %}
 {% block body_class %}detail page-rules{% endblock %}
 {% block sr_h1 %}{% endblock %}
+{# Citizen panel 2026-09-22 (quick win 2): the detail-denial notice
+   misleads on static reference pages, so base.html skips it here. #}
+{% set suppress_detail_banner = True %}
+{# Citizen panel 2026-09-22 (quick win 8): the provenance dict lives
+   at the top so the capture date can be stated plainly under the
+   lede, not buried in the About section. #}
+{% set provenance = {
+  "feed": "feeds/rules.json",
+  "captured": "2026-09-21",
+  "sources": [
+    {"label": "Local Rules Book effective 4-24-26 (PDF, hamiltoncountycourts.org)", "url": book_url},
+    {"label": "Municipal Court local rules index (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/municipal-local-rules/"},
+  ],
+  "sha256": book_sha256,
+  "note": "Corpus captured 2026-09-21. Rule 31 PDF, Rule 17 PDF, and Rule 18 PDF are the amendment sources listed above. The 2017 Rule 24 text was excluded from every feed and is not published here.",
+} %}
+
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="{{ base_url }}/">Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Local rules</span>
@@ -27,6 +44,8 @@
   texts are archival.
 </p>
 
+<p class="capture-line">Court rules captured {{ provenance.captured }}.</p>
+
 <nav aria-label="On this page">
   <ul class="tab-toc">
     <li><a href="#changed">Changed since the book <span class="count">{{ amendment_count }}</span></a></li>
@@ -36,12 +55,12 @@
   </ul>
 </nav>
 
-<details class="sect-h" id="changed" open>
+<details class="sect-h" tabindex="-1" id="changed" open>
   <summary><h2>Changed since the book</h2><span class="meta"><span class="count">{{ amendment_count }}</span> amendments</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <p>Three rules adopted after the 4-24-26 book, newest first. Each shows its effective date, its source PDF, and the full rule text.</p>
     {% for a in amendments %}
-    <article class="rule-card" id="rule-{{ a.rule }}">
+    <article class="rule-card" tabindex="-1" id="rule-{{ a.rule }}">
       <h3>
         <span class="rule-chip">Rule {{ a.rule }}</span>
         {{ a.title }}
@@ -63,7 +82,7 @@
   </div>
 </details>
 
-<details class="sect-h" id="book" open>
+<details class="sect-h" tabindex="-1" id="book" open>
   <summary><h2>Current rules book <span class="status-pill status-pill-current">Current</span></h2><span class="meta"><span class="count">{{ toc_count }}</span> rules</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <p>
@@ -85,7 +104,7 @@
   </div>
 </details>
 
-<details class="sect-h" id="municipal">
+<details class="sect-h" tabindex="-1" id="municipal">
   <summary><h2>Municipal Court rules</h2><span class="meta"><span class="count">{{ municipal_html | length }}</span> pages, <span class="count">{{ municipal_pdf | length }}</span> civil-rule PDFs</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <p>
@@ -115,7 +134,7 @@
   </div>
 </details>
 
-<div class="archival-block" id="archival">
+<div class="archival-block" tabindex="-1" id="archival">
   <details open>
     <summary>
       <h2><span class="status-pill status-pill-archived">Archived</span> Superseded rules <span class="count">({{ archival_count }} entries)</span></h2>
@@ -163,7 +182,7 @@
   </details>
 </div>
 
-<details class="sect-h" id="methodology">
+<details class="sect-h" tabindex="-1" id="methodology">
   <summary><h2>About this page</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <p>
@@ -181,16 +200,7 @@
   </div>
 </details>
 
-{% set provenance = {
-  "feed": "feeds/rules.json",
-  "captured": "2026-09-21",
-  "sources": [
-    {"label": "Local Rules Book effective 4-24-26 (PDF, hamiltoncountycourts.org)", "url": book_url},
-    {"label": "Municipal Court local rules index (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/municipal-local-rules/"},
-  ],
-  "sha256": book_sha256,
-  "note": "Corpus captured 2026-09-21. Rule 31 PDF, Rule 17 PDF, and Rule 18 PDF are the amendment sources listed above. The 2017 Rule 24 text was excluded from every feed and is not published here.",
-} %}
+
 {% include "_provenance.html" %}
 {% include "_disclaimer_strip.html" %}
 {% include "_more_reference.html" %}

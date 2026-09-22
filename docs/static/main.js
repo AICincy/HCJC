@@ -234,6 +234,14 @@
       if (f.tier) sp.set('tier', f.tier);
       if (f.chap) sp.set('chap', f.chap);
       if (f.recent) sp.set('recent', f.recent);
+      if (pagerSize !== 24) sp.set('pagesize', String(pagerSize));
+      // The page param tracks the primary (first visible) paginated list so
+      // a copied URL restores the page the reader was on.
+      var prim = primaryContainer();
+      if (prim) {
+        var primPage = pagerPages[prim.id] || 1;
+        if (primPage > 1) sp.set('page', String(primPage));
+      }
       var qs = sp.toString();
       var hash = window.location.hash || '';
       var next = window.location.pathname + (qs ? '?' + qs : '') + hash;
@@ -307,6 +315,11 @@
     }
     function apply(trigger) {
       var f = currentFilters();
+      if (trigger !== 'init') {
+        // Any new filter or sort input restarts every paginated list at
+        // page 1; the URL page param is dropped by syncUrl below.
+        pagerPages = {};
+      }
       var active = !!(f.tier || f.chap || f.search || f.recent);
       var shown = 0;
       clearAllMarks();
@@ -344,8 +357,241 @@
         status.textContent = active ? summary : '';
       }
       recountFilterOptions(f);
+      renderPagination();
       if (trigger !== 'init') syncUrl(f);
     }
+
+    // (3d) Pagination. Each month (and the sort-bin) is an independent
+    //      paginated list: 24 cards per page default, 24/48/96 choices.
+    //      Paginates the filtered set within each visible container, so it
+    //      composes with search/tier/offense/activity filters and sort modes.
+    //      Pager navs are built by JS only: without JS every card renders and
+    //      there is no paging (progressive enhancement).
+    var PAGE_SIZES = [24, 48, 96];
+    var pagerSize = 24;
+    var pagerPages = {}; // container id -> current page, 1-based
+    function mkEl(tag, cls) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      return e;
+    }
+    function pagerSortBin() { return document.getElementById('sort-bin'); }
+    function pagerContainers() {
+      // Visible paginated lists in DOM order: the sort-bin when a sort mode
+      // is active, otherwise every open, non-hidden month. Closed months
+      // are excluded: their pagers are not visible, and opening one starts
+      // it at page 1 via the toggle handler below. Hidden months (sort
+      // mode) are excluded; filter-emptied months render zero cards and
+      // their pagers hide themselves.
+      var list = [];
+      var sb = pagerSortBin();
+      if (sb && !sb.hidden) list.push(sb);
+      months.forEach(function (m) { if (!m.hidden && m.open) list.push(m); });
+      return list;
+    }
+    function primaryContainer() {
+      var cs = pagerContainers();
+      return cs.length ? cs[0] : null;
+    }
+    function filteredList(container) {
+      var out = [];
+      var all = container.querySelectorAll('.cards .card-inmate');
+      for (var i = 0; i < all.length; i++) {
+        if (!all[i].classList.contains('is-filtered-out')) out.push(all[i]);
+      }
+      return out;
+    }
+    function totalPagesFor(n) { return Math.max(1, Math.ceil(n / pagerSize)); }
+    function pageOf(id, total) {
+      var p = pagerPages[id] || 1;
+      if (p < 1) p = 1;
+      if (p > total) p = total;
+      pagerPages[id] = p;
+      return p;
+    }
+    function pagerLabel(container) {
+      var h = container.querySelector('summary h2');
+      if (h) return h.textContent.trim();
+      return container.getAttribute('aria-label') || 'roster';
+    }
+    function pageWindow(page, total) {
+      // Numbered buttons: first, last, and one neighbor each side of the
+      // current page, with ellipses for gaps. AUDHD-friendly: never a wall
+      // of tiny numbers; prev/next + first/last always present.
+      var out = [];
+      [1, page - 1, page, page + 1, total].forEach(function (p) {
+        if (p >= 1 && p <= total && out.indexOf(p) === -1) out.push(p);
+      });
+      out.sort(function (a, b) { return a - b; });
+      return out;
+    }
+    function renderPagerNav(container, pos, st) {
+      var nav = mkEl('nav', 'pager pager-' + pos);
+      nav.setAttribute('aria-label', 'Roster pages, ' + st.label);
+      var ctrls = mkEl('div', 'pager-controls');
+      var btns = mkEl('div', 'pager-btns');
+      function pgBtn(text, pg, alabel, disabled) {
+        var b = mkEl('button', 'pager-btn');
+        b.type = 'button';
+        b.setAttribute('data-pg', pg);
+        b.setAttribute('data-container', container.id);
+        b.textContent = text;
+        b.setAttribute('aria-label', alabel);
+        if (disabled) b.disabled = true;
+        return b;
+      }
+      btns.appendChild(pgBtn('First', 'first', 'First page, ' + st.label, st.page <= 1));
+      btns.appendChild(pgBtn('Prev', 'prev', 'Previous page, ' + st.label, st.page <= 1));
+      var nums = mkEl('span', 'pager-nums');
+      nums.setAttribute('role', 'group');
+      nums.setAttribute('aria-label', 'Page numbers, ' + st.label);
+      var win = pageWindow(st.page, st.total);
+      var prevP = 0;
+      win.forEach(function (p) {
+        if (p - prevP > 1) {
+          var ell = mkEl('span', 'pager-ellipsis');
+          ell.textContent = '…';
+          ell.setAttribute('aria-hidden', 'true');
+          nums.appendChild(ell);
+        }
+        var nb = mkEl('button', 'pager-num');
+        nb.type = 'button';
+        nb.setAttribute('data-pg', String(p));
+        nb.setAttribute('data-container', container.id);
+        nb.textContent = String(p);
+        if (p === st.page) {
+          nb.setAttribute('aria-current', 'page');
+          nb.setAttribute('aria-label', 'Page ' + p + ', current page, ' + st.label);
+        } else {
+          nb.setAttribute('aria-label', 'Go to page ' + p + ', ' + st.label);
+        }
+        nums.appendChild(nb);
+        prevP = p;
+      });
+      btns.appendChild(nums);
+      btns.appendChild(pgBtn('Next', 'next', 'Next page, ' + st.label, st.page >= st.total));
+      btns.appendChild(pgBtn('Last', 'last', 'Last page, ' + st.label, st.page >= st.total));
+      ctrls.appendChild(btns);
+      // Count line: the top nav's full status is the polite live region so
+      // page changes are announced once; the bottom nav mirrors the text.
+      var status = mkEl('p', 'pager-status');
+      var compact = mkEl('span', 'pager-status-compact');
+      compact.textContent = 'Page ' + st.page + ' of ' + st.total;
+      var full = mkEl('span', 'pager-status-full');
+      var range = st.count > 0 ? (st.start + 1) + '-' + st.end + ' of ' + st.count : '0 of 0';
+      full.textContent = 'Page ' + st.page + ' of ' + st.total + ' · Showing ' + range;
+      if (pos === 'top') full.setAttribute('aria-live', 'polite');
+      status.appendChild(compact);
+      status.appendChild(document.createTextNode(' '));
+      status.appendChild(full);
+      ctrls.appendChild(status);
+      var sizeLab = mkEl('label', 'pager-size');
+      sizeLab.appendChild(document.createTextNode('Per page '));
+      var sel = document.createElement('select');
+      sel.className = 'pager-size-sel';
+      sel.setAttribute('data-container', container.id);
+      sel.setAttribute('aria-label', 'Cards per page, ' + st.label);
+      PAGE_SIZES.forEach(function (s) {
+        var o = document.createElement('option');
+        o.value = String(s);
+        o.textContent = String(s);
+        if (s === pagerSize) o.selected = true;
+        sel.appendChild(o);
+      });
+      sizeLab.appendChild(sel);
+      ctrls.appendChild(sizeLab);
+      nav.appendChild(ctrls);
+      return nav;
+    }
+    function renderPagination() {
+      pagerContainers().forEach(function (container) {
+        var list = filteredList(container);
+        var total = totalPagesFor(list.length);
+        var page = pageOf(container.id, total);
+        var start = (page - 1) * pagerSize;
+        var end = Math.min(start + pagerSize, list.length);
+        var all = container.querySelectorAll('.cards .card-inmate');
+        var i;
+        for (i = 0; i < all.length; i++) all[i].classList.remove('is-paged-out');
+        for (i = 0; i < list.length; i++) {
+          if (i < start || i >= end) list[i].classList.add('is-paged-out');
+        }
+        // Rebuild the above/below pagers from current state. They only
+        // exist while JS runs, so no-JS keeps the full unpaged list.
+        for (i = container.children.length - 1; i >= 0; i--) {
+          var ch = container.children[i];
+          if (ch.classList && ch.classList.contains('pager')) container.removeChild(ch);
+        }
+        if (total > 1) {
+          var cardsEl = container.querySelector('.cards');
+          var st = { label: pagerLabel(container), page: page, total: total,
+                     start: start, end: end, count: list.length };
+          container.insertBefore(renderPagerNav(container, 'top', st), cardsEl);
+          if (cardsEl.nextSibling) container.insertBefore(renderPagerNav(container, 'bottom', st), cardsEl.nextSibling);
+          else container.appendChild(renderPagerNav(container, 'bottom', st));
+        }
+      });
+    }
+    function focusListTop(container) {
+      // Page change moves context to the list top: AT focus without a
+      // scroll jump, then a smooth (or instant, under reduced-motion)
+      // scroll of the container into view. The .month scroll-margin-top
+      // keeps the sticky masthead clear of the heading.
+      var h2 = container.querySelector('summary h2');
+      var target = h2 || container.querySelector('nav.pager');
+      if (target) {
+        target.tabIndex = -1;
+        try { target.focus({ preventScroll: true }); }
+        catch (err) { try { target.focus(); } catch (e2) {} }
+      }
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      try { container.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' }); }
+      catch (err) {}
+    }
+    // Pager button activation (delegated; navs are rebuilt on every render).
+    document.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest('.pager [data-pg]') : null;
+      if (!btn || btn.disabled) return;
+      var container = document.getElementById(btn.getAttribute('data-container'));
+      if (!container) return;
+      var list = filteredList(container);
+      var total = totalPagesFor(list.length);
+      var page = pagerPages[container.id] || 1;
+      var pg = btn.getAttribute('data-pg');
+      var next = pg === 'first' ? 1 : pg === 'prev' ? page - 1 :
+                 pg === 'next' ? page + 1 : pg === 'last' ? total :
+                 (parseInt(pg, 10) || 1);
+      if (next < 1) next = 1;
+      if (next > total) next = total;
+      if (next === page) return;
+      pagerPages[container.id] = next;
+      renderPagination();
+      syncUrl(currentFilters());
+      focusListTop(container);
+    });
+    // Page-size change (delegated): new size restarts at page 1 everywhere.
+    document.addEventListener('change', function (e) {
+      var sel = e.target && e.target.closest ? e.target.closest('.pager-size-sel') : null;
+      if (!sel) return;
+      var s = parseInt(sel.value, 10);
+      if (PAGE_SIZES.indexOf(s) === -1 || s === pagerSize) return;
+      pagerSize = s;
+      pagerPages = {};
+      renderPagination();
+      syncUrl(currentFilters());
+    });
+    // Opening a month starts it at page 1 and builds its pagers; closing
+    // one (or opening another) can change which list the ?page= param
+    // tracks, so re-sync the URL on every toggle.
+    months.forEach(function (m) {
+      m.addEventListener('toggle', function () {
+        if (m.open) {
+          pagerPages[m.id] = 1;
+          renderPagination();
+        }
+        syncUrl(currentFilters());
+      });
+    });
     var applyDebounce = null;
     inputs.forEach(function (i) {
       var key = i.getAttribute('data-filter');
@@ -394,6 +640,16 @@
         }
         i.value = val;
       });
+      // Pager deep-link: ?pagesize= (24/48/96) applies globally; ?page=
+      // seeds the primary (first visible) paginated list. renderPagination
+      // inside apply('init') clamps it to the real page count.
+      var psz = parseInt(params.get('pagesize') || '', 10);
+      if (PAGE_SIZES.indexOf(psz) !== -1) pagerSize = psz;
+      var pnum = parseInt(params.get('page') || '', 10);
+      if (pnum > 1) {
+        var primInit = primaryContainer();
+        if (primInit) pagerPages[primInit.id] = pnum;
+      }
     } catch (e) {}
     apply('init');
     syncUrl(currentFilters());
@@ -469,6 +725,10 @@
         binCards.appendChild(frag);
         months.forEach(function (m) { m.hidden = true; });
         sortBin.hidden = false;
+        // New card order: restart the sort-bin pager at page 1.
+        pagerPages = {};
+        renderPagination();
+        syncUrl(currentFilters());
       });
     }
   } // end (3) filter bar

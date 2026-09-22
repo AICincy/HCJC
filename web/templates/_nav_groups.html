@@ -3,31 +3,35 @@
    default '') marks the current page with aria-current="page". Every page
    template sets active_nav to its key; the drawer, the homepage reference
    strip, and each tab's "More court reference" block stay in sync because
-   they all read the same grouping. #}
+   they all read the same grouping.
+
+   Citizen panel 2026-09-22 (quick win 4): the tiny gray subtitle hints are
+   gone (nobody could read or decode them). RSS and GitHub stay in the
+   drawer; external hrefs render without the base_url prefix. #}
 {% set _nav = [
   ("Roster tools", [
-    ("stats", "Stats", "/stats/", "snapshot"),
-    ("calendar", "Calendar", "/court/", "who's due"),
-    ("safety", "Safety", "/safety/", "incidents"),
-    ("statutes", "Statutes", "/statute/", "lookup"),
-    ("data", "Data", "/data/", "feeds"),
-    ("visit", "Visit and contact", "/visit/", "visiting"),
-    ("disparity", "Bond disparity", "/bond-disparity/", "research"),
+    ("stats", "Stats", "/stats/"),
+    ("calendar", "Calendar", "/court/"),
+    ("safety", "Safety", "/safety/"),
+    ("statutes", "Statutes", "/statute/"),
+    ("data", "Data", "/data/"),
+    ("visit", "Visit and contact", "/visit/"),
+    ("disparity", "Bond disparity", "/bond-disparity/"),
   ]),
   ("Court reference", [
-    ("courts", "Courts", "/courts/", "system"),
-    ("bond", "Bond schedule", "/bond-schedule/", "costs"),
-    ("judges", "Judges", "/judges/", "profiles"),
-    ("jury", "Jury duty", "/jury/", "summons"),
-    ("rules", "Rules", "/rules/", "local rules"),
-    ("forms", "Forms", "/forms/", "file"),
-    ("help", "Help and free aid", "/help/", "free help"),
-    ("services", "Services and programs", "/services/", "programs"),
+    ("courts", "Courts", "/courts/"),
+    ("bond", "Bond schedule", "/bond-schedule/"),
+    ("judges", "Judges", "/judges/"),
+    ("jury", "Jury duty", "/jury/"),
+    ("rules", "Rules", "/rules/"),
+    ("forms", "Forms", "/forms/"),
+    ("help", "Help and free aid", "/help/"),
+    ("services", "Services and programs", "/services/"),
   ]),
   ("Site", [
-    ("rss", "RSS", "/feed.xml", ""),
-    ("github", "GitHub", "https://github.com/AICincy/HCJC", ""),
-    ("access", "Access", "/transparency/", "scorecard"),
+    ("rss", "RSS", "/feed.xml"),
+    ("github", "GitHub", "https://github.com/AICincy/HCJC"),
+    ("access", "Access", "/transparency/"),
   ]),
 ] %}
 <nav class="nav-drawer" aria-label="Site">
@@ -37,11 +41,11 @@
   {% for group_label, links in _nav %}
   <div class="nav-group" role="group" aria-label="{{ group_label }}">
     <span class="nav-group-label" aria-hidden="true">{{ group_label }}</span>
-    {% for key, label, href, hint in links %}
+    {% for key, label, href in links %}
     {% if href.startswith("http") %}
     <a class="nav-link" href="{{ href }}"{% if active_nav | default("") == key %} aria-current="page"{% endif %}>{{ label }}</a>
     {% else %}
-    <a class="nav-link" href="{{ base_url }}{{ href }}"{% if active_nav | default("") == key %} aria-current="page"{% endif %}>{{ label }}{% if hint %} <span class="nav-hint">{{ hint }}</span>{% endif %}</a>
+    <a class="nav-link" href="{{ base_url }}{{ href }}"{% if active_nav | default("") == key %} aria-current="page"{% endif %}>{{ label }}</a>
     {% endif %}
     {% endfor %}
   </div>

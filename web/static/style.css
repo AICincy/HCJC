@@ -388,20 +388,22 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
 .nav-menu { display: block; grid-column: 1 / -1; grid-row: 3; }
 .nav-drawer {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   gap: 0 2px;
   border-top: 1px solid var(--border);
   margin-top: 4px;
   padding-top: 4px;
+  overflow-x: auto;
 }
 .nav-group {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   gap: 0 2px;
+  flex-shrink: 0;
 }
 .nav-group + .nav-group {
   border-left: 1px solid var(--border);
@@ -443,7 +445,6 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
      in flow via the base .nav-drawer flex. */
 }
 @media (max-width: 720px) {
-  .masthead .nav-hint { display: none; }
   .running.desktop-only { display: none; }
   .running.mobile-only {
     display: flex;
@@ -509,6 +510,24 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
     border-radius: 0;
   }
   .nav-drawer .nav-link:hover { background: var(--bg-soft); }
+  /* Citizen panel 2026-09-22 (quick win 5): Bond schedule above the fold on
+     mobile, where the nav drawer ships closed. Full-width strip under the
+     masthead row. Hidden on desktop (min-width rule below). */
+  .masthead-bond {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: center;
+    padding: 8px 12px;
+    margin-top: 6px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--link);
+  }
+}
+@media (min-width: 721px) {
+  .masthead-bond { display: none; }
 }
 
 /* Month chip rail */
@@ -527,6 +546,21 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
   scrollbar-width: thin;
   max-width: 1280px;
   margin: 0 auto;
+}
+/* Citizen panel 2026-09-22 (quick win 3): a visible horizontal-scroll cue on
+   the month chip rail. The right-edge fade tells users the rail continues
+   past the viewport edge; it is pointer-transparent so the last chip stays
+   tappable. Shown only on narrow screens, where the rail overflows. */
+@media (max-width: 720px) {
+  .month-nav::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 52px;
+    pointer-events: none;
+    background: linear-gradient(to right, transparent 0%, var(--surface) 85%);
+  }
+  .month-nav-inner { padding-right: 56px; }
 }
 .month-nav-inner::-webkit-scrollbar { height: 0; }
 
@@ -560,13 +594,16 @@ body.detail .page { max-width: 1080px; }
 .banner-fine { font-size: 12px; color: var(--fg-muted); }
 .banner-fine a { color: var(--fg-muted); text-decoration: underline; }
 
-/* ===== Source-denial banner (site-wide, rendered from base.html) ===== */
-/* Existing tokens only: --warn is the established severity-red token (there
-   is no --danger token in this stylesheet; red is reserved for severity),
-   --fg-soft for secondary text, --link for links. */
+/* ===== Freshness notice (detail-denial, roster-derived pages only) ===== */
+/* Citizen panel 2026-09-22 (quick win 2): plain language, no alarm styling.
+   The notice keeps its honesty (exact start date, what is stale, evidence
+   links) in a neutral bordered card: red is reserved for severity, and this
+   is not an emergency. Rendered from base.html on roster-derived pages and
+   below the roster on the homepage; static reference pages skip it. */
 .source-banner {
-  border-left: 4px solid var(--warn);
+  border: 1px solid var(--border);
   background: var(--bg-soft);
+  border-radius: var(--radius);
   padding: .75rem 1rem;
   margin: 0 0 12px;
   font-size: 13px;
@@ -3574,16 +3611,19 @@ table.charges.schedule tbody th[scope="rowgroup"] {
   background: #C22525;
   color: #fff;
 }
-/* Filter bar */
-.filter-bar {
+/* Filter bar (bond schedule page ONLY: scoped 2026-09-22, defect #1.
+   These generic selectors leaked onto every .filter-bar/.legend site-wide,
+   stacking the roster toolbar labels vertically and the roster legend into a
+   full-width grid. .page-bond comes from bond-schedule.html body_class.) */
+.page-bond .filter-bar {
   margin: 16px 0;
 }
-.filter-bar label {
+.page-bond .filter-bar label {
   display: block;
   font-weight: 600;
   margin-bottom: 6px;
 }
-.filter-bar input[type="search"] {
+.page-bond .filter-bar input[type="search"] {
   width: 100%;
   max-width: 480px;
   padding: 10px 12px;
@@ -3593,20 +3633,20 @@ table.charges.schedule tbody th[scope="rowgroup"] {
   background: var(--surface);
   color: var(--fg);
 }
-.filter-count {
+.page-bond .filter-count {
   margin-top: 8px;
   font-size: 13px;
   color: var(--fg-muted);
 }
-/* Legend pills */
-.legend {
+/* Legend pills (bond page only; see scoping note above) */
+.page-bond .legend {
   list-style: none;
   padding: 0;
   margin: 12px 0 16px;
   display: grid;
   gap: 8px;
 }
-.legend .pill {
+.page-bond .legend .pill {
   display: inline-block;
   border: 1px solid var(--border-hi);
   border-radius: 999px;
@@ -4162,4 +4202,361 @@ details.sect-h {
 details.sect-h > summary h2 {
   font-size: clamp(18px, 2.2vw, 22px);
   letter-spacing: -0.025em;
+}
+
+/* ============================================================
+   Defect #1 (2026-09-22, owner-directed): the roster list is the hero.
+   The filter apparatus collapses to ONE compact sticky toolbar
+   (search + tier + sort); offense/activity/table-view/reset and the
+   legend hide behind a "Filters" disclosure; the F1-MM degree strip is
+   a slim 4px bar; the 24h-release list moved below the roster in markup.
+   Token-only, no new hues. All JS hooks (ids, data-filter attrs,
+   .tier-strip-seg) unchanged.
+   ============================================================ */
+
+/* Compact sticky toolbar. Sticky top:0 keeps the roster tool at hand while
+   scrolling the month accordions; z-index clears the month rail (18). */
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: block;
+  padding: 8px 12px 10px;
+  margin: 0 0 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.filter-bar-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.filter-bar .filter-bar-main .search-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.filter-bar .filter-bar-main input[type="search"] {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  font-size: 14px;
+}
+.filter-bar .filter-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+.filter-bar .filter-inline select {
+  height: 40px;
+  padding: 0 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  max-width: 11rem;
+}
+.filter-bar .filter-inline select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
+}
+/* "Filters" disclosure: display:contents keeps the summary in the toolbar
+   row while the body breaks to a full-width second row. Native details, so
+   no JS is needed and keyboard/AT behavior comes free. */
+.more-filters { display: contents; }
+.more-filters summary {
+  flex: 0 0 auto;
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-soft);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-soft);
+  white-space: nowrap;
+  min-height: 40px;
+}
+.more-filters summary::-webkit-details-marker { display: none; }
+.more-filters summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-left: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  flex: 0 0 auto;
+}
+.more-filters[open] summary::after { transform: rotate(225deg) translateY(-2px); }
+.more-filters summary:hover { border-color: var(--accent); color: var(--fg); }
+.more-filters summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.more-filters[open] summary { border-color: var(--accent); color: var(--accent); }
+.more-filters:not([open]) > .more-filters-body { display: none; }
+.more-filters[open] > .more-filters-body {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-top: 8px;
+  padding: 12px 2px 2px;
+  border-top: 1px solid var(--border);
+}
+.more-filters-body .filter-count { margin: 0; }
+.more-filters-body .legend {
+  flex: 1 1 100%;
+  margin: 2px 0 0;
+}
+/* Slim degree strip: the distribution as a 4px bar, not a labeled section.
+   Reuses .tier-strip (flex, segment fills, M-ladder colors); segments stay
+   clickable degree filters via main.js 3b2. */
+.tier-strip.tier-strip-slim {
+  height: 4px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 2px;
+}
+/* Released-24h now closes the roster section instead of leading it. */
+.released-24h { margin-top: 18px; }
+
+/* Homepage: compact the hero so the first inmate cards land in the first
+   viewport. Content unchanged (spec 1.3.2): kicker, h1, sub line, 4 KPIs. */
+.page-home .roster-hero {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  margin: 0 0 10px;
+}
+.page-home .roster-hero-copy { gap: 6px; }
+.page-home .roster-hero h1 {
+  font-size: clamp(26px, 3.2vw, 40px);
+  max-width: none;
+}
+.page-home .roster-hero p:not(.eyebrow) {
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+.page-home .court-hero-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.page-home .court-stat { padding: 8px 10px; gap: 4px; }
+.page-home .court-stat-num { font-size: clamp(20px, 2vw, 26px); }
+.page-home .court-stat-lab { font-size: 11px; }
+@media (max-width: 900px) {
+  .page-home .roster-hero { grid-template-columns: 1fr; }
+  .page-home .court-hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Toolbar on small viewports: search takes its own row, tier/sort/Filters
+   share the second. Still compact, still one toolbar. */
+@media (max-width: 720px) {
+  .filter-bar-main { flex-wrap: wrap; }
+  .filter-bar .filter-bar-main .search-wrap { flex: 1 1 100%; }
+  .filter-bar .filter-inline select { max-width: none; }
+  .more-filters summary { flex: 1 1 auto; justify-content: center; }
+}
+
+/* ============================================================
+   Defect #2 (2026-09-22, owner-directed): /forms/ page.
+   Raw extracted-PDF-text leads are gone from the markup; each row gets a
+   one-line human blurb (built in pages.py from category/court/revision);
+   editorial notes render as notes; the "Official source pending
+   verification" state is a muted status line, not a broken-looking row.
+   ============================================================ */
+.form-row { margin: 0 0 18px; }
+.form-blurb {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--fg-soft);
+}
+.form-note {
+  margin: 8px 0 0;
+  padding: 6px 0 6px 12px;
+  border-left: 3px solid var(--border-hi);
+  font-size: 12.5px;
+  color: var(--fg-muted);
+}
+.form-note strong { color: var(--fg-soft); }
+.form-source-pending {
+  color: var(--fg-muted);
+  font-style: italic;
+}
+/* Citizen panel 2026-09-22 (quick wins 1, 8): the consolidated source
+   notice (forms) and the plain capture-date line (court-reference pages). */
+.form-source-note {
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  padding: .6rem .9rem;
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--fg-soft);
+}
+.capture-line {
+  font-size: 12.5px;
+  color: var(--fg-muted);
+  margin: -4px 0 12px;
+}
+
+/* ===== Defect #1, first-viewport pass (2026-09-22): tighten the homepage stack
+   so the first inmate cards render in the first viewport on load. All rules
+   are .page-home-scoped; global pages are untouched. ===== */
+.page-home .masthead-inner { padding-bottom: 8px; }
+.page-home .brand-name { font-size: clamp(28px, 3.4vw, 36px); }
+.page-home .source-banner { padding: .55rem .9rem; margin-bottom: 10px; font-size: 12.5px; }
+.page-home .roster-hero { padding: 12px 18px; gap: 12px; }
+.page-home .roster-hero h1 { font-size: clamp(24px, 2.8vw, 32px); }
+.page-home .court-stat { padding: 6px 10px; }
+.page-home .court-stat-num { font-size: clamp(18px, 1.8vw, 24px); }
+.page-home .section-h { margin: 12px 0 8px; }
+.page-home .filter-bar { padding: 6px 10px 8px; }
+.page-home .month > summary { padding: 12px 18px; margin-bottom: 8px; }
+.page-home .month > summary h2 { font-size: clamp(18px, 2vw, 22px); }
+@media (max-width: 720px) {
+  .page-home .masthead-inner { padding-bottom: 6px; }
+  .page-home .brand-name { font-size: 26px; }
+}
+/* First-viewport safety margin (2026-09-22): keep the first inmate card
+   comfortably inside a 900px viewport even with the access banner present. */
+.page-home .source-banner { padding: .45rem .9rem; font-size: 12px; }
+.page-home .section-h { margin: 10px 0 6px; }
+.page-home .month > summary { padding: 10px 16px; }
+.page-home .month > .cards { padding-top: 6px; }
+
+/* Defect #1, mobile first-viewport (2026-09-22): on narrow screens the hero
+   KPIs become an inline stat strip (all four stats kept, no tiles), and the
+   toolbar becomes a 2-row grid: [search][Filters] / [Tier][Sort]. Page-home
+   scoped; global pages untouched. */
+@media (max-width: 720px) {
+  .page-home .roster-hero { padding: 10px 14px; gap: 10px; }
+  .page-home .roster-hero h1 { font-size: 24px; }
+  .page-home .roster-hero .lede { font-size: 12.5px; }
+  .page-home .court-hero-stats { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .page-home .court-stat {
+    flex: 1 1 40%;
+    flex-direction: row; align-items: baseline; gap: 6px;
+    background: none; border: none; box-shadow: none; padding: 2px 0;
+  }
+  .page-home .court-stat-primary { background: none; }
+  .page-home .court-stat-primary .court-stat-num { color: var(--accent); }
+  .page-home .court-stat-primary .court-stat-lab { color: var(--fg-muted); }
+  .page-home .court-stat-num { font-size: 17px; }
+  .page-home .court-stat-lab { font-size: 11px; }
+  .page-home .source-banner { font-size: 11.5px; padding: .4rem .8rem; }
+  .page-home .filter-bar-main {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "search filters" "tier sort";
+    align-items: center;
+  }
+  .page-home .filter-bar-main .search-wrap { grid-area: search; }
+  .page-home .filter-bar-main .more-filters > summary { grid-area: filters; }
+  .page-home .filter-bar-main .filter-inline[for="filter-tier"] { grid-area: tier; }
+  .page-home .filter-bar-main .filter-inline[for="filter-sort"] { grid-area: sort; }
+  .page-home .month > summary { padding: 8px 14px; }
+  .page-home .month > summary h2 { font-size: 19px; }
+}
+
+/* Defect #1, mobile first-viewport final pass (2026-09-22): single-line
+   eyebrow, tighter hero copy, 2-row stat strip, compact access banner. */
+@media (max-width: 720px) {
+  .page-home .roster-hero .eyebrow {
+    font-size: 9.5px; letter-spacing: 0.02em; white-space: nowrap;
+  }
+  .page-home .roster-hero h1 { font-size: 22px; margin: 2px 0 4px; }
+  .page-home .roster-hero .lede { font-size: 12px; margin: 0 0 6px; }
+  .page-home .court-hero-stats { gap: 2px 12px; }
+  .page-home .court-stat-num { font-size: 16px; }
+  .page-home .court-stat-lab { font-size: 10.5px; }
+  .page-home .source-banner { font-size: 11px; padding: .35rem .7rem; line-height: 1.45; }
+  .page-home .source-banner p + p { margin-top: .2rem; }
+  .page-home .legal-disclosure { font-size: 12px; }
+  .page-home .section-h { margin: 8px 0 6px; }
+  .page-home .section-h h2 { font-size: 17px; }
+  .page-home .filter-bar { padding: 5px 8px 7px; }
+}
+
+/* ============================================================
+   Roster pagination (2026-09-22, owner-directed: "no one wants to
+   scroll a million miles"). Per-month pagers are built by JS above and
+   below each month's card list: without JS there are no pagers and no
+   paging (progressive enhancement). Token-only; light + dark themes.
+   ============================================================ */
+.card-inmate.is-paged-out { display: none; }
+
+.pager { margin: 14px 0; }
+.pager-controls {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 8px 16px;
+}
+.pager-btns { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.pager-btn,
+.pager-num {
+  min-width: 44px; min-height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--fg-soft);
+  font: inherit; font-size: 14px; line-height: 1;
+  cursor: pointer;
+}
+.pager-btn:hover:not(:disabled),
+.pager-num:hover:not([aria-current="page"]) { border-color: var(--accent); color: var(--fg); }
+.pager-btn:disabled { opacity: 0.45; cursor: default; }
+.pager-num[aria-current="page"] {
+  background: var(--accent-bg); color: var(--accent);
+  border-color: var(--accent); font-weight: 700;
+}
+.pager-btn:focus-visible,
+.pager-num:focus-visible,
+.pager-size-sel:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+.pager-ellipsis { color: var(--fg-muted); padding: 0 2px; }
+.pager-status {
+  margin: 0; font-size: 13px; color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+.pager-status-compact { display: none; }
+.pager-size {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--fg-muted);
+}
+.pager-size-sel {
+  min-height: 44px; padding: 0 8px;
+  background: var(--surface); color: var(--fg);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  font: inherit; font-size: 14px;
+}
+/* Mobile: collapse to prev/next + first/last + "Page X of Y". The numbered
+   buttons are display:none, so AT gets the same reduced control set. */
+@media (max-width: 640px) {
+  .pager-nums, .pager-status-full { display: none; }
+  .pager-status-compact { display: inline; }
+  .pager-size { margin-left: 0; }
+}
+/* Print: pagers are interactive UI; print the full unpaged card list. */
+@media print {
+  .pager { display: none !important; }
+  .card-inmate.is-paged-out { display: revert !important; }
 }

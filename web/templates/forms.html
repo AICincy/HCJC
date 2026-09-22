@@ -15,6 +15,21 @@
 {% block canonical_path %}/forms/{% endblock %}
 {% block body_class %}detail page-forms{% endblock %}
 {% block sr_h1 %}{% endblock %}
+{# Citizen panel 2026-09-22 (quick win 2): the detail-denial notice
+   misleads on static reference pages, so base.html skips it here. #}
+{% set suppress_detail_banner = True %}
+{# Citizen panel 2026-09-22 (quick win 8): the provenance dict lives at the
+   top so the capture date can be stated plainly under the lede, not buried
+   in the About section. #}
+{% set provenance = {
+  "feed": "feeds/forms.json",
+  "captured": "2026-09-21",
+  "sources": [
+    {"label": "hamiltoncountycourts.org", "url": "https://hamiltoncountycourts.org"}
+  ],
+  "note": "Link check 2026-09-22: the 3 Word documents resolve. The 46 PDF source URLs had gone dead after the court's 2026 upload reorganization; all 46 were recovered the same day at their reorganized locations and each verified live (HTTP 200, PDF content type, file-signature check). Spelling quirks in source filenames ('Misdemeaner', 'Regan-Tokes', 'Reagan-Tookes') are preserved verbatim from the feed."
+} %}
+
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="{{ base_url }}/">&larr; Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Court Forms</span>
@@ -31,15 +46,33 @@
   The forms the court currently accepts, plus prior generations and related forms. Always file the current generation.
 </p>
 
-<div class="decision-aid" aria-label="What do you need to file?">
+<p class="capture-line">Court forms captured {{ provenance.captured }}.</p>
+
+{# Citizen panel 2026-09-22 (quick win 1): the link-verification state is
+   stated ONCE here, not repeated on rows. The revision badges name
+   the generation the court accepted at capture; that is not a live check
+   against the courthouse. #}
+{% if forms_link_summary is defined and forms_link_summary.pending > 0 %}
+<p class="form-source-note"><strong>Official source links pending verification.</strong> {{ forms_link_summary.pending }} of {{ forms_link_summary.total }} forms below were captured from the court's uploads, which the court has since reorganized. Those source links are being re-verified and stay hidden until they check out. Revision badges (for example Rev. 4.24.26) name the generation the court accepted when captured on {{ provenance.captured }}; that is not a live check against the courthouse, so verify with the court before filing.</p>
+{% elif forms_link_summary is defined %}
+<p class="form-source-note"><strong>Source links verified 2026-09-22.</strong> All {{ forms_link_summary.total }} forms below link to the court's own files, each checked live on 2026-09-22 after the court reorganized its uploads. Revision badges (for example Rev. 4.24.26) name the generation the court accepted when captured on {{ provenance.captured }}; that is not a live check against the courthouse, so verify with the court before filing.</p>
+{% endif %}
+
+{# Citizen panel 2026-09-22 (quick win 7): a section landmark, not a plain
+   div with a decorative aria-label. #}
+<section class="decision-aid" aria-label="What do you need to file?">
   <p><strong>What do you need to file?</strong></p>
   <p>Pleading guilty or no contest in Common Pleas: use the <a href="#current-forms">current plea forms</a>.</p>
   <p>Giving up a jury trial: the current <a href="#form-2026_04_JURY-WAIVER-4.24.26">Waiver of Trial by Jury</a>.</p>
   <p>Cannot afford court costs: the current <a href="#form-2026_04_Affidavit-of-Indigency-4.24.26">Affidavit of Indigency</a>.</p>
   <p>Filing a discovery plan: see <a href="#other-forms">Discovery</a> below.</p>
   <p>Scheduling a case or applying to mediate: see <a href="#other-forms">Scheduling and mediation</a> below.</p>
+  {# Citizen panel 2026-09-22 (quick win 6): a protection-order scenario, in
+     plain words. The form itself is not in the corpus; the Known gaps
+     section says so. #}
+  <p>You need protection from someone: Ohio courts can issue a civil protection order. That form is not listed on this page yet (see <a href="#known-gaps">Known gaps</a>); <a href="{{ base_url }}/help/">free help resources</a> can point you to the right court.</p>
   <p>Looking for an older version of a plea form: see <a href="#archived">Archived generations</a>.</p>
-</div>
+</section>
 
 <nav class="tab-toc" aria-label="On this page">
   <ul class="tab-toc">
@@ -50,108 +83,98 @@
   </ul>
 </nav>
 
-<details class="section-h-details" id="current-forms" open>
+<details class="section-h-details" id="current-forms" tabindex="-1" open>
   <summary><h2>Current forms</h2><span class="grow"></span><span class="meta">{{ counts.current }} forms &middot; rev. 4-24-26</span></summary>
   {% for label, items in groups_current %}
   <h3>{{ label }}</h3>
   {% for f in items %}
-  <div class="form-row" id="form-{{ f.id }}">
+  <div class="form-row" tabindex="-1" id="form-{{ f.id }}">
     {% if f.href %}
     <a class="ref-row" href="{{ f.href }}" target="_blank" rel="noopener" aria-label="Official form: {{ f.title }} (hamiltoncountycourts.org, opens in a new tab)">
       <span class="ref-row-title">{{ f.title }}</span>
-      <span class="status-pill status-pill-current">Current</span>
-      <span class="ref-row-meta">{{ f.court }}{% if f.court %} &middot; {% endif %}{{ f.file_type }} &middot; {{ f.revision }} &middot; hamiltoncountycourts.org</span>
+      <span class="status-pill status-pill-current">{{ f.revision }}</span>
+      <span class="ref-row-meta">{{ f.file_type }} &middot; hamiltoncountycourts.org</span>
     </a>
     {% else %}
     <div class="ref-row">
       <span class="ref-row-title">{{ f.title }}</span>
-      <span class="status-pill status-pill-current">Current</span>
-      <span class="ref-row-meta">{{ f.court }}{% if f.court %} &middot; {% endif %}{{ f.file_type }} &middot; {{ f.revision }} &middot; Official source pending verification</span>
+      <span class="status-pill status-pill-current">{{ f.revision }}</span>
+      <span class="ref-row-meta">{{ f.file_type }}</span>
     </div>
     {% endif %}
-    {% if f.lead %}
-    <p class="ref-row-lede" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{{ f.lead }}</p>
-    {% endif %}
+    <p class="form-blurb">{{ f.blurb }}</p>
     {% if f.note %}
-    <p class="ref-row-lede">Note: {{ f.note }}</p>
+    <p class="form-note"><strong>Note:</strong> {{ f.note }}</p>
     {% endif %}
   </div>
   {% endfor %}
   {% endfor %}
 </details>
 
-<details class="section-h-details" id="other-forms" open>
+<details class="section-h-details" id="other-forms" tabindex="-1" open>
   <summary><h2>Other forms</h2><span class="grow"></span><span class="meta">{{ counts.other }} forms</span></summary>
   {% for label, items in groups_other %}
   <h3>{{ label }}</h3>
   {% for f in items %}
-  <div class="form-row" id="form-{{ f.id }}">
+  <div class="form-row" tabindex="-1" id="form-{{ f.id }}">
     {% if f.href %}
     <a class="ref-row" href="{{ f.href }}" target="_blank" rel="noopener" aria-label="Official form: {{ f.title }} (hamiltoncountycourts.org, opens in a new tab)">
       <span class="ref-row-title">{{ f.title }}</span>
-      <span class="ref-row-meta">{{ f.court }}{% if f.court %} &middot; {% endif %}{{ f.file_type }}{% if f.revision %} &middot; {{ f.revision }}{% endif %} &middot; hamiltoncountycourts.org</span>
+      <span class="ref-row-meta">{{ f.file_type }} &middot; hamiltoncountycourts.org</span>
     </a>
     {% else %}
     <div class="ref-row">
       <span class="ref-row-title">{{ f.title }}</span>
-      <span class="ref-row-meta">{{ f.court }}{% if f.court %} &middot; {% endif %}{{ f.file_type }}{% if f.revision %} &middot; {{ f.revision }}{% endif %} &middot; Official source pending verification</span>
+      <span class="ref-row-meta">{{ f.file_type }}</span>
     </div>
     {% endif %}
-    {% if f.lead %}
-    <p class="ref-row-lede" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{{ f.lead }}</p>
-    {% endif %}
+    <p class="form-blurb">{{ f.blurb }}</p>
     {% if f.note %}
-    <p class="ref-row-lede">Note: {{ f.note }}</p>
+    <p class="form-note"><strong>Note:</strong> {{ f.note }}</p>
     {% endif %}
   </div>
   {% endfor %}
   {% endfor %}
 </details>
 
-<details class="archival-block" id="archived">
+<details class="archival-block" id="archived" tabindex="-1">
   <summary><h2>Archived generations</h2> <span class="status-pill status-pill-archived">Archived</span> <span class="meta">{{ counts.archival }} forms</span></summary>
   <p class="archival-preamble">Superseded generations, kept for reference. Always file the current generation.</p>
   {% for wave_label, items in waves %}
   <h3>{{ wave_label }}</h3>
   {% for f in items %}
-  <div class="form-row" id="form-{{ f.id }}">
+  <div class="form-row" tabindex="-1" id="form-{{ f.id }}">
     {% if f.href %}
     <a class="ref-row" href="{{ f.href }}" target="_blank" rel="noopener" aria-label="Archived form: {{ f.title }} (hamiltoncountycourts.org, opens in a new tab)">
       <span class="ref-row-title">{{ f.title }}</span>
       <span class="status-pill status-pill-archived">Archived</span>
-      <span class="ref-row-meta">{{ f.court }}{% if f.court %} &middot; {% endif %}{{ f.file_type }} &middot; {{ f.revision }} &middot; hamiltoncountycourts.org</span>
+      <span class="ref-row-meta">{{ f.file_type }} &middot; hamiltoncountycourts.org</span>
     </a>
     {% else %}
     <div class="ref-row">
       <span class="ref-row-title">{{ f.title }}</span>
       <span class="status-pill status-pill-archived">Archived</span>
-      <span class="ref-row-meta">{{ f.court }}{% if f.court %} &middot; {% endif %}{{ f.file_type }} &middot; {{ f.revision }} &middot; Official source pending verification</span>
+      <span class="ref-row-meta">{{ f.file_type }}</span>
     </div>
     {% endif %}
+    <p class="form-blurb">{{ f.blurb }}</p>
     {% if f.note %}
-    <p class="ref-row-lede">Note: {{ f.note }}</p>
+    <p class="form-note"><strong>Note:</strong> {{ f.note }}</p>
     {% endif %}
   </div>
   {% endfor %}
   {% endfor %}
 </details>
 
-<details class="section-h-details" id="known-gaps">
+<details class="section-h-details" id="known-gaps" tabindex="-1">
   <summary><h2>Known gaps</h2><span class="grow"></span><span class="meta">what the corpus does not have</span></summary>
   <p>No Common Pleas forms landing page exists in the court's published corpus.</p>
+  <p>Protection-order forms (civil, criminal, and stalking protection orders) and record-sealing or expungement forms are not in this corpus.</p>
   <p>Municipal forms are two outbound links: <a href="https://courtclerk.org" target="_blank" rel="noopener" aria-label="courtclerk.org, the county Clerk of Courts site (opens in a new tab)">courtclerk.org</a> and the <a href="#form-2022_01_Transcript-Request-Form">Transcript Request Form</a> above.</p>
 </details>
 
-<details class="section-h-details" id="about">
+<details class="section-h-details" id="about" tabindex="-1">
   <summary><h2>About this page</h2></summary>
-  {% set provenance = {
-    "feed": "feeds/forms.json",
-    "captured": "2026-09-21",
-    "sources": [
-      {"label": "hamiltoncountycourts.org", "url": "https://hamiltoncountycourts.org"}
-    ],
-    "note": "Link check 2026-09-22: the 3 Word documents resolve; the 46 PDF source URLs returned 404, so those rows show 'Official source pending verification' instead of dead links. Spelling quirks in source filenames ('Misdemeaner', 'Regan-Tokes', 'Reagan-Tookes') are preserved verbatim from the feed."
-  } %}
   {% include "_provenance.html" %}
   <p>If you find an error, <a href="https://github.com/AICincy/HCJC/issues">open an issue</a>.</p>
 </details>

@@ -18,6 +18,21 @@
 {% block canonical_path %}/services/{% endblock %}
 {% block body_class %}detail page-services{% endblock %}
 {% block sr_h1 %}{% endblock %}
+{# Citizen panel 2026-09-22 (quick win 2): the detail-denial notice
+   misleads on static reference pages, so base.html skips it here. #}
+{% set suppress_detail_banner = True %}
+{# Citizen panel 2026-09-22 (quick win 8): the provenance dict lives
+   at the top so the capture date can be stated plainly under the
+   lede, not buried in the About section. #}
+{% set provenance = {
+    "feed": "feeds/services-programs.json",
+    "captured": "2026-09-21",
+    "sources": [
+      {"label": "hamiltoncountycourts.org", "url": "https://hamiltoncountycourts.org"}
+    ],
+    "note": "Link check 2026-09-22: all 28 program page URLs resolved. Contact details are quoted from the feed as published by the court; eligibility criteria are shown only where the feed states them."
+  } %}
+
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="{{ base_url }}/">&larr; Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Services and Programs</span>
@@ -34,7 +49,9 @@
   The county programs attached to the courts: supervision, pretrial release, and treatment dockets.
 </p>
 
-<div class="decision-aid" aria-label="I need...">
+<p class="capture-line">Services and programs captured {{ provenance.captured }}.</p>
+
+<div class="decision-aid" tabindex="-1">
   <p><strong>I need...</strong></p>
   <p>...to find my probation officer or learn about probation: start with <a href="#probation">Probation</a>.</p>
   <p>...pretrial release, electronic monitoring, or supervision before trial: start with <a href="#pretrial">Pretrial services</a>.</p>
@@ -49,7 +66,7 @@
   </ul>
 </nav>
 
-<details class="section-h-details" id="probation" open>
+<details class="section-h-details" tabindex="-1" id="probation" open>
   <summary><h2>Probation</h2><span class="grow"></span><span class="meta">{{ counts.probation }} programs</span></summary>
   <div class="visit-grid">
     {% for c in probation_cards %}
@@ -63,7 +80,7 @@
     {% endfor %}
   </div>
   {% for r in probation_rows %}
-  <div class="program-row" id="program-{{ r.id }}">
+  <div class="program-row" tabindex="-1" id="program-{{ r.id }}">
     <a class="ref-row" href="{{ r.href }}" target="_blank" rel="noopener" aria-label="{{ r.title }} (hamiltoncountycourts.org, opens in a new tab)">
       <span class="ref-row-title">{{ r.title }}</span>
       <span class="ref-row-meta">hamiltoncountycourts.org</span>
@@ -73,7 +90,7 @@
   <p class="ref-row-lede">{{ missing_municipal_staff }}</p>
 </details>
 
-<details class="section-h-details" id="pretrial" open>
+<details class="section-h-details" tabindex="-1" id="pretrial" open>
   <summary><h2>Pretrial services</h2><span class="grow"></span><span class="meta">{{ counts.pretrial }} programs</span></summary>
   <div class="visit-grid">
     <div class="visit-card">
@@ -90,7 +107,7 @@
     </div>
   </div>
   {% for r in pretrial_rows %}
-  <div class="program-row" id="program-{{ r.id }}">
+  <div class="program-row" tabindex="-1" id="program-{{ r.id }}">
     <a class="ref-row" href="{{ r.href }}" target="_blank" rel="noopener" aria-label="{{ r.title }} (hamiltoncountycourts.org, opens in a new tab)">
       <span class="ref-row-title">{{ r.title }}</span>
       <span class="ref-row-meta">hamiltoncountycourts.org</span>
@@ -105,7 +122,7 @@
   {% endfor %}
 </details>
 
-<details class="section-h-details" id="specialized-dockets" open>
+<details class="section-h-details" tabindex="-1" id="specialized-dockets" open>
   <summary><h2>Specialized dockets</h2><span class="grow"></span><span class="meta">{{ counts.specialized_dockets }} programs</span></summary>
   <div class="visit-grid">
     {% for c in docket_cards %}
@@ -127,7 +144,7 @@
     {% endfor %}
   </div>
   {% for r in docket_rows %}
-  <div class="program-row" id="program-{{ r.id }}">
+  <div class="program-row" tabindex="-1" id="program-{{ r.id }}">
     <a class="ref-row" href="{{ r.href }}" target="_blank" rel="noopener" aria-label="{{ r.title }} (hamiltoncountycourts.org, opens in a new tab)">
       <span class="ref-row-title">{{ r.title }}</span>
       <span class="ref-row-meta">hamiltoncountycourts.org</span>
@@ -139,16 +156,9 @@
   {% endfor %}
 </details>
 
-<details class="section-h-details" id="about">
+<details class="section-h-details" tabindex="-1" id="about">
   <summary><h2>About this page</h2></summary>
-  {% set provenance = {
-    "feed": "feeds/services-programs.json",
-    "captured": "2026-09-21",
-    "sources": [
-      {"label": "hamiltoncountycourts.org", "url": "https://hamiltoncountycourts.org"}
-    ],
-    "note": "Link check 2026-09-22: all 28 program page URLs resolved. Contact details are quoted from the feed as published by the court; eligibility criteria are shown only where the feed states them."
-  } %}
+  
   {% include "_provenance.html" %}
   <p>If you find an error, <a href="https://github.com/AICincy/HCJC/issues">open an issue</a>.</p>
 </details>

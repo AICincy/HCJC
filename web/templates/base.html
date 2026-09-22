@@ -67,15 +67,6 @@
              alt="Hamilton County Booking Photos seal"
              width="36" height="36" decoding="async">
       </a>
-      <a class="masthead-seal masthead-seal-coc"
-         href="https://www.facebook.com/cityofcincinnati"
-         target="_blank" rel="noopener"
-         aria-label="City of Cincinnati on Facebook">
-        <img src="{{ base_url }}/static/img/coc-seal.png"
-             srcset="{{ base_url }}/static/img/coc-seal.png 1x, {{ base_url }}/static/img/coc-seal-2x.png 2x"
-             alt="City of Cincinnati seal"
-             width="36" height="36" decoding="async">
-      </a>
       {% if snapshot is defined and snapshot.inmate_count %}
       <span class="running desktop-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody{% if trend is defined and trend.spark and trend.spark | length > 1 %}<svg class="spark" viewBox="0 0 120 26" width="120" height="26" role="img" aria-label="Roster size trend, last {{ trend.spark | length }} days"><polyline points="{{ spark_points(trend.spark) }}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>{% endif %}</span>
       {% endif %}
@@ -83,6 +74,9 @@
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
       </button>
+      {# Citizen panel 2026-09-22 (quick win 5): a Bond schedule link above the
+         fold on mobile. Hidden on desktop where the nav drawer shows it. #}
+      <a class="masthead-bond" href="{{ base_url }}/bond-schedule/">Bond schedule</a>
       {# Site nav drawer (spec 3.5). Ships WITHOUT the open attribute: mobile gets
          a native closed disclosure with no JS (H6 fix, B2); desktop renders
          the rail from closed markup via the ::details-content CSS override
@@ -101,7 +95,7 @@
         {% include "_nav_groups.html" %}
       </details>
     </div>
-    {% if nav_months is defined and nav_months %}
+    {% if nav_months is defined and nav_months and not suppress_month_rail %}
     <nav class="month-nav" aria-label="Jump to month">
       <div class="month-nav-inner">
         {% for nm in nav_months %}
@@ -112,12 +106,15 @@
     </nav>
     {% endif %}
   </header>
-  {# A4: site-wide detail-denial banner. Renders on every page while the
-     WAF-block ledger shows an open detail-level denial period, so
-     roster-derived pages (/, /stats/, /court/, /statute/) carry the signal
-     even though they have no page-local banner. Guarded on `is defined`
-     because some test harnesses render base.html without build globals. #}
-  {% if roster_stale is defined and roster_stale.detail_denial_open %}
+  {# A4: detail-denial freshness notice. Renders after the masthead on
+     roster-derived pages (/, /stats/, /court/, /statute/, /archive/,
+     /inmate/*) while the WAF-block ledger shows an open detail-level denial
+     period, so it sits above the fold. Static court-reference pages set
+     suppress_detail_banner because the notice misleads there (their data
+     comes from dated court documents, not the blocked feed). Guarded on
+     `is defined` because some test harnesses render base.html without build
+     globals. #}
+  {% if roster_stale is defined and roster_stale.detail_denial_open and not suppress_detail_banner %}
   {% include "_source_banner.html" %}
   {% endif %}
   <main id="main" class="page">

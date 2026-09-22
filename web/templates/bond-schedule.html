@@ -1,9 +1,27 @@
 {% extends "base.html" %}
 {% set active_nav = "bond" %}
+{# Citizen panel 2026-09-22 (quick win 2): the detail-denial notice
+   misleads on static reference pages, so base.html skips it here. #}
+{% set suppress_detail_banner = True %}
 {% block title %}Standard Bond Schedule &middot; JCStream{% endblock %}
 {% block canonical_path %}/bond-schedule/{% endblock %}
-{% block body_class %}detail{% endblock %}
+{% block body_class %}detail page-bond{% endblock %}
 {% block sr_h1 %}{% endblock %}
+{# Citizen panel 2026-09-22 (quick win 8): the provenance dict lives at the
+   top so the capture date can be stated plainly under the lede, not buried
+   in the About section. #}
+{% set provenance = {
+  "feed": "feeds/bond.json",
+  "captured": "2026-09-21",
+  "sources": [
+    {"label": "Standard Bond Schedule (PDF, rev. 3/5/2026)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2026/03/bond_sched_latest.pdf"},
+    {"label": "Courts scam alert (updated 06/09/2026, PDF)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2026/07/SCAM-ALERT.pdf"},
+    {"label": "Clerk of Courts bond FAQ", "url": "https://www.courtclerk.org/frequently-asked-questions-bond-information/"},
+    {"label": "Clerk of Courts memo: Posting Real Estate for a Criminal Bond (PDF)", "url": "https://www.courtclerk.org/forms/pre.pdf"}
+  ],
+  "sha256": "b29db798621dfc175be0da7e821757ff1226d04cd17c01d2e95a4987a4b8bb49",
+  "note": "Schedule rev. 3/5/2026, about 6.5 months old when captured. Verify amounts with the court before relying on them."
+} %}
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="{{ base_url }}/">&larr; Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Standard bond schedule</span>
@@ -18,7 +36,9 @@
 
 <p class="page-lede">The court's published starting point for misdemeanor and traffic bonds: money posted to secure release until the case is resolved. The judge sets the actual bond. This schedule covers Municipal Court misdemeanors and traffic offenses only. Felonies have no standard bond.</p>
 
-<div class="decision-aid">
+<p class="capture-line">Bond schedule captured {{ provenance.captured }}.</p>
+
+<div class="decision-aid" tabindex="-1">
   <p><strong>What brings you here?</strong> To find the starting bond amount for a charge, see the <a href="#schedule">schedule</a>. To understand what the flags mean, read the <a href="#explain">explainer</a>. To post a bond, see <a href="#pay">how, where, and when to post</a>.</p>
 </div>
 
@@ -32,8 +52,8 @@
 
 <nav aria-label="On this page">
   <ul class="tab-toc">
-    <li><a href="#explain">Explainer</a></li>
     <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#explain">Explainer</a></li>
     <li><a href="#no-standard-bond">No standard bond <span class="count">{{ no_standard_bond|length }}</span></a></li>
     <li><a href="#notes">Notes</a></li>
     <li><a href="#related">Related</a></li>
@@ -41,39 +61,8 @@
   </ul>
 </nav>
 
-<section aria-labelledby="explain-h">
-  <h2 class="sect-h" id="explain">Understanding the schedule</h2>
-
-  <h3>1. What "10%" means</h3>
-  <p>An entry like "$1,000 @ 10%" means the bond is set at $1,000 and the person posting pays 10 percent of that amount to secure release. Two examples from the schedule: $1,000 @ 10% means $100 posted; $2,500 @ 10% means $250 posted.</p>
-  <p>The three amount columns are residency tiers: in-county (lowest), out-of-county, and out-of-state or no permanent address (highest). The tier that applies depends on the arrestee's residence and whether they have a verifiable local address.</p>
-  <p>The schedule lists cash-percentage amounts and says nothing about surety bonds. Do not read the "10%" figure as a commercial bondsman's fee; the 10% is the share of the bond amount posted to the court.</p>
-  <p class="muted">Source: the court's Standard Bond Schedule, rev. 3/5/2026.</p>
-
-  <h3>2. What "+ REVIEW" means</h3>
-  <p>Several offenses, for example negligent homicide, vehicular homicide, vehicular assault, unlawful sexual contact with a minor, sexual imposition, voyeurism, and public indecency, show amounts like "$5,000 + REVIEW." The schedule itself does not define REVIEW, and the court's published materials used for this page do not describe the review's timing, location, or procedure.</p>
-  <p class="muted">Source: the court's Standard Bond Schedule, rev. 3/5/2026.</p>
-
-  <h3 id="pay">3. How, where, and when to post bond</h3>
-  <ul>
-    <li><strong>Where.</strong> Bonds are posted with the Hamilton County Clerk of Courts at the Hamilton County Justice Center: the Clerk of Courts Municipal Criminal/Traffic Division, 1st Floor, 1000 Sycamore Street, Room 112. All bonds must be posted in Hamilton County.</li>
-    <li><strong>Hours.</strong> 24 hours a day, 365 days a year. Bond refund check pickup is narrower: Room 112, Monday through Friday, 8 am to 8 pm.</li>
-    <li><strong>Payment.</strong> Cash, or credit/debit card: Mastercard, Visa, American Express, Discover. Photo ID is required to post bond. The Clerk's bond line is (513) 946-6010.</li>
-  </ul>
-  <p class="muted">Source: the courts' scam alert (updated 06/09/2026) and the Clerk of Courts bond FAQ.</p>
-
-  <h3>4. Bond refunds</h3>
-  <p>The refund is generally 90% of the bond-amount portion. The state fee is refunded only if the case is dismissed, ignored by the grand jury, or ends in not guilty. Refunds are issued by check only, never credited back to a credit card, and are payable to the person who posted. A refund is released only to the surety unless a bond-authorization form names a third party, and it is issued within 14 days of the final disposition of all cases on the receipt.</p>
-  <p class="muted">Source: the Clerk of Courts bond FAQ.</p>
-
-  <h3>5. Real-estate bonds</h3>
-  <p>A defendant or surety may post Ohio real estate as bond. The property must be titled in the defendant's or the surety's name and located in Ohio (R.C. 2937.24). Property owned by a trust, corporation, LLC, partnership, or similar entity is not accepted, and property in foreclosure is not accepted. The surety must hold equity of at least twice the bond amount, over and above all encumbrances (R.C. 2937.281). A Surety Affidavit must be filed with the signatures of all current owners and spouses, all lien holders and balances with documentation, the county auditor's current valuation, the equity computation, and a certified copy of the deed from the county recorder. The Clerk may deny the property as bond if the terms are not met; knowingly false information is contempt and referral for prosecution.</p>
-  <p>Full requirements: <a href="https://www.courtclerk.org/forms/pre.pdf">Posting Real Estate for a Criminal Bond, Clerk of Courts memo (PDF)</a>.</p>
-  <p class="muted">Source: the Clerk of Courts memo "Posting Real Estate for a Criminal Bond."</p>
-</section>
-
 <section aria-labelledby="schedule-h">
-  <h2 class="sect-h" id="schedule">Standard bond schedule</h2>
+  <h2 class="sect-h" id="schedule" tabindex="-1">Standard bond schedule</h2>
 
   <ul class="legend" id="bond-legend" aria-label="How to read the bond amounts">
     <li><span class="pill" aria-hidden="true">$1,000 @ 10%</span> <strong>@ 10%</strong>: post 10% of the listed amount to be released. Example: $1,000 @ 10% means $100 posted.</li>
@@ -126,7 +115,47 @@
   </div>
 </section>
 
-<details class="sect-h" id="no-standard-bond">
+<section aria-labelledby="explain-h">
+  <h2 class="sect-h" id="explain" tabindex="-1">Understanding the schedule</h2>
+
+  <h3>1. What "10%" means</h3>
+  <p>An entry like "$1,000 @ 10%" means the bond is set at $1,000 and the person posting pays 10 percent of that amount to secure release. Two examples from the schedule: $1,000 @ 10% means $100 posted; $2,500 @ 10% means $250 posted.</p>
+  <p>The three amount columns are residency tiers: in-county (lowest), out-of-county, and out-of-state or no permanent address (highest). The tier that applies depends on the arrestee's residence and whether they have a verifiable local address.</p>
+  <p>The schedule lists cash-percentage amounts and says nothing about surety bonds. Do not read the "10%" figure as a commercial bondsman's fee; the 10% is the share of the bond amount posted to the court.</p>
+  <p class="muted">Source: the court's Standard Bond Schedule, rev. 3/5/2026.</p>
+
+  <h3>2. What "+ REVIEW" means</h3>
+  <p>Several offenses, for example negligent homicide, vehicular homicide, vehicular assault, unlawful sexual contact with a minor, sexual imposition, voyeurism, and public indecency, show amounts like "$5,000 + REVIEW." The schedule itself does not define REVIEW, and the court's published materials used for this page do not describe the review's timing, location, or procedure.</p>
+  <p class="muted">Source: the court's Standard Bond Schedule, rev. 3/5/2026.</p>
+
+  <h3 id="pay" tabindex="-1">3. How, where, and when to post bond</h3>
+  <ul>
+    <li><strong>Where.</strong> Bonds are posted with the Hamilton County Clerk of Courts at the Hamilton County Justice Center: the Clerk of Courts Municipal Criminal/Traffic Division, 1st Floor, 1000 Sycamore Street, Room 112. All bonds must be posted in Hamilton County.</li>
+    <li><strong>Hours.</strong> 24 hours a day, 365 days a year. Bond refund check pickup is narrower: Room 112, Monday through Friday, 8 am to 8 pm.</li>
+    <li><strong>Payment.</strong> Cash, or credit/debit card: Mastercard, Visa, American Express, Discover. Photo ID is required to post bond. The Clerk's bond line is (513) 946-6010.</li>
+  </ul>
+  <p class="muted">Source: the courts' scam alert (updated 06/09/2026) and the Clerk of Courts bond FAQ.</p>
+
+  <h3>4. Bond refunds</h3>
+  <p>The refund is generally 90% of the bond-amount portion. The state fee is refunded only if the case is dismissed, ignored by the grand jury, or ends in not guilty. Refunds are issued by check only, never credited back to a credit card, and are payable to the person who posted. A refund is released only to the surety unless a bond-authorization form names a third party, and it is issued within 14 days of the final disposition of all cases on the receipt.</p>
+  <p class="muted">Source: the Clerk of Courts bond FAQ.</p>
+
+  <h3>5. Real-estate bonds</h3>
+  <p>A defendant or surety may post Ohio real estate as bond. The property must be titled in the defendant's or the surety's name and located in Ohio (R.C. 2937.24). Property owned by a trust, corporation, LLC, partnership, or similar entity is not accepted, and property in foreclosure is not accepted. The surety must hold equity of at least twice the bond amount, over and above all encumbrances (R.C. 2937.281). A Surety Affidavit must be filed with the signatures of all current owners and spouses, all lien holders and balances with documentation, the county auditor's current valuation, the equity computation, and a certified copy of the deed from the county recorder. The Clerk may deny the property as bond if the terms are not met; knowingly false information is contempt and referral for prosecution.</p>
+  <p>Full requirements: <a href="https://www.courtclerk.org/forms/pre.pdf">Posting Real Estate for a Criminal Bond, Clerk of Courts memo (PDF)</a>.</p>
+  <p class="muted">Source: the Clerk of Courts memo "Posting Real Estate for a Criminal Bond."</p>
+
+  {# Citizen panel 2026-09-22 (quick win 6): victim resources belong on this
+     page. Phone and web address confirmed by the 2026-09-22 public search;
+     Ohio AG victim services is not listed because its number could not be
+     confirmed from an official source before publication. #}
+  <h3 id="victim-notification" tabindex="-1">6. Victim notification and protection</h3>
+  <p>If you are a victim of the offense, you can get custody-status notifications: Ohio VINE, <a href="tel:+18007700192">1-800-770-0192</a>, or register online at <a href="https://www.vinelink.com/">VINELink</a>.</p>
+  <p>If you need protection from someone, Ohio courts can issue a protection order. <a href="{{ base_url }}/help/">Free help resources</a> can connect you with advocates and the right court.</p>
+  <p class="muted">Source: public search 2026-09-22 (Ohio VINE / VINELink). The bond schedule itself is a posting-amount document; it says nothing about victim services.</p>
+</section>
+
+<details class="sect-h" id="no-standard-bond" tabindex="-1">
   <summary><h2>Misdemeanor charges without standard bonds ({{ no_standard_bond|length }})</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <p>The schedule lists {{ no_standard_bond|length }} offenses with no standard bond amount. For these, the judge sets bond at arraignment.</p>
@@ -150,7 +179,7 @@
 </details>
 
 <section aria-labelledby="notes-h">
-  <h2 class="sect-h" id="notes">Notes from the schedule</h2>
+  <h2 class="sect-h" id="notes" tabindex="-1">Notes from the schedule</h2>
   <ul class="muted">
     {% for n in general_notes %}
     <li>{{ n.note }}</li>
@@ -162,7 +191,7 @@
 </section>
 
 <section aria-labelledby="related-h">
-  <h2 class="sect-h" id="related">Related</h2>
+  <h2 class="sect-h" id="related" tabindex="-1">Related</h2>
   <ul class="muted">
     <li>Municipal Criminal/Traffic Violations Bureau payout schedules, amendments through 2026-04-13: fine payout schedules, distinct from bond. (Live court PDF link pending URL verification; the text was captured in the 2026-09-21 crawl.)</li>
     <li><a href="{{ base_url }}/rules/">Local Rules 14.1 (Bond) and 14.2 (Setting Aside Bond Forfeiture Judgments)</a>, in the Common Pleas rules book effective 4-24-26.</li>
@@ -171,7 +200,7 @@
   </ul>
 </section>
 
-<details class="sect-h" id="about">
+<details class="sect-h" id="about" tabindex="-1">
   <summary><h2>About this page</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
   <div class="sect-h-body">
     <h3>Methodology</h3>
@@ -181,18 +210,6 @@
   </div>
 </details>
 
-{% set provenance = {
-  "feed": "feeds/bond.json",
-  "captured": "2026-09-21",
-  "sources": [
-    {"label": "Standard Bond Schedule (PDF, rev. 3/5/2026)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2026/03/bond_sched_latest.pdf"},
-    {"label": "Courts scam alert (updated 06/09/2026, PDF)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2026/07/SCAM-ALERT.pdf"},
-    {"label": "Clerk of Courts bond FAQ", "url": "https://www.courtclerk.org/frequently-asked-questions-bond-information/"},
-    {"label": "Clerk of Courts memo: Posting Real Estate for a Criminal Bond (PDF)", "url": "https://www.courtclerk.org/forms/pre.pdf"}
-  ],
-  "sha256": "b29db798621dfc175be0da7e821757ff1226d04cd17c01d2e95a4987a4b8bb49",
-  "note": "Schedule rev. 3/5/2026, about 6.5 months old when captured. Verify amounts with the court before relying on them."
-} %}
 {% include "_provenance.html" %}
 
 {% include "_disclaimer_strip.html" %}

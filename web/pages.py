@@ -10,6 +10,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 import shutil
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
@@ -1641,6 +1642,73 @@ def _form_court(lead: str | None) -> str:
     return ""
 
 
+# Defect #2 (2026-09-22, owner-directed): the /forms/ page rendered each
+# form's raw extracted-PDF-text lead as a visible wall of text. Leads no
+# longer ship to the template; each row gets a one-line human blurb composed
+# from the feed's own category/court/revision fields. Nothing is invented:
+# the purpose labels humanize the feed's category slugs.
+_FORM_PURPOSE = {
+    "plea": "Plea form",
+    "discovery": "Discovery plan form",
+    "jury-waiver": "Jury trial waiver",
+    "indigency": "Indigency affidavit",
+    "scheduling": "Scheduling order form",
+    "mediator": "Mediation application",
+    "registration-notice": "Registration notice",
+    "reec": "REEC docket application",
+    "transcript": "Transcript request form",
+    "media": "Media coverage request",
+}
+
+
+def _form_revision(revision: str | None) -> str:
+    """Human revision label, no underscores: '2023_01' -> '2023-01 generation'."""
+    rev = (revision or "").strip()
+    if re.fullmatch(r"\d{4}_\d{2}", rev):
+        return rev.replace("_", "-") + " generation"
+    return rev
+
+
+# Defect #2 (2026-09-22): title-specific one-line descriptions. Keys are the
+# exact feed titles; each value paraphrases its title in plain words and
+# invents nothing. Unmapped titles fall back to the category purpose.
+_FORM_BLURB = {
+    "Alford Plea": "Alford plea entry, pleading guilty while maintaining innocence",
+    "Guilty Plea": "Standard guilty plea entry",
+    "Guilty Plea, Agreed Sentence": "Guilty plea entry with an agreed sentence",
+    "No Contest Plea": "No-contest plea entry",
+    "Misdemeanor Guilty Plea": "Guilty plea entry for misdemeanor cases",
+    "Guilty Plea, Reagan Tokes Qualifying Offense": "Guilty plea entry for a Reagan Tokes qualifying offense",
+    "No Contest Plea, Reagan Tokes Qualifying Offense": "No-contest plea entry for a Reagan Tokes qualifying offense",
+    "Waiver of Trial by Jury": "Written waiver of the right to a jury trial",
+    "Affidavit of Indigency": "Sworn statement of inability to pay court costs",
+    "Joint Discovery Plan (Jenkins, Crim.R. 26F)": "Joint discovery plan, Judge Jenkins, under Crim.R. 26(F)",
+    "Crim.R. 26F Discovery Form 2": "Crim.R. 26(F) discovery form, second version",
+    "Joint Discovery Plan (Goering, Crim.R. 26F)": "Joint discovery plan, Judge Goering, under Crim.R. 26(F)",
+    "Joint Discovery Plan (Tallent, Crim.R. 26F)": "Joint discovery plan, Judge Tallent, under Crim.R. 26(F)",
+    "Crim.R. 26F Discovery Plan v5": "Crim.R. 26(F) joint discovery plan, version 5",
+    "Joint Discovery Plan (Branch, Crim.R. 26F)": "Joint discovery plan, Judge Branch, under Crim.R. 26(F)",
+    "Criminal Case Scheduling Order": "Scheduling order for a criminal case",
+    "Jury Scheduling Order (Silverstein)": "Jury scheduling order, Judge Silverstein",
+    "Volunteer Mediator Application": "Application to serve as a volunteer mediator",
+    "Contract Mediator Application (fillable)": "Fillable application for contract mediator",
+    "Explanation of Duties to Register as a Sex Offender": "Explanation of sex-offender registration duties",
+    "Notice of Duties to Enroll as a Violent Offender (ORC 2903.41 et seq.)": "Notice of violent-offender enrollment duties under ORC 2903.41 et seq.",
+    "Notice of Duties to Register as an Arson Offender (ORC 2909.14)": "Notice of arson-offender registration duties under ORC 2909.14",
+    "REEC Application (Hamilton County)": "Application for the Hamilton County REEC docket",
+    "Transcript Request Form": "Request for a transcript of proceedings",
+    "Media Request Form": "Request for media coverage of proceedings",
+}
+
+
+def _form_blurb(title: str | None, category: str | None, court: str, revision: str, prior: bool = False) -> str:
+    desc = _FORM_BLURB.get(title or "")
+    if desc is None:
+        base = _FORM_PURPOSE.get(category or "", "Court form")
+        desc = ("Prior-generation " if prior else "") + base[0].lower() + base[1:]
+    return ", ".join(part for part in (desc, court, revision) if part)
+
+
 def _render_forms_page(env: Environment, out_dir: Path) -> None:
     """Court Forms reference page (spec 2.3 Forms).
 
@@ -1657,26 +1725,34 @@ def _render_forms_page(env: Environment, out_dir: Path) -> None:
             f"forms_source_status.json missing or corrupt: {e}"
         ) from e
 
-    def _ctx(f: dict) -> dict:
+    def _ctx(f: dict, prior: bool = False) -> dict:
         sid = f["id"]
         entry = status_map.get(sid, {"status": "pending", "url": None})
         href = entry["url"] or f["source_url"] if entry["status"] == "ok" else None
+        # court is still derived from the feed lead text (feed-only parsing),
+        # but the raw lead itself no longer ships to the template (defect #2).
+        court = _form_court(f.get("lead"))
+        revision = _form_revision(f.get("revision"))
         return {
             "id": sid,
             "title": f["title"],
-            "revision": f.get("revision", ""),
-            "court": _form_court(f.get("lead")),
+            "revision": revision,
+            "court": court,
             "file_type": _form_file_type(f.get("source_txt", "")),
-            "lead": f.get("lead"),
+            "blurb": _form_blurb(f.get("title"), f.get("category"), court, revision, prior),
             "note": f.get("note"),
             "href": href,
         }
 
     current = [_ctx(f) for f in raw.get("current", [])]
-    archival = [_ctx(f) for f in raw.get("archival", [])]
+    archival = [_ctx(f, prior=True) for f in raw.get("archival", [])]
     other = [_ctx(f) for f in raw.get("other_forms", [])]
     if not current or not archival or not other:
         raise RuntimeError("forms.json schema violation: empty current/archival/other list")
+    # Citizen panel 2026-09-22 (quick win 1): the pending-verification state
+    # is stated once at the top of the page, not repeated on every row.
+    _all_forms = current + archival + other
+    _link_ok = sum(1 for f in _all_forms if f["href"])
 
     cat_order = [("plea", "Plea forms"), ("jury-waiver", "Waiver of Trial by Jury"),
                  ("indigency", "Affidavit of Indigency")]
@@ -1691,7 +1767,7 @@ def _render_forms_page(env: Environment, out_dir: Path) -> None:
     by_wave: dict[str, list] = {w: [] for w in wave_order}
     for gen, items in zip((f["generation"] for f in raw["archival"]), archival):
         by_wave.setdefault(gen, []).append(items)
-    waves = [(f"{w} generation", by_wave[w]) for w in wave_order if by_wave.get(w)]
+    waves = [(f"{w.replace('_', '-')} generation", by_wave[w]) for w in wave_order if by_wave.get(w)]
 
     other_groups = [
         ("Discovery", [x for x, f in zip(other, raw["other_forms"]) if f["category"] == "discovery"]),
@@ -1712,6 +1788,11 @@ def _render_forms_page(env: Environment, out_dir: Path) -> None:
             "current": len(current),
             "archival": len(archival),
             "other": len(other),
+        },
+        forms_link_summary={
+            "ok": _link_ok,
+            "pending": len(_all_forms) - _link_ok,
+            "total": len(_all_forms),
         },
         generated_utc=env.globals["generated_utc"],
     )
