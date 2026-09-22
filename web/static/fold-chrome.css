@@ -7,6 +7,8 @@
   justify-self: end;
 }
 
+.masthead-seal { display: none; }
+
 @media (min-width: 721px) {
   .running.mobile-only { display: none; }
 
@@ -20,7 +22,6 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-  /* RSS / GitHub / Access stay in the mobile drawer and the footer. */
   .nav-drawer > .nav-group:last-of-type { display: none; }
 
   .month > .cards {
@@ -107,7 +108,6 @@
   line-height: 1.15;
 }
 
-/* UI-03: do not use --accent-quiet as text. */
 :root[data-theme="dark"] .masthead .nav-link[aria-current="page"],
 :root[data-theme="dark"] .month-nav .chip strong,
 :root[data-theme="dark"] .page-home .court-stat-primary .court-stat-num {
@@ -122,11 +122,9 @@
   color: var(--fg);
 }
 
-/* UI-07: strip is a chart, not a control. */
 .tier-strip-seg { cursor: default; pointer-events: none; }
 .tier-strip-seg:hover { outline: none; }
 
-/* UI-08: overflow cue on in-page TOC rails. */
 @media (max-width: 720px) {
   .tab-toc {
     position: relative;
