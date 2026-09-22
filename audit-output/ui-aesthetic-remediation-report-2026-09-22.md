@@ -8,128 +8,108 @@
 
 The product is substantially more capable than its first impression suggests. The live site provides a direct roster search, client-side filtering, judge/court reference pages, provenance dates, source links, correction/removal routes, and explicit presumption-of-innocence language. The implementation also has several good foundations: a skip link, native disclosure elements, visible focus rules, reduced-motion handling, accessible labels for the core search/filter controls, and progressive enhancement in the roster UI ([base template](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/base.html#L52-L124), [roster tool](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/_roster_tool.html#L17-L131), [motion/focus CSS](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L262-L304)).
 
-The main problem is not missing functionality; it is **hierarchy**. The visual system currently presents a large, dense data surface before it clearly establishes the product name, the independent/non-governmental relationship, or the next step for family members and people seeking help. The dark theme also contains a measurable small-text contrast regression in its latest accent override. On mobile, important secondary navigation is deliberately compressed into horizontal rails without a consistent cue that more content exists.
+The main problem is hierarchy, not missing pages. The roster-first ordering is an intentional product decision and should remain intact. The highest-confidence fixes are the large initial roster DOM, the 4px chart/control ambiguity, the judge labels, the mobile Help TOC overflow, and a P1 contrast verification of dark-theme accent text. The masthead seal/affiliation treatment should be corrected without assuming that the publisher name needs to change. The severity scale and load-bearing legal copy are project rules and should be preserved while their surrounding presentation is refined.
 
 ### Overall assessment
 
 | Dimension | Assessment | Why |
 |---|---|---|
 | Core utility | **Strong** | Search, filters, roster detail, court reference, and source links are present. |
-| Task hierarchy | **Needs remediation** | The roster dominates; help, bond, visit, and court routes are secondary or below the roster. |
-| Trust/identity | **Needs remediation** | `JCStream` is the dominant name even though the public URL and user intent are “Are they in jail?”. The masthead seal/social link adds affiliation ambiguity. |
-| Visual coherence | **Mixed** | The system is deliberate, but mono wordmark + double rule + pills + cards + severity fills + multiple category colors create a dashboard/incident-board tone. |
-| Accessibility foundation | **Good with targeted gaps** | Several strong primitives are present; the dark accent token and pointer-only tier strip need attention. |
+| Task hierarchy | **Intentional, with focused refinements** | Roster-first is appropriate; the audit should not add a competing above-roster route row. |
+| Trust/identity | **Clarify affiliation, not necessarily the name** | JCStream can remain the publisher; the masthead seal should not imply government affiliation. |
+| Visual coherence | **Mixed** | The system is deliberate; surrounding shapes and decoration can be simplified without muting the project’s severity scale. |
+| Accessibility foundation | **Good with targeted gaps** | Several strong primitives are present; dark accent text, the tier strip, and mobile TOC need focused work. |
 | Perceived performance | **Needs remediation** | The homepage ships hundreds of roster cards in its initial HTML and only paginates after JavaScript runs. |
 
 ## Priority summary
 
-| ID | Priority | Finding | Recommended outcome |
+| ID | Priority/status | Finding | Recommended outcome |
 |---|---:|---|---|
-| UI-01 | P1 | Public identity and product name are misaligned | Make **Are They In Jail?** the user-facing masthead; keep JCStream as attribution. |
-| UI-02 | P1 | First-viewport task routing is too roster-centric | Put a compact “start here” action row immediately below search/freshness. |
-| UI-03 | P1 | Dark-theme active text has contrast regressions | Remove `--accent-quiet` from text use or retune it; add automated light/dark contrast checks. |
+| UI-01 | P2 / decision | Publisher identity and masthead affiliation need separation | Keep JCStream unless a deliberate naming decision is made; move/relabel the seal. |
+| UI-02 | Accepted | Roster-first ordering is intentional | Do not pull Help/Bond above search or add a four-tile row above the months. |
+| UI-03 | P1 / verify | Dark-theme accent text may fail contrast | Measure actual rendered selector pairs now; fix only confirmed failures. |
 | UI-04 | P1 | Client-side pagination arrives after a large initial DOM | Server-render a small first slice; keep the full archive behind a deliberate route. |
-| UI-05 | P2 | Navigation is over-complete and flat | Reduce primary navigation to the five most common tasks; move technical links to More/footer. |
-| UI-06 | P2 | Shape and color language is visually noisy and can read as punitive | Adopt one shape vocabulary and reserve saturated red for warnings/state. |
-| UI-07 | P2 | The 4px severity strip is an ambiguous pointer-only control | Make it decorative or turn each segment into a real, keyboard-operable control. |
+| UI-05 | P2 / later | Navigation breadth is a later IA question | Do not cut links immediately; use task data before considering a five-link primary. |
+| UI-06 | P2 | Surrounding visual language is over-signalled | Preserve the F1–F5 scale; refine chrome, spacing, and redundant signals around it. |
+| UI-07 | P2 | The 4px severity strip is an ambiguous pointer-only control | Make it decorative; let the existing Charge level control own filtering. |
 | UI-08 | P2 | Mobile in-page navigation hides overflow without a consistent cue | Wrap/group sections or add an explicit “more sections” affordance. |
-| UI-09 | P2 | Record pages lack a compact next-step action cluster | Add Verify, Bond, Visit/contact, Court record, Help, and Correction actions near the record heading. |
+| UI-09 | Deferred | A record-page action bar is not yet justified | Preserve current in-context links; test record tasks before adding new controls. |
 | UI-10 | P2 | Judge cards repeat generic “Profile” controls | Give each disclosure a name-specific label and make the action purpose explicit. |
-| UI-11 | P2 | Important legal/provenance copy is too small and too long in-flow | Keep concise framing inline; move full policy text to a structured legal/data surface. |
+| UI-11 | P2 | Important legal/provenance copy needs presentation refinement | Keep presumed-innocent/FCRA content in-flow; improve size, measure, grouping, and scanability. |
 
----
 
 ## Findings and remediation details
 
-### UI-01 — The public identity is not the user’s mental model
+### UI-01 — Publisher identity and masthead affiliation should be separated, not rebranded
 
-**Priority: P1 — trust, comprehension, and continuity**
+**Priority: P2 — trust clarity and an explicit product decision**
 
 #### Evidence
 
-- The live homepage title is `JCStream · 1210 currently in custody`, while the requested public address is `aretheyinjail.com`; the live page’s primary heading is “Search the roster” ([live homepage](https://www.aretheyinjail.com/)).
+- The live homepage title is `JCStream · 1210 currently in custody`, while the public address is `aretheyinjail.com`; the live page’s primary heading is “Search the roster” ([live homepage](https://www.aretheyinjail.com/)).
 - The masthead visibly brands the site **JCStream** and describes it as “Hamilton County · Justice Center mirror” ([base template, lines 56–60](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/base.html#L56-L60)).
-- The footer correctly says the project is independent and not affiliated with the Sheriff’s Office or a government entity ([base template, lines 145–150](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/base.html#L145-L150)), but that clarification arrives after the strongest visual identity has already been established.
+- The footer correctly says the project is independent and not affiliated with the Sheriff’s Office or a government entity ([base template, lines 145–150](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/base.html#L145-L150)).
+- The masthead also presents a seal/link labeled “Hamilton County Booking Photos on Facebook” ([base template, lines 62–69](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/base.html#L62-L69)).
 
-#### Why it matters
+#### Revised assessment
 
-A person arriving from a search result, a shared link, or the domain name should understand both **what this is** and **whether it is official** before interpreting a name/photo/charge record. “JCStream” sounds like a technical product or data feed; it does not answer the natural-language question implied by the domain. The adjacent seal link to “Hamilton County Booking Photos on Facebook” further increases the risk that a visitor reads the masthead as an official county property, even though the footer disclaims affiliation ([base template, lines 62–69](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/base.html#L62-L69)).
-
-W3C guidance also recommends continuity between a page title and the link/context that brought a user to the page ([WCAG 2.4.4 — Link Purpose](https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html)). This is not a claim that the current title fails WCAG; it is a product-language and trust issue.
-
-#### Remediation
-
-1. Make the visible wordmark **Are They In Jail?** or **Are They In Jail? — Hamilton County**.
-2. Put the source attribution on the secondary line: `Current Hamilton County custody roster · independent mirror by JCStream`.
-3. Change the homepage title to `Are They In Jail? · Hamilton County custody roster` and preserve the current count as a secondary title suffix.
-4. Move the booking-photo/Facebook seal out of the primary masthead into a source/provenance area. If retained, label it as an external social source rather than a civic seal.
-5. Repeat “Independent public-record mirror — not a government site” beside the first search interaction, not only in the footer.
-
-#### Acceptance criteria
-
-- A first-time visitor can answer “what is this?”, “is it official?”, and “where do I search?” without scrolling.
-- Browser title, visible wordmark, and shared-link preview use the same primary name.
-- The independent status is adjacent to the first interaction and remains in the full legal/source area.
-
----
-
-### UI-02 — The first viewport optimizes the roster but under-serves non-roster tasks
-
-**Priority: P1 — task completion**
-
-#### Evidence
-
-The live homepage starts with roster search/filtering and then a long sequence of monthly booking results ([live homepage](https://www.aretheyinjail.com/)). In the template, the “Where to start” audience cards—“Someone you know was arrested,” “You have a case,” and “Researching the system”—are rendered **after** the legal disclosure and roster block ([homepage template](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/index.html#L31-L110)). The help page shows that the audience includes people looking for a public defender, visitation, bond, case lookup, expungement, crisis assistance, and court-arrival information ([live Help & Self-Help](https://www.aretheyinjail.com/help/)).
-
-#### Why it matters
-
-Search-first is correct for one core audience, but the site itself serves at least three distinct jobs: find a person, navigate a case/custody process, and research the system. A family member who needs bond, visitation, or free legal help should not have to infer that those routes exist from a collapsed menu or traverse the roster. This is especially consequential on a phone, where the primary nav becomes a menu disclosure ([base template, lines 78–105](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/base.html#L78-L105)).
+The domain asks a natural-language question and **JCStream can validly remain the publisher name**. Changing the wordmark to “Are They In Jail?” would be a public identity/trust decision, not an implementation fix, and is out of scope unless the product owner chooses it. The more immediate issue is that an external booking-photo seal in the primary masthead can visually imply official affiliation before the footer disclaimer is encountered.
 
 #### Remediation
 
-Keep the roster as the main product, but insert one compact route row immediately below search/freshness and above the first month:
-
-- **Find someone** — Search the current roster.
-- **Bond, visit, or contact** — Practical custody steps.
-- **Court date or case** — Docket and courtroom routes.
-- **Free help now** — Public defender, legal aid, crisis resources.
-
-Use text links or small utility tiles, not four more large filled cards. Keep the longer audience cards lower on the homepage for users who want context.
+1. Keep the JCStream wordmark unless a separate naming exercise deliberately changes it.
+2. Move the booking-photo/Facebook seal out of the primary masthead into the source/provenance area.
+3. If retained, label it plainly as an external social/source link rather than a civic seal.
+4. Put a concise adjacent attribution near the first search interaction: `JCStream — independent public-record mirror; not a government site.`
+5. Optionally use a descriptive title such as `JCStream · Hamilton County custody roster` without changing the visible product name.
+6. Validate the result with a short comprehension test: users should distinguish the domain question, the JCStream publisher, and the official/non-official source relationship.
 
 #### Acceptance criteria
 
-- On a 375px viewport, all four routes are visible or reachable without opening the global menu.
-- Each route lands on a page whose heading matches the link text.
-- The roster remains the first primary control; routing does not displace search.
+- JCStream remains visibly identifiable unless a deliberate product-name decision says otherwise.
+- The masthead cannot reasonably be mistaken for a government seal or official county site.
+- The independent status is adjacent to the first search interaction and remains in the full legal/source area.
 
----
+This finding does **not** recommend a rebrand. It recommends separating publisher identity, domain intent, and source affiliation clearly.
 
-### UI-03 — Dark-theme active text has measurable contrast regressions
 
-**Priority: P1 — accessibility and visual legibility**
+### UI-02 — Roster-first hierarchy is an accepted product decision
 
-#### Evidence and calculation
+**Status: Accepted — no remediation requested**
+
+The live homepage starts with roster search/filtering and monthly booking results ([live homepage](https://www.aretheyinjail.com/)). The template places the “Where to start” audience cards after the legal disclosure and roster block ([homepage template](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/index.html#L31-L110)). That ordering is intentional: the roster is the primary product, and the audience cards are supporting context.
+
+The previous recommendation to add a four-route row above the months is withdrawn. Do **not** pull Help, Bond, or other audience routes above search, and do not add a competing tile row to the first roster workspace. Preserve the current roster-first hierarchy. If future analytics or user testing shows that a secondary audience cannot find its route, solve that below the roster, in the existing navigation, or through a small contextual link—not by displacing the primary search task.
+
+
+### UI-03 — Dark-theme accent text requires P1 contrast verification
+
+**Priority: P1 — verify before treating the state as acceptable**
+
+#### Evidence and candidate calculation
 
 The dark theme defines `--accent: #F0433A` and a later visual pass defines `--accent-quiet: color-mix(in oklch, #F0433A 73%, #141619)` ([dark tokens](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L119-L204), [latest override](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L4551-L4580)). The same override applies `--accent-quiet` to small text in the active nav state, month counts, and the primary statistic on the court page ([style override, lines 4566–4574](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L4566-L4574)).
 
-Using the CSS Oklab/Oklch interpolation specified by that rule, the mixed color is approximately `#AF3B34`; against `#141619` it is approximately **3.0:1**. That is a decorative red, not a legible normal-text color. A second case is the current pager number: `#F0433A` text on the dark `--accent-bg` (`#2B1D19`) is approximately **4.31:1**, below the 4.5:1 normal-text threshold. The pager styles are here ([pager state](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L4491-L4520)).
+Using the CSS Oklab/Oklch interpolation specified by that rule, the mixed color is approximately `#AF3B34`; against `#141619` it is approximately **3.0:1**. A second candidate is the current pager number: `#F0433A` text on the dark `--accent-bg` (`#2B1D19`) is approximately **4.31:1**, below the 4.5:1 normal-text threshold. The pager styles are here ([pager state](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L4491-L4520)).
 
-WCAG 2.2 SC 1.4.3 requires at least 4.5:1 for normal text, and explicitly includes placeholder, hover, and focus text ([W3C — Contrast Minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)). Meaningful control boundaries and state indicators have a separate 3:1 non-text requirement ([W3C — Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)).
+These are strong candidates for a real failure, but this audit did not have a browser’s computed-style/accessibility engine. Treat this as a **P1 verification item now**, not as a reason to redesign the accent system before measuring the actual rendered selectors.
+
+WCAG 2.2 SC 1.4.3 requires at least 4.5:1 for normal text, and includes placeholder, hover, and focus text ([W3C — Contrast Minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)). Meaningful control boundaries and state indicators have a separate 3:1 non-text requirement ([W3C — Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)).
 
 #### Remediation
 
-- Use `--accent-quiet` only for non-text decoration: rules, borders, or a large graphical accent.
-- Use `--fg` or a lightened accent for active navigation/count text. Do not rely on the color alone; retain weight, underline, or a border indicator.
-- Change the selected pager state to `color: var(--fg)` with an accent border, or use a dark enough tinted background for the chosen text color.
-- Add a small contrast test matrix for normal, hover, focus, selected, light, and dark states. The test should evaluate the actual token combinations, not just root variables.
+1. Inventory every dark-theme selector that uses `--accent`, `--accent-quiet`, or `--accent-bg` for text.
+2. Measure the actual computed foreground/background pairs in normal, current, hover, focus, and selected states with a browser or contrast test.
+3. If a pair fails, make the smallest local correction—text color, background, or a text/border treatment—while preserving the project’s accent and severity language.
+4. Do not remove or redesign the scale/token globally until the selector-level results justify it.
+5. Add the measured state matrix to automated regression checks.
 
 #### Acceptance criteria
 
-- All normal text states pass 4.5:1; large text passes 3:1.
-- All non-text focus/state indicators pass 3:1 against adjacent colors.
-- Visual hierarchy still distinguishes current nav, selected pager, and primary actions without a saturated red fill everywhere.
+- Every actual normal-text combination passes 4.5:1; large text passes 3:1.
+- Non-text focus/state indicators pass 3:1 against adjacent colors.
+- The audit records the measured rendered values and selectors, not just root-token estimates.
 
----
 
 ### UI-04 — The homepage ships a large roster DOM and paginates after JavaScript
 
@@ -167,76 +147,72 @@ The visual result can look compact while the browser is still parsing a very lar
 
 ---
 
-### UI-05 — Navigation is too broad and too flat for a public-facing first visit
+### UI-05 — Navigation breadth is a later IA question, not an immediate cut
 
-**Priority: P2 — information architecture**
+**Priority: P2 — defer structural changes until task/link data exists**
 
 #### Evidence
 
 The shared navigation exposes seven “Roster tools,” eight “Court reference” links, and three “Site” links ([nav groups](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/_nav_groups.html#L8-L55)). The footer repeats a large set of destinations ([base footer](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/base.html#L128-L150)), while reference pages also render a “More court reference” block of up to seven cards ([reference block](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/_more_reference.html#L7-L29)).
 
-#### Why it matters
+#### Revised assessment
 
-The links are individually reasonable, but the aggregate creates three competing navigation systems: the desktop rail, the mobile drawer, and the repeated card strip/footer. The first-time user must decide among “Calendar,” “Courts,” “Bond schedule,” “Visit and contact,” “Help and free aid,” “Services and programs,” “Stats,” “Data,” “Access,” and others before understanding the product’s primary route.
+The link set is broad, but breadth alone is not enough evidence to remove destinations. A five-link primary nav with a More area may be a good later direction, but it should follow usage data and task testing—not be bundled with the roster-first decision or implemented as an immediate cut.
 
-#### Remediation
+#### Remediation when this work is scheduled
 
-Use a two-level information architecture:
+- Instrument navigation use or review existing analytics/search queries.
+- Identify the five highest-value user tasks and the links that support them.
+- Prototype a five-link primary plus More only after confirming that secondary/reference destinations remain discoverable.
+- Keep the footer as a complete index during the transition.
 
-**Primary:** Roster, Court dates, Bond/visit, Help, More.  
-**More:** Courts, Judges, Jury duty, Rules, Forms, Services, Stats, Statutes, Data, Access, RSS, GitHub.
+For now, preserve the current navigation and focus on the higher-confidence issues: contrast verification, DOM weight, the decorative tier strip, named judge controls, and mobile TOC overflow.
 
-On reference pages, replace the full repeated card matrix with a compact “Related” list. Keep the footer as a complete index, but visually subordinate technical/project links.
 
-This also gives the mobile drawer a meaningful first screen rather than a long list.
+### UI-06 — Refine the surrounding visual language without muting the project severity scale
 
----
-
-### UI-06 — The visual language is deliberate but over-signalled
-
-**Priority: P2 — overall aesthetics and emotional tone**
+**Priority: P2 — visual polish within an intentional project rule**
 
 #### Evidence
 
 The site combines a centered uppercase mono wordmark and double-rule masthead ([masthead styles](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L306-L355)), rounded pill navigation ([in-page TOC](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L3730-L3760)), multiple card radii and shadows ([cards](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L3838-L3969)), a seven-category color legend ([roster legend](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/_roster_tool.html#L80-L90)), and filled red-to-amber felony badges ([severity badges](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L938-L1011)).
 
-The live detail page simultaneously states “Arrest is not conviction” and “charges below are accusations only” ([live record example](https://www.aretheyinjail.com/inmate/2672540/)). The current red/amber severity palette is therefore a sensitive visual choice: it can help scanning, but it can also make accusation severity feel like a punitive or editorial judgment.
-
-This is an aesthetic and trust observation, not a claim that the color coding is technically wrong. The code does provide text labels alongside color, which is the right direction.
+The live detail page simultaneously states “Arrest is not conviction” and “charges below are accusations only” ([live record example](https://www.aretheyinjail.com/inmate/2672540/)). The severity scale is a project rule and should remain visible; this finding is about the amount of competing chrome around it, not about draining the F1–F5 scale into an optional visualization mode.
 
 #### Remediation
 
-- Adopt one shape vocabulary: mostly rectangular 4–6px surfaces, with round pills reserved for truly stateful controls.
-- Reduce the number of simultaneous signals. Keep the F1–MM text label and a thin category marker; avoid a saturated filled chip, a color strip, a colored charge label, and a legend all competing at once.
-- Use red primarily for warnings, errors, and the active primary action. Use neutral/blue/ink treatments for ordinary degree/category metadata.
-- Keep the warm severity scale available in the detail page or an optional “visualize severity” mode if it is important to the research audience.
-- Make “presumed innocent” framing visually calm and close to the record, not visually outshouted by the severity palette.
+- Preserve the F1–F5 severity scale, its meaning, and redundant text labels.
+- Reduce competing decoration around that scale: align radii, spacing, border weights, and legends so the severity signal is intentional rather than one of many simultaneous accents.
+- Keep color plus text/pattern/state so the scale is not color-only; verify the actual color pairs under UI-03.
+- Use neutral treatments for unrelated metadata, while retaining the defined red/amber treatment where the project rule calls for it.
+- Validate the tone with stakeholders and representative users rather than unilaterally neutralizing a meaningful research signal.
 
 #### Acceptance criteria
 
-A visual review at light and dark themes should show one clear focal point per screen: search on the homepage, person/status on a record, and the requested information on reference pages.
+F1–F5 remains visible and recognizable in the roster/detail experience. The refinement reduces visual noise around the scale without changing its semantics, colors, or availability.
 
----
 
-### UI-07 — The 4px degree strip is a pointer-only control with weak discoverability
+### UI-07 — Make the 4px degree strip decorative; let Charge level filter
 
 **Priority: P2 — control clarity and keyboard parity**
 
 #### Evidence
 
-The roster template renders a 4px `role="img"` tier strip whose segments are clickable in JavaScript ([roster markup](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/_roster_tool.html#L94-L105), [4px CSS](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L4311-L4319)). The JavaScript explicitly describes the segment behavior as “Pointer-only enhancement”; the accessible equivalent is the select ([tier-strip handler](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/main.js#L676-L688)). The explanatory caption is hidden by the final chrome stylesheet ([fold chrome](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/fold-chrome.css#L89-L106)).
+The roster template renders a 4px `role="img"` tier strip whose segments are clickable in JavaScript ([roster markup](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/_roster_tool.html#L94-L105), [4px CSS](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L4311-L4319)). The JavaScript describes the segment behavior as “Pointer-only enhancement”; the accessible equivalent is the existing select ([tier-strip handler](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/main.js#L676-L688)). The explanatory caption is hidden by the final chrome stylesheet ([fold chrome](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/fold-chrome.css#L89-L106)).
 
-#### Why it matters
+#### Revised assessment
 
-A 4px bar reads as a chart, not a filter. A user must discover that its segments are interactive, and keyboard users cannot focus or activate the individual segments. WCAG 2.2 sets a 24×24 CSS-pixel minimum pointer target except for defined exceptions ([W3C — Target Size Minimum](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html)). A visible control also needs a perceivable boundary/state, with 3:1 non-text contrast where applicable ([W3C — Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)).
+The strip is a chart pretending to be a control. Charge level already provides the filter, so the strip does not need a second interaction model. A 4px bar should communicate distribution only; it should not require users to discover pointer behavior or force keyboard users to rely on a different control.
 
-#### Remediation options
+#### Remediation
 
-**Preferred:** make the strip a non-interactive data visualization and let “Charge level” be the only filter control. Remove `cursor: pointer` and the click handler.
+- Remove the click handler, pointer cursor, and interactive affordance from the strip.
+- Keep it as a decorative/data visualization with an accurate accessible description if it conveys a meaningful distribution; otherwise mark it decorative.
+- Keep the existing labeled Charge level select as the single filter control.
+- Restore a short visible caption/legend if the chart is not self-explanatory; the caption should explain the relationship to the Charge level select, not invite clicking.
 
-**If it must filter:** render each segment as a button/link with a name such as `Filter to F1 — 41 people`, at least a 24px target (ideally 44px), visible focus, and a text legend. Keep the select as a keyboard-friendly alternative, not as a hidden explanation for a visual control.
+This is the preferred resolution; do not replace the strip with another set of tiny buttons.
 
----
 
 ### UI-08 — Mobile in-page navigation hides overflow without a consistent cue
 
@@ -259,38 +235,25 @@ W3C’s informative mobile guidance treats small-screen size as a distinct desig
 
 ---
 
-### UI-09 — Record pages need a next-step action cluster
+### UI-09 — Record-page next-step actions are deferred pending task evidence
 
-**Priority: P2 — task completion after lookup**
+**Status: Deferred — do not add a six-action bar by default**
 
 #### Evidence
 
-The live record page is information-rich: person/status summary, booking metadata, charge table, bond, court/case links, time in custody, bond distribution, severity ladder, statute context, and similar inmates ([live record example](https://www.aretheyinjail.com/inmate/2672540/)). The template places the person summary and long legal disclosure before the charges table ([record hero](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/inmate.html#L46-L104)), and the practical links are distributed throughout the page rather than collected as next steps.
+The live record page is information-rich: person/status summary, booking metadata, charge table, bond, court/case links, time in custody, bond distribution, severity ladder, statute context, and similar inmates ([live record example](https://www.aretheyinjail.com/inmate/2672540/)). The template places the person summary and legal disclosure before the charges table ([record hero](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/inmate.html#L46-L104)).
 
-#### Why it matters
+The audit observed that practical links are distributed through the record, but did not measure a failure to find them. Adding six prominent actions—Verify, Bond, Visit, Court, Help, and Correction—could create a second dashboard and compete with the record itself.
 
-Finding a person is usually not the end task. The next question is likely “How do I verify this?”, “How do I post bond?”, “How do I visit/contact them?”, “Where is the case/court date?”, or “How do I request a correction/removal?”. The current record is optimized for research depth; it is less optimized for a stressed family member who has already found the right name.
+#### Decision and future test
 
-#### Remediation
+- Preserve the current record hierarchy and in-context links.
+- Keep the presumed-innocent and data-use language near the record; do not trade it for action chrome.
+- Test concrete tasks with family/friend, case, and research users before adding controls.
+- If one next step is consistently missed, add that one contextual link at the point of need rather than a permanent six-action bar.
 
-Add a compact action row below the record name/status and above the metadata:
+This item is retained as a future research question, not as a current must-fix or a recommendation to pull Help/Bond above the homepage search.
 
-- **Verify at HCSO**
-- **Bond and release**
-- **Visit or contact**
-- **Court record / case**
-- **Free help**
-- **Correction or removal**
-
-Use one primary action (probably Verify) and quiet text links for the rest. Do not turn every action into a colored pill. Keep the legal disclosure collapsed or summarized with a `Read legal/data-use notice` control, while preserving the full text and no-JavaScript access.
-
-#### Acceptance criteria
-
-- The action row is visible without scrolling on a typical desktop record and near the top on mobile.
-- Each action has descriptive link text and a destination-specific external-link indicator where needed.
-- The action row never implies that a charge is a conviction or that the mirror is the official source.
-
----
 
 ### UI-10 — Judge cards repeat generic “Profile” controls
 
@@ -311,7 +274,7 @@ W3C says headings/labels should describe a control’s topic or purpose ([WCAG 2
 
 ---
 
-### UI-11 — Small legal/provenance text is doing too much work in-flow
+### UI-11 — Legal/provenance copy needs presentation refinement, not demotion
 
 **Priority: P2 — readability and trust**
 
@@ -319,17 +282,25 @@ W3C says headings/labels should describe a control’s topic or purpose ([WCAG 2
 
 The footer contains four long legal/source paragraphs at `font-size: 11px`, while record-level legal text is `12px` ([legal styles](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/static/style.css#L2466-L2473), [footer markup](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/base.html#L143-L150)). The record also carries a long legal paragraph immediately after the personal metadata ([record legal copy](https://github.com/AICincy/HCJC/blob/5c7ac9b3c38c94d891722f3579741649fcb27e92/web/templates/inmate.html#L89-L98)).
 
-The copy is important and should not be deleted. The issue is hierarchy: small type, long line lengths, and dense legal references make both the useful warning and the policy text harder to scan. Web.dev recommends considering line length, font size, and line height together; it cites roughly 45–75 characters as a comfortable single-column range and recommends relative/ch-based constraints ([web.dev Typography](https://web.dev/learn/design/typography)).
+#### Revised assessment
+
+The presumed-innocent and FCRA sentences are load-bearing and must remain in-flow on the record page. They should not be demoted behind a generic disclosure or removed in favor of a six-action row. The issue is presentation: small type, long lines, and dense legal references make important warnings harder to scan.
 
 #### Remediation
 
-- Keep a short inline statement near the record: `Arrest is not conviction. Charges are accusations. This is an independent public-record mirror.`
-- Put full FCRA, copyright, source-reuse, correction/removal, and public-record policy in a dedicated `Legal & data use` page or a clearly labeled disclosure.
-- Use 13–14px for readable legal/supporting copy, `max-inline-size: 70ch` for prose, and clear subheadings within the full policy.
-- Keep source freshness/provenance adjacent to the claim it qualifies, rather than relying on a distant footer.
-- Keep the complete policy available without JavaScript and printable.
+- Keep the current `Arrest is not conviction`, accusation, independent-mirror, and FCRA language adjacent to the record.
+- Give that block a clear heading such as `Important legal and data-use information`, stronger spacing, and readable 13–14px text where feasible.
+- Constrain prose to roughly 60–75ch, while allowing structured metadata/tables to use the available width.
+- Separate auxiliary policy detail with subheadings and links, but do not hide the load-bearing sentences behind JavaScript or move them only to the footer.
+- Keep the complete policy available without JavaScript and printable; a dedicated policy page can supplement the record, not replace its essential warning.
+- Preserve source freshness/provenance adjacent to the claim it qualifies.
 
----
+#### Acceptance criteria
+
+- A record visitor sees the presumed-innocent and FCRA framing without opening a disclosure or visiting another page.
+- The essential legal block is readable at desktop, mobile, zoom, and print widths.
+- Full policy remains available, while the record page retains the minimum context needed to prevent misuse.
+
 
 ## What is already working well
 
@@ -350,12 +321,12 @@ These strengths should be preserved while remediating the hierarchy:
 
 ### Homepage hierarchy
 
-1. Brand + independent/source line.
+1. JCStream brand + independent/source line.
 2. One plain-language promise: `Find a person in the current Hamilton County custody roster.`
 3. Search input and freshness line.
-4. Four compact task routes.
-5. Roster browsing workspace.
-6. Detailed context, methodology, and legal policy.
+4. Roster browsing workspace.
+5. Existing audience/context content below the roster.
+6. Detailed methodology and legal policy.
 
 ### Type
 
@@ -381,31 +352,33 @@ These strengths should be preserved while remediating the hierarchy:
 
 ## Remediation roadmap
 
-### Phase 0 — high-leverage fixes
+### Phase 0 — high-confidence fixes
 
-1. Fix UI-03 token/state contrast and add a contrast regression test.
-2. Align visible brand, title, and source/independence language (UI-01).
-3. Add the four-route task row above the roster (UI-02).
-4. Rename judge disclosures (UI-10).
-5. Move or relabel the masthead social seal so it cannot imply government affiliation.
+1. Measure the actual dark-theme text/state combinations and correct confirmed contrast failures (UI-03).
+2. Reduce initial roster HTML/DOM weight without changing the roster-first order (UI-04).
+3. Make the 4px tier strip decorative and leave Charge level as the filter (UI-07).
+4. Give judge disclosures name-specific labels (UI-10).
+5. Move/relabel the masthead booking-photo seal to clarify affiliation (UI-01).
+6. Add a mobile overflow cue or grouped pattern to the Help TOC (UI-08).
 
-### Phase 1 — task and performance structure
+### Phase 1 — evidence-led structure
 
-1. Replace client-only first-page pagination with server-bounded roster output (UI-04).
-2. Simplify the primary navigation and consolidate reference links (UI-05).
-3. Add record-page next-step actions (UI-09).
-4. Make the mobile TOC behavior consistent (UI-08).
+1. Review navigation usage and task data before considering a five-link primary plus More (UI-05).
+2. Test record-page tasks before adding any next-step controls (UI-09).
+3. Keep the existing roster-first homepage order; do not add an above-roster Help/Bond route row (UI-02).
 
-### Phase 2 — visual-system refinement
+### Phase 2 — visual and content refinement
 
-1. Reduce filled severity/category signals and unify radii (UI-06).
-2. Decide whether the tier strip is visualization or control; implement one semantic model (UI-07).
-3. Rework legal/provenance disclosure hierarchy and prose measure (UI-11).
-4. Run usability sessions with at least three audience types: family/friend, person with a case, and researcher.
+1. Refine surrounding radii, spacing, borders, and legends without altering the F1–F5 project severity scale (UI-06).
+2. Improve legal/provenance typography and grouping while keeping load-bearing copy in-flow on records (UI-11).
+3. Run usability sessions with at least three audience types: family/friend, person with a case, and researcher.
+
 
 ## Verification plan
 
 Before calling the remediation complete, test:
+
+**Product decisions to preserve during remediation:** roster-first homepage order; JCStream as publisher unless separately renamed; the F1–F5 severity scale; and presumed-innocent/FCRA language in-flow on record pages.
 
 - **Viewports:** 320, 375, 412, 768, 1024, and 1440px.
 - **Themes:** light/dark, fresh/stale/blocked states, hover/focus/selected/disabled states.
