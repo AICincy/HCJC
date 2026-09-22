@@ -14,8 +14,14 @@ name: "CodeQL Advanced"
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - "data/**"
+      - "docs/**"
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - "data/**"
+      - "docs/**"
   schedule:
     - cron: '38 21 * * 2'
 
@@ -94,8 +100,8 @@ jobs:
       if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        echo 'If you are using a "manual" build mode for one or more of the' \
-          'languages you are analyzing, replace this with the commands to build' \
+        echo 'If you are using a "manual" build mode for one or more of the'
+          'languages you are analyzing, replace this with the commands to build'
           'your code, for example:'
         echo '  make bootstrap'
         echo '  make release'
