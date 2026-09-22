@@ -2835,7 +2835,10 @@ h2.sect-h {
 .month > summary::-webkit-details-marker {
   display: none;
 }
-.month > summary:hover,
+.month > summary:hover {
+  background: var(--bg-soft);
+  border-color: var(--border);
+}
 .month > summary:focus-visible {
   background: var(--bg-soft);
   border-color: var(--accent);
@@ -2848,7 +2851,7 @@ h2.sect-h {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
-.month[open] > summary { border-color: var(--accent); background: var(--surface); box-shadow: var(--shadow-card); }
+.month[open] > summary { border-color: var(--border); background: var(--surface); box-shadow: var(--shadow-card); }
 .month > summary h2 {
   font-size: clamp(20px, 2.4vw, 28px);
   font-weight: 700;
@@ -4088,9 +4091,9 @@ a.visit-card.visit-card-sm { gap: 6px; padding: 12px 14px; }
 .page-lede a { color: var(--link); }
 
 /* --- 2. Homepage hero: designed, not default-stacked.
-   Accent top rule anchors it; display type goes larger and tighter. --- */
+   Quiet top rule anchors it; display type goes larger and tighter. --- */
 .roster-hero {
-  border-top: 3px solid var(--accent);
+  border-top: 3px solid var(--border);
   padding: 30px 30px 26px;
   margin: 0 0 20px;
 }
@@ -4243,19 +4246,17 @@ details.sect-h > summary h2 {
 .filter-bar .filter-bar-main input[type="search"] {
   width: 100%;
   min-width: 0;
-  height: 40px;
+  height: 44px;
   font-size: 14px;
 }
 .filter-bar .filter-inline {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  display: grid;
+  gap: 0.25rem;
   flex: 0 0 auto;
   margin: 0;
   font-size: 12px;
   font-weight: 600;
   color: var(--fg-muted);
-  white-space: nowrap;
 }
 .filter-bar .filter-inline select {
   height: 40px;
@@ -4563,3 +4564,114 @@ details.sect-h > summary h2 {
   .pager { display: none !important; }
   .card-inmate.is-paged-out { display: revert !important; }
 }
+
+/* ===== Visual pass 2026-09-22: quiet the dark theme, names as display type =====
+   Amended per engineering-panel review (engineering-panel-css-pass-2026-09-22).
+   Scope: this file only. Unlayered override rules, placed after the rules they
+   replace. No template, font, palette, motion, or legal-copy changes. */
+
+/* 1. Smaller wordmark. Cap 1.75rem; the 32-44px clamp was the defect. */
+.masthead .brand-name {
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* 2. Less red, chrome only. --accent stays #F0433A for text, :focus-visible,
+   .button-primary, and state. --accent-quiet is decoration only: borders and
+   rules, never running text, never focus, never state. */
+:root[data-theme="dark"] {
+  --accent-quiet: color-mix(in oklch, #F0433A 73%, #141619);
+}
+.masthead .brand:hover .brand-name { color: var(--accent-quiet); }
+.masthead .nav-link:hover { color: var(--fg); }
+.masthead .nav-link:hover .nav-hint { color: var(--fg); }
+.masthead .nav-link[aria-current="page"] { color: var(--accent-quiet); }
+.month-nav .chip strong { color: var(--accent-quiet); }
+.page-home .court-stat-primary .court-stat-num { color: var(--accent-quiet); }
+
+/* 5. Banner: quiet inline-start rule. No full-width accent fill. */
+.source-banner {
+  background: transparent;
+  border-inline-start: 3px solid var(--accent-quiet);
+}
+
+/* 6. De-pill the custody count. The ::before status dot is untouched. */
+.masthead .running {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  padding-inline: 0;
+}
+
+/* 3. Names as rows. _card.html order is .tier-corner, .thumb, .meta; columns
+   are placed explicitly so no markup change is needed. */
+.month > .cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.card-inmate {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  column-gap: 0.75rem;
+  align-items: center;
+  border: 0;
+  border-radius: 0;
+  border-block-end: 1px solid var(--border);
+  border-inline-start: 3px solid var(--card-cat, var(--border));
+  background: transparent;
+  box-shadow: none;
+  padding-block: 0.625rem;
+  padding-inline: 0.75rem;
+}
+.card-inmate > .thumb { grid-column: 1; width: 48px; height: 60px; }
+.card-inmate > .meta { grid-column: 2; min-inline-size: 0; }
+.card-inmate > .tier.tier-corner {
+  position: relative;
+  grid-column: 3;
+  grid-row: 1;
+  top: auto;
+  right: auto;
+  align-self: center;
+  justify-self: end;
+}
+.card-inmate:hover {
+  border-block-end-color: var(--border-hi);
+  background: var(--bg-soft);
+  box-shadow: none;
+}
+.card-inmate .name a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.card-inmate:focus-within { background: var(--accent-bg); }
+.month .cards > .card-inmate:nth-child(even) { background: var(--bg-soft); }
+.card-inmate .name {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+.card-inmate .charge {
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+.card-inmate .id-chip {
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+}
+
+/* 4. Search as the wide control. Desktop grid on .filter-bar-main; the
+   existing 720px mobile layout is untouched. */
+@media (min-width: 721px) {
+  .filter-bar-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(8rem, 10rem) minmax(8rem, 10rem) auto;
+    gap: 0.5rem 0.75rem;
+    align-items: end;
+  }
+}
+.filter-bar-main .search-wrap { min-width: 0; }
+.filter-bar input[type="search"] { width: 100%; }
+.filter-bar input,
+.filter-bar select { accent-color: var(--link); }

@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
   <script src="/static/theme-init.js?v=1fb7517bcf"></script>
-  <link rel="stylesheet" href="/static/style.css?v=96f0c48372">
+  <link rel="stylesheet" href="/static/style.css?v=c43e641690">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
@@ -107,11 +107,11 @@
     <h1 class="title">Access Transparency Scorecard</h1>
     <div class="sub">HCSO public-records access interruptions, measured from the tamper-evident evidence ledger &middot; R.C. 149.43</div>
   </div>
-  <div class="stamp">Computed 2026-09-22T05:01Z</div>
+  <div class="stamp">Computed 2026-09-22T05:06Z</div>
 </header>
 
 <aside class="banner" aria-label="Current access status" role="status">
-  <p><span class="status-pill status-pill-blocked">Blocked</span> Retrieval is currently denied (last fully successful retrieval 4.1 hours ago). Inmate detail pages are returning blocked or error responses since 2026-09-21; charges, bonds, and photos reflect last-good data.</p>
+  <p><span class="status-pill status-pill-blocked">Blocked</span> Retrieval is currently denied (last fully successful retrieval 4.2 hours ago). Inmate detail pages are returning blocked or error responses since 2026-09-21; charges, bonds, and photos reflect last-good data.</p>
 </aside>
 
 <h2 class="sect-h">Denial Metrics</h2>
@@ -131,8 +131,8 @@
     <tr><td>Systemic detail-degraded cycles (total)</td><td>9</td></tr>
     <tr><td>Most recent detail failure (UTC)</td><td>2026-09-21T13:10:14Z</td></tr>
     <tr><td>Detail denial open since (UTC)</td><td>2026-09-21T06:18:38Z</td></tr>
-    <tr><td>Hours since last fully healthy retrieval</td><td>4.1</td></tr>
-    <tr><td>Roster snapshot age</td><td>4.1 hours</td></tr>
+    <tr><td>Hours since last fully healthy retrieval</td><td>4.2</td></tr>
+    <tr><td>Roster snapshot age</td><td>4.2 hours</td></tr>
   </tbody>
 </table>
 <p class="muted">How to read this: the sweep appends one <code>blocked</code> record to the ledger for each cycle in which HCSO&rsquo;s portal returned blocked or empty responses to the roster-list retrieval, and one <code>recovered</code> record when a healthy sweep closes the denial period. Detail-phase failures are recorded separately: one <code>detail_page_waf_block</code> record per inmate detail fetch that was blocked (deduped per inmate and failure mode over 24 hours), and one <code>detail_degraded</code> record per sweep in which detail fetches failed systemically. Cumulative denied access sums each roster denial period from its first blocked cycle to its recovery; a period still open at build time accrues up to the build timestamp. The scorecard reads BLOCKED when either the roster list or the detail pages have an open denial period. These figures regenerate every build and are mirrored as JSON at <a href="/data/transparency_metrics.json">transparency_metrics.json</a>.</p>
