@@ -1581,14 +1581,18 @@ _FORMS_LINK_STATUS_PATH = Path(__file__).resolve().parent / "forms_source_status
 
 
 def _load_court_forms_feed(name: str) -> dict:
-    """Load a staged tab-build feed. Fail closed like the bond schedule page."""
+    """Load a staged tab-build feed. Fail soft: a missing or unreadable feed
+    logs a warning and returns {}, and the forms/services renderers publish
+    an empty page with a note instead of failing the build."""
     path = _TAB_FEEDS_DIR / name
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as e:
-        raise RuntimeError(f"{name} missing or corrupt at {path}: {e}") from e
+        log.warning("tab feed %s unreadable: %s", path, e)
+        return {}
     if not isinstance(raw, dict):
-        raise RuntimeError(f"{name} schema violation: top level is not an object")
+        log.warning("tab feed %s schema violation: top level is not an object", path)
+        return {}
     return raw
 
 
@@ -1687,6 +1691,25 @@ def _render_forms_page(env: Environment, out_dir: Path) -> None:
     section. Counts come from the feed at build time.
     """
     raw = _load_court_forms_feed("forms.json")
+    if not raw:
+        # Feed absent (e.g. CI checkout without the tab-build feeds): publish
+        # an empty page with a note instead of failing the build.
+        page = env.get_template("forms.html").render(
+            groups_current=[],
+            groups_other=[],
+            waves=[],
+            counts={"current": 0, "archival": 0, "other": 0},
+            forms_link_summary={"ok": 0, "pending": 0, "total": 0},
+            feed_note=(
+                "The court forms feed was not available when this page was built, "
+                "so no forms are listed."
+            ),
+            generated_utc=env.globals["generated_utc"],
+        )
+        target = out_dir / "forms" / "index.html"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(page, encoding="utf-8")
+        return
     try:
         link_status = json.loads(_FORMS_LINK_STATUS_PATH.read_text(encoding="utf-8"))
         status_map = link_status["forms"]
@@ -1835,6 +1858,28 @@ def _render_services_page(env: Environment, out_dir: Path) -> None:
     at build time.
     """
     raw = _load_court_forms_feed("services-programs.json")
+    if not raw:
+        # Feed absent (e.g. CI checkout without the tab-build feeds): publish
+        # an empty page with a note instead of failing the build.
+        page = env.get_template("services.html").render(
+            counts={"probation": 0, "pretrial": 0, "specialized_dockets": 0},
+            probation_cards=[],
+            probation_rows=[],
+            pretrial_card={},
+            pretrial_rows=[],
+            docket_cards=[],
+            docket_rows=[],
+            missing_municipal_staff="",
+            feed_note=(
+                "The services and programs feed was not available when this page "
+                "was built, so no programs are listed."
+            ),
+            generated_utc=env.globals["generated_utc"],
+        )
+        target = out_dir / "services" / "index.html"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(page, encoding="utf-8")
+        return
     items = raw.get("items", [])
     if not items:
         raise RuntimeError("services-programs.json schema violation: no items")

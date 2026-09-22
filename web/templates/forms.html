@@ -57,6 +57,9 @@
 {% elif forms_link_summary is defined %}
 <p class="form-source-note"><strong>Source links verified 2026-09-22.</strong> All {{ forms_link_summary.total }} forms below link to the court's own files, each checked live on 2026-09-22 after the court reorganized its uploads. Revision badges (for example Rev. 4.24.26) name the generation the court accepted when captured on {{ provenance.captured }}; that is not a live check against the courthouse, so verify with the court before filing.</p>
 {% endif %}
+{% if feed_note is defined and feed_note %}
+<p class="form-note">{{ feed_note }}</p>
+{% endif %}
 
 {# Citizen panel 2026-09-22 (quick win 7): a section landmark, not a plain
    div with a decorative aria-label. #}

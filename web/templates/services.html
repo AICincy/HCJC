@@ -51,6 +51,10 @@
 
 <p class="capture-line">Services and programs captured {{ provenance.captured }}.</p>
 
+{% if feed_note is defined and feed_note %}
+<p class="form-note">{{ feed_note }}</p>
+{% endif %}
+
 <div class="decision-aid" tabindex="-1">
   <p><strong>I need...</strong></p>
   <p>...to find my probation officer or learn about probation: start with <a href="#probation">Probation</a>.</p>
