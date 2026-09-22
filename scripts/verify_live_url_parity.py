@@ -3,6 +3,13 @@
 Default mode deliberately checks availability and JSON shape, not byte equality:
 the live site may contain a newer data vintage than a pull-request build. Use
 ``--compare-bytes`` only when validating a frozen release candidate.
+
+Recovery mode: when EVERY manifest JSON path 404s on the live site, the live
+tree serves no published data at all (a clobbered/stale deploy, e.g. a
+branch-serve of the committed ``docs/`` skeleton). The gate then warns and
+exits 0 so this deploy can restore the contract. A rename/removal incident
+404s only the affected path(s) while the rest probe OK, so it still fails,
+and ``--compare-bytes`` (frozen release validation) is always strict.
 """
 
 from __future__ import annotations
@@ -39,6 +46,7 @@ def main() -> int:
 
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     errors: list[str] = []
+    not_found: list[str] = []
     checked = 0
     for entry in manifest["files"]:
         name = entry["path"]
@@ -58,6 +66,8 @@ def main() -> int:
             remote_value = json.loads(remote_bytes)
         except HTTPError as exc:
             errors.append(f"{name}: HTTP {exc.code} from {url}")
+            if exc.code == 404:
+                not_found.append(name)
             continue
         except (URLError, TimeoutError, json.JSONDecodeError) as exc:
             errors.append(f"{name}: live probe failed: {exc}")
@@ -73,6 +83,31 @@ def main() -> int:
         checked += 1
 
     if errors:
+        if (
+            not args.compare_bytes
+            and len(not_found) == len(manifest["files"])
+            and len(not_found) == len(errors)
+        ):
+            # Recovery mode: the live site 404s every published JSON path,
+            # so it serves no published data at all (a clobbered/stale
+            # deploy, e.g. a branch-serve of the committed docs skeleton).
+            # The contract is already broken for every consumer and this
+            # deploy can only restore it, so warn and proceed. A partial
+            # 404 (rename/removal) or any non-404 error still fails.
+            print(
+                "::warning title=Live parity gate (recovery mode)::-all "
+                f"{len(not_found)} manifest JSON paths 404 on the live site; "
+                "the live tree serves no published data. Deploying to restore "
+                "the contract."
+            )
+            for name in not_found:
+                print(f"  live 404: /data/{name}")
+            print(
+                f"live URL parity recovery mode: {len(not_found)} published "
+                "JSON URL(s) missing on live; deploy proceeds to restore the "
+                "contract"
+            )
+            return 0
         for error in errors:
             print(f"ERROR: {error}")
         print(f"live URL parity failed: {len(errors)} error(s), {checked} file(s) checked")
