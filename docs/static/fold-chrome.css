@@ -1,6 +1,23 @@
 /* Homepage fold chrome. Loaded after style.css. Does not retune the felony scale.
    Kept as a second sheet because style.css is too large to rewrite in-place here. */
 
+/* C-1: light-theme muted/dim were ~4.7:1 on --bg. Dark theme tokens are untouched. */
+:root {
+  --fg-muted: #4a4a4a;
+  --fg-dim: #555555;
+}
+
+/* C-2: stamp/meta only. Do not convert the rest of style.css to rem. */
+.masthead .running,
+.running.mobile-only,
+.banner-fine,
+.filter-bar .filter-count,
+.page-home .source-banner,
+.footer-legal,
+.attribution {
+  font-size: 13px;
+}
+
 .masthead .theme-toggle {
   grid-column: 3;
   grid-row: 1;
