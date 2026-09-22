@@ -1,6 +1,23 @@
 /* Homepage fold chrome. Loaded after style.css. Does not retune the felony scale.
    Kept as a second sheet because style.css is too large to rewrite in-place here. */
 
+/* C-1: light-theme muted/dim were ~4.7:1 on --bg. Dark theme tokens are untouched. */
+:root {
+  --fg-muted: #4a4a4a;
+  --fg-dim: #555555;
+}
+
+/* C-2: stamp/meta only. Do not convert the rest of style.css to rem. */
+.masthead .running,
+.running.mobile-only,
+.banner-fine,
+.filter-bar .filter-count,
+.page-home .source-banner,
+.footer-legal,
+.attribution {
+  font-size: 13px;
+}
+
 .masthead .theme-toggle {
   grid-column: 3;
   grid-row: 1;
@@ -132,4 +149,31 @@
     -webkit-mask-image: linear-gradient(to right, #000 78%, transparent);
     padding-right: 28px;
   }
+}
+
+/* Dark small-text on --accent/--warn was 4.18-4.31:1. Do not retune felony fills. */
+:root[data-theme="dark"] {
+  --accent-text: #FF7A6E;
+  --cat-family: #B58BEF;
+}
+:root[data-theme="dark"] .visit-card-kicker,
+:root[data-theme="dark"] .alert.inline-alert > strong:first-child,
+:root[data-theme="dark"] .kpi:first-child .label {
+  color: var(--accent-text);
+}
+
+/* Prose links: non-color cue. Nav, chips, cards stay exception. */
+.page p a,
+.page li a,
+.page dd a,
+.footer-legal a,
+.banner-fine a,
+.source-banner a {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.filter-bar select,
+.filter-bar input[type="search"] {
+  font-size: 16px;
 }
