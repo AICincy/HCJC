@@ -42,4 +42,7 @@ jobs:
           name: hcjc-evidence-archive-${{ github.run_id }}
           path: archive-output/
           if-no-files-found: error
-          retention-days: 400
+          # GitHub's public-repository artifact retention limit is commonly
+          # 90 days; the manifest and source commit preserve the longer-term
+          # provenance even after this staging copy expires.
+          retention-days: 90
