@@ -12,7 +12,6 @@ import hashlib
 import json
 from pathlib import Path
 
-
 DEFAULT_MANIFEST = Path("config/public-data-manifest.json")
 
 
