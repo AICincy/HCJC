@@ -34,9 +34,9 @@ jobs:
         env:
           JCSTREAM_SITE_BASE_URL: ""
           JCSTREAM_CNAME: www.aretheyinjail.com
-        run: python -m web.build
-      - name: Commit built site
+        run: python -m web.build --out /tmp/jcstream-docs-build
+      - name: Commit generated source data
         env:
           GIT_COMMIT_NAME: jcstream-bot
           GIT_COMMIT_EMAIL: noreply@github.com
-        run: bash scripts/commit_generated_changes.sh main "data+site: rebuild $(date -u +%Y-%m-%dT%H:%MZ)" data/ docs/
+        run: bash scripts/commit_generated_changes.sh main "data: rebuild $(date -u +%Y-%m-%dT%H:%MZ)" data/

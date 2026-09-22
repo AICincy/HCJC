@@ -457,12 +457,10 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     # Anchored to the repo source tree: a build invoked from any working
     # directory publishes the real downloads instead of an empty /data/.
     #
-    # C-4: the waf_block_log.json duplication (data/ = sweep's working copy,
-    # docs/data/ = published mirror) is deliberate. The sweep appends to
-    # data/; the build publishes a byte-identical mirror under docs/data/ so
-    # the evidence is browsable at the live URL. CI asserts the two stay
-    # byte-identical, and the append-only rule covers both copies -- never
-    # edit, rewrite, or truncate either by hand.
+    # The WAF log remains canonical in data/; the build copies it into the
+    # generated Pages artifact so the public compatibility URL is retained
+    # without maintaining a second tracked copy. The append-only rule applies
+    # to the canonical evidence file -- never edit, rewrite, or truncate it.
     data_dir = feeds_mod.DATA_DIR
     manifest_path = Path(__file__).resolve().parent.parent / "config" / "public-data-manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))

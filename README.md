@@ -19,9 +19,9 @@ fully static, searchable site. No database server, no backend, no tracking.
   here by design; the live commit is always the current `origin/main` tip.
   CI and the Pages build run green on every push to `main`.
 - **137,807-record** append-only SHA-256 hash-chained WAF evidence log
-  (docs/data/waf_block_log.json), chain verified in CI. The log lives in
-  both `data/` (the sweep's working copy) and `docs/data/` (the published
-  mirror); the two are byte-identical and CI asserts they stay that way.
+  (`data/waf_block_log.json`), chain verified in CI. The Pages build copies
+  it into the generated deployment artifact at `/data/waf_block_log.json`;
+  it is no longer duplicated in the Git working tree.
 - 702 tests, ruff and mypy clean (verified 2026-09-21).
 - Deep-audit wave (2026-09-20): the 2 critical and 3 major findings were
   fixed fail-closed (corrupt evidence/changelog can no longer be silently
@@ -75,19 +75,19 @@ fully static, searchable site. No database server, no backend, no tracking.
 
 ### Publishing
 
-GitHub Pages publishes `docs/` from `main` on every push (the
-"pages build and deployment" workflow). The custom domain is
-www.aretheyinjail.com (`docs/CNAME`). Note for local builds: `docs/CNAME`
-is only written when the `JCSTREAM_CNAME` env var is set; `web/build.py`
-preserves it (and other non-generated files) across the output swap, so a
-local build never deletes it.
+GitHub Actions builds and deploys a verified `docs/` artifact from `main`
+on every push through `.github/workflows/pages.yml`. The custom domain is
+www.aretheyinjail.com (`docs/CNAME` in the generated artifact). Note for
+local builds: `docs/CNAME` is only written when the `JCSTREAM_CNAME` env var
+is set; `web/build.py` preserves it and other non-generated files across the
+output swap.
 
 ### Evidence and integrity
 
-- **WAF block log** (`docs/data/waf_block_log.json`): append-only, each row
-  SHA-256-linked to the previous one. Verified by
-  `scraper/verify_block_log.py` and re-verified in CI on every run. **Never
-  edit, rewrite, or truncate this file by hand.** It is legal evidence, not
+- **WAF block log** (`data/waf_block_log.json`, published at
+  `/data/waf_block_log.json`): append-only, each row SHA-256-linked to the
+  previous one. Verified by `scraper/verify_block_log.py` and re-verified in
+  CI on every run. **Never edit, rewrite, or truncate this file by hand.** It is legal evidence, not
   a cache.
 - **Change history**: `data/changelog.json` capped at 10,000 entries.
   `data/anon_changelog.json` scrubs names and IDs after 7 days and compacts
@@ -167,10 +167,12 @@ PYTHONPATH=. ~/workspace/.venvs/hcjc/bin/python -m scraper.sweep --help
 
 Hard rules for local work:
 
-- Do not hand-edit `docs/data/waf_block_log.json`. It is append-only
-  evidence; breaking the SHA-256 chain invalidates the whole log.
-- Do not delete `docs/CNAME`; the build preserves it locally.
-- Sweeps commit to `main`, and Pages deploys `main`. Push only with approval.
+- Do not hand-edit `data/waf_block_log.json`. It is append-only evidence;
+  breaking the SHA-256 chain invalidates the whole log.
+- Do not delete `docs/CNAME`; the Pages build writes it into the deployment
+  artifact when `JCSTREAM_CNAME` is set.
+- Sweeps commit source data to `main`; Pages builds and deploys the verified
+  artifact from `main`. Push only with approval.
 
 ## Legal and ethical posture
 
@@ -207,8 +209,8 @@ Hard rules for local work:
 | `data/current.json` | Active roster snapshot (1,213 inmates as of 2026-09-22) |
 | `data/changelog.json` | Booking/release/change events, capped at 10,000 |
 | `data/anon_changelog.json` | Anonymized long-term history (PII scrubbed after 7 days) |
-| `docs/data/waf_block_log.json` | Append-only SHA-256-chained block evidence (137,807 records as of 2026-09-22) |
-| `docs/data/SHA256SUMS` | Build checksums for data files |
+| `data/waf_block_log.json` | Append-only SHA-256-chained block evidence (137,807 records as of 2026-09-22), copied into the Pages artifact |
+| `config/public-data-manifest.json` | Published JSON URL and source compatibility contract |
 | `docs/search.json` | Compressed client-side search index |
 | `docs/inmate/` | Per-profile static pages (1,213 as of 2026-09-22) |
 | `docs/photos/` | Booking photos referenced by the live snapshot (1,126 of 1,213 as of 2026-09-22) |

@@ -20,12 +20,12 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def verify(root: Path, manifest_path: Path) -> list[str]:
+def verify(root: Path, manifest_path: Path, *, source_root: Path | None = None) -> list[str]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     entries = manifest["files"]
     errors: list[str] = []
     public_dir = root / "docs" / "data"
-    source_root = root
+    source_root = source_root or root
 
     expected = {entry["path"] for entry in entries}
     actual = {p.name for p in public_dir.glob("*.json")}
@@ -55,10 +55,18 @@ def verify(root: Path, manifest_path: Path) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Verify published JSON data paths and mirrors.")
-    parser.add_argument("--root", type=Path, default=Path("."))
+    parser.add_argument("--root", type=Path, default=Path("."), help="Root containing docs/data")
+    parser.add_argument(
+        "--source-root",
+        type=Path,
+        default=None,
+        help="Root containing canonical data/ (defaults to --root)",
+    )
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     args = parser.parse_args()
-    errors = verify(args.root.resolve(), args.manifest)
+    root = args.root.resolve()
+    source_root = (args.source_root or root).resolve()
+    errors = verify(root, args.manifest, source_root=source_root)
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
