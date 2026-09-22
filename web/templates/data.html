@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Data &amp; legal notices &middot; JCStream{% endblock %}
 {% block canonical_path %}/data/{% endblock %}
-{% block body_class %}detail{% endblock %}
+{% block body_class %}detail data-page{% endblock %}
 {% block sr_h1 %}{% endblock %}
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -17,6 +17,54 @@
 </header>
 
 <p class="page-lede">JCStream is generated exclusively from public records maintained by the Hamilton County Sheriff's Office (HCSO) and published through HCSO's public inmate-search portal at <a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">hcso.org</a>. Everything the site is built from is published here as plain JSON, rebuilt by GitHub Actions on a best-effort schedule (cron every 15 minutes). That cadence is not a guarantee: observed refresh gaps have reached several hours during incidents, and each supplemental feed's row below states its own refresh-attempt cadence, not a freshness guarantee. We mirror the <em>current</em> roster: when HCSO removes a person, the next sweep removes them here too. There is no historical archive of released individuals.</p>
+
+<section class="data-observatory-hero" aria-labelledby="observatory-title">
+  <div class="data-observatory-copy">
+    <p class="data-kicker">Open data observatory</p>
+    <h2 id="observatory-title">Learn from the public record without losing the context.</h2>
+    <p>Documented data streams for learning, journalism, research, and accountability. Start with privacy-preserving history, then inspect the source files and build evidence behind them.</p>
+  </div>
+  <div class="data-observatory-stats" aria-label="Data observatory summary">
+    <div><strong>17</strong><span>published streams</span></div>
+    <div><strong>{{ "{:,}".format(snapshot.inmate_count) if snapshot.inmate_count else "0" }}</strong><span>current roster records</span></div>
+    <div><strong>{{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}</strong><span>roster vintage</span></div>
+  </div>
+</section>
+
+<nav class="data-section-nav" aria-label="Data page sections">
+  <a href="#streams">Start here</a>
+  <a href="#published-files">All streams</a>
+  <a href="#pipeline">Pipeline</a>
+  <a href="#legal">Data boundaries</a>
+</nav>
+
+<section id="streams" class="data-start" aria-labelledby="start-title">
+  <div class="data-section-heading">
+    <p class="data-kicker">Start here</p>
+    <h2 id="start-title">Three useful paths into the data</h2>
+    <p>Choose a stream by the question you want to answer, not by the file format.</p>
+  </div>
+  <div class="data-feature-grid">
+    <article class="data-feature-card data-feature-primary">
+      <p class="data-card-label">Current lookup</p><h3>Current roster</h3>
+      <p>Current public custody snapshot, charges, and source timestamps.</p>
+      <div class="data-card-meta"><span>current.json</span><span>Source record</span></div>
+      <a class="data-card-link" href="current.json">Open the snapshot <span aria-hidden="true">&rarr;</span></a>
+    </article>
+    <article class="data-feature-card">
+      <p class="data-card-label">Longitudinal research</p><h3>Anonymous event log</h3>
+      <p>Permanent booking and release patterns with identifying fields stripped after seven days.</p>
+      <div class="data-card-meta"><span>anon_changelog.json</span><span>PII-stripped</span></div>
+      <a class="data-card-link" href="anon_changelog.json">Open the research stream <span aria-hidden="true">&rarr;</span></a>
+    </article>
+    <article class="data-feature-card">
+      <p class="data-card-label">Trends and charts</p><h3>Roster history</h3>
+      <p>Daily counts only: roster size, bookings, and releases across approximately 400 days.</p>
+      <div class="data-card-meta"><span>history.json</span><span>Counts only</span></div>
+      <a class="data-card-link" href="history.json">Open the time series <span aria-hidden="true">&rarr;</span></a>
+    </article>
+  </div>
+</section>
 
 <h2 class="sect-h">Authoritative Sources</h2>
 <div class="fields">
@@ -50,6 +98,19 @@
   <div class="v">United Way of Greater Cincinnati. Dial <strong>211</strong> or <a href="tel:+15137217900">513-721-7900</a>. Connects to housing, food, utilities, and benefits assistance.</div>
 </div>
 
+<section id="published-files" class="data-catalog" aria-labelledby="catalog-title">
+  <div class="data-section-heading"><p class="data-kicker">Published streams</p><h2 id="catalog-title">Browse by purpose</h2><p>Every card separates data vintage, refresh attempts, coverage, and privacy boundaries.</p></div>
+  <div class="data-catalog-grid">
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Roster</span><a href="current.json" aria-label="Open current.json">JSON &rarr;</a></div><h3>Current roster</h3><p>Authoritative custody snapshot with charge-level details and source timestamps.</p><dl><div><dt>Vintage</dt><dd>{{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}</dd></div><div><dt>Scope</dt><dd>Current records</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Events</span><a href="changelog.json" aria-label="Open changelog.json">JSON &rarr;</a></div><h3>Observed changes</h3><p>Recent bookings, releases, and updates from the change log.</p><dl><div><dt>Retention</dt><dd>Approximately 8 days</dd></div><div><dt>Cadence</dt><dd>15-minute sweep</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">History</span><a href="anon_changelog.json" aria-label="Open anon_changelog.json">JSON &rarr;</a></div><h3>Anonymous events</h3><p>Permanent institutional-pattern data with identifiers stripped after seven days.</p><dl><div><dt>Privacy</dt><dd>PII-stripped</dd></div><div><dt>Coverage</dt><dd>Permanent</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Trends</span><a href="history.json" aria-label="Open history.json">JSON &rarr;</a></div><h3>Roster history</h3><p>Daily counts for roster size, bookings, and releases.</p><dl><div><dt>Coverage</dt><dd>Approximately 400 days</dd></div><div><dt>Privacy</dt><dd>Counts only</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Civic data</span><a href="cfs_recent.json" aria-label="Open cfs_recent.json">JSON &rarr;</a></div><h3>Calls for service</h3><p>CPD and CFD calls with arrest, citation, and offense-report dispositions.</p><dl><div><dt>Vintage</dt><dd>{{ human_utc(feed_vintage['cfs_recent.json']) if feed_vintage and feed_vintage.get('cfs_recent.json') else 'see file' }}</dd></div><div><dt>Attempts</dt><dd>Hourly</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Civic data</span><a href="shootings_recent.json" aria-label="Open shootings_recent.json">JSON &rarr;</a></div><h3>Reported shootings</h3><p>CPD reported shootings from Cincinnati Open Data.</p><dl><div><dt>Coverage</dt><dd>Approximately 30 days</dd></div><div><dt>Attempts</dt><dd>Every 6 hours</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Pipeline</span><a href="transparency_metrics.json" aria-label="Open transparency_metrics.json">JSON &rarr;</a></div><h3>Transparency metrics</h3><p>Aggregate source availability, freshness, denial, and recovery metrics.</p><dl><div><dt>Computed</dt><dd>At build time</dd></div><div><dt>Details</dt><dd>Freshness + denial</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Pipeline</span><a href="waf_block_log.json" aria-label="Open waf_block_log.json">JSON &rarr;</a></div><h3>Access interruptions</h3><p>Hash-chained record of blocked and recovered source-access cycles.</p><dl><div><dt>Integrity</dt><dd>SHA-256 chain</dd></div><div><dt>Use</dt><dd>Reproducibility</dd></div></dl></article>
+  </div>
+  <details class="data-more-files"><summary>Show every published file and schema</summary>
 <h2 class="sect-h">Published Files</h2>
 {# V9-L03: per-feed vintage. Each supplemental feed row appends its actual
    data age (the feed JSON's generated_utc stamp) so refresh-attempt cadence
@@ -81,6 +142,7 @@
     <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history. Verify downloads by running <code>sha256sum -c SHA256SUMS</code> in the directory you downloaded the files to (<code>shasum -a 256 -c SHA256SUMS</code> on macOS).</td></tr>
   </tbody>
 </table>
+</details>
 
 {% if roster_stale.ever_blocked %}
 <div class="section-h"><h2 id="access">Access interruptions</h2></div>
@@ -100,7 +162,7 @@ the same images HCSO embeds (base64) on its own <code>inmate-detail</code> page,
 to 250&times;312 JPEG. A photo is present only if HCSO published one. They are removed when
 the inmate leaves the public roster.</p>
 
-<div class="section-h"><h2>How it&rsquo;s built</h2></div>
+<div id="pipeline" class="section-h"><h2>How it&rsquo;s built</h2></div>
 <p class="muted">A GitHub Actions cron sweeps <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>&rsquo;s
 inmate search (substring match on last name - the 26 single letters cover the whole
 roster with dedup), parses each detail page, downscales the photo, diffs against the prior
