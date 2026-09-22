@@ -6,6 +6,10 @@ venv/
 .env
 .env.local
 
+# Node backend (backend/). Dependencies are restored from the committed
+# package-lock.json; the tree itself is never committed.
+node_modules/
+
 # Build outputs
 .cache/
 # NOTE: docs/ is intentionally NOT gitignored — Pages serves from there.

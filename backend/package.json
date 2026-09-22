@@ -1,0 +1,17 @@
+{
+  "name": "hcjc-backend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Supabase-backed API for JCStream. The published site stays static; this service is the only component that talks to Supabase.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "start:local": "node --env-file=.env src/index.js"
+  },
+  "dependencies": {
+    "@supabase/server": "^1.8.0"
+  }
+}

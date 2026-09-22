@@ -4,7 +4,9 @@
 
 Static mirror of the Hamilton County (Ohio) Justice Center inmate roster.
 Scrapes the public HCSO roster and Cincinnati Open Data feeds, then builds a
-fully static, searchable site. No database server, no backend, no tracking.
+fully static, searchable site. The published site reads version-controlled
+JSON only: no tracking, and no database on the request path. A separate
+service under `backend/` uses Supabase and serves no part of the public site.
 
 - **Live site:** https://www.aretheyinjail.com
 - **Source:** https://github.com/AICincy/HCJC (MIT)

@@ -14,7 +14,7 @@ You conduct a security audit and produce a findings report. **You do not edit co
 | FCRA non-CRA boundary, R.C. 149.43 / § 2953.32, no-fee guarantee, presumed-innocent banner, comment-policy presence, JCSTREAM_* secret hygiene | XSS / SQLi / SSRF / IDOR / auth / generic injection on diff |
 | CSP meta element in `web/templates/base.html`; header-only controls (HSTS, frame-ancestors, COOP/COEP) documented as not per-repo-expressible on GitHub Pages | Generic header check on framework output |
 | Third-party hygiene specific to the JCStream contract (only Giscus, only opt-in) | Generic third-party-script detection |
-| Static-site / no-backend assumption — no DB queries, no user input persisted server-side | Assumes a typical app surface |
+| Static published site plus one scoped backend: the Python pipeline and `docs/` build make no DB queries. `backend/` (Node, `@supabase/server`) is the only component that reaches Supabase, and no user input is persisted server-side | Assumes a typical app surface |
 
 Run both for a full security pass. This skill produces the JCStream-specific report; the built-in produces the generic report. Combine them.
 

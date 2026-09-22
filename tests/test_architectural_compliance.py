@@ -108,7 +108,13 @@ class RepositoryArchitecturalGuard:
         return findings
 
     def verify_flat_file_constraint(self) -> List[ComplianceFinding]:
-        """Prevents the introduction of database engines to protect zero-cost hosting."""
+        """Keeps the Python pipeline off every database.
+
+        Repository state persists exclusively in version-controlled flat JSON.
+        Supabase is reachable only from the Node service in `backend/`, which
+        this guard does not scan. The scan catches the Python side reaching for
+        a database directly, `supabase` included, so the boundary stays one-way.
+        """
         findings = []
         for py_file in self._tracked_python_files():
             if self._should_skip(py_file):
@@ -116,15 +122,16 @@ class RepositoryArchitecturalGuard:
             try:
                 content = py_file.read_text(encoding="utf-8")
                 clean_content = self._clean_content(content)
-                # Detect forbidden database engines or ORM drivers
-                if re.search(r"sqlite3|sqlalchemy|psycopg2|mysql", clean_content, re.IGNORECASE):
+                # Detect forbidden database engines, ORM drivers, and the
+                # Supabase client inside the Python pipeline.
+                if re.search(r"sqlite3|sqlalchemy|psycopg2|mysql|supabase", clean_content, re.IGNORECASE):
                     findings.append(
                         ComplianceFinding(
                             rule_id="RULE-STOR-001",
                             target_file=str(py_file.relative_to(self.root_path)),
                             status="NON-COMPLIANT",
-                            description="File introduces SQL database components or external storage drivers.",
-                            remediation="Remove database libraries, persist state exclusively within version-controlled flat JSON files.",
+                            description="File introduces a database client or external storage driver into the Python pipeline.",
+                            remediation="Remove the database library from Python. Persist state in version-controlled flat JSON, or route database access through the Node service in backend/.",
                         )
                     )
             except IOError:
