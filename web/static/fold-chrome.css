@@ -1,10 +1,13 @@
-/* Homepage fold chrome. Loaded after style.css. Does not retune the felony scale. */
+/* Homepage fold chrome. Loaded after style.css. Does not retune the felony scale.
+   Kept as a second sheet because style.css is too large to rewrite in-place here. */
 
 .masthead .theme-toggle {
   grid-column: 3;
   grid-row: 1;
   justify-self: end;
 }
+
+.masthead-seal { display: none; }
 
 @media (min-width: 721px) {
   .running.mobile-only { display: none; }
@@ -19,9 +22,8 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+  .nav-drawer > .nav-group:last-of-type { display: none; }
 
-  /* Restore the multi-inmate card grid. The later "names as rows" block
-     forced one column. Table view still wins when body.is-table is set. */
   .month > .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
@@ -87,6 +89,7 @@
 }
 
 .tier-strip-cap { display: none; }
+.roster-hero { display: none; }
 
 .thumb.thumb-placeholder {
   background: var(--surface);
@@ -103,4 +106,30 @@
   letter-spacing: -0.02em;
   color: var(--fg);
   line-height: 1.15;
+}
+
+:root[data-theme="dark"] .masthead .nav-link[aria-current="page"],
+:root[data-theme="dark"] .month-nav .chip strong,
+:root[data-theme="dark"] .page-home .court-stat-primary .court-stat-num {
+  color: var(--fg);
+}
+:root[data-theme="dark"] .pager-num[aria-current="page"] {
+  color: var(--fg);
+  background: var(--surface);
+  border-color: var(--accent);
+}
+:root[data-theme="dark"] .masthead .brand:hover .brand-name {
+  color: var(--fg);
+}
+
+.tier-strip-seg { cursor: default; pointer-events: none; }
+.tier-strip-seg:hover { outline: none; }
+
+@media (max-width: 720px) {
+  .tab-toc {
+    position: relative;
+    mask-image: linear-gradient(to right, #000 78%, transparent);
+    -webkit-mask-image: linear-gradient(to right, #000 78%, transparent);
+    padding-right: 28px;
+  }
 }
