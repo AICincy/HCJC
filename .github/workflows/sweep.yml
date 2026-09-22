@@ -97,25 +97,10 @@ jobs:
         run: python -m web.build
 
       - name: Commit data + built site
-        run: |
-          git config user.name "jcstream-bot"
-          git config user.email "noreply@github.com"
-          git add data/ docs/
-          if ! git diff --cached --quiet; then
-            git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
-            # Fetch only main. `git fetch origin` on a shallow clone spent
-            # ~7m pulling every branch and left origin/main stale, so rebase
-            # was a no-op and push was rejected (#2586).
-            git fetch --no-tags origin main:refs/remotes/origin/main
-            git rebase origin/main || {
-              echo "::error::Rebase conflict detected; refusing merge fallback (M-3). Aborting push; next cycle retries from a fresh sweep."
-              git rebase --abort
-              exit 1
-            }
-            git push origin HEAD:main
-          else
-            echo "no changes"
-          fi
+        env:
+          GIT_COMMIT_NAME: jcstream-bot
+          GIT_COMMIT_EMAIL: noreply@github.com
+        run: bash scripts/commit_generated_changes.sh main "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)" data/ docs/
 
       - name: Deploy staleness alarm
         if: always()
