@@ -9,40 +9,28 @@
    a single row); offense, activity, table view, reset, and the legend live
    behind a "Filters" disclosure; the F1-MM degree strip is a slim 4px bar;
    the "Released in the last 24 hours" list moved below the roster. All JS
-   hooks (ids, data-filter attributes, .tier-strip-seg clicks) are unchanged:
-   this is a layout change, not a feature removal.
+   hooks (ids, data-filter attributes) are unchanged. The degree strip is
+   visualization only; filtering is #filter-tier.
 
    v3.1 (2026-09-22): charge level and sort also sit behind Filters so the
    fold is search + the 4px bar + cards. #}
 <div class="filter-bar" id="filters">
   <div class="filter-bar-main">
-    {# Results panel and status announcer live OUTSIDE the label: label
-       subtree content feeds the input's computed accessible name, and
-       interactive content inside a label is nonconforming HTML. The visible
-       label is sr-only; the placeholder carries the sighted affordance. #}
     <div class="search-wrap">
       <label for="search-box" class="sr-only">Search the roster</label>
       <input type="search" data-filter="search" id="search-box" placeholder="Name, charge, ORC code" autocomplete="off" aria-controls="search-results">
       <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
       <span class="sr-only" id="search-status" role="status"></span>
     </div>
-    {# Secondary filters behind a native disclosure: no JS needed, works
-       with keyboard and AT out of the box. display:contents (CSS) keeps the
-       summary in the toolbar row while the body breaks to a full-width row. #}
     <details class="more-filters">
       <summary>Filters</summary>
       <div class="more-filters-body">
-        {# Citizen panel 2026-09-22 (quick win 4): "Tier" had no constituency;
-           nobody would touch a control they could not decode. Plain language:
-           "Charge level". The ?tier= URL param and option values are unchanged. #}
         <label class="filter-inline" for="filter-tier">Charge level
           <select id="filter-tier" data-filter="tier" aria-describedby="tier-explain">
             <option value="">all</option>
             <option value="felony">felony</option>
             <option value="misdemeanor">misdemeanor</option>
             <optgroup label="degree">
-              {# Lowercase values: the ?tier= deep-link loop in main.js lowercases
-                 params before matching option values. #}
               {% for t in tier_ladder %}<option value="{{ t | lower }}">{{ t }}{% if roster_tiers.get(t) %} ({{ roster_tiers[t] }}){% endif %}</option>{% endfor %}
             </optgroup>
           </select>
@@ -68,14 +56,11 @@
             <option value="booked">booked 24h</option>
           </select>
         </label>
-        {# JS-only controls ship hidden; the bar itself is visible without JS. #}
         <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
           <span class="view-toggle-icon" aria-hidden="true">≡</span>
           <span class="view-toggle-text">Table view</span>
         </button>
         <button type="button" class="filter-reset" id="filter-reset" hidden>Reset filters</button>
-        {# Visible only; announcements go through the single #search-status node
-           so one keystroke can't fire multiple polite live regions at once. #}
         <span class="filter-count"></span>
         <p class="legend" aria-hidden="true">
           <span class="swatch charge-2903"><span class="dot"></span>violence / sex</span>
@@ -91,17 +76,14 @@
       </div>
     </details>
   </div>
-  {# Slim degree strip: the most-serious-degree distribution as a 4px bar,
-     not a labeled section. Segments stay clickable degree filters
-     (main.js 3b2); the role="img" label carries the numbers for AT. #}
+  {# Slim degree strip: visualization only. The role="img" label carries the numbers for AT. #}
   {% set tb = roster_tiers %}
   {% set tb_known = (tb.values() | sum) - tb.get('UNK', 0) %}
   {% if tb_known > 0 %}
   <div class="tier-strip tier-strip-slim" role="img" aria-label="Roster by most serious degree: {% for t in tier_ladder %}{% if tb.get(t) %}{{ t }} {{ tb[t] }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}">
     {% for t in tier_ladder %}{% if tb.get(t) %}<span class="tier-strip-seg ladder-{{ t }}" style="width: {{ '%.2f' % (100.0 * tb[t] / tb_known) }}%" title="{{ t }}: {{ tb[t] }}"></span>{% endif %}{% endfor %}
   </div>
-  {# Caption kept in markup for AT-adjacent readers who view source; CSS hides it. #}
-  <p class="tier-strip-cap">Roster share by most serious charge: felonies F1 (most serious) through F5, then misdemeanors M1 through MM. Select a color to filter.</p>
+  <p class="tier-strip-cap">Roster share by most serious charge: felonies F1 through F5, then misdemeanors M1 through MM. Use Charge level to filter.</p>
   {% endif %}
 </div>
 <div class="empty filter-empty" id="filter-empty" role="status" hidden>
@@ -110,10 +92,6 @@
   <p><a href="{{ base_url }}/help/">Get free help resources</a> &middot; <a href="https://www.hcso.org/justice-center-services/inmate-search/">Check the HCSO source</a></p>
 </div>
 
-{# Empty landing bin for JS sort modes (main.js 3c). Ships hidden and empty:
-   with JS off the sort control never appears and this section is inert.
-   class="month" is load-bearing - the .month > .cards grid padding and the
-   body.is-table row rules are scoped to .month. #}
 <section class="month sort-bin" id="sort-bin" aria-label="Sorted roster" hidden><div class="cards"></div></section>
 
 {% for month, group in by_month %}
@@ -130,8 +108,6 @@
 </details>
 {% endfor %}
 
-{# Owner-directed 2026-09-22: the 24h-release list stays on the page but must
-   not sit above the roster. It now closes the roster section. #}
 {% if recent_released_24h %}
 <details class="released-24h">
   <summary>Released in the last 24 hours <span class="count">{{ recent_released_24h | length }}</span> <span class="released-date">as of {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}</span></summary>
