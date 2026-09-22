@@ -13,7 +13,9 @@ These tests enforce the compliance boundary by verifying that:
 2. robots.txt contains "Disallow: /" so compliant crawlers don't index.
 3. The FCRA disclaimer (15 U.S.C. 1681a(d)/(f), 1681b) is present in the visit/data template.
 4. The "presumed innocent" disclaimer appears in all individual-facing templates.
-5. No historical archive endpoint exists (we mirror, not archive).
+5. The /archive/ endpoint is a paginated view of the current custody mirror
+   (not a historical record store) and carries the same CRA boundary markers
+   as every other roster view.
 """
 
 from __future__ import annotations
@@ -84,10 +86,16 @@ def test_stats_has_presumed_innocent():
     assert "presumed innocent" in html.lower()
 
 
-# --- 5. no historical archive -----------------------------------------------
+# --- 5. /archive/ is a mirror view, not a historical archive -----------------
 
 
-def test_no_archive_endpoint():
-    """No template named 'archive' should exist — we mirror, not archive."""
-    archive_templates = list(TEMPLATE_DIR.glob("*archive*"))
-    assert archive_templates == [], f"unexpected archive template(s): {archive_templates}"
+def test_archive_endpoint_is_mirror_view():
+    """The /archive/ page paginates the current custody mirror by booking
+    month (owner decision 2026-09-22: keep /archive/). It must carry the same
+    CRA boundary markers as every other roster view: noindex inherited from
+    base.html, and the presumed-innocent disclaimer via the shared partial.
+    It renders the live snapshot, not a separate historical record store."""
+    html = _read_template("archive.html")
+    assert '{% extends "base.html" %}' in html, "archive.html must inherit noindex from base.html"
+    assert "_legal_disclosure.html" in html, "archive.html must include the presumed-innocent disclaimer partial"
+    assert "snapshot" in html, "archive.html must render the current snapshot, not a historical store"
