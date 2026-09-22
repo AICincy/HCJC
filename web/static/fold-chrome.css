@@ -150,3 +150,30 @@
     padding-right: 28px;
   }
 }
+
+/* Dark small-text on --accent/--warn was 4.18-4.31:1. Do not retune felony fills. */
+:root[data-theme="dark"] {
+  --accent-text: #FF7A6E;
+  --cat-family: #B58BEF;
+}
+:root[data-theme="dark"] .visit-card-kicker,
+:root[data-theme="dark"] .alert.inline-alert > strong:first-child,
+:root[data-theme="dark"] .kpi:first-child .label {
+  color: var(--accent-text);
+}
+
+/* Prose links: non-color cue. Nav, chips, cards stay exception. */
+.page p a,
+.page li a,
+.page dd a,
+.footer-legal a,
+.banner-fine a,
+.source-banner a {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.filter-bar select,
+.filter-bar input[type="search"] {
+  font-size: 16px;
+}
