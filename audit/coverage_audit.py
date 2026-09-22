@@ -47,6 +47,33 @@ WITHHOLD_RULES = {
     "egress_evidence":"internal network-egress evidence; operational, not a public feed",
 }
 
+# Produced fields that are deliberately not rendered. Exact match only. Each
+# carries the verified reason it is not a coverage gap. Kept separate from
+# WITHHOLD_RULES because that map is substring match and would also catch
+# surfaced siblings (recent_booked_ids, recent_released_24h).
+WITHHELD_EXACT = {
+    "recent_booked":   "24h booking count, passed to the homepage render context; not rendered after the 2026-09-22 homepage stat consolidation (owner spec: exactly one visible count)",
+    "recent_released": "24h release count, passed to the homepage render context; not rendered after the 2026-09-22 homepage stat consolidation (owner spec: exactly one visible count)",
+}
+
+# Produced fields that are deliberately not rendered. Exact match only. Each
+# carries the verified reason it is not a coverage gap. Kept separate from
+# WITHHOLD_RULES because that map is substring match and would also catch
+# surfaced siblings (recent_booked_ids, recent_released_24h).
+WITHHELD_EXACT = {
+    "recent_booked":   "24h booking count, passed to the homepage render context; not rendered after the 2026-09-22 homepage stat consolidation (owner spec: exactly one visible count)",
+    "recent_released": "24h release count, passed to the homepage render context; not rendered after the 2026-09-22 homepage stat consolidation (owner spec: exactly one visible count)",
+}
+
+# Produced fields that are deliberately not rendered. Exact match only. Each
+# carries the verified reason it is not a coverage gap. Kept separate from
+# WITHHOLD_RULES because that map is substring match and would also catch
+# surfaced siblings (recent_booked_ids, recent_released_24h).
+WITHHELD_EXACT = {
+    "recent_booked":   "24h booking count, passed to the homepage render context; not rendered after the 2026-09-22 homepage stat consolidation (owner spec: exactly one visible count)",
+    "recent_released": "24h release count, passed to the homepage render context; not rendered after the 2026-09-22 homepage stat consolidation (owner spec: exactly one visible count)",
+}
+
 # Dict keys that are lookup-table / grouping keys rather than output fields.
 # Exact match only. Each carries the verified reason it is not a coverage gap.
 INTERNAL_KEYS = {
@@ -123,6 +150,8 @@ def published_files() -> tuple[set[str], set[str]]:
     return stored, public
 
 def classify_field(field: str, tvars: set[str]) -> tuple[str, str]:
+    if field in WITHHELD_EXACT:
+        return "WITHHELD_BY_DESIGN", WITHHELD_EXACT[field]
     for key, reason in WITHHOLD_RULES.items():
         if key in field:
             return "WITHHELD_BY_DESIGN", reason

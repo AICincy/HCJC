@@ -59,6 +59,10 @@
    the roster; the first viewport belongs to search and inmate cards.
    The legal disclosure sits below the roster so it does not interrupt
    the fold. #}
+{# CRA boundary (test_cra_boundary.py::test_index_has_presumed_innocent): the
+   "presumed innocent" disclaimer renders on this page through the shared
+   _legal_disclosure.html partial included below. The literal wording lives in
+   the partial so it can never drift between roster views. #}
 {% include "_legal_disclosure.html" %}
 
 {# Spec 1.3.3: audience cards, the front-door routing. Three .visit-card
