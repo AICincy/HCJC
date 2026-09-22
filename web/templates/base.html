@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary">
   <script src="{{ base_url }}/static/theme-init.js?v={{ theme_js_version | default('dev', true) }}"></script>
   <link rel="stylesheet" href="{{ base_url }}/static/style.css?v={{ css_version | default('dev', true) }}">
-  <link rel="stylesheet" href="{{ base_url }}/static/fold-chrome.css?v=20260922d">
+  <link rel="stylesheet" href="{{ base_url }}/static/fold-chrome.css?v={{ fold_css_version | default('dev', true) }}">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="{{ base_url }}/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="{{ base_url }}/static/img/hcjc-seal.png">
@@ -39,15 +39,6 @@
           <span class="brand-name">JCStream</span>
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
-      </a>
-      <a class="masthead-seal masthead-seal-hcjc"
-         href="https://www.facebook.com/HCJCOH"
-         target="_blank" rel="noopener"
-         aria-label="Hamilton County Booking Photos on Facebook">
-        <img src="{{ base_url }}/static/img/hcjc-seal.png"
-             srcset="{{ base_url }}/static/img/hcjc-seal.png 1x, {{ base_url }}/static/img/hcjc-seal-2x.png 2x"
-             alt="Hamilton County Booking Photos seal"
-             width="36" height="36" decoding="async">
       </a>
       {% if snapshot is defined and snapshot.inmate_count %}
       <span class="running desktop-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody{% if trend is defined and trend.spark and trend.spark | length > 1 %}<svg class="spark" viewBox="0 0 120 26" width="120" height="26" role="img" aria-label="Roster size trend, last {{ trend.spark | length }} days"><polyline points="{{ spark_points(trend.spark) }}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>{% endif %}</span>
@@ -104,6 +95,7 @@
     </nav>
     <span>Generated {{ human_utc(snapshot.generated_utc) if snapshot is defined and snapshot.generated_utc else (human_utc(generated_utc) if generated_utc is defined and generated_utc else " - ") }}</span>
     <span><a href="{{ base_url }}/data/">Data, methodology & legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
+    <p>External social link: <a href="https://www.facebook.com/HCJCOH" target="_blank" rel="noopener">Hamilton County Booking Photos on Facebook</a>.</p>
     <span class="footer-legal">
       <span class="footer-legal-para">Independent, non-governmental project. Not affiliated with, endorsed by, or operated by the Hamilton County Sheriff's Office, Hamilton County, or any other government entity.</span>
       <span class="footer-legal-para">This site republishes current public inmate-roster facts for civic, journalistic, and accountability use. It does not furnish consumer reports and is not offered as a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and 1681a(f). Do not use this site, or any data obtained from it, as a factor in determining a person's eligibility for credit, insurance, employment, housing, tenant screening, or any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined by those statutory definitions, not by this notice.</span>

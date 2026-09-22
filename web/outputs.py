@@ -20,6 +20,7 @@ from web.classify import (
 )
 from web.shape import (
     _cached_offenses,
+    _card_data_attrs,
     _primary_chapter,
     _primary_charge,
 )
@@ -89,7 +90,8 @@ def _write_manifest(out_dir: Path, base_url: str) -> None:
 def _write_search_json(out_dir: Path, snapshot: Snapshot, offenses: dict | None = None) -> None:
     """Compact searchable index of the current roster -- useful for API
     consumers and as a base for a future client-side search UI.
-    One row per inmate: n=name, c=primary offense category, t=tier, id.
+    One row per inmate: n=name, c=primary offense category, t=tier, id,
+    s=full card search text (all charge descriptions and ORC codes).
 
     The tier is user-facing data, so it resolves through the offenses dict
     like every other displayed tier (F-10-02).
@@ -103,6 +105,7 @@ def _write_search_json(out_dir: Path, snapshot: Snapshot, offenses: dict | None 
         rows.append(
             {
                 "n": inm.full_name,
+                "s": _card_data_attrs(inm)["search"],
                 "c": (chap["label"] if chap else _primary_charge(inm)) or "",
                 "t": tier["kind"] if tier else "",
                 "b": inm.booking_date or "",

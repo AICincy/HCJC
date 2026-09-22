@@ -119,20 +119,22 @@ class IndexContext:
     map_points: int
 
 
-#: Homepage roster window (spec 1.3.6). False (default): the homepage shows the
-#: current booking month plus two prior months; older months move to the
-#: /archive/ page, which the homepage links. True: the homepage shows the full
-#: roster, restoring the pre-redesign roster in one build. No booking data is
-#: unpublished either way. V4 is the release gate for the windowed layout
-#: (time-to-interactive on a mid-range Android device, before vs after): the
-#: flag returns to True if the archive move shows no material improvement.
-#: V4 was not performed in this environment and remains a
-#: human/physical-device gate before release.
+#: Bounded initial HTML. The full current roster remains on /archive/ and
+#: in the lazily fetched search index. The flag allows a full-roster fallback.
 HOMEPAGE_FULL_ROSTER = False
+HOMEPAGE_CARD_LIMIT = 48
 
-#: Booking-month groups shown on the homepage when HOMEPAGE_FULL_ROSTER is
-#: False: the current month plus two prior months (spec 1.3.6).
-HOMEPAGE_MONTH_WINDOW = 3
+
+def _homepage_slice(by_month, limit=HOMEPAGE_CARD_LIMIT):
+    """Keep booking order and cap the total, not each individual month."""
+    result = []
+    for month, group in by_month:
+        if limit <= 0:
+            break
+        if group:
+            result.append((month, group[:limit]))
+            limit -= len(result[-1][1])
+    return result
 
 
 def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
@@ -142,8 +144,8 @@ def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
         hp_months = ctx.by_month
         hp_nav = ctx.nav_months
     else:
-        hp_months = ctx.by_month[:HOMEPAGE_MONTH_WINDOW]
-        hp_nav = ctx.nav_months[:HOMEPAGE_MONTH_WINDOW]
+        hp_months = _homepage_slice(ctx.by_month)
+        hp_nav = ctx.nav_months[:len(hp_months)]
     cfs_30d = _filter_last_days(
         ctx.cfs_rows,
         ("create_time_incident", "create_time_dispatch", "dispatch_time_primary_unit"),
@@ -171,8 +173,10 @@ def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
         active_nav="",
         # Archive link inputs (spec 1.3.6): shown only when the window is on.
         homepage_full_roster=HOMEPAGE_FULL_ROSTER,
+        roster_preview=not HOMEPAGE_FULL_ROSTER,
+        homepage_bookings=sum(len(g) for _, g in hp_months),
         archive_months=max(0, len(ctx.by_month) - len(hp_months)),
-        archive_bookings=sum(len(g) for _, g in ctx.by_month[len(hp_months):]),
+        archive_bookings=sum(len(g) for _, g in ctx.by_month) - sum(len(g) for _, g in hp_months),
     )
     (out_dir / "index.html").write_text(page, encoding="utf-8")
 
@@ -186,7 +190,7 @@ def _render_archive_page(
 ) -> None:
     """Earlier-bookings archive (/archive/): the full roster with the same
     search and filters as the homepage. Keeps every booking published and
-    searchable while the homepage shows the 3-month window
+    searchable while the homepage shows a bounded recent-booking preview
     (HOMEPAGE_FULL_ROSTER=False). Rendered always, so the one-build reversal
     of the flag never 404s a linked page."""
     page = env.get_template("archive.html").render(

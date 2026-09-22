@@ -218,6 +218,8 @@ def _build_env(snapshot: Snapshot, offenses: dict[str, dict], base_url: str, sit
     # otherwise a CSS change with unchanged data ships new HTML against stale CSS.
     _css = STATIC_DIR / "style.css"
     env.globals["css_version"] = hashlib.sha256(_css.read_bytes()).hexdigest()[:10] if _css.exists() else "dev"
+    _fold_css = STATIC_DIR / "fold-chrome.css"
+    env.globals["fold_css_version"] = hashlib.sha256(_fold_css.read_bytes()).hexdigest()[:10]
     # Same pattern for the externalized JS module. `map.js` was removed; the
     # previous `map_js_version` env.global had no template reference and is
     # gone too.

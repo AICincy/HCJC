@@ -18,8 +18,8 @@
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
   <script src="/static/theme-init.js?v=1fb7517bcf"></script>
-  <link rel="stylesheet" href="/static/style.css?v=8e34a74299">
-  <link rel="stylesheet" href="/static/fold-chrome.css?v=20260922c">
+  <link rel="stylesheet" href="/static/style.css?v=9097671c21">
+  <link rel="stylesheet" href="/static/fold-chrome.css?v=b1f63c6482">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
@@ -39,15 +39,6 @@
           <span class="brand-name">JCStream</span>
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
-      </a>
-      <a class="masthead-seal masthead-seal-hcjc"
-         href="https://www.facebook.com/HCJCOH"
-         target="_blank" rel="noopener"
-         aria-label="Hamilton County Booking Photos on Facebook">
-        <img src="/static/img/hcjc-seal.png"
-             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
-             alt="Hamilton County Booking Photos seal"
-             width="36" height="36" decoding="async">
       </a>
       <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
@@ -150,152 +141,152 @@
   </div>
 
   <div class="table-scroll" tabindex="0" role="region" aria-label="Standard bond schedule table, scrollable">
-  <table class="charges schedule" aria-describedby="bond-legend">
+  <table class="charges schedule stackable" role="table" aria-describedby="bond-legend">
     <caption class="sr-only">Hamilton County Courts standard bond schedule, revision 3/5/2026. Nineteen rows: eleven criminal, eight traffic. Three bond tiers per row.</caption>
-    <thead><tr>
+    <thead role="rowgroup"><tr role="row">
       <th scope="col">Offense</th>
       <th scope="col">ORC</th>
       <th scope="col">In County</th>
       <th scope="col">Out of County</th>
       <th scope="col">Out of State / No Permanent Address</th>
     </tr></thead>
-    <tbody>
-      <tr><th scope="rowgroup" colspan="5">Criminal</th></tr>
-      <tr data-offense="misdemeanor 1 &amp; 2" data-orc="">
+    <tbody role="rowgroup">
+      <tr role="row"><th scope="rowgroup" colspan="5">Criminal</th></tr>
+      <tr role="row" data-offense="misdemeanor 1 &amp; 2" data-orc="">
         <th scope="row">MISDEMEANOR 1 &amp; 2</th>
-        <td class="mono"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></td>
-        <td style="white-space:nowrap">$1,000 @ 10%</td>
-        <td style="white-space:nowrap">$2,000 @ 10%</td>
-        <td style="white-space:nowrap">$2,500 @ 10%</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$1,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$2,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$2,500 @ 10%</span></td>
       </tr>
-      <tr data-offense="misdemeanor 3 &amp; 4" data-orc="">
+      <tr role="row" data-offense="misdemeanor 3 &amp; 4" data-orc="">
         <th scope="row">MISDEMEANOR 3 &amp; 4</th>
-        <td class="mono"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></td>
-        <td style="white-space:nowrap">$500 @ 10%</td>
-        <td style="white-space:nowrap">$1,000 @ 10%</td>
-        <td style="white-space:nowrap">$1,500 @ 10%</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$500 @ 10%</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$1,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$1,500 @ 10%</span></td>
       </tr>
-      <tr data-offense="minor misdemeanor" data-orc="">
+      <tr role="row" data-offense="minor misdemeanor" data-orc="">
         <th scope="row">MINOR MISDEMEANOR</th>
-        <td class="mono"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></td>
-        <td style="white-space:nowrap">O.R.</td>
-        <td style="white-space:nowrap">O.R.</td>
-        <td style="white-space:nowrap">O.R.</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">O.R.</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">O.R.</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">O.R.</span></td>
       </tr>
-      <tr data-offense="failure to comply w/ po" data-orc="2921-331">
+      <tr role="row" data-offense="failure to comply w/ po" data-orc="2921-331">
         <th scope="row">FAILURE TO COMPLY W/ PO</th>
-        <td class="mono"><a href="/statute/#orc-2921-331">2921-331</a></td>
-        <td style="white-space:nowrap">$5,000 @ 10%</td>
-        <td style="white-space:nowrap">$5,000 @ 10%</td>
-        <td style="white-space:nowrap">$10,000 @ 10%</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-2921-331">2921-331</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$5,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$5,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$10,000 @ 10%</span></td>
       </tr>
-      <tr data-offense="negligent homicide" data-orc="2903-05">
+      <tr role="row" data-offense="negligent homicide" data-orc="2903-05">
         <th scope="row">NEGLIGENT HOMICIDE</th>
-        <td class="mono"><a href="/statute/#orc-2903-05">2903-05</a></td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$10,000 + REVIEW</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-2903-05">2903-05</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$10,000 + REVIEW</span></td>
       </tr>
-      <tr data-offense="vehicular homicide" data-orc="2903-06">
+      <tr role="row" data-offense="vehicular homicide" data-orc="2903-06">
         <th scope="row">VEHICULAR HOMICIDE</th>
-        <td class="mono"><a href="/statute/#orc-2903-06">2903-06</a></td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$10,000 + REVIEW</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-2903-06">2903-06</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$10,000 + REVIEW</span></td>
       </tr>
-      <tr data-offense="vehicular assault" data-orc="2903-08A3">
+      <tr role="row" data-offense="vehicular assault" data-orc="2903-08A3">
         <th scope="row">VEHICULAR ASSAULT</th>
-        <td class="mono"><a href="/statute/#orc-2903-08A3">2903-08A3</a></td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$10,000 + REVIEW</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-2903-08A3">2903-08A3</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$10,000 + REVIEW</span></td>
       </tr>
-      <tr data-offense="unlawful sexual contact with a minor" data-orc="2907-04">
+      <tr role="row" data-offense="unlawful sexual contact with a minor" data-orc="2907-04">
         <th scope="row">UNLAWFUL SEXUAL CONTACT WITH A MINOR</th>
-        <td class="mono"><a href="/statute/#orc-2907-04">2907-04</a></td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$10,000 + REVIEW</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-2907-04">2907-04</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$10,000 + REVIEW</span></td>
       </tr>
-      <tr data-offense="sexaul imposition" data-orc="2907-06">
+      <tr role="row" data-offense="sexaul imposition" data-orc="2907-06">
         <th scope="row">SEXAUL IMPOSITION [sic]</th>
-        <td class="mono"><a href="/statute/#orc-2907-06">2907-06</a></td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$10,000 + REVIEW</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-2907-06">2907-06</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$10,000 + REVIEW</span></td>
       </tr>
-      <tr data-offense="voyeurism" data-orc="2907-08">
+      <tr role="row" data-offense="voyeurism" data-orc="2907-08">
         <th scope="row">VOYEURISM</th>
-        <td class="mono"><a href="/statute/#orc-2907-08">2907-08</a></td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$10,000 + REVIEW</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-2907-08">2907-08</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$10,000 + REVIEW</span></td>
       </tr>
-      <tr data-offense="public indecency" data-orc="2907-09">
+      <tr role="row" data-offense="public indecency" data-orc="2907-09">
         <th scope="row">PUBLIC INDECENCY</th>
-        <td class="mono"><a href="/statute/#orc-2907-09">2907-09</a></td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$5,000 + REVIEW</td>
-        <td style="white-space:nowrap">$10,000 + REVIEW</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-2907-09">2907-09</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$5,000 + REVIEW</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$10,000 + REVIEW</span></td>
       </tr>
     </tbody>
-    <tbody>
-      <tr><th scope="rowgroup" colspan="5">Traffic</th></tr>
-      <tr data-offense="ovi 1st in 10 yrs" data-orc="">
+    <tbody role="rowgroup">
+      <tr role="row"><th scope="rowgroup" colspan="5">Traffic</th></tr>
+      <tr role="row" data-offense="ovi 1st in 10 yrs" data-orc="">
         <th scope="row">OVI 1ST IN 10 YRS</th>
-        <td class="mono"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></td>
-        <td style="white-space:nowrap">$1,000 @ 10%</td>
-        <td style="white-space:nowrap">$2,000 @ 10%</td>
-        <td style="white-space:nowrap">$2,500 @ 10%</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$1,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$2,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$2,500 @ 10%</span></td>
       </tr>
-      <tr data-offense="ovi 2nd in 10 yrs" data-orc="">
+      <tr role="row" data-offense="ovi 2nd in 10 yrs" data-orc="">
         <th scope="row">OVI 2ND IN 10 YRS</th>
-        <td class="mono"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></td>
-        <td style="white-space:nowrap">$2,000 @ 10%</td>
-        <td style="white-space:nowrap">$2,500 @ 10%</td>
-        <td style="white-space:nowrap">$5,000 @ 10%</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$2,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$2,500 @ 10%</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$5,000 @ 10%</span></td>
       </tr>
-      <tr data-offense="ovi 3rd in 10 yrs" data-orc="">
+      <tr role="row" data-offense="ovi 3rd in 10 yrs" data-orc="">
         <th scope="row">OVI 3RD IN 10 YRS</th>
-        <td class="mono"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></td>
-        <td style="white-space:nowrap">$5,000 @ 10%</td>
-        <td style="white-space:nowrap">$5,000 @ 10%</td>
-        <td style="white-space:nowrap">$5,000 @ 10%</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$5,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$5,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$5,000 @ 10%</span></td>
       </tr>
-      <tr data-offense="ovi 4th/5th in 10 yrs/6th in 20 yrs" data-orc="">
+      <tr role="row" data-offense="ovi 4th/5th in 10 yrs/6th in 20 yrs" data-orc="">
         <th scope="row">OVI 4th/5th IN 10 YRS/6TH IN 20 YRS</th>
-        <td class="mono"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></td>
-        <td style="white-space:nowrap"><span class="bond-chip-no">NO BOND</span></td>
-        <td style="white-space:nowrap"><span class="bond-chip-no">NO BOND</span></td>
-        <td style="white-space:nowrap"><span class="bond-chip-no">NO BOND</span></td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value"><span class="bond-chip-no">NO BOND</span></span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value"><span class="bond-chip-no">NO BOND</span></span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value"><span class="bond-chip-no">NO BOND</span></span></td>
       </tr>
-      <tr data-offense="driving under suspension / ovi-physical control" data-orc="4510-11, 4510-14, 4510-037*, 4511-194">
+      <tr role="row" data-offense="driving under suspension / ovi-physical control" data-orc="4510-11, 4510-14, 4510-037*, 4511-194">
         <th scope="row">DRIVING UNDER SUSPENSION / OVI-PHYSICAL CONTROL</th>
-        <td class="mono"><a href="/statute/#orc-4510-11">4510-11</a>, <a href="/statute/#orc-4510-14">4510-14</a>, <a href="/statute/#orc-4510-037">4510-037</a>, <a href="/statute/#orc-4511-194">4511-194</a></td>
-        <td style="white-space:nowrap">$1,000 @ 10%</td>
-        <td style="white-space:nowrap">$2,000 @ 10%</td>
-        <td style="white-space:nowrap">$2,500 @ 10%</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-4510-11">4510-11</a>, <a href="/statute/#orc-4510-14">4510-14</a>, <a href="/statute/#orc-4510-037">4510-037</a>, <a href="/statute/#orc-4511-194">4511-194</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$1,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$2,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$2,500 @ 10%</span></td>
       </tr>
-      <tr data-offense="leaving the scene, stopping after accident" data-orc="4549-02, 4549-03">
+      <tr role="row" data-offense="leaving the scene, stopping after accident" data-orc="4549-02, 4549-03">
         <th scope="row">LEAVING THE SCENE, STOPPING AFTER ACCIDENT</th>
-        <td class="mono"><a href="/statute/#orc-4549-02">4549-02</a>, <a href="/statute/#orc-4549-03">4549-03</a></td>
-        <td style="white-space:nowrap">$1,000 @ 10%</td>
-        <td style="white-space:nowrap">$2,000 @ 10%</td>
-        <td style="white-space:nowrap">$2,500 @ 10%</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-4549-02">4549-02</a>, <a href="/statute/#orc-4549-03">4549-03</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">$1,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">$2,000 @ 10%</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">$2,500 @ 10%</span></td>
       </tr>
-      <tr data-offense="unclassified misdemeanors**" data-orc="4507-02, 4507-35, 4510-111, 4510-12, 4510-16, 4510-21, 4511-203">
+      <tr role="row" data-offense="unclassified misdemeanors**" data-orc="4507-02, 4507-35, 4510-111, 4510-12, 4510-16, 4510-21, 4511-203">
         <th scope="row">UNCLASSIFIED MISDEMEANORS**</th>
-        <td class="mono"><a href="/statute/#orc-4507-02">4507-02</a>, <a href="/statute/#orc-4507-35">4507-35</a>, <a href="/statute/#orc-4510-111">4510-111</a>, <a href="/statute/#orc-4510-12">4510-12</a>, <a href="/statute/#orc-4510-16">4510-16</a>, <a href="/statute/#orc-4510-21">4510-21</a>, <a href="/statute/#orc-4511-203">4511-203</a></td>
-        <td style="white-space:nowrap">O.R.</td>
-        <td style="white-space:nowrap">O.R.</td>
-        <td style="white-space:nowrap">O.R.</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><a href="/statute/#orc-4507-02">4507-02</a>, <a href="/statute/#orc-4507-35">4507-35</a>, <a href="/statute/#orc-4510-111">4510-111</a>, <a href="/statute/#orc-4510-12">4510-12</a>, <a href="/statute/#orc-4510-16">4510-16</a>, <a href="/statute/#orc-4510-21">4510-21</a>, <a href="/statute/#orc-4511-203">4511-203</a></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">O.R.</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">O.R.</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">O.R.</span></td>
       </tr>
-      <tr data-offense="all other traffic" data-orc="">
+      <tr role="row" data-offense="all other traffic" data-orc="">
         <th scope="row">ALL OTHER TRAFFIC</th>
-        <td class="mono"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></td>
-        <td style="white-space:nowrap">O.R.</td>
-        <td style="white-space:nowrap">O.R.</td>
-        <td style="white-space:nowrap">O.R.</td>
+        <td role="cell" data-label="ORC"><span class="cell-value"><span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span></span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">O.R.</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">O.R.</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">O.R.</span></td>
       </tr>
     </tbody>
   </table>
@@ -554,6 +545,7 @@
     </nav>
     <span>Generated Sep 22, 2026, 1:46 PM ET</span>
     <span><a href="/data/">Data, methodology & legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
+    <p>External social link: <a href="https://www.facebook.com/HCJCOH" target="_blank" rel="noopener">Hamilton County Booking Photos on Facebook</a>.</p>
     <span class="footer-legal">
       <span class="footer-legal-para">Independent, non-governmental project. Not affiliated with, endorsed by, or operated by the Hamilton County Sheriff's Office, Hamilton County, or any other government entity.</span>
       <span class="footer-legal-para">This site republishes current public inmate-roster facts for civic, journalistic, and accountability use. It does not furnish consumer reports and is not offered as a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and 1681a(f). Do not use this site, or any data obtained from it, as a factor in determining a person's eligibility for credit, insurance, employment, housing, tenant screening, or any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined by those statutory definitions, not by this notice.</span>
@@ -562,7 +554,6 @@
     </span>
   </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
-
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
     <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
     <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
@@ -571,9 +562,7 @@
       <figcaption id="lb-cap"></figcaption>
     </figure>
   </div>
-
   <div id="tier-tip" role="tooltip" hidden></div>
-
-  <script src="/static/main.js?v=a1b1b4ff4e" defer></script>
+  <script src="/static/main.js?v=120005c39a" defer></script>
 </body>
 </html>

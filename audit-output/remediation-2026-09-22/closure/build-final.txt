@@ -1,0 +1,30 @@
+2026-09-22 21:47:40,886 INFO scraper.match: CFS matcher: 452/1202 inmates have candidate dispatch calls (3187 CFS rows scanned)
+2026-09-22 21:47:46,570 WARNING web.pages: tab feed /home/user/firecrawl-zips/tab-build-2026-09-21/feeds/jury.json unreadable: [Errno 2] No such file or directory: '/home/user/firecrawl-zips/tab-build-2026-09-21/feeds/jury.json'
+2026-09-22 21:47:46,577 WARNING web.pages: tab feed /home/user/firecrawl-zips/tab-build-2026-09-21/feeds/rules.json unreadable: [Errno 2] No such file or directory: '/home/user/firecrawl-zips/tab-build-2026-09-21/feeds/rules.json'
+2026-09-22 21:47:46,586 ERROR web.pages: tab feed /home/user/firecrawl-zips/tab-build-2026-09-21/feeds/forms.json unreadable: [Errno 2] No such file or directory: '/home/user/firecrawl-zips/tab-build-2026-09-21/feeds/forms.json'
+Traceback (most recent call last):
+  File "/home/user/HCJC/web/pages.py", line 1581, in _load_court_forms_feed
+    raw = json.loads(path.read_text(encoding="utf-8"))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/pathlib.py", line 1059, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/pathlib.py", line 1045, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/user/firecrawl-zips/tab-build-2026-09-21/feeds/forms.json'
+2026-09-22 21:47:46,598 ERROR web.pages: tab feed /home/user/firecrawl-zips/tab-build-2026-09-21/feeds/services-programs.json unreadable: [Errno 2] No such file or directory: '/home/user/firecrawl-zips/tab-build-2026-09-21/feeds/services-programs.json'
+Traceback (most recent call last):
+  File "/home/user/HCJC/web/pages.py", line 1581, in _load_court_forms_feed
+    raw = json.loads(path.read_text(encoding="utf-8"))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/pathlib.py", line 1059, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/pathlib.py", line 1045, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/user/firecrawl-zips/tab-build-2026-09-21/feeds/services-programs.json'
+2026-09-22 21:47:46,810 WARNING jcstream.site: preserved file FRAMEWORK-REVIEW-2026-09-20.md not found under .cache/closure/site; skipping
+2026-09-22 21:47:46,899 INFO jcstream.site: preserved 1 non-generated file(s): CNAME
+2026-09-22 21:47:46,899 INFO jcstream.site: site built: 1202 inmates, 10000 recent events -> .cache/closure/site

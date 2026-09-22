@@ -78,36 +78,36 @@
   </div>
 
   <div class="table-scroll" tabindex="0" role="region" aria-label="Standard bond schedule table, scrollable">
-  <table class="charges schedule" aria-describedby="bond-legend">
+  <table class="charges schedule stackable" role="table" aria-describedby="bond-legend">
     <caption class="sr-only">Hamilton County Courts standard bond schedule, revision 3/5/2026. Nineteen rows: eleven criminal, eight traffic. Three bond tiers per row.</caption>
-    <thead><tr>
+    <thead role="rowgroup"><tr role="row">
       <th scope="col">Offense</th>
       <th scope="col">ORC</th>
       <th scope="col">In County</th>
       <th scope="col">Out of County</th>
       <th scope="col">Out of State / No Permanent Address</th>
     </tr></thead>
-    <tbody>
-      <tr><th scope="rowgroup" colspan="5">Criminal</th></tr>
+    <tbody role="rowgroup">
+      <tr role="row"><th scope="rowgroup" colspan="5">Criminal</th></tr>
       {% for r in bond_rows if r.section == 'criminal' %}
-      <tr data-offense="{{ r.offense|lower }}" data-orc="{{ r.orc }}">
+      <tr role="row" data-offense="{{ r.offense|lower }}" data-orc="{{ r.orc }}">
         <th scope="row">{{ r.offense }}{% if "SEXAUL" in r.offense %} [sic]{% endif %}</th>
-        <td class="mono">{% if r.orc_links %}{% for link in r.orc_links %}<a href="{{ base_url }}/statute/#orc-{{ link.anchor }}">{{ link.code }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% else %}<span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span>{% endif %}</td>
-        <td style="white-space:nowrap">{{ r.in_county_html }}</td>
-        <td style="white-space:nowrap">{{ r.out_of_county_html }}</td>
-        <td style="white-space:nowrap">{{ r.out_of_state_no_address_html }}</td>
+        <td role="cell" data-label="ORC"><span class="cell-value">{% if r.orc_links %}{% for link in r.orc_links %}<a href="{{ base_url }}/statute/#orc-{{ link.anchor }}">{{ link.code }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% else %}<span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span>{% endif %}</span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">{{ r.in_county_html }}</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">{{ r.out_of_county_html }}</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">{{ r.out_of_state_no_address_html }}</span></td>
       </tr>
       {% endfor %}
     </tbody>
-    <tbody>
-      <tr><th scope="rowgroup" colspan="5">Traffic</th></tr>
+    <tbody role="rowgroup">
+      <tr role="row"><th scope="rowgroup" colspan="5">Traffic</th></tr>
       {% for r in bond_rows if r.section == 'traffic' %}
-      <tr data-offense="{{ r.offense|lower }}" data-orc="{{ r.orc }}">
+      <tr role="row" data-offense="{{ r.offense|lower }}" data-orc="{{ r.orc }}">
         <th scope="row">{{ r.offense }}{% if "SEXAUL" in r.offense %} [sic]{% endif %}</th>
-        <td class="mono">{% if r.orc_links %}{% for link in r.orc_links %}<a href="{{ base_url }}/statute/#orc-{{ link.anchor }}">{{ link.code }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% else %}<span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span>{% endif %}</td>
-        <td style="white-space:nowrap">{{ r.in_county_html }}</td>
-        <td style="white-space:nowrap">{{ r.out_of_county_html }}</td>
-        <td style="white-space:nowrap">{{ r.out_of_state_no_address_html }}</td>
+        <td role="cell" data-label="ORC"><span class="cell-value">{% if r.orc_links %}{% for link in r.orc_links %}<a href="{{ base_url }}/statute/#orc-{{ link.anchor }}">{{ link.code }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% else %}<span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span>{% endif %}</span></td>
+        <td role="cell" data-label="In County"><span class="cell-value">{{ r.in_county_html }}</span></td>
+        <td role="cell" data-label="Out of County"><span class="cell-value">{{ r.out_of_county_html }}</span></td>
+        <td role="cell" data-label="Out of State / No Permanent Address"><span class="cell-value">{{ r.out_of_state_no_address_html }}</span></td>
       </tr>
       {% endfor %}
     </tbody>

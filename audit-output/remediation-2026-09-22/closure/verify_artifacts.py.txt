@@ -1,0 +1,119 @@
+import gzip
+import hashlib
+import json
+import re
+import shutil
+import subprocess
+from datetime import datetime, timezone
+from pathlib import Path
+from urllib.parse import unquote, urlsplit
+from selectolax.parser import HTMLParser
+
+ROOT = Path.cwd()
+OUT = ROOT / 'audit-output/remediation-2026-09-22/closure'
+SITE = ROOT / '.cache/closure/site'
+BASE = ROOT / '.cache/closure/baseline-site'
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def save(name, value):
+    (OUT / name).write_text(json.dumps(value, indent=2, sort_keys=True) + '\n')
+
+inputs = {str(p.relative_to(ROOT)): digest(p) for directory in ['web', 'scraper', 'data', 'config', 'HAMCO'] for p in (ROOT / directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+before = json.loads((ROOT / '.cache/closure/inputs-before.json').read_text())
+changed = sorted(k for k in inputs.keys() | before.keys() if inputs.get(k) != before.get(k))
+assert changed == ['web/static/main.js'], changed
+assert not subprocess.check_output(['git', 'diff', '--name-only', 'HEAD', '--', 'data/']).strip()
+save('inputs-after.json', inputs)
+shutil.copy2(ROOT / '.cache/closure/inputs-before.json', OUT / 'inputs-before.json')
+
+# Preserve the repository convention: update checked-in website artifacts, not
+# new JSON mirrors / empty fallbacks. The Pages workflow builds those at deploy.
+tracked = subprocess.check_output(['git', 'ls-files', '-z', 'docs']).decode().split('\0')
+copied = []
+for name in filter(None, tracked):
+    source = SITE / Path(name).relative_to('docs')
+    if source.is_file():
+        target = ROOT / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if not target.exists() or digest(target) != digest(source):
+            shutil.copy2(source, target)
+            copied.append(name)
+
+published = {str(p.relative_to(SITE)): digest(p) for p in SITE.rglob('*') if p.is_file()}
+checked_in = {str(p.relative_to(ROOT / 'docs')): digest(p) for p in (ROOT / 'docs').rglob('*') if p.is_file()}
+mismatch = sorted(k for k in published.keys() & checked_in.keys() if published[k] != checked_in[k])
+assert mismatch == [], mismatch
+save('artifact-sha256.json', published)
+save('artifact-consistency.json', {
+    'compared_at_utc': datetime.now(timezone.utc).isoformat(),
+    'matched_paths': len(published.keys() & checked_in.keys()), 'mismatches': mismatch,
+    'fresh_build_only': sorted(published.keys() - checked_in.keys()),
+    'checked_in_only': sorted(checked_in.keys() - published.keys()),
+    'updated_tracked_artifacts': copied,
+    'policy': 'Fresh build-only public JSON mirrors and existing empty clerk fallback remain uncommitted. Checked-in FRAMEWORK-REVIEW is not a generated artifact.'
+})
+
+# Every emitted HTML local link and asset must resolve, including font URLs.
+errors, external = [], set()
+links = 0
+htmls = list(SITE.rglob('*.html'))
+for p in htmls:
+    dom = HTMLParser(p.read_text())
+    for n in dom.css('[href], [src]'):
+        ref = n.attributes.get('href') or n.attributes.get('src') or ''
+        url = urlsplit(ref)
+        if url.scheme or url.netloc:
+            external.add(ref)
+            continue
+        if not url.path:
+            continue
+        target = (SITE / unquote(url.path).lstrip('/')) if url.path.startswith('/') else p.parent / unquote(url.path)
+        links += 1
+        if not target.exists():
+            errors.append({'page': str(p.relative_to(SITE)), 'url': ref})
+for p in (SITE / 'static').rglob('*.css'):
+    for ref in re.findall(r'url\([\s\"\']*([^\)\"\']+)', p.read_text()):
+        url = urlsplit(ref)
+        if url.scheme or url.netloc:
+            continue
+        target = SITE / url.path.lstrip('/') if url.path.startswith('/') else p.parent / url.path
+        links += 1
+        if not target.exists():
+            errors.append({'page': str(p.relative_to(SITE)), 'url': ref})
+
+index = json.loads((SITE / 'search.json').read_text())
+current = json.loads((ROOT / 'data/current.json').read_text())
+roster_ids = {i['inmate_number'] for i in current['inmates']}
+index_ids = {i['id'] for i in index['rows']}
+archive = HTMLParser((SITE / 'archive/index.html').read_text())
+archive_ids = {n.attributes['href'].strip('/').split('/')[-1] for n in archive.css('.card-inmate .name a')}
+assert roster_ids == index_ids == archive_ids
+assert len(index['rows']) == len(roster_ids) == 1202
+home = HTMLParser((SITE / 'index.html').read_text())
+assert len(home.css('.card-inmate')) == 48
+csp = lambda root: HTMLParser((root / 'index.html').read_text()).css_first('meta[http-equiv="Content-Security-Policy"]').attributes['content']
+assert csp(SITE) == csp(BASE)
+
+def warnings(p):
+    return re.findall(r'(WARNING|ERROR) web.pages: tab feed .*?/feeds/([^ /]+) unreadable:', p.read_text())
+assert warnings(ROOT / '.cache/closure/build-final.txt') == warnings(ROOT / '.cache/closure/baseline-build.txt')
+assert (SITE / 'data/courtclerk_cases.json').read_bytes() == (BASE / 'data/courtclerk_cases.json').read_bytes()
+save('integrity.json', {
+    'input_paths_hashed': len(inputs), 'input_changes': changed, 'canonical_data_unchanged': True,
+    'full_roster_id_sets_equal': True, 'roster_count': len(roster_ids), 'preview_count': len(home.css('.card-inmate')),
+    'csp_equal_to_HEAD': True, 'html_files_checked': len(htmls), 'local_references_checked': links,
+    'broken_local_references': errors, 'external_links_not_network_verified': sorted(external),
+    'baseline_and_current_feed_warnings_equal': True, 'feed_warnings': warnings(ROOT / '.cache/closure/build-final.txt'),
+    'clerk_empty_fallback_equal_to_baseline': True,
+})
+save('performance.json', {
+    'kind': 'Local initial HTML / gzip measurements only. Not production network or device measurements.',
+    'gzip': 'Python gzip.compress, level=9, mtime=0',
+    **{label: {'html_bytes': len((root / 'index.html').read_bytes()), 'gzip_bytes': len(gzip.compress((root / 'index.html').read_bytes(), compresslevel=9, mtime=0)), 'cards': len(HTMLParser((root / 'index.html').read_text()).css('.card-inmate')), 'dom_elements': len(HTMLParser((root / 'index.html').read_text()).css('*'))} for label, root in [('baseline_HEAD', BASE), ('remediation', SITE)]}
+})
+print('matched roster IDs:', len(roster_ids), 'HTML pages:', len(htmls), 'local references:', links, 'broken:', len(errors))
+print('warnings unchanged:', warnings(ROOT / '.cache/closure/build-final.txt'))
+print('copied tracked artifacts:', len(copied))
+print('broken references:', errors[:25])
