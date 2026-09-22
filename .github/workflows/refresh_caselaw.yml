@@ -58,4 +58,5 @@ jobs:
           TARGET_BRANCH: ${{ github.ref_name }}
           GIT_COMMIT_NAME: jcstream-caselaw-bot
           GIT_COMMIT_EMAIL: noreply@aretheyinjail.com
-        run: bash scripts/commit_generated_changes.sh "$TARGET_BRANCH" "data: weekly refresh of orc_caselaw.json from CourtListener" data/orc_caselaw.json
+        run: |
+          bash scripts/commit_generated_changes.sh "$TARGET_BRANCH" "data: weekly refresh of orc_caselaw.json from CourtListener" data/orc_caselaw.json

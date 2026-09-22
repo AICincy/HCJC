@@ -39,4 +39,5 @@ jobs:
         env:
           GIT_COMMIT_NAME: jcstream-bot
           GIT_COMMIT_EMAIL: noreply@github.com
-        run: bash scripts/commit_generated_changes.sh main "data: rebuild $(date -u +%Y-%m-%dT%H:%MZ)" data/
+        run: |
+          bash scripts/commit_generated_changes.sh main "data: rebuild $(date -u +%Y-%m-%dT%H:%MZ)" data/
