@@ -39,16 +39,23 @@ jobs:
         run: |
           git config user.name "jcstream-bot"
           git config user.email "noreply@github.com"
-          git add docs/
+          # web.build may update generated lookup data (for example
+          # data/orc_offenses.json) while rendering docs. Stage both trees so
+          # the later rebase never sees an unstaged build side effect.
+          git add data/ docs/
           if ! git diff --cached --quiet; then
-            git commit -m "site: rebuild $(date -u +%Y-%m-%dT%H:%MZ)"
-            git fetch origin
-            git rebase origin/main || {
+            git commit -m "data+site: rebuild $(date -u +%Y-%m-%dT%H:%MZ)"
+            # Fetch only main; fetching every branch is unnecessarily slow and
+            # can leave a stale remote-tracking ref during a manual rebuild.
+            git fetch --no-tags origin main:refs/remotes/origin/main
+            if ! git rebase origin/main; then
               echo "::error::Rebase conflict on rebuild; aborting."
-              git rebase --abort
+              # Abort only if Git actually started a rebase; do not hide the
+              # original failure with "no rebase in progress".
+              git rebase --abort 2>/dev/null || true
               exit 1
-            }
-            git push
+            fi
+            git push origin HEAD:main
           else
             echo "no changes"
           fi
