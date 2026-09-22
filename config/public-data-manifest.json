@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "description": "The compatibility contract for JSON files published below /data/. Existing public paths must not be removed or renamed without a versioned migration.",
+  "files": [
+    {"path": "anon_changelog.json", "source": "data/anon_changelog.json", "mode": "copy", "privacy": "identifiers stripped after retention window"},
+    {"path": "cca_complaints_recent.json", "source": "data/cca_complaints_recent.json", "mode": "copy", "privacy": "source-defined public feed"},
+    {"path": "cfs_pdi_recent.json", "source": "data/cfs_pdi_recent.json", "mode": "copy", "privacy": "source-defined public feed"},
+    {"path": "cfs_recent.json", "source": "data/cfs_recent.json", "mode": "copy", "privacy": "source-defined public feed"},
+    {"path": "changelog.json", "source": "data/changelog.json", "mode": "copy", "privacy": "short-retention observed events"},
+    {"path": "courtclerk_cases.json", "source": "data/courtclerk_cases.json", "mode": "copy-or-empty-fallback", "privacy": "reader-submitted public docket fields"},
+    {"path": "crime_stars_recent.json", "source": "data/crime_stars_recent.json", "mode": "copy", "privacy": "source-defined public feed"},
+    {"path": "current.json", "source": "data/current.json", "mode": "copy", "privacy": "current roster only"},
+    {"path": "history.json", "source": "data/history.json", "mode": "copy", "privacy": "aggregate counts"},
+    {"path": "orc_offenses.json", "source": "data/orc_offenses.json", "mode": "copy", "privacy": "reference lookup"},
+    {"path": "pedestrian_stops_recent.json", "source": "data/pedestrian_stops_recent.json", "mode": "copy", "privacy": "source-defined public feed"},
+    {"path": "shootings_recent.json", "source": "data/shootings_recent.json", "mode": "copy", "privacy": "source-defined public feed"},
+    {"path": "traffic_stops_drivers_recent.json", "source": "data/traffic_stops_drivers_recent.json", "mode": "copy", "privacy": "source-defined public feed"},
+    {"path": "transparency_metrics.json", "source": null, "mode": "generated", "privacy": "aggregate pipeline telemetry"},
+    {"path": "use_of_force_incidents_recent.json", "source": "data/use_of_force_incidents_recent.json", "mode": "copy", "privacy": "source-defined public feed"},
+    {"path": "use_of_force_pdi_recent.json", "source": "data/use_of_force_pdi_recent.json", "mode": "copy", "privacy": "source-defined public feed"},
+    {"path": "waf_block_log.json", "source": "data/waf_block_log.json", "mode": "copy", "privacy": "hash-chained pipeline evidence"}
+  ]
+}

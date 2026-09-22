@@ -1,21 +1,16 @@
 name: sweep
 
 # Workflow permissions, scoped to the minimum each active step requires:
-#   contents: write -- the "Commit data + built site" step pushes new sweep
-#                      data and the regenerated docs/ tree back to the branch.
+#   contents: write -- the "Commit generated source data" step pushes new
+#                      sweep data. Pages builds docs/ from the source data artifact.
 #   issues:   write -- the "Roster freeze alarm" step opens (and dedupes) a
 #                      GitHub issue when the roster freeze passes
 #                      ROSTER_STALE_ALARM_HOURS (scraper/freeze_alert.py).
 #
 # Permissions deliberately NOT requested:
-#   pages:    write -- the deploy-pages path is commented out (see the
-#                      "upload-pages-artifact" / "deploy-pages" steps further
-#                      down). Pages now serves directly from docs/ on the
-#                      working branch via Settings > Pages > Source = branch.
-#   id-token: write -- only deploy-pages@v4 needed an OIDC token; that step
-#                      is no longer active.
-# If the deploy-pages path is ever re-enabled, restore pages: write and
-# id-token: write together; do not re-grant either without the other.
+#   pages:    write -- Pages deployment is handled by pages.yml from a
+#                      verified build artifact, not by this data sweep.
+#   id-token: write -- only the pages.yml deployment job needs OIDC.
 
 on:
   schedule:
@@ -94,28 +89,14 @@ jobs:
         env:
           JCSTREAM_SITE_BASE_URL: ""
           JCSTREAM_CNAME: www.aretheyinjail.com
-        run: python -m web.build
+        run: python -m web.build --out /tmp/jcstream-docs-build
 
-      - name: Commit data + built site
+      - name: Commit generated source data
+        env:
+          GIT_COMMIT_NAME: jcstream-bot
+          GIT_COMMIT_EMAIL: noreply@github.com
         run: |
-          git config user.name "jcstream-bot"
-          git config user.email "noreply@github.com"
-          git add data/ docs/
-          if ! git diff --cached --quiet; then
-            git commit -m "data+site: sweep $(date -u +%Y-%m-%dT%H:%MZ)"
-            # Fetch only main. `git fetch origin` on a shallow clone spent
-            # ~7m pulling every branch and left origin/main stale, so rebase
-            # was a no-op and push was rejected (#2586).
-            git fetch --no-tags origin main:refs/remotes/origin/main
-            git rebase origin/main || {
-              echo "::error::Rebase conflict detected; refusing merge fallback (M-3). Aborting push; next cycle retries from a fresh sweep."
-              git rebase --abort
-              exit 1
-            }
-            git push origin HEAD:main
-          else
-            echo "no changes"
-          fi
+          bash scripts/commit_generated_changes.sh main "data: sweep $(date -u +%Y-%m-%dT%H:%MZ)" data/
 
       - name: Deploy staleness alarm
         if: always()

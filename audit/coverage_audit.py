@@ -28,6 +28,7 @@ items; 15 were extraction noise fixed by this revision.
 from __future__ import annotations
 
 import ast
+import json
 import re
 import sys
 from pathlib import Path
@@ -129,6 +130,13 @@ def declared_files() -> set[str]:
 def published_files() -> tuple[set[str], set[str]]:
     stored = {p.name for p in DATA.glob("*.json")} if DATA.exists() else set()
     public = {p.name for p in DOCS_DATA.glob("*.json")} if DOCS_DATA.exists() else set()
+    # Pages now publishes a generated artifact. The manifest is the public
+    # contract even when the generated docs/data mirrors are intentionally not
+    # tracked in Git.
+    manifest = ROOT / "config" / "public-data-manifest.json"
+    if manifest.exists():
+        payload = json.loads(manifest.read_text(encoding="utf-8"))
+        public.update(entry["path"] for entry in payload.get("files", []))
     return stored, public
 
 def classify_field(field: str, tvars: set[str]) -> tuple[str, str]:

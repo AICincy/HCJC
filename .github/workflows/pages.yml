@@ -1,0 +1,60 @@
+name: pages
+
+# Production Pages deployment from a verified build artifact. This replaces the
+# implicit committed-docs deployment only after the build and live URL contract
+# checks pass in the same run.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: pages-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and verify Pages artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build site
+        env:
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: www.aretheyinjail.com
+        run: python -m web.build
+      - name: Verify publication contract
+        run: python scripts/verify_public_data.py
+      - name: Verify live URL compatibility
+        run: python scripts/verify_live_url_parity.py --site https://www.aretheyinjail.com
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b  # v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa  # v3
+        with:
+          path: docs/
+
+  deploy:
+    name: Deploy Pages artifact
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e  # v4

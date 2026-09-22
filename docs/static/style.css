@@ -716,7 +716,7 @@ details.coms > summary::-webkit-details-marker { display: none; }
    ink is 13.4:1. Measured 2026-07-09. */
 .card-inmate mark.hl { background: #F2E29B; color: var(--fg); padding: 0 1px; border-radius: 2px; }
 
-/* Tier-strip segments double as degree-filter targets (main.js 3b2). */
+/* Tier-strip segments are informational; the Charge level select is the filter control. */
 .tier-strip-seg { cursor: pointer; }
 .tier-strip-seg:hover { outline: 2px solid var(--fg); outline-offset: 1px; }
 
@@ -4309,8 +4309,8 @@ details.sect-h > summary h2 {
   margin: 2px 0 0;
 }
 /* Slim degree strip: the distribution as a 4px bar, not a labeled section.
-   Reuses .tier-strip (flex, segment fills, M-ladder colors); segments stay
-   clickable degree filters via main.js 3b2. */
+   Reuses .tier-strip (flex, segment fills, M-ladder colors); the tier select
+   remains the filter control. */
 .tier-strip.tier-strip-slim {
   height: 4px;
   margin-top: 10px;
@@ -4658,3 +4658,145 @@ details.sect-h > summary h2 {
 .filter-bar input[type="search"] { width: 100%; }
 .filter-bar input,
 .filter-bar select { accent-color: var(--link); }
+
+/* Data observatory catalog: turns the published-file directory into a
+   research-friendly starting point while keeping the full schema table below
+   as a progressive disclosure. */
+.data-observatory-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, .75fr);
+  gap: 24px;
+  align-items: stretch;
+  padding: 24px;
+  margin: 18px 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--accent-bg), var(--surface));
+  box-shadow: var(--shadow-card);
+}
+.data-observatory-copy { max-width: 42rem; }
+.data-kicker, .data-card-label {
+  margin: 0 0 7px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.data-observatory-copy h2, .data-section-heading h2 {
+  margin: 0;
+  color: var(--fg);
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.12;
+  letter-spacing: -.025em;
+}
+.data-observatory-copy > p:last-child, .data-section-heading > p:last-child {
+  margin: 10px 0 0;
+  color: var(--fg-soft);
+  max-width: 58rem;
+}
+.data-observatory-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  align-content: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--border);
+}
+.data-observatory-stats div {
+  display: flex;
+  min-height: 76px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 14px;
+  background: var(--surface);
+}
+.data-observatory-stats div:last-child { grid-column: 1 / -1; }
+.data-observatory-stats strong { color: var(--fg); font-family: var(--font-mono); font-size: 16px; font-weight: 600; }
+.data-observatory-stats span { color: var(--fg-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+.data-section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 32px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--border);
+}
+.data-section-nav a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--fg-soft);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.data-section-nav a:hover, .data-section-nav a:focus-visible { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+.data-start, .data-catalog { margin: 0 0 38px; scroll-margin-top: 24px; }
+.data-section-heading { margin: 0 0 14px; }
+.data-feature-grid, .data-catalog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.data-feature-card, .data-stream-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+.data-feature-card { min-height: 226px; }
+.data-feature-card.data-feature-primary { border-top: 3px solid var(--accent); }
+.data-feature-card h3, .data-stream-card h3 { margin: 0; color: var(--fg); font-size: 18px; line-height: 1.2; }
+.data-feature-card > p:not(.data-card-label), .data-stream-card > p { margin: 9px 0 14px; color: var(--fg-soft); font-size: 13px; line-height: 1.55; }
+.data-card-meta, .data-stream-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.data-card-meta { margin-top: auto; color: var(--fg-muted); font-family: var(--font-mono); font-size: 10.5px; }
+.data-card-meta span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.data-card-link { margin-top: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: .15em; }
+.data-stream-card { min-height: 205px; }
+.data-stream-top { margin-bottom: 16px; }
+.data-stream-top > a { font-family: var(--font-mono); font-size: 11px; font-weight: 600; text-decoration: underline; text-underline-offset: .15em; }
+.data-stream-kind { color: var(--accent); font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.data-stream-card dl { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: auto 0 0; padding-top: 12px; border-top: 1px solid var(--border); }
+.data-stream-card dl div { min-width: 0; }
+.data-stream-card dt { color: var(--fg-muted); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
+.data-stream-card dd { margin: 3px 0 0; color: var(--fg-soft); font-family: var(--font-mono); font-size: 11px; overflow-wrap: anywhere; }
+.data-more-files { margin-top: 18px; border-top: 1px solid var(--border); }
+.data-more-files > summary { padding: 14px 0; color: var(--link); cursor: pointer; font-weight: 600; text-decoration: underline; text-underline-offset: .15em; }
+.data-more-files > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.data-more-files > .sect-h { margin-top: 8px; }
+@media (max-width: 850px) {
+  .data-observatory-hero { grid-template-columns: 1fr; }
+  .data-feature-grid, .data-catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .data-observatory-hero { padding: 18px; }
+  .data-observatory-copy h2, .data-section-heading h2 { font-size: 23px; }
+  .data-observatory-stats { grid-template-columns: 1fr 1fr; }
+  .data-observatory-stats strong { font-size: 13px; }
+  .data-feature-grid, .data-catalog-grid { grid-template-columns: 1fr; }
+  .data-feature-card, .data-stream-card { min-height: 0; }
+  .data-section-nav { gap: 6px; }
+  .data-section-nav a { min-height: 36px; }
+}
+
+/* Data-page prose links remain identifiable at rest; navigation and compact
+   JSON/card controls retain their own explicit styles above. */
+.data-page p a, .data-page .fields .v a, .data-page .muted a, .data-page .source a {
+  text-decoration: underline;
+  text-underline-offset: .14em;
+  text-decoration-thickness: .08em;
+}
+:root[data-theme="dark"] .data-page .data-kicker,
+:root[data-theme="dark"] .data-page .data-card-label,
+:root[data-theme="dark"] .data-page .data-stream-kind {
+  color: #FF6B5F;
+}

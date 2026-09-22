@@ -1,0 +1,176 @@
+{
+ "tabStops": [
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "skip-link",
+   "text": "Skip to content",
+   "outline": "auto 1px rgb(238, 238, 238)",
+   "boxShadow": "none",
+   "inViewport": false
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "brand",
+   "text": "JCStream\n          Hamilton Co",
+   "outline": "auto 1px rgb(238, 238, 238)",
+   "boxShadow": "none",
+   "inViewport": true
+  },
+  {
+   "tag": "BUTTON",
+   "id": "",
+   "cls": "theme-toggle",
+   "text": "",
+   "outline": "solid 2px rgb(240, 67, 58)",
+   "boxShadow": "none",
+   "inViewport": true
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "nav-link",
+   "text": "Stats",
+   "outline": "solid 3px rgb(198, 203, 212)",
+   "boxShadow": "rgba(0, 0, 0, 0) 0px -2px 0px 0px inset",
+   "inViewport": true
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "nav-link",
+   "text": "Calendar",
+   "outline": "solid 3px rgb(198, 203, 212)",
+   "boxShadow": "rgba(0, 0, 0, 0) 0px -2px 0px 0px inset",
+   "inViewport": true
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "nav-link",
+   "text": "Safety",
+   "outline": "solid 3px rgb(198, 203, 212)",
+   "boxShadow": "rgba(0, 0, 0, 0) 0px -2px 0px 0px inset",
+   "inViewport": true
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "nav-link",
+   "text": "Statutes",
+   "outline": "solid 3px rgb(198, 203, 212)",
+   "boxShadow": "rgba(0, 0, 0, 0) 0px -2px 0px 0px inset",
+   "inViewport": true
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "nav-link",
+   "text": "Data",
+   "outline": "solid 3px rgb(198, 203, 212)",
+   "boxShadow": "rgba(0, 0, 0, 0) 0px -2px 0px 0px inset",
+   "inViewport": true
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "nav-link",
+   "text": "Visit and contact",
+   "outline": "solid 3px rgb(198, 203, 212)",
+   "boxShadow": "rgba(0, 0, 0, 0) 0px -2px 0px 0px inset",
+   "inViewport": true
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "nav-link",
+   "text": "Bond disparity",
+   "outline": "solid 3px rgb(198, 203, 212)",
+   "boxShadow": "rgba(0, 0, 0, 0) 0px -2px 0px 0px inset",
+   "inViewport": true
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "nav-link",
+   "text": "Courts",
+   "outline": "solid 3px rgb(198, 203, 212)",
+   "boxShadow": "rgba(0, 0, 0, 0) 0px -2px 0px 0px inset",
+   "inViewport": true
+  },
+  {
+   "tag": "A",
+   "id": "",
+   "cls": "nav-link",
+   "text": "Bond schedule",
+   "outline": "solid 3px rgb(198, 203, 212)",
+   "boxShadow": "rgba(0, 0, 0, 0) 0px -2px 0px 0px inset",
+   "inViewport": true
+  }
+ ],
+ "tierTipOnFocus": {
+  "hidden": false,
+  "text": "M42911.21A1 · M4 · Criminal trespass",
+  "rect": {
+   "x": 154,
+   "y": 520.09375,
+   "width": 247.1875,
+   "height": 61.890625,
+   "top": 520.09375,
+   "right": 401.1875,
+   "bottom": 581.984375,
+   "left": 154
+  }
+ },
+ "search": {
+  "panelHidden": false,
+  "items": 17,
+  "statusText": "17 results",
+  "visibleCards": 11
+ },
+ "filtersSummaryFocus": {
+  "outline": "none 3px rgb(240, 67, 58)"
+ },
+ "themeToggle": {
+  "before": "dark",
+  "after": "light"
+ },
+ "perf": {
+  "localLoadMs": 303,
+  "transferSize": 974844,
+  "domContentLoaded": 293,
+  "loadEvent": 301,
+  "resources": 61,
+  "byType": {
+   "script": 2,
+   "link": 2,
+   "img": 49,
+   "css": 8
+  },
+  "imgBytes": 0,
+  "imgCount": 49,
+  "bigAssets": [
+   {
+    "url": "/static/theme-init.js?v=1fb7517bcf",
+    "status": 200,
+    "type": "script"
+   },
+   {
+    "url": "/static/style.css?v=8e34a74299",
+    "status": 200,
+    "type": "stylesheet"
+   },
+   {
+    "url": "/static/fold-chrome.css?v=20260922",
+    "status": 200,
+    "type": "stylesheet"
+   },
+   {
+    "url": "/static/main.js?v=a1b1b4ff4e",
+    "status": 200,
+    "type": "script"
+   }
+  ]
+ }
+}

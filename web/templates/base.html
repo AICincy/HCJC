@@ -5,40 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>{% block title %}JCStream{% endblock %}</title>
-  {# noarchive = no Google-cache snapshot. We mirror; we don't archive. If a
-     record is purged here pursuant to ORC § 2953.32 sealing/expungement, a
-     cached copy mustn't outlive it. #}
   <meta name="robots" content="noindex, noarchive">
-  {# D-7: canonical URL for every page. Pages override the canonical_path
-     block; the default is the site root. Low SEO impact given
-     noindex-everywhere, but correct hygiene for mirrors and copies that
-     ignore robots directives. #}
   <link rel="canonical" href="{{ site_url }}{% block canonical_path %}/{% endblock %}">
-  {# Security headers asserted in HTML because GitHub Pages does not let us
-     set HTTP response headers. frame-ancestors and X-Content-Type-Options
-     cannot be asserted via <meta>. #}
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#141619">
   <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
-  {# Site-level social card only - per-page links deliberately unfurl as the
-     generic project card rather than splashing an individual's name/photo into
-     a chat preview. Unfurlers don't honor noindex; this keeps the framing right. #}
   <meta property="og:site_name" content="JCStream">
   <meta property="og:type" content="website">
   <meta property="og:title" content="JCStream - Hamilton County, OH Justice Center roster mirror">
   <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, rebuilt on a best-effort schedule. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
   <meta property="og:url" content="{{ site_url }}/">
   <meta name="twitter:card" content="summary">
-  {# IBM Plex Mono self-hosted under /static/fonts/ via @font-face in style.css. #}
-  {# Theme pre-paint init: synchronous so first paint uses the right tokens.
-     External file (not inline) per the script-src 'self' CSP. #}
   <script src="{{ base_url }}/static/theme-init.js?v={{ theme_js_version | default('dev', true) }}"></script>
   <link rel="stylesheet" href="{{ base_url }}/static/style.css?v={{ css_version | default('dev', true) }}">
-  <link rel="stylesheet" href="{{ base_url }}/static/fold-chrome.css?v=20260922c">
-  {# The theme toggle is JS-only (main.js binds the click). Without JS it is
-     a dead control, so hide it: style-src allows 'unsafe-inline', and this
-     is a <style> element, not an inline script (script-src 'self' unaffected). #}
+  <link rel="stylesheet" href="{{ base_url }}/static/fold-chrome.css?v=20260922d">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="{{ base_url }}/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="{{ base_url }}/static/img/hcjc-seal.png">
@@ -131,7 +112,6 @@
     </span>
   </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
-
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
     <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
     <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
@@ -140,9 +120,7 @@
       <figcaption id="lb-cap"></figcaption>
     </figure>
   </div>
-
   <div id="tier-tip" role="tooltip" hidden></div>
-
   <script src="{{ base_url }}/static/main.js?v={{ main_js_version | default('dev', true) }}" defer></script>
 </body>
 </html>

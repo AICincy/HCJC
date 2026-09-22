@@ -36,26 +36,10 @@ jobs:
       - name: Commit case data
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GIT_COMMIT_NAME: jcstream-bot
+          GIT_COMMIT_EMAIL: noreply@github.com
         run: |
-          git config user.name "jcstream-bot"
-          git config user.email "noreply@github.com"
-          git add data/courtclerk_cases.json
-          if ! git diff --cached --quiet; then
-            git commit -m "case-data: ingest issue #$ISSUE_NUMBER"
-            # A-1: full fetch so origin/main is fresh for the rebase below.
-            git fetch origin
-            # M-3 (same class as sweep.yml): on rebase conflict, abort and fail
-            # loudly instead of `git merge -X ours`, which could silently drop
-            # the other side's evidence-log records, invisible to the hash chain.
-            git rebase origin/main || {
-              echo "::error::Rebase conflict detected; refusing merge fallback (M-3). Aborting push."
-              git rebase --abort
-              exit 1
-            }
-            git push
-          else
-            echo "no changes"
-          fi
+          bash scripts/commit_generated_changes.sh main "case-data: ingest issue #$ISSUE_NUMBER" data/courtclerk_cases.json
 
       - name: Acknowledge on the issue
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0

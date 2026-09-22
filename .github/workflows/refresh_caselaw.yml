@@ -53,21 +53,10 @@ jobs:
 
       - name: Commit if changed
         env:
-          # Never interpolate ${{ }} directly in run: (shell injection).
-          REF_NAME: ${{ github.ref_name }}
+          # Keep the ref in the environment rather than interpolating it into
+          # shell source; the shared publisher performs the guarded rebase.
+          TARGET_BRANCH: ${{ github.ref_name }}
+          GIT_COMMIT_NAME: jcstream-caselaw-bot
+          GIT_COMMIT_EMAIL: noreply@aretheyinjail.com
         run: |
-          if [[ -n $(git status --porcelain data/orc_caselaw.json) ]]; then
-            git config user.name 'jcstream-caselaw-bot'
-            git config user.email 'noreply@aretheyinjail.com'
-            git add data/orc_caselaw.json
-            git commit -m "data: weekly refresh of orc_caselaw.json from CourtListener"
-            git fetch origin
-            git rebase "origin/$REF_NAME" || {
-              echo "::error::Rebase conflict on caselaw refresh; refusing merge fallback (M-3). Aborting push."
-              git rebase --abort
-              exit 1
-            }
-            git push origin "HEAD:$REF_NAME"
-          else
-            echo "no changes to commit"
-          fi
+          bash scripts/commit_generated_changes.sh "$TARGET_BRANCH" "data: weekly refresh of orc_caselaw.json from CourtListener" data/orc_caselaw.json

@@ -1,9 +1,10 @@
 """Render the static JCStream site from data/current.json + data/changelog.json.
 
-Output goes to ``docs/`` (``DEFAULT_OUT``), which GitHub Pages serves directly
-via Settings > Pages > Source = "Deploy from a branch"; the sweep commits it
-alongside the data each cycle. build() renders into a temp sibling dir and
-swaps it into place, so a render failure leaves the last-good ``docs/`` intact.
+Output goes to ``docs/`` (``DEFAULT_OUT``), which GitHub Actions uploads as
+the verified GitHub Pages deployment artifact. The sweep can render into a
+temporary output while committing only source data. build() renders into a
+temp sibling dir and swaps it into place, so a render failure leaves the
+last-good output intact.
 """
 
 from __future__ import annotations
