@@ -8,22 +8,9 @@
 {% set suppress_month_rail = True %}
 {% block content %}
 
-{# Spec 1.3.2: one header, not two. doc-h and roster-hero merged: one h1
-   naming the page and a single muted last-checked line. The hero kicker
-   (site name) duplicated the wordmark + brand-sub, the lookup paragraph
-   duplicated the search heading + placeholder, and the accusations line
-   duplicated the legal disclosure summary: each fact now lives in exactly
-   one place above the roster (owner-directed 2026-09-22). The separate
-   "Sweep" stamp is deleted; "Last checked" covers it. active_nav stays ""
-   (render context): the homepage is not a drawer item, so nothing
-   highlights. #}
-<header class="roster-hero" aria-labelledby="home-title">
-  <div class="roster-hero-copy">
-    <h1 id="home-title">Inmate roster and court reference</h1>
-    <p class="muted">Last checked {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}.</p>
-  </div>
-</header>
-
+{# Spec 1.3.2 follow-up 2026-09-22: the roster-hero title card restated
+   the search heading. Homepage h1 is now "Search the roster"; last-checked
+   sits on that same section-h row. #}
 
 {% if snapshot.inmate_count == 0 %}
 <div class="empty">
@@ -37,7 +24,10 @@
    sit below the filter bar, collapsed into a details on small viewports.
    Crimes-of-the-month moved to /stats/ (spec 1.3.7). #}
 <section aria-labelledby="roster-tool-h">
-  <div class="section-h"><h2 id="roster-tool-h">Search the roster</h2></div>
+  <div class="section-h">
+    <h1 id="roster-tool-h">Search the roster</h1>
+    <span class="meta">Last checked {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}.</span>
+  </div>
   {% include "_roster_tool.html" %}
 </section>
 
