@@ -1,4 +1,4 @@
-/* Homepage fold chrome. Loaded after style.css. Does not touch the felony scale. */
+/* Homepage fold chrome. Loaded after style.css. Does not retune the felony scale. */
 
 .masthead .theme-toggle {
   grid-column: 3;
@@ -8,6 +8,74 @@
 
 @media (min-width: 721px) {
   .running.mobile-only { display: none; }
+
+  .nav-drawer {
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    justify-content: center;
+    row-gap: 4px;
+  }
+  .nav-group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Restore the multi-inmate card grid. The later "names as rows" block
+     forced one column. Table view still wins when body.is-table is set. */
+  .month > .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+    gap: 10px;
+    padding: 12px 14px 14px;
+  }
+  .card-inmate {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    border-block-end: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+    padding: 10px 12px;
+  }
+  .month .cards > .card-inmate:nth-child(even) { background: var(--surface); }
+  .card-inmate > .thumb { width: 52px; height: 65px; }
+  .card-inmate > .tier.tier-corner {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  body.is-table .month > .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 16px 12px;
+  }
+  body.is-table .month .card-inmate {
+    display: grid;
+    grid-template-columns: 52px 1fr 140px 70px 100px;
+    align-items: center;
+    border: 0;
+    border-radius: 0;
+    border-left: 3px solid var(--card-cat, transparent);
+    border-bottom: 1px solid var(--border);
+    box-shadow: none;
+    background: transparent;
+    padding: 10px 12px;
+  }
+  body.is-table .month .card-inmate > .tier.tier-corner {
+    position: static;
+    top: auto;
+    right: auto;
+  }
+
+  .filter-bar-main {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
 }
 
 @media (max-width: 720px) {
@@ -16,7 +84,16 @@
     grid-row: 1;
     justify-self: start;
   }
-  .tier-strip-cap { display: none; }
+}
+
+.tier-strip-cap { display: none; }
+
+.thumb.thumb-placeholder {
+  background: var(--surface);
+  border: 1px solid var(--border-hi);
+  color: var(--fg);
+  font-size: 13px;
+  letter-spacing: 0.04em;
 }
 
 .section-h h1 {

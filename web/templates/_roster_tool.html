@@ -10,7 +10,10 @@
    behind a "Filters" disclosure; the F1-MM degree strip is a slim 4px bar;
    the "Released in the last 24 hours" list moved below the roster. All JS
    hooks (ids, data-filter attributes, .tier-strip-seg clicks) are unchanged:
-   this is a layout change, not a feature removal. #}
+   this is a layout change, not a feature removal.
+
+   v3.1 (2026-09-22): charge level and sort also sit behind Filters so the
+   fold is search + the 4px bar + cards. #}
 <div class="filter-bar" id="filters">
   <div class="filter-bar-main">
     {# Results panel and status announcer live OUTSIDE the label: label
@@ -23,36 +26,36 @@
       <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
       <span class="sr-only" id="search-status" role="status"></span>
     </div>
-    {# Citizen panel 2026-09-22 (quick win 4): "Tier" had no constituency;
-       nobody would touch a control they could not decode. Plain language:
-       "Charge level". The ?tier= URL param and option values are unchanged. #}
-    <label class="filter-inline" for="filter-tier">Charge level
-      <select id="filter-tier" data-filter="tier" aria-describedby="tier-explain">
-        <option value="">all</option>
-        <option value="felony">felony</option>
-        <option value="misdemeanor">misdemeanor</option>
-        <optgroup label="degree">
-          {# Lowercase values: the ?tier= deep-link loop in main.js lowercases
-             params before matching option values. #}
-          {% for t in tier_ladder %}<option value="{{ t | lower }}">{{ t }}{% if roster_tiers.get(t) %} ({{ roster_tiers[t] }}){% endif %}</option>{% endfor %}
-        </optgroup>
-      </select>
-      <span class="sr-only" id="tier-explain">Filter by how serious the most serious charge is: felony or misdemeanor, most serious first.</span>
-    </label>
-    <label class="filter-inline" for="filter-sort">Sort
-      <select id="filter-sort">
-        <option value="recent">newest first</option>
-        <option value="custody">longest held</option>
-        <option value="degree">most serious</option>
-        <option value="name">name A-Z</option>
-      </select>
-    </label>
     {# Secondary filters behind a native disclosure: no JS needed, works
        with keyboard and AT out of the box. display:contents (CSS) keeps the
        summary in the toolbar row while the body breaks to a full-width row. #}
     <details class="more-filters">
       <summary>Filters</summary>
       <div class="more-filters-body">
+        {# Citizen panel 2026-09-22 (quick win 4): "Tier" had no constituency;
+           nobody would touch a control they could not decode. Plain language:
+           "Charge level". The ?tier= URL param and option values are unchanged. #}
+        <label class="filter-inline" for="filter-tier">Charge level
+          <select id="filter-tier" data-filter="tier" aria-describedby="tier-explain">
+            <option value="">all</option>
+            <option value="felony">felony</option>
+            <option value="misdemeanor">misdemeanor</option>
+            <optgroup label="degree">
+              {# Lowercase values: the ?tier= deep-link loop in main.js lowercases
+                 params before matching option values. #}
+              {% for t in tier_ladder %}<option value="{{ t | lower }}">{{ t }}{% if roster_tiers.get(t) %} ({{ roster_tiers[t] }}){% endif %}</option>{% endfor %}
+            </optgroup>
+          </select>
+          <span class="sr-only" id="tier-explain">Filter by how serious the most serious charge is: felony or misdemeanor, most serious first.</span>
+        </label>
+        <label class="filter-inline" for="filter-sort">Sort
+          <select id="filter-sort">
+            <option value="recent">newest first</option>
+            <option value="custody">longest held</option>
+            <option value="degree">most serious</option>
+            <option value="name">name A-Z</option>
+          </select>
+        </label>
         <label class="filter-inline" for="filter-chap">Offense
           <select id="filter-chap" data-filter="chap">
             <option value="">all offenses</option>
@@ -97,15 +100,13 @@
   <div class="tier-strip tier-strip-slim" role="img" aria-label="Roster by most serious degree: {% for t in tier_ladder %}{% if tb.get(t) %}{{ t }} {{ tb[t] }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}">
     {% for t in tier_ladder %}{% if tb.get(t) %}<span class="tier-strip-seg ladder-{{ t }}" style="width: {{ '%.2f' % (100.0 * tb[t] / tb_known) }}%" title="{{ t }}: {{ tb[t] }}"></span>{% endif %}{% endfor %}
   </div>
-  {# Citizen panel 2026-09-22 (quick win 7): the strip's colors get an honest
-     visible label. Felonies run F1 (most serious) to F5; misdemeanors M1 to
-     MM follow in blue. #}
+  {# Caption kept in markup for AT-adjacent readers who view source; CSS hides it. #}
   <p class="tier-strip-cap">Roster share by most serious charge: felonies F1 (most serious) through F5, then misdemeanors M1 through MM. Select a color to filter.</p>
   {% endif %}
 </div>
 <div class="empty filter-empty" id="filter-empty" role="status" hidden>
   <h2>No one in custody matches that filter.</h2>
-  <p>Try a last name only, clear one filter, or check spelling. Recently arrested people may not appear immediately, and some people may be held by another county, city, state, or federal agency.</p>
+  <p>Try a last name only, clear one filter, or check spelling. Recently arrested people may not appear immediately, and some people may be held by another county, city, or federal agency.</p>
   <p><a href="{{ base_url }}/help/">Get free help resources</a> &middot; <a href="https://www.hcso.org/justice-center-services/inmate-search/">Check the HCSO source</a></p>
 </div>
 
