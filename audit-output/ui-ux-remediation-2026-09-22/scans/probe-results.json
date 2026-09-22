@@ -1,0 +1,570 @@
+{
+ "homeDesktop": {
+  "typography": {
+   "body": {
+    "fontSize": "15px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "24.75px",
+    "ls": "normal"
+   },
+   "h1": {
+    "fontSize": "20px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "23px",
+    "ls": "-0.4px"
+   },
+   ".section-h h1": {
+    "fontSize": "20px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "23px",
+    "ls": "-0.4px"
+   },
+   ".section-h h2": {
+    "fontSize": "20px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "23px",
+    "ls": "-0.4px"
+   },
+   "h2": {
+    "fontSize": "16px",
+    "weight": "600",
+    "family": "Public Sans",
+    "lineHeight": "26.4px",
+    "ls": "normal"
+   },
+   "h3": {
+    "fontSize": "19px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "22.8px",
+    "ls": "-0.285px"
+   },
+   ".card-inmate .name": {
+    "fontSize": "17px",
+    "weight": "600",
+    "family": "Public Sans",
+    "lineHeight": "20.4px",
+    "ls": "-0.17px"
+   },
+   ".card-inmate .charge": {
+    "fontSize": "13px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "21.45px",
+    "ls": "normal"
+   },
+   ".card-inmate .id-chip": {
+    "fontSize": "12px",
+    "weight": "400",
+    "family": "IBM Plex Mono",
+    "lineHeight": "19.8px",
+    "ls": "normal"
+   },
+   "p": {
+    "fontSize": "11.5px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "18.975px",
+    "ls": "normal"
+   },
+   "a": {
+    "fontSize": "13.6px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "22.44px",
+    "ls": "normal"
+   },
+   ".masthead .brand-name": {
+    "fontSize": "28px",
+    "weight": "600",
+    "family": "IBM Plex Mono",
+    "lineHeight": "28px",
+    "ls": "1.68px"
+   },
+   ".meta": {
+    "fontSize": "12px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "19.8px",
+    "ls": "-0.06px"
+   },
+   "footer.site span": {
+    "fontSize": "12px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "19.8px",
+    "ls": "normal"
+   }
+  },
+  "placeholder": {
+   "placeholderRule": null,
+   "inputBg": "rgb(20, 22, 25)",
+   "inputFg": "rgb(237, 239, 242)",
+   "attr": "Name, charge, ORC code",
+   "pseudo": {
+    "color": "rgb(163, 171, 182)",
+    "opacity": "1"
+   }
+  },
+  "linkStyle": {
+   "color": "rgb(143, 188, 232)",
+   "textDecoration": "none",
+   "thickness": "auto"
+  }
+ },
+ "homeNarrow": {
+  "overflow": {
+   "scrollW": 320,
+   "clientW": 320,
+   "hasHScroll": false
+  },
+  "offenders": [
+   {
+    "tag": "A",
+    "cls": "plain",
+    "right": 332,
+    "left": 102,
+    "w": 230
+   },
+   {
+    "tag": "A",
+    "cls": "plain",
+    "right": 351,
+    "left": 102,
+    "w": 249
+   },
+   {
+    "tag": "A",
+    "cls": "plain",
+    "right": 333,
+    "left": 102,
+    "w": 231
+   },
+   {
+    "tag": "A",
+    "cls": "plain",
+    "right": 357,
+    "left": 102,
+    "w": 255
+   },
+   {
+    "tag": "A",
+    "cls": "plain",
+    "right": 334,
+    "left": 102,
+    "w": 232
+   },
+   {
+    "tag": "A",
+    "cls": "plain",
+    "right": 373,
+    "left": 102,
+    "w": 271
+   },
+   {
+    "tag": "A",
+    "cls": "plain",
+    "right": 333,
+    "left": 102,
+    "w": 231
+   }
+  ]
+ },
+ "inmateMobile": {
+  "typography": {
+   "body": {
+    "fontSize": "15px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "24.75px",
+    "ls": "normal"
+   },
+   "h1": {
+    "fontSize": "20px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "20px",
+    "ls": "-0.5px"
+   },
+   ".section-h h2": {
+    "fontSize": "16px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "18.4px",
+    "ls": "-0.32px"
+   },
+   "h2": {
+    "fontSize": "16px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "18.4px",
+    "ls": "-0.32px"
+   },
+   "h3": {
+    "fontSize": "13px",
+    "weight": "600",
+    "family": "Public Sans",
+    "lineHeight": "21.45px",
+    "ls": "normal"
+   },
+   "p": {
+    "fontSize": "12px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "16.8px",
+    "ls": "normal"
+   },
+   "a": {
+    "fontSize": "13.6px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "22.44px",
+    "ls": "normal"
+   },
+   ".masthead .brand-name": {
+    "fontSize": "20.68px",
+    "weight": "600",
+    "family": "IBM Plex Mono",
+    "lineHeight": "20.68px",
+    "ls": "1.2408px"
+   },
+   ".meta": {
+    "fontSize": "12px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "19.8px",
+    "ls": "-0.06px"
+   },
+   "footer.site span": {
+    "fontSize": "12px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "19.8px",
+    "ls": "normal"
+   }
+  },
+  "overflow": {
+   "scrollW": 390,
+   "clientW": 390,
+   "hasHScroll": false
+  },
+  "offenders": [
+   {
+    "tag": "TABLE",
+    "cls": "charges",
+    "right": 681,
+    "left": 12,
+    "w": 669
+   },
+   {
+    "tag": "THEAD",
+    "cls": "",
+    "right": 681,
+    "left": 14,
+    "w": 667
+   },
+   {
+    "tag": "TR",
+    "cls": "",
+    "right": 681,
+    "left": 14,
+    "w": 667
+   },
+   {
+    "tag": "TH",
+    "cls": "",
+    "right": 427,
+    "left": 367,
+    "w": 59
+   },
+   {
+    "tag": "TH",
+    "cls": "",
+    "right": 531,
+    "left": 427,
+    "w": 105
+   },
+   {
+    "tag": "TH",
+    "cls": "",
+    "right": 681,
+    "left": 531,
+    "w": 149
+   },
+   {
+    "tag": "TBODY",
+    "cls": "",
+    "right": 681,
+    "left": 14,
+    "w": 667
+   },
+   {
+    "tag": "TR",
+    "cls": "charge-row-traffic",
+    "right": 681,
+    "left": 14,
+    "w": 667
+   },
+   {
+    "tag": "TD",
+    "cls": "",
+    "right": 427,
+    "left": 367,
+    "w": 59
+   },
+   {
+    "tag": "TD",
+    "cls": "",
+    "right": 531,
+    "left": 427,
+    "w": 105
+   },
+   {
+    "tag": "TD",
+    "cls": "",
+    "right": 681,
+    "left": 531,
+    "w": 149
+   },
+   {
+    "tag": "A",
+    "cls": "case-link case-traffic",
+    "right": 668,
+    "left": 543,
+    "w": 125
+   }
+  ],
+  "charges": {
+   "tableW": 669,
+   "wrapScrollW": 669,
+   "wrapClientW": 366,
+   "overflowX": "auto"
+  }
+ },
+ "statsDark": {
+  "typography": {
+   "body": {
+    "fontSize": "15px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "24.75px",
+    "ls": "normal"
+   },
+   "h1": {
+    "fontSize": "44px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "44.88px",
+    "ls": "-1.54px"
+   },
+   ".section-h h2": {
+    "fontSize": "20px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "23px",
+    "ls": "-0.4px"
+   },
+   "h2": {
+    "fontSize": "20px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "23px",
+    "ls": "-0.4px"
+   },
+   "h3": {
+    "fontSize": "14.04px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "23.166px",
+    "ls": "normal"
+   },
+   "p": {
+    "fontSize": "16px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "25.6px",
+    "ls": "normal"
+   },
+   "a": {
+    "fontSize": "13.6px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "22.44px",
+    "ls": "normal"
+   },
+   ".masthead .brand-name": {
+    "fontSize": "28px",
+    "weight": "600",
+    "family": "IBM Plex Mono",
+    "lineHeight": "28px",
+    "ls": "1.68px"
+   },
+   ".kpi .num": {
+    "fontSize": "32px",
+    "weight": "700",
+    "family": "Public Sans",
+    "lineHeight": "32px",
+    "ls": "-0.96px"
+   },
+   ".kpi .label": {
+    "fontSize": "11.5px",
+    "weight": "500",
+    "family": "Public Sans",
+    "lineHeight": "18.975px",
+    "ls": "0.92px"
+   },
+   ".meta": {
+    "fontSize": "12px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "19.8px",
+    "ls": "-0.06px"
+   },
+   "footer.site span": {
+    "fontSize": "12px",
+    "weight": "400",
+    "family": "Public Sans",
+    "lineHeight": "19.8px",
+    "ls": "normal"
+   }
+  },
+  "kpi": {
+   "color": "rgb(240, 67, 58)",
+   "fs": "11.5px",
+   "fw": "500",
+   "bgStack": [
+    "rgb(31, 35, 42)",
+    "rgb(20, 22, 25)",
+    "rgb(20, 22, 25)"
+   ],
+   "text": "In custody"
+  }
+ },
+ "homeMobileLight": {
+  "placeholder": {
+   "placeholderRule": null,
+   "inputBg": "rgb(246, 245, 243)",
+   "inputFg": "rgb(26, 26, 26)",
+   "attr": "Name, charge, ORC code",
+   "pseudo": {
+    "color": "rgb(92, 92, 92)",
+    "opacity": "1"
+   }
+  },
+  "masthead": {
+   "innerH": 55,
+   "mastheadH": 67,
+   "brandFs": "20.68px",
+   "toggle": {
+    "w": 34,
+    "h": 34
+   },
+   "nav": {
+    "w": 44,
+    "h": 44
+   }
+  },
+  "linkStyle": {
+   "color": "rgb(47, 94, 140)",
+   "textDecoration": "none",
+   "thickness": "auto"
+  }
+ },
+ "bondMobile": {
+  "overflow": {
+   "scrollW": 390,
+   "clientW": 390,
+   "hasHScroll": false
+  },
+  "offenders": [
+   {
+    "tag": "LI",
+    "cls": "",
+    "right": 436,
+    "left": 370,
+    "w": 66
+   },
+   {
+    "tag": "A",
+    "cls": "",
+    "right": 436,
+    "left": 370,
+    "w": 66
+   },
+   {
+    "tag": "LI",
+    "cls": "",
+    "right": 521,
+    "left": 444,
+    "w": 77
+   },
+   {
+    "tag": "A",
+    "cls": "",
+    "right": 521,
+    "left": 444,
+    "w": 77
+   },
+   {
+    "tag": "LI",
+    "cls": "",
+    "right": 655,
+    "left": 529,
+    "w": 126
+   },
+   {
+    "tag": "A",
+    "cls": "",
+    "right": 655,
+    "left": 529,
+    "w": 126
+   },
+   {
+    "tag": "TABLE",
+    "cls": "charges schedule",
+    "right": 602,
+    "left": 12,
+    "w": 590
+   },
+   {
+    "tag": "THEAD",
+    "cls": "",
+    "right": 601,
+    "left": 13,
+    "w": 589
+   },
+   {
+    "tag": "TR",
+    "cls": "",
+    "right": 601,
+    "left": 13,
+    "w": 589
+   },
+   {
+    "tag": "TH",
+    "cls": "",
+    "right": 464,
+    "left": 336,
+    "w": 128
+   },
+   {
+    "tag": "TH",
+    "cls": "",
+    "right": 601,
+    "left": 464,
+    "w": 137
+   },
+   {
+    "tag": "TBODY",
+    "cls": "",
+    "right": 601,
+    "left": 13,
+    "w": 589
+   }
+  ]
+ }
+}
