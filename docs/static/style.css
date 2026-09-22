@@ -389,7 +389,10 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
 .nav-drawer {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  /* safe center: stays centered when the links fit, but aligns to the
+     inline start when they overflow, so the first link (Stats) remains
+     reachable via horizontal scroll instead of clipping at negative offset. */
+  justify-content: safe center;
   align-items: center;
   gap: 0 2px;
   border-top: 1px solid var(--border);
