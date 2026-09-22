@@ -472,15 +472,15 @@
       btns.appendChild(pgBtn('Next', 'next', 'Next page, ' + st.label, st.page >= st.total));
       btns.appendChild(pgBtn('Last', 'last', 'Last page, ' + st.label, st.page >= st.total));
       ctrls.appendChild(btns);
-      // Count line: the top nav's full status is the polite live region so
-      // page changes are announced once; the bottom nav mirrors the text.
+      // Count line: the bottom nav's full status is the polite live region
+      // so page changes are announced once; it is the only pager now.
       var status = mkEl('p', 'pager-status');
       var compact = mkEl('span', 'pager-status-compact');
       compact.textContent = 'Page ' + st.page + ' of ' + st.total;
       var full = mkEl('span', 'pager-status-full');
       var range = st.count > 0 ? (st.start + 1) + '-' + st.end + ' of ' + st.count : '0 of 0';
       full.textContent = 'Page ' + st.page + ' of ' + st.total + ' · Showing ' + range;
-      if (pos === 'top') full.setAttribute('aria-live', 'polite');
+      if (pos === 'bottom') full.setAttribute('aria-live', 'polite');
       status.appendChild(compact);
       status.appendChild(document.createTextNode(' '));
       status.appendChild(full);
@@ -516,8 +516,9 @@
         for (i = 0; i < list.length; i++) {
           if (i < start || i >= end) list[i].classList.add('is-paged-out');
         }
-        // Rebuild the above/below pagers from current state. They only
-        // exist while JS runs, so no-JS keeps the full unpaged list.
+        // Rebuild the below-list pager from current state. It only
+        // exists while JS runs, so no-JS keeps the full unpaged list.
+        // The roster always renders before the pager (owner-directed).
         for (i = container.children.length - 1; i >= 0; i--) {
           var ch = container.children[i];
           if (ch.classList && ch.classList.contains('pager')) container.removeChild(ch);
@@ -526,7 +527,6 @@
           var cardsEl = container.querySelector('.cards');
           var st = { label: pagerLabel(container), page: page, total: total,
                      start: start, end: end, count: list.length };
-          container.insertBefore(renderPagerNav(container, 'top', st), cardsEl);
           if (cardsEl.nextSibling) container.insertBefore(renderPagerNav(container, 'bottom', st), cardsEl.nextSibling);
           else container.appendChild(renderPagerNav(container, 'bottom', st));
         }

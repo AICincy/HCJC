@@ -4499,9 +4499,10 @@ details.sect-h > summary h2 {
 
 /* ============================================================
    Roster pagination (2026-09-22, owner-directed: "no one wants to
-   scroll a million miles"). Per-month pagers are built by JS above and
-   below each month's card list: without JS there are no pagers and no
-   paging (progressive enhancement). Token-only; light + dark themes.
+   scroll a million miles"). The per-month pager is built by JS below
+   each month's card list, so the current roster always shows before the
+   pager: without JS there is no pager and no paging (progressive
+   enhancement). Token-only; light + dark themes.
    ============================================================ */
 .card-inmate.is-paged-out { display: none; }
 
