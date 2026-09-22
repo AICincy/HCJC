@@ -17,7 +17,7 @@ The most important remediation work is accessibility-related rather than cosmeti
 3. **Repair the degree-strip interaction contract.** The UI copy says the strip can be selected, the JavaScript has a click handler, but the final stylesheet sets `.tier-strip-seg` to `pointer-events: none`. This is a concrete broken interaction.
 4. **Increase actionable badge hit areas.** The roster renders 20px-high tier buttons. The audit measured 80 sub-24px actionable targets on the mobile homepage sample.
 5. **Make wide data tables easier to use on phones.** The detail charges table is 669px wide inside a 366px scroll container at a 390px viewport; the bond schedule table is 590px wide. The current behavior technically preserves the data but makes comparison and discovery difficult.
-6. **Normalize page hierarchy.** The homepage's visible H1 is 20px while major reference pages use 44px. The homepage is the site's primary task surface, yet its title is visually subordinate to the large month heading and dense roster grid.
+6. **Document intentional visual exceptions.** The homepage H1 and desktop navigation differ from reference pages by design; they should be validated through task testing rather than treated as defects.
 
 No production code was changed by this audit. The report and reproducible evidence are the deliverables.
 
@@ -26,6 +26,7 @@ No production code was changed by this audit. The report and reproducible eviden
 - **P0:** Fix before the next public UI release. Blocks or materially impairs access to core information.
 - **P1:** Fix in the next design-system / interaction pass. Causes recurring task friction or a broken/ambiguous interaction.
 - **P2:** Fix during the next polish pass. Improves consistency, touch use, or maintainability without blocking the core task.
+- **Observation:** A design preference or intentional visual choice, not a confirmed defect.
 
 ## Evidence and method
 
@@ -40,6 +41,7 @@ The evidence bundle contains:
 - `shots/`: 48 screenshots covering desktop, mobile, narrow 320px, light/dark, full-page, focused controls, search results, filters, and the lightbox.
 
 The browser audit used Chromium with viewport sizes **1440x900**, **390x844**, and **320x600**. The local static server used the checked-in `docs/` output, which is the repository's GitHub Pages artifact. The public site fetch returned the same page structure and live roster UI before the local render was used for repeatable screenshots.
+The follow-up verification also checked current `main` and the live `fold-chrome.css?v=20260922c`. The dark small-text findings are scoped to the confirmed selectors above; the light-theme token comments were not treated as failures where recomputed ratios pass.
 
 ### Standards used
 
@@ -92,6 +94,7 @@ The browser audit used Chromium with viewport sizes **1440x900**, **390x844**, a
 - The scan's representative targets include `HCSO inmate search`, `HomeWAV`, `R.C. 149.43`, `schedule`, `history.json`, `courtclerk.org`, and `earlier bookings archive`.
 - The rendered computed style for a normal prose link is `text-decoration: none`; this is confirmed in `scans/probe-results.json`.
 - Source evidence: `web/static/style.css:302-304` globally defines `a { color: var(--link); text-decoration: none; }` and only adds underline on hover. This fails the static distinction required by WCAG 1.4.1.
+- This is a **link-distinction** failure, not a claim that the link text itself fails WCAG 1.4.3 contrast against its background. The adjacent-text comparison is useful context: dark `#8FBCE8` against body `#C6CBD4` is approximately 1.22:1, which explains why a non-color cue is important.
 
 **Recommendation:**
 
@@ -126,24 +129,19 @@ The preferred solution is a real button per segment inside a labelled group. A s
 
 ---
 
-### P1-04. The degree legend is hidden from assistive technology while the visual strip is compressed
+### P2-04. Optional: expose the visual legend in addition to the accessible distribution label
 
-**Impact:** The visual key for charge categories and felony/misdemeanor coding is present for sighted users but is deliberately removed from the accessibility tree. The 4px distribution strip is also too compressed to communicate individual categories visually without the surrounding text.
+**Impact:** This is an enhancement opportunity, not a confirmed loss of the degree distribution. The legend swatches are hidden from the accessibility tree, but the strip itself is `role="img"` with an `aria-label` listing the degree counts, so assistive technology already receives the distribution summary.
 
 **Observed evidence:**
 
-- `web/templates/_roster_tool.html:80` sets `<p class="legend" aria-hidden="true">`, hiding the legend's category labels from screen readers.
-- `web/static/fold-chrome.css:91` sets `.tier-strip-cap { display: none; }`, hiding the explanatory caption visually while the strip remains only 4px tall.
-- The strip's wrapper does have an aria-label, but that label describes the degree distribution as a whole, not the color legend or the individual interaction affordances.
+- `web/templates/_roster_tool.html:80` sets `<p class="legend" aria-hidden="true">`, hiding the F/M and charge-category swatches from screen readers.
+- `web/static/fold-chrome.css:91` sets `.tier-strip-cap { display: none; }`.
+- The strip wrapper in `web/templates/_roster_tool.html` has `role="img"` and an aria-label that lists each available degree and count.
 
-**Recommendation:**
+**Recommendation:** Treat the current degree-count announcement as sufficient for the distribution summary. If the category-color legend is intended to carry meaning beyond the degree counts, expose a separate text legend or accessible list rather than relying on color. This is lower priority than repairing the strip's dead interaction contract in P1-03.
 
-- Remove `aria-hidden="true"` from the legend if it communicates information needed to interpret the roster. Give it a visible heading or `aria-label="Charge category legend"`.
-- Keep the thin bar as a visual summary, but provide an adjacent text summary or accessible list containing each degree and count.
-- If segments remain interactive, expose their accessible names and pressed/selected state independently.
-
-**Acceptance criteria:** A screen-reader user can determine what each category color means and can obtain every count without relying on the CSS color encoding.
-
+**Acceptance criteria:** If the visual category legend remains hidden from assistive technology, the accessible degree/count label remains accurate; if category colors become semantically necessary, equivalent text is added.
 ---
 
 ### P1-05. Wide data tables are technically scrollable but difficult to use on mobile
@@ -167,27 +165,13 @@ The preferred solution is a real button per segment inside a labelled group. A s
 
 ---
 
-### P1-06. Homepage heading hierarchy is visually inconsistent with the rest of the site
+### Observation O-01. Homepage heading scale is intentionally different
 
-**Impact:** The homepage's primary task lacks the visual emphasis established by the reference pages. This makes the page feel like a dense dashboard rather than a clearly guided entry point, and it weakens information hierarchy above the roster.
+**Assessment:** This is a visual consistency observation, not a confirmed accessibility or usability defect.
 
-**Observed evidence:** Rendered heading measurements from `scans/probe-results.json` and `scans/` heading output:
+**Evidence:** The homepage H1 “Search the roster” renders at 20px, while major reference pages render H1s at 44px. `web/static/fold-chrome.css:102-111` explicitly sets `.section-h h1` to `clamp(16px, 2vw, 20px)`. The homepage month headings render at approximately 22px.
 
-- Home H1, “Search the roster”: **20px**.
-- Inmate detail H1: **24px**.
-- Help, stats, courts, judges, bond, data, transparency, archive, visit, and safety H1s: generally **44px** on desktop.
-- Homepage month H2s render at approximately **22px** while the H1 is 20px, so a repeated content heading can be visually larger than the page's primary heading.
-- Source evidence: `web/static/fold-chrome.css:102-111` explicitly sets `.section-h h1` to `clamp(16px, 2vw, 20px)`.
-
-**Recommendation:**
-
-- Establish a page-level type scale with a clear homepage exception documented in the design system. For example, use a 28-32px homepage H1 at desktop and 24-28px on mobile, then use 18-22px for month headings.
-- Keep the “Last checked” metadata adjacent to the heading, but reduce its visual competition through spacing and muted styling rather than shrinking the H1.
-- Make the search panel visually subordinate to the H1 but clearly primary relative to the roster.
-
-**Acceptance criteria:** The homepage H1 is visibly the strongest heading before the roster, and the type scale is consistent across desktop and mobile without causing wrapping problems.
-
----
+**Recommendation:** Keep the current scale if the design intent is to make the roster the hero rather than the page title. If the design system requires a single page-heading scale, document the homepage exception rather than treating it as a defect.
 
 ### P1-07. Search control text is undersized for a primary mobile interaction
 
@@ -243,21 +227,13 @@ This is not asserted as an automatic WCAG failure; it is a visual hierarchy and 
 
 ---
 
-### P2-10. Desktop navigation consumes substantial vertical space before the core task
+### Observation O-02. Desktop navigation wrap is intentional
 
-**Impact:** The desktop masthead combines a centered brand, running roster metric, theme toggle, a multi-row site rail, and a second court-reference row. This creates a visually heavy top chrome for a task site whose primary action is search.
+**Assessment:** This is a visual preference, not a confirmed defect.
 
-**Observed evidence:**
+**Evidence:** The desktop screenshot `shots/home-desktop-dark-fold.png` shows the multi-row navigation rail before “Search the roster.” The source groups 7 “Roster tools” links and 8 “Court reference” links in `_nav_groups.html`; `web/static/fold-chrome.css:18-29` deliberately wraps the groups on desktop.
 
-- The desktop screenshot `shots/home-desktop-dark-fold.png` shows the multi-row navigation rail before “Search the roster.”
-- The source groups 7 “Roster tools” links and 8 “Court reference” links in `_nav_groups.html`; `web/static/fold-chrome.css:18-29` deliberately wraps the groups on desktop.
-- The home screenshot and rendered probe show the core search heading begins only after the masthead/nav region.
-
-**Recommendation:** Keep the brand, theme toggle, and one primary navigation row in the masthead. Move lower-frequency court-reference links into the menu drawer or a clearly labelled “Reference” section. If the two-row rail is retained, establish a stronger visual group separation and reduce vertical padding.
-
-**Acceptance criteria:** At a 900px-high desktop viewport, the brand, search heading, search field, and first roster row are visible without the navigation rail dominating the first screen.
-
----
+**Recommendation:** Preserve the current wrap if discoverability of the reference sections is the priority. Consider reducing masthead height only if task testing shows that users miss the search surface; do not treat the current two-row rail as an accessibility failure.
 
 ### P2-11. Unused font assets add design-system ambiguity and page weight
 
@@ -302,8 +278,8 @@ This is not asserted as an automatic WCAG failure; it is a visual hierarchy and 
 
 ### Sprint 3: hierarchy and visual polish
 
-1. Normalize the homepage H1/month heading scale.
-2. Reduce desktop masthead/navigation height while preserving discoverability.
+1. Document the homepage H1/month-heading scale decision and validate it with task testing.
+2. Revisit desktop masthead/navigation height only if task testing shows it harms search discoverability.
 3. Establish semantic typography tokens for name, charge, metadata, kicker, and legal text.
 4. Remove unused font assets and update the design-system documentation.
 
