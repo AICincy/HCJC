@@ -35,7 +35,7 @@
      External file (not inline) per the script-src 'self' CSP. #}
   <script src="{{ base_url }}/static/theme-init.js?v={{ theme_js_version | default('dev', true) }}"></script>
   <link rel="stylesheet" href="{{ base_url }}/static/style.css?v={{ css_version | default('dev', true) }}">
-  <link rel="stylesheet" href="{{ base_url }}/static/fold-chrome.css?v=20260922">
+  <link rel="stylesheet" href="{{ base_url }}/static/fold-chrome.css?v=20260922c">
   {# The theme toggle is JS-only (main.js binds the click). Without JS it is
      a dead control, so hide it: style-src allows 'unsafe-inline', and this
      is a <style> element, not an inline script (script-src 'self' unaffected). #}
@@ -75,13 +75,6 @@
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
       </button>
-      {# Site nav drawer (spec 3.5). Ships WITHOUT the open attribute: mobile gets
-         a native closed disclosure with no JS (H6 fix, B2); desktop renders
-         the rail from closed markup via the ::details-content CSS override
-         (progressive enhancement, with a working Menu toggle fallback).
-         The group list is the shared _nav_groups.html partial so drawer,
-         homepage strip, and tab footers stay in sync. aria-current comes
-         from each template's active_nav. main.js syncs aria-expanded. #}
       <details class="nav-menu">
         <summary class="nav-toggle" aria-label="Menu">
           <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -104,22 +97,10 @@
     </nav>
     {% endif %}
   </header>
-  {# A4: detail-denial freshness notice. Renders after the masthead on
-     roster-derived pages (/, /stats/, /court/, /statute/, /archive/,
-     /inmate/*) while the WAF-block ledger shows an open detail-level denial
-     period, so it sits above the fold. Static court-reference pages set
-     suppress_detail_banner because the notice misleads there (their data
-     comes from dated court documents, not the blocked feed). Guarded on
-     `is defined` because some test harnesses render base.html without build
-     globals. #}
   {% if roster_stale is defined and roster_stale.detail_denial_open and not suppress_detail_banner %}
   {% include "_source_banner.html" %}
   {% endif %}
   <main id="main" class="page">
-    {# Optional sr-only h1 hook. Every current page declares its own visible
-       <h1>, so all children override this block to empty and the default
-       never renders; kept as an extension point for any future page that
-       needs a screen-reader-only heading ahead of its content. #}
     {% block sr_h1 %}{% endblock %}
     <div class="doc-wrap">
       {% block content %}{% endblock %}
@@ -141,7 +122,7 @@
       <a href="{{ base_url }}/data/public-records/">Public Records Dashboard</a>
     </nav>
     <span>Generated {{ human_utc(snapshot.generated_utc) if snapshot is defined and snapshot.generated_utc else (human_utc(generated_utc) if generated_utc is defined and generated_utc else " - ") }}</span>
-    <span><a href="{{ base_url }}/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
+    <span><a href="{{ base_url }}/data/">Data, methodology & legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
     <span class="footer-legal">
       <span class="footer-legal-para">Independent, non-governmental project. Not affiliated with, endorsed by, or operated by the Hamilton County Sheriff's Office, Hamilton County, or any other government entity.</span>
       <span class="footer-legal-para">This site republishes current public inmate-roster facts for civic, journalistic, and accountability use. It does not furnish consumer reports and is not offered as a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and 1681a(f). Do not use this site, or any data obtained from it, as a factor in determining a person's eligibility for credit, insurance, employment, housing, tenant screening, or any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined by those statutory definitions, not by this notice.</span>
@@ -151,8 +132,6 @@
   </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
 
-  {# Single shared lightbox - JS swaps the image in. No-JS users go to the
-     detail page instead (the photo lives there). #}
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
     <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
     <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
@@ -162,10 +141,6 @@
     </figure>
   </div>
 
-  {# One shared tier-badge tooltip - content comes from each badge's data-tip,
-     JS positions it. Keeping it out of the cards lets the cards use
-     content-visibility:auto (paint containment would clip an in-card tooltip).
-     pointer-events:none so it never steals the mouse from the badge. #}
   <div id="tier-tip" role="tooltip" hidden></div>
 
   <script src="{{ base_url }}/static/main.js?v={{ main_js_version | default('dev', true) }}" defer></script>
