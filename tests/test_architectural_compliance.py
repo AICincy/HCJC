@@ -108,7 +108,13 @@ class RepositoryArchitecturalGuard:
         return findings
 
     def verify_flat_file_constraint(self) -> List[ComplianceFinding]:
-        """Prevents the introduction of database engines to protect zero-cost hosting."""
+        """Keeps the Python pipeline off every database.
+
+        Repository state persists exclusively in version-controlled flat JSON.
+        Supabase is reachable only from the Node service in `backend/`, which
+        this guard does not scan. The scan catches the Python side reaching for
+        a database directly, `supabase` included, so the boundary stays one-way.
+        """
         findings = []
         for py_file in self._tracked_python_files():
             if self._should_skip(py_file):
@@ -116,15 +122,16 @@ class RepositoryArchitecturalGuard:
             try:
                 content = py_file.read_text(encoding="utf-8")
                 clean_content = self._clean_content(content)
-                # Detect forbidden database engines or ORM drivers
-                if re.search(r"sqlite3|sqlalchemy|psycopg2|mysql", clean_content, re.IGNORECASE):
+                # Detect forbidden database engines, ORM drivers, and the
+                # Supabase client inside the Python pipeline.
+                if re.search(r"sqlite3|sqlalchemy|psycopg2|mysql|supabase", clean_content, re.IGNORECASE):
                     findings.append(
                         ComplianceFinding(
                             rule_id="RULE-STOR-001",
                             target_file=str(py_file.relative_to(self.root_path)),
                             status="NON-COMPLIANT",
-                            description="File introduces SQL database components or external storage drivers.",
-                            remediation="Remove database libraries, persist state exclusively within version-controlled flat JSON files.",
+                            description="File introduces a database client or external storage driver into the Python pipeline.",
+                            remediation="Remove the database library from Python. Persist state in version-controlled flat JSON, or route database access through the Node service in backend/.",
                         )
                     )
             except IOError:
@@ -213,3 +220,40 @@ def test_repository_architectural_compliance():
             f"- {f.rule_id} in {f.target_file}: {f.description} (Remediation: {f.remediation})" for f in report.findings
         )
         raise AssertionError(f"Codebase violated repository architectural rules:\n{details}")
+
+
+def _rule_stor_001_findings(tmp_path, filename: str, content: str) -> List[ComplianceFinding]:
+    """Run RULE-STOR-001 against a throwaway repository holding one file.
+
+    The guard enumerates files with `git ls-files`, so the fixture has to be a
+    real repository rather than a bare directory.
+    """
+    (tmp_path / filename).write_text(content, encoding="utf-8")
+    subprocess.run(["git", "-c", "init.defaultBranch=main", "init", "-q"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "add", "--", filename], cwd=tmp_path, check=True)
+    return RepositoryArchitecturalGuard(str(tmp_path)).verify_flat_file_constraint()
+
+
+def test_rule_stor_001_flags_supabase_in_python(tmp_path):
+    """RULE-STOR-001 must catch the Supabase client, not only named SQL drivers.
+
+    Regression guard. `supabase` was absent from the pattern until 2026-09-22,
+    so a Python module could import the Supabase client, pass this guard, and
+    still violate the rule's intent that the Python pipeline never reaches a
+    database. Supabase access is confined to the Node service in `backend/`.
+    """
+    findings = _rule_stor_001_findings(tmp_path, "offender.py", "from supabase import create_client\n")
+
+    assert [f.rule_id for f in findings] == ["RULE-STOR-001"]
+    assert findings[0].target_file == "offender.py"
+
+
+def test_rule_stor_001_allows_plain_http_pipeline_code(tmp_path):
+    """RULE-STOR-001 must not fire on ordinary pipeline code.
+
+    A pattern widened without bound would be as useless as one that misses the
+    real case, so the guard has to keep letting the httpx-based scrapers past.
+    """
+    findings = _rule_stor_001_findings(tmp_path, "scraper_module.py", "import httpx\n")
+
+    assert findings == []

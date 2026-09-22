@@ -137,3 +137,54 @@ jobs:
           path: docs/
           if-no-files-found: error
           retention-days: 7
+
+  backend:
+    name: Backend (Node)
+    # The service under backend/ is outside the Python pipeline that `test`
+    # and `build` cover, so it gets its own job. Without this the Node code
+    # ships with no syntax check, no dependency gate, and no proof it boots.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020  # v7.0.0
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      # `ci` not `install`: fails when package.json and package-lock.json
+      # disagree, so the committed lockfile is the contract.
+      - run: npm ci
+      - name: Syntax check
+        run: node --check src/index.js
+      - name: Dependency CVE scan (npm audit)
+        # Mirrors the pip-audit gate above. Held at high/critical rather than
+        # "any advisory" because the Node tree is almost entirely transitive
+        # (13 packages for one direct dependency), and a low-severity advisory
+        # with no available bump would otherwise block every PR, data sweeps
+        # included, with no action available to clear it.
+        run: npm audit --audit-level=high
+      - name: Smoke test
+        # Proves the service boots and enforces its auth modes. A dummy project
+        # URL suffices: /health needs SUPABASE_URL present but makes no
+        # outbound call, and /me must reject before any JWKS fetch, so this
+        # step passes with no network access to Supabase.
+        env:
+          SUPABASE_URL: https://ci-smoke.invalid.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_smoke_placeholder
+        run: |
+          node src/index.js & SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for _ in $(seq 1 20); do
+            curl -fsS http://127.0.0.1:8787/health >/dev/null 2>&1 && break
+            sleep 0.5
+          done
+          curl -fsS http://127.0.0.1:8787/health | grep -q '"ok":true' \
+            || { echo "::error::/health did not return ok"; exit 1; }
+          code=$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8787/me)
+          [ "$code" = "401" ] \
+            || { echo "::error::/me returned $code for an unauthenticated request, expected 401"; exit 1; }
+          echo "backend smoke OK: /health 200, /me 401"

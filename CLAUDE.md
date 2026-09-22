@@ -144,6 +144,22 @@ Violating them imposes cognitive cost the owner cannot afford.
   skip-gate still applies: the run no-ops if `current.json` is younger than
   20 minutes. Verified working 2026-07-05.
 - Tests: `python -m pytest -q` (must stay green; >=464 tests as of 2026-07-09, suite grows).
+- `backend/` is the **only** component that talks to Supabase, and the only
+  place a Supabase credential is read. It is Node (`@supabase/server`),
+  independent of the Python pipeline. Run it with `npm ci && npm start` from
+  `backend/`; for local env copy `.env.example` to `.env` and use
+  `npm run start:local`. The secret key lives in the repository secret
+  `JCSTREAM_SUPABASE_SECRET_KEY`, never in the tree.
+- `RULE-STOR-001` in `tests/test_architectural_compliance.py` keeps the Python
+  side off every database, `supabase` included, so the boundary stays one-way.
+  Two regression tests pin that pattern; do not widen it back.
+- **Never run `npx skills add` from the repo root without checking `git status`
+  afterwards.** The installer drops copies into agent-tool directories it
+  guesses at. On 2026-09-22 it wrote a symlink to `data/skills/supabase-server`,
+  and `sweep.yml` / `rebuild.yml` both run `git add -- data/`, so the next
+  automated sweep would have pushed that stray path straight to `main`. It also
+  created a root-level `agent/` duplicate. Check for and delete strays before
+  committing.
 - The stylesheet is cache-busted by content hash (`css_version` in build.py); don't
   key it off the data timestamp again.
 - The sweep refuses to write a degraded roster (`_sweep_looks_healthy` in
