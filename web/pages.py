@@ -464,20 +464,10 @@ def _render_data_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> No
     # byte-identical, and the append-only rule covers both copies -- never
     # edit, rewrite, or truncate either by hand.
     data_dir = feeds_mod.DATA_DIR
-    supplemental = [f.filename for f in FEEDS]
-    for name in (
-        "current.json",
-        "changelog.json",
-        "anon_changelog.json",
-        "history.json",
-        "cfs_recent.json",
-        "shootings_recent.json",
-        "waf_block_log.json",
-        "cfs_pdi_recent.json",
-        "courtclerk_cases.json",
-        "orc_offenses.json",
-        *supplemental,
-    ):
+    manifest_path = Path(__file__).resolve().parent.parent / "config" / "public-data-manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for entry in manifest["files"]:
+        name = entry["path"]
         src = data_dir / name
         if src.exists():
             if name == "waf_block_log.json":
