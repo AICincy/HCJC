@@ -106,3 +106,32 @@
   color: var(--fg);
   line-height: 1.15;
 }
+
+/* UI-03: do not use --accent-quiet as text. */
+:root[data-theme="dark"] .masthead .nav-link[aria-current="page"],
+:root[data-theme="dark"] .month-nav .chip strong,
+:root[data-theme="dark"] .page-home .court-stat-primary .court-stat-num {
+  color: var(--fg);
+}
+:root[data-theme="dark"] .pager-num[aria-current="page"] {
+  color: var(--fg);
+  background: var(--surface);
+  border-color: var(--accent);
+}
+:root[data-theme="dark"] .masthead .brand:hover .brand-name {
+  color: var(--fg);
+}
+
+/* UI-07: strip is a chart, not a control. */
+.tier-strip-seg { cursor: default; pointer-events: none; }
+.tier-strip-seg:hover { outline: none; }
+
+/* UI-08: overflow cue on in-page TOC rails. */
+@media (max-width: 720px) {
+  .tab-toc {
+    position: relative;
+    mask-image: linear-gradient(to right, #000 78%, transparent);
+    -webkit-mask-image: linear-gradient(to right, #000 78%, transparent);
+    padding-right: 28px;
+  }
+}
