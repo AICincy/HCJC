@@ -1588,7 +1588,7 @@ def _load_court_forms_feed(name: str) -> dict:
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as e:
-        log.warning("tab feed %s unreadable: %s", path, e)
+        log.error("tab feed %s unreadable: %s", path, e, exc_info=True)
         return {}
     if not isinstance(raw, dict):
         log.warning("tab feed %s schema violation: top level is not an object", path)
