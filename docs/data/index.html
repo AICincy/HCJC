@@ -18,8 +18,8 @@
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
   <script src="/static/theme-init.js?v=1fb7517bcf"></script>
-  <link rel="stylesheet" href="/static/style.css?v=8e34a74299">
-  <link rel="stylesheet" href="/static/fold-chrome.css?v=20260922c">
+  <link rel="stylesheet" href="/static/style.css?v=9097671c21">
+  <link rel="stylesheet" href="/static/fold-chrome.css?v=b1f63c6482">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
@@ -30,7 +30,7 @@
   <link rel="alternate" type="application/rss+xml" title="JCStream - releases" href="/released.xml">
   <link rel="author" href="/humans.txt">
 </head>
-<body id="top" class="detail">
+<body id="top" class="detail data-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="masthead">
     <div class="masthead-inner">
@@ -39,15 +39,6 @@
           <span class="brand-name">JCStream</span>
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
-      </a>
-      <a class="masthead-seal masthead-seal-hcjc"
-         href="https://www.facebook.com/HCJCOH"
-         target="_blank" rel="noopener"
-         aria-label="Hamilton County Booking Photos on Facebook">
-        <img src="/static/img/hcjc-seal.png"
-             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
-             alt="Hamilton County Booking Photos seal"
-             width="36" height="36" decoding="async">
       </a>
       <span class="running desktop-only"><strong>1,202</strong> in custody</span>
       <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
@@ -110,6 +101,54 @@
 
 <p class="page-lede">JCStream is generated exclusively from public records maintained by the Hamilton County Sheriff's Office (HCSO) and published through HCSO's public inmate-search portal at <a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">hcso.org</a>. Everything the site is built from is published here as plain JSON, rebuilt by GitHub Actions on a best-effort schedule (cron every 15 minutes). That cadence is not a guarantee: observed refresh gaps have reached several hours during incidents, and each supplemental feed's row below states its own refresh-attempt cadence, not a freshness guarantee. We mirror the <em>current</em> roster: when HCSO removes a person, the next sweep removes them here too. There is no historical archive of released individuals.</p>
 
+<section class="data-observatory-hero" aria-labelledby="observatory-title">
+  <div class="data-observatory-copy">
+    <p class="data-kicker">Open data observatory</p>
+    <h2 id="observatory-title">Learn from the public record without losing the context.</h2>
+    <p>Documented data streams for learning, journalism, research, and accountability. Start with privacy-preserving history, then inspect the source files and build evidence behind them.</p>
+  </div>
+  <div class="data-observatory-stats" aria-label="Data observatory summary">
+    <div><strong>17</strong><span>published streams</span></div>
+    <div><strong>1,202</strong><span>current roster records</span></div>
+    <div><strong>Sep 22, 2026, 1:46 PM ET</strong><span>roster vintage</span></div>
+  </div>
+</section>
+
+<nav class="data-section-nav" aria-label="Data page sections">
+  <a href="#streams">Start here</a>
+  <a href="#published-files">All streams</a>
+  <a href="#pipeline">Pipeline</a>
+  <a href="#legal">Data boundaries</a>
+</nav>
+
+<section id="streams" class="data-start" aria-labelledby="start-title">
+  <div class="data-section-heading">
+    <p class="data-kicker">Start here</p>
+    <h2 id="start-title">Three useful paths into the data</h2>
+    <p>Choose a stream by the question you want to answer, not by the file format.</p>
+  </div>
+  <div class="data-feature-grid">
+    <article class="data-feature-card data-feature-primary">
+      <p class="data-card-label">Current lookup</p><h3>Current roster</h3>
+      <p>Current public custody snapshot, charges, and source timestamps.</p>
+      <div class="data-card-meta"><span>current.json</span><span>Source record</span></div>
+      <a class="data-card-link" href="current.json">Open the snapshot <span aria-hidden="true">&rarr;</span></a>
+    </article>
+    <article class="data-feature-card">
+      <p class="data-card-label">Longitudinal research</p><h3>Anonymous event log</h3>
+      <p>Permanent booking and release patterns with identifying fields stripped after seven days.</p>
+      <div class="data-card-meta"><span>anon_changelog.json</span><span>PII-stripped</span></div>
+      <a class="data-card-link" href="anon_changelog.json">Open the research stream <span aria-hidden="true">&rarr;</span></a>
+    </article>
+    <article class="data-feature-card">
+      <p class="data-card-label">Trends and charts</p><h3>Roster history</h3>
+      <p>Daily counts only: roster size, bookings, and releases across approximately 400 days.</p>
+      <div class="data-card-meta"><span>history.json</span><span>Counts only</span></div>
+      <a class="data-card-link" href="history.json">Open the time series <span aria-hidden="true">&rarr;</span></a>
+    </article>
+  </div>
+</section>
+
 <h2 class="sect-h">Authoritative Sources</h2>
 <div class="fields">
   <div class="k">Inmate roster</div>
@@ -142,6 +181,19 @@
   <div class="v">United Way of Greater Cincinnati. Dial <strong>211</strong> or <a href="tel:+15137217900">513-721-7900</a>. Connects to housing, food, utilities, and benefits assistance.</div>
 </div>
 
+<section id="published-files" class="data-catalog" aria-labelledby="catalog-title">
+  <div class="data-section-heading"><p class="data-kicker">Published streams</p><h2 id="catalog-title">Browse by purpose</h2><p>Every card separates data vintage, refresh attempts, coverage, and privacy boundaries.</p></div>
+  <div class="data-catalog-grid">
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Roster</span><a href="current.json" aria-label="Open current.json">JSON &rarr;</a></div><h3>Current roster</h3><p>Authoritative custody snapshot with charge-level details and source timestamps.</p><dl><div><dt>Vintage</dt><dd>Sep 22, 2026, 1:46 PM ET</dd></div><div><dt>Scope</dt><dd>Current records</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Events</span><a href="changelog.json" aria-label="Open changelog.json">JSON &rarr;</a></div><h3>Observed changes</h3><p>Recent bookings, releases, and updates from the change log.</p><dl><div><dt>Retention</dt><dd>Approximately 8 days</dd></div><div><dt>Cadence</dt><dd>15-minute sweep</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">History</span><a href="anon_changelog.json" aria-label="Open anon_changelog.json">JSON &rarr;</a></div><h3>Anonymous events</h3><p>Permanent institutional-pattern data with identifiers stripped after seven days.</p><dl><div><dt>Privacy</dt><dd>PII-stripped</dd></div><div><dt>Coverage</dt><dd>Permanent</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Trends</span><a href="history.json" aria-label="Open history.json">JSON &rarr;</a></div><h3>Roster history</h3><p>Daily counts for roster size, bookings, and releases.</p><dl><div><dt>Coverage</dt><dd>Approximately 400 days</dd></div><div><dt>Privacy</dt><dd>Counts only</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Civic data</span><a href="cfs_recent.json" aria-label="Open cfs_recent.json">JSON &rarr;</a></div><h3>Calls for service</h3><p>CPD and CFD calls with arrest, citation, and offense-report dispositions.</p><dl><div><dt>Vintage</dt><dd>Sep 22, 2026, 1:46 PM ET</dd></div><div><dt>Attempts</dt><dd>Hourly</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Civic data</span><a href="shootings_recent.json" aria-label="Open shootings_recent.json">JSON &rarr;</a></div><h3>Reported shootings</h3><p>CPD reported shootings from Cincinnati Open Data.</p><dl><div><dt>Coverage</dt><dd>Approximately 30 days</dd></div><div><dt>Attempts</dt><dd>Every 6 hours</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Pipeline</span><a href="transparency_metrics.json" aria-label="Open transparency_metrics.json">JSON &rarr;</a></div><h3>Transparency metrics</h3><p>Aggregate source availability, freshness, denial, and recovery metrics.</p><dl><div><dt>Computed</dt><dd>At build time</dd></div><div><dt>Details</dt><dd>Freshness + denial</dd></div></dl></article>
+    <article class="data-stream-card"><div class="data-stream-top"><span class="data-stream-kind">Pipeline</span><a href="waf_block_log.json" aria-label="Open waf_block_log.json">JSON &rarr;</a></div><h3>Access interruptions</h3><p>Hash-chained record of blocked and recovered source-access cycles.</p><dl><div><dt>Integrity</dt><dd>SHA-256 chain</dd></div><div><dt>Use</dt><dd>Reproducibility</dd></div></dl></article>
+  </div>
+  <details class="data-more-files"><summary>Show every published file and schema</summary>
 <h2 class="sect-h">Published Files</h2>
 <table class="charges">
   <caption class="sr-only">Published data files</caption>
@@ -168,6 +220,7 @@
     <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history. Verify downloads by running <code>sha256sum -c SHA256SUMS</code> in the directory you downloaded the files to (<code>shasum -a 256 -c SHA256SUMS</code> on macOS).</td></tr>
   </tbody>
 </table>
+</details>
 
 <div class="section-h"><h2 id="access">Access interruptions</h2></div>
 <p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal. A requester&rsquo;s right to inspect and copy public records from the public office is governed by <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">R.C. 149.43</a>, which imposes duties on the public office or person responsible for public records. Beginning 2026-05-30, that portal began returning blocked responses (HTTP&nbsp;403, and at times HTTP&nbsp;200 pages stripped of their results) to this site&rsquo;s automated retrieval. Roster-list retrieval has since resumed; the roster list was updated 2026-09-22.</p>
@@ -185,7 +238,7 @@ the same images HCSO embeds (base64) on its own <code>inmate-detail</code> page,
 to 250&times;312 JPEG. A photo is present only if HCSO published one. They are removed when
 the inmate leaves the public roster.</p>
 
-<div class="section-h"><h2>How it&rsquo;s built</h2></div>
+<div id="pipeline" class="section-h"><h2>How it&rsquo;s built</h2></div>
 <p class="muted">A GitHub Actions cron sweeps <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>&rsquo;s
 inmate search (substring match on last name - the 26 single letters cover the whole
 roster with dedup), parses each detail page, downscales the photo, diffs against the prior
@@ -282,6 +335,7 @@ at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issu
     </nav>
     <span>Generated Sep 22, 2026, 1:46 PM ET</span>
     <span><a href="/data/">Data, methodology & legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
+    <p>External social link: <a href="https://www.facebook.com/HCJCOH" target="_blank" rel="noopener">Hamilton County Booking Photos on Facebook</a>.</p>
     <span class="footer-legal">
       <span class="footer-legal-para">Independent, non-governmental project. Not affiliated with, endorsed by, or operated by the Hamilton County Sheriff's Office, Hamilton County, or any other government entity.</span>
       <span class="footer-legal-para">This site republishes current public inmate-roster facts for civic, journalistic, and accountability use. It does not furnish consumer reports and is not offered as a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and 1681a(f). Do not use this site, or any data obtained from it, as a factor in determining a person's eligibility for credit, insurance, employment, housing, tenant screening, or any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined by those statutory definitions, not by this notice.</span>
@@ -290,7 +344,6 @@ at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issu
     </span>
   </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
-
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
     <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
     <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
@@ -299,9 +352,7 @@ at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issu
       <figcaption id="lb-cap"></figcaption>
     </figure>
   </div>
-
   <div id="tier-tip" role="tooltip" hidden></div>
-
-  <script src="/static/main.js?v=a1b1b4ff4e" defer></script>
+  <script src="/static/main.js?v=120005c39a" defer></script>
 </body>
 </html>

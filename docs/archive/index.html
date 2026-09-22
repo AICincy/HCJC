@@ -18,8 +18,8 @@
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
   <script src="/static/theme-init.js?v=1fb7517bcf"></script>
-  <link rel="stylesheet" href="/static/style.css?v=8e34a74299">
-  <link rel="stylesheet" href="/static/fold-chrome.css?v=20260922c">
+  <link rel="stylesheet" href="/static/style.css?v=9097671c21">
+  <link rel="stylesheet" href="/static/fold-chrome.css?v=b1f63c6482">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
@@ -39,15 +39,6 @@
           <span class="brand-name">JCStream</span>
           <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
         </span>
-      </a>
-      <a class="masthead-seal masthead-seal-hcjc"
-         href="https://www.facebook.com/HCJCOH"
-         target="_blank" rel="noopener"
-         aria-label="Hamilton County Booking Photos on Facebook">
-        <img src="/static/img/hcjc-seal.png"
-             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
-             alt="Hamilton County Booking Photos seal"
-             width="36" height="36" decoding="async">
       </a>
       <span class="running desktop-only"><strong>1,202</strong> in custody</span>
       <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
@@ -128,11 +119,11 @@
 <header class="doc-h">
   <div class="doc-h-stack">
     <h1 class="title">Earlier bookings archive</h1>
-    <div class="sub">The complete booking history on this mirror, newest first, with the same search and filters as the homepage</div>
+    <div class="sub">All people in the current custody mirror, newest first, with the same search and filters as the homepage</div>
   </div>
 </header>
 
-<p class="page-lede">The homepage shows the three most recent booking months. This archive holds every booking month on the mirror, searchable in one place. Nothing here is unpublished anywhere else on the site.</p>
+<p class="page-lede">The homepage shows a small recent-booking preview. This archive lists the complete current custody roster by booking month, searchable in one place. It is not a historical archive of released people.</p>
 
 
 <details class="banner legal-disclosure">
@@ -149,19 +140,20 @@
 
 <section aria-labelledby="archive-roster-h">
   <div class="section-h"><h2 id="archive-roster-h">Search all bookings</h2><span class="grow"></span><span class="meta">1,202 in custody</span></div>
-<div class="filter-bar" id="filters">
+<form class="filter-bar" id="filters" action="/archive/" method="get">
   <div class="filter-bar-main">
     <div class="search-wrap">
       <label for="search-box" class="sr-only">Search the roster</label>
-      <input type="search" data-filter="search" id="search-box" placeholder="Name, charge, ORC code" autocomplete="off" aria-controls="search-results">
+      <input type="search" name="q" data-filter="search" id="search-box" placeholder="Name, charge, or ORC code" autocomplete="off" aria-controls="search-results">
       <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
       <span class="sr-only" id="search-status" role="status"></span>
     </div>
+    <button class="filter-reset roster-submit" type="submit">Search all</button>
     <details class="more-filters">
       <summary>Filters</summary>
       <div class="more-filters-body">
         <label class="filter-inline" for="filter-tier">Charge level
-          <select id="filter-tier" data-filter="tier" aria-describedby="tier-explain">
+          <select id="filter-tier" name="tier" data-filter="tier" aria-describedby="tier-explain">
             <option value="">all</option>
             <option value="felony">felony</option>
             <option value="misdemeanor">misdemeanor</option>
@@ -179,12 +171,12 @@
           </select>
         </label>
         <label class="filter-inline" for="filter-chap">Offense
-          <select id="filter-chap" data-filter="chap">
+          <select id="filter-chap" name="chap" data-filter="chap">
             <option value="">all offenses</option>
 <option value="arson-damage">Arson / Damage (35)</option><option value="disorderly">Disorderly (3)</option><option value="drugs">Drugs (165)</option><option value="family-domestic">Family / Domestic (32)</option><option value="kidnapping-abduction">Kidnapping / Abduction (14)</option><option value="obstruction">Obstruction (36)</option><option value="other">Other (22)</option><option value="robbery-burglary">Robbery / Burglary (157)</option><option value="sexual-assault">Sexual Assault (77)</option><option value="theft-fraud">Theft / Fraud (134)</option><option value="traffic-dui">Traffic / DUI (27)</option><option value="traffic-license">Traffic / License (8)</option><option value="violence-homicide">Violence / Homicide (424)</option><option value="weapons">Weapons (47)</option>          </select>
         </label>
         <label class="filter-inline" for="filter-recent">Activity
-          <select id="filter-recent" data-filter="recent">
+          <select id="filter-recent" name="recent" data-filter="recent">
             <option value="">any time</option>
             <option value="booked">booked 24h</option>
           </select>
@@ -195,7 +187,7 @@
         </button>
         <button type="button" class="filter-reset" id="filter-reset" hidden>Reset filters</button>
         <span class="filter-count"></span>
-        <p class="legend" aria-hidden="true">
+        <p class="legend">
           <span class="swatch charge-2903"><span class="dot"></span>violence / sex</span>
           <span class="swatch charge-2923"><span class="dot"></span>weapons</span>
           <span class="swatch charge-2911"><span class="dot"></span>burglary / property</span>
@@ -211,8 +203,9 @@
   </div>
   <div class="tier-strip tier-strip-slim" role="img" aria-label="Roster by most serious degree: F1 208, F2 208, F3 133, F4 38, F5 214, M1 328, M2 20, M3 1, M4 12, MM 19">
 <span class="tier-strip-seg ladder-F1" style="width: 17.61%" title="F1: 208"></span><span class="tier-strip-seg ladder-F2" style="width: 17.61%" title="F2: 208"></span><span class="tier-strip-seg ladder-F3" style="width: 11.26%" title="F3: 133"></span><span class="tier-strip-seg ladder-F4" style="width: 3.22%" title="F4: 38"></span><span class="tier-strip-seg ladder-F5" style="width: 18.12%" title="F5: 214"></span><span class="tier-strip-seg ladder-M1" style="width: 27.77%" title="M1: 328"></span><span class="tier-strip-seg ladder-M2" style="width: 1.69%" title="M2: 20"></span><span class="tier-strip-seg ladder-M3" style="width: 0.08%" title="M3: 1"></span><span class="tier-strip-seg ladder-M4" style="width: 1.02%" title="M4: 12"></span><span class="tier-strip-seg ladder-MM" style="width: 1.61%" title="MM: 19"></span>  </div>
-  <p class="tier-strip-cap">Roster share by most serious charge: felonies F1 (most serious) through F5, then misdemeanors M1 through MM. Select a color to filter.</p>
-</div>
+  <p class="tier-strip-cap">Roster share by most serious charge. Use Charge level in Filters.</p>
+</form>
+<noscript><p>Live search and filters need JavaScript. <a href="/archive/">Browse the complete current roster</a> and use your browser’s Find command to look up a name.</p></noscript>
 <div class="empty filter-empty" id="filter-empty" role="status" hidden>
   <h2>No one in custody matches that filter.</h2>
   <p>Try a last name only, clear one filter, or check spelling. Recently arrested people may not appear immediately, and some people may be held by another county, city, or federal agency.</p>
@@ -581,7 +574,7 @@
     <p class="charge charge-2925">Drugs <span class="ct-count">+4</span></p>
     <a class="id-chip" href="/inmate/2305427/" tabindex="-1" aria-hidden="true">#&thinsp;2305427 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-14202725-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="drugs" data-recent="booked" data-search="sherman dandre trafficking in drugs possession of controlled substances 2925.03 2925.11 #14202725">
+</article><article class="card-inmate" aria-labelledby="card-14202725-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="drugs" data-search="sherman dandre trafficking in drugs possession of controlled substances 2925.03 2925.11 #14202725">
   <button type="button" class="tier tier-felony tier-F5 tier-corner" aria-label="F5, charges detail" aria-describedby="tier-tip" data-tip="F5
 2925.03 · F5 · Trafficking in drugs
 2925.11 · F5 · Possession of drugs">F5</button>
@@ -593,7 +586,7 @@
     <p class="charge charge-2925">Drugs <span class="ct-count">+1</span></p>
     <a class="id-chip" href="/inmate/14202725/" tabindex="-1" aria-hidden="true">#&thinsp;14202725 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-14617265-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="obstruction" data-recent="booked" data-search="watts cody driving under suspension/violaton restriction failure to comply with an order or signal of a police officer 4510.11 2921.331 #14617265">
+</article><article class="card-inmate" aria-labelledby="card-14617265-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="obstruction" data-search="watts cody driving under suspension/violaton restriction failure to comply with an order or signal of a police officer 4510.11 2921.331 #14617265">
   <button type="button" class="tier tier-misdemeanor tier-M1 tier-corner" aria-label="M1, charges detail" aria-describedby="tier-tip" data-tip="M1
 4510.11 · M1 · Driving under suspension
 2921.331 · M1 · Failure to comply with order or signal of police officer">M1</button>
@@ -605,7 +598,7 @@
     <p class="charge charge-2921">Obstruction <span class="ct-count">+1</span></p>
     <a class="id-chip" href="/inmate/14617265/" tabindex="-1" aria-hidden="true">#&thinsp;14617265 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-14419611-name" data-tier="unknown" data-degree="UNK" data-custody="1" data-chap="unknown" data-recent="booked" data-search="posey duemierr   #14419611">
+</article><article class="card-inmate" aria-labelledby="card-14419611-name" data-tier="unknown" data-degree="UNK" data-custody="1" data-chap="unknown" data-search="posey duemierr   #14419611">
   <a class="thumb" href="/inmate/14419611/" tabindex="-1" aria-hidden="true" data-photo="/photos/14419611.jpg" data-photo-cap="POSEY DUEMIERR · booked 9/21/26" data-photo-alt="HCSO booking photo of POSEY DUEMIERR">
     <img src="/photos/14419611.jpg" alt="" width="48" height="60" loading="lazy" decoding="async" data-photo-fallback data-initials="PD">
   </a>
@@ -613,7 +606,7 @@
     <p class="name" id="card-14419611-name"><a class="plain" href="/inmate/14419611/">POSEY DUEMIERR</a></p>
     <a class="id-chip" href="/inmate/14419611/" tabindex="-1" aria-hidden="true">#&thinsp;14419611 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-2532085-name" data-tier="unknown" data-degree="UNK" data-custody="1" data-chap="unknown" data-recent="booked" data-search="perryman austin   #2532085">
+</article><article class="card-inmate" aria-labelledby="card-2532085-name" data-tier="unknown" data-degree="UNK" data-custody="1" data-chap="unknown" data-search="perryman austin   #2532085">
   <a class="thumb" href="/inmate/2532085/" tabindex="-1" aria-hidden="true" data-photo="/photos/2532085.jpg" data-photo-cap="PERRYMAN AUSTIN · booked 9/21/26" data-photo-alt="HCSO booking photo of PERRYMAN AUSTIN">
     <img src="/photos/2532085.jpg" alt="" width="48" height="60" loading="lazy" decoding="async" data-photo-fallback data-initials="PA">
   </a>
@@ -621,7 +614,7 @@
     <p class="name" id="card-2532085-name"><a class="plain" href="/inmate/2532085/">PERRYMAN AUSTIN</a></p>
     <a class="id-chip" href="/inmate/2532085/" tabindex="-1" aria-hidden="true">#&thinsp;2532085 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-14155861-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="family-domestic" data-recent="booked" data-search="morales-martinez ramon domestic violence 2919.25 #14155861">
+</article><article class="card-inmate" aria-labelledby="card-14155861-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="family-domestic" data-search="morales-martinez ramon domestic violence 2919.25 #14155861">
   <button type="button" class="tier tier-misdemeanor tier-M1 tier-corner" aria-label="M1, charges detail" aria-describedby="tier-tip" data-tip="M1
 2919.25 · M1 · Domestic violence">M1</button>
   <a class="thumb" href="/inmate/14155861/" tabindex="-1" aria-hidden="true" data-photo="/photos/14155861.jpg" data-photo-cap="MORALES-MARTINEZ RAMON · booked 9/21/26" data-photo-alt="HCSO booking photo of MORALES-MARTINEZ RAMON">
@@ -632,7 +625,7 @@
     <p class="charge charge-2919">Family / Domestic</p>
     <a class="id-chip" href="/inmate/14155861/" tabindex="-1" aria-hidden="true">#&thinsp;14155861 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-1477076-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="drugs" data-recent="booked" data-search="hunter william trafficking in drugs 2925.03a2 #1477076">
+</article><article class="card-inmate" aria-labelledby="card-1477076-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="drugs" data-search="hunter william trafficking in drugs 2925.03a2 #1477076">
   <button type="button" class="tier tier-felony tier-F5 tier-corner" aria-label="F5, charges detail" aria-describedby="tier-tip" data-tip="F5
 2925.03A2 · F5 · Trafficking in drugs">F5</button>
   <a class="thumb" href="/inmate/1477076/" tabindex="-1" aria-hidden="true" data-photo="/photos/1477076.jpg" data-photo-cap="HUNTER WILLIAM · booked 9/21/26" data-photo-alt="HCSO booking photo of HUNTER WILLIAM">
@@ -643,7 +636,7 @@
     <p class="charge charge-2925">Drugs</p>
     <a class="id-chip" href="/inmate/1477076/" tabindex="-1" aria-hidden="true">#&thinsp;1477076 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-14770770-name" data-tier="misdemeanor" data-degree="M2" data-custody="1" data-chap="robbery-burglary" data-recent="booked" data-search="young lejuan disorderly conduct resisting arrest  criminal trespass 2917.11b1 2921.33a 2909.09a1 2911.21a1 #14770770">
+</article><article class="card-inmate" aria-labelledby="card-14770770-name" data-tier="misdemeanor" data-degree="M2" data-custody="1" data-chap="robbery-burglary" data-search="young lejuan disorderly conduct resisting arrest  criminal trespass 2917.11b1 2921.33a 2909.09a1 2911.21a1 #14770770">
   <button type="button" class="tier tier-misdemeanor tier-M2 tier-corner" aria-label="M2, charges detail" aria-describedby="tier-tip" data-tip="M2
 2917.11B1 · MM · Disorderly conduct
 2921.33A · M2 · Resisting arrest
@@ -657,7 +650,7 @@
     <p class="charge charge-2911">Robbery / Burglary <span class="ct-count">+3</span></p>
     <a class="id-chip" href="/inmate/14770770/" tabindex="-1" aria-hidden="true">#&thinsp;14770770 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-14663162-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="theft-fraud" data-recent="booked" data-search="payne callee possession of controlled substances theft 2925.11 2913.02a1 #14663162">
+</article><article class="card-inmate" aria-labelledby="card-14663162-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="theft-fraud" data-search="payne callee possession of controlled substances theft 2925.11 2913.02a1 #14663162">
   <button type="button" class="tier tier-felony tier-F5 tier-corner" aria-label="F5, charges detail" aria-describedby="tier-tip" data-tip="F5
 2925.11 · F5 · Possession of drugs
 2913.02A1 · M1 · Theft">F5</button>
@@ -669,7 +662,7 @@
     <p class="charge charge-2913">Theft / Fraud <span class="ct-count">+1</span></p>
     <a class="id-chip" href="/inmate/14663162/" tabindex="-1" aria-hidden="true">#&thinsp;14663162 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-2148132-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="theft-fraud" data-recent="booked" data-search="overstreet demetrius theft 2913.02a1 #2148132">
+</article><article class="card-inmate" aria-labelledby="card-2148132-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="theft-fraud" data-search="overstreet demetrius theft 2913.02a1 #2148132">
   <button type="button" class="tier tier-misdemeanor tier-M1 tier-corner" aria-label="M1, charges detail" aria-describedby="tier-tip" data-tip="M1
 2913.02A1 · M1 · Theft">M1</button>
   <span class="thumb thumb-placeholder" aria-hidden="true" data-initials="OD"></span>
@@ -678,7 +671,7 @@
     <p class="charge charge-2913">Theft / Fraud</p>
     <a class="id-chip" href="/inmate/2148132/" tabindex="-1" aria-hidden="true">#&thinsp;2148132 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-2117541-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="drugs" data-recent="booked" data-search="brooks alichia possession of drugs 2925.11a #2117541">
+</article><article class="card-inmate" aria-labelledby="card-2117541-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="drugs" data-search="brooks alichia possession of drugs 2925.11a #2117541">
   <button type="button" class="tier tier-felony tier-F5 tier-corner" aria-label="F5, charges detail" aria-describedby="tier-tip" data-tip="F5
 2925.11A · F5 · Possession of drugs">F5</button>
   <a class="thumb" href="/inmate/2117541/" tabindex="-1" aria-hidden="true" data-photo="/photos/2117541.jpg" data-photo-cap="BROOKS ALICHIA · booked 9/21/26" data-photo-alt="HCSO booking photo of BROOKS ALICHIA">
@@ -689,7 +682,7 @@
     <p class="charge charge-2925">Drugs</p>
     <a class="id-chip" href="/inmate/2117541/" tabindex="-1" aria-hidden="true">#&thinsp;2117541 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-1574282-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="drugs" data-recent="booked" data-search="ross steven trafficking in drugs 2925.03a2 #1574282">
+</article><article class="card-inmate" aria-labelledby="card-1574282-name" data-tier="felony" data-degree="F5" data-custody="1" data-chap="drugs" data-search="ross steven trafficking in drugs 2925.03a2 #1574282">
   <button type="button" class="tier tier-felony tier-F5 tier-corner" aria-label="F5, charges detail" aria-describedby="tier-tip" data-tip="F5
 2925.03A2 · F5 · Trafficking in drugs">F5</button>
   <a class="thumb" href="/inmate/1574282/" tabindex="-1" aria-hidden="true" data-photo="/photos/1574282.jpg" data-photo-cap="ROSS STEVEN · booked 9/21/26" data-photo-alt="HCSO booking photo of ROSS STEVEN">
@@ -700,7 +693,7 @@
     <p class="charge charge-2925">Drugs</p>
     <a class="id-chip" href="/inmate/1574282/" tabindex="-1" aria-hidden="true">#&thinsp;1574282 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-14819795-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="theft-fraud" data-recent="booked" data-search="frederick alyvia theft 2913.02 #14819795">
+</article><article class="card-inmate" aria-labelledby="card-14819795-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="theft-fraud" data-search="frederick alyvia theft 2913.02 #14819795">
   <button type="button" class="tier tier-misdemeanor tier-M1 tier-corner" aria-label="M1, charges detail" aria-describedby="tier-tip" data-tip="M1
 2913.02 · M1 · Theft">M1</button>
   <a class="thumb" href="/inmate/14819795/" tabindex="-1" aria-hidden="true" data-photo="/photos/14819795.jpg" data-photo-cap="FREDERICK ALYVIA · booked 9/21/26" data-photo-alt="HCSO booking photo of FREDERICK ALYVIA">
@@ -711,7 +704,7 @@
     <p class="charge charge-2913">Theft / Fraud</p>
     <a class="id-chip" href="/inmate/14819795/" tabindex="-1" aria-hidden="true">#&thinsp;14819795 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-14639753-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="theft-fraud" data-recent="booked" data-search="recker ashley unauthorized use of a motor vehicle 2913.03a #14639753">
+</article><article class="card-inmate" aria-labelledby="card-14639753-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="theft-fraud" data-search="recker ashley unauthorized use of a motor vehicle 2913.03a #14639753">
   <button type="button" class="tier tier-misdemeanor tier-M1 tier-corner" aria-label="M1, charges detail" aria-describedby="tier-tip" data-tip="M1
 2913.03A · M1 · Unauthorized use of a vehicle">M1</button>
   <a class="thumb" href="/inmate/14639753/" tabindex="-1" aria-hidden="true" data-photo="/photos/14639753.jpg" data-photo-cap="RECKER ASHLEY · booked 9/21/26" data-photo-alt="HCSO booking photo of RECKER ASHLEY">
@@ -722,7 +715,7 @@
     <p class="charge charge-2913">Theft / Fraud</p>
     <a class="id-chip" href="/inmate/14639753/" tabindex="-1" aria-hidden="true">#&thinsp;14639753 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-2663488-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="traffic-license" data-recent="booked" data-search="dickey dayvonn license suspension- points 4510.037j #2663488">
+</article><article class="card-inmate" aria-labelledby="card-2663488-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="traffic-license" data-search="dickey dayvonn license suspension- points 4510.037j #2663488">
   <button type="button" class="tier tier-misdemeanor tier-M1 tier-corner" aria-label="M1, charges detail" aria-describedby="tier-tip" data-tip="M1
 4510.037J · M1 · License restrictions during 12-point suspension">M1</button>
   <a class="thumb" href="/inmate/2663488/" tabindex="-1" aria-hidden="true" data-photo="/photos/2663488.jpg" data-photo-cap="DICKEY DAYVONN · booked 9/21/26" data-photo-alt="HCSO booking photo of DICKEY DAYVONN">
@@ -733,7 +726,7 @@
     <p class="charge charge-traffic">Traffic / License</p>
     <a class="id-chip" href="/inmate/2663488/" tabindex="-1" aria-hidden="true">#&thinsp;2663488 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-1658277-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="theft-fraud" data-recent="booked" data-search="elmore selma theft 2913.02 #1658277">
+</article><article class="card-inmate" aria-labelledby="card-1658277-name" data-tier="misdemeanor" data-degree="M1" data-custody="1" data-chap="theft-fraud" data-search="elmore selma theft 2913.02 #1658277">
   <button type="button" class="tier tier-misdemeanor tier-M1 tier-corner" aria-label="M1, charges detail" aria-describedby="tier-tip" data-tip="M1
 2913.02 · M1 · Theft">M1</button>
   <a class="thumb" href="/inmate/1658277/" tabindex="-1" aria-hidden="true" data-photo="/photos/1658277.jpg" data-photo-cap="ELMORE SELMA · booked 9/21/26" data-photo-alt="HCSO booking photo of ELMORE SELMA">
@@ -744,7 +737,7 @@
     <p class="charge charge-2913">Theft / Fraud</p>
     <a class="id-chip" href="/inmate/1658277/" tabindex="-1" aria-hidden="true">#&thinsp;1658277 &middot; booked 9/21/26 &middot; <span class="dic">in custody 1d</span></a>
   </div>
-</article><article class="card-inmate" aria-labelledby="card-14804757-name" data-tier="felony" data-degree="F2" data-custody="1" data-chap="violence-homicide" data-recent="booked" data-search="bryant jamier aggravated vehicular homicide - vehicular homicide - vehicular manslaughter 2903.06 #14804757">
+</article><article class="card-inmate" aria-labelledby="card-14804757-name" data-tier="felony" data-degree="F2" data-custody="1" data-chap="violence-homicide" data-search="bryant jamier aggravated vehicular homicide - vehicular homicide - vehicular manslaughter 2903.06 #14804757">
   <button type="button" class="tier tier-felony tier-F2 tier-corner" aria-label="F2, charges detail" aria-describedby="tier-tip" data-tip="F2
 2903.06 · F2 · Aggravated vehicular homicide">F2</button>
   <a class="thumb" href="/inmate/14804757/" tabindex="-1" aria-hidden="true" data-photo="/photos/14804757.jpg" data-photo-cap="BRYANT JAMIER · booked 9/21/26" data-photo-alt="HCSO booking photo of BRYANT JAMIER">
@@ -16939,9 +16932,9 @@ OTHER · UNSUPPORTED TYPE">F1</button>
 </details>
 
 <details class="released-24h">
-  <summary>Released in the last 24 hours <span class="count">101</span> <span class="released-date">as of Sep 22, 2026, 1:46 PM ET</span></summary>
+  <summary>Released in the last 24 hours <span class="count">54</span> <span class="released-date">as of Sep 22, 2026, 1:46 PM ET</span></summary>
   <p class="released-note">From the public <a href="/data/">changelog</a>. Release events record leaving the Justice Center; this site does not track court outcomes.</p>
-  <p class="released-flow"><span>SLONE ERICA</span> <span class="sep" aria-hidden="true">·</span> <span>RANKIN JYDAN</span> <span class="sep" aria-hidden="true">·</span> <span>RAMSEY ROBERT</span> <span class="sep" aria-hidden="true">·</span> <span>PITTS KEISHA</span> <span class="sep" aria-hidden="true">·</span> <span>HOWARD ALLEN</span> <span class="sep" aria-hidden="true">·</span> <span>COLE DANNY</span> <span class="sep" aria-hidden="true">·</span> <span>CARR HOLLIE</span> <span class="sep" aria-hidden="true">·</span> <span>BROWN YAHKIA</span> <span class="sep" aria-hidden="true">·</span> <span>BROWN JOHNNIE</span> <span class="sep" aria-hidden="true">·</span> <span>AUSTIN SHIRLEY</span> <span class="sep" aria-hidden="true">·</span> <span>WILLIAMS TIESHA</span> <span class="sep" aria-hidden="true">·</span> <span>WILLIAMS MIKHAIL</span> <span class="sep" aria-hidden="true">·</span> <a href="/data/">+89 more in the changelog</a></p>
+  <p class="released-flow"><span>SLONE ERICA</span> <span class="sep" aria-hidden="true">·</span> <span>RANKIN JYDAN</span> <span class="sep" aria-hidden="true">·</span> <span>RAMSEY ROBERT</span> <span class="sep" aria-hidden="true">·</span> <span>PITTS KEISHA</span> <span class="sep" aria-hidden="true">·</span> <span>HOWARD ALLEN</span> <span class="sep" aria-hidden="true">·</span> <span>COLE DANNY</span> <span class="sep" aria-hidden="true">·</span> <span>CARR HOLLIE</span> <span class="sep" aria-hidden="true">·</span> <span>BROWN YAHKIA</span> <span class="sep" aria-hidden="true">·</span> <span>BROWN JOHNNIE</span> <span class="sep" aria-hidden="true">·</span> <span>AUSTIN SHIRLEY</span> <span class="sep" aria-hidden="true">·</span> <span>WILLIAMS TIESHA</span> <span class="sep" aria-hidden="true">·</span> <span>WILLIAMS MIKHAIL</span> <span class="sep" aria-hidden="true">·</span> <a href="/data/">+42 more in the changelog</a></p>
 </details>
 </section>
 
@@ -16966,6 +16959,7 @@ OTHER · UNSUPPORTED TYPE">F1</button>
     </nav>
     <span>Generated Sep 22, 2026, 1:46 PM ET</span>
     <span><a href="/data/">Data, methodology & legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
+    <p>External social link: <a href="https://www.facebook.com/HCJCOH" target="_blank" rel="noopener">Hamilton County Booking Photos on Facebook</a>.</p>
     <span class="footer-legal">
       <span class="footer-legal-para">Independent, non-governmental project. Not affiliated with, endorsed by, or operated by the Hamilton County Sheriff's Office, Hamilton County, or any other government entity.</span>
       <span class="footer-legal-para">This site republishes current public inmate-roster facts for civic, journalistic, and accountability use. It does not furnish consumer reports and is not offered as a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and 1681a(f). Do not use this site, or any data obtained from it, as a factor in determining a person's eligibility for credit, insurance, employment, housing, tenant screening, or any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined by those statutory definitions, not by this notice.</span>
@@ -16974,7 +16968,6 @@ OTHER · UNSUPPORTED TYPE">F1</button>
     </span>
   </footer>
   <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
-
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
     <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
     <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
@@ -16983,9 +16976,7 @@ OTHER · UNSUPPORTED TYPE">F1</button>
       <figcaption id="lb-cap"></figcaption>
     </figure>
   </div>
-
   <div id="tier-tip" role="tooltip" hidden></div>
-
-  <script src="/static/main.js?v=a1b1b4ff4e" defer></script>
+  <script src="/static/main.js?v=120005c39a" defer></script>
 </body>
 </html>

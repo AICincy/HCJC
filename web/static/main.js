@@ -200,7 +200,24 @@
   // (3) Filter bar. Scoped to its own block so a page without #filters still
   //     reaches the (4) search dropdown below, which is an independent feature.
   var bar = document.getElementById('filters');
-  if (bar) {
+  if (bar && bar.hasAttribute('data-roster-preview')) {
+    // The preview is deliberately bounded. Never filter only those 48 cards
+    // and claim the rest of the custody roster has no matches.
+    if (location.search || /^#m-/.test(location.hash)) {
+      location.replace(ROOT + '/archive/' + location.search + location.hash);
+    }
+    bar.querySelectorAll('select[data-filter]').forEach(function (select) {
+      select.addEventListener('change', function () { bar.requestSubmit(); });
+    });
+    var previewSort = document.getElementById('filter-sort');
+    if (previewSort) previewSort.addEventListener('change', function () {
+      location.href = ROOT + '/archive/?sort=' + encodeURIComponent(previewSort.value);
+    });
+  }
+  if (bar && !bar.hasAttribute('data-roster-preview')) {
+    bar.addEventListener('submit', function (event) { event.preventDefault(); apply('search'); });
+    var submitButton = bar.querySelector('.roster-submit');
+    if (submitButton) submitButton.hidden = true;
     bar.hidden = false;
     var inputs = bar.querySelectorAll('[data-filter]');
     var countEl = bar.querySelector('.filter-count');
@@ -234,6 +251,8 @@
       if (f.tier) sp.set('tier', f.tier);
       if (f.chap) sp.set('chap', f.chap);
       if (f.recent) sp.set('recent', f.recent);
+      var sort = document.getElementById('filter-sort');
+      if (sort && sort.value !== 'recent') sp.set('sort', sort.value);
       if (pagerSize !== 24) sp.set('pagesize', String(pagerSize));
       // The page param tracks the primary (first visible) paginated list so
       // a copied URL restores the page the reader was on.
@@ -584,7 +603,10 @@
     // one (or opening another) can change which list the ?page= param
     // tracks, so re-sync the URL on every toggle.
     months.forEach(function (m) {
+      var wasOpen = m.open;
       m.addEventListener('toggle', function () {
+        if (m.open === wasOpen) return; // Ignore initial markup's queued toggle.
+        wasOpen = m.open;
         if (m.open) {
           pagerPages[m.id] = 1;
           renderPagination();
@@ -652,7 +674,6 @@
       }
     } catch (e) {}
     apply('init');
-    syncUrl(currentFilters());
 
     // (3b) Crime-of-month pills: click to filter roster by that chapter.
     var chapSelect = document.getElementById('filter-chap');
@@ -713,6 +734,18 @@
         renderPagination();
         syncUrl(currentFilters());
       });
+      var requestedSort = new URLSearchParams(location.search).get('sort');
+      if (['custody', 'degree', 'name'].indexOf(requestedSort) !== -1) {
+        sortSel.value = requestedSort;
+        sortSel.dispatchEvent(new Event('change'));
+        // Sorting resets interactive pagination. Restore a requested URL page
+        // after the initial sort has moved cards into the active container.
+        if (pnum > 1) {
+          pagerPages[sortBin.id] = pnum;
+          renderPagination();
+          syncUrl(currentFilters());
+        }
+      }
     }
   } // end (3) filter bar
 
@@ -727,9 +760,15 @@
     function loadIdx() {
       if (idx || loading) return;
       loading = true;
-      fetch(ROOT + '/search.json').then(function (r) { return r.json(); })
+      fetch(ROOT + '/search.json').then(function (r) {
+        if (!r.ok) throw new Error('Search index unavailable');
+        return r.json();
+      })
         .then(function (d) { idx = (d && d.rows) || []; render(); })
-        .catch(function () { idx = []; });
+        .catch(function () {
+          loading = false;
+          if (sstatus) sstatus.textContent = 'Search suggestions unavailable. Use Search all or browse the full roster archive.';
+        });
     }
     function clearEl(el) { while (el.firstChild) el.removeChild(el.firstChild); }
     function render() {
@@ -742,7 +781,7 @@
       var hits = [];
       for (var i = 0; i < idx.length && hits.length < 20; i++) {
         var r = idx[i];
-        if ((r.n + ' ' + r.c + ' #' + r.id).toLowerCase().indexOf(q) !== -1) hits.push(r);
+        if ((r.s || (r.n + ' ' + r.c + ' #' + r.id)).toLowerCase().indexOf(q) !== -1) hits.push(r);
       }
       clearEl(sresults);
       if (!hits.length) {

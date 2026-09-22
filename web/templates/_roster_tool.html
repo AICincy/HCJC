@@ -14,19 +14,20 @@
 
    v3.1 (2026-09-22): charge level and sort also sit behind Filters so the
    fold is search + the 4px bar + cards. #}
-<div class="filter-bar" id="filters">
+<form class="filter-bar" id="filters" action="{{ base_url }}/archive/" method="get"{% if roster_preview %} data-roster-preview{% endif %}>
   <div class="filter-bar-main">
     <div class="search-wrap">
       <label for="search-box" class="sr-only">Search the roster</label>
-      <input type="search" data-filter="search" id="search-box" placeholder="Name, charge, ORC code" autocomplete="off" aria-controls="search-results">
+      <input type="search" name="q" data-filter="search" id="search-box" placeholder="Name, charge, or ORC code" autocomplete="off" aria-controls="search-results">
       <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
       <span class="sr-only" id="search-status" role="status"></span>
     </div>
+    <button class="filter-reset roster-submit" type="submit">Search all</button>
     <details class="more-filters">
       <summary>Filters</summary>
       <div class="more-filters-body">
         <label class="filter-inline" for="filter-tier">Charge level
-          <select id="filter-tier" data-filter="tier" aria-describedby="tier-explain">
+          <select id="filter-tier" name="tier" data-filter="tier" aria-describedby="tier-explain">
             <option value="">all</option>
             <option value="felony">felony</option>
             <option value="misdemeanor">misdemeanor</option>
@@ -45,13 +46,13 @@
           </select>
         </label>
         <label class="filter-inline" for="filter-chap">Offense
-          <select id="filter-chap" data-filter="chap">
+          <select id="filter-chap" name="chap" data-filter="chap">
             <option value="">all offenses</option>
             {% for slug, label, count in all_chapters %}<option value="{{ slug }}">{{ label }} ({{ count }})</option>{% endfor %}
           </select>
         </label>
         <label class="filter-inline" for="filter-recent">Activity
-          <select id="filter-recent" data-filter="recent">
+          <select id="filter-recent" name="recent" data-filter="recent">
             <option value="">any time</option>
             <option value="booked">booked 24h</option>
           </select>
@@ -62,7 +63,7 @@
         </button>
         <button type="button" class="filter-reset" id="filter-reset" hidden>Reset filters</button>
         <span class="filter-count"></span>
-        <p class="legend" aria-hidden="true">
+        <p class="legend">
           <span class="swatch charge-2903"><span class="dot"></span>violence / sex</span>
           <span class="swatch charge-2923"><span class="dot"></span>weapons</span>
           <span class="swatch charge-2911"><span class="dot"></span>burglary / property</span>
@@ -83,9 +84,10 @@
   <div class="tier-strip tier-strip-slim" role="img" aria-label="Roster by most serious degree: {% for t in tier_ladder %}{% if tb.get(t) %}{{ t }} {{ tb[t] }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}">
     {% for t in tier_ladder %}{% if tb.get(t) %}<span class="tier-strip-seg ladder-{{ t }}" style="width: {{ '%.2f' % (100.0 * tb[t] / tb_known) }}%" title="{{ t }}: {{ tb[t] }}"></span>{% endif %}{% endfor %}
   </div>
-  <p class="tier-strip-cap">Roster share by most serious charge: felonies F1 through F5, then misdemeanors M1 through MM. Use Charge level to filter.</p>
+  <p class="tier-strip-cap">Roster share by most serious charge. Use Charge level in Filters.</p>
   {% endif %}
-</div>
+</form>
+<noscript><p>Live search and filters need JavaScript. <a href="{{ base_url }}/archive/">Browse the complete current roster</a> and use your browser’s Find command to look up a name.</p></noscript>
 <div class="empty filter-empty" id="filter-empty" role="status" hidden>
   <h2>No one in custody matches that filter.</h2>
   <p>Try a last name only, clear one filter, or check spelling. Recently arrested people may not appear immediately, and some people may be held by another county, city, or federal agency.</p>
@@ -99,7 +101,7 @@
 <details class="month" id="m-{{ month_slug }}" {% if month in expanded_months %}open{% endif %}>
   <summary>
     <h2>{{ month }}</h2>
-    <span class="count">{{ group | length }} booking{{ '' if group|length == 1 else 's' }}</span>
+    <span class="count">{{ group | length }} {% if roster_preview %}shown{% else %}booking{{ '' if group|length == 1 else 's' }}{% endif %}</span>
   </summary>
 
   <div class="cards">

@@ -717,8 +717,7 @@ details.coms > summary::-webkit-details-marker { display: none; }
 .card-inmate mark.hl { background: #F2E29B; color: var(--fg); padding: 0 1px; border-radius: 2px; }
 
 /* Tier-strip segments are informational; the Charge level select is the filter control. */
-.tier-strip-seg { cursor: pointer; }
-.tier-strip-seg:hover { outline: 2px solid var(--fg); outline-offset: 1px; }
+.tier-strip-seg { cursor: default; }
 
 /* Released-in-24h list (server-rendered, collapsible). */
 .released-24h {

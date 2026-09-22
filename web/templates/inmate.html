@@ -94,6 +94,7 @@
       {% for c in bc %}<span class="chap chap-{{ c.cls }}">{{ c.label }} <strong>{{ c.count }}</strong></span>{% endfor %}
     </div>
     {% endif %}
+    <h2 class="record-legal-h">Important legal and data-use information</h2>
     <p class="record-legal muted">This page republishes a public record kept by the Hamilton County Sheriff&rsquo;s Office and is removed automatically when the Sheriff&rsquo;s Office removes it. To request earlier removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> - <strong>there is never a fee, and there never will be</strong>. This site republishes current public inmate-roster facts for civic, journalistic, and accountability use. It does not furnish consumer reports and is not offered as a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and 1681a(f). Do not use this site, or any data obtained from it, as a factor in determining a person&rsquo;s eligibility for credit, insurance, employment, housing, tenant screening, or any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined by those statutory definitions, not by this notice.</p>
   </div>
 </section>
@@ -104,29 +105,29 @@
 </div>
 {% if inmate.charges %}
 <div class="table-scroll">
-<table class="charges">
+<table class="charges stackable" role="table">
   <caption class="sr-only">Charges against {{ inmate.full_name }}</caption>
-  <thead><tr>
+  <thead role="rowgroup"><tr role="row">
     <th scope="col">ORC</th><th scope="col">Description</th><th scope="col">Charge level</th><th scope="col">Court date</th><th scope="col">Bond</th><th scope="col">Disposition</th><th scope="col">Case #</th>
   </tr></thead>
-  <tbody>
+  <tbody role="rowgroup">
   {% for c in inmate.charges %}
     {% set case = c.common_pleas_case or c.municipal_case or c.other_case %}
     {% set orc_t = orc_title(c.orc_code) %}
     {% set ch_tier = charge_tier(c) %}
     {% set ch_url = codes_ohio_url(c.orc_code) %}
     {% set ch_chap = charge_chapter(c.orc_code) %}
-    <tr{% if ch_chap %} class="charge-row-{{ ch_chap.cls }}"{% endif %}>
-      <td>
+    <tr role="row"{% if ch_chap %} class="charge-row-{{ ch_chap.cls }}"{% endif %}>
+      <td role="cell" data-label="ORC"><span class="cell-value">
         {% if ch_url %}<a class="orc-code" href="{{ ch_url }}" target="_blank" rel="noopener">{{ c.orc_code }} ↗</a>{% else %}<span class="orc-code">{{ c.orc_code or ' - ' }}</span>{% endif %}
         {% if orc_t %}<br><small class="orc-title">{{ orc_t }}</small>{% endif %}
-      </td>
-      <td>{{ c.description or ' - ' }}{% if c.comments %}<br><small class="charge-comments muted">{{ c.comments }}</small>{% endif %}</td>
-      <td>{% if ch_tier %}<span class="tier tier-{{ ch_tier.label if (ch_tier.label|length >= 2 and ch_tier.label[0] in ('F','M')) else ch_tier.kind }}">{{ ch_tier.label }}</span>{% else %}<span class="muted"> - </span>{% endif %}</td>
-      <td>{{ c.court_date or ' - ' }}</td>
-      <td>{{ ((c.bond_type or '') ~ ' ' ~ (c.bond_amount or '')) | trim or ' - ' }}</td>
-      <td>{{ c.disposition or ' - ' }}</td>
-      <td>{% if case %}<a class="case-link case-{{ case_category(case) }}" href="{{ cck_case_summary(case | case_fmt) }}" target="_blank" rel="noopener">{{ case | case_fmt }} ↗</a>{% else %} - {% endif %}</td>
+      </span></td>
+      <td role="cell" data-label="Description"><span class="cell-value">{{ c.description or ' - ' }}{% if c.comments %}<br><small class="charge-comments muted">{{ c.comments }}</small>{% endif %}</span></td>
+      <td role="cell" data-label="Charge level"><span class="cell-value">{% if ch_tier %}<span class="tier tier-{{ ch_tier.label if (ch_tier.label|length >= 2 and ch_tier.label[0] in ('F','M')) else ch_tier.kind }}">{{ ch_tier.label }}</span>{% else %}<span class="muted"> - </span>{% endif %}</span></td>
+      <td role="cell" data-label="Court date"><span class="cell-value">{{ c.court_date or ' - ' }}</span></td>
+      <td role="cell" data-label="Bond"><span class="cell-value">{{ ((c.bond_type or '') ~ ' ' ~ (c.bond_amount or '')) | trim or ' - ' }}</span></td>
+      <td role="cell" data-label="Disposition"><span class="cell-value">{{ c.disposition or ' - ' }}</span></td>
+      <td role="cell" data-label="Case #"><span class="cell-value">{% if case %}<a class="case-link case-{{ case_category(case) }}" href="{{ cck_case_summary(case | case_fmt) }}" target="_blank" rel="noopener">{{ case | case_fmt }} ↗</a>{% else %} - {% endif %}</span></td>
     </tr>
   {% endfor %}
   </tbody>
