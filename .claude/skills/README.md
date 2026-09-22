@@ -22,6 +22,20 @@ paired with a same-named subagent in `../agents/`.
 | [jcstream-security-reviewer](jcstream-security-reviewer/SKILL.md) | JCStream-specific compliance review reports (read-only) cross-cutting | FCRA boundary, R.C. 149.43 / § 2953.32, CSP meta element, no-fee guarantee, presumed-innocent banner, JCSTREAM_* secret hygiene, dependency CVEs |
 | [jcstream-code-reviewer](jcstream-code-reviewer/SKILL.md) | Orchestrator (read-only); fans out to python/template/css/security reviewers in parallel and emits a consolidated PR-style review | PR review, branch review, full-repo audit |
 
+## Upstream skills
+
+Not part of the table above: these come from outside the repo, carry no paired
+subagent, and are not part of the handoff topology.
+
+| Skill | Owns | Source |
+|---|---|---|
+| [supabase-server](supabase-server/SKILL.md) | `backend/` Node code that imports `@supabase/server` (`withSupabase`, `createSupabaseContext`, auth modes) | `npx skills add supabase/server`, pinned in `skills-lock.json` |
+
+Its content is canonical under `.agents/skills/`; `.claude/skills/supabase-server`
+is a symlink to it, which is the layout the `skills` CLI expects. Do not move
+the real directory into `.claude/skills/`, or `npx skills update` will recreate
+`.agents/` and desynchronize the two.
+
 ## Handoff topology
 
 ```

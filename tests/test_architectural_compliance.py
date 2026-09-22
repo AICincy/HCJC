@@ -220,3 +220,40 @@ def test_repository_architectural_compliance():
             f"- {f.rule_id} in {f.target_file}: {f.description} (Remediation: {f.remediation})" for f in report.findings
         )
         raise AssertionError(f"Codebase violated repository architectural rules:\n{details}")
+
+
+def _rule_stor_001_findings(tmp_path, filename: str, content: str) -> List[ComplianceFinding]:
+    """Run RULE-STOR-001 against a throwaway repository holding one file.
+
+    The guard enumerates files with `git ls-files`, so the fixture has to be a
+    real repository rather than a bare directory.
+    """
+    (tmp_path / filename).write_text(content, encoding="utf-8")
+    subprocess.run(["git", "-c", "init.defaultBranch=main", "init", "-q"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "add", "--", filename], cwd=tmp_path, check=True)
+    return RepositoryArchitecturalGuard(str(tmp_path)).verify_flat_file_constraint()
+
+
+def test_rule_stor_001_flags_supabase_in_python(tmp_path):
+    """RULE-STOR-001 must catch the Supabase client, not only named SQL drivers.
+
+    Regression guard. `supabase` was absent from the pattern until 2026-09-22,
+    so a Python module could import the Supabase client, pass this guard, and
+    still violate the rule's intent that the Python pipeline never reaches a
+    database. Supabase access is confined to the Node service in `backend/`.
+    """
+    findings = _rule_stor_001_findings(tmp_path, "offender.py", "from supabase import create_client\n")
+
+    assert [f.rule_id for f in findings] == ["RULE-STOR-001"]
+    assert findings[0].target_file == "offender.py"
+
+
+def test_rule_stor_001_allows_plain_http_pipeline_code(tmp_path):
+    """RULE-STOR-001 must not fire on ordinary pipeline code.
+
+    A pattern widened without bound would be as useless as one that misses the
+    real case, so the guard has to keep letting the httpx-based scrapers past.
+    """
+    findings = _rule_stor_001_findings(tmp_path, "scraper_module.py", "import httpx\n")
+
+    assert findings == []
