@@ -1212,7 +1212,7 @@ def _render_judges_page(env: Environment, out_dir: Path) -> None:
                     if len(staff_phones) > 1:
                         label += f" ({i + 1})"
                     contacts.append({"label": label, "display": num, "href": href})
-        staff_emails = []
+        staff_emails: list[str] = []
         for staff in rec.get("staff") or []:
             if isinstance(staff, dict):
                 staff_emails.extend(staff.get("emails") or [])
@@ -1755,7 +1755,7 @@ def _render_forms_page(env: Environment, out_dir: Path) -> None:
 
     cat_order = [("plea", "Plea forms"), ("jury-waiver", "Waiver of Trial by Jury"),
                  ("indigency", "Affidavit of Indigency")]
-    by_cat = {c: [] for c, _ in cat_order}
+    by_cat: dict[str, list] = {c: [] for c, _ in cat_order}
     for c, items in zip(
         (f["category"] for f in raw["current"]), current, strict=True
     ):
