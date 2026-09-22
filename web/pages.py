@@ -1140,7 +1140,6 @@ def _render_judges_page(env: Environment, out_dir: Path) -> None:
     (no hotlinking, per the T5 self-hosting decision). Fails closed on
     missing feed, count drift, photo-manifest mismatch, or slug collision.
     """
-    import re
 
     feed_path = Path(
         "/home/hatch/workspace/firecrawl-zips/tab-build-2026-09-21/judges/judges.json"
@@ -1758,22 +1757,22 @@ def _render_forms_page(env: Environment, out_dir: Path) -> None:
                  ("indigency", "Affidavit of Indigency")]
     by_cat = {c: [] for c, _ in cat_order}
     for c, items in zip(
-        (f["category"] for f in raw["current"]), current
+        (f["category"] for f in raw["current"]), current, strict=True
     ):
         by_cat.setdefault(c, []).append(items)
     groups_current = [(label, by_cat[c]) for c, label in cat_order if by_cat.get(c)]
 
     wave_order = ["2025_04", "2024_03", "2023_01", "2022_01", "2021_12", "2021_10"]
     by_wave: dict[str, list] = {w: [] for w in wave_order}
-    for gen, items in zip((f["generation"] for f in raw["archival"]), archival):
+    for gen, items in zip((f["generation"] for f in raw["archival"]), archival, strict=True):
         by_wave.setdefault(gen, []).append(items)
     waves = [(f"{w.replace('_', '-')} generation", by_wave[w]) for w in wave_order if by_wave.get(w)]
 
     other_groups = [
-        ("Discovery", [x for x, f in zip(other, raw["other_forms"]) if f["category"] == "discovery"]),
-        ("Scheduling and mediation", [x for x, f in zip(other, raw["other_forms"])
+        ("Discovery", [x for x, f in zip(other, raw["other_forms"], strict=True) if f["category"] == "discovery"]),
+        ("Scheduling and mediation", [x for x, f in zip(other, raw["other_forms"], strict=True)
                                       if f["category"] in ("scheduling", "mediator")]),
-        ("Notices and misc", [x for x, f in zip(other, raw["other_forms"])
+        ("Notices and misc", [x for x, f in zip(other, raw["other_forms"], strict=True)
                                if f["category"] in ("registration-notice", "reec",
                                                     "transcript", "media")]),
     ]
