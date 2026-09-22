@@ -1,12 +1,17 @@
 """CRA (Consumer Reporting Agency) boundary invariant tests.
 
-JCStream is NOT a consumer reporting agency under the FCRA, 15 U.S.C. § 1681.
+JCStream does not furnish consumer reports and is not offered as a consumer
+reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and
+1681a(f); use of the site as a factor in eligibility for credit, insurance,
+employment, housing, tenant screening, or any other purpose described in
+15 U.S.C. 1681b is prohibited by the site's legal notice. FCRA coverage is
+determined by those statutory definitions, not by the notice.
 These tests enforce the compliance boundary by verifying that:
 
 1. Every rendered page carries <meta name="robots" content="noindex"> to prevent
    search-engine indexing of individual records.
 2. robots.txt contains "Disallow: /" so compliant crawlers don't index.
-3. The FCRA disclaimer is present in the visit/data template.
+3. The FCRA disclaimer (15 U.S.C. 1681a(d)/(f), 1681b) is present in the visit/data template.
 4. The "presumed innocent" disclaimer appears in all individual-facing templates.
 5. No historical archive endpoint exists (we mirror, not archive).
 """
@@ -48,7 +53,7 @@ def test_robots_txt_disallow_all(tmp_path):
 
 def test_visit_template_has_fcra_disclaimer():
     html = _read_template("visit.html")
-    assert "consumer reporting agency" in html.lower(), "visit.html must contain the FCRA disclaimer"
+    assert "15 U.S.C. 1681a(d)" in html, "visit.html must contain the FCRA disclaimer (15 U.S.C. 1681a(d)/(f), 1681b)"
 
 
 def test_data_template_has_presumed_innocent():

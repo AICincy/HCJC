@@ -41,7 +41,7 @@ Page metadata, footer language, individual-page context, and legal documentation
 
 ## V1-85 Consumer Reporting Restriction
 
-The footer and legal documentation state that JCStream is not a consumer reporting agency and prohibit use for employment, housing, credit, insurance, tenant screening, and other FCRA-governed eligibility purposes.
+The footer and legal documentation state that JCStream does not furnish consumer reports and is not offered as a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and 1681a(f), and prohibit use of the site or its data as a factor in determining a person's eligibility for credit, insurance, employment, housing, tenant screening, or any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined by those statutory definitions, not by the notice.
 
 **Implementation and verification references:** `web/templates/base.html`, `web/templates/data.html`, `wiki/Legal.md`, `tests/test_cra_boundary.py`.
 
@@ -83,7 +83,7 @@ Public pages identify HCSO and supplemental source agencies, display generation 
 
 ## V1-91 Public-Use and Licensing Notices
 
-The footer distinguishes the MIT-licensed source code, the project-arranged record-data license, and the legal status of underlying public records. These notices accompany the non-affiliation and use-restriction statements.
+The footer distinguishes the MIT-licensed source code, the CC BY-NC 4.0 license on JCStream's original selection, coordination, or arrangement (to the extent copyrightable), and the uncopyrightability of the underlying public-record facts, which are not licensed by the project. These notices accompany the non-affiliation and use-restriction statements.
 
 **Implementation and verification references:** `web/templates/base.html`, `LICENSE`, `README.md`.
 

@@ -1,6 +1,6 @@
 ---
 name: jcstream-security-reviewer
-description: Use when conducting a security review of the JCStream project — cross-cutting audit that extends the built-in `/security-review` with JCStream-specific compliance: FCRA (no employment / credit / housing screening signals), ORC § 149.43 (Ohio public records attribution), ORC § 2953.32 (expungement-removal protocol enforcement), the CSP meta-element review (GitHub Pages: meta-deliverable policy vs header-only controls), no-fee guarantee enforcement, presumed-innocent banner presence per page, JCSTREAM_* secret hygiene in workflows, third-party-script hygiene (only Giscus is allowed and only when opted in via env), comment-policy moderation enforcement, dependency CVE scan. **Read-only** — produces a findings report and hands fixes off to `jcstream-legal-copy-author` (compliance copy), `jcstream-scraper-author` (workflows / secrets), `jcstream-template-author` (presence checks, CSP meta). Trigger phrases: "security review", "FCRA compliance check", "audit for vulnerabilities", "review for PII leaks", "secrets scan", "CSP review", "audit CSP meta", "review CSP", "expungement protocol audit", "dependency CVE scan", "JCStream security audit".
+description: Use when conducting a security review of the JCStream project — cross-cutting audit that extends the built-in `/security-review` with JCStream-specific compliance: FCRA (no employment / credit / housing screening signals), R.C. 149.43 (Ohio public records attribution), ORC § 2953.32 (expungement-removal protocol enforcement), the CSP meta-element review (GitHub Pages: meta-deliverable policy vs header-only controls), no-fee guarantee enforcement, presumed-innocent banner presence per page, JCSTREAM_* secret hygiene in workflows, third-party-script hygiene (only Giscus is allowed and only when opted in via env), comment-policy moderation enforcement, dependency CVE scan. **Read-only** — produces a findings report and hands fixes off to `jcstream-legal-copy-author` (compliance copy), `jcstream-scraper-author` (workflows / secrets), `jcstream-template-author` (presence checks, CSP meta). Trigger phrases: "security review", "FCRA compliance check", "audit for vulnerabilities", "review for PII leaks", "secrets scan", "CSP review", "audit CSP meta", "review CSP", "expungement protocol audit", "dependency CVE scan", "JCStream security audit".
 ---
 
 # JCStream security reviewer
@@ -11,7 +11,7 @@ You conduct a security audit and produce a findings report. **You do not edit co
 
 | `jcstream-security-reviewer` (this skill) | built-in `/security-review` |
 |---|---|
-| FCRA non-CRA boundary, ORC § 149.43 / § 2953.32, no-fee guarantee, presumed-innocent banner, comment-policy presence, JCSTREAM_* secret hygiene | XSS / SQLi / SSRF / IDOR / auth / generic injection on diff |
+| FCRA non-CRA boundary, R.C. 149.43 / § 2953.32, no-fee guarantee, presumed-innocent banner, comment-policy presence, JCSTREAM_* secret hygiene | XSS / SQLi / SSRF / IDOR / auth / generic injection on diff |
 | CSP meta element in `web/templates/base.html`; header-only controls (HSTS, frame-ancestors, COOP/COEP) documented as not per-repo-expressible on GitHub Pages | Generic header check on framework output |
 | Third-party hygiene specific to the JCStream contract (only Giscus, only opt-in) | Generic third-party-script detection |
 | Static-site / no-backend assumption — no DB queries, no user input persisted server-side | Assumes a typical app surface |
@@ -35,11 +35,11 @@ grep -rn 'noindex' web/templates/inmate.html
 grep -rnE '<script src="https?://(www\.google-analytics|plausible|fathom|matomo|hotjar|fullstory)' web/
 ```
 
-### ORC § 149.43 — Ohio public records attribution
+### R.C. 149.43 — Ohio public records attribution
 
 JCStream operates as a public-records mirror. Attribution is required:
 
-- `data.html` must name the source as "Hamilton County Sheriff's Office" or equivalent, with the legal basis cited (ORC § 149.43).
+- `data.html` must name the source as "Hamilton County Sheriff's Office" or equivalent, with the legal basis cited (R.C. 149.43).
 - The CC BY-NC 4.0 license footer must NOT claim copyright over the underlying public records (those are not copyrightable). It applies to JCStream's editorial layer.
 - The footer in `base.html` must include the source attribution.
 

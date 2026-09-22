@@ -2445,6 +2445,8 @@ a.orc-code:hover { border-bottom-style: solid; }
 .footer-legal { flex-basis: 100%; font-size: 11px; color: var(--fg-muted); line-height: 1.55; }
 .footer-legal strong { color: var(--fg-soft); }
 .footer-legal a { color: var(--link); text-decoration: underline; }
+.footer-legal-para { display: block; margin: 0 0 .55em; }
+.footer-legal-para:last-child { margin-bottom: 0; }
 .record-legal { font-size: 12px; color: var(--fg-muted); line-height: 1.5; margin: 0 0 14px; }
 .record-legal strong { color: var(--fg-soft); }
 h2.legal-anchor {

@@ -174,16 +174,23 @@ Hard rules for local work:
 
 ## Legal and ethical posture
 
-- **Basis (project's stated position):** the Ohio Public Records Act,
-  ORC 149.43. This is the project's legal theory, not a verified legal
-  conclusion.
+- **Basis (project's stated position):** the source records are kept by a
+  public office. A requester's right to inspect and copy those records from
+  the public office is governed by R.C. 149.43, which imposes duties on the
+  public office or person responsible for public records. It does not license,
+  restrict, or otherwise govern reuse of disclosed public-record facts by this
+  independent project.
 - **Mirror, not archive:** when HCSO drops a record, it drops off this site
   in the next update cycle. There is no public historical archive of
   released individuals (aggregated anonymized statistics are retained).
 - **Presumption of innocence:** every profile and the site footer state that
   arrest is not conviction.
-- **FCRA:** this is not a consumer reporting agency; do not use the data
-  for employment or tenant screening.
+- **FCRA:** this site does not furnish consumer reports and is not offered as
+  a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d)
+  and 1681a(f). Do not use the data as a factor in determining a person's
+  eligibility for credit, insurance, employment, housing, tenant screening, or
+  any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined
+  by those statutory definitions, not by this notice.
 - **No fee, ever:** corrections, sealing/expungement removals, and privacy
   requests are free. Open an issue.
 - **No-index:** every page carries `<meta name="robots"

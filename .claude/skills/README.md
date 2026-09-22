@@ -13,13 +13,13 @@ paired with a same-named subagent in `../agents/`.
 | [jcstream-scraper-author](jcstream-scraper-author/SKILL.md) | `scraper/*.py`, `.github/workflows/sweep.yml` | new data feeds, HCSO fixes, threshold tuning |
 | [jcstream-test-author](jcstream-test-author/SKILL.md) | `tests/*.py`, `tests/conftest.py` | new coverage, flaky-test fixes |
 | [jcstream-design-interpreter](jcstream-design-interpreter/SKILL.md) | orchestration of design ports | uploaded design zips / Figma / JSX / screenshots |
-| [jcstream-legal-copy-author](jcstream-legal-copy-author/SKILL.md) | legal language across public templates | disclaimer edits, FCRA, ORC § 149.43 / § 2953.32 |
+| [jcstream-legal-copy-author](jcstream-legal-copy-author/SKILL.md) | legal language across public templates | disclaimer edits, FCRA, R.C. 149.43 / § 2953.32 |
 | [jcstream-a11y-auditor](jcstream-a11y-auditor/SKILL.md) | accessibility audit reports (read-only) | WCAG checks, contrast issues, ARIA review |
 | [jcstream-sweep-debugger](jcstream-sweep-debugger/SKILL.md) | diagnostic reports for sweep failures (read-only) | flat roster counts, silent fallback events |
 | [jcstream-python-reviewer](jcstream-python-reviewer/SKILL.md) | python code-review reports (read-only) for `scraper/`, `web/`, `tests/` | PR review, lint / type / regex / thread-safety review |
 | [jcstream-template-reviewer](jcstream-template-reviewer/SKILL.md) | template-layer review reports (read-only) for `web/templates/`, `feed.xml`, `feed.xsl`, `main.js` | XSS / JSON-LD / RSS / progressive-enhancement / third-party hygiene review |
 | [jcstream-css-reviewer](jcstream-css-reviewer/SKILL.md) | CSS code-review reports (read-only) for `web/static/style.css` | dead rules, dupe selectors, tier ladder consistency, breakpoint hand-offs, focus rings, print rule, dead tokens |
-| [jcstream-security-reviewer](jcstream-security-reviewer/SKILL.md) | JCStream-specific compliance review reports (read-only) cross-cutting | FCRA boundary, ORC § 149.43 / § 2953.32, CSP meta element, no-fee guarantee, presumed-innocent banner, JCSTREAM_* secret hygiene, dependency CVEs |
+| [jcstream-security-reviewer](jcstream-security-reviewer/SKILL.md) | JCStream-specific compliance review reports (read-only) cross-cutting | FCRA boundary, R.C. 149.43 / § 2953.32, CSP meta element, no-fee guarantee, presumed-innocent banner, JCSTREAM_* secret hygiene, dependency CVEs |
 | [jcstream-code-reviewer](jcstream-code-reviewer/SKILL.md) | Orchestrator (read-only); fans out to python/template/css/security reviewers in parallel and emits a consolidated PR-style review | PR review, branch review, full-repo audit |
 
 ## Handoff topology

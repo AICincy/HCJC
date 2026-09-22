@@ -11,7 +11,7 @@
 <header class="doc-h">
   <div class="doc-h-stack">
     <h1 class="title">Access Transparency Scorecard</h1>
-    <div class="sub">HCSO public-records access interruptions, measured from the tamper-evident evidence ledger &middot; ORC &sect; 149.43</div>
+    <div class="sub">HCSO public-records access interruptions, measured from the tamper-evident evidence ledger &middot; R.C. 149.43</div>
   </div>
   <div class="stamp">Computed {{ metrics.computed_utc[:16] }}Z</div>
 </header>
@@ -50,7 +50,7 @@
 <p class="muted">How to read this: the sweep appends one <code>blocked</code> record to the ledger for each cycle in which HCSO&rsquo;s portal returned blocked or empty responses to the roster-list retrieval, and one <code>recovered</code> record when a healthy sweep closes the denial period. Detail-phase failures are recorded separately: one <code>detail_page_waf_block</code> record per inmate detail fetch that was blocked (deduped per inmate and failure mode over 24 hours), and one <code>detail_degraded</code> record per sweep in which detail fetches failed systemically. Cumulative denied access sums each roster denial period from its first blocked cycle to its recovery; a period still open at build time accrues up to the build timestamp. The scorecard reads BLOCKED when either the roster list or the detail pages have an open denial period. These figures regenerate every build and are mirrored as JSON at <a href="{{ base_url }}/data/transparency_metrics.json">transparency_metrics.json</a>.</p>
 
 <h2 class="sect-h">The Non-Evasion Policy</h2>
-<p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal as authorized by the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>), using a mandatory delay between requests and a concurrency cap. When the portal blocks that retrieval, JCStream does not attempt to circumvent the block: it rotates no IP addresses, uses no proxies, preserves the last-known-good roster, declines to publish a partial one, and documents the interruption. A clean, persisting, documented denial is itself part of the public record this site maintains.</p>
+<p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal, using a mandatory delay between requests and a concurrency cap. A requester&rsquo;s right to inspect and copy public records from the public office is governed by <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">R.C. 149.43</a>, which imposes duties on the public office or person responsible for public records. When the portal blocks that retrieval, JCStream does not attempt to circumvent the block: it rotates no IP addresses, uses no proxies, preserves the last-known-good roster, declines to publish a partial one, and documents the interruption. A clean, persisting, documented denial is itself part of the public record this site maintains.</p>
 
 <h2 class="sect-h">Verify Independently</h2>
 <ol>

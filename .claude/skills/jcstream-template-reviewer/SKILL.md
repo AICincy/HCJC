@@ -142,7 +142,7 @@ The following must appear on the pages noted (handoff to `jcstream-legal-copy-au
 |---|---|
 | Presumed-innocent banner | `index.html`, `inmate.html`, `stats.html`, `statute.html`, `data.html` |
 | FCRA disclaimer | `data.html` footer or `base.html` footer |
-| ORC § 149.43 attribution | `data.html` |
+| R.C. 149.43 attribution | `data.html` |
 | ORC § 2953.32 expungement-removal protocol | `data.html` |
 | No-fee guarantee | `data.html` |
 | CC BY-NC 4.0 license + comment policy | `base.html` footer (or `inmate.html` for Giscus) |

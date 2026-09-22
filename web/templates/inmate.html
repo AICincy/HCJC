@@ -28,18 +28,17 @@
    "isAccessibleForFree":true,
    "isBasedOn":{"@type":"WebPage",
      "name":"Hamilton County Justice Center booking record (HCSO source)",
-     "url": {{ ("https://www.hcso.org/justice-center-services/inmate-search/inmate-detail/?id=" ~ inmate.inmate_number) | tojson }},
-     "license":"https://codes.ohio.gov/ohio-revised-code/section-149.43"}}}
+     "url": {{ ("https://www.hcso.org/justice-center-services/inmate-search/inmate-detail/?id=" ~ inmate.inmate_number) | tojson }}}}
 </script>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>{{ inmate.full_name }}</span>
 </nav>
 
-<div class="public-record-stamp" aria-hidden="true">Public Record · ORC § 149.43</div>
+<div class="public-record-stamp" aria-hidden="true">Public Record · R.C. 149.43</div>
 
 <header class="doc-h doc-h-center">
-  <div class="filing-id">JCSTREAM/HCSO · INMATE-ROSTER-MIRROR · ORC § 149.43</div>
+  <div class="filing-id">JCSTREAM/HCSO · INMATE-ROSTER-MIRROR · R.C. 149.43</div>
   <div class="title">Inmate Record</div>
   <div class="sub">Hamilton County Justice Center · Cincinnati, Ohio</div>
 </header>
@@ -52,7 +51,7 @@
     <a href="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo="{{ base_url }}/photos/{{ inmate.photo_filename }}" data-photo-cap="{{ inmate.full_name }} · booked {{ display_date(inmate.booking_date) or 'date not reported' }}" data-photo-alt="HCSO booking photo of {{ inmate.full_name }}" aria-label="Enlarge booking photo">
       <img src="{{ base_url }}/photos/{{ inmate.photo_filename }}" alt="HCSO booking photo of {{ inmate.full_name }}" width="240" height="300" decoding="async" data-photo-fallback>
     </a>
-    <figcaption>Booking photo &middot; ORC &sect; 149.43</figcaption>
+    <figcaption>Booking photo &middot; R.C. 149.43</figcaption>
   </figure>
   {% else %}
   <figure class="record-photo">
@@ -95,7 +94,7 @@
       {% for c in bc %}<span class="chap chap-{{ c.cls }}">{{ c.label }} <strong>{{ c.count }}</strong></span>{% endfor %}
     </div>
     {% endif %}
-    <p class="record-legal muted">This is a public record under <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> and is removed automatically when the Hamilton County Sheriff&rsquo;s Office removes it. To request earlier removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> - <strong>there is never a fee, and there never will be</strong>. <strong>Not a consumer reporting agency</strong>; do not use this page for any purpose governed by the FCRA.</p>
+    <p class="record-legal muted">This page republishes a public record kept by the Hamilton County Sheriff&rsquo;s Office and is removed automatically when the Sheriff&rsquo;s Office removes it. To request earlier removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> - <strong>there is never a fee, and there never will be</strong>. This site republishes current public inmate-roster facts for civic, journalistic, and accountability use. It does not furnish consumer reports and is not offered as a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and 1681a(f). Do not use this site, or any data obtained from it, as a factor in determining a person&rsquo;s eligibility for credit, insurance, employment, housing, tenant screening, or any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined by those statutory definitions, not by this notice.</p>
   </div>
 </section>
 
@@ -108,7 +107,7 @@
 <table class="charges">
   <caption class="sr-only">Charges against {{ inmate.full_name }}</caption>
   <thead><tr>
-    <th scope="col">ORC</th><th scope="col">Description</th><th scope="col">Tier</th><th scope="col">Court date</th><th scope="col">Bond</th><th scope="col">Disposition</th><th scope="col">Case #</th>
+    <th scope="col">ORC</th><th scope="col">Description</th><th scope="col">Charge level</th><th scope="col">Court date</th><th scope="col">Bond</th><th scope="col">Disposition</th><th scope="col">Case #</th>
   </tr></thead>
   <tbody>
   {% for c in inmate.charges %}
@@ -453,7 +452,7 @@
   <a href="https://www.hcso.org/justice-center-services/inmate-search/inmate-detail/?id={{ inmate.inmate_number }}" target="_blank" rel="noopener">hcso.org &middot; inmate-detail / id={{ inmate.inmate_number }} ↗</a>
 </p>
 <p class="muted attribution">
-  Record data licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a> &middot;
+  Original selection, coordination, or arrangement by JCStream, to the extent copyrightable, licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a> &middot;
   <a href="{{ base_url }}/data/#legal">licensing &amp; takedown protocol</a> &middot;
   <a href="https://github.com/AICincy/HCJC/issues">report an error or request removal - there is never a fee, and there never will be</a>
 </p>

@@ -21,7 +21,7 @@
 <h2 class="sect-h">Authoritative Sources</h2>
 <div class="fields">
   <div class="k">Inmate roster</div>
-  <div class="v"><a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">HCSO inmate search</a> - Hamilton County Sheriff's Office, published under <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC § 149.43</a>.</div>
+  <div class="v"><a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">HCSO inmate search</a> - Hamilton County Sheriff's Office, public records (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">R.C. 149.43</a>).</div>
   <div class="k">Court dockets &amp; case files</div>
   <div class="v"><a href="https://www.courtclerk.org" target="_blank" rel="noopener">Hamilton County Clerk of Courts</a> (Pavan Parikh). Search by name or case number. Civil, criminal, traffic.</div>
   <div class="k">Court system</div>
@@ -84,7 +84,7 @@
 
 {% if roster_stale.ever_blocked %}
 <div class="section-h"><h2 id="access">Access interruptions</h2></div>
-<p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal as authorized by the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>). Beginning {{ roster_stale.since or '2026-05-19' }}, that portal began returning blocked responses (HTTP&nbsp;403, and at times HTTP&nbsp;200 pages stripped of their results) to this site&rsquo;s automated retrieval.{% if roster_stale.blocked %} As of the last build, roster-list retrieval is still blocked; the roster list shown reflects the last successful update on {{ roster_stale.last_updated }}.{% else %} Roster-list retrieval has since resumed; the roster list was updated {{ roster_stale.last_updated }}.{% endif %}{% if roster_stale.detail_denial_open %} Separately, inmate detail retrieval has been blocked since {{ roster_stale.detail_since }}; charges, bonds, and photos reflect last-good data, not the current roster.{% endif %}</p>
+<p class="muted">JCStream retrieves the roster from HCSO&rsquo;s public inmate-search portal. A requester&rsquo;s right to inspect and copy public records from the public office is governed by <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">R.C. 149.43</a>, which imposes duties on the public office or person responsible for public records. Beginning {{ roster_stale.since or '2026-05-19' }}, that portal began returning blocked responses (HTTP&nbsp;403, and at times HTTP&nbsp;200 pages stripped of their results) to this site&rsquo;s automated retrieval.{% if roster_stale.blocked %} As of the last build, roster-list retrieval is still blocked; the roster list shown reflects the last successful update on {{ roster_stale.last_updated }}.{% else %} Roster-list retrieval has since resumed; the roster list was updated {{ roster_stale.last_updated }}.{% endif %}{% if roster_stale.detail_denial_open %} Separately, inmate detail retrieval has been blocked since {{ roster_stale.detail_since }}; charges, bonds, and photos reflect last-good data, not the current roster.{% endif %}</p>
 <p class="muted">Every blocked cycle, and each recovery, is recorded with a UTC timestamp in <a href="waf_block_log.json">waf_block_log.json</a> (hash-chained, and mirrored in this repository&rsquo;s authenticated git history). JCStream does not attempt to circumvent the block: it preserves the last-known-good roster, declines to publish a partial one, and documents the interruption. The site does not route around HCSO&rsquo;s controls.</p>
 {% endif %}
 
@@ -131,7 +131,7 @@ snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commi
 
 <h2 id="cite" class="sect-h">Citing this data</h2>
 <p class="muted">There is no historical archive here: the roster mirror reflects only the current HCSO snapshot, so a citation should capture the snapshot it used (the <code>generated_utc</code> field, or the SHA256SUMS line for the file). Suggested format:</p>
-<p class="muted"><code>JCStream, Hamilton County Justice Center roster mirror, snapshot {{ snapshot.generated_utc if snapshot is defined and snapshot.generated_utc else 'YYYY-MM-DDTHH:MM:SSZ' }}, https://www.aretheyinjail.com/data/. Underlying records: Hamilton County Sheriff's Office public inmate roster (ORC &sect; 149.43). Data arrangement licensed CC BY-NC 4.0.</code></p>
+<p class="muted"><code>JCStream, Hamilton County Justice Center roster mirror, snapshot {{ snapshot.generated_utc if snapshot is defined and snapshot.generated_utc else 'YYYY-MM-DDTHH:MM:SSZ' }}, https://www.aretheyinjail.com/data/. Underlying records: Hamilton County Sheriff's Office public inmate roster (R.C. 149.43). Original selection, coordination, or arrangement by JCStream, to the extent copyrightable, licensed CC BY-NC 4.0.</code></p>
 <p class="muted">For journalism and research use, note the caveats above: snapshot-in-time data, best-effort refresh cadence, no archive of released individuals, and the FCRA prohibition in the legal notices below.</p>
 
 <h2 id="legal" class="legal-anchor">Legal notices</h2>
@@ -142,11 +142,7 @@ guilty in a court of law. An arrest or booking record is not evidence of guilt. 
 reduced, dismissed, or result in acquittal. This site does not editorialize about guilt or innocence.</p>
 
 <div class="section-h"><h2>Legal authority</h2></div>
-<p class="muted">JCStream is generated exclusively from public records maintained by the Hamilton County
-Sheriff&rsquo;s Office and published through HCSO&rsquo;s public inmate-search portal. The right of public
-access to these records is established by the Ohio Public Records Act,
-<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>, which
-provides that public records be open and available for inspection.</p>
+<p class="muted">The source records are kept by a public office. A requester&rsquo;s right to inspect and copy those records from the public office is governed by <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">R.C. 149.43</a>. That statute imposes duties on the public office or person responsible for public records. It does not license, restrict, or otherwise govern reuse of disclosed public-record facts by this independent project.</p>
 
 <div class="section-h"><h2>Record removal &amp; sealing compliance</h2></div>
 <p class="muted">When HCSO removes a record from its public inmate roster, this site removes the corresponding
@@ -161,11 +157,7 @@ never will be</strong>. This site&rsquo;s voluntary compliance with sealing and 
 its respect for the rehabilitative purpose of Ohio&rsquo;s sealing and expungement statutes (ORC&nbsp;&sect;&sect;&nbsp;2953.31-2953.61).</p>
 
 <div class="section-h"><h2>Fair Credit Reporting Act notice</h2></div>
-<p class="muted"><strong>This site is not a consumer reporting agency</strong> as defined by the Fair Credit Reporting
-Act, 15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em> The information here has not been collected, in whole or
-in part, for the purpose of furnishing consumer reports. You may not use this site to make decisions
-about consumer credit, employment, insurance, housing, tenant screening, or any other purpose that
-would require compliance with the FCRA.</p>
+<p class="muted">This site republishes current public inmate-roster facts for civic, journalistic, and accountability use. It does not furnish consumer reports and is not offered as a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d) and 1681a(f). Do not use this site, or any data obtained from it, as a factor in determining a person&rsquo;s eligibility for credit, insurance, employment, housing, tenant screening, or any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined by those statutory definitions, not by this notice.</p>
 
 <div class="section-h"><h2>Purpose</h2></div>
 <p class="muted">JCStream exists to increase public access to, and transparency of, Hamilton County&rsquo;s criminal
@@ -181,15 +173,9 @@ party is not affiliated with JCStream and cannot fulfill that promise. Removal r
 at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> - <strong>there is never a fee, and there never will be</strong>.</p>
 
 <div class="section-h"><h2>Non-affiliation</h2></div>
-<p class="muted">JCStream is an independent, non-governmental project. It is not affiliated with, endorsed by, or
-operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, the State of Ohio, or any
-government entity. The site&rsquo;s source code is available under the MIT License at
-<a href="https://github.com/AICincy/HCJC">github.com/AICincy/HCJC</a>; that license governs the
-code only and does not (and cannot) license the underlying public-records data, which is governed by
-Ohio law. The JCStream-arranged record data (the curation and presentation of those public records
-on this site) is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>;
-the underlying public records themselves remain governed by Ohio law and carry no JCStream license
-claim.</p>
+<p class="muted">Independent, non-governmental project. Not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any other government entity.</p>
+<p class="muted">Source code is MIT-licensed. Any original selection, coordination, or arrangement added by JCStream, to the extent it is copyrightable, is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>. The underlying public-record facts are not copyrightable and are not licensed by this project. See 17 U.S.C. 102(b); Feist Publications, Inc. v. Rural Telephone Service Co., 499 U.S. 340 (1991); CC BY-NC 4.0, section 2(a)(2).</p>
+<p class="muted">The source records are kept by a public office. A requester&rsquo;s right to inspect and copy those records from the public office is governed by <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">R.C. 149.43</a>. That statute imposes duties on the public office or person responsible for public records. It does not license, restrict, or otherwise govern reuse of disclosed public-record facts by this independent project.</p>
 
 <p class="source">Generated {{ human_utc(snapshot.generated_utc) if snapshot is defined and snapshot.generated_utc else " - " }}. This page is general information about the project, not legal advice.</p>
 {% endblock %}
