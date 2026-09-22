@@ -716,7 +716,7 @@ details.coms > summary::-webkit-details-marker { display: none; }
    ink is 13.4:1. Measured 2026-07-09. */
 .card-inmate mark.hl { background: #F2E29B; color: var(--fg); padding: 0 1px; border-radius: 2px; }
 
-/* Tier-strip segments double as degree-filter targets (main.js 3b2). */
+/* Tier-strip segments are informational; the Charge level select is the filter control. */
 .tier-strip-seg { cursor: pointer; }
 .tier-strip-seg:hover { outline: 2px solid var(--fg); outline-offset: 1px; }
 
@@ -4309,8 +4309,8 @@ details.sect-h > summary h2 {
   margin: 2px 0 0;
 }
 /* Slim degree strip: the distribution as a 4px bar, not a labeled section.
-   Reuses .tier-strip (flex, segment fills, M-ladder colors); segments stay
-   clickable degree filters via main.js 3b2. */
+   Reuses .tier-strip (flex, segment fills, M-ladder colors); the tier select
+   remains the filter control. */
 .tier-strip.tier-strip-slim {
   height: 4px;
   margin-top: 10px;

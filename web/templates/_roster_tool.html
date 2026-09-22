@@ -92,8 +92,8 @@
     </details>
   </div>
   {# Slim degree strip: the most-serious-degree distribution as a 4px bar,
-     not a labeled section. Segments stay clickable degree filters
-     (main.js 3b2); the role="img" label carries the numbers for AT. #}
+     not a labeled section. The role="img" label carries the numbers for AT;
+     the Charge level select remains the filter control. #}
   {% set tb = roster_tiers %}
   {% set tb_known = (tb.values() | sum) - tb.get('UNK', 0) %}
   {% if tb_known > 0 %}
@@ -101,7 +101,7 @@
     {% for t in tier_ladder %}{% if tb.get(t) %}<span class="tier-strip-seg ladder-{{ t }}" style="width: {{ '%.2f' % (100.0 * tb[t] / tb_known) }}%" title="{{ t }}: {{ tb[t] }}"></span>{% endif %}{% endfor %}
   </div>
   {# Caption kept in markup for AT-adjacent readers who view source; CSS hides it. #}
-  <p class="tier-strip-cap">Roster share by most serious charge: felonies F1 (most serious) through F5, then misdemeanors M1 through MM. Select a color to filter.</p>
+  <p class="tier-strip-cap">Roster share by most serious charge: felonies F1 (most serious) through F5, then misdemeanors M1 through MM.</p>
   {% endif %}
 </div>
 <div class="empty filter-empty" id="filter-empty" role="status" hidden>
