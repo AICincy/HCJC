@@ -2,7 +2,7 @@
 
 **Executed:** September 22, 2026, UTC.
 **Disposition:** Local automated gates passed. Release closure remains blocked.
-**Release activity:** No commit, push, PR, merge, or deployment performed by this session.
+**Release activity:** Committed as `95e2675` and pushed to `arena/01a0cae3-hcjc`. Draft PR [#485](https://github.com/AICincy/HCJC/pull/485) is open with all GitHub checks green, including Python 3.13 and 3.14. No merge and no deployment.
 
 This record executes the [approved closure plan](../UI_Remediation_and_Closure_Plan_2026-09-22.md). It supplements, rather than overwrites, the earlier evidence. Checklist approval is not manual-test completion or a release-risk waiver.
 
@@ -115,8 +115,8 @@ A second test used local gzip HTTP servers, a 390px viewport, fourfold CPU slowd
 | PERF-01 / Gate C | **OPEN.** Local lab evidence recorded, with the cold-search tradeoff above. Production-like/production measurements and representative mobile evidence still required. |
 | LIVE-D / Gate D | **BLOCKED.** HTTPS probe at `2026-09-22T21:54:04Z` failed with curl exit 35 / TLS `SSL_ERROR_SYSCALL`. No deployed UI or performance verified. See [production-probe.txt](production-probe.txt). |
 | BUILD-E / Gate E | **LOCAL PASS.** Same inputs except the intentional JavaScript correction, same optional-feed failures as baseline, and no canonical-data changes. Rebuild from the final reviewed commit before deployment. |
-| CI-01 | **NOT RUN on Python 3.13/3.14.** Python 3.13 installation failed certificate/TLS downloads. Local Python 3.11 tests are green but are not the CI version matrix. No remote CI run was initiated. |
-| RELEASE-01 | **OPEN.** Final reviewed commit, CI results, final deployment artifact, post-deployment smoke tests, and deployed identifier are not available. No release-risk waiver recorded. |
+| CI-01 | **PASSED on GitHub Actions.** Commit `95e2675` on the pushed branch: `test (3.13)` and `test (3.14)` succeeded, including ruff, mypy, pip-audit, pytest, and both WAF-evidence steps. `Build static site`, CodeQL actions/python/JavaScript analysis, GitGuardian, and Semgrep also passed. Local Python 3.11.2 remains the only local interpreter tested. |
+| RELEASE-01 | **OPEN.** Draft PR [#485](https://github.com/AICincy/HCJC/pull/485) from `arena/01a0cae3-hcjc` at commit `95e2675`; not merged and not deployed. Post-deployment smoke tests and a deployed build identifier are still unavailable. No release-risk waiver recorded. |
 
 All manual/device owners remain unassigned pending actual tester/device availability. Accepted and deferred research items remain outside remediation scope. Do not mark the findings fully release-closed from this record.
 
