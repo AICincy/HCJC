@@ -87,7 +87,13 @@ const server = createServer(async (req, res) => {
   } catch (error) {
     // Never echo the underlying message: credential and JWKS errors from
     // @supabase/server can carry upstream response detail.
-    console.error(`unhandled error on ${req.method} ${req.url}:`, error)
+    //
+    // The URL is attacker-controlled, so it is passed as an argument rather
+    // than interpolated into the format string, and newlines are stripped so a
+    // crafted request cannot forge extra log lines. Only the first argument to
+    // console.error is treated as a format string.
+    const safeUrl = String(req.url ?? '').replace(/[\r\n]+/g, '')
+    console.error('unhandled error on', req.method, safeUrl, error)
     if (!res.headersSent) res.writeHead(500, { 'content-type': 'application/json' })
     res.end(JSON.stringify({ error: 'internal_error' }))
   }
