@@ -1,0 +1,51 @@
+name: rebuild-site
+
+# Build docs/ from the current tree without scraping HCSO.
+# Use after a UI merge so Pages does not wait on the next sweep cron.
+# Shares the sweep concurrency group so a scrape and a rebuild never
+# push docs/ at the same time.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: jcstream-sweep
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    name: Build site only
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build static site
+        env:
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: www.aretheyinjail.com
+        run: python -m web.build
+      - name: Commit built site
+        run: |
+          git config user.name "jcstream-bot"
+          git config user.email "noreply@github.com"
+          git add docs/
+          if ! git diff --cached --quiet; then
+            git commit -m "site: rebuild $(date -u +%Y-%m-%dT%H:%MZ)"
+            git fetch origin
+            git rebase origin/main || {
+              echo "::error::Rebase conflict on rebuild; aborting."
+              git rebase --abort
+              exit 1
+            }
+            git push
+          else
+            echo "no changes"
+          fi

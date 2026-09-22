@@ -1,4 +1,5 @@
-/* Homepage fold chrome. Loaded after style.css. Does not retune the felony scale. */
+/* Homepage fold chrome. Loaded after style.css. Does not retune the felony scale.
+   Kept as a second sheet because style.css is too large to rewrite in-place here. */
 
 .masthead .theme-toggle {
   grid-column: 3;
@@ -19,9 +20,9 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+  /* RSS / GitHub / Access stay in the mobile drawer and the footer. */
+  .nav-drawer > .nav-group:last-of-type { display: none; }
 
-  /* Restore the multi-inmate card grid. The later "names as rows" block
-     forced one column. Table view still wins when body.is-table is set. */
   .month > .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
@@ -87,6 +88,7 @@
 }
 
 .tier-strip-cap { display: none; }
+.roster-hero { display: none; }
 
 .thumb.thumb-placeholder {
   background: var(--surface);
