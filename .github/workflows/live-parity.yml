@@ -1,0 +1,38 @@
+name: live-url-parity
+
+# Staged deployment safety check. This probes the existing production URLs
+# against a fresh build without changing Pages or data.
+
+on:
+  schedule:
+    - cron: '40 4 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jcstream-live-url-parity
+  cancel-in-progress: true
+
+jobs:
+  parity:
+    name: Check published JSON URL contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build candidate artifact
+        env:
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: www.aretheyinjail.com
+        run: python -m web.build
+      - name: Verify local publication contract
+        run: python scripts/verify_public_data.py
+      - name: Probe current production URLs
+        run: python scripts/verify_live_url_parity.py --site https://www.aretheyinjail.com

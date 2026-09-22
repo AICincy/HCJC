@@ -34,21 +34,10 @@ jobs:
         env:
           JCSTREAM_SITE_BASE_URL: ""
           JCSTREAM_CNAME: www.aretheyinjail.com
-        run: python -m web.build
-      - name: Commit built site
+        run: python -m web.build --out /tmp/jcstream-docs-build
+      - name: Commit generated source data
+        env:
+          GIT_COMMIT_NAME: jcstream-bot
+          GIT_COMMIT_EMAIL: noreply@github.com
         run: |
-          git config user.name "jcstream-bot"
-          git config user.email "noreply@github.com"
-          git add docs/
-          if ! git diff --cached --quiet; then
-            git commit -m "site: rebuild $(date -u +%Y-%m-%dT%H:%MZ)"
-            git fetch origin
-            git rebase origin/main || {
-              echo "::error::Rebase conflict on rebuild; aborting."
-              git rebase --abort
-              exit 1
-            }
-            git push
-          else
-            echo "no changes"
-          fi
+          bash scripts/commit_generated_changes.sh main "data: rebuild $(date -u +%Y-%m-%dT%H:%MZ)" data/

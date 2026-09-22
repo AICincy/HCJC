@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "status": "prepared-for-immutable-upload",
+  "source_repository": "https://github.com/AICincy/HCJC",
+  "source_commit": "3c1c53e",
+  "public_compatibility_url": "https://www.aretheyinjail.com/data/waf_block_log.json",
+  "artifacts": [
+    {
+      "name": "waf_block_log-2026-09-22.json",
+      "source": "data/waf_block_log.json",
+      "bytes": 40093131,
+      "sha256": "061f70d37908ffa7d2061afefc1a031505f5deed4de1680c446fa80452bcf1fd",
+      "verification": "python -m scraper.verify_block_log data/waf_block_log.json"
+    },
+    {
+      "name": "ui-ux-remediation-2026-09-22.zip",
+      "source": "audit-output/ui-ux-remediation-2026-09-22.zip",
+      "sha256": "58391ba892446797cebce077716f438c0ce628bc54f6992a853a08097d859a84",
+      "verification": "sha256sum -c SHA256SUMS"
+    }
+  ],
+  "upload_target": "Immutable release or object-storage asset",
+  "notes": "This manifest records the byte identity before external archival. No public URL or tracked source file is removed by this phase."
+}

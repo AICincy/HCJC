@@ -669,23 +669,6 @@
         bar.scrollIntoView({ block: 'start', behavior: scrollBehavior });
       });
     }
-    // (3b2) Tier-strip segments filter by degree on click. Pointer-only
-    //       enhancement: the tier select is the accessible equivalent.
-    var tierSelect = document.getElementById('filter-tier');
-    if (tierSelect) {
-      document.addEventListener('click', function (e) {
-        var seg = e.target.closest && e.target.closest('.tier-strip-seg');
-        if (!seg) return;
-        var deg = '';
-        seg.classList.forEach(function (c) { if (c.indexOf('ladder-') === 0) deg = c.replace('ladder-', ''); });
-        if (!deg) return;
-        tierSelect.value = deg.toLowerCase();
-        tierSelect.dispatchEvent(new Event('change'));
-        var segScroll = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-        bar.scrollIntoView({ block: 'start', behavior: segScroll });
-      });
-    }
-
     // (3c) Sort modes - non-default modes move every card into the flat
     //      #sort-bin in sorted order and hide the month sections; "recent"
     //      moves each card back to its original month container (appending
