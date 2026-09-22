@@ -118,7 +118,31 @@ class IndexContext:
     map_points: int
 
 
+#: Homepage roster window (spec 1.3.6). False (default): the homepage shows the
+#: current booking month plus two prior months; older months move to the
+#: /archive/ page, which the homepage links. True: the homepage shows the full
+#: roster, restoring the pre-redesign roster in one build. No booking data is
+#: unpublished either way. V4 is the release gate for the windowed layout
+#: (time-to-interactive on a mid-range Android device, before vs after): the
+#: flag returns to True if the archive move shows no material improvement.
+#: V4 was not performed in this environment and remains a
+#: human/physical-device gate before release.
+HOMEPAGE_FULL_ROSTER = False
+
+#: Booking-month groups shown on the homepage when HOMEPAGE_FULL_ROSTER is
+#: False: the current month plus two prior months (spec 1.3.6).
+HOMEPAGE_MONTH_WINDOW = 3
+
+
 def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
+    # Spec 1.3.6: windowed homepage roster behind HOMEPAGE_FULL_ROSTER.
+    # The /stats/ page always uses the full month list (passed separately).
+    if HOMEPAGE_FULL_ROSTER:
+        hp_months = ctx.by_month
+        hp_nav = ctx.nav_months
+    else:
+        hp_months = ctx.by_month[:HOMEPAGE_MONTH_WINDOW]
+        hp_nav = ctx.nav_months[:HOMEPAGE_MONTH_WINDOW]
     cfs_30d = _filter_last_days(
         ctx.cfs_rows,
         ("create_time_incident", "create_time_dispatch", "dispatch_time_primary_unit"),
@@ -131,9 +155,9 @@ def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
     )
     page = env.get_template("index.html").render(
         snapshot=ctx.snapshot,
-        by_month=ctx.by_month,
-        nav_months=ctx.nav_months,
-        expanded_months=ctx.expanded_months,
+        by_month=hp_months,
+        nav_months=hp_nav,
+        expanded_months={m for m, _ in hp_months[:1]},
         recent_booked=ctx.recent_booked,
         recent_released=ctx.recent_released,
         trend=ctx.trend,
@@ -142,9 +166,56 @@ def _render_index(env: Environment, ctx: IndexContext, out_dir: Path) -> None:
         cfs_by_district=_group_by_district(cfs_30d),
         shoot_by_district=_group_by_district(shoot_30d),
         map_points=ctx.map_points,
-        safety_teaser=feeds_mod.latest_incidents(feeds_mod.DATA_DIR, n=3),
+        # The homepage is not in the drawer groups (spec 1.3): no highlight.
+        active_nav="",
+        # Archive link inputs (spec 1.3.6): shown only when the window is on.
+        homepage_full_roster=HOMEPAGE_FULL_ROSTER,
+        archive_months=max(0, len(ctx.by_month) - len(hp_months)),
+        archive_bookings=sum(len(g) for _, g in ctx.by_month[len(hp_months):]),
     )
     (out_dir / "index.html").write_text(page, encoding="utf-8")
+
+
+def _render_archive_page(
+    env: Environment,
+    snapshot: Snapshot,
+    by_month,
+    nav_months: list[dict],
+    out_dir: Path,
+) -> None:
+    """Earlier-bookings archive (/archive/): the full roster with the same
+    search and filters as the homepage. Keeps every booking published and
+    searchable while the homepage shows the 3-month window
+    (HOMEPAGE_FULL_ROSTER=False). Rendered always, so the one-build reversal
+    of the flag never 404s a linked page."""
+    page = env.get_template("archive.html").render(
+        snapshot=snapshot,
+        by_month=by_month,
+        nav_months=nav_months,
+        expanded_months={m for m, _ in by_month[:1]},
+        generated_utc=env.globals["generated_utc"],
+        active_nav="",
+    )
+    target = out_dir / "archive" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
+def _render_public_records_page(env: Environment, snapshot: Snapshot, out_dir: Path) -> None:
+    """Public Records Dashboard (/data/public-records/): collects the
+    public-records material already published by the build (open data feeds,
+    the access-interruption evidence log, the transparency scorecard) with a
+    one-line description of each. The repo carries no public-records
+    correspondence log, so none is presented; the page links the agency's own
+    request channel instead. Factual and minimal; no records are invented."""
+    page = env.get_template("public_records.html").render(
+        snapshot=snapshot,
+        generated_utc=env.globals["generated_utc"],
+        active_nav="",
+    )
+    target = out_dir / "data" / "public-records" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
 
 
 def _safe_crowdsourced_url(value: object) -> str:
@@ -553,7 +624,12 @@ def _compute_stats(snapshot: Snapshot, by_month) -> dict:
 
 def _render_stats_page(env: Environment, snapshot: Snapshot, by_month, trend: dict, out_dir: Path) -> None:
     stats = _compute_stats(snapshot, by_month)
-    page = env.get_template("stats.html").render(snapshot=snapshot, s=stats, trend=trend)
+    # by_month rides along so the crimes-of-the-month section (moved here from
+    # the homepage, spec 1.3.7) can compute per-month categories. "stats" is
+    # the drawer's Roster-tools key for this page (spec 3.5).
+    page = env.get_template("stats.html").render(
+        snapshot=snapshot, s=stats, trend=trend, by_month=by_month, active_nav="stats"
+    )
     target = out_dir / "stats" / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(page, encoding="utf-8")
@@ -1040,6 +1116,427 @@ def _render_courts_page(env: Environment, out_dir: Path) -> None:
     target.write_text(page, encoding="utf-8")
 
 
+def _judge_profile_slug(name: str) -> str:
+    """Deep-link slug for a judge card: id="judge-<slug>".
+
+    Same rule as _parse_judges_hamco and _judges_from_ingested_json so the
+    Courts tab's /judges/#judge-<slug> links (spec 5.3) resolve: lowercase,
+    every run of non-[a-z0-9] collapsed to a single hyphen, leading/trailing
+    hyphens stripped. E.g. "Jennifer L. Branch" -> "jennifer-l-branch".
+    """
+    import re
+
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+
+def _render_judges_page(env: Environment, out_dir: Path) -> None:
+    """Judge profile grid (/judges/).
+
+    Feeds: the 2026-09-21 tab-build corpus judges.json (30 profiles, 16 Common
+    Pleas / 14 Municipal) plus the self-hosted photo provenance manifest
+    (web/static/judges/provenance.json). Photos are served from the
+    manifest's local_path; the remote photo_url is never referenced
+    (no hotlinking, per the T5 self-hosting decision). Fails closed on
+    missing feed, count drift, photo-manifest mismatch, or slug collision.
+    """
+    import re
+
+    feed_path = Path(
+        "/home/hatch/workspace/firecrawl-zips/tab-build-2026-09-21/judges/judges.json"
+    )
+    try:
+        judges_raw = json.loads(feed_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        raise RuntimeError(f"judges.json missing or corrupt: {e}") from e
+    if not isinstance(judges_raw, list):
+        raise RuntimeError("judges.json schema violation: expected a list of profiles")
+    n_cp = sum(1 for r in judges_raw if r.get("court") == "Common Pleas")
+    n_mun = sum(1 for r in judges_raw if r.get("court") == "Municipal")
+    if len(judges_raw) != 30 or n_cp != 16 or n_mun != 14:
+        raise RuntimeError(
+            f"judges.json count FAIL: expected 30 profiles (16 Common Pleas, "
+            f"14 Municipal), got {len(judges_raw)} ({n_cp} Common Pleas, {n_mun} Municipal)"
+        )
+
+    prov_path = Path(__file__).resolve().parent / "static" / "judges" / "provenance.json"
+    try:
+        prov = json.loads(prov_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        raise RuntimeError(f"judge photo provenance.json missing or corrupt: {e}") from e
+    photos = {
+        j.get("full_name"): j
+        for j in prov.get("judges", [])
+        if isinstance(j, dict)
+    }
+    if len(photos) != 30:
+        raise RuntimeError(
+            f"judge photo provenance FAIL: expected 30 manifest entries, got {len(photos)}"
+        )
+
+    base_url = str(env.globals.get("base_url", ""))
+    seen_slugs: set[str] = set()
+    judges: list[dict] = []
+    for rec in judges_raw:
+        name = str(rec.get("full_name") or "").strip()
+        court = str(rec.get("court") or "").strip()
+        if not name or court not in ("Common Pleas", "Municipal"):
+            raise RuntimeError(f"judges.json record missing name/court: {name!r}")
+        manifest = photos.get(name)
+        if not manifest or manifest.get("status") != "ok" or not manifest.get("local_path"):
+            raise RuntimeError(
+                f"judges.json: no self-hosted photo for {name!r} "
+                f"(manifest status: {(manifest or {}).get('status')}); "
+                "initials fallback is not a build-time default"
+            )
+        slug = _judge_profile_slug(name)
+        if slug in seen_slugs:
+            raise RuntimeError(f"judges.json: slug collision on {slug!r}")
+        seen_slugs.add(slug)
+
+        contacts: list[dict] = []
+        courtroom = str(rec.get("courtroom") or "").strip()
+        if courtroom:
+            contacts.append({"label": "Courtroom", "display": courtroom, "href": ""})
+        for staff in rec.get("staff") or []:
+            if not isinstance(staff, dict):
+                continue
+            role = str(staff.get("role") or "").strip()
+            if "bailiff" in role.lower():
+                staff_name = str(staff.get("name") or "").strip()
+                staff_phones = [p for p in (staff.get("phones") or []) if p]
+                for i, num in enumerate(staff_phones):
+                    num = str(num).strip()
+                    href_val = sanitize_phone_href(num)
+                    href = f"tel:+1{href_val.replace('-', '').replace(' ', '').replace('(', '').replace(')', '').replace('.', '')}" if href_val else ""
+                    label = f"{staff_name}, bailiff" if staff_name else "Bailiff"
+                    if len(staff_phones) > 1:
+                        label += f" ({i + 1})"
+                    contacts.append({"label": label, "display": num, "href": href})
+        staff_emails = []
+        for staff in rec.get("staff") or []:
+            if isinstance(staff, dict):
+                staff_emails.extend(staff.get("emails") or [])
+        staff_emails.extend(rec.get("emails_unassigned") or [])
+        for em in dict.fromkeys(str(e).strip() for e in staff_emails if str(e).strip()):
+            href_val = sanitize_email_href(em)
+            contacts.append(
+                {"label": "Chambers email", "display": em, "href": f"mailto:{href_val}" if href_val else ""}
+            )
+
+        sub_chip = ""
+        if court == "Municipal":
+            sub_chip = str(rec.get("district") or "").strip()
+        else:
+            sub_chip = str(rec.get("division") or "").strip()
+
+        judges.append({
+            "name": name,
+            "slug": slug,
+            "court": court,
+            "court_chip": court if court == "Common Pleas" else "Municipal Court",
+            "sub_chip": sub_chip,
+            "presiding": bool(rec.get("presiding_administrative_judge")),
+            "photo_src": f"{base_url}{manifest['local_path']}",
+            "contacts": contacts,
+            "bio": str(rec.get("bio") or ""),
+            "standing_orders": str(rec.get("standing_orders") or ""),
+            "source_url": sanitize_outbound_url(rec.get("source_url") or ""),
+            "search_text": " ".join(
+                [
+                    name,
+                    courtroom,
+                    " ".join(str(a) for a in (rec.get("chambers_address") or [])),
+                ]
+            ).lower(),
+        })
+
+    def _sort_key(j: dict) -> tuple:
+        parts = j["name"].split()
+        last = parts[-1] if parts else j["name"]
+        # Presiding/Administrative Judge first within Common Pleas (spec 2.3.4).
+        return (0 if j["presiding"] else 1, last.lower(), j["name"].lower())
+
+    common_pleas = sorted((j for j in judges if j["court"] == "Common Pleas"), key=_sort_key)
+    municipal = sorted((j for j in judges if j["court"] == "Municipal"), key=_sort_key)
+
+    provenance = {
+        "feed": "judges/judges.json",
+        "captured": "2026-09-21",
+        "sources": [
+            {
+                "label": "hamiltoncountycourts.org judge profile pages",
+                "url": "https://hamiltoncountycourts.org",
+            }
+        ],
+        "note": "All 30 portraits self-hosted; manifest at /static/judges/provenance.json",
+    }
+    page = env.get_template("judges.html").render(
+        common_pleas=common_pleas,
+        municipal=municipal,
+        judges_total=len(judges),
+        provenance=provenance,
+        generated_utc=env.globals["generated_utc"],
+    )
+    target = out_dir / "judges" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
+# --- Court-reference tab feeds (spec 2.3, 5.1, 5.5): jury.json / rules.json.
+# The tab-build feeds are read-only build inputs; the build never edits them.
+_TAB_FEEDS_DIR = Path(
+    os.environ.get(
+        "HCJC_TAB_FEEDS_DIR",
+        str(Path(__file__).parents[1] / ".." / "firecrawl-zips" / "tab-build-2026-09-21" / "feeds"),
+    )
+).resolve()
+
+
+def _load_tab_feed(name: str) -> dict:
+    """Load one court-reference tab feed JSON; fail closed on any error."""
+    path = _TAB_FEEDS_DIR / name
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        log.warning("tab feed %s unreadable: %s", path, e)
+        return {}
+
+
+def _pdf_url_from_source_path(source_path: str) -> str:
+    """Rebuild the official wp-content PDF URL from a staged pdf-text path.
+
+    Staged form: pdf-text/hamiltoncountycourts.org_wp-content_uploads_<YYYY>_<MM>_<File>.pdf.txt
+    Official form: https://hamiltoncountycourts.org/wp-content/uploads/<YYYY>/<MM>/<File>.pdf
+    Every URL produced here is HEAD-checked against the live court host before
+    publish (spec V5); sanitize_outbound_url still gates the href.
+    """
+    m = source_path.replace("pdf-text/hamiltoncountycourts.org_wp-content_uploads_", "", 1)
+    if m == source_path or not m.endswith(".txt"):
+        return ""
+    stem = m[: -len(".txt")]
+    parts = stem.split("_", 2)
+    if len(parts) != 3 or not (parts[0].isdigit() and parts[1].isdigit()):
+        return ""
+    return f"https://hamiltoncountycourts.org/wp-content/uploads/{parts[0]}/{parts[1]}/{parts[2]}"
+
+
+def _prose_paragraphs(text: str) -> list[str]:
+    """Split extracted court text into paragraphs, dropping page-number lines.
+
+    Verbatim: line content is never edited, only regrouped. Lines that are
+    nothing but a page number (digits, optional whitespace) are dropped.
+    """
+    paras: list[str] = []
+    for line in text.split("\n"):
+        s = line.strip()
+        if not s:
+            continue
+        if s.isdigit():
+            continue
+        paras.append(s)
+    return paras
+
+
+# ---------------------------------------------------------------------------
+# Jury tab (/jury/): prose plus directory (spec 2.3 Jury).
+# ---------------------------------------------------------------------------
+
+_JURY_QA = [
+    ("Who may be called to serve as a juror?",
+     "You may be called to serve if you are at least 18 years old, a United States citizen and a resident of Hamilton County. In addition, you must have a reasonable knowledge of English and be physically and mentally capable of serving."),
+    ("How did my name get selected for jury duty?",
+     "Jurors' names are selected at random by a computer from a list of registered voters provided by the Board of Elections."),
+    ("How long will I be required to serve?",
+     "Normal length of service is for two weeks. However, if you are not serving on a jury in progress, you will call a recording each night for reporting instructions for the next day. If your services are not required, it is recommended that you report to work."),
+    ("Do I get paid for jury duty?",
+     "You will receive a fee of $30.00 for each day that you are required to attend. Work statements for your company indicating the days that you served as a juror and the amount paid will be furnished upon request."),
+    ("What should I wear for jury duty?",
+     "Wear comfortable clothing that enhances the dignity of the Court and emphasizes the seriousness of your responsibility. Shorts, hats, tank tops, tee-shirts, sweatsuits, or other such informal attire is not considered appropriate in the courtroom. Because the Courthouse is an older building the Jury Commission Office tends to run either hot or cold; it is recommended that you come prepared with a jacket for colder temperatures."),
+    ("What hours will I serve?",
+     "Normal business hours at the Courthouse are from 8:00 a.m. to 4:00 p.m. On days that you report for jury service, you can expect to be there during its normal hours. A specific time that you will need to appear by will be given with your nightly jury instructions, but the building will open at 8:00 a.m. If not selected for a jury, you may be able to leave early. Jurors will be given a lunch break and may be given other breaks during a trial. On occasion, a trial will continue beyond the normal working hours; if this happens, you may need to arrange your schedule to allow you to stay longer."),
+    ("Is it possible that I might report for jury service but not sit on a jury?",
+     "Yes. The parties involved in a case generally seek to settle their differences and avoid the expense and time of a trial. Sometimes the case is settled just a few moments before the trial begins. Though many trials are scheduled daily, the Court does not know until that morning how many will actually go to trial. But your time spent waiting is not wasted; your presence encourages settlement."),
+    ("Why doesn't my summons have a time to appear if I am a Petit Juror?",
+     "If you are a Petit Juror you will not automatically be appearing on the date listed on your summons that you received in the mail. Instead you must check the Juror Hotline (513-946-5879) or the court's reporting-instructions page after 4:00 p.m. the weekend prior to the date on your summons for your reporting instructions. If you are to appear you will be given a time to appear within the message. If you need to appear on the initial date from your summons the time will most likely be 8:30 a.m. Other days your reporting time may vary. Grand jurors are always to report on the date and time listed on your summons."),
+    ("Can I bring food and drinks into the courthouse?",
+     "Yes. You are more than welcome to pack your lunch and any drinking vessel that you prefer so long as it has a lid. For your convenience the Jury Commission Office is equipped with a refrigerator, freezer, and 2 microwaves. Do not bring metal cutlery as it is possible it could be confiscated at the security checkpoint upon arrival. Plastic cutlery and plates are available here for you to use."),
+    ("A note on security",
+     "Deputy Sheriffs will no longer be issuing claim tickets for items deemed by them to be dangerous items. This list includes, but is not limited to: pocket knives, scissors, mace, or any other weapon. If you feel you have a dangerous item in your possession you will need to leave it in your car. The Sheriff will not let you in the building with these items."),
+]
+
+_JURY_AMENITIES = [
+    "Three 55-inch flat screen televisions with cable access",
+    "Desktop computers with internet",
+    "Wireless internet",
+    "4 cell phone charging stations",
+    "Books (donated by the Cincinnati Public Library)",
+    "Private bathrooms",
+    "Jurors quiet area (Room 468)",
+    "Private room for nursing mothers",
+    "Landline telephone access",
+    "Free coffee, tea, and water",
+    "Refrigerator, freezer, and microwave access",
+    "Plastic cutlery (forks, spoons, and knives) and paper plates available",
+    "Vending machines for both snacks and drinks (available for pay)",
+    "Complimentary: Tylenol, Advil, Aleve, and Aspirin available upon request",
+]
+
+_JURY_CREED = [
+    "I am a JUROR.",
+    "I am a seeker after truth.",
+    "I must listen carefully and with concentration to all of the evidence.",
+    "I must heed and follow the instructions of the Court.",
+    "I must respectfully and attentively follow the arguments of the lawyers, dispassionately seeking to find and follow the silver thread of truth through their conflicting assertions.",
+    "I must lay aside all bias and prejudice.",
+    "I must be led by my intelligence and not by my emotions.",
+    "I must respect the opinions of my fellow jurors, as they must respect mine, and in a spirit of tolerance and understanding must endeavor to bring the deliberations of the whole jury to agreement upon a verdict: but I must never assent to a verdict which violates the instructions of the Court or which finds as a fact that which, under the evidence and in my conscience, I believe to be untrue.",
+    "In fine, I must apply the Golden Rule by putting myself impartially in the place of the plaintiff, and of the defendant, remembering that although I am a juror today passing upon the rights of others, tomorrow I may be a litigant whose rights other jurors shall pass upon.",
+    'My verdict must do justice, for what is just is "true and righteous altogether"; and when my term of jury service is ended, I must leave it with my citizenship unsullied and my conscience clear.',
+]
+
+_JURY_CONTACT = [
+    ("Jury Commissioner, Bradley J. Seitz", "513-946-5880, bseitz@cms.hamilton-co.org"),
+    ("Jury Clerk, Alicia Vollner", "513-946-5882"),
+    ("Jury Clerk, Liz Jeffries", "513-946-5881"),
+    ("Juror information line", "513-946-5879"),
+    ("Jury response email", "juryresponse@cms.hamilton-co.org (response must be scanned as an attachment; do NOT respond in the body of an email)"),
+    ("Jury office fax", "513-946-5885"),
+    ("Office", "Hamilton County Courthouse, 1000 Main Street, Room 455, Cincinnati, Ohio 45202"),
+]
+
+
+def _render_jury_page(env: Environment, out_dir: Path) -> None:
+    """Jury Duty tab: hero link-out to the live court reporting page, scam
+    alert (with the 2023 press release date-labeled in the archival block),
+    contact, Q&A, excuses, amenities, work statements and check re-issue,
+    creed, and orientation video. Reporting instructions are never cached:
+    the hero card routes to the court's live page with the link-verified date.
+    """
+    feed = _load_tab_feed("jury.json")
+    items = {i.get("id", ""): i for i in feed.get("items", []) if isinstance(i, dict)}
+    reporting = items.get(
+        "hamiltoncountycourts.org_index.php_jury-reporting-instructions_.json", {}
+    )
+    reporting_url = sanitize_outbound_url(
+        reporting.get("url", "https://hamiltoncountycourts.org/index.php/jury-reporting-instructions/")
+    )
+    page = env.get_template("jury.html").render(
+        active_nav="jury",
+        reporting_url=reporting_url,
+        link_verified_date=feed.get("built_date", "2026-09-21"),
+        reporting_live_date=reporting.get("live_date", ""),
+        jury_qa=_JURY_QA,
+        jury_amenities=_JURY_AMENITIES,
+        jury_creed=_JURY_CREED,
+        jury_contact=_JURY_CONTACT,
+        generated_utc=env.globals["generated_utc"],
+    )
+    target = out_dir / "jury" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
+# Rules tab (/rules/): versioned corpus (spec 2.3 Rules).
+# ---------------------------------------------------------------------------
+
+_RULE_AMENDMENT_WHAT_CHANGED = {
+    "31": "Any civil case filed in the Court of Common Pleas General Division may be referred to mediation by order of the Court.",
+    "17": 'Technology plan adopted "Pursuant to Ohio Superintendence Rule 3.03," describing "what technical tools the court has to assist" court customers.',
+    "18": 'Compliance Plan for the submission of Fingerprints, Incident Tracking Numbers (ITN) and case disposition numbers; Mental Health Adjudications (Hopper Act); Protections Orders [sic]; and Bureau of Motor Vehicle related convictions.',
+}
+
+
+def _render_rules_page(env: Environment, out_dir: Path) -> None:
+    """Local Rules tab: the post-book amendment layer (Rules 31, 17, 18)
+    first, the 4-24-26 rules book with its 47-entry TOC, the Municipal Court
+    rule index, and the archival block (50 superseded standalone rules plus
+    the archived Municipal Rule 11 proposal). The 2017 Rule 24 text is never
+    published (dropped from every feed per owner decision).
+    """
+    feed = _load_tab_feed("rules.json")
+    book = feed.get("canonical_rules_book", {}) or {}
+    book_url = sanitize_outbound_url(
+        _pdf_url_from_source_path(book.get("source_path", ""))
+    )
+
+    amendments = []
+    for a in feed.get("amendments", []):
+        rule_no = str(a.get("rule", ""))
+        effective = a.get("effective")
+        amendments.append({
+            "rule": rule_no,
+            "title": a.get("title", ""),
+            "court": a.get("court", ""),
+            "effective_display": effective if effective else "not stated",
+            "effective_caveat": a.get("effective_provenance", ""),
+            "what_changed": _RULE_AMENDMENT_WHAT_CHANGED.get(rule_no, ""),
+            "source_url": sanitize_outbound_url(_pdf_url_from_source_path(a.get("source_path", ""))),
+            "source_label": _pdf_url_from_source_path(a.get("source_path", "")).rsplit("/", 1)[-1],
+            "full_text": _prose_paragraphs(a.get("full_text", "")),
+        })
+
+    toc = [
+        {"rule": str(e.get("rule", "")), "title": e.get("title", "")}
+        for e in book.get("toc", [])
+    ]
+
+    municipal = feed.get("municipal", {}) or {}
+    html_rules = []
+    for e in municipal.get("html_rules", []):
+        html_rules.append({
+            "title": e.get("title", ""),
+            "url": sanitize_outbound_url(e.get("url", "")),
+        })
+    civil_pdfs = []
+    for e in municipal.get("civil_rules_pdfs", []):
+        url = _pdf_url_from_source_path(e.get("source_path", ""))
+        civil_pdfs.append({
+            "title": e.get("title", ""),
+            "url": sanitize_outbound_url(url),
+            "label": url.rsplit("/", 1)[-1],
+        })
+
+    archival = []
+    for e in feed.get("archival_standalone_rules", []):
+        archival.append({
+            "rule": str(e.get("rule", "")) if e.get("rule") else "",
+            "title": e.get("title", ""),
+            "status": e.get("status", ""),
+        })
+
+    proposed = []
+    for e in feed.get("proposed_amendments_archived", []):
+        proposed.append({
+            "title": e.get("title", ""),
+            "url": sanitize_outbound_url(e.get("url", "")),
+            "item": e.get("proposed_item", ""),
+            "closed": e.get("comment_period_closed", ""),
+            "extract_note": e.get("proposed_pdf_note", ""),
+            "contact": e.get("contact_per_page", ""),
+        })
+
+    page = env.get_template("rules.html").render(
+        active_nav="rules",
+        book_effective=book.get("effective", "2026-04-24"),
+        book_url=book_url,
+        book_sha256=book.get("source_sha256", ""),
+        toc=toc,
+        toc_count=len(toc),
+        amendments=amendments,
+        amendment_count=len(amendments),
+        municipal_html=html_rules,
+        municipal_pdf=civil_pdfs,
+        archival=archival,
+        archival_count=len(archival),
+        proposed=proposed,
+        generated_utc=env.globals["generated_utc"],
+    )
+    target = out_dir / "rules" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
 def _linked_statute_codes(snapshot: Snapshot) -> list[str]:
     """Every normalized ORC code actually linked from a built page.
 
@@ -1094,3 +1591,301 @@ def _render_404_page(env: Environment, out_dir: Path) -> None:
     """Branded GitHub Pages 404. Pages serves /404.html for any missing path."""
     page = env.get_template("404.html").render()
     (out_dir / "404.html").write_text(page, encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
+# Forms (/forms/) and Services/Programs (/services/) tab pages.
+# Source feeds live outside the repo at
+#   ~/workspace/firecrawl-zips/tab-build-2026-09-21/feeds/
+# (forms.json, services-programs.json). Templates render exactly what the
+# feeds contain; nothing is invented. Form link verification results live in
+# web/forms_source_status.json (checked 2026-09-22): rows whose official
+# source URL failed verification render "Official source pending
+# verification" per spec 5.4, never a dead link.
+
+_TAB_FEEDS_DIR = (
+    Path.home() / "workspace" / "firecrawl-zips" / "tab-build-2026-09-21" / "feeds"
+)
+_FORMS_LINK_STATUS_PATH = Path(__file__).resolve().parent / "forms_source_status.json"
+
+
+def _load_court_forms_feed(name: str) -> dict:
+    """Load a staged tab-build feed. Fail closed like the bond schedule page."""
+    path = _TAB_FEEDS_DIR / name
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        raise RuntimeError(f"{name} missing or corrupt at {path}: {e}") from e
+    if not isinstance(raw, dict):
+        raise RuntimeError(f"{name} schema violation: top level is not an object")
+    return raw
+
+
+def _form_file_type(source_txt: str) -> str:
+    if source_txt.endswith(".docx.txt") or source_txt.endswith(".doc.txt"):
+        return "Word"
+    return "PDF"
+
+
+def _form_court(lead: str | None) -> str:
+    """Court derived from the feed lead text only. Empty when not derivable."""
+    text = (lead or "").upper()
+    has_common = "COMMON PLEAS" in text
+    has_municipal = "MUNICIPAL COURT" in text
+    if has_common and has_municipal:
+        return "Common Pleas and Municipal"
+    if has_municipal:
+        return "Municipal Court"
+    if has_common:
+        return "Common Pleas"
+    return ""
+
+
+def _render_forms_page(env: Environment, out_dir: Path) -> None:
+    """Court Forms reference page (spec 2.3 Forms).
+
+    Current 2026_04 generation is the default view; archival generations sit
+    in a separate collapsed block; related standing forms get their own
+    section. Counts come from the feed at build time.
+    """
+    raw = _load_court_forms_feed("forms.json")
+    try:
+        link_status = json.loads(_FORMS_LINK_STATUS_PATH.read_text(encoding="utf-8"))
+        status_map = link_status["forms"]
+    except (OSError, json.JSONDecodeError, KeyError) as e:
+        raise RuntimeError(
+            f"forms_source_status.json missing or corrupt: {e}"
+        ) from e
+
+    def _ctx(f: dict) -> dict:
+        sid = f["id"]
+        entry = status_map.get(sid, {"status": "pending", "url": None})
+        href = entry["url"] or f["source_url"] if entry["status"] == "ok" else None
+        return {
+            "id": sid,
+            "title": f["title"],
+            "revision": f.get("revision", ""),
+            "court": _form_court(f.get("lead")),
+            "file_type": _form_file_type(f.get("source_txt", "")),
+            "lead": f.get("lead"),
+            "note": f.get("note"),
+            "href": href,
+        }
+
+    current = [_ctx(f) for f in raw.get("current", [])]
+    archival = [_ctx(f) for f in raw.get("archival", [])]
+    other = [_ctx(f) for f in raw.get("other_forms", [])]
+    if not current or not archival or not other:
+        raise RuntimeError("forms.json schema violation: empty current/archival/other list")
+
+    cat_order = [("plea", "Plea forms"), ("jury-waiver", "Waiver of Trial by Jury"),
+                 ("indigency", "Affidavit of Indigency")]
+    by_cat = {c: [] for c, _ in cat_order}
+    for c, items in zip(
+        (f["category"] for f in raw["current"]), current
+    ):
+        by_cat.setdefault(c, []).append(items)
+    groups_current = [(label, by_cat[c]) for c, label in cat_order if by_cat.get(c)]
+
+    wave_order = ["2025_04", "2024_03", "2023_01", "2022_01", "2021_12", "2021_10"]
+    by_wave: dict[str, list] = {w: [] for w in wave_order}
+    for gen, items in zip((f["generation"] for f in raw["archival"]), archival):
+        by_wave.setdefault(gen, []).append(items)
+    waves = [(f"{w} generation", by_wave[w]) for w in wave_order if by_wave.get(w)]
+
+    other_groups = [
+        ("Discovery", [x for x, f in zip(other, raw["other_forms"]) if f["category"] == "discovery"]),
+        ("Scheduling and mediation", [x for x, f in zip(other, raw["other_forms"])
+                                      if f["category"] in ("scheduling", "mediator")]),
+        ("Notices and misc", [x for x, f in zip(other, raw["other_forms"])
+                               if f["category"] in ("registration-notice", "reec",
+                                                    "transcript", "media")]),
+    ]
+    if any(not items for _, items in other_groups):
+        raise RuntimeError("forms.json schema violation: empty other-forms group")
+
+    page = env.get_template("forms.html").render(
+        groups_current=groups_current,
+        groups_other=other_groups,
+        waves=waves,
+        counts={
+            "current": len(current),
+            "archival": len(archival),
+            "other": len(other),
+        },
+        generated_utc=env.globals["generated_utc"],
+    )
+    target = out_dir / "forms" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")
+
+
+# Contact details quoted from the feed lead fields (hamiltoncountycourts.org
+# program pages). The feed's leads are truncated strings, so the contacts are
+# recorded here keyed by item id rather than parsed; every value below comes
+# from the feed, nothing is invented.
+_SERVICES_CONTACTS: dict[str, list[dict]] = {
+    "pretrial-services": [
+        {"role": "Director", "name": "Amy Ruehl",
+         "address": "1000 Sycamore St, Rm 111, Cincinnati, Ohio 45202",
+         "phone": "(513) 946-6161"},
+    ],
+    "pretrial-services-prosecutors-diversion-programs": [
+        {"role": "Program Coordinator", "name": "Maria Karvelas",
+         "address": "230 E 9th St #1150, Cincinnati, Ohio 45202",
+         "phone": "(513) 946-3385"},
+    ],
+    "drug-court": [
+        {"role": "Bailiff", "name": "Doris Vincent", "phone": "(513) 946-5770"},
+        {"role": "Director", "name": "Keshia Jones", "phone": "(513) 946-5773"},
+        {"role": "Certification Coordinator", "name": "Ashley Autry",
+         "phone": "(513) 946-5777"},
+        {"role": "Specialized Docket Assistant", "name": "Tamara Clark",
+         "phone": "(513) 946-5775"},
+    ],
+    "felony-veterans-treatment-court": [
+        {"role": "Program Director", "name": "Gary Yuratovac, Esq.",
+         "phone": "(513) 618-4215"},
+        {"role": "Court Coordinator", "name": "Greg Street",
+         "phone": "(513) 946-3371"},
+    ],
+    "hamilton-county-re-entry-docket": [
+        {"role": "Reentry Docket Specialist", "name": "Sheryl Miles",
+         "phone": "(513) 946-5556"},
+        {"role": "Director, Hamilton County Office of Reentry",
+         "name": "Trina Jackson", "phone": "(513) 946-4304"},
+        {"role": "Probation Officer", "name": "Mia Willright",
+         "phone": "(513) 946-9767"},
+    ],
+}
+
+# Complete first sentences quoted from the feed lead fields.
+_SERVICES_DESCRIPTIONS = {
+    "specialized-dockets-common-pleas": (
+        "Specialized dockets are particular sessions of court or dockets that "
+        "offer a therapeutically oriented judicial approach to providing court "
+        "supervision and appropriate treatment to individuals."
+    ),
+    "municipal-specialized-dockets": (
+        "The objective of Veterans Court is to divert veterans from the "
+        "traditional criminal justice system to a treatment-based court in "
+        "order to rehabilitate and assist veterans in leading a productive "
+        "and law abiding life."
+    ),
+}
+
+
+def _render_services_page(env: Environment, out_dir: Path) -> None:
+    """Services and Programs directory (spec 2.3 Services).
+
+    The authoritative home for probation, pretrial services, electronic
+    monitoring, and specialized dockets. Grouped by program with contact
+    info and descriptions as stated in the feed. Counts come from the feed
+    at build time.
+    """
+    raw = _load_court_forms_feed("services-programs.json")
+    items = raw.get("items", [])
+    if not items:
+        raise RuntimeError("services-programs.json schema violation: no items")
+    by_id = {it["id"]: it for it in items}
+    by_cat: dict[str, list[dict]] = {}
+    for it in items:
+        by_cat.setdefault(it["category"], []).append(it)
+
+    def _row(item_id: str, title: str | None = None,
+             see_also: list | None = None) -> dict:
+        it = by_id[item_id]
+        return {
+            "id": item_id,
+            "title": title or it["title"],
+            "href": it["page_url"],
+            "contacts": _SERVICES_CONTACTS.get(item_id, []),
+            "see_also": see_also or [],
+            "description": _SERVICES_DESCRIPTIONS.get(item_id),
+        }
+
+    probation_cards = [
+        {"title": by_id["probation-common-pleas"]["title"],
+         "href": by_id["probation-common-pleas"]["page_url"]},
+        {"title": by_id["probation-municipal"]["title"],
+         "href": by_id["probation-municipal"]["page_url"]},
+    ]
+    probation_rows = [
+        _row("common-pleas-probation", "Common Pleas Probation, department page"),
+        _row("probation-intensive-supervision-probation-isp"),
+        _row("probation-inter-state-intra-state-compact-ic"),
+        _row("probation-presentence-investigation-psi"),
+        _row("probation-community-service-program"),
+        _row("probation-substations"),
+        _row("probation-victims-services-unit"),
+        _row("probation-faqs"),
+        _row("probation-holiday-closures"),
+        _row("probation-common-pleas-staff-directory"),
+    ]
+
+    pretrial_card = {
+        "title": by_id["pretrial-services"]["title"],
+        "href": by_id["pretrial-services"]["page_url"],
+        "contacts": _SERVICES_CONTACTS["pretrial-services"],
+    }
+    pretrial_rows = [
+        _row("pretrial-services-electronic-monitoring-release-unit", see_also=[
+            {"label": "Bond schedule", "href": "/bond-schedule/"}]),
+        _row("pretrial-services-failure-to-appear-unit", see_also=[
+            {"label": "Help and free aid", "href": "/help/"}]),
+        _row("pretrial-services-jail-intake-processing-bail-investigations-and-bail-review"),
+        _row("pretrial-services-jail-monitoring-offender-classification-and-post-conviction-services"),
+        _row("pretrial-services-court-ordered-supervision"),
+        _row("pretrial-services-court-ordered-testing-for-sexually-transmitted-and-communicable-diseases"),
+        _row("pretrial-services-mediation-services", see_also=[
+            {"label": "Local Rules", "href": "/rules/"},
+            {"label": "Help and free aid", "href": "/help/"}]),
+        _row("pretrial-services-prosecutors-diversion-programs"),
+        _row("pretrial-services-veteran-intervention-programs"),
+        _row("pretrial-services-court-interpreter-services", see_also=[
+            {"label": "Help and free aid", "href": "/help/"}]),
+    ]
+
+    docket_cards = [
+        {"title": by_id["drug-court"]["title"],
+         "href": by_id["drug-court"]["page_url"],
+         "note": "First drug court in Ohio.",
+         "contacts": _SERVICES_CONTACTS["drug-court"]},
+        {"title": by_id["felony-veterans-treatment-court"]["title"],
+         "href": by_id["felony-veterans-treatment-court"]["page_url"],
+         "note": None,
+         "contacts": _SERVICES_CONTACTS["felony-veterans-treatment-court"]},
+        {"title": by_id["hamilton-county-re-entry-docket"]["title"],
+         "href": by_id["hamilton-county-re-entry-docket"]["page_url"],
+         "note": None,
+         "contacts": _SERVICES_CONTACTS["hamilton-county-re-entry-docket"]},
+    ]
+    docket_rows = [
+        _row("specialized-dockets-common-pleas"),
+        _row("municipal-specialized-dockets"),
+    ]
+
+    sections = raw.get("sections", {})
+    page = env.get_template("services.html").render(
+        counts={
+            "probation": sections.get("probation", len(by_cat.get("probation", []))),
+            "pretrial": sections.get("pretrial", len(by_cat.get("pretrial", []))),
+            "specialized_dockets": sections.get("specialized_dockets",
+                                               len(by_cat.get("specialized-dockets", []))),
+        },
+        probation_cards=probation_cards,
+        probation_rows=probation_rows,
+        pretrial_card=pretrial_card,
+        pretrial_rows=pretrial_rows,
+        docket_cards=docket_cards,
+        docket_rows=docket_rows,
+        missing_municipal_staff=(
+            "No Municipal staff directory exists in the corpus: the legacy "
+            "capital-URL staff directory page returns a 404 ('Sorry!'), and "
+            "no lowercase replacement was found."
+        ),
+        generated_utc=env.globals["generated_utc"],
+    )
+    target = out_dir / "services" / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(page, encoding="utf-8")

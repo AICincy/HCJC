@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Earlier bookings archive &middot; JCStream{% endblock %}
+{% block canonical_path %}/archive/{% endblock %}
+{% block body_class %}detail{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Earlier bookings</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <h1 class="title">Earlier bookings archive</h1>
+    <div class="sub">The complete booking history on this mirror, newest first, with the same search and filters as the homepage</div>
+  </div>
+</header>
+
+<p class="page-lede">The homepage shows the three most recent booking months. This archive holds every booking month on the mirror, searchable in one place. Nothing here is unpublished anywhere else on the site.</p>
+
+{% if roster_stale.blocked %}
+<aside class="banner" aria-label="Data access notice" role="status">
+  <p><strong>Roster updates are currently interrupted.</strong> The figures below reflect the last successful update; they are not current. The interruption is logged per cycle in the timestamped evidence log (<a href="{{ base_url }}/data/waf_block_log.json">waf_block_log.json</a>).</p>
+</aside>
+{% endif %}
+
+{% include "_legal_disclosure.html" %}
+
+{% if snapshot.inmate_count == 0 %}
+<div class="empty">
+  <h2>No roster data yet</h2>
+  <p>JCStream's first sweep hasn't completed. Trigger a manual run from the <a href="https://github.com/AICincy/HCJC/actions/workflows/sweep.yml">sweep workflow</a> or wait for the next 15-minute cron.</p>
+</div>
+{% else %}
+
+<section aria-labelledby="archive-roster-h">
+  <div class="section-h"><h2 id="archive-roster-h">Search all bookings</h2><span class="grow"></span><span class="meta">{{ "{:,}".format(snapshot.inmate_count) }} in custody</span></div>
+  {% include "_roster_tool.html" %}
+</section>
+
+{% endif %}
+
+<p class="muted"><a href="{{ base_url }}/">&larr; Back to the homepage</a></p>
+{% endblock %}

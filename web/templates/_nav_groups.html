@@ -1,0 +1,49 @@
+{# _nav_groups.html — shared drawer group list (spec 3.5, 6.3).
+   Included by base.html inside the site nav drawer. `active_nav` (string,
+   default '') marks the current page with aria-current="page". Every page
+   template sets active_nav to its key; the drawer, the homepage reference
+   strip, and each tab's "More court reference" block stay in sync because
+   they all read the same grouping. #}
+{% set _nav = [
+  ("Roster tools", [
+    ("stats", "Stats", "/stats/", "snapshot"),
+    ("calendar", "Calendar", "/court/", "who's due"),
+    ("safety", "Safety", "/safety/", "incidents"),
+    ("statutes", "Statutes", "/statute/", "lookup"),
+    ("data", "Data", "/data/", "feeds"),
+    ("visit", "Visit and contact", "/visit/", "visiting"),
+    ("disparity", "Bond disparity", "/bond-disparity/", "research"),
+  ]),
+  ("Court reference", [
+    ("courts", "Courts", "/courts/", "system"),
+    ("bond", "Bond schedule", "/bond-schedule/", "costs"),
+    ("judges", "Judges", "/judges/", "profiles"),
+    ("jury", "Jury duty", "/jury/", "summons"),
+    ("rules", "Rules", "/rules/", "local rules"),
+    ("forms", "Forms", "/forms/", "file"),
+    ("help", "Help and free aid", "/help/", "free help"),
+    ("services", "Services and programs", "/services/", "programs"),
+  ]),
+  ("Site", [
+    ("rss", "RSS", "/feed.xml", ""),
+    ("github", "GitHub", "https://github.com/AICincy/HCJC", ""),
+    ("access", "Access", "/transparency/", "scorecard"),
+  ]),
+] %}
+<nav class="nav-drawer" aria-label="Site">
+  {% if snapshot is defined and snapshot.inmate_count %}
+  <span class="running mobile-only"><strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> in custody</span>
+  {% endif %}
+  {% for group_label, links in _nav %}
+  <div class="nav-group" role="group" aria-label="{{ group_label }}">
+    <span class="nav-group-label" aria-hidden="true">{{ group_label }}</span>
+    {% for key, label, href, hint in links %}
+    {% if href.startswith("http") %}
+    <a class="nav-link" href="{{ href }}"{% if active_nav | default("") == key %} aria-current="page"{% endif %}>{{ label }}</a>
+    {% else %}
+    <a class="nav-link" href="{{ base_url }}{{ href }}"{% if active_nav | default("") == key %} aria-current="page"{% endif %}>{{ label }}{% if hint %} <span class="nav-hint">{{ hint }}</span>{% endif %}</a>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endfor %}
+</nav>

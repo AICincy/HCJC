@@ -1,0 +1,158 @@
+{# services.html — Services and Programs tab (spec 2.3 Services, skeleton 3.1).
+   The authoritative home for probation, pretrial services, electronic
+   monitoring, and specialized dockets (spec 2.2.3). Contact info and
+   descriptions come from the feed only; nothing is invented.
+   Context (from _render_services_page in web/pages.py):
+     counts:         {probation, pretrial, specialized_dockets}
+     probation_cards: [{title, href}]                       — 2 entity cards
+     probation_rows:  [{id, title, href}]                    — 10 rows
+     pretrial_card:   {title, href, contacts: [{role, name, phone, address}]}
+     pretrial_rows:   [{id, title, href, contacts, see_also: [{label, href}]}]
+     docket_cards:    [{title, href, note, contacts}]
+     docket_rows:    [{id, title, href, description}]
+     missing_municipal_staff: str                            — missing-state line
+     generated_utc #}
+{% extends "base.html" %}
+{% set active_nav = "services" %}
+{% block title %}Services and programs &middot; JCStream{% endblock %}
+{% block canonical_path %}/services/{% endblock %}
+{% block body_class %}detail page-services{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">&larr; Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Services and Programs</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <h1 class="title">Services and Programs</h1>
+    <div class="sub">Probation, pretrial services, specialized dockets</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  The county programs attached to the courts: supervision, pretrial release, and treatment dockets.
+</p>
+
+<div class="decision-aid" aria-label="I need...">
+  <p><strong>I need...</strong></p>
+  <p>...to find my probation officer or learn about probation: start with <a href="#probation">Probation</a>.</p>
+  <p>...pretrial release, electronic monitoring, or supervision before trial: start with <a href="#pretrial">Pretrial services</a>.</p>
+  <p>...a treatment court for drugs, veterans, or re-entry: start with <a href="#specialized-dockets">Specialized dockets</a>.</p>
+</div>
+
+<nav class="tab-toc" aria-label="On this page">
+  <ul class="tab-toc">
+    <li><a href="#probation">Probation <span class="count">{{ counts.probation }}</span></a></li>
+    <li><a href="#pretrial">Pretrial services <span class="count">{{ counts.pretrial }}</span></a></li>
+    <li><a href="#specialized-dockets">Specialized dockets <span class="count">{{ counts.specialized_dockets }}</span></a></li>
+  </ul>
+</nav>
+
+<details class="section-h-details" id="probation" open>
+  <summary><h2>Probation</h2><span class="grow"></span><span class="meta">{{ counts.probation }} programs</span></summary>
+  <div class="visit-grid">
+    {% for c in probation_cards %}
+    <div class="visit-card">
+      <div class="visit-card-body">
+        <h3 class="visit-card-title">{{ c.title }}</h3>
+        {% if c.desc %}<p class="visit-card-desc">{{ c.desc }}</p>{% endif %}
+        <a class="visit-card-cta" href="{{ c.href }}" target="_blank" rel="noopener">Official page &rarr;</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% for r in probation_rows %}
+  <div class="program-row" id="program-{{ r.id }}">
+    <a class="ref-row" href="{{ r.href }}" target="_blank" rel="noopener" aria-label="{{ r.title }} (hamiltoncountycourts.org, opens in a new tab)">
+      <span class="ref-row-title">{{ r.title }}</span>
+      <span class="ref-row-meta">hamiltoncountycourts.org</span>
+    </a>
+  </div>
+  {% endfor %}
+  <p class="ref-row-lede">{{ missing_municipal_staff }}</p>
+</details>
+
+<details class="section-h-details" id="pretrial" open>
+  <summary><h2>Pretrial services</h2><span class="grow"></span><span class="meta">{{ counts.pretrial }} programs</span></summary>
+  <div class="visit-grid">
+    <div class="visit-card">
+      <div class="visit-card-body">
+        <h3 class="visit-card-title">{{ pretrial_card.title }}</h3>
+        <dl>
+          {% for c in pretrial_card.contacts %}
+          <dt>{{ c.role }}</dt>
+          <dd>{{ c.name }}{% if c.address %}, {{ c.address }}{% endif %}{% if c.phone %}, <a href="tel:+1{{ c.phone | replace('(', '') | replace(')', '') | replace('-', '') | replace(' ', '') }}">{{ c.phone }}</a>{% endif %}</dd>
+          {% endfor %}
+        </dl>
+        <a class="visit-card-cta" href="{{ pretrial_card.href }}" target="_blank" rel="noopener">Official page &rarr;</a>
+      </div>
+    </div>
+  </div>
+  {% for r in pretrial_rows %}
+  <div class="program-row" id="program-{{ r.id }}">
+    <a class="ref-row" href="{{ r.href }}" target="_blank" rel="noopener" aria-label="{{ r.title }} (hamiltoncountycourts.org, opens in a new tab)">
+      <span class="ref-row-title">{{ r.title }}</span>
+      <span class="ref-row-meta">hamiltoncountycourts.org</span>
+    </a>
+    {% if r.contacts %}
+    <p class="ref-row-lede">{% for c in r.contacts %}{{ c.role }}: {{ c.name }}{% if c.address %}, {{ c.address }}{% endif %}{% if c.phone %}, <a href="tel:+1{{ c.phone | replace('(', '') | replace(')', '') | replace('-', '') | replace(' ', '') }}">{{ c.phone }}</a>{% endif %}{% if not loop.last %} &middot; {% endif %}{% endfor %}</p>
+    {% endif %}
+    {% if r.see_also %}
+    <p class="ref-row-lede">See also: {% for s in r.see_also %}<a href="{{ base_url }}{{ s.href }}">{{ s.label }}</a>{% if not loop.last %}; {% endif %}{% endfor %}</p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</details>
+
+<details class="section-h-details" id="specialized-dockets" open>
+  <summary><h2>Specialized dockets</h2><span class="grow"></span><span class="meta">{{ counts.specialized_dockets }} programs</span></summary>
+  <div class="visit-grid">
+    {% for c in docket_cards %}
+    <div class="visit-card">
+      <div class="visit-card-body">
+        <h3 class="visit-card-title">{{ c.title }}</h3>
+        {% if c.note %}
+        <p class="visit-card-desc">{{ c.note }}</p>
+        {% endif %}
+        <dl>
+          {% for k in c.contacts %}
+          <dt>{{ k.role }}</dt>
+          <dd>{{ k.name }}{% if k.phone %}, <a href="tel:+1{{ k.phone | replace('(', '') | replace(')', '') | replace('-', '') | replace(' ', '') }}">{{ k.phone }}</a>{% endif %}</dd>
+          {% endfor %}
+        </dl>
+        <a class="visit-card-cta" href="{{ c.href }}" target="_blank" rel="noopener">Official page &rarr;</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% for r in docket_rows %}
+  <div class="program-row" id="program-{{ r.id }}">
+    <a class="ref-row" href="{{ r.href }}" target="_blank" rel="noopener" aria-label="{{ r.title }} (hamiltoncountycourts.org, opens in a new tab)">
+      <span class="ref-row-title">{{ r.title }}</span>
+      <span class="ref-row-meta">hamiltoncountycourts.org</span>
+    </a>
+    {% if r.description %}
+    <p class="ref-row-lede">{{ r.description }}</p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</details>
+
+<details class="section-h-details" id="about">
+  <summary><h2>About this page</h2></summary>
+  {% set provenance = {
+    "feed": "feeds/services-programs.json",
+    "captured": "2026-09-21",
+    "sources": [
+      {"label": "hamiltoncountycourts.org", "url": "https://hamiltoncountycourts.org"}
+    ],
+    "note": "Link check 2026-09-22: all 28 program page URLs resolved. Contact details are quoted from the feed as published by the court; eligibility criteria are shown only where the feed states them."
+  } %}
+  {% include "_provenance.html" %}
+  <p>If you find an error, <a href="https://github.com/AICincy/HCJC/issues">open an issue</a>.</p>
+</details>
+
+{% include "_disclaimer_strip.html" %}
+{% include "_more_reference.html" %}
+{% endblock %}

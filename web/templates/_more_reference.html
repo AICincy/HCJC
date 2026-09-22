@@ -1,0 +1,29 @@
+{# _more_reference.html — "More court reference" card block (spec 3.1.8, 6.3).
+   One shared snippet: the same component and wording as the homepage
+   reference strip (spec 1.3.4). Renders the 7 tabs other than the current
+   page (active_nav); the current tab is never linked to itself. Every tab
+   footer includes this, so cross-tab navigation is in the same position
+   on every tab (spec 2.2.6). #}
+{% set _ref_tabs = [
+  ("courts", "Courts", "/courts/", "Which court handles what, and how to reach it."),
+  ("bond", "Bond schedule", "/bond-schedule/", "The published starting-point bond for misdemeanor and traffic charges."),
+  ("judges", "Judges", "/judges/", "Your judge's courtroom, chambers contact, and standing orders."),
+  ("jury", "Jury duty", "/jury/", "You got a jury summons; what to do."),
+  ("rules", "Rules", "/rules/", "Local court rules: what is current and what changed."),
+  ("forms", "Forms", "/forms/", "The current court forms you can file."),
+  ("help", "Help and free aid", "/help/", "Free legal aid and what to do right now."),
+  ("services", "Services and programs", "/services/", "Court-run programs: probation, pretrial, treatment dockets."),
+] %}
+<section class="more-reference" aria-label="More court reference">
+  <h2 class="sect-h">More court reference</h2>
+  <div class="visit-grid">
+    {% for key, label, href, desc in _ref_tabs %}
+    {% if active_nav | default("") != key %}
+    <a class="visit-card visit-card-sm" href="{{ base_url }}{{ href }}">
+      <span class="visit-card-title">{{ label }}</span>
+      <span class="visit-card-desc">{{ desc }}</span>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

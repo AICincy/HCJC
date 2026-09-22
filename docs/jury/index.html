@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en" data-base-url="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Jury duty &middot; JCStream</title>
+  <meta name="robots" content="noindex, noarchive">
+  <link rel="canonical" href="https://www.aretheyinjail.com/jury/">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#141619">
+  <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
+  <meta property="og:site_name" content="JCStream">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JCStream - Hamilton County, OH Justice Center roster mirror">
+  <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, rebuilt on a best-effort schedule. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
+  <meta property="og:url" content="https://www.aretheyinjail.com/">
+  <meta name="twitter:card" content="summary">
+  <script src="/static/theme-init.js?v=1fb7517bcf"></script>
+  <link rel="stylesheet" href="/static/style.css?v=d908b3a588">
+  <noscript><style>.theme-toggle { display: none; }</style></noscript>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - all changes" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - new bookings" href="/booked.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - releases" href="/released.xml">
+  <link rel="author" href="/humans.txt">
+</head>
+<body id="top" class="detail page-jury">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="/">
+        <span class="brand-text">
+          <span class="brand-name">JCStream</span>
+          <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
+        </span>
+      </a>
+      <a class="masthead-seal masthead-seal-hcjc"
+         href="https://www.facebook.com/HCJCOH"
+         target="_blank" rel="noopener"
+         aria-label="Hamilton County Booking Photos on Facebook">
+        <img src="/static/img/hcjc-seal.png"
+             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
+             alt="Hamilton County Booking Photos seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <a class="masthead-seal masthead-seal-coc"
+         href="https://www.facebook.com/cityofcincinnati"
+         target="_blank" rel="noopener"
+         aria-label="City of Cincinnati on Facebook">
+        <img src="/static/img/coc-seal.png"
+             srcset="/static/img/coc-seal.png 1x, /static/img/coc-seal-2x.png 2x"
+             alt="City of Cincinnati seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      </button>
+      <details class="nav-menu">
+        <summary class="nav-toggle" aria-label="Menu">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </summary>
+<nav class="nav-drawer" aria-label="Site">
+  <div class="nav-group" role="group" aria-label="Roster tools">
+    <span class="nav-group-label" aria-hidden="true">Roster tools</span>
+    <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
+    <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who&#39;s due</span></a>
+    <a class="nav-link" href="/safety/">Safety <span class="nav-hint">incidents</span></a>
+    <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
+    <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
+    <a class="nav-link" href="/visit/">Visit and contact <span class="nav-hint">visiting</span></a>
+    <a class="nav-link" href="/bond-disparity/">Bond disparity <span class="nav-hint">research</span></a>
+  </div>
+  <div class="nav-group" role="group" aria-label="Court reference">
+    <span class="nav-group-label" aria-hidden="true">Court reference</span>
+    <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
+    <a class="nav-link" href="/bond-schedule/">Bond schedule <span class="nav-hint">costs</span></a>
+    <a class="nav-link" href="/judges/">Judges <span class="nav-hint">profiles</span></a>
+    <a class="nav-link" href="/jury/" aria-current="page">Jury duty <span class="nav-hint">summons</span></a>
+    <a class="nav-link" href="/rules/">Rules <span class="nav-hint">local rules</span></a>
+    <a class="nav-link" href="/forms/">Forms <span class="nav-hint">file</span></a>
+    <a class="nav-link" href="/help/">Help and free aid <span class="nav-hint">free help</span></a>
+    <a class="nav-link" href="/services/">Services and programs <span class="nav-hint">programs</span></a>
+  </div>
+  <div class="nav-group" role="group" aria-label="Site">
+    <span class="nav-group-label" aria-hidden="true">Site</span>
+    <a class="nav-link" href="/feed.xml">RSS</a>
+    <a class="nav-link" href="https://github.com/AICincy/HCJC">GitHub</a>
+    <a class="nav-link" href="/transparency/">Access <span class="nav-hint">scorecard</span></a>
+  </div>
+</nav>      </details>
+    </div>
+  </header>
+<aside class="source-banner" role="status" aria-label="Inmate detail retrieval status">
+  <p><strong>Detail retrieval blocked.</strong>
+  Since 2026-09-21, HCSO&rsquo;s inmate detail pages have been returning blocked or error responses to this site&rsquo;s automated public-records retrieval. Charges, bonds, and photos on this page reflect the last successfully retrieved data, not necessarily the current roster.</p>
+  <p class="muted">Each failed retrieval is logged as evidence; see <a href="/data/#access">access interruptions</a> and the <a href="/transparency/">transparency scorecard</a>.</p>
+</aside>  <main id="main" class="page">
+    <div class="doc-wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Jury duty</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <h1 class="title">Jury Duty</h1>
+    <div class="sub">Hamilton County Courts, Jury Commission</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  You received a jury summons from Hamilton County. This page explains what to do: how to check whether
+  you must report, how to respond to the summons or ask to be excused, and how to reach the Jury
+  Commission. The court's reporting instructions change daily, so always check the live court page for
+  today's instructions, never a cached copy.
+</p>
+
+<div class="decision-aid" aria-label="What to do with your jury summons">
+  <p><strong>You got a jury summons. Three steps.</strong></p>
+  <p>1. Find your group number on your summons: about an inch below the barcode, the word GROUP followed by a 3-digit number.</p>
+  <p>2. Check the court's live reporting page the evening before your date, or call the Juror Hotline at <a href="tel:+15139465879">513-946-5879</a>, to learn whether your group must report.</p>
+  <p>3. If you cannot serve or need a different date, respond by email with a scanned attachment to <a href="mailto:juryresponse@cms.hamilton-co.org">juryresponse@cms.hamilton-co.org</a>, or through the Juror Web Portal. Grand jurors report on the date and time listed on the summons.</p>
+</div>
+
+<section aria-labelledby="do-i-report-h">
+  <div class="visit-card visit-card-primary" id="do-i-report">
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Reporting instructions</span>
+      <h2 class="visit-card-title" id="do-i-report-h">Do I report?</h2>
+      <p class="visit-card-desc">
+        The court's reporting instructions change every day. This page never caches them:
+        always check the court's live reporting page for the current instructions.
+      </p>
+      <a class="visit-card-cta" href="https://hamiltoncountycourts.org/index.php/jury-reporting-instructions/">Check the live reporting page at hamiltoncountycourts.org &rarr;</a>
+      <p class="visit-card-desc">
+        <span class="status-pill status-pill-current">Link verified 2026-09-21</span>
+        This is the last date the link was checked, not today's instructions.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="alert inline-alert" role="note">
+  <strong>Scam alert: jury duty phone scam.</strong>
+  Courts never call to demand payment for missed jury duty. Scammers pose as county officials, threaten fines for alleged jury duty violations, and demand payment by phone; this is a scam, hang up. Read the court's <a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/07/SCAM-ALERT.pdf">July 2026 jury scam alert (PDF)</a>.
+</div>
+<nav aria-label="On this page">
+  <ul class="tab-toc">
+    <li><a href="#scam-details">Scam details</a></li>
+    <li><a href="#contact">Contact the Jury Commission</a></li>
+    <li><a href="#qa">Juror Q&amp;A <span class="count">10</span></a></li>
+    <li><a href="#excuses">Excuses</a></li>
+    <li><a href="#amenities">Amenities <span class="count">14</span></a></li>
+    <li><a href="#work">Work and pay</a></li>
+    <li><a href="#creed">Juror Creed</a></li>
+    <li><a href="#video">Orientation video</a></li>
+  </ul>
+</nav>
+
+<details class="sect-h" id="scam-details">
+  <summary><h2>Scam details</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>
+      The Jury Commission warns that to be called for jury duty in Hamilton County you must first
+      receive a summons in the mail. If you receive a phone call, email, visit, or any other
+      suspicious correspondence from anyone claiming to represent the Jury Commission Office,
+      Sheriff's Office, Clerk of Court, or any other court personnel, contact the Jury Commission
+      at <a href="tel:+15139465879">513-946-5879</a> to verify any potential jury duty obligations.
+      A newer version of the scam offers the caller the last 4 digits of your Social Security number;
+      the Jury Commission Office will never ask you for, collect, or use your Social Security number.
+    </p>
+    <div class="archival-block">
+      <details>
+        <summary>
+          <h3><span class="status-pill status-pill-archived">Archived</span> Jury duty phone scam press release, September 11, 2023</h3>
+        </summary>
+        <p class="archival-preamble">Court of Common Pleas press release dated September 11, 2023; kept for reference.</p>
+        <p>
+          The courts warned of a resurgence of a long-running phone scam: fraudsters posing as county
+          officials threatened individuals with fines for allegedly missing jury duty and pressured
+          victims into paying by phone with a Green Dot card or similar reloadable prepaid debit cards.
+          One recent victim was told he owed a $400 fine for allegedly missing jury duty and paid
+          before verifying. Administrative Judge Christopher Wagner advised residents to hang up and
+          call the Jury Commission Office at (513) 946-5879. Full release:
+          <a href="https://hamiltoncountycourts.org/wp-content/uploads/2023/09/JuryScam_PressRelease_Final_9.11.pdf">JuryScam_PressRelease_Final_9.11.pdf (PDF, hamiltoncountycourts.org)</a>.
+        </p>
+      </details>
+    </div>
+  </div>
+</details>
+
+<details class="sect-h" id="contact" open>
+  <summary><h2>Contact the Jury Commission</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <dl>
+      <dt>Jury Commissioner, Bradley J. Seitz</dt>
+      <dd>513-946-5880, bseitz@cms.hamilton-co.org</dd>
+      <dt>Jury Clerk, Alicia Vollner</dt>
+      <dd>513-946-5882</dd>
+      <dt>Jury Clerk, Liz Jeffries</dt>
+      <dd>513-946-5881</dd>
+      <dt>Juror information line</dt>
+      <dd>513-946-5879</dd>
+      <dt>Jury response email</dt>
+      <dd>juryresponse@cms.hamilton-co.org (response must be scanned as an attachment; do NOT respond in the body of an email)</dd>
+      <dt>Jury office fax</dt>
+      <dd>513-946-5885</dd>
+      <dt>Office</dt>
+      <dd>Hamilton County Courthouse, 1000 Main Street, Room 455, Cincinnati, Ohio 45202</dd>
+    </dl>
+    <p>
+      The Jury Commission now accepts jury summons responses and excuse/postponement requests by email;
+      responses must be scanned in as an attachment, and must not be written in the body of the email.
+      You may also respond through the <a href="http://juryservice.hamiltoncountycourts.org/">Juror Web Portal at juryservice.hamiltoncountycourts.org</a>
+      (log in with the 7-digit number beneath the barcode and your last name in ALL CAPS).
+      Office hours are Monday through Friday, 8:00 a.m. to 4:00 p.m., excluding holidays.
+    </p>
+  </div>
+</details>
+
+<section id="qa" aria-label="Juror questions and answers">
+  <h2 class="sect-h">Juror Q&amp;A <span class="count">(10 questions)</span></h2>
+  <details>
+    <summary><h3>Who may be called to serve as a juror?</h3></summary>
+    <p>You may be called to serve if you are at least 18 years old, a United States citizen and a resident of Hamilton County. In addition, you must have a reasonable knowledge of English and be physically and mentally capable of serving.</p>
+  </details>
+  <details>
+    <summary><h3>How did my name get selected for jury duty?</h3></summary>
+    <p>Jurors&#39; names are selected at random by a computer from a list of registered voters provided by the Board of Elections.</p>
+  </details>
+  <details>
+    <summary><h3>How long will I be required to serve?</h3></summary>
+    <p>Normal length of service is for two weeks. However, if you are not serving on a jury in progress, you will call a recording each night for reporting instructions for the next day. If your services are not required, it is recommended that you report to work.</p>
+  </details>
+  <details>
+    <summary><h3>Do I get paid for jury duty?</h3></summary>
+    <p>You will receive a fee of $30.00 for each day that you are required to attend. Work statements for your company indicating the days that you served as a juror and the amount paid will be furnished upon request.</p>
+  </details>
+  <details>
+    <summary><h3>What should I wear for jury duty?</h3></summary>
+    <p>Wear comfortable clothing that enhances the dignity of the Court and emphasizes the seriousness of your responsibility. Shorts, hats, tank tops, tee-shirts, sweatsuits, or other such informal attire is not considered appropriate in the courtroom. Because the Courthouse is an older building the Jury Commission Office tends to run either hot or cold; it is recommended that you come prepared with a jacket for colder temperatures.</p>
+  </details>
+  <details>
+    <summary><h3>What hours will I serve?</h3></summary>
+    <p>Normal business hours at the Courthouse are from 8:00 a.m. to 4:00 p.m. On days that you report for jury service, you can expect to be there during its normal hours. A specific time that you will need to appear by will be given with your nightly jury instructions, but the building will open at 8:00 a.m. If not selected for a jury, you may be able to leave early. Jurors will be given a lunch break and may be given other breaks during a trial. On occasion, a trial will continue beyond the normal working hours; if this happens, you may need to arrange your schedule to allow you to stay longer.</p>
+  </details>
+  <details>
+    <summary><h3>Is it possible that I might report for jury service but not sit on a jury?</h3></summary>
+    <p>Yes. The parties involved in a case generally seek to settle their differences and avoid the expense and time of a trial. Sometimes the case is settled just a few moments before the trial begins. Though many trials are scheduled daily, the Court does not know until that morning how many will actually go to trial. But your time spent waiting is not wasted; your presence encourages settlement.</p>
+  </details>
+  <details>
+    <summary><h3>Why doesn&#39;t my summons have a time to appear if I am a Petit Juror?</h3></summary>
+    <p>If you are a Petit Juror you will not automatically be appearing on the date listed on your summons that you received in the mail. Instead you must check the Juror Hotline (513-946-5879) or the court&#39;s reporting-instructions page after 4:00 p.m. the weekend prior to the date on your summons for your reporting instructions. If you are to appear you will be given a time to appear within the message. If you need to appear on the initial date from your summons the time will most likely be 8:30 a.m. Other days your reporting time may vary. Grand jurors are always to report on the date and time listed on your summons.</p>
+  </details>
+  <details>
+    <summary><h3>Can I bring food and drinks into the courthouse?</h3></summary>
+    <p>Yes. You are more than welcome to pack your lunch and any drinking vessel that you prefer so long as it has a lid. For your convenience the Jury Commission Office is equipped with a refrigerator, freezer, and 2 microwaves. Do not bring metal cutlery as it is possible it could be confiscated at the security checkpoint upon arrival. Plastic cutlery and plates are available here for you to use.</p>
+  </details>
+  <details>
+    <summary><h3>A note on security</h3></summary>
+    <p>Deputy Sheriffs will no longer be issuing claim tickets for items deemed by them to be dangerous items. This list includes, but is not limited to: pocket knives, scissors, mace, or any other weapon. If you feel you have a dangerous item in your possession you will need to leave it in your car. The Sheriff will not let you in the building with these items.</p>
+  </details>
+</section>
+
+<details class="sect-h" id="excuses">
+  <summary><h2>Excuses and postponements</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>
+      Any request to be excused or postponed must include your 6 or 7 digit juror number, located below
+      the bar code on your original summons. The Jury Commission will send a postcard granting or
+      denying your request; if you have not received one by the Thursday before your summons date,
+      contact the office at <a href="tel:+15139465879">513-946-5879</a> (press 0 to skip the automated message).
+    </p>
+    <h3>Mandatory excuses</h3>
+    <ul>
+      <li><strong>Age:</strong> if you are over the age of 75 and wish to be excused, the law requires the court to excuse you. Check the box and return the summons with verification of your age.</li>
+      <li><strong>Served in the last 2 years:</strong> if you have served on jury duty in Hamilton County within the last two years and wish to be excused, the request will be granted after the office verifies your last date of service.</li>
+      <li><strong>Out of county:</strong> if you are no longer a resident of Hamilton County you are ineligible to serve. Reply with verification of your out-of-county address (ID card or driver's license, utility bill, or rental/purchase agreement).</li>
+    </ul>
+    <h3>Optional excuses</h3>
+    <ul>
+      <li><strong>Employment issues:</strong> if your employer will not compensate you, submit a letter of verification on company letterhead stating that policy. If you are self-employed, write a letter on company letterhead stating the hardship (you may also submit a business card or recent tax filings; redact SSN/EIN).</li>
+      <li><strong>Student:</strong> submit a document verifying current enrollment (class schedule or a letter from the school; do not submit the school's calendar of events).</li>
+      <li><strong>Medical hardship:</strong> submit a letter from a medical professional stating you cannot serve; for chronic conditions ask that it be noted. If you are a care provider for an elderly parent or child, submit a letter from their doctor identifying them as needing your consistent care.</li>
+      <li><strong>Prior felonies:</strong> jurors with prior felony convictions may serve if no longer incarcerated or on probation/community control. A request to be excused on this ground must include verification of the conviction.</li>
+      <li><strong>Military service, stay-at-home parents, and mothers of a newborn or nursing mothers:</strong> contact the Jury Commission Office by phone during the indicated hours to inquire; active-duty military should call rather than send orders in writing.</li>
+    </ul>
+    <h3>Postponements</h3>
+    <p>
+      Ohio law allows a one-time postponement: indicate on the summons the Monday you would prefer to
+      start, within six months of your original date. A second request must include a letter explaining
+      why you need additional time.
+    </p>
+  </div>
+</details>
+
+<details class="sect-h" id="amenities">
+  <summary><h2>Juror amenities</h2><span class="meta"><span class="count">14</span> items</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>The Jury Commission Office provides the following while you wait to be called for a trial:</p>
+    <ul>
+      <li>Three 55-inch flat screen televisions with cable access</li>
+      <li>Desktop computers with internet</li>
+      <li>Wireless internet</li>
+      <li>4 cell phone charging stations</li>
+      <li>Books (donated by the Cincinnati Public Library)</li>
+      <li>Private bathrooms</li>
+      <li>Jurors quiet area (Room 468)</li>
+      <li>Private room for nursing mothers</li>
+      <li>Landline telephone access</li>
+      <li>Free coffee, tea, and water</li>
+      <li>Refrigerator, freezer, and microwave access</li>
+      <li>Plastic cutlery (forks, spoons, and knives) and paper plates available</li>
+      <li>Vending machines for both snacks and drinks (available for pay)</li>
+      <li>Complimentary: Tylenol, Advil, Aleve, and Aspirin available upon request</li>
+    </ul>
+  </div>
+</details>
+
+<details class="sect-h" id="work">
+  <summary><h2>Work statements and check re-issue</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <div class="ref-row-list">
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">Work statements</div>
+          <div class="ref-row-lede">Available on request, or print your own from the Juror Web Portal after your service begins. To request: name, 7-digit juror number, and preferred method of receipt (mail, email, or fax). <a href="mailto:bseitz@cms.hamilton-co.org">Email bseitz@cms.hamilton-co.org</a>.</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">Re-issue a check</div>
+          <div class="ref-row-lede">If your juror check was lost or never received, email the office; uncashed checks are investigated before re-issue, a process that takes 2-4 weeks. Include: status of the old check (lost, not received, stale), juror name, current address, dates of service, and a copy of the old check if stale. <a href="mailto:bseitz@cms.hamilton-co.org">Email bseitz@cms.hamilton-co.org</a>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details class="sect-h" id="creed">
+  <summary><h2>Juror Creed</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <blockquote class="juror-creed">
+      <p>I am a JUROR.</p>
+      <p>I am a seeker after truth.</p>
+      <p>I must listen carefully and with concentration to all of the evidence.</p>
+      <p>I must heed and follow the instructions of the Court.</p>
+      <p>I must respectfully and attentively follow the arguments of the lawyers, dispassionately seeking to find and follow the silver thread of truth through their conflicting assertions.</p>
+      <p>I must lay aside all bias and prejudice.</p>
+      <p>I must be led by my intelligence and not by my emotions.</p>
+      <p>I must respect the opinions of my fellow jurors, as they must respect mine, and in a spirit of tolerance and understanding must endeavor to bring the deliberations of the whole jury to agreement upon a verdict: but I must never assent to a verdict which violates the instructions of the Court or which finds as a fact that which, under the evidence and in my conscience, I believe to be untrue.</p>
+      <p>In fine, I must apply the Golden Rule by putting myself impartially in the place of the plaintiff, and of the defendant, remembering that although I am a juror today passing upon the rights of others, tomorrow I may be a litigant whose rights other jurors shall pass upon.</p>
+      <p>My verdict must do justice, for what is just is &#34;true and righteous altogether&#34;; and when my term of jury service is ended, I must leave it with my citizenship unsullied and my conscience clear.</p>
+    </blockquote>
+  </div>
+</details>
+
+<details class="sect-h" id="video">
+  <summary><h2>Orientation video</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <div class="visit-grid">
+      <div class="visit-card">
+        <div class="visit-card-body">
+          <span class="visit-card-kicker">Video</span>
+          <h3 class="visit-card-title">Juror orientation video</h3>
+          <p class="visit-card-desc">Hamilton County Jury Duty Introduction, published by the Hamilton County Court of Common Pleas on YouTube.</p>
+          <a class="visit-card-cta" href="https://www.youtube.com/watch?v=ExD1t-bj54w">Watch on youtube.com &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<div class="provenance">
+  <span class="prov-kicker">Sources</span>
+  <p>
+    Content mirrored from <span class="prov-feed">feeds/jury.json</span>
+    (corpus captured 2026-09-21).
+    <a href="https://hamiltoncountycourts.org/index.php/jury-commission/">Jury Commission page (hamiltoncountycourts.org)</a>;     <a href="https://hamiltoncountycourts.org/index.php/jury-reporting-instructions/">Jury reporting instructions (hamiltoncountycourts.org)</a>;     <a href="https://hamiltoncountycourts.org/index.php/contact-the-jury-commission/">Contact the Jury Commission (hamiltoncountycourts.org)</a>;     <a href="https://hamiltoncountycourts.org/index.php/juror-qa/">Juror Q&amp;A (hamiltoncountycourts.org)</a>;     <a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/07/SCAM-ALERT.pdf">July 2026 jury scam alert (PDF)</a>  </p>
+  <p class="prov-note">Corpus captured 2026-09-21. The court&#39;s reporting instructions page updates daily; link last verified 2026-09-21. Full texts of the July 2026 scam alert and the September 11, 2023 jury-scam press release are in the corpus.</p>
+</div>
+<div class="disclaimer-strip">
+  <p>JCStream is a public-records mirror, not a lawyer and not legal advice. Information is mirrored from court-published sources and may be out of date; verify time-sensitive details with the court before acting. If you find an error, <a href="https://github.com/AICincy/HCJC/issues">open an issue</a>.</p>
+</div><section class="more-reference" aria-label="More court reference">
+  <h2 class="sect-h">More court reference</h2>
+  <div class="visit-grid">
+    <a class="visit-card visit-card-sm" href="/courts/">
+      <span class="visit-card-title">Courts</span>
+      <span class="visit-card-desc">Which court handles what, and how to reach it.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/bond-schedule/">
+      <span class="visit-card-title">Bond schedule</span>
+      <span class="visit-card-desc">The published starting-point bond for misdemeanor and traffic charges.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/judges/">
+      <span class="visit-card-title">Judges</span>
+      <span class="visit-card-desc">Your judge&#39;s courtroom, chambers contact, and standing orders.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/rules/">
+      <span class="visit-card-title">Rules</span>
+      <span class="visit-card-desc">Local court rules: what is current and what changed.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/forms/">
+      <span class="visit-card-title">Forms</span>
+      <span class="visit-card-desc">The current court forms you can file.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/help/">
+      <span class="visit-card-title">Help and free aid</span>
+      <span class="visit-card-desc">Free legal aid and what to do right now.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/services/">
+      <span class="visit-card-title">Services and programs</span>
+      <span class="visit-card-desc">Court-run programs: probation, pretrial, treatment dockets.</span>
+    </a>
+  </div>
+</section>    </div>
+  </main>
+  <footer class="site">
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/courts/">Courts</a>
+      <a href="/bond-schedule/">Bond schedule</a>
+      <a href="/judges/">Judges</a>
+      <a href="/jury/">Jury duty</a>
+      <a href="/rules/">Rules</a>
+      <a href="/forms/">Forms</a>
+      <a href="/help/">Self-Help</a>
+      <a href="/services/">Services/Programs</a>
+      <a href="/feed.xml">RSS</a>
+      <a href="https://github.com/AICincy/HCJC">GitHub</a>
+      <a href="/transparency/">Access</a>
+      <a href="/data/public-records/">Public Records Dashboard</a>
+    </nav>
+    <span>Generated Sep 21, 2026, 8:52 PM ET</span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
+    <span class="footer-legal">Independent, non-governmental project - not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law, including the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC&nbsp;&sect;&nbsp;149.43</a>).</span>
+  </footer>
+  <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+
+  <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
+    <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <figure class="lightbox-figure">
+      <img id="lb-img" alt="" decoding="async">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+  </div>
+
+  <div id="tier-tip" role="tooltip" hidden></div>
+
+  <script src="/static/main.js?v=afc91b756b" defer></script>
+</body>
+</html>

@@ -3,43 +3,37 @@
 {% block sr_h1 %}{% endblock %}
 {% block content %}
 
-<header class="doc-h">
-  <div class="doc-h-stack">
-    <div class="title">Inmate Roster</div>
-    <div class="sub">Hamilton County Justice Center · Cincinnati, Ohio · ORC § 149.43</div>
-  </div>
-  <div class="stamp">Sweep {{ human_utc(snapshot.generated_utc) }}</div>
-</header>
-
-<section class="roster-hero" aria-labelledby="roster-hero-title">
+{# Spec 1.3.2: one header, not two. doc-h and roster-hero merged: kicker,
+   one h1 naming the page, one plain-language sub line, and the 4 stats as a
+   KPI row reusing the court-stat tile pattern (primary tile accent fill for
+   "Listed now"). The separate "Sweep" stamp is deleted; "Last checked" covers
+   it. active_nav stays "" (render context): the homepage is not a drawer
+   item, so nothing highlights. #}
+<header class="roster-hero" aria-labelledby="home-title">
   <div class="roster-hero-copy">
-    <p class="eyebrow">Hamilton County Justice Center mirror</p>
-    <h1 id="roster-hero-title">Search who is currently listed in custody.</h1>
+    <p class="eyebrow">Hamilton County Justice Center, public-records mirror</p>
+    <h1 id="home-title">Inmate roster and court reference</h1>
     <p>Look up a person by name, charge, ORC code, or booking number. Records are accusations only; arrest is not conviction.</p>
-    <div class="roster-hero-actions">
-      <a class="button-primary" href="#search-box">Search roster</a>
-      <a class="button-secondary" href="{{ base_url }}/help/">Free help resources</a>
+  </div>
+  <div class="court-hero-stats" role="list" aria-label="Roster snapshot">
+    <div class="court-stat court-stat-primary" role="listitem">
+      <span class="court-stat-num">{{ "{:,}".format(snapshot.inmate_count) }}</span>
+      <span class="court-stat-lab">Listed now</span>
+    </div>
+    <div class="court-stat" role="listitem">
+      <span class="court-stat-num">{{ recent_booked }}</span>
+      <span class="court-stat-lab">Booked 24h</span>
+    </div>
+    <div class="court-stat" role="listitem">
+      <span class="court-stat-num">{{ recent_released }}</span>
+      <span class="court-stat-lab">Released 24h</span>
+    </div>
+    <div class="court-stat" role="listitem">
+      <span class="court-stat-num">{{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}</span>
+      <span class="court-stat-lab">Last checked</span>
     </div>
   </div>
-  <dl class="roster-hero-stats" aria-label="Roster snapshot">
-    <div>
-      <dt>Listed now</dt>
-      <dd>{{ "{:,}".format(snapshot.inmate_count) }}</dd>
-    </div>
-    <div>
-      <dt>Booked 24h</dt>
-      <dd>{{ recent_booked }}</dd>
-    </div>
-    <div>
-      <dt>Released 24h</dt>
-      <dd>{{ recent_released }}</dd>
-    </div>
-    <div>
-      <dt>Last checked</dt>
-      <dd>{{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}</dd>
-    </div>
-  </dl>
-</section>
+</header>
 
 {% if roster_stale.blocked %}
 <aside class="banner" aria-label="Data access notice" role="status">
@@ -53,40 +47,52 @@
 </aside>
 {% endif %}
 
-<details class="banner legal-disclosure" open>
-  <summary><strong>Arrest is not conviction.</strong> Independent public-records mirror. No paid removals.</summary>
-  <div class="legal-disclosure-body">
-    <p>Everyone listed here is <strong>legally presumed innocent</strong> unless and until proven guilty in a court of law. The charges shown are accusations only and may be reduced, dismissed, or result in acquittal.</p>
-    <p>JCStream republishes public records of the Hamilton County Sheriff&rsquo;s Office (HCSO) as authorized by the Ohio Public Records Act, <a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a> - derived from HCSO&rsquo;s public inmate roster at <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a>. When HCSO removes a record, it is removed here on the next update cycle; this site keeps no historical archive. JCStream is an <strong>independent, non-governmental project</strong> - not affiliated with, endorsed by, or operated by HCSO or any government agency.</p>
-    <p class="banner-fine"><strong>Not a consumer reporting agency.</strong> Do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act (15&nbsp;U.S.C.&nbsp;&sect;&nbsp;1681 <em>et seq.</em>). To report an error, or to request removal under a court order of sealing or expungement (<a href="https://codes.ohio.gov/ohio-revised-code/section-2953.32">ORC&nbsp;&sect;&nbsp;2953.32</a>, as amended), open an issue at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> - <strong>there is never a fee, and there never will be</strong>. <a href="{{ base_url }}/data/#legal">Full legal notices &rarr;</a></p>
+{% include "_legal_disclosure.html" %}
+
+{# Spec 1.3.3: audience cards, the front-door routing. Three .visit-card
+   components in a .visit-grid (stacks at <=720px). Each card routes its
+   audience to the right tab; the crisis card's bond route points at
+   /bond-schedule/ (the H2 misroute fix), never at the disparity analysis. #}
+<section class="audience" aria-labelledby="audience-h">
+  <h2 id="audience-h" class="sr-only">Where to start</h2>
+  <div class="visit-grid">
+    <div class="visit-card visit-card-primary">
+      <div class="visit-card-body">
+        <span class="visit-card-kicker">Family and friends</span>
+        <h3 class="visit-card-title">Someone you know was arrested</h3>
+        <p class="visit-card-desc">Start here if this is your first time.</p>
+      </div>
+      <a class="visit-card-cta" href="#search-box">Search the roster</a>
+      <a class="visit-card-cta" href="{{ base_url }}/bond-schedule/">Bond: what it costs and how to post it</a>
+      <a class="visit-card-cta" href="{{ base_url }}/visit/">Visit or contact</a>
+      <a class="visit-card-cta" href="{{ base_url }}/help/">Free help</a>
+    </div>
+    <div class="visit-card">
+      <div class="visit-card-body">
+        <span class="visit-card-kicker">Your case</span>
+        <h3 class="visit-card-title">You have a case</h3>
+        <p class="visit-card-desc">Court dates, charge lookup, and bond costs.</p>
+      </div>
+      <a class="visit-card-cta" href="{{ base_url }}/court/">Find your court date</a>
+      <a class="visit-card-cta" href="{{ base_url }}/statute/">Look up a charge</a>
+      <a class="visit-card-cta" href="{{ base_url }}/bond-schedule/">Bond schedule</a>
+    </div>
+    <div class="visit-card">
+      <div class="visit-card-body">
+        <span class="visit-card-kicker">Research</span>
+        <h3 class="visit-card-title">Researching the system</h3>
+        <p class="visit-card-desc">The data behind this site, and how it stays accountable.</p>
+      </div>
+      <a class="visit-card-cta" href="{{ base_url }}/data/">Data and methodology</a>
+      <a class="visit-card-cta" href="{{ base_url }}/stats/">Statistics</a>
+      <a class="visit-card-cta" href="{{ base_url }}/transparency/">Transparency scorecard</a>
+    </div>
   </div>
-</details>
+</section>
 
-<p class="roster-meta">
-  <strong>{{ "{:,}".format(snapshot.inmate_count) }}</strong> {{ 'person' if snapshot.inmate_count == 1 else 'people' }} in custody.
-  Sweep {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}.
-  {{ recent_booked }} booked, {{ recent_released }} released in the last 24h.
-  <a href="{{ base_url }}/stats/">Statistics &rarr;</a>
-</p>
-<nav class="quick-actions" aria-label="Common next steps">
-  <a href="{{ base_url }}/court/">Find court date</a>
-  <a href="{{ base_url }}/visit/">Visit or contact</a>
-  <a href="{{ base_url }}/bond-disparity/">Understand bond</a>
-  <a href="{{ base_url }}/safety/">Community safety</a>
-  <a href="{{ base_url }}/help/">Free help</a>
-  <a href="{{ base_url }}/data/">Download data</a>
-  <a href="{{ base_url }}/feed.xml">Subscribe RSS</a>
-</nav>
-
-{% if safety_teaser is defined and safety_teaser %}
-<div class="section-h"><h2>Latest community incidents</h2><span class="grow"></span><span class="meta"><a href="{{ base_url }}/safety/">Cincinnati Open Data, explained &rarr;</a></span></div>
-<div class="fields">
-  {% for i in safety_teaser %}
-  <div class="k">{{ i.when_display }}</div>
-  <div class="v"><strong>{{ i.what }}</strong>{% if i.where %} &middot; {{ i.where }}{% endif %}{% if i.neighborhood %} &middot; {{ i.neighborhood }}{% endif %}</div>
-  {% endfor %}
-</div>
-{% endif %}
+{# Spec 1.3.4: the eight-tab court reference strip, the same block as the tab
+   footers (spec 3.1.8). active_nav is "" on the homepage, so all 8 render. #}
+{% include "_more_reference.html" %}
 
 {% if snapshot.inmate_count == 0 %}
 <div class="empty">
@@ -95,129 +101,27 @@
 </div>
 {% else %}
 
-<div class="filter-bar" id="filters" hidden>
-  <label for="filter-tier">Tier
-    <select id="filter-tier" data-filter="tier">
-      <option value="">all</option>
-      <option value="felony">felony</option>
-      <option value="misdemeanor">misdemeanor</option>
-      <optgroup label="degree">
-        {# Lowercase values: the ?tier= deep-link loop in main.js lowercases
-           params before matching option values. #}
-        {% for t in tier_ladder %}<option value="{{ t | lower }}">{{ t }}{% if roster_tiers.get(t) %} ({{ roster_tiers[t] }}){% endif %}</option>{% endfor %}
-      </optgroup>
-    </select>
-  </label>
-  <label for="filter-chap">Offense
-    <select id="filter-chap" data-filter="chap">
-      <option value="">all offenses</option>
-      {% for slug, label, count in all_chapters %}<option value="{{ slug }}">{{ label }} ({{ count }})</option>{% endfor %}
-    </select>
-  </label>
-  {# Results panel and status announcer live OUTSIDE the label: label
-     subtree content feeds the input's computed accessible name, and
-     interactive content inside a label is nonconforming HTML. #}
-  <div class="search-wrap">
-    <label for="search-box">Search
-      <input type="search" data-filter="search" id="search-box" placeholder="name, charge, ORC code, or #" autocomplete="off" aria-controls="search-results">
-    </label>
-    <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
-    <span class="sr-only" id="search-status" role="status"></span>
-  </div>
-  <label for="filter-recent">Activity
-    <select id="filter-recent" data-filter="recent">
-      <option value="">any time</option>
-      <option value="booked">booked 24h</option>
-    </select>
-  </label>
-  <label for="filter-sort">Sort
-    <select id="filter-sort">
-      <option value="recent">newest first</option>
-      <option value="custody">longest held</option>
-      <option value="degree">most serious</option>
-      <option value="name">name A-Z</option>
-    </select>
-  </label>
-  <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false" hidden>
-    <span class="view-toggle-icon" aria-hidden="true">≡</span>
-    <span class="view-toggle-text">Table view</span>
-  </button>
-  <button type="button" class="filter-reset" id="filter-reset" hidden>Reset filters</button>
-  {# Visible only; announcements go through the single #search-status node
-     so one keystroke can't fire multiple polite live regions at once. #}
-  <span class="filter-count"></span>
-</div>
-<div class="empty filter-empty" id="filter-empty" role="status" hidden>
-  <h2>No one in custody matches that filter.</h2>
-  <p>Try a last name only, clear one filter, or check spelling. Recently arrested people may not appear immediately, and some people may be held by another county, city, state, or federal agency.</p>
-  <p><a href="{{ base_url }}/help/">Get free help resources</a> &middot; <a href="https://www.hcso.org/justice-center-services/inmate-search/">Check the HCSO source</a></p>
-</div>
-{% set tb = roster_tiers %}
-{% set tb_known = (tb.values() | sum) - tb.get('UNK', 0) %}
-{% if tb_known > 0 %}
-<div class="tier-strip-wrap">
-  <div class="tier-strip" role="img" aria-label="Roster by most serious degree: {% for t in tier_ladder %}{% if tb.get(t) %}{{ t }} {{ tb[t] }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}">
-    {% for t in tier_ladder %}{% if tb.get(t) %}<span class="tier-strip-seg ladder-{{ t }}" style="width: {{ '%.2f' % (100.0 * tb[t] / tb_known) }}%" title="{{ t }}: {{ tb[t] }}"></span>{% endif %}{% endfor %}
-  </div>
-  <span class="tier-strip-cap" aria-hidden="true">most serious degree per person &middot; F1 &rarr; MM</span>
-</div>
-{% endif %}
-<p class="legend" aria-hidden="true">
-  <span class="swatch charge-2903"><span class="dot"></span> violence / sex</span>
-  <span class="swatch charge-2923"><span class="dot"></span> weapons</span>
-  <span class="swatch charge-2911"><span class="dot"></span> burglary / property</span>
-  <span class="swatch charge-2913"><span class="dot"></span> theft / fraud</span>
-  <span class="swatch charge-2925"><span class="dot"></span> drugs</span>
-  <span class="swatch charge-2919"><span class="dot"></span> family / domestic</span>
-  <span class="swatch charge-traffic"><span class="dot"></span> traffic / other</span>
-  <span class="swatch"><span class="tier tier-felony legend-tier">F</span> felony</span>
-  <span class="swatch"><span class="tier tier-misdemeanor legend-tier">M</span> misdemeanor</span>
-</p>
+{# Spec 1.3.5: the roster tool. Search and filter controls render visible in
+   markup (no `hidden`); JS enhances rather than gates. Tier strip and legend
+   sit below the filter bar, collapsed into a details on small viewports.
+   Crimes-of-the-month moved to /stats/ (spec 1.3.7). #}
+<section aria-labelledby="roster-tool-h">
+  <div class="section-h"><h2 id="roster-tool-h">Search the roster</h2><span class="grow"></span><span class="meta">{{ "{:,}".format(snapshot.inmate_count) }} in custody</span></div>
+  {% include "_roster_tool.html" %}
+</section>
 
-{% if recent_released_24h %}
-<details class="released-24h">
-  <summary>Released in the last 24 hours <span class="count">{{ recent_released_24h | length }}</span></summary>
-  <p class="released-note">From the public <a href="{{ base_url }}/data/">changelog</a>. Release events record leaving the Justice Center; this site does not track court outcomes.</p>
-  {% set rel_recent = recent_released_24h[-12:] | reverse | list %}
-  <p class="released-flow">{% for e in rel_recent %}<span>{{ e.name }}</span> <span class="sep" aria-hidden="true">·</span> {% endfor %}<a href="{{ base_url }}/data/">{% if recent_released_24h | length > 12 %}+{{ recent_released_24h | length - 12 }} more in the changelog{% else %}full changelog{% endif %}</a></p>
-</details>
+{# Spec 1.3.6: the month window behind HOMEPAGE_FULL_ROSTER. Older months live
+   on the archive page; nothing is unpublished. The sticky month rail's
+   archive chip needs a base.html edit (Phase-A owned); this block is the
+   in-content route until then. #}
+{% if not homepage_full_roster and archive_months > 0 %}
+<section aria-labelledby="archive-link-h">
+  <div class="section-h"><h2 id="archive-link-h">Earlier bookings</h2><span class="grow"></span><span class="meta"><a href="{{ base_url }}/archive/">open the archive &rarr;</a></span></div>
+  <p>{{ "{:,}".format(archive_bookings) }} more booking{{ '' if archive_bookings == 1 else 's' }} from {{ archive_months }} earlier {{ 'month' if archive_months == 1 else 'months' }} {{ 'is' if archive_bookings == 1 else 'are' }} on the <a href="{{ base_url }}/archive/">earlier bookings archive</a>, with the same search and filters.</p>
+</section>
 {% endif %}
 
-{# Empty landing bin for JS sort modes (main.js 3c). Ships hidden and empty:
-   with JS off the sort control never appears and this section is inert.
-   class="month" is load-bearing - the .month > .cards grid padding and the
-   body.is-table row rules are scoped to .month. #}
-<section class="month sort-bin" id="sort-bin" aria-label="Sorted roster" hidden><div class="cards"></div></section>
-
-{% for month, group in by_month %}
-{% set month_slug = month | replace(' ', '-') | lower %}
-<details class="month" id="m-{{ month_slug }}" {% if month in expanded_months %}open{% endif %}>
-  <summary>
-    <h2>{{ month }}</h2>
-    <span class="count">{{ group | length }} booking{{ '' if group|length == 1 else 's' }}</span>
-  </summary>
-
-  {% set coms = crimes_of_month(group) %}
-  {% if coms %}
-  <details class="coms">
-    <summary>
-      <span class="coms-label">Crimes of {{ month.split(' ')[0] }}</span>
-      {% for c in coms[:4] %}<span class="coms-top chap chap-{{ c.cls }}">{{ c.label }} <strong>{{ c.count }}</strong></span>{% endfor %}
-      {% if coms | length > 4 %}<span class="coms-more">+{{ coms|length - 4 }} more</span>{% endif %}
-    </summary>
-    <div class="coms-grid">
-      {% for c in coms %}<span class="chap chap-{{ c.cls }}">{{ c.label }} <strong>{{ c.count }}</strong></span>{% endfor %}
-    </div>
-  </details>
-  {% endif %}
-
-  <div class="cards">
-    {% for inm in group %}{% include "_card.html" %}{% endfor %}
-  </div>
-</details>
-{% endfor %}
-
-
+{% endif %}
 
 <details class="about-jcstream">
   <summary>About JCStream - purpose, removal policy, no fees</summary>
@@ -227,8 +131,5 @@
     <p class="muted">See also: <a href="{{ base_url }}/data/#legal">full legal notices</a> &middot; <a href="{{ base_url }}/data/">data &amp; methodology</a> &middot; <a href="https://github.com/AICincy/HCJC">source code (MIT)</a>.</p>
   </div>
 </details>
-
-{% endif %}
-
 
 {% endblock %}

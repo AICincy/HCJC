@@ -28,13 +28,20 @@
     if (a && a.getAttribute('href').length > 1) openDetailsFor(a.getAttribute('href'));
   });
 
-  // (1b) Site nav drawer. Markup ships with [open] so the no-JS fallback is
-  // an expanded (usable) list; with JS, small screens start closed and the
-  // drawer dismisses on outside click. Desktop hides the toggle entirely.
+  // (1b) Site nav drawer. Markup ships closed: mobile is a native disclosure
+  // with no JS (H6 fix, B2); desktop renders the rail from closed markup via
+  // the ::details-content CSS override. With JS, the drawer dismisses on
+  // outside click on small screens and aria-expanded on the toggle is synced
+  // for assistive technology (B2).
   var navMenu = document.querySelector('.nav-menu');
   if (navMenu && window.matchMedia) {
     var navMQ = window.matchMedia('(max-width: 720px)');
-    if (navMQ.matches) navMenu.removeAttribute('open');
+    var navToggle = navMenu.querySelector('.nav-toggle');
+    var syncNavAria = function () {
+      if (navToggle) navToggle.setAttribute('aria-expanded', navMenu.open ? 'true' : 'false');
+    };
+    navMenu.addEventListener('toggle', syncNavAria);
+    syncNavAria();
     document.addEventListener('click', function (e) {
       if (navMQ.matches && navMenu.open && !navMenu.contains(e.target)) navMenu.removeAttribute('open');
     });

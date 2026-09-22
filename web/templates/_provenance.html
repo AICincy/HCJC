@@ -1,0 +1,29 @@
+{# _provenance.html — .provenance source-line component (spec 3.2, 5.5, 6.3).
+   Set `provenance` (dict) before including:
+     provenance = {
+       "feed": "feeds/courts.json",          # staged feed path (required)
+       "captured": "2026-09-21",             # corpus crawl date (required)
+       "sources": [{"label": "...", "url": "..."}],  # official sources (required)
+       "sha256": "...",                      # source-document hash (optional)
+       "note": "...",                        # extra provenance note (optional)
+     }
+   Every money/time/law claim on the page carries its own inline provenance
+   per spec 5.1.6; this block is the page-level source line. #}
+{% if provenance is defined and provenance %}
+<div class="provenance">
+  <span class="prov-kicker">Sources</span>
+  <p>
+    Content mirrored from <span class="prov-feed">{{ provenance.feed }}</span>
+    (corpus captured {{ provenance.captured }}).
+    {% for s in provenance.sources | default([], true) %}
+    <a href="{{ s.url }}">{{ s.label }}</a>{% if not loop.last %}; {% endif %}
+    {% endfor %}
+  </p>
+  {% if provenance.sha256 %}
+  <p class="prov-sha">Source document SHA-256: <code>{{ provenance.sha256 }}</code></p>
+  {% endif %}
+  {% if provenance.note %}
+  <p class="prov-note">{{ provenance.note }}</p>
+  {% endif %}
+</div>
+{% endif %}

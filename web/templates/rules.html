@@ -1,0 +1,197 @@
+{# rules.html — Local Rules tab (spec 2.3 Rules, 3.1, 3.2, 5.1, 5.5, 6.1).
+   Job statement: "what do the local rules say, and which version is current."
+   Core pattern: current / amended / archived are never intermixed.
+   The superseded 2017 Rule 24 text is never published (dropped from every feed). #}
+{% extends "base.html" %}
+{% set active_nav = "rules" %}
+{% block title %}Local rules &middot; JCStream{% endblock %}
+{% block canonical_path %}/rules/{% endblock %}
+{% block body_class %}detail page-rules{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Local rules</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <h1 class="title">Local Rules</h1>
+    <div class="sub">Common Pleas, General Division, book effective 4-24-26</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  The current rules book, the amendments adopted after it, and the superseded rules kept for
+  reference. The layering on this page is how this site organizes the material: the 4-24-26 rules
+  book is canonical, three post-book amendments sit on top of it, and superseded standalone rule
+  texts are archival.
+</p>
+
+<nav aria-label="On this page">
+  <ul class="tab-toc">
+    <li><a href="#changed">Changed since the book <span class="count">{{ amendment_count }}</span></a></li>
+    <li><a href="#book">Current rules book <span class="count">{{ toc_count }}</span></a></li>
+    <li><a href="#municipal">Municipal Court rules <span class="count">{{ municipal_html | length }} pages, {{ municipal_pdf | length }} PDFs</span></a></li>
+    <li><a href="#archival">Archived rules <span class="count">{{ archival_count }}</span></a></li>
+  </ul>
+</nav>
+
+<details class="sect-h" id="changed" open>
+  <summary><h2>Changed since the book</h2><span class="meta"><span class="count">{{ amendment_count }}</span> amendments</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>Three rules adopted after the 4-24-26 book, newest first. Each shows its effective date, its source PDF, and the full rule text.</p>
+    {% for a in amendments %}
+    <article class="rule-card" id="rule-{{ a.rule }}">
+      <h3>
+        <span class="rule-chip">Rule {{ a.rule }}</span>
+        {{ a.title }}
+        <span class="status-pill status-pill-current">Current</span>
+      </h3>
+      <p class="rule-meta">{{ a.court }} &middot; Effective {{ a.effective_display }}{% if a.effective_caveat %} &middot; {{ a.effective_caveat }}{% endif %}</p>
+      <p>{{ a.what_changed }}</p>
+      <p>Source: <a href="{{ a.source_url }}">{{ a.source_label }} (PDF, hamiltoncountycourts.org)</a></p>
+      <details>
+        <summary><h4>Read Rule {{ a.rule }}</h4></summary>
+        <div class="rule-fulltext">
+          {% for para in a.full_text %}
+          <p>{{ para }}</p>
+          {% endfor %}
+        </div>
+      </details>
+    </article>
+    {% endfor %}
+  </div>
+</details>
+
+<details class="sect-h" id="book" open>
+  <summary><h2>Current rules book <span class="status-pill status-pill-current">Current</span></h2><span class="meta"><span class="count">{{ toc_count }}</span> rules</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>
+      Local Rules Book, Hamilton County Court of Common Pleas, General Division, effective
+      {{ book_effective }}. Each entry links to the source PDF:
+      <a href="{{ book_url }}">Local-Rules-Book-Version-Effective-4-24-26.pdf (PDF, hamiltoncountycourts.org)</a>.
+      The table of contents below is reproduced verbatim from the book, including its own quirks:
+      rule 48's title truncates at "Commercial Dockets -", and rule 14.2's title prints
+      "Judgment s". The full book text is not inlined here; it is a single unsegmented extract.
+    </p>
+    <div class="ref-row-list">
+      {% for entry in toc %}
+      <a class="ref-row" href="{{ book_url }}" aria-label="Rule {{ entry.rule }} in the current rules book PDF">
+        <span class="rule-chip ref-chip">{{ entry.rule }}</span>
+        <span class="ref-row-title">{{ entry.title }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</details>
+
+<details class="sect-h" id="municipal">
+  <summary><h2>Municipal Court rules</h2><span class="meta"><span class="count">{{ municipal_html | length }}</span> pages, <span class="count">{{ municipal_pdf | length }}</span> civil-rule PDFs</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>
+      Hamilton County Municipal Court local rules. There is no Municipal Rule 11 page in the court's
+      published corpus; the proposed Municipal Rule 11 bond schedule amendment is archived below
+      (comment period closed 9/20/2026). Civil rules are in Roman numerals.
+    </p>
+    <h3>Rule pages</h3>
+    <div class="ref-row-list">
+      {% for r in municipal_html %}
+      <a class="ref-row" href="{{ r.url }}">
+        <span class="ref-row-title">{{ r.title }}</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      {% endfor %}
+    </div>
+    <h3>Civil rule PDFs</h3>
+    <div class="ref-row-list">
+      {% for r in municipal_pdf %}
+      <a class="ref-row" href="{{ r.url }}">
+        <span class="ref-row-title">{{ r.title }}</span>
+        <span class="ref-row-meta">{{ r.label }}</span>
+      </a>
+      {% endfor %}
+    </div>
+    <p class="quirk-note">Source layout quirk preserved: the Municipal Civil Rule XVIII PDF opens with a fee-schedule fragment ("Alias Summons (does not include service) $40.00") before the rule text.</p>
+  </div>
+</details>
+
+<div class="archival-block" id="archival">
+  <details open>
+    <summary>
+      <h2><span class="status-pill status-pill-archived">Archived</span> Superseded rules <span class="count">({{ archival_count }} entries)</span></h2>
+    </summary>
+    <p class="archival-preamble">Superseded by the 4-24-26 rules book; kept for reference, not current law. The 2017 Rule 24 (compulsory arbitration) text is not published here; that rule number was reassigned.</p>
+    <div class="ref-row-list">
+      {% for e in archival %}
+      {% if e.rule %}
+      <div class="ref-row">
+        <span class="rule-chip ref-chip">{{ e.rule }}</span>
+        <div>
+          <div class="ref-row-title">{{ e.title }}</div>
+          <div class="ref-row-lede">{{ e.status }}.</div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% for e in archival %}
+      {% if not e.rule %}
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">{{ e.title }}</div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </details>
+  <details>
+    <summary>
+      <h2><span class="status-pill status-pill-archived">Archived</span> Proposed amendments</h2>
+    </summary>
+    <p class="archival-preamble">Comment period closed 9/20/2026; kept for reference, not current law.</p>
+    {% for p in proposed %}
+    <div class="ref-row">
+      <div>
+        <div class="ref-row-title">{{ p.title }}: {{ p.item }}</div>
+        <div class="ref-row-lede">
+          Comment period closed {{ p.closed }}. {{ p.extract_note }} Contact listed on the proposal page:
+          {{ p.contact }}. <a href="{{ p.url }}">Watch the live proposal page at hamiltoncountycourts.org for adoption</a>.
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </details>
+</div>
+
+<details class="sect-h" id="methodology">
+  <summary><h2>About this page</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>
+      Methodology: Rules 7, 9, 14, and 29 were reclassified to archival on 2026-09-21 after text
+      comparison verified each was absorbed into the 4-24-26 rules book (similarities 0.995 to 0.999;
+      the book's Rule 14 section is stamped Effective 12-11-2025). The true post-book amendment layer
+      is Rules 31, 17, and 18. Rule 17's effective date comes from the source filename; the document
+      text states only "Rev. 8/2026". Rule 18's effective date is not stated in the document.
+    </p>
+    <p>
+      See also: <a href="{{ base_url }}/forms/">court forms</a>, and the
+      <a href="{{ base_url }}/bond-schedule/">bond schedule</a> (rules 14.1 and 14.2 cover bond and
+      bond-forfeiture judgments in the book).
+    </p>
+  </div>
+</details>
+
+{% set provenance = {
+  "feed": "feeds/rules.json",
+  "captured": "2026-09-21",
+  "sources": [
+    {"label": "Local Rules Book effective 4-24-26 (PDF, hamiltoncountycourts.org)", "url": book_url},
+    {"label": "Municipal Court local rules index (hamiltoncountycourts.org)", "url": "https://hamiltoncountycourts.org/index.php/municipal-local-rules/"},
+  ],
+  "sha256": book_sha256,
+  "note": "Corpus captured 2026-09-21. Rule 31 PDF, Rule 17 PDF, and Rule 18 PDF are the amendment sources listed above. The 2017 Rule 24 text was excluded from every feed and is not published here.",
+} %}
+{% include "_provenance.html" %}
+{% include "_disclaimer_strip.html" %}
+{% include "_more_reference.html" %}
+{% endblock %}

@@ -362,6 +362,8 @@ def _render_build(
         map_points=len(dispatch_points),
     )
     _render_index(env, idx_ctx, build_dir)
+    _render_archive_page(env, snapshot, rd["by_month"], rd["nav_months"], build_dir)
+    _render_public_records_page(env, snapshot, build_dir)
     _render_inmates(env, snapshot, matches, events, build_dir)
     _render_feeds(env, events, build_dir)
     _render_data_page(env, snapshot, build_dir)
@@ -375,6 +377,11 @@ def _render_build(
     _render_visit_page(env, build_dir)
     _render_help_page(env, build_dir)
     _render_courts_page(env, build_dir)
+    _render_judges_page(env, build_dir)
+    _render_jury_page(env, build_dir)
+    _render_rules_page(env, build_dir)
+    _render_forms_page(env, build_dir)
+    _render_services_page(env, build_dir)
     _copy_static(build_dir)
     _copy_photos(build_dir)
     _write_manifest(build_dir, base_url)
@@ -539,10 +546,17 @@ from web.pages import (  # noqa: E402
     _render_courts_page,
     _render_data_page,
     _render_feeds,
+    _render_forms_page,
     _render_help_page,
     _render_index,
+    _render_archive_page,
+    _render_public_records_page,
     _render_inmates,
+    _render_judges_page,
+    _render_jury_page,
+    _render_rules_page,
     _render_safety_page,
+    _render_services_page,
     _render_stats_page,
     _render_statute_page,
     _render_transparency_page,

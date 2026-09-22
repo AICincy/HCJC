@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Public Records Dashboard &middot; JCStream{% endblock %}
+{% block canonical_path %}/data/public-records/{% endblock %}
+{% block body_class %}detail{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+{# Public Records Dashboard (spec 1.3 homepage item 6). Collects the
+   public-records material already published by the build, one line per item.
+   The repo carries no public-records correspondence log, so none is
+   presented; the agency's own request channel is linked instead. Nothing on
+   this page is invented: every target exists in the build. active_nav stays
+   "" (render context): no drawer highlight. #}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Public Records Dashboard</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <h1 class="title">Public Records Dashboard</h1>
+    <div class="sub">The public-records material this project publishes, in one place</div>
+  </div>
+  <div class="stamp">Sweep {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}</div>
+</header>
+
+<p class="page-lede">JCStream republishes public records of the Hamilton County Sheriff&rsquo;s Office under the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43">ORC&nbsp;&sect;&nbsp;149.43</a>). This page collects what the project itself publishes about those records: the open data feeds, the access-interruption evidence, and the transparency scorecard.</p>
+
+<div class="section-h"><h2>Records and feeds</h2></div>
+<div class="ref-rows">
+  <a class="ref-row" href="{{ base_url }}/data/">
+    <span class="ref-row-title">Open data feeds</span>
+    <span class="ref-row-lede">Every JSON feed this site is built from: the current roster snapshot, the changelog, and the supplemental open-data pulls, each with its own refresh stamp.</span>
+  </a>
+  <a class="ref-row" href="{{ base_url }}/data/waf_block_log.json">
+    <span class="ref-row-title">Access-interruption evidence log</span>
+    <span class="ref-row-lede">Timestamped, tamper-evident record of blocked or empty responses from the HCSO public inmate-search portal, logged per retrieval cycle.</span>
+  </a>
+  <a class="ref-row" href="{{ base_url }}/transparency/">
+    <span class="ref-row-title">Transparency scorecard</span>
+    <span class="ref-row-lede">Tallies computed from the evidence log (block counts, streaks, cumulative denied hours), plus a JSON mirror of the metrics.</span>
+  </a>
+</div>
+
+<div class="section-h"><h2>Requesting records yourself</h2></div>
+<p>To request public records directly from the agency, use the Sheriff&rsquo;s Office <a href="https://www.hcso.org/public-records-requests/" target="_blank" rel="noopener">public records request page</a> or email <a href="mailto:publicrecords@hcso.org">publicrecords@hcso.org</a>.</p>
+<p class="muted">This dashboard lists only material the project publishes. It is not a records repository and does not hold correspondence with the agency.</p>
+{% endblock %}

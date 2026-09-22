@@ -1,0 +1,203 @@
+{
+  "checked_utc": "2026-09-22T03:45:00Z",
+  "method": "HTTP GET status check via the host egress proxy; curl/8.0 user agent for all 49 form URLs, plus a browser-UA spot check on one 404 (still 404).",
+  "note": "46 of 49 form source URLs return 404 (extensionless feed URL and extension-appended URL alike); only the 3 Word documents resolve. Rows render 'Official source pending verification' per spec 5.4 rather than dead links. The court's uploads directory appears reorganized since the 2026-09-20 crawl.",
+  "forms": {
+    "2026_04_Alford-Plea-4.24.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_04_Guilty-Plea-Form-4.24.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_04_Guilty-Plea-Agreed-Sentence-form-4.24.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_04_No-Contest-4.24.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_04_Misdemeaner-Guilty-Plea-4.24.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_04_RT-Guilty-Plea-Regan-Tokes-4.24.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_04_RT-No-Contest-Guilty-Plea-Qualifying-Offense-4.24.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_04_JURY-WAIVER-4.24.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_04_Affidavit-of-Indigency-4.24.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2021_12_Wagner-Guilty-Plea-Misdemeanor-Rev-9-23-21": {
+      "status": "pending",
+      "url": null
+    },
+    "2021_12_Wagner-Guilty-Plea-No-Reagan-Tokes-Rev-9-22-21": {
+      "status": "pending",
+      "url": null
+    },
+    "2021_12_Wagner-Guilty-Plea-Regan-Tokes-Rev-9-23-21": {
+      "status": "pending",
+      "url": null
+    },
+    "2021_12_Wagner-No-Contest-Plea-No-Reagan-Tokes-Rev-9-23-21": {
+      "status": "pending",
+      "url": null
+    },
+    "2021_12_Wagner-No-Contest-Plea-Reagan-Tokes-Rev-9-23-21": {
+      "status": "pending",
+      "url": null
+    },
+    "2021_10_Cross_1Waiver-of-Trial-by-Jury-Criminal": {
+      "status": "pending",
+      "url": null
+    },
+    "2022_01_Alford-Plea-Form": {
+      "status": "pending",
+      "url": null
+    },
+    "2023_01_Dink-Guilty-Plea": {
+      "status": "pending",
+      "url": null
+    },
+    "2023_01_Dink-Entry-Plea-of-Guilty-Agreed-Sentence": {
+      "status": "pending",
+      "url": null
+    },
+    "2023_01_Dink-Entry-Plea-of-No-Contest": {
+      "status": "pending",
+      "url": null
+    },
+    "2023_01_Dink-Entry-Plea-of-No-Contest-Agreed-Sentence": {
+      "status": "pending",
+      "url": null
+    },
+    "2023_01_Dink-Entry-Withdrawing-Plea-Guilty-F1F2-Reagan-Tookes": {
+      "status": "pending",
+      "url": null
+    },
+    "2023_01_Dink-Entry-Withdrawing-Plea-Not-Guilty-to-Guilty-Misd.DNA-Copy": {
+      "status": "pending",
+      "url": null
+    },
+    "2024_03_01Guilty-Plea-Updated-Conforming-Revisions-1-18-24": {
+      "status": "pending",
+      "url": null
+    },
+    "2024_03_02Guilty-Plea-Agreed-Sentence-Updated-Conforming-Revisions-1-18-24": {
+      "status": "pending",
+      "url": null
+    },
+    "2024_03_03No-Contest-Plea-Reagan-Tokes-Rev-5-22-23": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_04_Guilty-Plea-Agreed-Sentence-Updated-Conforming-Revisions-1-18-24": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_04_Guilty-Plea-OPEN-RT": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_04_Guilty-Plea-form-non-RT": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_04_MISDEMEANOR-PLEA": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_04_guilty-agreed-non-rt": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_04_NEW-JURY-WAIVER-3.31.25": {
+      "status": "pending",
+      "url": null
+    },
+    "2024_03_Guilty-Plea-No-Reagan-Tokes-Rev-2-23-24.doc": {
+      "status": "ok",
+      "url": null
+    },
+    "2024_03_Guilty-Plea-Agreed-Sentence-No-Reagan-Tokes-Rev-2-23-24_1.doc": {
+      "status": "ok",
+      "url": null
+    },
+    "2021_04_Jenkins-26F-Joint-Discovery-Plan": {
+      "status": "pending",
+      "url": null
+    },
+    "2021_06_Rule26Form2": {
+      "status": "pending",
+      "url": null
+    },
+    "2022_01_goering26f-pdf": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_04_Tallent-26F-Joint-Discovery-Plan-FINAL-4.1.25": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_05_rule26-v5-Updated_1": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_05_Criminal-Case-Scheduling-Order-4.21.26": {
+      "status": "pending",
+      "url": null
+    },
+    "2024_07_Jury-Scheduling-Order-Form-Silverstein": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_07_Volunteer-Mediator-Application": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_07_Contract-Mediator-Application_fillable": {
+      "status": "pending",
+      "url": null
+    },
+    "2022_03_Explanation-of-Duties-to-Register-as-a-Sex-Offender1": {
+      "status": "pending",
+      "url": null
+    },
+    "2022_03_Notice-of-Duties-to-Enroll-as-a-Violent-Offender-ORC-2903.41-et-seq.": {
+      "status": "pending",
+      "url": null
+    },
+    "2022_03_Notice-of-Duties-to-Register-as-an-Arson-Offender-ORC-2909.14": {
+      "status": "pending",
+      "url": null
+    },
+    "2024_07_REEC-Application-HAM-CO.-FINAL-UPDATED-COPY-PDF": {
+      "status": "pending",
+      "url": null
+    },
+    "2022_01_Transcript-Request-Form": {
+      "status": "pending",
+      "url": null
+    },
+    "2025_04_Media-Request": {
+      "status": "pending",
+      "url": null
+    },
+    "2026_04_Branch-26F-Joint-Discovery-Plan-updated-4.22.26.docx": {
+      "status": "ok",
+      "url": null
+    }
+  }
+}

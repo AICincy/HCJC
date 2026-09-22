@@ -1,0 +1,1371 @@
+<!doctype html>
+<html lang="en" data-base-url="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Local rules &middot; JCStream</title>
+  <meta name="robots" content="noindex, noarchive">
+  <link rel="canonical" href="https://www.aretheyinjail.com/rules/">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#141619">
+  <meta name="description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster. Everyone listed is presumed innocent until proven guilty in a court of law.">
+  <meta property="og:site_name" content="JCStream">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JCStream - Hamilton County, OH Justice Center roster mirror">
+  <meta property="og:description" content="Public-records mirror of the Hamilton County, Ohio Justice Center inmate roster, rebuilt on a best-effort schedule. Everyone listed is presumed innocent - charges are accusations only, not evidence of guilt.">
+  <meta property="og:url" content="https://www.aretheyinjail.com/">
+  <meta name="twitter:card" content="summary">
+  <script src="/static/theme-init.js?v=1fb7517bcf"></script>
+  <link rel="stylesheet" href="/static/style.css?v=d908b3a588">
+  <noscript><style>.theme-toggle { display: none; }</style></noscript>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - all changes" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - new bookings" href="/booked.xml">
+  <link rel="alternate" type="application/rss+xml" title="JCStream - releases" href="/released.xml">
+  <link rel="author" href="/humans.txt">
+</head>
+<body id="top" class="detail page-rules">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="/">
+        <span class="brand-text">
+          <span class="brand-name">JCStream</span>
+          <span class="brand-sub">Hamilton County &middot; Justice Center mirror</span>
+        </span>
+      </a>
+      <a class="masthead-seal masthead-seal-hcjc"
+         href="https://www.facebook.com/HCJCOH"
+         target="_blank" rel="noopener"
+         aria-label="Hamilton County Booking Photos on Facebook">
+        <img src="/static/img/hcjc-seal.png"
+             srcset="/static/img/hcjc-seal.png 1x, /static/img/hcjc-seal-2x.png 2x"
+             alt="Hamilton County Booking Photos seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <a class="masthead-seal masthead-seal-coc"
+         href="https://www.facebook.com/cityofcincinnati"
+         target="_blank" rel="noopener"
+         aria-label="City of Cincinnati on Facebook">
+        <img src="/static/img/coc-seal.png"
+             srcset="/static/img/coc-seal.png 1x, /static/img/coc-seal-2x.png 2x"
+             alt="City of Cincinnati seal"
+             width="36" height="36" decoding="async">
+      </a>
+      <button type="button" class="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      </button>
+      <details class="nav-menu">
+        <summary class="nav-toggle" aria-label="Menu">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </summary>
+<nav class="nav-drawer" aria-label="Site">
+  <div class="nav-group" role="group" aria-label="Roster tools">
+    <span class="nav-group-label" aria-hidden="true">Roster tools</span>
+    <a class="nav-link" href="/stats/">Stats <span class="nav-hint">snapshot</span></a>
+    <a class="nav-link" href="/court/">Calendar <span class="nav-hint">who&#39;s due</span></a>
+    <a class="nav-link" href="/safety/">Safety <span class="nav-hint">incidents</span></a>
+    <a class="nav-link" href="/statute/">Statutes <span class="nav-hint">lookup</span></a>
+    <a class="nav-link" href="/data/">Data <span class="nav-hint">feeds</span></a>
+    <a class="nav-link" href="/visit/">Visit and contact <span class="nav-hint">visiting</span></a>
+    <a class="nav-link" href="/bond-disparity/">Bond disparity <span class="nav-hint">research</span></a>
+  </div>
+  <div class="nav-group" role="group" aria-label="Court reference">
+    <span class="nav-group-label" aria-hidden="true">Court reference</span>
+    <a class="nav-link" href="/courts/">Courts <span class="nav-hint">system</span></a>
+    <a class="nav-link" href="/bond-schedule/">Bond schedule <span class="nav-hint">costs</span></a>
+    <a class="nav-link" href="/judges/">Judges <span class="nav-hint">profiles</span></a>
+    <a class="nav-link" href="/jury/">Jury duty <span class="nav-hint">summons</span></a>
+    <a class="nav-link" href="/rules/" aria-current="page">Rules <span class="nav-hint">local rules</span></a>
+    <a class="nav-link" href="/forms/">Forms <span class="nav-hint">file</span></a>
+    <a class="nav-link" href="/help/">Help and free aid <span class="nav-hint">free help</span></a>
+    <a class="nav-link" href="/services/">Services and programs <span class="nav-hint">programs</span></a>
+  </div>
+  <div class="nav-group" role="group" aria-label="Site">
+    <span class="nav-group-label" aria-hidden="true">Site</span>
+    <a class="nav-link" href="/feed.xml">RSS</a>
+    <a class="nav-link" href="https://github.com/AICincy/HCJC">GitHub</a>
+    <a class="nav-link" href="/transparency/">Access <span class="nav-hint">scorecard</span></a>
+  </div>
+</nav>      </details>
+    </div>
+  </header>
+<aside class="source-banner" role="status" aria-label="Inmate detail retrieval status">
+  <p><strong>Detail retrieval blocked.</strong>
+  Since 2026-09-21, HCSO&rsquo;s inmate detail pages have been returning blocked or error responses to this site&rsquo;s automated public-records retrieval. Charges, bonds, and photos on this page reflect the last successfully retrieved data, not necessarily the current roster.</p>
+  <p class="muted">Each failed retrieval is logged as evidence; see <a href="/data/#access">access interruptions</a> and the <a href="/transparency/">transparency scorecard</a>.</p>
+</aside>  <main id="main" class="page">
+    <div class="doc-wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Local rules</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <h1 class="title">Local Rules</h1>
+    <div class="sub">Common Pleas, General Division, book effective 4-24-26</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  The current rules book, the amendments adopted after it, and the superseded rules kept for
+  reference. The layering on this page is how this site organizes the material: the 4-24-26 rules
+  book is canonical, three post-book amendments sit on top of it, and superseded standalone rule
+  texts are archival.
+</p>
+
+<nav aria-label="On this page">
+  <ul class="tab-toc">
+    <li><a href="#changed">Changed since the book <span class="count">3</span></a></li>
+    <li><a href="#book">Current rules book <span class="count">47</span></a></li>
+    <li><a href="#municipal">Municipal Court rules <span class="count">11 pages, 10 PDFs</span></a></li>
+    <li><a href="#archival">Archived rules <span class="count">50</span></a></li>
+  </ul>
+</nav>
+
+<details class="sect-h" id="changed" open>
+  <summary><h2>Changed since the book</h2><span class="meta"><span class="count">3</span> amendments</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>Three rules adopted after the 4-24-26 book, newest first. Each shows its effective date, its source PDF, and the full rule text.</p>
+    <article class="rule-card" id="rule-31">
+      <h3>
+        <span class="rule-chip">Rule 31</span>
+        Mediation
+        <span class="status-pill status-pill-current">Current</span>
+      </h3>
+      <p class="rule-meta">Common Pleas, General Division &middot; Effective 2026-07-24</p>
+      <p>Any civil case filed in the Court of Common Pleas General Division may be referred to mediation by order of the Court.</p>
+      <p>Source: <a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/07/Rule-31.pdf">Rule-31.pdf (PDF, hamiltoncountycourts.org)</a></p>
+      <details>
+        <summary><h4>Read Rule 31</h4></summary>
+        <div class="rule-fulltext">
+          <p>RULE 31. Mediation</p>
+          <p>(A) Cases for Mediation</p>
+          <p>(1) Any civil case filed in the Court of Common Pleas General Division may be</p>
+          <p>referred to mediation by order of the Court.</p>
+          <p>(2) Exceptions: Mediation is prohibited in the following:</p>
+          <p>a. Petitions to perpetuate testimony (Civ.R. 27);</p>
+          <p>b. As an alternative to the prosecution or adjudication of domestic violence;</p>
+          <p>c. In determining whether to grant, modify or terminate a protection order;</p>
+          <p>d. In determining the terms and conditions of a protection order;</p>
+          <p>e. In determining the penalty for violation of a protection order.</p>
+          <p>(3) All mediations shall be conducted in accordance with the “Ohio Uniform</p>
+          <p>Mediation Act,” R.C. Chapter 2710, which is herein incorporated by reference.</p>
+          <p>(B) Referral to Mediation</p>
+          <p>(1) The judge may, by appropriate entry, refer a case to mediation and state a date by</p>
+          <p>which mediation must be concluded. If required by the referring judge, prior to such</p>
+          <p>referral counsel for the parties must complete the “Mediation Referral Readiness</p>
+          <p>Questionnaire” which will be attached to the entry of referral.</p>
+          <p>(2) Any party may request, in writing to the judge, that the case be considered for</p>
+          <p>referral to mediation.</p>
+          <p>(3) A status report conference shall be scheduled approximately 45–60 days after</p>
+          <p>referral of a case to mediation at which time the Court may inquire about the status</p>
+          <p>of mediation efforts.</p>
+          <p>(4) Upon referral of a case to mediation, the Court may elect to stay all filing deadlines</p>
+          <p>for up to 60 days. The Clerk of Courts shall not accept for filing any documents</p>
+          <p>while a case is in mediation, unless expressly permitted by these rules or by court</p>
+          <p>order. Only the following documents may be filed while a mediation stay is in</p>
+          <p>effect:</p>
+          <p>a. Motion to lift the mediation stay;</p>
+          <p>b. Response to a motion to lift mediation stay;</p>
+          <p>c. Motion or stipulation to dismiss the case; and</p>
+          <p>d. Notice related to counsel.</p>
+          <p>(5) Written objection to mediation or assigned mediator shall be filed within 5 business</p>
+          <p>days of referral entry and must explain reasons for opposition.</p>
+          <p>(C) Mediation Conferences</p>
+          <p>(1) The mediator may direct the parties and their attorneys to attend a mediation</p>
+          <p>conference in person or remotely. Such a conference shall be conducted by the</p>
+          <p>mediator to consider the possibility of settlement, the simplification of the issues</p>
+          <p>and any other matters which the mediator and the parties determine may aid in the</p>
+          <p>handling or the disposition of the proceedings. A standard mediation conference</p>
+          <p>shall be for not more than 4 hours. At the Court’s discretion, for complex cases</p>
+          <p>involving 3 or more distinct parties, an additional 1–4 hours may be authorized.</p>
+          <p>(2) Mediation shall continue, for up to 4 hours (or up to 8 hours for authorized complex</p>
+          <p>cases), until the parties have reached a settlement, until they are unwilling to</p>
+          <p>proceed further, or until the mediator determined that further mediation efforts shall</p>
+          <p>cease. An appointed mediator may schedule such additional conference(s) as may</p>
+          <p>be necessary only by leave of Court. Alternatively, the parties may choose to</p>
+          <p>continue a mediation session(s) with the appointed mediator privately at parties’</p>
+          <p>own expense and according to such terms as they agree.</p>
+          <p>(3) The mediator may request that the parties make available at mediation documents</p>
+          <p>and witnesses, including expert witnesses, but has no authority to order such</p>
+          <p>production.</p>
+          <p>(4) The mediator shall ensure the parties memorialize any agreements in principle.</p>
+          <p>(D) Reporting to Court</p>
+          <p>(1) An assigned mediator shall notify the Court promptly when a case is not accepted</p>
+          <p>for mediation, whether due to a party or scheduling conflict or any other reason.</p>
+          <p>(2) Immediately at the conclusion of the mediation, no matter the outcome, the</p>
+          <p>mediator shall report in writing to the Court the fact that the mediation process</p>
+          <p>has ended.</p>
+          <p>(3) Immediately after a case or issues are settled (through court mediation, private</p>
+          <p>mediation, or otherwise), the parties shall prepare and submit to the Court an</p>
+          <p>entry of dismissal reflecting the case has settled, and, once filed, the case will be</p>
+          <p>moved to inactive status.</p>
+          <p>(4) If some but not all of the issues in the case are settled during court or private</p>
+          <p>mediation, or otherwise, or if agreements are reached to limit discovery or on any</p>
+          <p>other matter, the parties shall submit a joint written statement to the Court</p>
+          <p>enumerating the issues that have been resolved and the issues that remain</p>
+          <p>pending. The statement shall be submitted immediately after the termination of</p>
+          <p>mediation.</p>
+          <p>(5) If a case is settled after it has been set for mediation, but prior to the date of the</p>
+          <p>mediation, the parties must promptly notify the Court of settlement. Failure to</p>
+          <p>comply with this notice requirement may result in the cost of mediation being</p>
+          <p>assessed as a cost of the action.</p>
+          <p>(E) Mediation Fees</p>
+          <p>(1) No fees shall be charged for civil cases referred to the Hamilton County Court of</p>
+          <p>Common Pleas Mediation Service when the case is successfully mediated and all</p>
+          <p>claims are settled.</p>
+          <p>(2) If a case is referred to mediation and the parties fail to schedule such a mediation</p>
+          <p>within the time allotted by the Court, a $300.00 fee may be assessed and taxed as</p>
+          <p>costs to the parties.</p>
+          <p>(3) If a mediation is scheduled but then cancelled, for whatever reason, within 2</p>
+          <p>business days of the scheduled mediation date, a $300.00 fee may be assessed and</p>
+          <p>taxed as costs to the parties.</p>
+          <p>(4) If the parties are unable to resolve the case through mediation and any part of the</p>
+          <p>case proceeds to(wards) the trial, the Court may assess a mediation fee of up to</p>
+          <p>$1,200.00 for a standard mediation conference (or up to $2,400.00 for complex</p>
+          <p>cases), which shall be taxed as costs.</p>
+          <p>(5) If the parties agree to use a private mediator and not a mediator assigned by the</p>
+          <p>Court, the parties shall share the cost of the mediation in such proportions as they</p>
+          <p>may agree. The Court shall not be responsible for the quality of a mediator</p>
+          <p>selected by the parties without guidance from the Court and who does not meet</p>
+          <p>the qualifications, education, and training requirements of Sup.R. 6.04.</p>
+          <p>(6) The Court may waive fees and costs at its discretion.</p>
+          <p>(F) Duty of Parties and Counsel</p>
+          <p>(1) To Report Domestic Abuse: Mediation is prohibited when domestic abuse or</p>
+          <p>domestic violence is alleged, suspected, or present, unless the conditions of</p>
+          <p>Sup.R. 6.05 are met.</p>
+          <p>(2) Attendance: All counsel shall have their clients present for mediation. Insurance</p>
+          <p>company representatives, who have decision-making authority, must also be</p>
+          <p>present. In such case, the insured’s presence is not required unless their consent is</p>
+          <p>necessary for settlement. The failure to have all necessary parties present for</p>
+          <p>mediation, without good cause, may result in the cost of the mediation being</p>
+          <p>assessed against the appropriate party or any other appropriate sanction as</p>
+          <p>determined by the Court. In the event mediation must be cancelled due to the</p>
+          <p>absence of necessary parties, a $300.00 fee may be assessed by the Court.</p>
+          <p>(3) Any statutory filing required by the Ohio Revised Code according to case type</p>
+          <p>must be in the record prior to settlement or resolution.</p>
+          <p>(G) Responsibilities of Mediators</p>
+          <p>(1) All mediators shall comply with the duties and responsibilities listed in Sup.R.</p>
+          <p>6.03, which is herein incorporated by reference.</p>
+          <p>(2) Contracted and volunteer mediators shall comply with any additional provisions</p>
+          <p>that may be included in any contract or memorandum of understanding entered</p>
+          <p>into with the Court for their services.</p>
+          <p>(H) The Court shall utilize procedures for all cases that will:</p>
+          <p>(1) Ensure that the parties are allowed to participate in mediation, and if the parties</p>
+          <p>wish, that their attorneys and other individuals they designate are allowed to</p>
+          <p>accompany them and participate in mediation.</p>
+          <p>(2) Screen for domestic violence both before and during mediation.</p>
+          <p>(3) Maintain resources for mediation parties, including victims and suspected victims</p>
+          <p>of domestic violence, and encourage appropriate referrals to legal counsel and</p>
+          <p>other support services, such as children’s services, domestic violence prevention,</p>
+          <p>counseling, substance abuse, and mental health services.</p>
+          <p>(4) Ensure that any mediation participant may submit written comments, complaints,</p>
+          <p>or feedback regarding the performance of mediators receiving referrals from the</p>
+          <p>Court.</p>
+          <p>(I) Privilege &amp; Confidentiality</p>
+          <p>(1) Mediation communications are privileged and confidential as described in R.C.</p>
+          <p>Chapter 2710. Additionally, any files maintained by a mediator but not filed with</p>
+          <p>a clerk or submitted to the Court shall not be available for public access. This</p>
+          <p>Court may impose penalties for any improper disclosures. Disputes regarding</p>
+          <p>confidentiality should first be addressed with the mediator or Court Mediation</p>
+          <p>Office where possible.</p>
+          <p>(2) The parties and participants shall sign a written agreement prior to mediation,</p>
+          <p>which shall address confidentiality. By participating in mediation, a nonparty</p>
+          <p>participant submits to the Court’s jurisdiction to the extent necessary for</p>
+          <p>enforcement of this rule and the mediation agreement. Any nonparty participant</p>
+          <p>shall have the rights and duties under this rule as are attributed to parties, except</p>
+          <p>that no evidence privilege will be expanded.</p>
+          <p>(3) The mediator shall not disclose to the Court or to any judge of the Court the</p>
+          <p>contents of mediation discussions unless agreed to by all parties in writing.</p>
+          <p>(4) No party to mediation shall call the mediator as a witness for any purpose.</p>
+          <p>(5) Exceptions:</p>
+          <p>a. Parties may share privileged communications with their attorneys;</p>
+          <p>b. Certain threats of abuse or neglect of a child or an adult;</p>
+          <p>c. Statements made during the mediation process to plan or hide an ongoing</p>
+          <p>crime;</p>
+          <p>d. Statements made during the mediation process that reveal a felony.</p>
+          <p>(J) Selection of Mediators</p>
+          <p>(1) In all cases ordered to mediation, the mediator shall be a full- or part-time</p>
+          <p>employee of the Court, a volunteer mediator, or a contract mediator appointed</p>
+          <p>from a rotating list of approved mediators.</p>
+          <p>(2) The assignment of mediators shall be in a standardized order from the rotating list</p>
+          <p>of approved mediators, except mediators may recuse themselves from a case in</p>
+          <p>the interests of justice. A specific appointment may be made by the Court taking</p>
+          <p>into consideration the qualifications, skills, expertise, and caseload of the</p>
+          <p>mediator in addition to the type, complexity, and requirements of the case.</p>
+          <p>(3) An attorney who wishes to be added to the list of approved contract mediators</p>
+          <p>must have the following qualifications:</p>
+          <p>a. At least 5 years of experience in the practice of law with some trial or</p>
+          <p>judicial experience and be a current member of the Ohio Bar in good standing</p>
+          <p>with the Supreme Court of Ohio;</p>
+          <p>b. Specialized training in mediation including courses that are approved for</p>
+          <p>at least three hours of Continuing Legal Education credit by the Supreme Court of</p>
+          <p>Ohio in each biennial reporting period;</p>
+          <p>c. Participation in at least three separate mediations as a mediator or counsel</p>
+          <p>for a party in any jurisdiction, or observation of at least two mediations conducted</p>
+          <p>by a qualified Hamilton County court mediator;</p>
+          <p>d. Significant, demonstrated experience in preparation, presentation, and</p>
+          <p>resolution of disputes on behalf of others either through litigation, negotiation, or</p>
+          <p>mediation;</p>
+          <p>e. Must maintain malpractice insurance covering services as a mediator and</p>
+          <p>submit proof of coverage to the Court Mediation Office and Court</p>
+          <p>Administration;</p>
+          <p>f. Must submit completed mediator application materials to the Court</p>
+          <p>Mediation Office, and are subject to approval by the Administrative Judge.</p>
+          <p>g. Demonstrated compliance with either subpart of Sup.R. 6.04(A).</p>
+          <p>(K) Compensation of Mediators</p>
+          <p>(1) Full- or part-time employees of the Court are not eligible for any supplemental</p>
+          <p>compensation derived from mediation services rendered in the Court of Common</p>
+          <p>Pleas.</p>
+          <p>(2) Each appointed contract mediator shall receive compensation at a rate of $300.00</p>
+          <p>per hour for up to four hours for a standard mediation session (or for up to eight</p>
+          <p>hours for authorized complex cases). Contract mediators shall not receive</p>
+          <p>additional compensation for subsequent sessions involving the same case number,</p>
+          <p>unless approved by the Court.</p>
+          <p>(3) If the case is settled or dismissed, or a mediation is otherwise cancelled, more</p>
+          <p>than two business days prior to the date scheduled for the mediation, the mediator</p>
+          <p>shall not be entitled to any fees. If a case is settled or dismissed, or a mediation is</p>
+          <p>otherwise cancelled, within the two-business-day period, the contract mediator</p>
+          <p>shall be entitled to receive a fee of $300.00.</p>
+          <p>(4) Any approved contract mediators shall complete an order to pay mediator fees</p>
+          <p>upon completion of mediation and not later than 21 business days following the</p>
+          <p>mediation session. Such invoice shall be submitted to the Court Mediation Office.</p>
+          <p>Effective: (July 24, 2026)</p>
+        </div>
+      </details>
+    </article>
+    <article class="rule-card" id="rule-17">
+      <h3>
+        <span class="rule-chip">Rule 17</span>
+        Court Technology Plan (rev. 8/2026)
+        <span class="status-pill status-pill-current">Current</span>
+      </h3>
+      <p class="rule-meta">Municipal Court &middot; Effective 2026-08-07 &middot; Grounded in the source filename (text states only &#34;Rev. 8/2026&#34;); treat as filename-derived, not text-stated.</p>
+      <p>Technology plan adopted &#34;Pursuant to Ohio Superintendence Rule 3.03,&#34; describing &#34;what technical tools the court has to assist&#34; court customers.</p>
+      <p>Source: <a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/08/Court-Technology-Plan-Local-Rule-17-Final-8-7-26.pdf">Court-Technology-Plan-Local-Rule-17-Final-8-7-26.pdf (PDF, hamiltoncountycourts.org)</a></p>
+      <details>
+        <summary><h4>Read Rule 17</h4></summary>
+        <div class="rule-fulltext">
+          <p>Hamilton County Municipal Court Technology Plan Rev. 8/2026</p>
+          <p>Hamilton County Municipal Court</p>
+          <p>Technology Plan</p>
+          <p>Pursuant to Ohio Superintendence Rule 3.03 the Hamilton County Municipal Court has</p>
+          <p>prepared this Technology Plan. Court customers can consult this plan to learn about what</p>
+          <p>technical tools the court has to assist them.</p>
+          <p>Tool and/or</p>
+          <p>Product</p>
+          <p>Name</p>
+          <p>Purpose Implementation</p>
+          <p>and Instruction</p>
+          <p>Notes</p>
+          <p>Case</p>
+          <p>Management</p>
+          <p>System (CMS)</p>
+          <p>Case</p>
+          <p>Management</p>
+          <p>software</p>
+          <p>Docket</p>
+          <p>information</p>
+          <p>on cases.</p>
+          <p>Implemented in all</p>
+          <p>offices and</p>
+          <p>courtrooms.</p>
+          <p>Maintained by Proware.</p>
+          <p>BIS Digital</p>
+          <p>Audio Recording</p>
+          <p>Audio and</p>
+          <p>video</p>
+          <p>recording of</p>
+          <p>hearings.</p>
+          <p>Implemented in all</p>
+          <p>trial rooms Court</p>
+          <p>staff have been</p>
+          <p>instructed on</p>
+          <p>operation.</p>
+          <p>Multi-site backup solution for recordings</p>
+          <p>Transcripts are possible. Contact Court</p>
+          <p>Reporter’s Office at 513-946-5400.</p>
+          <p>Hamilton County Municipal Court Technology Plan Rev. 8/2026</p>
+          <p>For The Record</p>
+          <p>(FTR)</p>
+          <p>Audio</p>
+          <p>recording of</p>
+          <p>hearings.</p>
+          <p>Implemented in all</p>
+          <p>arraignment and</p>
+          <p>hearing rooms.</p>
+          <p>Court staff have</p>
+          <p>been instructed on</p>
+          <p>operation.</p>
+          <p>Multi-site backup solution for recordings</p>
+          <p>Transcripts are possible. Contact Court</p>
+          <p>Reporter’s Office at 513-946-5400.</p>
+          <p>Promethean</p>
+          <p>(Smart Board</p>
+          <p>Devise)</p>
+          <p>Interactive</p>
+          <p>evidence</p>
+          <p>presentation.</p>
+          <p>One devise per</p>
+          <p>floor.</p>
+          <p>Training classes have been provided to court</p>
+          <p>personnel.</p>
+          <p>Media</p>
+          <p>Presentation</p>
+          <p>Devise</p>
+          <p>Evidence</p>
+          <p>presentation,</p>
+          <p>Zoom</p>
+          <p>sessions.</p>
+          <p>One devise per</p>
+          <p>trial room.</p>
+          <p>Computer able to display media on a 55” TV</p>
+          <p>screen. Can also be used for Zoom sessions.</p>
+          <p>Skype</p>
+          <p>Video</p>
+          <p>conferencing</p>
+          <p>for after hours</p>
+          <p>search</p>
+          <p>warrants.</p>
+          <p>Each Judge has</p>
+          <p>the option to use</p>
+          <p>during their duty</p>
+          <p>week.</p>
+          <p>Police officers go to the Clerk’s Office for the</p>
+          <p>process. The duty judge uses an iPad for their</p>
+          <p>part of the process.</p>
+          <p>Zoom Video</p>
+          <p>conferencing</p>
+          <p>directly with</p>
+          <p>courtrooms</p>
+          <p>and Mediation</p>
+          <p>sessions.</p>
+          <p>A link with</p>
+          <p>instructions is</p>
+          <p>emailed to</p>
+          <p>participants.</p>
+          <p>Used occasionally for court proceedings. At</p>
+          <p>Judge’s discretion</p>
+          <p>Telephones</p>
+          <p>Telephonic</p>
+          <p>interpretation</p>
+          <p>with Polycom</p>
+          <p>conferencing</p>
+          <p>hardware</p>
+          <p>Implemented in all</p>
+          <p>courtrooms.</p>
+          <p>Scheduled by</p>
+          <p>Language Services</p>
+          <p>Administrator</p>
+          <p>Fax</p>
+          <p>Sending and</p>
+          <p>receiving</p>
+          <p>fax messages.</p>
+          <p>In place in the</p>
+          <p>administrative</p>
+          <p>staff area and is</p>
+          <p>shared device for</p>
+          <p>court.</p>
+          <p>Each courtroom has it’s own dedicated fax</p>
+          <p>number.</p>
+          <p>Hamilton County Municipal Court Technology Plan Rev. 8/2026</p>
+          <p>Miscellaneous</p>
+          <p>vendors</p>
+          <p>Office</p>
+          <p>phones,</p>
+          <p>email.</p>
+          <p>Implemented in all</p>
+          <p>offices and</p>
+          <p>courtrooms.</p>
+          <p>Maintained by</p>
+          <p>vendor or County</p>
+          <p>IT Department.</p>
+          <p>Court staff directory with phone numbers and</p>
+          <p>email capability see:</p>
+          <p>https://hamiltoncountycourts.org/index.php/</p>
+          <p>court-administration/</p>
+          <p>Court Website</p>
+          <p>Information</p>
+          <p>about</p>
+          <p>Municipal</p>
+          <p>Court</p>
+          <p>Maintained by the</p>
+          <p>court. Includes</p>
+          <p>information about</p>
+          <p>the courts and</p>
+          <p>judges, court</p>
+          <p>contact information,</p>
+          <p>links, legal</p>
+          <p>resources.</p>
+          <p>Address</p>
+          <p>https://www.hamiltoncountycourts.org/</p>
+          <p>Clerk Website</p>
+          <p>Information</p>
+          <p>about</p>
+          <p>Municipal</p>
+          <p>Court cases</p>
+          <p>Maintained by the</p>
+          <p>Clerk of Courts.</p>
+          <p>Includes information</p>
+          <p>about case</p>
+          <p>information.</p>
+          <p>Addresses https://www.courtclerk.org</p>
+          <p>E-Filing with</p>
+          <p>Clerk of Courts</p>
+          <p>Municipal</p>
+          <p>Civil Cases</p>
+          <p>only</p>
+          <p>Integrated with the</p>
+          <p>Court’s CMS.</p>
+          <p>See Clerk of Court website for more</p>
+          <p>information: https://www.courtclerk.org</p>
+          <p>JSI</p>
+          <p>Juror</p>
+          <p>notification</p>
+          <p>System notifies</p>
+          <p>jurors when they</p>
+          <p>need to report for</p>
+          <p>service by texts and</p>
+          <p>phone messages.</p>
+          <p>Operated by Jury Commissioner’s Office</p>
+          <p>Assisted</p>
+          <p>Listening</p>
+          <p>Devises</p>
+          <p>Allow those</p>
+          <p>who are</p>
+          <p>hearing</p>
+          <p>impaired to</p>
+          <p>fully</p>
+          <p>participate in</p>
+          <p>court</p>
+          <p>proceedings.</p>
+          <p>Available in each</p>
+          <p>courtroom for</p>
+          <p>those who are</p>
+          <p>hearing impaired</p>
+          <p>Hamilton County Municipal Court Technology Plan Rev. 8/2026</p>
+          <p>Wi-Fi</p>
+          <p>Internet</p>
+          <p>access for</p>
+          <p>court</p>
+          <p>customers.</p>
+          <p>Implemented in</p>
+          <p>courtrooms. The</p>
+          <p>Court Administrator</p>
+          <p>hands out policy</p>
+          <p>document that</p>
+          <p>contains the</p>
+          <p>password.</p>
+          <p>Backups to the in-house Wi-Fi may be</p>
+          <p>available in the form of Verizon mi-fi units.</p>
+          <p>Future plans:</p>
+          <p>The Court is in the process of moving the License Intervention Program operations into the existing</p>
+          <p>CMS, expanding efiling to Municipal Criminal and Traffic cases, and developing an e-Citation process</p>
+          <p>that will integrate with law enforcement records management systems.</p>
+          <p>For More Information:</p>
+          <p>Contact Municipal Court at 513-946-5200</p>
+        </div>
+      </details>
+    </article>
+    <article class="rule-card" id="rule-18">
+      <h3>
+        <span class="rule-chip">Rule 18</span>
+        Reporting to Law Enforcement Compliance Plan (Administrative Rule 18)
+        <span class="status-pill status-pill-current">Current</span>
+      </h3>
+      <p class="rule-meta">Municipal Court &middot; Effective not stated</p>
+      <p>Compliance Plan for the submission of Fingerprints, Incident Tracking Numbers (ITN) and case disposition numbers; Mental Health Adjudications (Hopper Act); Protections Orders [sic]; and Bureau of Motor Vehicle related convictions.</p>
+      <p>Source: <a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/01/LR-18-Law-Enforcement.pdf">LR-18-Law-Enforcement.pdf (PDF, hamiltoncountycourts.org)</a></p>
+      <details>
+        <summary><h4>Read Rule 18</h4></summary>
+        <div class="rule-fulltext">
+          <p>HAMILTON COUNTY MUNICIPAL COURT</p>
+          <p>HAMILTON COUNTY, OHIO</p>
+          <p>IN RE:    ADMINISTRATIVE    :</p>
+          <p>RULE 18       :</p>
+          <p>Reporting to Law Enforcement</p>
+          <p>Compliance Plan</p>
+          <p>Pursuant to Sup. R. 5(F), the Hamilton County Municipal Court does hereby establish a</p>
+          <p>Compliance Plan for the submission of Fingerprints, Incident Tracking Numbers (ITN) and case</p>
+          <p>disposition numbers; Mental Health Adjudications (Hopper Act); Protections Orders; and Bureau</p>
+          <p>of Motor Vehicle related convictions and points.</p>
+          <p>18.01   Fingerprint, Incident Tracking Numbers &amp; Case Disposition Reporting</p>
+          <p>A. Prior to each daily arraignment session, the Court Management System (CMS)will</p>
+          <p>identify defendants to be arraigned that have not previously been fingerprinted/not</p>
+          <p>been assigned an Incident Tracking Number (ITN) upon arrest/booking pursuant to</p>
+          <p>Ohio Revised Code, Sections 109.57(A)(2) and 109.60 and display the information on</p>
+          <p>the Court’s the Judges Sheet.</p>
+          <p>B. Upon conviction, the Judge will order fingerprints to be taken by the Probation</p>
+          <p>Department if they were not previously taken.</p>
+          <p>C. Probation will have each defendant in need of fingerprinting, fingerprinted via the</p>
+          <p>Automated Fingerprint Identification System (AFIS) prior to leaving the probation</p>
+          <p>department.</p>
+          <p>D. The probation department intake staff shall capture all required prints from the</p>
+          <p>defendants and ensure an (ITN) is assigned by the AFIS system prior to transmitting</p>
+          <p>the fingerprints and ITN to the Ohio Bureau of Criminal Investigation &amp;</p>
+          <p>Identification (BCI&amp;I).</p>
+          <p>E. The ITN number will be entered into CMS.</p>
+          <p>F. The CMS will apply the appropriate disposition code to the ITN number</p>
+          <p>G. The Clerk of Courts shall transmit case dispositions to the Ohio Bureau of Criminal</p>
+          <p>Investigation &amp; Identification (BCI&amp;I) on a recurring weekly basis.</p>
+          <p>H. The Clerk shall review all rejected transactions and will correct and resend as needed.</p>
+          <p>18.02   Mental Health Adjudication Reporting</p>
+          <p>A. Upon a defendant pleading guilty or being found guilty of an offense of violence as</p>
+          <p>defined by Ohio Revised Code, Section 2901.01(A)(9)(a) or any substantially similar</p>
+          <p>municipal ordinance; or pleading guilty or being found guilty of conspiracy or</p>
+          <p>attempt to commit, or complicity in committing an offense of violence as defined by</p>
+          <p>Ohio Revised Code, Section 2901.01(A)(9)(a); or any substantially similar municipal</p>
+          <p>ordinance and being ordered to a mental health evaluation; or being found not guilty</p>
+          <p>by reason of insanity; or being found incompetent to stand trial, the Court shall</p>
+          <p>complete Form 95: NCIC Mental Health Notice with all required information at the</p>
+          <p>time of plea or adjudication.</p>
+          <p>B. The Clerk of Courts shall docket the completion of Form 95, maintain the original</p>
+          <p>case file and transmit a copy of the completed form to the Hamilton County Sheriff’s</p>
+          <p>Office to enter into NCIC and  LEADS via RCIC/eClear. A copy of Form 95 will also</p>
+          <p>be sent to the police agency that made the original arrest by the Clerk of Courts.</p>
+          <p>18.03          Protection Orders</p>
+          <p>Upon a motion for Temporary Protection Order being granted by the Court, the Court</p>
+          <p>shall:</p>
+          <p>A. Review and obtain defendant signature in all required areas.</p>
+          <p>B. Provide a copy to the defendant.</p>
+          <p>C. Ensure Form 10-A has been completed.</p>
+          <p>D. The completed and executed Protection Order and Form 10-A shall be docketed</p>
+          <p>and imaged in the Court  Management System (CMS). .</p>
+          <p>E. The Clerk of Courts will send a copy of the protection order and Form 10-A to the</p>
+          <p>Hamilton County Sheriff’s Office.</p>
+          <p>F. The Hamilton County Sheriff’s Office will timely transmit the Form 10-A</p>
+          <p>information to NCIC/LEADS/RCIC each day the Hamilton County Municipal</p>
+          <p>Court conducts hearings and without any undue delay.</p>
+          <p>18.04      Ohio Bureau of Motor Vehicles (BMV) Reporting</p>
+          <p>Procedures and timelines for reporting court ordered suspensions, blocks and points to</p>
+          <p>the Bureau of Motor Vehicles.</p>
+          <p>A. Reporting of court actions to the BMV shall be done within 7 days as prescribed</p>
+          <p>by law</p>
+          <p>B. The Clerk of Courts shall use the CMS to create a file of all suspensions,</p>
+          <p>forfeitures, convictions, and points to be reported.</p>
+          <p>C. The report shall be in the format as prescribed by the Bureau of Motor Vehicles</p>
+          <p>(BMV).</p>
+          <p>D. The Clerk of Courts will create and send the electronic FTP file of the report</p>
+          <p>using CMS. The FTP file will be stored within CMS.</p>
+          <p>E. The Clerk of Courts shall verify through the CMS to ensure that the file was</p>
+          <p>uploaded.</p>
+          <p>F. A docket entry shall be created to the docket reflecting the date that the case</p>
+          <p>information was uploaded to the BMV.</p>
+          <p>18.05       Expunged and Sealed Records Reporting</p>
+          <p>Procedures and Timelines for reporting expunged and sealed records;</p>
+          <p>A. Pursuant to Local Administrative Rule 16 and RC 2930.171, the Hamilton County</p>
+          <p>Prosecutor and the Cincinnati City Solicitor, respectively, shall notify victims</p>
+          <p>shall notify victims when an expungement or sealing has been granted by the</p>
+          <p>court.</p>
+          <p>B. The Clerk of Courts shall be responsible for notification of expunged and sealed</p>
+          <p>records to BCI&amp;I and the appropriate law enforcement agencies as required by</p>
+          <p>RC 2953.</p>
+          <p>C. Expunged and sealed records shall be maintained by the Clerk of Courts in a</p>
+          <p>confidential file and only released pursuant to court order or within the parameters</p>
+          <p>of RC 2953.34.</p>
+          <p>This order shall be effective January 22, 2026 and until further order of the Court.</p>
+        </div>
+      </details>
+    </article>
+  </div>
+</details>
+
+<details class="sect-h" id="book" open>
+  <summary><h2>Current rules book <span class="status-pill status-pill-current">Current</span></h2><span class="meta"><span class="count">47</span> rules</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>
+      Local Rules Book, Hamilton County Court of Common Pleas, General Division, effective
+      2026-04-24. Each entry links to the source PDF:
+      <a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf">Local-Rules-Book-Version-Effective-4-24-26.pdf (PDF, hamiltoncountycourts.org)</a>.
+      The table of contents below is reproduced verbatim from the book, including its own quirks:
+      rule 48's title truncates at "Commercial Dockets -", and rule 14.2's title prints
+      "Judgment s". The full book text is not inlined here; it is a single unsegmented extract.
+    </p>
+    <div class="ref-row-list">
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 1 in the current rules book PDF">
+        <span class="rule-chip ref-chip">1</span>
+        <span class="ref-row-title">Scope and Applicability of Rules 3</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 2 in the current rules book PDF">
+        <span class="rule-chip ref-chip">2</span>
+        <span class="ref-row-title">Joint Session and General Division Sessions 3</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 3 in the current rules book PDF">
+        <span class="rule-chip ref-chip">3</span>
+        <span class="ref-row-title">Presiding Judge, Assistant and Second Assistant Presiding Judges, and</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 4 in the current rules book PDF">
+        <span class="rule-chip ref-chip">4</span>
+        <span class="ref-row-title">General Division Administrative Judge 5</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 5 in the current rules book PDF">
+        <span class="rule-chip ref-chip">5</span>
+        <span class="ref-row-title">Terms of Court 5</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 6 in the current rules book PDF">
+        <span class="rule-chip ref-chip">6</span>
+        <span class="ref-row-title">Designation of Official Daily Law Journal 5</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 7 in the current rules book PDF">
+        <span class="rule-chip ref-chip">7</span>
+        <span class="ref-row-title">Individual Assignment System 5</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 8 in the current rules book PDF">
+        <span class="rule-chip ref-chip">8</span>
+        <span class="ref-row-title">Juries 9</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 9 in the current rules book PDF">
+        <span class="rule-chip ref-chip">9</span>
+        <span class="ref-row-title">Deposit of Security for Costs – 20</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 10 in the current rules book PDF">
+        <span class="rule-chip ref-chip">10</span>
+        <span class="ref-row-title">Trial Attorneys – 22</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 11 in the current rules book PDF">
+        <span class="rule-chip ref-chip">11</span>
+        <span class="ref-row-title">Pleadings and Other Papers – 23</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 12 in the current rules book PDF">
+        <span class="rule-chip ref-chip">12</span>
+        <span class="ref-row-title">Extensions of Time to Move or Plead by Stipulation 29</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 13 in the current rules book PDF">
+        <span class="rule-chip ref-chip">13</span>
+        <span class="ref-row-title">Default – 29</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 14 in the current rules book PDF">
+        <span class="rule-chip ref-chip">14</span>
+        <span class="ref-row-title">Motions, Memoranda and Procedure Thereon 31</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 14.1 in the current rules book PDF">
+        <span class="rule-chip ref-chip">14.1</span>
+        <span class="ref-row-title">Bond 32</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 14.2 in the current rules book PDF">
+        <span class="rule-chip ref-chip">14.2</span>
+        <span class="ref-row-title">Setting Aside Bond Forfeiture Judgment s 33</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 15 in the current rules book PDF">
+        <span class="rule-chip ref-chip">15</span>
+        <span class="ref-row-title">Case Management 33</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 16 in the current rules book PDF">
+        <span class="rule-chip ref-chip">16</span>
+        <span class="ref-row-title">Judgment s Upon Warrant of Attorney to Confess 35</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 17 in the current rules book PDF">
+        <span class="rule-chip ref-chip">17</span>
+        <span class="ref-row-title">Journal Entries – 36</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 18 in the current rules book PDF">
+        <span class="rule-chip ref-chip">18</span>
+        <span class="ref-row-title">Disposition of Cases Called for Trial 36</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 19 in the current rules book PDF">
+        <span class="rule-chip ref-chip">19</span>
+        <span class="ref-row-title">Judgment Debtor Exams 37</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 20 in the current rules book PDF">
+        <span class="rule-chip ref-chip">20</span>
+        <span class="ref-row-title">Fees – 38</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 21 in the current rules book PDF">
+        <span class="rule-chip ref-chip">21</span>
+        <span class="ref-row-title">Process Servers 42</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 22 in the current rules book PDF">
+        <span class="rule-chip ref-chip">22</span>
+        <span class="ref-row-title">Notary Public: Examination and Appointments 46</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 23 in the current rules book PDF">
+        <span class="rule-chip ref-chip">23</span>
+        <span class="ref-row-title">Magistrates 46</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 24 in the current rules book PDF">
+        <span class="rule-chip ref-chip">24</span>
+        <span class="ref-row-title">Court Technology Plan 50</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 25 in the current rules book PDF">
+        <span class="rule-chip ref-chip">25</span>
+        <span class="ref-row-title">Court Administrator 50</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 26 in the current rules book PDF">
+        <span class="rule-chip ref-chip">26</span>
+        <span class="ref-row-title">Effective Date; Repeal; Amendments 51</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 29 in the current rules book PDF">
+        <span class="rule-chip ref-chip">29</span>
+        <span class="ref-row-title">Reporting to Law Enforcement Compliance Plan 52</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 30 in the current rules book PDF">
+        <span class="rule-chip ref-chip">30</span>
+        <span class="ref-row-title">Media Coverage of Court Proceedings 53</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 31 in the current rules book PDF">
+        <span class="rule-chip ref-chip">31</span>
+        <span class="ref-row-title">Mediation 55</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 32 in the current rules book PDF">
+        <span class="rule-chip ref-chip">32</span>
+        <span class="ref-row-title">Use of Body-Worn Cameras (BWC) by Hamilton County Sheriff’s Office</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 33 in the current rules book PDF">
+        <span class="rule-chip ref-chip">33</span>
+        <span class="ref-row-title">Hamilton County Courthouse 58</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 34 in the current rules book PDF">
+        <span class="rule-chip ref-chip">34</span>
+        <span class="ref-row-title">Electronic Transmission Filings – 65</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 35 in the current rules book PDF">
+        <span class="rule-chip ref-chip">35</span>
+        <span class="ref-row-title">Hamilton County Drug Treatment and Recovery Court 70</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 36 in the current rules book PDF">
+        <span class="rule-chip ref-chip">36</span>
+        <span class="ref-row-title">Issuance of Warrant for Probation Violation (per Criminal Rule 4) 74</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 37 in the current rules book PDF">
+        <span class="rule-chip ref-chip">37</span>
+        <span class="ref-row-title">Civil Protection Order 75</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 38 in the current rules book PDF">
+        <span class="rule-chip ref-chip">38</span>
+        <span class="ref-row-title">Court Record Retention 76</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 39 in the current rules book PDF">
+        <span class="rule-chip ref-chip">39</span>
+        <span class="ref-row-title">Return of Inmates for Forfeiture Proceedings 76</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 41 in the current rules book PDF">
+        <span class="rule-chip ref-chip">41</span>
+        <span class="ref-row-title">Appointment of Special Prosecutor 76</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 42 in the current rules book PDF">
+        <span class="rule-chip ref-chip">42</span>
+        <span class="ref-row-title">DNA Testing 77</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 44 in the current rules book PDF">
+        <span class="rule-chip ref-chip">44</span>
+        <span class="ref-row-title">Search Warrants 78</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 45 in the current rules book PDF">
+        <span class="rule-chip ref-chip">45</span>
+        <span class="ref-row-title">Foreclosure – 78</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 46 in the current rules book PDF">
+        <span class="rule-chip ref-chip">46</span>
+        <span class="ref-row-title">Certificate of Qualification for Employment – 84</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 47 in the current rules book PDF">
+        <span class="rule-chip ref-chip">47</span>
+        <span class="ref-row-title">Specialized Dockets – 85</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 48 in the current rules book PDF">
+        <span class="rule-chip ref-chip">48</span>
+        <span class="ref-row-title">Commercial Dockets -</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf" aria-label="Rule 49 in the current rules book PDF">
+        <span class="rule-chip ref-chip">49</span>
+        <span class="ref-row-title">Use of Artificial Intelligence in Court Submissions -</span>
+      </a>
+    </div>
+  </div>
+</details>
+
+<details class="sect-h" id="municipal">
+  <summary><h2>Municipal Court rules</h2><span class="meta"><span class="count">11</span> pages, <span class="count">10</span> civil-rule PDFs</span><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>
+      Hamilton County Municipal Court local rules. There is no Municipal Rule 11 page in the court's
+      published corpus; the proposed Municipal Rule 11 bond schedule amendment is archived below
+      (comment period closed 9/20/2026). Civil rules are in Roman numerals.
+    </p>
+    <h3>Rule pages</h3>
+    <div class="ref-row-list">
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/">
+        <span class="ref-row-title">Municipal Court Local Rules</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rule-1/">
+        <span class="ref-row-title">Municipal Rule 1</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rule-2/">
+        <span class="ref-row-title">Municipal Rule 2</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rule-3-6/">
+        <span class="ref-row-title">Municipal Rule 3-6</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rules-7-8/">
+        <span class="ref-row-title">Municipal Rules 7-8</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rule-9/">
+        <span class="ref-row-title">Municipal Rule 9</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rules-10/">
+        <span class="ref-row-title">Municipal Rules 10</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rule-12/">
+        <span class="ref-row-title">Municipal Rule 12</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rule-13/">
+        <span class="ref-row-title">Municipal Rule 13</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rule-14/">
+        <span class="ref-row-title">Municipal Rule 14</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/municipal-rule-15/">
+        <span class="ref-row-title">Municipal Rule 15 – 16</span>
+        <span class="ref-row-meta">hamiltoncountycourts.org</span>
+      </a>
+    </div>
+    <h3>Civil rule PDFs</h3>
+    <div class="ref-row-list">
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2025/05/Municipal_Civil_Rule_18.pdf">
+        <span class="ref-row-title">Municipal Civil Rule XVIII (fee schedule text opens the doc; source layout quirk)</span>
+        <span class="ref-row-meta">Municipal_Civil_Rule_18.pdf</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2025/05/Municipal_Civil_Rules_19.pdf">
+        <span class="ref-row-title">RULE XIX Accuracy and Procedure</span>
+        <span class="ref-row-meta">Municipal_Civil_Rules_19.pdf</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2025/05/Municipal_Civil_Rules_20.pdf">
+        <span class="ref-row-title">RULE XX Fair Debt Collection Practices</span>
+        <span class="ref-row-meta">Municipal_Civil_Rules_20.pdf</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2025/05/Municipal_Civil_Rules_21.pdf">
+        <span class="ref-row-title">RULE XXI Evictions</span>
+        <span class="ref-row-meta">Municipal_Civil_Rules_21.pdf</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2025/05/Municipal_Civil_Rules_22.pdf">
+        <span class="ref-row-title">RULE XXII Rent Escrow</span>
+        <span class="ref-row-meta">Municipal_Civil_Rules_22.pdf</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2025/09/Municipal_Civil_Rules_23.pdf">
+        <span class="ref-row-title">RULE XXIII Garnishments (eff. 9/29/2025)</span>
+        <span class="ref-row-meta">Municipal_Civil_Rules_23.pdf</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2025/05/Municipal_Civil_Rules_24.pdf">
+        <span class="ref-row-title">RULE XXIV Procedure for Objection to Magistrate&#39;s Eviction Decision</span>
+        <span class="ref-row-meta">Municipal_Civil_Rules_24.pdf</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2025/05/Municipal_Civil_Rules_25.pdf">
+        <span class="ref-row-title">RULE XXV Special Process Server (eff. 5/1/2025)</span>
+        <span class="ref-row-meta">Municipal_Civil_Rules_25.pdf</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2025/09/Municipal_Civil_Rules_6-17.pdf">
+        <span class="ref-row-title">Municipal Civil Rules VI-XVII compilation (opens at Rule VI Jury Demand)</span>
+        <span class="ref-row-meta">Municipal_Civil_Rules_6-17.pdf</span>
+      </a>
+      <a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2026/04/Local-Civil-Rule-XXIX.pdf">
+        <span class="ref-row-title">Municipal Civil RULE XXIX Procedure to Set Aside Magistrate&#39;s Order</span>
+        <span class="ref-row-meta">Local-Civil-Rule-XXIX.pdf</span>
+      </a>
+    </div>
+    <p class="quirk-note">Source layout quirk preserved: the Municipal Civil Rule XVIII PDF opens with a fee-schedule fragment ("Alias Summons (does not include service) $40.00") before the rule text.</p>
+  </div>
+</details>
+
+<div class="archival-block" id="archival">
+  <details open>
+    <summary>
+      <h2><span class="status-pill status-pill-archived">Archived</span> Superseded rules <span class="count">(50 entries)</span></h2>
+    </summary>
+    <p class="archival-preamble">Superseded by the 4-24-26 rules book; kept for reference, not current law. The 2017 Rule 24 (compulsory arbitration) text is not published here; that rule number was reassigned.</p>
+    <div class="ref-row-list">
+      <div class="ref-row">
+        <span class="rule-chip ref-chip">29</span>
+        <div>
+          <div class="ref-row-title">Reporting to Law Enforcement Compliance Plan</div>
+          <div class="ref-row-lede">absorbed into 4-24-26 Rules Book (verified by text comparison 2026-09-21).</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <span class="rule-chip ref-chip">14</span>
+        <div>
+          <div class="ref-row-title">Motions, Memoranda and Procedure Thereon (revised)</div>
+          <div class="ref-row-lede">absorbed into 4-24-26 Rules Book (verified by text comparison 2026-09-21).</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <span class="rule-chip ref-chip">9</span>
+        <div>
+          <div class="ref-row-title">Deposit of Security for Costs (v2.0)</div>
+          <div class="ref-row-lede">absorbed into 4-24-26 Rules Book (verified by text comparison 2026-09-21).</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <span class="rule-chip ref-chip">7</span>
+        <div>
+          <div class="ref-row-title">Individual Assignment System (2025-10)</div>
+          <div class="ref-row-lede">absorbed into 4-24-26 Rules Book (verified by text comparison 2026-09-21).</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 10. Trial Attorneys (A) Every pleading, motion or other document of a part represented by an attorney shall be signed by at least one a</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 11. Pleadings and Other Papers (A) Pleadings and other papers shall be printed on 8 ½ x 11-inch paper. All pleadings and other papers f</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 12. Extensions of Time to Move or Plead by Stipulation Parties may obtain an extension of time, not to exceed 28 days, in which to move</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 13. Default (A) Liquidated Damages and No Appearance by Non-Moving Party (1) A party moving for a default Judgment with liquidated dama</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 16. Judgments Upon Warrant of Attorney to Confess Judgment s by confession, upon a warrant of attorney, will not be entered in the abse</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 17. Journal Entries (A) When the Court signs a judgment as defined in Ohio Civil Rule 54 from which an appeal lies, as provided in Revi</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 18. Disposition of Cases Called for Trial If a cause is called for trial and the party prosecuting such cause fails to respond, either </div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 19. Judgment Debtor Exams (A) In accordance with the provisions of Revised Code Chapter 2333, a motion for order of appearance of judgm</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 2: Joint Session and General Division Sessions (A) The Joint Session of the Hamilton County Court of Common Pleas this Court shall cons</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 20. Fees (A) Partition Cases Fees allowed in partition cases as costs therein shall be predicated either upon the appraised value of th</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 22. Notary Public: Notary Commissions are obtained through the Ohio Secretary of State per Ohio Revised Code 147. Effective: (March 1, </div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 23. Magistrates (A) Appointment Magistrates shall be appointed by the Court and serve as full time employees of the Court as provided b</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 25. Court Administrator (A) Duties The Court shall appoint as required a qualified court administrator who will function as the chief n</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 26. Effective Date; Repeal; Amendments (A) The original rules took effect on the 1st day of October, 1973, and after such rules were fi</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 27. [RESERVED] Effective: (March 1, 2023)</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 28. [RESERVED] Effective: (March 1, 2023)</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 3: Presiding Judge, Assistant and Second Assistant Presiding Judges, and Secretary. (A) At a meeting of the annual Joint Session, all j</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 33. Hamilton County Courthouse This Local Rule applies to all Court Facilities. For purposes of this Local Rule, “Court Facilities” inc</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 34. Electronic Transmission Filings (A) Internet Electronic Filings (1) Except as provided in (A)(2) of this rule, in conformity with O</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 35. Hamilton County Drug Treatment and Recovery Court (A) General Provisions (1) Mission Statement The mission of drug courts is to sto</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 36. Issuance of Warrant for Probation Violation (Per Criminal Rule 4) In the event of a defendant’s violation of the condition of commu</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 37. Civil Protection Order The Assignment Commissioner shall assign all cases filed under Ohio Revised Code 2903.214 to the Judge sitti</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 38. Court Record Retention Hamilton County Common Pleas Court hereby adopts Ohio Supreme Court Sup. R. 26 in its entirety. Effective: (</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 39. Return of Inmates for Forfeiture Proceedings (A) In all actions involving the statutory forfeiture of United States currency, real </div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 40. [RESERVED] Effective: (March 1, 2023)</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 41. Appointment of Special Prosecutor From time to time the Hamilton County Prosecutor is faced with a situation that prevents the Hami</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 42. DNA Testing Post-conviction DNA testing is governed by Ohio Revised Code 2953.71 – 2953.83 Upon the motion of either party to a civ</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 43. [RESERVED] Effective: (March 1, 2023)</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 44. Search Warrants (A) Applications for search warrants shall be submitted to the Equity/Criminal Presiding Judge or, if that judge is</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 45. Foreclosures (A) Pleading In every action demanding the judicial sale of real estate, the party or parties seeking such judicial sa</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 46. Certificate of Qualification for Employment (A) To request a Certificate for Qualification of Employment (CQE), the petition must b</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 5: Term of Court (A) Pursuant to Revised Code Section 2301.05 the term of the Common Pleas Court is one calendar year. Effective: (Marc</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 6. Designation of Official Daily Law Journal. (A) The Cincinnati Court Index is hereby designated as the official daily law journal of </div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 8. Juries (A) Opportunity for Service Jury service is an obligation of all qualified citizens of Hamilton County. The opportunity for s</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 1. Scope and Applicability of Rules (A) The rules hereinafter set forth shall apply to the general division of the Court of Common Plea</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">Rule 14.2 Setting Aside Bond Forfeiture Judgment s A motion setting aside a bond forfeiture Judgment must be filed with the Clerk of Courts </div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 4. General Division Administrative Judge In the event the judge elected Presiding Judge pursuant to Rule 3(A) is a judge of the General</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 47. Specialized Dockets The purpose of this Local Rule is to define the specific Local Rule requirements and procedures relate to Speci</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">Rule 14.1 Bond In the event that a criminal defendant is bound over to, or indicted by the Grand Jury, the Common Pleas Court automatically </div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 7. Individual Assignment System. (A) In accordance with the Rules of Superintendence, upon the filing or transfer of a civil case, upon</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 48. COMMERCIAL DOCKET A) Establishment of a Commercial Docket Effective March 1, 2024, the Hamilton County Court of Common Pleas, Gener</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">Local Rule 49 - Use of Artificial Intelligence in Court Submissions (A) Purpose and Scope This rule is established to govern the use of arti</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">Rule 21. Process Servers (A) A person may be designated as a “Civil Process Server” for cases filed in the court by filing a combined Affida</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 24. Court Technology Plan In accordance with Superintendence Rule 5(E), the Court has adopted and maintains a court technology plan whi</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">RULE 30. Media Coverage of Court Proceedings (A) Procedure (1) Consistent with Rule 12 of the Rules of Superintendence for the Courts of Ohi</div>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div>
+          <div class="ref-row-title">1. Authorization for Use of Body-Worn Cameras (BWC): o Hamilton County Sheriff&#39;s Deputies assigned to courthouse security may wear and activ</div>
+        </div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>
+      <h2><span class="status-pill status-pill-archived">Archived</span> Proposed amendments</h2>
+    </summary>
+    <p class="archival-preamble">Comment period closed 9/20/2026; kept for reference, not current law.</p>
+    <div class="ref-row">
+      <div>
+        <div class="ref-row-title">Municipal Proposed Amendment(s): Rule 11 - Standard Bond Schedule/Bond</div>
+        <div class="ref-row-lede">
+          Comment period closed 2026-09-20. extraction empty (scanned/image-only); proposed rule text not recoverable from corpus Contact listed on the proposal page:
+          Andrew Gillen, Municipal Court Administrator, 1000 Main St. Room 205, Cincinnati, Ohio 45202. <a href="https://hamiltoncountycourts.org/index.php/municipal-proposed-ammendments">Watch the live proposal page at hamiltoncountycourts.org for adoption</a>.
+        </div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<details class="sect-h" id="methodology">
+  <summary><h2>About this page</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>
+      Methodology: Rules 7, 9, 14, and 29 were reclassified to archival on 2026-09-21 after text
+      comparison verified each was absorbed into the 4-24-26 rules book (similarities 0.995 to 0.999;
+      the book's Rule 14 section is stamped Effective 12-11-2025). The true post-book amendment layer
+      is Rules 31, 17, and 18. Rule 17's effective date comes from the source filename; the document
+      text states only "Rev. 8/2026". Rule 18's effective date is not stated in the document.
+    </p>
+    <p>
+      See also: <a href="/forms/">court forms</a>, and the
+      <a href="/bond-schedule/">bond schedule</a> (rules 14.1 and 14.2 cover bond and
+      bond-forfeiture judgments in the book).
+    </p>
+  </div>
+</details>
+
+<div class="provenance">
+  <span class="prov-kicker">Sources</span>
+  <p>
+    Content mirrored from <span class="prov-feed">feeds/rules.json</span>
+    (corpus captured 2026-09-21).
+    <a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/05/Local-Rules-Book-Version-Effective-4-24-26.pdf">Local Rules Book effective 4-24-26 (PDF, hamiltoncountycourts.org)</a>;     <a href="https://hamiltoncountycourts.org/index.php/municipal-local-rules/">Municipal Court local rules index (hamiltoncountycourts.org)</a>  </p>
+  <p class="prov-sha">Source document SHA-256: <code>df565138894c8ff52d1dedcf7e8da7498fef6098b8e51f893d95c7fdff8c5c38</code></p>
+  <p class="prov-note">Corpus captured 2026-09-21. Rule 31 PDF, Rule 17 PDF, and Rule 18 PDF are the amendment sources listed above. The 2017 Rule 24 text was excluded from every feed and is not published here.</p>
+</div>
+<div class="disclaimer-strip">
+  <p>JCStream is a public-records mirror, not a lawyer and not legal advice. Information is mirrored from court-published sources and may be out of date; verify time-sensitive details with the court before acting. If you find an error, <a href="https://github.com/AICincy/HCJC/issues">open an issue</a>.</p>
+</div><section class="more-reference" aria-label="More court reference">
+  <h2 class="sect-h">More court reference</h2>
+  <div class="visit-grid">
+    <a class="visit-card visit-card-sm" href="/courts/">
+      <span class="visit-card-title">Courts</span>
+      <span class="visit-card-desc">Which court handles what, and how to reach it.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/bond-schedule/">
+      <span class="visit-card-title">Bond schedule</span>
+      <span class="visit-card-desc">The published starting-point bond for misdemeanor and traffic charges.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/judges/">
+      <span class="visit-card-title">Judges</span>
+      <span class="visit-card-desc">Your judge&#39;s courtroom, chambers contact, and standing orders.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/jury/">
+      <span class="visit-card-title">Jury duty</span>
+      <span class="visit-card-desc">You got a jury summons; what to do.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/forms/">
+      <span class="visit-card-title">Forms</span>
+      <span class="visit-card-desc">The current court forms you can file.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/help/">
+      <span class="visit-card-title">Help and free aid</span>
+      <span class="visit-card-desc">Free legal aid and what to do right now.</span>
+    </a>
+    <a class="visit-card visit-card-sm" href="/services/">
+      <span class="visit-card-title">Services and programs</span>
+      <span class="visit-card-desc">Court-run programs: probation, pretrial, treatment dockets.</span>
+    </a>
+  </div>
+</section>    </div>
+  </main>
+  <footer class="site">
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/courts/">Courts</a>
+      <a href="/bond-schedule/">Bond schedule</a>
+      <a href="/judges/">Judges</a>
+      <a href="/jury/">Jury duty</a>
+      <a href="/rules/">Rules</a>
+      <a href="/forms/">Forms</a>
+      <a href="/help/">Self-Help</a>
+      <a href="/services/">Services/Programs</a>
+      <a href="/feed.xml">RSS</a>
+      <a href="https://github.com/AICincy/HCJC">GitHub</a>
+      <a href="/transparency/">Access</a>
+      <a href="/data/public-records/">Public Records Dashboard</a>
+    </nav>
+    <span>Generated Sep 21, 2026, 8:52 PM ET</span>
+    <span><a href="/data/">Data, methodology &amp; legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
+    <span class="footer-legal">Independent, non-governmental project - not affiliated with, endorsed by, or operated by the Hamilton County Sheriff&rsquo;s Office, Hamilton County, or any government entity. <strong>Not a consumer reporting agency</strong>; do not use this site for employment, housing, credit, insurance, tenant screening, or any purpose governed by the Fair Credit Reporting Act, 15&nbsp;U.S.C. &sect;&nbsp;1681 <em>et seq.</em> Source code is MIT-licensed; the JCStream-arranged record data is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener" target="_blank">CC&nbsp;BY-NC&nbsp;4.0</a>; the underlying public records are governed by Ohio law, including the Ohio Public Records Act (<a href="https://codes.ohio.gov/ohio-revised-code/section-149.43" target="_blank" rel="noopener">ORC&nbsp;&sect;&nbsp;149.43</a>).</span>
+  </footer>
+  <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+
+  <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Booking photo" hidden>
+    <button type="button" class="lightbox-backdrop" aria-label="Close"></button>
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <figure class="lightbox-figure">
+      <img id="lb-img" alt="" decoding="async">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+  </div>
+
+  <div id="tier-tip" role="tooltip" hidden></div>
+
+  <script src="/static/main.js?v=afc91b756b" defer></script>
+</body>
+</html>

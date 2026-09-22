@@ -1,17 +1,45 @@
+{# help.html: Self-Help tab (/help/), spec 2.3 Self-Help. Aid directory (find
+   help by situation) plus the courts' own guides. Appearing-in-court
+   guidance moved here from /courts/ (verbatim); specialty courts and
+   probation link out to /services/; full judge profiles live on /judges/.
+   URL stays /help/; display label is "Help & Self-Help". #}
+{% set active_nav = "help" %}
 {% extends "base.html" %}
-{% block title %}Get help &middot; JCStream{% endblock %}
+{% block title %}Help &amp; self-help &middot; JCStream{% endblock %}
 {% block canonical_path %}/help/{% endblock %}
 {% block body_class %}detail page-help{% endblock %}
 {% block sr_h1 %}{% endblock %}
 {% block content %}
+{% set guides = [
+  {"group": "appearing", "scope": "", "title": "Appearing in Court", "url": "https://hamiltoncountycourts.org/index.php/appearing/", "desc": "You should have been given a ticket, citation, subpoena or other paperwork telling you where to appear. Please check that paperwork."},
+  {"group": "appearing", "scope": "", "title": "Court Hearing Information", "url": "https://hamiltoncountycourts.org/index.php/court-hearing-information/", "desc": "If you have an attorney, check with your attorney about when and where you should appear. Check your paperwork for the date and place."},
+  {"group": "appearing", "scope": "", "title": "Courthouse Attire", "url": "https://hamiltoncountycourts.org/index.php/courthouse-attire/", "desc": "No tank tops, no tube tops, no shorts above the knees, no hats, no do-rags, no caps. Violations are subject to contempt, seizure or ejection."},
+  {"group": "appearing", "scope": "", "title": "Parking and Map", "url": "https://hamiltoncountycourts.org/index.php/parking-and-map/", "desc": "Courthouse address: 1000 Main Street, Cincinnati, Ohio 45202. Anyone entering must go through a Sheriff's Security Checkpoint."},
+  {"group": "appearing", "scope": "", "title": "Failure to Appear in Court", "url": "https://hamiltoncountycourts.org/index.php/failure-to-appear-in-court/", "desc": "Missed a court date? The court's canonical guide to failure to appear, for witnesses, defendants, and jurors."},
+  {"group": "appearing", "scope": "Municipal Court", "title": "Traffic Cases", "url": "https://hamiltoncountycourts.org/index.php/traffic-cases/", "desc": "Monday 6:00 PM and Wednesday 6:00 PM, Courtroom B, Hamilton County Justice Center, 1000 Sycamore Street."},
+  {"group": "appearing", "scope": "Municipal Court", "title": "Paying Fines", "url": "https://hamiltoncountycourts.org/index.php/paying-fines/", "desc": "Pay online, or in person 8 AM to 8 PM Monday through Friday in Room 112 of the Hamilton County Justice Center."},
+  {"group": "appearing", "scope": "Municipal Court", "title": "Change Court", "url": "https://hamiltoncountycourts.org/index.php/change-court-2/", "desc": "A specialized court for those charged with prostitution and related offenses. Coordinator Jessica Hines: 513-609-7108."},
+  {"group": "faq", "scope": "Municipal Court", "title": "Frequently Asked Questions", "url": "https://hamiltoncountycourts.org/index.php/frequently-asked-questions/", "desc": "Municipal Court handles criminal and traffic misdemeanor offenses: domestic violence, bad checks, trespassing, OVI, speeding tickets."},
+  {"group": "faq", "scope": "", "title": "FAQs Regarding Court (PDF)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2024/10/FAQS-Regarding-Court-10-28-24.pdf", "desc": "Court-published FAQ sheet dated 10-28-24: court location, parking, finding your courtroom."},
+  {"group": "faq", "scope": "", "title": "FAQs Regarding Process (PDF)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2024/10/FAQS-Regarding-Process-10-28-24.pdf", "desc": "Court-published FAQ sheet dated 10-28-24: representing yourself, and the standard self-represented litigants face."},
+  {"group": "finding-help", "scope": "Municipal Court", "title": "Finding When and Where", "url": "https://hamiltoncountycourts.org/index.php/municipal-finding-whenwhere/", "desc": "Check with your attorney first. Otherwise your ticket, citation, subpoena, or paperwork should tell you where to appear."},
+  {"group": "finding-help", "scope": "Municipal Court", "title": "Finding a Lawyer", "url": "https://hamiltoncountycourts.org/index.php/municipal-finding-a-lawyer/", "desc": "If you are charged with a crime, including a traffic offense, you are entitled to a lawyer at all stages of the proceedings."},
+  {"group": "finding-help", "scope": "Municipal Court", "title": "Municipal Officiants", "url": "https://hamiltoncountycourts.org/index.php/muni-officiants/", "desc": "Probate Court issues marriage licenses: 513-946-3590. Public officials in Hamilton County may perform civil marriage ceremonies."},
+  {"group": "virtual-help", "scope": "", "title": "Virtual Help Center", "url": "https://hamiltoncountycourts.org/index.php/virtual-help-center/", "desc": "Applies only to the Court of Common Pleas, General Division. For a municipal case, visit the Help Center."},
+  {"group": "virtual-help", "scope": "", "title": "Virtual Help Center Resources", "url": "https://hamiltoncountycourts.org/index.php/hamilton-county-self-represented-litigants-virtual-help-center-resources/", "desc": "Help Center, Ohio Rules of Civil Procedure, Ohio Rules of Evidence, and links to the Law Library."},
+  {"group": "programs", "scope": "Municipal Court", "title": "LIP License Intervention Program", "url": "https://hamiltoncountycourts.org/index.php/lip-license-intervention-program/", "desc": "Assists people cited to court for driver's license issues, checking Ohio BMV records for the individual."},
+  {"group": "programs", "scope": "", "title": "Mediation / Alternative Dispute Resolution", "url": "https://hamiltoncountycourts.org/index.php/mediation-alternative-dispute-resolution/", "desc": "Mediation services at the Hamilton County Courthouse, 1000 Main Street, Room 450. 513-946-5470."},
+  {"group": "glossary", "scope": "", "title": "Glossary of Terms (PDF)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2024/10/Glossary-of-Terms-10-28-24.pdf", "desc": "Court-published glossary dated 10-28-24: abeyance, affidavit, bailiff, bench trial, and more."},
+  {"group": "glossary", "scope": "", "title": "Self-Representation Guide (PDF)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2024/08/Self-Representation-Page-Final.pdf", "desc": "The Law Library's guide for people going to court without a lawyer, August 2024."}
+] %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
-  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Help</span>
+  <a href="{{ base_url }}/">Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Help</span>
 </nav>
 
 <header class="doc-h">
   <div class="doc-h-stack">
-    <h1 class="title">Get Help in Hamilton County</h1>
-    <div class="sub">Free legal aid, court services, expungement, and crisis resources</div>
+    <h1 class="title">Help &amp; Self-Help</h1>
+    <div class="sub">Free legal aid, court services, and the courts' own guides</div>
   </div>
 </header>
 
@@ -19,12 +47,22 @@
   JCStream is not legal advice and not a lawyer. This page mirrors current contact information for the free Hamilton County resources most relevant to people who land on this site looking for help with the justice system. Start with the category that matches your situation.
 </p>
 
-<div class="alert inline-alert" role="note">
-  <strong>Scam alert</strong>
-  Scammers actively impersonate the Hamilton County Sheriff's Office, the Electronic Monitoring Unit, and the Clerk of Courts to demand release fees via Zelle, Venmo, or Cash App. Hamilton County never requires payment for electronic monitoring before release. Verify directly: Electronic Monitoring Unit <strong>513-946-9800</strong>.
-</div>
+{% set scam_variant = "general" %}{% include "_scam_alert.html" %}
 
-<h2 class="sect-h">I'm Being Charged with a Crime</h2>
+<nav class="tab-toc" aria-label="On this page">
+  <a href="#charged">Charged</a>
+  <a href="#custody">In custody</a>
+  <a href="#expungement">Expungement</a>
+  <a href="#civil">Civil</a>
+  <a href="#specialty">Specialty courts</a>
+  <a href="#probation">Probation</a>
+  <a href="#crisis">Crisis</a>
+  <a href="#appearing">Appearing in court</a>
+  <a href="#guides">Guides from the courts</a>
+  <a href="#why">Why this page exists</a>
+</nav>
+
+<h2 class="sect-h" id="charged">I'm Being Charged with a Crime</h2>
 <div class="visit-grid">
   <div class="visit-card visit-card-primary">
     <div class="visit-card-icon" aria-hidden="true">PD</div>
@@ -56,14 +94,14 @@
   </div>
 </div>
 
-<h2 class="sect-h">My Loved One Is in Custody</h2>
+<h2 class="sect-h" id="custody">My Loved One Is in Custody</h2>
 <div class="fields">
   <div class="k">Find them</div>
   <div class="v"><a href="https://www.hcso.org/justice-center-services/inmate-search/" target="_blank" rel="noopener">HCSO inmate search</a> - the source roster, served by the Sheriff's office without our framing or aggregation. JCStream mirrors this on a best-effort schedule.</div>
   <div class="k">Visit them</div>
   <div class="v">All visits go through <a href="https://www.homewav.com/" target="_blank" rel="noopener">HomeWAV</a>. On-site terminals are free; remote video visits are $5.99 + fees. <a href="{{ base_url }}/visit/">JCStream visitation guide &rarr;</a></div>
   <div class="k">Post bond</div>
-  <div class="v">Clerk of Courts Municipal Criminal/Traffic Division, 1st Floor of the Hamilton County Justice Center, 1000 Sycamore Street. 24/7/365. <a href="tel:+15139466040">513-946-6040</a> (8 AM-4 PM); <a href="tel:+15139466019">513-946-6019</a> after hours.</div>
+  <div class="v">Clerk of Courts Municipal Criminal/Traffic Division, 1st Floor of the Hamilton County Justice Center, 1000 Sycamore Street. 24/7/365. <a href="tel:+15139466040">513-946-6040</a> (8 AM-4 PM); <a href="tel:+15139466019">513-946-6019</a> after hours. How, where, and when to post is explained on the <a href="{{ base_url }}/bond-schedule/">Bond schedule tab</a>.</div>
   <div class="k">Send money</div>
   <div class="v">Through approved kiosks, phone, or online vendors. Cash cannot be handed to jail staff. Funds go to a commissary trust account in the inmate's name.</div>
   <div class="k">Send mail</div>
@@ -72,7 +110,7 @@
   <div class="v">The Department of Pretrial and Community Transition Services has provided bail investigations and pretrial supervision to the Hamilton County courts since 1973: jail intake, bail investigations, electronic monitoring, court-ordered supervision. Open 24 hours a day, 7 days a week. <a href="https://hamiltoncountycourts.org/index.php/pretrial-services/" target="_blank" rel="noopener">hamiltoncountycourts.org/pretrial-services &rarr;</a></div>
 </div>
 
-<h2 class="sect-h">I Want a Record Sealed or Expunged</h2>
+<h2 class="sect-h" id="expungement">I Want a Record Sealed or Expunged</h2>
 <div class="fields">
   <div class="k">Fresh Start Expungement Clinic</div>
   <div class="v">Free clinic run by the Public Defender. 1st and 3rd Wednesday of each month, 1:00 PM-4:00 PM. Walk-ins are not accepted. Call <a href="tel:+15139463666">513-946-3666</a> between 8:30 AM and 11:30 AM <em>on the clinic date you want to attend</em> to claim an appointment, first come first served.</div>
@@ -84,7 +122,7 @@
   <div class="v">A juvenile or criminal record - even decades old - can affect employment, housing, professional licensing, immigration status, and benefits eligibility.</div>
 </div>
 
-<h2 class="sect-h">I Have a Civil Court Problem (Not Criminal)</h2>
+<h2 class="sect-h" id="civil">I Have a Civil Court Problem (Not Criminal)</h2>
 <div class="visit-grid">
   <div class="visit-card visit-card-primary">
     <div class="visit-card-icon" aria-hidden="true">HC</div>
@@ -125,54 +163,18 @@
     </div>
   </div>
 </div>
-<div class="fields">
-  <div class="k">Self-representation guide</div>
-  <div class="v"><a href="https://hamiltoncountycourts.org/wp-content/uploads/2024/08/Self-Representation-Page-Final.pdf" target="_blank" rel="noopener">The Law Library's self-representation guide (PDF) &rarr;</a> - help for people going to court without a lawyer, from the Hamilton County Law Library (1000 Main Street, 6th floor, Mon-Fri 8 AM-4 PM).</div>
-  <div class="k">Language Access Plan</div>
-  <div class="v"><a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/07/Language-Access-Plan.pdf" target="_blank" rel="noopener">The court's Language Access Plan (July 2026, PDF) &rarr;</a> - the court's plan for language services in court proceedings.</div>
-  <div class="k">Legal terms glossary</div>
-  <div class="v"><a href="https://hamiltoncountycourts.org/wp-content/uploads/2024/10/Glossary-of-Terms-10-28-24.pdf" target="_blank" rel="noopener">Glossary of legal terms (PDF) &rarr;</a> - plain definitions of court terms (abeyance, affidavit, bailiff, bench trial, and more).</div>
-</div>
 
-<h2 class="sect-h">Specialty Courts &amp; Dockets</h2>
-<div class="fields">
-  <div class="k">Drug Treatment &amp; Recovery Court</div>
-  <div class="v">Felony 4 and 5 offenses. Hon. Nicole L. Sanders. Room 500, Courthouse. Director: <a href="tel:+15139465773">513-946-5773</a>.</div>
-  <div class="k">Veterans' Treatment Court</div>
-  <div class="v">Veterans whose service-connected issues led to felony charges. Hon. Christopher A. Wagner. Room 330, Courthouse. Director: <a href="tel:+15136184215">513-618-4215</a>.</div>
-  <div class="k">Reentry Docket</div>
-  <div class="v">Judicial release for low-level non-violent offenders transitioning from state prison. Hon. Wende C. Cross. Room 380, Courthouse. Specialist: <a href="tel:+15139465556">513-946-5556</a>.</div>
-  <div class="k">Probate Court</div>
-  <div class="v">Estates, guardianship, marriage licenses, adoptions, name changes. Judge Ralph Winkler. William Howard Taft Center, 230 East Ninth Street, 9th &amp; 10th floors. <a href="tel:+15139463570">513-946-3570</a> main. <a href="https://www.probatect.org" target="_blank" rel="noopener">probatect.org &rarr;</a></div>
-  <div class="k">Juvenile Court</div>
-  <div class="v">Cases involving people under 18, plus custody between parents or with a non-parent. The Help Center has a satellite office for custody issues inside Juvenile Court, 1st floor. <a href="tel:+15139469442">513-946-9442</a>.</div>
-  <div class="k">First District Court of Appeals</div>
-  <div class="v">Reviews appeals from Common Pleas, Municipal, and Juvenile Courts in Hamilton County.</div>
-  <div class="k">E-filing</div>
-  <div class="v"><a href="https://efiling.hamiltoncountycourts.org" target="_blank" rel="noopener">efiling.hamiltoncountycourts.org</a> - file court documents electronically with the Clerk of Courts.</div>
-</div>
+<h2 class="sect-h" id="specialty">Specialty Courts &amp; Dockets</h2>
+<p>
+  Specialty courts and dockets (drug, veterans, and reentry treatment courts) now live on the <a href="{{ base_url }}/services/#specialized-dockets">Services and Programs tab</a>.
+</p>
 
-<h2 class="sect-h">Probation</h2>
-<div class="fields">
-  <div class="k">Felony (Common Pleas)</div>
-  <div class="v">Find your probation officer: <a href="tel:+15139469844">513-946-9844</a>. <a href="https://hamiltoncountycourts.org/index.php/common-pleas-probation/" target="_blank" rel="noopener">hamiltoncountycourts.org/common-pleas-probation &rarr;</a></div>
-  <div class="k">Misdemeanor (Municipal)</div>
-  <div class="v">Find your probation officer: <a href="tel:+15139469600">513-946-9600</a>. <a href="https://hamiltoncountycourts.org/index.php/Probation%20Municipal/" target="_blank" rel="noopener">hamiltoncountycourts.org/probation-municipal &rarr;</a></div>
-  <div class="k">Drug screen calendar</div>
-  <div class="v"><a href="https://probation.hamiltoncountycourts.org/DrugScreen/" target="_blank" rel="noopener">probation.hamiltoncountycourts.org/DrugScreen &rarr;</a></div>
-  <div class="k">Online payments</div>
-  <div class="v"><a href="https://probation.hamiltoncountycourts.org/Payments/" target="_blank" rel="noopener">probation.hamiltoncountycourts.org/Payments &rarr;</a></div>
-  <div class="k">Adult Parole Authority (state)</div>
-  <div class="v">7710 Reading Road, Suite 210, Cincinnati, OH 45237. <a href="tel:+15138214804">513-821-4804</a>. (Distinct from county probation.)</div>
-  <div class="k">Probation FAQs</div>
-  <div class="v"><a href="https://hamiltoncountycourts.org/index.php/probation-faqs/" target="_blank" rel="noopener">Common questions &rarr;</a> - hours (Monday-Friday 8 AM-4 PM), drug testing, reporting, and the department's move to centralized reporting with expanded field services.</div>
-  <div class="k">Probation substations</div>
-  <div class="v">Walnut Hills, 3501 Burnet Ave &middot; Madisonville, 3990 Red Bank Road &middot; Over-the-Rhine, 1715 Vine Street &middot; Price Hill, 4013 St. Lawrence Ave. The department is centralizing reporting at the main office; check the FAQs before you go. <a href="https://hamiltoncountycourts.org/index.php/Probation-Substations/" target="_blank" rel="noopener">Substation list &rarr;</a></div>
-  <div class="k">Victims' Services Unit</div>
-  <div class="v">800 Broadway, Cincinnati, OH 45202. Victim Impact Statements on felony and misdemeanor convictions; case-status line <a href="tel:+15139469634">513-946-9634</a>; Ohio Victims of Crime Compensation Program applications.</div>
-</div>
+<h2 class="sect-h" id="probation">Probation</h2>
+<p>
+  Probation supervision (felony and misdemeanor) now lives on the <a href="{{ base_url }}/services/#probation">Services and Programs tab</a>.
+</p>
 
-<h2 class="sect-h">Crisis &amp; Community Help</h2>
+<h2 class="sect-h" id="crisis">Crisis &amp; Community Help</h2>
 <div class="fields">
   <div class="k">211 help line</div>
   <div class="v">Dial <strong>211</strong> or <a href="tel:+15137217900">513-721-7900</a>. United Way of Greater Cincinnati connects you to housing, food, utilities, government benefits, and essential community services. Online directory at <a href="https://www.211uwgc.org/" target="_blank" rel="noopener">211uwgc.org</a>.</div>
@@ -186,12 +188,136 @@
   <div class="v">Talbert House, <a href="tel:+15133388596">513-338-8596</a>. The Healing Center, <a href="tel:+15133464080">513-346-4080</a>. Alcohol Awareness Council via the Public Defender resources page.</div>
 </div>
 
-<h2 class="sect-h">Why This Page Exists</h2>
+<h2 class="sect-h" id="appearing">Appearing in court</h2>
+<p>
+  Moved from the Courts tab. Mirrored from <a href="https://hamiltoncountycourts.org/index.php/appearing/" target="_blank" rel="noopener">hamiltoncountycourts.org/appearing</a>.
+</p>
+<div class="fields">
+  <div class="k">Arrive early</div>
+  <div class="v">Plan to arrive at least 30 minutes before your scheduled court appearance. All persons entering the Courthouse and Justice Center must pass through a metal detector. Between 8:30 AM and 9:30 AM, expect longer lines.</div>
+  <div class="k">Courtrooms A &amp; B</div>
+  <div class="v">Located in the Justice Center (the jail), 1000 Sycamore Street, behind the Courthouse. Separate from the Courthouse at 1000 Main Street.</div>
+  <div class="k">Parking</div>
+  <div class="v">Expect to pay $5-$10 depending on location. <a href="https://hamiltoncountycourts.org/index.php/parking-and-map/" target="_blank" rel="noopener">Map and parking lots &rarr;</a></div>
+  <div class="k">Dress code</div>
+  <div class="v">Neat, clean, and appropriate. No tank tops, tube tops, shorts above the knees, hats, do-rags, or caps.</div>
+  <div class="k">Electronics</div>
+  <div class="v">Cell phones, pagers, cameras, and other electronic devices are prohibited without court permission. Violations are subject to contempt, seizure, or ejection.</div>
+  <div class="k">Prohibited items</div>
+  <div class="v">Pocket knives, scissors, mace, or any other weapon. Deputies will not issue claim tickets for confiscated items. Leave them in your car.</div>
+  <div class="k">Failure to appear</div>
+  <div class="v">In a criminal case, a bench warrant is typically issued for your arrest. In a civil case, you may lose by default. If you cannot appear, contact your attorney, the bailiff, or the Assignment Commissioner at <a href="tel:+15139466250">513-946-6250</a>.</div>
+  <div class="k">Find your hearing</div>
+  <div class="v">Assignment Commissioner: <a href="tel:+15139466250">513-946-6250</a> (Room 117, Justice Center or Room 255, Courthouse, 8 AM-4 PM). Clerk of Courts 24-hour line: <a href="tel:+15139466010">513-946-6010</a>. Kiosk terminals near courthouse elevators show the next 7 days of scheduled hearings.</div>
+</div>
+
+<h2 class="sect-h" id="guides">Guides from the courts</h2>
+<p>
+  The courts' own how-to pages and reference sheets, grouped by topic. Everything here is court-published; links go to the live court pages and PDFs.
+</p>
+<div class="visit-grid">
+  <div class="visit-card visit-card-primary">
+    <div class="visit-card-icon" aria-hidden="true">HC</div>
+    <div class="visit-card-body">
+      <span class="visit-card-kicker">Call first</span>
+      <h3 class="visit-card-title">Clerk of Courts Help Center</h3>
+      <p class="visit-card-desc">Free info and free 40-minute lawyer appointments for civil matters. Room 113, Hamilton County Courthouse. Mon-Thu 8 AM-3:30 PM, Fri 8 AM-3 PM.</p>
+      <a class="visit-card-cta" href="tel:+15139465650">Call 513-946-5650 &rarr;</a>
+    </div>
+  </div>
+</div>
+
+{% macro guide_card(g) %}
+<a class="visit-card" href="{{ g.url }}" target="_blank" rel="noopener">
+  <span class="visit-card-body">
+    {% if g.scope %}<span class="visit-card-kicker">{{ g.scope }}</span>{% endif %}
+    <span class="visit-card-title">{{ g.title }}</span>
+    <span class="visit-card-desc">{{ g.desc }}</span>
+  </span>
+</a>
+{% endmacro %}
+
+{% set appearing_guides = guides | selectattr("group", "equalto", "appearing") | list %}
+{% set faq_guides = guides | selectattr("group", "equalto", "faq") | list %}
+{% set finding_guides = guides | selectattr("group", "equalto", "finding-help") | list %}
+{% set vhc_guides = guides | selectattr("group", "equalto", "virtual-help") | list %}
+{% set program_guides = guides | selectattr("group", "equalto", "programs") | list %}
+{% set glossary_guides = guides | selectattr("group", "equalto", "glossary") | list %}
+
+<h3>Appearing in court ({{ appearing_guides | length }})</h3>
+<div class="visit-grid">
+  {% for g in appearing_guides %}{{ guide_card(g) }}{% endfor %}
+</div>
+
+<h3>FAQs ({{ faq_guides | length }})</h3>
+<div class="visit-grid">
+  {% for g in faq_guides %}{{ guide_card(g) }}{% endfor %}
+</div>
+
+<h3>Finding help ({{ finding_guides | length }})</h3>
+<div class="visit-grid">
+  {% for g in finding_guides %}{{ guide_card(g) }}{% endfor %}
+</div>
+
+<h3>Virtual Help Center ({{ vhc_guides | length }})</h3>
+<div class="visit-grid">
+  {% for g in vhc_guides %}{{ guide_card(g) }}{% endfor %}
+</div>
+
+<h3>Programs ({{ program_guides | length }})</h3>
+<div class="visit-grid">
+  {% for g in program_guides %}{{ guide_card(g) }}{% endfor %}
+</div>
+
+<h3>Glossary and self-representation guide ({{ glossary_guides | length }})</h3>
+<div class="visit-grid">
+  {% for g in glossary_guides %}{{ guide_card(g) }}{% endfor %}
+</div>
+
+<h3>Dated court reference sheets</h3>
+<p class="muted">Court-published PDF sheets below the evergreen guides. Dates are the court's publication dates.</p>
+<a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2024/10/FAQS-Regarding-Court-10-28-24.pdf" target="_blank" rel="noopener">
+  <span class="ref-row-title">FAQs Regarding Court</span>
+  <span class="muted">PDF, dated 10-28-24</span>
+</a>
+<a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2024/10/FAQS-Regarding-Process-10-28-24.pdf" target="_blank" rel="noopener">
+  <span class="ref-row-title">FAQs Regarding Process</span>
+  <span class="muted">PDF, dated 10-28-24</span>
+</a>
+<a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2024/10/Glossary-of-Terms-10-28-24.pdf" target="_blank" rel="noopener">
+  <span class="ref-row-title">Glossary of Terms</span>
+  <span class="muted">PDF, dated 10-28-24</span>
+</a>
+<a class="ref-row" href="https://hamiltoncountycourts.org/wp-content/uploads/2024/08/Self-Representation-Page-Final.pdf" target="_blank" rel="noopener">
+  <span class="ref-row-title">Self-Representation Guide</span>
+  <span class="muted">PDF, August 2024 &middot; from the Hamilton County Law Library</span>
+</a>
+
+<div class="archival-block">
+  <p class="archival-preamble">What is missing</p>
+  <p>The corpus has no e-filing help page; e-filing links out to <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>. The court publishes no accessibility or accommodations page: the Courthouse Attire page promises accommodations but its body has none. The court's Language Access Plan scans are unreadable (text not recoverable); no usable language-access content is in the corpus.</p>
+</div>
+
+<h2 class="sect-h" id="why">Why This Page Exists</h2>
 <p>
   Many people land on JCStream because someone they love was just booked or because a record about them is showing up in public search results. The site itself is a public-records mirror and is not equipped to help. The agencies and organizations above are. This page is a curated, single-screen index of the free Hamilton County resources most relevant to people in those situations, written in plain English and kept current.
 </p>
 <p class="muted">
   Phone numbers and links are verified from the agencies' own sites. If you find a number that has changed or an organization that no longer offers a listed service, please <a href="https://github.com/AICincy/HCJC/issues">open an issue</a>. <strong>There is never a fee, and there never will be.</strong>
 </p>
+
+{% set provenance = {
+  "feed": "feeds/self-help.json",
+  "captured": "2026-09-21",
+  "sources": [
+    {"label": "hamiltoncountycourts.org", "url": "https://hamiltoncountycourts.org/"},
+    {"label": "cincyhelpcenter.org", "url": "https://cincyhelpcenter.org/"},
+    {"label": "courtclerk.org", "url": "https://www.courtclerk.org/"}
+  ],
+  "note": "Corpus captured 2026-09-20/21. Appearing-in-court guidance moved here from the Courts tab (single home for this content). Specialty courts, probation, and full judge profiles live on the Services and Programs tab and the Judges tab respectively."
+} %}
+{% include "_provenance.html" %}
+{% include "_disclaimer_strip.html" %}
+{% include "_more_reference.html" %}
 
 {% endblock %}

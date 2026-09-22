@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Hamilton County Judges &middot; JCStream{% endblock %}
+{% block canonical_path %}/judges/{% endblock %}
+{% block body_class %}detail page-judges{% endblock %}
+{% block sr_h1 %}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  {# "Court reference" is the drawer group name (spec 3.1.2); there is no
+     /court-reference/ URL, so the parent crumb is a plain label, not a link. #}
+  <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Judges</span>
+</nav>
+
+<header class="doc-h">
+  <div class="doc-h-stack">
+    <h1 class="title">Hamilton County Judges</h1>
+    <div class="sub">{{ judges_total }} judges, Common Pleas and Municipal, profiles mirrored from hamiltoncountycourts.org</div>
+  </div>
+</header>
+
+<p class="page-lede">
+  Find your judge's courtroom, chambers contact, and standing orders. Start with the court.
+</p>
+
+<nav aria-label="On this page">
+  <ul class="tab-toc">
+    <li><a href="#common-pleas">Common Pleas <span class="count">{{ common_pleas | length }}</span></a></li>
+    <li><a href="#municipal">Municipal Court <span class="count">{{ municipal | length }}</span></a></li>
+  </ul>
+</nav>
+
+<div class="filter-bar" role="search" aria-label="Filter judges">
+  <label for="judge-filter">Search judges</label>
+  <input type="search" id="judge-filter" placeholder="Name, courtroom, or room" autocomplete="off" style="min-height:44px">
+  <fieldset class="judge-court-chips" id="judge-court-chips" style="border:0;padding:0;margin:0">
+    <legend class="sr-only">Court</legend>
+    <button type="button" class="view-toggle" data-court="all" aria-pressed="true">All <span class="count">{{ judges_total }}</span></button>
+    <button type="button" class="view-toggle" data-court="common-pleas" aria-pressed="false">Common Pleas <span class="count">{{ common_pleas | length }}</span></button>
+    <button type="button" class="view-toggle" data-court="municipal" aria-pressed="false">Municipal <span class="count">{{ municipal | length }}</span></button>
+  </fieldset>
+  <span class="filter-count" id="judge-filter-count" aria-live="polite">Showing {{ judges_total }} of {{ judges_total }} judges</span>
+</div>
+<p id="judge-filter-empty" style="display:none">No judges match. Clear the search or choose a different court.</p>
+
+{% macro judge_cards(judges, court_key) %}
+<div class="ref-grid">
+  {% for judge in judges %}
+  <section class="judge-card" id="judge-{{ judge.slug }}" data-court="{{ court_key }}" data-search="{{ judge.search_text }}">
+    <div class="judge-card-top">
+      <img class="judge-photo" src="{{ base_url }}{{ judge.photo_src }}" alt="" width="96" height="96" loading="lazy">
+      <div>
+        <h3 class="judge-name">{{ judge.name }}</h3>
+        <div class="judge-meta">
+          {% if judge.presiding %}<span class="status-pill status-pill-fresh">Presiding</span>{% endif %}
+          <span class="judge-court-chip">{{ judge.court_chip }}</span>
+          {% if judge.sub_chip %}<span class="judge-court-chip">{{ judge.sub_chip }}</span>{% endif %}
+        </div>
+      </div>
+    </div>
+    {% if judge.contacts %}
+    <p class="judge-contact">
+      {% for c in judge.contacts %}
+      <span>{{ c.label }}: {% if c.href %}<a href="{{ c.href }}">{{ c.display }}</a>{% else %}{{ c.display }}{% endif %}</span>{% if not loop.last %}<br>{% endif %}
+      {% endfor %}
+    </p>
+    {% endif %}
+    {% if judge.bio %}
+    <details>
+      <summary>Profile</summary>
+      <div class="judge-details-body" style="white-space: pre-line">{{ judge.bio }}</div>
+    </details>
+    {% endif %}
+    {% if judge.standing_orders %}
+    <details>
+      <summary>Standing orders / courtroom procedures</summary>
+      <div class="judge-details-body" style="white-space: pre-line">{{ judge.standing_orders }}</div>
+    </details>
+    {% endif %}
+    {% if judge.source_url %}
+    <p class="judge-official"><a href="{{ judge.source_url }}" target="_blank" rel="noopener" aria-label="Official profile for Judge {{ judge.name }}">Official profile</a></p>
+    {% endif %}
+  </section>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+<details class="sect-h judges-section" id="common-pleas" open>
+  <summary><h2>Common Pleas, General Division</h2><span class="sect-h-marker" aria-hidden="true"></span><span class="count">{{ common_pleas | length }} judges</span></summary>
+  <div class="sect-h-body">
+    {{ judge_cards(common_pleas, "common-pleas") }}
+  </div>
+</details>
+
+<details class="sect-h judges-section" id="municipal" open>
+  <summary><h2>Hamilton County Municipal Court</h2><span class="sect-h-marker" aria-hidden="true"></span><span class="count">{{ municipal | length }} judges</span></summary>
+  <div class="sect-h-body">
+    {{ judge_cards(municipal, "municipal") }}
+  </div>
+</details>
+
+{% include "_provenance.html" %}
+{% include "_disclaimer_strip.html" %}
+{% include "_more_reference.html" %}
+
+<script src="{{ base_url }}/static/judges.js" defer></script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{# _scam_alert.html — unified scam/staleness callout (spec 2.3, 3.2, 5.3, 6.3).
+   One component, one wording per alert, so wording cannot drift between tabs.
+   Set scam_variant before including:
+     "general" (default): Courts, Self-Help. EMU impersonation warning.
+     "bond": Bond tab. In-person posting warning.
+     "jury": Jury tab. Jury-duty phone scam warning.
+   Wording is verbatim from court-published sources (feeds + court PDFs). #}
+{% set _sv = scam_variant | default("general", true) %}
+<div class="alert inline-alert" role="note">
+{% if _sv == "bond" %}
+  <strong>Scam alert: bond payments.</strong>
+  Payments are NOT requested or processed over the phone. If you receive a phone call requesting any form of payment or are threatened with arrest, this is a scam. All bonds must be posted in person, 24 hours a day, 365 days a year, at the Clerk of Courts Municipal Criminal/Traffic Division on the 1st Floor of the Hamilton County Justice Center, 1000 Sycamore Street. Bond payments are accepted as cash or credit/debit card (Mastercard, Visa, American Express, Discover); photo ID is required. If you suspect a scam, hang up and call the Sheriff's Office directly at <strong>513-825-1500</strong> to confirm.
+{% elif _sv == "jury" %}
+  <strong>Scam alert: jury duty phone scam.</strong>
+  Courts never call to demand payment for missed jury duty. Scammers pose as county officials, threaten fines for alleged jury duty violations, and demand payment by phone; this is a scam, hang up. Read the court's <a href="https://hamiltoncountycourts.org/wp-content/uploads/2026/07/SCAM-ALERT.pdf">July 2026 jury scam alert (PDF)</a>.
+{% else %}
+  <strong>Scam alert.</strong>
+  Scammers actively impersonate Hamilton County Sheriff's Office, Electronic Monitoring Unit, and Clerk of Courts personnel, calling families of incarcerated individuals and demanding fees for "release via electronic GPS ankle monitor." They use spoofed numbers and publicly available arrest records, and request payment via Zelle, Venmo, or Cash App. Hamilton County <strong>will never require payment</strong> for electronic monitoring before release from the Justice Center. Verify directly with the Electronic Monitoring Unit at <strong>513-946-9800</strong>.
+{% endif %}
+</div>

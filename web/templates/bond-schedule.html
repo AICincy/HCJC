@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% set active_nav = "bond" %}
 {% block title %}Standard Bond Schedule &middot; JCStream{% endblock %}
 {% block canonical_path %}/bond-schedule/{% endblock %}
 {% block body_class %}detail{% endblock %}
 {% block sr_h1 %}{% endblock %}
 {% block content %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
-  <a href="{{ base_url }}/">&larr; All inmates</a> <span aria-hidden="true">/</span> <span>Standard bond schedule</span>
+  <a href="{{ base_url }}/">&larr; Home</a> <span aria-hidden="true">/</span> <span>Court reference</span> <span aria-hidden="true">/</span> <span aria-current="page">Standard bond schedule</span>
 </nav>
 
 <header class="doc-h">
@@ -15,90 +16,188 @@
   </div>
 </header>
 
-<p class="page-lede">This is the court's published standard bond schedule: the starting point for misdemeanor and traffic bonds in Hamilton County. The judge sets the actual bond at arraignment based on the facts of the case. This page is a reference, not legal advice.</p>
+<p class="page-lede">The court's published starting point for misdemeanor and traffic bonds: money posted to secure release until the case is resolved. The judge sets the actual bond. This schedule covers Municipal Court misdemeanors and traffic offenses only. Felonies have no standard bond.</p>
 
-<h2 class="sect-h">How to read this table</h2>
-<ul class="legend">
-  <li><span class="pill" aria-hidden="true">$5,000 @ 10%</span> <strong>@ 10%</strong>: post 10% of the listed amount to be released. The rule is stated as published; the site does not compute the amount you would pay.</li>
-  <li><span class="pill" aria-hidden="true">O.R.</span> <strong>O.R.</strong>: released on your own recognizance, no money posted, with a promise to appear.</li>
-  <li><span class="bond-chip-no" aria-hidden="true">NO BOND</span> <strong>NO BOND</strong>: no standard bond is available for this charge at booking.</li>
-  <li><span class="pill" aria-hidden="true">$5,000 + REVIEW</span> <strong>+ REVIEW</strong>: the listed amount applies but a judge must review the bond before release.</li>
-</ul>
-
-<div class="filter-bar">
-  <label for="bond-filter">Search the schedule</label>
-  <input type="search" id="bond-filter" placeholder="Try an offense or ORC code (e.g. 4511.19)" autocomplete="off" style="min-height:44px">
-  <div class="filter-count" aria-live="polite" id="bond-filter-count">19 of 19 schedule rows shown. 14 no-standard-bond offenses listed below.</div>
+<div class="decision-aid">
+  <p><strong>What brings you here?</strong> To find the starting bond amount for a charge, see the <a href="#schedule">schedule</a>. To understand what the flags mean, read the <a href="#explain">explainer</a>. To post a bond, see <a href="#pay">how, where, and when to post</a>.</p>
 </div>
 
-<div class="table-scroll" tabindex="0" role="region" aria-label="Standard bond schedule table, scrollable">
-<table class="charges schedule">
-  <caption class="sr-only">Hamilton County Courts standard bond schedule, revision 3/5/2026. Nineteen rows: eleven criminal, eight traffic. Three bond tiers per row.</caption>
-  <thead><tr>
-    <th scope="col">Offense</th>
-    <th scope="col">ORC</th>
-    <th scope="col">In County</th>
-    <th scope="col">Out of County</th>
-    <th scope="col">Out of State / No Permanent Address</th>
-  </tr></thead>
-  <tbody>
-    <tr><th scope="rowgroup" colspan="5">Criminal</th></tr>
-    {% for r in bond_rows if r.section == 'criminal' %}
-    <tr data-offense="{{ r.offense|lower }}" data-orc="{{ r.orc }}">
-      <th scope="row">{{ r.offense_display }}</th>
-      <td class="mono">{% if r.orc_links %}{% for link in r.orc_links %}<a href="{{ base_url }}/statute/#orc-{{ link.anchor }}">{{ link.code }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% else %}<span aria-hidden="true">&mdash;</span><span class="sr-only">No ORC code listed</span>{% endif %}</td>
-      <td style="white-space:nowrap">{{ r.in_county_html }}</td>
-      <td style="white-space:nowrap">{{ r.out_of_county_html }}</td>
-      <td style="white-space:nowrap">{{ r.out_of_state_no_address_html }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-  <tbody>
-    <tr><th scope="rowgroup" colspan="5">Traffic</th></tr>
-    {% for r in bond_rows if r.section == 'traffic' %}
-    <tr data-offense="{{ r.offense|lower }}" data-orc="{{ r.orc }}">
-      <th scope="row">{{ r.offense_display }}</th>
-      <td class="mono">{% if r.orc_links %}{% for link in r.orc_links %}<a href="{{ base_url }}/statute/#orc-{{ link.anchor }}">{{ link.code }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% else %}<span aria-hidden="true">&mdash;</span><span class="sr-only">No ORC code listed</span>{% endif %}</td>
-      <td style="white-space:nowrap">{{ r.in_county_html }}</td>
-      <td style="white-space:nowrap">{{ r.out_of_county_html }}</td>
-      <td style="white-space:nowrap">{{ r.out_of_state_no_address_html }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="alert inline-alert" role="note">
+  <strong>Check the date before you rely on an amount.</strong>
+  This schedule was revised 3/5/2026, about 6.5 months before the court's site was captured for this page on 2026-09-21. Amounts may have changed. It covers Municipal Court misdemeanors and traffic offenses only; felonies have no standard bond. Verify amounts with the court before acting.
 </div>
 
-<p class="source">Source: <a href="{{ bond_source_url }}">Standard Bond Schedule, Hamilton County Courts (PDF)</a>, rev. 3/5/2026. Mirrored and verified 2026-09-20. Note: the source PDF misspells one offense as &ldquo;SEXAUL IMPOSITION&rdquo; [sic] (ORC 2907-06); the table above shows the corrected spelling &ldquo;SEXUAL IMPOSITION&rdquo;.</p>
+{% set scam_variant = "bond" %}
+{% include "_scam_alert.html" %}
 
-<details class="section-h-details" id="no-standard-bond">
-  <summary>Misdemeanor offenses without standard bonds (14)</summary>
-  <div class="no-bond-list">
+<nav aria-label="On this page">
+  <ul class="tab-toc">
+    <li><a href="#explain">Explainer</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#no-standard-bond">No standard bond <span class="count">{{ no_standard_bond|length }}</span></a></li>
+    <li><a href="#notes">Notes</a></li>
+    <li><a href="#related">Related</a></li>
+    <li><a href="#about">About this page</a></li>
+  </ul>
+</nav>
+
+<section aria-labelledby="explain-h">
+  <h2 class="sect-h" id="explain">Understanding the schedule</h2>
+
+  <h3>1. What "10%" means</h3>
+  <p>An entry like "$1,000 @ 10%" means the bond is set at $1,000 and the person posting pays 10 percent of that amount to secure release. Two examples from the schedule: $1,000 @ 10% means $100 posted; $2,500 @ 10% means $250 posted.</p>
+  <p>The three amount columns are residency tiers: in-county (lowest), out-of-county, and out-of-state or no permanent address (highest). The tier that applies depends on the arrestee's residence and whether they have a verifiable local address.</p>
+  <p>The schedule lists cash-percentage amounts and says nothing about surety bonds. Do not read the "10%" figure as a commercial bondsman's fee; the 10% is the share of the bond amount posted to the court.</p>
+  <p class="muted">Source: the court's Standard Bond Schedule, rev. 3/5/2026.</p>
+
+  <h3>2. What "+ REVIEW" means</h3>
+  <p>Several offenses, for example negligent homicide, vehicular homicide, vehicular assault, unlawful sexual contact with a minor, sexual imposition, voyeurism, and public indecency, show amounts like "$5,000 + REVIEW." The schedule itself does not define REVIEW, and the court's published materials used for this page do not describe the review's timing, location, or procedure.</p>
+  <p class="muted">Source: the court's Standard Bond Schedule, rev. 3/5/2026.</p>
+
+  <h3 id="pay">3. How, where, and when to post bond</h3>
+  <ul>
+    <li><strong>Where.</strong> Bonds are posted with the Hamilton County Clerk of Courts at the Hamilton County Justice Center: the Clerk of Courts Municipal Criminal/Traffic Division, 1st Floor, 1000 Sycamore Street, Room 112. All bonds must be posted in Hamilton County.</li>
+    <li><strong>Hours.</strong> 24 hours a day, 365 days a year. Bond refund check pickup is narrower: Room 112, Monday through Friday, 8 am to 8 pm.</li>
+    <li><strong>Payment.</strong> Cash, or credit/debit card: Mastercard, Visa, American Express, Discover. Photo ID is required to post bond. The Clerk's bond line is (513) 946-6010.</li>
+  </ul>
+  <p class="muted">Source: the courts' scam alert (updated 06/09/2026) and the Clerk of Courts bond FAQ.</p>
+
+  <h3>4. Bond refunds</h3>
+  <p>The refund is generally 90% of the bond-amount portion. The state fee is refunded only if the case is dismissed, ignored by the grand jury, or ends in not guilty. Refunds are issued by check only, never credited back to a credit card, and are payable to the person who posted. A refund is released only to the surety unless a bond-authorization form names a third party, and it is issued within 14 days of the final disposition of all cases on the receipt.</p>
+  <p class="muted">Source: the Clerk of Courts bond FAQ.</p>
+
+  <h3>5. Real-estate bonds</h3>
+  <p>A defendant or surety may post Ohio real estate as bond. The property must be titled in the defendant's or the surety's name and located in Ohio (R.C. 2937.24). Property owned by a trust, corporation, LLC, partnership, or similar entity is not accepted, and property in foreclosure is not accepted. The surety must hold equity of at least twice the bond amount, over and above all encumbrances (R.C. 2937.281). A Surety Affidavit must be filed with the signatures of all current owners and spouses, all lien holders and balances with documentation, the county auditor's current valuation, the equity computation, and a certified copy of the deed from the county recorder. The Clerk may deny the property as bond if the terms are not met; knowingly false information is contempt and referral for prosecution.</p>
+  <p>Full requirements: <a href="https://www.courtclerk.org/forms/pre.pdf">Posting Real Estate for a Criminal Bond, Clerk of Courts memo (PDF)</a>.</p>
+  <p class="muted">Source: the Clerk of Courts memo "Posting Real Estate for a Criminal Bond."</p>
+</section>
+
+<section aria-labelledby="schedule-h">
+  <h2 class="sect-h" id="schedule">Standard bond schedule</h2>
+
+  <ul class="legend" id="bond-legend" aria-label="How to read the bond amounts">
+    <li><span class="pill" aria-hidden="true">$1,000 @ 10%</span> <strong>@ 10%</strong>: post 10% of the listed amount to be released. Example: $1,000 @ 10% means $100 posted.</li>
+    <li><span class="pill" aria-hidden="true">O.R.</span> <strong>O.R.</strong>: shown instead of a dollar amount on some rows; the schedule does not define it.</li>
+    <li><span class="bond-chip-no" aria-hidden="true">NO BOND</span> <strong>NO BOND</strong>: the schedule sets no standard bond for this charge.</li>
+    <li><span class="pill" aria-hidden="true">$5,000 + REVIEW</span> <strong>+ REVIEW</strong>: shown on some schedule amounts; the schedule does not define REVIEW.</li>
+  </ul>
+
+  <div class="filter-bar">
+    <label for="bond-filter">Search the schedule</label>
+    <input type="search" id="bond-filter" placeholder="Try an offense or ORC code (e.g. 4511.19)" autocomplete="off" style="min-height:44px">
+    <div class="filter-count" aria-live="polite" id="bond-filter-count">19 of 19 schedule rows shown. 14 no-standard-bond offenses listed below.</div>
+  </div>
+
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Standard bond schedule table, scrollable">
+  <table class="charges schedule" aria-describedby="bond-legend">
+    <caption class="sr-only">Hamilton County Courts standard bond schedule, revision 3/5/2026. Nineteen rows: eleven criminal, eight traffic. Three bond tiers per row.</caption>
+    <thead><tr>
+      <th scope="col">Offense</th>
+      <th scope="col">ORC</th>
+      <th scope="col">In County</th>
+      <th scope="col">Out of County</th>
+      <th scope="col">Out of State / No Permanent Address</th>
+    </tr></thead>
+    <tbody>
+      <tr><th scope="rowgroup" colspan="5">Criminal</th></tr>
+      {% for r in bond_rows if r.section == 'criminal' %}
+      <tr data-offense="{{ r.offense|lower }}" data-orc="{{ r.orc }}">
+        <th scope="row">{{ r.offense }}{% if "SEXAUL" in r.offense %} [sic]{% endif %}</th>
+        <td class="mono">{% if r.orc_links %}{% for link in r.orc_links %}<a href="{{ base_url }}/statute/#orc-{{ link.anchor }}">{{ link.code }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% else %}<span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span>{% endif %}</td>
+        <td style="white-space:nowrap">{{ r.in_county_html }}</td>
+        <td style="white-space:nowrap">{{ r.out_of_county_html }}</td>
+        <td style="white-space:nowrap">{{ r.out_of_state_no_address_html }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tbody>
+      <tr><th scope="rowgroup" colspan="5">Traffic</th></tr>
+      {% for r in bond_rows if r.section == 'traffic' %}
+      <tr data-offense="{{ r.offense|lower }}" data-orc="{{ r.orc }}">
+        <th scope="row">{{ r.offense }}{% if "SEXAUL" in r.offense %} [sic]{% endif %}</th>
+        <td class="mono">{% if r.orc_links %}{% for link in r.orc_links %}<a href="{{ base_url }}/statute/#orc-{{ link.anchor }}">{{ link.code }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% else %}<span aria-hidden="true">-</span><span class="sr-only">No ORC code listed</span>{% endif %}</td>
+        <td style="white-space:nowrap">{{ r.in_county_html }}</td>
+        <td style="white-space:nowrap">{{ r.out_of_county_html }}</td>
+        <td style="white-space:nowrap">{{ r.out_of_state_no_address_html }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<details class="sect-h" id="no-standard-bond">
+  <summary><h2>Misdemeanor charges without standard bonds ({{ no_standard_bond|length }})</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <p>The schedule lists {{ no_standard_bond|length }} offenses with no standard bond amount. For these, the judge sets bond at arraignment.</p>
+    {# Feed-shape guard: the bond feed's `special` array mixes offense rows with one
+       header record ("MISDEMEANOR CHARGES WITHOUT STANDARD BONDS") and three note
+       records. Only offense-shaped entries render as rows; the header becomes this
+       section's title and the notes render in the Notes section below. #}
     {% for item in no_standard_bond %}
+    {% if item.offense and "WITHOUT STANDARD BONDS" not in item.offense %}
     <div class="no-bond-row" data-offense="{{ item.offense|lower }}" data-orc="{{ item.orc }}">
-      <strong>{{ item.offense }}</strong>
-      <span class="mono"><a href="{{ base_url }}/statute/#orc-{{ item.orc_anchor }}">{{ item.orc }}</a></span>
-      <p class="muted">No standard bond is listed. The judge sets bond at arraignment.</p>
+      <div class="ref-row" style="border-bottom:none; padding-bottom:0;">
+        <span class="ref-row-title">{{ item.offense }}</span>
+        <span class="ref-chip status-pill status-pill-nobond">NO BOND</span>
+        <span class="ref-row-meta mono"><a href="{{ base_url }}/statute/#orc-{{ item.orc_anchor }}">{{ item.orc }}</a></span>
+      </div>
+      <p class="muted" style="margin:2px 0 0 4px; padding-bottom:10px; border-bottom:1px solid var(--border); font-size:13px;">The judge sets bond at arraignment.</p>
     </div>
+    {% endif %}
     {% endfor %}
   </div>
 </details>
 
-<h2 class="sect-h">Notes from the schedule</h2>
-<ul class="muted">
-  {% for n in general_notes %}
-  <li>{{ n.note }}</li>
-  {% endfor %}
-  {% for f in felony_notes %}
-  <li>{{ f.offense }} ({{ f.orc }}): listed in the schedule as a felony note. Felonies have no standard bond.</li>
-  {% endfor %}
-</ul>
+<section aria-labelledby="notes-h">
+  <h2 class="sect-h" id="notes">Notes from the schedule</h2>
+  <ul class="muted">
+    {% for n in general_notes %}
+    <li>{{ n.note }}</li>
+    {% endfor %}
+    {% for f in felony_notes %}
+    <li>{{ f.offense }} ({{ f.orc }}): listed in the schedule as a felony note. Felonies have no standard bond.</li>
+    {% endfor %}
+  </ul>
+</section>
 
-<h2 class="sect-h">Methodology</h2>
-<p class="muted">This page mirrors the court's Standard Bond Schedule (rev. 3/5/2026) as a structured table so it can be searched and read on a phone. Amounts are shown exactly as published, including the &ldquo;@ 10%&rdquo;, &ldquo;O.R.&rdquo;, &ldquo;NO BOND&rdquo;, and &ldquo;+ REVIEW&rdquo; flags. The site does not compute &ldquo;you post $X&rdquo; amounts: whether the 10% rule applies unconditionally is not established from the schedule alone.</p>
-<p class="muted">How do actual bonds compare? See the <a href="{{ base_url }}/bond-disparity/">Bond Disparity Index</a>, which shows how bonds set on the current roster vary for the same statute. The schedule is what the court publishes; the disparity index is what the roster shows. They answer different questions.</p>
-<p class="muted">For posting bond in person, see <a href="{{ base_url }}/visit/#posting-bond">Posting Bond</a>. For how a case moves through the courts, see <a href="{{ base_url }}/courts/#case-path">How a Case Moves Through the System</a>.</p>
+<section aria-labelledby="related-h">
+  <h2 class="sect-h" id="related">Related</h2>
+  <ul class="muted">
+    <li>Municipal Criminal/Traffic Violations Bureau payout schedules, amendments through 2026-04-13: fine payout schedules, distinct from bond. (Live court PDF link pending URL verification; the text was captured in the 2026-09-21 crawl.)</li>
+    <li><a href="{{ base_url }}/rules/">Local Rules 14.1 (Bond) and 14.2 (Setting Aside Bond Forfeiture Judgments)</a>, in the Common Pleas rules book effective 4-24-26.</li>
+    <li><a href="{{ base_url }}/bond-disparity/">Bond Disparity Index</a>: how bonds set on the current roster vary for the same statute. The schedule is what the court publishes; the disparity index is what the roster shows.</li>
+    <li><a href="{{ base_url }}/visit/#posting-bond">Posting bond in person</a>: where to go and what to bring.</li>
+  </ul>
+</section>
 
-<p class="muted" id="bond-correction-log">Correction log: 12 statute explainer &ldquo;typical bond&rdquo; values that contradict this schedule are marked <strong>not established</strong> on <a href="{{ base_url }}/statute/">statute pages</a> pending independent re-extraction from the official PDF. No value from either source is shown for those codes until the re-extraction is verified.</p>
+<details class="sect-h" id="about">
+  <summary><h2>About this page</h2><span class="sect-h-marker" aria-hidden="true"></span></summary>
+  <div class="sect-h-body">
+    <h3>Methodology</h3>
+    <p class="muted">This page mirrors the court's Standard Bond Schedule (rev. 3/5/2026) as a searchable table. Amounts are shown exactly as published, including the "@ 10%", "O.R.", "NO BOND", and "+ REVIEW" flags, and the source PDF's "SEXAUL IMPOSITION" [sic] spelling (ORC 2907-06) is preserved verbatim, not silently corrected. The site does not compute the amount you would pay.</p>
+    <h3>Correction log</h3>
+    <p class="muted" id="bond-correction-log">12 statute explainer "typical bond" values that contradict this schedule are marked <strong>not established</strong> on <a href="{{ base_url }}/statute/">statute pages</a> pending independent re-extraction from the official PDF. No value from either source is shown for those codes until the re-extraction is verified.</p>
+  </div>
+</details>
+
+{% set provenance = {
+  "feed": "feeds/bond.json",
+  "captured": "2026-09-21",
+  "sources": [
+    {"label": "Standard Bond Schedule (PDF, rev. 3/5/2026)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2026/03/bond_sched_latest.pdf"},
+    {"label": "Courts scam alert (updated 06/09/2026, PDF)", "url": "https://hamiltoncountycourts.org/wp-content/uploads/2026/07/SCAM-ALERT.pdf"},
+    {"label": "Clerk of Courts bond FAQ", "url": "https://www.courtclerk.org/frequently-asked-questions-bond-information/"},
+    {"label": "Clerk of Courts memo: Posting Real Estate for a Criminal Bond (PDF)", "url": "https://www.courtclerk.org/forms/pre.pdf"}
+  ],
+  "sha256": "b29db798621dfc175be0da7e821757ff1226d04cd17c01d2e95a4987a4b8bb49",
+  "note": "Schedule rev. 3/5/2026, about 6.5 months old when captured. Verify amounts with the court before relying on them."
+} %}
+{% include "_provenance.html" %}
+
+{% include "_disclaimer_strip.html" %}
+
+{% include "_more_reference.html" %}
 
 <script src="{{ base_url }}/static/bond-schedule.js" defer></script>
 {% endblock %}
