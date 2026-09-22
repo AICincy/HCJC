@@ -513,24 +513,6 @@ a.plain, a.plain:hover { color: inherit; text-decoration: none; }
     border-radius: 0;
   }
   .nav-drawer .nav-link:hover { background: var(--bg-soft); }
-  /* Citizen panel 2026-09-22 (quick win 5): Bond schedule above the fold on
-     mobile, where the nav drawer ships closed. Full-width strip under the
-     masthead row. Hidden on desktop (min-width rule below). */
-  .masthead-bond {
-    display: block;
-    grid-column: 1 / -1;
-    grid-row: 2;
-    text-align: center;
-    padding: 8px 12px;
-    margin-top: 6px;
-    border-top: 1px solid var(--border);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--link);
-  }
-}
-@media (min-width: 721px) {
-  .masthead-bond { display: none; }
 }
 
 /* Month chip rail */

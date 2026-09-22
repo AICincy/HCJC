@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://www.aretheyinjail.com/">
   <meta name="twitter:card" content="summary">
   <script src="/static/theme-init.js?v=1fb7517bcf"></script>
-  <link rel="stylesheet" href="/static/style.css?v=356cece8f4">
+  <link rel="stylesheet" href="/static/style.css?v=8e34a74299">
   <noscript><style>.theme-toggle { display: none; }</style></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/static/img/hcjc-seal.png">
@@ -53,7 +53,6 @@
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
       </button>
-      <a class="masthead-bond" href="/bond-schedule/">Bond schedule</a>
       <details class="nav-menu">
         <summary class="nav-toggle" aria-label="Menu">
           <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -107,11 +106,11 @@
     <h1 class="title">Access Transparency Scorecard</h1>
     <div class="sub">HCSO public-records access interruptions, measured from the tamper-evident evidence ledger &middot; R.C. 149.43</div>
   </div>
-  <div class="stamp">Computed 2026-09-22T05:13Z</div>
+  <div class="stamp">Computed 2026-09-22T05:19Z</div>
 </header>
 
 <aside class="banner" aria-label="Current access status" role="status">
-  <p><span class="status-pill status-pill-blocked">Blocked</span> Retrieval is currently denied (last fully successful retrieval 4.3 hours ago). Inmate detail pages are returning blocked or error responses since 2026-09-21; charges, bonds, and photos reflect last-good data.</p>
+  <p><span class="status-pill status-pill-blocked">Blocked</span> Retrieval is currently denied (last fully successful retrieval 4.5 hours ago). Inmate detail pages are returning blocked or error responses since 2026-09-21; charges, bonds, and photos reflect last-good data.</p>
 </aside>
 
 <h2 class="sect-h">Denial Metrics</h2>
@@ -131,8 +130,8 @@
     <tr><td>Systemic detail-degraded cycles (total)</td><td>9</td></tr>
     <tr><td>Most recent detail failure (UTC)</td><td>2026-09-21T13:10:14Z</td></tr>
     <tr><td>Detail denial open since (UTC)</td><td>2026-09-21T06:18:38Z</td></tr>
-    <tr><td>Hours since last fully healthy retrieval</td><td>4.3</td></tr>
-    <tr><td>Roster snapshot age</td><td>4.3 hours</td></tr>
+    <tr><td>Hours since last fully healthy retrieval</td><td>4.5</td></tr>
+    <tr><td>Roster snapshot age</td><td>4.5 hours</td></tr>
   </tbody>
 </table>
 <p class="muted">How to read this: the sweep appends one <code>blocked</code> record to the ledger for each cycle in which HCSO&rsquo;s portal returned blocked or empty responses to the roster-list retrieval, and one <code>recovered</code> record when a healthy sweep closes the denial period. Detail-phase failures are recorded separately: one <code>detail_page_waf_block</code> record per inmate detail fetch that was blocked (deduped per inmate and failure mode over 24 hours), and one <code>detail_degraded</code> record per sweep in which detail fetches failed systemically. Cumulative denied access sums each roster denial period from its first blocked cycle to its recovery; a period still open at build time accrues up to the build timestamp. The scorecard reads BLOCKED when either the roster list or the detail pages have an open denial period. These figures regenerate every build and are mirrored as JSON at <a href="/data/transparency_metrics.json">transparency_metrics.json</a>.</p>
