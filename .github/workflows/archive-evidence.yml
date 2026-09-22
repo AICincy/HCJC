@@ -1,0 +1,48 @@
+name: archive-evidence
+
+# Stage a verified evidence bundle outside the Git object database. The
+# artifact is additive: public /data URLs and tracked evidence remain intact
+# until a later deployment-parity migration proves a safe cutover.
+
+on:
+  schedule:
+    # Monthly retention checkpoint; the source WAF log remains append-only in
+    # Git while this creates independently downloadable evidence snapshots.
+    - cron: '20 3 1 * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jcstream-evidence-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    name: Prepare verified evidence archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Prepare archive bundle
+        run: bash scripts/create_evidence_archive.sh archive-output
+      - name: Verify archive bundle
+        run: python scripts/verify_evidence_archive.py archive-output
+      - name: Upload immutable-style snapshot artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        with:
+          name: hcjc-evidence-archive-${{ github.run_id }}
+          path: archive-output/
+          if-no-files-found: error
+          # GitHub's public-repository artifact retention limit is commonly
+          # 90 days; the manifest and source commit preserve the longer-term
+          # provenance even after this staging copy expires.
+          retention-days: 90
