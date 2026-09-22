@@ -3,6 +3,11 @@ name: ci
 on:
   push:
     branches: [main]
+    paths-ignore:
+      # Sweep/rebuild commits only rewrite generated snapshots. CI still
+      # runs on PRs and on source/workflow pushes.
+      - "data/**"
+      - "docs/**"
   pull_request:
 
 concurrency:
