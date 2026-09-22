@@ -2,8 +2,7 @@ name: rebuild-site
 
 # Build docs/ from the current tree without scraping HCSO.
 # Use after a UI merge so Pages does not wait on the next sweep cron.
-# Shares the sweep concurrency group so a scrape and a rebuild never
-# push docs/ at the same time.
+# Own concurrency group so a 50-minute scrape does not stall a UI publish.
 
 on:
   workflow_dispatch:
@@ -12,7 +11,9 @@ permissions:
   contents: write
 
 concurrency:
-  group: jcstream-sweep
+  # Separate from sweep so a 50-minute scrape does not stall a UI publish.
+  # M-3 abort below handles a rare simultaneous docs/ push.
+  group: jcstream-rebuild
   cancel-in-progress: false
 
 jobs:
@@ -22,6 +23,8 @@ jobs:
     timeout-minutes: 50
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
         with:
           python-version: '3.14'
