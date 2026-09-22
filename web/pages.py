@@ -1117,45 +1117,31 @@ def _render_courts_page(env: Environment, out_dir: Path) -> None:
     target.write_text(page, encoding="utf-8")
 
 
-def _judge_profile_slug(name: str) -> str:
-    """Deep-link slug for a judge card: id="judge-<slug>".
-
-    Same rule as _parse_judges_hamco and _judges_from_ingested_json so the
-    Courts tab's /judges/#judge-<slug> links (spec 5.3) resolve: lowercase,
-    every run of non-[a-z0-9] collapsed to a single hyphen, leading/trailing
-    hyphens stripped. E.g. "Jennifer L. Branch" -> "jennifer-l-branch".
-    """
-    import re
-
-    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
-
-
 def _render_judges_page(env: Environment, out_dir: Path) -> None:
     """Judge profile grid (/judges/).
 
-    Feeds: the 2026-09-21 tab-build corpus judges.json (30 profiles, 16 Common
-    Pleas / 14 Municipal) plus the self-hosted photo provenance manifest
-    (web/static/judges/provenance.json). Photos are served from the
-    manifest's local_path; the remote photo_url is never referenced
+    Feed: the in-repo ingested corpus data/court_judges.json (30 profiles, 16
+    Common Pleas / 14 Municipal), read through _judges_from_ingested_json()
+    (feeds_mod.DATA_DIR / "court_judges.json"), plus the self-hosted photo
+    provenance manifest (web/static/judges/provenance.json). Photos are served
+    from the manifest's local_path; the remote photo_url is never referenced
     (no hotlinking, per the T5 self-hosting decision). Fails closed on
-    missing feed, count drift, photo-manifest mismatch, or slug collision.
+    missing feed, count drift, photo-manifest mismatch, or slug collision:
+    unlike _parse_judges(), an invalid feed raises instead of falling back to
+    HAMCO/ profiles.
     """
 
-    feed_path = Path(
-        "/home/hatch/workspace/firecrawl-zips/tab-build-2026-09-21/judges/judges.json"
-    )
-    try:
-        judges_raw = json.loads(feed_path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as e:
-        raise RuntimeError(f"judges.json missing or corrupt: {e}") from e
-    if not isinstance(judges_raw, list):
-        raise RuntimeError("judges.json schema violation: expected a list of profiles")
-    n_cp = sum(1 for r in judges_raw if r.get("court") == "Common Pleas")
-    n_mun = sum(1 for r in judges_raw if r.get("court") == "Municipal")
-    if len(judges_raw) != 30 or n_cp != 16 or n_mun != 14:
+    parsed = _judges_from_ingested_json()
+    if parsed is None:
         raise RuntimeError(
-            f"judges.json count FAIL: expected 30 profiles (16 Common Pleas, "
-            f"14 Municipal), got {len(judges_raw)} ({n_cp} Common Pleas, {n_mun} Municipal)"
+            "judges page: data/court_judges.json missing, unreadable, or not "
+            "30 validated profiles (fail-closed; no HAMCO fallback on /judges/)"
+        )
+    common_pleas_raw, municipal_raw = parsed
+    if len(common_pleas_raw) != 16 or len(municipal_raw) != 14:
+        raise RuntimeError(
+            "judges page: data/court_judges.json count FAIL: expected 16 Common "
+            f"Pleas + 14 Municipal, got {len(common_pleas_raw)} + {len(municipal_raw)}"
         )
 
     prov_path = Path(__file__).resolve().parent / "static" / "judges" / "provenance.json"
@@ -1173,14 +1159,21 @@ def _render_judges_page(env: Environment, out_dir: Path) -> None:
             f"judge photo provenance FAIL: expected 30 manifest entries, got {len(photos)}"
         )
 
+    def _tel_href(num: str) -> str:
+        digits = "".join(ch for ch in sanitize_phone_href(num) if ch.isdigit())
+        return f"tel:+1{digits}" if digits else ""
+
     base_url = str(env.globals.get("base_url", ""))
     seen_slugs: set[str] = set()
     judges: list[dict] = []
-    for rec in judges_raw:
-        name = str(rec.get("full_name") or "").strip()
-        court = str(rec.get("court") or "").strip()
-        if not name or court not in ("Common Pleas", "Municipal"):
-            raise RuntimeError(f"judges.json record missing name/court: {name!r}")
+    for court, rec in [("Common Pleas", r) for r in common_pleas_raw] + [
+        ("Municipal", r) for r in municipal_raw
+    ]:
+        name = rec["name"]
+        slug = rec["slug"]
+        if slug in seen_slugs:
+            raise RuntimeError(f"judges.json: slug collision on {slug!r}")
+        seen_slugs.add(slug)
         manifest = photos.get(name)
         if not manifest or manifest.get("status") != "ok" or not manifest.get("local_path"):
             raise RuntimeError(
@@ -1188,80 +1181,60 @@ def _render_judges_page(env: Environment, out_dir: Path) -> None:
                 f"(manifest status: {(manifest or {}).get('status')}); "
                 "initials fallback is not a build-time default"
             )
-        slug = _judge_profile_slug(name)
-        if slug in seen_slugs:
-            raise RuntimeError(f"judges.json: slug collision on {slug!r}")
-        seen_slugs.add(slug)
 
         contacts: list[dict] = []
-        courtroom = str(rec.get("courtroom") or "").strip()
-        if courtroom:
-            contacts.append({"label": "Courtroom", "display": courtroom, "href": ""})
-        for staff in rec.get("staff") or []:
-            if not isinstance(staff, dict):
-                continue
-            role = str(staff.get("role") or "").strip()
-            if "bailiff" in role.lower():
-                staff_name = str(staff.get("name") or "").strip()
-                staff_phones = [p for p in (staff.get("phones") or []) if p]
-                for i, num in enumerate(staff_phones):
-                    num = str(num).strip()
-                    href_val = sanitize_phone_href(num)
-                    href = f"tel:+1{href_val.replace('-', '').replace(' ', '').replace('(', '').replace(')', '').replace('.', '')}" if href_val else ""
-                    label = f"{staff_name}, bailiff" if staff_name else "Bailiff"
-                    if len(staff_phones) > 1:
-                        label += f" ({i + 1})"
-                    contacts.append({"label": label, "display": num, "href": href})
-        staff_emails: list[str] = []
-        for staff in rec.get("staff") or []:
-            if isinstance(staff, dict):
-                staff_emails.extend(staff.get("emails") or [])
-        staff_emails.extend(rec.get("emails_unassigned") or [])
-        for em in dict.fromkeys(str(e).strip() for e in staff_emails if str(e).strip()):
-            href_val = sanitize_email_href(em)
+        room = str(rec.get("room") or "").strip()
+        if room:
+            contacts.append({"label": "Courtroom", "display": room, "href": ""})
+        bailiff = str(rec.get("bailiff") or "").strip()
+        if bailiff:
+            contacts.append({"label": "Bailiff", "display": bailiff, "href": ""})
+        phone = str(rec.get("phone") or "").strip()
+        if phone:
+            contacts.append({"label": "Chambers", "display": phone, "href": _tel_href(phone)})
+        fax = str(rec.get("fax") or "").strip()
+        if fax:
+            contacts.append({"label": "Fax", "display": fax, "href": ""})
+        email = str(rec.get("email") or "").strip()
+        if email:
+            email_href = sanitize_email_href(email)
             contacts.append(
-                {"label": "Chambers email", "display": em, "href": f"mailto:{href_val}" if href_val else ""}
+                {
+                    "label": "Chambers email",
+                    "display": email,
+                    "href": f"mailto:{email_href}" if email_href else "",
+                }
             )
-
-        sub_chip = ""
-        if court == "Municipal":
-            sub_chip = str(rec.get("district") or "").strip()
-        else:
-            sub_chip = str(rec.get("division") or "").strip()
+        law_clerk = str(rec.get("law_clerk") or "").strip()
+        if law_clerk:
+            contacts.append({"label": "Law clerk", "display": law_clerk, "href": ""})
 
         judges.append({
             "name": name,
             "slug": slug,
             "court": court,
             "court_chip": court if court == "Common Pleas" else "Municipal Court",
-            "sub_chip": sub_chip,
-            "presiding": bool(rec.get("presiding_administrative_judge")),
+            # The ingested feed carries no district/division, presiding flag,
+            # or standing-orders text; those corpus-only fields stay empty.
+            "sub_chip": "",
+            "presiding": False,
             "photo_src": f"{base_url}{manifest['local_path']}",
             "contacts": contacts,
             "bio": str(rec.get("bio") or ""),
-            "standing_orders": str(rec.get("standing_orders") or ""),
-            "source_url": sanitize_outbound_url(rec.get("source_url") or ""),
-            "search_text": " ".join(
-                [
-                    name,
-                    courtroom,
-                    " ".join(str(a) for a in (rec.get("chambers_address") or [])),
-                ]
-            ).lower(),
+            "standing_orders": "",
+            "source_url": str(rec.get("source_url") or ""),
+            "search_text": " ".join([name, room, bailiff]).lower(),
         })
 
-    def _sort_key(j: dict) -> tuple:
-        parts = j["name"].split()
-        last = parts[-1] if parts else j["name"]
-        # Presiding/Administrative Judge first within Common Pleas (spec 2.3.4).
-        return (0 if j["presiding"] else 1, last.lower(), j["name"].lower())
-
-    common_pleas = sorted((j for j in judges if j["court"] == "Common Pleas"), key=_sort_key)
-    municipal = sorted((j for j in judges if j["court"] == "Municipal"), key=_sort_key)
+    # _judges_from_ingested_json() already returns both lists sorted by
+    # (last_name, name); the presiding-first ordering needed the corpus-only
+    # presiding flag, so the loader order stands.
+    common_pleas = [j for j in judges if j["court"] == "Common Pleas"]
+    municipal = [j for j in judges if j["court"] == "Municipal"]
 
     provenance = {
-        "feed": "judges/judges.json",
-        "captured": "2026-09-21",
+        "feed": "data/court_judges.json",
+        "captured": "2026-09-20",
         "sources": [
             {
                 "label": "hamiltoncountycourts.org judge profile pages",
@@ -1595,17 +1568,15 @@ def _render_404_page(env: Environment, out_dir: Path) -> None:
 
 # ---------------------------------------------------------------------------
 # Forms (/forms/) and Services/Programs (/services/) tab pages.
-# Source feeds live outside the repo at
-#   ~/workspace/firecrawl-zips/tab-build-2026-09-21/feeds/
+# Source feeds are resolved through _TAB_FEEDS_DIR (defined above with the
+# jury/rules feeds: HCJC_TAB_FEEDS_DIR env override, else the repo-relative
+# tab-build feeds dir). No absolute machine paths: the laptop checkout path
+# must never appear here.
 # (forms.json, services-programs.json). Templates render exactly what the
 # feeds contain; nothing is invented. Form link verification results live in
 # web/forms_source_status.json (checked 2026-09-22): rows whose official
 # source URL failed verification render "Official source pending
 # verification" per spec 5.4, never a dead link.
-
-_TAB_FEEDS_DIR = (
-    Path.home() / "workspace" / "firecrawl-zips" / "tab-build-2026-09-21" / "feeds"
-)
 _FORMS_LINK_STATUS_PATH = Path(__file__).resolve().parent / "forms_source_status.json"
 
 

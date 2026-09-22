@@ -196,6 +196,15 @@ def _snapshot_with_comments_and_feed(tmp_path: Path) -> None:
     (data_dir / "cfs_recent.json").write_text(
         json.dumps({"generated_utc": "2026-09-20T01:41:01Z", "rows": []})
     )
+    # The /judges/ page is fail-closed on its feed (no silent HAMCO fallback),
+    # so the fixture tree must stage a valid 30-profile court_judges.json.
+    # Content is irrelevant to this test's assertions; copy the repo's real
+    # feed (repo-anchored, unaffected by the chdir below).
+    import shutil
+
+    from web import feeds as feeds_mod
+
+    shutil.copy(feeds_mod.DATA_DIR / "court_judges.json", data_dir / "court_judges.json")
 
 
 def test_build_renders_comments_vintage_and_photo_markers(tmp_path, monkeypatch):
