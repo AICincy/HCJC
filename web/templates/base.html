@@ -35,6 +35,7 @@
      External file (not inline) per the script-src 'self' CSP. #}
   <script src="{{ base_url }}/static/theme-init.js?v={{ theme_js_version | default('dev', true) }}"></script>
   <link rel="stylesheet" href="{{ base_url }}/static/style.css?v={{ css_version | default('dev', true) }}">
+  <link rel="stylesheet" href="{{ base_url }}/static/fold-chrome.css?v=20260922">
   {# The theme toggle is JS-only (main.js binds the click). Without JS it is
      a dead control, so hide it: style-src allows 'unsafe-inline', and this
      is a <style> element, not an inline script (script-src 'self' unaffected). #}

@@ -1,0 +1,29 @@
+/* Homepage fold chrome. Loaded after style.css. Does not touch the felony scale. */
+
+.masthead .theme-toggle {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+
+@media (min-width: 721px) {
+  .running.mobile-only { display: none; }
+}
+
+@media (max-width: 720px) {
+  .masthead .theme-toggle {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+  .tier-strip-cap { display: none; }
+}
+
+.section-h h1 {
+  margin: 0;
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  line-height: 1.15;
+}
