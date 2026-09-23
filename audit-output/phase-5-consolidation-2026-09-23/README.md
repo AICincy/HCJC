@@ -39,7 +39,7 @@ The four departures are recorded because each was forced by evidence.
 3. **`STALLED`, `ESCALATED`, and `PENDING-BLOCKED` are in the vocabulary.** The brief's list omitted them, and their absence would make three real conditions unrepresentable: unassigned owners (`closure/README.md:121`), a blocked D2 with no committed threshold, and a defect loop that must not run unbounded.
 4. **The test cross-checks its own constants against `state-schema.md`.** The brief's Property 6 worried about JSON versus dashboard drift. The likelier failure is prose versus enforcement drift: someone edits a rule in a document and the test keeps enforcing the old one, green. `test_schema_document_vocabularies_match_constants` and its sibling transition test make that a CI failure. Both tests failed on first run and forced four fixes, which is the evidence that they work.
 
-**E4's own verification, run in full:** `pytest tests/test_recovery_state.py` 18 passed; whole suite `pytest -q` 759 passed; `ruff check` clean; `ruff format` applied; `mypy` on the test file clean. Negative coverage is inside the file: invented status, illegal transition, terminal-state departure, hand-edited `eligible`, duplicate event id, backdated event, empty actor, and a dashboard row deleted. A test that only proves the current state is clean proves nothing about the guard.
+**E4's own verification, run in full:** `pytest tests/test_recovery_state.py` 18 passed; whole suite `pytest -q` 759 passed; `ruff check` clean; `ruff format` applied; `mypy` on the test file clean. On GitHub, draft PR [#493](https://github.com/AICincy/HCJC/pull/493) at `296f052f` runs the guard in CI: run `35814635975` conclusion `success`, with `test (3.13)` and `test (3.14)` both passing on a fresh checkout. That is the check that matters for the synchrony design, since a fresh checkout is exactly where an mtime-based rule would have been dead code. Negative coverage is inside the file: invented status, illegal transition, terminal-state departure, hand-edited `eligible`, duplicate event id, backdated event, empty actor, and a dashboard row deleted. A test that only proves the current state is clean proves nothing about the guard.
 
 Adversarial check run against the committed state, outside pytest: clean state produces 0 findings; a copy with a hand-edited `eligible` flag, an invented `SWEEP-PROBABLY-FINE` status, and a forged duplicate event produces 8 distinct findings across five validators, and deleting every key from the dashboard produces 8.
 
@@ -68,7 +68,7 @@ Gate closure: manifest and Python matrix     2       COMPLETE
 CI isolation enforcement                     2       PROPOSED, merge pending
 Human gate ingestion contract                3       ASSERTED, NOT COMMITTED (see below)
 Non-happy-path recovery architecture        4       COMPLETE, on corrected anchors
-Recovery state file, schema, and guard      4/5 E4  COMPLETE; test merged in this branch
+Recovery state file, schema, and guard      4/5 E4  COMPLETE on branch; CI green on #493; merge pending
 Coordinator operational brief               5 E1    COMPLETE
 AICINCY scope resolution                    5 E2    SCOPE-CLARIFIED + SCOPE-001 deferred
 Post-deployment failure path                5 E3    COMPLETE
@@ -106,7 +106,7 @@ evidence.
 | ID | Item | Why parked |
 | :-- | :-- | :-- |
 | PARK-001 | Phase 3 C-processor contract uncommitted, now the last structural gap | Committing it is an owner act; Phase 5 must not author the rules it says it merely translates |
-| PARK-002 | E4 test is committed on this branch, not merged to `main` | Merge is an owner act under F-05; until then CI on `main` does not run the guard |
+| PARK-002 | E4 test is committed and green on draft PR #493 at `296f052f`, not merged to `main` | Merge is an owner act under F-05; until it merges, CI on `main` does not run the guard, and `recovery-state.json` is unguarded on the trunk |
 | PARK-003 | `deploy_alert` cadence comment drift (F-04) | One-line doc fix, unrelated to release closure; not bundled into an audit branch |
 | PARK-004 | `sync_note` in the state file is a manual pointer to a dashboard row | Automating it needs a stable row-id convention in the dashboard, which is a Phase 4 schema change |
 | PARK-005 | The 16 MB `audit-output/ui-ux-remediation-2026-09-22.zip` in Git | Pre-existing, out of scope, and it kept growing this directory's tracked weight |
