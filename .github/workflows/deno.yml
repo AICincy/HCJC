@@ -31,12 +31,24 @@ jobs:
         with:
           deno-version: v1.x
 
+      - name: Detect Deno project
+        id: deno_project
+        run: |
+          if git ls-files | grep -Eq '(^|/)deno\.jsonc?$'; then
+            echo "has_deno_project=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_deno_project=false" >> "$GITHUB_OUTPUT"
+            echo "No deno.json or deno.jsonc found; skipping Deno lint/test."
+          fi
+
       # Uncomment this step to verify the use of 'deno fmt' on each commit.
       # - name: Verify formatting
       #   run: deno fmt --check
 
       - name: Run linter
+        if: steps.deno_project.outputs.has_deno_project == 'true'
         run: deno lint
 
       - name: Run tests
+        if: steps.deno_project.outputs.has_deno_project == 'true'
         run: deno test -A
