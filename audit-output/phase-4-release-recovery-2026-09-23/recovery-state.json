@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "as_of_date_utc": "2026-09-23T03:21:00Z",
+  "state_authority": "audit-output/remediation-2026-09-22/closure/README.md",
+  "candidate": {
+    "commit": "d9ba0678d4171cf4e46fe62343cf5f1ef120ae8f",
+    "ci_run_id": 35809118882
+  },
+  "phase_3_snapshot": {
+    "gate_a": "NOT-RUN",
+    "gate_b": "NOT-RUN",
+    "gate_c": "OPEN",
+    "gate_d": "BLOCKED",
+    "gate_e": "LOCAL-PASS",
+    "isolation_merge": "LOCAL-PASS",
+    "ci_01": "PASSED",
+    "release_01": "SUPERSEDED-PARTIAL",
+    "source_lines": {
+      "gate_table": "closure/README.md:111-119",
+      "owner_assignment": "closure/README.md:121"
+    }
+  },
+  "recovery_items": {
+    "d0_snapshot": {
+      "agent": "D0",
+      "status": "DELTAS-EMITTED",
+      "feeds_back_to": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "sync_note": "cross-agent-state-table.md row 0",
+      "deltas": [
+        {
+          "id": "D0-A",
+          "recorded": "PR #485 draft, not merged (closure/README.md:119)",
+          "actual": "MERGED 2026-09-22T22:31:45Z",
+          "consequence": "RE-INGEST-BEFORE-D-ACTIVATION"
+        },
+        {
+          "id": "D0-B",
+          "recorded": "no deployment (closure/README.md:119)",
+          "actual": "pages run 35809118858 success at 2026-09-23T02:07:48Z",
+          "consequence": "RE-INGEST-BEFORE-D-ACTIVATION"
+        },
+        {
+          "id": "D0-C",
+          "recorded": "scheduled sweep healthy",
+          "actual": "run 35800597032 failed 2026-09-23T00:07:01Z on pre-fix commit a709b3a6",
+          "consequence": "RE-INGEST-BEFORE-D-ACTIVATION"
+        },
+        {
+          "id": "D0-D",
+          "recorded": "LIVE-D blocked by TLS probe failure at 21:54:04Z",
+          "actual": "live-parity step 'Probe current production URLs' succeeded at 23:55:54Z (run 35799729427)",
+          "consequence": "RE-INGEST-BEFORE-D-ACTIVATION"
+        }
+      ]
+    },
+    "d1_gate_a": {
+      "agent": "D1",
+      "status": "NOT-ACTIVATED",
+      "feeds_back_to": [
+        "C1"
+      ],
+      "sync_note": "cross-agent-state-table.md row 1",
+      "defects": [],
+      "owner": "NEEDS-OWNER"
+    },
+    "d1_gate_b": {
+      "agent": "D1",
+      "status": "NOT-ACTIVATED",
+      "feeds_back_to": [
+        "C1"
+      ],
+      "sync_note": "cross-agent-state-table.md row 2",
+      "defects": [],
+      "owner": "NEEDS-OWNER"
+    },
+    "d2_option_2": {
+      "agent": "D2",
+      "status": "NOT-ACTIVATED",
+      "feeds_back_to": [
+        "C2"
+      ],
+      "sync_note": "cross-agent-state-table.md row 4",
+      "attempts": [],
+      "owner": "NEEDS-OWNER"
+    },
+    "d2_option_3": {
+      "agent": "D2",
+      "status": "PENDING-BLOCKED",
+      "feeds_back_to": [
+        "C2"
+      ],
+      "sync_note": "cross-agent-state-table.md row 5",
+      "attempts": [],
+      "owner": "NEEDS-OWNER",
+      "blocked_reason": "No predeclared threshold exists in any committed record; D2 rejects activation. closure/README.md:107 states no performance threshold or risk acceptance was invented."
+    },
+    "d3_sweep": {
+      "agent": "D3",
+      "status": "PENDING-NEXT-SWEEP",
+      "feeds_back_to": [
+        "standing note in BUILD-E"
+      ],
+      "sync_note": "cross-agent-state-table.md row 6",
+      "verification_runs": [
+        {
+          "run_id": 35800597032,
+          "event": "schedule",
+          "conclusion": "failure",
+          "head_sha": "a709b3a6c54951039d511faf491c5777ccde9725",
+          "created_utc": "2026-09-23T00:07:01Z",
+          "counts_toward_closure": false,
+          "reason": "predates the fix merged at d9ba0678; failure mode was the publisher abort the fix addresses"
+        }
+      ],
+      "closure_condition": "next event=schedule sweep run on a descendant of d9ba0678 with conclusion success and all behavior fields Y",
+      "last_observed_gap_hours": 3.2
+    },
+    "d4_freshness": {
+      "agent": "D4",
+      "status": "VALID-NO-ACTION",
+      "feeds_back_to": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "sync_note": "cross-agent-state-table.md rows 7 and 10",
+      "aged_items": [],
+      "assessed_items": [
+        {
+          "evidence": "ci run 35809118882",
+          "captured_utc": "2026-09-23T02:07:48Z",
+          "test": "git log --since=2026-09-23T02:07:48Z main -- . ':(exclude)data' ':(exclude)docs'",
+          "observed": "main tip still d9ba0678; no behavioral commit",
+          "outcome": "VALID-NO-ACTION"
+        },
+        {
+          "evidence": "pages deploy run 35809118858",
+          "captured_utc": "2026-09-23T02:07:48Z",
+          "test": "main tip equality with the run headSha",
+          "observed": "equal",
+          "outcome": "VALID-NO-ACTION"
+        }
+      ],
+      "next_trigger": "any commit touching a path outside data/ and docs/, or 2026-10-23 elapsed"
+    },
+    "d5_live_probe": {
+      "agent": "D5",
+      "status": "INCONCLUSIVE-EVIDENCE",
+      "feeds_back_to": [
+        "C-processor for LIVE-D"
+      ],
+      "sync_note": "cross-agent-state-table.md row 8",
+      "observations": [
+        {
+          "point": "closure run, manual curl",
+          "utc": "2026-09-22T21:54:04Z",
+          "result": "curl exit 35 SSL_ERROR_SYSCALL",
+          "control": "not recorded",
+          "classification": "PATH-EVIDENCE"
+        },
+        {
+          "point": "GitHub Actions runner, live-parity",
+          "utc": "2026-09-22T23:55:54Z",
+          "result": "step 'Probe current production URLs' conclusion success",
+          "control": "implicit: the same step fails on URLError, so reaching success required HTTP-level responses",
+          "classification": "SITE-EVIDENCE"
+        },
+        {
+          "point": "arena sandbox",
+          "utc": "2026-09-23T03:12:00Z",
+          "result": "api.github.com 200; both Pages addresses reset after Client Hello",
+          "control": "api.github.com succeeded on the same host",
+          "classification": "PATH-EVIDENCE"
+        }
+      ],
+      "unresolved": "log body of run 35799729427 not retrievable (gh run view --log EOF)",
+      "request": "one more live-parity dispatch with a recorded control settles the evidence class"
+    }
+  },
+  "c4_activation": {
+    "eligible": false,
+    "rationale": "gate_a NOT-RUN, gate_b NOT-RUN, gate_c OPEN, isolation_merge LOCAL-PASS not CLOSED; D2 Option 3 PENDING-BLOCKED. D3 status is excluded from this calculation by design.",
+    "blocking_items": [
+      "d0_snapshot",
+      "d1_gate_a",
+      "d1_gate_b",
+      "d2_option_2",
+      "d2_option_3",
+      "d4_freshness"
+    ],
+    "non_blocking_items": [
+      "d3_sweep",
+      "d5_live_probe"
+    ]
+  },
+  "events": [
+    {
+      "event_id": "RS-001",
+      "utc_timestamp": "2026-09-23T03:10:00Z",
+      "item": "d0_snapshot",
+      "from_status": "NOT-RUN",
+      "to_status": "RECONCILE-FIRST",
+      "actor": "arena-agent (Phase 4 build)",
+      "evidence": [
+        "audit-output/phase-4-release-recovery-2026-09-23/README.md"
+      ],
+      "feeds_back_to": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ]
+    },
+    {
+      "event_id": "RS-002",
+      "utc_timestamp": "2026-09-23T03:12:00Z",
+      "item": "d5_live_probe",
+      "from_status": "NOT-ACTIVATED",
+      "to_status": "INCONCLUSIVE-EVIDENCE",
+      "actor": "arena-agent (Phase 4 build)",
+      "evidence": [
+        "closure/production-probe.txt",
+        "run 35799729427 step conclusions",
+        "scripts/verify_live_url_parity.py:72-73"
+      ],
+      "feeds_back_to": [
+        "C-processor for LIVE-D"
+      ]
+    },
+    {
+      "event_id": "RS-003",
+      "utc_timestamp": "2026-09-23T03:13:00Z",
+      "item": "d3_sweep",
+      "from_status": "NOT-ACTIVATED",
+      "to_status": "PENDING-NEXT-SWEEP",
+      "actor": "arena-agent (Phase 4 build)",
+      "evidence": [
+        "gh run list --workflow=sweep.yml",
+        "scripts/commit_generated_changes.sh:34"
+      ],
+      "feeds_back_to": [
+        "standing note in BUILD-E"
+      ]
+    },
+    {
+      "event_id": "RS-004",
+      "utc_timestamp": "2026-09-23T03:21:00Z",
+      "item": "d2_option_3",
+      "from_status": "NOT-ACTIVATED",
+      "to_status": "PENDING-BLOCKED",
+      "actor": "arena-agent (Phase 4 build)",
+      "evidence": [
+        "closure/README.md:107",
+        "cross-agent-state-table.md row 5"
+      ],
+      "feeds_back_to": [
+        "C2"
+      ]
+    },
+    {
+      "event_id": "RS-005",
+      "utc_timestamp": "2026-09-23T03:25:00Z",
+      "item": "d0_snapshot",
+      "from_status": "RECONCILE-FIRST",
+      "to_status": "DELTAS-EMITTED",
+      "actor": "arena-agent (Phase 4 build)",
+      "evidence": [
+        "gh pr view 485 --json state,mergedAt",
+        "gh run list --workflow=pages.yml",
+        "gh run list --workflow=sweep.yml",
+        "gh run view 35799729427 --json jobs"
+      ],
+      "feeds_back_to": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ]
+    },
+    {
+      "event_id": "RS-006",
+      "utc_timestamp": "2026-09-23T03:25:00Z",
+      "item": "d4_freshness",
+      "from_status": "NOT-AGED",
+      "to_status": "VALID-NO-ACTION",
+      "actor": "arena-agent (Phase 4 build)",
+      "evidence": [
+        "git log --since=2026-09-23T02:07:48Z main -- . ':(exclude)data' ':(exclude)docs'"
+      ],
+      "feeds_back_to": [
+        "C1",
+        "C2",
+        "C3"
+      ]
+    }
+  ]
+}

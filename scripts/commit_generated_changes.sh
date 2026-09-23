@@ -30,7 +30,13 @@ git commit -m "$commit_message"
 
 git fetch --no-tags origin "$target_branch:refs/remotes/origin/$target_branch"
 if ! git rebase "origin/$target_branch"; then
+  conflicts=$(git diff --name-only --diff-filter=U || true)
   echo "::error::Rebase conflict while publishing generated changes; refusing merge fallback." >&2
+  if [ -n "$conflicts" ]; then
+    echo "conflicting paths:" >&2
+    printf '%s\n' "$conflicts" | sed 's/^/  /' >&2
+  fi
+  echo "hint: re-run this workflow from the fresh $target_branch tip; the next scheduled sweep also self-heals." >&2
   git rebase --abort 2>/dev/null || true
   exit 1
 fi

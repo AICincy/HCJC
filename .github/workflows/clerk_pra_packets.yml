@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
     inputs:
       date:
-        description: "Packet folder date (YYYY-MM-DD; default: today UTC)"
+        description: "Packet folder date (YYYY-MM-DD, unpadded ok; default: today UTC)"
         required: false
         default: ""
 
