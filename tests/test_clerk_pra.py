@@ -1,10 +1,14 @@
 import json
 
+import pytest
+
 from scraper.clerk_pra import (
     build_packet,
     case_types,
     full_name,
     known_case_numbers,
+    main,
+    normalize_folder_date,
     recipient_block,
     render_letter,
     sanitize_filename_part,
@@ -158,6 +162,41 @@ def test_build_packet_skips_nameless_entries(tmp_path):
     manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
     assert set(manifest["requests"]) == {"2316160"}
     assert manifest["packet"]["letter_count"] == 1
+
+
+def test_normalize_folder_date_accepts_human_variants():
+    assert normalize_folder_date("2026-09-22") == "2026-09-22"
+    assert normalize_folder_date("2026-9-2") == "2026-09-02"
+    assert normalize_folder_date("  2026-09-22\n") == "2026-09-22"
+
+
+def test_normalize_folder_date_rejects_garbage():
+    for bad in ("", "09/22/2026", "2026-13-01", "2026-02-30", "yesterday", "2026-09-22x"):
+        with pytest.raises(ValueError):
+            normalize_folder_date(bad)
+
+
+def _roster_file(tmp_path):
+    path = tmp_path / "current.json"
+    path.write_text(
+        json.dumps({"generated_utc": "2026-09-22T23:00:00Z", "inmates": [_inmate()]}),
+        encoding="utf-8",
+    )
+    return path
+
+
+def test_main_normalizes_unpadded_dispatch_date(tmp_path):
+    out = tmp_path / "pra"
+    roster = _roster_file(tmp_path)
+    assert main(["--date", "2026-9-22", "--out", str(out), "--roster", str(roster)]) == 0
+    assert (out / "2026-09-22" / "manifest.json").exists()
+
+
+def test_main_rejects_bad_date_and_missing_roster(tmp_path):
+    out = tmp_path / "pra"
+    roster = _roster_file(tmp_path)
+    assert main(["--date", "09/22/2026", "--out", str(out), "--roster", str(roster)]) == 2
+    assert main(["--out", str(out), "--roster", str(tmp_path / "nope.json")]) == 2
 
 
 def test_build_packet_limit(tmp_path):

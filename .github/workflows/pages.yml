@@ -46,6 +46,10 @@ jobs:
 
   deploy:
     name: Deploy Pages artifact
+    # The github-pages environment only trusts main: protection rules reject
+    # branch deploys, so a branch dispatch exercises build+verify and skips
+    # this job instead of failing on the environment gate.
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:
