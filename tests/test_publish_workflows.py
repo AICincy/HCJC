@@ -45,6 +45,17 @@ def test_publishing_workflows_check_out_fresh_tip() -> None:
         assert _first_checkout_sets_ref(text), f"{name}: checkout must pin ref: to the fresh tip"
 
 
+def test_pages_deploy_gated_to_main() -> None:
+    """Branch Pages dispatches must skip the protected deploy, not fail it.
+
+    The github-pages environment rejects non-main branches (run 35799476988),
+    so the deploy job carries a main-only gate while build+verify still run.
+    """
+    text = (REPO_ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
+    header = text.split("Deploy Pages artifact", 1)[1].split("steps:", 1)[0]
+    assert "github.ref == 'refs/heads/main'" in header
+
+
 def test_publisher_still_refuses_merge_fallback() -> None:
     """The shared publisher must abort a conflicted rebase, never merge it."""
     script = (REPO_ROOT / "scripts" / "commit_generated_changes.sh").read_text(encoding="utf-8")

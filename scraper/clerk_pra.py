@@ -342,6 +342,25 @@ def load_roster(path: Path) -> tuple[list[dict], str]:
     return inmates, snapshot_date
 
 
+def normalize_folder_date(raw: str) -> str:
+    """Normalize a --date value to canonical YYYY-MM-DD.
+
+    Accepts surrounding whitespace and unpadded month/day (``2026-9-2``),
+    the variants a human types into the workflow_dispatch form. Raises
+    ValueError for anything else, including impossible calendar dates.
+    Slash dates (``9/22/2026``) stay rejected: the input contract is
+    YYYY-MM-DD and guessing locale conventions mangles folder names.
+    """
+    match = re.fullmatch(r"\s*(\d{4})-(\d{1,2})-(\d{1,2})\s*", raw or "")
+    if not match:
+        raise ValueError(f"bad --date (want YYYY-MM-DD): {raw}")
+    try:
+        parsed = datetime(int(match.group(1)), int(match.group(2)), int(match.group(3)))
+    except ValueError:
+        raise ValueError(f"bad --date (not a calendar date): {raw}") from None
+    return parsed.strftime("%Y-%m-%d")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Generate dated clerk PRA packets")
     parser.add_argument("--date", default=None, help="Folder date YYYY-MM-DD (default: today UTC)")
@@ -355,9 +374,10 @@ def main(argv: list[str] | None = None) -> int:
         log.error("roster not found: %s", args.roster)
         return 2
     inmates, snapshot_date = load_roster(args.roster)
-    folder_date = args.date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", folder_date):
-        log.error("bad --date (want YYYY-MM-DD): %s", folder_date)
+    try:
+        folder_date = normalize_folder_date(args.date or datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+    except ValueError as e:
+        log.error("%s", e)
         return 2
     build_packet(inmates, snapshot_date or folder_date, folder_date, args.out, args.limit)
     return 0
