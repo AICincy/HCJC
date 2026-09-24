@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Backfill recent anonymized changelog tags from Git history.
+"""Backfill recent anonymized changelog tags from history and the live roster.
 
-The anonymized changelog keeps identifiers for seven days. Within that window,
-the repository history can still contain a historical data/current.json snapshot
-for the booking or release event. This script uses those snapshots to restore
-missing tier/category tags without introducing any new identifying fields.
+The anonymized changelog keeps identifiers for seven days. The preferred source
+is the best historical data/current.json snapshot for the event; when history is
+incomplete, the current working-tree roster is used for records that are still
+present. Released events remain history-only because the current roster no
+longer contains those inmates. The repair only fills missing tier/category tags
+and never adds new identifying fields.
 """
 
 from __future__ import annotations
@@ -94,6 +96,57 @@ def _load_snapshots(since: datetime) -> list[HistoricalSnapshot]:
     return snapshots
 
 
+def _load_current_snapshot() -> HistoricalSnapshot | None:
+    """Load the live roster as a recovery fallback when Git history is sparse."""
+    try:
+        raw = CURRENT_PATH.read_text(encoding="utf-8")
+        payload = json.loads(raw)
+        if not isinstance(payload, dict):
+            return None
+        generated = _parse_utc(payload.get("generated_utc", ""))
+        if generated is None:
+            return None
+        from scraper.models import Snapshot
+
+        snapshot = Snapshot.model_validate(payload)
+        return HistoricalSnapshot(
+            generated,
+            {inm.inmate_number: inm for inm in snapshot.inmates},
+        )
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        log.warning("skipping unreadable live roster %s: %s", CURRENT_PATH, exc)
+        return None
+
+
+def _best_current_record(
+    snapshot: HistoricalSnapshot | None,
+    event: dict,
+) -> dict | None:
+    """Return a live-roster record for events whose subject should still be present."""
+    if snapshot is None or event.get("event") == "released":
+        return None
+    inmate_number = str(event.get("inmate_number") or "")
+    if not inmate_number:
+        return None
+    return snapshot.inmates.get(inmate_number)
+
+
+def _best_recovery_record(
+    snapshots: list[HistoricalSnapshot],
+    current: HistoricalSnapshot | None,
+    event: dict,
+) -> tuple[dict | None, str | None]:
+    """Choose the safest recovery source for an eligible event."""
+    if event.get("event") != "released":
+        live = _best_current_record(current, event)
+        if live is not None:
+            return live, "live"
+    historical = _best_historical_record(snapshots, event)
+    if historical is not None:
+        return historical, "history"
+    return None, None
+
+
 def _best_historical_record(
     snapshots: list[HistoricalSnapshot],
     event: dict,
@@ -160,7 +213,14 @@ def _apply_takedowns(rows: list[dict]) -> int:
 
 def backfill(days: int = DEFAULT_DAYS, *, dry_run: bool = False) -> dict[str, int]:
     if not ANON_CHANGELOG_PATH.exists():
-        return {"updated": 0, "unresolved": 0, "eligible": 0, "takedown_anonymized": 0}
+        return {
+            "updated": 0,
+            "unresolved": 0,
+            "eligible": 0,
+            "historical_recovery": 0,
+            "live_fallback": 0,
+            "takedown_anonymized": 0,
+        }
 
     try:
         rows = json.loads(ANON_CHANGELOG_PATH.read_text(encoding="utf-8"))
@@ -173,17 +233,24 @@ def backfill(days: int = DEFAULT_DAYS, *, dry_run: bool = False) -> dict[str, in
     cutoff = datetime.now(timezone.utc) - timedelta(days=days)
     eligible = _recent_full_rows(rows, cutoff)
     snapshots = _load_snapshots(cutoff - timedelta(days=1))
+    current = _load_current_snapshot()
     offenses = _load_anon_offenses(ORC_OFFENSES_PATH)
 
     updated = 0
     unresolved = 0
+    live_fallback = 0
+    historical_recovery = 0
     for row in eligible:
         if row.get("tier") is not None and row.get("category") is not None:
             continue
-        inmate = _best_historical_record(snapshots, row)
+        inmate, source = _best_recovery_record(snapshots, current, row)
         if inmate is None:
             unresolved += 1
             continue
+        if source == "live":
+            live_fallback += 1
+        elif source == "history":
+            historical_recovery += 1
         enrichment = _anon_enrichment({}, {inmate.inmate_number: inmate}, offenses)[inmate.inmate_number]
         changed = False
         if row.get("tier") is None and enrichment.get("tier") is not None:
@@ -202,12 +269,14 @@ def backfill(days: int = DEFAULT_DAYS, *, dry_run: bool = False) -> dict[str, in
         "updated": updated,
         "unresolved": unresolved,
         "eligible": len(eligible),
+        "historical_recovery": historical_recovery,
+        "live_fallback": live_fallback,
         "takedown_anonymized": takedown_anonymized,
     }
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Backfill recent anon-changelog tier/category tags from git history.")
+    parser = argparse.ArgumentParser(description="Backfill recent anon-changelog tier/category tags from history and the live roster.")
     parser.add_argument("--days", type=int, default=DEFAULT_DAYS)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("-v", "--verbose", action="store_true")
@@ -223,10 +292,12 @@ def main(argv: list[str] | None = None) -> int:
         log.error("refusing anon backfill: %s", exc)
         return 1
     log.warning(
-        "anon backfill: eligible=%d updated=%d unresolved=%d takedown_anonymized=%d dry_run=%s",
+        "anon backfill: eligible=%d updated=%d unresolved=%d history=%d live=%d takedown_anonymized=%d dry_run=%s",
         result["eligible"],
         result["updated"],
         result["unresolved"],
+        result["historical_recovery"],
+        result["live_fallback"],
         result["takedown_anonymized"],
         args.dry_run,
     )

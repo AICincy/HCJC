@@ -157,6 +157,18 @@ otherwise.
    to new events. It will **not** fall below the 811 permanent nulls; those are
    unrecoverable and are recorded in `.incident_summary.json`.
 
+
+## Manual backfill utility
+
+The recovery utility can also be run independently when the deployment orchestration is not the right entry point:
+
+```bash
+python -m scripts.backfill_anon_changelog --days 7 --dry-run -v
+python -m scripts.backfill_anon_changelog --days 7 -v
+```
+
+It prefers an event-appropriate historical roster snapshot when one is available. If Git history is sparse, it falls back to the checked-in `data/current.json` roster for non-release events whose inmate number still resolves there. A `released` event is never recovered from the live roster alone; it requires a historical pre-release snapshot. The utility only fills existing `tier` and `category` fields on eligible recent rows, never adds identifiers, and reports whether each recovery came from history or the live roster.
+
 ## Re-running
 
 Safe. A second run finds nothing to repair, stages nothing, and reports the

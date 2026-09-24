@@ -143,6 +143,14 @@ retention and does not re-identify anyone.
 - Modify `data/changelog.json` or any other data file
 - Alter `data/waf_block_log.json` under any circumstances
 
+
+
+### Standalone backfill utility
+
+The standalone `scripts/backfill_anon_changelog.py` utility uses a different recovery hierarchy from the deployment gate: it prefers an event-appropriate historical roster snapshot when one exists. When history is incomplete, it may use the checked-in `data/current.json` roster for non-release events whose identifiers still resolve there. It must never use the current roster as the sole recovery source for a `released` event.
+
+This fallback is bounded by the same retention and mutation rules as the deployment repair: it fills only existing `tier` and `category` fields on rows that are still eligible, never adds identifiers, and leaves unresolved rows unchanged. Recovery-source counts are recorded as `history` versus `live` so an operator can distinguish historical recovery from current-roster fallback.
+
 ### Known anomaly in the live file
 
 Some rows carry `inmate_number` with no `timestamp_utc`. They are neither inside
