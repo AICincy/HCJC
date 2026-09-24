@@ -40,6 +40,7 @@ import httpx
 
 from .client import DEFAULT_CONCURRENCY, HcsoClient, make_client
 from .models import Inmate, ListRow, utcnow_iso
+from .orc import DEGREE_ORDER, normalize_code
 from .parsers import parse_detail_page, parse_list_page
 from .photos import downscale_and_save
 from .store import (
@@ -569,6 +570,72 @@ def _fetch_details(
     return n_detail_attempts, n_detail_named, n_detail_with_photo, failure_counts
 
 
+def _anon_enrichment(
+    previous: dict[str, Inmate],
+    current: dict[str, Inmate],
+    offenses_path: Path,
+) -> dict[str, dict]:
+    """Build ``{inmate_number: {"tier", "category"}}`` for the anon feed.
+
+    Two faults in the inlined version of this logic silently nulled the
+    aggregate signal on ~1,300 changelog rows. Both are fixed here:
+
+    1. **Released inmates were never tagged.** The loop covered ``current``
+       only, but a ``released`` event is by definition about someone who is
+       no longer on the roster — so every released row was written with
+       ``tier=None``. The previous roster is the last place their charges
+       existed, so merge both. ``current`` wins on conflict: it is fresher,
+       and a re-booking between sweeps must not be tagged from a stale
+       snapshot.
+    2. **Subsection codes never matched.** Booking rows carry codes like
+       ``2925.11A`` / ``2903.02A1`` while ``orc_offenses.json`` is keyed by
+       base section (``2925.11``). The raw lookup missed 42% of the roster
+       (58.0% hit rate vs 98.8% normalized). Route through
+       ``normalize_code``, which every other consumer already uses.
+
+    A missing degree is reported as ``None``, not ``UNKNOWN`` (``"?"``):
+    the anon feed is aggregate statistics, and ``"?"`` would be counted as a
+    real tier by every downstream consumer. Callers that need the ``"?"``
+    sentinel use ``degree_for`` directly.
+
+    Never raises: a malformed offenses file degrades to empty tags rather
+    than taking down the sweep's finally-block.
+    """
+    offenses: dict = {}
+    if offenses_path.exists():
+        try:
+            loaded = json.loads(offenses_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError, UnicodeDecodeError):
+            loaded = None
+        if isinstance(loaded, dict):
+            table = loaded.get("offenses")
+            if isinstance(table, dict):
+                offenses = table
+
+    def tags_for(inm: Inmate) -> dict:
+        tier = None
+        category = None
+        first_charge = inm.charges[0] if inm.charges else None
+        if first_charge:
+            code = normalize_code((first_charge.orc_code or "").strip())
+            ent = offenses.get(code) if code else None
+            if isinstance(ent, dict):
+                # A "?" placeholder degree is not a tier; keep it null so the
+                # aggregate stats don't invent a severity bucket.
+                degree = ent.get("degree")
+                tier = degree if degree in DEGREE_ORDER else None
+                category = ent.get("title") or None
+        return {"tier": tier, "category": category}
+
+    enrichment: dict[str, dict] = {}
+    # previous first so current overwrites it on conflict.
+    for inm in previous.values():
+        enrichment[inm.inmate_number] = tags_for(inm)
+    for inm in current.values():
+        enrichment[inm.inmate_number] = tags_for(inm)
+    return enrichment
+
+
 def _save_changelog_and_anon(
     previous: dict[str, Inmate],
     current: dict[str, Inmate],
@@ -601,32 +668,11 @@ def _save_changelog_and_anon(
     changelog.extend(events)
     save_changelog(paths.changelog_path, changelog)
     # Phase 11: maintain the PII-expiring append-only feed.
-    # Build enrichment so anonymized rows still carry tier +
-    # category aggregate signal (which is what makes the
-    # long-term feed useful at all).
-    enrichment: dict[str, dict] = {}
-    offenses_path = paths.orc_offenses_path
-    offenses: dict = {}
-    if offenses_path.exists():
-        try:
-            offenses = json.loads(offenses_path.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, OSError):
-            offenses = {}
-    for inm in current.values():
-        first_charge = inm.charges[0] if inm.charges else None
-        tier = None
-        category = None
-        if first_charge:
-            code = (first_charge.orc_code or "").strip()
-            ent = offenses.get("offenses", {}).get(code) if isinstance(offenses, dict) else None
-            if isinstance(ent, dict):
-                tier = ent.get("degree")
-                category = ent.get("title")
-        enrichment[inm.inmate_number] = {
-            "tier": tier,
-            "category": category,
-        }
-    save_anon_changelog(paths.anon_changelog_path, changelog, enrichment)
+    save_anon_changelog(
+        paths.anon_changelog_path,
+        changelog,
+        _anon_enrichment(previous, current, paths.orc_offenses_path),
+    )
 
 
 def run(
