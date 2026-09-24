@@ -67,12 +67,53 @@ def _human_utc(ts: str | None) -> str:
     return _strftime_nopad(dt, "%b %-d, %Y, %-I:%M %p ") + label
 
 
+_anchored_now_est: datetime | None = None
+
+
+def set_build_now_from_utc(utc_str: str | None) -> None:
+    """Anchor the build's 'now' to a data vintage for deterministic output.
+
+    Parses ``utc_str`` (expected ``...Z`` form) and converts it to naive
+    Eastern time. When set, ``_now_naive_est()`` returns this anchored value
+    instead of wall-clock time, making timeline percentages and days-in-custody
+    stable across repeated builds of the same snapshot. Pass None or unparseable
+    to clear the anchor and fall back to wall-clock.
+    """
+    global _anchored_now_est
+    if not utc_str:
+        _anchored_now_est = None
+        return
+    s = utc_str.strip()
+    if s.endswith("Z"):
+        s = s[:-1] + "+00:00"
+    try:
+        dt = datetime.fromisoformat(s)
+    except ValueError:
+        _anchored_now_est = None
+        return
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    try:
+        from zoneinfo import ZoneInfo
+
+        eastern = dt.astimezone(ZoneInfo("America/New_York")).replace(tzinfo=None)
+    except Exception:
+        # Fallback: keep UTC naive if tzdata unavailable.
+        eastern = dt.astimezone(timezone.utc).replace(tzinfo=None)
+    _anchored_now_est = eastern
+
+
 def _now_naive_est() -> datetime:
     """Return current wall-clock time in America/New_York (EST/EDT) as a naive datetime.
     Used to generate consistent relative labels (e.g. '3 hours ago') during site build
     regardless of the runner timezone. The return stays naive because every
     consumer compares it against naive local-midnight datetimes.
+
+    When ``set_build_now_from_utc`` has anchored the clock (deterministic builds),
+    returns the anchored value; otherwise falls back to wall-clock time.
     """
+    if _anchored_now_est is not None:
+        return _anchored_now_est
     from zoneinfo import ZoneInfo
 
     return datetime.now(ZoneInfo("America/New_York")).replace(tzinfo=None)

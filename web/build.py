@@ -401,10 +401,15 @@ def _render_build(
 
 def build(out_dir: Path) -> int:
     from scraper.update_orc_offenses import update_orc_offenses
+    from web.shape.common import set_build_now_from_utc
 
     update_orc_offenses()
 
     snapshot, events, cfs_rows, shooting_rows, matches, dispatch_points = _load_inputs()
+    # Anchor timeline / days-in-custody / transparency to data vintage for
+    # deterministic builds (audit 2026-09-24 Option B). Wall-clock fallback only
+    # when vintage is missing (empty bootstrap).
+    set_build_now_from_utc(snapshot.generated_utc or None)
     offenses = orc_mod.load_offenses()
     base_url = _resolve_base_url()
     site_url = _resolve_site_url()
@@ -482,6 +487,10 @@ def build(out_dir: Path) -> int:
         len(events),
         out_dir,
     )
+    # Clear anchored clock so subsequent builds/tests without vintage fall back to wall-clock.
+    from web.shape.common import set_build_now_from_utc as _clear_anchor
+
+    _clear_anchor(None)
     return 0
 
 
