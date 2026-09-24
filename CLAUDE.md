@@ -150,22 +150,32 @@ Violating them imposes cognitive cost the owner cannot afford.
   3. Watch the job start within 30s
   
   The 20-minute skip-gate still applies: the run no-ops if `current.json` is 
-  younger than 20 minutes. If Option A returns 403 (Forbidden), your token 
-  lacks `actions:write` scope; use Option B (UI) instead. **After a merge, 
-  GitHub revokes the session token** (no remote ops available in closed 
-  sessions); use a new session for Option A or Option B via GitHub web UI.
-  
-  Verified: UI dispatch works always (owner-initiated); CLI dispatch 
+  younger than 20 minutes. If Option A returns 403 (Forbidden), your token
+  lacks `actions:write` scope; use Option B (UI) instead.
+
+  A 403 means missing **scope**, not a dead credential. Measured 2026-09-24
+  after PR #504 merged and GitHub deleted the branch: the same bot token still
+  performed REST reads, `git fetch`, `git push` (recreating the branch), and PR
+  create/edit. Merging a PR does not revoke it. What it cannot do is dispatch
+  workflows (`actions:write`) or comment on issues (`issues:write`) -- both 403.
+  See the capability matrix in `audit/25_pages_stale_artifact_misdiagnosis.md`.
+
+  Verified: UI dispatch always works (owner-initiated); CLI dispatch is
   conditional on token scope (verified 2026-09-24).
 
 - Tests: `python -m pytest -q` (must stay green; >=464 tests as of 2026-07-09, suite grows).
 
-**Session lifecycle note**: After code merges (PR merged to main), GitHub 
-revokes the session token to prevent stale credentials. To dispatch workflows 
-in a new session, start a new Claude Code session or use the GitHub web UI 
-"Run workflow" button (owner only). Do NOT force-push main to trigger Pages 
-deployment (it rewrites history without fixing the webhook issue); instead use 
-UI dispatch or wait for the hourly cron.
+**Session lifecycle note**: an agent token's *scope* is narrower than its
+*lifetime*. After a merge it can still read, fetch, push branches and open PRs;
+it cannot dispatch workflows or comment on issues (both 403). So hand dispatch
+and issue comments to the owner, and do not diagnose a 403 as a revoked
+credential -- verified 2026-09-24, `audit/25_pages_stale_artifact_misdiagnosis.md`.
+
+Do NOT force-push main to trigger a Pages deployment. It rewrites published
+history, it does not make a webhook fire, and force-pushes on `main` are blocked
+in branch protection. Same rule in `runbooks/live-parity-failure.md` §4.3: never
+hand-edit `docs/` or force-push generated output. Use UI dispatch, and do not
+assume the cron is hourly -- it drifts 3.5-5.5h in practice.
 
 - `backend/` is the **only** component that talks to Supabase, and the only
   place a Supabase credential is read. It is Node (`@supabase/server`),
@@ -173,6 +183,47 @@ UI dispatch or wait for the hourly cron.
   `backend/`. The `.env` for local dev is `.env.example` renamed (no secrets
   committed); `NODE_ENV=production` on deploy. No Python process talks to
   Supabase.
+
+### Runbook: roster frozen / "no new inmates" (HCSO WAF block)
+
+Signature: `data/current.json` (and `data/changelog.json`) stop changing while
+the sweep keeps committing the open-data feeds + `docs/` every cycle. Both
+freeze at the same `generated_utc`. The degraded-roster guard is firing every
+run and keeping last-good data. This is the guard working, not a bug.
+
+1. Confirm: `git log -15 --format="%cI %s" origin/main -- data/current.json` -
+   if `current.json` hasn't changed in hours but `sweep` commits keep landing,
+   it's frozen.
+   You'll usually hear about it first from the auto-opened GitHub issue
+   ("Roster frozen: HCSO sweep is not updating current.json", from
+   `scraper.freeze_alert`) once the freeze passes `ROSTER_STALE_ALARM_HOURS`.
+2. Diagnose from the Actions sweep log (grep, in order):
+   - `ROSTER FROZEN` / the `::error::` "Roster frozen" annotation - the freeze
+     alarm (`roster_stale_hours` >= `ROSTER_STALE_ALARM_HOURS`, 6h), emitted by
+     the "Roster freeze alarm" step (`scraper.freeze_alert`) in `sweep.yml`.
+   - `list sweep looks degraded (prev=... seen=... N/M surname fetches failed)` -
+     the guard fire. `N/M > 2/26` => WAF raising on fetches; `seen < 50% of prev`
+     => WAF serving empty-but-parseable pages.
+   - `WAF-block-shaped response for id=...` / `429 ...` => WAF active.
+3. Cause is almost always HCSO's WAF blocking the GitHub Actions egress IP.
+   Code can't fix that. **Posture (2026-05-20): document the block, do not
+   evade it.** A clean, persisting, documented denial supports the ORC 149.43
+   mandamus record; evading it would weaken that. Each blocked cycle + each
+   recovery is recorded in `data/waf_block_log.json` (see `audit/14_hcso_waf.md`),
+   and the site surfaces an interruption notice. Options, in order:
+   - **Do nothing but wait** for the block to rotate (cloud WAFs commonly
+     24-72h); the evidence log keeps growing, which is the point.
+   - The `JCSTREAM_HTTP_PROXY` repo secret routes HCSO fetches through an egress
+     proxy (HTTP/HTTPS/SOCKS), unset = direct, scoped to HCSO. It is kept
+     available but is **deliberately left unset** while the mandamus record is
+     built. Use it only on an explicit decision to prioritize data over the
+     denial record.
+   - Run from a
+     self-hosted runner, or contact HCSO for allowlisting.
+4. NEVER lower `SWEEP_MAX_FAILED_FRACTION` (0.10) or `SWEEP_MIN_ROSTER_FRACTION`
+   (0.5) to force the sweep through - that publishes a partial roster as if
+   complete, which is worse than stale data. Tuning `crawl_delay` / `concurrency`
+   in `client.py` only helps if errors are borderline (~3/26), not a hard block.
 
 ## Design and implementation decisions
 
@@ -294,13 +345,69 @@ Bond spread (Q3/Q1 interquartile ratio) computed per charge tier. Individual per
 
 #### Pages deployment flow
 
-1. Sweep writes `data/` to main.
-2. GitHub Pages webhook triggers a build from main.
-3. Pages build runner clones main, runs `web/build.py`.
-4. Output (`docs/`) is deployed to github.io.
-5. Custom-domain CNAME redirects to www.aretheyinjail.com.
+Pages is configured as Settings > Pages > Source = **"Deploy from a branch"**
+(`build_type=legacy`), branch `main`, path `/docs`. GitHub therefore serves the
+`docs/` tree **exactly as committed** -- it does not clone the repo and run
+`web/build.py`. Nothing is built at deploy time.
 
-Pages deployment usually completes in < 5 min. Outliers (> 90 min) trigger an alert; see below.
+1. `sweep.yml` scrapes HCSO, runs `python -m web.build` **into `docs/`**, and
+   commits `data/` + `docs/` to main.
+2. The push triggers GitHub's built-in `pages-build-deployment`, which publishes
+   the committed `docs/` tree (typically < 2 min; observed 28-36s).
+3. `pages.yml` additionally builds a verified artifact and deploys it through the
+   `github-pages` environment. It is a secondary path: it only serves the site if
+   an admin flips Pages Source to "GitHub Actions". Do not flip `build_type` from
+   an agent -- the settings API needs admin, and the 2026-07-04 experiment left
+   the site unable to publish when the Actions deploy failed GitHub-side.
+4. The custom-domain CNAME points `www.aretheyinjail.com` at the Pages host.
+
+**The consequence that matters:** because GitHub publishes committed `docs/`,
+a workflow that builds into `/tmp` and commits only `data/` produces a *green*
+`pages-build-deployment` that republishes a frozen `docs/` skeleton while main's
+roster moves on. That is the root cause of the recurring "Site deploy is stale"
+alerts (issues #483, #487, #496) -- not a failed or stuck webhook. `sweep.yml`
+and `rebuild.yml` must build into `docs/` (the default `--out`) and commit both
+paths; `tests/test_publish_workflows.py::test_branch_serve_publishers_commit_docs`
+enforces it.
+
+Pages deployment usually completes in < 5 min. Outliers (> 90 min) trigger an
+alert; see below.
+
+### Pages deploy: branch-serving is the live path (as of 2026-09-24)
+
+Pages currently serves `docs/` via Settings > Pages > Source = "Deploy from a
+branch" (`build_type=legacy`). Every push to main triggers GitHub's built-in
+`pages-build-deployment`; the committed `docs/` tree is the live site.
+
+`sweep.yml` and `rebuild.yml` MUST build into `docs/` (default out) and commit
+both `data/` and `docs/`. A `/tmp`-only build that commits only `data/` leaves
+the live site frozen on the last committed `docs/` skeleton while main's
+roster stays current. That is the real root cause behind the recurring
+"Site deploy is stale" alerts (issues #483, #487, #496), not a failed
+`pages-build-deployment` job. Those jobs often report success while publishing
+the stale skeleton.
+
+`pages.yml` still builds a verified artifact and can deploy when the Pages
+source is "GitHub Actions". Do not flip `build_type` from this agent: the
+Pages settings API requires admin, and the 2026-07-04 experiment left the site
+unable to publish when Actions deploy failed GitHub-side. Keep branch-serve
+working; treat `pages.yml` as a secondary path until an admin confirms the
+source flip and a green Actions deploy.
+
+If a `pages-build-deployment` run itself fails with
+`##[error]Deployment failed, try again later`, re-run the failed job
+(`rerun_failed_jobs`). Transient GitHub-side rejections self-heal on the next
+successful sweep push that includes a fresh `docs/`.
+
+### Pages deploy stuck in deployment_queued
+
+The "pages build and deployment" run occasionally sits in
+`deployment_queued` for many minutes while githubstatus.com says Pages is
+operational. This is GitHub-side queueing. Do not chase it: the artifact
+is already built, the site keeps serving the previous deploy, and the next
+sweep triggers a fresh deploy that supersedes the stuck one.
+Only investigate if the live `Generated` timestamp lags main by more than
+two sweep cycles.
 
 #### If Deployment Lags > 90 min
 
@@ -310,14 +417,25 @@ or check GitHub status as shown below.
 
 1. Check https://github.com/AICincy/HCJC/actions
 2. Look for `pages-build-deployment` workflow
-3. If missing: Webhook misconfigured → trigger next sweep:
-   - **Wait for hourly cron** (automatic; sweep runs at top of the hour)
-   - **OR dispatch manually via UI** (owner only):
+3. First establish *which* lag this is -- they have different fixes:
+   - **Roster age**: `data/current.json:generated_utc` is itself old. No sweep has
+     run; the deploy is fine and there is nothing newer to publish. Dispatch a sweep.
+   - **Stale published artifacts**: the deploy succeeded but shipped an old `docs/`.
+     Compare `docs/data/transparency_metrics.json:computed_utc` with
+     `data/current.json:generated_utc`; a mismatch means `docs/` was built by older
+     code. Regenerate and commit `docs/` (see "Deterministic Build Contract").
+   - **Genuinely stuck deploy**: rare. Continue below.
+
+   Then trigger a sweep:
+   - **Dispatch manually via UI** (owner; reliable):
      https://github.com/AICincy/HCJC/actions/workflows/sweep.yml → "Run workflow"
-   - **OR via CLI** (if token has `actions:write`):
+   - **OR via CLI** (if the token has `actions:write`):
      ```bash
      gh workflow run sweep.yml -r main
      ```
+   - Waiting for the cron is the *last* resort, not a one-hour wait: `sweep.yml`
+     declares `0 * * * *` but observed gaps on 2026-09-23/24 were 3.5-5.5h
+     (starts `05:37, 11:01, 16:22, 20:00, 23:27Z`). Actions cron is best-effort.
 
 4. If stuck > 120s: Build likely timed out or queued
    - Do NOT cancel + force-push (loses history)
@@ -335,6 +453,77 @@ or check GitHub status as shown below.
    gh run list --workflow pages --limit 3
    ```
 
+### Live-Parity HTML Freshness SLA (added 2026-09-24, audit 5dc39f0)
+
+Every rendered HTML page carries a machine-readable roster vintage:
+
+```html
+<meta name="jcstream:generated-utc" content="2026-09-23T23:35:42Z">
+```
+
+And a human footer:
+
+```html
+Last updated: <time datetime="2026-09-23T23:35:42Z">Sep 23, 2026, 7:35 PM ET</time>
+```
+
+The value is `data/current.json:generated_utc`, never wall-clock during template rendering. Transparency metrics and timeline are also anchored to this vintage for deterministic builds (Option B, issue #502).
+
+#### Deployment Freshness Check
+```bash
+python -m scraper.deploy_alert
+# Output: "deploy fresh <X> min" or "deploy stale <X> min"
+# X < 5 min: ✅ OK
+# 5-90 min: ⚠️ Warning (monitor closely)
+# > 90 min: 🔴 Alarm (incident response required)
+```
+
+#### Scheduled Validations
+
+**Daily**: Automated monitoring (planned for next sprint)
+```bash
+# (via .github/workflows/deployment-monitor.yml)
+# Runs every 6 hours; alerts on Slack/PagerDuty if lag > 30 min
+```
+
+**Manual Spot-Checks**: 3 pages, 3 times per week
+```bash
+for url in "https://www.aretheyinjail.com/" \
+           "https://www.aretheyinjail.com/inmates/" \
+           "https://www.aretheyinjail.com/reports/"; do
+  curl -s "$url" | grep "jcstream:generated-utc" | head -1
+done
+# All should show timestamps < 1 hour old
+```
+
+**Weekly**: Monday 04:40 UTC scheduled parity gate
+- Runs `live-parity.yml` workflow (2 jobs: JSON contract + HTML freshness)
+- Probes https://www.aretheyinjail.com/ representative pages:
+  index.html, data/index.html, help/index.html, stats/index.html, transparency/index.html
+- Validates strict UTC Z timestamps, microsecond precision, rejects malformed/offset/missing/future/epoch
+- Fails closed on 404/500/TLS/timeout, redirects, candidate-regression
+- Threshold: lag <= 26h pass, >26h fail
+- See: `runbooks/live-parity-failure.md` if it fails
+- Gate: `live-parity.yml` scheduled `40 4 * * 1` (Monday 04:40 UTC)
+
+#### If Deployment Lags > 90 min
+
+1. Check https://github.com/AICincy/HCJC/actions
+2. Look for `pages-build-deployment` workflow
+3. If missing: Webhook misconfigured → re-run `sweep.yml`:
+   ```bash
+   gh workflow run sweep.yml -r main
+   ```
+4. If stuck: Build timed out → cancel it, re-run
+5. If failed: Check logs → fix issue, commit, re-run sweep
+6. Full runbook: `runbooks/live-parity-failure.md`
+7. Verify live:
+   ```bash
+   curl -s https://www.aretheyinjail.com/ | grep jcstream:generated-utc
+   curl -s https://www.aretheyinjail.com/ | grep -i "last updated"
+   gh run list --workflow pages --limit 3
+   ```
+
 #### Deterministic Build Contract
 
 - `docs/data/transparency_metrics.json:computed_utc` == `data/current.json:generated_utc` (anchored, not wall-clock)
@@ -342,6 +531,26 @@ or check GitHub status as shown below.
 - Timeline `now_x` and `days_in_custody` anchored to `generated_utc` via `set_build_now_from_utc`
 - Consecutive builds with identical inputs produce byte-identical `docs/` (verified: `diff -qr /tmp/docs-run-1 docs` empty)
 - See issue #502 for Option B rationale.
+- Enforced by `tests/test_build_determinism.py`, which asserts the
+  `computed_utc` / `generated_utc` equality against the **committed** `docs/`, and
+  that `web/build.py` anchors the clock before `_render_build(...)` and clears it
+  after. Added because PR #503 merged the fix while the committed `docs/` had been
+  generated by pre-fix code, so branch-serve published unanchored artifacts with
+  every gate green (`audit/25_pages_stale_artifact_misdiagnosis.md`).
+
+#### Deterministic Build Contract
+
+- `docs/data/transparency_metrics.json:computed_utc` == `data/current.json:generated_utc` (anchored, not wall-clock)
+- `freshness_hours` == `generated_utc - last_healthy_sweep_utc` (0 when healthy)
+- Timeline `now_x` and `days_in_custody` anchored to `generated_utc` via `set_build_now_from_utc`
+- Consecutive builds with identical inputs produce byte-identical `docs/` (verified: `diff -qr /tmp/docs-run-1 docs` empty)
+- See issue #502 for Option B rationale.
+- Enforced by `tests/test_build_determinism.py`, which asserts the
+  `computed_utc` / `generated_utc` equality against the **committed** `docs/`, and
+  that `web/build.py` anchors the clock before `_render_build(...)` and clears it
+  after. Added because PR #503 merged the fix while the committed `docs/` had been
+  generated by pre-fix code, so branch-serve published unanchored artifacts with
+  every gate green (`audit/25_pages_stale_artifact_misdiagnosis.md`).
 
 ### Optional features (owner-side setup, not something I can do from here)
 
