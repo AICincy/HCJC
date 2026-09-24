@@ -1,15 +1,18 @@
 name: sweep
 
 # Workflow permissions, scoped to the minimum each active step requires:
-#   contents: write -- the "Commit generated source data" step pushes new
-#                      sweep data. Pages builds docs/ from the source data artifact.
-#   issues:   write -- the "Roster freeze alarm" step opens (and dedupes) a
-#                      GitHub issue when the roster freeze passes
-#                      ROSTER_STALE_ALARM_HOURS (scraper/freeze_alert.py).
+#   contents: write -- the publish step pushes new sweep data AND the rebuilt
+#                      docs/ tree. Pages is still Settings > Source =
+#                      "Deploy from a branch" (build_type=legacy); every push
+#                      to main triggers the built-in pages-build-deployment,
+#                      so the committed docs/ IS the live site.
+#   issues:   write -- the "Roster freeze alarm" / "Deploy staleness alarm"
+#                      steps open (and dedupe) GitHub issues.
 #
 # Permissions deliberately NOT requested:
-#   pages:    write -- Pages deployment is handled by pages.yml from a
-#                      verified build artifact, not by this data sweep.
+#   pages:    write -- legacy branch-serve does not need the Actions Pages
+#                      token. pages.yml remains as a secondary verified-artifact
+#                      path once build_type is flipped to workflow.
 #   id-token: write -- only the pages.yml deployment job needs OIDC.
 
 on:
@@ -94,14 +97,17 @@ jobs:
         env:
           JCSTREAM_SITE_BASE_URL: ""
           JCSTREAM_CNAME: www.aretheyinjail.com
-        run: python -m web.build --out /tmp/jcstream-docs-build
+        # Write into docs/ (DEFAULT_OUT). Legacy branch-serve publishes the
+        # committed docs/ tree; a /tmp-only build is discarded and leaves the
+        # live site frozen on the last committed skeleton (issue #496).
+        run: python -m web.build
 
-      - name: Commit generated source data
+      - name: Commit generated source data and docs
         env:
           GIT_COMMIT_NAME: jcstream-bot
           GIT_COMMIT_EMAIL: noreply@github.com
         run: |
-          bash scripts/commit_generated_changes.sh main "data: sweep $(date -u +%Y-%m-%dT%H:%MZ)" data/
+          bash scripts/commit_generated_changes.sh main "data: sweep $(date -u +%Y-%m-%dT%H:%MZ)" data/ docs/
 
       - name: Deploy staleness alarm
         if: always()
