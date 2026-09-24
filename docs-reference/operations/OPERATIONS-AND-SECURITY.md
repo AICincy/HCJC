@@ -41,9 +41,9 @@ After the HCSO sweep, `scraper.freeze_alert` evaluates the age of the last succe
 
 ## V1-97 Deployment Staleness Monitoring
 
-`scraper.deploy_alert` compares the committed roster generation time with the live public `current.json` value. A lag beyond ninety minutes can produce an annotation and deduplicated issue while leaving the data-acquisition workflow available.
+`scraper.deploy_alert` compares the committed roster generation time with the live public `current.json` value. It alarms when `main` has held roster data the live site does not serve for more than thirty minutes (a healthy Pages deploy lands in about a minute), producing an annotation and deduplicated issue. It does not alarm on the raw timestamp gap, which equals the sweep interval whenever the newest push is still deploying (the issue #506 false positive). It runs with `scraper.freeze_alert` in `staleness-watchdog.yml` on a schedule independent of `sweep.yml`, so a stalled sweep cron cannot silence it.
 
-**Implementation and verification references:** `scraper/deploy_alert.py`, `.github/workflows/sweep.yml`, `tests/test_deploy_alert.py`.
+**Implementation and verification references:** `scraper/deploy_alert.py`, `scraper/staleness_watchdog.py`, `.github/workflows/staleness-watchdog.yml`, `tests/test_deploy_alert.py`, `tests/test_staleness_watchdog.py`.
 
 ## V1-98 WAF Access Evidence Ledger
 

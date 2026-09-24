@@ -1,0 +1,56 @@
+name: staleness-watchdog
+
+# Out-of-band alarms for a frozen roster, a stalled sweep cron, and a stuck
+# Pages deploy (scraper.staleness_watchdog -> freeze_alert + deploy_alert).
+#
+# Why this is its own workflow: deploy_alert used to be the last step of
+# sweep.yml, so when the sweep cron stalled, the alarm stalled with it -- it
+# could only fire once a sweep finally ran (issue #496). Running on a separate
+# schedule removes that shared failure domain. It is still GitHub Actions cron
+# (best-effort), so a platform-wide scheduler outage can delay both; but a
+# stall now needs two independent schedules to drop, not one.
+#
+# Read-only against the repo: it never commits, never builds, and does not join
+# the jcstream-sweep concurrency group, so it cannot delay or conflict with a
+# sweep.
+#
+# Permissions:
+#   contents: read  -- checkout of main to read data/current.json.
+#   issues:   write -- open (and dedupe) the alarm issues.
+
+on:
+  schedule:
+    # Twice an hour, offset from sweep.yml's top-of-hour request so the two
+    # schedules are not queued in the same slot.
+    - cron: '23,53 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: jcstream-staleness-watchdog
+  cancel-in-progress: true
+
+jobs:
+  watchdog:
+    name: Freeze + deploy staleness check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          # Fresh tip of main, not the trigger SHA: the check is about what is
+          # committed now.
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run staleness alarms
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m scraper.staleness_watchdog

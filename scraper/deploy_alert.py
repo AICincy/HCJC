@@ -1,16 +1,34 @@
 """Active alert when the deployed site lags the committed roster data.
 
 Distinct from ``scraper.freeze_alert``: that fires when ``data/current.json``
-itself stops updating (HCSO WAF). This fires the opposite case, the one that
-went unnoticed for ~12 hours on 2026-07-04: ``current.json`` keeps updating on
-``main`` every sweep, but the GitHub Pages deploy is stuck (the built-in
-``pages-build-deployment`` failing with "Deployment failed, try again later"),
-so the live site serves stale content while main is fresh.
+itself stops updating (HCSO WAF, or a stalled sweep cron). This fires the
+opposite case, the one that went unnoticed for ~12 hours on 2026-07-04:
+``current.json`` keeps updating on ``main`` every sweep, but the GitHub Pages
+deploy is stuck (the built-in ``pages-build-deployment`` failing with
+"Deployment failed, try again later"), so the live site serves stale content
+while main is fresh.
 
-The check compares the live site's ``/data/current.json`` ``generated_utc``
-against the locally committed one. If the live deploy lags main by more than
-``DEPLOY_STALE_ALARM_MINUTES`` (about two to three sweep cycles) it emits a
-GitHub Actions ``::error`` annotation and opens a deduped GitHub issue.
+What is measured
+----------------
+The alarm metric is how long ``main`` has held roster data the live site does
+not serve (:func:`deploy_pending_minutes`): if the live ``generated_utc`` is
+older than the committed one, the deploy has been pending since the committed
+snapshot was generated. It fires past ``DEPLOY_PENDING_ALARM_MINUTES``.
+
+It deliberately does NOT alarm on the raw timestamp gap (committed minus live,
+:func:`deploy_lag_minutes`). That gap equals the interval between the last two
+sweeps whenever the newest push has not deployed yet, and Actions cron drifts
+3.5-5.5h in practice, so a gap-based alarm fired on essentially every sweep
+(issue #506: "258 minutes behind" at 03:54:18Z; Pages finished the deploy 27s
+later). The gap is still reported in the issue body for context.
+
+Where it runs
+-------------
+``.github/workflows/staleness-watchdog.yml``, on its own schedule, via
+``scraper.staleness_watchdog``. It used to run as the last step of
+``sweep.yml``, which shared a failure domain with the thing it watches: when the
+sweep cron stalled, the alarm stalled with it. Run inside a sweep it could not
+work anyway -- its own push has not deployed yet.
 
 Send-gate and dedupe mirror ``scraper.freeze_alert``: it dry-runs (logs only)
 unless both ``GITHUB_TOKEN`` and ``GITHUB_REPOSITORY`` are set, and it opens at
@@ -33,12 +51,11 @@ from .sweep import CURRENT_PATH, _prev_generated_utc
 
 log = logging.getLogger("jcstream.sweep")
 
-# Sweep cadence is best-effort (cron */15; observed gaps 2-5h), so a 90-minute
-# alarm window is roughly one missed cycle at worst observed spacing.
-# The deploy for the current push has not landed when this runs, so the live
-# site is always ~1 cycle behind; the threshold sits above that to fire only on
-# a genuinely stuck deploy, not the normal one-cycle lag.
-DEPLOY_STALE_ALARM_MINUTES = 90
+# A healthy branch-serve Pages build finishes in under a minute after the push,
+# and the Pages CDN may cache /data/current.json for up to ~10 minutes. Thirty
+# minutes clears both with room for one automatic retry, while still catching a
+# stuck deploy within one watchdog cycle.
+DEPLOY_PENDING_ALARM_MINUTES = 30
 DEFAULT_SITE_URL = "https://www.aretheyinjail.com"
 ISSUE_TITLE = "Site deploy is stale: live roster lags main"
 
@@ -67,6 +84,28 @@ def deploy_lag_minutes(local_generated: str | None, live_generated: str | None) 
     return (local_dt - live_dt).total_seconds() / 60.0
 
 
+def deploy_pending_minutes(
+    local_generated: str | None,
+    live_generated: str | None,
+    now: datetime | None = None,
+) -> float | None:
+    """Minutes ``main`` has held roster data the live site does not serve.
+
+    ``0.0`` when the live site is caught up (or ahead). Otherwise the time since
+    the committed snapshot was generated, which is when its deploy became due.
+    Returns None if either timestamp is missing or unparseable (inconclusive).
+    """
+    lag = deploy_lag_minutes(local_generated, live_generated)
+    if lag is None:
+        return None
+    if lag <= 0:
+        return 0.0
+    local_dt = _parse_iso(local_generated)
+    assert local_dt is not None  # guaranteed by deploy_lag_minutes above
+    current = now if now is not None else datetime.now(timezone.utc)
+    return max((current - local_dt).total_seconds() / 60.0, 0.0)
+
+
 def _fetch_live_generated(site_url: str) -> str | None:
     """Fetch ``generated_utc`` from the live site's ``/data/current.json``.
     Returns None on any network/parse error (treated as inconclusive)."""
@@ -90,13 +129,15 @@ def _fetch_live_generated(site_url: str) -> str | None:
     return gen if isinstance(gen, str) and gen else None
 
 
-def _issue_body(lag_min: float, local_generated: str | None, live_generated: str | None) -> str:
+def _issue_body(pending_min: float, lag_min: float, local_generated: str | None, live_generated: str | None) -> str:
     return (
-        f"The live site's roster is **{lag_min:.0f} minutes** behind `main` "
-        f"(alarm threshold {DEPLOY_STALE_ALARM_MINUTES} min, about two to three "
-        f"sweep cycles).\n\n"
+        f"`main` has held roster data the live site does not serve for "
+        f"**{pending_min:.0f} minutes** (alarm threshold "
+        f"{DEPLOY_PENDING_ALARM_MINUTES} min; a healthy Pages deploy lands in "
+        f"about a minute).\n\n"
         f"- committed `data/current.json`: `{local_generated}`\n"
-        f"- live `/data/current.json`: `{live_generated}`\n\n"
+        f"- live `/data/current.json`: `{live_generated}` "
+        f"({lag_min:.0f} min older)\n\n"
         "`current.json` keeps updating on `main` but the GitHub Pages deploy is "
         "not publishing. This is the stuck-deploy case (branch-serving "
         "`pages-build-deployment` failing GitHub-side), not a roster freeze.\n\n"
@@ -119,44 +160,54 @@ def _open_issue_exists(repo: str, token: str) -> bool:
     return any(isinstance(i, dict) and i.get("title") == ISSUE_TITLE for i in items)
 
 
-def alert(local_generated: str | None, live_generated: str | None) -> str:
+def alert(
+    local_generated: str | None,
+    live_generated: str | None,
+    now: datetime | None = None,
+) -> str:
     """Emit the deploy-staleness alert. Returns the action taken for
     logging/testing: ``"unknown"`` (inconclusive), ``"ok"`` (within threshold),
     ``"dry-run"`` (stale, no token), ``"exists"`` (issue already open), or
     ``"created"``."""
+    pending = deploy_pending_minutes(local_generated, live_generated, now)
     lag = deploy_lag_minutes(local_generated, live_generated)
-    if lag is None:
+    if pending is None or lag is None:
         log.info("deploy staleness inconclusive (local=%s live=%s)", local_generated, live_generated)
         return "unknown"
-    if lag <= DEPLOY_STALE_ALARM_MINUTES:
-        log.info("deploy freshness OK (site %.0f min behind main)", max(lag, 0.0))
+    if pending <= DEPLOY_PENDING_ALARM_MINUTES:
+        log.info(
+            "deploy freshness OK (newest committed roster pending deploy for %.0f min; site %.0f min older)",
+            pending,
+            max(lag, 0.0),
+        )
         return "ok"
 
     # Stuck deploy: surface in the Actions UI regardless of token availability.
     print(
-        f"::error title=Deploy stale::live roster is {lag:.0f} min behind main "
-        f"(>= {DEPLOY_STALE_ALARM_MINUTES} min). Pages deploy likely stuck; see "
-        f"the CLAUDE.md deploy runbook."
+        f"::error title=Deploy stale::main has held undeployed roster data for "
+        f"{pending:.0f} min (> {DEPLOY_PENDING_ALARM_MINUTES} min; live is "
+        f"{lag:.0f} min older). Pages deploy likely stuck; see the CLAUDE.md "
+        f"deploy runbook."
     )
     token = os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPOSITORY")
     if not token or not repo:
         log.warning(
             "deploy stale %.0f min; GITHUB_TOKEN/GITHUB_REPOSITORY unset, not opening an issue (dry-run)",
-            lag,
+            pending,
         )
         return "dry-run"
     try:
         if _open_issue_exists(repo, token):
-            log.info("deploy stale %.0f min; issue already open, not duplicating", lag)
+            log.info("deploy stale %.0f min; issue already open, not duplicating", pending)
             return "exists"
         _gh(
             "POST",
             f"{API}/repos/{repo}/issues",
             token,
-            {"title": ISSUE_TITLE, "body": _issue_body(lag, local_generated, live_generated)},
+            {"title": ISSUE_TITLE, "body": _issue_body(pending, lag, local_generated, live_generated)},
         )
-        log.error("deploy stale %.0f min; opened a deploy-staleness issue on %s", lag, repo)
+        log.error("deploy stale %.0f min; opened a deploy-staleness issue on %s", pending, repo)
         return "created"
     except (urllib.error.URLError, urllib.error.HTTPError, ValueError) as e:
         # Never fail the workflow on an alerting error.
