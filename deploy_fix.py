@@ -28,6 +28,8 @@ FILES_TO_COMMIT = (
     "tests/test_sweep.py",
     "scripts/backfill_anon_changelog.py",
     "deploy_fix.py",
+    "data/anon_changelog.json",
+    ".incident_summary.json",
     "README_DEPLOY.md",
     "DEPLOYMENT_FLOW.md",
     "DEPLOYMENT_SPEC.md",
