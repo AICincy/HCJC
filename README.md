@@ -122,7 +122,7 @@ The backend reads these variables:
     SUPABASE_JWKS_URL
     SUPABASE_SECRET_KEY
 
-The secret key is sensitive and must not be committed or logged. GitHub Actions supplies the secret through the repository secret named JCSTREAM_SUPABASE_SECRET_KEY.
+The secret key is sensitive and must not be committed or logged. The variable name is documented in backend/.env.example; configure it through the deployment environment used for the backend.
 
 Start the local backend with:
 
