@@ -1,66 +1,199 @@
-# Remediation deployment runbook
+# Deploying the anon-feed enrichment fix
 
-## Purpose
+Quick-start for whoever is running this. Read this file; the other three are
+reference. For the full reasoning see `DEPLOYMENT_SPEC.md`.
 
-deploy_fix.py applies and verifies the anonymized-changelog remediation. It does not push to GitHub.
+## What is being deployed
 
-The flow is:
+A fix to `_save_changelog_and_anon()` in `scraper/sweep.py`, which builds the
+`tier` and `category` tags on `data/anon_changelog.json` — the public,
+PII-expiring event feed. Two independent faults produced one symptom: null
+aggregate signal.
 
-1. Probe Git history and the live roster for usable recovery data.
-2. Backfill recent missing tier/category tags from the best available source: historical snapshots first, with the live roster as a fallback for current/booked rows.
-3. Refuse to continue when unexpected untracked files are present.
-4. Commit only the remediation and recovery artifacts.
-5. Run the verification gates.
-6. Create a rollback commit and return exit code 2 if verification fails.
+1. **Released inmates were never tagged.** Enrichment was built from the
+   *current* roster only. A `released` event is by definition about someone no
+   longer on the roster, so every released row was written with `tier=None`.
+2. **Subsection codes never matched.** Booking rows carry codes like
+   `2925.11A`; `data/orc_offenses.json` is keyed by base section (`2925.11`).
+   The raw lookup resolved 58.0% of the roster. `normalize_code()` — which
+   every other consumer of that table already used — resolves 98.8%.
 
-## Prerequisites
+## Run it
 
-Run from the repository root with the same Python environment used by the project:
+```bash
+python deploy_fix.py --plan     # measure and decide; changes nothing
+python deploy_fix.py            # repair, commit, verify
+```
 
-    python --version
-    python -m pytest --version
+`--plan` is safe and idempotent. Run it first if you have never seen this
+repository. Then run without flags.
 
-Python >=3.13 is required by pyproject.toml.
+The script needs an interpreter with `pytest` importable. `pytest` is a
+`[project.optional-dependencies] dev` extra, so a runtime-only install does not
+have it:
 
-## Run
+```bash
+python -m venv .venv
+.venv/bin/pip install -r requirements.txt
+python deploy_fix.py
+```
 
-    python deploy_fix.py -v
-    python deploy_fix.py --days 7 -v
+Discovery order is `$JCSTREAM_PYTEST_PYTHON`, `.venv/bin/python`,
+`.venv/Scripts/python.exe`, the running interpreter, `python3`, `python`. If
+none can import `pytest`, verification V3 fails and the run rolls back — so fix
+the environment before running rather than overriding the check.
 
-Skip the live sweep dry-run gate when HCSO access is unavailable:
+## What it decides, and what it can actually recover
 
-    python deploy_fix.py --skip-dry-run -v
+Gate 1 measures the damage and picks a path. **Both paths exit 0.** Path B is
+not an error; it is the correct outcome when nothing recoverable is left.
 
-## Exit codes
+Measured on the live data at the time of writing:
 
-- 0 — deployment and verification succeeded.
-- 1 — a pre-deployment safety gate failed, normally because an unexpected untracked file is present.
-- 2 — a post-commit verification failed and a rollback commit was attempted.
+| | rows | null tier/category | recoverable |
+|---|---|---|---|
+| Inside the 7-day window, PII intact | 1,889 | 960 | **501** |
+| Past the window, PII stripped | 6,028 | 352 | 0 |
+| **Total** | **7,917** | **1,312** | **501 (38% of all nulls)** |
 
-## Audit files
+**The recovery ceiling is ~52% of in-window nulls, not the ">90%" claimed in an
+earlier draft of this runbook.** If you are comparing against that number, the
+earlier number was wrong, not this run.
 
-deploy_fix.py writes .deployment.log as newline-delimited JSON. It writes .incident_summary.json when Git history does not contain enough snapshots for the recovery path.
+The 811 rows that stay null cannot be recovered, and it is worth being precise
+about why, because the obvious recovery ideas all fail:
 
-    cat .deployment.log | jq .
-    cat .deployment.log | jq 'select(.type == "verification")'
+- **Expired rows (352)** have had `inmate_number` stripped by
+  `_anonymize_event()`. There is nothing left to join on. Recovering them would
+  mean re-identifying people whose retention window has closed, which the repair
+  refuses to do on principle.
+- **In-window rows for people already released (459, of which 340 are
+  `released` events)** still carry `inmate_number`, but no surviving source maps
+  that number to a charge. `data/changelog.json` keeps `inmate_number`, but
+  `ChangeEvent` carries only `event / inmate_number / name / timestamp_utc /
+  note` — no charges.
+- **Git history does not help.** This repository has a single squashed commit,
+  so `data/current.json` has exactly one revision: there is no historical roster
+  to mine. See the warning below.
 
-## Manual recovery
+> **Do not probe git history for recovery material here.**
+> `git log --follow -p data/anon_changelog.json` returns 1,889 `inmate_number`
+> hits on this repository, which looks like a rich historical source. Every one
+> of those hits comes from the single commit adding the *current* file contents.
+> A gate that greps history for inmate data and concludes "backfill is possible"
+> gets a confident false positive, then "extracts a historical roster" that is
+> just today's roster. Gate 1 probes the working tree instead and reports the
+> split it actually finds.
 
-The data-only recovery utility can be run independently:
+The repair is deliberately narrow. It fills `tier`/`category` **only** on rows
+that are inside the retention window and already carry PII. It never adds a row,
+never removes one, never overwrites an existing tag, and never writes to an
+expired row. Verified after the fact: 501 rows changed, all of them only in
+`tier`/`category`, PII row count identical at 1,889.
 
-    python -m scripts.backfill_anon_changelog --days 7 --dry-run -v
-    python -m scripts.backfill_anon_changelog --days 7 -v
+## Reading the result
 
-The utility only fills missing tier and category values on recent full rows. It prefers event-appropriate Git snapshots, then falls back to the live `data/current.json` roster for non-release events when history is incomplete. Released events still require a historical pre-release snapshot. It does not add identifiers or reconstruct records older than the retention window.
+Exit `0` — success. Repair applied and verified, or nothing was left to do.
 
-## Review and push
+```bash
+git show HEAD --stat      # review the commit
+jq '.[] | select(.type=="verification")' .deployment.log
+cat .incident_summary.json
+```
 
-After a successful run, review the commit and publish the current task branch through the repository's pull-request workflow:
+Exit `1` — halted before touching anything. Gate 2 found uncommitted changes
+outside the fix targets. This matters because rollback uses `git reset --hard`,
+which is only safe if the tree was clean to start with. Commit or stash the
+unrelated work and re-run.
 
-    git show --stat HEAD
-    git status --short
-    git push -u origin HEAD
+Exit `2` — a verification failed and the change was rolled back. Find out which:
 
-Open or update a pull request from the current task branch into `main`. Do not push directly to `main`.
+```bash
+jq '.[] | select(.type=="verification" and .passed==false)' .deployment.log
+```
 
-The deployment script never runs git push.
+## Verification checks
+
+| | What it asserts |
+|---|---|
+| **V1** | Null count fell by *exactly* the number of rows repaired — no more, no less. |
+| **V2** | Row count unchanged, PII row count unchanged, and the population of rows carrying `inmate_number` without a `timestamp_utc` unchanged. The repair must not re-identify anyone. |
+| **V3** | The six enrichment regression tests pass, offline, on a real interpreter. |
+| **V4** | The full suite stays green (825 tests at time of writing). The fix touches a shared code path. |
+| **V5** | The commit contains only the expected files. Runs only when a commit was created. |
+
+**There is no dry-run sweep check, on purpose.** An earlier draft verified the
+fix by running a sweep in dry-run mode and asserting no new nulls. That check
+was vacuous twice over: `_save_changelog_and_anon()` sits behind
+`if not dry_run and roster_ok:` in `sweep.run()`, so a dry run cannot write the
+feed at all and can never produce a null; and it requires a live HCSO roster,
+which is unavailable offline. It has been replaced by V2, which constrains
+something real.
+
+The thing a dry run was *trying* to prove — that the next live sweep tags
+released events correctly — can only be proven by a live sweep. That is a
+post-deploy monitoring step, not a gate, and this script does not claim
+otherwise.
+
+## After deploying
+
+1. Review the commit: `git show HEAD`
+2. Push the branch and open a PR. This script never pushes.
+3. On the **first live sweep**, confirm released events now carry tags:
+
+   ```bash
+   jq '[.[] | select(.event=="released" and .timestamp_utc)] |
+       {n: length, tagged: [.[] | select(.tier)] | length}' data/anon_changelog.json
+   ```
+
+   **This reads 0 tagged immediately after deploying, and that is expected.** The
+   repair cannot tag historical released rows — those people are already off the
+   roster, which is precisely why they were unrecoverable. The fix changes what
+   *future* sweeps write: from the next sweep onward a release event is tagged
+   from the previous roster, so `tagged` climbs while `n` grows. Compare the ratio
+   across sweeps, not against zero on day one.
+
+4. Expect the in-window null count to fall further as live sweeps apply the fix
+   to new events. It will **not** fall below the 811 permanent nulls; those are
+   unrecoverable and are recorded in `.incident_summary.json`.
+
+
+## Manual backfill utility
+
+The recovery utility can also be run independently when the deployment orchestration is not the right entry point:
+
+```bash
+python -m scripts.backfill_anon_changelog --days 7 --dry-run -v
+python -m scripts.backfill_anon_changelog --days 7 -v
+```
+
+It prefers an event-appropriate historical roster snapshot when one is available. If Git history is sparse, it falls back to the checked-in `data/current.json` roster for non-release events whose inmate number still resolves there. A `released` event is never recovered from the live roster alone; it requires a historical pre-release snapshot. The utility only fills existing `tier` and `category` fields on eligible recent rows, never adds identifiers, and reports whether each recovery came from history or the live roster.
+
+## Re-running
+
+Safe. A second run finds nothing to repair, stages nothing, and reports the
+fix as already committed — it does not create an empty commit. It is not
+destructive, but it is not interesting either: the repair is at its ceiling.
+
+Note that a re-run **overwrites** `.deployment.log` and `.incident_summary.json`
+with the latest run's view, so both will then report `repaired: 0` and
+`accept_losses`. They are last-run artifacts, not a cumulative history — the
+durable record of what was repaired is the commit itself
+(`git show <sha> -- data/anon_changelog.json`). Preserve the log from the
+deploying run if you need it for an incident report; copy it before re-running.
+
+If you re-run and see a non-zero `repaired` count again, something restored the
+pre-fix data. Check `git log -- data/anon_changelog.json`.
+
+## Flags
+
+```
+--plan         measure and decide; change nothing
+--no-commit    repair the data but leave it uncommitted for review
+--no-rollback  on failure, leave changes in place instead of reverting
+--no-log       do not write .deployment.log
+--quiet        only gate and verification results
+```
+
+`.deployment.log` and `.incident_summary.json` are gitignored — they are run
+artifacts carrying a snapshot of damage counts, not source.
