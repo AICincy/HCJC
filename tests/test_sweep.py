@@ -1,3 +1,4 @@
+import json
 """Tests for the sweep health heuristic - the guard that stops a rate-limited
 or partially-failed list sweep from being written as the live roster."""
 
