@@ -24,8 +24,9 @@ _anon_enrichment(previous, current, offenses) MUST:
 The backfill utility MUST:
 
 - operate only on rows whose full identifiers are still within the selected retention window;
-- use repository history only; it performs no new external data retrieval;
 - prefer a historical snapshot appropriate to the event type;
+- when history is incomplete, use the checked-in current roster as a fallback for non-release events;
+- never use the current roster as the sole source for a release event;
 - modify only existing tier and category fields;
 - leave unresolved rows unchanged;
 - write no new identifying fields.
@@ -54,4 +55,4 @@ Any failure after commit causes a revert commit and exit 2.
 
 ## Non-goals
 
-This remediation does not reconstruct data older than the seven-day retention period. It does not scrape a new source, alter current roster privacy rules, or change the public-site publication policy.
+This remediation does not reconstruct data older than the seven-day retention period. The live-roster fallback reads only the repository's existing `data/current.json`; it does not perform new external retrieval. Released events still require a historical pre-release roster. The change does not alter current roster privacy rules or the public-site publication policy.
