@@ -42,6 +42,8 @@ deploy_fix.py provides the operator flow, JSON audit log, incident path, commit 
 
     python deploy_fix.py -v
     git show --stat HEAD
-    git push origin main
+    git push -u origin HEAD
+
+Push the current task branch and open or update a pull request targeting `main`; do not push directly to `main`.
 
 For details, see README_DEPLOY.md, DEPLOYMENT_FLOW.md, and DEPLOYMENT_SPEC.md.
