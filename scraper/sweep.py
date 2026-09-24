@@ -595,10 +595,11 @@ def _anon_enrichment(
             code = orc.normalize_code((first_charge.orc_code or "").strip())
             if code:
                 entry = orc.lookup(code, offenses)
-                raw_degree = entry.get("degree")
-                tier = raw_degree if raw_degree and raw_degree != orc.UNKNOWN else None
-                raw_title = entry.get("title")
-                category = raw_title.strip() if isinstance(raw_title, str) and raw_title.strip() else None
+                if isinstance(entry, dict):
+                    raw_degree = entry.get("degree")
+                    tier = raw_degree if raw_degree and raw_degree != orc.UNKNOWN else None
+                    raw_title = entry.get("title")
+                    category = raw_title.strip() if isinstance(raw_title, str) and raw_title.strip() else None
         enrichment[inmate_number] = {"tier": tier, "category": category}
     return enrichment
 
@@ -612,7 +613,13 @@ def _load_anon_offenses(path: Path) -> dict[str, dict]:
     if not isinstance(raw, dict):
         return {}
     offenses = raw.get("offenses")
-    return offenses if isinstance(offenses, dict) else {}
+    if not isinstance(offenses, dict):
+        return {}
+    return {
+        str(code): entry
+        for code, entry in offenses.items()
+        if isinstance(code, str) and isinstance(entry, dict)
+    }
 
 
 def _save_changelog_and_anon(
