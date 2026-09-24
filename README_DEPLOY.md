@@ -48,17 +48,19 @@ deploy_fix.py writes .deployment.log as newline-delimited JSON. It writes .incid
 
 The data-only recovery utility can be run independently:
 
-    python scripts/backfill_anon_changelog.py --days 7 --dry-run -v
-    python scripts/backfill_anon_changelog.py --days 7 -v
+    python -m scripts.backfill_anon_changelog --days 7 --dry-run -v
+    python -m scripts.backfill_anon_changelog --days 7 -v
 
 The utility only fills missing tier and category values on recent full rows. It does not add identifiers or reconstruct records older than the retention window.
 
 ## Review and push
 
-After a successful run:
+After a successful run, review the commit and publish the current task branch through the repository's pull-request workflow:
 
     git show --stat HEAD
     git status --short
-    git push origin main
+    git push -u origin HEAD
+
+Open or update a pull request from the current task branch into `main`. Do not push directly to `main`.
 
 The deployment script never runs git push.
