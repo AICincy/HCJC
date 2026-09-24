@@ -28,3 +28,5 @@ Later standalone records:
 | `19_counsel_cover_memo.md` | Cover memo for counsel on the evidence dossier |
 | `20_audit_runbook_reconcile.md` | External audit runbook reconciled against the repo |
 | `21_nodata_monitor.md` | Datadog no-data monitor spec: detect a missed sweep (absent sweep_start) |
+| `24_pages_deploy_stale_incidents.md` | `deploy_alert` incident log for stuck Pages deploys |
+| `25_pages_stale_artifact_misdiagnosis.md` | 2026-09-24 stale-artifact publish after PR #503; corrects the "Pages webhook pending" diagnosis and a force-push remediation tier |
