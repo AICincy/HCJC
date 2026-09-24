@@ -11,13 +11,17 @@ branch-serving is the live path" and "Live-Parity HTML Freshness SLA", and
 
 - Date: 2026-09-24
 - Trigger: a handoff document ("Production Remediation: Corrected Technical
-  Analysis") circulated with a force-push remediation tier and a claim that the
-  Pages webhook was still pending. Both claims were checked against the GitHub
-  API and a local rebuild and found to be wrong.
+  Analysis") circulated with a force-push remediation tier, a claim that the
+  Pages webhook was still pending, and a claim that the agent's token had been
+  revoked. Each was checked against the GitHub API, the Actions/deployment
+  history, and local rebuilds. The webhook-pending claim was wrong; the
+  force-push prohibition was right; the token claim was half right — scoped, not
+  revoked, and the capability matrix below records which operations actually 403.
 - Author: Arena agent session `arena/01a0d152-hcjc`, verified against the GitHub
   API, Actions history, and two independent local builds at write time.
-- State at write time: `main` = `5d90340`, working branch carrying a regenerated
-  `docs/` and `tests/test_build_determinism.py`.
+- State at write time: `main` = `5d90340`; branch `arena/01a0d152-hcjc` carries
+  the regenerated `docs/`, `tests/test_build_determinism.py`, and this record,
+  raised as PR #504 (Lint + Deno green).
 
 ## Summary
 
@@ -140,9 +144,37 @@ cron would not reliably deliver.
 | "208 min lag is NOT missing docs/ … is Pages deployment not yet published" | **Half right, wrong conclusion.** `docs/` was present and deployed; it was *stale*, built by pre-fix code. The 208 min is roster age from cron drift. |
 | Tier 1: "Next sweep at next hour boundary. If 23:40 UTC now, sweep runs at 00:00 (~20 min)" | **Wrong and unsafe to rely on.** No sweep ran at `00:00Z` or `01:00Z` or `02:00Z`. Observed gaps are 3.5–5.5 h. Manual dispatch is the reliable path, not waiting. |
 | Tier 2: "Owner must dispatch manually — bot token revoked, no `actions:write`" | **Half right, and the operative half is correct.** `gh workflow run sweep.yml --ref main` failed with `HTTP 403: Resource not accessible by integration` on `/actions/workflows/277044658/dispatches`, so dispatch genuinely must go through the UI. The *reason* is wrong: the token is not revoked. |
-| "Session now CLOSED (token revoked post-merge)" | **Wrong.** `gh auth status` = authenticated as `arena-ai-coding-agent[bot]`. Reads, Actions history, `git push` of a branch, and `gh pr create` (PR #504) all succeeded. Only `actions:write` is absent. |
+| "Session now CLOSED (token revoked post-merge)" | **Wrong.** `gh auth status` = authenticated as `arena-ai-coding-agent[bot]`. The token is live and useful; it is scoped, not revoked. See the capability matrix below. |
+
+### Bot capability matrix, measured not assumed
+
+`GET /repos/AICincy/HCJC` reports `permissions` all-`false` for this
+installation, which is **not** a reliable guide — `git push` succeeded despite
+`push: false`. Measured behaviour:
+
+| Operation | Result |
+| :-- | :-- |
+| REST reads (commits, pages, deployments, runs) | **works** |
+| `gh run list` / `gh run watch` | **works** |
+| `git push origin arena/01a0d152-hcjc` | **works** |
+| `gh pr create` / `gh pr edit` via REST PATCH | **works** (PR #504) |
+| `gh workflow run sweep.yml --ref main` | **403** — no `actions:write` |
+| `gh issue comment 496` / `502` | **403** — no `issues:write` |
+| `gh pr edit` via GraphQL | fails on an unrelated `Projects (classic)` deprecation; the REST PATCH path works |
+
+So the handoff document was right that the owner must dispatch the sweep by hand,
+and right that commenting on the issues is not something an agent can do here —
+but wrong that the session or token was dead. Planned work should be scoped to
+branch push + PR, with dispatch and issue comment handed to the owner.
+
+Because issue comments are blocked, the traceability notes for #496 and #502 live
+in this record and in the PR #504 description instead of on the issues. Both
+issues are CLOSED and the open-issue count is 0, so no `deploy_alert` alarm is
+latched open (the dedupe latch described in
+[24_pages_deploy_stale_incidents.md](./24_pages_deploy_stale_incidents.md) is
+clear).
 | Success criterion "docs/ rebuilds to byte-identical (≤1s rebuild time, 0 diff)" | **Unmet as stated.** Rebuild is ~12–18 s, not ≤1 s. Byte-identity holds between two builds of the *current* code (0 diff, identical tree hash `e9794f7a…`), but committed `docs/` differed from it in 654 files until regenerated. |
-| "Document findings in issue #502" | **Blocked.** #502 and #496 are both CLOSED; #502's only run was `skipped`. Open-issue count is 0, so no `deploy_alert` alarm is latched open. |
+| "Document findings in issue #502" | **Blocked twice over.** #502 and #496 are both CLOSED (#502's only workflow run was `skipped`), and `gh issue comment` returns 403 — no `issues:write`. Findings are recorded here and on PR #504 instead. |
 | "DO NOT `git push -f origin main`" | **Correct and endorsed.** Consistent with `runbooks/live-parity-failure.md` §4.3 ("Do not hand-edit `docs/` or force-push generated output") and `DECISIONS.md` (owner enabled block-force-push + block-deletion on `main`). |
 | "Determinism Fix ✅ Complete" | **Code: yes. Artifacts: no** — see §2 above. |
 
@@ -214,9 +246,12 @@ CONTEXT (verified 2026-09-24, main = 5d90340):
 - Pages is NOT pending. Deployment of 5d90340 succeeded 02:44:59Z.
 - The /tmp-build defect (issue #496) was already fixed by 5790d1a16d.
 - The residual defect was stale docs/ artifacts published by the determinism
-  merge itself; regenerated + guarded by tests/test_build_determinism.py.
+  merge itself; regenerated + guarded by tests/test_build_determinism.py on
+  branch arena/01a0d152-hcjc, PR #504 (Lint + Deno green).
 - The roster ages because the hourly cron drifts 3.5-5.5h, not because of
   webhooks. Issues #496 and #502 are CLOSED; open-issue count is 0.
+- Bot scope: can read, push branches, open/edit PRs. CANNOT dispatch workflows
+  or comment on issues (403 on both). Owner must dispatch sweep.yml via the UI.
 
 DO:
 1. Verify docs/ reproduces byte-identically:
