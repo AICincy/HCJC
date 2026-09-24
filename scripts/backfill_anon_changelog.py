@@ -160,7 +160,7 @@ def _apply_takedowns(rows: list[dict]) -> int:
 
 def backfill(days: int = DEFAULT_DAYS, *, dry_run: bool = False) -> dict[str, int]:
     if not ANON_CHANGELOG_PATH.exists():
-        return {"updated": 0, "unresolved": 0, "eligible": 0}
+        return {"updated": 0, "unresolved": 0, "eligible": 0, "takedown_anonymized": 0}
 
     try:
         rows = json.loads(ANON_CHANGELOG_PATH.read_text(encoding="utf-8"))
