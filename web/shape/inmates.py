@@ -313,9 +313,17 @@ def _roster_stale_context(snapshot: Snapshot) -> dict:
     period."""
     from scraper.store import BlockLogCorruptError, load_block_log
     from scraper.sweep_guards import ROSTER_STALE_ALARM_HOURS, roster_stale_hours
-    from web.transparency import detail_denial_context
+    from web.transparency import _parse_utc, detail_denial_context
 
     hours = roster_stale_hours(snapshot.generated_utc)
+    # Anchor detail-denial window to data vintage for deterministic builds.
+    # Falls back to wall-clock only when the snapshot has no parseable vintage
+    # (empty bootstrap).
+    anchored_now = _parse_utc(snapshot.generated_utc)
+    if anchored_now is None:
+        from datetime import datetime, timezone
+
+        anchored_now = datetime.now(timezone.utc)
     try:
         log = load_block_log()
     except BlockLogCorruptError as e:
@@ -333,7 +341,8 @@ def _roster_stale_context(snapshot: Snapshot) -> dict:
             break
     # A1/A4: detail-level denial from the same ledger, shared derivation
     # with the transparency scorecard (web.transparency.detail_denial_context).
-    detail = detail_denial_context(log)
+    # Pass anchored clock so banner state is deterministic for identical inputs.
+    detail = detail_denial_context(log, now=anchored_now)
     return {
         "blocked": hours is not None and hours >= ROSTER_STALE_ALARM_HOURS,
         "since": since,

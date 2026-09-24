@@ -255,6 +255,85 @@ If a `pages-build-deployment` run itself fails with
 (`rerun_failed_jobs`). Transient GitHub-side rejections self-heal on the next
 successful sweep push that includes a fresh `docs/`.
 
+### Live-Parity HTML Freshness SLA (added 2026-09-24, audit 5dc39f0)
+
+Every rendered HTML page carries a machine-readable roster vintage:
+
+```html
+<meta name="jcstream:generated-utc" content="2026-09-23T23:35:42Z">
+```
+
+And a human footer:
+
+```html
+Last updated: <time datetime="2026-09-23T23:35:42Z">Sep 23, 2026, 7:35 PM ET</time>
+```
+
+The value is `data/current.json:generated_utc`, never wall-clock during template rendering. Transparency metrics and timeline are also anchored to this vintage for deterministic builds (Option B, issue #502).
+
+#### Deployment Freshness Check
+```bash
+python -m scraper.deploy_alert
+# Output: "deploy fresh <X> min" or "deploy stale <X> min"
+# X < 5 min: ✅ OK
+# 5-90 min: ⚠️ Warning (monitor closely)
+# > 90 min: 🔴 Alarm (incident response required)
+```
+
+#### Scheduled Validations
+
+**Daily**: Automated monitoring (planned for next sprint)
+```bash
+# (via .github/workflows/deployment-monitor.yml)
+# Runs every 6 hours; alerts on Slack/PagerDuty if lag > 30 min
+```
+
+**Manual Spot-Checks**: 3 pages, 3 times per week
+```bash
+for url in "https://www.aretheyinjail.com/" \
+           "https://www.aretheyinjail.com/inmates/" \
+           "https://www.aretheyinjail.com/reports/"; do
+  curl -s "$url" | grep "jcstream:generated-utc" | head -1
+done
+# All should show timestamps < 1 hour old
+```
+
+**Weekly**: Monday 04:40 UTC scheduled parity gate
+- Runs `live-parity.yml` workflow (2 jobs: JSON contract + HTML freshness)
+- Probes https://www.aretheyinjail.com/ representative pages:
+  index.html, data/index.html, help/index.html, stats/index.html, transparency/index.html
+- Validates strict UTC Z timestamps, microsecond precision, rejects malformed/offset/missing/future/epoch
+- Fails closed on 404/500/TLS/timeout, redirects, candidate-regression
+- Threshold: lag <= 26h pass, >26h fail
+- See: `runbooks/live-parity-failure.md` if it fails
+- Gate: `live-parity.yml` scheduled `40 4 * * 1` (Monday 04:40 UTC)
+
+#### If Deployment Lags > 90 min
+
+1. Check https://github.com/AICincy/HCJC/actions
+2. Look for `pages-build-deployment` workflow
+3. If missing: Webhook misconfigured → re-run `sweep.yml`:
+   ```bash
+   gh workflow run sweep.yml -r main
+   ```
+4. If stuck: Build timed out → cancel it, re-run
+5. If failed: Check logs → fix issue, commit, re-run sweep
+6. Full runbook: `runbooks/live-parity-failure.md`
+7. Verify live:
+   ```bash
+   curl -s https://www.aretheyinjail.com/ | grep jcstream:generated-utc
+   curl -s https://www.aretheyinjail.com/ | grep -i "last updated"
+   gh run list --workflow pages --limit 3
+   ```
+
+#### Deterministic Build Contract
+
+- `docs/data/transparency_metrics.json:computed_utc` == `data/current.json:generated_utc` (anchored, not wall-clock)
+- `freshness_hours` == `generated_utc - last_healthy_sweep_utc` (0 when healthy)
+- Timeline `now_x` and `days_in_custody` anchored to `generated_utc` via `set_build_now_from_utc`
+- Consecutive builds with identical inputs produce byte-identical `docs/` (verified: `diff -qr /tmp/docs-run-1 docs` empty)
+- See issue #502 for Option B rationale.
+
 ### Optional features (owner-side setup, not something I can do from here)
 
 - **Giscus comments** on inmate pages (`web/templates/inmate.html` renders the

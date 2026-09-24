@@ -51,6 +51,30 @@ def _stamps(recs: list[dict]) -> list[str]:
     return [ts for e in recs if isinstance((ts := e.get("timestamp_utc")), str) and ts]
 
 
+def _resolve_now(
+    generated_utc: str | None,
+    last_healthy_sweep_utc: str | None,
+    now: datetime | None,
+) -> datetime:
+    """Resolve the reference clock for deterministic builds.
+
+    When ``now`` is explicitly supplied (tests, diagnostics) it wins.
+    Otherwise the data vintage (``generated_utc``) is the source of truth,
+    falling back to ``last_healthy_sweep_utc`` for older snapshots, and only
+    finally to wall-clock time. This makes ``transparency_metrics.json`` and
+    the transparency page byte-identical for identical inputs, fixing the
+    non-deterministic ``computed_utc`` / ``SHA256SUMS`` drift noted in the
+    2026-09-24 full-stack audit (Option B: anchor to data vintage).
+    """
+    if now is not None:
+        return now
+    for candidate in (generated_utc, last_healthy_sweep_utc):
+        parsed = _parse_utc(candidate)
+        if parsed is not None:
+            return parsed
+    return datetime.now(timezone.utc)
+
+
 def detail_denial_context(entries: list[dict], now: datetime | None = None) -> dict:
     """Detail-retrieval denial state derived from the evidence ledger.
 
@@ -60,6 +84,11 @@ def detail_denial_context(entries: list[dict], now: datetime | None = None) -> d
     ``detail_degraded``), totals, and ``last_failure_utc``. Shared by the
     transparency scorecard and the site-wide staleness banner so both read
     the same derivation (precursor of the graded per-source manifest).
+
+    ``now`` is the trailing-window reference. When omitted it defaults to
+    wall-clock time for backward compatibility; callers that need deterministic
+    builds (``_roster_stale_context`` and ``compute_transparency_metrics``)
+    should pass an anchored clock derived from the snapshot vintage.
     """
     if now is None:
         now = datetime.now(timezone.utc)
@@ -122,9 +151,14 @@ def compute_transparency_metrics(
     (``last_healthy_sweep_utc``), falling back to ``generated_utc`` for
     snapshots written before that field existed; ``roster_age_hours`` keeps
     the plain roster-vintage age for comparison.
+
+    Determinism: when ``now`` is omitted the function anchors to
+    ``generated_utc`` (or ``last_healthy_sweep_utc``) instead of wall-clock
+    time, so identical ledger + snapshot inputs produce identical JSON. This
+    is Option B from the audit (anchor to data vintage). Pass an explicit
+    ``now`` in tests or when wall-clock semantics are required.
     """
-    if now is None:
-        now = datetime.now(timezone.utc)
+    now = _resolve_now(generated_utc, last_healthy_sweep_utc, now)
 
     blocked = [e for e in entries if e.get("event") == "blocked"]
     first_block_utc = blocked[0].get("timestamp_utc") if blocked else None

@@ -204,4 +204,10 @@ def test_build_renders_transparency_page_without_ledger(tmp_path, monkeypatch):
     assert "none recorded" in html
     mirror = json.loads((out / "data" / "transparency_metrics.json").read_text(encoding="utf-8"))
     assert mirror["total_block_events"] == 0
-    assert mirror["status"] == "STALE"
+    # Deterministic build: anchored to data vintage (Option B audit fix 2026-09-24),
+    # so empty ledger with vintage matching now is FRESH. STALE only occurs when
+    # last_healthy_sweep_utc lags behind generated_utc by >= alarm threshold.
+    assert mirror["status"] == "FRESH"
+    # Computed UTC must be anchored to data vintage, not wall-clock, for reproducible builds.
+    assert mirror["computed_utc"] == "2025-05-20T12:00:00Z"
+    assert mirror["roster_generated_utc"] == "2025-05-20T12:00:00Z"
