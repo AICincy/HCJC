@@ -95,6 +95,11 @@ def test_snapshot_accepts_strict_utcnow_iso():
     assert s.generated_utc == "2026-05-14T01:00:00Z"
 
 
+def test_snapshot_preserves_microsecond_utc_precision():
+    s = Snapshot(generated_utc="2026-05-14T01:00:00.123456Z", inmate_count=0, inmates=[])
+    assert s.generated_utc.endswith(".123456Z")
+
+
 def test_history_record_round_trip():
     # data-F7: history.json records are now validated on load. Round trip
     # confirms the shape committed by web/build.py loads back equivalent.

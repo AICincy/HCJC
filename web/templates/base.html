@@ -2,17 +2,17 @@
 <html lang="en" data-base-url="{{ base_url or '' }}">
 <head>
   <meta charset="utf-8">
+  {# Machine-readable roster vintage. Keep this immediately after charset so
+     scrapers can find it before any viewport/SEO metadata. The value is the
+     same strict UTC stamp rendered in the footer and read from the snapshot,
+     never from wall-clock time during template rendering. #}
+  {% if (snapshot is defined and snapshot.generated_utc) or (generated_utc is defined and generated_utc) %}
+  <meta name="jcstream:generated-utc" content="{{ snapshot.generated_utc if snapshot is defined and snapshot.generated_utc else generated_utc }}">
+  {% endif %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>{% block title %}JCStream{% endblock %}</title>
   <meta name="robots" content="noindex, noarchive">
-  {# Machine-readable roster vintage, the same snapshot.generated_utc the
-     footer renders in human form. scripts/verify_live_html_freshness.py
-     ages the live deploy against this stamp instead of parsing the human
-     format; pages built before the stamp shipped simply lack the tag. #}
-  {% if (snapshot is defined and snapshot.generated_utc) or (generated_utc is defined and generated_utc) %}
-  <meta name="jcstream:generated-utc" content="{{ snapshot.generated_utc if snapshot is defined and snapshot.generated_utc else generated_utc }}">
-  {% endif %}
   <link rel="canonical" href="{{ site_url }}{% block canonical_path %}/{% endblock %}">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -100,7 +100,12 @@
       <a href="{{ base_url }}/transparency/">Access</a>
       <a href="{{ base_url }}/data/public-records/">Public Records Dashboard</a>
     </nav>
-    <span>Generated {{ human_utc(snapshot.generated_utc) if snapshot is defined and snapshot.generated_utc else (human_utc(generated_utc) if generated_utc is defined and generated_utc else " - ") }}</span>
+    {% set page_generated_utc = snapshot.generated_utc if snapshot is defined and snapshot.generated_utc else (generated_utc if generated_utc is defined else "") %}
+    {% if page_generated_utc %}
+    <span class="generated-stamp" aria-label="Last updated {{ human_utc(page_generated_utc) }}">Last updated: <time datetime="{{ page_generated_utc }}">{{ human_utc(page_generated_utc) }}</time></span>
+    {% else %}
+    <span class="generated-stamp" aria-label="Last updated unavailable">Last updated: unavailable</span>
+    {% endif %}
     <span><a href="{{ base_url }}/data/">Data, methodology & legal notices</a> &middot; Mirrors <a href="https://www.hcso.org/justice-center-services/inmate-search/">hcso.org</a> &middot; <a href="https://github.com/AICincy/HCJC">source (MIT)</a></span>
     <p>External social link: <a href="https://www.facebook.com/HCJCOH" target="_blank" rel="noopener">Hamilton County Booking Photos on Facebook</a>.</p>
     <span class="footer-legal">

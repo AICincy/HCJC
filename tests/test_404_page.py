@@ -65,3 +65,20 @@ def test_human_utc_handles_offset_and_fractional_stamps():
     assert "Sep 20, 2026" in _human_utc("2026-09-20T14:23:00.000")
     assert _human_utc("2026-09-20T14:23:00Z") == _human_utc("2026-09-20T14:23:00.000Z")
     assert _human_utc("not a stamp") == "not a stamp"  # unparseable -> raw passthrough
+
+
+def test_base_footer_exposes_machine_and_accessible_human_stamp():
+    env = _env()
+    env.globals["generated_utc"] = "2026-09-23T23:35:42Z"
+    html = env.get_template("base.html").render(content="", generated_utc="2026-09-23T23:35:42Z")
+    assert '<meta name="jcstream:generated-utc" content="2026-09-23T23:35:42Z">' in html
+    assert '<time datetime="2026-09-23T23:35:42Z">' in html
+    assert "Last updated:" in html
+    assert "ET" in html
+
+
+def test_base_footer_is_explicit_when_stamp_is_missing():
+    env = _env()
+    html = env.get_template("base.html").render(content="", generated_utc="")
+    assert "Last updated: unavailable" in html
+    assert "jcstream:generated-utc" not in html

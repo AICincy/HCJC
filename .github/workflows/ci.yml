@@ -4,11 +4,13 @@ on:
   push:
     branches: [main]
     paths-ignore:
-      # Sweep/rebuild commits only rewrite generated snapshots. CI still
-      # runs on PRs and on source/workflow pushes.
+      # Sweep/rebuild commits only rewrite generated snapshots. The side-branch
+      # and pull-request gap is owned by lint.yml; this workflow is main-only.
       - "data/**"
       - "docs/**"
-  pull_request:
+  # Pull requests and side-branch pushes are owned by lint.yml. Keeping the
+  # full matrix on main only avoids running Ruff/pytest twice on every PR while
+  # preserving the merge-time checks on the protected branch.
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
