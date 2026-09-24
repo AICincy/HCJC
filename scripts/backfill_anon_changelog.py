@@ -81,12 +81,7 @@ def _load_snapshots(since: datetime) -> list[HistoricalSnapshot]:
             if generated.isoformat() in seen_generated:
                 continue
             seen_generated.add(generated.isoformat())
-            by_id = {
-                str(row.get("inmate_number")): row
-                for row in inmates
-                if isinstance(row, dict) and row.get("inmate_number")
-            }
-            from scraper.models import Inmate, Snapshot
+            from scraper.models import Snapshot
 
             snapshot = Snapshot.model_validate(payload)
             typed = {inm.inmate_number: inm for inm in snapshot.inmates}
