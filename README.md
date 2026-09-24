@@ -2,275 +2,382 @@
 
 [![CI](https://github.com/AICincy/HCJC/actions/workflows/ci.yml/badge.svg)](https://github.com/AICincy/HCJC/actions/workflows/ci.yml)
 
-Static mirror of the Hamilton County (Ohio) Justice Center inmate roster.
-Scrapes the public HCSO roster and Cincinnati Open Data feeds, then builds a
-fully static, searchable site. The published site reads version-controlled
-JSON only: no tracking, and no database on the request path. A separate
-service under `backend/` uses Supabase and serves no part of the public site.
+JCStream is a static public-records mirror of the Hamilton County, Ohio Justice Center inmate roster.
 
-- **Live site:** https://www.aretheyinjail.com
-- **Source:** https://github.com/AICincy/HCJC (MIT)
-- **Corrections, sealing, or removal:** https://github.com/AICincy/HCJC/issues - no fee, ever
+The repository has three main layers:
 
-## Status as of 2026-09-22
+- scraper/ retrieves the HCSO roster and selected Cincinnati Open Data feeds, normalizes the records, and writes JSON source data under data/.
+- web/ builds a static site from those JSON files. The request path is static: no application database is required to serve the public site.
+- backend/ is a separate Node service that uses Supabase for authentication scaffolding. It is not used to render the public site.
 
-- **1,213 people** listed in custody, data current as of **2026-09-22T15:06:59Z**
-  (live `/data/current.json` `inmate_count` and `inmates` length both 1,213;
-  live site verified HTTP 200).
-- Deploys from the tip of `main` via GitHub Pages. No commit hash is pinned
-  here by design; the live commit is always the current `origin/main` tip.
-  CI and the Pages build run green on every push to `main`.
-- **137,807-record** append-only SHA-256 hash-chained WAF evidence log
-  (`data/waf_block_log.json`), chain verified in CI. The Pages build copies
-  it into the generated deployment artifact at `/data/waf_block_log.json`;
-  it is no longer duplicated in the Git working tree.
-- 779 tests, ruff and mypy clean (verified 2026-09-24).
-- Deep-audit wave (2026-09-20): the 2 critical and 3 major findings were
-  fixed fail-closed (corrupt evidence/changelog can no longer be silently
-  replaced; detail-page blocks are deduped; outage probes use 3 roster IDs
-  with a content-size recovery rule; the `-X ours` merge fallback is gone),
-  plus all 16 minor findings (stale-ref fetch race, CI WAF presence guard,
-  timestamp commit churn, `%y` pivot and offset-timestamp handling, UI label
-  and timestamp fixes, canonical tags). See the audit report.
-- Dark theme is live with a header toggle (persists via localStorage).
-  Felony F1-F5 red-to-amber severity scale unchanged.
-- 1,126 inmates in that snapshot carry a `photo_filename`; the gap is upstream
-  photo-fetch failures during HCSO blocks, not pruning.
+The public site is searchable, publishes per-inmate pages while records remain on the source roster, exposes machine-readable JSON, and publishes aggregate history and operational evidence.
 
-## How it works
+Live site: https://www.aretheyinjail.com
 
-### Data pipeline
+Source: https://github.com/AICincy/HCJC
 
-1. **Sweep** (`scraper/sweep.py`): queries the HCSO inmate-search form with
-   single-letter surname substrings (A-Z, configured in `data/surnames.txt`),
-   dedupes rows, then fetches detail pages for new or stale profiles.
-   - 16 worker threads, 0.5 s crawl delay per worker, polite User-Agent.
-   - 20-minute skip-gate: a run does no network work if `data/current.json`
-     is fresher than 20 minutes.
-   - 22-minute orchestrator wall-clock cap; partial results are saved, never
-     discarded (workflow timeout is 50 minutes).
-   - WAF backoff tracker: exponential backoff starting at 2 s, capped at 30 s;
-     Retry-After headers honored up to 30 s.
-   - Safety guards reject the run before writing: roster collapse over 50%,
-     surname-query failure rate over 10%, name-extraction watchdog breach, or
-     photo pruning that would delete over 50% of the cache in one pass.
-   - Rebooking rule: if a known inmate's list-row admit date differs from the
-     stored booking date, the detail page is force-refetched so the newest
-     booking photo wins. Corrupt fresh photo bytes never overwrite a good
-     cached photo.
-2. **Cincinnati Open Data** (same sweep run): calls for service (rolling
-   30 days, 1 h cache), police CFS long-term feed, reported shootings
-   (6 h cache), plus a supplemental registry (traffic stops, pedestrian
-   stops, citizen complaints, use-of-force incidents). Collapse guards warn
-   but never block the roster write.
-3. **Dispatch-to-arrest correlation** (`scraper/correlate.py`): runs offline on
-   local files, no network. 60-minute matching window, confidence floor 0.45.
-   Candidate pairs only; join data is not shown on public profile pages.
-4. **Case-law cache** (weekly, separate workflow): pulls Ohio appellate
-   opinions via CourtListener for the top 30 ORC sections on the active
-   roster. Sundays 06:00 UTC.
-5. **Build** (`web/build.py`, Jinja2, sequential): compiles `docs/` -
-   searchable index, per-inmate profile pages, stats, bond-disparity,
-   safety, court/schedule views, statute directory, RSS/Atom feeds
-   (`feed.xml`, `booked.xml`, `released.xml`), `search.json` client index,
-   `robots.txt`, `CNAME`, `.well-known/security.txt`, and `SHA256SUMS`.
+Corrections, sealing, or removal requests: https://github.com/AICincy/HCJC/issues
 
-### Publishing
+License: MIT
 
-GitHub Actions builds and deploys a verified `docs/` artifact from `main`
-on every push through `.github/workflows/pages.yml`. The custom domain is
-www.aretheyinjail.com (`docs/CNAME` in the generated artifact). Note for
-local builds: `docs/CNAME` is only written when the `JCSTREAM_CNAME` env var
-is set; `web/build.py` preserves it and other non-generated files across the
-output swap.
+## Architecture
 
-### Evidence and integrity
+### Scraper
 
-- **WAF block log** (`data/waf_block_log.json`, published at
-  `/data/waf_block_log.json`): append-only, each row SHA-256-linked to the
-  previous one. Verified by `scraper/verify_block_log.py` and re-verified in
-  CI on every run. **Never edit, rewrite, or truncate this file by hand.** It is legal evidence, not
-  a cache.
-- **Change history**: `data/changelog.json` capped at 10,000 entries.
-  `data/anon_changelog.json` scrubs names and IDs after 7 days and compacts
-  entries older than 365 days into monthly summaries.
-- **Egress evidence** (`data/egress_evidence.json`): runner IP recorded during
-  blocks to show they target cloud execution infrastructure.
-- **Freeze alarm**: if the roster goes stale past 6 hours, the sweep workflow
-  opens (and dedupes) a GitHub issue automatically.
+The primary sweep entry point is:
 
-### Automation
+    python -m scraper.sweep
 
-| Workflow | Trigger | What it does |
+It reads the surname list from data/surnames.txt, queries the HCSO inmate-search endpoint, deduplicates list rows, fetches detail pages for new or stale inmates, caches booking photos, and persists data/current.json plus change logs.
+
+The HCSO client uses 16 worker threads, a 0.5 second per-worker crawl delay, one retry, and exponential WAF backoff capped at 30 seconds. The sweep also has health guards that keep the last-good roster when list or detail retrieval is materially degraded.
+
+The sweep has a 20-minute freshness skip-gate and a 22-minute detail-phase wall-clock cap. The GitHub Actions workflow is scheduled hourly with cron 0 * * * *; GitHub Actions delivery is best-effort and can be much less frequent in practice.
+
+The anonymized event feed is data/anon_changelog.json. It keeps identifying fields for seven days, then strips them and eventually compacts old rows into monthly summaries.
+
+### Static build
+
+The site builder is web/build.py and writes to docs/ by default.
+
+A build produces the static site, per-inmate pages, search index, feeds, court/reference pages, transparency data, and published JSON under docs/data/.
+
+The build is deterministic for committed inputs. It uses an output-directory swap and preserves CNAME plus the repository's explicitly preserved review file across that swap.
+
+A local build changes tracked generated files, so use an alternate output directory when inspecting a build without intending to update docs/.
+
+### Backend
+
+The backend lives under backend/ and contains:
+
+    GET /health
+
+    GET /me
+
+/health is unauthenticated. /me requires a verified user JWT through @supabase/server.
+
+The backend does not define application tables or public-site rendering routes.
+
+## Prerequisites
+
+### Python
+
+Python 3.13 or newer.
+
+The CI matrix currently runs Python 3.13 and 3.14. The pinned project dependencies are:
+
+    httpx==0.28.1
+    selectolax==0.4.11
+    pydantic==2.13.5
+    jinja2==3.1.6
+    defusedxml==0.7.1
+    Pillow==12.3.0
+
+Development tools are pinned separately:
+
+    pytest==9.1.1
+    ruff==0.16.7
+    mypy==2.3.1
+
+### Node.js
+
+The backend declares Node >=20. Current CI uses Node 22. Use Node 22 locally to match CI and the current @supabase/server support baseline.
+
+Required system tools for common workflows are:
+
+- Git
+- npm
+- curl for shell-based HTTP checks and some operational scripts
+- gh for scripts or runbooks that interact with GitHub through the CLI
+
+No database is required for the public-site build.
+
+## Installation and setup
+
+### Python environment
+
+From the repository root:
+
+    git clone https://github.com/AICincy/HCJC.git
+    cd HCJC
+    python3.13 -m venv .venv
+    .venv/bin/python -m pip install --upgrade pip
+    .venv/bin/pip install -r requirements.txt
+    .venv/bin/pip install ruff==0.16.7 mypy==2.3.1
+
+An editable development install is also supported:
+
+    .venv/bin/pip install -e ".[dev]"
+
+### Backend environment
+
+    cd backend
+    npm ci
+    cp .env.example .env
+
+The backend reads these variables:
+
+    SUPABASE_URL
+    SUPABASE_PUBLISHABLE_KEY
+    SUPABASE_JWKS_URL
+    SUPABASE_SECRET_KEY
+
+The secret key is sensitive and must not be committed or logged. GitHub Actions supplies the secret through the repository secret named JCSTREAM_SUPABASE_SECRET_KEY.
+
+Start the local backend with:
+
+    npm run start:local
+
+The default listener is http://0.0.0.0:8787. HOST and PORT can be set for local runs.
+
+## Environment variables
+
+The source tree reads the following deployment/runtime variables.
+
+### Site build
+
+    JCSTREAM_SITE_BASE_URL
+    JCSTREAM_SITE_URL
+    JCSTREAM_CNAME
+    JCSTREAM_GISCUS_REPO
+    JCSTREAM_GISCUS_REPO_ID
+    JCSTREAM_GISCUS_CATEGORY
+    JCSTREAM_GISCUS_CATEGORY_ID
+    HCJC_TAB_FEEDS_DIR
+
+JCSTREAM_CNAME controls the generated docs/CNAME value. The default tab-feed location is outside the repository under a sibling firecrawl-zips directory; set HCJC_TAB_FEEDS_DIR when those build inputs are stored elsewhere.
+
+### Scraper
+
+    JCSTREAM_USER_AGENT
+    JCSTREAM_CRAWL_DELAY
+    JCSTREAM_HTTP_PROXY
+    JCSTREAM_CAPTURE_EGRESS
+
+JCSTREAM_CAPTURE_EGRESS=1 enables the optional egress-IP evidence snapshot when the sweep records a block. JCSTREAM_HTTP_PROXY is an explicit proxy configuration; the project does not rotate proxies automatically to evade source-side blocks.
+
+JCSTREAM_FORCE_SWEEP exists in scraper/sweep_skip.py, but the current scraper/sweep.py entry point implements its own freshness gate and does not consult that helper. Do not rely on JCSTREAM_FORCE_SWEEP to bypass the production sweep gate.
+
+### GitHub automation
+
+    GITHUB_TOKEN
+    GITHUB_REPOSITORY
+
+These are used by automation such as the freeze/staleness alert paths. ISSUE_BODY, ISSUE_NUMBER, ISSUE_SUBMITTER, and ISSUE_URL are consumed by the issue-ingestion workflow when GitHub supplies them.
+
+## Usage
+
+### Inspect sweep options
+
+    .venv/bin/python -m scraper.sweep --help
+
+Supported flags:
+
+    --surnames PATH
+    --max-surnames N
+    --refresh-known
+    --dry-run
+    -v / --verbose
+
+The default surname source is data/surnames.txt.
+
+The current dry-run mode skips current.json/changelog persistence, but detail fetching can still write booking photos, and block evidence can still be appended. Treat it as an operational test mode, not a filesystem-free simulation.
+
+### Run a limited sweep
+
+A limited sweep still contacts the live HCSO service:
+
+    .venv/bin/python -m scraper.sweep --max-surnames 3
+
+Use the full surname file for a normal sweep:
+
+    .venv/bin/python -m scraper.sweep
+
+### Open Data feeds
+
+List configured feeds:
+
+    .venv/bin/python -m scraper.open_data_feeds --list
+
+The main feed refresh commands are also available directly:
+
+    .venv/bin/python -m scraper.cfs --help
+    .venv/bin/python -m scraper.cfs_pdi --help
+    .venv/bin/python -m scraper.shootings --help
+
+The current defaults are 30 days of data for the CFS feeds, 30 days for reported shootings, one hour for the CFS cache, and six hours for the shootings cache.
+
+### Static site build
+
+For a local build without replacing the committed docs/ directory:
+
+    .venv/bin/python -m web.build --out /tmp/hcjc-site
+
+For the repository's normal generated output:
+
+    JCSTREAM_SITE_BASE_URL="" JCSTREAM_CNAME=www.aretheyinjail.com .venv/bin/python -m web.build
+
+Be aware that web.build also updates data/history.json as part of the build.
+
+If court-reference tab feeds are unavailable, the builder fails closed for those inputs and can render the affected sections empty while the overall build still exits successfully. Set HCJC_TAB_FEEDS_DIR to the directory containing the required feeds when they are available.
+
+### Verify published JSON
+
+The public-data verifier expects the repository root as source context and the generated site as the root being checked:
+
+    .venv/bin/python scripts/verify_public_data.py --root /tmp/hcjc-site --source-root .
+
+### Verify the WAF evidence chain
+
+    .venv/bin/python -m scraper.verify_block_log
+
+Do not hand-edit data/waf_block_log.json. It is a hash-chained evidence file.
+
+### Summarize operational telemetry
+
+    .venv/bin/python scripts/summarize_telemetry.py
+
+### ORC enrichment
+
+Normalize and inspect the current ORC catalog with:
+
+    .venv/bin/python -m scraper.update_orc_offenses
+
+The source catalog is data/orc_offenses.json. scraper/orc.py normalizes subsection-style inputs such as 2925.11A to the base section 2925.11 before lookup.
+
+### Dispatch correlation
+
+    .venv/bin/python -m scraper.correlate
+
+This job is offline and writes its correlation output under the gitignored private/ tree.
+
+### Court-law cache
+
+scripts/refresh_caselaw.py is run by the scheduled GitHub Actions workflow. It refreshes the ORC case-law cache from CourtListener for the top active sections; it is not part of the normal sweep.
+
+## Testing and validation
+
+### Full test suite
+
+    .venv/bin/python -m pytest -q
+
+### Lint
+
+    .venv/bin/ruff check .
+
+### Type checking
+
+The CI type-check target is:
+
+    .venv/bin/mypy scraper web
+
+Running bare mypy also checks scripts and tests and is therefore a broader check than the CI gate.
+
+### Dependency audit
+
+    .venv/bin/pip-audit -r requirements.txt
+
+pip-audit is a CI tool; install it locally when you want to reproduce that gate.
+
+### Syntax checks
+
+Backend:
+
+    cd backend
+    npm ci
+    node --check src/index.js
+
+### Backend smoke test
+
+The CI smoke contract is:
+
+    SUPABASE_URL=https://ci-smoke.invalid.supabase.co     SUPABASE_PUBLISHABLE_KEY=ci-smoke-publishable-key     SUPABASE_JWKS_URL=https://ci-smoke.invalid.supabase.co/auth/v1/.well-known/jwks.json     npm run start:local
+
+Then verify /health returns {"ok":true}. The smoke test does not require a real Supabase project.
+
+### Test the repository build contract
+
+The committed docs/ tree is generated output. Before replacing it, build to a temporary output and compare the generated tree with the checked-in tree.
+
+### Test the remediation
+
+The current anonymized-changelog remediation is documented separately:
+
+    python deploy_fix.py -v
+
+The deployment flow never pushes to GitHub. See README_DEPLOY.md for its safety gates and rollback behavior.
+
+## Workflows
+
+The primary GitHub Actions workflows are:
+
+| Workflow | Trigger | Purpose |
 |---|---|---|
-| `sweep.yml` | cron `*/15 * * * *` (best-effort) | Full sweep: HCSO roster, open data, correlate, freeze check, build, commit to main |
-| `ci.yml` | push / pull request | ruff, mypy (`scraper`, `web`), pytest, pip-audit, WAF-chain verify, smoke build from empty data, CNAME check |
-| `lint.yml` | branch pushes / pull requests | Fast ruff + pytest feedback on side-branch pushes (the gap `ci.yml` leaves); full gate stays in `ci.yml` |
-| `live-parity.yml` | Mondays 04:40 UTC | Probe the live site against a fresh build: published JSON URL contract plus HTML freshness (live pages must carry the roster-vintage stamp within `--max-lag-hours` of the tip) |
-| `refresh_caselaw.yml` | Sundays 06:00 UTC | Refresh `data/orc_caselaw.json` from CourtListener, commit if changed |
-| `ingest_case_data.yml` | issue labeled `case-data` | Parse issue body into `data/courtclerk_cases.json` |
-| `clerk_pra_packets.yml` | **manual dispatch only** | Build *draft* ORC 149.43 request letters as workflow artifacts. A human fills in the sender block and sends them. Nothing is sent or committed automatically. |
-| `codeql.yml` | Tuesdays | CodeQL security scan |
+| sweep.yml | hourly schedule plus manual dispatch | scrape, refresh feeds, correlate, build, commit generated data/docs, monitor source availability |
+| ci.yml | push to main, excluding data/docs-only changes | main-branch verification: ruff, mypy, pytest, dependency audit, evidence verification, smoke/build checks |
+| lint.yml | side-branch pushes and pull requests | fast ruff + pytest feedback |
+| staleness-watchdog.yml | scheduled | independent freshness/freeze/deploy-staleness checks |
+| pages.yml | secondary verified-artifact path | builds and deploys a Pages artifact; current live settings use branch serving |
+| rebuild.yml | manual dispatch | rebuilds generated data/docs |
+| refresh_caselaw.yml | scheduled | refreshes ORC case law |
+| archive-evidence.yml | monthly | creates independently downloadable evidence archives |
+| ingest_case_data.yml | issue workflow | ingests human-submitted court data |
+| clerk_pra_packets.yml | manual dispatch | produces draft public-record request letters |
+| codeql.yml | scheduled | security scanning |
 
-**About the sweep schedule:** the cron fires every 15 minutes, but GitHub
-Actions delivery is best-effort with observed gaps of 2-5 hours
-(noted in `sweep.yml` itself). Observed 2026-09-21: runs landed at 06:17,
-13:05, 18:39, 22:13 UTC (gaps of roughly 3.5-7 hours). The 20-minute
-skip-gate means back-to-back runs never double-scrape. Treat "every 15
-minutes" as the *schedule*, not the *delivery*.
+The repository's current live Pages configuration serves the committed docs/ tree from the branch. pages.yml is a secondary verified-artifact deployment path, not the current source of truth for the live site.
 
-## Tech stack
+## Data and privacy model
 
-- Python >= 3.13 (CI matrix 3.13/3.14; workflows run 3.14)
-- `httpx` (synchronous, thread-pooled - not async), `selectolax` (CSS-selector
-  HTML parsing), `pydantic` 2 (record validation), `jinja2` 3 (templates),
-  `Pillow` 12 (photo normalization)
-- `ruff` (lint/format), `mypy` (type checks on `scraper` and `web`),
-  `pytest` (702 tests as of 2026-09-21)
+The source-of-truth files are under data/.
 
-## Local development
+    data/current.json
+    data/changelog.json
+    data/anon_changelog.json
+    data/takedowns.json
+    data/orc_offenses.json
+    data/history.json
+    data/waf_block_log.json
 
-```sh
-git clone https://github.com/AICincy/HCJC.git
-cd HCJC
-python3.13 -m venv ~/workspace/.venvs/hcjc
-~/workspace/.venvs/hcjc/bin/pip install -r requirements.txt
-```
+current.json contains the active roster. changelog.json contains the recent rolling event history. anon_changelog.json keeps aggregate event information after seven days while removing identifying fields. takedowns.json is enforced at write boundaries so sealed records are not reintroduced by a scrape or changelog write.
 
-Run the test suite (the `TMPDIR` override matters: `/tmp` is a small tmpfs
-on some hosts and pytest temp dirs can exhaust it):
+The public site does not archive released individuals as profile pages. Long-term aggregate history is retained separately.
 
-```sh
-TMPDIR=~/tmp-pytest ~/workspace/.venvs/hcjc/bin/python -m pytest -q
-```
+## Repository constraints
 
-Build the static site (same `TMPDIR` caveat):
+- Run sweep and build commands from the repository root unless a command explicitly documents another working directory.
+- Do not hand-edit the WAF evidence log.
+- Do not use proxy rotation or other mechanisms intended to evade source-side blocking.
+- Do not use git add -A in automation that owns only a subset of generated files.
+- Do not commit credentials or backend .env files.
+- Treat data/ and docs/ changes as generated artifacts unless the task explicitly requires editing their source inputs.
 
-```sh
-PYTHONPATH=. TMPDIR=~/tmp-pytest ~/workspace/.venvs/hcjc/bin/python web/build.py
-```
+## Legal and operational posture
 
-Lint and type-check:
+The project mirrors public records and publishes a statement that an arrest is not a conviction. It is not intended to be a consumer reporting agency or a consumer report under the project's stated policy. Corrections, sealing, and removal requests are handled through the GitHub issue tracker.
 
-```sh
-~/workspace/.venvs/hcjc/bin/ruff check .
-~/workspace/.venvs/hcjc/bin/mypy scraper web
-```
+When HCSO blocks or degrades automated access, the system records evidence and keeps the last-good roster. It does not rotate through egress addresses to evade the source-side control.
 
-Verify the WAF evidence chain:
+## Key paths
 
-```sh
-PYTHONPATH=. ~/workspace/.venvs/hcjc/bin/python -m scraper.verify_block_log
-```
-
-Run a sweep manually (hits the live HCSO site; be polite, keep defaults):
-
-```sh
-PYTHONPATH=. ~/workspace/.venvs/hcjc/bin/python -m scraper.sweep --help
-```
-
-Hard rules for local work:
-
-- Do not hand-edit `data/waf_block_log.json`. It is append-only evidence;
-  breaking the SHA-256 chain invalidates the whole log.
-- Do not delete `docs/CNAME`; the Pages build writes it into the deployment
-  artifact when `JCSTREAM_CNAME` is set.
-- Sweeps commit source data to `main`; Pages builds and deploys the verified
-  artifact from `main`. Push only with approval.
-
-## Legal and ethical posture
-
-- **Basis (project's stated position):** the source records are kept by a
-  public office. A requester's right to inspect and copy those records from
-  the public office is governed by R.C. 149.43, which imposes duties on the
-  public office or person responsible for public records. It does not license,
-  restrict, or otherwise govern reuse of disclosed public-record facts by this
-  independent project.
-- **Mirror, not archive:** when HCSO drops a record, it drops off this site
-  in the next update cycle. There is no public historical archive of
-  released individuals (aggregated anonymized statistics are retained).
-- **Presumption of innocence:** every profile and the site footer state that
-  arrest is not conviction.
-- **FCRA:** this site does not furnish consumer reports and is not offered as
-  a consumer reporting agency as those terms are defined in 15 U.S.C. 1681a(d)
-  and 1681a(f). Do not use the data as a factor in determining a person's
-  eligibility for credit, insurance, employment, housing, tenant screening, or
-  any other purpose described in 15 U.S.C. 1681b. FCRA coverage is determined
-  by those statutory definitions, not by this notice.
-- **No fee, ever:** corrections, sealing/expungement removals, and privacy
-  requests are free. Open an issue.
-- **No-index:** every page carries `<meta name="robots"
-  content="noindex, noarchive">` and `robots.txt` disallows all crawling.
-  Inmate pages expose only site-level OpenGraph tags, never per-profile
-  social preview cards.
-- **Document, don't evade:** when firewalls block the pipeline, the block is
-  logged as evidence. No proxy rotation, no evasion.
-
-## Key files
-
-| Path | What it is |
+| Path | Purpose |
 |---|---|
-| `data/current.json` | Active roster snapshot (1,213 inmates as of 2026-09-22) |
-| `data/changelog.json` | Booking/release/change events, capped at 10,000 |
-| `data/anon_changelog.json` | Anonymized long-term history (PII scrubbed after 7 days) |
-| `data/waf_block_log.json` | Append-only SHA-256-chained block evidence (137,807 records as of 2026-09-22), copied into the Pages artifact |
-| `config/public-data-manifest.json` | Published JSON paths, canonical sources, publication modes, and privacy contract |
-| `docs/search.json` | Compressed client-side search index |
-| `docs/inmate/` | Per-profile static pages (1,213 as of 2026-09-22) |
-| `docs/photos/` | Booking photos referenced by the live snapshot (1,126 of 1,213 as of 2026-09-22) |
-| `scraper/sweep.py` | Sweep orchestrator |
-| `scraper/client.py` | HCSO HTTP client (16 workers, 0.5 s delay) |
-| `scraper/sweep_guards.py` | Health gates and WAF-stub detection |
-| `scraper/freeze_alert.py` | 6-hour staleness alarm |
-| `web/build.py` | Static site builder |
+| scraper/sweep.py | primary HCSO sweep orchestrator |
+| scraper/client.py | HCSO HTTP client, concurrency and retry policy |
+| scraper/sweep_guards.py | list/detail health guards |
+| scraper/orc.py | ORC normalization and lookup |
+| scraper/store.py | JSON persistence, changelog, anonymization, takedown enforcement |
+| web/build.py | deterministic static-site builder |
+| web/classify.py | charge classification and display helpers |
+| scripts/verify_public_data.py | published JSON contract verifier |
+| scripts/summarize_telemetry.py | operational health summary |
+| data/surnames.txt | A-Z surname inputs |
+| config/public-data-manifest.json | public JSON compatibility and privacy contract |
+| backend/src/index.js | Supabase-backed Node service |
+| SECURITY.md | vulnerability reporting policy |
 
-## Glossary
+## Operational remediation
 
-- **HCSO**: Hamilton County Sheriff's Office, the roster source.
-- **ORC**: Ohio Revised Code.
-- **PRA**: Public Records Act (ORC 149.43).
-- **WAF**: Web Application Firewall; the layer that throttles or blocks
-  automated requests from HCSO's side.
-- **Skip-gate**: the 20-minute freshness check that lets a sweep run exit
-  without scraping when data is already fresh.
-- **Freeze alarm**: the 6-hour staleness threshold that files a GitHub issue.
-- **Charge tier**: severity ranking (felonies F1-F5, misdemeanors M1-M4, then
-  minor misdemeanor MM) used for sorting and color encoding.
-- **Hash chain**: each evidence-log row embeds the SHA-256 of the previous
-  row, making silent edits or deletions detectable.
+The repository now includes a specific deployment flow for the anonymized-changelog tagging defect.
 
-## Internals (verified against the code 2026-09-20)
-
-- **Detail-page name parser** (`scraper/parsers.py`): 5-tier fallback order --
-  heading tags, `og:title`, container text, labeled cell, `<title>`.
-- **Photo extractor** (`scraper/parsers.py`): prefers the photo URL, falls
-  back to base64-decoded bytes; validates the JPEG start-of-image marker
-  (`FF D8 FF`) because HCSO declares `image/png` but serves JPEG bytes.
-- **Sentinel-date handling** (`web/classify.py`): HCSO's no-date sentinel is
-  exactly `1/1/70` (Unix epoch 0) and is treated as unknown; `_display_date`
-  additionally blanks dates more than 15 years in the past. Far-future dates
-  are surfaced, not hidden (C-10). Two-digit years pivot per Python `%y`
-  (69-99 to 19XX); dates more than a year in the future are rejected as
-  data-entry garbage (C-5).
-- **Court calendar** (`web/shape/court.py`): buckets are today / tomorrow /
-  this_week / this_month; `_next_court_date` returns the earliest future
-  charge date, falling back to the most recent past date (labeled "Last known
-  court date" on profile pages, D-1).
-- **Bond stats** (`web/shape/bond.py`): spread is the Q3/Q1 interquartile
-  ratio; an individual's percentile is the fraction of peer bonds below
-  theirs (`below / len(peers)`).
-- **Clerk case matching** (`scraper/case_match.py`, `scraper/courtclerk.py`):
-  charges carry `common_pleas_case` / `municipal_case` fields; there is no
-  case-number-based court-category inference in the current code.
-- **Dispatch geocoding** (`web/dispatch.py`): the CPD feed rows arrive with
-  `latitude_x` / `longitude_x` columns already populated; the build maps them
-  to compact `la`/`lo` keys for the homepage map. No address geocoding is
-  performed locally.
-- **Egress evidence** (`scraper/egress_ip.py`, gated on
-  `JCSTREAM_CAPTURE_EGRESS=1`): on a block, snapshots the runner's egress IP
-  and checks it against GitHub's published Actions IP ranges, recording
-  `runner_ip_in_actions_range`.
-- **Low-volume bypass** (`scraper/sweep_guards.py`): the name-extraction and
-  detail-degraded watchdogs are bypassed below minimum sample counts
-  (`DETAIL_WATCHDOG_MIN_SAMPLE`, `DETAIL_DEGRADED_MIN_SAMPLE`) so a
-  first/tiny run is not failed by its own guards.
+See README_DEPLOY.md for the operator runbook and DEPLOYMENT_SPEC.md for the recovery contract.
