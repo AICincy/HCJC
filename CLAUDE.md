@@ -225,29 +225,35 @@ The "pages build and deployment" run occasionally sits in
 `deployment_queued` for many minutes while githubstatus.com says Pages is
 operational. This is GitHub-side queueing. Do not chase it: the artifact
 is already built, the site keeps serving the previous deploy, and the next
-sweep (~20-45 min) triggers a fresh deploy that supersedes the stuck one.
+sweep triggers a fresh deploy that supersedes the stuck one.
 Only investigate if the live `Generated` timestamp lags main by more than
 two sweep cycles.
 
-### Pages deploy: branch-serving, and the failed Actions experiment (2026-07-04)
+### Pages deploy: branch-serving is the live path (as of 2026-09-24)
 
-Pages serves `docs/` directly via Settings > Pages > Source = "Deploy from a
-branch". Every push to main (sweep commits, PR merges) triggers GitHub's
-built-in `pages-build-deployment`; the push is the deploy. That built-in flow
-intermittently fails with `##[error]Deployment failed, try again later`, a
-GitHub Pages backend rejection (~10 on 2026-07-03/04). Those failures are
-transient and self-heal: the next sweep's push supersedes the failed deploy,
-so the live site stays current. If one blocks something urgent, re-run the
-failed job (`rerun_failed_jobs`).
+Pages currently serves `docs/` via Settings > Pages > Source = "Deploy from a
+branch" (`build_type=legacy`). Every push to main triggers GitHub's built-in
+`pages-build-deployment`; the committed `docs/` tree is the live site.
 
-Do NOT migrate to an Actions-based deploy (`.github/workflows/pages.yml` +
-Source = "GitHub Actions") to "fix" this. It was tried and reverted the same
-day (2026-07-04): `upload-pages-artifact` succeeded but `actions/deploy-pages`
-failed with the identical "Deployment failed, try again later" on isolated,
-collision-free deploys, twice in a row, leaving the site unable to publish at
-all. Branch-serving's self-healing intermittent failure is more reliable than
-the Actions path was. The failure is GitHub-side, not a repo defect;
-concurrency control does not address it.
+`sweep.yml` and `rebuild.yml` MUST build into `docs/` (default out) and commit
+both `data/` and `docs/`. A `/tmp`-only build that commits only `data/` leaves
+the live site frozen on the last committed `docs/` skeleton while main's
+roster stays current. That is the real root cause behind the recurring
+"Site deploy is stale" alerts (issues #483, #487, #496), not a failed
+`pages-build-deployment` job. Those jobs often report success while publishing
+the stale skeleton.
+
+`pages.yml` still builds a verified artifact and can deploy when the Pages
+source is "GitHub Actions". Do not flip `build_type` from this agent: the
+Pages settings API requires admin, and the 2026-07-04 experiment left the site
+unable to publish when Actions deploy failed GitHub-side. Keep branch-serve
+working; treat `pages.yml` as a secondary path until an admin confirms the
+source flip and a green Actions deploy.
+
+If a `pages-build-deployment` run itself fails with
+`##[error]Deployment failed, try again later`, re-run the failed job
+(`rerun_failed_jobs`). Transient GitHub-side rejections self-heal on the next
+successful sweep push that includes a fresh `docs/`.
 
 ### Optional features (owner-side setup, not something I can do from here)
 

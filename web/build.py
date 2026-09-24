@@ -1,10 +1,11 @@
 """Render the static JCStream site from data/current.json + data/changelog.json.
 
-Output goes to ``docs/`` (``DEFAULT_OUT``), which GitHub Actions uploads as
-the verified GitHub Pages deployment artifact. The sweep can render into a
-temporary output while committing only source data. build() renders into a
-temp sibling dir and swaps it into place, so a render failure leaves the
-last-good output intact.
+Output goes to ``docs/`` (``DEFAULT_OUT``). With Pages still on legacy
+branch-serve (``build_type=legacy``), the committed ``docs/`` tree is the live
+site: sweep and rebuild must build into ``docs/`` and commit it. ``pages.yml``
+also uploads ``docs/`` as a verified Actions artifact once the repo source is
+flipped to workflow. build() renders into a temp sibling dir and swaps it into
+place, so a render failure leaves the last-good output intact.
 """
 
 from __future__ import annotations

@@ -61,3 +61,25 @@ def test_publisher_still_refuses_merge_fallback() -> None:
     script = (REPO_ROOT / "scripts" / "commit_generated_changes.sh").read_text(encoding="utf-8")
     assert "git rebase --abort" in script
     assert "refusing merge fallback" in script
+
+
+def test_branch_serve_publishers_commit_docs() -> None:
+    """Legacy Pages publishes the committed docs/ tree; publishers must write it.
+
+    Issue #496: sweep/rebuild built into /tmp and committed only data/, so every
+    pages-build-deployment "success" republished the frozen docs/ skeleton while
+    main's roster stayed current. Guard both the build out path and the commit
+    path list.
+    """
+    for name in ("sweep.yml", "rebuild.yml"):
+        text = (REPO_ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8")
+        assert "python -m web.build --out /tmp/" not in text, (
+            f"{name}: must build into docs/ (default out), not a discarded /tmp tree"
+        )
+        assert "python -m web.build" in text, f"{name}: missing site build step"
+        # The publisher argv must include docs/ so the branch-serve deploy
+        # receives the rebuilt site, not only source data/.
+        assert re.search(
+            r"commit_generated_changes\.sh\s+\S+\s+\"[^\"]+\"\s+.*\bdocs/",
+            text,
+        ), f"{name}: commit_generated_changes.sh must publish docs/"

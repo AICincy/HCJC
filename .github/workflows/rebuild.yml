@@ -38,10 +38,11 @@ jobs:
         env:
           JCSTREAM_SITE_BASE_URL: ""
           JCSTREAM_CNAME: www.aretheyinjail.com
-        run: python -m web.build --out /tmp/jcstream-docs-build
-      - name: Commit generated source data
+        # Write into docs/ so legacy branch-serve publishes the rebuilt site.
+        run: python -m web.build
+      - name: Commit generated source data and docs
         env:
           GIT_COMMIT_NAME: jcstream-bot
           GIT_COMMIT_EMAIL: noreply@github.com
         run: |
-          bash scripts/commit_generated_changes.sh main "data: rebuild $(date -u +%Y-%m-%dT%H:%MZ)" data/
+          bash scripts/commit_generated_changes.sh main "data: rebuild $(date -u +%Y-%m-%dT%H:%MZ)" data/ docs/
