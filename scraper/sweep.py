@@ -38,8 +38,8 @@ from urllib.parse import urlparse
 
 import httpx
 
-from .client import DEFAULT_CONCURRENCY, HcsoClient, make_client
 from . import orc
+from .client import DEFAULT_CONCURRENCY, HcsoClient, make_client
 from .models import Inmate, ListRow, utcnow_iso
 from .parsers import parse_detail_page, parse_list_page
 from .photos import downscale_and_save
