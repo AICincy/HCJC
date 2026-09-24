@@ -29,12 +29,14 @@ def _init_repo(tmp_path: Path) -> Path:
 
 
 def _patch_operator(monkeypatch, repo: Path) -> None:
-    monkeypatch.setattr(deploy_fix, "ROOT", repo)
-    monkeypatch.setattr(deploy_fix, "LOG_PATH", repo / ".deployment.log")
-    monkeypatch.setattr(deploy_fix, "INCIDENT_PATH", repo / ".incident_summary.json")
-    monkeypatch.setattr(deploy_fix, "BACKFILL", repo / "scripts" / "backfill_anon_changelog.py")
+    monkeypatch.setattr(deploy_fix, "REPO_ROOT", repo)
+    monkeypatch.setattr(deploy_fix, "DEPLOY_LOG", repo / ".deployment.log")
+    monkeypatch.setattr(deploy_fix, "INCIDENT_FILE", repo / ".incident_summary.json")
     monkeypatch.setattr(deploy_fix, "ANON_PATH", repo / "data" / "anon_changelog.json")
-    monkeypatch.setattr(deploy_fix, "FILES_TO_COMMIT", ("deploy_fix.py",))
+    monkeypatch.setattr(deploy_fix, "FIX_TARGETS", ("deploy_fix.py",))
+    monkeypatch.setattr(deploy_fix, "RUNBOOK_FILES", ())
+    monkeypatch.setattr(deploy_fix, "EXPECTED_COMMIT_FILES", {"deploy_fix.py"})
+    monkeypatch.setattr(deploy_fix, "KNOWN_ARTIFACTS", {".deployment.log"})
 
 
 def _modify_allowlisted_file(repo: Path) -> None:
@@ -42,7 +44,15 @@ def _modify_allowlisted_file(repo: Path) -> None:
 
 
 def _commit_names(repo: Path, commit: str = "HEAD") -> list[str]:
-    return [line for line in _git(repo, "show", "--format=", "--name-only", commit).stdout.splitlines() if line]
+    return [
+        line
+        for line in _git(repo, "show", "--format=", "--name-only", commit).stdout.splitlines()
+        if line
+    ]
+
+
+def _audit_log() -> deploy_fix.AuditLog:
+    return deploy_fix.AuditLog(deploy_fix.DEPLOY_LOG)
 
 
 def test_gate_2_rejects_prestaged_unrelated_file(tmp_path: Path, monkeypatch):
@@ -52,64 +62,66 @@ def test_gate_2_rejects_prestaged_unrelated_file(tmp_path: Path, monkeypatch):
     unrelated.write_text("must not ship\n", encoding="utf-8")
     _git(repo, "add", "unrelated.txt")
 
-    assert deploy_fix.gate_2_untracked_files() is False
-    assert json.loads(deploy_fix.LOG_PATH.read_text(encoding="utf-8").splitlines()[-1])["unexpected_staged"] == [
-        "unrelated.txt"
-    ]
+    clean, offenders = deploy_fix.gate_2_worktree(_audit_log())
+
+    assert clean is False
+    assert offenders == ["unrelated.txt"]
+    events = json.loads(deploy_fix.DEPLOY_LOG.read_text(encoding="utf-8"))
+    assert events[-1]["stage"] == "gate_2_worktree"
 
 
-def test_main_commits_after_noop_backfill(tmp_path: Path, monkeypatch):
+def test_commit_fix_is_idempotent_after_noop_rerun(tmp_path: Path, monkeypatch):
     repo = _init_repo(tmp_path)
     _patch_operator(monkeypatch, repo)
     _modify_allowlisted_file(repo)
 
-    monkeypatch.setattr(deploy_fix, "gate_1_backfill_decision", lambda days: ("backfill", "test"))
-    monkeypatch.setattr(
-        deploy_fix,
-        "run_backfill",
-        lambda days: {"before_nulls": 0, "after_nulls": 0, "updated": 0},
-    )
-    monkeypatch.setattr(deploy_fix, "verify_dry_run", lambda: True)
-    monkeypatch.setattr(deploy_fix, "verify_tests", lambda: True)
+    first = deploy_fix.commit_fix(_audit_log(), "test commit")
+    second = deploy_fix.commit_fix(_audit_log(), "test commit")
 
-    assert deploy_fix.main([]) == 0
+    assert first == second
     assert _git(repo, "status", "--porcelain").stdout == ""
     assert _commit_names(repo) == ["deploy_fix.py"]
-    assert "success" in deploy_fix.LOG_PATH.read_text(encoding="utf-8")
 
 
-def test_main_reverts_on_verification_failure(tmp_path: Path, monkeypatch):
+def test_rollback_restores_data_and_head(tmp_path: Path, monkeypatch):
     repo = _init_repo(tmp_path)
     _patch_operator(monkeypatch, repo)
+    data_dir = repo / "data"
+    data_dir.mkdir()
+    data = data_dir / "anon_changelog.json"
+    data.write_text("before-data\n", encoding="utf-8")
+    _git(repo, "add", "data/anon_changelog.json")
+    _git(repo, "commit", "-qm", "add data")
+
+    before_head = _git(repo, "rev-parse", "HEAD").stdout.strip()
+    backup = deploy_fix.backup(data)
+    data.write_text("after-data\n", encoding="utf-8")
     _modify_allowlisted_file(repo)
+    new_head = deploy_fix.commit_fix(_audit_log(), "test mutation")
+    assert new_head != before_head
 
-    monkeypatch.setattr(deploy_fix, "gate_1_backfill_decision", lambda days: ("accept_losses", "test"))
-    monkeypatch.setattr(deploy_fix, "write_incident", lambda days: None)
-    monkeypatch.setattr(
-        deploy_fix,
-        "verify_dry_run",
-        lambda: False,
-    )
-    monkeypatch.setattr(deploy_fix, "verify_tests", lambda: True)
+    deploy_fix.rollback(_audit_log(), before_head, backup, allow=True)
 
-    assert deploy_fix.main([]) == 2
-    assert (repo / "deploy_fix.py").read_text(encoding="utf-8") == "before\n"
-    assert _git(repo, "log", "-1", "--format=%s").stdout.strip().startswith("Revert")
-    assert json.loads(deploy_fix.LOG_PATH.read_text(encoding="utf-8").splitlines()[-1])["rollback_status"] == "ok"
+    assert _git(repo, "rev-parse", "HEAD").stdout.strip() == before_head
+    assert data.read_text(encoding="utf-8") == "before-data\n"
 
 
-def test_main_reports_rollback_failure(tmp_path: Path, monkeypatch):
+def test_rollback_records_failure(tmp_path: Path, monkeypatch):
     repo = _init_repo(tmp_path)
     _patch_operator(monkeypatch, repo)
-    _modify_allowlisted_file(repo)
+    data_dir = repo / "data"
+    data_dir.mkdir()
+    data = data_dir / "anon_changelog.json"
+    data.write_text("before-data\n", encoding="utf-8")
+    backup = deploy_fix.backup(data)
 
-    monkeypatch.setattr(deploy_fix, "gate_1_backfill_decision", lambda days: ("accept_losses", "test"))
-    monkeypatch.setattr(deploy_fix, "write_incident", lambda days: None)
-    monkeypatch.setattr(deploy_fix, "verify_dry_run", lambda: False)
-    monkeypatch.setattr(deploy_fix, "verify_tests", lambda: True)
-    monkeypatch.setattr(deploy_fix, "rollback", lambda commit_sha: False)
+    def fail_git(*args, **kwargs):
+        raise subprocess.CalledProcessError(1, ["git", *args])
 
-    assert deploy_fix.main([]) == 2
-    assert (repo / "deploy_fix.py").read_text(encoding="utf-8") == "after\n"
-    result = json.loads(deploy_fix.LOG_PATH.read_text(encoding="utf-8").splitlines()[-1])
-    assert result["rollback_status"] == "fail"
+    monkeypatch.setattr(deploy_fix, "_git", fail_git)
+
+    deploy_fix.rollback(_audit_log(), "deadbeef", backup, allow=True)
+
+    events = json.loads(deploy_fix.DEPLOY_LOG.read_text(encoding="utf-8"))
+    assert events[-1]["stage"] == "rollback"
+    assert events[-1]["status"] == "failed"
