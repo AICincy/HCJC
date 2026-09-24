@@ -7,7 +7,8 @@ name: live-url-parity
 
 on:
   schedule:
-    # Monday 04:40 UTC, after several hourly sweep opportunities.
+    # Monday 04:40 UTC. Sweep cron drifts 3.5-5.5h, so this is not tied to
+    # any particular sweep; it checks whatever main holds at run time.
     - cron: '40 4 * * 1'
   workflow_dispatch: {}
 

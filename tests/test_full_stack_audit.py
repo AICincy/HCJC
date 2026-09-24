@@ -27,6 +27,7 @@ EXPECTED_WORKFLOWS = {
     "pages.yml",
     "rebuild.yml",
     "refresh_caselaw.yml",
+    "staleness-watchdog.yml",
     "sweep.yml",
 }
 
