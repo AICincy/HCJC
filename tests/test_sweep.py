@@ -929,6 +929,27 @@ def test_anon_enrichment_prefers_current_and_tolerates_unknowns(tmp_path):
     malformed.write_text("{not-json", encoding="utf-8")
     assert sweep._load_anon_offenses(malformed) == {}
 
+    malformed_entry = {
+        "offenses": {
+            "9999.99": None,
+            "2913.02": {"title": "Assault", "degree": "M1"},
+        }
+    }
+    malformed.write_text(json.dumps(malformed_entry), encoding="utf-8")
+    enrichment = sweep._anon_enrichment(
+        {},
+        {
+            "400": Inmate(
+                inmate_number="400",
+                last_name="DOE",
+                first_name="JANE",
+                charges=[Charge(orc_code="9999.99")],
+            )
+        },
+        sweep._load_anon_offenses(malformed),
+    )
+    assert enrichment["400"] == {"tier": None, "category": None}
+
 
 def test_save_changelog_and_anon_refuses_corrupt_changelog(tmp_path):
     # C-2: a corrupt changelog must not be truncated to one cycle's events.
