@@ -21,8 +21,9 @@ def _init_repo(tmp_path: Path) -> Path:
     _git(repo, "init", "-q")
     _git(repo, "config", "user.email", "test@example.invalid")
     _git(repo, "config", "user.name", "Test")
+    (repo / ".gitignore").write_text("*.log\n", encoding="utf-8")
     (repo / "deploy_fix.py").write_text("before\n", encoding="utf-8")
-    _git(repo, "add", "deploy_fix.py")
+    _git(repo, "add", ".gitignore", "deploy_fix.py")
     _git(repo, "commit", "-qm", "baseline")
     return repo
 
