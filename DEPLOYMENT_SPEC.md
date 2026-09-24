@@ -35,7 +35,8 @@ The backfill utility MUST:
 The deployment MUST:
 
 - stop on unexpected untracked files;
-- stage an explicit allow-list;
+- reject pre-staged paths outside the commit allow-list before making changes;
+- revalidate the cached index against the allow-list immediately before commit;
 - never add .mcp.json;
 - never push to a remote;
 - emit newline-delimited JSON audit records;
@@ -46,7 +47,7 @@ The deployment MUST:
 Success requires:
 
 - V1: recent null-tag count is not increased;
-- V2: the configured sweep dry-run exits successfully and recent null tags do not increase;
+- V2: the configured sweep dry-run runs from a detached temporary Git worktree, exits successfully, and recent null tags do not increase in the operator worktree;
 - V3: the complete pytest suite exits 0.
 
 Any failure after commit causes a revert commit and exit 2.
