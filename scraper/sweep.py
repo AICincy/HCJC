@@ -12,7 +12,7 @@ Each invocation:
 
 Designed to fit a ~25-minute budget at Crawl-delay: 0.5s per worker with
 16-way concurrency (scraper/client.py: DEFAULT_CRAWL_DELAY,
-DEFAULT_CONCURRENCY), so it can run on the `*/15 * * * *` GitHub Actions
+DEFAULT_CONCURRENCY), so it can run on the hourly GitHub Actions
 cron (with a 20-minute skip-gate to avoid back-to-back runs; actual
 delivery is best-effort).
 """
@@ -38,9 +38,9 @@ from urllib.parse import urlparse
 
 import httpx
 
+from . import orc
 from .client import DEFAULT_CONCURRENCY, HcsoClient, make_client
 from .models import Inmate, ListRow, utcnow_iso
-from .orc import DEGREE_ORDER, normalize_code
 from .parsers import parse_detail_page, parse_list_page
 from .photos import downscale_and_save
 from .store import (
@@ -573,67 +573,54 @@ def _fetch_details(
 def _anon_enrichment(
     previous: dict[str, Inmate],
     current: dict[str, Inmate],
-    offenses_path: Path,
-) -> dict[str, dict]:
-    """Build ``{inmate_number: {"tier", "category"}}`` for the anon feed.
+    offenses: dict[str, dict] | Path,
+) -> dict[str, dict[str, str | None]]:
+    """Build anon-feed enrichment for every inmate in either roster.
 
-    Two faults in the inlined version of this logic silently nulled the
-    aggregate signal on ~1,300 changelog rows. Both are fixed here:
-
-    1. **Released inmates were never tagged.** The loop covered ``current``
-       only, but a ``released`` event is by definition about someone who is
-       no longer on the roster — so every released row was written with
-       ``tier=None``. The previous roster is the last place their charges
-       existed, so merge both. ``current`` wins on conflict: it is fresher,
-       and a re-booking between sweeps must not be tagged from a stale
-       snapshot.
-    2. **Subsection codes never matched.** Booking rows carry codes like
-       ``2925.11A`` / ``2903.02A1`` while ``orc_offenses.json`` is keyed by
-       base section (``2925.11``). The raw lookup missed 42% of the roster
-       (58.0% hit rate vs 98.8% normalized). Route through
-       ``normalize_code``, which every other consumer already uses.
-
-    A missing degree is reported as ``None``, not ``UNKNOWN`` (``"?"``):
-    the anon feed is aggregate statistics, and ``"?"`` would be counted as a
-    real tier by every downstream consumer. Callers that need the ``"?"``
-    sentinel use ``degree_for`` directly.
-
-    Never raises: a malformed offenses file degrades to empty tags rather
-    than taking down the sweep's finally-block.
+    Release events come from inmates present only in the previous roster, so
+    enrichment cannot be derived from current alone. Current records take
+    precedence when an inmate exists in both snapshots. ORC lookup is
+    normalized so subsection suffixes such as 2925.11A resolve to 2925.11.
+    Missing or unknown degrees are represented as None, not the internal
+    question-mark sentinel.
     """
-    offenses: dict = {}
-    if offenses_path.exists():
-        try:
-            loaded = json.loads(offenses_path.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, OSError, UnicodeDecodeError):
-            loaded = None
-        if isinstance(loaded, dict):
-            table = loaded.get("offenses")
-            if isinstance(table, dict):
-                offenses = table
-
-    def tags_for(inm: Inmate) -> dict:
-        tier = None
-        category = None
-        first_charge = inm.charges[0] if inm.charges else None
-        if first_charge:
-            code = normalize_code((first_charge.orc_code or "").strip())
-            ent = offenses.get(code) if code else None
-            if isinstance(ent, dict):
-                # A "?" placeholder degree is not a tier; keep it null so the
-                # aggregate stats don't invent a severity bucket.
-                degree = ent.get("degree")
-                tier = degree if degree in DEGREE_ORDER else None
-                category = ent.get("title") or None
-        return {"tier": tier, "category": category}
-
-    enrichment: dict[str, dict] = {}
-    # previous first so current overwrites it on conflict.
-    for inm in previous.values():
-        enrichment[inm.inmate_number] = tags_for(inm)
-    for inm in current.values():
-        enrichment[inm.inmate_number] = tags_for(inm)
+    offense_table = _load_anon_offenses(offenses) if isinstance(offenses, Path) else offenses
+    combined = dict(previous)
+    combined.update(current)
+    enrichment: dict[str, dict[str, str | None]] = {}
+    for inmate_number, inmate in combined.items():
+        tier: str | None = None
+        category: str | None = None
+        if inmate.charges:
+            first_charge = inmate.charges[0]
+            code = orc.normalize_code((first_charge.orc_code or "").strip())
+            if code:
+                entry = orc.lookup(code, offense_table)
+                if isinstance(entry, dict):
+                    raw_degree = entry.get("degree")
+                    tier = raw_degree if raw_degree and raw_degree != orc.UNKNOWN else None
+                    raw_title = entry.get("title")
+                    category = raw_title.strip() if isinstance(raw_title, str) and raw_title.strip() else None
+        enrichment[inmate_number] = {"tier": tier, "category": category}
     return enrichment
+
+
+def _load_anon_offenses(path: Path) -> dict[str, dict]:
+    """Load the ORC offense map for anon enrichment, failing closed on bad input."""
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return {}
+    if not isinstance(raw, dict):
+        return {}
+    offenses = raw.get("offenses")
+    if not isinstance(offenses, dict):
+        return {}
+    return {
+        str(code): entry
+        for code, entry in offenses.items()
+        if isinstance(code, str) and isinstance(entry, dict)
+    }
 
 
 def _save_changelog_and_anon(
@@ -657,7 +644,7 @@ def _save_changelog_and_anon(
         changelog = load_changelog(paths.changelog_path)
     except SnapshotCorruptError as e:
         # C-2: the changelog is unreadable; extending it would truncate the
-        # full history to this cycle's events. Leave the file untouched for
+        # full history to this cycles events. Leave the file untouched for
         # investigation and skip the changelog + anon-feed update this cycle.
         log.error(
             "refusing to update changelog: %s is corrupt (%s); leaving file untouched",
@@ -667,13 +654,11 @@ def _save_changelog_and_anon(
         return
     changelog.extend(events)
     save_changelog(paths.changelog_path, changelog)
-    # Phase 11: maintain the PII-expiring append-only feed.
-    save_anon_changelog(
-        paths.anon_changelog_path,
-        changelog,
-        _anon_enrichment(previous, current, paths.orc_offenses_path),
-    )
-
+    # Phase 11: maintain the PII-expiring append-only feed. Build enrichment
+    # from both snapshots so released inmates retain their last-known tags.
+    offenses = _load_anon_offenses(paths.orc_offenses_path)
+    enrichment = _anon_enrichment(previous, current, offenses)
+    save_anon_changelog(paths.anon_changelog_path, changelog, enrichment)
 
 def run(
     surnames: list[str],
