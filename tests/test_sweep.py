@@ -1,6 +1,7 @@
 """Tests for the sweep health heuristic - the guard that stops a rate-limited
 or partially-failed list sweep from being written as the live roster."""
 
+import json
 import logging
 from pathlib import Path
 from typing import Any, cast
@@ -856,6 +857,99 @@ def test_wallclock_cap_carries_forward_unfetched_inmates(tmp_path, monkeypatch):
     assert set(current) == set(previous)
     for inm in current.values():
         assert inm.last_name == "DOE"
+
+
+def test_anon_enrichment_covers_released_inmates():
+    from scraper.models import Charge
+
+    previous = {
+        "100": Inmate(
+            inmate_number="100",
+            last_name="DOE",
+            first_name="JANE",
+            charges=[Charge(orc_code="2913.02")],
+        )
+    }
+    current = {}
+    offenses = {
+        "2913.02": {"title": "Assault", "degree": "M1"},
+    }
+
+    enrichment = sweep._anon_enrichment(previous, current, offenses)
+
+    assert enrichment["100"] == {"tier": "M1", "category": "Assault"}
+
+
+def test_anon_enrichment_normalizes_subsection_codes():
+    from scraper.models import Charge
+
+    current = {
+        "200": Inmate(
+            inmate_number="200",
+            last_name="DOE",
+            first_name="JANE",
+            charges=[Charge(orc_code="2925.11A")],
+        )
+    }
+    offenses = {
+        "2925.11": {"title": "Drugs", "degree": "F5"},
+    }
+
+    enrichment = sweep._anon_enrichment({}, current, offenses)
+
+    assert enrichment["200"] == {"tier": "F5", "category": "Drugs"}
+
+
+def test_anon_enrichment_prefers_current_and_tolerates_unknowns(tmp_path):
+    from scraper.models import Charge
+
+    previous = {
+        "300": Inmate(
+            inmate_number="300",
+            last_name="DOE",
+            first_name="OLD",
+            charges=[Charge(orc_code="2913.02")],
+        )
+    }
+    current = {
+        "300": Inmate(
+            inmate_number="300",
+            last_name="DOE",
+            first_name="NEW",
+            charges=[Charge(orc_code="9999.99")],
+        )
+    }
+    known_offenses = {
+        "2913.02": {"title": "Assault", "degree": "M1"},
+    }
+
+    enrichment = sweep._anon_enrichment(previous, current, known_offenses)
+    assert enrichment["300"] == {"tier": None, "category": None}
+
+    malformed = tmp_path / "orc_offenses.json"
+    malformed.write_text("{not-json", encoding="utf-8")
+    assert sweep._load_anon_offenses(malformed) == {}
+
+    malformed_entry = {
+        "offenses": {
+            "9999.99": None,
+            "2913.02": {"title": "Assault", "degree": "M1"},
+        }
+    }
+    malformed.write_text(json.dumps(malformed_entry), encoding="utf-8")
+    enrichment = sweep._anon_enrichment(
+        {},
+        {
+            "400": Inmate(
+                inmate_number="400",
+                last_name="DOE",
+                first_name="JANE",
+                charges=[Charge(orc_code="9999.99")],
+            )
+        },
+        sweep._load_anon_offenses(malformed),
+    )
+    assert enrichment["400"] == {"tier": None, "category": None}
 
 
 def test_save_changelog_and_anon_refuses_corrupt_changelog(tmp_path):
