@@ -17,8 +17,8 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from scraper.sweep import _anon_enrichment, _load_anon_offenses
 from scraper.store import _atomic_write_text
+from scraper.sweep import _anon_enrichment, _load_anon_offenses
 
 log = logging.getLogger(__name__)
 
