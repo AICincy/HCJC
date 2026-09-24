@@ -6,8 +6,8 @@ deploy_fix.py applies and verifies the anonymized-changelog remediation. It does
 
 The flow is:
 
-1. Probe Git history for at least two data/current.json snapshots inside the recovery window.
-2. Backfill recent missing tier/category tags from those snapshots when recovery data exists.
+1. Probe Git history and the live roster for usable recovery data.
+2. Backfill recent missing tier/category tags from the best available source: historical snapshots first, with the live roster as a fallback for current/booked rows.
 3. Refuse to continue when unexpected untracked files are present.
 4. Commit only the remediation and recovery artifacts.
 5. Run the verification gates.
@@ -51,7 +51,7 @@ The data-only recovery utility can be run independently:
     python -m scripts.backfill_anon_changelog --days 7 --dry-run -v
     python -m scripts.backfill_anon_changelog --days 7 -v
 
-The utility only fills missing tier and category values on recent full rows. It does not add identifiers or reconstruct records older than the retention window.
+The utility only fills missing tier and category values on recent full rows. It prefers event-appropriate Git snapshots, then falls back to the live `data/current.json` roster for non-release events when history is incomplete. Released events still require a historical pre-release snapshot. It does not add identifiers or reconstruct records older than the retention window.
 
 ## Review and push
 
