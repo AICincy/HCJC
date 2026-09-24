@@ -139,8 +139,8 @@ cron would not reliably deliver.
 | Root cause "Pages Deployment: webhook published async; no fallback when stuck" | **Wrong.** `CLAUDE.md` already records the true cause (`/tmp`-only builds), fixed by `5790d1a16d` before this session. |
 | "208 min lag is NOT missing docs/ … is Pages deployment not yet published" | **Half right, wrong conclusion.** `docs/` was present and deployed; it was *stale*, built by pre-fix code. The 208 min is roster age from cron drift. |
 | Tier 1: "Next sweep at next hour boundary. If 23:40 UTC now, sweep runs at 00:00 (~20 min)" | **Wrong and unsafe to rely on.** No sweep ran at `00:00Z` or `01:00Z` or `02:00Z`. Observed gaps are 3.5–5.5 h. Manual dispatch is the reliable path, not waiting. |
-| Tier 2: "Owner must dispatch manually — bot token revoked, no `actions:write`" | **Not true in this session.** `gh auth status` = authenticated as `arena-ai-coding-agent[bot]`; API reads and Actions history all succeeded. |
-| "Session now CLOSED (token revoked post-merge)" | **Not true here.** See above. |
+| Tier 2: "Owner must dispatch manually — bot token revoked, no `actions:write`" | **Half right, and the operative half is correct.** `gh workflow run sweep.yml --ref main` failed with `HTTP 403: Resource not accessible by integration` on `/actions/workflows/277044658/dispatches`, so dispatch genuinely must go through the UI. The *reason* is wrong: the token is not revoked. |
+| "Session now CLOSED (token revoked post-merge)" | **Wrong.** `gh auth status` = authenticated as `arena-ai-coding-agent[bot]`. Reads, Actions history, `git push` of a branch, and `gh pr create` (PR #504) all succeeded. Only `actions:write` is absent. |
 | Success criterion "docs/ rebuilds to byte-identical (≤1s rebuild time, 0 diff)" | **Unmet as stated.** Rebuild is ~12–18 s, not ≤1 s. Byte-identity holds between two builds of the *current* code (0 diff, identical tree hash `e9794f7a…`), but committed `docs/` differed from it in 654 files until regenerated. |
 | "Document findings in issue #502" | **Blocked.** #502 and #496 are both CLOSED; #502's only run was `skipped`. Open-issue count is 0, so no `deploy_alert` alarm is latched open. |
 | "DO NOT `git push -f origin main`" | **Correct and endorsed.** Consistent with `runbooks/live-parity-failure.md` §4.3 ("Do not hand-edit `docs/` or force-push generated output") and `DECISIONS.md` (owner enabled block-force-push + block-deletion on `main`). |
@@ -175,8 +175,12 @@ limit, not evidence about the site.
      rebuilds, not §2 (recorded honestly in the test docstring).
 4. **Gates**: 803 + 4 tests pass, ruff clean, mypy clean, `verify_public_data.py`
    reports "public data manifest and source mirrors: OK".
-5. **Dispatched a sweep** to close the roster gap rather than wait on drifting
-   cron.
+5. **Attempted to dispatch a sweep** to close the roster gap rather than wait on
+   drifting cron: `gh workflow run sweep.yml --ref main` returned `HTTP 403`,
+   `Resource not accessible by integration`, on
+   `/actions/workflows/277044658/dispatches`. The bot lacks `actions:write`, so
+   dispatch is UI-only and the roster gap remains open at write time. This is the
+   one operational claim in the handoff document that was substantively correct.
 
 ## Open items not fixed here
 
@@ -224,7 +228,10 @@ DO:
 2. Run the gates: pytest -q (807), ruff check ., mypy scraper web,
    python scripts/verify_public_data.py
 3. Treat manual dispatch of sweep.yml as the reliable freshness lever; do not
-   plan around an hourly cron.
+   plan around an hourly cron. Note the bot cannot dispatch: `gh workflow run`
+   returns HTTP 403 (no `actions:write`), so it is a UI action for the owner --
+   but the bot CAN read, push branches and open PRs, so do not assume the token
+   is dead.
 4. Pick up the open items in audit/25_*.md, in priority order:
    deploy_alert's shared failure domain with sweep, then cron drift, then the
    pages.yml / CLAUDE.md contradiction.
