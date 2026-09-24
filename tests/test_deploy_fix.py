@@ -66,8 +66,8 @@ def test_gate_2_rejects_prestaged_unrelated_file(tmp_path: Path, monkeypatch):
 
     assert clean is False
     assert offenders == ["unrelated.txt"]
-    event = deploy_fix.DEPLOY_LOG.read_text(encoding="utf-8").splitlines()[-1]
-    assert json.loads(event)["stage"] == "gate_2_worktree"
+    events = json.loads(deploy_fix.DEPLOY_LOG.read_text(encoding="utf-8"))
+    assert events[-1]["stage"] == "gate_2_worktree"
 
 
 def test_commit_fix_is_idempotent_after_noop_rerun(tmp_path: Path, monkeypatch):
@@ -109,7 +109,10 @@ def test_rollback_restores_data_and_head(tmp_path: Path, monkeypatch):
 def test_rollback_records_failure(tmp_path: Path, monkeypatch):
     repo = _init_repo(tmp_path)
     _patch_operator(monkeypatch, repo)
-    data = repo / "deploy_fix.py"
+    data_dir = repo / "data"
+    data_dir.mkdir()
+    data = data_dir / "anon_changelog.json"
+    data.write_text("before-data\n", encoding="utf-8")
     backup = deploy_fix.backup(data)
 
     def fail_git(*args, **kwargs):
@@ -119,6 +122,6 @@ def test_rollback_records_failure(tmp_path: Path, monkeypatch):
 
     deploy_fix.rollback(_audit_log(), "deadbeef", backup, allow=True)
 
-    event = json.loads(deploy_fix.DEPLOY_LOG.read_text(encoding="utf-8").splitlines()[-1])
-    assert event["stage"] == "rollback"
-    assert event["status"] == "failed"
+    events = json.loads(deploy_fix.DEPLOY_LOG.read_text(encoding="utf-8"))
+    assert events[-1]["stage"] == "rollback"
+    assert events[-1]["status"] == "failed"
