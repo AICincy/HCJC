@@ -21,6 +21,7 @@ jobs:
     permissions:
       contents: read
       pages: write
+      actions: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
@@ -39,10 +40,30 @@ jobs:
         run: python scripts/verify_live_url_parity.py --site https://www.aretheyinjail.com
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b  # v5
+
+      # upload-pages-artifact creates an artifact named github-pages. Remove
+      # any artifact left by an earlier attempt before creating the replacement.
+      # This also makes full-workflow reruns safe with immutable artifacts.
+      - name: Remove stale Pages artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_ARTIFACT_NAME: github-pages
+        run: |
+          ids="$(gh api             "/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts?per_page=100&name=${PAGES_ARTIFACT_NAME}"             --jq '.artifacts | sort_by(.created_at) | .[].id')"
+
+          if [ -z "$ids" ]; then
+            exit 0
+          fi
+
+          while read -r id; do
+            [ -z "$id" ] && continue
+            gh api --method DELETE               "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}"
+          done <<< "$ids"
+
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa  # v3
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
         with:
-          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+          name: github-pages
           path: docs/
 
   deploy:
@@ -56,12 +77,29 @@ jobs:
     permissions:
       pages: write
       id-token: write
+      actions: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # A transient upload retry can leave two artifacts with the same name.
+      # Keep the newest one so deploy-pages sees exactly one match.
+      - name: Remove duplicate Pages artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_ARTIFACT_NAME: github-pages
+        run: |
+          ids="$(gh api             "/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts?per_page=100&name=${PAGES_ARTIFACT_NAME}"             --jq '.artifacts | sort_by(.created_at) | reverse | .[1:] | .[].id')"
+
+          if [ -z "$ids" ]; then
+            exit 0
+          fi
+
+          while read -r id; do
+            [ -z "$id" ] && continue
+            gh api --method DELETE               "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}"
+          done <<< "$ids"
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e  # v4
-        with:
-          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346  # v5.0.1
