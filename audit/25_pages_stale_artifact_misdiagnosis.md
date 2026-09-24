@@ -282,3 +282,76 @@ DO NOT:
 - flip Pages build_type from an agent (CLAUDE.md: admin-only, 2026-07-04
   incident)
 ```
+
+## Addendum: `CLAUDE.md` was destroyed on `main` during this session
+
+Found while integrating `main` into this branch at ~`03:45Z`. Commit `e2e378f`
+("Revise CLAUDE.md for clarity and accuracy", `03:13:19Z`) did not apply a
+revision — it **replaced the file with the text of a unified diff**:
+
+```
+--- CLAUDE.md (original - STALE)
++++ CLAUDE.md (corrected - 2026-09-24)
+@@ -137,14 +137,31 @@
+```
+
+467 lines became 72: 2 hunk headers, 41 `+` lines, 10 `-` lines, 18 context
+lines, and no leading `# ` heading. The file is a patch, not a document. All 36
+headings are gone, including four operational runbooks and both sections this
+record cites:
+
+- `### Runbook: roster frozen / "no new inmates" (HCSO WAF block)`
+- `### Pages deploy stuck in deployment_queued`
+- `### Pages deploy: branch-serving is the live path (as of 2026-09-24)` — the
+  authoritative statement of the `/tmp`-build root cause behind #483, #487, #496
+- `### Live-Parity HTML Freshness SLA (added 2026-09-24, audit 5dc39f0)`
+- `#### Deterministic Build Contract` — the contract PR #503 implemented and this
+  record verifies
+- plus `## Chain of Custody: Session IDs`, `## Hard constraints`, `### Merge
+  discipline`, `### Build artifacts`, `### Evidence-log isolation (conftest.py)`,
+  `## Review process` / `### Gemini bot reviews`
+
+Three further commits then deleted `evidence/hcso-outage-2026-09-19/`
+(`f759a84`), `DECISIONS.md` (`911f0e8`) and `skills-lock.json` (`0abd1b0`).
+Those deletions are recorded here but **not** reverted by this branch; they are
+the owner's to justify or undo. Two notes on their blast radius:
+
+- `DECISIONS.md` held the owner decisions on `main` branch protection, including
+  the block-force-push rule this record and `runbooks/live-parity-failure.md`
+  §4.3 both appeal to. That rule still exists in GitHub settings; only its
+  recorded rationale is gone.
+- `audit/16_evidence_affidavit.md` is an operator affidavit authenticating the
+  WAF-block evidence log, and `audit/18_offplatform_capture.md` /
+  `19_counsel_cover_memo.md` reference that capture work. Deleting
+  `evidence/hcso-outage-2026-09-19/` removes the artifacts those audit records
+  attest to, against the append-only evidence model `audit/24` describes.
+
+### Restoration
+
+Nothing is lost: `git show 5d90340:CLAUDE.md` returns the last good version, and
+this branch merged `origin/main` so it no longer resurrects the three deleted
+paths. Restore with that content, then apply the two edits the corrupted diff was
+*trying* to make — both are worth keeping:
+
+1. A force-push prohibition in `#### If Deployment Lags > 90 min`, consistent
+   with `runbooks/live-parity-failure.md` §4.3 and the owner's block-force-push
+   rule.
+2. Dispatch guidance that separates the CLI path (needs `actions:write`) from the
+   UI path (owner, always works), and says to fall back to the UI on HTTP 403.
+
+One claim in that diff should **not** be carried over as written:
+
+> After a merge, GitHub revokes the session token (no remote ops available in
+> closed sessions).
+
+Measured today, this is false. After PR #504 merged at `03:40:26Z` and GitHub
+deleted the remote branch, the same bot token still performed REST reads,
+`git fetch`, and a fresh `git push` that recreated the branch. What the token
+lacks is scope, not validity: `actions:write` and `issues:write` both return 403,
+while `contents`/`pull_requests` writes succeed. Diagnosing "token revoked" sends
+the next session looking for a credential problem that does not exist; the
+capability matrix above is the accurate version.
+
+Also worth correcting while in there: the restored file's dispatch note should
+not promise an hourly sweep. Observed cron gaps today were 3.5–5.5 h against a
+declared `0 * * * *`.
