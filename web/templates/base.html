@@ -6,6 +6,13 @@
   <meta name="color-scheme" content="light dark">
   <title>{% block title %}JCStream{% endblock %}</title>
   <meta name="robots" content="noindex, noarchive">
+  {# Machine-readable roster vintage, the same snapshot.generated_utc the
+     footer renders in human form. scripts/verify_live_html_freshness.py
+     ages the live deploy against this stamp instead of parsing the human
+     format; pages built before the stamp shipped simply lack the tag. #}
+  {% if (snapshot is defined and snapshot.generated_utc) or (generated_utc is defined and generated_utc) %}
+  <meta name="jcstream:generated-utc" content="{{ snapshot.generated_utc if snapshot is defined and snapshot.generated_utc else generated_utc }}">
+  {% endif %}
   <link rel="canonical" href="{{ site_url }}{% block canonical_path %}/{% endblock %}">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://giscus.app; connect-src 'self' https://giscus.app; frame-src https://giscus.app; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">

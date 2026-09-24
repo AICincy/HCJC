@@ -1,7 +1,11 @@
 name: live-url-parity
 
 # Staged deployment safety check. This probes the existing production URLs
-# against a fresh build without changing Pages or data.
+# against a fresh build without changing Pages or data: the JSON contract
+# probe catches shape/availability drift, and the HTML freshness probe ages
+# the deployed pages against the tip's data vintage so a silently broken
+# Pages deploy (the issue #496 frozen-skeleton incident) cannot hide behind
+# green deploy runs.
 
 on:
   schedule:

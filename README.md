@@ -24,7 +24,7 @@ service under `backend/` uses Supabase and serves no part of the public site.
   (`data/waf_block_log.json`), chain verified in CI. The Pages build copies
   it into the generated deployment artifact at `/data/waf_block_log.json`;
   it is no longer duplicated in the Git working tree.
-- 702 tests, ruff and mypy clean (verified 2026-09-21).
+- 779 tests, ruff and mypy clean (verified 2026-09-24).
 - Deep-audit wave (2026-09-20): the 2 critical and 3 major findings were
   fixed fail-closed (corrupt evidence/changelog can no longer be silently
   replaced; detail-page blocks are deduped; outage probes use 3 roster IDs
@@ -105,6 +105,8 @@ output swap.
 |---|---|---|
 | `sweep.yml` | cron `*/15 * * * *` (best-effort) | Full sweep: HCSO roster, open data, correlate, freeze check, build, commit to main |
 | `ci.yml` | push / pull request | ruff, mypy (`scraper`, `web`), pytest, pip-audit, WAF-chain verify, smoke build from empty data, CNAME check |
+| `lint.yml` | branch pushes / pull requests | Fast ruff + pytest feedback on side-branch pushes (the gap `ci.yml` leaves); full gate stays in `ci.yml` |
+| `live-parity.yml` | Mondays 04:40 UTC | Probe the live site against a fresh build: published JSON URL contract plus HTML freshness (live pages must carry the roster-vintage stamp within `--max-lag-hours` of the tip) |
 | `refresh_caselaw.yml` | Sundays 06:00 UTC | Refresh `data/orc_caselaw.json` from CourtListener, commit if changed |
 | `ingest_case_data.yml` | issue labeled `case-data` | Parse issue body into `data/courtclerk_cases.json` |
 | `clerk_pra_packets.yml` | **manual dispatch only** | Build *draft* ORC 149.43 request letters as workflow artifacts. A human fills in the sender block and sends them. Nothing is sent or committed automatically. |
