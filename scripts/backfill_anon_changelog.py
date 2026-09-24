@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from scraper.store import _atomic_write_text
+from scraper.store import SnapshotCorruptError, _anonymize_event, _atomic_write_text, _load_takedowns
 from scraper.sweep import _anon_enrichment, _load_anon_offenses
 
 log = logging.getLogger(__name__)
@@ -74,6 +74,8 @@ def _load_snapshots(since: datetime) -> list[HistoricalSnapshot]:
         try:
             raw = _run_git("show", f"{commit}:data/current.json")
             payload = json.loads(raw)
+            if not isinstance(payload, dict):
+                continue
             generated = _parse_utc(payload.get("generated_utc", ""))
             inmates = payload.get("inmates", [])
             if generated is None or not isinstance(inmates, list):
@@ -136,6 +138,26 @@ def _recent_full_rows(rows: list[dict], cutoff: datetime) -> list[dict]:
     return out
 
 
+def _apply_takedowns(rows: list[dict]) -> int:
+    """Anonymize retained rows whose inmate number is currently sealed."""
+    sealed = _load_takedowns(ANON_CHANGELOG_PATH.parent)
+    changed = 0
+    for index, row in enumerate(rows):
+        inmate_number = str(row.get("inmate_number") or "")
+        if inmate_number not in sealed:
+            continue
+        rows[index] = _anonymize_event(
+            {
+                "event": row.get("event"),
+                "timestamp_utc": row.get("timestamp_utc"),
+                "primary_tier": row.get("tier"),
+                "primary_category": row.get("category"),
+            }
+        )
+        changed += 1
+    return changed
+
+
 def backfill(days: int = DEFAULT_DAYS, *, dry_run: bool = False) -> dict[str, int]:
     if not ANON_CHANGELOG_PATH.exists():
         return {"updated": 0, "unresolved": 0, "eligible": 0}
@@ -147,6 +169,7 @@ def backfill(days: int = DEFAULT_DAYS, *, dry_run: bool = False) -> dict[str, in
     if not isinstance(rows, list):
         raise SystemExit(f"{ANON_CHANGELOG_PATH} is not a JSON array")
 
+    takedown_anonymized = _apply_takedowns(rows)
     cutoff = datetime.now(timezone.utc) - timedelta(days=days)
     eligible = _recent_full_rows(rows, cutoff)
     snapshots = _load_snapshots(cutoff - timedelta(days=1))
@@ -175,7 +198,12 @@ def backfill(days: int = DEFAULT_DAYS, *, dry_run: bool = False) -> dict[str, in
     if not dry_run:
         _atomic_write_text(ANON_CHANGELOG_PATH, json.dumps(rows, indent=2))
 
-    return {"updated": updated, "unresolved": unresolved, "eligible": len(eligible)}
+    return {
+        "updated": updated,
+        "unresolved": unresolved,
+        "eligible": len(eligible),
+        "takedown_anonymized": takedown_anonymized,
+    }
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -189,12 +217,17 @@ def main(argv: list[str] | None = None) -> int:
         level=logging.INFO if args.verbose else logging.WARNING,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
-    result = backfill(args.days, dry_run=args.dry_run)
+    try:
+        result = backfill(args.days, dry_run=args.dry_run)
+    except SnapshotCorruptError as exc:
+        log.error("refusing anon backfill: %s", exc)
+        return 1
     log.warning(
-        "anon backfill: eligible=%d updated=%d unresolved=%d dry_run=%s",
+        "anon backfill: eligible=%d updated=%d unresolved=%d takedown_anonymized=%d dry_run=%s",
         result["eligible"],
         result["updated"],
         result["unresolved"],
+        result["takedown_anonymized"],
         args.dry_run,
     )
     return 0
