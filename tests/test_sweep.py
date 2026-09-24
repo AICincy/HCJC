@@ -17,6 +17,8 @@ from scraper.sweep_guards import (
     list_response_looks_blocked,
     looks_like_waf_block,
     roster_stale_hours,
+)
+from scraper.sweep_guards import (
     sweep_looks_healthy as _sweep_looks_healthy,
 )
 
