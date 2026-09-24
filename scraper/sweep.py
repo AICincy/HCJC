@@ -12,7 +12,7 @@ Each invocation:
 
 Designed to fit a ~25-minute budget at Crawl-delay: 0.5s per worker with
 16-way concurrency (scraper/client.py: DEFAULT_CRAWL_DELAY,
-DEFAULT_CONCURRENCY), so it can run on the `*/15 * * * *` GitHub Actions
+DEFAULT_CONCURRENCY), so it can run on the hourly GitHub Actions
 cron (with a 20-minute skip-gate to avoid back-to-back runs; actual
 delivery is best-effort).
 """
