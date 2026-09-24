@@ -164,8 +164,15 @@ def _write_well_known(out_dir: Path, site_url: str, generated_utc: str) -> None:
     # boundary; pinning it means a frozen roster produces a byte-stable file
     # instead of timestamp churn on every build.
     try:
-        base = datetime.strptime(generated_utc, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
-    except (TypeError, ValueError):
+        # Preserve fractional seconds when a precision-bearing snapshot is
+        # used; fromisoformat is guarded by Snapshot's strict Z validator.
+        iso = generated_utc[:-1] + "+00:00" if generated_utc.endswith("Z") else generated_utc
+        base = datetime.fromisoformat(iso)
+        if base.tzinfo is None:
+            base = base.replace(tzinfo=timezone.utc)
+        else:
+            base = base.astimezone(timezone.utc)
+    except (AttributeError, TypeError, ValueError):
         base = datetime.now(timezone.utc)
     expires = (base + timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%SZ")
     wk = out_dir / ".well-known"

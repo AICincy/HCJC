@@ -11,7 +11,10 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 # Permitted shape for generated_utc on a populated snapshot. Empty is allowed
 # at bootstrap time (web/build.py constructs an empty Snapshot when no data
 # file exists yet); a real, written snapshot must use utcnow_iso().
-_GENERATED_UTC_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+# Strict UTC ISO-8601 stamps. Fractional seconds are optional but, when
+# present, retained (rather than truncated) so freshness boundaries remain
+# precise. Offsets and a missing Z are intentionally rejected.
+_GENERATED_UTC_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z$")
 
 # HCSO dates: M/D/YY, M/D/YYYY, MM/DD/YY, MM/DD/YYYY.  The epoch sentinel
 # "1/1/70" means "unknown"; we pass it through rather than discarding so

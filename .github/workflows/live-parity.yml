@@ -1,14 +1,13 @@
 name: live-url-parity
 
-# Staged deployment safety check. This probes the existing production URLs
-# against a fresh build without changing Pages or data: the JSON contract
-# probe catches shape/availability drift, and the HTML freshness probe ages
-# the deployed pages against the tip's data vintage so a silently broken
-# Pages deploy (the issue #496 frozen-skeleton incident) cannot hide behind
-# green deploy runs.
+# Alert-only production check. The first job verifies the published JSON
+# contract; the second job builds the same tip and probes representative HTML
+# pages against the live domain. Neither job has write/pages permissions, and
+# no deploy step exists here.
 
 on:
   schedule:
+    # Monday 04:40 UTC, after several hourly sweep opportunities.
     - cron: '40 4 * * 1'
   workflow_dispatch: {}
 
@@ -20,8 +19,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  parity:
-    name: Check published JSON URL contract
+  contract:
+    name: Check published JSON contract
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -38,5 +37,41 @@ jobs:
         run: python -m web.build
       - name: Verify local publication contract
         run: python scripts/verify_public_data.py
-      - name: Probe current production URLs
-        run: python scripts/verify_live_url_parity.py --site https://www.aretheyinjail.com
+      - name: Probe current production JSON URLs
+        run: python scripts/verify_live_url_parity.py --site https://www.aretheyinjail.com --timeout 10
+
+  html-freshness:
+    name: Check published JSON contract and HTML freshness
+    needs: contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build candidate HTML from tip data
+        env:
+          JCSTREAM_SITE_BASE_URL: ""
+          JCSTREAM_CNAME: www.aretheyinjail.com
+        run: python -m web.build
+      - name: Verify live HTML freshness
+        # No recovery mode: a missing stamp, malformed stamp, HTTP/TLS error,
+        # stale page, or candidate regression returns non-zero. The explicit
+        # pages make the multi-page policy reviewable without probing every
+        # inmate detail URL on every Monday gate.
+        run: >-
+          python scripts/verify_live_html_freshness.py
+          --site https://www.aretheyinjail.com
+          --local docs
+          --data data/current.json
+          --max-lag-hours 26
+          --timeout 10
+          --fail-on-live-newer
+          --page index.html
+          --page data/index.html
+          --page help/index.html
+          --page stats/index.html
+          --page transparency/index.html
