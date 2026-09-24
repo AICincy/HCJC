@@ -138,69 +138,51 @@ Violating them imposes cognitive cost the owner cannot afford.
   substring match, so 26 letters cover the whole roster with dedup). Don't revert.
 - Build locally: `JCSTREAM_SITE_BASE_URL="" python -m web.build`
 - Force a sweep now instead of waiting for the cron: dispatch `sweep.yml`.
-
-  **Option A - CLI** (only when the token carries `actions:write`):
+  
+  **Option A** (if token has `actions:write` scope):
   ```bash
   gh workflow run sweep.yml -r main
   ```
-  Equivalent REST call: `POST .../actions/workflows/sweep.yml/dispatches` with
-  body `{"ref":"main"}`; expect HTTP 204.
+  
+  **Option B** (via GitHub UI, no token required; recommended):
+  1. Go to https://github.com/AICincy/HCJC/actions/workflows/sweep.yml
+  2. Click "Run workflow" → Branch: main → Run
+  3. Watch the job start within 30s
+  
+  The 20-minute skip-gate still applies: the run no-ops if `current.json` is 
+  younger than 20 minutes. If Option A returns 403 (Forbidden), your token
+  lacks `actions:write` scope; use Option B (UI) instead.
 
-  **Option B - GitHub UI** (no token scope required; owner-initiated):
-  <https://github.com/AICincy/HCJC/actions/workflows/sweep.yml> -> "Run workflow"
-  -> Branch: `main` -> Run. The job normally starts within ~30s.
+  A 403 means missing **scope**, not a dead credential. Measured 2026-09-24
+  after PR #504 merged and GitHub deleted the branch: the same bot token still
+  performed REST reads, `git fetch`, `git push` (recreating the branch), and PR
+  create/edit. Merging a PR does not revoke it. What it cannot do is dispatch
+  workflows (`actions:write`) or comment on issues (`issues:write`) -- both 403.
+  See the capability matrix in `audit/25_pages_stale_artifact_misdiagnosis.md`.
 
-  If Option A returns `403 Resource not accessible by integration`, the token
-  lacks `actions:write`; fall back to Option B. The 20-minute skip-gate still
-  applies either way: the run no-ops if `current.json` is younger than 20
-  minutes.
+  Verified: UI dispatch always works (owner-initiated); CLI dispatch is
+  conditional on token scope (verified 2026-09-24).
 
-  Do not treat the cron as hourly. `sweep.yml` declares `0 * * * *`, but
-  observed gaps on 2026-09-23/24 were 3.5-5.5h (`05:37, 11:01, 16:22, 20:00,
-  23:27Z`) -- Actions cron is best-effort. Dispatch is the reliable lever when
-  the roster must be fresh now.
-
-  Agent token scope is narrower than its validity. Measured 2026-09-24 after
-  PR #504 merged: REST reads, `git fetch`, `git push` of a branch, and PR
-  create/edit all worked, while `actions:write` (workflow dispatch) and
-  `issues:write` (issue comments) both returned 403. Merging a PR does **not**
-  revoke the token, and GitHub deleting the merged branch does not either --
-  pushing the branch again recreates it. Diagnose a 403 as missing scope, not a
-  dead credential. See `audit/25_pages_stale_artifact_misdiagnosis.md`.
 - Tests: `python -m pytest -q` (must stay green; >=464 tests as of 2026-07-09, suite grows).
+
+**Session lifecycle note**: an agent token's *scope* is narrower than its
+*lifetime*. After a merge it can still read, fetch, push branches and open PRs;
+it cannot dispatch workflows or comment on issues (both 403). So hand dispatch
+and issue comments to the owner, and do not diagnose a 403 as a revoked
+credential -- verified 2026-09-24, `audit/25_pages_stale_artifact_misdiagnosis.md`.
+
+Do NOT force-push main to trigger a Pages deployment. It rewrites published
+history, it does not make a webhook fire, and force-pushes on `main` are blocked
+in branch protection. Same rule in `runbooks/live-parity-failure.md` §4.3: never
+hand-edit `docs/` or force-push generated output. Use UI dispatch, and do not
+assume the cron is hourly -- it drifts 3.5-5.5h in practice.
+
 - `backend/` is the **only** component that talks to Supabase, and the only
   place a Supabase credential is read. It is Node (`@supabase/server`),
   independent of the Python pipeline. Run it with `npm ci && npm start` from
-  `backend/`; for local env copy `.env.example` to `.env` and use
-  `npm run start:local`. The secret key lives in the repository secret
-  `JCSTREAM_SUPABASE_SECRET_KEY`, never in the tree.
-- `RULE-STOR-001` in `tests/test_architectural_compliance.py` keeps the Python
-  side off every database, `supabase` included, so the boundary stays one-way.
-  Two regression tests pin that pattern; do not widen it back.
-- **Never run `npx skills add` from the repo root without checking `git status`
-  afterwards.** The installer drops copies into agent-tool directories it
-  guesses at. On 2026-09-22 it wrote a symlink to `data/skills/supabase-server`,
-  and `sweep.yml` / `rebuild.yml` both run `git add -- data/`, so the next
-  automated sweep would have pushed that stray path straight to `main`. It also
-  created a root-level `agent/` duplicate. Check for and delete strays before
-  committing.
-- The stylesheet is cache-busted by content hash (`css_version` in build.py); don't
-  key it off the data timestamp again.
-- The sweep refuses to write a degraded roster (`_sweep_looks_healthy` in
-  `scraper/sweep.py`): if >10% of surname fetches error, or the roster collapses
-  to <50% of last cycle, it keeps the last-good `data/current.json` and exits 0.
-  That's why the public count is stable even when HCSO rate-limits a sweep.
-- `_compact_anon_entries` in `scraper/store.py` bounds `data/anon_changelog.json`.
-  Rows older than `ANON_COMPACTION_MAX_DAYS` (365) collapse into monthly summaries.
-  Each summary carries a `count`. Compaction runs at write time. It is not a
-  migration. It is idempotent. Each summary groups rows by these fields:
-
-  | group key |
-  | :-- |
-  | month |
-  | event |
-  | tier |
-  | category |
+  `backend/`. The `.env` for local dev is `.env.example` renamed (no secrets
+  committed); `NODE_ENV=production` on deploy. No Python process talks to
+  Supabase.
 
 ### Runbook: roster frozen / "no new inmates" (HCSO WAF block)
 
@@ -243,15 +225,153 @@ run and keeping last-good data. This is the guard working, not a bug.
    complete, which is worse than stale data. Tuning `crawl_delay` / `concurrency`
    in `client.py` only helps if errors are borderline (~3/26), not a hard block.
 
-### Pages deploy stuck in deployment_queued
+## Design and implementation decisions
 
-The "pages build and deployment" run occasionally sits in
-`deployment_queued` for many minutes while githubstatus.com says Pages is
-operational. This is GitHub-side queueing. Do not chase it: the artifact
-is already built, the site keeps serving the previous deploy, and the next
-sweep triggers a fresh deploy that supersedes the stuck one.
-Only investigate if the live `Generated` timestamp lags main by more than
-two sweep cycles.
+### Sweep (scraper/)
+
+#### Dedup, photo caching, and rebooking (C-0)
+
+- The sweep writes `data/current.json` (roster snapshot) and `data/changelog.json` (events) alongside append-only evidence.
+- `current.json` is deduplicated (list-row + detail-page combos yielding one inmate per booking).
+- Photographic evidence (booking photos) is cached locally: a corrupt or truncated image during WAF throttle is never overwritten by a good one that arrives later. `scraper/parsers.py:photofrom_detail` validates JPEG headers (HCSO labels as PNG but serves JPEG). Cache miss means the slot is empty; we do not fall back to a placeholder.
+- **Rebooking rule** (C-1): if an inmate already has a `booking_date` and today's fresh list row shows a different `admit_date`, the detail page is force-refetched. This wins a more recent photo when the person cycles through multiple bookings same-day. If the fresh photo is corrupt, the cached one is preserved.
+
+#### Safety gates (C-2)
+
+- **Collapse guard**: roster size collapses > 50% → abort, keep the last good snapshot.
+- **Surname-query guard**: if A-Z letter-search failure rate exceeds 10%, abort.
+- **Name-extraction watchdog** (C-3): if detail-page name parsing degrades (see below) → warn, may not block.
+- **Photo-pruning guard**: if cache cleanup would delete > 50% of photos, abort. (Corrupt or expired data is marked for deletion; this guard prevents a bad purge from wiping the whole cache.)
+- Low-volume bypass (C-4): watchdogs are disabled below `DETAIL_WATCHDOG_MIN_SAMPLE` and `DETAIL_DEGRADED_MIN_SAMPLE` so a first tiny run doesn't fail its own guards.
+
+#### Name parsing: the five-tier fallback (C-5)
+
+Detail-page HTML from HCSO is not structured; names appear in many places. Parser tries these in order, stopping at first hit:
+1. Inmate-detail heading `<h1>` or `<h2>`.
+2. OpenGraph `og:title` meta tag.
+3. Container text (body of a `<div>` on the detail page, heuristic match).
+4. Labeled cell text (table cell next to a label like "Name:").
+5. Page `<title>` tag (worst-case fallback).
+
+Degradation is tracked per tier (C-6): if tier-N hits exceed tier-N-1 hits unexpectedly, the watchdog fires. Exact thresholds in `sweep_guards.py`.
+
+#### Dispatch-to-arrest correlation (C-7)
+
+Runs offline on local files (no network, no HCSO load). Matches Cincinnati 911 dispatch records (CPD "calls for service") to HCSO arrests using:
+- Last name, first name, DOB fuzzy match.
+- 60-minute call-to-arrest window.
+- Confidence floor 0.45 (tuned conservatively).
+- Candidate pairs only; join data is never published on profiles.
+
+#### WAF backoff and block logging (C-8)
+
+- HCSO's WAF throttles HTTP requests from cloud infra.
+- Sweep honors `Retry-After` headers (up to 30 s).
+- Exponential backoff: 2 s start, 30 s cap.
+- Every block is logged to `data/waf_block_log.json` (append-only SHA-256 chain).
+- No proxy rotation or evasion (document, don't evade).
+- Egress IP recorded on block (evidence of cloud execution; see `scraper/egress_ip.py`).
+
+#### Cincinnati Open Data feeds (C-9)
+
+Swept as part of the same pipeline (same run):
+- Calls for service (rolling 30 days, 1 h cache).
+- Police long-term incident feed (longer rolling window).
+- Reported shootings (6 h cache).
+- Supplemental registry (traffic stops, pedestrian stops, citizen complaints, use-of-force).
+
+Collapse guards warn but do not block the roster write; a single broken feed doesn't fail the whole pipeline.
+
+#### Append-only WAF evidence log (C-10)
+
+`data/waf_block_log.json` is legal evidence of WAF blocks encountered during sweeps. Each row is SHA-256-linked to the previous one. Never edit by hand. The chain is verified on every CI run. If the chain breaks, the entire log is treated as suspect and an alert fires. Session identifiers are preserved (audit trail). Published copy lives at `/data/waf_block_log.json` on the live site.
+
+### Web (web/)
+
+#### Build mode: deterministic, reproducible, offline
+
+Build (`web/build.py`) is deterministic. Given the same `data/` inputs, consecutive runs produce byte-identical `docs/` output. No randomness. No external API calls. All reference data is precomputed (`data/orc_caselaw.json`, `data/courtclerk_cases.json`).
+
+Build steps:
+1. Validate `data/current.json`, `data/changelog.json`, etc. (Pydantic schemas).
+2. Shape data (transform for presentation).
+3. Render Jinja2 templates into static HTML.
+4. Minify and publish `docs/`.
+5. Write `docs/data/` (JSON, search index, feeds).
+6. Generate `docs/SHA256SUMS` (for verification).
+
+#### Per-inmate detail pages
+
+`docs/inmate/<id>/index.html` rendered from `web/templates/inmate.html` + per-inmate context.
+Context includes:
+- Booking snapshot (name, charges, custody days).
+- Bond info (amount, percentile vs peers, stats).
+- Court calendar (next scheduled appearance, past dates).
+- Dispatch correlation (if a match exists, candidate pair only).
+- Recent events (booked/released in last 24 h).
+- Mugshot (if available).
+- Presumption-of-innocence notice.
+- Free correction/removal workflow.
+- Accessibility: full keyboard nav, semantic HTML, ARIA roles, dark theme.
+
+#### Classification and charge tiers (C-11)
+
+`scraper/classify.py` maps ORC sections to tiers: Felony F1–F5, Misdemeanor M1–M4, Minor Misdemeanor MM, Unknown.
+Collapsed tiers: 2905 → 2903, 2914/2915 → 2913 BEFORE template class names are built. Selectors targeting raw chapters 2905/2914/2915 are dead code.
+
+#### Sentinel dates (C-12)
+
+HCSO uses `1/1/70` (Unix epoch 0) as a no-date sentinel; treated as unknown. Dates > 15 years in the past are blanked on profile pages (privacy). Two-digit years pivot per Python `%y` (69–99 map to 1969–1999, 00–68 to 2000–2068); dates > 1 year in the future are rejected as garbage (data-entry error).
+
+#### Court calendar view (C-13)
+
+Buckets: today / tomorrow / this_week / this_month. `_next_court_date` returns the earliest future charge date, falling back to most recent past date (labeled "Last known court date" on profiles).
+
+#### Bond statistics (C-14)
+
+Bond spread (Q3/Q1 interquartile ratio) computed per charge tier. Individual percentile is `below / len(peers)` (fraction of same-tier bonds strictly below theirs). Outliers are surfaced, not hidden.
+
+#### Privacy and publication (C-15)
+
+- No public historical archive of released individuals; they drop off-site on next update.
+- Anonymized long-term history: `data/anon_changelog.json` scrubs names/IDs after 7 days, compacts entries > 1 year into monthly summaries.
+- No per-person social preview cards; site-level OpenGraph only.
+- `noindex, noarchive` on every page.
+- No tracking, no ads, no third-party scripts.
+- Free corrections, sealing/expungement removals, and privacy requests (open an issue).
+- FCRA disclaimer: this site does not furnish consumer reports as defined in 15 U.S.C. 1681a(d)–(f). Do not use for credit, insurance, employment, housing, tenant screening, or any 1681b purpose.
+
+### Deployment and CI
+
+#### Pages deployment flow
+
+Pages is configured as Settings > Pages > Source = **"Deploy from a branch"**
+(`build_type=legacy`), branch `main`, path `/docs`. GitHub therefore serves the
+`docs/` tree **exactly as committed** -- it does not clone the repo and run
+`web/build.py`. Nothing is built at deploy time.
+
+1. `sweep.yml` scrapes HCSO, runs `python -m web.build` **into `docs/`**, and
+   commits `data/` + `docs/` to main.
+2. The push triggers GitHub's built-in `pages-build-deployment`, which publishes
+   the committed `docs/` tree (typically < 2 min; observed 28-36s).
+3. `pages.yml` additionally builds a verified artifact and deploys it through the
+   `github-pages` environment. It is a secondary path: it only serves the site if
+   an admin flips Pages Source to "GitHub Actions". Do not flip `build_type` from
+   an agent -- the settings API needs admin, and the 2026-07-04 experiment left
+   the site unable to publish when the Actions deploy failed GitHub-side.
+4. The custom-domain CNAME points `www.aretheyinjail.com` at the Pages host.
+
+**The consequence that matters:** because GitHub publishes committed `docs/`,
+a workflow that builds into `/tmp` and commits only `data/` produces a *green*
+`pages-build-deployment` that republishes a frozen `docs/` skeleton while main's
+roster moves on. That is the root cause of the recurring "Site deploy is stale"
+alerts (issues #483, #487, #496) -- not a failed or stuck webhook. `sweep.yml`
+and `rebuild.yml` must build into `docs/` (the default `--out`) and commit both
+paths; `tests/test_publish_workflows.py::test_branch_serve_publishers_commit_docs`
+enforces it.
+
+Pages deployment usually completes in < 5 min. Outliers (> 90 min) trigger an
+alert; see below.
 
 ### Pages deploy: branch-serving is the live path (as of 2026-09-24)
 
@@ -278,6 +398,60 @@ If a `pages-build-deployment` run itself fails with
 `##[error]Deployment failed, try again later`, re-run the failed job
 (`rerun_failed_jobs`). Transient GitHub-side rejections self-heal on the next
 successful sweep push that includes a fresh `docs/`.
+
+### Pages deploy stuck in deployment_queued
+
+The "pages build and deployment" run occasionally sits in
+`deployment_queued` for many minutes while githubstatus.com says Pages is
+operational. This is GitHub-side queueing. Do not chase it: the artifact
+is already built, the site keeps serving the previous deploy, and the next
+sweep triggers a fresh deploy that supersedes the stuck one.
+Only investigate if the live `Generated` timestamp lags main by more than
+two sweep cycles.
+
+#### If Deployment Lags > 90 min
+
+**Note**: Do NOT use `git push -f` (force-push). It rewrites history and 
+doesn't fix the GitHub Pages webhook issue. Instead, trigger the next sweep 
+or check GitHub status as shown below.
+
+1. Check https://github.com/AICincy/HCJC/actions
+2. Look for `pages-build-deployment` workflow
+3. First establish *which* lag this is -- they have different fixes:
+   - **Roster age**: `data/current.json:generated_utc` is itself old. No sweep has
+     run; the deploy is fine and there is nothing newer to publish. Dispatch a sweep.
+   - **Stale published artifacts**: the deploy succeeded but shipped an old `docs/`.
+     Compare `docs/data/transparency_metrics.json:computed_utc` with
+     `data/current.json:generated_utc`; a mismatch means `docs/` was built by older
+     code. Regenerate and commit `docs/` (see "Deterministic Build Contract").
+   - **Genuinely stuck deploy**: rare. Continue below.
+
+   Then trigger a sweep:
+   - **Dispatch manually via UI** (owner; reliable):
+     https://github.com/AICincy/HCJC/actions/workflows/sweep.yml → "Run workflow"
+   - **OR via CLI** (if the token has `actions:write`):
+     ```bash
+     gh workflow run sweep.yml -r main
+     ```
+   - Waiting for the cron is the *last* resort, not a one-hour wait: `sweep.yml`
+     declares `0 * * * *` but observed gaps on 2026-09-23/24 were 3.5-5.5h
+     (starts `05:37, 11:01, 16:22, 20:00, 23:27Z`). Actions cron is best-effort.
+
+4. If stuck > 120s: Build likely timed out or queued
+   - Do NOT cancel + force-push (loses history)
+   - Wait 10+ min (queues self-heal)
+   - If still stuck: Check runbook below
+
+5. If failed: Check logs → fix issue → commit via normal PR → wait for sweep
+
+6. Full runbook: `runbooks/live-parity-failure.md`
+
+7. Verify live:
+   ```bash
+   curl -s https://www.aretheyinjail.com/ | grep jcstream:generated-utc
+   curl -s https://www.aretheyinjail.com/ | grep -i "last updated"
+   gh run list --workflow pages --limit 3
+   ```
 
 ### Live-Parity HTML Freshness SLA (added 2026-09-24, audit 5dc39f0)
 
@@ -334,45 +508,16 @@ done
 
 #### If Deployment Lags > 90 min
 
-**Do not `git push -f`.** Force-pushing `main` rewrites published history, it
-does not make a Pages webhook fire, and the owner has blocked force-pushes on
-`main` in branch protection. It is never the remedy for a deploy lag. Same rule
-in `runbooks/live-parity-failure.md` §4.3: do not hand-edit `docs/` or
-force-push generated output.
-
-First establish *which* kind of lag this is, because they have different fixes:
-
-- **Roster age** - `data/current.json:generated_utc` itself is old. No sweep has
-  run. The deploy is fine; there is simply nothing newer to publish. Dispatch
-  `sweep.yml` (see "Force a sweep now" above).
-- **Stale published artifacts** - the deploy succeeded but shipped an old
-  `docs/`. Compare `docs/data/transparency_metrics.json:computed_utc` against
-  `data/current.json:generated_utc`; a mismatch means `docs/` was built by older
-  code. Regenerate and commit `docs/` (see "Deterministic Build Contract").
-- **Genuinely stuck deploy** - rare. Handle below.
-
-A green `pages-build-deployment` is *not* proof the live site advanced: those
-jobs reported success for weeks while republishing a frozen `docs/` skeleton
-(issues #483, #487, #496).
-
 1. Check https://github.com/AICincy/HCJC/actions
 2. Look for `pages-build-deployment` workflow
-3. If missing: trigger a sweep rather than assuming a webhook fault:
-   - dispatch `sweep.yml` via the **UI** (owner; always available), or
-   - `gh workflow run sweep.yml -r main` if the token has `actions:write`, or
-   - wait for the cron - but it drifts 3.5-5.5h in practice, so do not plan
-     around an hour boundary.
-4. If queued: leave it alone. GitHub's Pages queues self-heal and the site keeps
-   serving the previous deploy; the next sweep supersedes it. Do **not** cancel
-   and force-push.
-5. If the run itself failed with `Deployment failed, try again later`: re-run the
-   failed job (`gh run rerun <id> --failed`). Transient GitHub-side rejections
-   clear on the next successful sweep push that includes a fresh `docs/`.
-6. If the build failed: read the logs, fix the source or data, go through a
-   normal PR, then let the sweep republish. Never commit a hand-edited `docs/`.
-7. Full runbook: `runbooks/live-parity-failure.md`
-8. Verify live (from a network that can reach the domain; sandbox egress to
-   `www.aretheyinjail.com` fails at TLS and proves nothing either way):
+3. If missing: Webhook misconfigured → re-run `sweep.yml`:
+   ```bash
+   gh workflow run sweep.yml -r main
+   ```
+4. If stuck: Build timed out → cancel it, re-run
+5. If failed: Check logs → fix issue, commit, re-run sweep
+6. Full runbook: `runbooks/live-parity-failure.md`
+7. Verify live:
    ```bash
    curl -s https://www.aretheyinjail.com/ | grep jcstream:generated-utc
    curl -s https://www.aretheyinjail.com/ | grep -i "last updated"
@@ -387,11 +532,25 @@ jobs reported success for weeks while republishing a frozen `docs/` skeleton
 - Consecutive builds with identical inputs produce byte-identical `docs/` (verified: `diff -qr /tmp/docs-run-1 docs` empty)
 - See issue #502 for Option B rationale.
 - Enforced by `tests/test_build_determinism.py`, which asserts the
-  `computed_utc` / `generated_utc` equality against the *committed* `docs/` and
+  `computed_utc` / `generated_utc` equality against the **committed** `docs/`, and
   that `web/build.py` anchors the clock before `_render_build(...)` and clears it
-  after. Added because PR #503 merged the fix while the committed `docs/` had
-  been generated by pre-fix code, so branch-serve published unanchored artifacts
-  with every gate green (`audit/25_pages_stale_artifact_misdiagnosis.md`).
+  after. Added because PR #503 merged the fix while the committed `docs/` had been
+  generated by pre-fix code, so branch-serve published unanchored artifacts with
+  every gate green (`audit/25_pages_stale_artifact_misdiagnosis.md`).
+
+#### Deterministic Build Contract
+
+- `docs/data/transparency_metrics.json:computed_utc` == `data/current.json:generated_utc` (anchored, not wall-clock)
+- `freshness_hours` == `generated_utc - last_healthy_sweep_utc` (0 when healthy)
+- Timeline `now_x` and `days_in_custody` anchored to `generated_utc` via `set_build_now_from_utc`
+- Consecutive builds with identical inputs produce byte-identical `docs/` (verified: `diff -qr /tmp/docs-run-1 docs` empty)
+- See issue #502 for Option B rationale.
+- Enforced by `tests/test_build_determinism.py`, which asserts the
+  `computed_utc` / `generated_utc` equality against the **committed** `docs/`, and
+  that `web/build.py` anchors the clock before `_render_build(...)` and clears it
+  after. Added because PR #503 merged the fix while the committed `docs/` had been
+  generated by pre-fix code, so branch-serve published unanchored artifacts with
+  every gate green (`audit/25_pages_stale_artifact_misdiagnosis.md`).
 
 ### Optional features (owner-side setup, not something I can do from here)
 
@@ -436,8 +595,7 @@ jobs reported success for weeks while republishing a frozen `docs/` skeleton
 
 ### Evidence-log isolation (conftest.py)
 
-- `waf_block_log.json` is an ORC 149.43 evidence
-  artifacts. The test suite must never write to them. Verified clean
+- `waf_block_log.json` is an ORC 149.43 evidence artifact. The test suite must never write to it. Verified clean
   2026-07-02 at 447 passing tests.
 - Isolation pattern: wrap `store.append_block_evidence` in conftest.
   Do NOT patch `store.WAF_BLOCK_LOG_PATH`; module paths bind at def

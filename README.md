@@ -214,7 +214,7 @@ Hard rules for local work:
 | `data/changelog.json` | Booking/release/change events, capped at 10,000 |
 | `data/anon_changelog.json` | Anonymized long-term history (PII scrubbed after 7 days) |
 | `data/waf_block_log.json` | Append-only SHA-256-chained block evidence (137,807 records as of 2026-09-22), copied into the Pages artifact |
-| `config/public-data-manifest.json` | Published JSON URL and source compatibility contract |
+| `config/public-data-manifest.json` | Published JSON paths, canonical sources, publication modes, and privacy contract |
 | `docs/search.json` | Compressed client-side search index |
 | `docs/inmate/` | Per-profile static pages (1,213 as of 2026-09-22) |
 | `docs/photos/` | Booking photos referenced by the live snapshot (1,126 of 1,213 as of 2026-09-22) |
