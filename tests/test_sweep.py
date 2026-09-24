@@ -859,99 +859,6 @@ def test_wallclock_cap_carries_forward_unfetched_inmates(tmp_path, monkeypatch):
         assert inm.last_name == "DOE"
 
 
-def test_anon_enrichment_covers_released_inmates():
-    from scraper.models import Charge
-
-    previous = {
-        "100": Inmate(
-            inmate_number="100",
-            last_name="DOE",
-            first_name="JANE",
-            charges=[Charge(orc_code="2913.02")],
-        )
-    }
-    current = {}
-    offenses = {
-        "2913.02": {"title": "Assault", "degree": "M1"},
-    }
-
-    enrichment = sweep._anon_enrichment(previous, current, offenses)
-
-    assert enrichment["100"] == {"tier": "M1", "category": "Assault"}
-
-
-def test_anon_enrichment_normalizes_subsection_codes():
-    from scraper.models import Charge
-
-    current = {
-        "200": Inmate(
-            inmate_number="200",
-            last_name="DOE",
-            first_name="JANE",
-            charges=[Charge(orc_code="2925.11A")],
-        )
-    }
-    offenses = {
-        "2925.11": {"title": "Drugs", "degree": "F5"},
-    }
-
-    enrichment = sweep._anon_enrichment({}, current, offenses)
-
-    assert enrichment["200"] == {"tier": "F5", "category": "Drugs"}
-
-
-def test_anon_enrichment_prefers_current_and_tolerates_unknowns(tmp_path):
-    from scraper.models import Charge
-
-    previous = {
-        "300": Inmate(
-            inmate_number="300",
-            last_name="DOE",
-            first_name="OLD",
-            charges=[Charge(orc_code="2913.02")],
-        )
-    }
-    current = {
-        "300": Inmate(
-            inmate_number="300",
-            last_name="DOE",
-            first_name="NEW",
-            charges=[Charge(orc_code="9999.99")],
-        )
-    }
-    known_offenses = {
-        "2913.02": {"title": "Assault", "degree": "M1"},
-    }
-
-    enrichment = sweep._anon_enrichment(previous, current, known_offenses)
-    assert enrichment["300"] == {"tier": None, "category": None}
-
-    malformed = tmp_path / "orc_offenses.json"
-    malformed.write_text("{not-json", encoding="utf-8")
-    assert sweep._load_anon_offenses(malformed) == {}
-
-    malformed_entry = {
-        "offenses": {
-            "9999.99": None,
-            "2913.02": {"title": "Assault", "degree": "M1"},
-        }
-    }
-    malformed.write_text(json.dumps(malformed_entry), encoding="utf-8")
-    enrichment = sweep._anon_enrichment(
-        {},
-        {
-            "400": Inmate(
-                inmate_number="400",
-                last_name="DOE",
-                first_name="JANE",
-                charges=[Charge(orc_code="9999.99")],
-            )
-        },
-        sweep._load_anon_offenses(malformed),
-    )
-    assert enrichment["400"] == {"tier": None, "category": None}
-
-
 def test_save_changelog_and_anon_refuses_corrupt_changelog(tmp_path):
     # C-2: a corrupt changelog must not be truncated to one cycle's events.
     # The file is left untouched for investigation; the cycle continues.
@@ -966,3 +873,155 @@ def test_save_changelog_and_anon_refuses_corrupt_changelog(tmp_path):
     _save_changelog_and_anon(prev, cur, paths)
     assert changelog.read_text(encoding="utf-8") == "[corrupt"
     assert not anon.exists()
+
+
+# ---------------------------------------------------------------------------
+# _anon_enrichment regression coverage.
+#
+# Two faults in the previously-inlined enrichment silently nulled tier and
+# category on ~1,300 anon_changelog rows. Every test here fails against the
+# old inline logic and passes against the extracted helper.
+# ---------------------------------------------------------------------------
+
+# Offense table keyed the way data/orc_offenses.json is: BASE section only,
+# never a subsection suffix. Mirrors the real entries for these codes.
+_OFFENSES_FIXTURE = {
+    "offenses": {
+        "2903.13": {"title": "Assault", "degree": "M1"},
+        "2925.11": {"title": "Possession of drugs", "degree": "F5"},
+        "2919.25": {"title": "Domestic violence", "degree": "M1"},
+        # HAMCO-sourced rows carry the "?" placeholder degree.
+        "4511.19": {"title": "Driving under suspension", "degree": "?"},
+    }
+}
+
+
+def _write_offenses(tmp_path: Path) -> Path:
+    p = tmp_path / "orc_offenses.json"
+    p.write_text(json.dumps(_OFFENSES_FIXTURE), encoding="utf-8")
+    return p
+
+
+def _inmate(number: str, code: str = "", last_name: str = "DOE") -> Inmate:
+    from scraper.models import Charge
+
+    charges = [Charge(orc_code=code)] if code else []
+    return Inmate(
+        inmate_number=number,
+        last_name=last_name,
+        first_name="J",
+        booking_date="5/10/26",
+        charges=charges,
+    )
+
+
+def test_anon_enrichment_covers_released_inmates(tmp_path):
+    # Fault 1: the old loop iterated `current` only, so a `released` event --
+    # by definition about someone no longer on the roster -- was always
+    # written with tier=None. Measured on real data: all 970 released rows in
+    # data/anon_changelog.json were null, and not one tagged row was a
+    # release. The previous roster is the last place their charges existed.
+    offenses_path = _write_offenses(tmp_path)
+    previous = {"777": _inmate("777", "2903.13")}
+    current: dict[str, Inmate] = {}  # released: gone from the roster
+
+    enrichment = sweep._anon_enrichment(previous, current, offenses_path)
+
+    assert enrichment["777"] == {"tier": "M1", "category": "Assault"}
+
+
+def test_anon_enrichment_normalizes_subsection_codes(tmp_path):
+    # Fault 2: booking rows carry subsection codes ("2925.11A", "2903.02A1")
+    # while the offense table is keyed by base section. The old raw-string
+    # lookup resolved 58.0% of the live roster; normalize_code resolves 98.8%.
+    offenses_path = _write_offenses(tmp_path)
+    current = {"1": _inmate("1", "2925.11A")}
+
+    enrichment = sweep._anon_enrichment({}, current, offenses_path)
+
+    assert enrichment["1"] == {"tier": "F5", "category": "Possession of drugs"}
+
+
+def test_anon_enrichment_prefers_current_and_tolerates_unknowns(tmp_path):
+    # `current` must win over `previous` (fresher; a re-booking between sweeps
+    # must not be tagged from a stale snapshot), and unknown / empty codes must
+    # degrade to None rather than raising or inventing a tier.
+    offenses_path = _write_offenses(tmp_path)
+    previous = {"1": _inmate("1", "2903.13"), "2": _inmate("2", "2919.25")}
+    current = {
+        "1": _inmate("1", "2925.11A"),  # charge changed since last sweep
+        "3": _inmate("3", "9999.99"),  # not in the offense table
+        "4": _inmate("4", ""),  # no code at all
+        "5": _inmate("5"),  # no charges
+    }
+
+    enrichment = sweep._anon_enrichment(previous, current, offenses_path)
+
+    assert enrichment["1"] == {"tier": "F5", "category": "Possession of drugs"}
+    assert enrichment["2"] == {"tier": "M1", "category": "Domestic violence"}
+    for unknown in ("3", "4", "5"):
+        assert enrichment[unknown] == {"tier": None, "category": None}
+
+
+def test_anon_enrichment_reports_placeholder_degree_as_none(tmp_path):
+    # orc.UNKNOWN ("?") is a lookup sentinel, not a severity bucket. Emitting
+    # it into the aggregate feed would let downstream consumers count it as a
+    # real tier, so it must stay None. The title is still useful and is kept.
+    offenses_path = _write_offenses(tmp_path)
+    current = {"1": _inmate("1", "4511.19A1A")}
+
+    enrichment = sweep._anon_enrichment({}, current, offenses_path)
+
+    assert enrichment["1"]["tier"] is None
+    assert enrichment["1"]["category"] == "Driving under suspension"
+
+
+def test_anon_enrichment_tolerates_malformed_offenses_file(tmp_path):
+    # This runs inside the sweep's finally block; a bad offenses file must
+    # degrade to empty tags, never take down the cycle.
+    from scraper.sweep import _anon_enrichment
+
+    current = {"1": _inmate("1", "2903.13")}
+
+    missing = tmp_path / "absent.json"
+    assert _anon_enrichment({}, current, missing) == {"1": {"tier": None, "category": None}}
+
+    for bad in ("[corrupt", '{"offenses": "not-a-dict"}', "[]", '{"other": 1}'):
+        path = tmp_path / "bad.json"
+        path.write_text(bad, encoding="utf-8")
+        assert _anon_enrichment({}, current, path) == {"1": {"tier": None, "category": None}}
+
+
+def test_released_inmate_row_lands_tagged_in_anon_changelog(tmp_path):
+    # End-to-end guard on the actual write path: a release event must reach
+    # data/anon_changelog.json carrying tier + category, and must still be
+    # inside the PII retention window at write time.
+    from datetime import datetime, timedelta, timezone
+
+    from scraper.sweep import SweepPaths, _save_changelog_and_anon
+
+    offenses_path = _write_offenses(tmp_path)
+    anon = tmp_path / "anon.json"
+    changelog = tmp_path / "changelog.json"
+    paths = SweepPaths(
+        changelog_path=changelog,
+        anon_changelog_path=anon,
+        orc_offenses_path=offenses_path,
+    )
+    previous = {"777": _inmate("777", "2903.13", last_name="RELEASED")}
+    current: dict[str, Inmate] = {}
+
+    _save_changelog_and_anon(previous, current, paths)
+
+    rows = json.loads(anon.read_text(encoding="utf-8"))
+    assert len(rows) == 1
+    row = rows[0]
+    assert row["event"] == "released"
+    assert row["tier"] == "M1"
+    assert row["category"] == "Assault"
+    # Still within retention, so PII is expected here; it expires on schedule.
+    cutoff = datetime.now(timezone.utc) - timedelta(days=7)
+    assert datetime.strptime(row["timestamp_utc"], "%Y-%m-%dT%H:%M:%SZ").replace(
+        tzinfo=timezone.utc
+    ) > cutoff
+    assert row["inmate_number"] == "777"

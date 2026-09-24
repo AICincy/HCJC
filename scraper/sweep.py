@@ -573,7 +573,7 @@ def _fetch_details(
 def _anon_enrichment(
     previous: dict[str, Inmate],
     current: dict[str, Inmate],
-    offenses: dict[str, dict],
+    offenses: dict[str, dict] | Path,
 ) -> dict[str, dict[str, str | None]]:
     """Build anon-feed enrichment for every inmate in either roster.
 
@@ -584,6 +584,7 @@ def _anon_enrichment(
     Missing or unknown degrees are represented as None, not the internal
     question-mark sentinel.
     """
+    offense_table = _load_anon_offenses(offenses) if isinstance(offenses, Path) else offenses
     combined = dict(previous)
     combined.update(current)
     enrichment: dict[str, dict[str, str | None]] = {}
@@ -594,7 +595,7 @@ def _anon_enrichment(
             first_charge = inmate.charges[0]
             code = orc.normalize_code((first_charge.orc_code or "").strip())
             if code:
-                entry = orc.lookup(code, offenses)
+                entry = orc.lookup(code, offense_table)
                 if isinstance(entry, dict):
                     raw_degree = entry.get("degree")
                     tier = raw_degree if raw_degree and raw_degree != orc.UNKNOWN else None
