@@ -48,6 +48,49 @@ def test_best_historical_record_prefers_event_side_of_timestamp():
     assert booked is after
 
 
+
+def test_best_recovery_record_prefers_live_roster_for_non_release():
+    event_time = _now_iso()
+    historical = _inmate("108", first="HISTORY")
+    live = _inmate("108", first="LIVE")
+    snapshots = [
+        backfill_mod.HistoricalSnapshot(
+            datetime.now(timezone.utc) - timedelta(minutes=10),
+            {"108": historical},
+        )
+    ]
+    current = backfill_mod.HistoricalSnapshot(
+        datetime.now(timezone.utc),
+        {"108": live},
+    )
+
+    record, source = backfill_mod._best_recovery_record(
+        snapshots,
+        current,
+        {"event": "booked", "inmate_number": "108", "timestamp_utc": event_time},
+    )
+
+    assert record is live
+    assert source == "live"
+
+
+def test_best_recovery_record_requires_history_for_release():
+    released = _inmate("109", first="RELEASED")
+    current = backfill_mod.HistoricalSnapshot(
+        datetime.now(timezone.utc),
+        {"109": released},
+    )
+
+    record, source = backfill_mod._best_recovery_record(
+        [],
+        current,
+        {"event": "released", "inmate_number": "109", "timestamp_utc": _now_iso()},
+    )
+
+    assert record is None
+    assert source is None
+
+
 def test_load_snapshots_skips_malformed_history(monkeypatch):
     now = _now_iso()
     valid = Snapshot(
@@ -249,3 +292,111 @@ def test_backfill_noop_when_recent_rows_are_already_enriched(tmp_path: Path, mon
 
     assert result["updated"] == 0
     assert anon_path.read_text(encoding="utf-8") == original
+
+
+def test_backfill_uses_live_roster_when_history_is_unavailable(tmp_path: Path, monkeypatch):
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    anon_path = data_dir / "anon_changelog.json"
+    orc_path = data_dir / "orc_offenses.json"
+    current_path = data_dir / "current.json"
+    orc_path.write_text(
+        json.dumps({"offenses": {"2913.02": {"title": "Assault", "degree": "M1"}}}),
+        encoding="utf-8",
+    )
+    now = _now_iso(timedelta(hours=-1))
+    anon_path.write_text(
+        json.dumps(
+            [
+                {
+                    "event": "booked",
+                    "timestamp_utc": now,
+                    "inmate_number": "110",
+                    "name": "DOE, JANE",
+                    "tier": None,
+                    "category": None,
+                }
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    current_path.write_text(
+        json.dumps(
+            Snapshot(
+                generated_utc=_now_iso(),
+                inmate_count=1,
+                inmates=[_inmate("110")],
+            ).model_dump(mode="json"),
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(backfill_mod, "ANON_CHANGELOG_PATH", anon_path)
+    monkeypatch.setattr(backfill_mod, "CURRENT_PATH", current_path)
+    monkeypatch.setattr(backfill_mod, "ORC_OFFENSES_PATH", orc_path)
+    monkeypatch.setattr(backfill_mod, "_load_snapshots", lambda since: [])
+
+    result = backfill_mod.backfill(days=7)
+
+    written = json.loads(anon_path.read_text(encoding="utf-8"))
+    assert result["updated"] == 1
+    assert result["live_fallback"] == 1
+    assert result["historical_recovery"] == 0
+    assert written[0]["tier"] == "M1"
+    assert written[0]["category"] == "Assault"
+
+
+def test_backfill_does_not_use_live_roster_for_release(tmp_path: Path, monkeypatch):
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    anon_path = data_dir / "anon_changelog.json"
+    orc_path = data_dir / "orc_offenses.json"
+    current_path = data_dir / "current.json"
+    orc_path.write_text(
+        json.dumps({"offenses": {"2913.02": {"title": "Assault", "degree": "M1"}}}),
+        encoding="utf-8",
+    )
+    now = _now_iso(timedelta(hours=-1))
+    anon_path.write_text(
+        json.dumps(
+            [
+                {
+                    "event": "released",
+                    "timestamp_utc": now,
+                    "inmate_number": "111",
+                    "name": "DOE, RELEASED",
+                    "tier": None,
+                    "category": None,
+                }
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    current_path.write_text(
+        json.dumps(
+            Snapshot(
+                generated_utc=_now_iso(),
+                inmate_count=1,
+                inmates=[_inmate("111")],
+            ).model_dump(mode="json"),
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(backfill_mod, "ANON_CHANGELOG_PATH", anon_path)
+    monkeypatch.setattr(backfill_mod, "CURRENT_PATH", current_path)
+    monkeypatch.setattr(backfill_mod, "ORC_OFFENSES_PATH", orc_path)
+    monkeypatch.setattr(backfill_mod, "_load_snapshots", lambda since: [])
+
+    result = backfill_mod.backfill(days=7)
+
+    written = json.loads(anon_path.read_text(encoding="utf-8"))
+    assert result["updated"] == 0
+    assert result["unresolved"] == 1
+    assert result["live_fallback"] == 0
+    assert written[0]["tier"] is None
+    assert written[0]["category"] is None
