@@ -39,6 +39,7 @@ from urllib.parse import urlparse
 import httpx
 
 from .client import DEFAULT_CONCURRENCY, HcsoClient, make_client
+from . import orc
 from .models import Inmate, ListRow, utcnow_iso
 from .parsers import parse_detail_page, parse_list_page
 from .photos import downscale_and_save
@@ -569,6 +570,51 @@ def _fetch_details(
     return n_detail_attempts, n_detail_named, n_detail_with_photo, failure_counts
 
 
+def _anon_enrichment(
+    previous: dict[str, Inmate],
+    current: dict[str, Inmate],
+    offenses: dict[str, dict],
+) -> dict[str, dict[str, str | None]]:
+    """Build anon-feed enrichment for every inmate in either roster.
+
+    Release events come from inmates present only in the previous roster, so
+    enrichment cannot be derived from current alone. Current records take
+    precedence when an inmate exists in both snapshots. ORC lookup is
+    normalized so subsection suffixes such as 2925.11A resolve to 2925.11.
+    Missing or unknown degrees are represented as None, not the internal
+    question-mark sentinel.
+    """
+    combined = dict(previous)
+    combined.update(current)
+    enrichment: dict[str, dict[str, str | None]] = {}
+    for inmate_number, inmate in combined.items():
+        tier: str | None = None
+        category: str | None = None
+        if inmate.charges:
+            first_charge = inmate.charges[0]
+            code = orc.normalize_code((first_charge.orc_code or "").strip())
+            if code:
+                entry = orc.lookup(code, offenses)
+                raw_degree = entry.get("degree")
+                tier = raw_degree if raw_degree and raw_degree != orc.UNKNOWN else None
+                raw_title = entry.get("title")
+                category = raw_title.strip() if isinstance(raw_title, str) and raw_title.strip() else None
+        enrichment[inmate_number] = {"tier": tier, "category": category}
+    return enrichment
+
+
+def _load_anon_offenses(path: Path) -> dict[str, dict]:
+    """Load the ORC offense map for anon enrichment, failing closed on bad input."""
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return {}
+    if not isinstance(raw, dict):
+        return {}
+    offenses = raw.get("offenses")
+    return offenses if isinstance(offenses, dict) else {}
+
+
 def _save_changelog_and_anon(
     previous: dict[str, Inmate],
     current: dict[str, Inmate],
@@ -590,7 +636,7 @@ def _save_changelog_and_anon(
         changelog = load_changelog(paths.changelog_path)
     except SnapshotCorruptError as e:
         # C-2: the changelog is unreadable; extending it would truncate the
-        # full history to this cycle's events. Leave the file untouched for
+        # full history to this cycles events. Leave the file untouched for
         # investigation and skip the changelog + anon-feed update this cycle.
         log.error(
             "refusing to update changelog: %s is corrupt (%s); leaving file untouched",
@@ -600,34 +646,11 @@ def _save_changelog_and_anon(
         return
     changelog.extend(events)
     save_changelog(paths.changelog_path, changelog)
-    # Phase 11: maintain the PII-expiring append-only feed.
-    # Build enrichment so anonymized rows still carry tier +
-    # category aggregate signal (which is what makes the
-    # long-term feed useful at all).
-    enrichment: dict[str, dict] = {}
-    offenses_path = paths.orc_offenses_path
-    offenses: dict = {}
-    if offenses_path.exists():
-        try:
-            offenses = json.loads(offenses_path.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, OSError):
-            offenses = {}
-    for inm in current.values():
-        first_charge = inm.charges[0] if inm.charges else None
-        tier = None
-        category = None
-        if first_charge:
-            code = (first_charge.orc_code or "").strip()
-            ent = offenses.get("offenses", {}).get(code) if isinstance(offenses, dict) else None
-            if isinstance(ent, dict):
-                tier = ent.get("degree")
-                category = ent.get("title")
-        enrichment[inm.inmate_number] = {
-            "tier": tier,
-            "category": category,
-        }
+    # Phase 11: maintain the PII-expiring append-only feed. Build enrichment
+    # from both snapshots so released inmates retain their last-known tags.
+    offenses = _load_anon_offenses(paths.orc_offenses_path)
+    enrichment = _anon_enrichment(previous, current, offenses)
     save_anon_changelog(paths.anon_changelog_path, changelog, enrichment)
-
 
 def run(
     surnames: list[str],
