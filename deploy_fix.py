@@ -52,11 +52,11 @@ def _log(event_type: str, **fields: object) -> None:
 def _run(
     *args: str,
     check: bool = True,
-    cwd: Path = ROOT,
+    cwd: Path | None = None,
 ) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         args,
-        cwd=cwd,
+        cwd=ROOT if cwd is None else cwd,
         text=True,
         capture_output=True,
         check=check,
