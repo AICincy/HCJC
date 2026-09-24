@@ -1,7 +1,7 @@
-import json
 """Tests for the sweep health heuristic - the guard that stops a rate-limited
 or partially-failed list sweep from being written as the live roster."""
 
+import json
 import logging
 from pathlib import Path
 from typing import Any, cast
@@ -17,8 +17,6 @@ from scraper.sweep_guards import (
     list_response_looks_blocked,
     looks_like_waf_block,
     roster_stale_hours,
-)
-from scraper.sweep_guards import (
     sweep_looks_healthy as _sweep_looks_healthy,
 )
 
