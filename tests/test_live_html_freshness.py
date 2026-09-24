@@ -14,7 +14,7 @@ VINTAGE = "2026-09-23T19:35:00Z"
 
 PAGE_HTML = (
     "<!doctype html><html><head><meta charset=\"utf-8\">"
-    f"<meta name=\"jcstream:generated-utc\" content=\"{{stamp}}\">"
+    "<meta name=\"jcstream:generated-utc\" content=\"{stamp}\">"
     "</head><body><span>Generated</span></body></html>"
 )
 
