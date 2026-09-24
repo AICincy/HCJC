@@ -2,7 +2,8 @@
 """Operator-side deployment orchestration for the anon-changelog remediation.
 
 The script does not push to GitHub. It probes recovery data, performs the
-7-day backfill when Git history contains usable roster snapshots, commits only
+7-day backfill when historical snapshots are available or the live roster can
+still recover current records, commits only
 the remediation files, runs verification gates, and creates a rollback commit
 when a post-commit verification fails.
 """
@@ -100,13 +101,25 @@ def gate_1_backfill_decision(days: int) -> tuple[str, str]:
         "data/current.json",
     )
     commits = [line for line in cp.stdout.splitlines() if line.strip()]
-    choice = "backfill" if len(commits) >= 2 else "accept_losses"
-    reason = (
-        f"found {len(commits)} historical current.json snapshots within the recovery window"
-        if choice == "backfill"
-        else "fewer than two historical roster snapshots are available in Git history"
+    current_available = (ROOT / "data" / "current.json").exists()
+    recent_nulls = _recent_null_count(days)
+    choice = "backfill" if recent_nulls > 0 and (len(commits) >= 2 or current_available) else "accept_losses"
+    if choice == "backfill":
+        if len(commits) >= 2:
+            reason = f"found {len(commits)} historical current.json snapshots within the recovery window"
+        else:
+            reason = "Git history is sparse, but the live roster is available for current/booked-row recovery"
+    else:
+        reason = "no eligible recent null rows or no usable roster source is available"
+    _log(
+        "decision",
+        gate="Gate 1",
+        choice=choice,
+        reason=reason,
+        historical_snapshots=len(commits),
+        live_roster_available=current_available,
+        recent_nulls=recent_nulls,
     )
-    _log("decision", gate="Gate 1", choice=choice, reason=reason)
     return choice, reason
 
 
