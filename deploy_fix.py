@@ -14,6 +14,7 @@ import json
 import logging
 import subprocess
 import sys
+import tempfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -48,10 +49,14 @@ def _log(event_type: str, **fields: object) -> None:
     logging.getLogger("deploy_fix").info("%s", json.dumps(record, sort_keys=True))
 
 
-def _run(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+def _run(
+    *args: str,
+    check: bool = True,
+    cwd: Path = ROOT,
+) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         args,
-        cwd=ROOT,
+        cwd=cwd,
         text=True,
         capture_output=True,
         check=check,
@@ -107,21 +112,36 @@ def gate_1_backfill_decision(days: int) -> tuple[str, str]:
 
 def gate_2_untracked_files() -> bool:
     cp = _run("git", "status", "--porcelain")
-    unexpected = []
+    unexpected_untracked: list[str] = []
     for line in cp.stdout.splitlines():
-        if not line.startswith("?? "):
-            continue
-        path = line[3:]
-        if path != ".mcp.json":
-            unexpected.append(path)
-    ok = not unexpected
-    _log("decision", gate="Gate 2", status="ok" if ok else "fail", unexpected=unexpected)
+        if line.startswith("?? "):
+            path = line[3:]
+            if path != ".mcp.json":
+                unexpected_untracked.append(path)
+
+    staged = _run("git", "diff", "--cached", "--name-only").stdout.splitlines()
+    unexpected_staged = [path for path in staged if path not in FILES_TO_COMMIT]
+    ok = not unexpected_untracked and not unexpected_staged
+    _log(
+        "decision",
+        gate="Gate 2",
+        status="ok" if ok else "fail",
+        unexpected_untracked=unexpected_untracked,
+        unexpected_staged=unexpected_staged,
+    )
     return ok
 
 
 def run_backfill(days: int) -> dict[str, int]:
     before = _recent_null_count(days)
-    cp = _run(sys.executable, str(BACKFILL), "--days", str(days), "--verbose")
+    cp = _run(
+        sys.executable,
+        "-m",
+        "scripts.backfill_anon_changelog",
+        "--days",
+        str(days),
+        "--verbose",
+    )
     detail = {"stdout": cp.stdout[-2000:], "stderr": cp.stderr[-2000:]}
     _log("action", stage="backfill", status="ok", **detail)
     after = _recent_null_count(days)
@@ -150,6 +170,16 @@ def create_commit() -> str:
             existing.append(path)
     _run("git", "add", "--", *existing)
     staged = _run("git", "diff", "--cached", "--name-only").stdout.splitlines()
+    unexpected = [path for path in staged if path not in FILES_TO_COMMIT]
+    if unexpected:
+        _log(
+            "action",
+            stage="commit_stage",
+            status="fail",
+            unexpected_staged=unexpected,
+        )
+        _run("git", "reset", "--", *staged, check=False)
+        raise RuntimeError(f"staged paths outside allow-list: {unexpected}")
     _log("action", stage="commit_stage", status="ok", paths=staged)
     if not staged:
         raise RuntimeError("nothing to commit")
@@ -176,23 +206,61 @@ def verify_tests() -> bool:
 
 def verify_dry_run() -> bool:
     before = _recent_null_count(7)
-    cp = _run(
-        sys.executable,
-        "-m",
-        "scraper.sweep",
-        "--dry-run",
-        "--max-surnames",
-        "1",
-        check=False,
-    )
+    with tempfile.TemporaryDirectory(prefix="jcstream-v2-") as tmp:
+        worktree = Path(tmp) / "repo"
+        add = _run(
+            "git",
+            "worktree",
+            "add",
+            "--detach",
+            str(worktree),
+            "HEAD",
+            check=False,
+        )
+        if add.returncode != 0:
+            _log(
+                "verification",
+                check="v2_sweep_dryrun",
+                passed=False,
+                detail={
+                    "stage": "worktree_add",
+                    "returncode": add.returncode,
+                    "stdout": add.stdout[-2000:],
+                    "stderr": add.stderr[-2000:],
+                },
+            )
+            return False
+
+        try:
+            cp = _run(
+                sys.executable,
+                "-m",
+                "scraper.sweep",
+                "--dry-run",
+                "--max-surnames",
+                "1",
+                check=False,
+                cwd=worktree,
+            )
+        finally:
+            remove = _run(
+                "git",
+                "worktree",
+                "remove",
+                "--force",
+                str(worktree),
+                check=False,
+            )
+
     after = _recent_null_count(7)
-    passed = cp.returncode == 0 and after == before
+    passed = cp.returncode == 0 and after == before and remove.returncode == 0
     _log(
         "verification",
         check="v2_sweep_dryrun",
         passed=passed,
         detail={
             "returncode": cp.returncode,
+            "worktree_remove_returncode": remove.returncode,
             "nulls_before": before,
             "nulls_after": after,
             "stdout": cp.stdout[-2000:],
@@ -202,16 +270,18 @@ def verify_dry_run() -> bool:
     return passed
 
 
-def rollback(commit_sha: str) -> None:
+def rollback(commit_sha: str) -> bool:
     cp = _run("git", "revert", "--no-edit", commit_sha, check=False)
+    ok = cp.returncode == 0
     _log(
         "action",
         stage="rollback",
-        status="ok" if cp.returncode == 0 else "fail",
+        status="ok" if ok else "fail",
         commit_sha=commit_sha,
         stdout=cp.stdout[-2000:],
         stderr=cp.stderr[-2000:],
     )
+    return ok
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -250,8 +320,13 @@ def main(argv: list[str] | None = None) -> int:
         _log("result", status="success", commit_sha=commit_sha)
         return 0
 
-    rollback(commit_sha)
-    _log("result", status="failure", commit_sha=commit_sha)
+    rollback_ok = rollback(commit_sha)
+    _log(
+        "result",
+        status="failure",
+        commit_sha=commit_sha,
+        rollback_status="ok" if rollback_ok else "fail",
+    )
     return 2
 
 
