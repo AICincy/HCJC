@@ -146,11 +146,16 @@ otherwise.
        {n: length, tagged: [.[] | select(.tier)] | length}' data/anon_changelog.json
    ```
 
-   Before the fix that ratio was 0 of 970. It should now be non-zero and climb.
+   **This reads 0 tagged immediately after deploying, and that is expected.** The
+   repair cannot tag historical released rows — those people are already off the
+   roster, which is precisely why they were unrecoverable. The fix changes what
+   *future* sweeps write: from the next sweep onward a release event is tagged
+   from the previous roster, so `tagged` climbs while `n` grows. Compare the ratio
+   across sweeps, not against zero on day one.
 
-4. Expect the in-window null count to fall further on its own as live sweeps
-   apply the fix to new events. It will **not** fall below the 811 permanent
-   nulls; those are unrecoverable and are recorded in `.incident_summary.json`.
+4. Expect the in-window null count to fall further as live sweeps apply the fix
+   to new events. It will **not** fall below the 811 permanent nulls; those are
+   unrecoverable and are recorded in `.incident_summary.json`.
 
 ## Re-running
 
@@ -158,8 +163,15 @@ Safe. A second run finds nothing to repair, stages nothing, and reports the
 fix as already committed — it does not create an empty commit. It is not
 destructive, but it is not interesting either: the repair is at its ceiling.
 
-If you re-run and see `repaired: 501` again, something restored the old data.
-Check `git log -- data/anon_changelog.json`.
+Note that a re-run **overwrites** `.deployment.log` and `.incident_summary.json`
+with the latest run's view, so both will then report `repaired: 0` and
+`accept_losses`. They are last-run artifacts, not a cumulative history — the
+durable record of what was repaired is the commit itself
+(`git show <sha> -- data/anon_changelog.json`). Preserve the log from the
+deploying run if you need it for an incident report; copy it before re-running.
+
+If you re-run and see a non-zero `repaired` count again, something restored the
+pre-fix data. Check `git log -- data/anon_changelog.json`.
 
 ## Flags
 

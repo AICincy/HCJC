@@ -255,6 +255,14 @@ Logging failures are caught and reported to stderr. A deployment must not fail
 because its audit log could not be written — but the failure is surfaced, never
 swallowed silently.
 
+**Both run artifacts are last-run snapshots, not cumulative history.** A re-run
+rewrites `.deployment.log` from an empty event list and regenerates
+`.incident_summary.json`, so after an idempotent second run both report
+`repaired: 0` and gate 1 as `accept_losses` — which is an accurate description of
+*that* run and a misleading one of the deployment. The durable record of what was
+repaired is the commit (`git show <sha> -- data/anon_changelog.json`). Copy the
+log elsewhere before re-running if an incident report needs it.
+
 Useful queries:
 
 ```bash
@@ -411,7 +419,13 @@ jq '[.[] | select(.event=="released" and .timestamp_utc)] |
     {n: length, tagged: [.[] | select(.tier)] | length}' data/anon_changelog.json
 ```
 
-Before the fix: 0 tagged of 970. After: non-zero and climbing with each sweep.
+**Immediately after deploying this reads `tagged: 0` of 351, which is a correct
+result and must not be treated as a failed deployment.** The repair cannot tag
+historical released rows: those people are already off the roster, which is
+precisely why they were classified unrecoverable in §5. The fix changes what
+*future* sweeps write — from the next sweep onward a release event is tagged from
+the `previous` roster passed into `_anon_enrichment()`. The metric to watch is the
+ratio trending upward across sweeps, not its value on day one.
 
 Also confirm the in-window null count falls on live sweeps and then **plateaus
 at the permanent residue**. It will not go to zero, and a monitor alerting on

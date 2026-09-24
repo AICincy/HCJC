@@ -266,7 +266,13 @@ jq '[.[] | select(.event=="released" and .timestamp_utc)] |
     {n: length, tagged: [.[] | select(.tier)] | length}' data/anon_changelog.json
 ```
 
-Before: 0 of 970. After: non-zero, climbing each sweep.
+**Immediately after deploying this reads `tagged: 0`, and that is the correct
+result.** The repair cannot tag historical released rows — those people are
+already off the roster, which is exactly why they were unrecoverable. The fix
+changes what *future* sweeps write: from the next sweep onward a release event is
+tagged from the previous roster, so `tagged` climbs as `n` grows. Compare the
+ratio across sweeps. Alerting on `tagged == 0` right after deploy would fire on a
+successful deployment.
 
 **Alert on the trend, not on `nulls > 0`.** The count plateaus at the permanent
 residue and never reaches zero; an absolute threshold would fire forever.
