@@ -97,11 +97,11 @@
     <h1 class="title">Access Transparency Scorecard</h1>
     <div class="sub">HCSO public-records access interruptions, measured from the tamper-evident evidence ledger &middot; R.C. 149.43</div>
   </div>
-  <div class="stamp">Computed 2026-09-24T01:07Z</div>
+  <div class="stamp">Computed 2026-09-23T23:35Z</div>
 </header>
 
 <aside class="banner" aria-label="Current access status" role="status">
-  <p><span class="status-pill status-pill-fresh">Fresh</span> The roster snapshot is 1.5 hours old, within the 6.0-hour alarm threshold. Retrieval is working.</p>
+  <p><span class="status-pill status-pill-fresh">Fresh</span> The roster snapshot is 0.0 hours old, within the 6.0-hour alarm threshold. Retrieval is working.</p>
 </aside>
 
 <h2 class="sect-h">Denial Metrics</h2>
@@ -121,8 +121,8 @@
     <tr><td>Systemic detail-degraded cycles (total)</td><td>9</td></tr>
     <tr><td>Most recent detail failure (UTC)</td><td>none recorded</td></tr>
     <tr><td>Detail denial open since (UTC)</td><td>n/a</td></tr>
-    <tr><td>Hours since last fully healthy retrieval</td><td>1.5</td></tr>
-    <tr><td>Roster snapshot age</td><td>1.5 hours</td></tr>
+    <tr><td>Hours since last fully healthy retrieval</td><td>0.0</td></tr>
+    <tr><td>Roster snapshot age</td><td>0.0 hours</td></tr>
   </tbody>
 </table>
 <p class="muted">How to read this: the sweep appends one <code>blocked</code> record to the ledger for each cycle in which HCSO&rsquo;s portal returned blocked or empty responses to the roster-list retrieval, and one <code>recovered</code> record when a healthy sweep closes the denial period. Detail-phase failures are recorded separately: one <code>detail_page_waf_block</code> record per inmate detail fetch that was blocked (deduped per inmate and failure mode over 24 hours), and one <code>detail_degraded</code> record per sweep in which detail fetches failed systemically. Cumulative denied access sums each roster denial period from its first blocked cycle to its recovery; a period still open at build time accrues up to the build timestamp. The scorecard reads BLOCKED when either the roster list or the detail pages have an open denial period. These figures regenerate every build and are mirrored as JSON at <a href="/data/transparency_metrics.json">transparency_metrics.json</a>.</p>
