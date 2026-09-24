@@ -11,13 +11,17 @@ branch-serving is the live path" and "Live-Parity HTML Freshness SLA", and
 
 - Date: 2026-09-24
 - Trigger: a handoff document ("Production Remediation: Corrected Technical
-  Analysis") circulated with a force-push remediation tier and a claim that the
-  Pages webhook was still pending. Both claims were checked against the GitHub
-  API and a local rebuild and found to be wrong.
+  Analysis") circulated with a force-push remediation tier, a claim that the
+  Pages webhook was still pending, and a claim that the agent's token had been
+  revoked. Each was checked against the GitHub API, the Actions/deployment
+  history, and local rebuilds. The webhook-pending claim was wrong; the
+  force-push prohibition was right; the token claim was half right — scoped, not
+  revoked, and the capability matrix below records which operations actually 403.
 - Author: Arena agent session `arena/01a0d152-hcjc`, verified against the GitHub
   API, Actions history, and two independent local builds at write time.
-- State at write time: `main` = `5d90340`, working branch carrying a regenerated
-  `docs/` and `tests/test_build_determinism.py`.
+- State at write time: `main` = `5d90340`; branch `arena/01a0d152-hcjc` carries
+  the regenerated `docs/`, `tests/test_build_determinism.py`, and this record,
+  raised as PR #504 (Lint + Deno green).
 
 ## Summary
 
@@ -140,9 +144,37 @@ cron would not reliably deliver.
 | "208 min lag is NOT missing docs/ … is Pages deployment not yet published" | **Half right, wrong conclusion.** `docs/` was present and deployed; it was *stale*, built by pre-fix code. The 208 min is roster age from cron drift. |
 | Tier 1: "Next sweep at next hour boundary. If 23:40 UTC now, sweep runs at 00:00 (~20 min)" | **Wrong and unsafe to rely on.** No sweep ran at `00:00Z` or `01:00Z` or `02:00Z`. Observed gaps are 3.5–5.5 h. Manual dispatch is the reliable path, not waiting. |
 | Tier 2: "Owner must dispatch manually — bot token revoked, no `actions:write`" | **Half right, and the operative half is correct.** `gh workflow run sweep.yml --ref main` failed with `HTTP 403: Resource not accessible by integration` on `/actions/workflows/277044658/dispatches`, so dispatch genuinely must go through the UI. The *reason* is wrong: the token is not revoked. |
-| "Session now CLOSED (token revoked post-merge)" | **Wrong.** `gh auth status` = authenticated as `arena-ai-coding-agent[bot]`. Reads, Actions history, `git push` of a branch, and `gh pr create` (PR #504) all succeeded. Only `actions:write` is absent. |
+| "Session now CLOSED (token revoked post-merge)" | **Wrong.** `gh auth status` = authenticated as `arena-ai-coding-agent[bot]`. The token is live and useful; it is scoped, not revoked. See the capability matrix below. |
+
+### Bot capability matrix, measured not assumed
+
+`GET /repos/AICincy/HCJC` reports `permissions` all-`false` for this
+installation, which is **not** a reliable guide — `git push` succeeded despite
+`push: false`. Measured behaviour:
+
+| Operation | Result |
+| :-- | :-- |
+| REST reads (commits, pages, deployments, runs) | **works** |
+| `gh run list` / `gh run watch` | **works** |
+| `git push origin arena/01a0d152-hcjc` | **works** |
+| `gh pr create` / `gh pr edit` via REST PATCH | **works** (PR #504) |
+| `gh workflow run sweep.yml --ref main` | **403** — no `actions:write` |
+| `gh issue comment 496` / `502` | **403** — no `issues:write` |
+| `gh pr edit` via GraphQL | fails on an unrelated `Projects (classic)` deprecation; the REST PATCH path works |
+
+So the handoff document was right that the owner must dispatch the sweep by hand,
+and right that commenting on the issues is not something an agent can do here —
+but wrong that the session or token was dead. Planned work should be scoped to
+branch push + PR, with dispatch and issue comment handed to the owner.
+
+Because issue comments are blocked, the traceability notes for #496 and #502 live
+in this record and in the PR #504 description instead of on the issues. Both
+issues are CLOSED and the open-issue count is 0, so no `deploy_alert` alarm is
+latched open (the dedupe latch described in
+[24_pages_deploy_stale_incidents.md](./24_pages_deploy_stale_incidents.md) is
+clear).
 | Success criterion "docs/ rebuilds to byte-identical (≤1s rebuild time, 0 diff)" | **Unmet as stated.** Rebuild is ~12–18 s, not ≤1 s. Byte-identity holds between two builds of the *current* code (0 diff, identical tree hash `e9794f7a…`), but committed `docs/` differed from it in 654 files until regenerated. |
-| "Document findings in issue #502" | **Blocked.** #502 and #496 are both CLOSED; #502's only run was `skipped`. Open-issue count is 0, so no `deploy_alert` alarm is latched open. |
+| "Document findings in issue #502" | **Blocked twice over.** #502 and #496 are both CLOSED (#502's only workflow run was `skipped`), and `gh issue comment` returns 403 — no `issues:write`. Findings are recorded here and on PR #504 instead. |
 | "DO NOT `git push -f origin main`" | **Correct and endorsed.** Consistent with `runbooks/live-parity-failure.md` §4.3 ("Do not hand-edit `docs/` or force-push generated output") and `DECISIONS.md` (owner enabled block-force-push + block-deletion on `main`). |
 | "Determinism Fix ✅ Complete" | **Code: yes. Artifacts: no** — see §2 above. |
 
@@ -214,9 +246,12 @@ CONTEXT (verified 2026-09-24, main = 5d90340):
 - Pages is NOT pending. Deployment of 5d90340 succeeded 02:44:59Z.
 - The /tmp-build defect (issue #496) was already fixed by 5790d1a16d.
 - The residual defect was stale docs/ artifacts published by the determinism
-  merge itself; regenerated + guarded by tests/test_build_determinism.py.
+  merge itself; regenerated + guarded by tests/test_build_determinism.py on
+  branch arena/01a0d152-hcjc, PR #504 (Lint + Deno green).
 - The roster ages because the hourly cron drifts 3.5-5.5h, not because of
   webhooks. Issues #496 and #502 are CLOSED; open-issue count is 0.
+- Bot scope: can read, push branches, open/edit PRs. CANNOT dispatch workflows
+  or comment on issues (403 on both). Owner must dispatch sweep.yml via the UI.
 
 DO:
 1. Verify docs/ reproduces byte-identically:
@@ -247,3 +282,76 @@ DO NOT:
 - flip Pages build_type from an agent (CLAUDE.md: admin-only, 2026-07-04
   incident)
 ```
+
+## Addendum: `CLAUDE.md` was destroyed on `main` during this session
+
+Found while integrating `main` into this branch at ~`03:45Z`. Commit `e2e378f`
+("Revise CLAUDE.md for clarity and accuracy", `03:13:19Z`) did not apply a
+revision — it **replaced the file with the text of a unified diff**:
+
+```
+--- CLAUDE.md (original - STALE)
++++ CLAUDE.md (corrected - 2026-09-24)
+@@ -137,14 +137,31 @@
+```
+
+467 lines became 72: 2 hunk headers, 41 `+` lines, 10 `-` lines, 18 context
+lines, and no leading `# ` heading. The file is a patch, not a document. All 36
+headings are gone, including four operational runbooks and both sections this
+record cites:
+
+- `### Runbook: roster frozen / "no new inmates" (HCSO WAF block)`
+- `### Pages deploy stuck in deployment_queued`
+- `### Pages deploy: branch-serving is the live path (as of 2026-09-24)` — the
+  authoritative statement of the `/tmp`-build root cause behind #483, #487, #496
+- `### Live-Parity HTML Freshness SLA (added 2026-09-24, audit 5dc39f0)`
+- `#### Deterministic Build Contract` — the contract PR #503 implemented and this
+  record verifies
+- plus `## Chain of Custody: Session IDs`, `## Hard constraints`, `### Merge
+  discipline`, `### Build artifacts`, `### Evidence-log isolation (conftest.py)`,
+  `## Review process` / `### Gemini bot reviews`
+
+Three further commits then deleted `evidence/hcso-outage-2026-09-19/`
+(`f759a84`), `DECISIONS.md` (`911f0e8`) and `skills-lock.json` (`0abd1b0`).
+Those deletions are recorded here but **not** reverted by this branch; they are
+the owner's to justify or undo. Two notes on their blast radius:
+
+- `DECISIONS.md` held the owner decisions on `main` branch protection, including
+  the block-force-push rule this record and `runbooks/live-parity-failure.md`
+  §4.3 both appeal to. That rule still exists in GitHub settings; only its
+  recorded rationale is gone.
+- `audit/16_evidence_affidavit.md` is an operator affidavit authenticating the
+  WAF-block evidence log, and `audit/18_offplatform_capture.md` /
+  `19_counsel_cover_memo.md` reference that capture work. Deleting
+  `evidence/hcso-outage-2026-09-19/` removes the artifacts those audit records
+  attest to, against the append-only evidence model `audit/24` describes.
+
+### Restoration
+
+Nothing is lost: `git show 5d90340:CLAUDE.md` returns the last good version, and
+this branch merged `origin/main` so it no longer resurrects the three deleted
+paths. Restore with that content, then apply the two edits the corrupted diff was
+*trying* to make — both are worth keeping:
+
+1. A force-push prohibition in `#### If Deployment Lags > 90 min`, consistent
+   with `runbooks/live-parity-failure.md` §4.3 and the owner's block-force-push
+   rule.
+2. Dispatch guidance that separates the CLI path (needs `actions:write`) from the
+   UI path (owner, always works), and says to fall back to the UI on HTTP 403.
+
+One claim in that diff should **not** be carried over as written:
+
+> After a merge, GitHub revokes the session token (no remote ops available in
+> closed sessions).
+
+Measured today, this is false. After PR #504 merged at `03:40:26Z` and GitHub
+deleted the remote branch, the same bot token still performed REST reads,
+`git fetch`, and a fresh `git push` that recreated the branch. What the token
+lacks is scope, not validity: `actions:write` and `issues:write` both return 403,
+while `contents`/`pull_requests` writes succeed. Diagnosing "token revoked" sends
+the next session looking for a credential problem that does not exist; the
+capability matrix above is the accurate version.
+
+Also worth correcting while in there: the restored file's dispatch note should
+not promise an hourly sweep. Observed cron gaps today were 3.5–5.5 h against a
+declared `0 * * * *`.
