@@ -81,23 +81,27 @@
 <div class="section-h"><h2>Bookings by month</h2><span class="grow"></span><span class="meta">of the current roster</span></div>
 {{ bars(s.months, s.months[0][1] if s.months else 1) }}
 
-{# Stacked severity composition bar - design's tier mix in one strip. #}
+{# Stacked severity composition bar. The source breakdown has numbered
+   F/M grades plus venue-inferred F/M and an UNK bucket; include every bucket in
+   both the denominator and the rendered segments so the percentages describe
+   the full current roster rather than only numbered ORC degrees. #}
 {% set tb = s.tier_breakdown %}
-{% set tb_tot = (tb.F1 + tb.F2 + tb.F3 + tb.F4 + tb.F5 + tb.M1 + tb.M2 + tb.M3 + tb.M4 + tb.MM) or 1 %}
+{% set tb_tot = (tb.F1 + tb.F2 + tb.F3 + tb.F4 + tb.F5 + tb.F + tb.M1 + tb.M2 + tb.M3 + tb.M4 + tb.MM + tb.M + tb.UNK) or 1 %}
 {% set tb_segs = [
   ('F1', tb.F1), ('F2', tb.F2), ('F3', tb.F3), ('F4', tb.F4), ('F5', tb.F5),
-  ('M1', tb.M1), ('M2', tb.M2), ('M3', tb.M3), ('M4', tb.M4), ('MM', tb.MM),
+  ('F', tb.F), ('M1', tb.M1), ('M2', tb.M2), ('M3', tb.M3), ('M4', tb.M4), ('MM', tb.MM),
+  ('M', tb.M), ('UNK', tb.UNK),
 ] %}
-<div class="section-h"><h2>Severity composition</h2><span class="grow"></span><span class="meta">most-severe charge per person, F1 &rarr; MM</span></div>
+<div class="section-h"><h2>Severity composition</h2><span class="grow"></span><span class="meta">most-severe charge per person, including inferred/unknown</span></div>
 <div class="stacked">
   <div class="stacked-bar">
-    {% for k, w in tb_segs %}{% if w %}<div class="stacked-seg stacked-seg-{{ 'f' if k.startswith('F') else 'm' }} stacked-seg-{{ k | lower }}" style="flex:{{ w }}" title="{{ k }}: {{ w }} ({{ '%.1f' % (100.0 * w / tb_tot) }}%)"></div>{% endif %}{% endfor %}
+    {% for k, w in tb_segs %}{% if w %}<div class="stacked-seg stacked-seg-{{ 'f' if k.startswith('F') else ('m' if k.startswith('M') else 'u') }} stacked-seg-{{ k | lower }}" style="flex:{{ w }}" title="{{ k }}: {{ w }} ({{ '%.1f' % (100.0 * w / tb_tot) }}%)"></div>{% endif %}{% endfor %}
   </div>
   <ul class="stacked-leg">
     {% for k, w in tb_segs %}{% if w %}
     <li>
       <a class="stacked-row-link" href="{{ base_url }}/?tier={{ k | lower }}" aria-label="Show the {{ w }} people whose most serious charge is {{ k }} on the roster">
-        <span class="stacked-sw stacked-sw-{{ 'f' if k.startswith('F') else 'm' }} stacked-sw-{{ k | lower }}"></span>
+        <span class="stacked-sw stacked-sw-{{ 'f' if k.startswith('F') else ('m' if k.startswith('M') else 'u') }} stacked-sw-{{ k | lower }}"></span>
         <span class="stacked-k">{{ k }} &middot; {{ tier_max(k) }}</span>
         <span class="stacked-v">{{ "{:,}".format(w) }} <em>({{ '%.1f' % (100.0 * w / tb_tot) }}%)</em></span>
       </a>
