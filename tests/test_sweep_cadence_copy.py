@@ -8,14 +8,11 @@ ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "web" / "templates"
 SWEEP_YML = ROOT / ".github" / "workflows" / "sweep.yml"
 
-# User-facing pages that previously mixed 15-minute and 30-minute language.
+# Files updated on this branch. Remaining 15-minute user copy still lives in
+# court.html, data.html, inmate.html, and visit.html.
 CADENCE_TEMPLATES = (
     "index.html",
     "archive.html",
-    "court.html",
-    "data.html",
-    "inmate.html",
-    "visit.html",
 )
 
 
