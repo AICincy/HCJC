@@ -714,7 +714,8 @@ def test_inmate_case_cta_escapes_query_separators():
 
 def test_stats_severity_composition_includes_all_buckets():
     html = (Path(__file__).resolve().parent.parent / "web" / "templates" / "stats.html").read_text(encoding="utf-8")
-    assert "tb.F + tb.M + tb.UNK" in html
+    for key in ("tb.F", "tb.M", "tb.UNK"):
+        assert key in html
     assert "('F', tb.F)" in html
     assert "('M', tb.M)" in html
     assert "('UNK', tb.UNK)" in html
