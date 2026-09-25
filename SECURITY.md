@@ -75,8 +75,9 @@ Instead:
 
 ### Availability
 
-- Sweeps run every 15 minutes (best-effort); GitHub Actions delivery has
-  observed gaps of 2-5 hours.
+- Sweeps are scheduled twice per hour at :07 and :37 UTC (best-effort);
+  GitHub Actions delivery can still drop or delay runs, including multi-hour
+  gaps during incidents.
 - Site may lag up to 45 minutes behind live bookings during normal operation.
 - WAF throttling is documented and logged, never evaded (no proxy rotation).
 
