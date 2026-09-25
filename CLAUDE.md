@@ -433,9 +433,10 @@ or check GitHub status as shown below.
      ```bash
      gh workflow run sweep.yml -r main
      ```
-   - Waiting for the cron is the *last* resort, not a one-hour wait: `sweep.yml`
-     declares `0 * * * *` but observed gaps on 2026-09-23/24 were 3.5-5.5h
-     (starts `05:37, 11:01, 16:22, 20:00, 23:27Z`). Actions cron is best-effort.
+   - Waiting for the cron is the *last* resort, not a guaranteed 30-minute wait: `sweep.yml`
+     starts at `:07` and `:37` UTC. The earlier `0 * * * *` schedule had observed
+     gaps of 3.5-5.5h on 2026-09-23/24 (`05:37, 11:01, 16:22, 20:00, 23:27Z`).
+     Actions cron remains best-effort and can still delay or drop runs.
 
 4. If stuck > 120s: Build likely timed out or queued
    - Do NOT cancel + force-push (loses history)
