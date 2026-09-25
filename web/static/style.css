@@ -2365,6 +2365,7 @@ a.orc-code:hover { border-bottom-style: solid; }
 /* Base fallback colors by kind; per-degree classes below win when present. */
 .stacked-seg-f, .stacked-sw-f { background: var(--tier-felony-base); }
 .stacked-seg-m, .stacked-sw-m { background: var(--tier-misd-mid); }
+.stacked-seg-u, .stacked-sw-u { background: var(--fg-dim); }
 /* Degree ladder: F1 darkest red through MM palest blue. */
 .stacked-seg-f1, .stacked-sw-f1 { background: var(--tier-felony-dark); }
 .stacked-seg-f2, .stacked-sw-f2 { background: var(--tier-felony-mid); }
