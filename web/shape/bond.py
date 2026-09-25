@@ -22,10 +22,10 @@ def _bond_disparity(indexes: RosterIndexes, offenses: dict, min_n: int = BOND_DI
     """Per-statute bond dispersion rows for the /bond-disparity/ page.
 
     Consumes the pre-built ``bonds_by_code`` arrays (sorted, positive bond
-    amounts of each inmate's first-listed charge). Statutes below ``min_n``
-    are suppressed. Spread is Q3/Q1 (interquartile ratio); quartiles come
-    from ``statistics.quantiles(n=4)``. Rows sort by spread descending,
-    ties by sample size.
+    amounts of each inmate's first charge that has a valid ORC code).
+    Statutes below ``min_n`` are suppressed. Spread is Q3/Q1 (interquartile
+    ratio); quartiles come from ``statistics.quantiles(n=4)``. Rows sort
+    by spread descending, ties by sample size.
     """
     rows: list[dict] = []
     for code, vals in indexes.bonds_by_code.items():
@@ -104,6 +104,11 @@ def _bond_peer_amounts(
 
 
 def _sorted_pct(values: list[int], p: float) -> int:
+    # Callers (_bond_context) return None when len(peers) < 5, so an empty
+    # list is unreachable in production. Guard anyway so a future caller
+    # cannot hit values[-1] on [].
+    if not values:
+        raise ValueError("_sorted_pct requires a non-empty values list")
     idx = max(0, min(len(values) - 1, int(round((len(values) - 1) * p))))
     return values[idx]
 
