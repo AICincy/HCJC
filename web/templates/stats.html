@@ -99,8 +99,9 @@
   </div>
   <ul class="stacked-leg">
     {% for k, w in tb_segs %}{% if w %}
+    {% set tier_href = 'felony' if k == 'F' else ('misdemeanor' if k == 'M' else ('unknown' if k == 'UNK' else k | lower)) %}
     <li>
-      <a class="stacked-row-link" href="{{ base_url }}/?tier={{ k | lower }}" aria-label="Show the {{ w }} people whose most serious charge is {{ k }} on the roster">
+      <a class="stacked-row-link" href="{{ base_url }}/?tier={{ tier_href }}" aria-label="Show the {{ w }} people whose most serious charge is {{ k }} on the roster">
         <span class="stacked-sw stacked-sw-{{ 'f' if k.startswith('F') else ('m' if k.startswith('M') else 'u') }} stacked-sw-{{ k | lower }}"></span>
         <span class="stacked-k">{{ k }} &middot; {{ tier_max(k) }}</span>
         <span class="stacked-v">{{ "{:,}".format(w) }} <em>({{ '%.1f' % (100.0 * w / tb_tot) }}%)</em></span>
