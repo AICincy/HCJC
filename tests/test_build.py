@@ -699,3 +699,27 @@ def test_approx_age_keeps_real_late_1960s_dob():
     expected = today.year - 1970 - ((today.month, today.day) < (6, 15))
     assert build._approx_age("6/15/70") == expected
     assert build._approx_age("1/1/70") is None
+
+
+# --- Framework-review frontend nits -----------------------------------------
+
+
+def test_inmate_case_cta_escapes_query_separators():
+    html = (Path(__file__).resolve().parent.parent / "web" / "templates" / "inmate.html").read_text(encoding="utf-8")
+    assert "issues/new?template=case-data.yml&amp;title=" in html
+    assert "&amp;case_number=" in html
+    assert "&amp;defendant_name=" in html
+    assert "case-data.yml&title=" not in html
+
+
+def test_stats_severity_composition_includes_all_buckets():
+    html = (Path(__file__).resolve().parent.parent / "web" / "templates" / "stats.html").read_text(encoding="utf-8")
+    for key in ("tb.F", "tb.M", "tb.UNK"):
+        assert key in html
+    assert "('F', tb.F)" in html
+    assert "('M', tb.M)" in html
+    assert "('UNK', tb.UNK)" in html
+    assert "else 'u'" in html
+    assert "tier_href = 'felony'" in html
+    assert "('misdemeanor' if k == 'M'" in html
+    assert "('unknown' if k == 'UNK'" in html
