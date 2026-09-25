@@ -48,6 +48,9 @@
   }
 
   // (2) Shared lightbox.
+  // Contract: every page extending base.html renders #lb, #lb-img, and #lb-cap.
+  // Keep this bundle paired with that shared layout; standalone pages need their
+  // own lightbox markup before this handler is evaluated.
   var lb = document.getElementById('lb');
   var lbImg = document.getElementById('lb-img');
   var lbCap = document.getElementById('lb-cap');
