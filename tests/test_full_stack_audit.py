@@ -114,9 +114,9 @@ def test_live_parity_is_monday_schedule_and_manual_only():
     assert "permissions:\n  contents: read" in text
 
 
-def test_sweep_is_hourly_and_publishes_docs_with_deterministic_build():
+def test_sweep_runs_twice_hourly_and_publishes_docs_with_deterministic_build():
     text = _active_text(WORKFLOW_DIR / "sweep.yml")
-    assert "cron: '0 * * * *'" in text
+    assert "cron: '7,37 * * * *'" in text
     assert "python -m web.build" in text
     assert re.search(r"commit_generated_changes\.sh\s+main\s+\"[^\"]+\"\s+data/\s+docs/", text)
     assert "concurrency:" in text

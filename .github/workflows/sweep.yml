@@ -18,12 +18,12 @@ name: sweep
 
 on:
   schedule:
-    # Requested hourly, but Actions cron is best-effort: observed starts drift
-    # 3.5-5.5h apart (e.g. 05:37, 11:01, 16:22, 20:00, 23:27Z on 2026-09-23).
-    # Do not assume an hourly cadence anywhere downstream. The Python skip-gate
-    # refuses anything younger than 20 minutes. Stall detection runs out of
-    # band in staleness-watchdog.yml.
-    - cron: '0 * * * *'
+    # Request two starts per hour at :07 and :37 to avoid the top-of-hour
+    # contention pattern already observed in this repository. Actions cron is
+    # still best-effort and can drift or drop runs, but the 30-minute spacing
+    # means the Python 20-minute skip-gate does not suppress a healthy second
+    # opportunity. The separate watchdog detects longer stalls.
+    - cron: '7,37 * * * *'
   workflow_dispatch:
     inputs:
       max_surnames:
