@@ -19,7 +19,7 @@ slipped past normal cadence.
 Send-gate (mirrors the PRA loop): it dry-runs (logs only) unless both
 ``GITHUB_TOKEN`` and ``GITHUB_REPOSITORY`` are set. Dedupe: if an open issue
 with the marker title already exists it does nothing, so a cron firing every
-~15 minutes during a long freeze does not spam new issues or comments.
+~30 minutes during a long freeze does not spam new issues or comments.
 """
 
 from __future__ import annotations
@@ -91,8 +91,8 @@ def _issue_body(stale_h: float) -> str:
 
 def alert(stale_h: float | None) -> str:
     """Emit the freeze alert. Returns the action taken for logging/testing:
-    ``"ok"`` (not frozen), ``"dry-run"`` (frozen, no token), ``"exists"``
-    (issue already open), or ``"created"``."""
+    ``\"ok\"`` (not frozen), ``\"dry-run\"`` (frozen, no token), ``\"exists\"``
+    (issue already open), or ``\"created\"``."""
     if stale_h is None or stale_h < ROSTER_STALE_ALARM_HOURS:
         log.info("roster freshness OK (%s)", "unknown" if stale_h is None else f"{stale_h:.1f}h")
         return "ok"
@@ -126,7 +126,7 @@ def alert(stale_h: float | None) -> str:
 
 # C-8: the ::warning annotation below fires once per sweep cycle while the
 # roster sits in the removal-SLA window. During a multi-day WAF block that is
-# one annotation per ~15-minute cycle with no change in state -- pure spam.
+# one annotation per ~30-minute cycle with no change in state -- pure spam.
 # Throttle: at most one emission per window. State lives in a small JSON file
 # committed to the repo (the runner is ephemeral), so the throttle holds
 # across cycles; the file only changes when a warning actually fires, so the
@@ -161,9 +161,9 @@ def removal_sla_warn(stale_h: float | None, *, state_path: Path | None = None) -
     fires. It is a log annotation only (no issue), so it cannot spam during a
     multi-day WAF block; the FCRA context is that a released inmate is removed
     on the next successful sweep, and this flags when that has been delayed
-    past normal cadence. Returns ``"warn"`` when the annotation fired, ``"ok"``
+    past normal cadence. Returns ``\"warn\"`` when the annotation fired, ``\"ok\"``
     otherwise (fresh, unknown, or already at the freeze threshold), and
-    ``"throttled"`` when a warning was already emitted within the throttle
+    ``\"throttled\"`` when a warning was already emitted within the throttle
     window (C-8)."""
     if stale_h is None or stale_h < REMOVAL_SLA_HOURS or stale_h >= ROSTER_STALE_ALARM_HOURS:
         return "ok"
