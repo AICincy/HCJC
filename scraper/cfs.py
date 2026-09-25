@@ -29,9 +29,15 @@ CFS_PATH = Path("data/cfs_recent.json")
 
 
 def pull_recent(hours: int = 168, limit: int = 5000) -> list[dict]:
-    # 168h, not 48h - Cincinnati's qiik-bpks dataset lags real-time by a few
-    # days, so a 48h window often returns zero rows.
-    """Return ARREST/CITATION/OFFENSE rows from the last `hours`."""
+    # Function default is 168h (7 days): qiik-bpks lags real-time by a few
+    # days, so a 48h window often returns zero rows. The CLI default in
+    # main() is 720h (30 days) for the scheduled refresh; callers that
+    # omit hours get the shorter in-process window on purpose.
+    """Return ARREST/CITATION/OFFENSE rows from the last `hours`.
+
+    Default 168h for library callers. ``python -m scraper.cfs`` uses
+    ``--hours 720`` unless overridden.
+    """
     since = since_iso(hours=hours)
     disposition_filter = " OR ".join(f"disposition_text like '{d}'" for d in ARREST_DISPOSITIONS)
     where = f"create_time_incident > '{since}' AND ({disposition_filter})"
