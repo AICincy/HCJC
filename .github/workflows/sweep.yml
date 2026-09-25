@@ -18,12 +18,12 @@ name: sweep
 
 on:
   schedule:
-    # Request every 15 minutes, off the top-of-hour bias. Actions cron is
-    # best-effort and can still drift or drop runs. The Python skip-gate refuses
-    # anything younger than 20 minutes, so a healthy scheduler yields roughly
-    # 30-minute completed sweeps while the separate watchdog detects longer
-    # stalls.
-    - cron: '*/15 * * * *'
+    # Request two starts per hour at :07 and :37 to avoid the top-of-hour
+    # contention pattern already observed in this repository. Actions cron is
+    # still best-effort and can drift or drop runs, but the 30-minute spacing
+    # means the Python 20-minute skip-gate does not suppress a healthy second
+    # opportunity. The separate watchdog detects longer stalls.
+    - cron: '7,37 * * * *'
   workflow_dispatch:
     inputs:
       max_surnames:
