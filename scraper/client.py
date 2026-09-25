@@ -32,8 +32,8 @@ DEFAULT_CRAWL_DELAY = 0.5  # seconds between requests per worker; gates the
 # 32-worker profile.
 # Honored on 429 responses: if the server requests a longer wait, we cap it
 # at this many seconds so a misbehaving upstream can't extend the cron budget
-# indefinitely. Cron is */15 with a 20-min skip-gate; one 30s pause per worker
-# is acceptable.
+# indefinitely. The sweep starts twice per hour at :07 and :37 UTC with a
+# 20-minute skip-gate; one 30s pause per worker is acceptable.
 RETRY_AFTER_CAP_S = 30.0
 # 16 (half of the prior 32) trades sweep wall-time for WAF-block reduction.
 # HCSO's WordPress on nginx handles 16 concurrent connections without 503s,

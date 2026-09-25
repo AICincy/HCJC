@@ -2,10 +2,10 @@
 
 JCStream is a static public-records mirror of the Hamilton County, Ohio Justice
 Center inmate roster. A Python script (`web/build.py`) regenerates `docs/` from
-`data/current.json` on a GitHub Actions cron that fires every 15 minutes with a
-20-minute skip-gate (`.github/workflows/sweep.yml` cron `*/15 * * * *`; the
-sweep no-ops if `current.json` is less than 20 minutes old). Effective cadence
-is roughly 20-45 minutes; during incidents the next-run can slip past the hour.
+`data/current.json` on a GitHub Actions cron scheduled twice per hour at :07
+and :37 UTC with a 20-minute skip-gate (`.github/workflows/sweep.yml` cron
+`7,37 * * * *`). Effective cadence is roughly 30 minutes when both starts are
+delivered; during incidents, GitHub Actions can still delay or drop runs.
 The sweep also runs the HCSO scraper
 (`scraper/`) and pulls the Cincinnati Open Data feeds (nine as of 2026-07:
 three dedicated parsers plus the six-feed registry in `open_data_feeds.py`).
@@ -433,9 +433,10 @@ or check GitHub status as shown below.
      ```bash
      gh workflow run sweep.yml -r main
      ```
-   - Waiting for the cron is the *last* resort, not a one-hour wait: `sweep.yml`
-     declares `0 * * * *` but observed gaps on 2026-09-23/24 were 3.5-5.5h
-     (starts `05:37, 11:01, 16:22, 20:00, 23:27Z`). Actions cron is best-effort.
+   - Waiting for the cron is the *last* resort, not a guaranteed 30-minute wait: `sweep.yml`
+     starts at `:07` and `:37` UTC. The earlier `0 * * * *` schedule had observed
+     gaps of 3.5-5.5h on 2026-09-23/24 (`05:37, 11:01, 16:22, 20:00, 23:27Z`).
+     Actions cron remains best-effort and can still delay or drop runs.
 
 4. If stuck > 120s: Build likely timed out or queued
    - Do NOT cancel + force-push (loses history)
