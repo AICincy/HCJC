@@ -720,3 +720,6 @@ def test_stats_severity_composition_includes_all_buckets():
     assert "('M', tb.M)" in html
     assert "('UNK', tb.UNK)" in html
     assert "else 'u'" in html
+    assert "tier_href = 'felony'" in html
+    assert "('misdemeanor' if k == 'M'" in html
+    assert "('unknown' if k == 'UNK'" in html
