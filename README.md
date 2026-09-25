@@ -32,7 +32,7 @@ It reads the surname list from data/surnames.txt, queries the HCSO inmate-search
 
 The HCSO client uses 16 worker threads, a 0.5 second per-worker crawl delay, one retry, and exponential WAF backoff capped at 30 seconds. The sweep also has health guards that keep the last-good roster when list or detail retrieval is materially degraded.
 
-The sweep has a 20-minute freshness skip-gate and a 22-minute detail-phase wall-clock cap. The GitHub Actions workflow is scheduled hourly with cron 0 * * * *; GitHub Actions delivery is best-effort and can be much less frequent in practice.
+The sweep has a 20-minute freshness skip-gate and a 22-minute detail-phase wall-clock cap. The GitHub Actions workflow is scheduled twice per hour at :07 and :37 UTC (`7,37 * * * *`). GitHub Actions delivery is best-effort and can still be much less frequent in practice.
 
 The anonymized event feed is data/anon_changelog.json. It keeps identifying fields for seven days, then strips them and eventually compacts old rows into monthly summaries.
 
