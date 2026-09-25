@@ -18,9 +18,10 @@ snapshot was generated. It fires past ``DEPLOY_PENDING_ALARM_MINUTES``.
 It deliberately does NOT alarm on the raw timestamp gap (committed minus live,
 :func:`deploy_lag_minutes`). That gap equals the interval between the last two
 sweeps whenever the newest push has not deployed yet, and Actions cron drifts
-3.5-5.5h in practice, so a gap-based alarm fired on essentially every sweep
-(issue #506: "258 minutes behind" at 03:54:18Z; Pages finished the deploy 27s
-later). The gap is still reported in the issue body for context.
+3.5-5.5h in practice before the current twice-hourly :07/:37 schedule, so a
+gap-based alarm fired on essentially every sweep (issue #506: "258 minutes
+behind" at 03:54:18Z; Pages finished the deploy 27s later). The gap is still
+reported in the issue body for context.
 
 Where it runs
 -------------
