@@ -1,0 +1,21 @@
+name: delete-hourly-copy-helper
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/delete-hourly-copy-helper.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete truncated helper branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh api -X DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/fix/hourly-copy-helper"
