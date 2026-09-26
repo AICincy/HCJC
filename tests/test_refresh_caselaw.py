@@ -41,6 +41,31 @@ def test_top_codes_counts_and_ranks(tmp_path, monkeypatch):
     assert "" not in codes
 
 
+def test_load_existing_cache_keeps_prior_hits(tmp_path, monkeypatch):
+    payload = {
+        "generated_utc": "2026-09-01T00:00:00Z",
+        "by_code": {"2913.02": [{"case_name": "State v. Prior"}]},
+    }
+    path = tmp_path / "orc_caselaw.json"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    monkeypatch.setattr(rc, "DATA", tmp_path)
+    assert rc.load_existing_cache()["2913.02"][0]["case_name"] == "State v. Prior"
+
+
+def test_load_existing_cache_missing_or_malformed(tmp_path, monkeypatch):
+    monkeypatch.setattr(rc, "DATA", tmp_path)
+    assert rc.load_existing_cache() == {}
+    (tmp_path / "orc_caselaw.json").write_text("{not-json", encoding="utf-8")
+    assert rc.load_existing_cache() == {}
+
+
+def test_budget_seconds_reads_env(monkeypatch):
+    monkeypatch.setenv("CASELAW_BUDGET_SECONDS", "90")
+    assert rc._budget_seconds() == 90.0
+    monkeypatch.setenv("CASELAW_BUDGET_SECONDS", "nope")
+    assert rc._budget_seconds() == float(rc.DEFAULT_BUDGET_SECONDS)
+
+
 def test_fetch_for_code_success(monkeypatch):
     import httpx
 
