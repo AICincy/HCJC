@@ -149,3 +149,15 @@ def test_clerk_pra_packets_are_daily_drafts_not_smtp():
     assert "contents: write" in text
     assert "commit_generated_changes.sh" in text
     assert "pra_requests/" in text
+
+
+def test_dated_audit_output_markdown_is_archived():
+    audit_dir = REPO_ROOT / "audit-output"
+    readme = (audit_dir / "README.md").read_text(encoding="utf-8")
+    assert readme.startswith("# ARCHIVED — not current")
+    assert "AUDIT-CONTRACT.md" in readme
+    for path in sorted(audit_dir.rglob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        assert text.startswith("# ARCHIVED — not current"), path
+        assert "AUDIT-CONTRACT.md" in text, path
+        assert len(text) < 800, path

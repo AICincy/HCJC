@@ -3,7 +3,7 @@
 No network is used: the probe fetch is monkeypatched, so the stamp extraction,
 strict parsing, lag decision, multi-page policy, and fail-closed HTTP behavior
 are exercised against fixture pages.  The cases intentionally mirror the
-on-call stress matrix in ``audit-output/full-stack-live-parity-2026-09-24.md``.
+freshness cases in ``scripts/verify_live_html_freshness.py`` and ``AUDIT-CONTRACT.md``.
 """
 
 import json
