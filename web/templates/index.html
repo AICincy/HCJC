@@ -26,7 +26,7 @@
 <section aria-labelledby="roster-tool-h">
   <div class="section-h">
     <h1 id="roster-tool-h">Search the roster</h1>
-    <span class="meta">Roster {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}{% if oldest_detail_utc %}; details oldest {{ human_utc(oldest_detail_utc) }}{% endif %}.</span>
+    <span class="meta">Roster {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}{% if roster_stale.oldest_detail_utc %}; details oldest {{ human_utc(roster_stale.oldest_detail_utc) }}{% endif %}.</span>
   </div>
   <p class="roster-attribution">JCStream is an independent public-record mirror, not a government site.</p>
   {% if roster_preview %}<p class="roster-preview-note">Browsing {{ homepage_bookings }} recent bookings from the current custody roster. Search covers the full roster. <a href="{{ base_url }}/archive/">Browse and filter all {{ snapshot.inmate_count }} records</a>.</p>{% endif %}

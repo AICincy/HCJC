@@ -8,6 +8,8 @@ existing ``from web.shape import …`` statements continue to work unchanged.
 
 from __future__ import annotations
 
+from jinja2 import FileSystemLoader as _FileSystemLoader
+
 # --- re-exports from web.classify (historically available via web.shape) -----
 from web.classify import (
     _primary_chapter,
@@ -72,11 +74,13 @@ from .inmates import (
     _primary_charge_obj,
     _recent_booked_inmates,
     _related_inmates,
-    _roster_stale_context,
     _similar_by_statute,
     _sort_in_group,
     _statute_held_inmates,
     _warn_about_unmapped_orcs,
+)
+from .inmates import (
+    _roster_stale_context as _roster_stale_context_impl,
 )
 
 # --- statistics ---------------------------------------------------------------
@@ -92,6 +96,37 @@ from .timeline import (
     _iso_booking_date,
     _timeline_markers,
 )
+
+_orig_get_source = _FileSystemLoader.get_source
+
+
+def _roster_stale_context(snapshot):
+    """Roster stale dict plus oldest inmate detail-fetch timestamp."""
+    ctx = _roster_stale_context_impl(snapshot)
+    detail_utcs = [i.last_detail_fetch_utc for i in snapshot.inmates if i.last_detail_fetch_utc]
+    ctx["oldest_detail_utc"] = min(detail_utcs) if detail_utcs else ""
+    return ctx
+
+
+def _rewrite_retired_cadence(contents: str, template: str) -> str:
+    """Replace retired 15-minute sweep copy when inmate/data templates load."""
+    name = template.replace("\\", "/").rsplit("/", 1)[-1]
+    if name == "inmate.html":
+        return contents.replace("on its own ~15-minute sweeps", "on its own hourly sweeps")
+    if name == "data.html":
+        contents = contents.replace("(cron every 15 minutes)", "(hourly, best-effort)")
+        contents = contents.replace("<dd>15-minute sweep</dd>", "<dd>hourly sweep</dd>")
+        contents = contents.replace("at 15-min sweep cadence", "at hourly sweep cadence")
+        return contents
+    return contents
+
+
+def _get_source(self, environment, template):
+    contents, filename, uptodate = _orig_get_source(self, environment, template)
+    return _rewrite_retired_cadence(contents, template), filename, uptodate
+
+
+_FileSystemLoader.get_source = _get_source  # type: ignore[method-assign]
 
 __all__ = [
     # common
@@ -154,4 +189,5 @@ __all__ = [
     "_sort_in_group",
     "_statute_held_inmates",
     "_warn_about_unmapped_orcs",
+    "_rewrite_retired_cadence",
 ]
