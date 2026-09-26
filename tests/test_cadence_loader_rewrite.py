@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from web.shape import _rewrite_retired_cadence, _roster_stale_context
 from scraper.models import Inmate, Snapshot
+from web.shape import _rewrite_retired_cadence, _roster_stale_context
 
 
 def test_inmate_template_rewrite() -> None:
