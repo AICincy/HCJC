@@ -31,9 +31,9 @@ def _first_checkout_sets_ref(text: str) -> bool:
             if stripped == "":
                 continue
             indent = len(nxt) - len(nxt.lstrip(" "))
-            if indent <= base_indent and (stripped.startswith("- ") or re.match(r"^\S", nxt)):
+            if indent <= base_indent and (stripped.startswith("- ") or re.match(r"^\\S", nxt)):
                 break
-            if re.match(r"^\s*ref\s*:", nxt):
+            if re.match(r"^\\s*ref\\s*:", nxt):
                 return True
         return False
     raise AssertionError("no actions/checkout step found")
@@ -57,17 +57,20 @@ def test_pages_deploy_gated_to_main() -> None:
 
 
 def test_publisher_still_refuses_merge_fallback() -> None:
-    """The shared publisher must abort a conflicted rebase, never merge it."""
+    """The shared publisher must never `git merge` a conflicted rebase."""
     script = (REPO_ROOT / "scripts" / "commit_generated_changes.sh").read_text(encoding="utf-8")
     assert "git rebase --abort" in script
     assert "refusing merge fallback" in script
+    assert "git merge" not in script
+    assert "resolve_generated_rebase_conflicts" in script
+    assert "generated_utc" in script
 
 
 def test_branch_serve_publishers_commit_docs() -> None:
     """Legacy Pages publishes the committed docs/ tree; publishers must write it.
 
     Issue #496: sweep/rebuild built into /tmp and committed only data/, so every
-    pages-build-deployment "success" republished the frozen docs/ skeleton while
+    pages-build-deployment \"success\" republished the frozen docs/ skeleton while
     main's roster stayed current. Guard both the build out path and the commit
     path list.
     """
@@ -80,6 +83,6 @@ def test_branch_serve_publishers_commit_docs() -> None:
         # The publisher argv must include docs/ so the branch-serve deploy
         # receives the rebuilt site, not only source data/.
         assert re.search(
-            r"commit_generated_changes\.sh\s+\S+\s+\"[^\"]+\"\s+.*\bdocs/",
+            r"commit_generated_changes\\.sh\\s+\\S+\\s+\"[^\"]+\"\\s+.*\\bdocs/",
             text,
         ), f"{name}: commit_generated_changes.sh must publish docs/"
