@@ -1,0 +1,56 @@
+name: purge-codeql-caches
+
+# One-shot operator job. Deletes CodeQL overlay caches only.
+# Leaves setup-python pip caches and the backend npm cache alone.
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Delete codeql-overlay-base-database caches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set +e
+          deleted=0
+          failed=0
+          for _ in 1 2 3 4 5; do
+            mapfile -t ids < <(
+              gh cache list --limit 100 --json id,key \
+                --jq '.[] | select(.key | startswith("codeql-overlay-base-database-")) | .id'
+            )
+            if [ "${#ids[@]}" -eq 0 ]; then
+              break
+            fi
+            for id in "${ids[@]}"; do
+              if gh cache delete "$id"; then
+                echo "deleted $id"
+                deleted=$((deleted + 1))
+              else
+                echo "failed $id" >&2
+                failed=$((failed + 1))
+              fi
+            done
+          done
+          echo "deleted=$deleted failed=$failed"
+          remaining=$(gh cache list --limit 100 --json key --jq '[.[] | select(.key | startswith("codeql-overlay-base-database-"))] | length')
+          echo "remaining_codeql=$remaining"
+          kept=$(gh cache list --limit 100 --json key --jq '.[].key')
+          echo "remaining_keys:"
+          echo "$kept"
+          if [ "$remaining" != "0" ]; then
+            echo "::error::CodeQL caches still present: $remaining"
+            exit 1
+          fi
+          echo "$kept" | grep -q 'setup-python-Linux-x64-24.04-Ubuntu-python-3.14' || echo "::warning::3.14 pip cache missing"
+          echo "$kept" | grep -q 'setup-python-Linux-x64-24.04-Ubuntu-python-3.13' || echo "::warning::3.13 pip cache missing"
+          echo "$kept" | grep -q 'node-cache-Linux-x64-npm-' || echo "::warning::npm cache missing"

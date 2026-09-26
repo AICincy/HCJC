@@ -25,6 +25,7 @@ EXPECTED_WORKFLOWS = {
     "lint.yml",
     "live-parity.yml",
     "pages.yml",
+    "purge_codeql_caches.yml",
     "rebuild.yml",
     "refresh_caselaw.yml",
     "staleness-watchdog.yml",
