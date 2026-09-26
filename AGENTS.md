@@ -10,7 +10,9 @@ feeds into a static website.
   limited to the requested task. Change CSS, templates, or design only when the
   task authorizes that work.
 - Read `README.md` for orientation, `CLAUDE.md` for existing project guidance,
-  and relevant entries in `DECISIONS.md`. Some historical operational notes are
+  `AUDIT-CONTRACT.md` for live audit authority, and relevant entries in
+  `DECISIONS.md`. Dated files under `audit-output/` are archived stubs, not
+  current inventory. Some historical operational notes are
   superseded: verify behavior against current code and workflows. In particular,
   Live Pages serves the committed `docs/` tree from `main` (branch-serve).
   `.github/workflows/pages.yml` is a secondary verified-artifact path, not the
