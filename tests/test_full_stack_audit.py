@@ -142,8 +142,10 @@ def test_sweep_runs_twice_hourly_and_publishes_docs_with_deterministic_build():
 def test_clerk_pra_packets_are_daily_drafts_not_smtp():
     text = _active_text(WORKFLOW_DIR / "clerk_pra_packets.yml")
     assert "cron: '0 9 * * *'" in text
-    assert "python -m scraper.clerk_pra" in text
+    assert "python -m scraper.clerk_pra_track" in text
     assert "scraper.pra" not in text
     assert "scraper.pra_capias" not in text
     assert "JCSTREAM_PRA_SMTP_HOST" not in text
-    assert "contents: write" not in text
+    assert "contents: write" in text
+    assert "commit_generated_changes.sh" in text
+    assert "pra_requests/" in text
