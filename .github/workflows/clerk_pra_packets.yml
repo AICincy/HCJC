@@ -1,14 +1,21 @@
 name: clerk-pra-packets
 
-# Manual only: builds a dated folder of per-inmate draft ORC 149.43 request
-# letters to the Hamilton County Clerk of Courts (scraper/clerk_pra.py) and
-# uploads it as a workflow artifact. The letters are drafts; a human fills
-# in the sender block and sends them. Nothing is committed.
+# Daily draft packet plus manual dispatch. Builds a dated folder of
+# per-inmate ORC 149.43 request letters to the Hamilton County Clerk of
+# Courts (scraper/clerk_pra.py) and uploads it as a workflow artifact.
+# The letters are drafts; a human fills in the sender block and sends them.
+# JCStream never sends. Nothing is committed.
+#
+# This is the HCJC replacement for JCStream pra_daily.yml (SMTP send).
+# Do not add scraper.pra / pra_capias SMTP transport here.
 #
 # Permissions deliberately NOT requested:
 #   contents: write -- output goes to the artifact, never the repo.
 
 on:
+  schedule:
+    # 09:00 UTC = 05:00 EDT. Drafts only; human send remains the gate.
+    - cron: '0 9 * * *'
   workflow_dispatch:
     inputs:
       date:

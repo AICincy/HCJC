@@ -46,6 +46,7 @@ def test_workflow_inventory_is_explicit_and_lint_is_renamed():
     assert "pylint.yml" not in actual
     assert "deno.yml" not in actual
     assert "purge_codeql_caches.yml" not in actual
+    assert "pra_daily.yml" not in actual
 
 
 def test_every_active_action_reference_is_a_full_sha():
@@ -134,3 +135,15 @@ def test_sweep_runs_twice_hourly_and_publishes_docs_with_deterministic_build():
     assert re.search(r"commit_generated_changes\.sh\s+main\s+\"[^\"]+\"\s+data/\s+docs/", text)
     assert "concurrency:" in text
     assert "timeout-minutes: 50" in text
+    assert "repository_dispatch:" in text
+    assert "jcstream-sweep" in text
+
+
+def test_clerk_pra_packets_are_daily_drafts_not_smtp():
+    text = _active_text(WORKFLOW_DIR / "clerk_pra_packets.yml")
+    assert "cron: '0 9 * * *'" in text
+    assert "python -m scraper.clerk_pra" in text
+    assert "scraper.pra" not in text
+    assert "scraper.pra_capias" not in text
+    assert "JCSTREAM_PRA_SMTP_HOST" not in text
+    assert "contents: write" not in text
