@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-09-25T04:32:54Z",
+  "generated_utc": "2026-09-26T17:09:39Z",
   "source": "CourtListener REST API v4 (Ohio appellate courts, published opinions only)",
   "by_code": {
     "2913.02": [
@@ -30,31 +30,47 @@
     ],
     "2925.11": [
       {
+        "case_name": "State v. Martin",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3778",
+        "neutral_cite": "2026 Ohio 3778",
+        "url": "https://www.courtlistener.com/opinion/10983971/state-v-martin/"
+      },
+      {
+        "case_name": "State v. Woodley",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3779",
+        "neutral_cite": "2026 Ohio 3779",
+        "url": "https://www.courtlistener.com/opinion/10983970/state-v-woodley/"
+      },
+      {
         "case_name": "State v. Styers",
         "court": "Ohio Ct. App.",
         "date_filed": "2026-09-22",
         "citation": "2026 Ohio 3726",
         "neutral_cite": "2026 Ohio 3726",
         "url": "https://www.courtlistener.com/opinion/10981395/state-v-styers/"
-      },
-      {
-        "case_name": "State v. Wilson",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3695",
-        "neutral_cite": "2026 Ohio 3695",
-        "url": "https://www.courtlistener.com/opinion/10978386/state-v-wilson/"
-      },
-      {
-        "case_name": "State v. Allen",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3691",
-        "neutral_cite": "2026 Ohio 3691",
-        "url": "https://www.courtlistener.com/opinion/10978262/state-v-allen/"
       }
     ],
     "2903.13": [
+      {
+        "case_name": "State v. Smith",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3764",
+        "neutral_cite": "2026 Ohio 3764",
+        "url": "https://www.courtlistener.com/opinion/10983601/state-v-smith/"
+      },
+      {
+        "case_name": "State v. Toran",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3763",
+        "neutral_cite": "2026 Ohio 3763",
+        "url": "https://www.courtlistener.com/opinion/10983600/state-v-toran/"
+      },
       {
         "case_name": "State v. Pullie",
         "court": "Ohio Ct. App.",
@@ -62,22 +78,6 @@
         "citation": "2026 Ohio 3717",
         "neutral_cite": "2026 Ohio 3717",
         "url": "https://www.courtlistener.com/opinion/10980997/state-v-pullie/"
-      },
-      {
-        "case_name": "State v. Bell",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-16",
-        "citation": "2026 Ohio 3614",
-        "neutral_cite": "2026 Ohio 3614",
-        "url": "https://www.courtlistener.com/opinion/10974621/state-v-bell/"
-      },
-      {
-        "case_name": "State v. Malinowski",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-15",
-        "citation": "2026 Ohio 3603",
-        "neutral_cite": "2026 Ohio 3603",
-        "url": "https://www.courtlistener.com/opinion/10974373/state-v-malinowski/"
       }
     ],
     "2903.11": [
@@ -106,32 +106,6 @@
         "url": "https://www.courtlistener.com/opinion/10973200/state-v-holley/"
       }
     ],
-    "2925.03": [
-      {
-        "case_name": "State v. Allen",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3691",
-        "neutral_cite": "2026 Ohio 3691",
-        "url": "https://www.courtlistener.com/opinion/10978262/state-v-allen/"
-      },
-      {
-        "case_name": "State v. Duncan",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3680",
-        "neutral_cite": "2026 Ohio 3680",
-        "url": "https://www.courtlistener.com/opinion/10978216/state-v-duncan/"
-      },
-      {
-        "case_name": "State v. Watson",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3682",
-        "neutral_cite": "2026 Ohio 3682",
-        "url": "https://www.courtlistener.com/opinion/10978211/state-v-watson/"
-      }
-    ],
     "2909.06": [
       {
         "case_name": "State v. Fontanez",
@@ -156,6 +130,32 @@
         "citation": "2026 Ohio 2543",
         "neutral_cite": "2026 Ohio 2543",
         "url": "https://www.courtlistener.com/opinion/10927915/state-v-lewis/"
+      }
+    ],
+    "2925.03": [
+      {
+        "case_name": "State v. Martin",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3778",
+        "neutral_cite": "2026 Ohio 3778",
+        "url": "https://www.courtlistener.com/opinion/10983971/state-v-martin/"
+      },
+      {
+        "case_name": "State v. Woodley",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3779",
+        "neutral_cite": "2026 Ohio 3779",
+        "url": "https://www.courtlistener.com/opinion/10983970/state-v-woodley/"
+      },
+      {
+        "case_name": "State v. Allen",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-21",
+        "citation": "2026 Ohio 3691",
+        "neutral_cite": "2026 Ohio 3691",
+        "url": "https://www.courtlistener.com/opinion/10978262/state-v-allen/"
       }
     ],
     "2921.31": [
@@ -186,28 +186,28 @@
     ],
     "2923.13": [
       {
-        "case_name": "State v. Byrd",
+        "case_name": "State v. Martin",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-18",
-        "citation": "2026 Ohio 3664",
-        "neutral_cite": "2026 Ohio 3664",
-        "url": "https://www.courtlistener.com/opinion/10976929/state-v-byrd/"
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3778",
+        "neutral_cite": "2026 Ohio 3778",
+        "url": "https://www.courtlistener.com/opinion/10983971/state-v-martin/"
       },
       {
-        "case_name": "State v. Replogle",
+        "case_name": "State v. Woodley",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-18",
-        "citation": "2026 Ohio 3671",
-        "neutral_cite": "2026 Ohio 3671",
-        "url": "https://www.courtlistener.com/opinion/10976926/state-v-replogle/"
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3779",
+        "neutral_cite": "2026 Ohio 3779",
+        "url": "https://www.courtlistener.com/opinion/10983970/state-v-woodley/"
       },
       {
-        "case_name": "State v. Bush",
+        "case_name": "State v. Johnson",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-18",
-        "citation": "2026 Ohio 3652",
-        "neutral_cite": "2026 Ohio 3652",
-        "url": "https://www.courtlistener.com/opinion/10976725/state-v-bush/"
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3760",
+        "neutral_cite": "2026 Ohio 3760",
+        "url": "https://www.courtlistener.com/opinion/10983603/state-v-johnson/"
       }
     ],
     "2925.14": [
@@ -264,54 +264,28 @@
     ],
     "0001.00": [
       {
+        "case_name": "Ross-Voet v. Neighborhood Properties, Inc.",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3781",
+        "neutral_cite": "2026 Ohio 3781",
+        "url": "https://www.courtlistener.com/opinion/10983974/ross-voet-v-neighborhood-properties-inc/"
+      },
+      {
+        "case_name": "State v. Woodley",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3779",
+        "neutral_cite": "2026 Ohio 3779",
+        "url": "https://www.courtlistener.com/opinion/10983970/state-v-woodley/"
+      },
+      {
         "case_name": "State ex rel. Kidd v. Clinton Cty. Bd. of Elections",
         "court": "Ohio",
         "date_filed": "2026-09-18",
         "citation": "2026 Ohio 3663",
         "neutral_cite": "2026 Ohio 3663",
         "url": "https://www.courtlistener.com/opinion/10976954/state-ex-rel-kidd-v-clinton-cty-bd-of-elections/"
-      },
-      {
-        "case_name": "State v. Shabazz",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-17",
-        "citation": "2026 Ohio 3630",
-        "neutral_cite": "2026 Ohio 3630",
-        "url": "https://www.courtlistener.com/opinion/10975782/state-v-shabazz/"
-      },
-      {
-        "case_name": "State v. Efford",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-14",
-        "citation": "2026 Ohio 3574",
-        "neutral_cite": "2026 Ohio 3574",
-        "url": "https://www.courtlistener.com/opinion/10973202/state-v-efford/"
-      }
-    ],
-    "2919.25": [
-      {
-        "case_name": "G.R. v. B.H.",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-18",
-        "citation": "2026 Ohio 3666",
-        "neutral_cite": "2026 Ohio 3666",
-        "url": "https://www.courtlistener.com/opinion/10976933/gr-v-bh/"
-      },
-      {
-        "case_name": "State v. Newton",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-18",
-        "citation": "2026 Ohio 3669",
-        "neutral_cite": "2026 Ohio 3669",
-        "url": "https://www.courtlistener.com/opinion/10976927/state-v-newton/"
-      },
-      {
-        "case_name": "Weilbacher v. Weilbacher",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-17",
-        "citation": "2026 Ohio 3646",
-        "neutral_cite": "2026 Ohio 3646",
-        "url": "https://www.courtlistener.com/opinion/10975798/weilbacher-v-weilbacher/"
       }
     ],
     "2911.21": [
@@ -330,6 +304,84 @@
         "citation": "2026 Ohio 3640",
         "neutral_cite": "2026 Ohio 3640",
         "url": "https://www.courtlistener.com/opinion/10975783/state-v-mcdaniel/"
+      },
+      {
+        "case_name": "State v. Butler",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-14",
+        "citation": "2026 Ohio 3585",
+        "neutral_cite": "2026 Ohio 3585",
+        "url": "https://www.courtlistener.com/opinion/10973203/state-v-butler/"
+      }
+    ],
+    "2919.25": [
+      {
+        "case_name": "State v. McGraw",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3756",
+        "neutral_cite": "2026 Ohio 3756",
+        "url": "https://www.courtlistener.com/opinion/10983255/state-v-mcgraw/"
+      },
+      {
+        "case_name": "G.R. v. B.H.",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-18",
+        "citation": "2026 Ohio 3666",
+        "neutral_cite": "2026 Ohio 3666",
+        "url": "https://www.courtlistener.com/opinion/10976933/gr-v-bh/"
+      },
+      {
+        "case_name": "State v. Newton",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-18",
+        "citation": "2026 Ohio 3669",
+        "neutral_cite": "2026 Ohio 3669",
+        "url": "https://www.courtlistener.com/opinion/10976927/state-v-newton/"
+      }
+    ],
+    "4511.19": [
+      {
+        "case_name": "State v. Martin",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3778",
+        "neutral_cite": "2026 Ohio 3778",
+        "url": "https://www.courtlistener.com/opinion/10983971/state-v-martin/"
+      },
+      {
+        "case_name": "State v. Mitchell",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3757",
+        "neutral_cite": "2026 Ohio 3757",
+        "url": "https://www.courtlistener.com/opinion/10983254/state-v-mitchell/"
+      },
+      {
+        "case_name": "State v. Jamison",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-21",
+        "citation": "2026 Ohio 3676",
+        "neutral_cite": "2026 Ohio 3676",
+        "url": "https://www.courtlistener.com/opinion/10978215/state-v-jamison/"
+      }
+    ],
+    "2921.331": [
+      {
+        "case_name": "State v. Hess",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-24",
+        "citation": "2026 Ohio 3734",
+        "neutral_cite": "2026 Ohio 3734",
+        "url": "https://www.courtlistener.com/opinion/10983038/state-v-hess/"
+      },
+      {
+        "case_name": "State v. White",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-21",
+        "citation": "2026 Ohio 3675",
+        "neutral_cite": "2026 Ohio 3675",
+        "url": "https://www.courtlistener.com/opinion/10978212/state-v-white/"
       },
       {
         "case_name": "State v. Butler",
@@ -364,58 +416,6 @@
         "citation": "2026 Ohio 3557",
         "neutral_cite": "2026 Ohio 3557",
         "url": "https://www.courtlistener.com/opinion/10972108/state-v-rutherford/"
-      }
-    ],
-    "4511.19": [
-      {
-        "case_name": "State v. Jamison",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3676",
-        "neutral_cite": "2026 Ohio 3676",
-        "url": "https://www.courtlistener.com/opinion/10978215/state-v-jamison/"
-      },
-      {
-        "case_name": "Cleveland v. McClairn",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-17",
-        "citation": "2026 Ohio 3641",
-        "neutral_cite": "2026 Ohio 3641",
-        "url": "https://www.courtlistener.com/opinion/10975795/cleveland-v-mcclairn/"
-      },
-      {
-        "case_name": "State v. Malinowski",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-15",
-        "citation": "2026 Ohio 3603",
-        "neutral_cite": "2026 Ohio 3603",
-        "url": "https://www.courtlistener.com/opinion/10974373/state-v-malinowski/"
-      }
-    ],
-    "2921.331": [
-      {
-        "case_name": "State v. Hess",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-24",
-        "citation": "2026 Ohio 3734",
-        "neutral_cite": "2026 Ohio 3734",
-        "url": "https://www.courtlistener.com/opinion/10983038/state-v-hess/"
-      },
-      {
-        "case_name": "State v. White",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3675",
-        "neutral_cite": "2026 Ohio 3675",
-        "url": "https://www.courtlistener.com/opinion/10978212/state-v-white/"
-      },
-      {
-        "case_name": "State v. Butler",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-14",
-        "citation": "2026 Ohio 3585",
-        "neutral_cite": "2026 Ohio 3585",
-        "url": "https://www.courtlistener.com/opinion/10973203/state-v-butler/"
       }
     ],
     "2911.01": [
@@ -472,6 +472,14 @@
     ],
     "0000.00": [
       {
+        "case_name": "Favaron v. Durrani",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3761",
+        "neutral_cite": "2026 Ohio 3761",
+        "url": "https://www.courtlistener.com/opinion/10983604/favaron-v-durrani/"
+      },
+      {
         "case_name": "Jackson-Essiet v. Essiet",
         "court": "Ohio Ct. App.",
         "date_filed": "2026-09-23",
@@ -486,40 +494,6 @@
         "citation": "2026 Ohio 3684",
         "neutral_cite": "2026 Ohio 3684",
         "url": "https://www.courtlistener.com/opinion/10978209/wagner-v-wagner/"
-      },
-      {
-        "case_name": "Williams v. Toledo Transformation, L.L.C.",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-15",
-        "citation": "2026 Ohio 3609",
-        "neutral_cite": "2026 Ohio 3609",
-        "url": "https://www.courtlistener.com/opinion/10974374/williams-v-toledo-transformation-llc/"
-      }
-    ],
-    "2919.27": [
-      {
-        "case_name": "State v. Kaman",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-08-17",
-        "citation": "2026 Ohio 3160",
-        "neutral_cite": "2026 Ohio 3160",
-        "url": "https://www.courtlistener.com/opinion/10951916/state-v-kaman/"
-      },
-      {
-        "case_name": "State v. Gibson",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-08-14",
-        "citation": "2026 Ohio 3140",
-        "neutral_cite": "2026 Ohio 3140",
-        "url": "https://www.courtlistener.com/opinion/10948710/state-v-gibson/"
-      },
-      {
-        "case_name": "State v. Short",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-08-10",
-        "citation": "2026 Ohio 3063",
-        "neutral_cite": "2026 Ohio 3063",
-        "url": "https://www.courtlistener.com/opinion/10943870/state-v-short/"
       }
     ],
     "2903.02": [
@@ -548,32 +522,33 @@
         "url": "https://www.courtlistener.com/opinion/10974353/state-v-gray/"
       }
     ],
-    "2907.02": [
+    "2919.27": [
       {
-        "case_name": "State v. Neff",
+        "case_name": "State v. Kaman",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-22",
-        "citation": "2026 Ohio 3719",
-        "neutral_cite": "2026 Ohio 3719",
-        "url": "https://www.courtlistener.com/opinion/10980995/state-v-neff/"
+        "date_filed": "2026-08-17",
+        "citation": "2026 Ohio 3160",
+        "neutral_cite": "2026 Ohio 3160",
+        "url": "https://www.courtlistener.com/opinion/10951916/state-v-kaman/"
       },
       {
-        "case_name": "State v. Ruiter",
+        "case_name": "State v. Gibson",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3718",
-        "neutral_cite": "2026 Ohio 3718",
-        "url": "https://www.courtlistener.com/opinion/10980996/state-v-ruiter/"
+        "date_filed": "2026-08-14",
+        "citation": "2026 Ohio 3140",
+        "neutral_cite": "2026 Ohio 3140",
+        "url": "https://www.courtlistener.com/opinion/10948710/state-v-gibson/"
       },
       {
-        "case_name": "In re J.Z.",
+        "case_name": "State v. Short",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-18",
-        "citation": "2026 Ohio 3667",
-        "neutral_cite": "2026 Ohio 3667",
-        "url": "https://www.courtlistener.com/opinion/10976932/in-re-jz/"
+        "date_filed": "2026-08-10",
+        "citation": "2026 Ohio 3063",
+        "neutral_cite": "2026 Ohio 3063",
+        "url": "https://www.courtlistener.com/opinion/10943870/state-v-short/"
       }
     ],
+    "2907.02": [],
     "2921.33": [
       {
         "case_name": "State v. Riefers",
@@ -602,28 +577,28 @@
     ],
     "2923.12": [
       {
+        "case_name": "State v. Johnson",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3760",
+        "neutral_cite": "2026 Ohio 3760",
+        "url": "https://www.courtlistener.com/opinion/10983603/state-v-johnson/"
+      },
+      {
+        "case_name": "State v. Temple",
+        "court": "Ohio Ct. App.",
+        "date_filed": "2026-09-25",
+        "citation": "2026 Ohio 3758",
+        "neutral_cite": "2026 Ohio 3758",
+        "url": "https://www.courtlistener.com/opinion/10983253/state-v-temple/"
+      },
+      {
         "case_name": "State v. Krouse",
         "court": "Ohio Ct. App.",
         "date_filed": "2026-09-22",
         "citation": "2026 Ohio 3700",
         "neutral_cite": "2026 Ohio 3700",
         "url": "https://www.courtlistener.com/opinion/10979353/state-v-krouse/"
-      },
-      {
-        "case_name": "State v. Byrd",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-18",
-        "citation": "2026 Ohio 3664",
-        "neutral_cite": "2026 Ohio 3664",
-        "url": "https://www.courtlistener.com/opinion/10976929/state-v-byrd/"
-      },
-      {
-        "case_name": "State v. Meyers",
-        "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-18",
-        "citation": "2026 Ohio 3655",
-        "neutral_cite": "2026 Ohio 3655",
-        "url": "https://www.courtlistener.com/opinion/10976723/state-v-meyers/"
       }
     ],
     "2911.12": [
@@ -756,30 +731,30 @@
         "url": "https://www.courtlistener.com/opinion/10973200/state-v-holley/"
       }
     ],
-    "2923.02": [
+    "2921.13": [
       {
-        "case_name": "State v. Ruiter",
+        "case_name": "State v. Doherty",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3718",
-        "neutral_cite": "2026 Ohio 3718",
-        "url": "https://www.courtlistener.com/opinion/10980996/state-v-ruiter/"
+        "date_filed": "2026-09-16",
+        "citation": "2026 Ohio 3615",
+        "neutral_cite": "2026 Ohio 3615",
+        "url": "https://www.courtlistener.com/opinion/10974620/state-v-doherty/"
       },
       {
-        "case_name": "State v. Dennis",
+        "case_name": "State v. Ford",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3677",
-        "neutral_cite": "2026 Ohio 3677",
-        "url": "https://www.courtlistener.com/opinion/10978217/state-v-dennis/"
+        "date_filed": "2026-09-15",
+        "citation": "2026 Ohio 3605",
+        "neutral_cite": "2026 Ohio 3605",
+        "url": "https://www.courtlistener.com/opinion/10974378/state-v-ford/"
       },
       {
-        "case_name": "State v. Duncan",
+        "case_name": "State v. Robinson",
         "court": "Ohio Ct. App.",
-        "date_filed": "2026-09-21",
-        "citation": "2026 Ohio 3680",
-        "neutral_cite": "2026 Ohio 3680",
-        "url": "https://www.courtlistener.com/opinion/10978216/state-v-duncan/"
+        "date_filed": "2026-07-15",
+        "citation": "2026 Ohio 2707",
+        "neutral_cite": "2026 Ohio 2707",
+        "url": "https://www.courtlistener.com/opinion/10931950/state-v-robinson/"
       }
     ]
   }
