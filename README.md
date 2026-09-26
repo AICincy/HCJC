@@ -313,7 +313,7 @@ The primary GitHub Actions workflows are:
 
 | Workflow | Trigger | Purpose |
 |---|---|
-| sweep.yml | hourly schedule plus manual dispatch | scrape, refresh feeds, correlate, build, commit generated data/docs, monitor source availability |
+| sweep.yml | cron `7,37`; `repository_dispatch` `jcstream-sweep`; `workflow_dispatch` | scrape, refresh feeds, correlate, build, commit generated data/docs, monitor source availability |
 | ci.yml | push to main, excluding data/docs-only changes | main-branch verification: ruff, mypy, pytest, dependency audit, evidence verification, smoke/build checks |
 | lint.yml | pull requests | fast ruff + pytest feedback |
 | staleness-watchdog.yml | scheduled | independent freshness/freeze/deploy-staleness checks |
