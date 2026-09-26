@@ -35,6 +35,10 @@ on:
         type: boolean
         required: false
         default: false
+  # External clock (PAT, Grok automation, or other dispatcher) uses this so
+  # freshness does not depend on GitHub delivering the schedule cron.
+  repository_dispatch:
+    types: [jcstream-sweep]
 
 permissions:
   contents: write
