@@ -13,8 +13,6 @@ CADENCE_TEMPLATES = (
     "archive.html",
     "court.html",
     "visit.html",
-    "inmate.html",
-    "data.html",
 )
 
 
