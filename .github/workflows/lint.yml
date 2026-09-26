@@ -1,4 +1,4 @@
-# Fast feedback on branch pushes and pull requests: ruff + pytest only.
+# Fast feedback on pull requests: ruff + pytest only.
 #
 # History: this file was misnamed `pylint.yml` by the run that replaced
 # Pylint with Ruff (the lint-workflow fix in #495) while the workflow actually
@@ -8,15 +8,12 @@
 #
 # Split of duties: `ci.yml` owns the full merge gate (mypy, pip-audit, the
 # 3.13/3.14 matrix, WAF evidence chain, backend smoke) on pull requests and
-# pushes to main. Re-running the suite on every push to main here was pure
-# duplication, so this workflow deliberately skips main and covers exactly
-# the gap ci.yml leaves: pushes to side branches before a PR exists.
+# pushes to main. This workflow is the fast PR check only. A side-branch
+# push trigger plus pull_request doubled runner demand and cancelled the
+# prior SHA mid-job (often before ruff/pytest). Open a PR for Lint.
 name: Lint
 
 on:
-  push:
-    branches-ignore:
-      - main
   pull_request:
 
 concurrency:

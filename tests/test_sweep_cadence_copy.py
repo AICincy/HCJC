@@ -12,6 +12,7 @@ CADENCE_TEMPLATES = (
     "index.html",
     "archive.html",
     "court.html",
+    "visit.html",
 )
 
 

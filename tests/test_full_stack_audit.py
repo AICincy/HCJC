@@ -71,10 +71,10 @@ def test_repeated_core_actions_use_one_sha_each():
         assert len(refs) == 1, f"{action} has inconsistent pins: {refs}"
 
 
-def test_lint_covers_side_branches_and_prs_without_main_push_overlap():
+def test_lint_is_pull_request_only_without_side_branch_push():
     text = _active_text(WORKFLOW_DIR / "lint.yml")
-    assert "branches-ignore:" in text
-    assert re.search(r"branches-ignore:\s*\n\s*- main", text)
+    assert "branches-ignore:" not in text
+    assert not re.search(r"^\s*push:", text, re.MULTILINE)
     assert re.search(r"\n\s*pull_request:\s*$", text, re.MULTILINE)
     assert "python-version: '3.14'" in text
     assert "pip install -r requirements.txt" in text
