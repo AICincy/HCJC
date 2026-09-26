@@ -1,0 +1,29 @@
+name: delete-dup-pages-artifact
+
+# One-shot. Deletes the attempt-1 github-pages artifact that blocks
+# deploy-pages on run 36258398462. Do not merge.
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Delete stale github-pages artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # Keep newest artifact 10911612802. Delete attempt-1 10911995089.
+          gh api --method DELETE \
+            "/repos/AICincy/HCJC/actions/artifacts/10911995089"
+          echo deleted=10911995089
+          gh api \
+            "/repos/AICincy/HCJC/actions/runs/36258398462/artifacts?per_page=100" \
+            --jq '.artifacts[] | {id,name,created_at}'
