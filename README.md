@@ -32,7 +32,7 @@ It reads the surname list from data/surnames.txt, queries the HCSO inmate-search
 
 The HCSO client uses 16 worker threads, a 0.5 second per-worker crawl delay, one retry, and exponential WAF backoff capped at 30 seconds. The sweep also has health guards that keep the last-good roster when list or detail retrieval is materially degraded.
 
-The sweep has a 20-minute freshness skip-gate and a 22-minute detail-phase wall-clock cap. The GitHub Actions workflow is scheduled twice per hour at :07 and :37 UTC (`7,37 * * * *`). GitHub Actions delivery is best-effort and can still be much less frequent in practice.
+The sweep has a 20-minute freshness skip-gate and a 22-minute detail-phase wall-clock cap. The GitHub Actions workflow still declares `7,37 * * * *`. An external hourly dispatcher starts `sweep.yml` via `repository_dispatch` (`jcstream-sweep`). GitHub Actions cron delivery is best-effort and can still be much less frequent in practice.
 
 The anonymized event feed is data/anon_changelog.json. It keeps identifying fields for seven days, then strips them and eventually compacts old rows into monthly summaries.
 
@@ -312,7 +312,7 @@ The deployment flow never pushes to GitHub. See README_DEPLOY.md for its safety 
 The primary GitHub Actions workflows are:
 
 | Workflow | Trigger | Purpose |
-|---|---|---|
+|---|---|
 | sweep.yml | hourly schedule plus manual dispatch | scrape, refresh feeds, correlate, build, commit generated data/docs, monitor source availability |
 | ci.yml | push to main, excluding data/docs-only changes | main-branch verification: ruff, mypy, pytest, dependency audit, evidence verification, smoke/build checks |
 | lint.yml | side-branch pushes and pull requests | fast ruff + pytest feedback |

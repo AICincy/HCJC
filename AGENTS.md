@@ -12,8 +12,9 @@ feeds into a static website.
 - Read `README.md` for orientation, `CLAUDE.md` for existing project guidance,
   and relevant entries in `DECISIONS.md`. Some historical operational notes are
   superseded: verify behavior against current code and workflows. In particular,
-  `.github/workflows/pages.yml` now builds and deploys a Pages artifact; older
-  branch-serving instructions do not describe the current workflow.
+  Live Pages serves the committed `docs/` tree from `main` (branch-serve).
+  `.github/workflows/pages.yml` is a secondary verified-artifact path, not the
+  live publisher.
 - Execute clear, authorized work without repeated confirmation. Ask only when
   missing requirements would materially change the result. Report what changed,
   what was verified, and any actual blocker concisely.
