@@ -315,7 +315,7 @@ The primary GitHub Actions workflows are:
 |---|---|
 | sweep.yml | hourly schedule plus manual dispatch | scrape, refresh feeds, correlate, build, commit generated data/docs, monitor source availability |
 | ci.yml | push to main, excluding data/docs-only changes | main-branch verification: ruff, mypy, pytest, dependency audit, evidence verification, smoke/build checks |
-| lint.yml | side-branch pushes and pull requests | fast ruff + pytest feedback |
+| lint.yml | pull requests | fast ruff + pytest feedback |
 | staleness-watchdog.yml | scheduled | independent freshness/freeze/deploy-staleness checks |
 | pages.yml | secondary verified-artifact path | builds and deploys a Pages artifact; current live settings use branch serving |
 | rebuild.yml | manual dispatch | rebuilds generated data/docs |
