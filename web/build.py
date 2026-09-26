@@ -92,5 +92,16 @@ ROOT = Path(__file__).parent
 TEMPLATE_DIR = ROOT / "templates"
 STATIC_DIR = ROOT / "static"
 PHOTOS_DIR = Path(__file__).resolve().parent.parent / "data" / "photos"
+# Pages serves from /docs at the repo root. Building straight there means the
+# workflow can commit the site alongside the data on every sweep.
 DEFAULT_OUT = Path("docs")
+
+# Non-generated files that must survive the output-directory swap. build()
+# renders into a temp dir and replaces the output dir wholesale, so anything
+# that is not a build output must be listed here: each entry is copied aside
+# before the swap and restored into the fresh tree after it. (Added 2026-09-20
+# after the swap silently deleted docs/FRAMEWORK-REVIEW-2026-09-20.md from the
+# working tree; CNAME added the same day after the swap silently deleted
+# docs/CNAME when JCSTREAM_CNAME was unset in the local environment.)
+# Paths are relative to the output directory.
 PRESERVED_FILES = ("FRAMEWORK-REVIEW-2026-09-20.md", "CNAME")
