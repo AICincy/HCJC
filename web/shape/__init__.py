@@ -8,6 +8,8 @@ existing ``from web.shape import …`` statements continue to work unchanged.
 
 from __future__ import annotations
 
+from jinja2 import FileSystemLoader as _FileSystemLoader
+
 # --- re-exports from web.classify (historically available via web.shape) -----
 from web.classify import (
     _primary_chapter,
@@ -72,11 +74,13 @@ from .inmates import (
     _primary_charge_obj,
     _recent_booked_inmates,
     _related_inmates,
-    _roster_stale_context as _roster_stale_context_impl,
     _similar_by_statute,
     _sort_in_group,
     _statute_held_inmates,
     _warn_about_unmapped_orcs,
+)
+from .inmates import (
+    _roster_stale_context as _roster_stale_context_impl,
 )
 
 # --- statistics ---------------------------------------------------------------
@@ -92,6 +96,8 @@ from .timeline import (
     _iso_booking_date,
     _timeline_markers,
 )
+
+_orig_get_source = _FileSystemLoader.get_source
 
 
 def _roster_stale_context(snapshot):
@@ -113,11 +119,6 @@ def _rewrite_retired_cadence(contents: str, template: str) -> str:
         contents = contents.replace("at 15-min sweep cadence", "at hourly sweep cadence")
         return contents
     return contents
-
-
-from jinja2 import FileSystemLoader as _FileSystemLoader
-
-_orig_get_source = _FileSystemLoader.get_source
 
 
 def _get_source(self, environment, template):
