@@ -1,20 +1,6 @@
 [
   {
     "event": "updated",
-    "inmate_number": "14160171",
-    "name": "OWENS DAIVONN",
-    "timestamp_utc": "2026-07-24T01:09:24Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "14452942",
-    "name": "ALLEN PAUL",
-    "timestamp_utc": "2026-07-24T01:09:24Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
     "inmate_number": "14567407",
     "name": "NEVINS DEMARIO",
     "timestamp_utc": "2026-07-24T01:09:24Z",
@@ -69998,5 +69984,19 @@
     "name": "ALCORN RICKY",
     "timestamp_utc": "2026-09-26T18:57:14Z",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14361135",
+    "name": "WASHINGTON MALIK",
+    "timestamp_utc": "2026-09-26T19:34:42Z",
+    "note": "booked 9/26/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14650012",
+    "name": "SMALLWOOD MARCUS",
+    "timestamp_utc": "2026-09-26T19:34:42Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
