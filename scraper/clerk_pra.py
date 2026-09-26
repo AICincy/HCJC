@@ -1,1 +1,387 @@
-see-local
+"""Generate per-inmate public-records request letters to the Hamilton County
+Clerk of Courts, foldered by date.
+
+Each letter is a *draft* Ohio Public Records Act (ORC 149.43) request for
+the case summary / docket of one roster inmate. The letters are
+ready-to-send: a human fills in the sender block, verifies the subject is
+still in custody, and mails or hand-delivers them. JCStream generates the
+drafts; it never sends them.
+
+Output layout (gitignored)::
+
+    pra_requests/YYYY-MM-DD/
+        README.md                  -- how to use, batching guidance
+        manifest.json              -- per-inmate request facts (evidence log)
+        2316160_ADAMS_CHEVALIER.md -- one letter per inmate
+        ...
+
+The manifest is the paper trail: it records exactly what was requested,
+for whom, and when, so any future clerk response or denial is attributable
+to a specific request. ``clerk_response`` starts null and is filled in by
+hand as responses arrive.
+
+Usage::
+
+    python -m scraper.clerk_pra [--date YYYY-MM-DD] [--out DIR] [--limit N]
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import logging
+import re
+from datetime import datetime, timezone
+from pathlib import Path
+
+log = logging.getLogger(__name__)
+
+CLERK_NAME = "Hamilton County Clerk of Courts"
+
+# Recipient routing by case type. The Clerk of Courts is one public office,
+# but its divisions sit at different addresses. Common Pleas criminal cases
+# ("B" numbers) route to the Criminal Division at Room 315; municipal
+# criminal/traffic cases ("CRA" numbers) route to the Municipal
+# Criminal/Traffic Division at the Justice Center. A letter naming only one
+# case type goes to that division; a letter naming both (or no case number
+# at all) goes to the Criminal Division with a note to forward municipal
+# items. Verified against courtclerk.org division pages on 2026-09-20.
+CLERK_CP_ATTN = "Attn: Criminal Division"
+CLERK_CP_STREET = "1000 Main Street, Room 315"
+CLERK_CP_CITY = "Cincinnati, OH 45202"
+CLERK_CP_PHONE = "(513) 946-5648"
+
+CLERK_MUNI_ATTN = "Attn: Municipal Criminal/Traffic Division"
+CLERK_MUNI_STREET = "1000 Sycamore Street, 1st Floor"
+CLERK_MUNI_CITY = "Cincinnati, OH 45202"
+CLERK_MUNI_PHONE = "(513) 946-6040"
+
+# Legal basis, verified 2026-09-20 against codes.ohio.gov.
+LEGAL_BASIS = "Ohio Revised Code 149.43"
+LEGAL_BASIS_EFFECTIVE = "2026-09-07"
+LEGAL_BASIS_LEGISLATION = "House Bill 31, 136th General Assembly"
+LEGAL_BASIS_VERIFIED_UTC = "2026-09-20"
+
+STATUS_DRAFT = "draft-ready-to-send"
+
+
+def sanitize_filename_part(part: str) -> str:
+    """Uppercase ASCII alnum/underscore only, capped at 40 chars."""
+    cleaned = re.sub(r"[^A-Z0-9]+", "_", (part or "").upper()).strip("_")
+    return cleaned[:40] or "UNKNOWN"
+
+
+def full_name(inmate: dict) -> str:
+    parts = [inmate.get("last_name") or "", inmate.get("first_name") or ""]
+    middle = (inmate.get("middle_name") or "").strip()
+    name = f"{parts[0]}, {parts[1]}".strip(", ").strip()
+    if middle and name:
+        name = f"{name} {middle}"
+    return " ".join(name.split())
+
+
+def known_case_numbers(inmate: dict) -> list[str]:
+    """Case numbers already on the roster charges, in stable order."""
+    seen: list[str] = []
+    for charge in inmate.get("charges") or []:
+        if not isinstance(charge, dict):
+            continue
+        for key in ("common_pleas_case", "municipal_case", "other_case"):
+            value = (charge.get(key) or "").strip()
+            if value and value not in seen:
+                seen.append(value)
+    return seen
+
+
+def case_types(cases: list[str]) -> set[str]:
+    """Classify known case numbers into 'common_pleas', 'municipal', or 'other'.
+
+    Common Pleas criminal cases use \"B\" numbers (e.g. \"B 2603812\").
+    Municipal criminal/traffic cases use \"CRA\" numbers (e.g. \"25/CRA/12436/B\").
+    Anything else is \"other\".
+    """
+    types: set[str] = set()
+    for case in cases:
+        upper = (case or "").upper()
+        if re.search(r"\\bB\\s*\\d", upper):
+            types.add("common_pleas")
+        elif "CRA" in upper:
+            types.add("municipal")
+        else:
+            types.add("other")
+    return types
+
+
+def recipient_block(cases: list[str]) -> tuple[str, str, str, str]:
+    """Return (attn, street, city, routing_note) for the case mix.
+
+    Single-type letters go to that division. Mixed or unknown mixes go to
+    the Criminal Division (the larger of the two) with a note asking the
+    clerk to forward municipal items to the Municipal division.
+    """
+    types = case_types(cases)
+    if types == {"municipal"}:
+        return (CLERK_MUNI_ATTN, CLERK_MUNI_STREET, CLERK_MUNI_CITY, "")
+    if types == {"common_pleas"}:
+        return (CLERK_CP_ATTN, CLERK_CP_STREET, CLERK_CP_CITY, "")
+    note = (
+        "Routing note: this request names cases from more than one division. "
+        f"Municipal criminal/traffic matters are handled by the {CLERK_MUNI_ATTN} "
+        f"at {CLERK_MUNI_STREET}, {CLERK_MUNI_CITY} ({CLERK_MUNI_PHONE}); "
+        "please forward as needed."
+    )
+    return (CLERK_CP_ATTN, CLERK_CP_STREET, CLERK_CP_CITY, note)
+
+
+def render_letter(
+    inmate: dict,
+    snapshot_date: str,
+    generated_utc: str,
+) -> str:
+    """Render one ORC 149.43 request letter as Markdown."""
+    name = full_name(inmate)
+    dob = (inmate.get("date_of_birth") or "").strip() or "[date of birth not in roster]"
+    booking = (inmate.get("booking_date") or "").strip() or "[booking date not in roster]"
+    cases = known_case_numbers(inmate)
+    attn, street, city, routing_note = recipient_block(cases)
+    if cases:
+        case_lines = "\\n".join(f"- {c}" for c in cases)
+        case_para = f"The roster lists the following case number(s) for this booking:\\n\\n{case_lines}\\n"
+    else:
+        case_para = (
+            "The roster lists no case number for this booking; please search by the name and date of birth above.\\n"
+        )
+    routing_para = f"\\n{routing_note}\\n" if routing_note else ""
+    return f"""[YOUR FULL NAME]
+[YOUR MAILING ADDRESS]
+[CITY, STATE ZIP]
+[YOUR EMAIL] | [YOUR PHONE]
+
+{snapshot_date}
+
+{CLERK_NAME}
+{attn}
+{street}
+{city}
+
+Re: Public records request under {LEGAL_BASIS}
+
+Dear Custodian of Records:
+
+Pursuant to the Ohio Public Records Act, {LEGAL_BASIS}, I request copies of the
+following public records:
+
+- The case summary / docket for any criminal case naming:
+
+      Name:          {name}
+      Date of birth: {dob}
+      Booking date (per HCSO roster): {booking}
+
+{case_para}{routing_para}
+If electronic copies (PDF or other common format) are available, I prefer
+electronic delivery to the email address above. I agree to pay reasonable
+copying and delivery costs; please notify me in advance if the estimated
+cost exceeds $25.
+
+If any portion of this request is denied, please cite the specific statutory
+exemption for each denial and release all reasonably segregable non-exempt
+portions, as required by {LEGAL_BASIS}(B)(1).
+
+Please respond within a reasonable period of time. Thank you for your
+assistance.
+
+Sincerely,
+
+[YOUR SIGNATURE]
+[YOUR FULL NAME]
+
+---
+*Draft generated by JCStream from the HCSO public roster snapshot of
+{snapshot_date} (generated {generated_utc}). Custody status changes
+frequently: please verify the subject is still in custody before sending.
+JCStream is an independent, non-governmental mirror and is not affiliated
+with the Hamilton County Sheriff's Office or the Clerk of Courts.*
+"""
+
+
+def render_readme(folder_date: str, count: int, generated_utc: str) -> str:
+    return f"""# Clerk PRA packet - {folder_date}
+
+{count} draft public-records request letters, one per inmate on the JCStream
+roster snapshot of {folder_date} (generated {generated_utc}).
+
+## How to use
+
+1. Fill in the `[YOUR ...]` sender block at the top of each letter you send.
+2. Verify the subject is still in custody (roster snapshots go stale fast).
+3. Mail or hand-deliver to the Clerk of Courts address on the letter.
+
+## Batching guidance
+
+Do **not** send all {count} letters at once. A mass mailing of this size
+would burden the Clerk's office and undermine the request. Suggested
+practice:
+
+- Send in small batches (e.g. 5-10 per week).
+- Prioritize inmates whose roster charges lack case numbers, or cases you
+  are specifically researching.
+- Log every response or denial back into `manifest.json` under
+  `clerk_response` so the paper trail stays complete.
+
+## What this is
+
+- Each letter is a **draft** under Ohio Revised Code 149.43. JCStream
+  generated the text; the human sender is the requester.
+- `manifest.json` records the facts of each draft request: who, what case
+  numbers were known, when the draft was generated. Treat it as the
+  evidence log for this packet.
+- Nothing here is legal advice. Charges listed are accusations, not
+  convictions.
+
+## Regenerating
+
+Run `python -m scraper.clerk_pra --date YYYY-MM-DD` from the repo root to
+build a fresh dated folder from the current `data/current.json`.
+"""
+
+
+def build_packet(
+    inmates: list[dict],
+    snapshot_date: str,
+    folder_date: str,
+    out_root: Path,
+    limit: int | None = None,
+) -> Path:
+    """Write the dated packet folder. Returns the folder path."""
+    generated_utc = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    folder = out_root / folder_date
+    folder.mkdir(parents=True, exist_ok=True)
+
+    manifest: dict[str, dict] = {}
+    written = 0
+    for inmate in inmates:
+        if limit is not None and written >= limit:
+            break
+        inmate_number = str(inmate.get("inmate_number") or "").strip()
+        name = full_name(inmate)
+        if not inmate_number or not name:
+            log.warning("skipping roster entry without inmate number or name")
+            continue
+        fname = (
+            f"{sanitize_filename_part(inmate_number)}_"
+            f"{sanitize_filename_part(inmate.get('last_name') or '')}_"
+            f"{sanitize_filename_part(inmate.get('first_name') or '')}.md"
+        )
+        (folder / fname).write_text(render_letter(inmate, snapshot_date, generated_utc), encoding="utf-8")
+        manifest[inmate_number] = {
+            "full_name": name,
+            "date_of_birth": (inmate.get("date_of_birth") or "").strip(),
+            "booking_date": (inmate.get("booking_date") or "").strip(),
+            "known_case_numbers": known_case_numbers(inmate),
+            "letter_file": fname,
+            "generated_utc": generated_utc,
+            "status": STATUS_DRAFT,
+            "clerk_response": None,
+        }
+        written += 1
+
+    (folder / "manifest.json").write_text(
+        json.dumps(
+            {
+                "packet": {
+                    "folder_date": folder_date,
+                    "generated_utc": generated_utc,
+                    "generator": "scraper/clerk_pra.py",
+                    "source_snapshot": f"data/current.json ({snapshot_date})",
+                    "letter_count": written,
+                    "legal_basis": LEGAL_BASIS,
+                    "legal_basis_effective": LEGAL_BASIS_EFFECTIVE,
+                    "legal_basis_legislation": LEGAL_BASIS_LEGISLATION,
+                    "legal_basis_verified_utc": LEGAL_BASIS_VERIFIED_UTC,
+                    "recipients": {
+                        "common_pleas": {
+                            "attn": CLERK_CP_ATTN,
+                            "street": CLERK_CP_STREET,
+                            "city": CLERK_CP_CITY,
+                            "phone": CLERK_CP_PHONE,
+                        },
+                        "municipal": {
+                            "attn": CLERK_MUNI_ATTN,
+                            "street": CLERK_MUNI_STREET,
+                            "city": CLERK_MUNI_CITY,
+                            "phone": CLERK_MUNI_PHONE,
+                        },
+                    },
+                    "status": STATUS_DRAFT,
+                    "note": (
+                        "Draft letters only. The human sender fills in the sender block, "
+                        "verifies custody, chooses the delivery channel, and sends. "
+                        "JCStream never sends."
+                    ),
+                },
+                "requests": manifest,
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    (folder / "README.md").write_text(render_readme(folder_date, written, generated_utc), encoding="utf-8")
+    log.info("wrote %d letters to %s", written, folder)
+    return folder
+
+
+def load_roster(path: Path) -> tuple[list[dict], str]:
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    inmates = raw.get("inmates", []) if isinstance(raw, dict) else []
+    if not isinstance(inmates, list):
+        raise ValueError(f"{path}: 'inmates' must be a JSON array, got {type(inmates).__name__}")
+    snapshot_date = ""
+    generated = raw.get("generated_utc", "") if isinstance(raw, dict) else ""
+    if generated:
+        snapshot_date = generated[:10]
+    return inmates, snapshot_date
+
+
+def normalize_folder_date(raw: str) -> str:
+    """Normalize a --date value to canonical YYYY-MM-DD.
+
+    Accepts surrounding whitespace and unpadded month/day (``2026-9-2``),
+    the variants a human types into the workflow_dispatch form. Raises
+    ValueError for anything else, including impossible calendar dates.
+    Slash dates (``9/22/2026``) stay rejected: the input contract is
+    YYYY-MM-DD and guessing locale conventions mangles folder names.
+    """
+    match = re.fullmatch(r"\\s*(\\d{4})-(\\d{1,2})-(\\d{1,2})\\s*", raw or "")
+    if not match:
+        raise ValueError(f"bad --date (want YYYY-MM-DD): {raw}")
+    try:
+        parsed = datetime(int(match.group(1)), int(match.group(2)), int(match.group(3)))
+    except ValueError:
+        raise ValueError(f"bad --date (not a calendar date): {raw}") from None
+    return parsed.strftime("%Y-%m-%d")
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Generate dated clerk PRA packets")
+    parser.add_argument("--date", default=None, help="Folder date YYYY-MM-DD (default: today UTC)")
+    parser.add_argument("--out", type=Path, default=Path("pra_requests"), help="Output root")
+    parser.add_argument("--limit", type=int, default=None, help="Max letters (testing)")
+    parser.add_argument("--roster", type=Path, default=Path("data/current.json"))
+    args = parser.parse_args(argv)
+
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+    if not args.roster.exists():
+        log.error("roster not found: %s", args.roster)
+        return 2
+    inmates, snapshot_date = load_roster(args.roster)
+    try:
+        folder_date = normalize_folder_date(args.date or datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+    except ValueError as e:
+        log.error("%s", e)
+        return 2
+    build_packet(inmates, snapshot_date or folder_date, folder_date, args.out, args.limit)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
