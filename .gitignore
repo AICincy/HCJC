@@ -43,9 +43,10 @@ HCJC.zip
 .claude/skills/All skills.zip
 .claude/agents/md skills.zip
 hcjc-agentic-audit-prompt.md
-# Generated clerk PRA packets are build output, not source: 1,100+ letters
-# per run. Regenerate on demand; never commit the output folders.
-pra_requests/
+# Per-inmate PRA letters stay untracked. Packet + history files are committed.
+pra_requests/*/*.md
+!pra_requests/*/README.md
+!pra_requests/*/PACKET.md
 
 # deploy_fix.py run artifacts. Both are regenerated on each run and carry a
 # snapshot of roster damage counts, so they are operational output rather than
