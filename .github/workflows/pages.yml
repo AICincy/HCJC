@@ -1,8 +1,7 @@
 name: pages
 
-# Production Pages deployment from a verified build artifact. This replaces the
-# implicit committed-docs deployment only after the build and live URL contract
-# checks pass in the same run.
+# Secondary verified-artifact Pages path. The live site is still branch-serve
+# of committed docs/ on main. Do not treat this workflow as the only publisher.
 
 on:
   push:
