@@ -15,17 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Delete stale Pages artifact 10911995089
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          gh api --method DELETE \
-            "/repos/${GITHUB_REPOSITORY}/actions/artifacts/10911995089"
-          echo deleted=10911995089
-          gh api \
-            "/repos/${GITHUB_REPOSITORY}/actions/runs/36258398462/artifacts?per_page=100" \
-            --jq '.artifacts[] | {id,name,created_at}'
       - name: Delete codeql-overlay-base-database caches
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
