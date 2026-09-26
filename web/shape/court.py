@@ -49,22 +49,6 @@ _SLIPPAGE_TIER_ORDER = ["F1", "F2", "F3", "F4", "F5", "F", "M1", "M2", "M3", "M4
 def _court_slippage(
     inmates: list[Inmate], now: datetime | None = None, offenses: dict | None = None
 ) -> dict:
-    """Aggregate count of people still on the roster whose earliest listed
-    court date has already passed.
-
-    Aggregate-only by design: totals, a severity-tier breakdown, and the
-    median days past, never a per-person list. The today boundary is
-    midnight Eastern via ``_now_naive_est`` (injectable for tests); epoch
-    sentinel dates ("1/1/70") are excluded by ``_parse_md_yy``. A passed
-    court date can reflect a continuance, a capias, or HCSO data lag - the
-    roster does not distinguish them, so this measures slippage of the
-    listed date, not confirmed missed hearings.
-
-    The tier breakdown is display-facing (stats page), so it resolves tiers
-    through the offenses dict like every other displayed tier (F-10-02);
-    the venue fallback only applies where no description suffix or ORC
-    degree exists.
-    """
     if now is None:
         now = _now_naive_est()
     if offenses is None:
@@ -85,13 +69,6 @@ def _court_slippage(
         if t:
             label = t["label"]
         else:
-            # _primary_tier ranks every _charge_tier label: classify._DEGREE_ORDER
-            # includes the bare venue fallbacks ("F" from a Common Pleas case,
-            # "M" from a Municipal case), so it returns None only when no
-            # charge carries any tier signal at all. In that case there are no
-            # "F"/"M" labels to find either, so the venue-letter arms below are
-            # unreachable on real data and this always lands on "other".
-            # They stay as a defensive fallback, not a live branch.
             labels = {(ct or {}).get("label") for ct in (_charge_tier(c, offenses) for c in inm.charges)}
             label = "F" if "F" in labels else ("M" if "M" in labels else "other")
         by_tier[label] += 1
@@ -105,7 +82,6 @@ def _court_slippage(
 
 
 def _next_court_date(inmate: Inmate) -> str:
-    """Earliest upcoming (or any) court date among the charges, as printed by HCSO."""
     dates = []
     for c in inmate.charges:
         d = (c.court_date or "").strip()
@@ -124,9 +100,6 @@ def _next_court_date(inmate: Inmate) -> str:
 
 
 def _next_court_date_is_past(inmate: Inmate) -> bool:
-    """D-1: True when _next_court_date returned a past date (no future dates
-    on any charge). Lets the template label it "Last known court date"
-    instead of the wrong "Next court date"."""
     raw = _next_court_date(inmate)
     if not raw:
         return False
@@ -135,15 +108,6 @@ def _next_court_date_is_past(inmate: Inmate) -> bool:
 
 
 def _court_calendar(inmates: list[Inmate]) -> dict:
-    """Group inmates by their next upcoming court date into today / tomorrow /
-    this week / next 30 days buckets. Each bucket entry is
-    {inmate, date_text, parsed_date}. Sorted by date within each bucket.
-
-    HCSO court dates are printed in local (Eastern) time; we compare on
-    naive midnight of the build server's date, which can shift a single
-    record by at most a few hours at the day boundary. Acceptable for a
-    "today's docket" surface; not used for any decision-critical logic.
-    """
     today = _now_naive_est().replace(hour=0, minute=0, second=0, microsecond=0)
     tomorrow = today + timedelta(days=1)
     week_end = today + timedelta(days=7)
@@ -180,11 +144,14 @@ def _court_calendar(inmates: list[Inmate]) -> dict:
 
 
 def _clean_case_number(cn: str | None) -> str:
-    """Tidy a case number for display and linking. HCSO sometimes drops the
-    leading court-prefix letter, leaving a stray leading slash ("/25/CRA/17789");
-    strip leading/trailing slashes and whitespace so it reads "25/CRA/17789".
-    Internal separators and any co-defendant suffix (".../B") are preserved."""
-    return (cn or "").strip().strip("/").strip()
+    """Tidy a case number for display and linking.
+
+    City municipal cases from HCSO start with a slash (``/26/CRB/19119``).
+    That leading slash is required by courtclerk.org and must be kept.
+    Trailing whitespace is stripped. Charge suffixes stay visible in the
+    label; the clerk URL builder drops them.
+    """
+    return (cn or "").strip()
 
 
 def _case_numbers(inmate: Inmate) -> list[str]:
@@ -203,13 +170,6 @@ _CASE_CAT_LABEL = {"criminal": "Criminal", "traffic": "Traffic", "civil": "Civil
 
 
 def _cases_grouped(inmate: Inmate) -> list[dict]:
-    """Group this inmate's case numbers by category then by year (newest first).
-
-    Returns [{key, label, cases_n, years: [{year, cases: [num, ...]}]}] in a
-    fixed category order. Years sort descending; unknown year sorts last. Each
-    case number is left raw so the template deep-links it via cck_case_summary
-    (the working courtclerk.org link).
-    """
     buckets: dict[str, dict] = defaultdict(lambda: defaultdict(list))
     for cn in _case_numbers(inmate):
         buckets[case_category(cn)][case_year(cn)].append(cn)
@@ -232,7 +192,6 @@ def _cases_grouped(inmate: Inmate) -> list[dict]:
 
 
 def _charge_status_summary(inmate: Inmate) -> str:
-    """e.g. '3 pending · 1 disposed' across the charge rows."""
     pending = disposed = 0
     for c in inmate.charges:
         d = (c.disposition or "").strip()
