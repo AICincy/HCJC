@@ -45,6 +45,15 @@ def test_publishing_workflows_check_out_fresh_tip() -> None:
         assert _first_checkout_sets_ref(text), f"{name}: checkout must pin ref: to the fresh tip"
 
 
+def test_refresh_caselaw_job_has_timeout_headroom() -> None:
+    """CourtListener searches routinely take 7-9 minutes; 10 minutes is too tight."""
+    text = (REPO_ROOT / ".github" / "workflows" / "refresh_caselaw.yml").read_text(encoding="utf-8")
+    match = re.search(r"timeout-minutes:\s*(\d+)", text)
+    assert match is not None
+    assert int(match.group(1)) >= 20
+    assert "CASELAW_BUDGET_SECONDS" in text
+
+
 def test_pages_deploy_gated_to_main() -> None:
     """Branch Pages dispatches must skip the protected deploy, not fail it.
 

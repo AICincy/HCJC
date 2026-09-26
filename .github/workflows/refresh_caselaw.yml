@@ -33,7 +33,10 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Successful refreshes already take 7-9 minutes. A 10-minute cap leaves no
+    # room for a slow CourtListener search or a 429 backoff, and GitHub then
+    # kills the job before the cache can be written or committed.
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
@@ -48,6 +51,9 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: Refresh ORC case-law cache
+        env:
+          # Leave ~5 minutes for the commit step if CourtListener stalls.
+          CASELAW_BUDGET_SECONDS: "1200"
         run: |
           python3 scripts/refresh_caselaw.py
 
