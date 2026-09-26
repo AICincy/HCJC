@@ -126,7 +126,7 @@ def _get_source(self, environment, template):
     return _rewrite_retired_cadence(contents, template), filename, uptodate
 
 
-_FileSystemLoader.get_source = _get_source
+setattr(_FileSystemLoader, "get_source", _get_source)
 
 __all__ = [
     # common
