@@ -15,7 +15,7 @@
 {% if snapshot.inmate_count == 0 %}
 <div class="empty">
   <h2>No roster data yet</h2>
-  <p>JCStream's first sweep hasn't completed. Trigger a manual run from the <a href="https://github.com/AICincy/HCJC/actions/workflows/sweep.yml">sweep workflow</a> or wait for the next 30-minute cron.</p>
+  <p>JCStream's first sweep hasn't completed. Trigger a manual run from the <a href="https://github.com/AICincy/HCJC/actions/workflows/sweep.yml">sweep workflow</a> or wait for the next hourly dispatcher (GitHub cron is best-effort).</p>
 </div>
 {% else %}
 
@@ -26,7 +26,7 @@
 <section aria-labelledby="roster-tool-h">
   <div class="section-h">
     <h1 id="roster-tool-h">Search the roster</h1>
-    <span class="meta">Last checked {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}.</span>
+    <span class="meta">Roster {{ human_utc(snapshot.generated_utc) if snapshot.generated_utc else 'pending' }}{% if oldest_detail_utc %}; details oldest {{ human_utc(oldest_detail_utc) }}{% endif %}.</span>
   </div>
   <p class="roster-attribution">JCStream is an independent public-record mirror, not a government site.</p>
   {% if roster_preview %}<p class="roster-preview-note">Browsing {{ homepage_bookings }} recent bookings from the current custody roster. Search covers the full roster. <a href="{{ base_url }}/archive/">Browse and filter all {{ snapshot.inmate_count }} records</a>.</p>{% endif %}
@@ -103,7 +103,7 @@
   <div class="about-body">
     <p><strong>Purpose.</strong> JCStream exists to increase public access to, and transparency of, Hamilton County&rsquo;s criminal justice system. By republishing the Hamilton County Sheriff&rsquo;s Office public inmate roster in a structured, searchable format, this project supports civic awareness, journalistic inquiry, court-watching, and public accountability. It does not editorialize about guilt or innocence, does not accept payment for record modification or removal, and removes records when the source agency removes them.</p>
     <p><strong>No fees - no exceptions.</strong> This site will never charge any person for the review, correction, or removal of their record. If you encounter any third party claiming to offer paid removal services for records on this site, that party is not affiliated with JCStream and cannot fulfill that promise. Removal requests are processed at <a href="https://github.com/AICincy/HCJC/issues">github.com/AICincy/HCJC/issues</a> at no cost.</p>
-    <p class="muted">See also: <a href="{{ base_url }}/data/#legal">full legal notices</a> &middot; <a href="{{ base_url }}/data/">data &amp; methodology</a> &middot; <a href="https://github.com/AICincy/HCJC">source code (MIT)</a>.</p>
+    <p class="muted">See also: <a href="{{ base_url }}/data/#legal">full legal notices</a> &middot; <a href="{{ base_url }}/data/">data & methodology</a> &middot; <a href="https://github.com/AICincy/HCJC">source code (MIT)</a>.</p>
   </div>
 </details>
 
