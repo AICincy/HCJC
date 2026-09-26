@@ -2,10 +2,21 @@ name: pages
 
 # Secondary verified-artifact Pages path. The live site is still branch-serve
 # of committed docs/ on main. Do not treat this workflow as the only publisher.
+#
+# GITHUB_TOKEN commits from sweep/rebuild do not fire push workflows, so
+# workflow_run is the data-publish path. Code pushes still run here; data/
+# and docs/ rewrites are ignored on push to avoid a second Pages build on
+# human merges that only touch generated trees.
 
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "data/**"
+      - "docs/**"
+  workflow_run:
+    workflows: [sweep, rebuild-site]
+    types: [completed]
   workflow_dispatch: {}
 
 concurrency:
@@ -15,6 +26,7 @@ concurrency:
 jobs:
   build:
     name: Build and verify Pages artifact
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -70,7 +82,13 @@ jobs:
     # The github-pages environment only trusts main: protection rules reject
     # branch deploys, so a branch dispatch exercises build+verify and skips
     # this job instead of failing on the environment gate.
-    if: github.ref == 'refs/heads/main'
+    if: |
+      always() &&
+      needs.build.result == 'success' &&
+      (
+        (github.event_name != 'workflow_run' && github.ref == 'refs/heads/main') ||
+        (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch == 'main')
+      )
     needs: build
     runs-on: ubuntu-latest
     permissions:

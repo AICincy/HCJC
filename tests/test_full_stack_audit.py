@@ -20,12 +20,10 @@ EXPECTED_WORKFLOWS = {
     "ci.yml",
     "clerk_pra_packets.yml",
     "codeql.yml",
-    "deno.yml",
     "ingest_case_data.yml",
     "lint.yml",
     "live-parity.yml",
     "pages.yml",
-    "purge_codeql_caches.yml",
     "rebuild.yml",
     "refresh_caselaw.yml",
     "staleness-watchdog.yml",
@@ -46,6 +44,8 @@ def test_workflow_inventory_is_explicit_and_lint_is_renamed():
     assert actual == EXPECTED_WORKFLOWS
     assert "lint.yml" in actual
     assert "pylint.yml" not in actual
+    assert "deno.yml" not in actual
+    assert "purge_codeql_caches.yml" not in actual
 
 
 def test_every_active_action_reference_is_a_full_sha():
@@ -93,11 +93,12 @@ def test_ci_is_main_push_only_and_does_not_duplicate_lint():
     assert "python -m pytest" in text
 
 
-def test_live_parity_has_sequential_contract_then_strict_html_gate():
+def test_live_parity_is_html_freshness_only():
     text = _active_text(WORKFLOW_DIR / "live-parity.yml")
-    assert "name: Check published JSON contract" in text
-    assert "name: Check published JSON contract and HTML freshness" in text
-    assert re.search(r"html-freshness:\s*\n\s*name:.*\n\s*needs: contract", text)
+    assert "name: Check published HTML freshness" in text
+    assert "needs: contract" not in text
+    assert "verify_live_url_parity.py" not in text
+    assert "verify_public_data.py" not in text
     assert "--site https://www.aretheyinjail.com" in text
     assert "--data data/current.json" in text
     assert "--max-lag-hours 26" in text
@@ -113,6 +114,17 @@ def test_live_parity_is_monday_schedule_and_manual_only():
     assert "cron: '40 4 * * 1'" in text
     assert "workflow_dispatch: {}" in text
     assert "permissions:\n  contents: read" in text
+
+
+def test_pages_follows_sweep_without_generated_push_noise():
+    text = _active_text(WORKFLOW_DIR / "pages.yml")
+    assert "workflow_run:" in text
+    assert "workflows: [sweep, rebuild-site]" in text
+    assert "paths-ignore:" in text
+    assert '"data/**"' in text
+    assert '"docs/**"' in text
+    assert "verify_public_data.py" in text
+    assert "verify_live_url_parity.py" in text
 
 
 def test_sweep_runs_twice_hourly_and_publishes_docs_with_deterministic_build():
