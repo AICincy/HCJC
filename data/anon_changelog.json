@@ -35046,6 +35046,12 @@
     "category": "Possession of drugs"
   },
   {
+    "event": "released",
+    "date": "2026-09-09",
+    "tier": "M1",
+    "category": "Violating protection order"
+  },
+  {
     "event": "booked",
     "date": "2026-09-10",
     "tier": "M1",
@@ -35368,6 +35374,12 @@
     "date": "2026-09-10",
     "tier": "F2",
     "category": "Robbery"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-10",
+    "tier": "F5",
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -60673,5 +60685,95 @@
     "tier": "M1",
     "category": "Falsification",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "1080379",
+    "name": "COLLINS MICHAEL",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "14126238",
+    "name": "PARHAM QUINNCALE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "14772551",
+    "name": "HAMMONS LAKYRA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "14794000",
+    "name": "JACKSON HAYDHUN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "1493445",
+    "name": "FIELDS PHILLIP",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "1817465",
+    "name": "BEAVER KENITHE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "2179841",
+    "name": "CASTRO-ARANDA SANDRO",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "2505690",
+    "name": "HILL DELISHA",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "2693606",
+    "name": "PEREZ-MACARIO OLIVER",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-28T06:13:01Z",
+    "inmate_number": "14816652",
+    "name": "HOWARD AKASHA",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "no longer on HCSO public roster"
   }
 ]
