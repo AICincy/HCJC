@@ -34621,6 +34621,18 @@
   },
   {
     "event": "booked",
+    "date": "2026-09-08",
+    "tier": "M1",
+    "category": "Driving under suspension"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-08",
+    "tier": "M1",
+    "category": "Driving under suspension"
+  },
+  {
+    "event": "booked",
     "date": "2026-09-09",
     "tier": "M1",
     "category": "Operating a vehicle under the influence (OVI / DUI)"
@@ -35056,6 +35068,12 @@
     "date": "2026-09-09",
     "tier": "M1",
     "category": "Violating protection order"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-09",
+    "tier": "M1",
+    "category": "Driving under suspension"
   },
   {
     "event": "booked",
@@ -37272,6 +37290,12 @@
     "category": "Aggravated burglary"
   },
   {
+    "event": "updated",
+    "date": "2026-09-16",
+    "tier": "M1",
+    "category": "Driving under suspension"
+  },
+  {
     "event": "booked",
     "date": "2026-09-17",
     "tier": "M1",
@@ -37894,6 +37918,12 @@
     "date": "2026-09-18",
     "tier": "M1",
     "category": "Theft"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-18",
+    "tier": "M1",
+    "category": "Driving under suspension"
   },
   {
     "event": "updated",
@@ -61302,6 +61332,132 @@
     "name": "YOUNGER LONZO",
     "tier": "F2",
     "category": "Strangulation",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "14656662",
+    "name": "DIA OMAR",
+    "tier": "F1",
+    "category": "Aggravated robbery",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "14443961",
+    "name": "CLEMENTS TYLER",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "14609640",
+    "name": "BENTON RONQUEZ",
+    "tier": null,
+    "category": null,
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "14818595",
+    "name": "WHITE DAVION",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "14825087",
+    "name": "WILLIAMS DAMIEN",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "2132029",
+    "name": "SMITH MELISSA",
+    "tier": "M1",
+    "category": "Violation of community control / probation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "2215613",
+    "name": "ROHE BRYAN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "2353567",
+    "name": "WHITEHEAD KEVIN",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "2577065",
+    "name": "LUTTRELL CHRISTOPHER",
+    "tier": "M4",
+    "category": "Public indecency",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "2665474",
+    "name": "WELLS DIAMOND",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "14770478",
+    "name": "BILLINGS NOAH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "14367593",
+    "name": "BROWN ALEXUS",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "14521147",
+    "name": "NURSE JASON",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-28T17:10:12Z",
+    "inmate_number": "14825105",
+    "name": "ROGERS ROXANN",
+    "tier": "MM",
+    "category": "Disorderly conduct",
     "note": "no longer on HCSO public roster"
   }
 ]
