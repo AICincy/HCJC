@@ -25836,6 +25836,12 @@
     "category": "Burglary"
   },
   {
+    "event": "released",
+    "date": "2026-08-12",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
     "event": "booked",
     "date": "2026-08-13",
     "tier": "M1",
@@ -60919,5 +60925,32 @@
     "tier": "F3",
     "category": "Having weapons while under disability",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-28T13:13:01Z",
+    "inmate_number": "1880923",
+    "name": "TURNER DANTE",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-28T13:13:01Z",
+    "inmate_number": "2586499",
+    "name": "HILLMAN SHAVONTE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-28T13:13:01Z",
+    "inmate_number": "14823075",
+    "name": "CRUZ-SANCHEZ DIANA",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "no longer on HCSO public roster"
   }
 ]
