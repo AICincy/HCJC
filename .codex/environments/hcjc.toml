@@ -1,0 +1,9 @@
+version = 1
+name = "HCJC"
+
+[setup.win32]
+script = '''Set-Location $env:CODEX_WORKTREE_PATH
+python -m pip install -r requirements.txt
+Set-Location backend
+pnpm install
+'''
