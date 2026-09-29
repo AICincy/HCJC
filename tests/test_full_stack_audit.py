@@ -80,7 +80,7 @@ def test_lint_is_pull_request_only_without_side_branch_push():
     assert re.search(r"\n\s*pull_request:\s*$", text, re.MULTILINE)
     assert "python-version: '3.14'" in text
     assert "pip install -r requirements.txt" in text
-    assert "pip install ruff==0.16.7" in text
+    assert "pip install ruff==0.16.8" in text
     assert "concurrency:" in text
     assert "timeout-minutes:" in text
     assert '-e ".[dev]"' not in text
