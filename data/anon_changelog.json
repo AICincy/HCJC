@@ -33577,6 +33577,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-09-04",
+    "tier": "MM",
+    "category": "Disorderly conduct"
+  },
+  {
+    "event": "booked",
     "date": "2026-09-05",
     "tier": "M1",
     "category": "Theft"
@@ -36688,6 +36694,12 @@
     "date": "2026-09-14",
     "tier": "M1",
     "category": "Possessing criminal tools"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-14",
+    "tier": "MM",
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
@@ -62032,5 +62044,59 @@
     "tier": "F5",
     "category": "Trafficking in drugs",
     "note": "booked 9/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-29T02:09:46Z",
+    "inmate_number": "14813204",
+    "name": "ELLIS BRANDON",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-09-29T02:09:46Z",
+    "inmate_number": "1755807",
+    "name": "ADAMS KEVIN",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 9/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-09-29T02:09:46Z",
+    "inmate_number": "2371289",
+    "name": "SIMMS TYRONE",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-29T02:09:46Z",
+    "inmate_number": "14227079",
+    "name": "COUCH JOSEPH",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-29T02:09:46Z",
+    "inmate_number": "2759341",
+    "name": "EBERHARDT ABIGAIL",
+    "tier": "MM",
+    "category": "Obedience to traffic control devices",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-09-29T02:09:46Z",
+    "inmate_number": "2439363",
+    "name": "PRATHER DOVONTAE",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "no longer on HCSO public roster"
   }
 ]
