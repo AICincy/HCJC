@@ -53,7 +53,7 @@ virtual environment:
 
 ```text
 python -m pip install -r requirements.txt
-python -m pip install ruff==0.16.7 mypy==2.3.1
+python -m pip install ruff==0.16.8 mypy==2.3.1
 python -m ruff check .
 python -m mypy scraper web
 python -m pytest -q
