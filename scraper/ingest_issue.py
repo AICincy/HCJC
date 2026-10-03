@@ -1,9 +1,14 @@
 """Parse a GitHub Issue body submitted via the case-data form and append it
 to ``data/courtclerk_cases.json``.
 
-Trigger: `.github/workflows/ingest_case_data.yml` on `issues: [opened, edited]`
-with the ``case-data`` label. The workflow passes the issue body via stdin
-or the ``ISSUE_BODY`` env var.
+The public issue trigger (`ingest_case_data.yml` plus the ``case-data``
+issue form) was retired on 2026-10-03: any GitHub user could inject a
+record. Ingest is now maintainer-only through
+`.github/workflows/maintainer_case_ingest.yml`, which maps its
+workflow_dispatch inputs onto this module's section keys and reuses the
+validation below unchanged (see ``scraper/ingest_dispatch.py``). ``main()``
+stays for local use: it reads an issue-form-shaped body from stdin or the
+``ISSUE_BODY`` env var.
 
 GitHub form bodies follow a predictable shape:
 

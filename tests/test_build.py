@@ -704,12 +704,15 @@ def test_approx_age_keeps_real_late_1960s_dob():
 # --- Framework-review frontend nits -----------------------------------------
 
 
-def test_inmate_case_cta_escapes_query_separators():
-    html = (Path(__file__).resolve().parent.parent / "web" / "templates" / "inmate.html").read_text(encoding="utf-8")
-    assert "issues/new?template=case-data.yml&amp;title=" in html
-    assert "&amp;case_number=" in html
-    assert "&amp;defendant_name=" in html
-    assert "case-data.yml&title=" not in html
+def test_templates_have_no_public_case_intake_link():
+    # The public case-data issue form was retired (2026-10-03): intake is
+    # maintainer-only via maintainer_case_ingest.yml, so no page may invite
+    # readers to file the removed form.
+    templates = Path(__file__).resolve().parent.parent / "web" / "templates"
+    for name in ("inmate.html", "data.html"):
+        html = (templates / name).read_text(encoding="utf-8")
+        assert "case-data.yml" not in html, name
+        assert "issues/new" not in html, name
 
 
 def test_stats_severity_composition_includes_all_buckets():

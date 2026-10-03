@@ -1,0 +1,160 @@
+name: maintainer-case-ingest
+
+# Private, maintainer-only replacement for the retired public issue-form
+# ingest (ingest_case_data.yml plus ISSUE_TEMPLATE/case-data.yml), where any
+# GitHub user could open a labeled issue and inject a record.
+#
+# - Trigger: workflow_dispatch only. The gate job fails closed unless AICincy
+#   (actor id 65099975) dispatched it from main; re-runs by anyone else fail.
+# - Inputs: never placed in an env: block or an inline expression in a run
+#   script. The runner prints each step's env: block into the step log, and
+#   this repository's logs are public. scraper.ingest_dispatch reads the values
+#   from $GITHUB_EVENT_PATH and masks every one with ::add-mask:: before use.
+#   Nothing writes them to a step summary or an artifact.
+# - Output: a pull request against main, never a direct push. The deploy key
+#   is not used; main's required checks gate the record like any change.
+#   GITHUB_TOKEN-created PRs start no pull_request runs, so the job dispatches
+#   ci and Lint on the PR branch to produce the required checks.
+# - Visibility: the record is public once the PR branch is pushed (public
+#   repository) and on the site after merge. That is expected.
+
+on:
+  workflow_dispatch:
+    inputs:
+      case_number:
+        description: "Case number as shown on courtclerk.org (e.g. B 24 1234)"
+        required: true
+        type: string
+      defendant_name:
+        description: "Defendant name (Last, First)"
+        required: true
+        type: string
+      defendant_dob:
+        description: "Defendant date of birth (MM/DD/YYYY)"
+        required: false
+        type: string
+      filed_date:
+        description: "Filed date (MM/DD/YYYY)"
+        required: false
+        type: string
+      judge:
+        description: "Judge"
+        required: false
+        type: string
+      charges:
+        description: "Charges (ORC code, then description)"
+        required: false
+        type: string
+      notes:
+        description: "Notes (verbatim docket entries only)"
+        required: false
+        type: string
+      next_hearing:
+        description: "Next hearing (MM/DD/YYYY)"
+        required: false
+        type: string
+      disposition:
+        description: "Disposition as shown on the docket"
+        required: false
+        type: string
+      source_url:
+        description: "https://www.courtclerk.org/data/case_summary.php link"
+        required: true
+        type: string
+      confirm_own_browser:
+        description: "I confirm this data was retrieved from courtclerk.org by my own browser, not by any automated tool."
+        required: true
+        type: boolean
+        default: false
+      confirm_verbatim:
+        description: "I confirm this data contains only verbatim docket information, no personal commentary or speculation."
+        required: true
+        type: boolean
+        default: false
+
+permissions: {}
+
+concurrency:
+  group: maintainer-case-ingest
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    name: Maintainer gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions: {}
+    steps:
+      - name: Fail closed unless AICincy dispatched from main
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          ACTOR: ${{ github.actor }}
+          ACTOR_ID: ${{ github.actor_id }}
+          TRIGGERING_ACTOR: ${{ github.triggering_actor }}
+          REF: ${{ github.ref }}
+        run: |
+          if [ "$EVENT_NAME" != "workflow_dispatch" ] \
+            || [ "$ACTOR" != "AICincy" ] \
+            || [ "$ACTOR_ID" != "65099975" ] \
+            || [ "$TRIGGERING_ACTOR" != "AICincy" ] \
+            || [ "$REF" != "refs/heads/main" ]; then
+            echo "::error::maintainer-case-ingest runs only when AICincy dispatches it from main"
+            exit 1
+          fi
+          echo "gate OK"
+
+  ingest:
+    name: Ingest case and open PR
+    needs: gate
+    if: github.event_name == 'workflow_dispatch' && github.actor == 'AICincy' && github.triggering_actor == 'AICincy' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write        # push the case-data branch (never main)
+      pull-requests: write   # open the PR
+      actions: write         # dispatch ci and Lint on the PR branch
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      # No env: block and no input expressions here, on purpose (see header).
+      - name: Mask inputs, validate, and update data/courtclerk_cases.json
+        run: python -m scraper.ingest_dispatch
+
+      - name: Push a case-data branch and open a pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          branch="case-data/run-${RUN_ID}-${RUN_ATTEMPT}"
+          title="case-data: maintainer ingest (run ${RUN_ID})"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -q -c "$branch"
+          git add -- data/courtclerk_cases.json
+          if git diff --cached --quiet; then
+            echo "::error::ingest produced no change to data/courtclerk_cases.json"
+            exit 1
+          fi
+          git commit -q -m "$title"
+          git push -q origin "HEAD:refs/heads/${branch}"
+          body="Maintainer-dispatched case-data ingest from ${RUN_URL}.
+
+          Validated by scraper/ingest_issue.py rules (courtclerk.org case_summary.php source only, both confirmations, field caps, normalized case-number dedup, schema_version). Review the data/courtclerk_cases.json diff before merging; the record appears on the site after merge."
+          pr_url="$(gh api "repos/${GITHUB_REPOSITORY}/pulls" \
+            -f base=main -f head="$branch" -f title="$title" -f body="$body" --jq .html_url)"
+          echo "opened ${pr_url}"
+          # Required checks: lint, test (3.13), test (3.14), Backend (Node),
+          # Build static site. A GITHUB_TOKEN PR triggers no pull_request
+          # runs, so dispatch them on the branch head instead.
+          gh workflow run ci.yml --ref "$branch"
+          gh workflow run lint.yml --ref "$branch"

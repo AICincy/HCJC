@@ -174,10 +174,10 @@
 {% if crowdsourced_for_inmate %}
 <aside class="crowdsource-block" aria-label="Crowdsourced case data">
   <header class="crowdsource-h">
-    <span class="crowdsource-kicker">Submitted by readers</span>
+    <span class="crowdsource-kicker">Looked up at courtclerk.org</span>
     <strong>Court records contributed for this inmate</strong>
   </header>
-  <p class="muted note-paragraph">These entries were looked up at courtclerk.org by individual readers and submitted through the case-data form - they are a point-in-time snapshot, not the official docket. <strong>Charges are accusations, not convictions.</strong> Verify anything that matters at the source link on each entry.</p>
+  <p class="muted note-paragraph">These entries were looked up at courtclerk.org in a regular browser and added by the site maintainer - they are a point-in-time snapshot, not the official docket. <strong>Charges are accusations, not convictions.</strong> Verify anything that matters at the source link on each entry.</p>
   <ul class="crowdsource-list">
     {% for entry in crowdsourced_for_inmate %}
     <li>
@@ -194,26 +194,12 @@
       {% endif %}
       {% if entry.disposition %} &middot; <em>{{ entry.disposition }}</em>{% endif %}
       {% if entry.charges_raw %}<br><span class="crowdsource-charges muted">{{ entry.charges_raw }}</span>{% endif %}
-      <span class="crowdsource-attrib muted">submitted by <a href="{{ entry.issue_url }}" target="_blank" rel="noopener">@{{ entry.submitter }}</a> on {{ entry.submitted }}{% if not entry.dob_verified %} (name match only - DOB not verified){% endif %}{% if entry.source_url %} &middot; <a href="{{ entry.source_url }}" target="_blank" rel="noopener">verify at courtclerk.org ↗</a>{% endif %}</span>
+      <span class="crowdsource-attrib muted">submitted by {% if entry.issue_url %}<a href="{{ entry.issue_url }}" target="_blank" rel="noopener">@{{ entry.submitter }}</a>{% else %}@{{ entry.submitter }}{% endif %} on {{ entry.submitted }}{% if not entry.dob_verified %} (name match only - DOB not verified){% endif %}{% if entry.source_url %} &middot; <a href="{{ entry.source_url }}" target="_blank" rel="noopener">verify at courtclerk.org ↗</a>{% endif %}</span>
     </li>
     {% endfor %}
   </ul>
 </aside>
 {% endif %}
-
-<aside class="case-cta" aria-label="Help us mirror this case">
-  <div class="case-cta-text">
-    <strong>Have you looked up this case at courtclerk.org?</strong>
-    JCStream can't scrape courtclerk.org because their <code>robots.txt</code> disallows it. If you pass the bot check on your own browser, you can paste the docket info into a one-minute form and it will appear here for everyone. <a href="{{ base_url }}/data/#crowdsource">How crowdsourcing works &rarr;</a>
-  </div>
-  {% set primary_case = (inmate.charges | selectattr('common_pleas_case') | map(attribute='common_pleas_case') | first) or
-                       (inmate.charges | selectattr('municipal_case')   | map(attribute='municipal_case')   | first) or
-                       (inmate.charges | selectattr('other_case')       | map(attribute='other_case')       | first) or '' %}
-  <a class="case-cta-btn" target="_blank" rel="noopener"
-     href="https://github.com/AICincy/HCJC/issues/new?template=case-data.yml&amp;title=%5Bcase%5D+{{ inmate.full_name | urlencode }}&amp;case_number={{ primary_case | urlencode }}&amp;defendant_name={{ inmate.full_name | urlencode }}">
-    Add case info for this inmate &rarr;
-  </a>
-</aside>
 
 {% set tl = timeline_markers(inmate) %}
 {% set bctx = bond_context(inmate) %}

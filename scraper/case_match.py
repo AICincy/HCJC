@@ -1,6 +1,6 @@
 """Match reader-submitted courtclerk case records to roster inmates.
 
-Submissions (`data/courtclerk_cases.json`, via the case-data issue workflow)
+Submissions (`data/courtclerk_cases.json`, via the maintainer_case_ingest workflow)
 carry a free-text ``defendant_name`` ("LAST, FIRST") and an optional
 ``defendant_dob``. The roster carries structured ``last_name`` /
 ``first_name`` / ``date_of_birth``. This module normalizes both sides and
