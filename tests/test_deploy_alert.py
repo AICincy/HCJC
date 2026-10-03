@@ -188,3 +188,90 @@ def test_fetch_live_generated_rejects_non_http_schemes(monkeypatch, site_url):
 
     monkeypatch.setattr(deploy_alert.urllib.request, "urlopen", _boom)
     assert deploy_alert._fetch_live_generated(site_url) is None
+
+
+# --- Auto-close when the live site catches up ---
+
+
+def _recording_gh(search_result):
+    calls = []
+
+    def _fake_gh(method, url, token, payload=None):
+        calls.append((method, url, payload))
+        if method == "GET":
+            return search_result
+        return {}
+
+    return calls, _fake_gh
+
+
+def _issue(number, title=deploy_alert.ISSUE_TITLE, login=deploy_alert.BOT_LOGIN):
+    return {"number": number, "title": title, "user": {"login": login}}
+
+
+def test_caught_up_closes_open_bot_alarm_issue(monkeypatch):
+    monkeypatch.setenv("GITHUB_TOKEN", "tok")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "AICincy/HCJC")
+    calls, fake = _recording_gh({"items": [_issue(507), _issue(508, login="JaredKrass")]})
+    monkeypatch.setattr(deploy_alert, "_gh", fake)
+    assert deploy_alert.alert(FRESH, FRESH, STUCK, auto_close=True) == "closed"
+    writes = [(m, u, p) for m, u, p in calls if m != "GET"]
+    assert [(m, u) for m, u, _ in writes] == [
+        ("POST", f"{deploy_alert.API}/repos/AICincy/HCJC/issues/507/comments"),
+        ("PATCH", f"{deploy_alert.API}/repos/AICincy/HCJC/issues/507"),
+    ]
+    assert FRESH in writes[0][2]["body"]
+    assert writes[1][2]["state"] == "closed"
+
+
+def test_within_grace_but_behind_does_not_close(monkeypatch):
+    # Inside the grace window the live site may still be serving the old stuck
+    # deploy; only a full catch-up (lag <= 0) closes.
+    monkeypatch.setenv("GITHUB_TOKEN", "tok")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "AICincy/HCJC")
+    monkeypatch.setattr(
+        deploy_alert,
+        "_gh",
+        lambda *a, **k: (_ for _ in ()).throw(AssertionError("must not close while live is behind")),
+    )
+    assert deploy_alert.alert(FRESH, BEHIND_120, JUST_PUSHED, auto_close=True) == "ok"
+
+
+def test_inconclusive_never_closes(monkeypatch):
+    monkeypatch.setenv("GITHUB_TOKEN", "tok")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "AICincy/HCJC")
+    monkeypatch.setattr(
+        deploy_alert,
+        "_gh",
+        lambda *a, **k: (_ for _ in ()).throw(AssertionError("inconclusive must not close")),
+    )
+    assert deploy_alert.alert(FRESH, None, auto_close=True) == "unknown"
+
+
+def test_caught_up_without_auto_close_makes_no_api_calls(monkeypatch):
+    monkeypatch.setenv("GITHUB_TOKEN", "tok")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "AICincy/HCJC")
+    monkeypatch.setattr(
+        deploy_alert,
+        "_gh",
+        lambda *a, **k: (_ for _ in ()).throw(AssertionError("must not call the API without auto_close")),
+    )
+    assert deploy_alert.alert(FRESH, FRESH, STUCK) == "ok"
+
+
+def test_auto_close_swallows_api_errors(monkeypatch):
+    import urllib.error
+
+    monkeypatch.setenv("GITHUB_TOKEN", "tok")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "AICincy/HCJC")
+
+    def _boom(*a, **k):
+        raise urllib.error.URLError("network down")
+
+    monkeypatch.setattr(deploy_alert, "_gh", _boom)
+    assert deploy_alert.alert(FRESH, FRESH, STUCK, auto_close=True) == "ok"
+
+
+def test_issue_body_mentions_auto_close():
+    body = deploy_alert._issue_body(45, 120, FRESH, BEHIND_120)
+    assert "closes it automatically" in body
