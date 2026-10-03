@@ -309,6 +309,11 @@ def _load_crowdsourced_cases(
         raw = json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return {}
+    # Canonical shape is the {"cases": [...]} envelope written by
+    # scraper.ingest_issue.save_cases; a bare list (pre-envelope files) is
+    # still accepted. Anything else renders no entries.
+    if isinstance(raw, dict):
+        raw = raw.get("cases")
     entries = raw if isinstance(raw, list) else []
     matched = match_cases_to_inmates([e for e in entries if isinstance(e, dict)], inmates)
     # Adapt stored records to the fields web/templates/inmate.html renders.
