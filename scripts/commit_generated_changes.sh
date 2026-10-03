@@ -108,4 +108,22 @@ if ! git rebase "origin/$target_branch"; then
   fi
 fi
 
-git push origin "HEAD:$target_branch"
+# Push with the bot deploy key when the workflow provides it. A deploy-key
+# push is a ruleset bypass actor on main, so bot data commits land even though
+# main requires status checks. The key exists only in this step's environment
+# and in a private ssh-agent killed on exit; it is never written to disk.
+# Fetch above stays on the checkout token.
+if [[ -n "${BOT_DEPLOY_KEY:-}" && -n "${GITHUB_REPOSITORY:-}" ]]; then
+  eval "$(ssh-agent -s)" >/dev/null
+  trap 'ssh-agent -k >/dev/null 2>&1 || true' EXIT
+  printf '%s\n' "$BOT_DEPLOY_KEY" | ssh-add -q -
+  known_hosts=$(mktemp)
+  # github.com ed25519 host key, from https://api.github.com/meta ssh_keys.
+  echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > "$known_hosts"
+  export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=$known_hosts -o StrictHostKeyChecking=yes"
+  echo "pushing with bot deploy key"
+  git push "git@github.com:${GITHUB_REPOSITORY}.git" "HEAD:$target_branch"
+else
+  echo "::warning::BOT_DEPLOY_KEY not set; pushing with the checkout token, which main's required-checks ruleset rejects."
+  git push origin "HEAD:$target_branch"
+fi

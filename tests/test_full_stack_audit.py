@@ -86,10 +86,11 @@ def test_lint_is_pull_request_only_without_side_branch_push():
     assert '-e ".[dev]"' not in text
 
 
-def test_ci_is_main_push_only_and_does_not_duplicate_lint():
+def test_ci_runs_on_main_push_and_unfiltered_pull_requests():
     text = _active_text(WORKFLOW_DIR / "ci.yml")
     assert re.search(r"push:\s*\n\s*branches: \[main\]", text)
-    assert not re.search(r"^\s*pull_request:", text, re.MULTILINE)
+    # Required checks must report on every PR, so pull_request has no paths filter.
+    assert re.search(r"^\s*pull_request:\s*\n\s*branches: \[main\]\s*\n\S", text, re.MULTILINE)
     assert "ruff check ." in text
     assert "python -m pytest" in text
 
