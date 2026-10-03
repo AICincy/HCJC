@@ -6,9 +6,10 @@
 # (`Lint`) and job id (`lint`) are kept byte-identical so any check-name
 # reference keeps resolving across the rename.
 #
-# Split of duties: `ci.yml` owns the full merge gate (mypy, pip-audit, the
-# 3.13/3.14 matrix, WAF evidence chain, backend smoke) on pull requests and
-# pushes to main. This workflow is the fast PR check only. A side-branch
+# Split of duties: `ci.yml` runs the full suite (mypy, pip-audit, the
+# 3.13/3.14 matrix, WAF evidence chain, backend smoke) only on pushes to
+# main that change anything outside data/** and docs/**; it does not run on
+# pull requests. This workflow is the fast PR check only. A side-branch
 # push trigger plus pull_request doubled runner demand and cancelled the
 # prior SHA mid-job (often before ruff/pytest). Open a PR for Lint.
 name: Lint
