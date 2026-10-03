@@ -16,6 +16,9 @@ name: Lint
 
 on:
   pull_request:
+  # Dispatched only by maintainer_case_ingest.yml on its PR branch (a
+  # GITHUB_TOKEN PR starts no pull_request run), so `lint` still reports.
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

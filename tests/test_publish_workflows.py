@@ -105,7 +105,6 @@ def test_bot_publishers_push_with_deploy_key() -> None:
     publishers = sorted(p.name for p in workflows.glob("*.yml") if "commit_generated_changes.sh" in p.read_text(encoding="utf-8"))
     assert publishers == [
         "clerk_pra_packets.yml",
-        "ingest_case_data.yml",
         "rebuild.yml",
         "refresh_caselaw.yml",
         "sweep.yml",

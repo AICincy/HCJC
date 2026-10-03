@@ -138,7 +138,7 @@
     <tr><td><a href="pedestrian_stops_recent.json">pedestrian_stops_recent.json</a></td><td>Cincinnati Open Data - Pedestrian Stops Contact Cards (Socrata <code>swrz-ak2i</code>), most recent ~5,000 contact cards. Source frozen: no new contact cards have been published since 2024. Refresh attempts run at most every 24&nbsp;hours.{{ vintage('pedestrian_stops_recent.json') }}</td></tr>
     <tr><td><a href="crime_stars_recent.json">crime_stars_recent.json</a></td><td>Cincinnati Open Data - Reported Crime under the STARS offense category, on or after 6/3/2024 (Socrata <code>7aqy-xrv9</code>), last ~30&nbsp;days. Refresh attempts run at most every 12&nbsp;hours.{{ vintage('crime_stars_recent.json') }}</td></tr>
     <tr><td><a href="cca_complaints_recent.json">cca_complaints_recent.json</a></td><td>Cincinnati Open Data - Citizen Complaint Authority (CCA) closed complaints against CPD (Socrata <code>ii65-eyg6</code>), last ~2&nbsp;years. Refresh attempts run at most every 24&nbsp;hours (rare-event feed).{{ vintage('cca_complaints_recent.json') }}</td></tr>
-    {% if courtclerk_cases_available %}<tr><td><a href="courtclerk_cases.json">courtclerk_cases.json</a></td><td>Crowdsourced case data submitted via the <a href="https://github.com/AICincy/HCJC/issues/new?template=case-data.yml">case-data issue form</a> by people who looked the case up themselves at courtclerk.org. May be empty.</td></tr>{% endif %}
+    {% if courtclerk_cases_available %}<tr><td><a href="courtclerk_cases.json">courtclerk_cases.json</a></td><td>Case data looked up at courtclerk.org in a regular browser and added by the site maintainer. May be empty.</td></tr>{% endif %}
     <tr><td><a href="SHA256SUMS">SHA256SUMS</a></td><td>SHA-256 of each file in this directory, regenerated every build - cheap tamper-evidence on top of the authenticated git history. Verify downloads by running <code>sha256sum -c SHA256SUMS</code> in the directory you downloaded the files to (<code>shasum -a 256 -c SHA256SUMS</code> on macOS).</td></tr>
   </tbody>
 </table>
@@ -174,13 +174,10 @@ snapshot, pulls the Cincinnati Open Data feeds, regenerates this site, and commi
   JCStream does <strong>not</strong> scrape <a href="https://www.courtclerk.org" target="_blank" rel="noopener">courtclerk.org</a>. The Hamilton County Clerk of Courts explicitly disallows automated access to <code>/data/</code> in their <code>robots.txt</code>, and the prior maintainer of this project made the principled call to respect that limit. A scraper here would also break every time the Clerk's site changes.
 </p>
 <p>
-  But there's a path that works: any reader who looks up a case at courtclerk.org (passing their bot check in a regular browser) can paste the docket fields into a one-minute GitHub form. The form's a structured issue template; a workflow ingests it into <code>data/courtclerk_cases.json</code>; the next site build then displays the submission on the matching inmate's detail page under "Submitted by readers." Anyone reading that inmate's page sees the court information without anyone scraping anyone.
+  But there's a path that works: a person looks up a case at courtclerk.org in a regular browser, and the site maintainer adds the docket fields through a maintainer-only workflow that validates them into <code>data/courtclerk_cases.json</code> by pull request; the next site build then displays the entry on the matching inmate's detail page. Anyone reading that inmate's page sees the court information without anyone scraping anyone. There is no public submission form.
 </p>
 <p>
-  This is a deliberate trade: coverage will always be patchy, because only what someone bothers to submit appears. The upside: every entry was looked up by a real person, so the data quality on what does come in is higher than any scraper would manage.
-</p>
-<p>
-  <a href="https://github.com/AICincy/HCJC/issues/new?template=case-data.yml">Open the case-data form &rarr;</a>
+  This is a deliberate trade: coverage will always be patchy, because only what gets looked up and added appears. The upside: every entry was looked up by a real person, so the data quality on what does come in is higher than any scraper would manage.
 </p>
 
 <h2 id="anon" class="sect-h">Anonymized event log (permanent)</h2>

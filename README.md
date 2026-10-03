@@ -321,7 +321,7 @@ The primary GitHub Actions workflows are:
 | rebuild.yml | manual dispatch | rebuilds generated data/docs |
 | refresh_caselaw.yml | scheduled | refreshes ORC case law |
 | archive-evidence.yml | monthly | creates independently downloadable evidence archives |
-| ingest_case_data.yml | issue workflow | ingests human-submitted court data |
+| maintainer_case_ingest.yml | manual dispatch, AICincy only | validates one courtclerk.org case and opens a PR updating data/courtclerk_cases.json |
 | clerk_pra_packets.yml | manual dispatch | produces draft public-record request letters |
 | codeql.yml | scheduled | security scanning |
 

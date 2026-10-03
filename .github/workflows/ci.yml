@@ -1,6 +1,10 @@
 name: ci
 
 on:
+  # Manual/ingest dispatch: maintainer_case_ingest.yml opens its PR with
+  # GITHUB_TOKEN, which starts no pull_request runs, so it dispatches this
+  # workflow on the PR branch to report the required checks on its head.
+  workflow_dispatch:
   push:
     branches: [main]
     paths-ignore:

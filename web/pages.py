@@ -292,8 +292,8 @@ def sanitize_email_href(value: object) -> str:
 def _load_crowdsourced_cases(
     inmates: list[Inmate],
 ) -> dict[str, list[dict]]:
-    """Read data/courtclerk_cases.json (populated via the case-data issue
-    workflow) and index entries by matched inmate_number.
+    """Read data/courtclerk_cases.json (populated via the maintainer-only
+    maintainer_case_ingest workflow) and index entries by matched inmate_number.
 
     Matching is by normalized defendant name plus date of birth
     (scraper.case_match); entries that match no current inmate are dropped,
