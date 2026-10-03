@@ -35,6 +35,13 @@ Send-gate and dedupe mirror ``scraper.freeze_alert``: it dry-runs (logs only)
 unless both ``GITHUB_TOKEN`` and ``GITHUB_REPOSITORY`` are set, and it opens at
 most one issue while the marker title stays open. A live-fetch or parse failure
 is inconclusive, not an alarm, so a transient network blip cannot false-fire.
+
+Auto-close also mirrors ``scraper.freeze_alert``: with ``auto_close=True`` (the
+watchdog) it closes any open alarm issue this bot opened once the live site has
+fully caught up (live ``generated_utc`` at or past the committed one), with a
+comment naming the live timestamp. Being merely inside the deploy grace window
+is not enough: a newer push can sit inside the window while the old stuck
+deploy is still being served, and closing then would flap.
 """
 
 from __future__ import annotations
@@ -47,7 +54,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
-from .freeze_alert import API, _gh
+from .freeze_alert import API, BOT_LOGIN, _gh
 from .sweep import CURRENT_PATH, _prev_generated_utc
 
 log = logging.getLogger("jcstream.sweep")
@@ -148,7 +155,16 @@ def _issue_body(pending_min: float, lag_min: float, local_generated: str | None,
         "2. If retries keep failing, GitHub Pages is degraded for this repo; the "
         "next successful sweep push supersedes the stuck deploy.\n\n"
         "_Opened automatically by `scraper.deploy_alert`. It will not duplicate "
-        "while open; close it once the live timestamp catches up._"
+        "while open, and the staleness watchdog closes it automatically once the "
+        "live timestamp catches up._"
+    )
+
+
+def _close_comment(local_generated: str | None, live_generated: str | None) -> str:
+    return (
+        f"Live site caught up: `/data/current.json` now serves `generated_utc` "
+        f"`{live_generated}` (committed on `main`: `{local_generated}`). Closing "
+        f"automatically (`scraper.deploy_alert`)."
     )
 
 
@@ -161,13 +177,55 @@ def _open_issue_exists(repo: str, token: str) -> bool:
     return any(isinstance(i, dict) and i.get("title") == ISSUE_TITLE for i in items)
 
 
+def _open_bot_alarm_issues(repo: str, token: str) -> list[dict]:
+    """Open issues with the marker title that this bot opened (same search
+    query as :func:`_open_issue_exists`, filtered to ``BOT_LOGIN``)."""
+    q = urllib.parse.quote(f'repo:{repo} is:issue is:open in:title "{ISSUE_TITLE}"')
+    result = _gh("GET", f"{API}/search/issues?q={q}", token)
+    items = result.get("items", []) if isinstance(result, dict) else []
+    return [
+        i
+        for i in items
+        if isinstance(i, dict)
+        and i.get("title") == ISSUE_TITLE
+        and isinstance(i.get("number"), int)
+        and isinstance(i.get("user"), dict)
+        and i["user"].get("login") == BOT_LOGIN
+    ]
+
+
+def _resolve(local_generated: str | None, live_generated: str | None) -> str:
+    """Close open bot alarm issues now that the live site has caught up.
+    Returns ``"closed"`` if any were closed, else ``"ok"`` (none open, no
+    token, or an API error, which is logged and never raised)."""
+    token = os.environ.get("GITHUB_TOKEN")
+    repo = os.environ.get("GITHUB_REPOSITORY")
+    if not token or not repo:
+        return "ok"
+    comment = _close_comment(local_generated, live_generated)
+    try:
+        issues = _open_bot_alarm_issues(repo, token)
+        for issue in issues:
+            number = issue["number"]
+            _gh("POST", f"{API}/repos/{repo}/issues/{number}/comments", token, {"body": comment})
+            _gh("PATCH", f"{API}/repos/{repo}/issues/{number}", token, {"state": "closed", "state_reason": "completed"})
+            log.info("deploy caught up; closed deploy-staleness issue #%s", number)
+    except (urllib.error.URLError, urllib.error.HTTPError, ValueError) as e:
+        log.warning("deploy-alert auto-close API call failed: %s", e)
+        return "ok"
+    return "closed" if issues else "ok"
+
+
 def alert(
     local_generated: str | None,
     live_generated: str | None,
     now: datetime | None = None,
+    *,
+    auto_close: bool = False,
 ) -> str:
     """Emit the deploy-staleness alert. Returns the action taken for
     logging/testing: ``"unknown"`` (inconclusive), ``"ok"`` (within threshold),
+    ``"closed"`` (caught up, and ``auto_close`` closed an open alarm issue),
     ``"dry-run"`` (stale, no token), ``"exists"`` (issue already open), or
     ``"created"``."""
     pending = deploy_pending_minutes(local_generated, live_generated, now)
@@ -181,6 +239,8 @@ def alert(
             pending,
             max(lag, 0.0),
         )
+        if auto_close and lag <= 0:
+            return _resolve(local_generated, live_generated)
         return "ok"
 
     # Stuck deploy: surface in the Actions UI regardless of token availability.
