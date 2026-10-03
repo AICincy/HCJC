@@ -209,6 +209,7 @@ _DISPOSITION_EN = {
     "CAN:CANCEL": "Cancelled",
     "INV: INV": "Investigation",
     "TOW: TOW RPRT": "Tow report",
+    "NTR: NOTHING TO REP": "Nothing to report",
 }
 
 # CAD incident-type codes need normalization, not enumeration: the two CFS
