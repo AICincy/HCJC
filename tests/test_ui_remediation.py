@@ -130,3 +130,28 @@ def test_normal_text_semantic_tokens_meet_aa(theme, surface):
     for token in text_tokens:
         a, b = sorted((_luminance(tokens[token]), _luminance(tokens[surface])))
         assert (b + .05) / (a + .05) >= 4.5, (theme, token, surface)
+
+
+def _rules_for(selector, sheet):
+    """Declaration blocks whose comma-separated selector list contains selector."""
+    css = re.sub(r"/\*.*?\*/", "", (ROOT / "web/static" / sheet).read_text(), flags=re.S)
+    return [body for sels, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css)
+            if selector in [s.strip() for s in sels.split(",")]]
+
+
+def test_dark_roster_trend_delta_down_uses_aa_text_token():
+    # 2026-10-03 production axe: 13px --warn on --surface was 4.18:1.
+    rules = _rules_for(':root[data-theme="dark"] .roster-trend .delta-down', "fold-chrome.css")
+    assert any("var(--accent-text)" in body for body in rules)
+    tokens = _tokens("dark")
+    a, b = sorted((_luminance(tokens["--accent-text"]), _luminance(tokens["--surface"])))
+    assert (b + .05) / (a + .05) >= 4.5
+
+
+def test_pager_size_select_meets_mobile_control_minimum():
+    # fold-chrome.css loads after style.css, so equal-specificity rules win there.
+    base = (ROOT / "web/templates/base.html").read_text()
+    assert base.index("static/style.css") < base.index("static/fold-chrome.css")
+    sizes = [float(m) for body in _rules_for(".pager-size-sel", "fold-chrome.css")
+             for m in re.findall(r"font-size:\s*([\d.]+)px", body)]
+    assert sizes and sizes[-1] >= 16
