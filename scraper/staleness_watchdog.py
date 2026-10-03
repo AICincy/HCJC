@@ -13,6 +13,11 @@ report it. Two checks, both read-only against the repo:
 2. **Stuck Pages deploy** -- ``scraper.deploy_alert.alert``, which compares the
    live ``/data/current.json`` with the committed one.
 
+Both run with ``auto_close=True``: this workflow checks out the fresh tip of
+``main``, so "fresh" here means the data really reached ``main`` (and, for the
+deploy check, the live site), and a recovered alarm issue is closed with a
+comment naming the fresh ``generated_utc``.
+
 Each check is isolated: an exception in one is logged and never prevents the
 other, and the watchdog always exits 0 (alerting must not create red CI noise
 of its own; the alarms surface via ``::error`` annotations and issues).
@@ -34,13 +39,13 @@ def run(local_generated: str | None, site_url: str) -> dict[str, str]:
     """Run both checks and return ``{"freeze": action, "deploy": action}``."""
     results: dict[str, str] = {}
     try:
-        results["freeze"] = freeze_alert.alert(roster_stale_hours(local_generated))
+        results["freeze"] = freeze_alert.alert(roster_stale_hours(local_generated), local_generated, auto_close=True)
     except Exception as e:  # noqa: BLE001 - one alarm must never block the other
         log.warning("watchdog: freeze check raised %s: %s", type(e).__name__, e)
         results["freeze"] = "error"
     try:
         live_generated = deploy_alert._fetch_live_generated(site_url)
-        results["deploy"] = deploy_alert.alert(local_generated, live_generated)
+        results["deploy"] = deploy_alert.alert(local_generated, live_generated, auto_close=True)
     except Exception as e:  # noqa: BLE001
         log.warning("watchdog: deploy check raised %s: %s", type(e).__name__, e)
         results["deploy"] = "error"

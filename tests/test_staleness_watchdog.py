@@ -58,12 +58,34 @@ def test_run_isolates_check_failures(monkeypatch) -> None:
 def test_run_reports_both_checks(monkeypatch) -> None:
     seen = {}
 
-    def _freeze(stale_h):
+    def _freeze(stale_h, generated_utc=None, *, auto_close=False):
         seen["stale_h"] = stale_h
+        seen["generated_utc"] = generated_utc
+        seen["auto_close"] = auto_close
         return "ok"
 
     monkeypatch.setattr(freeze_alert, "alert", _freeze)
     monkeypatch.setattr(deploy_alert, "_fetch_live_generated", lambda url: "2026-09-24T03:53:52Z")
+    # No token: the deploy auto-close path must stay a no-op.
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    monkeypatch.delenv("GITHUB_REPOSITORY", raising=False)
     results = staleness_watchdog.run("2026-09-24T03:53:52Z", "https://example.com")
     assert results == {"freeze": "ok", "deploy": "ok"}
     assert seen["stale_h"] is not None
+    # The watchdog reads committed main, so it is the path that auto-closes.
+    assert seen["generated_utc"] == "2026-09-24T03:53:52Z"
+    assert seen["auto_close"] is True
+
+
+def test_run_passes_auto_close_to_deploy_check(monkeypatch) -> None:
+    seen = {}
+
+    def _deploy(local_generated, live_generated, now=None, *, auto_close=False):
+        seen["auto_close"] = auto_close
+        return "ok"
+
+    monkeypatch.setattr(freeze_alert, "alert", lambda *a, **k: "ok")
+    monkeypatch.setattr(deploy_alert, "_fetch_live_generated", lambda url: "2026-09-24T03:53:52Z")
+    monkeypatch.setattr(deploy_alert, "alert", _deploy)
+    staleness_watchdog.run("2026-09-24T03:53:52Z", "https://example.com")
+    assert seen["auto_close"] is True
