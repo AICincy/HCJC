@@ -4,13 +4,15 @@ on:
   push:
     branches: [main]
     paths-ignore:
-      # Sweep/rebuild commits only rewrite generated snapshots. The side-branch
-      # and pull-request gap is owned by lint.yml; this workflow is main-only.
+      # Sweep/rebuild commits only rewrite generated snapshots.
       - "data/**"
       - "docs/**"
-  # Pull requests and side-branch pushes are owned by lint.yml. Keeping the
-  # full matrix on main only avoids running Ruff/pytest twice on every PR while
-  # preserving the merge-time checks on the protected branch.
+  # Main's ruleset requires `test (3.13)`, `test (3.14)`, `Backend (Node)` and
+  # `Build static site`, so they must report on every PR. No path filter here:
+  # a path-skipped required check never reports and would block the merge.
+  # Bot data pushes bypass the ruleset with the BOT_DEPLOY_KEY deploy key.
+  pull_request:
+    branches: [main]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -93,3 +93,26 @@ def test_branch_serve_publishers_commit_docs() -> None:
             r"commit_generated_changes\.sh\s+\S+\s+\"[^\"]+\"\s+.*\bdocs/",
             text,
         ), f"{name}: commit_generated_changes.sh must publish docs/"
+
+
+def test_bot_publishers_push_with_deploy_key() -> None:
+    """Main requires status checks; only the deploy key bypasses that ruleset.
+
+    Every workflow that runs the shared publisher must hand it BOT_DEPLOY_KEY,
+    and the publisher must push over SSH with it when present.
+    """
+    workflows = REPO_ROOT / ".github" / "workflows"
+    publishers = sorted(p.name for p in workflows.glob("*.yml") if "commit_generated_changes.sh" in p.read_text(encoding="utf-8"))
+    assert publishers == [
+        "clerk_pra_packets.yml",
+        "ingest_case_data.yml",
+        "rebuild.yml",
+        "refresh_caselaw.yml",
+        "sweep.yml",
+    ]
+    for name in publishers:
+        text = (workflows / name).read_text(encoding="utf-8")
+        assert "BOT_DEPLOY_KEY: ${{ secrets.BOT_DEPLOY_KEY }}" in text, f"{name}: publisher step lacks BOT_DEPLOY_KEY"
+    script = (REPO_ROOT / "scripts" / "commit_generated_changes.sh").read_text(encoding="utf-8")
+    assert 'git push "git@github.com:${GITHUB_REPOSITORY}.git" "HEAD:$target_branch"' in script
+    assert "StrictHostKeyChecking=yes" in script
