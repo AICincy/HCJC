@@ -463,6 +463,46 @@ def test_compound_and_unknown_dispositions():
         feeds_mod._disposition_en("XYZ: FOO")
 
 
+
+def test_truncated_final_disposition_resolves_by_code_and_prefix():
+    # The CFS feeds cap disposition_text at 30 chars, cutting the last part.
+    assert feeds_mod._disposition_en("TRAN: TRANS") == "Transported"
+    assert feeds_mod._disposition_en("TC:TRANSFE") == "Call transferred"
+    assert feeds_mod._disposition_en("301:OFFENSE REPORT,TRAN: TRANS") == (
+        "Offense report filed; Transported"
+    )
+    assert feeds_mod._disposition_en("ADV:ADVISED,TC:TRANSFERRED CAL") == (
+        "Advised; Call transferred"
+    )
+    assert feeds_mod._disposition_en("TC:TRANSFERRED CALL") == "Call transferred"
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        "XYZ: FOO",                      # unknown code
+        "TRAN: TRANSFER",                # known code, description not a prefix
+        "TRAN:TRANSPORT",                # known code, equal (not strict) description
+        "TRA",                           # code itself cut, no colon
+        "TRAN: TRANS,ARR: ARREST",       # truncation only allowed on the last part
+        "ARR: ARREST,XYZ: F",            # final part, unknown code
+    ],
+)
+def test_untranslatable_dispositions_still_raise(raw):
+    with pytest.raises(KeyError):
+        feeds_mod._disposition_en(raw)
+
+
+def test_ambiguous_truncated_disposition_raises(monkeypatch):
+    monkeypatch.setitem(feeds_mod._DISPOSITION_EN, "ZZ: ALPHA ONE", "Alpha one")
+    monkeypatch.setitem(feeds_mod._DISPOSITION_EN, "ZZ: ALPHA TWO", "Alpha two")
+    with pytest.raises(KeyError, match="ambiguous"):
+        feeds_mod._disposition_en("ARR: ARREST,ZZ: ALPHA")
+    # A cut that matches several entries with the same translation is fine.
+    assert feeds_mod._disposition_en("TRAN: TRAN") == "Transported"
+    assert feeds_mod._disposition_en("ZZ: ALPHA O") == "Alpha one"
+
+
 def test_unknown_stars_category_raises():
     """Fail loud: an unmapped STARS category raises instead of rendering raw."""
     with pytest.raises(KeyError):
