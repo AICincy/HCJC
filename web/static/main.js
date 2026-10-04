@@ -845,6 +845,9 @@
     sbox.addEventListener('input', function () {
       loadIdx();
       clearTimeout(renderDebounce);
+      // PERF-01: with the index already loaded, show the first suggestions
+      // at once instead of waiting for a typing pause; updates still debounce.
+      if (idx && sresults.hidden) render();
       renderDebounce = setTimeout(render, 200);
     });
     sbox.addEventListener('keydown', function (e) { if (e.key === 'Escape') dismiss(); });

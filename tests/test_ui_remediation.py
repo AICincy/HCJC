@@ -170,3 +170,7 @@ def test_search_index_prefetches_on_intent_and_loads_once():
         assert re.search(r"sbox\.addEventListener\('%s', loadIdx\b" % event, block), event
     fallback = block[block.index("sbox.addEventListener('input'"):]
     assert "loadIdx();" in fallback[:120]
+    # A prefetched index renders on the keystroke, not after the debounce.
+    handler = fallback[:fallback.index("});")]
+    assert "if (idx && sresults.hidden) render();" in handler
+    assert "setTimeout(render, 200)" in handler
