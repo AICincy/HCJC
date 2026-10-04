@@ -155,3 +155,18 @@ def test_pager_size_select_meets_mobile_control_minimum():
     sizes = [float(m) for body in _rules_for(".pager-size-sel", "fold-chrome.css")
              for m in re.findall(r"font-size:\s*([\d.]+)px", body)]
     assert sizes and sizes[-1] >= 16
+
+
+def test_search_index_prefetches_on_intent_and_loads_once():
+    # PERF-01: search.json starts loading at the earliest intent signal
+    # (pointer over the box, touch, focus), keeps the first-keystroke
+    # fallback, and the shared guard keeps it to a single fetch.
+    js = (ROOT / "web/static/main.js").read_text(encoding="utf-8")
+    start = js.index("function loadIdx()")
+    block = js[start:js.index("// (N) Theme toggle", start)]
+    assert "if (idx || loading) return;" in block[:200]
+    assert block.count("fetch(ROOT + '/search.json')") == 1
+    for event in ("pointerenter", "touchstart", "focus"):
+        assert re.search(r"sbox\.addEventListener\('%s', loadIdx\b" % event, block), event
+    fallback = block[block.index("sbox.addEventListener('input'"):]
+    assert "loadIdx();" in fallback[:120]

@@ -752,8 +752,9 @@
     }
   } // end (3) filter bar
 
-  // (4) Search-results dropdown - lazy-loads search.json on first keystroke,
-  //     shows a type-ahead list of matching people. Uses DOM APIs (not innerHTML)
+  // (4) Search-results dropdown - lazy-loads search.json on the first intent
+  //     signal (pointer over the box, touch, or focus; first keystroke as the
+  //     fallback), shows a type-ahead list of matching people. Uses DOM APIs (not innerHTML)
   //     to satisfy CodeQL DOM-text-reinterpreted-as-HTML checks.
   var sbox = document.getElementById('search-box');
   var sresults = document.getElementById('search-results');
@@ -835,6 +836,11 @@
       sbox.focus();
     });
     var renderDebounce = null;
+    // PERF-01: start the index fetch at the earliest intent signal so it is
+    // ready when typing starts. The input handler below stays as the fallback.
+    // loadIdx() returns early once a fetch is in flight or done: one load.
+    sbox.addEventListener('pointerenter', loadIdx, { once: true });
+    sbox.addEventListener('touchstart', loadIdx, { once: true, passive: true });
     sbox.addEventListener('focus', loadIdx);
     sbox.addEventListener('input', function () {
       loadIdx();
