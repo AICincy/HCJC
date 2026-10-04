@@ -171,9 +171,13 @@
 }
 :root[data-theme="dark"] .visit-card:not(.visit-card-primary) .visit-card-kicker,
 :root[data-theme="dark"] .alert.inline-alert > strong:first-child,
-:root[data-theme="dark"] .kpi:first-child .label {
+:root[data-theme="dark"] .kpi:first-child .label,
+:root[data-theme="dark"] .roster-trend .delta-down {
   color: var(--accent-text);
 }
+/* 2026-10-03 production axe (#485 gate re-check): /stats/ roster-trend
+   .delta-down was 13px --warn on --surface, 4.18:1. Latent until the roster
+   shrinks day-over-day, so the 2026-09-22 scans never rendered it. */
 /* Non-primary visit-card icon box: --accent glyph on --accent-bg was 4.31:1
    (axe: .visit-card-icon, help + visit pages). */
 :root[data-theme="dark"] .visit-card:not(.visit-card-primary) .visit-card-icon {
@@ -223,9 +227,12 @@ footer.site > p a,
 .page .stacked-row-link { text-decoration: none; } /* swatch + count row */
 
 /* P1-07: the primary search control (and its select peers) compute to at
-   least 16px, the mobile form-control minimum (was 13-14px computed). */
+   least 16px, the mobile form-control minimum (was 13-14px computed).
+   .pager-size-sel ("Cards per page", built by main.js) was still 14px on
+   /archive/, which triggers iOS Safari focus zoom. */
 .filter-bar select,
-.filter-bar input[type="search"] {
+.filter-bar input[type="search"],
+.pager-size-sel {
   font-size: 16px;
 }
 .filter-bar .filter-bar-main input[type="search"],
