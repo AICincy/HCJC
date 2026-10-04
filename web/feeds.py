@@ -215,6 +215,9 @@ _DISPOSITION_EN = {
     # arrive cut short: "CIT: CITED,OH: OH,TRAN: TRANSP" (CPD261002000427).
     "TRAN: TRANSPORT": "Transported",
     "TRAN: TRANSP": "Transported",
+    # Transferred to another agency/queue: "TC:TRANSFERRED CALL" in both CFS
+    # datasets (often cut short, e.g. "ADV:ADVISED,TC:TRANSFERRED CAL").
+    "TC:TRANSFERRED CALL": "Call transferred",
 }
 
 # CAD incident-type codes need normalization, not enumeration: the two CFS
@@ -372,21 +375,60 @@ def _address_en(raw: object) -> str:
     return " ".join(parts)
 
 
+def _split_disposition(part: str) -> tuple[str, str] | None:
+    """Split 'CODE: DESCRIPTION' into trimmed (code, description)."""
+    code, sep, desc = part.partition(":")
+    if not sep or not code.strip():
+        return None
+    return code.strip(), desc.strip()
+
+
+def _truncated_disposition_en(part: str) -> str | None:
+    """Translate a disposition part cut short by the feed's 30-char cap.
+
+    The CFS feeds cap disposition_text at 30 characters, so the last part
+    of a long compound string can arrive truncated ('TRAN: TRANS',
+    'TC:TRANSFE'). Resolve it only when its code exactly matches a known
+    entry's code and its description is a strict prefix of that entry's
+    description. Returns None when nothing matches; raises KeyError when
+    the cut matches entries with different translations.
+    """
+    split = _split_disposition(part)
+    if split is None:
+        return None
+    code, desc = split
+    hits: set[str] = set()
+    for key, english in _DISPOSITION_EN.items():
+        known = _split_disposition(key)
+        if known and known[0] == code and len(desc) < len(known[1]) and known[1].startswith(desc):
+            hits.add(english)
+    if len(hits) > 1:
+        raise KeyError(
+            f"ambiguous truncated disposition code {part!r} matches {sorted(hits)}; "
+            "add the exact string to _DISPOSITION_EN"
+        )
+    return hits.pop() if hits else None
+
+
 def _disposition_en(raw: object) -> str:
     """Translate a compound disposition like 'ARR: ARREST,SOW: SENT ON WAY'.
 
     Fail loud: an untranslated code raises KeyError so it gets a real
-    translation instead of leaking a title-cased raw code to readers.
+    translation instead of leaking a title-cased raw code to readers. The
+    one exception is the final part, which the feed's 30-char cap can cut
+    short: it may resolve through _truncated_disposition_en.
     """
     parts = [p.strip() for p in str(raw or "").split(",") if p.strip()]
     out = []
-    for p in parts:
-        try:
-            out.append(_DISPOSITION_EN[p])
-        except KeyError:
+    for i, p in enumerate(parts):
+        english = _DISPOSITION_EN.get(p)
+        if english is None and i == len(parts) - 1:
+            english = _truncated_disposition_en(p)
+        if english is None:
             raise KeyError(
                 f"untranslated disposition code {p!r}; add it to _DISPOSITION_EN"
-            ) from None
+            )
+        out.append(english)
     return "; ".join(out)
 
 
