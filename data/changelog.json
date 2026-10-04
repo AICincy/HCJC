@@ -1,34 +1,6 @@
 [
   {
     "event": "updated",
-    "inmate_number": "2447252",
-    "name": "SMITH JOHN",
-    "timestamp_utc": "2026-08-09T05:34:54Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2498698",
-    "name": "FRANKLIN REGINALD",
-    "timestamp_utc": "2026-08-09T05:34:54Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2509705",
-    "name": "PENN ASHLEY",
-    "timestamp_utc": "2026-08-09T05:34:54Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2532320",
-    "name": "IVORY BRENEE",
-    "timestamp_utc": "2026-08-09T05:34:54Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
     "inmate_number": "2535490",
     "name": "MCCREE SIERRA",
     "timestamp_utc": "2026-08-09T05:34:54Z",
@@ -69998,5 +69970,33 @@
     "name": "BREWSTER KEITH",
     "timestamp_utc": "2026-10-04T22:00:01Z",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14825976",
+    "name": "VAZQUEZ KEVIN",
+    "timestamp_utc": "2026-10-04T23:11:24Z",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "1949308",
+    "name": "ZANDERS MICHAEL",
+    "timestamp_utc": "2026-10-04T23:11:24Z",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "445158",
+    "name": "PUCK BRYAN",
+    "timestamp_utc": "2026-10-04T23:11:24Z",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "inmate_number": "14715410",
+    "name": "DALTON JOSEPH",
+    "timestamp_utc": "2026-10-04T23:11:24Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
