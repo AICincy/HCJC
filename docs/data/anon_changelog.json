@@ -41893,30 +41893,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-27T04:11:46Z",
-    "inmate_number": "14180224",
-    "name": "ELLIS-SMITH HUNTER",
+    "date": "2026-09-27",
     "tier": "M1",
-    "category": "Improperly handling firearms in a motor vehicle",
-    "note": "booked 9/26/26"
+    "category": "Improperly handling firearms in a motor vehicle"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-27T04:11:46Z",
-    "inmate_number": "14714327",
-    "name": "KEELER KYLE",
+    "date": "2026-09-27",
     "tier": "F2",
-    "category": "Burglary",
-    "note": "booked 9/26/26"
+    "category": "Burglary"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-27T04:11:46Z",
-    "inmate_number": "994018",
-    "name": "ALCORN RICKY",
+    "date": "2026-09-27",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "no longer on HCSO public roster"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
@@ -50170,5 +50161,68 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": "booked 10/3/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T05:09:44Z",
+    "inmate_number": "14122478",
+    "name": "JORDAN LATONIA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T05:09:44Z",
+    "inmate_number": "1492301",
+    "name": "HARRIS HAROLD",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-04T05:09:44Z",
+    "inmate_number": "1853499",
+    "name": "BARTON TIMOTHY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T05:09:44Z",
+    "inmate_number": "1989875",
+    "name": "GRIMES JASON",
+    "tier": "MM",
+    "category": "Rules for driving in marked lanes",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T05:09:44Z",
+    "inmate_number": "2598036",
+    "name": "VAUGHAN SAMANTHA",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T05:09:44Z",
+    "inmate_number": "2662683",
+    "name": "SPIVEY WHITNEY",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-04T05:09:44Z",
+    "inmate_number": "14560028",
+    "name": "MCCALLEY NATHANIEL",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "no longer on HCSO public roster"
   }
 ]
