@@ -41851,48 +41851,39 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-27T02:09:04Z",
-    "inmate_number": "14434553",
-    "name": "CRUMP CAMERON",
+    "date": "2026-09-27",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-27T02:09:04Z",
-    "inmate_number": "14731508",
-    "name": "YOUNGER LONZO",
+    "date": "2026-09-27",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 9/26/26"
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-27T02:09:04Z",
-    "inmate_number": "14825078",
-    "name": "MCRAE ERICK",
-    "tier": null,
-    "category": null,
-    "note": "booked 9/26/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-27T02:09:04Z",
-    "inmate_number": "1857394",
-    "name": "MUNDY TONY",
+    "date": "2026-09-27",
     "tier": "M1",
-    "category": "Menacing by stalking",
-    "note": "booked 9/26/26"
+    "category": "Menacing by stalking"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-27T02:09:04Z",
-    "inmate_number": "2101930",
-    "name": "PARRETT SONYA",
+    "date": "2026-09-27",
     "tier": "M1",
-    "category": "Theft",
-    "note": "no longer on HCSO public roster"
+    "category": "Theft"
+  },
+  {
+    "event": "booked",
+    "date": "2026-09-27",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-27",
+    "tier": null,
+    "category": null
   },
   {
     "event": "released",
@@ -50082,6 +50073,33 @@
     "name": "YEAGER MEGAN",
     "tier": "M1",
     "category": "Violating protection order",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T02:10:29Z",
+    "inmate_number": "14603622",
+    "name": "GRAY ANESHA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T02:10:29Z",
+    "inmate_number": "14825944",
+    "name": "HURST KIRSTIE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/3/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-04T02:10:29Z",
+    "inmate_number": "14825892",
+    "name": "LEWIS MARK",
+    "tier": "F5",
+    "category": "Possession of drugs",
     "note": "no longer on HCSO public roster"
   }
 ]
