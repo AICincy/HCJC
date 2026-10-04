@@ -42013,24 +42013,6 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-27T12:08:58Z",
-    "inmate_number": "14327451",
-    "name": "JOHNSON ARIEL",
-    "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-27T12:08:58Z",
-    "inmate_number": "1462326",
-    "name": "LUCADO MARC",
-    "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
     "timestamp_utc": "2026-09-27T13:14:19Z",
     "inmate_number": "1462326",
     "name": "LUCADO MARK",
@@ -50263,5 +50245,41 @@
     "tier": "F2",
     "category": "Strangulation",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T12:11:01Z",
+    "inmate_number": "14793576",
+    "name": "NJANJIKO SETH",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-04T12:11:01Z",
+    "inmate_number": "2273349",
+    "name": "BROWN MICHAEL",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-04T12:11:01Z",
+    "inmate_number": "2047455",
+    "name": "PHILLIPS AUDREY",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-04T12:11:01Z",
+    "inmate_number": "2148096",
+    "name": "ROSEMOND DEMETRIUS",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "no longer on HCSO public roster"
   }
 ]
