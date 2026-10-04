@@ -451,6 +451,12 @@ def test_incident_type_normalization_properties():
 def test_compound_and_unknown_dispositions():
     assert feeds_mod._disposition_en("ARR: ARREST,SOW: SENT ON WAY") == "Arrest made; Sent on way"
     assert feeds_mod._disposition_en("OH: OH") == "On hold"
+    # Sweep run 37163739715: CPD261002000427 arrived as exactly 30 chars, the
+    # feed's disposition_text cap, so "TRAN: TRANSPORT" was cut to "TRANSP".
+    assert feeds_mod._disposition_en("CIT: CITED,OH: OH,TRAN: TRANSP") == (
+        "Citation issued; On hold; Transported"
+    )
+    assert feeds_mod._disposition_en("ARR: ARREST,TRAN: TRANSPORT") == "Arrest made; Transported"
     # Fail loud: an untranslated disposition code raises instead of leaking
     # a title-cased raw code to readers.
     with pytest.raises(KeyError):
