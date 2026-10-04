@@ -42037,39 +42037,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-27T17:21:00Z",
-    "inmate_number": "14491323",
-    "name": "PETTIT BRIANNA",
+    "date": "2026-09-27",
     "tier": "M1",
-    "category": "Making false alarms",
-    "note": ""
+    "category": "Making false alarms"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-27T17:21:00Z",
-    "inmate_number": "1837379",
-    "name": "GLACKEN BRANDON",
+    "date": "2026-09-27",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 9/27/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-27T17:21:00Z",
-    "inmate_number": "2155004",
-    "name": "COTTON SHANDA",
-    "tier": "M1",
-    "category": "Theft",
-    "note": "booked 9/27/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-27T17:21:00Z",
-    "inmate_number": "2314750",
-    "name": "COOPER HEWITT",
+    "date": "2026-09-27",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 9/27/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
@@ -50287,5 +50269,32 @@
     "tier": "M1",
     "category": "Endangering children",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T18:08:54Z",
+    "inmate_number": "14651899",
+    "name": "DAVIS TYRELL",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-04T18:08:54Z",
+    "inmate_number": "1674331",
+    "name": "HARRISON JOHN",
+    "tier": "M1",
+    "category": "Endangering children",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T18:08:54Z",
+    "inmate_number": "2393047",
+    "name": "LOVINS CLINTON",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
