@@ -210,6 +210,11 @@ _DISPOSITION_EN = {
     "INV: INV": "Investigation",
     "TOW: TOW RPRT": "Tow report",
     "NTR: NOTHING TO REP": "Nothing to report",
+    # CPD transport (city legacy long form "TRAN - TRANSPORTED"). The CFS
+    # feed caps disposition_text at 30 characters, so a trailing code can
+    # arrive cut short: "CIT: CITED,OH: OH,TRAN: TRANSP" (CPD261002000427).
+    "TRAN: TRANSPORT": "Transported",
+    "TRAN: TRANSP": "Transported",
 }
 
 # CAD incident-type codes need normalization, not enumeration: the two CFS
