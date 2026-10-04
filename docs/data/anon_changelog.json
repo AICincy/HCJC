@@ -41833,39 +41833,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-27T00:57:12Z",
-    "inmate_number": "14434553",
-    "name": "CRUMP CAMERON",
+    "date": "2026-09-27",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 9/26/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-27T00:57:12Z",
-    "inmate_number": "1933529",
-    "name": "REILLY SHAWN",
+    "date": "2026-09-27",
     "tier": "F1",
-    "category": "Aggravated burglary",
-    "note": ""
+    "category": "Aggravated burglary"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-27T00:57:12Z",
-    "inmate_number": "1857507",
-    "name": "HILL TOREONO",
+    "date": "2026-09-27",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 9/26/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-09-27T00:57:12Z",
-    "inmate_number": "2760811",
-    "name": "ALLEN ALEXIS",
-    "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
@@ -50055,6 +50037,51 @@
     "name": "WILCOX MARQUES",
     "tier": "M1",
     "category": "Cincinnati Municipal Code: general offenses",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-04T01:11:17Z",
+    "inmate_number": "2157430",
+    "name": "STEELE ANTONIO",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-04T01:11:17Z",
+    "inmate_number": "2681882",
+    "name": "HAWKINS-TERRELL RECARDO",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-04T01:11:17Z",
+    "inmate_number": "2677808",
+    "name": "BENTON BRUCE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-04T01:11:17Z",
+    "inmate_number": "2683700",
+    "name": "EVANS ANGEL",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-04T01:11:17Z",
+    "inmate_number": "14425920",
+    "name": "YEAGER MEGAN",
+    "tier": "M1",
+    "category": "Violating protection order",
     "note": "no longer on HCSO public roster"
   }
 ]
