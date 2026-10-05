@@ -489,11 +489,11 @@ END FOR
 
 | Bug ID | Category | Status | Fix Applied | Tests Added |
 |--------|----------|--------|-------------|-------------|
-| 1.1 | Parser | Not Started | Name fallback chain (meta → title → breadcrumb) | ❌ |
-| 1.2 | Parser | Not Started | Label regex pattern | ❌ |
-| 1.3 | Parser | Not Started | JPEG-SOI fallback | ❌ |
-| 1.4 | Parser | Not Started | Path-form ID regex | ❌ |
-| 1.5 | Parser | Not Started | Punctuation label regex | ❌ |
+| 1.1 | Parser | Fixed | Name fallback chain (meta → title → breadcrumb) | ❌ |
+| 1.2 | Parser | Fixed | Label regex pattern | ❌ |
+| 1.3 | Parser | Fixed | JPEG-SOI fallback | ❌ |
+| 1.4 | Parser | Fixed | Path-form ID regex | ❌ |
+| 1.5 | Parser | Fixed | Punctuation label regex | ❌ |
 | 1.6 | Parser | Not Started | Zero fields breadcrumb | ❌ |
 | 1.7 | Sweep | Not Started | Clean interrupt handling | ❌ |
 | 1.8 | Sweep | Not Started | Sentinel for corrupt snapshot | ❌ |
