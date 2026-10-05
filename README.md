@@ -381,4 +381,3 @@ When HCSO blocks or degrades automated access, the system records evidence and k
 The repository now includes a specific deployment flow for the anonymized-changelog tagging defect.
 
 See README_DEPLOY.md for the operator runbook and DEPLOYMENT_SPEC.md for the recovery contract.
-
