@@ -14,12 +14,12 @@ This document tracks the implementation status of the 15 bug fixes across parser
 
 | Bug ID | Status | Tests | Fix Applied | Notes |
 |--------|--------|-------|-------------|-------|
-| 1.1 - Title-case name extraction | ❌ Not Started | ✅ Planned | ✅ Planned | Name fallback chain (meta → title → breadcrumb) |
-| 1.2 - Renamed charge labels | ❌ Not Started | ✅ Planned | ✅ Planned | Label regex pattern `r"^\s*([A-Za-z][A-Za-z0-9 #/_-]*?)\s*:\s*(.*?)\s*$"` |
-| 1.3 - Photo width change | ❌ Not Started | ✅ Planned | ✅ Planned | JPEG-SOI byte-marker fallback |
-| 1.4 - Path-form ID parsing | ❌ Not Started | ✅ Planned | ✅ Planned | Regex pattern `r"(?:[?&]id=|/inmate-detail/)(\d+)"` |
-| 1.5 - Punctuation in labels | ❌ Not Started | ✅ Planned | ✅ Planned | Accept labels with digits/punctuation |
-| 1.6 - Zero structured fields | ❌ Not Started | ✅ Planned | ✅ Planned | Per-record breadcrumb log |
+| 1.1 - Title-case name extraction | ✅ Fixed | ✅ Existing | ✅ Yes | Name fallback chain (meta → title → breadcrumb) |
+| 1.2 - Renamed charge labels | ✅ Fixed | ✅ Existing | ✅ Yes | Label regex accepts renamed labels |
+| 1.3 - Photo width change | ✅ Fixed | ✅ Existing | ✅ Yes | JPEG-SOI byte-marker fallback |
+| 1.4 - Path-form ID parsing | ✅ Fixed | ✅ Existing | ✅ Yes | Query-string and path-form ID regex |
+| 1.5 - Punctuation in labels | ✅ Fixed | ✅ Existing | ✅ Yes | Labels accept digits and punctuation |
+| 1.6 - Zero structured fields | ✅ Fixed | ✅ Existing | ✅ Yes | Per-record diagnostic log |
 
 **Fix File**: `scraper/parser.py`
 
