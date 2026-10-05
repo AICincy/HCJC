@@ -1195,7 +1195,7 @@ def _fetch_detail_with_retry(
                 http_status = response.status_code
                 try:
                     final_path = urlparse(str(response.url)).path or None
-                except Exception:
+                except (TypeError, ValueError, AttributeError):
                     final_path = None
             else:
                 html = client.get(DETAIL_PATH, params={"id": inmate_id})
