@@ -67,7 +67,7 @@ Python 3.13 or newer.
 The CI matrix currently runs Python 3.13 and 3.14. The pinned project dependencies are:
 
     httpx==0.28.1
-    selectolax==0.4.11
+    selectolax==0.4.12
     pydantic==2.13.5
     jinja2==3.1.6
     defusedxml==0.7.1
