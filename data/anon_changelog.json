@@ -42085,102 +42085,75 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "14280222",
-    "name": "CHOW MIGUEL",
+    "date": "2026-09-28",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "14219643",
-    "name": "HOLLSTEGGE GEORGIA",
+    "date": "2026-09-28",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "14317103",
-    "name": "CARDENAS DION",
+    "date": "2026-09-28",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "14325254",
-    "name": "LEWIS DOMINICK",
+    "date": "2026-09-28",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 9/27/26"
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "14406239",
-    "name": "RABE CAMERON",
+    "date": "2026-09-28",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 9/27/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "14825105",
-    "name": "ROGERS ROXANN",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "1931113",
-    "name": "OCONNER JASON",
+    "date": "2026-09-28",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 9/27/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "2198523",
-    "name": "CRUTCHER ERICA",
+    "date": "2026-09-28",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "14491323",
-    "name": "PETTIT BRIANNA",
+    "date": "2026-09-28",
     "tier": "M1",
-    "category": "Making false alarms",
-    "note": "no longer on HCSO public roster"
+    "category": "Making false alarms"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "14695942",
-    "name": "STONEWALL ADDISON",
+    "date": "2026-09-28",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": "no longer on HCSO public roster"
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-28T00:09:30Z",
-    "inmate_number": "2100623",
-    "name": "VEST MICHEAL",
+    "date": "2026-09-28",
     "tier": "MM",
-    "category": "Obedience to traffic control devices",
-    "note": "no longer on HCSO public roster"
+    "category": "Obedience to traffic control devices"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-28",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "released",
+    "date": "2026-09-28",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -50389,5 +50362,50 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-05T00:52:52Z",
+    "inmate_number": "14473419",
+    "name": "HARKNESS JLIN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-05T00:52:52Z",
+    "inmate_number": "14784594",
+    "name": "FARLEY ARYANNA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-05T00:52:52Z",
+    "inmate_number": "14825979",
+    "name": "DEGEORGE BERNARD",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 10/4/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-05T00:52:52Z",
+    "inmate_number": "14825980",
+    "name": "GARCIA-SANTIAGO RODOLFO",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-05T00:52:52Z",
+    "inmate_number": "2673676",
+    "name": "HARRIS JASON",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 9/11/26"
   }
 ]
