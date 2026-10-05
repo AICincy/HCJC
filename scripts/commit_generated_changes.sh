@@ -31,7 +31,7 @@ is_published_path() {
 }
 
 generated_utc_of() {
-  python3 -c 'import json,sys
+  python -c 'import json,sys
 p=sys.argv[1]
 try:
     with open(p,encoding="utf-8") as f:
@@ -127,3 +127,4 @@ else
   echo "::warning::BOT_DEPLOY_KEY not set; pushing with the checkout token, which main's required-checks ruleset rejects."
   git push origin "HEAD:$target_branch"
 fi
+

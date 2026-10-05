@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """Backfill recent anonymized changelog tags from history and the live roster.
 
 The anonymized changelog keeps identifiers for seven days. The preferred source
@@ -306,3 +306,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

@@ -67,7 +67,7 @@ Python 3.13 or newer.
 The CI matrix currently runs Python 3.13 and 3.14. The pinned project dependencies are:
 
     httpx==0.28.1
-    selectolax==0.4.11
+    selectolax==0.4.12
     pydantic==2.13.5
     jinja2==3.1.6
     defusedxml==0.7.1
@@ -381,3 +381,4 @@ When HCSO blocks or degrades automated access, the system records evidence and k
 The repository now includes a specific deployment flow for the anonymized-changelog tagging defect.
 
 See README_DEPLOY.md for the operator runbook and DEPLOYMENT_SPEC.md for the recovery contract.
+

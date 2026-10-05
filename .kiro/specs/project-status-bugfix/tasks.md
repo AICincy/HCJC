@@ -41,29 +41,10 @@
   - Run tests on UNFIXED code - expect PASS (this confirms baseline behavior to preserve)
   - _Requirements: 3.4, 3.5, 3.6, 3.7, 3.8_
 
-- [ ] **Property 1: Bug Condition** - Accessibility Exploration Test
-  - **IMPORTANT**: Write this property-based test BEFORE implementing the fix
-  - **GOAL**: Surface counterexamples that demonstrate the accessibility bugs exist
-  - Test all 4 accessibility bugs:
-    - Test 1.9: dialog open + Tab key - focus should stay within dialog, NOT escape to underlying elements
-    - Test 1.10: combobox expanded + ArrowDown - should navigate options with aria-activedescendant
-    - Test 1.11: tier badge focused + hover - screen reader should hear card_tip content
-    - Test 1.12: filter empty - screen reader should announce empty state with role="status"
-  - Run test on UNFIXED code - expect FAILURE (this confirms the bugs exist)
-  - Document counterexamples found to understand root cause
-  - _Requirements: 1.9, 1.10, 1.11, 1.12_
-
-- [ ] **Property 2: Preservation** - Accessibility Preservation Test
-  - **IMPORTANT**: Follow observation-first methodology
-  - Observe behavior on UNFIXED code for standard accessibility patterns
-  - Write property-based tests capturing observed behavior patterns
-  - Run tests on UNFIXED code - expect PASS (this confirms baseline behavior to preserve)
-  - _Requirements: 3.9, 3.10, 3.11, 3.12, 3.13, 3.14, 3.15_
-
 - [ ] **Property 1: Bug Condition** - Networking Exploration Test
   - **IMPORTANT**: Write this property-based test BEFORE implementing the fix
   - **GOAL**: Surface counterexamples that demonstrate the networking bugs exist
-  - Test both networking bugs:
+  - Test all 3 networking bugs:
     - Test 1.13: 429 response with Retry-After - should retry with capped delay, NOT treat as hard failure
     - Test 1.14: schema change with where clause errors - should narrow exception, NOT catch broad Exception
     - Test 1.15: docstring vs behavior mismatch - should reconcile docstring and actual behavior
@@ -106,27 +87,15 @@
   - **EXPECTED OUTCOME**: Tests PASS (confirms no regressions)
   - _Requirements: 3.4, 3.5, 3.6, 3.7, 3.8_
 
-- [ ] **Property 1: Expected Behavior** - Accessibility Fixes Verification
-  - **IMPORTANT**: Re-run the SAME test from task 5 - do NOT write a new test
-  - Run accessibility exploration test from step 5
-  - **EXPECTED OUTCOME**: Test PASSES (confirms all 4 accessibility bugs are fixed)
-  - _Requirements: 2.9, 2.10, 2.11, 2.12_
-
-- [ ] **Property 2: Preservation** - Accessibility Preservation Verification
-  - **IMPORTANT**: Re-run the SAME tests from task 6 - do NOT write new tests
-  - Run accessibility preservation tests from step 6
-  - **EXPECTED OUTCOME**: Tests PASS (confirms no regressions)
-  - _Requirements: 3.9, 3.10, 3.11, 3.12, 3.13, 3.14, 3.15_
-
 - [ ] **Property 1: Expected Behavior** - Networking Fixes Verification
-  - **IMPORTANT**: Re-run the SAME test from task 7 - do NOT write a new test
-  - Run networking exploration test from step 7
+  - **IMPORTANT**: Re-run the SAME test from task 5 - do NOT write a new test
+  - Run networking exploration test from step 5
   - **EXPECTED OUTCOME**: Test PASSES (confirms all 3 networking bugs are fixed)
   - _Requirements: 2.13, 2.14, 2.15_
 
 - [ ] **Property 2: Preservation** - Networking Preservation Verification
-  - **IMPORTANT**: Re-run the SAME tests from task 8 - do NOT write new tests
-  - Run networking preservation tests from step 8
+  - **IMPORTANT**: Re-run the SAME tests from task 6 - do NOT write new tests
+  - Run networking preservation tests from step 6
   - **EXPECTED OUTCOME**: Tests PASS (confirms no regressions)
   - _Requirements: 3.12, 3.13_
 
@@ -145,5 +114,3 @@
   - Verify all preservation tests still pass (Property 2: Preservation)
   - Ensure no regressions introduced
   - Run full test suite to confirm everything works
-
-

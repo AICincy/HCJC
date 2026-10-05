@@ -489,21 +489,21 @@ END FOR
 
 | Bug ID | Category | Status | Fix Applied | Tests Added |
 |--------|----------|--------|-------------|-------------|
-| 1.1 | Parser | Not Started | Name fallback chain (meta → title → breadcrumb) | ❌ |
-| 1.2 | Parser | Not Started | Label regex pattern | ❌ |
-| 1.3 | Parser | Not Started | JPEG-SOI fallback | ❌ |
-| 1.4 | Parser | Not Started | Path-form ID regex | ❌ |
-| 1.5 | Parser | Not Started | Punctuation label regex | ❌ |
-| 1.6 | Parser | Not Started | Zero fields breadcrumb | ❌ |
-| 1.7 | Sweep | Not Started | Clean interrupt handling | ❌ |
-| 1.8 | Sweep | Not Started | Sentinel for corrupt snapshot | ❌ |
+| 1.1 | Parser | Fixed | Name fallback chain (meta → title → breadcrumb) | ❌ |
+| 1.2 | Parser | Fixed | Label regex pattern | ❌ |
+| 1.3 | Parser | Fixed | JPEG-SOI fallback | ❌ |
+| 1.4 | Parser | Fixed | Path-form ID regex | ❌ |
+| 1.5 | Parser | Fixed | Punctuation label regex | ❌ |
+| 1.6 | Parser | Fixed | Zero fields breadcrumb | ❌ |
+| 1.7 | Sweep | Fixed | Clean interrupt handling | ❌ |
+| 1.8 | Sweep | Fixed | Sentinel for corrupt snapshot | ❌ |
 | 1.9 | Accessibility | Not Started | Dialog focus management | ❌ |
 | 1.10 | Accessibility | Not Started | Combobox aria-activedescendant | ❌ |
 | 1.11 | Accessibility | Not Started | Tier badge aria-describedby | ❌ |
 | 1.12 | Accessibility | Not Started | Filter empty role="status" | ❌ |
-| 1.13 | Networking | Not Started | 429 retry with Retry-After | ❌ |
-| 1.14 | Networking | Not Started | Narrow exception handling | ❌ |
-| 1.15 | Networking | Not Started | Docstring reconciliation | ❌ |
+| 1.13 | Networking | Fixed | 429 retry with Retry-After | ❌ |
+| 1.14 | Networking | Fixed | Narrow exception handling | ❌ |
+| 1.15 | Networking | Fixed | Docstring reconciliation | ❌ |
 
 ### Release Notes
 
@@ -538,4 +538,5 @@ END FOR
 5. Complete integration tests for full workflow validation
 6. Update documentation to reflect fixes
 7. Deploy to staging for user acceptance testing
+
 
