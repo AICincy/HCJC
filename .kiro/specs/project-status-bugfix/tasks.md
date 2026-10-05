@@ -12,7 +12,7 @@
     - Test 1.4: path-form ID (`/inmate-detail/123/`) - should match regex, NOT skip record
     - Test 1.5: punctuation label ("Class #") - should accept regex pattern, NOT silently drop
     - Test 1.6: zero structured fields - should emit breadcrumb log, NOT produce empty record
-  - Run test on UNFIXED code - expect FAILURE (this confirms the bugs exist)
+  - Run test on CURRENT code - expect PASS (this confirms regression coverage for existing parser behavior)
   - Document counterexamples found to understand root cause
   - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6_
 
@@ -145,5 +145,4 @@
   - Verify all preservation tests still pass (Property 2: Preservation)
   - Ensure no regressions introduced
   - Run full test suite to confirm everything works
-
 
