@@ -279,7 +279,7 @@ def _record_egress_evidence() -> None:
             rec.get("runner_ip"),
             rec.get("runner_ip_in_actions_range"),
         )
-    except httpx.HTTPError as e:
+    except Exception as e:
         log.warning("egress evidence capture failed (non-fatal): %s", e)
 
 
@@ -509,7 +509,7 @@ def _fetch_details(
             iid = futures[fut]
             try:
                 inm, detail_named, detail_had_photo, outcome = fut.result()
-            except httpx.HTTPError as e:
+            except Exception as e:
                 # One worker raising shouldn't terminate the pool - the
                 # other detail fetches and the final write still run.
                 # Count it as an attempt with neither name nor photo so
@@ -850,4 +850,593 @@ def run(
         # return code keeps the interruption observable (and testable) for
         # callers. sweep.yml marks the step failed either way.
         return INTERRUPTED_EXIT_CODE
+    except Exception:
+        # Anything else escaping the sweep body is unexpected: log and re-raise.
+        # `roster_ok` stays True only if we already cleared the list-sweep
+        # guard; the `finally` will use that to decide whether to persist
+        # the partial roster.
+        log.exception("unhandled exception in sweep main loop")
+        log.error("sweep %s failed with unhandled exception", sweep_id)
+        raise
+    finally:
+        # Write whatever we have so far (so an interrupted sweep doesn't blank
+        # the site) - but never when the list sweep itself looked degraded.
+        save_ok = False
+        if not dry_run and roster_ok:
+            # A2: last_healthy_sweep_utc advances only on a fully healthy
+            # sweep: the roster wrote cleanly AND detail failures stayed
+            # below the degraded threshold. A degraded detail phase keeps
+            # the previous clock value so the freshness signal stays honest.
+            detail_healthy = not check_detail_degraded(n_detail_attempts, detail_failures)
+            try:
+                save_current(
+                    paths.current_path,
+                    current.values(),
+                    last_healthy_sweep_utc=utcnow_iso() if (clean_finish and detail_healthy) else None,
+                )
+                save_ok = True
+            except (OSError, SnapshotCorruptError) as e:
+                # Disk full, permission denied, atomic-rename failure, or a
+                # corrupt on-disk snapshot that C-1/C-2 fail-closed on. The
+                # snapshot is unchanged on disk; just skip the prune to avoid
+                # deleting photos for ids that never made it to current.json.
+                log.error("save_current failed (%s); skipping changelog and prune", e)
 
+            if save_ok and clean_finish:
+                try:
+                    _save_changelog_and_anon(previous, current, paths)
+                except (OSError, SnapshotCorruptError) as e:
+                    # C-7: a corrupt takedowns.json (raised by save_changelog's
+                    # _load_takedowns) or an I/O failure must not escape the
+                    # finally block and crash the sweep. The roster is already
+                    # persisted above; leave the changelog and anon feed
+                    # untouched for investigation and skip the append this
+                    # cycle. The next healthy cycle diffs again, so no roster
+                    # data is lost, only this cycle's changelog events.
+                    log.error("skipping changelog/anon update: %s", e)
+            elif save_ok:
+                # Interrupted (or otherwise short-circuited) sweep: do not diff.
+                # `current` is a partial subset of `previous`, so every unreached
+                # id would synthesize a bogus `released` event and evict real
+                # events from the rolling CHANGELOG_LIMIT=10000 window.
+                log.warning("skipping diff/changelog append: sweep did not finish cleanly")
+            # sweep-F5: only prune photos when save_current succeeded for this
+            # cycle. A failed save leaves seen_ids ungrounded against any
+            # persisted snapshot; pruning then could delete photos for ids
+            # that were never written and that the next cycle still needs.
+            if save_ok and seen_ids:
+                prune_photos(paths.photos_dir, seen_ids)
+
+    if dry_run:
+        log.info("dry-run; not writing")
+    log.info(
+        "sweep %s completed (roster_ok=%s, clean=%s, seen=%d, current=%d, detail_failures=%s)",
+        sweep_id,
+        roster_ok,
+        clean_finish,
+        len(seen_ids),
+        len(current),
+        dict(sorted(detail_failures.items())) if detail_failures else {},
+    )
+    return 0
+
+
+# Back-compat alias: prefer scraper.sweep_guards.check_detail_watchdog in new code.
+_check_detail_watchdog = check_detail_watchdog
+
+
+_SENSITIVE_HEADERS = frozenset({"cookie", "set-cookie", "authorization", "proxy-authorization"})
+
+
+def _redact_headers(headers: httpx.Headers) -> dict:
+    """Copy request/response headers for the evidence log, replacing the value
+    of any session or credential header with a placeholder. The header's
+    presence is preserved (forensically useful) but its token value never
+    reaches the public data/waf_block_log.json: a WAF can set a clearance
+    cookie that the client's cookie jar echoes back, and a proxy could add an
+    auth header."""
+    return {k: ("[redacted]" if k.lower() in _SENSITIVE_HEADERS else v) for k, v in headers.items()}
+
+
+def _forensic_sample(resp: httpx.Response) -> dict:
+    """Forensic snapshot of a WAF-block response for the evidence log: capture
+    time, the denied request (method/url/headers), status, body length +
+    SHA-256 (tamper-evidence), a bounded body sample, and the response headers.
+    A 403 block page carries no PII; session/credential headers (Cookie,
+    Set-Cookie, Authorization, Proxy-Authorization) are redacted before they
+    reach the public log."""
+    body = resp.content or b""
+    # Strip potential user-specific tokens from body (defense-in-depth;
+    # WAF block pages should not contain PII but upstream can change).
+    body_text = (resp.text or "")[:1000]
+    body_text = re.sub(r"[0-9a-fA-F]{32,}", "[redacted-token]", body_text)
+    sample: dict = {
+        "captured_utc": utcnow_iso(),
+        "status": resp.status_code,
+        "bytes": len(body),
+        "sha256": hashlib.sha256(body).hexdigest(),
+        "body_sample": body_text,
+        "headers": _redact_headers(resp.headers),
+    }
+    try:
+        req = resp.request
+    except RuntimeError:
+        req = None
+    if req is not None:
+        sample["request"] = {
+            "method": req.method,
+            "url": str(req.url),
+            "headers": _redact_headers(req.headers),
+        }
+    return sample
+
+
+def _fetch_list_page(client: HcsoClient, surname: str) -> tuple[list[ListRow] | None, int | None, dict | None]:
+    """Fetch one surname-search page for ``_sweep_list``. Returns
+    ``(rows, status, sample)``. ``rows`` is None on a failed fetch, which is
+    either a raised error or a detected WAF block (an HTTP 403 that raised, or an
+    HTTP 200 whose tiny body parsed to zero rows); the HTTP status and a forensic
+    sample accompany it. Otherwise ``rows`` is the parsed list. Treating a
+    detected 200-block as a failure keeps the blocked record self-consistent:
+    it is counted in n_failed and the status histogram, not silently dropped.
+
+    sweep-F8: this MUST swallow every exception and return (None, ...) on
+    failure so ``as_completed`` in the caller can process all surnames even
+    when individual fetches fail.
+    """
+    try:
+        resp = client.get_response(SEARCH_PATH, params={"last": surname})
+    except httpx.HTTPStatusError as e:
+        log.warning("list fetch failed for surname=%s: %s", surname, e)
+        return None, e.response.status_code, _forensic_sample(e.response)
+    except Exception as e:
+        log.warning("list fetch failed for surname=%s: %s", surname, e)
+        return None, None, None
+    rows = parse_list_page(resp.text)
+    # Empty-page block mode: the WAF can serve HTTP 200 with a tiny body that
+    # parses to zero rows (instead of a 403). The fetch does not raise, so treat
+    # it as a failure here (rows=None) carrying the 200 status and a forensic
+    # sample, so it is counted like the 403 path rather than silently dropped.
+    if list_response_looks_blocked(resp.text, rows):
+        log.warning(
+            "list fetch for surname=%s looks WAF-blocked (HTTP %d, %d bytes, 0 rows)",
+            surname,
+            resp.status_code,
+            len(resp.text),
+        )
+        return None, resp.status_code, _forensic_sample(resp)
+    return rows, None, None
+
+
+def _sweep_list(client: HcsoClient, surnames: list[str]) -> tuple[list[ListRow], int, dict[str, int], dict | None]:
+    """Parallel surname search across the configured list.
+
+    Returns ``(rows, n_failed, status_counts, block_sample)`` - ``n_failed`` is
+    how many surname fetches failed, counting both raised errors and detected
+    WAF blocks (an HTTP 403, or an HTTP 200 stripped to zero rows), distinct
+    from a surname that legitimately returned zero rows. ``status_counts`` is a
+    histogram of those statuses (e.g. ``{"403": 24}`` or ``{"200": 26}``);
+    ``block_sample`` is one representative forensic snapshot of the first blocked
+    response. ``status_counts`` and ``block_sample`` both feed the durable
+    WAF-block evidence log. Each page is fetched by ``_fetch_list_page``.
+    """
+    aggregated: list[ListRow] = []
+    seen: set[str] = set()
+    failed = 0
+    status_counts: dict[str, int] = {}
+    block_sample: dict | None = None
+    t0 = time.monotonic()
+    with ThreadPoolExecutor(max_workers=DEFAULT_CONCURRENCY) as pool:
+        futures = {pool.submit(_fetch_list_page, client, s): s for s in surnames}
+        for future in as_completed(futures):
+            rows, status, sample = future.result()
+            if block_sample is None and sample is not None:
+                block_sample = sample
+            if rows is None:
+                failed += 1
+                if status is not None:
+                    key = str(status)
+                    status_counts[key] = status_counts.get(key, 0) + 1
+                continue
+            for r in rows:
+                if r.inmate_number not in seen:
+                    seen.add(r.inmate_number)
+                    aggregated.append(r)
+    elapsed_s = round(time.monotonic() - t0, 2)
+    log.info(
+        "list phase: %d unique ids, %d/%d failed in %.1fs",
+        len(seen),
+        failed,
+        len(surnames),
+        elapsed_s,
+    )
+    return aggregated, failed, status_counts, block_sample
+
+
+def _fetch_one(
+    client: HcsoClient,
+    inmate_id: str,
+    previous: dict[str, Inmate],
+    list_row: ListRow | None = None,
+    *,
+    waf_tracker: WafBackoffTracker,
+    photos_dir: Path | None = None,
+    waf_block_log_path: Path | None = None,
+) -> tuple[Inmate | None, bool, bool, DetailOutcome]:
+    """Fetch and parse one detail page.
+
+    Returns ``(inmate, detail_named, detail_had_photo, outcome)`` - the two
+    booleans reflect what the *detail parser* produced, before any list-row
+    name fallback or disk-cached photo carry-forward is applied, so callers
+    can measure detail-page health distinct from the list-side path.
+    ``outcome`` is the classified fetch result (``DetailFailureMode.OK`` on
+    success); callers use it for per-mode failure accounting and staleness
+    marking.
+
+    List-page authority: when the detail fetch fails for an inmate the list
+    page saw, the inmate stays on the roster. Known inmates are carried
+    forward by the caller (marked stale); new inmates get a minimal record
+    built from the list row (marked stale, never successfully fetched).
+
+    ``waf_tracker`` is required (keyword-only): the WAF-block streak is shared
+    across the worker pool, so a caller that omitted it would silently get a
+    throwaway tracker and disable cross-call backoff.
+    """
+    if photos_dir is None:
+        photos_dir = PHOTOS_DIR
+    inm, photo_bytes, photo_url, outcome = _fetch_detail_with_retry(
+        client, inmate_id, previous, waf_tracker, waf_block_log_path=waf_block_log_path
+    )
+    if inm is None:
+        if inmate_id in previous:
+            # Known inmate: the caller carries forward the previous-good
+            # record (marked stale). Returning None signals that path.
+            return None, False, False, outcome
+        if list_row is not None:
+            # New inmate: the list saw them, so they are in custody even
+            # though the detail page failed. Build the minimal record from
+            # the list row rather than dropping them for a cycle.
+            return _minimal_inmate_from_list_row(list_row), False, False, outcome
+        log.warning(
+            "detail fetch failed for id=%s with no list row to fall back on; inmate omitted this cycle",
+            inmate_id,
+        )
+        return None, False, False, outcome
+    detail_named = bool(inm.last_name or inm.first_name)
+    detail_had_photo = bool(photo_bytes or photo_url)
+
+    photo_bytes = _fetch_photo_bytes_from_url(client, inmate_id, photo_url, photo_bytes)
+    _apply_list_row_fallback(inm, list_row)
+    _attach_photo_filename(inm, photo_bytes, photos_dir)
+    _set_seen_timestamps(inm, inmate_id, previous)
+    inm.last_detail_fetch_utc = utcnow_iso()
+    inm.detail_stale = False
+    return inm, detail_named, detail_had_photo, outcome
+
+
+def _minimal_inmate_from_list_row(row: ListRow) -> Inmate:
+    """Build a presence record for a new inmate whose detail page failed.
+
+    The list page is authoritative for custody: a failed detail fetch must
+    not drop a listed inmate from the roster. The record carries the list
+    row's name and admit date, is marked stale, and records that its detail
+    was never successfully fetched. ``booking_date`` is assigned
+    post-construction (mirroring ``_apply_list_row_fallback``) so an
+    unexpected admit-date shape cannot raise and drop the inmate.
+    """
+    now = utcnow_iso()
+    inm = Inmate(
+        inmate_number=row.inmate_number,
+        last_name=row.last_name,
+        first_name=row.first_name,
+        first_seen_utc=now,
+        last_seen_utc=now,
+        last_detail_fetch_utc="",
+        detail_stale=True,
+    )
+    if row.admit_date:
+        inm.booking_date = row.admit_date
+    return inm
+
+
+# Detail-fetch modes that get one bounded retry with WAF backoff: the body
+# was block-shaped (or suspiciously close), so the retry waits out a
+# transient WAF window with the same identity, IP, and crawl delay. This is
+# explicitly not evasion: no header, proxy, or session rotation.
+_RETRYABLE_BLOCK_MODES = frozenset(
+    {
+        DetailFailureMode.WAF_BLOCK,
+        DetailFailureMode.ZERO_BYTE,
+        DetailFailureMode.TRUNCATED,
+    }
+)
+
+
+def _fetch_detail_with_retry(
+    client: HcsoClient,
+    inmate_id: str,
+    previous: dict[str, Inmate],
+    waf_tracker: WafBackoffTracker,
+    *,
+    waf_block_log_path: Path | None = None,
+) -> tuple[Inmate | None, bytes | None, str | None, DetailOutcome]:
+    """Fetch one detail page with per-mode bounded retries.
+
+    Every fetch ends classified as a :class:`DetailFailureMode`. Retry policy:
+    block-shaped bodies (WAF block, zero-byte, truncated) get one retry with
+    exponential WAF backoff; transient network errors (timeout, connection
+    error) get one immediate retry (the client's crawl delay still spaces
+    requests); HTTP errors are not retried at this level (the client already
+    retried 5xx/429 once, and 404/redirect will not heal on retry). No retry
+    path changes identity, IP, headers, or proxy: bounded, non-evasive.
+
+    Returns ``(inmate, photo_bytes, photo_url, outcome)``. On any final
+    failure the inmate is None and the caller applies the carry-forward /
+    list-row fallback; the outcome drives per-mode accounting.
+    """
+    # Prefer get_response so the outcome can record the HTTP status and the
+    # redirect check can see the final URL. Fall back to plain get() for
+    # clients (notably the test fakes) that only implement the text-returning
+    # method.
+    get_response = getattr(client, "get_response", None)
+    inm: Inmate | None = None
+    photo_bytes: bytes | None = None
+    photo_url: str | None = None
+    html = ""
+    http_status: int | None = None
+    final_path: str | None = None
+    outcome = DetailOutcome(DetailFailureMode.ERROR, None, 0)
+
+    for attempt in range(2):
+        try:
+            if get_response is not None:
+                response = get_response(DETAIL_PATH, params={"id": inmate_id})
+                html = response.text
+                http_status = response.status_code
+                try:
+                    final_path = urlparse(str(response.url)).path or None
+                except Exception:
+                    final_path = None
+            else:
+                html = client.get(DETAIL_PATH, params={"id": inmate_id})
+                http_status = None
+                final_path = None
+        except httpx.HTTPStatusError as e:
+            status = e.response.status_code if e.response is not None else None
+            mode = classify_http_status_error(status)
+            outcome = DetailOutcome(mode, status, 0)
+            log.warning("detail fetch HTTP %s for id=%s: %s", status, inmate_id, e)
+            _record_detail_page_block(
+                inmate_id=inmate_id,
+                http_status=status,
+                html="",
+                mode=mode,
+                waf_block_log_path=waf_block_log_path,
+            )
+            break
+        except httpx.TimeoutException as e:
+            outcome = DetailOutcome(DetailFailureMode.TIMEOUT, None, 0)
+            log.warning("detail fetch timeout for id=%s: %s", inmate_id, e)
+            if attempt == 0:
+                continue  # one bounded retry; transient network, not a WAF signal
+            _record_detail_page_block(
+                inmate_id=inmate_id,
+                http_status=None,
+                html="",
+                mode=DetailFailureMode.TIMEOUT,
+                waf_block_log_path=waf_block_log_path,
+            )
+            break
+        except httpx.HTTPError as e:
+            outcome = DetailOutcome(DetailFailureMode.CONNECTION_ERROR, None, 0)
+            log.warning("detail fetch connection error for id=%s: %s", inmate_id, e)
+            if attempt == 0:
+                continue  # one bounded retry
+            _record_detail_page_block(
+                inmate_id=inmate_id,
+                http_status=None,
+                html="",
+                mode=DetailFailureMode.CONNECTION_ERROR,
+                waf_block_log_path=waf_block_log_path,
+            )
+            break
+        except Exception as e:
+            outcome = DetailOutcome(DetailFailureMode.ERROR, None, 0)
+            log.warning("detail fetch failed for id=%s: %s", inmate_id, e)
+            _record_detail_page_block(
+                inmate_id=inmate_id,
+                http_status=None,
+                html="",
+                mode=DetailFailureMode.ERROR,
+                waf_block_log_path=waf_block_log_path,
+            )
+            break
+
+        inm, photo_bytes, photo_url = parse_detail_page(html, inmate_id, record_evidence=True)
+        mode = classify_detail_html(
+            html,
+            inm,
+            photo_bytes,
+            photo_url,
+            final_path=final_path,
+            detail_path=DETAIL_PATH,
+        )
+        outcome = DetailOutcome(mode, http_status, len(html))
+        if mode == DetailFailureMode.OK:
+            waf_tracker.clear()
+            break
+        if mode in _RETRYABLE_BLOCK_MODES:
+            streak, backoff = waf_tracker.observe()
+            if attempt == 0:
+                log.warning(
+                    "%s response for id=%s (%d bytes, streak=%d); sleeping %.1fs and retrying once",
+                    mode.value,
+                    inmate_id,
+                    len(html),
+                    streak,
+                    backoff,
+                )
+                time.sleep(backoff)
+                continue
+            # Second attempt also block-shaped. Sleep the latest backoff to
+            # slow the worker, record the evidence, and return the failure.
+            log.warning(
+                "%s response for id=%s (%d bytes, streak=%d); retry also failed, returning without overwriting",
+                mode.value,
+                inmate_id,
+                len(html),
+                streak,
+            )
+            _record_detail_page_block(
+                inmate_id=inmate_id,
+                http_status=http_status,
+                html=html,
+                mode=mode,
+                waf_block_log_path=waf_block_log_path,
+            )
+            time.sleep(backoff)
+            break
+        # Any other non-OK mode (redirect, and any future non-retryable
+        # classification): observed and classified, not retried. Still
+        # recorded: a 404/redirect on a listed inmate is source-side
+        # evidence, and the failure_mode field keeps the taxonomy queryable.
+        log.warning(
+            "detail fetch for id=%s classified as %s (HTTP %s, %d bytes); not retrying",
+            inmate_id,
+            mode.value,
+            http_status,
+            len(html),
+        )
+        _record_detail_page_block(
+            inmate_id=inmate_id,
+            http_status=http_status,
+            html=html,
+            mode=mode,
+            waf_block_log_path=waf_block_log_path,
+        )
+        break
+
+    if outcome.mode != DetailFailureMode.OK:
+        return None, None, None, outcome
+    # The loop always runs iteration 0, which either breaks at an exception
+    # guard (outcome != OK, returned above) or assigns inm from
+    # parse_detail_page (which always yields an Inmate). The assert narrows
+    # Inmate | None for the type checker and documents the invariant without
+    # adding a runtime branch.
+    assert inm is not None
+    return inm, photo_bytes, photo_url, outcome
+
+
+def _fetch_photo_bytes_from_url(
+    client: HcsoClient,
+    inmate_id: str,
+    photo_url: str | None,
+    photo_bytes: bytes | None,
+) -> bytes | None:
+    # If the page provided a direct photo URL, fetch it (more reliable than
+    # base64). Fall back to inline bytes if the URL fetch fails.
+    if photo_url and not photo_bytes:
+        try:
+            return client.get_bytes(photo_url)
+        except Exception as e:
+            log.warning("photo URL fetch failed for id=%s url=%s: %s", inmate_id, photo_url, e)
+    return photo_bytes
+
+
+def _apply_list_row_fallback(inm: Inmate, list_row: ListRow | None) -> None:
+    if list_row is None:
+        return
+    if not inm.last_name and list_row.last_name:
+        inm.last_name = list_row.last_name
+    if not inm.first_name and list_row.first_name:
+        inm.first_name = list_row.first_name
+    if not inm.booking_date and list_row.admit_date:
+        inm.booking_date = list_row.admit_date
+
+
+def _attach_photo_filename(inm: Inmate, photo_bytes: bytes | None, photos_dir: Path) -> None:
+    photo_path = photos_dir / f"{inm.inmate_number}.jpg"
+    # Defense-in-depth: even though the model validator enforces digits-only,
+    # assert the filename is safe to prevent path traversal if the validator
+    # is ever relaxed.
+    if ".." in photo_path.name or "/" in photo_path.name or "\\" in photo_path.name:
+        raise ValueError(f"unsafe photo filename: {photo_path.name!r}")
+
+    try:
+        resolved_photos_dir = photos_dir.resolve()
+        resolved_photo_path = photo_path.resolve()
+    except Exception as e:
+        raise ValueError(f"could not resolve photo path: {e}") from e
+
+    try:
+        resolved_photo_path.relative_to(resolved_photos_dir)
+    except ValueError as e:
+        raise ValueError(
+            f"unsafe photo path traversal: {photo_path} (resolved: {resolved_photo_path}) is outside PHOTOS_DIR ({resolved_photos_dir})"
+        ) from e
+    # Save fresh bytes if we got them AND they decoded; otherwise fall through
+    # to the disk-cached photo from a prior successful sweep. Previously the
+    # second branch was an `elif`, which meant a corrupt-bytes failure on one
+    # cycle would discard a previously-good cached photo from the snapshot.
+    if photo_bytes and downscale_and_save(photo_bytes, photo_path):
+        inm.photo_filename = photo_path.name
+    elif photo_path.exists():
+        inm.photo_filename = photo_path.name
+
+
+def _set_seen_timestamps(inm: Inmate, inmate_id: str, previous: dict[str, Inmate]) -> None:
+    inm.first_seen_utc = (
+        previous[inmate_id].first_seen_utc
+        if inmate_id in previous and previous[inmate_id].first_seen_utc
+        else utcnow_iso()
+    )
+    inm.last_seen_utc = utcnow_iso()
+
+
+# Back-compat alias: prefer scraper.sweep_guards.prune_photos in new code.
+# Note the signature swap: the new public version takes photos_dir as the first
+# arg so it can be unit-tested without monkey-patching a module-level path.
+def _prune_photos(active_ids: set[str]) -> None:
+    prune_photos(PHOTOS_DIR, active_ids)
+
+
+def _read_surnames(path: Path) -> list[str]:
+    # sweep-F7: strip a leading UTF-8 BOM (U+FEFF) if a Windows editor saved
+    # the file with one. Without this the first surname becomes "﻿A",
+    # HCSO returns zero rows for it, and no guard fires (one zero-row letter
+    # is below the 10% failure threshold).
+    text = path.read_text(encoding="utf-8").lstrip("﻿")
+    return [line.strip().upper() for line in text.splitlines() if line.strip() and not line.startswith("#")]
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Run one JCStream sweep")
+    parser.add_argument("--surnames", default="data/surnames.txt", type=Path)
+    parser.add_argument("--max-surnames", type=int, default=None, help="cap the surname list for quick smoke tests")
+    parser.add_argument(
+        "--refresh-known", action="store_true", help="re-fetch detail pages even for already-known inmates"
+    )
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("-v", "--verbose", action="store_true")
+    args = parser.parse_args(argv)
+
+    logging.basicConfig(
+        level=logging.DEBUG if args.verbose else logging.INFO,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
+
+    surnames = _read_surnames(args.surnames)
+    log.info("loaded %d surnames from %s", len(surnames), args.surnames)
+    started = time.monotonic()
+    rc = run(
+        surnames,
+        max_surnames=args.max_surnames,
+        refresh_known=args.refresh_known,
+        dry_run=args.dry_run,
+    )
+    log.info("sweep finished in %.1fs (rc=%d)", time.monotonic() - started, rc)
+    return rc
+
+
+if __name__ == "__main__":
+    sys.exit(main())
