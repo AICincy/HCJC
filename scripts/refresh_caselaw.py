@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Refresh data/orc_caselaw.json with recent Ohio appellate opinions citing
 each ORC code on the current roster.
 
@@ -201,4 +201,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-
