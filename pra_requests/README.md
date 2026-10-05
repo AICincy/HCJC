@@ -6,5 +6,5 @@ Draft ORC 149.43 request letters for Hamilton County Clerk of Courts.
 - Dated folders stay on `main` as historicals.
 - Tracked files per day: `README.md`, `manifest.json`, `PACKET.md`, `PACKET.docx`.
 
-Latest packet: [`2026-10-04/PACKET.docx`](./2026-10-04/PACKET.docx)
+Latest packet: [`2026-10-05/PACKET.docx`](./2026-10-05/PACKET.docx)
 Roster historicals: [`HISTORY.md`](./HISTORY.md)
