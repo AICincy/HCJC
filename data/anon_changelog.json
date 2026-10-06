@@ -42948,31 +42948,22 @@
     "category": null
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T02:37:55Z",
-    "inmate_number": "14774475",
-    "name": "MCCUBBINS NOLAN",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
     "event": "updated",
-    "timestamp_utc": "2026-09-29T02:37:55Z",
-    "inmate_number": "14825245",
-    "name": "ERVIN A ZIRION",
+    "date": "2026-09-29",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-29T02:37:55Z",
-    "inmate_number": "1755807",
-    "name": "ADAMS KEVIN",
+    "date": "2026-09-29",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
+  },
+  {
+    "event": "booked",
+    "date": "2026-09-29",
+    "tier": "M1",
+    "category": "Assault"
   },
   {
     "event": "updated",
@@ -49939,5 +49930,41 @@
     "tier": "M1",
     "category": "Violating protection order",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T03:10:17Z",
+    "inmate_number": "14678665",
+    "name": "EVANS ERIEON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/5/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T03:10:17Z",
+    "inmate_number": "1509999",
+    "name": "CLARK JOHN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T03:10:17Z",
+    "inmate_number": "2734479",
+    "name": "GORDON SEKOU",
+    "tier": "MM",
+    "category": "Lights when needed",
+    "note": "booked 10/5/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T03:10:17Z",
+    "inmate_number": "2727371",
+    "name": "SHEARMAN MICHAEL",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": "booked 10/5/26"
   }
 ]
