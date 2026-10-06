@@ -43063,39 +43063,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-29T10:09:06Z",
-    "inmate_number": "14207508",
-    "name": "FERGUSON MARQUEZ",
+    "date": "2026-09-29",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T10:09:06Z",
-    "inmate_number": "14806533",
-    "name": "GIVENS ALLISON",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 9/29/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-29T11:09:13Z",
-    "inmate_number": "14825256",
-    "name": "TWIST ROBERT",
+    "date": "2026-09-29",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": ""
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-29T11:09:13Z",
-    "inmate_number": "14284334",
-    "name": "USA QUINN",
+    "date": "2026-09-29",
     "tier": "F3",
-    "category": "Intimidation",
-    "note": "no longer on HCSO public roster"
+    "category": "Intimidation"
   },
   {
     "event": "updated",
@@ -50062,5 +50044,14 @@
     "tier": "MM",
     "category": "Lights when needed",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T11:10:00Z",
+    "inmate_number": "1381229",
+    "name": "DUNCAN WALLACE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
   }
 ]
