@@ -43039,48 +43039,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-29T08:09:40Z",
-    "inmate_number": "1292003",
-    "name": "CRAIG STEVEN",
+    "date": "2026-09-29",
     "tier": "M4",
-    "category": "Menacing",
-    "note": "booked 9/29/26"
+    "category": "Menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-29T08:09:40Z",
-    "inmate_number": "14783195",
-    "name": "PAULINO CHRISTINE",
+    "date": "2026-09-29",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": "booked 9/29/26"
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-29T09:07:49Z",
-    "inmate_number": "14258520",
-    "name": "DUNNOM ALEXXIS",
+    "date": "2026-09-29",
     "tier": "MM",
-    "category": "Speed limits",
-    "note": "booked 9/29/26"
+    "category": "Speed limits"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-29T09:07:49Z",
-    "inmate_number": "14825256",
-    "name": "TWIST ROBERT",
+    "date": "2026-09-29",
     "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T09:07:49Z",
-    "inmate_number": "2274764",
-    "name": "HAMPTON DEANY",
-    "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 9/29/26"
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "booked",
@@ -50056,5 +50035,14 @@
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 10/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T09:09:35Z",
+    "inmate_number": "14714102",
+    "name": "THOMAS MICKIRAH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
   }
 ]
