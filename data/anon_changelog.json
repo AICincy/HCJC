@@ -25554,6 +25554,12 @@
     "category": "Illegal use or possession of drug paraphernalia"
   },
   {
+    "event": "released",
+    "date": "2026-08-11",
+    "tier": "M1",
+    "category": "Violation of community control / probation"
+  },
+  {
     "event": "booked",
     "date": "2026-08-12",
     "tier": "M1",
@@ -43213,66 +43219,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-29T17:09:54Z",
-    "inmate_number": "14110958",
-    "name": "SHEPHERD JONATHAN",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T17:09:54Z",
-    "inmate_number": "14561969",
-    "name": "ERKINS TIMARION",
+    "date": "2026-09-29",
     "tier": "M1",
-    "category": "Violation of community control / probation",
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T17:09:54Z",
-    "inmate_number": "14800586",
-    "name": "FRIERSON CHRISTIAN",
-    "tier": null,
-    "category": null,
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T17:09:54Z",
-    "inmate_number": "2152000",
-    "name": "ROBINSON VICKY",
-    "tier": "M1",
-    "category": "Failure to comply with order or signal of police officer",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T17:09:54Z",
-    "inmate_number": "2192432",
-    "name": "BURGIN RICARDO",
-    "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T17:09:54Z",
-    "inmate_number": "2340752",
-    "name": "CORNELISON TERRON",
-    "tier": null,
-    "category": null,
-    "note": "booked 9/29/26"
+    "category": "Violation of community control / probation"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-09-29T17:09:54Z",
-    "inmate_number": "2507679",
-    "name": "HARRIS BRITTANY",
+    "date": "2026-09-29",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
@@ -50337,6 +50292,96 @@
     "name": "THOMAS MICKIRAH",
     "tier": "M1",
     "category": "Domestic violence",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "1143102",
+    "name": "REED LOVELL",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "1381229",
+    "name": "DUNCAN WALLACE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "14442834",
+    "name": "JEFFERSON JULIAN",
+    "tier": "MM",
+    "category": "Lanes of travel upon roadways of sufficient width",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "14565876",
+    "name": "BARTLEY KARRIE",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "14730549",
+    "name": "WILLIAMS NAKELAH",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 10/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "1582266",
+    "name": "GOODMAN ERIC",
+    "tier": "M1",
+    "category": "Violation of community control / probation",
+    "note": "booked 10/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "2567213",
+    "name": "RAGSTER DIONTA",
+    "tier": "MM",
+    "category": "Juvenile hold (no ORC code on file)",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "2577065",
+    "name": "LUTTRELL CHRISTOPHER",
+    "tier": "M4",
+    "category": "Public indecency",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "2681882",
+    "name": "HAWKINS RECARDO",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-06T17:10:16Z",
+    "inmate_number": "1802492",
+    "name": "SMITH ANGELA",
+    "tier": "M1",
+    "category": "Assault",
     "note": "no longer on HCSO public roster"
   }
 ]
