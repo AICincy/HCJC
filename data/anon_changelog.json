@@ -43345,102 +43345,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "1248477",
-    "name": "SMITH RICHARD",
-    "tier": null,
-    "category": null,
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "14648212",
-    "name": "BRYANT SHAVONNA",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "14655330",
-    "name": "SMITH DANNY",
+    "date": "2026-09-29",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 9/29/26"
+    "category": "Resisting arrest"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "14825421",
-    "name": "WALKER JUWAN",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "1624145",
-    "name": "WILCOX MARQUES",
+    "date": "2026-09-29",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "1724157",
-    "name": "BLYTHE DAMIEN",
-    "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "2181338",
-    "name": "STEELMAN JOSH",
-    "tier": null,
-    "category": null,
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "2505718",
-    "name": "WILKENS JUSTIN",
-    "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "2809319",
-    "name": "HARRIS KEONTE",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 9/29/26"
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "2541440",
-    "name": "HILL JUSTIN",
+    "date": "2026-09-29",
     "tier": "F5",
-    "category": "Breaking and entering",
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-09-29T22:08:44Z",
-    "inmate_number": "14774675",
-    "name": "JACKSON KEONETE",
-    "tier": "M1",
-    "category": "Violating protection order",
-    "note": "no longer on HCSO public roster"
+    "category": "Breaking and entering"
   },
   {
     "event": "booked",
@@ -50469,6 +50388,132 @@
     "name": "ANDERSON KAYLA",
     "tier": "MM",
     "category": "Speed limits",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "1229003",
+    "name": "DAVIS LESTER",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "14166190",
+    "name": "MAYS ROBERT",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 10/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "14631659",
+    "name": "COOK TYLER",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "1724157",
+    "name": "BLYTHE DAMIEN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "2446812",
+    "name": "CRUZ JUSTIN",
+    "tier": null,
+    "category": null,
+    "note": "booked 10/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "2707499",
+    "name": "BEAM AARON",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 10/6/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "1402609",
+    "name": "BECK MARCUS",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "14802764",
+    "name": "CHRISTIAN WESTLY",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "14286610",
+    "name": "DALE ANTHONY",
+    "tier": "M1",
+    "category": "Nonsupport of dependents",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "14561969",
+    "name": "ERKINS TIMARION",
+    "tier": "M1",
+    "category": "Violation of community control / probation",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "14424078",
+    "name": "TERRY JAELON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "2428141",
+    "name": "WESSELL DOUGLAS",
+    "tier": "M2",
+    "category": "Abuse of a corpse",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "14730549",
+    "name": "WILLIAMS NAKELAH",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-06T22:11:29Z",
+    "inmate_number": "1960293",
+    "name": "WILSON-EASTERLING BRETT",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
     "note": "no longer on HCSO public roster"
   }
 ]
