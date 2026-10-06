@@ -43363,48 +43363,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-09-29T23:08:02Z",
-    "inmate_number": "14161525",
-    "name": "SMITH DAQUAN",
+    "date": "2026-09-29",
     "tier": "M1",
-    "category": "Telecommunications harassment",
-    "note": "booked 9/29/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-09-29T23:08:02Z",
-    "inmate_number": "14825421",
-    "name": "WALKER JUWAN",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-09-29T23:08:02Z",
-    "inmate_number": "1758943",
-    "name": "SEWELL ADAM",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 9/29/26"
+    "category": "Telecommunications harassment"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-29T23:08:02Z",
-    "inmate_number": "14681290",
-    "name": "ROBINSON ROBERT",
+    "date": "2026-09-29",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "no longer on HCSO public roster"
+    "category": "Aggravated menacing"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-09-29T23:08:02Z",
-    "inmate_number": "14749683",
-    "name": "STARR HJESUS",
+    "date": "2026-09-29",
     "tier": "F2",
-    "category": "Robbery",
-    "note": "no longer on HCSO public roster"
+    "category": "Robbery"
   },
   {
     "event": "booked",
@@ -50515,5 +50488,68 @@
     "tier": "MM",
     "category": "Open container of beer or intoxicating liquor in a vehicle",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T23:10:25Z",
+    "inmate_number": "1229003",
+    "name": "DAVIS LESTER",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T23:10:25Z",
+    "inmate_number": "14322024",
+    "name": "SAFFRON JOSHUA",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T23:10:25Z",
+    "inmate_number": "14443532",
+    "name": "ENDERLE DENNIS",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 10/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T23:10:25Z",
+    "inmate_number": "14631659",
+    "name": "COOK TYLER",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T23:10:25Z",
+    "inmate_number": "14436018",
+    "name": "WHITFIELD IMANI",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/6/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-06T23:10:25Z",
+    "inmate_number": "1488428",
+    "name": "SEAY RENALDO",
+    "tier": null,
+    "category": null,
+    "note": "booked 10/6/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-06T23:10:25Z",
+    "inmate_number": "2707499",
+    "name": "BEAM AARON",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
   }
 ]
