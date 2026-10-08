@@ -200,7 +200,7 @@ def append_block_evidence(record: dict, path: Path = WAF_BLOCK_LOG_PATH) -> None
 
 
 # Deduplication for repeated observations (e.g. the same inmate's empty
-# booking photo seen on every 15-minute cycle). The evidence log is
+# booking photo seen on every sweep cycle). The evidence log is
 # append-only and hash-chained, so "deduplication" means skipping a redundant
 # append, never editing history. The first record is the provenance anchor;
 # identical observations within the window are skipped with a log line.
