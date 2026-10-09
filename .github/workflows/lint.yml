@@ -41,7 +41,7 @@ jobs:
       # pinned lint tool. The previous `-e ".[dev]"` install floated the
       # dependency set away from the requirements.txt that ci.yml audits.
       - run: pip install -r requirements.txt
-      - run: pip install ruff==0.16.8  # unified with ci.yml and pyproject [dev]
+      - run: pip install ruff==0.16.9  # unified with ci.yml and pyproject [dev]
       - name: Lint (ruff)
         run: ruff check .
       - name: Tests
