@@ -37092,6 +37092,12 @@
     "category": "Assault"
   },
   {
+    "event": "booked",
+    "date": "2026-09-14",
+    "tier": "M1",
+    "category": "Driving under FRA suspension"
+  },
+  {
     "event": "updated",
     "date": "2026-09-15",
     "tier": "MM",
@@ -37744,6 +37750,12 @@
     "date": "2026-09-16",
     "tier": "M1",
     "category": "Domestic violence"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-16",
+    "tier": "M1",
+    "category": "Driving under FRA suspension"
   },
   {
     "event": "booked",
@@ -53803,5 +53815,32 @@
     "tier": "MM",
     "category": "Open container of beer or intoxicating liquor in a vehicle",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-09T08:10:33Z",
+    "inmate_number": "14152895",
+    "name": "SMITH MIYAEL",
+    "tier": "M1",
+    "category": "Driving under FRA suspension",
+    "note": "booked 10/9/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-09T08:10:33Z",
+    "inmate_number": "14204513",
+    "name": "FIELDS TRAYONEA",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle",
+    "note": "booked 10/9/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-09T08:10:33Z",
+    "inmate_number": "2296377",
+    "name": "RONAN MICHAEL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 10/9/26"
   }
 ]
