@@ -72,11 +72,12 @@ The CI matrix currently runs Python 3.13 and 3.14. The pinned project dependenci
     jinja2==3.1.6
     defusedxml==0.7.1
     Pillow==12.3.0
+    tzdata==2026.5
 
 Development tools are pinned separately:
 
     pytest==9.1.1
-    ruff==0.16.8
+    ruff==0.16.9
     mypy==2.3.1
 
 ### Node.js
@@ -103,7 +104,7 @@ From the repository root:
     python3.13 -m venv .venv
     .venv/bin/python -m pip install --upgrade pip
     .venv/bin/pip install -r requirements.txt
-    .venv/bin/pip install ruff==0.16.8 mypy==2.3.1
+    .venv/bin/pip install ruff==0.16.9 mypy==2.3.1
 
 An editable development install is also supported:
 
