@@ -1,5 +1,5 @@
 {
-  "status": "FRESH",
+  "status": "BLOCKED",
   "roster_denial_open": false,
   "total_block_events": 13,
   "first_block_utc": "2026-05-30T23:07:48Z",
@@ -10,14 +10,14 @@
   "days_since_last_block": 10,
   "freshness_hours": 0.0,
   "roster_age_hours": 0.0,
-  "last_healthy_sweep_utc": "2026-10-09T02:10:03Z",
-  "detail_status": "HEALTHY",
-  "detail_denial_open": false,
-  "detail_denial_since_utc": null,
-  "total_detail_block_events": 685,
+  "last_healthy_sweep_utc": "2026-10-09T03:07:59Z",
+  "detail_status": "DEGRADED",
+  "detail_denial_open": true,
+  "detail_denial_since_utc": "2026-10-09T03:07:41Z",
+  "total_detail_block_events": 686,
   "total_detail_degraded_events": 9,
-  "last_detail_failure_utc": null,
+  "last_detail_failure_utc": "2026-10-09T03:07:41Z",
   "stale_alarm_hours": 6.0,
-  "roster_generated_utc": "2026-10-09T02:10:03Z",
-  "computed_utc": "2026-10-09T02:10:03Z"
+  "roster_generated_utc": "2026-10-09T03:07:59Z",
+  "computed_utc": "2026-10-09T03:07:59Z"
 }
