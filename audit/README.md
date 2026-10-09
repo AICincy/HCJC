@@ -31,3 +31,4 @@ Later standalone records:
 | `24_pages_deploy_stale_incidents.md` | `deploy_alert` incident log for stuck Pages deploys |
 | `25_pages_stale_artifact_misdiagnosis.md` | 2026-09-24 stale-artifact publish after PR #503; corrects the "Pages webhook pending" diagnosis and a force-push remediation tier |
 | `26_ui_ux_failures_2026-10-09.md` | 2026-10-09 UI & UX failures audit — claim ledger plus 18 roster/nav/detail/statute/chrome failures verified against tip `be62652f` and live `https://www.aretheyinjail.com` |
+| `27_ui_ux_remediation_plan_2026-10-09.md` | 2026-10-09 UI & UX remediation plan — 20-step queue for audit 26 (Phases 1–4, optional hygiene included), tip `be62652f` / live `2026-10-09T16:09:32Z` |
