@@ -30,3 +30,4 @@ Later standalone records:
 | `21_nodata_monitor.md` | Datadog no-data monitor spec: detect a missed sweep (absent sweep_start) |
 | `24_pages_deploy_stale_incidents.md` | `deploy_alert` incident log for stuck Pages deploys |
 | `25_pages_stale_artifact_misdiagnosis.md` | 2026-09-24 stale-artifact publish after PR #503; corrects the "Pages webhook pending" diagnosis and a force-push remediation tier |
+| `26_ui_ux_failures_2026-10-09.md` | 2026-10-09 UI & UX failures audit — claim ledger plus 18 roster/nav/detail/statute/chrome failures verified against tip `be62652f` and live `https://www.aretheyinjail.com` |
