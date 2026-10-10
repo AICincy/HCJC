@@ -38190,6 +38190,12 @@
     "category": "Menacing"
   },
   {
+    "event": "updated",
+    "date": "2026-09-17",
+    "tier": "M4",
+    "category": "Criminal trespass"
+  },
+  {
     "event": "booked",
     "date": "2026-09-18",
     "tier": "MM",
@@ -40468,6 +40474,12 @@
     "date": "2026-09-24",
     "tier": "M1",
     "category": "Theft"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-24",
+    "tier": "M4",
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
@@ -55836,6 +55848,24 @@
     "name": "WALTERS MICHELLE",
     "tier": "MM",
     "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T14:11:46Z",
+    "inmate_number": "14715212",
+    "name": "JOHNSON DANIELLE",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T14:11:46Z",
+    "inmate_number": "1620390",
+    "name": "NORRIS DIONNE",
+    "tier": "F5",
+    "category": "Forgery",
     "note": ""
   }
 ]
