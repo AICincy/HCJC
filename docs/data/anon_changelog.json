@@ -44251,57 +44251,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-03T22:56:34Z",
-    "inmate_number": "14419282",
-    "name": "NATICCHIONI KYRA",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-03T22:56:34Z",
-    "inmate_number": "14740934",
-    "name": "ZAYAS HECTOR",
-    "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-03T22:56:34Z",
-    "inmate_number": "14709449",
-    "name": "BARBER HERBERT",
+    "date": "2026-10-03",
     "tier": "F3",
-    "category": "Complicity",
-    "note": ""
+    "category": "Complicity"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-03T22:56:34Z",
-    "inmate_number": "1732812",
-    "name": "COSTON TOMMY",
+    "date": "2026-10-03",
     "tier": "M4",
-    "category": "Cincinnati Municipal Code: licensing",
-    "note": "booked 10/3/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-03T22:56:34Z",
-    "inmate_number": "2512623",
-    "name": "TURNER JARMEKO",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-03T22:56:34Z",
-    "inmate_number": "717498",
-    "name": "NEIL KENNETH",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": "Cincinnati Municipal Code: licensing"
   },
   {
     "event": "booked",
@@ -54381,6 +54339,51 @@
     "name": "GARDNER QUIARIS",
     "tier": "M1",
     "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-10T23:10:50Z",
+    "inmate_number": "14115756",
+    "name": "PIERRE ANTHONY",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-10T23:10:50Z",
+    "inmate_number": "14257999",
+    "name": "WILSON BRYANT",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-10T23:10:50Z",
+    "inmate_number": "1956923",
+    "name": "RICHARD EVAN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-10T23:10:50Z",
+    "inmate_number": "2154967",
+    "name": "CALHOUN JUANDAIZE",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-10T23:10:50Z",
+    "inmate_number": "2814681",
+    "name": "LONG MICHAEL",
+    "tier": "M1",
+    "category": "Assault",
     "note": "no longer on HCSO public roster"
   }
 ]
