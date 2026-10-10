@@ -44244,49 +44244,10 @@
     "category": null
   },
   {
-    "event": "updated",
-    "timestamp_utc": "2026-10-03T21:28:00Z",
-    "inmate_number": "14419282",
-    "name": "NATICCHIONI KYRA",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
     "event": "booked",
-    "timestamp_utc": "2026-10-03T21:28:00Z",
-    "inmate_number": "14709449",
-    "name": "BARBER HERBERT",
+    "date": "2026-10-03",
     "tier": "F3",
-    "category": "Complicity",
-    "note": "booked 10/3/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-03T21:28:00Z",
-    "inmate_number": "14740934",
-    "name": "ZAYAS HECTOR",
-    "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 10/3/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-03T21:28:00Z",
-    "inmate_number": "2320562",
-    "name": "THOMPSON ROBERT",
-    "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-03T21:28:00Z",
-    "inmate_number": "2605250",
-    "name": "CHANEY KIYANA",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 10/3/26"
+    "category": "Complicity"
   },
   {
     "event": "updated",
@@ -54385,5 +54346,41 @@
     "tier": "M4",
     "category": "Misconduct at an emergency",
     "note": "booked 10/10/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T22:12:15Z",
+    "inmate_number": "14308969",
+    "name": "DENSON DARIZ",
+    "tier": "M4",
+    "category": "Misconduct at an emergency",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-10T22:12:15Z",
+    "inmate_number": "14525875",
+    "name": "SMITH ROBERT",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T22:12:15Z",
+    "inmate_number": "2533691",
+    "name": "JOHNSON JOHN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-10T22:12:15Z",
+    "inmate_number": "14826552",
+    "name": "GARDNER QUIARIS",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "no longer on HCSO public roster"
   }
 ]
