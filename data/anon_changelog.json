@@ -27493,6 +27493,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-08-17",
+    "tier": "M1",
+    "category": "Driving under suspension"
+  },
+  {
+    "event": "booked",
     "date": "2026-08-18",
     "tier": "MM",
     "category": "Zoning violations"
@@ -29224,6 +29230,12 @@
     "date": "2026-08-21",
     "tier": "F2",
     "category": "Felonious assault"
+  },
+  {
+    "event": "released",
+    "date": "2026-08-21",
+    "tier": "M1",
+    "category": "Driving under suspension"
   },
   {
     "event": "updated",
@@ -55288,5 +55300,86 @@
     "tier": "M1",
     "category": "Driving without a valid license",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T05:09:13Z",
+    "inmate_number": "14153156",
+    "name": "CRAIG COREY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-10T05:09:13Z",
+    "inmate_number": "14227453",
+    "name": "CEARLEY DANIEL",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-10T05:09:13Z",
+    "inmate_number": "14541886",
+    "name": "TERRELL JAMELLE",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-10T05:09:13Z",
+    "inmate_number": "14753110",
+    "name": "WADE SHAUNICE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T05:09:13Z",
+    "inmate_number": "14808851",
+    "name": "TRAORE MOHAMMAD",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-10T05:09:13Z",
+    "inmate_number": "14826542",
+    "name": "QUINTERO REY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T05:09:13Z",
+    "inmate_number": "2083213",
+    "name": "EWING ERIC",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T05:09:13Z",
+    "inmate_number": "2488874",
+    "name": "PHELPS NICHOLAS",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T05:09:13Z",
+    "inmate_number": "2552284",
+    "name": "RUDOLPH BRYNA",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": ""
   }
 ]
