@@ -44244,24 +44244,6 @@
     "category": null
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-10-03T20:09:11Z",
-    "inmate_number": "14419282",
-    "name": "NATICCHIONI KYRA",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-03T20:09:11Z",
-    "inmate_number": "2512623",
-    "name": "TURNER JARMEKO",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
-  },
-  {
     "event": "updated",
     "timestamp_utc": "2026-10-03T21:28:00Z",
     "inmate_number": "14419282",
@@ -54385,5 +54367,14 @@
     "tier": "M2",
     "category": "Resisting arrest",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-10T20:47:24Z",
+    "inmate_number": "2533691",
+    "name": "JOHNSON JOHN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
   }
 ]
