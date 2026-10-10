@@ -1,20 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14570339",
-    "name": "BROWN TASIA",
-    "timestamp_utc": "2026-08-15T03:04:29Z",
-    "note": "booked 8/14/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2482329",
-    "name": "COOK DEMETRICE",
-    "timestamp_utc": "2026-08-15T03:04:29Z",
-    "note": "booked 8/14/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "605999",
     "name": "GREER BRUCE",
     "timestamp_utc": "2026-08-15T03:04:29Z",
@@ -69997,6 +69983,20 @@
     "inmate_number": "2488874",
     "name": "PHELPS NICHOLAS",
     "timestamp_utc": "2026-10-10T18:10:39Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "1880923",
+    "name": "TURNER DANTE",
+    "timestamp_utc": "2026-10-10T19:10:39Z",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "inmate_number": "14826543",
+    "name": "GOOD DEANNA",
+    "timestamp_utc": "2026-10-10T19:10:39Z",
     "note": "no longer on HCSO public roster"
   }
 ]
