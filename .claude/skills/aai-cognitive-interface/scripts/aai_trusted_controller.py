@@ -17,10 +17,10 @@ from __future__ import annotations
 import argparse
 import base64
 import hashlib
-import socket
 import json
 import os
 import secrets
+import socket
 import sys
 import time
 from dataclasses import dataclass
