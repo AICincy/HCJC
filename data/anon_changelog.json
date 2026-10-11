@@ -44263,66 +44263,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-04T00:36:58Z",
-    "inmate_number": "2586595",
-    "name": "COLVIN MARKEITH",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 10/3/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-04T00:36:58Z",
-    "inmate_number": "2677808",
-    "name": "BENTON BRUCE",
+    "date": "2026-10-04",
     "tier": null,
-    "category": null,
-    "note": ""
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-04T00:36:58Z",
-    "inmate_number": "2683700",
-    "name": "EVANS ANGEL",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-04T00:36:58Z",
-    "inmate_number": "2681882",
-    "name": "HAWKINS-TERRELL RECARDO",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-04T00:36:58Z",
-    "inmate_number": "717498",
-    "name": "NEIL KENNETH",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-04T00:36:58Z",
-    "inmate_number": "2633214",
-    "name": "CUPP RYAN",
+    "date": "2026-10-04",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "no longer on HCSO public roster"
+    "category": "Possession of drugs"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-04T00:36:58Z",
-    "inmate_number": "1624145",
-    "name": "WILCOX MARQUES",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "no longer on HCSO public roster"
+    "category": "Cincinnati Municipal Code: general offenses"
+  },
+  {
+    "event": "booked",
+    "date": "2026-10-04",
+    "tier": null,
+    "category": null
+  },
+  {
+    "event": "updated",
+    "date": "2026-10-04",
+    "tier": "M1",
+    "category": "Assault"
+  },
+  {
+    "event": "updated",
+    "date": "2026-10-04",
+    "tier": "M2",
+    "category": "Criminal damaging"
+  },
+  {
+    "event": "released",
+    "date": "2026-10-04",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -54421,5 +54412,23 @@
     "tier": "M1",
     "category": "Driving under suspension",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-11T01:09:44Z",
+    "inmate_number": "14124495",
+    "name": "DAVIS KEYAIR",
+    "tier": "M1",
+    "category": "Driving under FRA suspension",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-11T01:09:44Z",
+    "inmate_number": "2386222",
+    "name": "MOSLEY NASHON",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": ""
   }
 ]
