@@ -44431,84 +44431,45 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-04T08:10:15Z",
-    "inmate_number": "14216980",
-    "name": "LINDER DOUGLASS",
+    "date": "2026-10-04",
     "tier": "M3",
-    "category": "Sexual imposition",
-    "note": "booked 10/4/26"
+    "category": "Sexual imposition"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-04T08:10:15Z",
-    "inmate_number": "14328090",
-    "name": "BOYD DEMECO",
+    "date": "2026-10-04",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 10/4/26"
+    "category": "Strangulation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-04T08:10:15Z",
-    "inmate_number": "14734059",
-    "name": "MEYER DRAVEN",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Operating a vehicle under the influence (OVI / DUI)",
-    "note": "booked 10/4/26"
+    "category": "Operating a vehicle under the influence (OVI / DUI)"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-04T08:10:15Z",
-    "inmate_number": "14825948",
-    "name": "MARTINEZ JONATAN",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked 10/4/26"
+    "category": "Driving without a valid license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-04T08:10:15Z",
-    "inmate_number": "1694732",
-    "name": "NEIL THOMAS",
+    "date": "2026-10-04",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-04T08:10:15Z",
-    "inmate_number": "1790376",
-    "name": "BENNETT RHONDA",
+    "date": "2026-10-04",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-04T08:10:15Z",
-    "inmate_number": "2658519",
-    "name": "CARTER TERRY",
-    "tier": "M1",
-    "category": "Assault",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-04T08:10:15Z",
-    "inmate_number": "284632",
-    "name": "STILLWELL JOHN",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-04T08:10:15Z",
-    "inmate_number": "14603622",
-    "name": "GRAY ANESHA",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Operating a vehicle under the influence (OVI / DUI)",
-    "note": "no longer on HCSO public roster"
+    "category": "Operating a vehicle under the influence (OVI / DUI)"
   },
   {
     "event": "booked",
@@ -54390,6 +54351,42 @@
     "name": "WHITT DAVID",
     "tier": "F5",
     "category": "Possession of drugs",
+    "note": "booked 10/11/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-11T08:10:44Z",
+    "inmate_number": "14314878",
+    "name": "ANDERSON MACI",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-11T08:10:44Z",
+    "inmate_number": "1838339",
+    "name": "WESTMORELAND LAWRENCE",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-11T08:10:44Z",
+    "inmate_number": "2284355",
+    "name": "ESTILL KENNETH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/11/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-11T08:10:44Z",
+    "inmate_number": "2833273",
+    "name": "BOWEN AUSTIN",
+    "tier": "M3",
+    "category": "Criminal mischief",
     "note": "booked 10/11/26"
   }
 ]
