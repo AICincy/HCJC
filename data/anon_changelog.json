@@ -44490,58 +44490,28 @@
     "category": "Felonious assault"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-10-04T11:10:23Z",
-    "inmate_number": "2273349",
-    "name": "BROWN MICHAEL",
-    "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 10/4/26"
-  },
-  {
     "event": "updated",
-    "timestamp_utc": "2026-10-04T11:10:23Z",
-    "inmate_number": "2651440",
-    "name": "FRANCE CURTIS",
+    "date": "2026-10-04",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-04T12:11:01Z",
-    "inmate_number": "14793576",
-    "name": "NJANJIKO SETH",
-    "tier": "M1",
-    "category": "Operating a vehicle under the influence (OVI / DUI)",
-    "note": "booked 10/4/26"
+    "category": "Strangulation"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-04T12:11:01Z",
-    "inmate_number": "2273349",
-    "name": "BROWN MICHAEL",
+    "date": "2026-10-04",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-04T12:11:01Z",
-    "inmate_number": "2047455",
-    "name": "PHILLIPS AUDREY",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "no longer on HCSO public roster"
+    "category": "Receiving stolen property"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-04T12:11:01Z",
-    "inmate_number": "2148096",
-    "name": "ROSEMOND DEMETRIUS",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "no longer on HCSO public roster"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
@@ -54369,6 +54339,33 @@
     "name": "ENGLAND BRANDON",
     "tier": "M1",
     "category": "Stopping after accident on other than public roads",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-11T12:11:25Z",
+    "inmate_number": "14826603",
+    "name": "GALINDO ALFREDO",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 10/11/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-11T12:11:25Z",
+    "inmate_number": "2530112",
+    "name": "RUSH NATASHA",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-11T12:11:25Z",
+    "inmate_number": "2044231",
+    "name": "ZIEGELMEIER DAVID",
+    "tier": "M1",
+    "category": "Receiving stolen property",
     "note": "no longer on HCSO public roster"
   }
 ]
