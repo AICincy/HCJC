@@ -44538,40 +44538,10 @@
     "category": "Aggravated menacing"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-10-04T22:00:01Z",
-    "inmate_number": "14326817",
-    "name": "CLEMENTS ASHLEE",
-    "tier": null,
-    "category": null,
-    "note": "booked 10/4/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-04T22:00:01Z",
-    "inmate_number": "14715410",
-    "name": "DALTON JOSEPH",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
     "event": "updated",
-    "timestamp_utc": "2026-10-04T22:00:01Z",
-    "inmate_number": "232341",
-    "name": "PETERSON CHARLES",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-04T22:00:01Z",
-    "inmate_number": "2329230",
-    "name": "BREWSTER KEITH",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
@@ -54435,6 +54405,33 @@
     "name": "TAYLOR JONATHON",
     "tier": "M1",
     "category": "Falsification",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-11T22:12:35Z",
+    "inmate_number": "2318076",
+    "name": "RUFF TURHAN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 10/11/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-11T22:12:35Z",
+    "inmate_number": "1402083",
+    "name": "COPELAND WILLIAM",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-11T22:12:35Z",
+    "inmate_number": "1838339",
+    "name": "WESTMORELAND LAWRENCE",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
     "note": "no longer on HCSO public roster"
   }
 ]
