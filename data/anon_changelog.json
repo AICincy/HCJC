@@ -44515,30 +44515,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-04T15:13:47Z",
-    "inmate_number": "14667951",
-    "name": "DELLIPAOLI NADINE",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Endangering children",
-    "note": "booked 10/4/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-04T15:13:47Z",
-    "inmate_number": "1674331",
-    "name": "HARRISON JOHN",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": "Endangering children"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-04T16:09:32Z",
-    "inmate_number": "1674331",
-    "name": "HARRISON JOHN",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Endangering children",
-    "note": ""
+    "category": "Endangering children"
   },
   {
     "event": "booked",
@@ -54385,5 +54370,32 @@
     "tier": "M4",
     "category": "Cincinnati Municipal Code: dangerous weapons and fireworks (discharging firearms)",
     "note": "booked 10/11/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-11T16:09:40Z",
+    "inmate_number": "14826605",
+    "name": "ROBLERO EULALIO",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 10/11/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-11T16:09:40Z",
+    "inmate_number": "2833273",
+    "name": "BOWEN AUSTIN",
+    "tier": "M3",
+    "category": "Criminal mischief",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-11T16:09:40Z",
+    "inmate_number": "14308969",
+    "name": "DENSON DARIZ",
+    "tier": "M4",
+    "category": "Misconduct at an emergency",
+    "note": "no longer on HCSO public roster"
   }
 ]
