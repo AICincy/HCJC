@@ -44329,30 +44329,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-04T02:10:29Z",
-    "inmate_number": "14603622",
-    "name": "GRAY ANESHA",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-04T02:10:29Z",
-    "inmate_number": "14825944",
-    "name": "HURST KIRSTIE",
+    "date": "2026-10-04",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 10/3/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-10-04T02:10:29Z",
-    "inmate_number": "14825892",
-    "name": "LEWIS MARK",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "no longer on HCSO public roster"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -54405,6 +54384,24 @@
     "name": "BOULDIN ZIANEE",
     "tier": "M1",
     "category": "Theft",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-11T02:39:30Z",
+    "inmate_number": "2450497",
+    "name": "ENGLAND BRANDON",
+    "tier": "M1",
+    "category": "Stopping after accident on other than public roads",
+    "note": "booked 10/10/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-11T02:39:30Z",
+    "inmate_number": "14115756",
+    "name": "PIERRE ANTHONY",
+    "tier": "M2",
+    "category": "Criminal damaging",
     "note": "no longer on HCSO public roster"
   }
 ]
