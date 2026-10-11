@@ -44473,30 +44473,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-04T08:49:13Z",
-    "inmate_number": "14560028",
-    "name": "MCCALLEY NATHANIEL",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-04T08:49:13Z",
-    "inmate_number": "14825952",
-    "name": "DIA AMADOU",
+    "date": "2026-10-04",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 10/4/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-04T08:49:13Z",
-    "inmate_number": "1779951",
-    "name": "SCHOOLING ANTONIO",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 10/4/26"
+    "category": "Felonious assault"
   },
   {
     "event": "updated",
@@ -54388,5 +54367,32 @@
     "tier": "M3",
     "category": "Criminal mischief",
     "note": "booked 10/11/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-11T09:08:10Z",
+    "inmate_number": "1838339",
+    "name": "WESTMORELAND LAWRENCE",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-11T09:08:10Z",
+    "inmate_number": "2284355",
+    "name": "ESTILL KENNETH",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-11T09:08:10Z",
+    "inmate_number": "2833273",
+    "name": "BOWEN AUSTIN",
+    "tier": "M3",
+    "category": "Criminal mischief",
+    "note": ""
   }
 ]
