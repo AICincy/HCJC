@@ -44575,48 +44575,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-05T00:52:52Z",
-    "inmate_number": "14473419",
-    "name": "HARKNESS JLIN",
+    "date": "2026-10-05",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 10/4/26"
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-05T00:52:52Z",
-    "inmate_number": "14784594",
-    "name": "FARLEY ARYANNA",
+    "date": "2026-10-05",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-05T00:52:52Z",
-    "inmate_number": "14825979",
-    "name": "DEGEORGE BERNARD",
+    "date": "2026-10-05",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 10/4/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-05T00:52:52Z",
-    "inmate_number": "14825980",
-    "name": "GARCIA-SANTIAGO RODOLFO",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-05T00:52:52Z",
-    "inmate_number": "2673676",
-    "name": "HARRIS JASON",
+    "date": "2026-10-05",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 9/11/26"
+    "category": "Assault"
+  },
+  {
+    "event": "booked",
+    "date": "2026-10-05",
+    "tier": "M2",
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
@@ -54463,5 +54448,23 @@
     "tier": "MM",
     "category": "Illegal use or possession of drug paraphernalia",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-12T01:10:53Z",
+    "inmate_number": "1730714",
+    "name": "ALLEN RONDA",
+    "tier": "F5",
+    "category": "Forgery",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-12T01:10:53Z",
+    "inmate_number": "2526677",
+    "name": "TAYLOR DON",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
   }
 ]
