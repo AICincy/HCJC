@@ -44767,75 +44767,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-05T08:10:01Z",
-    "inmate_number": "14491962",
-    "name": "NELSON MCKINLEY",
+    "date": "2026-10-05",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 10/5/26"
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-05T08:10:01Z",
-    "inmate_number": "1469725",
-    "name": "WILLIAMS JAMES",
+    "date": "2026-10-05",
     "tier": "M1",
-    "category": "Falsification",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-05T08:10:01Z",
-    "inmate_number": "1968179",
-    "name": "DUPREE MICHAEL",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked 10/5/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-05T08:10:01Z",
-    "inmate_number": "2269421",
-    "name": "WISE CARLA",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 10/5/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-05T08:10:01Z",
-    "inmate_number": "2486165",
-    "name": "GOLDEN KESHA",
-    "tier": "M2",
-    "category": "Criminal damaging",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-05T08:10:01Z",
-    "inmate_number": "2740893",
-    "name": "COUCH RYAN",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": "Falsification"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-05T08:10:01Z",
-    "inmate_number": "2565933",
-    "name": "WATSON DEANGELA",
+    "date": "2026-10-05",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-05T09:09:57Z",
-    "inmate_number": "14825994",
-    "name": "REYNOSO DELFINA",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 10/5/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
@@ -54403,5 +54349,23 @@
     "tier": "M2",
     "category": "Possessing drug abuse instruments",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-12T09:11:52Z",
+    "inmate_number": "14355435",
+    "name": "NDIATHE COURO",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-12T09:11:52Z",
+    "inmate_number": "2428112",
+    "name": "HUNTER BRITTANY",
+    "tier": "MM",
+    "category": "License or registration violation",
+    "note": "booked 10/12/26"
   }
 ]
