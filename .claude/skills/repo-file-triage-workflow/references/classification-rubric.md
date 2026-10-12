@@ -74,6 +74,6 @@ Reason codes: `KEEP-SWEEP`, `KEEP-BUILD`, `KEEP-MANIFEST`, `KEEP-WORKFLOW`, `KEE
 
 ## Tie-breakers
 
-- Risk beats staleness: `of-concern` > `stale` > `irrelevant` > `inoperable` > `keep` for initial marking, but `inoperable` and `of-concern` both block auto-delete.
+- Apply the decision tree in its declared top-down order: `inoperable` > `of-concern` > `stale` > `irrelevant` > `keep`. Both `inoperable` and `of-concern` block auto-delete.
 - Evidence beats heuristic: a file with a passing workflow reference and a passing `verify_public_data.py` manifest entry is `keep` even if large.
 - Size does not imply irrelevance: `waf_block_log.json` (41 MB) and `docs/data/search.json` are large but load-bearing.
