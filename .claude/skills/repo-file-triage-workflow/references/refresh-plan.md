@@ -84,5 +84,5 @@ All must pass. `git diff --stat docs/` must be empty (determinism) or contain on
 ## 8. Rollback
 
 - Branch `triage/refresh` from `main`; never mutate `main` directly.
-- If any gate fails post-prune, `git checkout main -- <path>` for the affected file or `git reset --hard origin/main`.
+- If any gate fails post-prune, preserve the diff for diagnosis and restore only the approved paths from `origin/main`; after a prune commit exists, roll it back with a new revert commit. Never use `git reset --hard`.
 - Force-push on `main` is never allowed.
