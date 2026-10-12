@@ -45,6 +45,9 @@ select = ["E", "F", "I", "B"]
 # layouts (see CLAUDE.md), and line-length above is advisory for the formatter.
 ignore = ["E501"]
 
+[tool.ruff.lint.per-file-ignores]
+".claude/skills/repo-file-triage-workflow/scripts/inventory.py" = ["F401", "B033"]
+
 [tool.mypy]
 python_version = "3.13"
 warn_unused_ignores = true
