@@ -32166,6 +32166,12 @@
     "category": "Cincinnati Municipal Code: licensing"
   },
   {
+    "event": "released",
+    "date": "2026-08-30",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
     "event": "booked",
     "date": "2026-08-31",
     "tier": "MM",
@@ -32830,6 +32836,12 @@
     "date": "2026-09-01",
     "tier": "M4",
     "category": "Cincinnati Municipal Code: licensing"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-01",
+    "tier": "M1",
+    "category": "Theft"
   },
   {
     "event": "updated",
@@ -44545,21 +44557,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-05T00:09:28Z",
-    "inmate_number": "14784594",
-    "name": "FARLEY ARYANNA",
+    "date": "2026-10-05",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": null
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-05T00:09:28Z",
-    "inmate_number": "14825976",
-    "name": "VAZQUEZ KEVIN",
+    "date": "2026-10-05",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
+  },
+  {
+    "event": "updated",
+    "date": "2026-10-05",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -54405,6 +54417,51 @@
     "name": "BASKERVILLE YAHADAH",
     "tier": null,
     "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-12T00:13:13Z",
+    "inmate_number": "14671547",
+    "name": "CLINE INDIYAH",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 10/11/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-12T00:13:13Z",
+    "inmate_number": "1730714",
+    "name": "ALLEN RONDA",
+    "tier": "F5",
+    "category": "Forgery",
+    "note": "booked 10/11/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-12T00:13:13Z",
+    "inmate_number": "2253471",
+    "name": "BOOKER MARK",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 10/11/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-12T00:13:13Z",
+    "inmate_number": "2406445",
+    "name": "BASKERVILLE YAHADAH",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-12T00:13:13Z",
+    "inmate_number": "2526677",
+    "name": "TAYLOR DON",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
     "note": "booked (date not reported)"
   }
 ]
