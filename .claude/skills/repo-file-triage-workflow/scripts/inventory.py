@@ -90,8 +90,8 @@ def git_ls_files(root: Path) -> list[str]:
         )
         parts = [p.decode("utf-8", errors="surrogateescape") for p in out.split(b"\0") if p]
         return sorted(parts)
-    except Exception:
-        return []
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise RuntimeError(f"git ls-files failed for {root}") from exc
 
 
 def physical_walk(root: Path) -> list[str]:
