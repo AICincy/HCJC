@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "triage-ledger.csv row",
+  "type": "object",
+  "required": ["path", "bytes", "category", "reason_code", "evidence", "action", "notes"],
+  "properties": {
+    "path": { "type": "string", "description": "Repo-relative posix path." },
+    "bytes": { "type": "string", "pattern": "^[0-9]+$", "description": "File size in bytes as decimal string." },
+    "category": { "enum": ["keep", "stale", "irrelevant", "of-concern", "inoperable"], "description": "Five-way rubric label." },
+    "reason_code": {
+      "enum": [
+        "KEEP-SWEEP", "KEEP-BUILD", "KEEP-MANIFEST", "KEEP-WORKFLOW", "KEEP-VERIFY", "KEEP-TEST", "KEEP-BACKEND", "KEEP-SKILL",
+        "STALE-DOC", "STALE-DUPLICATE", "STALE-PACKET", "STALE-AUDIT-DUP",
+        "IRR-HAMCO", "IRR-EVIDENCE", "IRR-ARCHIVE", "IRR-SCRATCH", "IRR-DERIVABLE",
+        "CONCERN-DB-BOUNDARY", "CONCERN-SECRET", "CONCERN-PRIVACY", "CONCERN-MANIFEST-LEAK", "CONCERN-SHA256",
+        "INOP-LINT", "INOP-TYPE", "INOP-IMPORT", "INOP-TEST", "INOP-WORKFLOW"
+      ]
+    },
+    "evidence": { "type": "string", "description": "Source file, workflow, manifest entry, or grep that justifies the category." },
+    "action": { "enum": ["keep", "rewrite-or-delete (requires approval)", "delete (requires approval)", "manual review (do not auto-delete)", "fix or delete (requires approval)", "review"], "description": "Authorized next action. Destructive actions always require explicit user approval." },
+    "notes": { "type": "string", "description": "Freeform context, e.g., git-ignored residue or chain verification note." }
+  }
+}
