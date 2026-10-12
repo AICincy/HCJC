@@ -21,7 +21,6 @@ import hashlib
 import json
 import re
 import subprocess
-import sys
 from pathlib import Path
 
 MANIFEST_REL = Path("config/public-data-manifest.json")
@@ -177,7 +176,7 @@ def heuristic_category(
             if posix.startswith("tests/"):
                 return ("keep", "KEEP-TEST", "pytest + tests/conftest.py evidence isolation")
             if posix.startswith("backend/"):
-                return ("keep", "KEEP-BACKEND", "backend/ is the only Supabase consumer")
+                return ("keep", "KEEP-BACKEND", "backend/ is the only database-service consumer")
             if posix.startswith(".claude/"):
                 return ("keep", "KEEP-SKILL", ".claude/skills + .claude/agents active skill infrastructure")
             if posix.startswith("config/"):
@@ -200,7 +199,6 @@ def heuristic_category(
             "data/court_judges.json",      # scraper/ingest_court_content.py -> web/pages.py Firecrawl corpus
             "data/court_bond_schedule.json",  # scraper/ingest_court_content.py
             "data/orc_offenses.json",      # manifest-published, also classify reference
-            "data/orc_caselaw.json",
             "data/surnames.txt",           # scraper sweep seed
             "data/takedowns.json",         # web/build.py redaction list if present
         }
