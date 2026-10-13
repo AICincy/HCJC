@@ -45331,39 +45331,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-06T07:09:53Z",
-    "inmate_number": "14818846",
-    "name": "BATES JETT",
+    "date": "2026-10-06",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-06T07:09:53Z",
-    "inmate_number": "2817004",
-    "name": "FERGUSON DESHAWN",
+    "date": "2026-10-06",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 10/6/26"
+    "category": "Violating protection order"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-06T07:09:53Z",
-    "inmate_number": "1776031",
-    "name": "GASKINS RICHARD",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-10-06T07:09:53Z",
-    "inmate_number": "1695438",
-    "name": "WATKINS FREDRICK",
+    "date": "2026-10-06",
     "tier": "F5",
-    "category": "Trafficking in drugs",
-    "note": "no longer on HCSO public roster"
+    "category": "Trafficking in drugs"
   },
   {
     "event": "booked",
@@ -53995,5 +53977,23 @@
     "tier": "M1",
     "category": "Operating a vehicle under the influence (OVI / DUI)",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T07:13:17Z",
+    "inmate_number": "14826732",
+    "name": "DE LA CRUZ ISNEL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T07:13:17Z",
+    "inmate_number": "14826733",
+    "name": "PIZAT-CARMONA DEIVI",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked (date not reported)"
   }
 ]
