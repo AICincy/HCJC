@@ -39007,6 +39007,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-09-21",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)"
+  },
+  {
+    "event": "updated",
     "date": "2026-09-22",
     "tier": "M1",
     "category": "Receiving stolen property"
@@ -40186,6 +40192,12 @@
     "date": "2026-09-23",
     "tier": "M1",
     "category": "Failure to reinstate a license"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-23",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)"
   },
   {
     "event": "booked",
@@ -45277,39 +45289,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-06T05:09:37Z",
-    "inmate_number": "1143102",
-    "name": "REED LOVELL",
+    "date": "2026-10-06",
     "tier": "F3",
-    "category": "Tampering with evidence",
-    "note": "booked 10/6/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-06T05:09:37Z",
-    "inmate_number": "14650194",
-    "name": "SALCEDO BRIAN",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked 10/6/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-06T05:09:37Z",
-    "inmate_number": "14686814",
-    "name": "BORDEN RHONDA",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 10/6/26"
+    "category": "Tampering with evidence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-06T05:09:37Z",
-    "inmate_number": "1960293",
-    "name": "WILSON-EASTERLING BRETT",
+    "date": "2026-10-06",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": ""
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "updated",
@@ -53932,5 +53920,59 @@
     "tier": "M1",
     "category": "Theft",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T05:10:35Z",
+    "inmate_number": "14252954",
+    "name": "NIETO SUSAN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T05:10:35Z",
+    "inmate_number": "14594550",
+    "name": "CARUSO LOGAN",
+    "tier": null,
+    "category": null,
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T05:10:35Z",
+    "inmate_number": "14650378",
+    "name": "CONNOR RAKEEM",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-13T05:10:35Z",
+    "inmate_number": "14826627",
+    "name": "POLLARD RONNIE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-13T05:10:35Z",
+    "inmate_number": "14826724",
+    "name": "CARTER FREDDIE",
+    "tier": "F3",
+    "category": "Complicity",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T05:10:35Z",
+    "inmate_number": "2498018",
+    "name": "ELLIOTT JAMES",
+    "tier": null,
+    "category": null,
+    "note": "booked 10/13/26"
   }
 ]
