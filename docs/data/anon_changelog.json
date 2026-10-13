@@ -45360,15 +45360,6 @@
     "category": "Aggravated menacing"
   },
   {
-    "event": "updated",
-    "timestamp_utc": "2026-10-06T11:10:00Z",
-    "inmate_number": "1381229",
-    "name": "DUNCAN WALLACE",
-    "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
-  },
-  {
     "event": "released",
     "timestamp_utc": "2026-10-06T12:10:39Z",
     "inmate_number": "14060413",
@@ -54034,5 +54025,23 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T11:11:17Z",
+    "inmate_number": "14473106",
+    "name": "SHUPE KESHA",
+    "tier": null,
+    "category": null,
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-13T11:11:17Z",
+    "inmate_number": "2084556",
+    "name": "DANIELS DONALD",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
   }
 ]
