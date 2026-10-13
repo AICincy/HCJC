@@ -38239,6 +38239,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-09-17",
+    "tier": "MM",
+    "category": "Speed limits"
+  },
+  {
+    "event": "booked",
     "date": "2026-09-18",
     "tier": "MM",
     "category": "Occupant restraining devices (seat belts)"
@@ -38488,6 +38494,12 @@
     "date": "2026-09-18",
     "tier": "F5",
     "category": "Possession of drugs"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-18",
+    "tier": "MM",
+    "category": "Speed limits"
   },
   {
     "event": "updated",
@@ -45301,57 +45313,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-06T06:10:05Z",
-    "inmate_number": "1143102",
-    "name": "REED LOVELL",
+    "date": "2026-10-06",
     "tier": "F3",
-    "category": "Tampering with evidence",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-06T06:10:05Z",
-    "inmate_number": "14282866",
-    "name": "BROWN DAVENO",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 10/6/26"
+    "category": "Tampering with evidence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-06T06:10:05Z",
-    "inmate_number": "14650194",
-    "name": "SALCEDO BRIAN",
+    "date": "2026-10-06",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-06T06:10:05Z",
-    "inmate_number": "14686814",
-    "name": "BORDEN RHONDA",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-06T06:10:05Z",
-    "inmate_number": "14818846",
-    "name": "BATES JETT",
-    "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": "booked 10/6/26"
+    "category": "Assault"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-06T06:10:05Z",
-    "inmate_number": "14276316",
-    "name": "LEWIS-STEELE KENNETH",
+    "date": "2026-10-06",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "no longer on HCSO public roster"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
@@ -53974,5 +53950,50 @@
     "tier": null,
     "category": null,
     "note": "booked 10/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T06:10:11Z",
+    "inmate_number": "14086328",
+    "name": "BROWN ANTONIO",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: parks and recreation",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T06:10:11Z",
+    "inmate_number": "14446676",
+    "name": "WATTS JOHN",
+    "tier": "MM",
+    "category": "Speed limits",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-13T06:10:11Z",
+    "inmate_number": "14826627",
+    "name": "POLLARD RONNIE",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-13T06:10:11Z",
+    "inmate_number": "1581613",
+    "name": "SHIPMAN JOSEPH",
+    "tier": null,
+    "category": null,
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-13T06:10:11Z",
+    "inmate_number": "14614887",
+    "name": "TRIMPE KYLE",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "no longer on HCSO public roster"
   }
 ]
