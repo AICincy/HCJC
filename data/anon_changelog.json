@@ -45853,21 +45853,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-07T07:09:58Z",
-    "inmate_number": "14311651",
-    "name": "WILLIAMS MYA",
+    "date": "2026-10-07",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-07T07:09:58Z",
-    "inmate_number": "14795374",
-    "name": "SAICK TAMARA",
+    "date": "2026-10-07",
     "tier": "M4",
-    "category": "Operation in willful or wanton disregard of safety",
-    "note": "booked 10/7/26"
+    "category": "Operation in willful or wanton disregard of safety"
   },
   {
     "event": "booked",
@@ -54733,5 +54727,32 @@
     "tier": "M1",
     "category": "Driving without a valid license",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-14T08:10:56Z",
+    "inmate_number": "14602838",
+    "name": "FRANKLIN QUANAE",
+    "tier": "M4",
+    "category": "Cincinnati Municipal Code: parks and recreation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-14T08:10:56Z",
+    "inmate_number": "14826895",
+    "name": "LARKIN GABRIEL",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-14T08:10:56Z",
+    "inmate_number": "2018505",
+    "name": "DIRR ANDREA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "no longer on HCSO public roster"
   }
 ]
