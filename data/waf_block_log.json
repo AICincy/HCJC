@@ -1123029,5 +1123029,43 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "c7b3c7a21b1d6e238815e8dee942cd2d29d0e87aab33efba57ec77ef1b2bdfb6"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-10-14T00:40:24Z",
+    "inmate_id": "1673778",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "4a6b890e9cbd8fd3b1e6d3d87847108e1c53afc71c21612e14a374b0dd65975b"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-10-14T00:41:07Z",
+    "inmate_id": "2253471",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "1c977ab3a891bd71569fbf130ef5907c68133bedbb4d879e2417f0c83e78c9ed"
+  },
+  {
+    "timestamp_utc": "2026-10-14T00:41:31Z",
+    "event": "detail_page_waf_block",
+    "inmate_id": "2314750",
+    "url": "/justice-center-services/inmate-search/inmate-detail/?id=2314750",
+    "http_status": null,
+    "failure_mode": "timeout",
+    "response_signature": null,
+    "response_length": 0,
+    "prev_sha256": "e32592def9efa2d127af668207d97c65f15c81bdb58f0d27c94c9e212028b363"
+  },
+  {
+    "timestamp_utc": "2026-10-14T00:41:34Z",
+    "event": "detail_page_waf_block",
+    "inmate_id": "2447252",
+    "url": "/justice-center-services/inmate-search/inmate-detail/?id=2447252",
+    "http_status": null,
+    "failure_mode": "timeout",
+    "response_signature": null,
+    "response_length": 0,
+    "prev_sha256": "b219bfb1e54926c01e8f587468c11e47fcffebb9270cbece5e328939f2004a00"
   }
 ]
