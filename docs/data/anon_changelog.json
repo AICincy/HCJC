@@ -45775,30 +45775,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-07T03:07:45Z",
-    "inmate_number": "14107020",
-    "name": "TURNER MARVIN",
+    "date": "2026-10-07",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-07T03:07:45Z",
-    "inmate_number": "14826232",
-    "name": "ROBERTS NATASHA",
+    "date": "2026-10-07",
     "tier": "F5",
-    "category": "Harassment with a bodily substance",
-    "note": "booked 10/6/26"
+    "category": "Harassment with a bodily substance"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-07T03:07:45Z",
-    "inmate_number": "14122478",
-    "name": "JORDAN LATONIA",
+    "date": "2026-10-07",
     "tier": "M1",
-    "category": "Assault",
-    "note": "no longer on HCSO public roster"
+    "category": "Assault"
   },
   {
     "event": "updated",
@@ -54618,6 +54609,33 @@
     "name": "ADAMS DORAL",
     "tier": "M4",
     "category": "Menacing",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-14T03:09:47Z",
+    "inmate_number": "14631720",
+    "name": "HARRIS-ROSS TAKYLIA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-14T03:09:47Z",
+    "inmate_number": "14704073",
+    "name": "KELLEY SAMARA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-14T03:09:47Z",
+    "inmate_number": "2333861",
+    "name": "STEADMAN ANGELA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
     "note": "booked 10/13/26"
   }
 ]
