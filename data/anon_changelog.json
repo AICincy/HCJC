@@ -33937,6 +33937,18 @@
   },
   {
     "event": "booked",
+    "date": "2026-09-04",
+    "tier": "F2",
+    "category": "Burglary"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-04",
+    "tier": "F2",
+    "category": "Burglary"
+  },
+  {
+    "event": "booked",
     "date": "2026-09-05",
     "tier": "M1",
     "category": "Theft"
@@ -34642,6 +34654,12 @@
     "date": "2026-09-07",
     "tier": "M4",
     "category": "Menacing"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-07",
+    "tier": "F2",
+    "category": "Burglary"
   },
   {
     "event": "booked",
@@ -45708,22 +45726,10 @@
     "category": null
   },
   {
-    "event": "updated",
-    "timestamp_utc": "2026-10-07T01:06:32Z",
-    "inmate_number": "14322024",
-    "name": "SAFFRON JOSHUA",
-    "tier": "F3",
-    "category": "Having weapons while under disability",
-    "note": ""
-  },
-  {
     "event": "booked",
-    "timestamp_utc": "2026-10-07T01:06:32Z",
-    "inmate_number": "2100844",
-    "name": "JARRET JENNIFER",
+    "date": "2026-10-07",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 10/6/26"
+    "category": "Felonious assault"
   },
   {
     "event": "updated",
@@ -54562,5 +54568,32 @@
     "tier": "M1",
     "category": "Violating protection order",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-14T01:09:22Z",
+    "inmate_number": "14542586",
+    "name": "PATE BROOKLYN",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-14T01:09:22Z",
+    "inmate_number": "14704073",
+    "name": "KELLEY SAMARA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-14T01:09:22Z",
+    "inmate_number": "2130259",
+    "name": "KEENEY BLAKE",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": "booked (date not reported)"
   }
 ]

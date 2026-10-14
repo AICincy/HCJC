@@ -1123067,5 +1123067,29 @@
     "response_signature": null,
     "response_length": 0,
     "prev_sha256": "b219bfb1e54926c01e8f587468c11e47fcffebb9270cbece5e328939f2004a00"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-10-14T01:08:15Z",
+    "inmate_id": "14542586",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "060be733ad0d6ca670eb6d9696cebd3585008678735bd88e48cd5ca3772d6653"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-10-14T01:08:22Z",
+    "inmate_id": "14704073",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "43561e2063db72775fd6ed15a51a9a75970eb10ccbaaa1f463647f2d89dab447"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-10-14T01:08:39Z",
+    "inmate_id": "2130259",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "2d9a3ef2190dfd7256fd92fedd2b6fb9ce0e5c58e61ab0cb5cb2cfea4a2ab09f"
   }
 ]
