@@ -45793,93 +45793,51 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-07T04:10:19Z",
-    "inmate_number": "14132394",
-    "name": "LOWE TIASHA",
+    "date": "2026-10-07",
     "tier": "M1",
-    "category": "Endangering children",
-    "note": ""
+    "category": "Endangering children"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-07T04:10:19Z",
-    "inmate_number": "14826232",
-    "name": "ROBERTS NATASHA",
+    "date": "2026-10-07",
     "tier": "F5",
-    "category": "Harassment with a bodily substance",
-    "note": ""
+    "category": "Harassment with a bodily substance"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-07T04:10:19Z",
-    "inmate_number": "2043596",
-    "name": "EBNER LUKE",
+    "date": "2026-10-07",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-07T04:10:19Z",
-    "inmate_number": "2707499",
-    "name": "BEAM AARON",
+    "date": "2026-10-07",
     "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
+    "category": "Illegal use or possession of drug paraphernalia"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-07T05:09:57Z",
-    "inmate_number": "1308503",
-    "name": "NEELEY RICHARD",
+    "date": "2026-10-07",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 10/7/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-07T05:09:57Z",
-    "inmate_number": "1614365",
-    "name": "LACKEY SHARIE",
+    "date": "2026-10-07",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 10/7/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-07T05:09:57Z",
-    "inmate_number": "2569585",
-    "name": "TIDWELL KEVIN",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-07T05:09:57Z",
-    "inmate_number": "1229003",
-    "name": "DAVIS LESTER",
+    "date": "2026-10-07",
     "tier": "M1",
-    "category": "Driving under suspension",
-    "note": "no longer on HCSO public roster"
+    "category": "Driving under suspension"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-07T05:09:57Z",
-    "inmate_number": "1143102",
-    "name": "REED LOVELL",
+    "date": "2026-10-07",
     "tier": "F3",
-    "category": "Tampering with evidence",
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-10-07T05:09:57Z",
-    "inmate_number": "14650194",
-    "name": "SALCEDO BRIAN",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "no longer on HCSO public roster"
+    "category": "Tampering with evidence"
   },
   {
     "event": "updated",
@@ -54646,5 +54604,77 @@
     "tier": null,
     "category": null,
     "note": "booked 10/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-14T05:16:45Z",
+    "inmate_number": "14631720",
+    "name": "HARRIS-ROSS TAKYLIA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-14T05:16:45Z",
+    "inmate_number": "2088982",
+    "name": "ALEXANDER JULIUS",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-14T05:16:45Z",
+    "inmate_number": "2426234",
+    "name": "JOHNSON MARK",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 10/13/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-14T05:16:45Z",
+    "inmate_number": "2420592",
+    "name": "ELLIOTT CHRISTOPHER",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-14T05:16:45Z",
+    "inmate_number": "1677603",
+    "name": "LITTLE KEITH",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-14T05:16:45Z",
+    "inmate_number": "2678690",
+    "name": "MILLER JONATHAN",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-14T05:16:45Z",
+    "inmate_number": "14561712",
+    "name": "TILLER GABERIEL",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-14T05:16:45Z",
+    "inmate_number": "2191067",
+    "name": "TREMBLE ERICA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "no longer on HCSO public roster"
   }
 ]
