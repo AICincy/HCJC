@@ -1,7 +1,7 @@
 # Clerk PRA packet - 2026-10-14
 
-1198 draft public-records request letters, one per inmate on the JCStream
-roster snapshot of 2026-10-14 (generated 2026-10-14T14:21:16Z).
+1190 draft public-records request letters, one per inmate on the JCStream
+roster snapshot of 2026-10-14 (generated 2026-10-14T18:40:14Z).
 
 ## How to use
 
@@ -11,7 +11,7 @@ roster snapshot of 2026-10-14 (generated 2026-10-14T14:21:16Z).
 
 ## Batching guidance
 
-Do **not** send all 1198 letters at once. A mass mailing of this size
+Do **not** send all 1190 letters at once. A mass mailing of this size
 would burden the Clerk's office and undermine the request. Suggested
 practice:
 
