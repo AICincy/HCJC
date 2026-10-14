@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 import pytest
-from selectolax.parser import HTMLParser
+from selectolax.lexbor import LexborHTMLParser as HTMLParser
 
 from scraper.models import Charge, Inmate, Snapshot
 from web.build import _build_env
