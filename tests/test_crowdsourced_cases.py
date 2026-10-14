@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 import pytest
-from selectolax.parser import HTMLParser
+from selectolax.lexbor import LexborHTMLParser as HTMLParser
 
 from scraper.ingest_dispatch import sections_from_inputs
 from scraper.ingest_issue import build_case_record

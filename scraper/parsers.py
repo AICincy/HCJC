@@ -8,7 +8,8 @@ import re
 import threading as _threading
 from datetime import datetime, timezone
 
-from selectolax.parser import HTMLParser, Node
+from selectolax.lexbor import LexborHTMLParser as HTMLParser
+from selectolax.lexbor import LexborNode as Node
 
 from .models import Charge, Inmate, ListRow
 
