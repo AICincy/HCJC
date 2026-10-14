@@ -129,6 +129,12 @@ def test_pages_follows_sweep_without_generated_push_noise():
     assert "verify_live_url_parity.py" in text
 
 
+def test_pages_cancels_older_in_progress_runs():
+    text = _active_text(WORKFLOW_DIR / "pages.yml")
+    assert "group: pages-production" in text
+    assert "cancel-in-progress: true" in text
+
+
 def test_sweep_runs_twice_hourly_and_publishes_docs_with_deterministic_build():
     text = _active_text(WORKFLOW_DIR / "sweep.yml")
     assert "cron: '7,37 * * * *'" in text
