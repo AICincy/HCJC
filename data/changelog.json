@@ -1,19 +1,5 @@
 [
   {
-    "event": "updated",
-    "inmate_number": "2431325",
-    "name": "PARKER DAVID",
-    "timestamp_utc": "2026-08-18T05:23:36Z",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14582249",
-    "name": "HUNTER TRINITY",
-    "timestamp_utc": "2026-08-18T05:54:03Z",
-    "note": "booked (date not reported)"
-  },
-  {
     "event": "booked",
     "inmate_number": "14657220",
     "name": "BRICE KEVONTAY",
@@ -69998,5 +69984,19 @@
     "name": "BEHANAN RODNEY",
     "timestamp_utc": "2026-10-14T09:10:05Z",
     "note": "booked 10/14/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2725340",
+    "name": "BEHANAN RODNEY",
+    "timestamp_utc": "2026-10-14T10:09:59Z",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "inmate_number": "2135950",
+    "name": "ADAMS DORAL",
+    "timestamp_utc": "2026-10-14T10:09:59Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
