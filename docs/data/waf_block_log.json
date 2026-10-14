@@ -1123147,5 +1123147,24 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "a7327da884ee21f4f1cd8a4a9d39ec76bb5118eb3123259fc095f57758427312"
+  },
+  {
+    "timestamp_utc": "2026-10-14T04:08:10Z",
+    "event": "detail_page_waf_block",
+    "inmate_id": "14244981",
+    "url": "/justice-center-services/inmate-search/inmate-detail/?id=14244981",
+    "http_status": 404,
+    "failure_mode": "http_404",
+    "response_signature": null,
+    "response_length": 0,
+    "prev_sha256": "35b5f9b5232e707f64e0d5782757f9c8ffdcd255ee688d812ba2931ce7528447"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-10-14T04:08:31Z",
+    "inmate_id": "14826892",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "c1fd91327d0a70a350e604a8e304091c132bb096db73be11e8aa2fc4638ebb1f"
   }
 ]
