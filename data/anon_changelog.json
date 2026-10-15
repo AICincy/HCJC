@@ -46405,102 +46405,57 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-08T08:09:11Z",
-    "inmate_number": "14681198",
-    "name": "GARY JAZMIERE",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Carrying concealed weapons",
-    "note": ""
+    "category": "Carrying concealed weapons"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-08T08:09:11Z",
-    "inmate_number": "14708157",
-    "name": "WILLIAMS AYDEN",
+    "date": "2026-10-08",
     "tier": "MM",
-    "category": "Right-of-way of pedestrian within crosswalk",
-    "note": ""
+    "category": "Right-of-way of pedestrian within crosswalk"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-08T08:09:11Z",
-    "inmate_number": "2138847",
-    "name": "AKERS MICHAEL",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 10/8/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-08T08:09:11Z",
-    "inmate_number": "2175760",
-    "name": "LUNDY AARON",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked 10/8/26"
+    "category": "Driving without a valid license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-08T08:09:11Z",
-    "inmate_number": "2696690",
-    "name": "STOREY MICAH",
+    "date": "2026-10-08",
     "tier": "F1",
-    "category": "Aggravated robbery",
-    "note": "booked 10/8/26"
+    "category": "Aggravated robbery"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-08T08:09:11Z",
-    "inmate_number": "14101343",
-    "name": "DEVINE STEVON",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Falsification",
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-08T09:10:50Z",
-    "inmate_number": "1370407",
-    "name": "HENRY PATRICK",
-    "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 10/8/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-08T09:10:50Z",
-    "inmate_number": "14826334",
-    "name": "GRIFFIN KENIYAH",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 10/8/26"
+    "category": "Falsification"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-08T09:10:50Z",
-    "inmate_number": "2138847",
-    "name": "AKERS MICHAEL",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Domestic violence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-08T09:10:50Z",
-    "inmate_number": "2175760",
-    "name": "LUNDY AARON",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": ""
+    "category": "Driving without a valid license"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-08T09:10:50Z",
-    "inmate_number": "14578075",
-    "name": "HERNANDEZ GENESIS",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Stopping after accident on unoccupied property",
-    "note": "no longer on HCSO public roster"
+    "category": "Stopping after accident on unoccupied property"
   },
   {
     "event": "updated",
@@ -55618,5 +55573,32 @@
     "tier": "MM",
     "category": "Illegal use or possession of drug paraphernalia",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-15T09:16:29Z",
+    "inmate_number": "14214421",
+    "name": "WILLIAMSON TERREZ",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 10/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-15T09:16:29Z",
+    "inmate_number": "14438062",
+    "name": "MITCHELL JAQUAN",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 10/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-15T09:16:29Z",
+    "inmate_number": "1637453",
+    "name": "SINCLAIR ELRICO",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 10/15/26"
   }
 ]
