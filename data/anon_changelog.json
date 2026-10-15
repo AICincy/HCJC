@@ -31939,6 +31939,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-08-29",
+    "tier": "M1",
+    "category": "Operating a motor vehicle without lawful registration"
+  },
+  {
+    "event": "booked",
     "date": "2026-08-30",
     "tier": "F5",
     "category": "Possession of drugs"
@@ -37216,6 +37222,12 @@
     "date": "2026-09-14",
     "tier": "F4",
     "category": "Attempt to commit an offense"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-14",
+    "tier": "M1",
+    "category": "Operating a motor vehicle without lawful registration"
   },
   {
     "event": "updated",
@@ -46267,84 +46279,57 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-08T04:11:10Z",
-    "inmate_number": "1313320",
-    "name": "BENNIE DEVAIL",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked (date not reported)"
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-08T04:11:10Z",
-    "inmate_number": "1456130",
-    "name": "BROWN EUGENE",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-08T04:11:10Z",
-    "inmate_number": "1469667",
-    "name": "TAPKE JAMES",
+    "date": "2026-10-08",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 10/7/26"
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-08T05:07:20Z",
-    "inmate_number": "1313320",
-    "name": "BENNIE DEVAIL",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-08T05:07:20Z",
-    "inmate_number": "1370407",
-    "name": "HENRY PATRICK",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-08T05:07:20Z",
-    "inmate_number": "14558727",
-    "name": "TANNER CALEB",
-    "tier": null,
-    "category": null,
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-10-08T05:07:20Z",
-    "inmate_number": "1469667",
-    "name": "TAPKE JAMES",
+    "date": "2026-10-08",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
+    "category": "Resisting arrest"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-08T05:07:20Z",
-    "inmate_number": "14578075",
-    "name": "HERNANDEZ GENESIS",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Stopping after accident on unoccupied property",
-    "note": "booked 10/8/26"
+    "category": "Stopping after accident on unoccupied property"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-10-08T05:07:20Z",
-    "inmate_number": "2088962",
-    "name": "WEATHERS ANTONIO",
+    "date": "2026-10-08",
     "tier": "F2",
-    "category": "Felonious assault",
-    "note": "booked 10/8/26"
+    "category": "Felonious assault"
+  },
+  {
+    "event": "booked",
+    "date": "2026-10-08",
+    "tier": "M1",
+    "category": "Violating protection order"
+  },
+  {
+    "event": "booked",
+    "date": "2026-10-08",
+    "tier": "M1",
+    "category": "Receiving stolen property"
+  },
+  {
+    "event": "updated",
+    "date": "2026-10-08",
+    "tier": "M1",
+    "category": "Violating protection order"
   },
   {
     "event": "updated",
@@ -55462,5 +55447,50 @@
     "tier": "M1",
     "category": "Possessing criminal tools",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-15T05:10:46Z",
+    "inmate_number": "14438109",
+    "name": "JACKSON DARNELL",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 10/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-15T05:10:46Z",
+    "inmate_number": "14806562",
+    "name": "ROBERTS JONATHAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 10/15/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-15T05:10:46Z",
+    "inmate_number": "2558886",
+    "name": "COLWELL TIFFANY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-10-15T05:10:46Z",
+    "inmate_number": "2546743",
+    "name": "PHELPS FATIMA",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 10/15/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-15T05:10:46Z",
+    "inmate_number": "2574774",
+    "name": "STONE AUSTIN",
+    "tier": "M1",
+    "category": "Operating a motor vehicle without lawful registration",
+    "note": ""
   }
 ]
