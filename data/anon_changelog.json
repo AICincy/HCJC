@@ -46465,48 +46465,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-10-08T11:11:13Z",
-    "inmate_number": "14101343",
-    "name": "DEVINE STEVON",
+    "date": "2026-10-08",
     "tier": "M1",
-    "category": "Falsification",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-10-08T12:10:17Z",
-    "inmate_number": "2523404",
-    "name": "COOK CANDY",
-    "tier": null,
-    "category": null,
-    "note": "booked 10/8/26"
+    "category": "Falsification"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-08T12:10:17Z",
-    "inmate_number": "14372074",
-    "name": "COLEMAN TAMIKA",
+    "date": "2026-10-08",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "no longer on HCSO public roster"
+    "category": "Possession of drugs"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-10-08T12:10:17Z",
-    "inmate_number": "14817407",
-    "name": "KIRBY ANTHONY",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-10-08T12:10:17Z",
-    "inmate_number": "14388600",
-    "name": "TAYLOR DAYVON",
+    "date": "2026-10-08",
     "tier": "M4",
-    "category": "Cincinnati Municipal Code: dangerous dogs",
-    "note": "no longer on HCSO public roster"
+    "category": "Cincinnati Municipal Code: dangerous dogs"
   },
   {
     "event": "booked",
@@ -55615,5 +55588,77 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-15T12:17:58Z",
+    "inmate_number": "2314750",
+    "name": "COOPER HEWITT",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-10-15T12:17:58Z",
+    "inmate_number": "2527860",
+    "name": "BOUSSO OUMAR",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-15T12:17:58Z",
+    "inmate_number": "1936341",
+    "name": "BAILEY CECIL",
+    "tier": "F3",
+    "category": "Illegal conveyance of items into a detention facility",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-15T12:17:58Z",
+    "inmate_number": "14686967",
+    "name": "DANGERFIELD TERRELL",
+    "tier": "M1",
+    "category": "Carrying concealed weapons",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-15T12:17:58Z",
+    "inmate_number": "14479708",
+    "name": "JOHNSON JASMINE",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-15T12:17:58Z",
+    "inmate_number": "2452481",
+    "name": "MASON RANDY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-15T12:17:58Z",
+    "inmate_number": "1472558",
+    "name": "RICE GREGORY",
+    "tier": "MM",
+    "category": "Juvenile hold (no ORC code on file)",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-10-15T12:17:58Z",
+    "inmate_number": "2572120",
+    "name": "WHITE JUWAN",
+    "tier": "MM",
+    "category": "Juvenile hold (no ORC code on file)",
+    "note": "no longer on HCSO public roster"
   }
 ]
