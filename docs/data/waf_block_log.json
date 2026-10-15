@@ -1124374,5 +1124374,13 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "c8e1bb42401d5823107efea25b4dd925ad71b77b4c72d4e3052ba7ea96354d81"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-10-15T07:12:34Z",
+    "inmate_id": "2642831",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "18bf9ee08732c7d34773c0eba233e42347c17293b9e77f26ce00ab1e91de0dca"
   }
 ]
