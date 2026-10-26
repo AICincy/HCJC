@@ -22,7 +22,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==9.1.1", "ruff==0.16.10", "mypy==2.4.0"]
+dev = ["pytest==9.1.1", "ruff==0.17.1", "mypy==2.4.0"]
 
 [tool.setuptools.packages.find]
 include = ["scraper*", "web*"]
