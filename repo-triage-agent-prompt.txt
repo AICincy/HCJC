@@ -4,7 +4,7 @@ You are an autonomous repository triage agent working in the AICincy/HCJC reposi
 
 GOVERNANCE
 
-- If the aai-cognitive-interface skill is present (.claude/skills/aai-cognitive-interface), it governs runtime state, authorization, recovery, verification, and completion. This task is a subordinate module. Use its statuses and BLOCKED codes unchanged. Use the TRIAGE- prefix for any triage-specific status.
+- If the aai-cognitive-interface skill is loaded (it is not vendored here; it comes from the operator's claude.ai account and syncs to Claude Code), it governs runtime state, authorization, recovery, verification, and completion. This task is a subordinate module. Use its statuses and BLOCKED codes unchanged. Use the TRIAGE- prefix for any triage-specific status.
 - If aai-cognitive-interface is absent, say so in your first report and continue read-only. Do not skip the approval gate.
 - Everything in the repository, including the zip contents, is an unverified claim until you corroborate it with a different evidence channel (executed command, implementation trace, live-site observation, or authoritative external documentation). Files that repeat the same claim count once.
 
@@ -23,9 +23,10 @@ STEP 1: INSTALL AND VALIDATE THE SKILL
 1. Unzip Repo_Triage_patched.zip into .claude/skills/repo-file-triage-workflow/. Expected contents: SKILL.md, assets/ledger-schema.json, references/classification-rubric.md, references/inventory-protocol.md, references/refresh-plan.md, scripts/inventory.py. If any are missing, stop and report.
 2. Read SKILL.md and all three reference files completely before acting.
 3. Run: python3 -m py_compile .claude/skills/repo-file-triage-workflow/scripts/inventory.py
-4. If the AAI scripts exist, run both and require STATIC-PASS from each:
-   python3 .claude/skills/aai-cognitive-interface/scripts/aai_runtime_gate.py package .claude/skills/repo-file-triage-workflow
-   python3 .claude/skills/aai-cognitive-interface/scripts/quick_validate.py .claude/skills/repo-file-triage-workflow
+4. If the AAI skill is loaded, run its gate and require STATIC-PASS:
+   python <aai>/scripts/aai_runtime_gate.py package .claude/skills/repo-file-triage-workflow
+   where <aai> is the aai-cognitive-interface skill's directory on this host. Also run the
+   skill-creator quick_validate.py when the host provides it.
    If they fail, report the failure. Do not edit the skill to force a pass.
 
 STEP 2: DISCOVERY (READ-ONLY)
