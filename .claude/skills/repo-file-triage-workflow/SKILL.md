@@ -111,8 +111,14 @@ Only after user approves the ledger:
 After modifying this skill, run:
 
 ```text
-python3 .claude/skills/aai-cognitive-interface/scripts/aai_runtime_gate.py package .claude/skills/repo-file-triage-workflow
-python3 .claude/skills/aai-cognitive-interface/scripts/quick_validate.py .claude/skills/repo-file-triage-workflow
+python <aai>/scripts/aai_runtime_gate.py package .claude/skills/repo-file-triage-workflow
 ```
+
+`<aai>` is the `aai-cognitive-interface` skill wherever the host loads it. AAI
+is not vendored in this repository. It comes from the operator's claude.ai
+account (in Claude Code, synced under `~/.claude/skills/synced/`). Use the
+host's Python 3 interpreter. Also run the skill-creator `quick_validate.py`
+when the host provides it. If AAI is not loaded, report that and do not claim
+STATIC-PASS.
 
 Both must report STATIC-PASS. Runtime verification requires a ledger + plan + passing gates on a real inventory run.

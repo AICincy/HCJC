@@ -27,6 +27,11 @@ paired with a same-named subagent in `../agents/`.
 Not part of the table above: these come from outside the repo, carry no paired
 subagent, and are not part of the handoff topology.
 
+The AAI family (`aai-cognitive-interface` and its subordinate skills) is not
+vendored here. It loads from the operator's claude.ai account, which syncs it
+to Claude Code. A vendored copy would shadow the synced one in this repo, so
+do not add one back.
+
 | Skill | Owns | Source |
 |---|---|---|
 | [supabase-server](supabase-server/SKILL.md) | `backend/` Node code that imports `@supabase/server` (`withSupabase`, `createSupabaseContext`, auth modes) | `npx skills add supabase/server`, pinned in `skills-lock.json` |
