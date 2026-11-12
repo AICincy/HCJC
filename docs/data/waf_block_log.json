@@ -1125606,5 +1125606,13 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "15f6a4cfecfca7edd394de91dd9c8ce8629274a3b1677882ede9924b5d73ada0"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-12T09:10:12Z",
+    "inmate_id": "14809130",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "9aa9520ffaeba11329d9d8a734425ee08872b3098a7bb42eec25ba42e28ca11b"
   }
 ]
