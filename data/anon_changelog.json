@@ -34470,6 +34470,12 @@
     "category": "Violating protection order"
   },
   {
+    "event": "released",
+    "date": "2026-09-05",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
     "event": "booked",
     "date": "2026-09-06",
     "tier": "MM",
@@ -34948,6 +34954,18 @@
     "date": "2026-09-07",
     "tier": "F5",
     "category": "Trafficking in drugs"
+  },
+  {
+    "event": "booked",
+    "date": "2026-09-07",
+    "tier": "M1",
+    "category": "Receiving stolen property"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-07",
+    "tier": "M1",
+    "category": "Receiving stolen property"
   },
   {
     "event": "booked",
@@ -36574,6 +36592,12 @@
     "date": "2026-09-11",
     "tier": "M4",
     "category": "Public indecency"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-11",
+    "tier": "M1",
+    "category": "Receiving stolen property"
   },
   {
     "event": "booked",
@@ -45373,6 +45397,18 @@
   },
   {
     "event": "booked",
+    "date": "2026-10-04",
+    "tier": "F2",
+    "category": "Burglary"
+  },
+  {
+    "event": "released",
+    "date": "2026-10-04",
+    "tier": "F2",
+    "category": "Burglary"
+  },
+  {
+    "event": "booked",
     "date": "2026-10-05",
     "tier": null,
     "category": null
@@ -49948,6 +49984,12 @@
     "date": "2026-10-14",
     "tier": "M4",
     "category": "Cincinnati Municipal Code: dangerous weapons and fireworks (discharging firearms)"
+  },
+  {
+    "event": "released",
+    "date": "2026-10-14",
+    "tier": "F2",
+    "category": "Burglary"
   },
   {
     "event": "booked",
@@ -60279,6 +60321,105 @@
     "name": "WHALEN AUSTIN",
     "tier": "M1",
     "category": "Receiving stolen property",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "14191062",
+    "name": "STANFORD ARTAZE",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 11/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "14371284",
+    "name": "JACKSON CHARLES",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "14381277",
+    "name": "MOSS NATEPOLIAN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 11/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "14560028",
+    "name": "MCCALLEY NATHANIEL",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "14629379",
+    "name": "BONDS EMMANUAL",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "1576108",
+    "name": "LANGDON MARCUS",
+    "tier": null,
+    "category": null,
+    "note": "booked 11/12/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "2144102",
+    "name": "DUNN MICHAEL",
+    "tier": "M1",
+    "category": "Carrying concealed weapons",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "2208753",
+    "name": "GOLEY ANDREW",
+    "tier": "F4",
+    "category": "Arson",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "2705427",
+    "name": "TENBRINK VINCENT",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/12/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "1954466",
+    "name": "LAWSON STEVEN",
+    "tier": "M1",
+    "category": "Driving under OVI suspension",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-12T22:10:57Z",
+    "inmate_number": "2219193",
+    "name": "MASON MICHELL",
+    "tier": "M1",
+    "category": "Assault",
     "note": "no longer on HCSO public roster"
   }
 ]
