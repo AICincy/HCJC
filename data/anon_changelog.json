@@ -40590,6 +40590,12 @@
     "category": "Assault"
   },
   {
+    "event": "booked",
+    "date": "2026-09-22",
+    "tier": "F5",
+    "category": "Breaking and entering"
+  },
+  {
     "event": "updated",
     "date": "2026-09-23",
     "tier": "M1",
@@ -40918,6 +40924,12 @@
     "date": "2026-09-23",
     "tier": "M4",
     "category": "Public indecency"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-23",
+    "tier": "F5",
+    "category": "Breaking and entering"
   },
   {
     "event": "booked",
@@ -46030,6 +46042,12 @@
     "date": "2026-10-05",
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer"
+  },
+  {
+    "event": "released",
+    "date": "2026-10-05",
+    "tier": "F5",
+    "category": "Breaking and entering"
   },
   {
     "event": "booked",
@@ -62128,5 +62146,68 @@
     "tier": "M1",
     "category": "Nonsupport of dependents",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-13T22:01:40Z",
+    "inmate_number": "14079312",
+    "name": "BYRD MARTEZ",
+    "tier": "F5",
+    "category": "Breaking and entering",
+    "note": "booked 11/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-13T22:01:40Z",
+    "inmate_number": "14616044",
+    "name": "LEE DEVON",
+    "tier": "M1",
+    "category": "Falsification",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-13T22:01:40Z",
+    "inmate_number": "14690346",
+    "name": "BOLDIN STANKEVIOUS",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-13T22:01:40Z",
+    "inmate_number": "14799337",
+    "name": "WELKER SINCERE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 11/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-13T22:01:40Z",
+    "inmate_number": "1829865",
+    "name": "GRAY RODNEY",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-13T22:01:40Z",
+    "inmate_number": "1845251",
+    "name": "HOLLY ERIC",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-13T22:01:40Z",
+    "inmate_number": "2723692",
+    "name": "SMITH RICHARD",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 11/13/26"
   }
 ]
