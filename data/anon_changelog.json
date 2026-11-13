@@ -34974,6 +34974,12 @@
     "category": "Receiving stolen property"
   },
   {
+    "event": "released",
+    "date": "2026-09-07",
+    "tier": "M2",
+    "category": "Obstructing official business"
+  },
+  {
     "event": "booked",
     "date": "2026-09-08",
     "tier": "MM",
@@ -60706,5 +60712,32 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-13T02:09:43Z",
+    "inmate_number": "233358",
+    "name": "SMITHSON CHRISTINA",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 11/12/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-13T02:09:43Z",
+    "inmate_number": "2520089",
+    "name": "CURRY ANDRE",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 11/12/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-13T02:09:43Z",
+    "inmate_number": "14457186",
+    "name": "GUNNELS RECO",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": "no longer on HCSO public roster"
   }
 ]
