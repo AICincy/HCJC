@@ -32628,6 +32628,12 @@
     "category": "Failure to disclose personal information"
   },
   {
+    "event": "updated",
+    "date": "2026-08-31",
+    "tier": "M1",
+    "category": "Aggravated menacing"
+  },
+  {
     "event": "booked",
     "date": "2026-09-01",
     "tier": "M1",
@@ -34480,6 +34486,12 @@
     "date": "2026-09-05",
     "tier": "M1",
     "category": "Domestic violence"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-05",
+    "tier": "M1",
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
@@ -60846,6 +60858,42 @@
     "name": "JOHNSON DAMON",
     "tier": "MM",
     "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-13T06:12:43Z",
+    "inmate_number": "14676250",
+    "name": "MILLER NOAH",
+    "tier": "F1",
+    "category": "Aggravated arson",
+    "note": "booked 11/13/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-13T06:12:43Z",
+    "inmate_number": "1682773",
+    "name": "CRUSE PHILLIP",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 11/13/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-13T06:12:43Z",
+    "inmate_number": "2665474",
+    "name": "WELLS DIAMOND",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-13T06:12:43Z",
+    "inmate_number": "2736282",
+    "name": "BOYCE AARON",
+    "tier": "M1",
+    "category": "Assault",
     "note": ""
   }
 ]
