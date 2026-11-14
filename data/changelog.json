@@ -1,27 +1,6 @@
 [
   {
     "event": "updated",
-    "inmate_number": "2330532",
-    "name": "FERNAU RICHARD",
-    "timestamp_utc": "2026-08-26T15:52:20Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2335874",
-    "name": "WENDLING NATHANIEL",
-    "timestamp_utc": "2026-08-26T15:52:20Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2309281",
-    "name": "WOODS BRANDON",
-    "timestamp_utc": "2026-08-26T15:52:20Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
     "inmate_number": "2346573",
     "name": "EASTMAN CHASTITY",
     "timestamp_utc": "2026-08-26T15:52:20Z",
@@ -69998,5 +69977,26 @@
     "name": "BROCK BRYAN",
     "timestamp_utc": "2026-11-14T01:13:03Z",
     "note": "booked 11/13/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14612100",
+    "name": "MALONE RICHARD",
+    "timestamp_utc": "2026-11-14T02:10:56Z",
+    "note": "booked 11/13/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14626902",
+    "name": "BOWERS ALASIA",
+    "timestamp_utc": "2026-11-14T02:10:56Z",
+    "note": "booked 11/13/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14688847",
+    "name": "CHIUN-JACABO ALFREDO",
+    "timestamp_utc": "2026-11-14T02:10:56Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
