@@ -1,20 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "2137629",
-    "name": "KAMINSKY RICHARD",
-    "timestamp_utc": "2026-08-26T20:29:26Z",
-    "note": "booked 8/26/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2193600",
-    "name": "JOHNSON HENRY",
-    "timestamp_utc": "2026-08-26T20:29:26Z",
-    "note": "booked 8/26/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "2832072",
     "name": "BASKERVILLE OMAR",
     "timestamp_utc": "2026-08-26T20:29:26Z",
@@ -69998,5 +69984,19 @@
     "name": "STANFORD ARTAZE",
     "timestamp_utc": "2026-11-15T03:11:22Z",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14699876",
+    "name": "DELLER JOSHUA",
+    "timestamp_utc": "2026-11-15T04:10:27Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2096325",
+    "name": "COACH GERRY",
+    "timestamp_utc": "2026-11-15T04:10:27Z",
+    "note": "booked 11/14/26"
   }
 ]
