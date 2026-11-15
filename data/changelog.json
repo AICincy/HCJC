@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "1524193",
-    "name": "DUDLEY WILLIAM",
-    "timestamp_utc": "2026-08-27T07:45:47Z",
-    "note": "booked 8/26/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "1777895",
     "name": "PICKENS SHAMSUD",
     "timestamp_utc": "2026-08-27T07:45:47Z",
@@ -69998,5 +69991,12 @@
     "name": "AUSTIN MICHAEL",
     "timestamp_utc": "2026-11-15T16:11:49Z",
     "note": "booked 11/15/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14369682",
+    "name": "CHANDLER DEAN",
+    "timestamp_utc": "2026-11-15T17:13:32Z",
+    "note": ""
   }
 ]
