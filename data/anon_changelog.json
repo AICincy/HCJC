@@ -35436,6 +35436,12 @@
     "category": "Public indecency"
   },
   {
+    "event": "released",
+    "date": "2026-09-08",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
     "event": "booked",
     "date": "2026-09-09",
     "tier": "M1",
@@ -38424,6 +38430,12 @@
     "category": "Juvenile hold (no ORC code on file)"
   },
   {
+    "event": "released",
+    "date": "2026-09-16",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
     "event": "booked",
     "date": "2026-09-17",
     "tier": "M1",
@@ -38878,6 +38890,12 @@
     "date": "2026-09-17",
     "tier": "MM",
     "category": "Booking hold (no ORC code on file)"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-17",
+    "tier": "F5",
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
@@ -63937,5 +63955,50 @@
     "tier": "MM",
     "category": "Disorderly conduct",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-15T20:11:44Z",
+    "inmate_number": "14310939",
+    "name": "BIRKS COREY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-15T20:11:44Z",
+    "inmate_number": "1879154",
+    "name": "NORRIS JARED",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-15T20:11:44Z",
+    "inmate_number": "14800664",
+    "name": "CARTER TYVON",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 11/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-15T20:11:44Z",
+    "inmate_number": "1956405",
+    "name": "STEINHER-RICH ROBERT",
+    "tier": "M1",
+    "category": "Probation violation",
+    "note": "booked 11/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-15T20:11:44Z",
+    "inmate_number": "2684864",
+    "name": "RADIGAN CODY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 11/15/26"
   }
 ]
