@@ -1,20 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "1745761",
-    "name": "MEYERS NICHOLE",
-    "timestamp_utc": "2026-08-27T18:26:59Z",
-    "note": "booked 8/27/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "1689241",
-    "name": "BAXTER WILLIAM",
-    "timestamp_utc": "2026-08-27T18:26:59Z",
-    "note": "booked 8/27/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "1782676",
     "name": "WARD KWANE",
     "timestamp_utc": "2026-08-27T18:26:59Z",
@@ -69998,5 +69984,19 @@
     "name": "WOOTEN ANTON",
     "timestamp_utc": "2026-11-16T01:13:12Z",
     "note": "booked 11/15/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14200980",
+    "name": "MILLS ERICA",
+    "timestamp_utc": "2026-11-16T02:13:18Z",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "inmate_number": "2150649",
+    "name": "ROSE DENNIS",
+    "timestamp_utc": "2026-11-16T02:13:18Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
