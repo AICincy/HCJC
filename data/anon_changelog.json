@@ -32346,6 +32346,12 @@
     "category": "Theft"
   },
   {
+    "event": "released",
+    "date": "2026-08-30",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
     "event": "booked",
     "date": "2026-08-31",
     "tier": "MM",
@@ -33058,6 +33064,18 @@
     "date": "2026-09-01",
     "tier": "M2",
     "category": "Criminal damaging"
+  },
+  {
+    "event": "booked",
+    "date": "2026-09-01",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-01",
+    "tier": "MM",
+    "category": "Discard litter-public place"
   },
   {
     "event": "updated",
@@ -36649,6 +36667,18 @@
   },
   {
     "event": "booked",
+    "date": "2026-09-11",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-11",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
+    "event": "booked",
     "date": "2026-09-12",
     "tier": "MM",
     "category": "Disorderly conduct"
@@ -38059,6 +38089,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-09-15",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
+    "event": "updated",
     "date": "2026-09-16",
     "tier": "M1",
     "category": "Theft"
@@ -38434,6 +38470,12 @@
     "date": "2026-09-16",
     "tier": "M1",
     "category": "Theft"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-16",
+    "tier": "MM",
+    "category": "Discard litter-public place"
   },
   {
     "event": "booked",
@@ -38896,6 +38938,12 @@
     "date": "2026-09-17",
     "tier": "F5",
     "category": "Possession of drugs"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-17",
+    "tier": "MM",
+    "category": "Discard litter-public place"
   },
   {
     "event": "booked",
@@ -40960,6 +41008,12 @@
     "date": "2026-09-23",
     "tier": "F5",
     "category": "Breaking and entering"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-23",
+    "tier": "MM",
+    "category": "Discard litter-public place"
   },
   {
     "event": "booked",
@@ -45204,6 +45258,12 @@
     "category": "Periodic verification of residence"
   },
   {
+    "event": "updated",
+    "date": "2026-10-03",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
     "event": "booked",
     "date": "2026-10-04",
     "tier": "M1",
@@ -46594,6 +46654,18 @@
     "date": "2026-10-06",
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer"
+  },
+  {
+    "event": "updated",
+    "date": "2026-10-06",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
+    "event": "released",
+    "date": "2026-10-06",
+    "tier": "MM",
+    "category": "Discard litter-public place"
   },
   {
     "event": "updated",
@@ -49176,6 +49248,18 @@
     "category": null
   },
   {
+    "event": "booked",
+    "date": "2026-10-12",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
+    "event": "updated",
+    "date": "2026-10-12",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
     "event": "updated",
     "date": "2026-10-13",
     "tier": "F2",
@@ -50124,6 +50208,12 @@
     "category": "Burglary"
   },
   {
+    "event": "updated",
+    "date": "2026-10-14",
+    "tier": "MM",
+    "category": "Discard litter-public place"
+  },
+  {
     "event": "booked",
     "date": "2026-10-15",
     "tier": "M4",
@@ -50644,6 +50734,12 @@
     "date": "2026-10-15",
     "tier": "M3",
     "category": "Criminal mischief"
+  },
+  {
+    "event": "updated",
+    "date": "2026-10-15",
+    "tier": "MM",
+    "category": "Discard litter-public place"
   },
   {
     "event": "booked",
@@ -64189,5 +64285,32 @@
     "tier": "M2",
     "category": "Obstructing official business",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-16T03:10:30Z",
+    "inmate_number": "14493143",
+    "name": "BAMBA CHEICK",
+    "tier": "M1",
+    "category": "Driving under FRA suspension",
+    "note": "booked 11/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-16T03:10:30Z",
+    "inmate_number": "14830116",
+    "name": "HAGEN MATTHEW",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "booked 11/15/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-16T03:10:30Z",
+    "inmate_number": "2253471",
+    "name": "BOOKER MARK",
+    "tier": "MM",
+    "category": "Discard litter-public place",
+    "note": "booked 11/15/26"
   }
 ]
