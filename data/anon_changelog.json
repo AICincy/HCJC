@@ -36990,6 +36990,12 @@
     "category": "Disorderly conduct"
   },
   {
+    "event": "booked",
+    "date": "2026-09-12",
+    "tier": "F3",
+    "category": "Escape"
+  },
+  {
     "event": "updated",
     "date": "2026-09-13",
     "tier": "M1",
@@ -37762,6 +37768,12 @@
     "date": "2026-09-14",
     "tier": "F5",
     "category": "Vandalism"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-14",
+    "tier": "F3",
+    "category": "Escape"
   },
   {
     "event": "updated",
@@ -65622,6 +65634,51 @@
     "name": "WEST VERNON",
     "tier": null,
     "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-16T21:10:19Z",
+    "inmate_number": "14372863",
+    "name": "MILLER JONATHAN",
+    "tier": "F3",
+    "category": "Escape",
+    "note": "booked 11/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-16T21:10:19Z",
+    "inmate_number": "14643346",
+    "name": "BELLOMO ISABELLA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 11/16/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-16T21:10:19Z",
+    "inmate_number": "14817407",
+    "name": "KIRBY ANTHONY",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-16T21:10:19Z",
+    "inmate_number": "14817306",
+    "name": "CLARKSTON KRISTEN",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-16T21:10:19Z",
+    "inmate_number": "14775460",
+    "name": "WRIGHT EMIR",
+    "tier": "M2",
+    "category": "Resisting arrest",
     "note": "no longer on HCSO public roster"
   }
 ]
