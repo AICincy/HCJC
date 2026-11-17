@@ -1130131,5 +1130131,37 @@
     "seen_count": 1173,
     "note": "HCSO list sweep succeeded; automated access restored.",
     "prev_sha256": "6c1a07e50c9049b71f5ff6420f6740d87b6cc9ec666bc092497e94aa804c9f63"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-17T15:05:14Z",
+    "inmate_id": "14441401",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "2f284fc6a514eaf4a4a97f03915c0dbf9d4891230a5ebe42647355e631f06a69"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-17T15:05:16Z",
+    "inmate_id": "14479345",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "f2c3988255374ffc3ee897b0c0d1b10f031e2b26fd70014db05d5f71cac9795f"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-17T15:05:23Z",
+    "inmate_id": "14765506",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "0e748456752099da571e1aafbe901757689b231fcc57d1b24b29dcae4db0462c"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-17T15:05:58Z",
+    "inmate_id": "2619591",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "8d97ef9f31e74a739b5cd47e5c58abaf64b2537aca9b107b696bef6b9ed366e5"
   }
 ]
