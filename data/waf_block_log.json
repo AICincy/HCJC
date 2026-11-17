@@ -1130110,5 +1130110,19 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "eb5e2f3eb2ef43edaf7d622a5d2ae405e20d6ecd59b36d8dcb95a358706ba9c0"
+  },
+  {
+    "timestamp_utc": "2026-11-17T11:12:07Z",
+    "event": "blocked",
+    "prev_count": 1176,
+    "seen_count": 1175,
+    "surnames_total": 26,
+    "surnames_failed": 4,
+    "failed_fraction": 0.1538,
+    "http_status_counts": {},
+    "block_sample": null,
+    "roster_stale_hours": 1.0,
+    "note": "HCSO list sweep returned a degraded roster; last-good data kept.",
+    "prev_sha256": "d3957ba6fd78fe9539cd88a1e3ebc410fada145682c16f5df4f4f630471f699a"
   }
 ]
