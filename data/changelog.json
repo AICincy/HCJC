@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14809719",
-    "name": "JONES DONALD",
-    "timestamp_utc": "2026-08-29T23:33:10Z",
-    "note": "booked 8/29/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "1857091",
     "name": "BALDWIN DARYLL",
     "timestamp_utc": "2026-08-29T23:33:10Z",
@@ -69998,5 +69991,12 @@
     "name": "ISAAC IVAN",
     "timestamp_utc": "2026-11-18T00:16:38Z",
     "note": "booked 11/17/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "1755329",
+    "name": "HAYES LAFONZO",
+    "timestamp_utc": "2026-11-18T01:20:18Z",
+    "note": ""
   }
 ]
