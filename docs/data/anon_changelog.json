@@ -34272,6 +34272,12 @@
     "category": "Attempt to commit an offense"
   },
   {
+    "event": "released",
+    "date": "2026-09-04",
+    "tier": "F5",
+    "category": "Vandalism"
+  },
+  {
     "event": "booked",
     "date": "2026-09-05",
     "tier": "M1",
@@ -38146,6 +38152,12 @@
     "date": "2026-09-15",
     "tier": "MM",
     "category": "Discard litter-public place"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-15",
+    "tier": "F5",
+    "category": "Vandalism"
   },
   {
     "event": "updated",
@@ -42355,6 +42367,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-09-25",
+    "tier": "F5",
+    "category": "Vandalism"
+  },
+  {
+    "event": "updated",
     "date": "2026-09-26",
     "tier": "MM",
     "category": "Open container of beer or intoxicating liquor in a vehicle"
@@ -44062,6 +44080,18 @@
     "date": "2026-09-28",
     "tier": "M4",
     "category": "Failure to disclose personal information"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-28",
+    "tier": "F5",
+    "category": "Vandalism"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-28",
+    "tier": "F5",
+    "category": "Vandalism"
   },
   {
     "event": "updated",
@@ -67513,5 +67543,68 @@
     "tier": "M1",
     "category": "Stopping after accident on public roads",
     "note": "booked 11/17/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-18T03:40:25Z",
+    "inmate_number": "1040707",
+    "name": "BERLING ROBERT",
+    "tier": "M1",
+    "category": "Driving under suspension or cancellation",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-18T03:40:25Z",
+    "inmate_number": "14557845",
+    "name": "HARVEY JOSEPH",
+    "tier": "F5",
+    "category": "Vandalism",
+    "note": "booked 11/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-18T03:40:25Z",
+    "inmate_number": "14697470",
+    "name": "CODY JAMIE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-18T03:40:25Z",
+    "inmate_number": "1807167",
+    "name": "ISHAM BRIAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-18T03:40:25Z",
+    "inmate_number": "2304856",
+    "name": "TOMBS LARRY",
+    "tier": "F1",
+    "category": "Aggravated robbery",
+    "note": "booked 11/17/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-18T03:40:25Z",
+    "inmate_number": "2506495",
+    "name": "CARLTON DARIUS",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-18T03:40:25Z",
+    "inmate_number": "14190033",
+    "name": "HESLER COREY",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "no longer on HCSO public roster"
   }
 ]
