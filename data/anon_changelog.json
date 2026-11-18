@@ -39307,6 +39307,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-09-18",
+    "tier": "M1",
+    "category": "Theft"
+  },
+  {
+    "event": "updated",
     "date": "2026-09-21",
     "tier": "MM",
     "category": "Juvenile hold (no ORC code on file)"
@@ -44632,6 +44638,12 @@
     "date": "2026-09-29",
     "tier": "F3",
     "category": "Tampering with evidence"
+  },
+  {
+    "event": "updated",
+    "date": "2026-09-29",
+    "tier": "M1",
+    "category": "Theft"
   },
   {
     "event": "booked",
@@ -67759,5 +67771,41 @@
     "tier": "M1",
     "category": "Stopping after accident on public roads",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-18T08:13:42Z",
+    "inmate_number": "14743257",
+    "name": "MENDOZA LIZZY",
+    "tier": "MM",
+    "category": "Temporary instruction permit",
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-18T08:13:42Z",
+    "inmate_number": "2358823",
+    "name": "HARPER MARIA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-18T08:13:42Z",
+    "inmate_number": "2507679",
+    "name": "HARRIS BRITTANY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-18T08:13:42Z",
+    "inmate_number": "2724163",
+    "name": "WRITESEL DARLA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/18/26"
   }
 ]
