@@ -33504,6 +33504,12 @@
     "category": "Domestic violence"
   },
   {
+    "event": "released",
+    "date": "2026-09-02",
+    "tier": "F5",
+    "category": "Possession of drugs"
+  },
+  {
     "event": "booked",
     "date": "2026-09-03",
     "tier": null,
@@ -52044,94 +52050,10 @@
     "category": "Hitchhiking - soliciting employment, business, or contributions from occupant of vehicle"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "14108728",
-    "name": "HUNTER COREY",
-    "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 11/11/26"
-  },
-  {
     "event": "updated",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "14692781",
-    "name": "ELDER ZACHARY",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "14699345",
-    "name": "REVIS MALACHI",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 11/11/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "14777854",
-    "name": "PUGH RASHA",
-    "tier": null,
-    "category": null,
-    "note": "booked 11/11/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "1676900",
-    "name": "PERSLEY DANTE",
-    "tier": "M2",
-    "category": "Resisting arrest",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "1701118",
-    "name": "CAMPBELL LANDIS",
-    "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "1669672",
-    "name": "RICE OLONDRIUS",
-    "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 11/11/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "1954466",
-    "name": "LAWSON STEVEN",
-    "tier": "M1",
-    "category": "Driving under OVI suspension",
-    "note": "booked 11/11/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "2185706",
-    "name": "WHITFIELD LORENZO",
+    "date": "2026-11-11",
     "tier": "MM",
-    "category": "Failure to report a motor vehicle accident",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-11T23:14:30Z",
-    "inmate_number": "2324894",
-    "name": "PEEPLES-HAWKINS DEMARCUS",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 11/11/26"
+    "category": "Failure to report a motor vehicle accident"
   },
   {
     "event": "updated",
@@ -62545,5 +62467,95 @@
     "tier": "F2",
     "category": "Burglary",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "14437857",
+    "name": "JONES SANIYA",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "14525419",
+    "name": "MATZ KALEB",
+    "tier": null,
+    "category": null,
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "14830519",
+    "name": "REID JOSEPH",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "1668001",
+    "name": "PAYNE LARRY",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "1808233",
+    "name": "FAIRBANKS KENNETH",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "2005460",
+    "name": "HUDSON GEORGE",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "2213741",
+    "name": "THOMAS DARREN",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "2449280",
+    "name": "PINKSTON TYRIN",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "2783061",
+    "name": "DOHERTY ERIN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T00:12:48Z",
+    "inmate_number": "2839015",
+    "name": "GILES RHAMEKO",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": ""
   }
 ]
