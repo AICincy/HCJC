@@ -1132339,5 +1132339,32 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "d60b6a9f8a4616250e0612c784d1d3af37a4b4a241f1a5cd05c6d2291932a9d8"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-19T20:07:34Z",
+    "inmate_id": "14240933",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "832f24c6b883282e94a3effe1b114e20c71e789c47987ccb70c2c07183a1cdcd"
+  },
+  {
+    "timestamp_utc": "2026-11-19T20:07:35Z",
+    "event": "detail_page_waf_block",
+    "inmate_id": "14274579",
+    "url": "/justice-center-services/inmate-search/inmate-detail/?id=14274579",
+    "http_status": 404,
+    "failure_mode": "http_404",
+    "response_signature": null,
+    "response_length": 0,
+    "prev_sha256": "59babd35baca46fb71e6acb645846a7fc00bb9cf9f9f9a983d14ffed015931ed"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-19T20:08:02Z",
+    "inmate_id": "2247411",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "a9634faaf3dcdaa32f169191f1e7e9a9849d649bfe05a3b31d5f18e39f38b814"
   }
 ]
