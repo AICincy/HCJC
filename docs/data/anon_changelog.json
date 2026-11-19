@@ -52398,33 +52398,6 @@
     "category": "Stopping after accident on other than public roads"
   },
   {
-    "event": "updated",
-    "timestamp_utc": "2026-11-12T10:10:10Z",
-    "inmate_number": "2684078",
-    "name": "FRIEMOTH JAMES",
-    "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-12T10:10:10Z",
-    "inmate_number": "2815413",
-    "name": "BRANAM WILLADEAN",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-12T11:01:02Z",
-    "inmate_number": "14579074",
-    "name": "DOMINGO ANATANAEL",
-    "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "booked (date not reported)"
-  },
-  {
     "event": "released",
     "timestamp_utc": "2026-11-12T12:12:34Z",
     "inmate_number": "2815413",
@@ -62566,5 +62539,23 @@
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
     "note": "booked 11/19/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-19T11:11:22Z",
+    "inmate_number": "2272181",
+    "name": "CLAUSS EMIL",
+    "tier": "M1",
+    "category": "Driving under FRA suspension",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T11:11:22Z",
+    "inmate_number": "2762144",
+    "name": "BROWN TIMOTHY",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
   }
 ]
