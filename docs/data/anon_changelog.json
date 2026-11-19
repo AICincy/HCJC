@@ -34285,6 +34285,12 @@
   },
   {
     "event": "booked",
+    "date": "2026-09-04",
+    "tier": "F3",
+    "category": "Tampering with evidence"
+  },
+  {
+    "event": "booked",
     "date": "2026-09-05",
     "tier": "M1",
     "category": "Theft"
@@ -35044,6 +35050,12 @@
     "date": "2026-09-07",
     "tier": "M2",
     "category": "Obstructing official business"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-07",
+    "tier": "F3",
+    "category": "Tampering with evidence"
   },
   {
     "event": "booked",
@@ -40774,6 +40786,18 @@
     "date": "2026-09-22",
     "tier": "F5",
     "category": "Breaking and entering"
+  },
+  {
+    "event": "booked",
+    "date": "2026-09-22",
+    "tier": "MM",
+    "category": "Disorderly conduct"
+  },
+  {
+    "event": "released",
+    "date": "2026-09-22",
+    "tier": "MM",
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
@@ -52099,48 +52123,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-12T01:14:28Z",
-    "inmate_number": "14237417",
-    "name": "SIMPSON NOAH",
+    "date": "2026-11-12",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "booked (date not reported)"
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-12T01:14:28Z",
-    "inmate_number": "14419056",
-    "name": "MIDDLEKAMP ALIJAH",
+    "date": "2026-11-12",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-12T01:14:28Z",
-    "inmate_number": "14276664",
-    "name": "BINES JEREMY",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-12T01:14:28Z",
-    "inmate_number": "1669672",
-    "name": "RICE OLONDRIUS",
+    "date": "2026-11-12",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-12T01:14:28Z",
-    "inmate_number": "2324894",
-    "name": "PEEPLES-HAWKINS DEMARCUS",
+    "date": "2026-11-12",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
@@ -62617,5 +62620,77 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T02:10:45Z",
+    "inmate_number": "14516569",
+    "name": "WILLIAMS MIKHAIL",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T02:10:45Z",
+    "inmate_number": "2005460",
+    "name": "HUDSON GEORGE",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-19T02:10:45Z",
+    "inmate_number": "1951261",
+    "name": "HARRIS DEVONE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T02:10:45Z",
+    "inmate_number": "2477792",
+    "name": "GUNN ERIC",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-19T02:10:45Z",
+    "inmate_number": "2520089",
+    "name": "CURRY ANDRE",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-19T02:10:45Z",
+    "inmate_number": "2549815",
+    "name": "LUMMUS TAMON",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 11/18/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-19T02:10:45Z",
+    "inmate_number": "1854502",
+    "name": "COOPER SCOTT",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-19T02:10:45Z",
+    "inmate_number": "2493439",
+    "name": "HEALION JOSHUA",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "no longer on HCSO public roster"
   }
 ]
