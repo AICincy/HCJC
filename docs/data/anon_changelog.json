@@ -52855,30 +52855,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-13T03:08:50Z",
-    "inmate_number": "14688847",
-    "name": "CHIUN-JACABO ALFREDO",
+    "date": "2026-11-13",
     "tier": "F1",
-    "category": "Aggravated burglary",
-    "note": "booked 11/12/26"
+    "category": "Aggravated burglary"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-13T03:08:50Z",
-    "inmate_number": "2520089",
-    "name": "CURRY ANDRE",
+    "date": "2026-11-13",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
+    "category": "Obstructing official business"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-11-13T03:08:50Z",
-    "inmate_number": "2744444",
-    "name": "PRICE JAMYIA",
-    "tier": null,
-    "category": null,
-    "note": "booked 11/12/26"
+    "event": "updated",
+    "date": "2026-11-13",
+    "tier": "F3",
+    "category": "Tampering with evidence"
   },
   {
     "event": "updated",
@@ -62770,5 +62761,41 @@
     "tier": "MM",
     "category": "Illegal use or possession of drug paraphernalia",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T03:09:47Z",
+    "inmate_number": "1397325",
+    "name": "HOWARD TOMMY",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T03:09:47Z",
+    "inmate_number": "14628462",
+    "name": "COPE KRISTEN",
+    "tier": "M1",
+    "category": "Defacing identification mark of firearm",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T03:09:47Z",
+    "inmate_number": "14784306",
+    "name": "WILSON RANDOLPH",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-20T03:09:47Z",
+    "inmate_number": "2601930",
+    "name": "MAHER ERIKA",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "booked 11/19/26"
   }
 ]
