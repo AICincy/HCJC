@@ -1133298,5 +1133298,21 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "0d42d7c11b031d1238702a12680e75bc64ddb2400d97960a46b1ee619ebf042e"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-20T11:09:32Z",
+    "inmate_id": "14235203",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "16820a4663efc4ff3d7c9e4574d5b638d2ee24d2bf52322dd5d98a647454e2e7"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-20T11:09:38Z",
+    "inmate_id": "14347616",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "5a160fdbe603eeaf427be023b9075cb347a85da6723e1587978c187fc4173e79"
   }
 ]

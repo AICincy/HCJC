@@ -52981,57 +52981,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-13T10:10:14Z",
-    "inmate_number": "14570887",
-    "name": "BANKIN KIRIL",
+    "date": "2026-11-13",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 11/13/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-13T10:10:14Z",
-    "inmate_number": "14799957",
-    "name": "BIAYI SACRE",
+    "date": "2026-11-13",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": "no longer on HCSO public roster"
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-13T10:10:14Z",
-    "inmate_number": "2520089",
-    "name": "CURRY ANDRE",
+    "date": "2026-11-13",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "no longer on HCSO public roster"
+    "category": "Obstructing official business"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-13T10:10:14Z",
-    "inmate_number": "14721959",
-    "name": "REVELL KENNETH",
+    "date": "2026-11-13",
     "tier": "M1",
-    "category": "Telecommunications harassment",
-    "note": "no longer on HCSO public roster"
+    "category": "Telecommunications harassment"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-13T11:08:56Z",
-    "inmate_number": "14570887",
-    "name": "BANKIN KIRIL",
+    "date": "2026-11-13",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-11-13T11:08:56Z",
-    "inmate_number": "2173340",
-    "name": "SCHROER WILLIAM",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 11/13/26"
+    "event": "released",
+    "date": "2026-11-13",
+    "tier": "F3",
+    "category": "Tampering with evidence"
   },
   {
     "event": "updated",
@@ -63040,5 +63022,23 @@
     "tier": "M4",
     "category": "Criminal trespass",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-20T11:10:16Z",
+    "inmate_number": "14235203",
+    "name": "HENDERSON TREMON",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-20T11:10:16Z",
+    "inmate_number": "14347616",
+    "name": "HILL GEOFFREY",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": "booked 11/20/26"
   }
 ]
