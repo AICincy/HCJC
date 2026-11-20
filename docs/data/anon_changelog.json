@@ -52897,39 +52897,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-13T05:09:26Z",
-    "inmate_number": "14675620",
-    "name": "SLATON CAMRYON",
+    "date": "2026-11-13",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 11/12/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-13T05:09:26Z",
-    "inmate_number": "14688847",
-    "name": "CHIUN-JACABO ALFREDO",
+    "date": "2026-11-13",
     "tier": "F1",
-    "category": "Aggravated burglary",
-    "note": ""
+    "category": "Aggravated burglary"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-13T05:09:26Z",
-    "inmate_number": "14829945",
-    "name": "SMITH MEGAN",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-13T05:09:26Z",
-    "inmate_number": "1994785",
-    "name": "JOHNSON DAMON",
+    "date": "2026-11-13",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
@@ -62848,5 +62830,77 @@
     "tier": "M1",
     "category": "Operating a vehicle under the influence (OVI / DUI)",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T06:12:13Z",
+    "inmate_number": "14111777",
+    "name": "STALLWORTH MICHAEL",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-20T06:12:13Z",
+    "inmate_number": "14257521",
+    "name": "BROCK CODY",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": "booked 11/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T06:12:13Z",
+    "inmate_number": "14551959",
+    "name": "HENDRICKS TAVARIONA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-20T06:12:13Z",
+    "inmate_number": "1525368",
+    "name": "OATS WILLIAM",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 11/20/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-20T06:12:13Z",
+    "inmate_number": "2594754",
+    "name": "PETERSON CASSANDRA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T06:12:13Z",
+    "inmate_number": "2625046",
+    "name": "WILLIAMS KAESHOUNE",
+    "tier": "M2",
+    "category": "Criminal damaging",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-20T06:12:13Z",
+    "inmate_number": "2338521",
+    "name": "EVANS ALEX",
+    "tier": "MM",
+    "category": "Speed limits",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-20T06:12:13Z",
+    "inmate_number": "2458895",
+    "name": "ROSS PHILLIP",
+    "tier": "F2",
+    "category": "Burglary",
+    "note": "no longer on HCSO public roster"
   }
 ]
