@@ -52915,39 +52915,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-13T06:12:43Z",
-    "inmate_number": "14676250",
-    "name": "MILLER NOAH",
+    "date": "2026-11-13",
     "tier": "F1",
-    "category": "Aggravated arson",
-    "note": "booked 11/13/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-13T06:12:43Z",
-    "inmate_number": "1682773",
-    "name": "CRUSE PHILLIP",
-    "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": "booked 11/13/26"
+    "category": "Aggravated arson"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-13T06:12:43Z",
-    "inmate_number": "2665474",
-    "name": "WELLS DIAMOND",
+    "date": "2026-11-13",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": ""
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-13T06:12:43Z",
-    "inmate_number": "2736282",
-    "name": "BOYCE AARON",
+    "date": "2026-11-13",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
+  },
+  {
+    "event": "updated",
+    "date": "2026-11-13",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)"
   },
   {
     "event": "booked",
@@ -62902,5 +62890,50 @@
     "tier": "F2",
     "category": "Burglary",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T07:08:00Z",
+    "inmate_number": "2042127",
+    "name": "DUFFY RONALD",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T07:08:00Z",
+    "inmate_number": "2148132",
+    "name": "OVERSTREET DEMETRIUS",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T07:08:00Z",
+    "inmate_number": "2005460",
+    "name": "HUDSON GEORGE",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T07:08:00Z",
+    "inmate_number": "2140030",
+    "name": "SIMPSON SHAUN",
+    "tier": null,
+    "category": null,
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-20T07:08:00Z",
+    "inmate_number": "2167792",
+    "name": "GREEN BELINDA",
+    "tier": null,
+    "category": null,
+    "note": ""
   }
 ]

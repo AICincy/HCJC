@@ -1133164,5 +1133164,27 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "4cf93caca893aab83bd1829e29d8fff38eea826a3ac83012116356b0d4f61182"
+  },
+  {
+    "timestamp_utc": "2026-11-20T07:07:40Z",
+    "event": "detail_page_waf_block",
+    "inmate_id": "2254606",
+    "url": "/justice-center-services/inmate-search/inmate-detail/?id=2254606",
+    "http_status": 404,
+    "failure_mode": "http_404",
+    "response_signature": null,
+    "response_length": 0,
+    "prev_sha256": "b014f64bf93a35076a776dc4f9d215ab48a049b690d435e28cfd3d3119af35dd"
+  },
+  {
+    "timestamp_utc": "2026-11-20T07:07:40Z",
+    "event": "detail_page_waf_block",
+    "inmate_id": "2259746",
+    "url": "/justice-center-services/inmate-search/inmate-detail/?id=2259746",
+    "http_status": 404,
+    "failure_mode": "http_404",
+    "response_signature": null,
+    "response_length": 0,
+    "prev_sha256": "660a8ae3c24c221db129ef4a9f99a2987cd0190e2201c99c6db6e34974625d2e"
   }
 ]
