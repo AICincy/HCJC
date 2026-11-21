@@ -53581,30 +53581,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-14T12:12:47Z",
-    "inmate_number": "14618658",
-    "name": "SEAMAN DAKOTA",
+    "date": "2026-11-14",
     "tier": "MM",
-    "category": "Speed limits",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-14T12:12:47Z",
-    "inmate_number": "2672498",
-    "name": "HALL BENNIE",
-    "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 11/14/26"
+    "category": "Speed limits"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-14T12:12:47Z",
-    "inmate_number": "14799258",
-    "name": "AGUIRRE JOSE",
+    "date": "2026-11-14",
     "tier": "M1",
-    "category": "Theft",
-    "note": "no longer on HCSO public roster"
+    "category": "Theft"
   },
   {
     "event": "updated",
@@ -64000,5 +63985,32 @@
     "tier": "M1",
     "category": "Assault",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T13:11:42Z",
+    "inmate_number": "14620766",
+    "name": "STANLEY KYREE",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": "booked 11/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T13:11:42Z",
+    "inmate_number": "14664991",
+    "name": "TUBBS TIMOTHY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 11/21/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-21T13:11:42Z",
+    "inmate_number": "2483710",
+    "name": "NEELEY PAUL",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
