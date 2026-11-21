@@ -63940,5 +63940,32 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T10:10:59Z",
+    "inmate_number": "14272621",
+    "name": "MULLINS ROBERT",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 11/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T10:10:59Z",
+    "inmate_number": "14691794",
+    "name": "LANG DEANDRE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 11/21/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-21T10:10:59Z",
+    "inmate_number": "2812639",
+    "name": "MILLS JEFFREY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
   }
 ]
