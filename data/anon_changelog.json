@@ -53575,30 +53575,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T10:13:07Z",
-    "inmate_number": "2053661",
-    "name": "LEWIS MICHAEL",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 11/14/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-14T11:09:33Z",
-    "inmate_number": "14618658",
-    "name": "SEAMAN DAKOTA",
+    "date": "2026-11-14",
     "tier": "MM",
-    "category": "Speed limits",
-    "note": "booked 11/14/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-14T11:09:33Z",
-    "inmate_number": "2053661",
-    "name": "LEWIS MICHAEL",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Speed limits"
   },
   {
     "event": "updated",
@@ -63967,5 +63946,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T11:10:28Z",
+    "inmate_number": "14272621",
+    "name": "MULLINS ROBERT",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T11:10:28Z",
+    "inmate_number": "14691794",
+    "name": "LANG DEANDRE",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T11:10:28Z",
+    "inmate_number": "2462763",
+    "name": "SUGGS FREDRICK",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 11/21/26"
   }
 ]
