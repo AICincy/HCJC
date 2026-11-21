@@ -53365,48 +53365,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T01:13:03Z",
-    "inmate_number": "1585631",
-    "name": "THOMAS LATANYA",
-    "tier": null,
-    "category": null,
-    "note": "booked 11/13/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-14T01:13:03Z",
-    "inmate_number": "2013655",
-    "name": "BROCK BRYAN",
+    "date": "2026-11-14",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 11/13/26"
+    "category": "Assault"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T02:10:56Z",
-    "inmate_number": "14612100",
-    "name": "MALONE RICHARD",
+    "date": "2026-11-14",
     "tier": "M2",
-    "category": "Possessing drug abuse instruments",
-    "note": "booked 11/13/26"
+    "category": "Possessing drug abuse instruments"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T02:10:56Z",
-    "inmate_number": "14626902",
-    "name": "BOWERS ALASIA",
+    "date": "2026-11-14",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 11/13/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-14T02:10:56Z",
-    "inmate_number": "14688847",
-    "name": "CHIUN-JACABO ALFREDO",
+    "date": "2026-11-14",
     "tier": "F1",
-    "category": "Aggravated burglary",
-    "note": "no longer on HCSO public roster"
+    "category": "Aggravated burglary"
+  },
+  {
+    "event": "released",
+    "date": "2026-11-14",
+    "tier": null,
+    "category": null
   },
   {
     "event": "booked",
@@ -63774,6 +63759,24 @@
     "name": "SWEETING JOSHUSA",
     "tier": "F3",
     "category": "Tampering with evidence",
+    "note": "booked 11/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T02:11:52Z",
+    "inmate_number": "1249177",
+    "name": "REEVES DARYL",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T02:11:52Z",
+    "inmate_number": "1499162",
+    "name": "WHITT ROBERT",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
     "note": "booked 11/20/26"
   }
 ]
