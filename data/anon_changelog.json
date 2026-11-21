@@ -53592,40 +53592,22 @@
     "category": "Theft"
   },
   {
-    "event": "updated",
-    "timestamp_utc": "2026-11-14T13:15:17Z",
-    "inmate_number": "2672498",
-    "name": "HALL BENNIE",
-    "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
-  },
-  {
     "event": "released",
-    "timestamp_utc": "2026-11-14T13:15:17Z",
-    "inmate_number": "14579074",
-    "name": "DOMINGO ANATANAEL",
+    "date": "2026-11-14",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "no longer on HCSO public roster"
+    "category": "Driving without a valid license"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-14T13:15:17Z",
-    "inmate_number": "935808",
-    "name": "MARTIN ROBERT",
+    "date": "2026-11-14",
     "tier": "M1",
-    "category": "Operating a vehicle under the influence (OVI / DUI)",
-    "note": "no longer on HCSO public roster"
+    "category": "Operating a vehicle under the influence (OVI / DUI)"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-14T13:15:17Z",
-    "inmate_number": "14588781",
-    "name": "WASHINGTON JASAI",
+    "date": "2026-11-14",
     "tier": "F4",
-    "category": "Attempt to commit an offense",
-    "note": "no longer on HCSO public roster"
+    "category": "Attempt to commit an offense"
   },
   {
     "event": "booked",
@@ -64012,5 +63994,32 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T14:13:03Z",
+    "inmate_number": "14664991",
+    "name": "TUBBS TIMOTHY",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T14:13:03Z",
+    "inmate_number": "2173162",
+    "name": "WILLIAMS MICHAEL",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": "booked 11/21/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T14:13:03Z",
+    "inmate_number": "440935",
+    "name": "HENDERSON VINCENT",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked (date not reported)"
   }
 ]
