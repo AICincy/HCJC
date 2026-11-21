@@ -53395,48 +53395,33 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T03:10:20Z",
-    "inmate_number": "1161024",
-    "name": "GAINES THOMAS",
+    "date": "2026-11-14",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 11/13/26"
+    "category": "Disorderly conduct"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-14T03:10:20Z",
-    "inmate_number": "14612100",
-    "name": "MALONE RICHARD",
+    "date": "2026-11-14",
     "tier": "M2",
-    "category": "Possessing drug abuse instruments",
-    "note": ""
+    "category": "Possessing drug abuse instruments"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T03:10:20Z",
-    "inmate_number": "14799258",
-    "name": "AGUIRRE JOSE",
+    "date": "2026-11-14",
     "tier": "M1",
-    "category": "Theft",
-    "note": "booked 11/13/26"
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-14T03:10:20Z",
-    "inmate_number": "1503982",
-    "name": "DAVIS EARLINE",
+    "date": "2026-11-14",
     "tier": "M1",
-    "category": "Unauthorized use of a vehicle",
-    "note": ""
+    "category": "Unauthorized use of a vehicle"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T03:10:20Z",
-    "inmate_number": "2172258",
-    "name": "THOMPSON MARCELLA",
+    "date": "2026-11-14",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 11/13/26"
+    "category": "Strangulation"
   },
   {
     "event": "updated",
@@ -63777,6 +63762,51 @@
     "name": "WHITT ROBERT",
     "tier": "MM",
     "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 11/20/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T03:11:00Z",
+    "inmate_number": "14444242",
+    "name": "CORNELL TRAQVIS",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T03:11:00Z",
+    "inmate_number": "14830813",
+    "name": "GARCIA CARLOS",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T03:11:00Z",
+    "inmate_number": "14830816",
+    "name": "WALKER TESHONA",
+    "tier": "F2",
+    "category": "Felonious assault",
+    "note": "booked 11/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T03:11:00Z",
+    "inmate_number": "2801500",
+    "name": "SWEETING JOSHUSA",
+    "tier": "F3",
+    "category": "Tampering with evidence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T03:11:00Z",
+    "inmate_number": "2680117",
+    "name": "ILER ANDRE",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
     "note": "booked 11/20/26"
   }
 ]
