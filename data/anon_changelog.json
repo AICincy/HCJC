@@ -53425,129 +53425,63 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-14T04:12:30Z",
-    "inmate_number": "1161024",
-    "name": "GAINES THOMAS",
+    "date": "2026-11-14",
     "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-14T04:12:30Z",
-    "inmate_number": "14799258",
-    "name": "AGUIRRE JOSE",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Disorderly conduct"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T04:12:30Z",
-    "inmate_number": "14801433",
-    "name": "CRAIG KIIRAN",
-    "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 11/13/26"
+    "date": "2026-11-14",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T04:12:30Z",
-    "inmate_number": "2378066",
-    "name": "WOFFORD ANTHONY",
+    "date": "2026-11-14",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 11/13/26"
+    "category": "Telecommunications harassment"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T04:12:30Z",
-    "inmate_number": "2813963",
-    "name": "DAVIS RAYNARD",
-    "tier": "M1",
-    "category": "Telecommunications harassment",
-    "note": "booked 11/13/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-14T05:11:24Z",
-    "inmate_number": "14799258",
-    "name": "AGUIRRE JOSE",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-14T05:11:24Z",
-    "inmate_number": "14801433",
-    "name": "CRAIG KIIRAN",
-    "tier": "M2",
-    "category": "Obstructing official business",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-14T05:11:24Z",
-    "inmate_number": "14830065",
-    "name": "YETT MONTEZ",
+    "date": "2026-11-14",
     "tier": "F3",
-    "category": "Tampering with evidence",
-    "note": "booked 11/13/26"
+    "category": "Tampering with evidence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-14T05:11:24Z",
-    "inmate_number": "1743378",
-    "name": "SINGLETON HERBERT",
+    "date": "2026-11-14",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "booked 11/13/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-14T05:11:24Z",
-    "inmate_number": "1999145",
-    "name": "HARRIS WILLIAM",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 11/13/26"
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-14T05:11:24Z",
-    "inmate_number": "2172258",
-    "name": "THOMPSON MARCELLA",
+    "date": "2026-11-14",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-14T05:11:24Z",
-    "inmate_number": "2395566",
-    "name": "PHILLIPS SHANEACA",
-    "tier": "M1",
-    "category": "Theft",
-    "note": "booked 11/13/26"
+    "category": "Strangulation"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-14T05:11:24Z",
-    "inmate_number": "2813963",
-    "name": "DAVIS RAYNARD",
+    "date": "2026-11-14",
     "tier": "M1",
-    "category": "Telecommunications harassment",
-    "note": ""
+    "category": "Telecommunications harassment"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-14T05:11:24Z",
-    "inmate_number": "14615601",
-    "name": "VASQUEZ-GUERRA FREDY",
+    "date": "2026-11-14",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "no longer on HCSO public roster"
+    "category": "Obstructing official business"
+  },
+  {
+    "event": "booked",
+    "date": "2026-11-14",
+    "tier": "M4",
+    "category": "Failure to disclose personal information"
+  },
+  {
+    "event": "updated",
+    "date": "2026-11-14",
+    "tier": "M4",
+    "category": "Failure to disclose personal information"
   },
   {
     "event": "booked",
@@ -63861,6 +63795,87 @@
     "name": "SPIVEY LEAH",
     "tier": "MM",
     "category": "Disorderly conduct",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T05:12:17Z",
+    "inmate_number": "14165685",
+    "name": "EVANS BRUCE",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T05:12:17Z",
+    "inmate_number": "14444242",
+    "name": "CORNELL TRAVIS",
+    "tier": "F2",
+    "category": "Robbery",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T05:12:17Z",
+    "inmate_number": "1503982",
+    "name": "DAVIS EARLINE",
+    "tier": "M1",
+    "category": "Unauthorized use of a vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T05:12:17Z",
+    "inmate_number": "1857944",
+    "name": "WILSON ERIC",
+    "tier": null,
+    "category": null,
+    "note": "booked 11/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T05:12:17Z",
+    "inmate_number": "2149329",
+    "name": "PETERSON MICHAEL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T05:12:17Z",
+    "inmate_number": "2014794",
+    "name": "WARDWELL CHAD",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 11/20/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-21T05:12:17Z",
+    "inmate_number": "2438438",
+    "name": "BRYANT RAYSHAWN",
+    "tier": "M1",
+    "category": "Improperly handling firearms in a motor vehicle",
+    "note": "booked 11/20/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-21T05:12:17Z",
+    "inmate_number": "2680117",
+    "name": "ILER ANDRE",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-21T05:12:17Z",
+    "inmate_number": "14289986",
+    "name": "FIELDS TAYLOR",
+    "tier": "M1",
+    "category": "Falsification",
     "note": "no longer on HCSO public roster"
   }
 ]
