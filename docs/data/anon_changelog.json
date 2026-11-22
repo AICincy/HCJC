@@ -53965,30 +53965,21 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-15T10:09:25Z",
-    "inmate_number": "14587261",
-    "name": "WILLIAMS JADA",
+    "date": "2026-11-15",
     "tier": "MM",
-    "category": "Right-of-way yielded by pedestrian",
-    "note": ""
+    "category": "Right-of-way yielded by pedestrian"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-15T10:09:25Z",
-    "inmate_number": "2634922",
-    "name": "KERR CONNER",
+    "date": "2026-11-15",
     "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Theft"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-15T10:09:25Z",
-    "inmate_number": "2638091",
-    "name": "TURNER DYLAN",
+    "date": "2026-11-15",
     "tier": "M1",
-    "category": "Failure to reinstate a license",
-    "note": ""
+    "category": "Failure to reinstate a license"
   },
   {
     "event": "booked",
@@ -64735,5 +64726,23 @@
     "tier": "MM",
     "category": "Open container of beer or intoxicating liquor in a vehicle",
     "note": "booked 11/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T11:09:21Z",
+    "inmate_number": "14540130",
+    "name": "STONE JAILEN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T11:09:21Z",
+    "inmate_number": "2448923",
+    "name": "DRUMMOND LESLIE",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
   }
 ]
