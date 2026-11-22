@@ -53875,57 +53875,27 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-15T07:11:51Z",
-    "inmate_number": "14326826",
-    "name": "HALEY JAYLIN",
+    "date": "2026-11-15",
     "tier": "F3",
-    "category": "Complicity",
-    "note": "booked 11/15/26"
+    "category": "Complicity"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-15T07:11:51Z",
-    "inmate_number": "14830094",
-    "name": "RUCKER DAMONI",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 11/15/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-15T07:11:51Z",
-    "inmate_number": "2096325",
-    "name": "COACH GERRY",
-    "tier": "M4",
-    "category": "Failure to disclose personal information",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-15T07:11:51Z",
-    "inmate_number": "2521186",
-    "name": "JONES JOHN",
+    "date": "2026-11-15",
     "tier": "M1",
-    "category": "Cincinnati Municipal Code: general offenses",
-    "note": "booked 11/15/26"
+    "category": "Cincinnati Municipal Code: general offenses"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-15T07:11:51Z",
-    "inmate_number": "2638091",
-    "name": "TURNER DYLAN",
+    "date": "2026-11-15",
     "tier": "M1",
-    "category": "Failure to reinstate a license",
-    "note": "booked 11/15/26"
+    "category": "Failure to reinstate a license"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-15T07:11:51Z",
-    "inmate_number": "14618658",
-    "name": "SEAMAN DAKOTA",
+    "date": "2026-11-15",
     "tier": "MM",
-    "category": "Speed limits",
-    "note": "no longer on HCSO public roster"
+    "category": "Speed limits"
   },
   {
     "event": "booked",
@@ -64636,5 +64606,50 @@
     "tier": "M1",
     "category": "Assault",
     "note": "booked 11/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T07:12:01Z",
+    "inmate_number": "1198627",
+    "name": "KUHN RICHARD",
+    "tier": "F4",
+    "category": "Attempt to commit an offense",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T07:12:01Z",
+    "inmate_number": "14354915",
+    "name": "JACKSON MALIK",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T07:12:01Z",
+    "inmate_number": "1449263",
+    "name": "SIZEMORE RALPH",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-22T07:12:01Z",
+    "inmate_number": "14344798",
+    "name": "HOLT KEYONTE",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-22T07:12:01Z",
+    "inmate_number": "2720288",
+    "name": "MCDAVID DAVID",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "no longer on HCSO public roster"
   }
 ]
