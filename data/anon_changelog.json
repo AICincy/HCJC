@@ -53869,12 +53869,9 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-15T06:10:37Z",
-    "inmate_number": "14237973",
-    "name": "CARTER JEROME",
+    "date": "2026-11-15",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
@@ -64621,5 +64618,23 @@
     "tier": "M1",
     "category": "Assault",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T06:12:04Z",
+    "inmate_number": "1449263",
+    "name": "SIZEMORE RALPH",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T06:12:04Z",
+    "inmate_number": "2374117",
+    "name": "DIZDARIC DAMIR",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 11/22/26"
   }
 ]
