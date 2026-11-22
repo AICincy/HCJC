@@ -53983,21 +53983,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-15T11:11:07Z",
-    "inmate_number": "14415452",
-    "name": "ALEXANDER SIDNEY",
+    "date": "2026-11-15",
     "tier": "M4",
-    "category": "Cincinnati Municipal Code: animals",
-    "note": "booked 11/15/26"
+    "category": "Cincinnati Municipal Code: animals"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-15T11:11:07Z",
-    "inmate_number": "14557900",
-    "name": "SMITH DEAIRUS",
+    "date": "2026-11-15",
     "tier": "M1",
-    "category": "Possessing criminal tools",
-    "note": "booked 11/15/26"
+    "category": "Possessing criminal tools"
   },
   {
     "event": "updated",
@@ -64744,5 +64738,68 @@
     "tier": "MM",
     "category": "Open container of beer or intoxicating liquor in a vehicle",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T12:11:11Z",
+    "inmate_number": "14040277",
+    "name": "NEADHAM EBONY",
+    "tier": "M1",
+    "category": "Endangering children",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T12:11:11Z",
+    "inmate_number": "14216905",
+    "name": "LAMPKIN FREDDY",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T12:11:11Z",
+    "inmate_number": "14471952",
+    "name": "LEE CECIL",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T12:11:11Z",
+    "inmate_number": "14540130",
+    "name": "STONE JAILEN",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T12:11:11Z",
+    "inmate_number": "14675845",
+    "name": "WOYTSEK JORDAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-22T12:11:11Z",
+    "inmate_number": "14744265",
+    "name": "ROY HAILEY",
+    "tier": null,
+    "category": null,
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-22T12:11:11Z",
+    "inmate_number": "14382629",
+    "name": "STUBBS DAVID",
+    "tier": "M3",
+    "category": "Criminal mischief",
+    "note": "no longer on HCSO public roster"
   }
 ]
