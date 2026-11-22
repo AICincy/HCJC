@@ -53815,30 +53815,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-15T03:11:22Z",
-    "inmate_number": "14699876",
-    "name": "DELLER JOSHUA",
+    "date": "2026-11-15",
     "tier": "M4",
-    "category": "Cincinnati Municipal Code: parks and recreation",
-    "note": "booked 11/14/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-15T03:11:22Z",
-    "inmate_number": "14830092",
-    "name": "VANHORN AARIONA",
-    "tier": null,
-    "category": null,
-    "note": "booked 11/14/26"
+    "category": "Cincinnati Municipal Code: parks and recreation"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-15T03:11:22Z",
-    "inmate_number": "14191062",
-    "name": "STANFORD ARTAZE",
+    "date": "2026-11-15",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "no longer on HCSO public roster"
+    "category": "Receiving stolen property"
   },
   {
     "event": "updated",
@@ -64557,6 +64542,51 @@
     "name": "JACKSON JESSICA",
     "tier": "M1",
     "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T04:08:08Z",
+    "inmate_number": "1065933",
+    "name": "JONES DAVID",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T04:08:08Z",
+    "inmate_number": "1273388",
+    "name": "BALLEW THERESA",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T04:08:08Z",
+    "inmate_number": "14222594",
+    "name": "WILLIAMS DONTEVIUS",
+    "tier": "M1",
+    "category": "Carrying concealed weapons",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T04:08:08Z",
+    "inmate_number": "2677653",
+    "name": "HOUSLEY LATOYA",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-22T04:08:08Z",
+    "inmate_number": "14200980",
+    "name": "MILLS ERICA",
+    "tier": "F5",
+    "category": "Possession of drugs",
     "note": "no longer on HCSO public roster"
   }
 ]
