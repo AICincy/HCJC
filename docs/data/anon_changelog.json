@@ -37302,6 +37302,12 @@
     "category": "Criminal trespass"
   },
   {
+    "event": "released",
+    "date": "2026-09-13",
+    "tier": "M1",
+    "category": "Domestic violence"
+  },
+  {
     "event": "updated",
     "date": "2026-09-14",
     "tier": "M1",
@@ -53899,12 +53905,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-15T07:52:25Z",
-    "inmate_number": "14682555",
-    "name": "HAYES CHRISTIAN",
+    "date": "2026-11-15",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 11/15/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
@@ -64650,6 +64653,78 @@
     "name": "MCDAVID DAVID",
     "tier": "M2",
     "category": "Possessing drug abuse instruments",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T08:13:02Z",
+    "inmate_number": "1198627",
+    "name": "KUHN RICHARD",
+    "tier": "F4",
+    "category": "Attempt to commit an offense",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T08:13:02Z",
+    "inmate_number": "14354915",
+    "name": "JACKSON MALIK",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T08:13:02Z",
+    "inmate_number": "14689846",
+    "name": "MORAN AMBER",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T08:13:02Z",
+    "inmate_number": "2036250",
+    "name": "CROOM YURI",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T08:13:02Z",
+    "inmate_number": "2322269",
+    "name": "HALL WILLIAM",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-22T08:13:02Z",
+    "inmate_number": "2374117",
+    "name": "DIZDARIC DAMIR",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-22T08:13:02Z",
+    "inmate_number": "2671669",
+    "name": "VANCE BRANDI",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-22T08:13:02Z",
+    "inmate_number": "14830823",
+    "name": "PEREZ MARCOS",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
     "note": "no longer on HCSO public roster"
   }
 ]
