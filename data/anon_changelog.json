@@ -54187,30 +54187,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-16T03:10:30Z",
-    "inmate_number": "14493143",
-    "name": "BAMBA CHEICK",
+    "date": "2026-11-16",
     "tier": "M1",
-    "category": "Driving under FRA suspension",
-    "note": "booked 11/15/26"
+    "category": "Driving under FRA suspension"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-16T03:10:30Z",
-    "inmate_number": "14830116",
-    "name": "HAGEN MATTHEW",
+    "date": "2026-11-16",
     "tier": "M2",
-    "category": "Obstructing official business",
-    "note": "booked 11/15/26"
+    "category": "Obstructing official business"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-16T03:10:30Z",
-    "inmate_number": "2253471",
-    "name": "BOOKER MARK",
+    "date": "2026-11-16",
     "tier": "MM",
-    "category": "Discard litter-public place",
-    "note": "booked 11/15/26"
+    "category": "Discard litter-public place"
   },
   {
     "event": "updated",
@@ -64993,5 +64984,23 @@
     "tier": "M1",
     "category": "Violating protection order",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-23T03:10:42Z",
+    "inmate_number": "14797999",
+    "name": "HUNTER TONY",
+    "tier": "M3",
+    "category": "Sexual imposition",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-23T03:10:42Z",
+    "inmate_number": "1663237",
+    "name": "UNDERDOWN SOPHIE",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 11/22/26"
   }
 ]
