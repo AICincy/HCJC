@@ -54313,12 +54313,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-16T12:12:53Z",
-    "inmate_number": "2658560",
-    "name": "WELLS JAMYR",
+    "date": "2026-11-16",
     "tier": "M1",
-    "category": "Assault",
-    "note": "booked 11/16/26"
+    "category": "Assault"
   },
   {
     "event": "updated",
@@ -65046,6 +65043,15 @@
     "name": "VAN DOREN RYAN",
     "tier": "MM",
     "category": "Speed limits",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-23T12:14:20Z",
+    "inmate_number": "14551974",
+    "name": "RELIFORD-HOWARD TAEAVIN",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
     "note": ""
   }
 ]
