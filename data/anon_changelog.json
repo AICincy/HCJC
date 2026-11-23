@@ -54205,39 +54205,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-16T04:10:31Z",
-    "inmate_number": "2253471",
-    "name": "BOOKER MARK",
+    "date": "2026-11-16",
     "tier": "MM",
-    "category": "Discard litter-public place",
-    "note": ""
+    "category": "Discard litter-public place"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-16T04:10:31Z",
-    "inmate_number": "2544193",
-    "name": "BANNISTER CARL",
+    "date": "2026-11-16",
     "tier": "M1",
-    "category": "Driving without a valid license",
-    "note": "no longer on HCSO public roster"
+    "category": "Driving without a valid license"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-16T04:10:31Z",
-    "inmate_number": "2363938",
-    "name": "KERKULA ANTRENETTE",
+    "date": "2026-11-16",
     "tier": "M1",
-    "category": "Receiving stolen property",
-    "note": "no longer on HCSO public roster"
+    "category": "Receiving stolen property"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-16T04:10:31Z",
-    "inmate_number": "14830094",
-    "name": "RUCKER DAMONI",
+    "date": "2026-11-16",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "no longer on HCSO public roster"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
@@ -65064,6 +65052,33 @@
     "name": "SIZEMORE RALPH",
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-23T05:09:46Z",
+    "inmate_number": "14255679",
+    "name": "TRIMM ANDRE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-23T05:09:46Z",
+    "inmate_number": "2834204",
+    "name": "RILEY KIONTAYE",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 11/22/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-23T05:09:46Z",
+    "inmate_number": "14797999",
+    "name": "HUNTER TONY",
+    "tier": "M3",
+    "category": "Sexual imposition",
     "note": "no longer on HCSO public roster"
   }
 ]
