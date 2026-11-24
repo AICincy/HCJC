@@ -54793,30 +54793,15 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-17T03:10:56Z",
-    "inmate_number": "1200268",
-    "name": "JOHNSON MATTHEW",
+    "date": "2026-11-17",
     "tier": "M1",
-    "category": "Falsification",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-17T03:10:56Z",
-    "inmate_number": "14305997",
-    "name": "WALLS THERESA",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Falsification"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-17T03:10:56Z",
-    "inmate_number": "14544415",
-    "name": "CODY IMANUEL",
+    "date": "2026-11-17",
     "tier": "M2",
-    "category": "Criminal damaging",
-    "note": "booked 11/16/26"
+    "category": "Criminal damaging"
   },
   {
     "event": "booked",
@@ -65770,5 +65755,59 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": "booked 11/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T03:11:32Z",
+    "inmate_number": "14311035",
+    "name": "CORNIST KARA",
+    "tier": "MM",
+    "category": "Illegal use or possession of drug paraphernalia",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T03:11:32Z",
+    "inmate_number": "14619786",
+    "name": "TRAMMELL IEASHA",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 11/23/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T03:11:32Z",
+    "inmate_number": "14831035",
+    "name": "RODRIGUEZ-MARTINEZ MELVIN",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T03:11:32Z",
+    "inmate_number": "2038729",
+    "name": "BACHELIER DENNIS",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T03:11:32Z",
+    "inmate_number": "2309905",
+    "name": "NEELEY JAMES",
+    "tier": "F2",
+    "category": "Strangulation",
+    "note": "booked 11/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T03:11:32Z",
+    "inmate_number": "2834547",
+    "name": "PRICE SHARITA",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
   }
 ]
