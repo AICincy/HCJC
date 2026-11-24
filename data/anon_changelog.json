@@ -54691,6 +54691,18 @@
   },
   {
     "event": "booked",
+    "date": "2026-11-16",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
+  },
+  {
+    "event": "updated",
+    "date": "2026-11-16",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
+  },
+  {
+    "event": "booked",
     "date": "2026-11-17",
     "tier": null,
     "category": null
@@ -54745,66 +54757,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-17T01:08:48Z",
-    "inmate_number": "14111928",
-    "name": "BARRON MARKUS",
+    "date": "2026-11-17",
     "tier": "F3",
-    "category": "Illegal conveyance of items into a detention facility",
-    "note": ""
+    "category": "Illegal conveyance of items into a detention facility"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-17T01:08:48Z",
-    "inmate_number": "14524391",
-    "name": "BROUSSARD TAVIYON",
+    "date": "2026-11-17",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-17T01:08:48Z",
-    "inmate_number": "14276800",
-    "name": "ANDERSON JOSEPH",
-    "tier": null,
-    "category": null,
-    "note": "booked 11/16/26"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-17T01:08:48Z",
-    "inmate_number": "14817576",
-    "name": "UNDERWOOD ANGELA",
+    "date": "2026-11-17",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Criminal trespass"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-11-17T01:08:48Z",
-    "inmate_number": "2095137",
-    "name": "LEAR KENDAYL",
+    "event": "updated",
+    "date": "2026-11-17",
     "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-17T01:08:48Z",
-    "inmate_number": "2440860",
-    "name": "BOGGAN MICHAEL",
-    "tier": "MM",
-    "category": "Illegal use or possession of drug paraphernalia",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-17T01:08:48Z",
-    "inmate_number": "2733283",
-    "name": "CLEPPER WALTER",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": null
   },
   {
     "event": "booked",
@@ -65713,5 +65686,50 @@
     "tier": "M1",
     "category": "Operating a vehicle under the influence (OVI / DUI)",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T01:16:43Z",
+    "inmate_number": "14733004",
+    "name": "HOWARD MYRANDA",
+    "tier": "M1",
+    "category": "Receiving stolen property",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T01:16:43Z",
+    "inmate_number": "1552643",
+    "name": "HALL MARC",
+    "tier": "MM",
+    "category": "Display of license plates",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T01:16:43Z",
+    "inmate_number": "1948458",
+    "name": "DUKES DARNELL",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T01:16:43Z",
+    "inmate_number": "2634147",
+    "name": "STEVENS CANNAN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T01:16:43Z",
+    "inmate_number": "2783045",
+    "name": "JOHNSON JASMINE",
+    "tier": "M1",
+    "category": "Endangering children",
+    "note": "booked 11/23/26"
   }
 ]
