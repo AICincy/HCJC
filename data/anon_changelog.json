@@ -54805,39 +54805,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-17T04:10:01Z",
-    "inmate_number": "14256156",
-    "name": "OWENS MARCUS",
+    "date": "2026-11-17",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 11/16/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-17T04:10:01Z",
-    "inmate_number": "14541689",
-    "name": "WARD SHAWN",
+    "date": "2026-11-17",
     "tier": "M1",
-    "category": "Violating protection order",
-    "note": "booked 11/16/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-17T04:10:01Z",
-    "inmate_number": "1620994",
-    "name": "BARNES CLIFFORD",
-    "tier": null,
-    "category": null,
-    "note": "booked 11/16/26"
+    "category": "Violating protection order"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-17T04:10:01Z",
-    "inmate_number": "14305997",
-    "name": "WALLS THERESA",
+    "date": "2026-11-17",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "no longer on HCSO public roster"
+    "category": "Criminal trespass"
   },
   {
     "event": "updated",
@@ -65809,5 +65791,59 @@
     "tier": "M1",
     "category": "Aggravated menacing",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T04:12:27Z",
+    "inmate_number": "14716728",
+    "name": "MILLER AARON",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 11/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T04:12:27Z",
+    "inmate_number": "14831035",
+    "name": "RODRIGUEZ-MARTINEZ MELVIN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T04:12:27Z",
+    "inmate_number": "14824839",
+    "name": "GLOVER JANIA",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/23/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T04:12:27Z",
+    "inmate_number": "2038729",
+    "name": "BACHELIER DENNIS",
+    "tier": "M1",
+    "category": "Theft",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-24T04:12:27Z",
+    "inmate_number": "14619088",
+    "name": "OLAGBEMIRO DABLOE",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-24T04:12:27Z",
+    "inmate_number": "2029779",
+    "name": "PORTER WILLIAM",
+    "tier": "MM",
+    "category": "Sol busin at street crossngs",
+    "note": "no longer on HCSO public roster"
   }
 ]
