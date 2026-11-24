@@ -1,48 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14297820",
-    "name": "RONE JARIAH",
-    "timestamp_utc": "2026-09-06T08:56:33Z",
-    "note": "booked 9/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14324129",
-    "name": "FERRELL JAANTE",
-    "timestamp_utc": "2026-09-06T08:56:33Z",
-    "note": "booked 9/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14657832",
-    "name": "WILLIAMS-STEELE AXLE",
-    "timestamp_utc": "2026-09-06T08:56:33Z",
-    "note": "booked 9/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14822711",
-    "name": "GOODLOW MICKEYA",
-    "timestamp_utc": "2026-09-06T08:56:33Z",
-    "note": "booked 9/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14822721",
-    "name": "GREER CHRISTOPHER",
-    "timestamp_utc": "2026-09-06T08:56:33Z",
-    "note": "booked 9/6/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "14822725",
-    "name": "LEMIEUX COLLIN",
-    "timestamp_utc": "2026-09-06T08:56:33Z",
-    "note": "booked 9/6/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "14822715",
     "name": "WILLIAMS TONY",
     "timestamp_utc": "2026-09-06T08:56:33Z",
@@ -69998,5 +69956,47 @@
     "name": "WITT AMANDA",
     "timestamp_utc": "2026-11-24T08:13:07Z",
     "note": "booked 11/24/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "14745638",
+    "name": "DOUGLAS DONALD",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14680073",
+    "name": "LINDSEY BRIAN",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2447571",
+    "name": "SEARS JOSHUA",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2824810",
+    "name": "POGUE CASEY",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "940340",
+    "name": "PETTWAY JAMES",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2247378",
+    "name": "HUGHES JOSEPH",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "note": "no longer on HCSO public roster"
   }
 ]

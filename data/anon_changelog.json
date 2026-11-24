@@ -54720,6 +54720,12 @@
     "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
+    "event": "updated",
+    "date": "2026-11-16",
+    "tier": "M2",
+    "category": "Resisting arrest"
+  },
+  {
     "event": "booked",
     "date": "2026-11-17",
     "tier": null,
@@ -54877,30 +54883,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-17T08:13:30Z",
-    "inmate_number": "14402918",
-    "name": "THOMAS CAMRIN",
+    "date": "2026-11-17",
     "tier": "M1",
-    "category": "Driving under FRA suspension",
-    "note": "booked 11/17/26"
+    "category": "Driving under FRA suspension"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-17T08:13:30Z",
-    "inmate_number": "14767308",
-    "name": "ROBLERO-SANTIZO EDILBERTO",
+    "date": "2026-11-17",
     "tier": "M1",
-    "category": "Operating a vehicle under the influence (OVI / DUI)",
-    "note": ""
+    "category": "Operating a vehicle under the influence (OVI / DUI)"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-17T08:13:30Z",
-    "inmate_number": "2713650",
-    "name": "ADORNO JIMMY",
+    "date": "2026-11-17",
     "tier": "M1",
-    "category": "Falsification",
-    "note": "no longer on HCSO public roster"
+    "category": "Falsification"
   },
   {
     "event": "booked",
@@ -66007,5 +66004,59 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": "booked 11/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "inmate_number": "14745638",
+    "name": "DOUGLAS DONALD",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "inmate_number": "14680073",
+    "name": "LINDSEY BRIAN",
+    "tier": "M1",
+    "category": "Driving under suspension",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "inmate_number": "2447571",
+    "name": "SEARS JOSHUA",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "inmate_number": "2824810",
+    "name": "POGUE CASEY",
+    "tier": "MM",
+    "category": "Speed limits",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "inmate_number": "940340",
+    "name": "PETTWAY JAMES",
+    "tier": "M2",
+    "category": "Resisting arrest",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-24T09:51:22Z",
+    "inmate_number": "2247378",
+    "name": "HUGHES JOSEPH",
+    "tier": "MM",
+    "category": "Booking hold (no ORC code on file)",
+    "note": "no longer on HCSO public roster"
   }
 ]
