@@ -45817,6 +45817,18 @@
   },
   {
     "event": "booked",
+    "date": "2026-10-04",
+    "tier": "M4",
+    "category": "Menacing"
+  },
+  {
+    "event": "updated",
+    "date": "2026-10-04",
+    "tier": "M4",
+    "category": "Menacing"
+  },
+  {
+    "event": "booked",
     "date": "2026-10-05",
     "tier": null,
     "category": null
@@ -46405,6 +46417,12 @@
   },
   {
     "event": "updated",
+    "date": "2026-10-05",
+    "tier": "M4",
+    "category": "Menacing"
+  },
+  {
+    "event": "released",
     "date": "2026-10-05",
     "tier": "M4",
     "category": "Menacing"
@@ -54841,21 +54859,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-17T06:11:26Z",
-    "inmate_number": "14609201",
-    "name": "FREELAND JULIAN",
+    "date": "2026-11-17",
     "tier": "MM",
-    "category": "Underage person liquor offense",
-    "note": "booked 11/17/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-17T06:11:26Z",
-    "inmate_number": "2493481",
-    "name": "THOMAS DAVID",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Underage person liquor offense"
   },
   {
     "event": "updated",
@@ -65881,5 +65887,41 @@
     "tier": "F5",
     "category": "Trafficking in drugs",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T06:12:55Z",
+    "inmate_number": "14211644",
+    "name": "PARKS LADERRICK",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T06:12:55Z",
+    "inmate_number": "1570793",
+    "name": "LATTIMORE ANTHONY",
+    "tier": "M1",
+    "category": "Failure to reinstate a license",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T06:12:55Z",
+    "inmate_number": "1804575",
+    "name": "BARRICK SCOTT",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T06:12:55Z",
+    "inmate_number": "445158",
+    "name": "PUCK BRYAN",
+    "tier": "M4",
+    "category": "Menacing",
+    "note": "booked 11/24/26"
   }
 ]
