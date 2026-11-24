@@ -1,20 +1,6 @@
 [
   {
     "event": "updated",
-    "inmate_number": "2733322",
-    "name": "HOPKINS CHAZE",
-    "timestamp_utc": "2026-09-06T04:36:13Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2761213",
-    "name": "SMARTT DAESHA",
-    "timestamp_utc": "2026-09-06T04:36:13Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
     "inmate_number": "2760811",
     "name": "ALLEN ALEXIS",
     "timestamp_utc": "2026-09-06T04:36:13Z",
@@ -69998,5 +69984,19 @@
     "name": "PUCK BRYAN",
     "timestamp_utc": "2026-11-24T06:12:55Z",
     "note": "booked 11/24/26"
+  },
+  {
+    "event": "booked",
+    "inmate_number": "1810343",
+    "name": "JANSEN RANDALL",
+    "timestamp_utc": "2026-11-24T07:02:41Z",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14590502",
+    "name": "LEATHERS KEMONTA",
+    "timestamp_utc": "2026-11-24T07:02:41Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
