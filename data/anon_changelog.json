@@ -54913,57 +54913,33 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-17T12:13:58Z",
-    "inmate_number": "14503992",
-    "name": "COLLIER CIERA",
+    "date": "2026-11-17",
     "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Assault"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-17T12:13:58Z",
-    "inmate_number": "1492559",
-    "name": "TAYLOR ARTHUR",
+    "date": "2026-11-17",
     "tier": "MM",
-    "category": "Open container of beer or intoxicating liquor in a vehicle",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-17T12:13:58Z",
-    "inmate_number": "2363644",
-    "name": "DEAN BRANDEN",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": ""
+    "category": "Open container of beer or intoxicating liquor in a vehicle"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-17T12:13:58Z",
-    "inmate_number": "14609201",
-    "name": "FREELAND JULIAN",
+    "date": "2026-11-17",
     "tier": "MM",
-    "category": "Underage person liquor offense",
-    "note": "no longer on HCSO public roster"
+    "category": "Underage person liquor offense"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-17T12:13:58Z",
-    "inmate_number": "1786834",
-    "name": "HAWKINS QUINTIN",
+    "date": "2026-11-17",
     "tier": "M1",
-    "category": "Theft",
-    "note": "no longer on HCSO public roster"
+    "category": "Theft"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-17T12:13:58Z",
-    "inmate_number": "14753642",
-    "name": "PAAU MIGUEL",
+    "date": "2026-11-17",
     "tier": "M1",
-    "category": "Assault",
-    "note": "no longer on HCSO public roster"
+    "category": "Assault"
   },
   {
     "event": "released",
@@ -66052,5 +66028,41 @@
     "tier": "M1",
     "category": "Violating protection order",
     "note": "booked 11/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-24T13:13:43Z",
+    "inmate_number": "14471952",
+    "name": "LEE CECIL",
+    "tier": "M1",
+    "category": "Violating protection order",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-24T13:13:43Z",
+    "inmate_number": "2799255",
+    "name": "MITCHELL TIARA",
+    "tier": "M4",
+    "category": "Criminal trespass",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-24T13:13:43Z",
+    "inmate_number": "2516426",
+    "name": "KERSEY CHARLES",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-24T13:13:43Z",
+    "inmate_number": "14318875",
+    "name": "MORRISON MICHAEL",
+    "tier": "M2",
+    "category": "Obstructing official business",
+    "note": "no longer on HCSO public roster"
   }
 ]
