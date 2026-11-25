@@ -39972,6 +39972,12 @@
     "category": "Reckless operation of a vessel"
   },
   {
+    "event": "released",
+    "date": "2026-09-21",
+    "tier": "M1",
+    "category": "Assault"
+  },
+  {
     "event": "updated",
     "date": "2026-09-22",
     "tier": "M1",
@@ -55333,84 +55339,57 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-18T03:40:25Z",
-    "inmate_number": "1040707",
-    "name": "BERLING ROBERT",
+    "date": "2026-11-18",
     "tier": "M1",
-    "category": "Driving under suspension or cancellation",
-    "note": ""
+    "category": "Driving under suspension or cancellation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-18T03:40:25Z",
-    "inmate_number": "14557845",
-    "name": "HARVEY JOSEPH",
+    "date": "2026-11-18",
     "tier": "F5",
-    "category": "Vandalism",
-    "note": "booked 11/17/26"
+    "category": "Vandalism"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-18T03:40:25Z",
-    "inmate_number": "14697470",
-    "name": "CODY JAMIE",
+    "date": "2026-11-18",
     "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 11/17/26"
+    "category": "Domestic violence"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-18T03:40:25Z",
-    "inmate_number": "1807167",
-    "name": "ISHAM BRIAN",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 11/17/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-18T03:40:25Z",
-    "inmate_number": "2304856",
-    "name": "TOMBS LARRY",
+    "date": "2026-11-18",
     "tier": "F1",
-    "category": "Aggravated robbery",
-    "note": "booked 11/17/26"
+    "category": "Aggravated robbery"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-18T03:40:25Z",
-    "inmate_number": "2506495",
-    "name": "CARLTON DARIUS",
+    "date": "2026-11-18",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked (date not reported)"
+    "category": "Possession of drugs"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-18T03:40:25Z",
-    "inmate_number": "14190033",
-    "name": "HESLER COREY",
+    "date": "2026-11-18",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "no longer on HCSO public roster"
+    "category": "Possession of drugs"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-18T04:09:42Z",
-    "inmate_number": "2506495",
-    "name": "CARLTON DARIUS",
+    "date": "2026-11-18",
     "tier": "F5",
-    "category": "Possession of drugs",
-    "note": ""
+    "category": "Possession of drugs"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-18T04:09:42Z",
-    "inmate_number": "2693399",
-    "name": "SMITH KAYLA",
-    "tier": "M1",
-    "category": "Domestic violence",
-    "note": "booked 11/17/26"
+    "date": "2026-11-18",
+    "tier": "M2",
+    "category": "Criminal damaging"
+  },
+  {
+    "event": "released",
+    "date": "2026-11-18",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -66769,5 +66748,95 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": "booked 11/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "14500222",
+    "name": "ITSCHNER ANTHONY",
+    "tier": "F3",
+    "category": "Complicity",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "14542958",
+    "name": "BROWN LEO",
+    "tier": "M1",
+    "category": "Assault",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "14831152",
+    "name": "VIRDI MALKIT",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "2194623",
+    "name": "BOETTCHER JUSTIN",
+    "tier": "M2",
+    "category": "Possessing drug abuse instruments",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "14063184",
+    "name": "DAVIS BRITTNEY",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "2533043",
+    "name": "FANNON KIONNE",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "2501023",
+    "name": "MALACHI PARIS",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "14598404",
+    "name": "MORRIS JAYDEN",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "2785390",
+    "name": "SNIDER CHAD",
+    "tier": "F5",
+    "category": "Breaking and entering",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-25T04:11:27Z",
+    "inmate_number": "2351248",
+    "name": "STOKES DEMETRICE",
+    "tier": "F5",
+    "category": "Trafficking in drugs",
+    "note": "no longer on HCSO public roster"
   }
 ]
