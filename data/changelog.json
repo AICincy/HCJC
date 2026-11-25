@@ -1,20 +1,6 @@
 [
   {
     "event": "updated",
-    "inmate_number": "2247794",
-    "name": "JONES TIRAS",
-    "timestamp_utc": "2026-09-08T15:13:59Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "inmate_number": "2249755",
-    "name": "TAYLOR ROBERT",
-    "timestamp_utc": "2026-09-08T15:13:59Z",
-    "note": ""
-  },
-  {
-    "event": "updated",
     "inmate_number": "2259359",
     "name": "HAYES DARREN",
     "timestamp_utc": "2026-09-08T15:13:59Z",
@@ -69998,5 +69984,19 @@
     "name": "POOLE TEARIES",
     "timestamp_utc": "2026-11-25T09:11:05Z",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2336652",
+    "name": "ISHAM CHARISSE",
+    "timestamp_utc": "2026-11-25T10:09:28Z",
+    "note": "booked 11/25/26"
+  },
+  {
+    "event": "released",
+    "inmate_number": "2344584",
+    "name": "BARRON RAVEA",
+    "timestamp_utc": "2026-11-25T10:09:28Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
