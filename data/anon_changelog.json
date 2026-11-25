@@ -55513,30 +55513,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-18T14:28:13Z",
-    "inmate_number": "14830404",
-    "name": "MEDINA JOHAN",
+    "date": "2026-11-18",
     "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 11/18/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-18T14:28:13Z",
-    "inmate_number": "14830406",
-    "name": "MANZANARES ALEXIS",
-    "tier": "F2",
-    "category": "Strangulation",
-    "note": "booked 11/18/26"
+    "category": "Strangulation"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-18T14:28:13Z",
-    "inmate_number": "14316414",
-    "name": "HARRIS STEVEN",
+    "date": "2026-11-18",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "no longer on HCSO public roster"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
@@ -66966,6 +66951,51 @@
     "name": "RODRIGUEZ-MARTINEZ MELVIN",
     "tier": "M1",
     "category": "Domestic violence",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-25T15:13:03Z",
+    "inmate_number": "14629711",
+    "name": "GRIFFIN KING",
+    "tier": "M3",
+    "category": "Unlawful restraint",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-25T15:13:03Z",
+    "inmate_number": "14705333",
+    "name": "SANTIAGO THOMAS",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 11/25/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-25T15:13:03Z",
+    "inmate_number": "2122602",
+    "name": "STRUBLE PHILLIP",
+    "tier": null,
+    "category": null,
+    "note": "booked 11/25/26"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-25T15:13:03Z",
+    "inmate_number": "14042849",
+    "name": "GRIBBINS RAVEN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-25T15:13:03Z",
+    "inmate_number": "1463617",
+    "name": "JORDAN ERICA",
+    "tier": "M4",
+    "category": "Criminal trespass",
     "note": "no longer on HCSO public roster"
   }
 ]
