@@ -55309,30 +55309,27 @@
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-18T01:20:18Z",
-    "inmate_number": "1755329",
-    "name": "HAYES LAFONZO",
+    "date": "2026-11-18",
     "tier": "M1",
-    "category": "Aggravated menacing",
-    "note": ""
+    "category": "Aggravated menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-18T02:11:22Z",
-    "inmate_number": "1040707",
-    "name": "BERLING ROBERT",
+    "date": "2026-11-18",
     "tier": "M1",
-    "category": "Driving under suspension or cancellation",
-    "note": "booked (date not reported)"
+    "category": "Driving under suspension or cancellation"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-18T02:11:22Z",
-    "inmate_number": "14535969",
-    "name": "CHEATUM DEVIN",
+    "date": "2026-11-18",
     "tier": "M1",
-    "category": "Stopping after accident on public roads",
-    "note": "booked 11/17/26"
+    "category": "Stopping after accident on public roads"
+  },
+  {
+    "event": "booked",
+    "date": "2026-11-18",
+    "tier": null,
+    "category": null
   },
   {
     "event": "updated",
@@ -66727,5 +66724,50 @@
     "tier": "M1",
     "category": "Theft",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-25T02:12:24Z",
+    "inmate_number": "14619817",
+    "name": "ROBERTS LANDYN",
+    "tier": "M1",
+    "category": "Aggravated menacing",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-25T02:12:24Z",
+    "inmate_number": "2299801",
+    "name": "ROBERTS JEFFREY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-25T02:12:24Z",
+    "inmate_number": "2156657",
+    "name": "BRANDT JASON",
+    "tier": null,
+    "category": null,
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-25T02:12:24Z",
+    "inmate_number": "2373967",
+    "name": "GIBSON CHRIS",
+    "tier": "MM",
+    "category": "Restrictions on light transmittance (tinted windows)",
+    "note": "booked 11/24/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-25T02:12:24Z",
+    "inmate_number": "2625039",
+    "name": "WHITE TYWONN",
+    "tier": "F5",
+    "category": "Possession of drugs",
+    "note": "booked 11/24/26"
   }
 ]
