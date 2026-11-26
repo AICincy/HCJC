@@ -56023,21 +56023,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-19T11:11:22Z",
-    "inmate_number": "2272181",
-    "name": "CLAUSS EMIL",
+    "date": "2026-11-19",
     "tier": "M1",
-    "category": "Driving under FRA suspension",
-    "note": "booked (date not reported)"
+    "category": "Driving under FRA suspension"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-19T11:11:22Z",
-    "inmate_number": "2762144",
-    "name": "BROWN TIMOTHY",
+    "date": "2026-11-19",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": ""
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
@@ -67333,5 +67327,68 @@
     "tier": null,
     "category": null,
     "note": "booked (date not reported)"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-26T11:12:34Z",
+    "inmate_number": "1150086",
+    "name": "COMER FRANKLIN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-26T11:12:34Z",
+    "inmate_number": "14189952",
+    "name": "PHILLIPS TIMOTHY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-26T11:12:34Z",
+    "inmate_number": "14337498",
+    "name": "DOXIE SHANEZ",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-26T11:12:34Z",
+    "inmate_number": "1496462",
+    "name": "MARTIN MICHAEL",
+    "tier": "M1",
+    "category": "Theft",
+    "note": "booked 11/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-26T11:12:34Z",
+    "inmate_number": "2294286",
+    "name": "BUSH ANDRE",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "booked 11/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-26T11:12:34Z",
+    "inmate_number": "2545429",
+    "name": "OWENS DEVON",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-26T11:12:34Z",
+    "inmate_number": "14705333",
+    "name": "SANTIAGO THOMAS",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": "no longer on HCSO public roster"
   }
 ]
