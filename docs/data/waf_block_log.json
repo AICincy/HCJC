@@ -1138722,5 +1138722,56 @@
     "photo_field_path": "img[2]@src data:image/png;base64",
     "payload_length": 0,
     "prev_sha256": "d143e0fd477a52c882f64937f7215968e4801c8c11c42e8460f5befb75972ea3"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-26T00:12:41Z",
+    "inmate_id": "1465713",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "67dec89dfa49f6a609d66ed474acd65d070306c11860cc9ba4ff3790621fbc8c"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-26T00:12:45Z",
+    "inmate_id": "14621487",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "8d2aedab56df401f77830ee973b19f868268550e4fe8f8431ac925b0e0fc3ce1"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-26T00:12:59Z",
+    "inmate_id": "14831248",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "121d7f7bdee9393b6acd89f76b981008ec63538df866de8234994fa172c1652f"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-26T00:13:05Z",
+    "inmate_id": "1553706",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "751cb44b573a37c2e8f5f15eda45dcf17da36dcff6c6f89e1087233a1bba5b84"
+  },
+  {
+    "event": "empty_photo_observed",
+    "timestamp_utc": "2026-11-26T00:13:50Z",
+    "inmate_id": "2064003",
+    "photo_field_path": "img[2]@src data:image/png;base64",
+    "payload_length": 0,
+    "prev_sha256": "acef2126e860bfb0ac1b815320625c5e3b69e134c42bf45243dfe541350d5f42"
+  },
+  {
+    "timestamp_utc": "2026-11-26T00:14:07Z",
+    "event": "detail_page_waf_block",
+    "inmate_id": "2140030",
+    "url": "/justice-center-services/inmate-search/inmate-detail/?id=2140030",
+    "http_status": null,
+    "failure_mode": "timeout",
+    "response_signature": null,
+    "response_length": 0,
+    "prev_sha256": "360fbaf7fe871504e248a696f7bc441f466d5a645325b767737c8bcdace8096a"
   }
 ]
