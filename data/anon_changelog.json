@@ -56035,30 +56035,21 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-19T12:12:13Z",
-    "inmate_number": "14548406",
-    "name": "TREADWAY FELECIA",
+    "date": "2026-11-19",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "booked 11/19/26"
+    "category": "Criminal trespass"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-19T12:12:13Z",
-    "inmate_number": "14678189",
-    "name": "COOPER LOUIS",
+    "date": "2026-11-19",
     "tier": "F3",
-    "category": "Tampering with evidence",
-    "note": "booked 11/19/26"
+    "category": "Tampering with evidence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-19T12:12:13Z",
-    "inmate_number": "2272181",
-    "name": "CLAUSS EMIL",
+    "date": "2026-11-19",
     "tier": "M1",
-    "category": "Driving under FRA suspension",
-    "note": ""
+    "category": "Driving under FRA suspension"
   },
   {
     "event": "released",
@@ -67390,5 +67381,50 @@
     "tier": "MM",
     "category": "Open container of beer or intoxicating liquor in a vehicle",
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-26T12:15:00Z",
+    "inmate_number": "14189952",
+    "name": "PHILLIPS TIMOTHY",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-26T12:15:00Z",
+    "inmate_number": "14243333",
+    "name": "CEPHAS KEYONNA",
+    "tier": "M1",
+    "category": "Failure to comply with order or signal of police officer",
+    "note": "booked 11/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-26T12:15:00Z",
+    "inmate_number": "14337498",
+    "name": "DOXIE SHANEZ",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": ""
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-26T12:15:00Z",
+    "inmate_number": "2294286",
+    "name": "BUSH ANDRE",
+    "tier": "MM",
+    "category": "Open container of beer or intoxicating liquor in a vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-26T12:15:00Z",
+    "inmate_number": "2023210",
+    "name": "GRIGGS TERENCEO",
+    "tier": "F3",
+    "category": "Abduction",
+    "note": "booked 11/26/26"
   }
 ]
