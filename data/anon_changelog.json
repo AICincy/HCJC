@@ -56017,12 +56017,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-19T10:09:16Z",
-    "inmate_number": "2762144",
-    "name": "BROWN TIMOTHY",
+    "date": "2026-11-19",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 11/19/26"
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
@@ -67318,5 +67315,23 @@
     "tier": "M1",
     "category": "Failure to comply with order or signal of police officer",
     "note": "booked 11/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-26T10:11:02Z",
+    "inmate_number": "1150086",
+    "name": "COMER FRANKLIN",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-26T10:11:02Z",
+    "inmate_number": "14337498",
+    "name": "DOXIE SHANEZ",
+    "tier": null,
+    "category": null,
+    "note": "booked (date not reported)"
   }
 ]
