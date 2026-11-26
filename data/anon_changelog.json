@@ -55921,75 +55921,39 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-19T06:10:57Z",
-    "inmate_number": "14080171",
-    "name": "WALTON ANGELO",
+    "date": "2026-11-19",
     "tier": "M4",
-    "category": "Menacing",
-    "note": "booked 11/19/26"
+    "category": "Menacing"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-19T06:10:57Z",
-    "inmate_number": "14315457",
-    "name": "KEY-SIMS JONATHAN",
-    "tier": "M4",
-    "category": "Menacing",
-    "note": "booked 11/19/26"
+    "date": "2026-11-19",
+    "tier": "M1",
+    "category": "Having physical control of vehicle while under influence"
   },
   {
     "event": "updated",
-    "timestamp_utc": "2026-11-19T06:10:57Z",
-    "inmate_number": "14682286",
-    "name": "GULLY BRIAN",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": ""
+    "date": "2026-11-19",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-19T06:10:57Z",
-    "inmate_number": "14829837",
-    "name": "MARSHALL RICHARD",
+    "date": "2026-11-19",
     "tier": "M1",
-    "category": "Having physical control of vehicle while under influence",
-    "note": "booked 11/19/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-19T06:10:57Z",
-    "inmate_number": "2586897",
-    "name": "COOPER MARLON",
-    "tier": "M1",
-    "category": "Operating a vehicle under the influence (OVI / DUI)",
-    "note": ""
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-19T06:10:57Z",
-    "inmate_number": "2677653",
-    "name": "HOUSLEY LATOYA",
-    "tier": "M1",
-    "category": "Assault",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-19T06:10:57Z",
-    "inmate_number": "2710655",
-    "name": "ROUSE BRUCE",
-    "tier": "M1",
-    "category": "Cincinnati Municipal Code: vicious dogs",
-    "note": "booked (date not reported)"
+    "category": "Cincinnati Municipal Code: vicious dogs"
   },
   {
     "event": "released",
-    "timestamp_utc": "2026-11-19T06:10:57Z",
-    "inmate_number": "2284691",
-    "name": "LINVILLE TIMOTHY",
+    "date": "2026-11-19",
     "tier": "M4",
-    "category": "Criminal trespass",
-    "note": "no longer on HCSO public roster"
+    "category": "Criminal trespass"
+  },
+  {
+    "event": "booked",
+    "date": "2026-11-19",
+    "tier": "M1",
+    "category": "Failure to reinstate a license"
   },
   {
     "event": "updated",
@@ -67267,5 +67231,41 @@
     "tier": null,
     "category": null,
     "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-26T06:11:09Z",
+    "inmate_number": "14831254",
+    "name": "CASSELL LUKE",
+    "tier": "M1",
+    "category": "Unauthorized use of a vehicle",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-26T06:11:09Z",
+    "inmate_number": "1921097",
+    "name": "JONES CLIFFORD",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/26/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-26T06:11:09Z",
+    "inmate_number": "2165227",
+    "name": "JONES TIMOTHY",
+    "tier": "M1",
+    "category": "Driving on a suspended/revoked license",
+    "note": "booked 11/26/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-26T06:11:09Z",
+    "inmate_number": "2330719",
+    "name": "WILFONG SHYNA",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
   }
 ]
