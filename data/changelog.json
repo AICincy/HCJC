@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "14801498",
-    "name": "SIMS DEJANA",
-    "timestamp_utc": "2026-09-09T15:18:21Z",
-    "note": "booked 9/9/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "1516943",
     "name": "JOHNSON MICHAEL",
     "timestamp_utc": "2026-09-09T15:18:21Z",
@@ -69997,6 +69990,13 @@
     "inmate_number": "14771084",
     "name": "QUARLES CLYDE",
     "timestamp_utc": "2026-11-26T13:18:08Z",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14547922",
+    "name": "WRIGHT TRAVIS",
+    "timestamp_utc": "2026-11-26T18:11:51Z",
     "note": "no longer on HCSO public roster"
   }
 ]
