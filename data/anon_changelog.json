@@ -56653,21 +56653,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-20T11:10:16Z",
-    "inmate_number": "14235203",
-    "name": "HENDERSON TREMON",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-20T11:10:16Z",
-    "inmate_number": "14347616",
-    "name": "HILL GEOFFREY",
-    "tier": "MM",
-    "category": "Disorderly conduct",
-    "note": "booked 11/20/26"
+    "date": "2026-11-20",
+    "tier": "M1",
+    "category": "Assault"
   },
   {
     "event": "updated",
@@ -66583,6 +66571,15 @@
     "timestamp_utc": "2026-11-27T10:11:36Z",
     "inmate_number": "14831299",
     "name": "MONTENEGRO-GONZALEZ JAMILTON",
+    "tier": "M1",
+    "category": "Domestic violence",
+    "note": "booked 11/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-27T11:12:10Z",
+    "inmate_number": "14236975",
+    "name": "DODGE SUSAN",
     "tier": "M1",
     "category": "Domestic violence",
     "note": "booked 11/27/26"
