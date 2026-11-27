@@ -1,19 +1,5 @@
 [
   {
-    "event": "booked",
-    "inmate_number": "2805779",
-    "name": "MATHEWS WILLIAM",
-    "timestamp_utc": "2026-09-09T21:16:36Z",
-    "note": "booked 9/9/26"
-  },
-  {
-    "event": "booked",
-    "inmate_number": "2673572",
-    "name": "NASH RICARDO",
-    "timestamp_utc": "2026-09-09T21:16:36Z",
-    "note": "booked 9/9/26"
-  },
-  {
     "event": "released",
     "inmate_number": "14174758",
     "name": "COFFMAN BRANDON",
@@ -69998,5 +69984,19 @@
     "name": "DOWDY JASON",
     "timestamp_utc": "2026-11-27T20:10:45Z",
     "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "14831324",
+    "name": "BOSTON CHANEL",
+    "timestamp_utc": "2026-11-27T21:10:08Z",
+    "note": "booked (date not reported)"
+  },
+  {
+    "event": "released",
+    "inmate_number": "14725476",
+    "name": "TOOMBS DEMETRIUS",
+    "timestamp_utc": "2026-11-27T21:10:08Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
