@@ -1,13 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "2756866",
-    "name": "CHURCH JOANN",
-    "timestamp_utc": "2026-09-09T15:18:21Z",
-    "note": "booked 9/9/26"
-  },
-  {
-    "event": "booked",
     "inmate_number": "2834774",
     "name": "MERCER CODY",
     "timestamp_utc": "2026-09-09T15:18:21Z",
@@ -69998,5 +69991,12 @@
     "name": "ASHURST JEANNINE",
     "timestamp_utc": "2026-11-27T00:12:47Z",
     "note": "booked 11/26/26"
+  },
+  {
+    "event": "updated",
+    "inmate_number": "1824192",
+    "name": "ASHURST JEANNINE",
+    "timestamp_utc": "2026-11-27T01:13:20Z",
+    "note": ""
   }
 ]
