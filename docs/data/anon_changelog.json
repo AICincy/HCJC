@@ -57030,58 +57030,10 @@
     "category": "Violating protection order"
   },
   {
-    "event": "booked",
-    "timestamp_utc": "2026-11-20T23:14:48Z",
-    "inmate_number": "1077110",
-    "name": "BURGESS ANTHONY",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
     "event": "updated",
-    "timestamp_utc": "2026-11-20T23:14:48Z",
-    "inmate_number": "1848557",
-    "name": "PAYNE ANGELA",
+    "date": "2026-11-20",
     "tier": "M1",
-    "category": "Endangering children",
-    "note": ""
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-20T23:14:48Z",
-    "inmate_number": "2149329",
-    "name": "PETERSON MICHAEL",
-    "tier": null,
-    "category": null,
-    "note": "booked (date not reported)"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-20T23:14:48Z",
-    "inmate_number": "2273853",
-    "name": "JOHNSON JENNIFER",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked 11/20/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-20T23:14:48Z",
-    "inmate_number": "2313386",
-    "name": "DUNCAN JACOB",
-    "tier": "F5",
-    "category": "Possession of drugs",
-    "note": "booked 11/20/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-20T23:14:48Z",
-    "inmate_number": "433940",
-    "name": "BEDINGHAUS GEORGE",
-    "tier": "M4",
-    "category": "Criminal trespass",
-    "note": ""
+    "category": "Endangering children"
   },
   {
     "event": "updated",
@@ -66163,5 +66115,32 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": "booked 11/27/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-27T23:51:30Z",
+    "inmate_number": "14831327",
+    "name": "ROBINSON RONNIQUE",
+    "tier": "M1",
+    "category": "Assault",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-27T23:51:30Z",
+    "inmate_number": "1713746",
+    "name": "LASTER CHRISTOPHER",
+    "tier": null,
+    "category": null,
+    "note": "booked 11/27/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-27T23:51:30Z",
+    "inmate_number": "2661673",
+    "name": "GARDENHIRE CHRISTOPHER",
+    "tier": "M1",
+    "category": "Operating a vehicle under the influence (OVI / DUI)",
+    "note": "booked (date not reported)"
   }
 ]
