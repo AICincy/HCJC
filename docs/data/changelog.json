@@ -1,12 +1,5 @@
 [
   {
-    "event": "booked",
-    "inmate_number": "2245228",
-    "name": "ACOFF KEMIKO",
-    "timestamp_utc": "2026-09-09T18:46:27Z",
-    "note": "booked 9/9/26"
-  },
-  {
     "event": "updated",
     "inmate_number": "2249755",
     "name": "TAYLOR ROBERT",
@@ -69998,5 +69991,12 @@
     "name": "MONTENEGRO-GONZALEZ JAMILTON",
     "timestamp_utc": "2026-11-27T12:14:14Z",
     "note": ""
+  },
+  {
+    "event": "released",
+    "inmate_number": "1637453",
+    "name": "SINCLAIR ELRICO",
+    "timestamp_utc": "2026-11-27T13:15:18Z",
+    "note": "no longer on HCSO public roster"
   }
 ]
