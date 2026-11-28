@@ -57259,30 +57259,15 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-21T08:10:54Z",
-    "inmate_number": "1370319",
-    "name": "SMITH DOUGLAS",
+    "date": "2026-11-21",
     "tier": "M1",
-    "category": "Permitting drug abuse",
-    "note": "booked 11/21/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-21T08:10:54Z",
-    "inmate_number": "14730767",
-    "name": "MADARIS PAIGE",
-    "tier": "M1",
-    "category": "Theft",
-    "note": ""
+    "category": "Permitting drug abuse"
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-21T08:10:54Z",
-    "inmate_number": "2192626",
-    "name": "EDWARDS KENNETH",
+    "date": "2026-11-21",
     "tier": "M1",
-    "category": "Falsification",
-    "note": "booked 11/21/26"
+    "category": "Falsification"
   },
   {
     "event": "booked",
@@ -66264,6 +66249,15 @@
     "name": "BLUM ZACHARY",
     "tier": "M1",
     "category": "Driving on a suspended/revoked license",
+    "note": "booked 11/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-28T08:13:42Z",
+    "inmate_number": "2520605",
+    "name": "AHRMAN CHRISTINA",
+    "tier": "F5",
+    "category": "Possession of drugs",
     "note": "booked 11/28/26"
   }
 ]
