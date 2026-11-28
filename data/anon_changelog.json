@@ -57295,30 +57295,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-21T12:10:52Z",
-    "inmate_number": "14085221",
-    "name": "MIDDLEBROOK EMONTE",
+    "date": "2026-11-21",
     "tier": "M1",
-    "category": "Driving on a suspended/revoked license",
-    "note": "booked 11/21/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-21T12:10:52Z",
-    "inmate_number": "14830823",
-    "name": "PEREZ MARCOS",
-    "tier": "M1",
-    "category": "Operating a vehicle under the influence (OVI / DUI)",
-    "note": "booked 11/21/26"
-  },
-  {
-    "event": "updated",
-    "timestamp_utc": "2026-11-21T12:10:52Z",
-    "inmate_number": "2462763",
-    "name": "SUGGS FREDRICK",
-    "tier": "M1",
-    "category": "Assault",
-    "note": ""
+    "category": "Driving on a suspended/revoked license"
   },
   {
     "event": "booked",
@@ -66283,5 +66262,23 @@
     "tier": "F5",
     "category": "Possession of drugs",
     "note": "booked 11/28/26"
+  },
+  {
+    "event": "booked",
+    "timestamp_utc": "2026-11-28T12:12:54Z",
+    "inmate_number": "14831360",
+    "name": "GONZALEZ-PEREZ DILMAR",
+    "tier": "M1",
+    "category": "Driving without a valid license",
+    "note": "booked 11/28/26"
+  },
+  {
+    "event": "updated",
+    "timestamp_utc": "2026-11-28T12:12:54Z",
+    "inmate_number": "2623948",
+    "name": "ROBLES ALEXIS",
+    "tier": "MM",
+    "category": "Disorderly conduct",
+    "note": ""
   }
 ]
