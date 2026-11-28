@@ -1,20 +1,6 @@
 [
   {
     "event": "booked",
-    "inmate_number": "2594485",
-    "name": "WILLINGHAM GYRON",
-    "timestamp_utc": "2026-09-10T06:16:26Z",
-    "note": "booked 9/9/26"
-  },
-  {
-    "event": "released",
-    "inmate_number": "14352042",
-    "name": "WATTS JARRETT",
-    "timestamp_utc": "2026-09-10T06:16:26Z",
-    "note": "no longer on HCSO public roster"
-  },
-  {
-    "event": "booked",
     "inmate_number": "14296947",
     "name": "MURRAY AUSTIN",
     "timestamp_utc": "2026-09-10T11:38:10Z",
@@ -69998,5 +69984,19 @@
     "name": "WHITTEN BETHANY",
     "timestamp_utc": "2026-11-28T07:14:53Z",
     "note": ""
+  },
+  {
+    "event": "updated",
+    "inmate_number": "2107549",
+    "name": "PATTON JOHNATHAN",
+    "timestamp_utc": "2026-11-28T07:43:38Z",
+    "note": ""
+  },
+  {
+    "event": "booked",
+    "inmate_number": "2635096",
+    "name": "BLUM ZACHARY",
+    "timestamp_utc": "2026-11-28T07:43:38Z",
+    "note": "booked 11/28/26"
   }
 ]
