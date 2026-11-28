@@ -57301,30 +57301,9 @@
   },
   {
     "event": "booked",
-    "timestamp_utc": "2026-11-21T13:11:42Z",
-    "inmate_number": "14620766",
-    "name": "STANLEY KYREE",
+    "date": "2026-11-21",
     "tier": "M2",
-    "category": "Resisting arrest",
-    "note": "booked 11/21/26"
-  },
-  {
-    "event": "booked",
-    "timestamp_utc": "2026-11-21T13:11:42Z",
-    "inmate_number": "14664991",
-    "name": "TUBBS TIMOTHY",
-    "tier": "M1",
-    "category": "Assault",
-    "note": "booked 11/21/26"
-  },
-  {
-    "event": "released",
-    "timestamp_utc": "2026-11-21T13:11:42Z",
-    "inmate_number": "2483710",
-    "name": "NEELEY PAUL",
-    "tier": null,
-    "category": null,
-    "note": "no longer on HCSO public roster"
+    "category": "Resisting arrest"
   },
   {
     "event": "updated",
@@ -66280,5 +66259,23 @@
     "tier": "MM",
     "category": "Disorderly conduct",
     "note": ""
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-28T13:14:00Z",
+    "inmate_number": "2447377",
+    "name": "FLEMING ARIUS",
+    "tier": "M1",
+    "category": "Cincinnati Municipal Code: general offenses",
+    "note": "no longer on HCSO public roster"
+  },
+  {
+    "event": "released",
+    "timestamp_utc": "2026-11-28T13:14:00Z",
+    "inmate_number": "14831248",
+    "name": "HERNANDEZ JUAN",
+    "tier": "M4",
+    "category": "Failure to disclose personal information",
+    "note": "no longer on HCSO public roster"
   }
 ]
